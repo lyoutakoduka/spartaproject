@@ -25,7 +25,7 @@ CLASSIFIERS = [
 	'Development Status :: 1 - Planning',
 	'Environment :: GPU',
 	'Environment :: X11 Applications :: Qt',
-	'License :: OSI Approved :: MIT License'
+	'License :: OSI Approved :: MIT License',
 	'Natural Language :: English',
 	'Operating System :: Microsoft :: Windows :: Windows 11',
 	'Operating System :: POSIX :: Linux',
