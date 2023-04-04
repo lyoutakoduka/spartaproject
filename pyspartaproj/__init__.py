@@ -2,7 +2,7 @@
 
 class PySpartaAPI:
 	def runOffline(self):
-		print('sparta running offline...')
+		print('running offline...')
 		
 	def __init__(self):
-		print('API initialing...')
+		print('initialing API...')
