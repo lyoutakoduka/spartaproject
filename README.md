@@ -1,11 +1,11 @@
-lyouta
+cleanup point cloud intuitively
 ====
 
 Overview
-You can edit point cloud easry and intuitively, and it's free :D
+you can cleanup or edit 3d scanned lerge scale point cloud data by hand drawing interface, it's easy and intuitively and free :D
 
 ## Description
-spartaproject is python GUI application with hand drawing interface to edit 3d scanned lerge scale point cloud data.
+pyspartaproj is python based hand drawing paint app including with node base GUI interface and python API library.
 
 ## Demo
 http://spartaproject.com/
