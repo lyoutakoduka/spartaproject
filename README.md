@@ -14,14 +14,14 @@ http://spartaproject.com/
 0.0.1
 
 ## VS. 
-* python 3.11.2
+* numpy 1.24.2
 * PySide6 6.4.3
 * PyOpenGL 3.1.6
 
 ## Requirement
 1. install python.
 2. install libraies with dependencies.
-pip install PySide6, PyOpenGL
+pip install numpy, PySide6, PyOpenGL
 3. install pyspartaproj.
 pip install pyspartaproj
 
