@@ -2,13 +2,16 @@ lyouta
 ====
 
 Overview
-You can edit point cloud easry and intuitively, and it's is free :D
+You can edit point cloud easry and intuitively, and it's free :D
 
 ## Description
 spartaproject is python GUI application with hand drawing interface to edit 3d scanned lerge scale point cloud data.
 
 ## Demo
 http://spartaproject.com/
+
+## Version
+0.0.1
 
 ## VS. 
 * python 3.11.2
@@ -19,7 +22,7 @@ http://spartaproject.com/
 1. install python.
 2. install libraies with dependencies.
 pip install PySide6, PyOpenGL
-3. install spartaproject.
+3. install pyspartaproj.
 pip install pyspartaproj
 
 ## Usage
@@ -27,6 +30,9 @@ python.exe spartaproject/pyspartaproj
 
 ## Note
 we sometimes call this product sparta simply instead of spartaproject or pyspartaproj.
+
+## Laungage
+our tech support is provided by full japanese or simple english.
 
 ## Contribution
 getting ready...
