@@ -5,4 +5,4 @@ class PySpartaGUI:
 		print('showing GUI...')
 
 	def __init__(self):
-		print('initialing GUI ...')
+		pass
