@@ -3,23 +3,22 @@
 import setuptools
 import codecs
 
-package_name = 'pyspartaproj'
-email = 'lyouta@spartaproject.com'
-author_name = 'lyouta'
-search_keywords = 'sparta spartaproject pyspartaproj'
-package_version = '0.0.1'
-package_description = 'spartaproject'
-product_url = 'https://github.com/lyoutakoduka'
-content_type = 'text/markdown'
-license_type = 'MIT'
+PACKAGE_NAME = 'pyspartaproj'
+EMAIL = 'lyouta@spartaproject.com'
+AUTHOR_NAME = 'lyouta'
+SEARCH_KEYWORDS = 'sparta spartaproject pyspartaproj'
+PACKAGE_VERSION = '0.0.1'
+PACKAGE_DESCRIPTION = 'spartaproject'
+PRODUCT_URL = 'https://github.com/lyoutakoduka'
+CONTENT_TYPE = 'text/markdown'
+LICENSE_TYPE = 'MIT'
 
-readme_path = 'README.md'
+README_PATH = 'README.md'
 
 INSTALL_REQUIRES = [
     'PySide6>=6.4.3',
     'PyOpenGL>=3.1.6',
-    'numpy>=1.24.2'
-]
+    'numpy>=1.24.2']
 
 CLASSIFIERS = [
     'Development Status :: 1 - Planning',
@@ -32,24 +31,24 @@ CLASSIFIERS = [
     'Programming Language :: Python :: 3.11',
     'Programming Language :: C++',
     'Topic :: Artistic Software',
-    'Topic :: Multimedia :: Graphics :: 3D Modeling'
-]
+    'Topic :: Multimedia :: Graphics :: 3D Modeling']
 
-with codecs.open(readme_path, encoding='utf-8') as file:
+ENCODING_TYPE = 'utf-8'
+
+with codecs.open(PACKAGE_NAME, encoding=ENCODING_TYPE) as file:
     long_description = file.read()
 
 setuptools.setup(
-    name=package_name,
-    version=package_version,
-    description=package_description,
+    name=PACKAGE_NAME,
+    version=PACKAGE_VERSION,
+    description=PACKAGE_DESCRIPTION,
     long_description=long_description,
-    long_description_content_type=content_type,
-    url=product_url,
-    author=author_name,
-    author_email=email,
-    license=license_type,
-    keywords=search_keywords,
-    packages=[package_name],
+    long_description_content_type=CONTENT_TYPE,
+    url=PRODUCT_URL,
+    author=AUTHOR_NAME,
+    author_email=EMAIL,
+    license=LICENSE_TYPE,
+    keywords=SEARCH_KEYWORDS,
+    packages=[PACKAGE_NAME],
     install_requires=INSTALL_REQUIRES,
-    classifiers=CLASSIFIERS
-)
+    classifiers=CLASSIFIERS)
