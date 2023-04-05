@@ -25,9 +25,7 @@ http://spartaproject.com/
 
 1. install python.
 2. install modules with dependencies.
-   pip install numpy, PySide6, PyOpenGL
-3. install pyspartaproj.
-   pip install pyspartaproj
+3. install pyspartaproj by pip.
 
 ## Usage
 
