@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-class pySpartaGUI:
+class PySpartaGUI:
     def show(self):
         print('showing GUI...')
 
