@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 def show_application():
@@ -9,10 +10,12 @@ def show_application():
 
 def add_current_path():
     import os
+
     module_path = __file__
     directory_path = os.path.dirname(module_path)
 
     import sys
+
     sys.path.append(directory_path)
 
 
