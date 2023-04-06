@@ -21,8 +21,12 @@ class PySpartaSilent:
 
 
 class PySpartaAPI:
-    def runOffline(self):
-        print('running offline...')
+    def create_silent_sparta(
+        self,
+        online: bool = True,
+        offline: bool = True
+    ) -> PySpartaSilent:
 
-    def __init__(self):
-        print('initialing API...')
+        silent_app = PySpartaSilent()
+
+        return silent_app
