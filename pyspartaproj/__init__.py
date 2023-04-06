@@ -30,3 +30,16 @@ class PySpartaAPI:
         silent_app = PySpartaSilent()
 
         return silent_app
+
+
+def __main():
+    sparta_api = PySpartaAPI()
+
+    sparta_instance = sparta_api.create_silent_sparta(online=True)
+    sparta_instance.run()
+    sparta_instance.shutdown()
+    sparta_instance.delete()
+
+
+if __name__ == '__main__':
+    __main()
