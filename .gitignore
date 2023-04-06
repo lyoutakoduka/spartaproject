@@ -4,6 +4,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 *.egg-info
+*.css.map
 /build
 /dist
 /.venv
