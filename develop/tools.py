@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import sys
 import functools
 from typing import Callable
 
@@ -22,7 +23,7 @@ def sandwich(count: int = 79):
     return _decorator
 
 
-def _main() -> None:
+def _main() -> bool:
     MESSAGE: str = "Hello, World!"
 
     @sandwich()
@@ -31,6 +32,8 @@ def _main() -> None:
 
     _messages_sand()
 
+    return True
+
 
 if __name__ == '__main__':
-    _main()
+    sys.exit(_main())
