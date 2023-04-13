@@ -2,16 +2,19 @@
 # -*- coding: utf-8 -*-
 
 import sys
-import functools
-from typing import Callable
+from functools import wraps
+from typing import Callable, TypeVar, ParamSpec
+
+_R = TypeVar('_R')
+_P = ParamSpec('_P')
 
 
 def sandwich(count: int = 79):
-    def _decorator(func: Callable) -> Callable:
+    def _decorator(func: Callable[_P, _R]) -> Callable[_P, _R]:
 
-        @functools.wraps(func)
-        def _wrapper(*args, **kwargs):
-            def _line(id: str):
+        @wraps(func)
+        def _wrapper(*args: _P.args, **kwargs: _P.kwargs) -> _R:
+            def _line(id: str) -> None:
                 print(id * count)
 
             _line('.')
@@ -27,7 +30,7 @@ def _main() -> bool:
     MESSAGE: str = "Hello, World!"
 
     @sandwich()
-    def _messages_sand():
+    def _messages_sand() -> None:
         print(MESSAGE)
 
     _messages_sand()
