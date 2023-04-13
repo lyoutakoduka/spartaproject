@@ -9,7 +9,7 @@ _R = TypeVar('_R')
 _P = ParamSpec('_P')
 
 
-def sandwich(count: int = 79):
+def sandwich(count: int = 79, begin: str = '.', end: str = '-'):
     def _decorator(func: Callable[_P, _R]) -> Callable[_P, _R]:
 
         @wraps(func)
@@ -17,9 +17,9 @@ def sandwich(count: int = 79):
             def _line(id: str) -> None:
                 print(id * count)
 
-            _line('.')
+            _line(begin)
             result = func(*args, **kwargs)
-            _line('-')
+            _line(end)
 
             return result
         return _wrapper
@@ -29,7 +29,7 @@ def sandwich(count: int = 79):
 def _main() -> bool:
     MESSAGE: str = "Hello, World!"
 
-    @sandwich()
+    @sandwich(len(MESSAGE), '-', '=')
     def _messages_sand() -> None:
         print(MESSAGE)
 
