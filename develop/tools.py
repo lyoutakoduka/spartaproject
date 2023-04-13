@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import functools
-from typing import List, Dict, Union, Callable
+from typing import Callable
 
 
 def sandwich(count: int = 79):
@@ -22,31 +22,15 @@ def sandwich(count: int = 79):
     return _decorator
 
 
-def formatting(asset: Union[List[str], Dict[str, str]]) -> str:
-    if isinstance(asset, Dict):
-        sorted_asset = sorted(asset.items())
-        PAIR = ': '
-        asset = [PAIR.join(item) for item in sorted_asset]
-
-    ENTER = '\n'
-    message = ENTER.join(asset)
-
-    return message
-
-
-def __main():
-    orders = ['first', 'second', 'third']
-    animals = {'dog': 'bow', 'cat': 'mew'}
-    assets = [orders, animals]
+def _main() -> None:
+    MESSAGE: str = "Hello, World!"
 
     @sandwich()
-    def messages_sand():
-        for asset in assets:
-            message = formatting(asset)
-            print(message)
+    def _messages_sand():
+        print(MESSAGE)
 
-    messages_sand()
+    _messages_sand()
 
 
 if __name__ == '__main__':
-    __main()
+    _main()
