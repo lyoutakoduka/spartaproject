@@ -25,10 +25,7 @@ def _not_callable_target(module_name: str, func_name: str) -> bool:
     return not hasattr(import_module(module_name), func_name)
 
 
-def call_function(call_path: str, module_path: str, func_name: str) -> bool:
-    if call_path == module_path:
-        return False
-
+def call_function(module_path: str, func_name: str) -> bool:
     _build_call_environment(module_path)
 
     module_name: str = str(Path(module_path).stem)
@@ -44,7 +41,7 @@ def main() -> bool:
     MODULE_PATH: str = str(Path(CALL_PATH).with_name('debug_empty.py'))
     FUNC_NAME: str = 'main'
 
-    RESULT: bool = call_function(CALL_PATH, MODULE_PATH, FUNC_NAME)
+    RESULT: bool = call_function(MODULE_PATH, FUNC_NAME)
 
     return RESULT
 
