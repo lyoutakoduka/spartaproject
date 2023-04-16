@@ -2,21 +2,23 @@
 # -*- coding: utf-8 -*-
 
 class PySpartaSilent:
-    def run(self):
+    still_alive: bool
+
+    def run(self) -> None:
         print('run sparta silently')
 
-    def shutdown(self):
+    def shutdown(self) -> None:
         print('shutdown sparta')
 
-    def delete(self):
+    def delete(self) -> None:
         print('delete sparta')
         self.still_alive = False
 
-    def __del__(self):
+    def __del__(self) -> None:
         if self.still_alive:
             self.delete()
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.still_alive = True
 
 
