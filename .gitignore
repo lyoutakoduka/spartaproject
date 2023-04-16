@@ -8,4 +8,4 @@ __pycache__/
 /build
 /dist
 /.venv
-/server/.external
+/.tmp
