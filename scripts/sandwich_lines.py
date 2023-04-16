@@ -2,8 +2,11 @@
 # -*- coding: utf-8 -*-
 
 import sys
-from functools import wraps
 from typing import Callable, TypeVar, ParamSpec
+from functools import wraps
+
+from off_stdout import stdout_to_text, StdResults
+
 
 _R = TypeVar('_R')
 _P = ParamSpec('_P')
@@ -26,17 +29,24 @@ def sandwich(count: int = 79, begin: str = '.', end: str = '-'):
     return _decorator
 
 
-def _main() -> bool:
+def main() -> bool:
     MESSAGE: str = "Hello, World!"
+    RESULT: str = \
+        '-------------\n' \
+        'Hello, World!\n' \
+        '=============\n'
 
+    results = StdResults()
+
+    @stdout_to_text(results)
     @sandwich(len(MESSAGE), '-', '=')
     def _messages_sand() -> None:
         print(MESSAGE)
 
     _messages_sand()
 
-    return True
+    return RESULT == results.stdout
 
 
 if __name__ == '__main__':
-    sys.exit(_main())
+    sys.exit(not main())
