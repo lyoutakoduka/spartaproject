@@ -5,7 +5,7 @@ import sys
 from typing import Callable, TypeVar, ParamSpec
 from functools import wraps
 
-from off_stdout import stdout_to_text, StdResults
+from scripts.off_stdout import stdout_to_text, StdResults
 
 
 _R = TypeVar('_R')
