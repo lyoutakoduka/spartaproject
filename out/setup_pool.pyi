@@ -1,3 +1,0 @@
-from type_info import InitialContext as InitialContext
-
-def run(_test_conditions: InitialContext) -> bool: ...
