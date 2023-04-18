@@ -61,7 +61,7 @@ def _strip_lines(lines: _Strs) -> _Strs:
     return lines[len(striped_Lines):]
 
 
-def format_indent(input: str) -> str:
+def format_indent(input: str, stdout=False) -> str:
     line_attributes: _LinePairs = _strip_line(input)
 
     counts: _Nums = [
@@ -80,6 +80,9 @@ def format_indent(input: str) -> str:
 
     for _ in range(2):
         lines = _strip_lines(list(reversed(lines)))
+
+    if stdout:
+        lines += ['']
 
     return _ENTER.join(lines)
 
@@ -113,10 +116,11 @@ def main() -> bool:
         "",
         "Raises:",
         "    InvalidArgumentsError:",
+        "",
     ]
     expected: str = _ENTER.join(EXPECTED)
 
-    result: str = format_indent(INPUT)
+    result: str = format_indent(INPUT, stdout=True)
 
     return expected == result
 
