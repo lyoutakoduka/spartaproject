@@ -37,13 +37,15 @@ def call_function(module_path: str, func_name: str) -> bool:
 
 
 def main() -> bool:
-    CALL_PATH: str = __file__
-    MODULE_PATH: str = str(Path(CALL_PATH).with_name('debug_empty.py'))
+    MODULE_NAME: str = 'debug_empty.py'
     FUNC_NAME: str = 'main'
 
-    RESULT: bool = call_function(MODULE_PATH, FUNC_NAME)
+    call_path: str = __file__
+    module_path: str = str(Path(call_path).with_name(MODULE_NAME))
 
-    return RESULT
+    result: bool = call_function(module_path, FUNC_NAME)
+
+    return result
 
 
 if __name__ == '__main__':
