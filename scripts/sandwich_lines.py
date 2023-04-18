@@ -6,6 +6,7 @@ from typing import Callable, TypeVar, ParamSpec
 from functools import wraps
 
 from scripts.off_stdout import stdout_to_text, StdResults
+from scripts.format_texts import format_indent
 
 
 _R = TypeVar('_R')
@@ -31,10 +32,14 @@ def sandwich(count: int = 79, begin: str = '.', end: str = '-'):
 
 def main() -> bool:
     MESSAGE: str = "Hello, World!"
-    EXPECTED: str = \
-        '-------------\n' \
-        'Hello, World!\n' \
-        '=============\n'
+    EXPECTED: str = """
+        -------------
+        Hello, World!
+        =============
+        """
+
+    expected: str = format_indent(EXPECTED)
+    expected += '\n'
 
     results = StdResults()
 
@@ -45,7 +50,7 @@ def main() -> bool:
 
     _messages_sand()
 
-    return EXPECTED == results.stdout
+    return expected == results.stdout
 
 
 if __name__ == '__main__':

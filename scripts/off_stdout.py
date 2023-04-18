@@ -8,6 +8,8 @@ import tempfile
 from typing import Callable, TypeVar, ParamSpec
 from functools import wraps
 
+from scripts.format_texts import format_indent
+
 
 _R = TypeVar('_R')
 _P = ParamSpec('_P')
@@ -53,9 +55,13 @@ def stdout_to_text(results: StdResults):
 
 def main() -> bool:
     MESSAGE: str = "Hello, World!"
-    EXPECTED: str = \
-        'Hello, World!\n' \
-        'Hello, World!\n' \
+    EXPECTED: str = """
+        Hello, World!
+        Hello, World!
+        """
+
+    expected: str = format_indent(EXPECTED)
+    expected += '\n'
 
     results = StdResults()
 
@@ -66,7 +72,7 @@ def main() -> bool:
 
     _messages()
 
-    return EXPECTED == results.stdout
+    return expected == results.stdout
 
 
 if __name__ == '__main__':
