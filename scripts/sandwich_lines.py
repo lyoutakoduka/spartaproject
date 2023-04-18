@@ -38,8 +38,7 @@ def main() -> bool:
         =============
         """
 
-    expected: str = format_indent(EXPECTED)
-    expected += '\n'
+    expected: str = format_indent(EXPECTED, stdout=True)
 
     results = StdResults()
 
