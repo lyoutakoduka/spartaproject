@@ -61,7 +61,7 @@ def _strip_lines(lines: _Strs) -> _Strs:
     return lines[len(striped_Lines):]
 
 
-def format_indent(input: str, stdout=False) -> str:
+def format_indent(input: str, stdout: bool = False) -> str:
     line_attributes: _LinePairs = _strip_line(input)
 
     counts: _Nums = [
