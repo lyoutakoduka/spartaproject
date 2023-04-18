@@ -12,12 +12,6 @@ def _add_system_path(path: str) -> None:
         sys.path.insert(0, path)
 
 
-def _build_call_environment(path: str) -> None:
-    module_root: str = str(Path(path).parent)
-    _add_system_path(module_root)
-    os.chdir(module_root)
-
-
 def _not_callable_target(module_name: str, func_name: str) -> bool:
     if not util.find_spec(module_name):
         return True
@@ -26,7 +20,7 @@ def _not_callable_target(module_name: str, func_name: str) -> bool:
 
 
 def call_function(module_path: str, func_name: str) -> bool:
-    _build_call_environment(module_path)
+    _add_system_path(str(Path(module_path).parent))
 
     module_name: str = str(Path(module_path).stem)
 
