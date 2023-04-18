@@ -31,7 +31,7 @@ def sandwich(count: int = 79, begin: str = '.', end: str = '-'):
 
 def main() -> bool:
     MESSAGE: str = "Hello, World!"
-    RESULT: str = \
+    EXPECTED: str = \
         '-------------\n' \
         'Hello, World!\n' \
         '=============\n'
@@ -45,7 +45,7 @@ def main() -> bool:
 
     _messages_sand()
 
-    return RESULT == results.stdout
+    return EXPECTED == results.stdout
 
 
 if __name__ == '__main__':

@@ -53,7 +53,7 @@ def stdout_to_text(results: StdResults):
 
 def main() -> bool:
     MESSAGE: str = "Hello, World!"
-    RESULT: str = \
+    EXPECTED: str = \
         'Hello, World!\n' \
         'Hello, World!\n' \
 
@@ -66,7 +66,7 @@ def main() -> bool:
 
     _messages()
 
-    return RESULT == results.stdout
+    return EXPECTED == results.stdout
 
 
 if __name__ == '__main__':
