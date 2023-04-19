@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 
 import sys
-import os
 from pathlib import Path
 from typing import List
 
 from scripts.call_module import call_function
+from scripts.absolute_path import convert_path
 
 _Strs = List[str]
 
@@ -30,15 +30,8 @@ def _target_override(arguments: _Strs) -> _Strs:
         str(Path(Path(__file__).parent, *OVERRIDE_FILE))]
 
 
-def _convert_absolute_path(arguments: _Strs) -> _Strs:
-    def to_absolute(path: Path) -> str:
-        return str(path if path.is_absolute() else Path(os.getcwd(), path))
-
-    return [to_absolute(Path(argument)) for argument in arguments]
-
-
 def main() -> bool:
-    arguments: _Strs = _convert_absolute_path(sys.argv)
+    arguments: _Strs = convert_path(sys.argv)
 
     if _is_test_call(arguments):
         arguments = _target_override(arguments)
