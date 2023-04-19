@@ -7,7 +7,7 @@ from functools import wraps
 
 from scripts.off_stdout import StdoutText
 from scripts.format_texts import format_indent
-from deco_generator import TransferFunc
+from scripts.deco_generator import TransferFunc
 
 _R = TypeVar('_R')
 _P = ParamSpec('_P')

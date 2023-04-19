@@ -8,7 +8,7 @@ from tempfile import TemporaryDirectory
 from typing import Callable, TypeVar, ParamSpec
 
 from scripts.format_texts import format_indent
-from deco_generator import TransferFunc
+from scripts.deco_generator import TransferFunc
 
 _R = TypeVar('_R')
 _P = ParamSpec('_P')

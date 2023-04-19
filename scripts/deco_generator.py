@@ -5,7 +5,7 @@ import sys
 from typing import Callable, TypeVar, ParamSpec
 from functools import wraps
 
-from same_elements import all_true
+from scripts.same_elements import all_true
 
 
 _R = TypeVar('_R')
