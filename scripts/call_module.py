@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import sys
-import os
 from importlib import import_module, util
 from pathlib import Path
 
