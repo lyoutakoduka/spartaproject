@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import sys
+import os
 from pathlib import Path
 from typing import List
 
@@ -30,13 +31,19 @@ def _target_override(arguments: _Strs) -> _Strs:
         str(Path(Path(__file__).parent, *OVERRIDE_FILE))]
 
 
+def _get_common_directory(arguments: _Strs) -> str:
+    return os.path.commonpath([Path(path).parents[1] for path in arguments])
+
+
 def main() -> bool:
     arguments: _Strs = convert_path(sys.argv)
 
     if _is_test_call(arguments):
         arguments = _target_override(arguments)
 
-    RESULT: bool = call_function(arguments[1], FUNC_NAME)
+    imports: _Strs = [_get_common_directory(arguments)]
+
+    RESULT: bool = call_function(arguments[1], FUNC_NAME, imports=imports)
 
     return RESULT
 
