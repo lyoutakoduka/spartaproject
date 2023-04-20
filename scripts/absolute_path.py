@@ -6,7 +6,8 @@ import os
 from pathlib import Path
 from typing import List
 
-from scripts.same_elements import all_true
+from scripts.same_bools import pair_true
+from scripts.path_exists import check_exists
 
 _Strs = List[str]
 _Bools = List[bool]
@@ -31,12 +32,10 @@ def main() -> bool:
         for i in range(len(RELATIVE_PATH))
     ]
 
-    result_paths: _Strs = convert_path(relative_paths)
+    absolute_paths: _Strs = convert_path(relative_paths)
 
-    result: bool = all_true([
-        expected == Path(path).exists()
-        for expected, path in zip(EXISTS_EXPECTED, result_paths)
-    ])
+    file_exists: _Bools = check_exists(absolute_paths)
+    result: bool = pair_true(EXISTS_EXPECTED, file_exists)
 
     return result
 
