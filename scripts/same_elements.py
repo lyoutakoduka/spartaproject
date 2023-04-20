@@ -4,10 +4,10 @@
 import sys
 from typing import List
 
-_Flag = List[bool]
+_Bools = List[bool]
 
 
-def all_true(elements: _Flag) -> bool:
+def all_true(elements: _Bools) -> bool:
     elements = list(set(elements))
     return 1 == len(elements) and elements[0]
 

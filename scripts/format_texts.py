@@ -11,7 +11,7 @@ class _LinePair(TypedDict):
     count: int
 
 
-_Nums = List[int]
+_Ints = List[int]
 _Strs = List[str]
 _LinePairs = List[_LinePair]
 
@@ -64,7 +64,7 @@ def _strip_lines(lines: _Strs) -> _Strs:
 def format_indent(input: str, stdout: bool = False) -> str:
     line_attributes: _LinePairs = _strip_line(input)
 
-    counts: _Nums = [
+    counts: _Ints = [
         line_attribute['count'] for line_attribute in line_attributes]
 
     counts = list(set(counts))

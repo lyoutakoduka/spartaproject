@@ -9,7 +9,7 @@ from typing import List
 from scripts.same_elements import all_true
 
 _Strs = List[str]
-_Flag = List[bool]
+_Bools = List[bool]
 
 
 def convert_path(arguments: _Strs) -> _Strs:
@@ -20,7 +20,7 @@ def convert_path(arguments: _Strs) -> _Strs:
 
 
 def main() -> bool:
-    EXISTS_EXPECTED: _Flag = [
+    EXISTS_EXPECTED: _Bools = [
         False, True, False, False, False]
 
     RELATIVE_PATH: _Strs = [
