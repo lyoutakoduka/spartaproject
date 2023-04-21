@@ -7,6 +7,8 @@ from importlib import import_module, util
 from typing import List
 from pathlib import Path
 
+from scripts.absolute_path import convert_path
+
 _Strs = List[str]
 
 
@@ -44,6 +46,9 @@ def _target_override(module_path: str) -> str:
 
 
 def call_function(src_path: str, module_path: str, func_name: str) -> bool:
+    src_path = convert_path(src_path)
+    module_path = convert_path(module_path)
+
     if _is_test_call([src_path, module_path]):
         module_path = _target_override(module_path)
 
