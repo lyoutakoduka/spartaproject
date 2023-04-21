@@ -11,8 +11,12 @@ _Strs = List[str]
 _Bools = List[bool]
 
 
-def check_exists(paths: _Strs) -> _Bools:
-    return [Path(path).exists() for path in paths]
+def check_path(path: str) -> bool:
+    return Path(path).exists()
+
+
+def check_paths(paths: _Strs) -> _Bools:
+    return [check_path(path) for path in paths]
 
 
 def main() -> bool:
@@ -24,7 +28,7 @@ def main() -> bool:
         for type in FILE_TYPES
     ]
 
-    file_exists: _Bools = check_exists(full_paths)
+    file_exists: _Bools = check_paths(full_paths)
 
     result:  bool = pair_true(EXISTS_EXPECTED, file_exists)
 
