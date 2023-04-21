@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import List
 
 from scripts.call_module import call_function
-from scripts.absolute_path import convert_path
+from scripts.absolute_path import convert_paths
 
 _Strs = List[str]
 
@@ -36,7 +36,7 @@ def _get_common_directory(arguments: _Strs) -> str:
 
 
 def main() -> bool:
-    arguments: _Strs = convert_path(sys.argv)
+    arguments: _Strs = convert_paths(sys.argv)
 
     if _is_test_call(arguments):
         arguments = _target_override(arguments)
