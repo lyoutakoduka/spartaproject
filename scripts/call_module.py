@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import sys
+import os
 from importlib import import_module, util
 from typing import List
 from pathlib import Path
@@ -23,8 +24,17 @@ def _not_callable_target(module_name: str, func_name: str) -> bool:
     return not hasattr(import_module(module_name), func_name)
 
 
-def call_function(module_path: str, func_name: str, imports: _Strs = []) -> bool:
-    _add_system_path(imports + [str(Path(module_path).parent)])
+def _get_common_directory(arguments: _Strs) -> str:
+    return os.path.commonpath([Path(path).parents[1] for path in arguments])
+
+
+def call_function(src_path: str, module_path: str, func_name: str) -> bool:
+    imports: _Strs = [
+        _get_common_directory([src_path, module_path]),
+        str(Path(module_path).parent),
+    ]
+
+    _add_system_path(imports)
 
     module_name: str = str(Path(module_path).stem)
 
@@ -40,9 +50,8 @@ def main() -> bool:
 
     call_path: str = __file__
     module_path: str = str(Path(call_path).with_name(MODULE_NAME))
-    imports = [str(Path(module_path).parents[2])]
 
-    result: bool = call_function(module_path, FUNC_NAME, imports=imports)
+    result: bool = call_function(call_path, module_path, FUNC_NAME)
 
     return result
 

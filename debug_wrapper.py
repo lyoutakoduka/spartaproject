@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import sys
-import os
 from pathlib import Path
 from typing import List
 
@@ -10,9 +9,6 @@ from scripts.call_module import call_function
 from scripts.absolute_path import convert_paths
 
 _Strs = List[str]
-
-OVERRIDE_FILE:  _Strs = ['scripts', 'debug_empty.py']
-FUNC_NAME: str = 'main'
 
 
 def _is_test_call(arguments: _Strs) -> bool:
@@ -26,26 +22,24 @@ def _is_test_call(arguments: _Strs) -> bool:
 
 
 def _target_override(arguments: _Strs) -> _Strs:
+    OVERRIDE_FILE:  _Strs = ['scripts', 'debug_empty.py']
+
     return [
         arguments[0],
         str(Path(Path(__file__).parent, *OVERRIDE_FILE))]
 
 
-def _get_common_directory(arguments: _Strs) -> str:
-    return os.path.commonpath([Path(path).parents[1] for path in arguments])
-
-
 def main() -> bool:
+    FUNC_NAME: str = 'test'
+
     arguments: _Strs = convert_paths(sys.argv)
 
     if _is_test_call(arguments):
         arguments = _target_override(arguments)
 
-    imports: _Strs = [_get_common_directory(arguments)]
+    call_function(arguments[0], arguments[1], FUNC_NAME)
 
-    RESULT: bool = call_function(arguments[1], FUNC_NAME, imports=imports)
-
-    return RESULT
+    return True
 
 
 if __name__ == '__main__':
