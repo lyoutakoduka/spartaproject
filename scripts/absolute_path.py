@@ -13,11 +13,13 @@ _Strs = List[str]
 _Bools = List[bool]
 
 
-def convert_path(arguments: _Strs) -> _Strs:
-    def to_absolute(path: Path) -> str:
-        return str(path if path.is_absolute() else Path(os.getcwd(), path))
+def convert_path(relative_path: str) -> str:
+    path: Path = Path(relative_path)
+    return str(path if path.is_absolute() else Path(os.getcwd(), path))
 
-    return [to_absolute(Path(argument)) for argument in arguments]
+
+def convert_paths(relative_paths: _Strs) -> _Strs:
+    return [convert_path(path) for path in relative_paths]
 
 
 def main() -> bool:
@@ -32,7 +34,7 @@ def main() -> bool:
         for i in range(len(RELATIVE_PATH))
     ]
 
-    absolute_paths: _Strs = convert_path(relative_paths)
+    absolute_paths: _Strs = convert_paths(relative_paths)
 
     file_exists: _Bools = check_exists(absolute_paths)
     result: bool = pair_true(EXISTS_EXPECTED, file_exists)
