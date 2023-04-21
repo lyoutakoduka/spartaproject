@@ -16,7 +16,7 @@ def test() -> bool:
     if 2 == len(arguments):
         return call_function(arguments[0], arguments[1], FUNC_NAME)
 
-    return True
+    return True  # TODO: untestable
 
 
 if __name__ == '__main__':
