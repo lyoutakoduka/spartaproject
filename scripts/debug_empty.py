@@ -4,9 +4,9 @@
 import sys
 
 
-def main() -> bool:
+def test() -> bool:
     return True  # TODO: untestable
 
 
 if __name__ == '__main__':
-    sys.exit(not main())
+    sys.exit(not test())
