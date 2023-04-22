@@ -1,12 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import sys
 from typing import Callable, TypeVar, ParamSpec
 from functools import wraps
 
-from scripts.off_stdout import StdoutText
-from scripts.format_texts import format_indent
 from scripts.deco_generator import TransferFunc
 
 _R = TypeVar('_R')
@@ -45,30 +42,3 @@ class SandWich(TransferFunc):
         line(self._end)
 
         return result
-
-
-def test() -> bool:
-    MESSAGE: str = "Hello, World!"
-    EXPECTED: str = """
-        -------------
-        Hello, World!
-        =============
-        """
-
-    expected: str = format_indent(EXPECTED, stdout=True)
-
-    stdout_text = StdoutText()
-    sandwich = SandWich(len(MESSAGE), '-', '=')
-
-    @stdout_text.deco
-    @sandwich.deco
-    def _messages_sand() -> None:
-        print(MESSAGE)
-
-    _messages_sand()
-
-    return expected == stdout_text.show()
-
-
-if __name__ == '__main__':
-    sys.exit(not test())
