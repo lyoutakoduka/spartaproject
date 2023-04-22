@@ -55,7 +55,7 @@ def _check_test_path(call_context: _Pair) -> None:
         _replace_file_name(call_context['module']))
 
     if Path(test_module_path).exists():
-        call_context.update({'module': test_module_path, 'func': 'test'})
+        call_context.update({'module': test_module_path, 'func': 'main'})
 
 
 def _get_common_directory(call_context: _Pair) -> str:
@@ -100,7 +100,7 @@ def _check_call_environment(call_target: _Pair) -> None:
     _call_target_function(module_name, func_name)
 
 
-def call_function(src_path: str, module_path: str, func_name: str) -> bool:
+def call_function(src_path: str, module_path: str, func_name: str = 'main') -> bool:
     call_context: _Pair = {
         'src': src_path,
         'module': module_path,

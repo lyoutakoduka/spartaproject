@@ -10,11 +10,10 @@ _Strs = List[str]
 
 
 def test() -> bool:
-    FUNC_NAME: str = 'test'
     arguments: _Strs = sys.argv
 
     if 2 == len(arguments):
-        return call_function(arguments[0], arguments[1], FUNC_NAME)
+        return call_function(arguments[0], arguments[1])
 
     return True  # TODO: untestable
 

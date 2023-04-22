@@ -14,16 +14,16 @@ unknown: str = 'unknown'
 def test_unknown_module() -> None:
     error_path = str(Path(src_path).with_name(unknown + '.py'))
     with pytest.raises(FileNotFoundError, match='unknown'):
-        call_function(src_path, error_path, 'test')
+        call_function(src_path, error_path, func_name='test')
 
 
 def test_unknown_func() -> None:
     with pytest.raises(ModuleNotFoundError, match=unknown):
-        call_function(src_path, src_path, unknown)
+        call_function(src_path, src_path, func_name=unknown)
 
 
 def test_pass() -> None:
-    assert call_function(src_path, src_path, 'test')
+    assert call_function(src_path, src_path, func_name='test')
 
 
 def main() -> bool:
