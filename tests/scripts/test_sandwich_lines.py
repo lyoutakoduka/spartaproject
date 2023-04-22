@@ -6,7 +6,7 @@ from scripts.format_texts import format_indent
 from scripts.sandwich_lines import SandWich
 
 
-def test() -> bool:
+def test_pass() -> None:
     MESSAGE: str = "Hello, World!"
     EXPECTED: str = """
         -------------
@@ -25,5 +25,9 @@ def test() -> bool:
         print(MESSAGE)
 
     _messages_sand()
+    assert expected == stdout_text.show()
 
-    return expected == stdout_text.show()
+
+def main() -> bool:
+    test_pass()
+    return True

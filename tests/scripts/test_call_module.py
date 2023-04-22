@@ -22,6 +22,12 @@ def test_unknown_func() -> None:
         call_function(src_path, src_path, unknown)
 
 
-def test() -> bool:
-    call_function(src_path, src_path, 'test')
+def test_pass() -> None:
+    assert call_function(src_path, src_path, 'test')
+
+
+def main() -> bool:
+    test_unknown_module()
+    test_unknown_func()
+    test_pass()
     return True

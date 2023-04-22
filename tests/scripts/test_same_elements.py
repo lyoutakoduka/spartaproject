@@ -21,6 +21,13 @@ def test_false() -> None:
         all_true([False, False, False])
 
 
-def test() -> bool:
-    all_true([True, True, True])
+def test_pass() -> None:
+    assert all_true([True, True, True])
+
+
+def main() -> bool:
+    test_empty()
+    test_mixed()
+    test_false()
+    test_pass()
     return True
