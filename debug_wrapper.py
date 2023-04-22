@@ -10,7 +10,7 @@ _Strs = List[str]
 
 
 def test() -> bool:
-    FUNC_NAME: str = 'test'
+    FUNC_NAME: str = 'main'
     arguments: _Strs = sys.argv
 
     if 2 == len(arguments):
