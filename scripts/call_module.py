@@ -19,11 +19,12 @@ def _add_system_path(imports: _Strs) -> None:
         sys.path.insert(0, path)
 
 
-def _not_callable_target(module_name: str, func_name: str) -> bool:
+def _check_callable_target(module_name: str, func_name: str) -> None:
     if not util.find_spec(module_name):
-        return True
+        raise FileNotFoundError(module_name)
 
-    return not hasattr(import_module(module_name), func_name)
+    if not hasattr(import_module(module_name), func_name):
+        raise ModuleNotFoundError(func_name)
 
 
 def _get_common_directory(arguments: _Strs) -> str:
@@ -61,8 +62,7 @@ def call_function(src_path: str, module_path: str, func_name: str) -> bool:
 
     module_name: str = str(Path(module_path).stem)
 
-    if _not_callable_target(module_name, func_name):
-        return False
+    _check_callable_target(module_name, func_name)
 
     func: Any = getattr(import_module(module_name), func_name)
     func()
