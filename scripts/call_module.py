@@ -31,7 +31,7 @@ def _get_common_directory(arguments: _Strs) -> str:
     return os.path.commonpath([Path(path).parents[1] for path in arguments])
 
 
-def _is_test_call(arguments: _Strs) -> bool:
+def _check_same_path(arguments: _Strs) -> bool:
     if 2 != len(arguments):
         return True
 
@@ -50,7 +50,7 @@ def call_function(src_path: str, module_path: str, func_name: str) -> bool:
     src_path = convert_path(src_path)
     module_path = convert_path(module_path)
 
-    if _is_test_call([src_path, module_path]):
+    if _check_same_path([src_path, module_path]):
         module_path = _target_override(module_path)
 
     imports: _Strs = [
