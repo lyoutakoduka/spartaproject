@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import pytest
+
 from scripts.same_elements import all_true
 
 
