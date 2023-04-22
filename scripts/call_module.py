@@ -46,19 +46,21 @@ def _target_override(module_path: str) -> str:
     return str(Path(Path(__file__).with_name(OVERRIDE_FILE)))
 
 
+def get_import_paths(paths: _Strs) -> _Strs:
+    return [
+        _get_common_directory(paths),
+        str(Path(paths[0]).parent),
+    ]
+
+
 def call_function(src_path: str, module_path: str, func_name: str) -> bool:
     paths: _Strs = [src_path, module_path]
     paths = convert_paths(paths)
 
     if _check_same_path(paths):
-        module_path = _target_override(paths[0])
+        paths[0] = _target_override(paths[0])
 
-    imports: _Strs = [
-        _get_common_directory(paths),
-        str(Path(module_path).parent),
-    ]
-
-    _add_system_path(imports)
+    _add_system_path(get_import_paths(paths))
 
     module_name: str = str(Path(module_path).stem)
 
