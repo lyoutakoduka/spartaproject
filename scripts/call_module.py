@@ -7,7 +7,7 @@ from importlib import import_module, util
 from typing import List, Any
 from pathlib import Path
 
-from scripts.absolute_path import convert_path
+from scripts.absolute_path import convert_paths
 
 _Strs = List[str]
 
@@ -47,14 +47,14 @@ def _target_override(module_path: str) -> str:
 
 
 def call_function(src_path: str, module_path: str, func_name: str) -> bool:
-    src_path = convert_path(src_path)
-    module_path = convert_path(module_path)
+    paths: _Strs = [src_path, module_path]
+    paths = convert_paths(paths)
 
-    if _check_same_path([src_path, module_path]):
-        module_path = _target_override(module_path)
+    if _check_same_path(paths):
+        module_path = _target_override(paths[0])
 
     imports: _Strs = [
-        _get_common_directory([src_path, module_path]),
+        _get_common_directory(paths),
         str(Path(module_path).parent),
     ]
 
