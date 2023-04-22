@@ -3,7 +3,6 @@
 
 from typing import Callable, TypeVar, ParamSpec
 
-from scripts.same_elements import all_true
 from scripts.deco_generator import TransferFunc
 
 
@@ -12,7 +11,7 @@ _P = ParamSpec('_P')
 
 
 class TestDeco(TransferFunc):
-    def __init__(self, text: str) -> None:
+    def __init__(self, text: str = '') -> None:
         self.text = text
 
     def wrapper(self, func: Callable[_P, _R], *args: _P.args, **kwargs: _P.kwargs) -> _R:
@@ -24,25 +23,44 @@ class TestDeco(TransferFunc):
         return self.text
 
 
-def test() -> bool:
-    MESSAGE: str = "Hello!"
+def test_name() -> None:
+    test_deco = TestDeco()
+
+    @test_deco.deco
+    def text_print() -> None: pass
+    text_print()
 
     EXPECTED_FUNC: str = 'text_print'
-    EXPECTED_DOC: str = 'text doc'
-    EXPECTED_TEXT: str = 'Hello!Hello!'
+    assert EXPECTED_FUNC == text_print.__name__
 
+
+def test_doc() -> None:
+    test_deco = TestDeco()
+
+    @test_deco.deco
+    def text_print() -> None:
+        """text doc"""
+        pass
+    text_print()
+
+    EXPECTED_DOC: str = 'text doc'
+    assert EXPECTED_DOC == text_print.__doc__
+
+
+def test_text() -> None:
+    MESSAGE: str = "Hello!"
     test_deco = TestDeco(MESSAGE)
 
     @test_deco.deco
-    def text_print(text: str) -> bool:
-        """text doc"""
-        return True
+    def text_print() -> None: pass
+    text_print()
 
-    result: bool = all_true([
-        text_print(MESSAGE),
-        EXPECTED_FUNC == text_print.__name__,
-        EXPECTED_DOC == text_print.__doc__,
-        EXPECTED_TEXT == test_deco.show(),
-    ])
+    EXPECTED_TEXT: str = 'Hello!Hello!'
+    assert EXPECTED_TEXT == test_deco.show()
 
-    return result
+
+def main() -> bool:
+    test_name()
+    test_doc()
+    test_text()
+    return True
