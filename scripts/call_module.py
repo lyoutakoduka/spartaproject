@@ -34,9 +34,9 @@ def _check_same_path(call_context: _Pair) -> None:
             Path(Path(__file__).with_name(OVERRIDE_FILE)))
 
 
-def _replace_file_name(path: str) -> str:
+def _replace_file_name(head: str, path: str) -> str:
     module_path: Path = Path(path)
-    return str(module_path.with_name('test' + '_' + module_path.name))
+    return str(module_path.with_name(head + module_path.name))
 
 
 def _replace_to_test_root(test_added_path: str) -> str:
@@ -51,11 +51,14 @@ def _replace_to_test_root(test_added_path: str) -> str:
 
 
 def _check_test_path(call_context: _Pair) -> None:
-    test_module_path: str = _replace_to_test_root(
-        _replace_file_name(call_context['module']))
+    TEST_HEAD: str = 'test' + '_'
 
-    if Path(test_module_path).exists():
-        call_context.update({'module': test_module_path, 'func': 'main'})
+    if not Path(call_context['src']).name.startswith(TEST_HEAD):
+        test_module_path: str = _replace_to_test_root(
+            _replace_file_name(TEST_HEAD, call_context['module']))
+
+        if Path(test_module_path).exists():
+            call_context.update({'module': test_module_path, 'func': 'main'})
 
 
 def _get_common_directory(call_context: _Pair) -> str:
