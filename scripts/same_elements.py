@@ -7,5 +7,15 @@ _Bools = List[bool]
 
 
 def all_true(elements: _Bools) -> bool:
+    if 0 == len(elements):
+        raise ValueError('empty')
+
     elements = list(set(elements))
-    return 1 == len(elements) and elements[0]
+
+    if 1 != len(elements):
+        raise ValueError('true and false')
+
+    if not elements[0]:
+        raise ValueError('false')
+
+    return True
