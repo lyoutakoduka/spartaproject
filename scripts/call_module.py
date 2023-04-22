@@ -53,6 +53,11 @@ def get_import_paths(paths: _Strs) -> _Strs:
     ]
 
 
+def _call_target_function(module_name: str, func_name: str) -> None:
+    func: Any = getattr(import_module(module_name), func_name)
+    func()
+
+
 def call_function(src_path: str, module_path: str, func_name: str) -> bool:
     paths: _Strs = [src_path, module_path]
     paths = convert_paths(paths)
@@ -65,8 +70,6 @@ def call_function(src_path: str, module_path: str, func_name: str) -> bool:
     module_name: str = str(Path(module_path).stem)
 
     _check_callable_target(module_name, func_name)
-
-    func: Any = getattr(import_module(module_name), func_name)
-    func()
+    _call_target_function(module_name, func_name)
 
     return True
