@@ -2,29 +2,11 @@
 # -*- coding: utf-8 -*-
 
 from typing import Callable, TypeVar, ParamSpec
-from functools import wraps
 
 from scripts.deco_generator import TransferFunc
 
 _R = TypeVar('_R')
 _P = ParamSpec('_P')
-
-
-def sandwich(count: int = 79, begin: str = '.', end: str = '-'):
-    def _decorator(func: Callable[_P, _R]) -> Callable[_P, _R]:
-
-        @wraps(func)
-        def _wrapper(*args: _P.args, **kwargs: _P.kwargs) -> _R:
-            def _line(id: str) -> None:
-                print(id * count)
-
-            _line(begin)
-            result = func(*args, **kwargs)
-            _line(end)
-
-            return result
-        return _wrapper
-    return _decorator
 
 
 class SandWich(TransferFunc):
