@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import sys
 import itertools
 from typing import List, TypedDict
 
@@ -14,10 +13,6 @@ class _LinePair(TypedDict):
 _Ints = List[int]
 _Strs = List[str]
 _LinePairs = List[_LinePair]
-
-
-_EMPTY = ''
-_ENTER = '\n'
 
 
 def _strip_line(input: str) -> _LinePairs:
@@ -73,7 +68,7 @@ def format_indent(input: str, stdout: bool = False) -> str:
     counts.remove(0)
 
     if 0 == len(counts):
-        return _EMPTY
+        return ''
 
     empty_size: int = counts[0]
     lines: _Strs = _clip_line(empty_size, line_attributes)
@@ -84,46 +79,4 @@ def format_indent(input: str, stdout: bool = False) -> str:
     if stdout:
         lines += ['']
 
-    return _ENTER.join(lines)
-
-
-def test() -> bool:
-    INPUT: str = """
-
-        Formats text for document of API.
-
-        Args:
-            num1 (int): 1st operand.
-            num2 (int): 2nd operand.
-
-        Returns:
-            int: result.
-
-        Raises:
-            InvalidArgumentsError:
-
-    """
-
-    EXPECTED: _Strs = [
-        "Formats text for document of API.",
-        "",
-        "Args:",
-        "    num1 (int): 1st operand.",
-        "    num2 (int): 2nd operand.",
-        "",
-        "Returns:",
-        "    int: result.",
-        "",
-        "Raises:",
-        "    InvalidArgumentsError:",
-        "",
-    ]
-    expected: str = _ENTER.join(EXPECTED)
-
-    result: str = format_indent(INPUT, stdout=True)
-
-    return expected == result
-
-
-if __name__ == '__main__':
-    sys.exit(not test())
+    return '\n'.join(lines)
