@@ -4,12 +4,65 @@
 import sys
 import os
 from importlib import import_module, util
-from typing import List, Any
+from typing import List, Any, Dict
 from pathlib import Path
 
-from scripts.absolute_path import convert_paths
+from scripts.absolute_path import convert_path
 
 _Strs = List[str]
+_Pair = Dict[str, str]
+
+
+def _get_path_key() -> _Strs:
+    return ['src', 'module']
+
+
+def _check_absolute_path(call_context: _Pair) -> None:
+    call_context.update({
+        type: convert_path(call_context[type])
+        for type in _get_path_key()
+    })
+
+
+def _check_same_path(call_context: _Pair) -> None:
+    if 1 == len(set([
+        Path(call_context[type]).name
+        for type in _get_path_key()
+    ])):
+        OVERRIDE_FILE: str = 'debug_empty.py'
+        call_context['module'] = str(
+            Path(Path(__file__).with_name(OVERRIDE_FILE)))
+
+
+def _replace_file_name(path: str) -> str:
+    module_path: Path = Path(path)
+    return str(module_path.with_name('test' + '_' + module_path.name))
+
+
+def _replace_to_test_root(test_added_path: str) -> str:
+    ROOT_PATH: Path = Path('project', 'sparta')
+
+    root_path: str = convert_path(str(ROOT_PATH))
+    return str(Path(
+        root_path,
+        'tests',
+        Path(test_added_path).relative_to(root_path)
+    ))
+
+
+def _check_test_path(call_context: _Pair) -> None:
+    test_module_path: str = _replace_to_test_root(
+        _replace_file_name(call_context['module']))
+
+    if Path(test_module_path).exists():
+        call_context.update({'module': test_module_path, 'func': 'test'})
+
+
+def _get_common_directory(call_context: _Pair) -> str:
+    return os.path.commonpath([
+        Path(call_context[type]).parents[1]
+        for type in _get_path_key()
+    ])
 
 
 def _add_system_path(imports: _Strs) -> None:
@@ -17,6 +70,13 @@ def _add_system_path(imports: _Strs) -> None:
         if path in sys.path:
             sys.path.remove(path)
         sys.path.insert(0, path)
+
+
+def _check_system_path(call_context: _Pair) -> None:
+    _add_system_path([
+        _get_common_directory(call_context),
+        str(Path(call_context['module']).parent),
+    ])
 
 
 def _check_callable_target(module_name: str, func_name: str) -> None:
@@ -27,49 +87,30 @@ def _check_callable_target(module_name: str, func_name: str) -> None:
         raise ModuleNotFoundError(func_name)
 
 
-def _get_common_directory(arguments: _Strs) -> str:
-    return os.path.commonpath([Path(path).parents[1] for path in arguments])
-
-
-def _check_same_path(arguments: _Strs) -> bool:
-    if 2 != len(arguments):
-        return True
-
-    if 1 == len(set([Path(argument).name for argument in arguments])):
-        return True
-
-    return False
-
-
-def _target_override(module_path: str) -> str:
-    OVERRIDE_FILE: str = 'debug_empty.py'
-    return str(Path(Path(__file__).with_name(OVERRIDE_FILE)))
-
-
-def get_import_paths(paths: _Strs) -> _Strs:
-    return [
-        _get_common_directory(paths),
-        str(Path(paths[0]).parent),
-    ]
-
-
 def _call_target_function(module_name: str, func_name: str) -> None:
     func: Any = getattr(import_module(module_name), func_name)
     func()
 
 
-def call_function(src_path: str, module_path: str, func_name: str) -> bool:
-    paths: _Strs = [src_path, module_path]
-    paths = convert_paths(paths)
-
-    if _check_same_path(paths):
-        paths[0] = _target_override(paths[0])
-
-    _add_system_path(get_import_paths(paths))
-
-    module_name: str = str(Path(module_path).stem)
+def _check_call_environment(call_target: _Pair) -> None:
+    module_name: str = str(Path(call_target['module']).stem)
+    func_name: str = call_target['func']
 
     _check_callable_target(module_name, func_name)
     _call_target_function(module_name, func_name)
+
+
+def call_function(src_path: str, module_path: str, func_name: str) -> bool:
+    call_context: _Pair = {
+        'src': src_path,
+        'module': module_path,
+        'func': func_name
+    }
+
+    _check_absolute_path(call_context)
+    _check_same_path(call_context)
+    _check_test_path(call_context)
+    _check_system_path(call_context)
+    _check_call_environment(call_context)
 
     return True
