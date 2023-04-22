@@ -35,7 +35,7 @@ class StdoutText(TransferFunc):
         return self.stdout
 
 
-def main() -> bool:
+def test() -> bool:
     MESSAGE: str = "Hello, World!"
     EXPECTED: str = """
         Hello, World!
@@ -57,4 +57,4 @@ def main() -> bool:
 
 
 if __name__ == '__main__':
-    sys.exit(not main())
+    sys.exit(not test())

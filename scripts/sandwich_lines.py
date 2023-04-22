@@ -47,7 +47,7 @@ class SandWich(TransferFunc):
         return result
 
 
-def main() -> bool:
+def test() -> bool:
     MESSAGE: str = "Hello, World!"
     EXPECTED: str = """
         -------------
@@ -71,4 +71,4 @@ def main() -> bool:
 
 
 if __name__ == '__main__':
-    sys.exit(not main())
+    sys.exit(not test())

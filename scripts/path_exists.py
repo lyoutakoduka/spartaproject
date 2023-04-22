@@ -19,7 +19,7 @@ def check_paths(paths: _Strs) -> _Bools:
     return [check_path(path) for path in paths]
 
 
-def main() -> bool:
+def test() -> bool:
     EXISTS_EXPECTED: _Bools = [False, False, False, True]
     FILE_TYPES: _Strs = ['red', 'green', 'blue', 'empty']
 
@@ -36,4 +36,4 @@ def main() -> bool:
 
 
 if __name__ == '__main__':
-    sys.exit(not main())
+    sys.exit(not test())

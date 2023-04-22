@@ -16,7 +16,7 @@ def pair_true(lefts: _Bools, rights: _Bools) -> bool:
     return all_true([left == right for left, right in zip(lefts, rights)])
 
 
-def main() -> bool:
+def test() -> bool:
     LEFTS: _Bools = [True, False, True, False, True]
     RIGHTS: _Bools = [True, False, True, False, True]
 
@@ -26,4 +26,4 @@ def main() -> bool:
 
 
 if __name__ == '__main__':
-    sys.exit(not main())
+    sys.exit(not test())

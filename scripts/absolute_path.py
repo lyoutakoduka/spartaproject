@@ -22,7 +22,7 @@ def convert_paths(relative_paths: _Strs) -> _Strs:
     return [convert_path(path) for path in relative_paths]
 
 
-def main() -> bool:
+def test() -> bool:
     EXISTS_EXPECTED: _Bools = [
         False, True, False, False, False]
 
@@ -43,4 +43,4 @@ def main() -> bool:
 
 
 if __name__ == '__main__':
-    sys.exit(not main())
+    sys.exit(not test())

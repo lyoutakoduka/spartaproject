@@ -36,7 +36,7 @@ class TestDeco(TransferFunc):
         return self.text
 
 
-def main() -> bool:
+def test() -> bool:
     MESSAGE: str = "Hello!"
 
     EXPECTED_FUNC: str = 'text_print'
@@ -61,4 +61,4 @@ def main() -> bool:
 
 
 if __name__ == '__main__':
-    sys.exit(not main())
+    sys.exit(not test())

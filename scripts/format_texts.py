@@ -87,7 +87,7 @@ def format_indent(input: str, stdout: bool = False) -> str:
     return _ENTER.join(lines)
 
 
-def main() -> bool:
+def test() -> bool:
     INPUT: str = """
 
         Formats text for document of API.
@@ -126,4 +126,4 @@ def main() -> bool:
 
 
 if __name__ == '__main__':
-    sys.exit(not main())
+    sys.exit(not test())
