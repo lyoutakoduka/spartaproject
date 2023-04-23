@@ -4,7 +4,7 @@
 import sys
 
 
-def test() -> bool:
+def main() -> bool:
     return True  # TODO: untestable
 
 

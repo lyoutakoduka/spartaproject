@@ -9,7 +9,7 @@ from scripts.call_module import call_function
 _Strs = List[str]
 
 
-def test() -> bool:
+def main() -> bool:
     arguments: _Strs = sys.argv
 
     if 2 == len(arguments):
@@ -19,4 +19,4 @@ def test() -> bool:
 
 
 if __name__ == '__main__':
-    sys.exit(not test())
+    sys.exit(not main())
