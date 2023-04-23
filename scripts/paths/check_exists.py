@@ -8,9 +8,9 @@ _Paths = List[Path]
 _Bools = List[bool]
 
 
-def check_path(path: Path) -> bool:
+def path_exists(path: Path) -> bool:
     return Path(path).exists()
 
 
-def check_paths(paths: _Paths) -> _Bools:
-    return [check_path(path) for path in paths]
+def path_array_exists(paths: _Paths) -> _Bools:
+    return [path_exists(path) for path in paths]

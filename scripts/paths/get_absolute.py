@@ -7,9 +7,9 @@ from typing import List
 _Paths = List[Path]
 
 
-def convert_path(relative_path: Path) -> Path:
+def path_absolute(relative_path: Path) -> Path:
     return relative_path.absolute()  # resolve() ignore symbolic link
 
 
-def convert_paths(relative_paths: _Paths) -> _Paths:
-    return [convert_path(path) for path in relative_paths]
+def path_array_absolute(relative_paths: _Paths) -> _Paths:
+    return [path_absolute(path) for path in relative_paths]
