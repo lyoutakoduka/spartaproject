@@ -4,9 +4,9 @@
 from pathlib import Path
 from typing import List
 
-from scripts.bools.same_array import bool_same_array
-from scripts.paths.check_exists import path_array_exists, path_exists
-from scripts.paths.get_absolute import path_array_absolute, path_absolute
+from scripts.bools.same_value import bool_same_array
+from scripts.paths.check_exists import path_exists, path_array_exists
+from scripts.paths.get_absolute import path_absolute, path_array_absolute
 
 _Paths = List[Path]
 
