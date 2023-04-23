@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from typing import List
+from typing import List, Dict
 
 _Bools = List[bool]
+_BoolPair = Dict[str, bool]
 
 
 def bool_same_array(elements: _Bools) -> bool:
@@ -19,3 +20,7 @@ def bool_same_array(elements: _Bools) -> bool:
         raise ValueError('false')
 
     return True
+
+
+def bool_same_pair(flag_pair: _BoolPair) -> bool:
+    return bool_same_array([value for value in flag_pair.values()])
