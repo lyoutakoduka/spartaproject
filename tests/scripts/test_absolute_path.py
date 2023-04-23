@@ -9,7 +9,6 @@ from scripts.path_exists import check_paths, check_path
 from scripts.absolute_path import convert_paths, convert_path
 
 _Strs = List[str]
-_Bools = List[bool]
 _StrsList = List[_Strs]
 
 _BASE_PATH: _Strs = ['project', 'sparta']
@@ -22,9 +21,7 @@ def test_full() -> None:
 
 
 def test_single() -> None:
-    absolute_path: str = convert_path(str(Path(*_EMPTY_PATH)))
-
-    assert check_path(absolute_path)
+    assert check_path(convert_path(str(Path(*_EMPTY_PATH))))
 
 
 def test_multi() -> None:
@@ -38,10 +35,7 @@ def test_multi() -> None:
         for relative_path in RELATIVE_PATH
     ]
 
-    absolute_paths: _Strs = convert_paths(relative_paths)
-    file_exists: _Bools = check_paths(absolute_paths)
-
-    assert all_true(file_exists)
+    assert all_true(check_paths(convert_paths(relative_paths)))
 
 
 def main() -> bool:
