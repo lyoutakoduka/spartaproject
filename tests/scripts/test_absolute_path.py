@@ -4,7 +4,7 @@
 from pathlib import Path
 from typing import List
 
-from scripts.same_elements import all_true
+from scripts.bools.same_array import bool_same_array
 from scripts.path_exists import check_paths, check_path
 from scripts.absolute_path import convert_paths, convert_path
 
@@ -29,7 +29,7 @@ def test_multi() -> None:
         _BASE_PATH.joinpath('debug_wrapper.py'),
     ]
 
-    assert all_true(check_paths(convert_paths(RELATIVE_PATH)))
+    assert bool_same_array(check_paths(convert_paths(RELATIVE_PATH)))
 
 
 def main() -> bool:

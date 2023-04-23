@@ -4,7 +4,7 @@
 from pathlib import Path
 from typing import List
 
-from scripts.same_bools import pair_true
+from scripts.bools.same_pair import bool_same_pair
 from scripts.path_exists import check_paths, check_path
 
 _Paths = List[Path]
@@ -17,7 +17,7 @@ def test_single() -> None:
 
 def test_multi() -> None:
     paths: _Paths = [current_path, current_path.with_name('unknown.py')]
-    assert pair_true([True, False], check_paths(paths))
+    assert bool_same_pair([True, False], check_paths(paths))
 
 
 def main() -> bool:
