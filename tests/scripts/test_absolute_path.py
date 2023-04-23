@@ -15,7 +15,7 @@ _BASE_PATH: _Strs = ['project', 'sparta']
 _EMPTY_PATH: _Strs = _BASE_PATH + ['scripts', 'debug_empty.py']
 
 
-def test_full() -> None:
+def test_ignore() -> None:
     path: str = __file__
     assert path == convert_path(path)
 
@@ -39,7 +39,7 @@ def test_multi() -> None:
 
 
 def main() -> bool:
-    test_full()
+    test_ignore()
     test_single()
     test_multi()
     return True
