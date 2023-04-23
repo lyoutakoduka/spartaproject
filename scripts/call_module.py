@@ -7,7 +7,7 @@ from importlib import import_module, util
 from typing import List, Any, Dict
 from pathlib import Path
 
-from scripts.absolute_path import convert_path
+from scripts.paths.get_absolute import path_absolute
 
 _Strs = List[str]
 _Pair = Dict[str, str]
@@ -19,7 +19,7 @@ def _get_path_key() -> _Strs:
 
 def _check_absolute_path(call_context: _Pair) -> None:
     call_context.update({
-        type: convert_path(call_context[type])
+        type: str(path_absolute(Path(call_context[type])))
         for type in _get_path_key()
     })
 
@@ -42,7 +42,7 @@ def _replace_file_name(head: str, path: str) -> str:
 def _replace_to_test_root(test_added_path: str) -> str:
     ROOT_PATH: Path = Path('project', 'sparta')
 
-    root_path: str = convert_path(str(ROOT_PATH))
+    root_path: Path = path_absolute(ROOT_PATH)
     return str(Path(
         root_path,
         'tests',
