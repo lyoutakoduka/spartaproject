@@ -4,13 +4,13 @@
 from pathlib import Path
 from typing import List
 
-_Strs = List[str]
+_Paths = List[Path]
 _Bools = List[bool]
 
 
-def check_path(path: str) -> bool:
+def check_path(path: Path) -> bool:
     return Path(path).exists()
 
 
-def check_paths(paths: _Strs) -> _Bools:
+def check_paths(paths: _Paths) -> _Bools:
     return [check_path(path) for path in paths]
