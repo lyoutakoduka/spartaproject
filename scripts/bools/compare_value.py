@@ -3,13 +3,13 @@
 
 from typing import List
 
-from scripts.bools.same_array import bool_same_array
+from project.sparta.scripts.bools.same_value import bool_same_array
 
 _Bools = List[bool]
 _Ints = List[int]
 
 
-def bool_same_pair(lefts: _Bools, rights: _Bools) -> bool:
+def bool_compare_array(lefts: _Bools, rights: _Bools) -> bool:
     counts: _Ints = list(set([len(flags) for flags in [lefts, rights]]))
     count: int = len(counts)
 
