@@ -6,7 +6,7 @@ from typing import List
 _Bools = List[bool]
 
 
-def all_true(elements: _Bools) -> bool:
+def bool_same_array(elements: _Bools) -> bool:
     if 0 == len(elements):
         raise ValueError('empty')
 
