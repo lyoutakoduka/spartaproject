@@ -3,7 +3,7 @@
 
 import pytest
 
-from scripts.bools.same_value import bool_same_array
+from scripts.bools.same_value import bool_same_array, bool_same_pair
 
 
 def test_empty() -> None:
@@ -21,10 +21,15 @@ def test_false() -> None:
         bool_same_array([False, False, False])
 
 
-def test_pass() -> None:
+def test_array() -> None:
     assert bool_same_array([True, True, True])
 
 
+def test_pair() -> None:
+    assert bool_same_pair({'R': True, 'G': True, 'B': True})
+
+
 def main() -> bool:
-    test_pass()
+    test_array()
+    test_pair()
     return True
