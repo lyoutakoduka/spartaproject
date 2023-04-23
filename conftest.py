@@ -4,4 +4,10 @@
 import sys
 from pathlib import Path
 
-sys.path.append(str(Path(__file__).parent))
+
+def main() -> bool:
+    sys.path.append(str(Path(__file__).parent))
+    return True  # TODO: untestable
+
+
+main()  # not "__name__ == '__main__'" for pytest
