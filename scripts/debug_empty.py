@@ -9,4 +9,4 @@ def main() -> bool:
 
 
 if __name__ == '__main__':
-    sys.exit(not test())
+    sys.exit(not main())
