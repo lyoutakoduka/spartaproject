@@ -7,16 +7,16 @@ _Bools = List[bool]
 _BoolPair = Dict[str, bool]
 
 
-def bool_same_array(elements: _Bools) -> bool:
-    if 0 == len(elements):
+def bool_same_array(flags: _Bools) -> bool:
+    if 0 == len(flags):
         raise ValueError('empty')
 
-    elements = list(set(elements))
+    flags = list(set(flags))
 
-    if 1 != len(elements):
+    if 1 != len(flags):
         raise ValueError('true and false')
 
-    if not elements[0]:
+    if not flags[0]:
         raise ValueError('false')
 
     return True
