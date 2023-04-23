@@ -4,23 +4,23 @@
 import pytest
 from typing import List
 
-from scripts.bools.same_pair import bool_same_pair
+from scripts.bools.compare_value import bool_compare_array
 
 _Bools = List[bool]
 
 
 def test_size() -> None:
     with pytest.raises(ValueError, match='size'):
-        bool_same_pair([True], [True, False])
+        bool_compare_array([True], [True, False])
 
 
 def test_empty() -> None:
     with pytest.raises(ValueError, match='empty'):
-        bool_same_pair([], [])
+        bool_compare_array([], [])
 
 
 def test_pass() -> None:
-    assert bool_same_pair([True, False], [True, False])
+    assert bool_compare_array([True, False], [True, False])
 
 
 def main() -> bool:
