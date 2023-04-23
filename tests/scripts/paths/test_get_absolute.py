@@ -5,8 +5,8 @@ from pathlib import Path
 from typing import List
 
 from scripts.bools.same_array import bool_same_array
-from scripts.path_exists import check_paths, check_path
-from scripts.absolute_path import convert_paths, convert_path
+from scripts.paths.check_exists import path_array_exists, path_exists
+from scripts.paths.get_absolute import path_array_absolute, path_absolute
 
 _Paths = List[Path]
 
@@ -16,11 +16,11 @@ _EMPTY_PATH: Path = _BASE_PATH.joinpath('scripts', 'debug_empty.py')
 
 def test_ignore() -> None:
     path: Path = Path(__file__)
-    assert path == convert_path(path)
+    assert path == path_absolute(path)
 
 
 def test_single() -> None:
-    assert check_path(convert_path(_EMPTY_PATH))
+    assert path_exists(path_absolute(_EMPTY_PATH))
 
 
 def test_multi() -> None:
@@ -29,7 +29,9 @@ def test_multi() -> None:
         _BASE_PATH.joinpath('debug_wrapper.py'),
     ]
 
-    assert bool_same_array(check_paths(convert_paths(RELATIVE_PATH)))
+    assert bool_same_array(
+        path_array_exists(
+            path_array_absolute(RELATIVE_PATH)))
 
 
 def main() -> bool:
