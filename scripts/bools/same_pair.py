@@ -3,7 +3,7 @@
 
 from typing import List
 
-from scripts.same_elements import all_true
+from scripts.bools.same_array import all_true
 
 _Bools = List[bool]
 _Ints = List[int]
