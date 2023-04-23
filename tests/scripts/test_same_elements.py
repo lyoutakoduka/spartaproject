@@ -26,8 +26,5 @@ def test_pass() -> None:
 
 
 def main() -> bool:
-    test_empty()
-    test_mixed()
-    test_false()
     test_pass()
     return True

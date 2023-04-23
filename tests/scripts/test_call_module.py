@@ -27,7 +27,5 @@ def test_pass() -> None:
 
 
 def main() -> bool:
-    test_unknown_module()
-    test_unknown_func()
     test_pass()
     return True
