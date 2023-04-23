@@ -9,8 +9,8 @@ from scripts.format_texts import format_indent
 _Strs = List[str]
 
 
-def shared_compare(expected: _Strs, input: str) -> None:
-    assert '\n'.join(expected) == format_indent(input)
+def shared_compare(expected: _Strs, input: str, stdout: bool = False) -> None:
+    assert '\n'.join(expected) == format_indent(input, stdout=stdout)
 
 
 def test_stdout() -> None:
@@ -21,7 +21,7 @@ def test_stdout() -> None:
         "Hallo!",
         "",
     ]
-    assert '\n'.join(EXPECTED) == format_indent(INPUT, stdout=True)
+    shared_compare(EXPECTED, INPUT, stdout=True)
 
 
 def test_vertical() -> None:
