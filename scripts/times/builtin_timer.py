@@ -14,7 +14,7 @@ class TimerSelect:
         self._override: bool = override
         self._interval: Decimal = interval
 
-        self.APRIL_1_2023_EPOCH: Decimal = Decimal('1680274800')
+        self.APRIL_1_2023_EPOCH: Decimal = Decimal('1680307200')
         self._count: Decimal = self.APRIL_1_2023_EPOCH
 
     def current(self) -> Decimal:
