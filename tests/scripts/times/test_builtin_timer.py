@@ -18,8 +18,9 @@ COUNT: int = 10
 INI_EXPECTED: _Decimals = [Decimal(str(i + 1)) for i in range(COUNT)]
 
 
-def _check_counter_result(expected: _Decimals, time: TimerSelect) -> None:
-    assert expected == [time() for _ in range(COUNT)]
+def _check_counter_result(expected: _Decimals, timer: TimerSelect) -> None:
+    expected = [count + timer.APRIL_1_2023_EPOCH for count in expected]
+    assert expected == [timer() for _ in range(COUNT)]
 
 
 def test_int() -> None:
