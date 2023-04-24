@@ -21,3 +21,6 @@ class TimerSelect:
 
         self._count += self._interval
         return self._count
+
+    def current(self) -> Decimal:
+        return self._count

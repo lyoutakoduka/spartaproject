@@ -5,8 +5,10 @@ from typing import List
 from decimal import Decimal
 
 from scripts.decimal_context import set_decimal_context
+from scripts.bools.same_value import bool_same_array
 from scripts.times.builtin_timer import TimerSelect
 
+_Bools = List[bool]
 _Decimals = List[Decimal]
 
 
@@ -33,7 +35,20 @@ def test_interval() -> None:
     )
 
 
+def test_current() -> None:
+    timer = TimerSelect(override=True)
+    same_times: _Bools = []
+
+    for _ in range(COUNT):
+        increment_time: Decimal = timer()
+        current_time: Decimal = timer.current()
+        same_times += [increment_time == current_time]
+
+    assert bool_same_array(same_times)
+
+
 def main() -> bool:
     test_int()
     test_interval()
+    test_current()
     return True
