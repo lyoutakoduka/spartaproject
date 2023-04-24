@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import time
 from decimal import Decimal
+from datetime import timezone, datetime
 
 from scripts.decimal_context import set_decimal_context
 
@@ -24,6 +24,7 @@ class TimerSelect:
         if self._override:
             self._count += self._interval
         else:
-            self._count = Decimal(str(time.time()))
+            current_time = datetime.now(timezone.utc)
+            self._count = Decimal(str(current_time.timestamp()))
 
         return self.current()
