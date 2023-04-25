@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import os
+from pathlib import Path
 from contextlib import redirect_stdout
 from tempfile import TemporaryDirectory
 from typing import Callable, TypeVar, ParamSpec
@@ -18,7 +18,7 @@ class StdoutText(TransferFunc):
             return func(*args, **kwargs)
 
         with TemporaryDirectory() as tmp_directory:
-            tmp_file_path: str = os.path.join(tmp_directory, 'tmp')
+            tmp_file_path: Path = Path(tmp_directory, 'tmp')
 
             with open(tmp_file_path, 'w') as file:
                 with redirect_stdout(file):
