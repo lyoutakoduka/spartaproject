@@ -55,4 +55,5 @@ def main() -> bool:
     test_ignore()
     test_single()
     test_array()
+    test_pair()
     return True
