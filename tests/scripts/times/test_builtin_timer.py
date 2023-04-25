@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from time import sleep
 from typing import List
 from decimal import Decimal
 
@@ -40,7 +41,17 @@ def test_interval() -> None:
     )
 
 
+def test_builtin() -> None:
+    timer = TimerSelect()
+    interval: Decimal = Decimal('0.005')
+    begin: Decimal = timer()
+    sleep(float(interval))
+    compute_error: Decimal = timer() - begin
+    assert Decimal('0.007') > compute_error
+
+
 def main() -> bool:
     test_int()
     test_interval()
+    test_builtin()
     return True
