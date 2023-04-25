@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import sys
-import os
-from importlib import import_module, util
+from sys import path as system_path
 from typing import List, Any, Dict
 from pathlib import Path
+from os.path import commonpath
+from importlib import import_module, util
 
 from scripts.paths.get_absolute import path_absolute
 
@@ -62,7 +62,7 @@ def _check_test_path(call_context: _Pair) -> None:
 
 
 def _get_common_directory(call_context: _Pair) -> str:
-    return os.path.commonpath([
+    return commonpath([
         Path(call_context[type]).parents[1]
         for type in _get_path_key()
     ])
@@ -70,9 +70,9 @@ def _get_common_directory(call_context: _Pair) -> str:
 
 def _add_system_path(imports: _Strs) -> None:
     for path in imports:
-        if path in sys.path:
-            sys.path.remove(path)
-        sys.path.insert(0, path)
+        if path in system_path:
+            system_path.remove(path)
+        system_path.insert(0, path)
 
 
 def _check_system_path(call_context: _Pair) -> None:
