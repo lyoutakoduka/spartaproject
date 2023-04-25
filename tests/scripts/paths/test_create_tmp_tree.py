@@ -5,9 +5,9 @@ from typing import List, Callable
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from sparta.scripts.paths.get_relative import path_array_relative
-from sparta.scripts.paths.create_tmp_tree import create_tree
-from sparta.scripts.paths.iterate_directory import walk_iterator
+from scripts.paths.get_relative import path_array_relative
+from scripts.paths.create_tmp_tree import create_tree
+from scripts.paths.iterate_directory import walk_iterator
 
 _Ints = List[int]
 _Strs = List[str]

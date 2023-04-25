@@ -5,9 +5,9 @@ from typing import List, Callable, Generator
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from sparta.scripts.paths.get_relative import path_array_relative
-from sparta.scripts.paths.create_tmp_tree import create_tree
-from sparta.scripts.paths.iterate_directory import walk_iterator
+from scripts.paths.get_relative import path_array_relative
+from scripts.paths.create_tmp_tree import create_tree
+from scripts.paths.iterate_directory import walk_iterator
 
 _Paths = List[Path]
 _Strs = List[str]
@@ -37,7 +37,7 @@ def _inside_tmp_directory(expected: _StrList, func: Callable[[Path], _PathGene])
     with TemporaryDirectory() as tmp_path:
         root_path: Path = Path(tmp_path)
         create_tree(root_path, tree_deep=TREE_DEEP)
-        _check_walk_result(expected, func(Path(root_path)), root_path)
+        _check_walk_result(expected, func(root_path), root_path)
 
 
 def test_all() -> None:
