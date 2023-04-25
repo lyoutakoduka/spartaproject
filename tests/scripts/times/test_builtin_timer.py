@@ -5,22 +5,26 @@ from typing import List
 from decimal import Decimal
 
 from scripts.decimal_context import set_decimal_context
-from scripts.bools.same_value import bool_same_array
 from scripts.times.builtin_timer import TimerSelect
 
-_Bools = List[bool]
 _Decimals = List[Decimal]
 
 
 set_decimal_context()
 
 COUNT: int = 10
-INI_EXPECTED: _Decimals = [Decimal(str(i + 1)) for i in range(COUNT)]
+INI_EXPECTED: _Decimals = [Decimal(str(i)) for i in range(COUNT)]
 
 
 def _check_counter_result(expected: _Decimals, timer: TimerSelect) -> None:
     expected = [count + timer.APRIL_1_2023_EPOCH for count in expected]
-    assert expected == [timer() for _ in range(COUNT)]
+
+    results: _Decimals = []
+    for _ in range(COUNT):
+        results += [timer()]
+        timer.increase_timer()
+
+    assert expected == results
 
 
 def test_int() -> None:
@@ -36,20 +40,7 @@ def test_interval() -> None:
     )
 
 
-def test_current() -> None:
-    timer = TimerSelect(override=True)
-    same_times: _Bools = []
-
-    for _ in range(COUNT):
-        increment_time: Decimal = timer()
-        current_time: Decimal = timer.current()
-        same_times += [increment_time == current_time]
-
-    assert bool_same_array(same_times)
-
-
 def main() -> bool:
     test_int()
     test_interval()
-    test_current()
     return True

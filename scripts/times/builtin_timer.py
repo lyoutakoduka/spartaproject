@@ -29,13 +29,11 @@ class TimerSelect:
 
         self._initialize_current()
 
-    def current(self) -> Decimal:
-        return self._count
+    def increase_timer(self) -> None:
+        self._count += self._interval
 
     def __call__(self) -> Decimal:
         if self._override:
-            self._count += self._interval
-        else:
-            self._count = self._get_current()
+            return self._count
 
-        return self.current()
+        return self._get_current()
