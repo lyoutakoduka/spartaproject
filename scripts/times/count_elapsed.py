@@ -18,10 +18,10 @@ class LogTimer:
         self.restart()
 
     def timer_current(self) -> Decimal:
-        return self._timer.current()
+        return self._timer()
 
     def increase_timer(self) -> None:
-        self._timer()
+        self._timer.increase_timer()
 
     def restart(
         self,
