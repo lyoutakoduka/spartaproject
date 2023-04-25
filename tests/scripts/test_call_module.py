@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import pytest
+from pytest import raises
 from pathlib import Path
 
 from scripts.call_module import call_function
@@ -13,12 +13,12 @@ unknown: str = 'unknown'
 
 def test_unknown_module() -> None:
     error_path = str(Path(src_path).with_name(unknown + '.py'))
-    with pytest.raises(FileNotFoundError, match='unknown'):
+    with raises(FileNotFoundError, match='unknown'):
         call_function(src_path, error_path)
 
 
 def test_unknown_func() -> None:
-    with pytest.raises(ModuleNotFoundError, match=unknown):
+    with raises(ModuleNotFoundError, match=unknown):
         call_function(src_path, src_path, func_name=unknown)
 
 

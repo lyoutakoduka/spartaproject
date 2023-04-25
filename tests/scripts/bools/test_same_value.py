@@ -1,23 +1,23 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import pytest
+from pytest import raises
 
 from scripts.bools.same_value import bool_same_array, bool_same_pair
 
 
 def test_empty() -> None:
-    with pytest.raises(ValueError, match='empty'):
+    with raises(ValueError, match='empty'):
         bool_same_array([])
 
 
 def test_mixed() -> None:
-    with pytest.raises(ValueError, match='true and false'):
+    with raises(ValueError, match='true and false'):
         bool_same_array([False, True, False])
 
 
 def test_false() -> None:
-    with pytest.raises(ValueError, match='false'):
+    with raises(ValueError, match='false'):
         bool_same_array([False, False, False])
 
 
