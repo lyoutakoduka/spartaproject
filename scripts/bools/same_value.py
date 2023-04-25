@@ -7,7 +7,7 @@ _Bools = List[bool]
 _BoolPair = Dict[str, bool]
 
 
-def bool_same_array(flags: _Bools) -> bool:
+def bool_same_array(flags: _Bools, invert: bool = False) -> bool:
     if 0 == len(flags):
         raise ValueError('empty')
 
@@ -16,7 +16,7 @@ def bool_same_array(flags: _Bools) -> bool:
     if 1 != len(flags):
         raise ValueError('true and false')
 
-    if not flags[0]:
+    if not invert ^ flags[0]:
         raise ValueError('false')
 
     return True
