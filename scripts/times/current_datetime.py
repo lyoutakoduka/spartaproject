@@ -9,7 +9,7 @@ from scripts.times.builtin_timer import TimerSelect
 
 def get_current_time(override: bool = False, jst: bool = False) -> str:
     timer = TimerSelect(override=override)
-    current_time: datetime = datetime.fromtimestamp(int(timer.current()))
+    current_time: datetime = datetime.fromtimestamp(int(timer()))
     current_time = current_time.astimezone(gettz('UTC'))
 
     if jst:
