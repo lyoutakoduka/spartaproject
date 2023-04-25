@@ -17,7 +17,7 @@ class LogTimer:
     def __init__(self) -> None:
         self.restart()
 
-    def timer_current(self) -> Decimal:
+    def _timer_current(self) -> Decimal:
         return self._timer()
 
     def increase_timer(self) -> None:
@@ -32,7 +32,7 @@ class LogTimer:
     ):
         self._timer: TimerSelect = TimerSelect(
             override=override, interval=timer_interval)
-        self._start_time: Decimal = self.timer_current()
+        self._start_time: Decimal = self._timer_current()
 
         self._old_time: int = 0
         self._interval: Decimal = interval
@@ -47,7 +47,7 @@ class LogTimer:
         return count_changed
 
     def show(self, force: bool = False, header: _Strs = [], footer: _Strs = []) -> None:
-        elapsed: Decimal = self.timer_current() - self._start_time
+        elapsed: Decimal = self._timer_current() - self._start_time
 
         if force or self._is_force_show(elapsed):
             elapsed_text: str = readable_time(elapsed, order=self._order)
