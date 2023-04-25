@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import sys
+from sys import path as system_path
 from pathlib import Path
 
 
 def main() -> bool:
-    sys.path.append(str(Path(__file__).parent))
+    system_path.append(str(Path(__file__).parent))
     return True  # TODO: untestable
 
 

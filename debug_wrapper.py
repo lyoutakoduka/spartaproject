@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import sys
+from sys import exit
 from typing import List
 
 from scripts.call_module import call_function
@@ -19,4 +19,4 @@ def main() -> bool:
 
 
 if __name__ == '__main__':
-    sys.exit(not main())
+    exit(not main())

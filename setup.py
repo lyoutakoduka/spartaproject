@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import setuptools
-import codecs
+from setuptools import setup
+from codecs import open
 
 PACKAGE_NAME = 'pyspartaproj'
 EMAIL = 'lyouta@spartaproject.com'
@@ -36,10 +36,11 @@ CLASSIFIERS = [
 
 ENCODING_TYPE = 'utf-8'
 
-with codecs.open(PACKAGE_NAME, encoding=ENCODING_TYPE) as file:
+
+with open(README_PATH, encoding=ENCODING_TYPE) as file:
     long_description = file.read()
 
-setuptools.setup(
+setup(
     name=PACKAGE_NAME,
     version=PACKAGE_VERSION,
     description=PACKAGE_DESCRIPTION,
@@ -52,4 +53,5 @@ setuptools.setup(
     keywords=SEARCH_KEYWORDS,
     packages=[PACKAGE_NAME],
     install_requires=INSTALL_REQUIRES,
-    classifiers=CLASSIFIERS)
+    classifiers=CLASSIFIERS,
+)

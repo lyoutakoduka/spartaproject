@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import itertools
 from typing import List, TypedDict
+from itertools import takewhile
 
 
 class _LinePair(TypedDict):
@@ -50,8 +50,7 @@ def _clip_line(empty_size: int, line_attributes: _LinePairs) -> _Strs:
 
 
 def _strip_lines(lines: _Strs) -> _Strs:
-    striped_Lines: _Strs = list(itertools.takewhile(
-        lambda line: 0 == len(line), lines))
+    striped_Lines: _Strs = list(takewhile(lambda line: 0 == len(line), lines))
 
     return lines[len(striped_Lines):]
 
