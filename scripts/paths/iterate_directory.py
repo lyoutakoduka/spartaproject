@@ -43,7 +43,6 @@ def walk_iterator(
         filter = _create_filter(depth, file, directory, suffix)
 
     if 0 < len(filter):
-        print(filter)
         for path in root.glob(filter):
             if root != path:
                 yield path
