@@ -11,7 +11,7 @@ DEFAULT_FILTER: str = '**/*'
 
 def _create_filter(depth: int, file: bool, directory: bool, suffix: str) -> str:
     if 0 < depth:
-        filter = '*/' * depth
+        filter = '*/' * (depth - 1)
     else:
         filter = '**/'
 

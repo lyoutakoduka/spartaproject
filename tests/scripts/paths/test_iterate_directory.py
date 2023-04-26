@@ -65,10 +65,11 @@ def test_all() -> None:
 
 def test_depth() -> None:
     EXPECTED: _StrList = [
-        NAME_DIRS + [NAME_DIR_EMPTY],
-        NAME_DIRS + [NAME_INI],
-        NAME_DIRS + [NAME_JSON],
-        NAME_DIRS + [NAME_TEXT],
+        NAME_DIRS,
+        [NAME_DIR_1, NAME_DIR_EMPTY],
+        [NAME_DIR_1, NAME_INI],
+        [NAME_DIR_1, NAME_JSON],
+        [NAME_DIR_1, NAME_TEXT],
     ]
 
     def make_tree(root_path: Path) -> _PathGene:
