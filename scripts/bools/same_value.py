@@ -14,7 +14,7 @@ def bool_same_array(flags: _Bools, invert: bool = False) -> bool:
     flags = list(set(flags))
 
     if 1 != len(flags):
-        raise ValueError('true and false')
+        raise ValueError('true_false')
 
     if not invert ^ flags[0]:
         raise ValueError('false')

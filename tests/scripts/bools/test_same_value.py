@@ -12,7 +12,7 @@ def test_empty() -> None:
 
 
 def test_mixed() -> None:
-    with raises(ValueError, match='true and false'):
+    with raises(ValueError, match='true_false'):
         bool_same_array([False, True, False])
 
 
