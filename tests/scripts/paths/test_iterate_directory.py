@@ -98,10 +98,10 @@ def test_directory() -> None:
 def test_file() -> None:
     EXPECTED: _StrList = [
         [NAME_DIR_1],
-        NAME_DIRS,
-        NAME_DIRS + [NAME_DIR_EMPTY],
-        [NAME_DIR_1, NAME_DIR_EMPTY],
         [NAME_DIR_EMPTY],
+        NAME_DIRS,
+        [NAME_DIR_1, NAME_DIR_EMPTY],
+        NAME_DIRS + [NAME_DIR_EMPTY],
     ]
 
     def make_tree(root_path: Path) -> _PathGene:
