@@ -12,7 +12,6 @@ from scripts.paths.create_tmp_tree import create_tree
 from scripts.paths.iterate_directory import walk_iterator
 
 _Bools = List[bool]
-_Strs = List[str]
 _Paths = List[Path]
 
 
