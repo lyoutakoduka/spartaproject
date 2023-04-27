@@ -1,14 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from decimal import Decimal
-from typing import List
-
-from scripts.contexts.decimal_context import set_decimal_context
+from contexts.decimal_context import Decimal, set_decimal_context
+from contexts.string_context import Strs
 from scripts.times.builtin_timer import TimerSelect
 from scripts.times.convert_readable import readable_time
-
-_Strs = List[str]
 
 set_decimal_context()
 
@@ -46,7 +42,7 @@ class LogTimer:
 
         return count_changed
 
-    def show(self, force: bool = False, header: _Strs = [], footer: _Strs = []) -> None:
+    def show(self, force: bool = False, header: Strs = [], footer: Strs = []) -> None:
         elapsed: Decimal = self._timer_current() - self._start_time
 
         if force or self._is_force_show(elapsed):

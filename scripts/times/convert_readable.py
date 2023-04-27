@@ -1,20 +1,17 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from decimal import Decimal
 from datetime import datetime, timedelta
-from typing import List, Dict
 
-from scripts.contexts.decimal_context import set_decimal_context
-
-_Strs = List[str]
-_IntPair = Dict[str, int]
+from contexts.integer_context import IntPair
+from contexts.decimal_context import Decimal, set_decimal_context
+from contexts.string_context import Strs
 
 set_decimal_context()
 
 
-def _get_datetime_counts(counter: datetime) -> _IntPair:
-    counts: _IntPair = {
+def _get_datetime_counts(counter: datetime) -> IntPair:
+    counts: IntPair = {
         'year': counter.year,
         'month': counter.month,
         'day': counter.day,
@@ -32,7 +29,7 @@ def _get_datetime_counts(counter: datetime) -> _IntPair:
     return counts
 
 
-def _get_micro_second_text(second: Decimal, counts: _IntPair, order: int, order_limit: int) -> str:
+def _get_micro_second_text(second: Decimal, counts: IntPair, order: int, order_limit: int) -> str:
     count_text: str = str(counts['micro'])
 
     if '0' != count_text:
@@ -42,8 +39,8 @@ def _get_micro_second_text(second: Decimal, counts: _IntPair, order: int, order_
     return count_text[:order]
 
 
-def _get_decimal_count_texts(second: Decimal, counts: _IntPair, order: int) -> str:
-    second_numbers: _Strs = [str(counts['second'])]
+def _get_decimal_count_texts(second: Decimal, counts: IntPair, order: int) -> str:
+    second_numbers: Strs = [str(counts['second'])]
 
     ORDER_LIMIT: int = 6
 
@@ -57,8 +54,8 @@ def _get_decimal_count_texts(second: Decimal, counts: _IntPair, order: int) -> s
     return '.'.join(second_numbers) + 's'
 
 
-def _get_int_count_texts(counts: _IntPair) -> _Strs:
-    int_types: _Strs = ['year', 'month', 'day', 'hour', 'minute']
+def _get_int_count_texts(counts: IntPair) -> Strs:
+    int_types: Strs = ['year', 'month', 'day', 'hour', 'minute']
     return [
         str(counts[type]) + type[0]
         for type in int_types
@@ -67,10 +64,10 @@ def _get_int_count_texts(counts: _IntPair) -> _Strs:
 
 
 def readable_time(second: Decimal, order: int = 0) -> str:
-    counts: _IntPair = _get_datetime_counts(
+    counts: IntPair = _get_datetime_counts(
         datetime.min + timedelta(seconds=float(second)))
 
-    count_texts: _Strs = _get_int_count_texts(counts)
+    count_texts: Strs = _get_int_count_texts(counts)
     count_texts += [_get_decimal_count_texts(second, counts, order)]
 
     return ' '.join(count_texts)

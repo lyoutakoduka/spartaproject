@@ -1,16 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from typing import Dict, List
-from decimal import Decimal
-
+from contexts.integer_context import IntPair
+from contexts.decimal_context import Decimal, Decs, set_decimal_context
+from contexts.string_context import Strs
 from scripts.bools.same_value import bool_same_array
 from scripts.times.convert_readable import readable_time
-from scripts.contexts.decimal_context import set_decimal_context
-
-_Strs = List[str]
-_Decimals = List[Decimal]
-_IntPair = Dict[str, int]
 
 set_decimal_context()
 
@@ -28,7 +23,7 @@ def test_day() -> None:
     HOUR: int = MINUTE * 60
     DAY: int = HOUR * 24
 
-    INPUT_TIMES: _IntPair = {
+    INPUT_TIMES: IntPair = {
         "1s": SECOND,
         "1m 0s": MINUTE,
         "1m 1s": MINUTE + SECOND,
@@ -48,9 +43,9 @@ def test_day() -> None:
 
 
 def test_second() -> None:
-    INPUTS: _Decimals = [Decimal('0.1') ** Decimal(str(i)) for i in range(9)]
+    INPUTS: Decs = [Decimal('0.1') ** Decimal(str(i)) for i in range(9)]
 
-    EXPECTED: _Strs = [
+    EXPECTED: Strs = [
         "1.000000s",
         "0.100000s",
         "0.010000s",
@@ -69,7 +64,7 @@ def test_second() -> None:
 
 def test_order() -> None:
     INPUT_TIME: Decimal = Decimal('0.6666666')
-    INPUT_ORDERS: _IntPair = {
+    INPUT_ORDERS: IntPair = {
         "0s": 0,
         "0.6s": 1,
         "0.66s": 2,

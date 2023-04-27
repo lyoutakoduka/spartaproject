@@ -2,25 +2,21 @@
 # -*- coding: utf-8 -*-
 
 from time import sleep
-from typing import List
-from decimal import Decimal
 
-from scripts.contexts.decimal_context import set_decimal_context
+from contexts.decimal_context import Decimal, Decs, set_decimal_context
 from scripts.times.builtin_timer import TimerSelect
-
-_Decimals = List[Decimal]
 
 
 set_decimal_context()
 
 _COUNT: int = 10
-_INI_EXPECTED: _Decimals = [Decimal(str(i)) for i in range(_COUNT)]
+_INI_EXPECTED: Decs = [Decimal(str(i)) for i in range(_COUNT)]
 
 
-def _check_counter_result(expected: _Decimals, timer: TimerSelect) -> None:
+def _check_counter_result(expected: Decs, timer: TimerSelect) -> None:
     expected = [count + timer.APRIL_1_2023_EPOCH for count in expected]
 
-    results: _Decimals = []
+    results: Decs = []
     for _ in range(_COUNT):
         results += [timer()]
         timer.increase_timer()

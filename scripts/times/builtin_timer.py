@@ -1,10 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from decimal import Decimal
 from datetime import timezone, datetime
 
-from scripts.contexts.decimal_context import set_decimal_context
+from contexts.decimal_context import Decimal, set_decimal_context
 
 set_decimal_context()
 
