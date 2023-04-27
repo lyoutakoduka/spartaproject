@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from pathlib import Path
 from contextlib import redirect_stdout
 from tempfile import TemporaryDirectory
 from typing import Callable, TypeVar, ParamSpec
 
+from contexts.path_context import Path
 from scripts.deco_generator import TransferFunc
 
 _R = TypeVar('_R')

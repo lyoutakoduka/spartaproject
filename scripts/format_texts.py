@@ -4,14 +4,16 @@
 from typing import List, TypedDict
 from itertools import takewhile
 
+from contexts.integer_context import Ints
+from contexts.string_context import Strs
+
 
 class _LinePair(TypedDict):
     text: str
     count: int
 
 
-_Ints = List[int]
-_Strs = List[str]
+Strs = List[str]
 _LinePairs = List[_LinePair]
 
 
@@ -38,8 +40,8 @@ def _strip_line(input: str) -> _LinePairs:
     return line_attributes
 
 
-def _clip_line(empty_size: int, line_attributes: _LinePairs) -> _Strs:
-    clipped_lines: _Strs = []
+def _clip_line(empty_size: int, line_attributes: _LinePairs) -> Strs:
+    clipped_lines: Strs = []
 
     for line_attribute in line_attributes:
         line: str = line_attribute['text']
@@ -49,8 +51,8 @@ def _clip_line(empty_size: int, line_attributes: _LinePairs) -> _Strs:
     return clipped_lines
 
 
-def _strip_lines(lines: _Strs) -> _Strs:
-    striped_Lines: _Strs = list(takewhile(lambda line: 0 == len(line), lines))
+def _strip_lines(lines: Strs) -> Strs:
+    striped_Lines: Strs = list(takewhile(lambda line: 0 == len(line), lines))
 
     return lines[len(striped_Lines):]
 
@@ -58,7 +60,7 @@ def _strip_lines(lines: _Strs) -> _Strs:
 def format_indent(input: str, stdout: bool = False) -> str:
     line_attributes: _LinePairs = _strip_line(input)
 
-    counts: _Ints = [
+    counts: Ints = [
         line_attribute['count'] for line_attribute in line_attributes]
 
     counts = list(set(counts))
@@ -70,7 +72,7 @@ def format_indent(input: str, stdout: bool = False) -> str:
         return ''
 
     empty_size: int = counts[0]
-    lines: _Strs = _clip_line(empty_size, line_attributes)
+    lines: Strs = _clip_line(empty_size, line_attributes)
 
     for _ in range(2):
         lines = _strip_lines(list(reversed(lines)))

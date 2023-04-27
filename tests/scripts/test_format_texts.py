@@ -1,15 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from typing import List
-
+from contexts.string_context import Strs
 from scripts.format_texts import format_indent
 
 
-_Strs = List[str]
-
-
-def shared_compare(expected: _Strs, input: str, stdout: bool = False) -> None:
+def shared_compare(expected: Strs, input: str, stdout: bool = False) -> None:
     assert '\n'.join(expected) == format_indent(input, stdout=stdout)
 
 
@@ -17,7 +13,7 @@ def test_stdout() -> None:
     INPUT: str = """
         Hallo!
     """
-    EXPECTED: _Strs = [
+    EXPECTED: Strs = [
         "Hallo!",
         "",
     ]
@@ -30,7 +26,7 @@ def test_vertical() -> None:
         Hallo!
     　\n
     """
-    EXPECTED: _Strs = [
+    EXPECTED: Strs = [
         "Hallo!",
     ]
     shared_compare(EXPECTED, INPUT)
@@ -40,7 +36,7 @@ def test_horizontal() -> None:
     INPUT: str = """
     \t　    Hallo!    　\n
     """
-    EXPECTED: _Strs = [
+    EXPECTED: Strs = [
         "Hallo!",
     ]
     shared_compare(EXPECTED, INPUT)
@@ -52,7 +48,7 @@ def test_indent() -> None:
         Hallo!
                 Hallo!
     """
-    EXPECTED: _Strs = [
+    EXPECTED: Strs = [
         "    Hallo!",
         "Hallo!",
         "        Hallo!",
@@ -67,7 +63,7 @@ def test_inner() -> None:
 
         Hallo!    Hallo!
     """
-    EXPECTED: _Strs = [
+    EXPECTED: Strs = [
         "Hallo!    Hallo!",
         "",
         "",
