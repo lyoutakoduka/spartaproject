@@ -1,19 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from typing import List, Dict
-
-_Bools = List[bool]
-_Ints = List[int]
-_Strs = List[str]
-_BoolsList = List[_Bools]
-_StrsList = List[_Strs]
-_BoolPair = Dict[str, bool]
-_BoolType = _Bools | _BoolPair
+from contexts.bool_context import Bools, BoolPair, BoolsList, BoolType
+from contexts.integer_context import Ints
+from contexts.string_context import StrList
 
 
-def _check_args_size(lefts: _BoolType, rights: _BoolType) -> None:
-    flag_counts: _Ints = list(set([len(flags) for flags in [lefts, rights]]))
+def _check_args_size(lefts: BoolType, rights: BoolType) -> None:
+    flag_counts: Ints = list(set([len(flags) for flags in [lefts, rights]]))
     count: int = len(flag_counts)
 
     if 1 != count:
@@ -23,15 +17,15 @@ def _check_args_size(lefts: _BoolType, rights: _BoolType) -> None:
         raise ValueError('empty')
 
 
-def bool_compare_array(lefts: _Bools, rights: _Bools) -> bool:
+def bool_compare_array(lefts: Bools, rights: Bools) -> bool:
     _check_args_size(lefts, rights)
     return lefts == rights
 
 
-def bool_compare_pair(lefts: _BoolPair, rights: _BoolPair) -> bool:
+def bool_compare_pair(lefts: BoolPair, rights: BoolPair) -> bool:
     _check_args_size(lefts, rights)
 
-    sorted_keys: _StrsList = [
+    sorted_keys: StrList = [
         sorted(flags.keys())
         for flags in [lefts, rights]
     ]
@@ -39,7 +33,7 @@ def bool_compare_pair(lefts: _BoolPair, rights: _BoolPair) -> bool:
     if sorted_keys[0] != sorted_keys[1]:
         raise KeyError('unmatch')
 
-    sorted_flags: _BoolsList = [
+    sorted_flags: BoolsList = [
         [flags[key] for key in keys]
         for keys, flags in zip(sorted_keys, [lefts, rights])
     ]

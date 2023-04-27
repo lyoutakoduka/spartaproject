@@ -1,13 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from typing import List, Dict
-
-_Bools = List[bool]
-_BoolPair = Dict[str, bool]
+from contexts.bool_context import Bools, BoolPair
 
 
-def bool_same_array(flags: _Bools, invert: bool = False) -> bool:
+def bool_same_array(flags: Bools, invert: bool = False) -> bool:
     if 0 == len(flags):
         raise ValueError('empty')
 
@@ -22,5 +19,5 @@ def bool_same_array(flags: _Bools, invert: bool = False) -> bool:
     return True
 
 
-def bool_same_pair(flag_pair: _BoolPair) -> bool:
+def bool_same_pair(flag_pair: BoolPair) -> bool:
     return bool_same_array([value for value in flag_pair.values()])
