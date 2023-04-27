@@ -40,12 +40,14 @@ _TypeSingle = _TypeDefault | _TypeUser
 TypeJson = Dict[str, 'TypeJson'] | List['TypeJson'] | _TypeSingle
 
 
-def _convert_path(content: TypeJson) -> TypeJson:
-    return str(content) if isinstance(content, Path) else content
+def _convert_unknown(content: _TypeSingle) -> _TypeSingle:
+    if isinstance(content, Path):
+        return str(content)
 
+    if isinstance(content, Decimal):
+        return float(content)
 
-def _convert_decimal(content: TypeJson) -> TypeJson:
-    return float(content) if isinstance(content, Decimal) else content
+    return content
 
 
 def serialize_json(content: TypeJson) -> TypeJson:
@@ -55,4 +57,4 @@ def serialize_json(content: TypeJson) -> TypeJson:
     if isinstance(content, List):
         return [serialize_json(value) for value in content]
 
-    return _convert_decimal(_convert_path(content))
+    return _convert_unknown(content)
