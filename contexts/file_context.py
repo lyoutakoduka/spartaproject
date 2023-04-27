@@ -37,20 +37,22 @@ _TypeDefault = str | int | float | bool | None
 _TypeUser = _TypePath | _TypeStr | _TypeDec | _TypeFloat | _TypeInt | _TypeBool
 _TypeSingle = _TypeDefault | _TypeUser
 
-TypeFile = Dict[str, 'TypeFile'] | List['TypeFile'] | _TypeSingle
+TypeJson = Dict[str, 'TypeJson'] | List['TypeJson'] | _TypeSingle
 
 
-def serialize_unknown(content: TypeFile) -> TypeFile:
+def _convert_path(content: TypeJson) -> TypeJson:
+    return str(content) if isinstance(content, Path) else content
+
+
+def _convert_decimal(content: TypeJson) -> TypeJson:
+    return float(content) if isinstance(content, Decimal) else content
+
+
+def serialize_json(content: TypeJson) -> TypeJson:
     if isinstance(content, Dict):
-        return {key: serialize_unknown(value) for key, value in content.items()}
+        return {key: serialize_json(value) for key, value in content.items()}
 
     if isinstance(content, List):
-        return [serialize_unknown(value) for value in content]
+        return [serialize_json(value) for value in content]
 
-    if isinstance(content, Path):
-        return str(content)
-
-    if isinstance(content, Decimal):
-        return float(content)
-
-    return content
+    return _convert_decimal(_convert_path(content))
