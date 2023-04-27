@@ -14,16 +14,16 @@ _Strs = List[str]
 _StrList = List[_Strs]
 _PathGene = Generator[Path, None, None]
 
-TREE_DEEP: int = 3
+_TREE_DEEP: int = 3
 
-NAME_DIR_1: str = 'dir001'
-NAME_DIR_2: str = 'dir002'
-NAME_DIRS: _Strs = [NAME_DIR_1, NAME_DIR_2]
-NAME_DIR_EMPTY: str = 'empty'
+_NAME_DIR_1: str = 'dir001'
+_NAME_DIR_2: str = 'dir002'
+_NAME_DIRS: _Strs = [_NAME_DIR_1, _NAME_DIR_2]
+_NAME_DIR_EMPTY: str = 'empty'
 
-NAME_INI: str = 'file.ini'
-NAME_JSON: str = 'file.json'
-NAME_TEXT: str = 'file.txt'
+_NAME_INI: str = 'file.ini'
+_NAME_JSON: str = 'file.json'
+_NAME_TEXT: str = 'file.txt'
 
 
 def _check_walk_result(expected: _StrList, path_gene: _PathGene, root_path: Path) -> None:
@@ -36,26 +36,26 @@ def _check_walk_result(expected: _StrList, path_gene: _PathGene, root_path: Path
 def _inside_tmp_directory(expected: _StrList, func: Callable[[Path], _PathGene]) -> None:
     with TemporaryDirectory() as tmp_path:
         root_path: Path = Path(tmp_path)
-        create_tree(root_path, tree_deep=TREE_DEEP)
+        create_tree(root_path, tree_deep=_TREE_DEEP)
         _check_walk_result(expected, func(root_path), root_path)
 
 
 def test_all() -> None:
     EXPECTED: _StrList = [
-        [NAME_DIR_1],
-        [NAME_DIR_EMPTY],
-        [NAME_INI],
-        [NAME_JSON],
-        [NAME_TEXT],
-        NAME_DIRS,
-        [NAME_DIR_1, NAME_DIR_EMPTY],
-        [NAME_DIR_1, NAME_INI],
-        [NAME_DIR_1, NAME_JSON],
-        [NAME_DIR_1, NAME_TEXT],
-        NAME_DIRS + [NAME_DIR_EMPTY],
-        NAME_DIRS + [NAME_INI],
-        NAME_DIRS + [NAME_JSON],
-        NAME_DIRS + [NAME_TEXT],
+        [_NAME_DIR_1],
+        [_NAME_DIR_EMPTY],
+        [_NAME_INI],
+        [_NAME_JSON],
+        [_NAME_TEXT],
+        _NAME_DIRS,
+        [_NAME_DIR_1, _NAME_DIR_EMPTY],
+        [_NAME_DIR_1, _NAME_INI],
+        [_NAME_DIR_1, _NAME_JSON],
+        [_NAME_DIR_1, _NAME_TEXT],
+        _NAME_DIRS + [_NAME_DIR_EMPTY],
+        _NAME_DIRS + [_NAME_INI],
+        _NAME_DIRS + [_NAME_JSON],
+        _NAME_DIRS + [_NAME_TEXT],
     ]
 
     def make_tree(root_path: Path) -> _PathGene:
@@ -65,11 +65,11 @@ def test_all() -> None:
 
 def test_depth() -> None:
     EXPECTED: _StrList = [
-        NAME_DIRS,
-        [NAME_DIR_1, NAME_DIR_EMPTY],
-        [NAME_DIR_1, NAME_INI],
-        [NAME_DIR_1, NAME_JSON],
-        [NAME_DIR_1, NAME_TEXT],
+        _NAME_DIRS,
+        [_NAME_DIR_1, _NAME_DIR_EMPTY],
+        [_NAME_DIR_1, _NAME_INI],
+        [_NAME_DIR_1, _NAME_JSON],
+        [_NAME_DIR_1, _NAME_TEXT],
     ]
 
     def make_tree(root_path: Path) -> _PathGene:
@@ -79,15 +79,15 @@ def test_depth() -> None:
 
 def test_directory() -> None:
     EXPECTED: _StrList = [
-        [NAME_INI],
-        [NAME_JSON],
-        [NAME_TEXT],
-        [NAME_DIR_1, NAME_INI],
-        [NAME_DIR_1, NAME_JSON],
-        [NAME_DIR_1, NAME_TEXT],
-        NAME_DIRS + [NAME_INI],
-        NAME_DIRS + [NAME_JSON],
-        NAME_DIRS + [NAME_TEXT],
+        [_NAME_INI],
+        [_NAME_JSON],
+        [_NAME_TEXT],
+        [_NAME_DIR_1, _NAME_INI],
+        [_NAME_DIR_1, _NAME_JSON],
+        [_NAME_DIR_1, _NAME_TEXT],
+        _NAME_DIRS + [_NAME_INI],
+        _NAME_DIRS + [_NAME_JSON],
+        _NAME_DIRS + [_NAME_TEXT],
     ]
 
     def make_tree(root_path: Path) -> _PathGene:
@@ -97,11 +97,11 @@ def test_directory() -> None:
 
 def test_file() -> None:
     EXPECTED: _StrList = [
-        [NAME_DIR_1],
-        [NAME_DIR_EMPTY],
-        NAME_DIRS,
-        [NAME_DIR_1, NAME_DIR_EMPTY],
-        NAME_DIRS + [NAME_DIR_EMPTY],
+        [_NAME_DIR_1],
+        [_NAME_DIR_EMPTY],
+        _NAME_DIRS,
+        [_NAME_DIR_1, _NAME_DIR_EMPTY],
+        _NAME_DIRS + [_NAME_DIR_EMPTY],
     ]
 
     def make_tree(root_path: Path) -> _PathGene:
@@ -111,9 +111,9 @@ def test_file() -> None:
 
 def test_suffix() -> None:
     EXPECTED: _StrList = [
-        [NAME_JSON],
-        [NAME_DIR_1, NAME_JSON],
-        NAME_DIRS + [NAME_JSON],
+        [_NAME_JSON],
+        [_NAME_DIR_1, _NAME_JSON],
+        _NAME_DIRS + [_NAME_JSON],
     ]
 
     def make_tree(root_path: Path) -> _PathGene:
@@ -122,7 +122,7 @@ def test_suffix() -> None:
 
 
 def test_filter() -> None:
-    EXPECTED: _StrList = [NAME_DIRS + [NAME_TEXT]]
+    EXPECTED: _StrList = [_NAME_DIRS + [_NAME_TEXT]]
 
     def make_tree(root_path: Path) -> _PathGene:
         return walk_iterator(root_path, filter='*/*/*.txt')

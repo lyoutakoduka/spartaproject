@@ -12,18 +12,18 @@ _BoolPair = Dict[str, bool]
 _Paths = List[Path]
 _PathPair = Dict[str, Path]
 
-CURRENT_PATH: Path = Path(__file__)
-UNKNOWN_PATH: Path = CURRENT_PATH.with_name('unknown.py')
+_CURRENT_PATH: Path = Path(__file__)
+_UNKNOWN_PATH: Path = _CURRENT_PATH.with_name('unknown.py')
 
 
 def test_single() -> None:
-    assert path_exists(CURRENT_PATH)
+    assert path_exists(_CURRENT_PATH)
 
 
 def test_array() -> None:
     PATHS: _Paths = [
-        CURRENT_PATH,
-        UNKNOWN_PATH
+        _CURRENT_PATH,
+        _UNKNOWN_PATH
     ]
     EXPECTS: _Bools = [True, False]
 
@@ -32,9 +32,9 @@ def test_array() -> None:
 
 def test_pair() -> None:
     PATHS: _PathPair = {
-        'R': CURRENT_PATH,
-        'G': UNKNOWN_PATH,
-        'B': CURRENT_PATH.parent,
+        'R': _CURRENT_PATH,
+        'G': _UNKNOWN_PATH,
+        'B': _CURRENT_PATH.parent,
     }
     EXPECTS: _BoolPair = {'R': True, 'G': False, 'B': True}
 

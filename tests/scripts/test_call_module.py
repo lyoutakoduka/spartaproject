@@ -7,23 +7,23 @@ from pathlib import Path
 from scripts.call_module import call_function
 
 
-src_path: str = __file__
-unknown: str = 'unknown'
+_SRC_PATH: str = __file__
+_UNKNOWN: str = 'unknown'
 
 
 def test_unknown_module() -> None:
-    error_path = str(Path(src_path).with_name(unknown + '.py'))
+    error_path = str(Path(_SRC_PATH).with_name(_UNKNOWN + '.py'))
     with raises(FileNotFoundError, match='unknown'):
-        call_function(src_path, error_path)
+        call_function(_SRC_PATH, error_path)
 
 
 def test_unknown_func() -> None:
-    with raises(ModuleNotFoundError, match=unknown):
-        call_function(src_path, src_path, func_name=unknown)
+    with raises(ModuleNotFoundError, match=_UNKNOWN):
+        call_function(_SRC_PATH, _SRC_PATH, func_name=_UNKNOWN)
 
 
 def test_pass() -> None:
-    assert call_function(src_path, src_path)
+    assert call_function(_SRC_PATH, _SRC_PATH)
 
 
 def main() -> bool:

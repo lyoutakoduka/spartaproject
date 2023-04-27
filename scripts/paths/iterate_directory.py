@@ -6,7 +6,7 @@ from pathlib import Path
 
 _PathGene = Generator[Path, None, None]
 
-DEFAULT_FILTER: str = '**/*'
+_DEFAULT_FILTER: str = '**/*'
 
 
 def _create_filter(depth: int, file: bool, directory: bool, suffix: str) -> str:
@@ -36,10 +36,10 @@ def walk_iterator(
     file: bool = True,
     directory: bool = True,
     suffix: str = '*',
-    filter: str = DEFAULT_FILTER,
+    filter: str = _DEFAULT_FILTER,
 ) -> _PathGene:
 
-    if DEFAULT_FILTER == filter:
+    if _DEFAULT_FILTER == filter:
         filter = _create_filter(depth, file, directory, suffix)
 
     if 0 < len(filter):

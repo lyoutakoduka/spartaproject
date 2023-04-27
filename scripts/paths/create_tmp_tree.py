@@ -13,8 +13,8 @@ _Strs = List[str]
 _Pair = Dict[str, str]
 _PairTwo = Dict[str, _Pair]
 
-LIST_SAMPLE: _Strs = ['line' + str(i) for i in range(3)]
-DICT_SAMPLE: _PairTwo = {
+_LIST_SAMPLE: _Strs = ['line' + str(i) for i in range(3)]
+_DICT_SAMPLE: _PairTwo = {
     'section': {'option' + str(i): str(i) for i in range(3)}
 }
 
@@ -26,12 +26,12 @@ def _write_text(root: Path, format: str, content: str) -> None:
 
 
 def _sample_text(root: Path) -> None:
-    _write_text(root, 'txt', '\n'.join(LIST_SAMPLE))
+    _write_text(root, 'txt', '\n'.join(_LIST_SAMPLE))
 
 
 def _sample_config(root: Path) -> None:
     config = ConfigParser()
-    config.read_dict(DICT_SAMPLE)
+    config.read_dict(_DICT_SAMPLE)
 
     with StringIO() as file:
         config.write(file)
@@ -40,7 +40,7 @@ def _sample_config(root: Path) -> None:
 
 def _sample_json(root: Path) -> None:
     text: str = dumps(
-        DICT_SAMPLE, indent=2, ensure_ascii=False, sort_keys=True)
+        _DICT_SAMPLE, indent=2, ensure_ascii=False, sort_keys=True)
     _write_text(root, 'json', text)
 
 

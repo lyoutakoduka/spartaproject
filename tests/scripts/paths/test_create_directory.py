@@ -13,11 +13,11 @@ _Strs = List[str]
 _Paths = List[Path]
 _PathPair = Dict[str, Path]
 
-ELEMENT_NAMES: _Strs = ['R', 'G', 'B']
+_ELEMENT_NAMES: _Strs = ['R', 'G', 'B']
 
 
 def _get_head_path(index: int) -> Path:
-    return Path(*[ELEMENT_NAMES[i] for i in range(index + 1)])
+    return Path(*[_ELEMENT_NAMES[i] for i in range(index + 1)])
 
 
 def _inside_tmp_directory(func: Callable[[Path], bool]) -> None:
@@ -27,7 +27,7 @@ def _inside_tmp_directory(func: Callable[[Path], bool]) -> None:
 
 def test_single() -> None:
     def make_dir(tmp_path: Path) -> bool:
-        path: Path = Path(tmp_path, ELEMENT_NAMES[0])
+        path: Path = Path(tmp_path, _ELEMENT_NAMES[0])
         path_mkdir(path)
         return path_exists(path)
 
@@ -37,7 +37,7 @@ def test_single() -> None:
 def test_array() -> None:
     head_paths: _Paths = [
         _get_head_path(i)
-        for i, _ in enumerate(ELEMENT_NAMES)
+        for i, _ in enumerate(_ELEMENT_NAMES)
     ]
 
     def make_dir(tmp_path: Path) -> bool:
@@ -54,7 +54,7 @@ def test_array() -> None:
 def test_pair() -> None:
     head_paths: _PathPair = {
         name: _get_head_path(i)
-        for i, name in enumerate(ELEMENT_NAMES)
+        for i, name in enumerate(_ELEMENT_NAMES)
     }
 
     def make_dir(tmp_path: Path) -> bool:
