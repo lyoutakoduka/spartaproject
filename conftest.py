@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from sys import path as system_path
-from pathlib import Path
+from pathlib import Path  # use default Path
 
 
 def main() -> bool:
