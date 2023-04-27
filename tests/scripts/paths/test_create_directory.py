@@ -1,19 +1,16 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from typing import List, Dict, Callable
-from pathlib import Path
+from typing import Callable
 from tempfile import TemporaryDirectory
 
+from contexts.string_context import Strs
+from contexts.path_context import Path, Paths, PathPair
 from scripts.bools.same_value import bool_same_array, bool_same_pair
 from scripts.paths.check_exists import path_exists, path_array_exists, path_pair_exists
 from scripts.paths.create_directory import path_mkdir, path_array_mkdir, path_pair_mkdir
 
-_Strs = List[str]
-_Paths = List[Path]
-_PathPair = Dict[str, Path]
-
-_ELEMENT_NAMES: _Strs = ['R', 'G', 'B']
+_ELEMENT_NAMES: Strs = ['R', 'G', 'B']
 
 
 def _get_head_path(index: int) -> Path:
@@ -35,13 +32,13 @@ def test_single() -> None:
 
 
 def test_array() -> None:
-    head_paths: _Paths = [
+    head_paths: Paths = [
         _get_head_path(i)
         for i, _ in enumerate(_ELEMENT_NAMES)
     ]
 
     def make_dir(tmp_path: Path) -> bool:
-        paths: _Paths = [
+        paths: Paths = [
             Path(tmp_path, head_path)
             for head_path in head_paths
         ]
@@ -52,13 +49,13 @@ def test_array() -> None:
 
 
 def test_pair() -> None:
-    head_paths: _PathPair = {
+    head_paths: PathPair = {
         name: _get_head_path(i)
         for i, name in enumerate(_ELEMENT_NAMES)
     }
 
     def make_dir(tmp_path: Path) -> bool:
-        paths: _PathPair = {
+        paths: PathPair = {
             name: Path(tmp_path, head_path)
             for name, head_path in head_paths.items()
         }

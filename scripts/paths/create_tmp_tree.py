@@ -3,18 +3,14 @@
 
 from io import StringIO
 from json import dumps
-from typing import List, Dict
-from pathlib import Path
 from configparser import ConfigParser
 
+from contexts.string_context import Strs, StrPair2
+from contexts.path_context import Path
 from scripts.paths.create_directory import path_mkdir
 
-_Strs = List[str]
-_Pair = Dict[str, str]
-_PairTwo = Dict[str, _Pair]
-
-_LIST_SAMPLE: _Strs = ['line' + str(i) for i in range(3)]
-_DICT_SAMPLE: _PairTwo = {
+_LIST_SAMPLE: Strs = ['line' + str(i) for i in range(3)]
+_DICT_SAMPLE: StrPair2 = {
     'section': {'option' + str(i): str(i) for i in range(3)}
 }
 

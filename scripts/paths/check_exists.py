@@ -1,22 +1,17 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from pathlib import Path
-from typing import List, Dict
-
-_Paths = List[Path]
-_Bools = List[bool]
-_PathPair = Dict[str, Path]
-_BoolPair = Dict[str, bool]
+from contexts.bool_context import Bools, BoolPair
+from contexts.path_context import Path, Paths, PathPair
 
 
 def path_exists(path: Path) -> bool:
     return Path(path).exists()
 
 
-def path_array_exists(paths: _Paths) -> _Bools:
+def path_array_exists(paths: Paths) -> Bools:
     return [path_exists(path) for path in paths]
 
 
-def path_pair_exists(paths: _PathPair) -> _BoolPair:
+def path_pair_exists(paths: PathPair) -> BoolPair:
     return {key: path_exists(path) for key, path in paths.items()}

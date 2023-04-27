@@ -1,10 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from typing import Generator
-from pathlib import Path
-
-_PathGene = Generator[Path, None, None]
+from contexts.path_context import Path, PathGene
 
 _DEFAULT_FILTER: str = '**/*'
 
@@ -37,7 +34,7 @@ def walk_iterator(
     directory: bool = True,
     suffix: str = '*',
     filter: str = _DEFAULT_FILTER,
-) -> _PathGene:
+) -> PathGene:
 
     if _DEFAULT_FILTER == filter:
         filter = _create_filter(depth, file, directory, suffix)

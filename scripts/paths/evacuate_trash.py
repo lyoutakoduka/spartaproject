@@ -2,27 +2,23 @@
 # -*- coding: utf-8 -*-
 
 from shutil import move
-from typing import List
-from pathlib import Path
 from datetime import datetime
 
+from contexts.integer_context import IntsList
+from contexts.string_context import Strs
+from contexts.path_context import Path, Paths
 from scripts.paths.get_absolute import path_absolute
 from scripts.paths.create_directory import path_mkdir
 from scripts.times.current_datetime import get_current_time
 
-_Ints = List[int]
-_Strs = List[str]
-_Paths = List[Path]
-_IntsList = List[_Ints]
-
 
 def _default() -> Path:
-    TRASH_BOX: _Strs = ['.trash']
+    TRASH_BOX: Strs = ['.trash']
     return path_absolute(Path(*TRASH_BOX))
 
 
 class TrashBox:
-    def _get_time_data(self, time_utc: str) -> _IntsList:
+    def _get_time_data(self, time_utc: str) -> IntsList:
         time: datetime = datetime.fromisoformat(time_utc)
         return [
             [4, time.year],
@@ -36,9 +32,9 @@ class TrashBox:
 
     def _get_trash_path(self) -> Path:
         time_utc: str = get_current_time(jst=True)
-        time_counts: _IntsList = self._get_time_data(time_utc)
+        time_counts: IntsList = self._get_time_data(time_utc)
 
-        time_texts: _Strs = [
+        time_texts: Strs = [
             str(time_count).zfill(order)
             for order, time_count in time_counts
         ]
@@ -50,8 +46,8 @@ class TrashBox:
         move(target_path, trash_path)
         return trash_path
 
-    def throw_away(self, target_paths: _Paths) -> _Paths:
-        evacuated_paths: _Paths = []
+    def throw_away(self, target_paths: Paths) -> Paths:
+        evacuated_paths: Paths = []
 
         if 0 < len(target_paths):
             trash_root: Path = self._get_trash_path()
