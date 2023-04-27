@@ -45,12 +45,12 @@ def test_default() -> None:
 
 
 def test_select() -> None:
-    def make_tree(evacuate_targets: _Paths) -> _Paths:
-        with TemporaryDirectory() as tmp_path:
+    with TemporaryDirectory() as tmp_path:
+        def make_tree(evacuate_targets: _Paths) -> _Paths:
             trash_box = TrashBox(trash_path=Path(tmp_path))
             return trash_box.throw_away(evacuate_targets)
 
-    _inside_tmp_directory(make_tree)
+        _inside_tmp_directory(make_tree)
 
 
 def main() -> bool:
