@@ -1,21 +1,16 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from typing import Callable, TypeVar, ParamSpec
-
+from contexts.callable_context import CP, CR, Callable
 from scripts.deco_generator import TransferFunc
-
-
-_R = TypeVar('_R')
-_P = ParamSpec('_P')
 
 
 class TestDeco(TransferFunc):
     def __init__(self, text: str = '') -> None:
         self.text = text
 
-    def wrapper(self, func: Callable[_P, _R], *args: _P.args, **kwargs: _P.kwargs) -> _R:
-        result: _R = func(*args, **kwargs)
+    def wrapper(self, func: Callable[CP, CR], *args: CP.args, **kwargs: CP.kwargs) -> CR:
+        result: CR = func(*args, **kwargs)
         self.text *= 2
         return result
 

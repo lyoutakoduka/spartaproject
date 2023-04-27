@@ -3,18 +3,15 @@
 
 from contextlib import redirect_stdout
 from tempfile import TemporaryDirectory
-from typing import Callable, TypeVar, ParamSpec
 
+from contexts.callable_context import CP, CR, Callable
 from contexts.path_context import Path
 from scripts.deco_generator import TransferFunc
 
-_R = TypeVar('_R')
-_P = ParamSpec('_P')
-
 
 class StdoutText(TransferFunc):
-    def wrapper(self, func: Callable[_P, _R], *args: _P.args, **kwargs: _P.kwargs) -> _R:
-        def _execute_func() -> _R:
+    def wrapper(self, func: Callable[CP, CR], *args: CP.args, **kwargs: CP.kwargs) -> CR:
+        def _execute_func() -> CR:
             return func(*args, **kwargs)
 
         with TemporaryDirectory() as tmp_directory:
@@ -22,7 +19,7 @@ class StdoutText(TransferFunc):
 
             with open(tmp_file_path, 'w') as file:
                 with redirect_stdout(file):
-                    result: _R = _execute_func()
+                    result: CR = _execute_func()
 
             with open(tmp_file_path, 'r') as file:
                 self.stdout = file.read()

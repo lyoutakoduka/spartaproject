@@ -1,12 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from typing import Callable, TypeVar, ParamSpec
-
+from contexts.callable_context import CP, CR, Callable
 from scripts.deco_generator import TransferFunc
-
-_R = TypeVar('_R')
-_P = ParamSpec('_P')
 
 
 class SandWich(TransferFunc):
@@ -15,12 +11,12 @@ class SandWich(TransferFunc):
         self._begin = begin
         self._end = end
 
-    def wrapper(self, func: Callable[_P, _R], *args: _P.args, **kwargs: _P.kwargs) -> _R:
+    def wrapper(self, func: Callable[CP, CR], *args: CP.args, **kwargs: CP.kwargs) -> CR:
         def line(id: str) -> None:
             print(id * self._count)
 
         line(self._begin)
-        result: _R = func(*args, **kwargs)
+        result: CR = func(*args, **kwargs)
         line(self._end)
 
         return result
