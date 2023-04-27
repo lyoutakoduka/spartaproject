@@ -4,7 +4,7 @@
 from json import dumps
 
 from contexts.path_context import Path
-from contexts.file_context import TypeFile
+from contexts.file_context import TypeJson
 
 
 def _export_text(path: Path, content: str) -> None:
@@ -12,9 +12,9 @@ def _export_text(path: Path, content: str) -> None:
         file.write(content)
 
 
-def json_dump(content: TypeFile) -> str:
+def json_dump(content: TypeJson) -> str:
     return dumps(content, indent=2, ensure_ascii=False, sort_keys=True)
 
 
-def json_export(export_path: Path, content: TypeFile) -> None:
+def json_export(export_path: Path, content: TypeJson) -> None:
     _export_text(export_path, json_dump(content))
