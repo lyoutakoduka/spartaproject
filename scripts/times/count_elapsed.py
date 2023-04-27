@@ -4,7 +4,7 @@
 from decimal import Decimal
 from typing import List
 
-from scripts.decimal_context import set_decimal_context
+from scripts.contexts.decimal_context import set_decimal_context
 from scripts.times.builtin_timer import TimerSelect
 from scripts.times.convert_readable import readable_time
 

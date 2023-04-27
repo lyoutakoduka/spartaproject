@@ -6,7 +6,7 @@ from decimal import Decimal
 
 from scripts.bools.same_value import bool_same_array
 from scripts.times.convert_readable import readable_time
-from scripts.decimal_context import set_decimal_context
+from scripts.contexts.decimal_context import set_decimal_context
 
 _Strs = List[str]
 _Decimals = List[Decimal]

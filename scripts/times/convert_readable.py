@@ -5,7 +5,7 @@ from decimal import Decimal
 from datetime import datetime, timedelta
 from typing import List, Dict
 
-from scripts.decimal_context import set_decimal_context
+from scripts.contexts.decimal_context import set_decimal_context
 
 _Strs = List[str]
 _IntPair = Dict[str, int]

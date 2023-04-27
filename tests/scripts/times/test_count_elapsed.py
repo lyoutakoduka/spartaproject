@@ -6,7 +6,7 @@ from decimal import Decimal
 
 from scripts.off_stdout import StdoutText
 from scripts.format_texts import format_indent
-from scripts.decimal_context import set_decimal_context
+from scripts.contexts.decimal_context import set_decimal_context
 from scripts.times.count_elapsed import LogTimer
 
 set_decimal_context()

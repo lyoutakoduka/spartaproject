@@ -5,7 +5,7 @@ from time import sleep
 from typing import List
 from decimal import Decimal
 
-from scripts.decimal_context import set_decimal_context
+from scripts.contexts.decimal_context import set_decimal_context
 from scripts.times.builtin_timer import TimerSelect
 
 _Decimals = List[Decimal]
