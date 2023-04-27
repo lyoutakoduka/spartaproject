@@ -16,7 +16,7 @@ _PathPair = Dict[str, Path]
 
 _BASE_PATH: Path = Path('project', 'sparta')
 _EMPTY_HEAD: Path = Path('scripts', 'debug_empty.py')
-_EMPTY_PATH: Path = _BASE_PATH.joinpath(_EMPTY_HEAD)
+_EMPTY_PATH: Path = Path(_BASE_PATH, _EMPTY_HEAD)
 
 
 def test_ignore() -> None:

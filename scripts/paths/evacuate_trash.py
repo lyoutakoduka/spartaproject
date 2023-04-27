@@ -46,7 +46,7 @@ class TrashBox:
         return Path(self._trash_path, *time_texts)
 
     def move_file(self, trash_root: Path, target_path: Path) -> Path:
-        trash_path: Path = trash_root.joinpath(target_path.name)
+        trash_path: Path = Path(trash_root, target_path.name)
         move(target_path, trash_path)
         return trash_path
 

@@ -20,7 +20,7 @@ DICT_SAMPLE: _PairTwo = {
 
 
 def _write_text(root: Path, format: str, content: str) -> None:
-    path: Path = root.joinpath('.'.join(['file', format]))
+    path: Path = Path(root, '.'.join(['file', format]))
     with open(path, 'w') as file:
         file.write(content)
 
@@ -46,14 +46,14 @@ def _sample_json(root: Path) -> None:
 
 def _recursive_tree(root: Path, tree_deep: int, deep: int):
     path_mkdir(root)
-    path_mkdir(root.joinpath('empty'))
+    path_mkdir(Path(root, 'empty'))
     _sample_text(root)
     _sample_config(root)
     _sample_json(root)
 
     if 1 < deep:
         directory_name: Path = Path('dir' + str(tree_deep - deep + 1).zfill(3))
-        _recursive_tree(root.joinpath(directory_name), tree_deep, deep - 1)
+        _recursive_tree(Path(root, directory_name), tree_deep, deep - 1)
 
 
 def create_tree(root_path: Path, tree_deep: int = 1) -> None:

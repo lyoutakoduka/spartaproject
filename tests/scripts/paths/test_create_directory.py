@@ -27,7 +27,7 @@ def _inside_tmp_directory(func: Callable[[Path], bool]) -> None:
 
 def test_single() -> None:
     def make_dir(tmp_path: Path) -> bool:
-        path: Path = tmp_path.joinpath(ELEMENT_NAMES[0])
+        path: Path = Path(tmp_path, ELEMENT_NAMES[0])
         path_mkdir(path)
         return path_exists(path)
 
@@ -42,7 +42,7 @@ def test_array() -> None:
 
     def make_dir(tmp_path: Path) -> bool:
         paths: _Paths = [
-            tmp_path.joinpath(head_path)
+            Path(tmp_path, head_path)
             for head_path in head_paths
         ]
         path_array_mkdir(paths)
@@ -59,7 +59,7 @@ def test_pair() -> None:
 
     def make_dir(tmp_path: Path) -> bool:
         paths: _PathPair = {
-            name: tmp_path.joinpath(head_path)
+            name: Path(tmp_path, head_path)
             for name, head_path in head_paths.items()
         }
         path_pair_mkdir(paths)
