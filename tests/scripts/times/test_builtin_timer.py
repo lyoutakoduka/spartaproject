@@ -13,15 +13,15 @@ _Decimals = List[Decimal]
 
 set_decimal_context()
 
-COUNT: int = 10
-INI_EXPECTED: _Decimals = [Decimal(str(i)) for i in range(COUNT)]
+_COUNT: int = 10
+_INI_EXPECTED: _Decimals = [Decimal(str(i)) for i in range(_COUNT)]
 
 
 def _check_counter_result(expected: _Decimals, timer: TimerSelect) -> None:
     expected = [count + timer.APRIL_1_2023_EPOCH for count in expected]
 
     results: _Decimals = []
-    for _ in range(COUNT):
+    for _ in range(_COUNT):
         results += [timer()]
         timer.increase_timer()
 
@@ -29,14 +29,14 @@ def _check_counter_result(expected: _Decimals, timer: TimerSelect) -> None:
 
 
 def test_int() -> None:
-    _check_counter_result(INI_EXPECTED, TimerSelect(override=True))
+    _check_counter_result(_INI_EXPECTED, TimerSelect(override=True))
 
 
 def test_interval() -> None:
     micro_scale: Decimal = Decimal('0.000001')
 
     _check_counter_result(
-        [expected * micro_scale for expected in INI_EXPECTED],
+        [expected * micro_scale for expected in _INI_EXPECTED],
         TimerSelect(override=True, interval=micro_scale)
     )
 
