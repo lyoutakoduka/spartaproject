@@ -2,15 +2,13 @@
 # -*- coding: utf-8 -*-
 
 from sys import exit, argv
-from typing import List
 
+from contexts.string_context import Strs
 from scripts.call_module import call_function
-
-_Strs = List[str]
 
 
 def main() -> bool:
-    arguments: _Strs = argv
+    arguments: Strs = argv
 
     if 2 == len(arguments):
         return call_function(arguments[0], arguments[1])
