@@ -3,6 +3,10 @@
 
 from tempfile import TemporaryDirectory
 
+from contexts.bool_context import BoolPair
+from contexts.integer_context import IntPair
+from contexts.float_context import FloatPair
+from contexts.string_context import StrPair
 from contexts.path_context import Path
 from contexts.config_context import Config
 from scripts.files.export_config import config_dump, config_export
@@ -62,8 +66,40 @@ def test_lower() -> None:
     assert expected == config_dump(_JSON_INPUT)
 
 
+def test_type() -> None:
+    flags: BoolPair = {'a': True}
+    indies: IntPair = {'b': 1}
+    numbers: FloatPair = {'c': 1.0}
+    texts: StrPair = {'d': 'hello'}
+
+    _JSON_INPUT: Config = {
+        'flags': flags,
+        'indies': indies,
+        'numbers': numbers,
+        'texts': texts,
+    }
+
+    EXPECTED: str = """
+        [flags]
+        a = True
+
+        [indies]
+        b = 1
+
+        [numbers]
+        c = 1.0
+
+        [texts]
+        d = hello
+    """
+
+    expected: str = format_indent(EXPECTED)
+    assert expected == config_dump(_JSON_INPUT)
+
+
 def main() -> bool:
     test_dump()
     test_export()
     test_lower()
+    test_type()
     return True
