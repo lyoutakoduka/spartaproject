@@ -7,7 +7,8 @@ from contexts.bool_context import BoolPair
 from contexts.integer_context import IntPair
 from contexts.float_context import FloatPair
 from contexts.string_context import StrPair
-from contexts.path_context import Path
+from contexts.decimal_context import Decimal, DecPair
+from contexts.path_context import Path, PathPair
 from contexts.config_context import Config
 from scripts.files.export_config import config_dump, config_export
 from scripts.format_texts import format_indent
@@ -15,6 +16,8 @@ from scripts.format_texts import format_indent
 
 _CONFIG_INPUT: Config = {
     'section': {
+        'path': Path('root'),
+        'decimal': Decimal('0.1'),
         'str': '1',
         'float': 1.0,
         'int': 1,
@@ -25,6 +28,8 @@ _CONFIG_INPUT: Config = {
 # 2 space indent
 _EXPECTED_SRC: str = """
     [section]
+    path = root
+    decimal = 0.1
     str = 1
     float = 1.0
     int = 1
@@ -71,12 +76,16 @@ def test_type() -> None:
     indies: IntPair = {'b': 1}
     numbers: FloatPair = {'c': 1.0}
     texts: StrPair = {'d': 'hello'}
+    decimals: DecPair = {'e': Decimal('0.1')}
+    paths: PathPair = {'f': Path('root')}
 
     INPUT: Config = {
         'flags': flags,
         'indies': indies,
         'numbers': numbers,
         'texts': texts,
+        'decimals': decimals,
+        'paths': paths,
     }
 
     EXPECTED: str = """
@@ -91,6 +100,12 @@ def test_type() -> None:
 
         [texts]
         d = hello
+
+        [decimals]
+        e = 0.1
+
+        [paths]
+        f = root
     """
 
     expected: str = format_indent(EXPECTED)
