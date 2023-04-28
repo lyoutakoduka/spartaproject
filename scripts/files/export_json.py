@@ -2,9 +2,31 @@
 # -*- coding: utf-8 -*-
 
 from json import dumps
+from typing import List, Dict
 
+from contexts.decimal_context import Decimal
 from contexts.path_context import Path
-from contexts.json_context import TypeJson
+from contexts.json_context import TypeJson, TypeSingle
+
+
+def _convert_unknown(content: TypeSingle) -> TypeSingle:
+    if isinstance(content, Path):
+        return str(content)
+
+    if isinstance(content, Decimal):
+        return float(content)
+
+    return content
+
+
+def serialize_json(content: TypeJson) -> TypeJson:
+    if isinstance(content, Dict):
+        return {key: serialize_json(value) for key, value in content.items()}
+
+    if isinstance(content, List):
+        return [serialize_json(value) for value in content]
+
+    return _convert_unknown(content)
 
 
 def _export_text(path: Path, content: str) -> None:

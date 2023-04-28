@@ -35,26 +35,6 @@ _TypePath = Path | _Paths | _PathPair
 
 _TypeDefault = str | int | float | bool | None
 _TypeUser = _TypePath | _TypeStr | _TypeDec | _TypeFloat | _TypeInt | _TypeBool
-_TypeSingle = _TypeDefault | _TypeUser
+TypeSingle = _TypeDefault | _TypeUser
 
-TypeJson = Dict[str, 'TypeJson'] | List['TypeJson'] | _TypeSingle
-
-
-def _convert_unknown(content: _TypeSingle) -> _TypeSingle:
-    if isinstance(content, Path):
-        return str(content)
-
-    if isinstance(content, Decimal):
-        return float(content)
-
-    return content
-
-
-def serialize_json(content: TypeJson) -> TypeJson:
-    if isinstance(content, Dict):
-        return {key: serialize_json(value) for key, value in content.items()}
-
-    if isinstance(content, List):
-        return [serialize_json(value) for value in content]
-
-    return _convert_unknown(content)
+TypeJson = Dict[str, 'TypeJson'] | List['TypeJson'] | TypeSingle
