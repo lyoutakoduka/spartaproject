@@ -5,5 +5,5 @@ from typing import List, Dict
 
 Strs = List[str]
 StrPair = Dict[str, str]
-StrList = List[Strs]
+Strs2 = List[Strs]
 StrPair2 = Dict[str, StrPair]

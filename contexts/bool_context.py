@@ -5,5 +5,5 @@ from typing import List, Dict
 
 Bools = List[bool]
 BoolPair = Dict[str, bool]
-BoolsList = List[Bools]
+Bools2 = List[Bools]
 BoolType = Bools | BoolPair

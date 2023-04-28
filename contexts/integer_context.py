@@ -5,4 +5,4 @@ from typing import List, Dict
 
 Ints = List[int]
 IntPair = Dict[str, int]
-IntsList = List[Ints]
+Ints2 = List[Ints]
