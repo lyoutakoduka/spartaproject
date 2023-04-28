@@ -8,7 +8,7 @@ from contexts.float_context import Floats
 from contexts.decimal_context import Decimal
 from contexts.string_context import Strs
 from contexts.path_context import Path
-from contexts.file_context import TypeJson, serialize_json
+from contexts.json_context import TypeJson, serialize_json
 from scripts.bools.same_value import bool_same_pair
 
 _KEYS: Strs = ['R', 'G', 'B']

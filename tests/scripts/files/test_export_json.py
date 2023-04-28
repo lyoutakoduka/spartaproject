@@ -4,7 +4,7 @@
 from tempfile import TemporaryDirectory
 
 from contexts.path_context import Path
-from contexts.file_context import TypeJson
+from contexts.json_context import TypeJson
 from scripts.files.export_json import json_dump, json_export
 from scripts.format_texts import format_indent
 

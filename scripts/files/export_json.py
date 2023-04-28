@@ -4,7 +4,7 @@
 from json import dumps
 
 from contexts.path_context import Path
-from contexts.file_context import TypeJson
+from contexts.json_context import TypeJson
 
 
 def _export_text(path: Path, content: str) -> None:
