@@ -13,7 +13,7 @@ from scripts.files.export_config import config_dump, config_export
 from scripts.format_texts import format_indent
 
 
-_JSON_INPUT: Config = {
+_CONFIG_INPUT: Config = {
     'section': {
         'str': '1',
         'float': 1.0,
@@ -33,23 +33,23 @@ _EXPECTED_SRC: str = """
 
 
 def test_dump() -> None:
-    EXPECTED: str = format_indent(_EXPECTED_SRC)
-    assert EXPECTED == config_dump(_JSON_INPUT)
+    expected: str = format_indent(_EXPECTED_SRC)
+    assert expected == config_dump(_CONFIG_INPUT)
 
 
 def test_export() -> None:
-    EXPECTED: str = format_indent(_EXPECTED_SRC)
+    expected: str = format_indent(_EXPECTED_SRC)
 
     with TemporaryDirectory() as tmp_path:
         export_path: Path = Path(tmp_path, 'tmp.json')
-        config_export(export_path, _JSON_INPUT)
+        config_export(export_path, _CONFIG_INPUT)
 
         with open(export_path, 'r') as file:
-            assert EXPECTED == file.read()
+            assert expected == file.read()
 
 
 def test_lower() -> None:
-    _JSON_INPUT: Config = {
+    INPUT: Config = {
         'SECTION': {
             'TRUE': True,
             'FALSE': False
@@ -63,7 +63,7 @@ def test_lower() -> None:
     """
 
     expected: str = format_indent(EXPECTED)
-    assert expected == config_dump(_JSON_INPUT)
+    assert expected == config_dump(INPUT)
 
 
 def test_type() -> None:
@@ -72,7 +72,7 @@ def test_type() -> None:
     numbers: FloatPair = {'c': 1.0}
     texts: StrPair = {'d': 'hello'}
 
-    _JSON_INPUT: Config = {
+    INPUT: Config = {
         'flags': flags,
         'indies': indies,
         'numbers': numbers,
@@ -94,7 +94,7 @@ def test_type() -> None:
     """
 
     expected: str = format_indent(EXPECTED)
-    assert expected == config_dump(_JSON_INPUT)
+    assert expected == config_dump(INPUT)
 
 
 def main() -> bool:
