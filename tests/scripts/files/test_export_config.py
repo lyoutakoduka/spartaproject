@@ -44,7 +44,26 @@ def test_export() -> None:
             assert EXPECTED == file.read()
 
 
+def test_lower() -> None:
+    _JSON_INPUT: Config = {
+        'SECTION': {
+            'TRUE': True,
+            'FALSE': False
+        }
+    }
+
+    EXPECTED: str = """
+        [SECTION]
+        true = True
+        false = False
+    """
+
+    expected: str = format_indent(EXPECTED)
+    assert expected == config_dump(_JSON_INPUT)
+
+
 def main() -> bool:
     test_dump()
     test_export()
+    test_lower()
     return True
