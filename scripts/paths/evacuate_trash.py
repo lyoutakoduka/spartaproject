@@ -4,7 +4,7 @@
 from shutil import move
 from datetime import datetime
 
-from contexts.integer_context import IntsList
+from contexts.integer_context import Ints2
 from contexts.string_context import Strs
 from contexts.path_context import Path, Paths
 from scripts.paths.get_absolute import path_absolute
@@ -18,7 +18,7 @@ def _default() -> Path:
 
 
 class TrashBox:
-    def _get_time_data(self, time_utc: str) -> IntsList:
+    def _get_time_data(self, time_utc: str) -> Ints2:
         time: datetime = datetime.fromisoformat(time_utc)
         return [
             [4, time.year],
@@ -32,7 +32,7 @@ class TrashBox:
 
     def _get_trash_path(self) -> Path:
         time_utc: str = get_current_time(jst=True)
-        time_counts: IntsList = self._get_time_data(time_utc)
+        time_counts: Ints2 = self._get_time_data(time_utc)
 
         time_texts: Strs = [
             str(time_count).zfill(order)

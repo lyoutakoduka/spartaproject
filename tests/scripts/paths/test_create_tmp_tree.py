@@ -5,7 +5,7 @@ from typing import Callable
 from tempfile import TemporaryDirectory
 
 from contexts.integer_context import Ints
-from contexts.string_context import Strs, StrList
+from contexts.string_context import Strs, Strs2
 from contexts.path_context import Path, Paths
 from scripts.paths.get_relative import path_array_relative
 from scripts.paths.create_tmp_tree import create_tree
@@ -29,7 +29,7 @@ def test_three() -> None:
     NAME_JSON: str = 'file.json'
     NAME_TEXT: str = 'file.txt'
 
-    EXPECTED: StrList = [
+    EXPECTED: Strs2 = [
         [NAME_DIR_1],
         [NAME_DIR_EMPTY],
         [NAME_INI],

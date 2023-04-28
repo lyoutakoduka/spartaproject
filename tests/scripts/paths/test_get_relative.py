@@ -3,7 +3,7 @@
 
 from pytest import raises
 
-from contexts.string_context import Strs, StrList
+from contexts.string_context import Strs, Strs2
 from contexts.path_context import Path, Paths, PathPair
 from scripts.bools.same_value import bool_same_array
 from scripts.paths.get_relative import path_relative, path_array_relative, path_pair_relative
@@ -13,7 +13,7 @@ _BASE_PATH: Path = Path('project')
 _HEAD_PATH: Path = Path(_BASE_PATH, 'sparta', 'tests', 'scripts', 'paths')
 
 _TEST_PATH: Strs = ['sparta', 'tests']
-_EXPECTED: StrList = [
+_EXPECTED: Strs2 = [
     ['.'],
     ['sparta'],
     _TEST_PATH,

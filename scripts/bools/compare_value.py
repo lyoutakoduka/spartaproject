@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from contexts.bool_context import Bools, BoolPair, BoolsList, BoolType
+from contexts.bool_context import Bools, BoolPair, Bools2, BoolType
 from contexts.integer_context import Ints
-from contexts.string_context import StrList
+from contexts.string_context import Strs2
 
 
 def _check_args_size(lefts: BoolType, rights: BoolType) -> None:
@@ -25,7 +25,7 @@ def bool_compare_array(lefts: Bools, rights: Bools) -> bool:
 def bool_compare_pair(lefts: BoolPair, rights: BoolPair) -> bool:
     _check_args_size(lefts, rights)
 
-    sorted_keys: StrList = [
+    sorted_keys: Strs2 = [
         sorted(flags.keys())
         for flags in [lefts, rights]
     ]
@@ -33,7 +33,7 @@ def bool_compare_pair(lefts: BoolPair, rights: BoolPair) -> bool:
     if sorted_keys[0] != sorted_keys[1]:
         raise KeyError('unmatch')
 
-    sorted_flags: BoolsList = [
+    sorted_flags: Bools2 = [
         [flags[key] for key in keys]
         for keys, flags in zip(sorted_keys, [lefts, rights])
     ]

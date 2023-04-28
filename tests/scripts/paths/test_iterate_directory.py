@@ -4,7 +4,7 @@
 from typing import Callable
 from tempfile import TemporaryDirectory
 
-from contexts.string_context import Strs, StrList
+from contexts.string_context import Strs, Strs2
 from contexts.path_context import Path, Paths, PathGene
 from scripts.paths.get_relative import path_array_relative
 from scripts.paths.create_tmp_tree import create_tree
@@ -22,14 +22,14 @@ _NAME_JSON: str = 'file.json'
 _NAME_TEXT: str = 'file.txt'
 
 
-def _check_walk_result(expected: StrList, path_gene: PathGene, root_path: Path) -> None:
+def _check_walk_result(expected: Strs2, path_gene: PathGene, root_path: Path) -> None:
     results: Paths = path_array_relative(list(path_gene), root_path=root_path)
     expected_paths: Paths = [Path(*path_names) for path_names in expected]
 
     assert expected_paths == results
 
 
-def _inside_tmp_directory(expected: StrList, func: Callable[[Path], PathGene]) -> None:
+def _inside_tmp_directory(expected: Strs2, func: Callable[[Path], PathGene]) -> None:
     with TemporaryDirectory() as tmp_path:
         root_path: Path = Path(tmp_path)
         create_tree(root_path, tree_deep=_TREE_DEEP)
@@ -37,7 +37,7 @@ def _inside_tmp_directory(expected: StrList, func: Callable[[Path], PathGene]) -
 
 
 def test_all() -> None:
-    EXPECTED: StrList = [
+    EXPECTED: Strs2 = [
         [_NAME_DIR_1],
         [_NAME_DIR_EMPTY],
         [_NAME_INI],
@@ -60,7 +60,7 @@ def test_all() -> None:
 
 
 def test_depth() -> None:
-    EXPECTED: StrList = [
+    EXPECTED: Strs2 = [
         _NAME_DIRS,
         [_NAME_DIR_1, _NAME_DIR_EMPTY],
         [_NAME_DIR_1, _NAME_INI],
@@ -74,7 +74,7 @@ def test_depth() -> None:
 
 
 def test_directory() -> None:
-    EXPECTED: StrList = [
+    EXPECTED: Strs2 = [
         [_NAME_INI],
         [_NAME_JSON],
         [_NAME_TEXT],
@@ -92,7 +92,7 @@ def test_directory() -> None:
 
 
 def test_file() -> None:
-    EXPECTED: StrList = [
+    EXPECTED: Strs2 = [
         [_NAME_DIR_1],
         [_NAME_DIR_EMPTY],
         _NAME_DIRS,
@@ -106,7 +106,7 @@ def test_file() -> None:
 
 
 def test_suffix() -> None:
-    EXPECTED: StrList = [
+    EXPECTED: Strs2 = [
         [_NAME_JSON],
         [_NAME_DIR_1, _NAME_JSON],
         _NAME_DIRS + [_NAME_JSON],
@@ -118,7 +118,7 @@ def test_suffix() -> None:
 
 
 def test_filter() -> None:
-    EXPECTED: StrList = [_NAME_DIRS + [_NAME_TEXT]]
+    EXPECTED: Strs2 = [_NAME_DIRS + [_NAME_TEXT]]
 
     def make_tree(root_path: Path) -> PathGene:
         return walk_iterator(root_path, filter='*/*/*.txt')
