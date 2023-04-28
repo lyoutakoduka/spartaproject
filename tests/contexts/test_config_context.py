@@ -5,23 +5,17 @@ from typing import List, Any, get_args
 from decimal import Decimal
 from pathlib import Path
 
-from contexts.config_context import Config, ConfigExtend
+from contexts.config_context import Config
 
 
 def _check_type_structure(check_type: type) -> bool:
-    is_extend: bool = ConfigExtend == check_type
-
     section_key, section = get_args(check_type)
 
     if section_key != str:
         return False
 
-    default_types: List[type] = [bool, int, float, str]
-    default_type_union = bool | int | float | str
-
-    if is_extend:
-        default_types += [Decimal, Path]
-        default_type_union |= Decimal | Path
+    default_types: List[type] = [bool, int, float, str, Decimal, Path]
+    default_type_union = bool | int | float | str | Decimal | Path
 
     expected_types: List[Any] = default_types + [default_type_union]
 
@@ -43,11 +37,6 @@ def test_type() -> None:
     assert _check_type_structure(Config)
 
 
-def test_extend() -> None:
-    assert _check_type_structure(ConfigExtend)
-
-
 def main() -> bool:
     test_type()
-    test_extend()
     return True
