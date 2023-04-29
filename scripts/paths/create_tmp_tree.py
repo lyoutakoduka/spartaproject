@@ -1,18 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from io import StringIO
-from configparser import ConfigParser
-
-from contexts.string_context import Strs, StrPair2
+from contexts.string_context import Strs
 from contexts.path_context import Path
+from scripts.files.export_config import config_export, Config
 from scripts.files.export_json import json_export, Json
 from scripts.paths.create_directory import path_mkdir
 
 _LIST_SAMPLE: Strs = ['line' + str(i) for i in range(3)]
-_DICT_SAMPLE: StrPair2 = {
-    'section': {'option' + str(i): str(i) for i in range(3)}
-}
 
 _NAME: str = 'file'
 
@@ -28,12 +23,10 @@ def _sample_text(root: Path) -> None:
 
 
 def _sample_config(root: Path) -> None:
-    config = ConfigParser()
-    config.read_dict(_DICT_SAMPLE)
-
-    with StringIO() as file:
-        config.write(file)
-        _write_text(root, 'ini', file.getvalue())
+    INPUT: Config = {
+        'section': {'option' + str(i): str(i) for i in range(3)}
+    }
+    config_export(Path(root, _NAME + '.ini'), INPUT)
 
 
 def _sample_json(root: Path) -> None:
