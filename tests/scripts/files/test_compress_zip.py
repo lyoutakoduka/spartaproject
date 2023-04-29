@@ -101,6 +101,21 @@ def test_simple() -> None:
     _inside_tmp_directory(make_tree)
 
 
+def test_directory() -> None:
+    def make_tree(archive_root: Path, tree_root: Path, walk_paths: Paths) -> Paths:
+        archive_zip = ArchiveZip(archive_root)
+        create_tree(tree_root, tree_deep=2)
+
+        for path in walk_iterator(tree_root, file=False, depth=1):
+            archive_zip.add_archive(path)
+            walk_paths += [path]
+
+        return archive_zip.result()
+
+    _inside_tmp_directory(make_tree)
+
+
 def main() -> bool:
     test_simple()
+    test_directory()
     return True
