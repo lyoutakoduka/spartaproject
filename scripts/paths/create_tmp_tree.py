@@ -11,10 +11,18 @@ _NAME: str = 'file'
 
 
 def _sample_text(root: Path) -> None:
-    INPUT: Strs = ['line' + str(i) for i in range(3)]
+    line_count: int = 1
+    line_width: int = 64
+    index_order: int = len(str(line_count))
+    width: int = line_width - index_order
+
+    INPUT: str = '\n'.join([
+        str(i).zfill(index_order) + '-' * width
+        for i in range(line_count)
+    ])
 
     with open(Path(root, _NAME + '.txt'), 'w') as file:
-        file.writelines(INPUT)
+        file.write(INPUT)
 
 
 def _sample_config(root: Path) -> None:
