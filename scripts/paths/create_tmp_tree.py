@@ -75,6 +75,9 @@ def _recursive_tree(root: Path, tree_deep: int, deep: int, weight: int):
         )
 
 
-def create_tree(root_path: Path, tree_deep: int = 1, weight: int = 1) -> None:
-    if 1 <= tree_deep <= 10:
-        _recursive_tree(root_path, tree_deep, tree_deep, weight)
+def create_tree(root_path: Path, tree_deep: int = 1, tree_weight: int = 1) -> None:
+    enable_deep: bool = 1 <= tree_deep <= 10
+    enable_weight: bool = 1 <= tree_weight <= 10
+
+    if enable_deep and enable_weight:
+        _recursive_tree(root_path, tree_deep, tree_deep, tree_weight)
