@@ -13,11 +13,13 @@ _NAME: str = 'file'
 def _sample_text(root: Path) -> None:
     line_count: int = 1
     line_width: int = 64
+    line_count *= 10
     index_order: int = len(str(line_count))
     width: int = line_width - index_order
+    line_text: str = '-' * width
 
     INPUT: str = '\n'.join([
-        str(i).zfill(index_order) + '-' * width
+        str(i).zfill(index_order) + line_text
         for i in range(line_count)
     ])
 
