@@ -113,7 +113,7 @@ def test_export() -> None:
     expected: str = format_indent(EXPECTED)
 
     with TemporaryDirectory() as tmp_path:
-        export_path: Path = Path(tmp_path, 'tmp.json')
+        export_path: Path = Path(tmp_path, 'tmp.ini')
         config_export(export_path, INPUT)
 
         with open(export_path, 'r') as file:
