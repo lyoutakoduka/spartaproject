@@ -9,7 +9,7 @@ from contexts.float_context import FloatPair
 from contexts.string_context import StrPair
 from contexts.decimal_context import Decimal, DecPair
 from contexts.path_context import Path, PathPair
-from contexts.config_context import Config
+from contexts.config_context import Config, Section
 from scripts.files.export_config import config_dump, config_export
 from scripts.format_texts import format_indent
 
@@ -38,8 +38,28 @@ _EXPECTED_SRC: str = """
 
 
 def test_dump() -> None:
-    expected: str = format_indent(_EXPECTED_SRC)
-    assert expected == config_dump(_CONFIG_INPUT)
+    INPUT: Section = {
+        'path': Path('root'),
+        'decimal': Decimal('0.1'),
+        'str': '1',
+        'float': 1.0,
+        'int': 1,
+        'bool': True,
+    }
+    config_input: Config = {'section': INPUT}
+
+    EXPECTED: str = """
+        [section]
+        path = root
+        decimal = 0.1
+        str = 1
+        float = 1.0
+        int = 1
+        bool = True
+    """
+
+    expected: str = format_indent(EXPECTED)
+    assert expected == config_dump(config_input)
 
 
 def test_export() -> None:
