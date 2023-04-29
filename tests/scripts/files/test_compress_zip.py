@@ -78,7 +78,6 @@ def _check_archive_result(
 def _inside_tmp_directory(func: Callable[[Path, Path, Paths], Paths]) -> None:
     with TemporaryDirectory() as tmp_path:
         tree_root: Path = Path(tmp_path, 'tree')
-        create_tree(tree_root, tree_deep=4, tree_weight=4)
 
         archive_root: Path = Path(tmp_path, 'archive')
         walk_paths: Paths = []
@@ -91,6 +90,7 @@ def _inside_tmp_directory(func: Callable[[Path, Path, Paths], Paths]) -> None:
 def test_simple() -> None:
     def make_tree(archive_root: Path, tree_root: Path, walk_paths: Paths) -> Paths:
         archive_zip = ArchiveZip(archive_root)
+        create_tree(tree_root)
 
         for path in walk_iterator(tree_root, directory=False, depth=1):
             archive_zip.add_archive(path)
