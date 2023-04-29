@@ -54,8 +54,8 @@ def test_three() -> None:
     assert expected == _inside_tmp_directory(make_tree)
 
 
-def test_empty() -> None:
-    OUTRANGE_INDICES: Ints = [-2, -1, 0, 11, 12, 13]
+def test_deep() -> None:
+    OUTRANGE_INDICES: Ints = [-1, 0, 11, 12, 13]
 
     def make_tree(tmp_path: Path) -> None:
         for index in OUTRANGE_INDICES:
@@ -64,7 +64,18 @@ def test_empty() -> None:
     assert 0 == len(_inside_tmp_directory(make_tree))
 
 
+def test_weight() -> None:
+    OUTRANGE_INDICES: Ints = [-2, -1, 0, 11, 12, 13]
+
+    def make_tree(tmp_path: Path) -> None:
+        for index in OUTRANGE_INDICES:
+            create_tree(tmp_path, tree_weight=index)
+
+    assert 0 == len(_inside_tmp_directory(make_tree))
+
+
 def main() -> bool:
     test_three()
-    test_empty()
+    test_deep()
+    test_weight()
     return True
