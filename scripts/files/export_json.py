@@ -6,10 +6,10 @@ from typing import List, Dict
 
 from contexts.decimal_context import Decimal
 from contexts.path_context import Path
-from contexts.json_context import TypeJson, TypeSingle
+from contexts.json_context import Json, JsonSafe, Single, SingleSafe
 
 
-def _convert_unknown(content: TypeSingle) -> TypeSingle:
+def _convert_unknown(content: Single) -> SingleSafe:
     if isinstance(content, Path):
         return str(content)
 
@@ -19,7 +19,7 @@ def _convert_unknown(content: TypeSingle) -> TypeSingle:
     return content
 
 
-def serialize_json(content: TypeJson) -> TypeJson:
+def serialize_json(content: Json) -> JsonSafe:
     if isinstance(content, Dict):
         return {key: serialize_json(value) for key, value in content.items()}
 
@@ -34,9 +34,9 @@ def _export_text(path: Path, content: str) -> None:
         file.write(content)
 
 
-def json_dump(content: TypeJson) -> str:
+def json_dump(content: Json) -> str:
     return dumps(content, indent=2, ensure_ascii=False, sort_keys=True)
 
 
-def json_export(export_path: Path, content: TypeJson) -> None:
+def json_export(export_path: Path, content: Json) -> None:
     _export_text(export_path, json_dump(content))
