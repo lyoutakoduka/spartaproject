@@ -7,19 +7,14 @@ from scripts.files.export_config import config_export, Config
 from scripts.files.export_json import json_export, Json
 from scripts.paths.create_directory import path_mkdir
 
-_LIST_SAMPLE: Strs = ['line' + str(i) for i in range(3)]
-
 _NAME: str = 'file'
 
 
-def _write_text(root: Path, format: str, content: str) -> None:
-    path: Path = Path(root, '.'.join(['file', format]))
-    with open(path, 'w') as file:
-        file.write(content)
-
-
 def _sample_text(root: Path) -> None:
-    _write_text(root, 'txt', '\n'.join(_LIST_SAMPLE))
+    INPUT: Strs = ['line' + str(i) for i in range(3)]
+
+    with open(Path(root, _NAME + '.txt'), 'w') as file:
+        file.writelines(INPUT)
 
 
 def _sample_config(root: Path) -> None:
