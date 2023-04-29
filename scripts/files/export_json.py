@@ -19,12 +19,12 @@ def _convert_unknown(content: Single) -> SingleSafe:
     return content
 
 
-def serialize_json(content: Json) -> JsonSafe:
+def _serialize_json(content: Json) -> JsonSafe:
     if isinstance(content, Dict):
-        return {key: serialize_json(value) for key, value in content.items()}
+        return {key: _serialize_json(value) for key, value in content.items()}
 
     if isinstance(content, List):
-        return [serialize_json(value) for value in content]
+        return [_serialize_json(value) for value in content]
 
     return _convert_unknown(content)
 
@@ -35,7 +35,7 @@ def _export_text(path: Path, content: str) -> None:
 
 
 def json_dump(content: Json) -> str:
-    return dumps(content, indent=2, ensure_ascii=False, sort_keys=True)
+    return dumps(_serialize_json(content), indent=2, ensure_ascii=False, sort_keys=True)
 
 
 def json_export(export_path: Path, content: Json) -> None:
