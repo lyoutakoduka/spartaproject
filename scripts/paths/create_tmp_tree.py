@@ -2,17 +2,19 @@
 # -*- coding: utf-8 -*-
 
 from io import StringIO
-from json import dumps
 from configparser import ConfigParser
 
 from contexts.string_context import Strs, StrPair2
 from contexts.path_context import Path
+from scripts.files.export_json import json_export, Json
 from scripts.paths.create_directory import path_mkdir
 
 _LIST_SAMPLE: Strs = ['line' + str(i) for i in range(3)]
 _DICT_SAMPLE: StrPair2 = {
     'section': {'option' + str(i): str(i) for i in range(3)}
 }
+
+_NAME: str = 'file'
 
 
 def _write_text(root: Path, format: str, content: str) -> None:
@@ -35,9 +37,10 @@ def _sample_config(root: Path) -> None:
 
 
 def _sample_json(root: Path) -> None:
-    text: str = dumps(
-        _DICT_SAMPLE, indent=2, ensure_ascii=False, sort_keys=True)
-    _write_text(root, 'json', text)
+    INPUT: Json = {
+        'section': {'option' + str(i): str(i) for i in range(3)}
+    }
+    json_export(Path(root, _NAME + '.json'), INPUT)
 
 
 def _recursive_tree(root: Path, tree_deep: int, deep: int):
