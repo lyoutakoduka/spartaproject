@@ -78,11 +78,12 @@ class ArchiveZip:
         )
 
     def _add_file_to_archive(self, is_dir: bool, target: Path, root: Path) -> None:
-        with open(target, 'rb') as file_read:
-            self._file_zip.writestr(
-                str(path_relative(target, root_path=root)),
-                file_read.read()
-            )
+        relative_path: str = str(path_relative(target, root_path=root))
+        if is_dir:
+            self._file_zip.mkdir(relative_path)
+        else:
+            with open(target, 'rb') as file_read:
+                self._file_zip.writestr(relative_path, file_read.read())
 
     def _update_archive_byte(self, target: Path, root: Path) -> None:
         target_byte: Decimal = Decimal(str(target.stat().st_size))
@@ -121,7 +122,5 @@ class ArchiveZip:
     def add_archive(self, archive_target: Path, archive_root: Path = Path('')) -> None:
         if archive_target.is_relative_to(archive_root):
             self._add_archive_child(archive_target, archive_root)
-        elif archive_target.is_dir():
-            self._add_archive_child(archive_target, archive_target)
         else:
             self._add_archive_child(archive_target, archive_target.parent)
