@@ -5,36 +5,8 @@ from decimal import Decimal
 from pathlib import Path
 from typing import List, Dict
 
-_Bools = List[bool]
-_BoolPair = Dict[str, bool]
-_BoolsList = List[_Bools]
-_TypeBool = _Bools | _BoolPair | _BoolsList
+SingleSafe = None | bool | int | float | str
+Single = SingleSafe | Decimal | Path
 
-_Ints = List[int]
-_IntPair = Dict[str, int]
-_IntsList = List[_Ints]
-_TypeInt = _Ints | _IntPair | _IntsList
-
-_Floats = List[float]
-_FloatPair = Dict[str, float]
-_TypeFloat = _Floats | _FloatPair
-
-_Decs = List[Decimal]
-_DecPair = Dict[str, Decimal]
-_TypeDec = Decimal | _Decs | _DecPair
-
-_Strs = List[str]
-_StrPair = Dict[str, str]
-_StrList = List[_Strs]
-_StrPair2 = Dict[str, _StrPair]
-_TypeStr = _Strs | _StrPair | _StrList | _StrPair2
-
-_Paths = List[Path]
-_PathPair = Dict[str, Path]
-_TypePath = Path | _Paths | _PathPair
-
-_TypeDefault = str | int | float | bool | None
-_TypeUser = _TypePath | _TypeStr | _TypeDec | _TypeFloat | _TypeInt | _TypeBool
-TypeSingle = _TypeDefault | _TypeUser
-
-TypeJson = Dict[str, 'TypeJson'] | List['TypeJson'] | TypeSingle
+JsonSafe = SingleSafe | Dict[str, 'JsonSafe'] | List['JsonSafe']
+Json = Single | Dict[str, 'Json'] | List['Json']
