@@ -107,8 +107,7 @@ def test_simple() -> None:
             archive_zip.add_archive(path)
             walk_paths += [path]
 
-        archived: Paths = archive_zip.result()
-        del archive_zip
+        archived: Paths = archive_zip.close_archived()
         _common_test(archived, tmp_path, walk_paths)
 
     _inside_tmp_directory(individual_test)
@@ -125,8 +124,7 @@ def test_directory() -> None:
             archive_zip.add_archive(path)
             walk_paths += [path]
 
-        archived: Paths = archive_zip.result()
-        del archive_zip
+        archived: Paths = archive_zip.close_archived()
         _common_test(archived, tmp_path, walk_paths)
 
     _inside_tmp_directory(individual_test)
@@ -143,8 +141,7 @@ def test_tree() -> None:
             archive_zip.add_archive(path, archive_root=tree_root)
             walk_paths += [path]
 
-        archived: Paths = archive_zip.result()
-        del archive_zip
+        archived: Paths = archive_zip.close_archived()
         _common_test(archived, tmp_path, walk_paths)
 
     _inside_tmp_directory(individual_test)

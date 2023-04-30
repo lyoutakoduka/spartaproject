@@ -36,9 +36,6 @@ class ArchiveZip:
         self._init_walk_history()
         self._init_archive_byte()
 
-    def __del__(self):
-        self._file_zip.close()
-
     def _init_archive_id(self, archive_id: str) -> None:
         if 0 == len(archive_id):
             archive_id = self._output_root.name
@@ -53,7 +50,8 @@ class ArchiveZip:
         self._output_index: int = 0
         self._reset_archive_byte()
 
-    def result(self) -> Paths:
+    def close_archived(self) -> Paths:
+        self._file_zip.close()
         return self._archived
 
     def _get_archive_path(self) -> Path:
