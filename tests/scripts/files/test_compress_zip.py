@@ -182,9 +182,31 @@ def test_compress() -> None:
     _inside_tmp_directory(individual_test)
 
 
+def test_id() -> None:
+    ARCHIVE_NAME: str = 'test'
+
+    def individual_test(tmp_path: Path) -> None:
+        tree_root: Path = Path(tmp_path, 'tree')
+        archive_zip = ArchiveZip(
+            Path(tmp_path, 'archive'),
+            archive_id=ARCHIVE_NAME
+        )
+        create_tree(tree_root)
+
+        for path in walk_iterator(tree_root, directory=False, depth=1):
+            archive_zip.add_archive(path)
+
+        archived: Paths = archive_zip.close_archived()
+        archived_path = archived[0]
+        assert ARCHIVE_NAME == archived_path.stem
+
+    _inside_tmp_directory(individual_test)
+
+
 def main() -> bool:
     test_simple()
     test_directory()
     test_tree()
     test_compress()
+    test_id()
     return True
