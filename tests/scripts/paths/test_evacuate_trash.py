@@ -35,20 +35,20 @@ def _inside_tmp_directory(func: Callable[[Paths], Paths]) -> None:
 
 
 def test_default() -> None:
-    def make_tree(evacuate_targets: Paths) -> Paths:
+    def individual_test(evacuate_targets: Paths) -> Paths:
         trash_box = TrashBox()
         return trash_box.throw_away(evacuate_targets)
 
-    _inside_tmp_directory(make_tree)
+    _inside_tmp_directory(individual_test)
 
 
 def test_select() -> None:
     with TemporaryDirectory() as tmp_path:
-        def make_tree(evacuate_targets: Paths) -> Paths:
+        def individual_test(evacuate_targets: Paths) -> Paths:
             trash_box = TrashBox(trash_path=Path(tmp_path))
             return trash_box.throw_away(evacuate_targets)
 
-        _inside_tmp_directory(make_tree)
+        _inside_tmp_directory(individual_test)
 
 
 def main() -> bool:

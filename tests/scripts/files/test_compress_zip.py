@@ -77,7 +77,7 @@ def _get_sorted_paths(walk_paths: Paths, result_raw: Paths, tmp_path: Path) -> P
     ]
 
 
-def _check_archive_result(
+def _common_test(
     result_raw: Paths,
     tmp_path: Path,
     walk_paths: Paths,
@@ -97,7 +97,7 @@ def _inside_tmp_directory(func: Callable[[Path], None]) -> None:
 
 
 def test_simple() -> None:
-    def make_tree(tmp_path: Path) -> None:
+    def individual_test(tmp_path: Path) -> None:
         tree_root: Path = Path(tmp_path, 'tree')
         archive_zip = ArchiveZip(Path(tmp_path, 'archive'))
         create_tree(tree_root)
@@ -109,13 +109,13 @@ def test_simple() -> None:
 
         result_raw: Paths = archive_zip.result()
         del archive_zip
-        _check_archive_result(result_raw, tmp_path, walk_paths)
+        _common_test(result_raw, tmp_path, walk_paths)
 
-    _inside_tmp_directory(make_tree)
+    _inside_tmp_directory(individual_test)
 
 
 def test_directory() -> None:
-    def make_tree(tmp_path: Path) -> None:
+    def individual_test(tmp_path: Path) -> None:
         tree_root: Path = Path(tmp_path, 'tree')
         archive_zip = ArchiveZip(Path(tmp_path, 'archive'))
         create_tree(tree_root, tree_deep=2)
@@ -127,13 +127,13 @@ def test_directory() -> None:
 
         result_raw: Paths = archive_zip.result()
         del archive_zip
-        _check_archive_result(result_raw, tmp_path, walk_paths)
+        _common_test(result_raw, tmp_path, walk_paths)
 
-    _inside_tmp_directory(make_tree)
+    _inside_tmp_directory(individual_test)
 
 
 def test_tree() -> None:
-    def make_tree(tmp_path: Path) -> None:
+    def individual_test(tmp_path: Path) -> None:
         tree_root: Path = Path(tmp_path, 'tree')
         archive_zip = ArchiveZip(Path(tmp_path, 'archive'))
         create_tree(tree_root, tree_deep=3)
@@ -145,9 +145,9 @@ def test_tree() -> None:
 
         result_raw: Paths = archive_zip.result()
         del archive_zip
-        _check_archive_result(result_raw, tmp_path, walk_paths)
+        _common_test(result_raw, tmp_path, walk_paths)
 
-    _inside_tmp_directory(make_tree)
+    _inside_tmp_directory(individual_test)
 
 
 def main() -> bool:

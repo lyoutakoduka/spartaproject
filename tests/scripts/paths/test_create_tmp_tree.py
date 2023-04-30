@@ -48,30 +48,30 @@ def test_three() -> None:
 
     expected: Paths = [Path(*path_names) for path_names in EXPECTED]
 
-    def make_tree(tmp_path: Path) -> None:
+    def individual_test(tmp_path: Path) -> None:
         create_tree(tmp_path, tree_deep=3)
 
-    assert expected == _inside_tmp_directory(make_tree)
+    assert expected == _inside_tmp_directory(individual_test)
 
 
 def test_deep() -> None:
     OUTRANGE_INDICES: Ints = [-1, 0, 11, 12, 13]
 
-    def make_tree(tmp_path: Path) -> None:
+    def individual_test(tmp_path: Path) -> None:
         for index in OUTRANGE_INDICES:
             create_tree(tmp_path, tree_deep=index)
 
-    assert 0 == len(_inside_tmp_directory(make_tree))
+    assert 0 == len(_inside_tmp_directory(individual_test))
 
 
 def test_weight() -> None:
     OUTRANGE_INDICES: Ints = [-2, -1, 0, 11, 12, 13]
 
-    def make_tree(tmp_path: Path) -> None:
+    def individual_test(tmp_path: Path) -> None:
         for index in OUTRANGE_INDICES:
             create_tree(tmp_path, tree_weight=index)
 
-    assert 0 == len(_inside_tmp_directory(make_tree))
+    assert 0 == len(_inside_tmp_directory(individual_test))
 
 
 def main() -> bool:
