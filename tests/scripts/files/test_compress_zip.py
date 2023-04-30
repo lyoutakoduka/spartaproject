@@ -203,10 +203,28 @@ def test_id() -> None:
     _inside_tmp_directory(individual_test)
 
 
+def test_limit() -> None:
+    def individual_test(tmp_path: Path) -> None:
+        tree_root: Path = Path(tmp_path, 'tree')
+        archive_zip = ArchiveZip(Path(tmp_path, 'archive'), limit_byte=300)
+        create_tree(tree_root, tree_deep=3)
+
+        walk_paths: Paths = []
+        for path in walk_iterator(tree_root, directory=False):
+            archive_zip.add_archive(path, archive_root=tree_root)
+            walk_paths += [path]
+
+        archived: Paths = archive_zip.close_archived()
+        _common_test(archived, tmp_path, walk_paths)
+
+    _inside_tmp_directory(individual_test)
+
+
 def main() -> bool:
     test_simple()
     test_directory()
     test_tree()
     test_compress()
     test_id()
+    test_limit()
     return True

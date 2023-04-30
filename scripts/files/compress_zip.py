@@ -64,11 +64,9 @@ class ArchiveZip:
         return Path(self._output_root, '_'.join(file_names)).with_suffix('.zip')
 
     def _reset_archive_byte(self) -> None:
-        self._archive_byte: Decimal = Decimal('0')
-
         path_mkdir(self._output_root)
-        self._archived += [self._get_archive_path()]
 
+        self._archived += [self._get_archive_path()]
         self._file_zip = ZipFile(
             self._archived[-1],
             mode='w',
@@ -77,23 +75,41 @@ class ArchiveZip:
 
     def _add_file_to_archive(self, is_dir: bool, target: Path, root: Path) -> None:
         relative_path: str = str(path_relative(target, root_path=root))
+
         if is_dir:
             self._file_zip.mkdir(relative_path)
         else:
             with open(target, 'rb') as file_read:
                 self._file_zip.writestr(relative_path, file_read.read())
 
-    def _update_archive_byte(self, target: Path, root: Path) -> None:
-        target_byte: Decimal = Decimal(str(target.stat().st_size))
+    def _archive_outside_byte(self) -> Decimal:
+        current_archive: Path = self._archived[-1]
+        return Decimal(str(current_archive.stat().st_size))
 
-        if self._limit_byte < target_byte:
+    def _archive_inside_byte(self) -> Decimal:
+        return Decimal(str(sum([info.file_size for info in self._file_zip.infolist()])))
+
+    def _estimate_compressed_size(self, target: Path) -> Decimal:
+        outside_byte: Decimal = self._archive_outside_byte()
+        inside_byte: Decimal = self._archive_inside_byte()
+        src_byte: Decimal = Decimal(str(target.stat().st_size))
+
+        if 0 == inside_byte:
+            return src_byte
+
+        return src_byte * (outside_byte / inside_byte)
+
+    def _update_archive_byte(self, target: Path, root: Path) -> None:
+        estimate_byte: Decimal = self._estimate_compressed_size(target)
+
+        if self._limit_byte < estimate_byte:
             ...
         else:
-            next_byte: Decimal = self._archive_byte + target_byte
+            outside_byte: Decimal = self._archive_outside_byte()
+            next_byte: Decimal = outside_byte + estimate_byte
 
             if self._limit_byte < next_byte:
                 self._reset_archive_byte()
-            self._archive_byte += target_byte
 
             self._add_file_to_archive(False, target, root)
 
