@@ -6,11 +6,14 @@ from typing import Callable
 from tempfile import TemporaryDirectory
 
 from contexts.integer_context import Ints, Ints2
+from contexts.decimal_context import Decimal, Decs, set_decimal_context
 from contexts.path_context import Path, Paths, Paths2
 from scripts.files.compress_zip import ArchiveZip
 from scripts.paths.get_relative import path_array_relative
 from scripts.paths.create_tmp_tree import create_tree
 from scripts.paths.iterate_directory import walk_iterator
+
+set_decimal_context()
 
 
 def _get_input_paths(walk_paths: Paths, tmp_path: Path) -> Paths:
@@ -65,6 +68,20 @@ def _compare_file_size(sorted_paths: Paths2) -> None:
     ]
 
     assert file_size_pair[0] == file_size_pair[1]
+
+
+def _compare_compress_size(outputs: Paths, archived: Paths) -> None:
+    file_size_pair: Decs = [
+        Decimal(str(sum([
+            path.stat().st_size
+            for path in paths
+            if path.is_file()
+        ])))
+        for paths in [outputs, archived]
+    ]
+
+    ratio: Decimal = file_size_pair[1] / file_size_pair[0] * Decimal('100')
+    assert Decimal('3') > ratio
 
 
 def _get_sorted_paths(walk_paths: Paths, archived: Paths, tmp_path: Path) -> Paths2:
@@ -147,8 +164,27 @@ def test_tree() -> None:
     _inside_tmp_directory(individual_test)
 
 
+def test_compress() -> None:
+    def individual_test(tmp_path: Path) -> None:
+        tree_root: Path = Path(tmp_path, 'tree')
+        archive_zip = ArchiveZip(Path(tmp_path, 'archive'), compress=True)
+        create_tree(tree_root, tree_weight=4)
+
+        walk_paths: Paths = []
+        for path in walk_iterator(tree_root, directory=False, suffix='json'):
+            archive_zip.add_archive(path)
+            walk_paths += [path]
+
+        archived: Paths = archive_zip.close_archived()
+        sorted_paths: Paths2 = _common_test(archived, tmp_path, walk_paths)
+        _compare_compress_size(sorted_paths[-1], archived)
+
+    _inside_tmp_directory(individual_test)
+
+
 def main() -> bool:
     test_simple()
     test_directory()
     test_tree()
+    test_compress()
     return True
