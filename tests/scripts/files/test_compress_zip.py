@@ -31,12 +31,12 @@ def _get_input_paths(walk_paths: Paths, tmp_path: Path) -> Paths:
     return inputs
 
 
-def _get_output_paths(result_raw: Paths, tmp_path: Path) -> Paths:
+def _get_output_paths(archived: Paths, tmp_path: Path) -> Paths:
     outputs: Paths = []
     extract_root: Path = Path(tmp_path, 'extract')
 
-    for result_path in result_raw:
-        unpack_archive(result_path, extract_dir=extract_root)
+    for archived_path in archived:
+        unpack_archive(archived_path, extract_dir=extract_root)
 
         for path in walk_iterator(extract_root):
             outputs += [path]
@@ -67,9 +67,9 @@ def _compare_file_size(sorted_paths: Paths2) -> None:
     assert file_size_pair[0] == file_size_pair[1]
 
 
-def _get_sorted_paths(walk_paths: Paths, result_raw: Paths, tmp_path: Path) -> Paths2:
+def _get_sorted_paths(walk_paths: Paths, archived: Paths, tmp_path: Path) -> Paths2:
     inputs: Paths = _get_input_paths(walk_paths, tmp_path)
-    outputs: Paths = _get_output_paths(result_raw, tmp_path)
+    outputs: Paths = _get_output_paths(archived, tmp_path)
 
     return [
         sorted(list(set(paths)))
@@ -78,11 +78,11 @@ def _get_sorted_paths(walk_paths: Paths, result_raw: Paths, tmp_path: Path) -> P
 
 
 def _common_test(
-    result_raw: Paths,
+    archived: Paths,
     tmp_path: Path,
     walk_paths: Paths,
 ) -> Paths2:
-    sorted_paths: Paths2 = _get_sorted_paths(walk_paths, result_raw, tmp_path)
+    sorted_paths: Paths2 = _get_sorted_paths(walk_paths, archived, tmp_path)
 
     _compare_path_count(sorted_paths)
     _compare_path_name(sorted_paths, tmp_path)
@@ -107,9 +107,9 @@ def test_simple() -> None:
             archive_zip.add_archive(path)
             walk_paths += [path]
 
-        result_raw: Paths = archive_zip.result()
+        archived: Paths = archive_zip.result()
         del archive_zip
-        _common_test(result_raw, tmp_path, walk_paths)
+        _common_test(archived, tmp_path, walk_paths)
 
     _inside_tmp_directory(individual_test)
 
@@ -125,9 +125,9 @@ def test_directory() -> None:
             archive_zip.add_archive(path)
             walk_paths += [path]
 
-        result_raw: Paths = archive_zip.result()
+        archived: Paths = archive_zip.result()
         del archive_zip
-        _common_test(result_raw, tmp_path, walk_paths)
+        _common_test(archived, tmp_path, walk_paths)
 
     _inside_tmp_directory(individual_test)
 
@@ -143,9 +143,9 @@ def test_tree() -> None:
             archive_zip.add_archive(path, archive_root=tree_root)
             walk_paths += [path]
 
-        result_raw: Paths = archive_zip.result()
+        archived: Paths = archive_zip.result()
         del archive_zip
-        _common_test(result_raw, tmp_path, walk_paths)
+        _common_test(archived, tmp_path, walk_paths)
 
     _inside_tmp_directory(individual_test)
 
