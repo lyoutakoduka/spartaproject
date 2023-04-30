@@ -81,64 +81,71 @@ def _check_archive_result(
     result_raw: Paths,
     tmp_path: Path,
     walk_paths: Paths,
-) -> None:
+) -> Paths2:
     sorted_paths: Paths2 = _get_sorted_paths(walk_paths, result_raw, tmp_path)
 
     _compare_path_count(sorted_paths)
     _compare_path_name(sorted_paths, tmp_path)
     _compare_file_size(sorted_paths)
 
+    return sorted_paths
 
-def _inside_tmp_directory(func: Callable[[Path, Path, Paths], Paths]) -> None:
+
+def _inside_tmp_directory(func: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as tmp_path:
-        tree_root: Path = Path(tmp_path, 'tree')
-
-        archive_root: Path = Path(tmp_path, 'archive')
-        walk_paths: Paths = []
-        _check_archive_result(
-            func(archive_root, tree_root, walk_paths),
-            Path(tmp_path), walk_paths,
-        )
+        func(Path(tmp_path))
 
 
 def test_simple() -> None:
-    def make_tree(archive_root: Path, tree_root: Path, walk_paths: Paths) -> Paths:
-        archive_zip = ArchiveZip(archive_root)
+    def make_tree(tmp_path: Path) -> None:
+        tree_root: Path = Path(tmp_path, 'tree')
+        archive_zip = ArchiveZip(Path(tmp_path, 'archive'))
         create_tree(tree_root)
 
+        walk_paths: Paths = []
         for path in walk_iterator(tree_root, directory=False, depth=1):
             archive_zip.add_archive(path)
             walk_paths += [path]
 
-        return archive_zip.result()
+        result_raw: Paths = archive_zip.result()
+        del archive_zip
+        _check_archive_result(result_raw, tmp_path, walk_paths)
 
     _inside_tmp_directory(make_tree)
 
 
 def test_directory() -> None:
-    def make_tree(archive_root: Path, tree_root: Path, walk_paths: Paths) -> Paths:
-        archive_zip = ArchiveZip(archive_root)
+    def make_tree(tmp_path: Path) -> None:
+        tree_root: Path = Path(tmp_path, 'tree')
+        archive_zip = ArchiveZip(Path(tmp_path, 'archive'))
         create_tree(tree_root, tree_deep=2)
 
+        walk_paths: Paths = []
         for path in walk_iterator(tree_root, file=False, depth=1):
             archive_zip.add_archive(path)
             walk_paths += [path]
 
-        return archive_zip.result()
+        result_raw: Paths = archive_zip.result()
+        del archive_zip
+        _check_archive_result(result_raw, tmp_path, walk_paths)
 
     _inside_tmp_directory(make_tree)
 
 
 def test_tree() -> None:
-    def make_tree(archive_root: Path, tree_root: Path, walk_paths: Paths) -> Paths:
-        archive_zip = ArchiveZip(archive_root)
+    def make_tree(tmp_path: Path) -> None:
+        tree_root: Path = Path(tmp_path, 'tree')
+        archive_zip = ArchiveZip(Path(tmp_path, 'archive'))
         create_tree(tree_root, tree_deep=3)
 
+        walk_paths: Paths = []
         for path in walk_iterator(tree_root, directory=False, suffix='txt'):
             archive_zip.add_archive(path, archive_root=tree_root)
             walk_paths += [path]
 
-        return archive_zip.result()
+        result_raw: Paths = archive_zip.result()
+        del archive_zip
+        _check_archive_result(result_raw, tmp_path, walk_paths)
 
     _inside_tmp_directory(make_tree)
 
