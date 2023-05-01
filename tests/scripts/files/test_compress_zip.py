@@ -8,7 +8,7 @@ from tempfile import TemporaryDirectory
 from contexts.integer_context import Ints, Ints2
 from contexts.decimal_context import Decimal, Decs, set_decimal_context
 from contexts.path_context import Path, Paths, Paths2
-from scripts.files.compress_zip import ArchiveZip
+from scripts.files.compress_zip import CompressZip
 from scripts.paths.get_relative import path_array_relative
 from scripts.paths.create_tmp_tree import create_tree
 from scripts.paths.iterate_directory import walk_iterator
@@ -120,7 +120,7 @@ def _inside_tmp_directory(func: Callable[[Path], None]) -> None:
 def test_simple() -> None:
     def individual_test(tmp_path: Path) -> None:
         tree_root: Path = Path(tmp_path, 'tree')
-        archive_zip = ArchiveZip(Path(tmp_path, 'archive'))
+        archive_zip = CompressZip(Path(tmp_path, 'archive'))
         create_tree(tree_root)
 
         walk_paths: Paths = []
@@ -138,7 +138,7 @@ def test_simple() -> None:
 def test_directory() -> None:
     def individual_test(tmp_path: Path) -> None:
         tree_root: Path = Path(tmp_path, 'tree')
-        archive_zip = ArchiveZip(Path(tmp_path, 'archive'))
+        archive_zip = CompressZip(Path(tmp_path, 'archive'))
         create_tree(tree_root, tree_deep=2)
 
         walk_paths: Paths = []
@@ -156,7 +156,7 @@ def test_directory() -> None:
 def test_tree() -> None:
     def individual_test(tmp_path: Path) -> None:
         tree_root: Path = Path(tmp_path, 'tree')
-        archive_zip = ArchiveZip(Path(tmp_path, 'archive'))
+        archive_zip = CompressZip(Path(tmp_path, 'archive'))
         create_tree(tree_root, tree_deep=3)
 
         walk_paths: Paths = []
@@ -174,7 +174,7 @@ def test_tree() -> None:
 def test_compress() -> None:
     def individual_test(tmp_path: Path) -> None:
         tree_root: Path = Path(tmp_path, 'tree')
-        archive_zip = ArchiveZip(Path(tmp_path, 'archive'), compress=True)
+        archive_zip = CompressZip(Path(tmp_path, 'archive'), compress=True)
         create_tree(tree_root, tree_weight=4)
 
         walk_paths: Paths = []
@@ -195,7 +195,7 @@ def test_id() -> None:
 
     def individual_test(tmp_path: Path) -> None:
         tree_root: Path = Path(tmp_path, 'tree')
-        archive_zip = ArchiveZip(
+        archive_zip = CompressZip(
             Path(tmp_path, 'archive'),
             archive_id=ARCHIVE_NAME
         )
@@ -214,7 +214,7 @@ def test_id() -> None:
 def test_limit() -> None:
     def individual_test(tmp_path: Path) -> None:
         tree_root: Path = Path(tmp_path, 'tree')
-        archive_zip = ArchiveZip(Path(tmp_path, 'archive'), limit_byte=256)
+        archive_zip = CompressZip(Path(tmp_path, 'archive'), limit_byte=256)
         create_tree(tree_root, tree_deep=3)
 
         walk_paths: Paths = []
@@ -231,7 +231,7 @@ def test_limit() -> None:
 def test_heavy() -> None:
     def individual_test(tmp_path: Path) -> None:
         tree_root: Path = Path(tmp_path, 'tree')
-        archive_zip = ArchiveZip(Path(tmp_path, 'archive'), limit_byte=64)
+        archive_zip = CompressZip(Path(tmp_path, 'archive'), limit_byte=64)
         create_tree(tree_root, tree_deep=3, tree_weight=2)
 
         walk_paths: Paths = []

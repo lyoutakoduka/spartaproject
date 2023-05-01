@@ -20,7 +20,7 @@ def _default() -> int:
     return limit_byte * 4
 
 
-class ArchiveZip:
+class CompressZip:
     def __init__(
             self, output_root: Path,
             archive_id: str = '',
