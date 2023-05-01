@@ -84,6 +84,10 @@ def _compare_compress_size(outputs: Paths, archived: Paths) -> None:
     assert Decimal('3') > ratio
 
 
+def _compare_archived_count(archived: Paths) -> None:
+    assert 1 == len(archived)
+
+
 def _get_sorted_paths(walk_paths: Paths, archived: Paths, tmp_path: Path) -> Paths2:
     inputs: Paths = _get_input_paths(walk_paths, tmp_path)
     outputs: Paths = _get_output_paths(archived, tmp_path)
@@ -126,6 +130,7 @@ def test_simple() -> None:
 
         archived: Paths = archive_zip.close_archived()
         _common_test(archived, tmp_path, walk_paths)
+        _compare_archived_count(archived)
 
     _inside_tmp_directory(individual_test)
 
@@ -143,6 +148,7 @@ def test_directory() -> None:
 
         archived: Paths = archive_zip.close_archived()
         _common_test(archived, tmp_path, walk_paths)
+        _compare_archived_count(archived)
 
     _inside_tmp_directory(individual_test)
 
@@ -160,6 +166,7 @@ def test_tree() -> None:
 
         archived: Paths = archive_zip.close_archived()
         _common_test(archived, tmp_path, walk_paths)
+        _compare_archived_count(archived)
 
     _inside_tmp_directory(individual_test)
 
@@ -177,6 +184,7 @@ def test_compress() -> None:
 
         archived: Paths = archive_zip.close_archived()
         sorted_paths: Paths2 = _common_test(archived, tmp_path, walk_paths)
+        _compare_archived_count(archived)
         _compare_compress_size(sorted_paths[-1], archived)
 
     _inside_tmp_directory(individual_test)
