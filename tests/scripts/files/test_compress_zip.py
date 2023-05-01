@@ -206,7 +206,7 @@ def test_id() -> None:
 def test_limit() -> None:
     def individual_test(tmp_path: Path) -> None:
         tree_root: Path = Path(tmp_path, 'tree')
-        archive_zip = ArchiveZip(Path(tmp_path, 'archive'), limit_byte=300)
+        archive_zip = ArchiveZip(Path(tmp_path, 'archive'), limit_byte=256)
         create_tree(tree_root, tree_deep=3)
 
         walk_paths: Paths = []
