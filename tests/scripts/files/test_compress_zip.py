@@ -220,6 +220,23 @@ def test_limit() -> None:
     _inside_tmp_directory(individual_test)
 
 
+def test_heavy() -> None:
+    def individual_test(tmp_path: Path) -> None:
+        tree_root: Path = Path(tmp_path, 'tree')
+        archive_zip = ArchiveZip(Path(tmp_path, 'archive'), limit_byte=64)
+        create_tree(tree_root, tree_deep=3, tree_weight=2)
+
+        walk_paths: Paths = []
+        for path in walk_iterator(tree_root, directory=False, suffix='json'):
+            archive_zip.add_archive(path, archive_root=tree_root)
+            walk_paths += [path]
+
+        archived: Paths = archive_zip.close_archived()
+        _common_test(archived, tmp_path, walk_paths)
+
+    _inside_tmp_directory(individual_test)
+
+
 def main() -> bool:
     test_simple()
     test_directory()
@@ -227,4 +244,5 @@ def main() -> bool:
     test_compress()
     test_id()
     test_limit()
+    test_heavy()
     return True

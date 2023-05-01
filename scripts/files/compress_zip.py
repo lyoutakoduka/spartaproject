@@ -34,7 +34,7 @@ class ArchiveZip:
 
         self._init_archive_id(archive_id)
         self._init_walk_history()
-        self._init_archive_byte()
+        self._init_archive_output()
 
     def _init_archive_id(self, archive_id: str) -> None:
         if 0 == len(archive_id):
@@ -46,26 +46,27 @@ class ArchiveZip:
         self._walk_files: Paths = []
         self._archived: Paths = []
 
-    def _init_archive_byte(self) -> None:
+    def _init_archive_output(self) -> None:
         self._output_index: int = 0
-        self._reset_archive_byte()
+        path_mkdir(self._output_root)
 
     def close_archived(self) -> Paths:
         self._file_zip.close()
         return self._archived
 
+    def _has_archived(self) -> bool:
+        return 0 < self._output_index
+
     def _get_archive_path(self) -> Path:
         file_names: Strs = [self._archive_id]
 
-        if 0 < self._output_index:
+        if self._has_archived():
             file_names += [str(self._output_index).zfill(4)]
         self._output_index += 1
 
         return Path(self._output_root, '_'.join(file_names)).with_suffix('.zip')
 
     def _reset_archive_byte(self) -> None:
-        path_mkdir(self._output_root)
-
         self._archived += [self._get_archive_path()]
         self._file_zip = ZipFile(
             self._archived[-1],
@@ -73,14 +74,19 @@ class ArchiveZip:
             compression=ZIP_LZMA if self._compress else ZIP_STORED,
         )
 
-    def _add_file_to_archive(self, is_dir: bool, target: Path, root: Path) -> None:
-        relative_path: str = str(path_relative(target, root_path=root))
+    def _add_file_to_archive(self, is_dir: bool, reset: bool, target: Path, root: Path) -> None:
+        if reset:
+            self._reset_archive_byte()
 
+        relative_path: str = str(path_relative(target, root_path=root))
         if is_dir:
             self._file_zip.mkdir(relative_path)
         else:
             with open(target, 'rb') as file_read:
                 self._file_zip.writestr(relative_path, file_read.read())
+
+    def _within_allowance(self, target_byte: Decimal) -> bool:
+        return self._limit_byte >= target_byte
 
     def _archive_outside_byte(self) -> Decimal:
         current_archive: Path = self._archived[-1]
@@ -89,29 +95,37 @@ class ArchiveZip:
     def _archive_inside_byte(self) -> Decimal:
         return Decimal(str(sum([info.file_size for info in self._file_zip.infolist()])))
 
+    def _has_file_archived(self) -> bool:
+        if self._has_archived():
+            if 0 < self._archive_inside_byte():
+                return True
+
+        return False
+
     def _estimate_compressed_size(self, target: Path) -> Decimal:
-        outside_byte: Decimal = self._archive_outside_byte()
-        inside_byte: Decimal = self._archive_inside_byte()
         src_byte: Decimal = Decimal(str(target.stat().st_size))
 
-        if 0 == inside_byte:
+        if not self._has_file_archived():
             return src_byte
+
+        outside_byte: Decimal = self._archive_outside_byte()
+        inside_byte: Decimal = self._archive_inside_byte()
 
         return src_byte * (outside_byte / inside_byte)
 
     def _update_archive_byte(self, target: Path, root: Path) -> None:
         estimate_byte: Decimal = self._estimate_compressed_size(target)
+        archive_reset: bool = True
 
-        if self._limit_byte < estimate_byte:
-            ...
-        else:
-            outside_byte: Decimal = self._archive_outside_byte()
-            next_byte: Decimal = outside_byte + estimate_byte
+        if self._within_allowance(estimate_byte):
+            if self._has_file_archived():
+                outside_byte: Decimal = self._archive_outside_byte()
+                next_byte: Decimal = outside_byte + estimate_byte
 
-            if self._limit_byte < next_byte:
-                self._reset_archive_byte()
+                if self._within_allowance(next_byte):
+                    archive_reset = False
 
-            self._add_file_to_archive(False, target, root)
+        self._add_file_to_archive(False, archive_reset, target, root)
 
     def _not_still_archived(self, is_dir: bool, target: Path) -> bool:
         archived: Paths = self._walk_directories if is_dir else self._walk_files
@@ -125,7 +139,8 @@ class ArchiveZip:
     def _add_archive_child(self, target: Path, root: Path) -> None:
         if target.is_dir():
             if self._not_still_archived(True, target):
-                self._add_file_to_archive(True, target, root)
+                archive_reset: bool = not self._has_file_archived()
+                self._add_file_to_archive(True, archive_reset, target, root)
 
                 for path in walk_iterator(target):
                     self._add_archive_child(path, root)
