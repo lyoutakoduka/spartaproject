@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 
 from json import dumps
+from pathlib import Path
+from decimal import Decimal
 from typing import List, Dict
 
-from contexts.decimal_context import Decimal
-from contexts.path_context import Path
 from contexts.json_context import Json, JsonSafe, Single, SingleSafe
 
 

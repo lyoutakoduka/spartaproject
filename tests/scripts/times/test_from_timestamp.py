@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from decimal import Decimal
 from datetime import datetime
 
-from contexts.decimal_context import Decimal
 from scripts.times.from_timestamp import time_from_timestamp
 
 _INPUT_UTC: str = '2023-04-15T20:09:30.936886+00:00'

@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 
 from pytest import raises
+from pathlib import Path
 
-from contexts.path_context import Path
 from scripts.call_module import call_function
 
 

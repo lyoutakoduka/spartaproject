@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 
 from os import utime
+from pathlib import Path
 from datetime import datetime
 
-from contexts.path_context import Path
 from scripts.times.offset_timezone import offset_time
 
 

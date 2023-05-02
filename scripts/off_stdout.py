@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from pathlib import Path
 from contextlib import redirect_stdout
 from tempfile import TemporaryDirectory
 
 from contexts.callable_context import CP, CR, Callable
-from contexts.path_context import Path
 from scripts.deco_generator import TransferFunc
 
 

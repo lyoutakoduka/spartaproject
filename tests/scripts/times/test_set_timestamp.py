@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 
 from typing import Callable
+from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from contexts.json_context import Json
-from contexts.path_context import Path
 from scripts.files.export_json import json_export
 from scripts.times.set_timestamp import set_latest
 from scripts.times.get_timestamp import get_latest

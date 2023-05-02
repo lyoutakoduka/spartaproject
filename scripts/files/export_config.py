@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 
 from io import StringIO
+from pathlib import Path
 from configparser import ConfigParser
 
-from contexts.path_context import Path
 from contexts.config_context import Config
 
 

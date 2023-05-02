@@ -3,11 +3,11 @@
 
 from sys import path as system_path
 from typing import Any
+from pathlib import Path
 from os.path import commonpath
 from importlib import import_module, util
 
 from contexts.string_context import Strs, StrPair
-from contexts.path_context import Path
 from scripts.paths.get_absolute import path_absolute
 
 

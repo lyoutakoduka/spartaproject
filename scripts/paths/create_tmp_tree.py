@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from contexts.path_context import Path
+from pathlib import Path
+
 from scripts.files.export_config import config_export, Config
 from scripts.files.export_json import json_export, Json
 from scripts.paths.create_directory import path_mkdir

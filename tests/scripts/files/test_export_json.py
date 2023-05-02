@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from pathlib import Path
+from decimal import Decimal
 from tempfile import TemporaryDirectory
 
-from contexts.decimal_context import Decimal
-from contexts.path_context import Path
 from contexts.json_context import Json
 from scripts.files.export_json import json_dump, json_export
 from scripts.format_texts import format_indent
