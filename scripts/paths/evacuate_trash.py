@@ -18,8 +18,7 @@ def _default() -> Path:
 
 
 class TrashBox:
-    def _get_time_data(self, time_utc: str) -> Ints2:
-        time: datetime = datetime.fromisoformat(time_utc)
+    def _get_time_data(self, time: datetime) -> Ints2:
         return [
             [4, time.year],
             [2, time.month],
@@ -31,8 +30,8 @@ class TrashBox:
         ]
 
     def _get_trash_path(self) -> Path:
-        time_utc: str = get_current_time(jst=True)
-        time_counts: Ints2 = self._get_time_data(time_utc)
+        time: datetime = get_current_time(jst=True)
+        time_counts: Ints2 = self._get_time_data(time)
 
         time_texts: Strs = [
             str(time_count).zfill(order)
