@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from zipfile import ZipFile, ZIP_LZMA, ZIP_STORED
+from datetime import datetime
+from zipfile import ZipFile, ZipInfo, ZIP_LZMA, ZIP_STORED
 
 from contexts.decimal_context import Decimal, set_decimal_context
 from contexts.string_context import Strs
@@ -9,6 +10,7 @@ from contexts.path_context import Path, Paths
 from scripts.paths.get_relative import path_relative
 from scripts.paths.create_directory import path_mkdir
 from scripts.paths.iterate_directory import walk_iterator
+from scripts.times.get_timestamp import get_latest
 
 set_decimal_context()
 
@@ -82,8 +84,21 @@ class CompressZip:
         if is_dir:
             self._file_zip.mkdir(relative_path)
         else:
-            with open(target, 'rb') as file_read:
-                self._file_zip.writestr(relative_path, file_read.read())
+            time: datetime = get_latest(target)
+            zip_info: ZipInfo = ZipInfo(
+                filename=relative_path,
+                date_time=(
+                    time.year,
+                    time.month,
+                    time.day,
+                    time.hour,
+                    time.minute,
+                    time.second
+                )
+            )
+
+            with open(target, 'rb') as file:
+                self._file_zip.writestr(zip_info, file.read())
 
     def _within_allowance(self, target_byte: Decimal) -> bool:
         return self._limit_byte >= target_byte
