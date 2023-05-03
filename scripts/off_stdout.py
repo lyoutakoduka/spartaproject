@@ -6,7 +6,6 @@ from contextlib import redirect_stdout
 from tempfile import TemporaryDirectory
 
 from contexts.callable_context import CP, CR, Callable
-from scripts.files.export_file import text_export
 from scripts.files.import_file import text_import
 from scripts.deco_generator import TransferFunc
 
