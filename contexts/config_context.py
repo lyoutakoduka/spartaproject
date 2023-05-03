@@ -7,9 +7,9 @@ from pathlib import Path
 
 _Default = bool | int | float | str
 _Extend = Decimal | Path
-_Basic = _Default | _Extend
+Basic = _Default | _Extend
 
-Section = Dict[str, _Basic]
+_BasicPair = Dict[str, Basic]
 _BoolPair = Dict[str, bool]
 _IntPair = Dict[str, int]
 _FloatPair = Dict[str, float]
@@ -20,6 +20,6 @@ _PathPair = Dict[str, Path]
 _Section = \
     _BoolPair | _IntPair | _FloatPair | _StrPair |\
     _DecPair | _PathPair |\
-    Section
+    _BasicPair
 
 Config = Dict[str, _Section]
