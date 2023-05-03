@@ -7,7 +7,7 @@ from tempfile import TemporaryDirectory
 
 from contexts.time_context import Times
 from scripts.files.export_json import json_export
-from scripts.times.get_timestamp import get_latest, get_create
+from scripts.times.get_timestamp import get_latest, get_access
 
 
 def _common_test(times: Times) -> None:
@@ -23,7 +23,7 @@ def _inside_tmp_directory(func: Callable[[Path], None]) -> None:
 
 def test_utc() -> None:
     def individual_test(path: Path) -> None:
-        _common_test([func(path) for func in [get_latest, get_create]])
+        _common_test([func(path) for func in [get_latest, get_access]])
 
     _inside_tmp_directory(individual_test)
 
@@ -32,7 +32,7 @@ def test_jst() -> None:
     def individual_test(path: Path) -> None:
         times: Times = [
             func(path, jst=True)
-            for func in [get_latest, get_create]
+            for func in [get_latest, get_access]
         ]
         _common_test(times)
 
