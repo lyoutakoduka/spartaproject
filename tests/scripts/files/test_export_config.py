@@ -9,21 +9,22 @@ from contexts.float_context import FloatPair
 from contexts.string_context import StrPair
 from contexts.decimal_context import Decimal, DecPair
 from contexts.path_context import Path, PathPair
-from contexts.config_context import Config, Section
+from contexts.config_context import Config
 from scripts.files.export_config import config_dump, config_export
 from scripts.format_texts import format_indent
 
 
 def test_section() -> None:
-    INPUT: Section = {
-        'path': Path('root'),
-        'decimal': Decimal('0.1'),
-        'str': '1',
-        'float': 1.0,
-        'int': 1,
-        'bool': True,
+    INPUT: Config = {
+        'section': {
+            'path': Path('root'),
+            'decimal': Decimal('0.1'),
+            'str': '1',
+            'float': 1.0,
+            'int': 1,
+            'bool': True,
+        }
     }
-    config_input: Config = {'section': INPUT}
 
     EXPECTED: str = """
         [section]
@@ -36,7 +37,7 @@ def test_section() -> None:
     """
 
     expected: str = format_indent(EXPECTED)
-    assert expected == config_dump(config_input)
+    assert expected == config_dump(INPUT)
 
 
 def test_lower() -> None:
