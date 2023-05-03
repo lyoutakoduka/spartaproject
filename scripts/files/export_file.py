@@ -4,10 +4,8 @@
 from pathlib import Path
 
 
-def _file_export(path: Path, content: str | bytes, byte: bool = False) -> None:
-    type: str = 'wb' if byte else 'w'
-
-    with open(path, type) as file:
+def _file_export(path: Path, content: bytes, byte: bool = False) -> None:
+    with open(path, 'wb') as file:
         file.write(content)
 
 
@@ -16,4 +14,4 @@ def byte_export(export_path: Path, content: bytes) -> None:
 
 
 def text_export(export_path: Path, content: str) -> None:
-    _file_export(export_path, content)
+    _file_export(export_path, content.encode('utf-8'))
