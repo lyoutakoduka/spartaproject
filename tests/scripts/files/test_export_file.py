@@ -18,7 +18,7 @@ def _inside_tmp_directory(func: Callable[[Path], None]) -> None:
         func(text_path)
 
 
-def test_all() -> None:
+def test_text() -> None:
     INPUT: str = 'test'
 
     def individual_test(text_path: Path) -> None:
@@ -39,6 +39,6 @@ def test_byte() -> None:
 
 
 def main() -> bool:
-    test_all()
+    test_text()
     test_byte()
     return True
