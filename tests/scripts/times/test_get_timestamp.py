@@ -5,7 +5,6 @@ from typing import Callable
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from contexts.json_context import Json
 from contexts.time_context import Times
 from scripts.files.export_json import json_export
 from scripts.times.get_timestamp import get_latest, get_create
@@ -16,11 +15,9 @@ def _common_test(times: Times) -> None:
 
 
 def _inside_tmp_directory(func: Callable[[Path], None]) -> None:
-    INPUT_JSON: Json = {'A': None}
-
     with TemporaryDirectory() as tmp_path:
         path: Path = Path(tmp_path, 'tmp.json')
-        json_export(path, INPUT_JSON)
+        json_export(path, 'test')
         func(path)
 
 
