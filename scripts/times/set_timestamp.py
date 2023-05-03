@@ -8,6 +8,14 @@ from datetime import datetime
 from scripts.times.offset_timezone import offset_time
 
 
-def set_latest(path: Path, latest: datetime) -> None:
-    latest = offset_time(latest)
-    utime(path, (path.stat().st_atime, latest.timestamp()))  # Set as UTC.
+def _convert_timestamp(time: datetime) -> float:
+    time = offset_time(time)
+    return time.timestamp()
+
+
+def set_access(path: Path, time: datetime) -> None:
+    utime(path, (_convert_timestamp(time), path.stat().st_mtime))
+
+
+def set_latest(path: Path, time: datetime) -> None:
+    utime(path, (path.stat().st_atime, _convert_timestamp(time)))
