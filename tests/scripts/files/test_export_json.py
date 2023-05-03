@@ -6,6 +6,7 @@ from decimal import Decimal
 from tempfile import TemporaryDirectory
 
 from contexts.json_context import Json
+from scripts.files.import_file import text_import
 from scripts.files.export_json import json_dump, json_export
 from scripts.format_texts import format_indent
 
@@ -84,11 +85,9 @@ def test_export() -> None:
     expected: str = format_indent(EXPECTED)
 
     with TemporaryDirectory() as tmp_path:
-        export_path: Path = Path(tmp_path, 'tmp.json')
-        json_export(export_path, INPUT)
-
-        with open(export_path, 'r') as file:
-            assert expected == file.read()
+        json_path: Path = Path(tmp_path, 'tmp.json')
+        json_export(json_path, INPUT)
+        assert expected == text_import(json_path)
 
 
 def main() -> bool:

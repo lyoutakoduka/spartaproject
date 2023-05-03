@@ -10,6 +10,7 @@ from contexts.string_context import StrPair
 from contexts.decimal_context import Decimal, DecPair
 from contexts.path_context import Path, PathPair
 from contexts.config_context import Config
+from scripts.files.import_file import text_import
 from scripts.files.export_config import config_dump, config_export
 from scripts.format_texts import format_indent
 
@@ -114,11 +115,9 @@ def test_export() -> None:
     expected: str = format_indent(EXPECTED)
 
     with TemporaryDirectory() as tmp_path:
-        export_path: Path = Path(tmp_path, 'tmp.ini')
-        config_export(export_path, INPUT)
-
-        with open(export_path, 'r') as file:
-            assert expected == file.read()
+        config_path: Path = Path(tmp_path, 'tmp.ini')
+        config_export(config_path, INPUT)
+        assert expected == text_import(config_path)
 
 
 def main() -> bool:

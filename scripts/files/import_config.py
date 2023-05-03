@@ -6,11 +6,7 @@ from decimal import Decimal
 from configparser import ConfigParser
 
 from contexts.config_context import Config, Basic
-
-
-def _import_text(path: Path) -> str:
-    with open(path, 'r') as file:
-        return file.read()
+from scripts.files.import_file import text_import
 
 
 def _load_each_type(config: ConfigParser, section: str, option: str) -> Basic:
@@ -50,4 +46,4 @@ def config_load(content: str) -> Config:
 
 
 def config_import(import_path: Path) -> Config:
-    return config_load(_import_text(import_path))
+    return config_load(text_import(import_path))

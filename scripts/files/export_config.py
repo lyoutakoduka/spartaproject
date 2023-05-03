@@ -6,11 +6,7 @@ from pathlib import Path
 from configparser import ConfigParser
 
 from contexts.config_context import Config
-
-
-def _export_text(path: Path, content: str) -> None:
-    with open(path, 'w') as file:
-        file.write(content)
+from scripts.files.export_file import text_export
 
 
 def config_dump(content: Config) -> str:
@@ -24,4 +20,4 @@ def config_dump(content: Config) -> str:
 
 
 def config_export(export_path: Path, content: Config) -> None:
-    _export_text(export_path, config_dump(content))
+    text_export(export_path, config_dump(content))

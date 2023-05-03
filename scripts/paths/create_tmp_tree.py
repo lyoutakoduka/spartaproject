@@ -3,6 +3,7 @@
 
 from pathlib import Path
 
+from scripts.files.export_file import text_export
 from scripts.files.export_config import config_export, Config
 from scripts.files.export_json import json_export, Json
 from scripts.paths.create_directory import path_mkdir
@@ -20,8 +21,7 @@ def _sample_text(root: Path, weight: int) -> None:
         for i in range(weight)
     ])
 
-    with open(Path(root, _NAME + '.txt'), 'w') as file:
-        file.write(INPUT)
+    text_export(Path(root, _NAME + '.txt'), INPUT)
 
 
 def _sample_config(root: Path, weight: int) -> None:

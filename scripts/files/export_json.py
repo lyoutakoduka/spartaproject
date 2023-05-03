@@ -7,6 +7,7 @@ from decimal import Decimal
 from typing import List, Dict
 
 from contexts.json_context import Json, JsonSafe, Single, SingleSafe
+from scripts.files.export_file import text_export
 
 
 def _convert_unknown(content: Single) -> SingleSafe:
@@ -29,14 +30,9 @@ def _serialize_json(content: Json) -> JsonSafe:
     return _convert_unknown(content)
 
 
-def _export_text(path: Path, content: str) -> None:
-    with open(path, 'w') as file:
-        file.write(content)
-
-
 def json_dump(content: Json) -> str:
     return dumps(_serialize_json(content), indent=2, ensure_ascii=False, sort_keys=True)
 
 
 def json_export(export_path: Path, content: Json) -> None:
-    _export_text(export_path, json_dump(content))
+    text_export(export_path, json_dump(content))

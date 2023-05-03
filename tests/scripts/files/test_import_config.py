@@ -6,6 +6,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from contexts.config_context import Config, Basic
+from scripts.files.export_file import text_export
 from scripts.files.import_config import config_load, config_import
 from scripts.format_texts import format_indent
 
@@ -65,9 +66,7 @@ def test_import() -> None:
 
     with TemporaryDirectory() as tmp_path:
         config_path: Path = Path(tmp_path, 'tmp.ini')
-
-        with open(config_path, 'w') as file:
-            file.write(input)
+        text_export(config_path, input)
 
         config: Config = config_import(config_path)
         assert 'text' == config['section']['option']
