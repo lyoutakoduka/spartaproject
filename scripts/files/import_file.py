@@ -6,7 +6,8 @@ from pathlib import Path
 
 def _file_import(path: Path) -> bytes:
     with open(path, 'rb') as file:
-        return file.read()
+        content: bytes = file.read()
+        return content.replace(b'\r\n', b'\n')
 
 
 def byte_import(import_path: Path) -> bytes:
