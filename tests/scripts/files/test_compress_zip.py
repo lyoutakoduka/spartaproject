@@ -71,7 +71,7 @@ def _compare_file_size(sorted_paths: Paths2) -> None:
 
 
 def _compare_compress_size(outputs: Paths, archived: Paths) -> None:
-    file_size_pair: Decs = [
+    file_sizes: Decs = [
         Decimal(str(sum([
             path.stat().st_size
             for path in paths
@@ -80,8 +80,7 @@ def _compare_compress_size(outputs: Paths, archived: Paths) -> None:
         for paths in [outputs, archived]
     ]
 
-    ratio: Decimal = file_size_pair[1] / file_size_pair[0] * Decimal('100')
-    assert Decimal('3') > ratio
+    assert Decimal('0.05') > (file_sizes[1] / file_sizes[0])
 
 
 def _compare_archived_count(archived: Paths) -> None:

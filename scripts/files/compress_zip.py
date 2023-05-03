@@ -5,12 +5,15 @@ from datetime import datetime
 from zipfile import ZipFile, ZipInfo, ZIP_LZMA, ZIP_STORED
 
 from contexts.decimal_context import Decimal, set_decimal_context
+from contexts.integer_context import IntTuple
 from contexts.string_context import Strs
 from contexts.path_context import Path, Paths
+from scripts.files.import_file import byte_import
+from scripts.files.export_json import json_dump, Json
 from scripts.paths.get_relative import path_relative
 from scripts.paths.create_directory import path_mkdir
 from scripts.paths.iterate_directory import walk_iterator
-from scripts.times.get_timestamp import get_latest
+from scripts.times.get_timestamp import get_latest, get_access
 
 set_decimal_context()
 
@@ -73,32 +76,43 @@ class CompressZip:
         self._file_zip = ZipFile(
             self._archived[-1],
             mode='w',
-            compression=ZIP_LZMA if self._compress else ZIP_STORED,
         )
+
+    def _convert_comment(self, attribute: Json) -> bytes:
+        comment: str = json_dump(attribute)
+        return comment.encode('utf-8')
+
+    def _get_time_comment(self, target: Path) -> bytes:
+        return self._convert_comment({'time': {
+            type: func(target).isoformat()
+            for type, func in zip(['latest', 'access'], [get_latest, get_access])
+        }})
+
+    def _get_time_latest(self, target: Path) -> IntTuple:
+        time: datetime = get_latest(target)
+        return (time.year, time.month, time.day, time.hour, time.minute, time.second)
+
+    def _get_zip_info(self, target: Path, relative: Path) -> ZipInfo:
+        zip_info: ZipInfo = ZipInfo(filename=str(relative))
+
+        zip_info.compress_type = (ZIP_LZMA if self._compress else ZIP_STORED)
+        zip_info.comment = self._get_time_comment(target)
+        zip_info.date_time = self._get_time_latest(target)
+
+        return zip_info
 
     def _add_file_to_archive(self, is_dir: bool, reset: bool, target: Path, root: Path) -> None:
         if reset:
             self._reset_archive_byte()
 
-        relative_path: str = str(path_relative(target, root_path=root))
+        relative: Path = path_relative(target, root_path=root)
         if is_dir:
-            self._file_zip.mkdir(relative_path)
+            self._file_zip.mkdir(str(relative))
         else:
-            time: datetime = get_latest(target)
-            zip_info: ZipInfo = ZipInfo(
-                filename=relative_path,
-                date_time=(
-                    time.year,
-                    time.month,
-                    time.day,
-                    time.hour,
-                    time.minute,
-                    time.second
-                )
+            self._file_zip.writestr(
+                self._get_zip_info(target, relative),
+                byte_import(target),
             )
-
-            with open(target, 'rb') as file:
-                self._file_zip.writestr(zip_info, file.read())
 
     def _within_allowance(self, target_byte: Decimal) -> bool:
         return self._limit_byte >= target_byte
