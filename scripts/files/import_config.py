@@ -1,0 +1,53 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from pathlib import Path
+from decimal import Decimal
+from configparser import ConfigParser
+
+from contexts.config_context import Config, Basic
+
+
+def _import_text(path: Path) -> str:
+    with open(path, 'r') as file:
+        return file.read()
+
+
+def _load_each_type(config: ConfigParser, section: str, option: str) -> Basic:
+    for i in range(3):
+        try:
+            if 0 == i:
+                return config.getint(section, option)
+            elif 1 == i:
+                return Decimal(str(config.getfloat(section, option)))
+            elif 2 == i:
+                return config.getboolean(section, option)
+        except:
+            pass
+
+    text: str = config.get(section, option)
+    return Path(text) if 'path' in option else text
+
+
+def config_load(content: str) -> Config:
+    config = ConfigParser()
+    config.read_string(content)
+
+    key_groups = {
+        section: config.options(section)
+        for section in config.sections()
+    }
+
+    result_config: Config = {
+        key_section: {
+            key: _load_each_type(config, key_section, key)
+            for key in key_group
+        }
+        for key_section, key_group in key_groups.items()
+    }
+
+    return result_config
+
+
+def config_import(import_path: Path) -> Config:
+    return config_load(_import_text(import_path))
