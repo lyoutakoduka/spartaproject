@@ -18,6 +18,9 @@ def _default() -> Path:
 
 
 class TrashBox:
+    def __init__(self, trash_path: Path = _default()) -> None:
+        self._trash_path = trash_path
+
     def _get_time_data(self, time: datetime) -> Ints2:
         return [
             [4, time.year],
@@ -40,7 +43,7 @@ class TrashBox:
 
         return Path(self._trash_path, *time_texts)
 
-    def move_file(self, trash_root: Path, target_path: Path) -> Path:
+    def _move_file(self, trash_root: Path, target_path: Path) -> Path:
         trash_path: Path = Path(trash_root, target_path.name)
         move(target_path, trash_path)
         return trash_path
@@ -53,9 +56,6 @@ class TrashBox:
             path_mkdir(trash_root)
 
             for target_path in target_paths:
-                evacuated_paths += [self.move_file(trash_root, target_path)]
+                evacuated_paths += [self._move_file(trash_root, target_path)]
 
         return evacuated_paths
-
-    def __init__(self, trash_path: Path = _default()) -> None:
-        self._trash_path = trash_path
