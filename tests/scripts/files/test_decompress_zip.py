@@ -98,6 +98,22 @@ def test_directory() -> None:
     _inside_tmp_directory(individual_test)
 
 
+def test_tree() -> None:
+    def individual_test(tmp_root: Path) -> None:
+        tree_root: Path = Path(tmp_root, 'tree')
+        create_tree(tree_root, tree_deep=2)
+
+        trash_box = TrashBox()
+        for path in walk_iterator(tree_root, file=False):
+            if 0 == len(list(walk_iterator(path, depth=1))):
+                trash_box.throw_away_trash(path)
+
+        _compress_to_decompress(tmp_root)
+        _common_test(tmp_root)
+
+    _inside_tmp_directory(individual_test)
+
+
 def test_timestamp() -> None:
     EXPECTED: str = '2023-04-15T20:09:30.936886+00:00'
     expected: datetime = datetime.fromisoformat(EXPECTED)
@@ -124,5 +140,6 @@ def test_timestamp() -> None:
 
 def main() -> bool:
     test_directory()
+    test_tree()
     test_timestamp()
     return True
