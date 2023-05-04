@@ -6,6 +6,7 @@ from typing import Callable
 from tempfile import TemporaryDirectory
 from itertools import chain
 
+from contexts.integer_context import Ints2
 from contexts.path_context import Path, Paths, Paths2
 from contexts.time_context import datetime, Times2
 from scripts.files.compress_zip import CompressZip
@@ -39,6 +40,15 @@ def _compare_path_name(sorted_paths: Paths2, tmp_root: Path) -> None:
     assert relative_paths[0] == relative_paths[1]
 
 
+def _compare_file_size(sorted_paths: Paths2) -> None:
+    file_size_pair: Ints2 = [
+        [path.stat().st_size for path in paths if path.is_file()]
+        for paths in sorted_paths
+    ]
+
+    assert file_size_pair[0] == file_size_pair[1]
+
+
 def _get_sorted_paths(tmp_root: Path) -> Paths2:
     return [
         sorted(list(walk_iterator(Path(tmp_root, directory))))
@@ -48,7 +58,9 @@ def _get_sorted_paths(tmp_root: Path) -> Paths2:
 
 def _common_test(tmp_root: Path) -> Paths2:
     sorted_paths: Paths2 = _get_sorted_paths(tmp_root)
+
     _compare_path_name(sorted_paths, tmp_root)
+    _compare_file_size(sorted_paths)
 
     return sorted_paths
 
