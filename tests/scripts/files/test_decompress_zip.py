@@ -7,7 +7,7 @@ from tempfile import TemporaryDirectory
 from itertools import chain
 
 from contexts.integer_context import Ints2
-from contexts.path_context import Path, Paths2
+from contexts.path_context import Path, Paths, Paths2
 from contexts.time_context import datetime, Times2
 from scripts.files.compress_zip import CompressZip
 from scripts.files.decompress_zip import DecompressZip
@@ -114,6 +114,25 @@ def test_tree() -> None:
     _inside_tmp_directory(individual_test)
 
 
+def test_limit() -> None:
+    def individual_test(tmp_root: Path) -> None:
+        tree_root: Path = Path(tmp_root, 'tree')
+        create_tree(tree_root, tree_deep=5)
+
+        compress_zip = CompressZip(Path(tmp_root, 'archive'), limit_byte=200)
+        for path in walk_iterator(tree_root):
+            compress_zip.compress_archive(path)
+
+        archived_paths: Paths = compress_zip.close_archived()
+        decompress_zip = DecompressZip(Path(tmp_root, 'extract'))
+        for path in decompress_zip.sequential_archives(archived_paths[0]):
+            decompress_zip.decompress_archive(path)
+
+        _common_test(tmp_root)
+
+    _inside_tmp_directory(individual_test)
+
+
 def test_timestamp() -> None:
     EXPECTED: str = '2023-04-15T20:09:30.936886+00:00'
     expected: datetime = datetime.fromisoformat(EXPECTED)
@@ -141,5 +160,6 @@ def test_timestamp() -> None:
 def main() -> bool:
     test_directory()
     test_tree()
+    test_limit()
     test_timestamp()
     return True

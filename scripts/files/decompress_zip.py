@@ -2,19 +2,42 @@
 # -*- coding: utf-8 -*-
 
 from typing import Dict
-from pathlib import Path
 from datetime import datetime
 from zipfile import ZipFile, ZipInfo
 
+from contexts.string_context import Strs
+from contexts.path_context import Path, Paths
 from scripts.files.export_file import byte_export
 from scripts.files.import_json import json_load, Json
 from scripts.paths.create_directory import path_mkdir
+from scripts.paths.iterate_directory import walk_iterator
 from scripts.times.set_timestamp import set_latest
 
 
 class DecompressZip:
     def __init__(self, output_root: Path) -> None:
         self._output_root: Path = output_root
+
+    def _is_sequential_archive(self, path: Path) -> bool:
+        names: Strs = path.stem.split('#')
+        if 1 < len(names):
+            try:
+                int(names[-1])
+                return True
+            except:
+                pass
+
+        return False
+
+    def sequential_archives(self, source_archive: Path) -> Paths:
+        sequential: Paths = [source_archive]
+
+        for path in walk_iterator(source_archive.parent, directory=False, depth=1, suffix='zip'):
+            if source_archive != path:
+                if self._is_sequential_archive(path):
+                    sequential += [path]
+
+        return sequential
 
     def _decompress_file(self, file_path: Path, relative: Path, zip_file: ZipFile) -> None:
         parent_path: Path = file_path.parent
