@@ -67,16 +67,18 @@ def _common_test(tmp_root: Path) -> Paths2:
 
 def _inside_tmp_directory(func: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as tmp_path:
-        create_tree(Path(tmp_path, 'tree'), tree_deep=3, tree_weight=3)
         func(Path(tmp_path))
 
 
 def test_outside() -> None:
     def individual_test(tmp_root: Path) -> None:
+        tree_root: Path = Path(tmp_root, 'tree')
+        create_tree(tree_root)
+
         archived: Path = Path(make_archive(
             str(Path(tmp_root, *['archive'] * 2)),
             format='zip',
-            root_dir=str(Path(tmp_root, 'tree'))
+            root_dir=str(tree_root)
         ))
 
         decompress_zip = DecompressZip(Path(tmp_root, 'extract'))
@@ -92,14 +94,13 @@ def test_timestamp() -> None:
     expected: datetime = datetime.fromisoformat(EXPECTED)
 
     def individual_test(tmp_root: Path) -> None:
-        walk_paths: Paths = list(walk_iterator(Path(tmp_root, 'tree')))
+        tree_root: Path = Path(tmp_root, 'tree')
+        create_tree(tree_root)
 
-        for path in walk_paths:
+        compress_zip = CompressZip(Path(tmp_root, 'archive'))
+        for path in walk_iterator(tree_root):
             if path.is_file():
                 set_latest(path, expected)
-
-        compress_zip = CompressZip(Path(tmp_root, 'archive'), compress=True)
-        for path in walk_paths:
             compress_zip.add_archive(path)
 
         decompress_zip = DecompressZip(Path(tmp_root, 'extract'))
