@@ -164,20 +164,20 @@ class CompressZip:
 
         return not_still
 
-    def _add_archive_child(self, target: Path, root: Path) -> None:
+    def _compress_child(self, target: Path, root: Path) -> None:
         if target.is_dir():
             if self._not_still_archived(True, target):
                 archive_reset: bool = not self._has_archived()
                 self._add_file_to_archive(True, archive_reset, target, root)
 
                 for path in walk_iterator(target):
-                    self._add_archive_child(path, root)
+                    self._compress_child(path, root)
         else:
             if self._not_still_archived(False, target):
                 self._update_archive_byte(target, root)
 
-    def add_archive(self, archive_target: Path, archive_root: Path = Path('')) -> None:
+    def compress_archive(self, archive_target: Path, archive_root: Path = Path('')) -> None:
         if archive_target.is_relative_to(archive_root):
-            self._add_archive_child(archive_target, archive_root)
+            self._compress_child(archive_target, archive_root)
         else:
-            self._add_archive_child(archive_target, archive_target.parent)
+            self._compress_child(archive_target, archive_target.parent)

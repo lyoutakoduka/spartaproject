@@ -7,10 +7,11 @@ from tempfile import TemporaryDirectory
 from itertools import chain
 
 from contexts.integer_context import Ints2
-from contexts.path_context import Path, Paths, Paths2
+from contexts.path_context import Path, Paths2
 from contexts.time_context import datetime, Times2
 from scripts.files.compress_zip import CompressZip
 from scripts.files.decompress_zip import DecompressZip
+from scripts.paths.evacuate_trash import TrashBox
 from scripts.paths.get_relative import path_array_relative
 from scripts.paths.create_tmp_tree import create_tree
 from scripts.paths.iterate_directory import walk_iterator
@@ -73,7 +74,10 @@ def _inside_tmp_directory(func: Callable[[Path], None]) -> None:
 def test_directory() -> None:
     def individual_test(tmp_root: Path) -> None:
         tree_root: Path = Path(tmp_root, 'tree')
-        create_tree(tree_root)
+        create_tree(tree_root, tree_deep=3)
+
+        trash_box = TrashBox()
+        trash_box.throw_away(list(walk_iterator(tree_root, directory=False)))
 
         archived: Path = Path(make_archive(
             str(Path(tmp_root, *['archive'] * 2)),
@@ -101,7 +105,7 @@ def test_timestamp() -> None:
         for path in walk_iterator(tree_root):
             if path.is_file():
                 set_latest(path, expected)
-            compress_zip.add_archive(path)
+            compress_zip.compress_archive(path)
 
         decompress_zip = DecompressZip(Path(tmp_root, 'extract'))
         for path in compress_zip.close_archived():
