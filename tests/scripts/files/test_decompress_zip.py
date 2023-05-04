@@ -70,7 +70,7 @@ def _inside_tmp_directory(func: Callable[[Path], None]) -> None:
         func(Path(tmp_path))
 
 
-def test_outside() -> None:
+def test_directory() -> None:
     def individual_test(tmp_root: Path) -> None:
         tree_root: Path = Path(tmp_root, 'tree')
         create_tree(tree_root)
@@ -114,6 +114,6 @@ def test_timestamp() -> None:
 
 
 def main() -> bool:
-    test_outside()
+    test_directory()
     test_timestamp()
     return True
