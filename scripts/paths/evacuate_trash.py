@@ -7,6 +7,7 @@ from datetime import datetime
 from contexts.integer_context import Ints2
 from contexts.string_context import Strs
 from contexts.path_context import Path, Paths
+from scripts.paths.get_relative import path_relative
 from scripts.paths.get_absolute import path_absolute
 from scripts.paths.create_directory import path_mkdir
 from scripts.times.current_datetime import get_current_time
@@ -20,6 +21,13 @@ def _default() -> Path:
 class TrashBox:
     def __init__(self, trash_path: Path = _default()) -> None:
         self._trash_path = trash_path
+        self._evacuated: Paths = []
+        self._trash_box_root: Path = self._get_trash_path()
+
+    def pop_evacuated(self) -> Paths:
+        evacuated: Paths = self._evacuated[:]
+        self._evacuated.clear()
+        return evacuated
 
     def _get_time_data(self, time: datetime) -> Ints2:
         return [
@@ -43,19 +51,20 @@ class TrashBox:
 
         return Path(self._trash_path, *time_texts)
 
-    def _move_file(self, trash_root: Path, target_path: Path) -> Path:
-        trash_path: Path = Path(trash_root, target_path.name)
-        move(target_path, trash_path)
-        return trash_path
+    def _move_file(self, target: Path, root: Path) -> None:
+        if target.exists():
+            relative: Path = path_relative(target, root_path=root)
+            trash_path: Path = Path(self._trash_box_root, relative)
 
-    def throw_away(self, target_paths: Paths) -> Paths:
-        evacuated_paths: Paths = []
+            parent_path: Path = trash_path.parent
+            if not parent_path.exists():
+                path_mkdir(parent_path)
 
-        if 0 < len(target_paths):
-            trash_root: Path = self._get_trash_path()
-            path_mkdir(trash_root)
+            move(target, trash_path)
+            self._evacuated += [trash_path]
 
-            for target_path in target_paths:
-                evacuated_paths += [self._move_file(trash_root, target_path)]
-
-        return evacuated_paths
+    def throw_away_trash(self, trash_path: Path, trash_root: Path = Path('')) -> None:
+        if trash_path.is_relative_to(trash_root):
+            self._move_file(trash_path, trash_root)
+        else:
+            self._move_file(trash_path, trash_path.parent)

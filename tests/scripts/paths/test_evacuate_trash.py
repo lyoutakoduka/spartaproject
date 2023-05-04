@@ -13,7 +13,7 @@ from scripts.paths.create_tmp_tree import create_tree
 from scripts.paths.iterate_directory import walk_iterator
 
 
-def _check_result_exits(target_paths: Paths, evacuated_paths: Paths) -> None:
+def _common_test(target_paths: Paths, evacuated_paths: Paths) -> None:
     same_bools: Bools = []
 
     for i, paths in enumerate([target_paths, evacuated_paths]):
@@ -23,30 +23,38 @@ def _check_result_exits(target_paths: Paths, evacuated_paths: Paths) -> None:
     assert bool_same_array(same_bools)
 
 
-def _inside_tmp_directory(func: Callable[[Paths], Paths]) -> None:
+def _inside_tmp_directory(func: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as tmp_path:
-        root_path: Path = Path(tmp_path)
-
-        create_tree(root_path)
-        target_paths: Paths = [path for path in walk_iterator(root_path)]
-        evacuated_paths: Paths = func(target_paths)
-
-        _check_result_exits(target_paths, evacuated_paths)
+        func(Path(tmp_path))
 
 
 def test_default() -> None:
-    def individual_test(evacuate_targets: Paths) -> Paths:
+    def individual_test(tmp_root: Path) -> None:
+        create_tree(tmp_root)
+
         trash_box = TrashBox()
-        return trash_box.throw_away(evacuate_targets)
+        walk_paths: Paths = []
+        for path in walk_iterator(tmp_root):
+            trash_box.throw_away_trash(path)
+            walk_paths += [path]
+
+        _common_test(walk_paths, trash_box.pop_evacuated())
 
     _inside_tmp_directory(individual_test)
 
 
 def test_select() -> None:
     with TemporaryDirectory() as tmp_path:
-        def individual_test(evacuate_targets: Paths) -> Paths:
+        def individual_test(tmp_root: Path) -> None:
+            create_tree(tmp_root)
+
             trash_box = TrashBox(trash_path=Path(tmp_path))
-            return trash_box.throw_away(evacuate_targets)
+            walk_paths: Paths = []
+            for path in walk_iterator(tmp_root):
+                trash_box.throw_away_trash(path)
+                walk_paths += [path]
+
+            _common_test(walk_paths, trash_box.pop_evacuated())
 
         _inside_tmp_directory(individual_test)
 
