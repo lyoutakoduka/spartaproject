@@ -43,6 +43,21 @@ def test_default() -> None:
     _inside_tmp_directory(individual_test)
 
 
+def test_tree() -> None:
+    def individual_test(tmp_root: Path) -> None:
+        create_tree(tmp_root, tree_deep=3)
+
+        trash_box = TrashBox()
+        walk_paths: Paths = []
+        for path in walk_iterator(tmp_root):
+            trash_box.throw_away_trash(path, trash_root=tmp_root)
+            walk_paths += [path]
+
+        _common_test(walk_paths, trash_box.pop_evacuated())
+
+    _inside_tmp_directory(individual_test)
+
+
 def test_select() -> None:
     with TemporaryDirectory() as tmp_path:
         def individual_test(tmp_root: Path) -> None:
@@ -61,5 +76,6 @@ def test_select() -> None:
 
 def main() -> bool:
     test_default()
+    test_tree()
     test_select()
     return True
