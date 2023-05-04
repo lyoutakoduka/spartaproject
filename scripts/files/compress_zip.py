@@ -13,7 +13,7 @@ from scripts.files.export_json import json_dump, Json
 from scripts.paths.get_relative import path_relative
 from scripts.paths.create_directory import path_mkdir
 from scripts.paths.iterate_directory import walk_iterator
-from scripts.times.get_timestamp import get_latest, get_access
+from scripts.times.get_timestamp import get_latest
 
 set_decimal_context()
 
@@ -82,22 +82,19 @@ class CompressZip:
         comment: str = json_dump(attribute)
         return comment.encode('utf-8')
 
-    def _get_time_comment(self, target: Path) -> bytes:
-        return self._convert_comment({'time': {
-            type: func(target).isoformat()
-            for type, func in zip(['latest', 'access'], [get_latest, get_access])
-        }})
+    def _store_timestamp_detail(self, time: datetime) -> bytes:
+        return self._convert_comment({'latest': time.isoformat()})
 
-    def _get_time_latest(self, target: Path) -> IntTuple:
-        time: datetime = get_latest(target)
+    def _store_timestamp(self, time: datetime) -> IntTuple:
         return (time.year, time.month, time.day, time.hour, time.minute, time.second)
 
     def _get_zip_info(self, target: Path, relative: Path) -> ZipInfo:
         zip_info: ZipInfo = ZipInfo(filename=str(relative))
 
         zip_info.compress_type = (ZIP_LZMA if self._compress else ZIP_STORED)
-        zip_info.comment = self._get_time_comment(target)
-        zip_info.date_time = self._get_time_latest(target)
+        latest: datetime = get_latest(target)
+        zip_info.date_time = self._store_timestamp(latest)
+        zip_info.comment = self._store_timestamp_detail(latest)
 
         return zip_info
 
