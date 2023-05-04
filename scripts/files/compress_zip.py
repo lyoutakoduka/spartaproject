@@ -69,7 +69,7 @@ class CompressZip:
             file_names += [str(self._output_index).zfill(4)]
         self._output_index += 1
 
-        return Path(self._output_root, '_'.join(file_names)).with_suffix('.zip')
+        return Path(self._output_root, '#'.join(file_names)).with_suffix('.zip')
 
     def _reset_archive_byte(self) -> None:
         self._archived += [self._get_archive_path()]
