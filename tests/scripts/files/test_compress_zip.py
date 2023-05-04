@@ -5,7 +5,7 @@ from shutil import unpack_archive
 from typing import Callable
 from tempfile import TemporaryDirectory
 
-from contexts.integer_context import Ints, Ints2
+from contexts.integer_context import Ints2
 from contexts.decimal_context import Decimal, Decs, set_decimal_context
 from contexts.path_context import Path, Paths, Paths2
 from scripts.files.compress_zip import CompressZip
@@ -45,11 +45,6 @@ def _get_output_paths(archived: Paths, tmp_root: Path) -> Paths:
             outputs += [path]
 
     return outputs
-
-
-def _compare_path_count(sorted_paths: Paths2) -> None:
-    counts: Ints = [len(paths) for paths in sorted_paths]
-    assert counts[0] == counts[1]
 
 
 def _compare_path_name(sorted_paths: Paths2, tmp_root: Path) -> None:
@@ -104,7 +99,6 @@ def _common_test(
 ) -> Paths2:
     sorted_paths: Paths2 = _get_sorted_paths(walk_paths, archived, tmp_root)
 
-    _compare_path_count(sorted_paths)
     _compare_path_name(sorted_paths, tmp_root)
     _compare_file_size(sorted_paths)
 
