@@ -66,6 +66,18 @@ def _common_test(tmp_root: Path) -> Paths2:
     return sorted_paths
 
 
+def _compress_to_decompress(tmp_root: Path) -> None:
+    tree_root: Path = Path(tmp_root, 'tree')
+    archived: Path = Path(make_archive(
+        str(Path(tmp_root, *['archive'] * 2)),
+        format='zip',
+        root_dir=str(tree_root)
+    ))
+
+    decompress_zip = DecompressZip(Path(tmp_root, 'extract'))
+    decompress_zip.decompress_archive(archived)
+
+
 def _inside_tmp_directory(func: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as tmp_path:
         func(Path(tmp_path))
@@ -77,17 +89,10 @@ def test_directory() -> None:
         create_tree(tree_root, tree_deep=3)
 
         trash_box = TrashBox()
-        trash_box.throw_away(list(walk_iterator(tree_root, directory=False)))
+        for path in walk_iterator(tree_root, directory=False):
+            trash_box.throw_away_trash(path)
 
-        archived: Path = Path(make_archive(
-            str(Path(tmp_root, *['archive'] * 2)),
-            format='zip',
-            root_dir=str(tree_root)
-        ))
-
-        decompress_zip = DecompressZip(Path(tmp_root, 'extract'))
-        decompress_zip.decompress_archive(archived)
-
+        _compress_to_decompress(tmp_root)
         _common_test(tmp_root)
 
     _inside_tmp_directory(individual_test)
