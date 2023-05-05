@@ -7,12 +7,12 @@ from pathlib import Path
 from scripts.call_module import call_function
 
 
-_SRC_PATH: str = __file__
+_SRC_PATH: Path = Path(__file__)
 _UNKNOWN: str = 'unknown'
 
 
 def test_unknown_module() -> None:
-    error_path = str(Path(_SRC_PATH).with_name(_UNKNOWN + '.py'))
+    error_path = Path(_SRC_PATH).with_name(_UNKNOWN + '.py')
     with raises(FileNotFoundError, match='unknown'):
         call_function(_SRC_PATH, error_path)
 
