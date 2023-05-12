@@ -7,4 +7,5 @@ from pathlib import Path
 Paths = List[Path]
 PathPair = Dict[str, Path]
 Paths2 = List[Paths]
+PathPair2 = Dict[str, PathPair]
 PathGene = Generator[Path, None, None]
