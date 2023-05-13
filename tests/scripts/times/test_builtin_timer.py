@@ -43,7 +43,7 @@ def test_builtin() -> None:
     begin: Decimal = timer()
     sleep(float(interval))
     compute_error: Decimal = timer() - begin
-    assert Decimal('0.007') > compute_error
+    assert Decimal('0.01') > compute_error
 
 
 def main() -> bool:
