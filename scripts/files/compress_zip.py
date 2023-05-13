@@ -18,28 +18,30 @@ from scripts.times.get_timestamp import get_latest
 set_decimal_context()
 
 
-def _default() -> int:
-    limit_byte: int = 1
-    for _ in range(3):
-        limit_byte *= (2**10)
-    return limit_byte * 4
-
-
 class CompressZip:
     def __init__(
             self, output_root: Path,
             archive_id: str = '',
-            limit_byte: int = _default(),
+            limit_byte: int = 0,
             compress: bool = False,
     ) -> None:
         self._output_root: Path = output_root
 
-        self._limit_byte: Decimal = Decimal(str(limit_byte))
         self._compress: bool = compress
 
+        self._init_limit_byte(limit_byte)
         self._init_archive_id(archive_id)
         self._init_walk_history()
         self._init_archive_output()
+
+    def _init_limit_byte(self, byte: int) -> None:
+        if 0 == byte:
+            byte = 1
+            for _ in range(3):
+                byte *= (2 ** 10)
+            byte *= 4  # 4GB
+
+        self._limit_byte: Decimal = Decimal(str(byte))
 
     def _init_archive_id(self, archive_id: str) -> None:
         if 0 == len(archive_id):
