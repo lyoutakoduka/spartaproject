@@ -9,14 +9,15 @@ from scripts.paths.working_space import current_working_space
 from scripts.paths.create_directory import path_mkdir
 
 
-def _default() -> Path:
-    return current_working_space(Path('.trash'), jst=True)
-
-
 class TrashBox:
-    def __init__(self, trash_path: Path = _default()) -> None:
-        self._trash_path: Path = trash_path
+    def __init__(self, trash_path: Path = Path()) -> None:
         self._evacuated: Paths = []
+        self._init_trash_path(trash_path)
+
+    def _init_trash_path(self, path: Path) -> None:
+        if '.' == str(path):
+            path = current_working_space(Path('.trash'), jst=True)
+        self._trash_path: Path = path
 
     def pop_evacuated(self) -> Paths:
         evacuated: Paths = self._evacuated[:]
