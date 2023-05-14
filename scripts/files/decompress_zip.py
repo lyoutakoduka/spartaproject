@@ -10,6 +10,7 @@ from contexts.path_context import Path, Paths
 from scripts.files.export_file import byte_export
 from scripts.files.import_json import json_load, Json
 from scripts.paths.create_directory import path_mkdir
+from scripts.paths.parent_directory import create_parent_dir
 from scripts.paths.iterate_directory import walk_iterator
 from scripts.times.set_timestamp import set_latest
 
@@ -40,11 +41,7 @@ class DecompressZip:
         return sequential
 
     def _decompress_file(self, file_path: Path, relative: Path, zip_file: ZipFile) -> None:
-        parent_path: Path = file_path.parent
-
-        if not parent_path.exists():
-            path_mkdir(parent_path)
-
+        create_parent_dir(file_path)
         byte_export(file_path, zip_file.read(relative.as_posix()))
 
     def _restore_timestamp(self, file_path: Path, zip_info: ZipInfo) -> None:
