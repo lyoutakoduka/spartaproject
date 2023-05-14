@@ -4,11 +4,12 @@
 from pathlib import Path
 
 
-def byte_export(export_path: Path, content: bytes) -> None:
+def byte_export(export_path: Path, content: bytes) -> Path:
     with open(export_path, 'wb') as file:
         file.write(content)
+    return export_path
 
 
-def text_export(export_path: Path, content: str) -> None:
+def text_export(export_path: Path, content: str) -> Path:
     content = content.replace('\r\n', '\n')
-    byte_export(export_path, content.encode('utf-8'))
+    return byte_export(export_path, content.encode('utf-8'))
