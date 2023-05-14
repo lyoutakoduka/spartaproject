@@ -32,9 +32,7 @@ def _common_test(path: Path) -> None:
 
 def _inside_tmp_directory(func: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as tmp_path:
-        path: Path = Path(tmp_path, 'tmp.json')
-        json_export(path, 'test')
-        func(path)
+        func(json_export(Path(tmp_path, 'tmp.json'), 'test'))
 
 
 def test_utc() -> None:

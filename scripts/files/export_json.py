@@ -34,5 +34,5 @@ def json_dump(content: Json) -> str:
     return dumps(_serialize_json(content), indent=2, ensure_ascii=False, sort_keys=True)
 
 
-def json_export(export_path: Path, content: Json) -> None:
-    text_export(export_path, json_dump(content))
+def json_export(export_path: Path, content: Json) -> Path:
+    return text_export(export_path, json_dump(content))
