@@ -17,9 +17,7 @@ def _common_test(result: str) -> None:
 
 def _inside_tmp_directory(func: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as tmp_path:
-        text_path: Path = Path(tmp_path, 'tmp.txt')
-        text_export(text_path, _INPUT)
-        func(text_path)
+        func(text_export(Path(tmp_path, 'tmp.txt'), _INPUT))
 
 
 def test_text() -> None:

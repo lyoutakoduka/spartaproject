@@ -65,9 +65,7 @@ def test_import() -> None:
     input: str = format_indent(INPUT)
 
     with TemporaryDirectory() as tmp_path:
-        config_path: Path = Path(tmp_path, 'tmp.ini')
-        text_export(config_path, input)
-
+        config_path: Path = text_export(Path(tmp_path, 'tmp.ini'), input)
         config: Config = config_import(config_path)
         assert 'text' == config['section']['option']
 
