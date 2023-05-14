@@ -13,9 +13,11 @@ def _convert_timestamp(time: datetime) -> float:
     return time.timestamp()
 
 
-def set_access(path: Path, time: datetime) -> None:
+def set_access(path: Path, time: datetime) -> Path:
     utime(path, (_convert_timestamp(time), path.stat().st_mtime))
+    return path
 
 
-def set_latest(path: Path, time: datetime) -> None:
+def set_latest(path: Path, time: datetime) -> Path:
     utime(path, (path.stat().st_atime, _convert_timestamp(time)))
+    return path
