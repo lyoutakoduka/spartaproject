@@ -36,8 +36,10 @@ class TrashBox:
             move(target, trash_path)
             self._evacuated += [trash_path]
 
-    def throw_away_trash(self, trash_path: Path, trash_root: Path = Path('')) -> None:
-        if trash_path.is_relative_to(trash_root):
+    def throw_away_trash(self, trash_path: Path, trash_root: Path = Path()) -> None:
+        has_initial: bool = '.' != str(trash_root)
+
+        if has_initial and trash_path.is_relative_to(trash_root):
             self._move_file(trash_path, trash_root)
         else:
             self._move_file(trash_path, trash_path.parent)

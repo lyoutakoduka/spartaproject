@@ -178,8 +178,10 @@ class CompressZip:
             if self._not_still_archived(False, target):
                 self._update_archive_byte(target, root)
 
-    def compress_archive(self, archive_target: Path, archive_root: Path = Path('')) -> None:
-        if archive_target.is_relative_to(archive_root):
+    def compress_archive(self, archive_target: Path, archive_root: Path = Path()) -> None:
+        has_initial: bool = '.' != str(archive_root)
+
+        if has_initial and archive_target.is_relative_to(archive_root):
             self._compress_child(archive_target, archive_root)
         else:
             self._compress_child(archive_target, archive_target.parent)
