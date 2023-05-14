@@ -24,9 +24,7 @@ def _inside_tmp_directory(func: Callable[[Path], bool]) -> None:
 
 def test_single() -> None:
     def individual_test(tmp_path: Path) -> bool:
-        path: Path = Path(tmp_path, _ELEMENT_NAMES[0])
-        path_mkdir(path)
-        return path_exists(path)
+        return path_exists(path_mkdir(Path(tmp_path, _ELEMENT_NAMES[0])))
 
     _inside_tmp_directory(individual_test)
 
@@ -42,8 +40,8 @@ def test_array() -> None:
             Path(tmp_path, head_path)
             for head_path in head_paths
         ]
-        path_array_mkdir(paths)
-        return bool_same_array(path_array_exists(paths))
+
+        return bool_same_array(path_array_exists(path_array_mkdir(paths)))
 
     _inside_tmp_directory(individual_test)
 
@@ -59,8 +57,8 @@ def test_pair() -> None:
             name: Path(tmp_path, head_path)
             for name, head_path in head_paths.items()
         }
-        path_pair_mkdir(paths)
-        return bool_same_pair(path_pair_exists(paths))
+
+        return bool_same_pair(path_pair_exists(path_pair_mkdir(paths)))
 
     _inside_tmp_directory(individual_test)
 

@@ -29,7 +29,4 @@ def current_working_space(root: Path, override: bool = False, jst: bool = False)
         for order, time_count in get_time_data(get_current_time(override=override, jst=jst))
     ]
 
-    time_path: Path = path_absolute(Path(root, *time_texts))
-    path_mkdir(time_path)
-
-    return time_path
+    return path_mkdir(path_absolute(Path(root, *time_texts)))
