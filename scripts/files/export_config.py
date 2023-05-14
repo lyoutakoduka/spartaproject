@@ -19,5 +19,5 @@ def config_dump(content: Config) -> str:
         return test.strip()
 
 
-def config_export(export_path: Path, content: Config) -> None:
-    text_export(export_path, config_dump(content))
+def config_export(export_path: Path, content: Config) -> Path:
+    return text_export(export_path, config_dump(content))

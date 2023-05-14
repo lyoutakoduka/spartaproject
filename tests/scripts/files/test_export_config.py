@@ -115,8 +115,7 @@ def test_export() -> None:
     expected: str = format_indent(EXPECTED)
 
     with TemporaryDirectory() as tmp_path:
-        config_path: Path = Path(tmp_path, 'tmp.ini')
-        config_export(config_path, INPUT)
+        config_path: Path = config_export(Path(tmp_path, 'tmp.ini'), INPUT)
         assert expected == text_import(config_path)
 
 
