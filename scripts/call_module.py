@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from importlib import import_module, util
+from os.path import commonpath
 from sys import path as system_path
 from typing import Any
-from os.path import commonpath
-from importlib import import_module, util
 
-from contexts.string_context import Strs
 from contexts.path_context import Path, Paths, PathPair
+from contexts.string_context import Strs
 from scripts.paths.get_absolute import path_absolute
 
 

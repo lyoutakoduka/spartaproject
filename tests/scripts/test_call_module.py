@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from pytest import raises
 from pathlib import Path
+from pytest import raises
 
 from scripts.call_module import call_function
 

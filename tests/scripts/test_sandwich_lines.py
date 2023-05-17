@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from scripts.off_stdout import StdoutText
 from scripts.format_texts import format_indent
+from scripts.off_stdout import StdoutText
 from scripts.sandwich_lines import SandWich
 
 

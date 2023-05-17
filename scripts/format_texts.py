@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from typing import List, TypedDict
 from itertools import takewhile
+from typing import List, TypedDict
 
 from contexts.integer_context import Ints
 from contexts.string_context import Strs

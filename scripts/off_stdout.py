@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from pathlib import Path
 from contextlib import redirect_stdout
+from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from contexts.callable_context import CP, CR, Callable
-from scripts.files.import_file import text_import
 from scripts.deco_generator import TransferFunc
+from scripts.files.import_file import text_import
 
 
 class StdoutText(TransferFunc):
