@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from decimal import Decimal
 from json import dumps
 from pathlib import Path
-from decimal import Decimal
 from typing import List, Dict
 
 from contexts.json_context import Json, JsonSafe, Single, SingleSafe

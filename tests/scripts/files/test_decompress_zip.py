@@ -1,19 +1,19 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from shutil import make_archive
-from typing import Callable
-from tempfile import TemporaryDirectory
 from itertools import chain
+from shutil import make_archive
+from tempfile import TemporaryDirectory
+from typing import Callable
 
 from contexts.integer_context import Ints2
 from contexts.path_context import Path, Paths, Paths2
 from contexts.time_context import datetime, Times2
 from scripts.files.compress_zip import CompressZip
 from scripts.files.decompress_zip import DecompressZip
+from scripts.paths.create_tmp_tree import create_tree
 from scripts.paths.evacuate_trash import TrashBox
 from scripts.paths.get_relative import path_array_relative
-from scripts.paths.create_tmp_tree import create_tree
 from scripts.paths.iterate_directory import walk_iterator
 from scripts.times.get_timestamp import get_latest
 from scripts.times.set_timestamp import set_latest

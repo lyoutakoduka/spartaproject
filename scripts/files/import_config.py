@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from pathlib import Path
-from decimal import Decimal
 from configparser import ConfigParser
+from decimal import Decimal
+from pathlib import Path
 
 from contexts.config_context import Config, Basic
 from scripts.files.import_file import text_import

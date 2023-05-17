@@ -4,14 +4,14 @@
 from tempfile import TemporaryDirectory
 
 from contexts.bool_context import BoolPair
-from contexts.integer_context import IntPair
-from contexts.float_context import FloatPair
-from contexts.string_context import StrPair
-from contexts.decimal_context import Decimal, DecPair
-from contexts.path_context import Path, PathPair
 from contexts.config_context import Config
-from scripts.files.import_file import text_import
+from contexts.decimal_context import Decimal, DecPair
+from contexts.float_context import FloatPair
+from contexts.integer_context import IntPair
+from contexts.path_context import Path, PathPair
+from contexts.string_context import StrPair
 from scripts.files.export_config import config_dump, config_export
+from scripts.files.import_file import text_import
 from scripts.format_texts import format_indent
 
 

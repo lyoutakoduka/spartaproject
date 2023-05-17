@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from configparser import ConfigParser
 from io import StringIO
 from pathlib import Path
-from configparser import ConfigParser
 
 from contexts.config_context import Config
 from scripts.files.export_file import text_export

@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from typing import Dict
 from decimal import Decimal
 from pathlib import Path
 from tempfile import TemporaryDirectory
+from typing import Dict
 
 from contexts.json_context import Json
-from scripts.files.import_json import json_load, json_import
 from scripts.files.export_json import json_export
+from scripts.files.import_json import json_load, json_import
 
 
 def _get_input_json(input: str) -> str:
