@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from typing import Callable
 from pathlib import Path
 from tempfile import TemporaryDirectory
+from typing import Callable
 
 from contexts.time_context import Times
 from scripts.files.export_json import json_export

@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from decimal import Decimal
 from datetime import datetime
+from decimal import Decimal
 
 from scripts.times.from_timestamp import time_from_timestamp
 

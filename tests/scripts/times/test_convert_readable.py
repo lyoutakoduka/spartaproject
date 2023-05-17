@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from contexts.integer_context import IntPair
 from contexts.decimal_context import Decimal, Decs, set_decimal_context
+from contexts.integer_context import IntPair
 from contexts.string_context import Strs
 from scripts.bools.same_value import bool_same_array
 from scripts.times.convert_readable import readable_time

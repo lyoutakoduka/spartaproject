@@ -4,9 +4,9 @@
 from typing import Callable
 
 from contexts.decimal_context import Decimal, set_decimal_context
-from scripts.times.count_elapsed import LogTimer
-from scripts.off_stdout import StdoutText
 from scripts.format_texts import format_indent
+from scripts.off_stdout import StdoutText
+from scripts.times.count_elapsed import LogTimer
 
 set_decimal_context()
 
