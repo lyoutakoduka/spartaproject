@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 from decimal import setcontext, Context, ROUND_FLOOR, FloatOperation, Decimal
-
 from typing import List, Dict
 
 Decs = List[Decimal]

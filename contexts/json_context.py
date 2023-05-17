@@ -6,7 +6,8 @@ from pathlib import Path
 from typing import List, Dict
 
 SingleSafe = None | bool | int | float | str
-Single = SingleSafe | Decimal | Path
 
 JsonSafe = SingleSafe | Dict[str, 'JsonSafe'] | List['JsonSafe']
+Single = SingleSafe | Decimal | Path
+
 Json = Single | Dict[str, 'Json'] | List['Json']

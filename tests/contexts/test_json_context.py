@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from typing import List, Any, ForwardRef, get_args
 from decimal import Decimal
 from pathlib import Path
+from typing import List, Any, ForwardRef, get_args
 
 from contexts.json_context import Json, JsonSafe
 

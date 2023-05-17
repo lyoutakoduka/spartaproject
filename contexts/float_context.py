@@ -3,5 +3,5 @@
 
 from typing import List, Dict
 
-Floats = List[float]
 FloatPair = Dict[str, float]
+Floats = List[float]

@@ -3,7 +3,8 @@
 
 from typing import List, Dict, Tuple
 
+IntPair = Dict[str, int]
 Ints = List[int]
 IntTuple = Tuple[int, ...]
-IntPair = Dict[str, int]
+
 Ints2 = List[Ints]
