@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from typing import Callable
 from pathlib import Path
 from tempfile import TemporaryDirectory
+from typing import Callable
 
 from scripts.paths.check_exists import path_exists
 from scripts.paths.parent_directory import create_parent_dir

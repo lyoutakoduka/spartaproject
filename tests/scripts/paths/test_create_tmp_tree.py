@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from typing import Callable
 from tempfile import TemporaryDirectory
+from typing import Callable
 
 from contexts.integer_context import Ints
-from contexts.string_context import Strs, Strs2
 from contexts.path_context import Path, Paths
-from scripts.paths.get_relative import path_array_relative
+from contexts.string_context import Strs, Strs2
 from scripts.paths.create_tmp_tree import create_tree
+from scripts.paths.get_relative import path_array_relative
 from scripts.paths.iterate_directory import walk_iterator
 
 

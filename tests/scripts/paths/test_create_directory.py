@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from typing import Callable
 from tempfile import TemporaryDirectory
+from typing import Callable
 
-from contexts.string_context import Strs
 from contexts.path_context import Path, Paths, PathPair
+from contexts.string_context import Strs
 from scripts.bools.same_value import bool_same_array, bool_same_pair
 from scripts.paths.check_exists import path_exists, path_array_exists, path_pair_exists
 from scripts.paths.create_directory import path_mkdir, path_array_mkdir, path_pair_mkdir

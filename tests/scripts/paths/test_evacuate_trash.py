@@ -1,15 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from typing import Callable
 from tempfile import TemporaryDirectory
+from typing import Callable
 
 from contexts.bool_context import Bools
 from contexts.path_context import Path, Paths
 from scripts.bools.same_value import bool_same_array
 from scripts.paths.check_exists import path_array_exists
-from scripts.paths.evacuate_trash import TrashBox
 from scripts.paths.create_tmp_tree import create_tree
+from scripts.paths.evacuate_trash import TrashBox
 from scripts.paths.iterate_directory import walk_iterator
 
 

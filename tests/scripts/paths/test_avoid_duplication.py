@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from typing import Callable
 from pathlib import Path
 from tempfile import TemporaryDirectory
+from typing import Callable
 
-from scripts.paths.avoid_duplication import get_avoid_path
 from scripts.files.export_json import json_export
+from scripts.paths.avoid_duplication import get_avoid_path
 
 
 def _common_test(src_path: Path, dist_path: Path) -> None:
