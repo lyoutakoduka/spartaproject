@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from sys import exit, argv
 from pathlib import Path
+from sys import exit, argv
 
 from contexts.string_context import Strs
 from scripts.call_module import call_function

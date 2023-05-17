@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from sys import path as system_path
 from pathlib import Path  # use default Path
+from sys import path as system_path
 
 
 def main() -> bool:

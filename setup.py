@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from setuptools import setup
 from codecs import open
+from setuptools import setup
 
 _PACKAGE_NAME = 'pyspartaproj'
 _EMAIL = 'lyouta@spartaproject.com'
