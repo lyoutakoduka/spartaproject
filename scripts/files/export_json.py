@@ -6,11 +6,11 @@ from json import dumps
 from pathlib import Path
 from typing import List, Dict
 
-from contexts.json_context import Json, JsonSafe, Single, SingleSafe
+from contexts.json_context import Json, Single
 from scripts.files.export_file import text_export
 
 
-def _convert_unknown(content: Single) -> SingleSafe:
+def _convert_unknown(content: Single) -> Single:
     if isinstance(content, Path):
         return str(content)
 
@@ -20,7 +20,7 @@ def _convert_unknown(content: Single) -> SingleSafe:
     return content
 
 
-def _serialize_json(content: Json) -> JsonSafe:
+def _serialize_json(content: Json) -> Json:
     if isinstance(content, Dict):
         return {key: _serialize_json(value) for key, value in content.items()}
 
