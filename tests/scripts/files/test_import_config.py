@@ -16,37 +16,37 @@ def _get_section(input: str) -> Basic:
 
 
 def test_bool() -> None:
-    INPUT: str = "[section] \n option = True"
+    INPUT: str = "[section]\noption=True"
     assert _get_section(INPUT)
 
 
 def test_int() -> None:
-    INPUT: str = "[section] \n option = 1"
+    INPUT: str = "[section]\noption=1"
     EXPECTED: int = 1
     assert EXPECTED == _get_section(INPUT)
 
 
 def test_decimal() -> None:
-    INPUT: str = "[section] \n option = 1.0"
+    INPUT: str = "[section]\noption=1.0"
     EXPECTED: Decimal = Decimal('1.0')
     assert EXPECTED == _get_section(INPUT)
 
 
 def test_string() -> None:
-    INPUT: str = "[section] \n option = text"
+    INPUT: str = "[section]\noption=text"
     EXPECTED: str = 'text'
     assert EXPECTED == _get_section(INPUT)
 
 
 def test_path() -> None:
-    INPUT: str = "[section] \n path = text"
+    INPUT: str = "[section]\npath=text"
     EXPECTED: Path = Path('text')
     config: Config = config_load(INPUT)
     assert EXPECTED == config['section']['path']
 
 
 def test_import() -> None:
-    INPUT: str = "[section] \n option = text"
+    INPUT: str = "[section]\noption=text"
     EXPECTED: str = 'text'
     with TemporaryDirectory() as tmp_path:
         config_path: Path = text_export(Path(tmp_path, 'tmp.ini'), INPUT)
