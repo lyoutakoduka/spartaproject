@@ -7,4 +7,5 @@ Bools = List[bool]
 BoolPair = Dict[str, bool]
 
 Bools2 = List[Bools]
+BoolPair2 = Dict[str, BoolPair]
 BoolType = Bools | BoolPair
