@@ -4,8 +4,11 @@
 from decimal import setcontext, Context, ROUND_FLOOR, FloatOperation, Decimal
 from typing import List, Dict
 
-Decs = List[Decimal]
 DecPair = Dict[str, Decimal]
+Decs = List[Decimal]
+
+DecPair2 = Dict[str, DecPair]
+Decs2 = List[Decs]
 
 
 def set_decimal_context() -> None:
