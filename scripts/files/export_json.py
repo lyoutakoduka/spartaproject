@@ -30,9 +30,13 @@ def _serialize_json(content: Json) -> Json:
     return _convert_unknown(content)
 
 
-def json_dump(content: Json) -> str:
-    return dumps(_serialize_json(content), indent=2, ensure_ascii=False, sort_keys=True)
+def json_dump(content: Json, compress: bool = False) -> str:
+    content = _serialize_json(content)
+    if compress:
+        return dumps(content, ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+    else:
+        return dumps(content, ensure_ascii=False, sort_keys=True, indent=2)
 
 
-def json_export(export_path: Path, content: Json) -> Path:
-    return text_export(export_path, json_dump(content))
+def json_export(export_path: Path, content: Json, compress: bool = False) -> Path:
+    return text_export(export_path, json_dump(content, compress=compress))

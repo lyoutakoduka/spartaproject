@@ -11,6 +11,10 @@ from scripts.files.import_file import text_import
 from scripts.format_texts import format_indent
 
 
+def _common_test(expected: str, input: Json, compress: bool = False) -> None:
+    assert expected == json_dump(input, compress=compress)
+
+
 def test_default() -> None:
     INPUT: Json = {
         'None': None,
@@ -31,62 +35,32 @@ def test_default() -> None:
       }
     """
 
-    expected: str = format_indent(EXPECTED)
-    assert expected == json_dump(INPUT)
+    _common_test(format_indent(EXPECTED), INPUT)
 
 
 def test_extend() -> None:
     INPUT: Json = [Path('R'), Decimal('1.0')]
-    EXPECTED: str = """
-      [
-        "R",
-        1.0
-      ]
-    """
-
-    expected: str = format_indent(EXPECTED)
-    assert expected == json_dump(INPUT)
+    EXPECTED: str = '["R",1.0]'
+    _common_test(EXPECTED, INPUT, compress=True)
 
 
 def test_tree() -> None:
     INPUT: Json = {'0': {'1': {'2': {'3': {'4': {'5': {'6': None}}}}}}}
-    EXPECTED: str = """
-    {
-      "0": {
-        "1": {
-          "2": {
-            "3": {
-              "4": {
-                "5": {
-                  "6": null
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-    """
-
-    expected: str = format_indent(EXPECTED)
-    assert expected == json_dump(INPUT)
+    EXPECTED: str = '''{"0":{"1":{"2":{"3":{"4":{"5":{"6":null}}}}}}}'''
+    _common_test(EXPECTED, INPUT, compress=True)
 
 
 def test_export() -> None:
     INPUT: Json = ['R', 'G', 'B']
-    EXPECTED: str = """
-      [
-        "R",
-        "G",
-        "B"
-      ]
-    """
-
-    expected: str = format_indent(EXPECTED)
+    EXPECTED: str = '["R","G","B"]'
 
     with TemporaryDirectory() as tmp_path:
-        json_path: Path = json_export(Path(tmp_path, 'tmp.json'), INPUT)
-        assert expected == text_import(json_path)
+        json_path: Path = json_export(
+            Path(tmp_path, 'tmp.json'),
+            INPUT,
+            compress=True,
+        )
+        assert EXPECTED == text_import(json_path)
 
 
 def main() -> bool:
