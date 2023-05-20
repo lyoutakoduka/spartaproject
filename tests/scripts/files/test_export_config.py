@@ -15,6 +15,10 @@ from scripts.files.import_file import text_import
 from scripts.format_texts import format_indent
 
 
+def _common_test(expected: str, input: Config) -> None:
+    assert format_indent(expected) == config_dump(input)
+
+
 def test_section() -> None:
     INPUT: Config = {
         'section': {
@@ -37,8 +41,7 @@ def test_section() -> None:
         bool = True
     """
 
-    expected: str = format_indent(EXPECTED)
-    assert expected == config_dump(INPUT)
+    _common_test(EXPECTED, INPUT)
 
 
 def test_lower() -> None:
@@ -55,8 +58,7 @@ def test_lower() -> None:
         false = False
     """
 
-    expected: str = format_indent(EXPECTED)
-    assert expected == config_dump(INPUT)
+    _common_test(EXPECTED, INPUT)
 
 
 def test_type() -> None:
@@ -96,8 +98,7 @@ def test_type() -> None:
         f = root
     """
 
-    expected: str = format_indent(EXPECTED)
-    assert expected == config_dump(INPUT)
+    _common_test(EXPECTED, INPUT)
 
 
 def test_export() -> None:
