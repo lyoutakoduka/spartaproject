@@ -81,7 +81,7 @@ class CompressZip:
         )
 
     def _convert_comment(self, attribute: Json) -> bytes:
-        comment: str = json_dump(attribute)
+        comment: str = json_dump(attribute, compress=True)
         return comment.encode('utf-8')
 
     def _store_timestamp_detail(self, time: datetime) -> bytes:

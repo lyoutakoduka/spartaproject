@@ -6,4 +6,4 @@ from scripts.files.export_json import json_dump
 
 
 def is_same_dict(left: Json, right: Json) -> bool:
-    return 1 == len(list(set([json_dump(input) for input in [left, right]])))
+    return 1 == len(list(set([json_dump(input, compress=True) for input in [left, right]])))
