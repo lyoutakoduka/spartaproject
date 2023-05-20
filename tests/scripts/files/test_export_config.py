@@ -101,6 +101,16 @@ def test_type() -> None:
     _common_test(EXPECTED, INPUT)
 
 
+def test_compress() -> None:
+    INPUT: Config = {
+        'bool': {'true': True},
+        'int': {'one': 1},
+    }
+    EXPECTED: str = "[bool]\ntrue=True\n[int]\none=1"
+
+    assert EXPECTED == config_dump(INPUT, compress=True)
+
+
 def test_export() -> None:
     INPUT: Config = {
         'section': {
@@ -124,5 +134,6 @@ def main() -> bool:
     test_section()
     test_lower()
     test_type()
+    test_compress()
     test_export()
     return True
