@@ -19,31 +19,6 @@ def _common_test(expected: str, input: Config) -> None:
     assert format_indent(expected) == config_dump(input)
 
 
-def test_section() -> None:
-    INPUT: Config = {
-        'section': {
-            'path': Path('root'),
-            'decimal': Decimal('0.1'),
-            'str': '1',
-            'float': 1.0,
-            'int': 1,
-            'bool': True,
-        }
-    }
-
-    EXPECTED: str = """
-        [section]
-        path = root
-        decimal = 0.1
-        str = 1
-        float = 1.0
-        int = 1
-        bool = True
-    """
-
-    _common_test(EXPECTED, INPUT)
-
-
 def test_lower() -> None:
     INPUT: Config = {
         'SECTION': {
@@ -127,7 +102,32 @@ def test_path() -> None:
     _common_test(EXPECTED, input_pair)
 
 
-def test_type() -> None:
+def test_mix_option() -> None:
+    INPUT: Config = {
+        'section': {
+            'path': Path('root'),
+            'decimal': Decimal('0.1'),
+            'str': '1',
+            'float': 1.0,
+            'int': 1,
+            'bool': True,
+        }
+    }
+
+    EXPECTED: str = """
+        [section]
+        path = root
+        decimal = 0.1
+        str = 1
+        float = 1.0
+        int = 1
+        bool = True
+    """
+
+    _common_test(EXPECTED, INPUT)
+
+
+def test_mix_section() -> None:
     flags: BoolPair = {'a': True}
     indies: IntPair = {'b': 1}
     numbers: FloatPair = {'c': 1.0}
@@ -197,7 +197,6 @@ def test_export() -> None:
 
 
 def main() -> bool:
-    test_section()
     test_lower()
     test_bool()
     test_int()
@@ -205,7 +204,8 @@ def main() -> bool:
     test_str()
     test_decimal()
     test_path()
-    test_type()
+    test_mix_option()
+    test_mix_section()
     test_compress()
     test_export()
     return True
