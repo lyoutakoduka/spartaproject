@@ -35,7 +35,7 @@ def json_dump(content: Json, compress: bool = False) -> str:
     content = _serialize_json(content)
 
     separators: StrTuple | None = (',', ':') if compress else None
-    indent: int = 0 if compress else 2
+    indent: int | None = None if compress else 2
 
     return dumps(
         content,
