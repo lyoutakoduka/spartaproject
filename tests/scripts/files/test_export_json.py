@@ -11,8 +11,8 @@ from scripts.files.import_file import text_import
 from scripts.format_texts import format_indent
 
 
-def _common_test(expected: str, input: Json, compress: bool = False) -> None:
-    assert expected == json_dump(input, compress=compress)
+def _common_test(expected: str, input: Json) -> None:
+    assert format_indent(expected) == json_dump(input)
 
 
 def test_default() -> None:
@@ -35,37 +35,71 @@ def test_default() -> None:
       }
     """
 
-    _common_test(format_indent(EXPECTED), INPUT)
+    _common_test(EXPECTED, INPUT)
 
 
 def test_extend() -> None:
     INPUT: Json = [Path('R'), Decimal('1.0')]
-    EXPECTED: str = '["R",1.0]'
-    _common_test(EXPECTED, INPUT, compress=True)
+    EXPECTED: str = """
+      [
+        "R",
+        1.0
+      ]
+    """
+
+    _common_test(EXPECTED, INPUT)
 
 
 def test_tree() -> None:
     INPUT: Json = {'0': {'1': {'2': {'3': {'4': {'5': {'6': None}}}}}}}
+    EXPECTED: str = """
+    {
+      "0": {
+        "1": {
+          "2": {
+            "3": {
+              "4": {
+                "5": {
+                  "6": null
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    """
+
+    _common_test(EXPECTED, INPUT)
+
+
+def test_compress() -> None:
+    INPUT: Json = {'0': {'1': {'2': {'3': {'4': {'5': {'6': None}}}}}}}
     EXPECTED: str = '''{"0":{"1":{"2":{"3":{"4":{"5":{"6":null}}}}}}}'''
-    _common_test(EXPECTED, INPUT, compress=True)
+    assert EXPECTED == json_dump(INPUT, compress=True)
 
 
 def test_export() -> None:
     INPUT: Json = ['R', 'G', 'B']
-    EXPECTED: str = '["R","G","B"]'
+    EXPECTED: str = """
+      [
+        "R",
+        "G",
+        "B"
+      ]
+    """
+
+    expected: str = format_indent(EXPECTED)
 
     with TemporaryDirectory() as tmp_path:
-        json_path: Path = json_export(
-            Path(tmp_path, 'tmp.json'),
-            INPUT,
-            compress=True,
-        )
-        assert EXPECTED == text_import(json_path)
+        json_path: Path = json_export(Path(tmp_path, 'tmp.json'), INPUT)
+        assert expected == text_import(json_path)
 
 
 def main() -> bool:
     test_default()
     test_extend()
     test_tree()
+    test_compress()
     test_export()
     return True
