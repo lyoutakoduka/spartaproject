@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from decimal import Decimal
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
