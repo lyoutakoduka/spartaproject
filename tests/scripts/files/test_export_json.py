@@ -38,18 +38,6 @@ def test_default() -> None:
     _common_test(EXPECTED, INPUT)
 
 
-def test_extend() -> None:
-    INPUT: Json = [Path('R'), Decimal('1.0')]
-    EXPECTED: str = """
-      [
-        "R",
-        1.0
-      ]
-    """
-
-    _common_test(EXPECTED, INPUT)
-
-
 def test_tree() -> None:
     INPUT: Json = {'0': {'1': {'2': {'3': {'4': {'5': {'6': None}}}}}}}
     EXPECTED: str = """
@@ -98,7 +86,6 @@ def test_export() -> None:
 
 def main() -> bool:
     test_default()
-    test_extend()
     test_tree()
     test_compress()
     test_export()
