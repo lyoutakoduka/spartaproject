@@ -3,7 +3,8 @@
 
 from pathlib import Path
 
-from scripts.files.export_config import config_export, Config
+from contexts.string_context import StrPair2
+from scripts.files.export_config import config_export
 from scripts.files.export_file import text_export
 from scripts.files.export_json import json_export, Json
 from scripts.paths.create_directory import path_mkdir
@@ -29,7 +30,7 @@ def _sample_config(root: Path, weight: int) -> None:
     section_order: int = len(str(weight))
     line_text: str = '-' * width
 
-    INPUT: Config = {
+    INPUT: StrPair2 = {
         str(i).zfill(section_order): {
             str(j).zfill(section_order): line_text
             for j in range(weight)
@@ -76,7 +77,8 @@ def _recursive_tree(root: Path, tree_deep: int, deep: int, weight: int):
         )
 
 
-def create_tree(root_path: Path, tree_deep: int = 1, tree_weight: int = 1) -> None:
+def create_tree(root_path: Path, tree_deep: int = 1,
+                tree_weight: int = 1) -> None:
     enable_deep: bool = 1 <= tree_deep <= 10
     enable_weight: bool = 1 <= tree_weight <= 10
 
