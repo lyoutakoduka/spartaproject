@@ -105,35 +105,35 @@ def test_path() -> None:
 def test_mix_option() -> None:
     INPUT: Config = {
         'section': {
-            'path': Path('root'),
-            'decimal': Decimal('0.1'),
-            'str': '1',
-            'float': 1.0,
-            'int': 1,
             'bool': True,
+            'int': 1,
+            'float': 1.0,
+            'str': 'test',
+            'decimal': Decimal('0.1'),
+            'path': Path('root'),
         }
     }
 
     EXPECTED: str = """
         [section]
-        path = root
-        decimal = 0.1
-        str = 1
-        float = 1.0
-        int = 1
         bool = True
+        int = 1
+        float = 1.0
+        str = test
+        decimal = 0.1
+        path = root
     """
 
     _common_test(EXPECTED, INPUT)
 
 
 def test_mix_section() -> None:
-    flags: BoolPair = {'a': True}
-    indies: IntPair = {'b': 1}
-    numbers: FloatPair = {'c': 1.0}
-    texts: StrPair = {'d': 'hello'}
-    decimals: DecPair = {'e': Decimal('0.1')}
-    paths: PathPair = {'f': Path('root')}
+    flags: BoolPair = {'bool': True}
+    indies: IntPair = {'int': 1}
+    numbers: FloatPair = {'float': 1.0}
+    texts: StrPair = {'str': 'test'}
+    decimals: DecPair = {'decimal': Decimal('0.1')}
+    paths: PathPair = {'path': Path('root')}
 
     INPUT: Config = {
         'flags': flags,
@@ -146,22 +146,22 @@ def test_mix_section() -> None:
 
     EXPECTED: str = """
         [flags]
-        a = True
+        bool = True
 
         [indies]
-        b = 1
+        int = 1
 
         [numbers]
-        c = 1.0
+        float = 1.0
 
         [texts]
-        d = hello
+        str = test
 
         [decimals]
-        e = 0.1
+        decimal = 0.1
 
         [paths]
-        f = root
+        path = root
     """
 
     _common_test(EXPECTED, INPUT)
