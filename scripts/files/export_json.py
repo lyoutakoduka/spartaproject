@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import List, Dict
 
 from contexts.json_context import Json, Single
+from contexts.string_context import StrTuple
 from scripts.files.export_file import text_export
 
 
@@ -32,11 +33,23 @@ def _serialize_json(content: Json) -> Json:
 
 def json_dump(content: Json, compress: bool = False) -> str:
     content = _serialize_json(content)
-    if compress:
-        return dumps(content, ensure_ascii=False, sort_keys=True, separators=(',', ':'))
-    else:
-        return dumps(content, ensure_ascii=False, sort_keys=True, indent=2)
+
+    separators: StrTuple | None = (',', ':') if compress else None
+    indent: int = 0 if compress else 2
+
+    return dumps(
+        content,
+        ensure_ascii=False,
+        sort_keys=True,
+        indent=indent,
+        separators=separators,
+    )
 
 
-def json_export(export_path: Path, content: Json, compress: bool = False) -> Path:
+def json_export(
+    export_path: Path,
+    content: Json,
+    compress: bool = False,
+) -> Path:
+
     return text_export(export_path, json_dump(content, compress=compress))
