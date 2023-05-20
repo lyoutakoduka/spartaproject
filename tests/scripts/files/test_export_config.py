@@ -3,13 +3,13 @@
 
 from tempfile import TemporaryDirectory
 
-from contexts.bool_context import BoolPair
+from contexts.bool_context import BoolPair, BoolPair2
 from contexts.config_context import Config
-from contexts.decimal_context import Decimal, DecPair
-from contexts.float_context import FloatPair
-from contexts.integer_context import IntPair
-from contexts.path_context import Path, PathPair
-from contexts.string_context import StrPair
+from contexts.decimal_context import Decimal, DecPair, DecPair2
+from contexts.float_context import FloatPair, FloatPair2
+from contexts.integer_context import IntPair, IntPair2
+from contexts.path_context import Path, PathPair, PathPair2
+from contexts.string_context import StrPair, StrPair2
 from scripts.files.export_config import config_dump, config_export
 from scripts.files.import_file import text_import
 from scripts.format_texts import format_indent
@@ -59,6 +59,72 @@ def test_lower() -> None:
     """
 
     _common_test(EXPECTED, INPUT)
+
+
+def test_bool() -> None:
+    INPUT: BoolPair = {'b': True}
+    input_pair: BoolPair2 = {'A': INPUT}
+    EXPECTED: str = """
+        [A]
+        b = True
+    """
+    _common_test(EXPECTED, {'A': INPUT})
+    _common_test(EXPECTED, input_pair)
+
+
+def test_int() -> None:
+    INPUT: IntPair = {'b': 1}
+    input_pair: IntPair2 = {'A': INPUT}
+    EXPECTED: str = """
+        [A]
+        b = 1
+    """
+    _common_test(EXPECTED, {'A': INPUT})
+    _common_test(EXPECTED, input_pair)
+
+
+def test_float() -> None:
+    INPUT: FloatPair = {'b': 1.0}
+    input_pair: FloatPair2 = {'A': INPUT}
+    EXPECTED: str = """
+        [A]
+        b = 1.0
+    """
+    _common_test(EXPECTED, {'A': INPUT})
+    _common_test(EXPECTED, input_pair)
+
+
+def test_str() -> None:
+    INPUT: StrPair = {'b': 'test'}
+    input_pair: StrPair2 = {'A': INPUT}
+    EXPECTED: str = """
+        [A]
+        b = test
+    """
+    _common_test(EXPECTED, {'A': INPUT})
+    _common_test(EXPECTED, input_pair)
+
+
+def test_decimal() -> None:
+    INPUT: DecPair = {'b': Decimal('0.1')}
+    input_pair: DecPair2 = {'A': INPUT}
+    EXPECTED: str = """
+        [A]
+        b = 0.1
+    """
+    _common_test(EXPECTED, {'A': INPUT})
+    _common_test(EXPECTED, input_pair)
+
+
+def test_path() -> None:
+    INPUT: PathPair = {'path': Path('root')}
+    input_pair: PathPair2 = {'A': INPUT}
+    EXPECTED: str = """
+        [A]
+        path = root
+    """
+    _common_test(EXPECTED, {'A': INPUT})
+    _common_test(EXPECTED, input_pair)
 
 
 def test_type() -> None:
@@ -133,6 +199,12 @@ def test_export() -> None:
 def main() -> bool:
     test_section()
     test_lower()
+    test_bool()
+    test_int()
+    test_float()
+    test_str()
+    test_decimal()
+    test_path()
     test_type()
     test_compress()
     test_export()
