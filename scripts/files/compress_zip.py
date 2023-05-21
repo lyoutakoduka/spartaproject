@@ -8,7 +8,7 @@ from contexts.decimal_context import Decimal, set_decimal_context
 from contexts.integer_context import IntTuple
 from contexts.path_context import Path, Paths
 from contexts.string_context import Strs, StrPair
-from scripts.files.convert_to_json import json_from_pair
+from scripts.files.convert_to_json import pair_to_json
 from scripts.files.export_json import json_dump
 from scripts.files.import_file import byte_import
 from scripts.paths.create_directory import path_mkdir
@@ -80,7 +80,7 @@ class CompressZip:
         self._file_zip = ZipFile(self._archived[-1], mode='w')
 
     def _convert_comment(self, attribute: StrPair) -> bytes:
-        comment: str = json_dump(json_from_pair(attribute), compress=True)
+        comment: str = json_dump(pair_to_json(attribute), compress=True)
         return comment.encode('utf-8')
 
     def _store_timestamp_detail(self, time: datetime) -> bytes:
