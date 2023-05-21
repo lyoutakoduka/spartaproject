@@ -29,8 +29,7 @@ def test_utc() -> None:
 def test_jst() -> None:
     def individual_test(path: Path) -> None:
         times: Times = [
-            func(path, jst=True)
-            for func in [get_latest, get_access]
+            func(path, jst=True) for func in [get_latest, get_access]
         ]
         _common_test(times)
 

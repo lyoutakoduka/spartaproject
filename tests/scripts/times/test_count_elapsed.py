@@ -17,7 +17,6 @@ def _stdout_check(
     restart: Callable[[LogTimer], None],
     show: Callable[[LogTimer, int], None],
 ) -> None:
-
     timer = LogTimer()
     restart(timer)
 
@@ -88,8 +87,7 @@ def test_show() -> None:
 
     def show_timer(timer: LogTimer, index: int) -> None:
         timer.show(
-            header=[f'i={index}', 'Almost'],
-            footer=['have', 'passed...'],
+            header=[f'i={index}', 'Almost'], footer=['have', 'passed...'],
         )
 
     _stdout_check(EXPECTED, increase_count, restart_timer, show_timer)
