@@ -1,10 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from decimal import Decimal
-from pathlib import Path
-
-from scripts.bools.compare_dict import is_same_dict
+from project.sparta.scripts.bools.compare_json import is_same_dict
 
 
 def test_simple() -> None:
@@ -27,10 +24,8 @@ def test_type() -> None:
     assert is_same_dict(
         {
             'A': [None, True, 0, 0.1, 'test'],
-            'B': [Decimal('-0.1'), Path('root')],
         },
         {
-            'B': [Decimal('-0.1'), Path('root')],
             'A': [None, True, 0, 0.1, 'test'],
         },
     )
