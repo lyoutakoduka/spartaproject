@@ -28,17 +28,17 @@ def to_safe_json(content: Json) -> Json:
     return _convert_unknown(content)
 
 
-def pair_to_json(input: Pair) -> Json:
-    return {key: _convert_unknown(value) for key, value in input.items()}
-
-
-def pair2_to_json(input: Pair2) -> Json:
-    return {key: pair_to_json(value) for key, value in input.items()}
-
-
 def array_to_json(input: Array) -> Json:
     return [_convert_unknown(value) for value in input]
 
 
 def array2_to_json(input: Array2) -> Json:
     return [array_to_json(value) for value in input]
+
+
+def pair_to_json(input: Pair) -> Json:
+    return {key: _convert_unknown(value) for key, value in input.items()}
+
+
+def pair2_to_json(input: Pair2) -> Json:
+    return {key: pair_to_json(value) for key, value in input.items()}
