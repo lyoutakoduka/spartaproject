@@ -18,27 +18,27 @@ def _convert_unknown(input: Single) -> Single:
     return input
 
 
-def get_safe_json(content: Json) -> Json:
+def to_safe_json(content: Json) -> Json:
     if isinstance(content, Dict):
-        return {key: get_safe_json(value) for key, value in content.items()}
+        return {key: to_safe_json(value) for key, value in content.items()}
 
     if isinstance(content, List):
-        return [get_safe_json(value) for value in content]
+        return [to_safe_json(value) for value in content]
 
     return _convert_unknown(content)
 
 
-def json_from_pair(input: Pair) -> Json:
+def pair_to_json(input: Pair) -> Json:
     return {key: _convert_unknown(value) for key, value in input.items()}
 
 
-def json_from_pair2(input: Pair2) -> Json:
-    return {key: json_from_pair(value) for key, value in input.items()}
+def pair2_to_json(input: Pair2) -> Json:
+    return {key: pair_to_json(value) for key, value in input.items()}
 
 
-def json_from_array(input: Array) -> Json:
+def array_to_json(input: Array) -> Json:
     return [_convert_unknown(value) for value in input]
 
 
-def json_from_array2(input: Array2) -> Json:
-    return [json_from_array(value) for value in input]
+def array2_to_json(input: Array2) -> Json:
+    return [array_to_json(value) for value in input]
