@@ -20,13 +20,7 @@ def _common_test(expected: str, input: Config) -> None:
 
 
 def test_lower() -> None:
-    INPUT: Config = {
-        'SECTION': {
-            'TRUE': True,
-            'FALSE': False
-        }
-    }
-
+    INPUT: Config = {'SECTION': {'TRUE': True, 'FALSE': False}}
     EXPECTED: str = """
         [SECTION]
         true = True
@@ -168,22 +162,14 @@ def test_mix_section() -> None:
 
 
 def test_compress() -> None:
-    INPUT: Config = {
-        'bool': {'true': True},
-        'int': {'one': 1},
-    }
+    INPUT: Config = {'bool': {'true': True}, 'int': {'one': 1}}
     EXPECTED: str = "[bool]\ntrue=True\n[int]\none=1"
 
     assert EXPECTED == config_dump(INPUT, compress=True)
 
 
 def test_export() -> None:
-    INPUT: Config = {
-        'section': {
-            'option': 'value',
-        }
-    }
-
+    INPUT: Config = {'section': {'option': 'value'}}
     EXPECTED: str = """
         [section]
         option = value

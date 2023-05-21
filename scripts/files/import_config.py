@@ -18,7 +18,7 @@ def _load_each_type(config: ConfigParser, section: str, option: str) -> Basic:
                 return Decimal(str(config.getfloat(section, option)))
             elif 2 == i:
                 return config.getboolean(section, option)
-        except:
+        except BaseException:
             pass
 
     text: str = config.get(section, option)
@@ -30,14 +30,12 @@ def config_load(content: str) -> Config:
     config.read_string(content)
 
     key_groups = {
-        section: config.options(section)
-        for section in config.sections()
+        section: config.options(section) for section in config.sections()
     }
 
     result_config: Config = {
         key_section: {
-            key: _load_each_type(config, key_section, key)
-            for key in key_group
+            key: _load_each_type(config, key_section, key) for key in key_group
         }
         for key_section, key_group in key_groups.items()
     }

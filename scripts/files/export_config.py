@@ -28,5 +28,7 @@ def config_dump(content: Config, compress: bool = False) -> str:
         return _cleanup_text(file.getvalue(), compress)
 
 
-def config_export(export_path: Path, content: Config, compress: bool = False) -> Path:
+def config_export(
+    export_path: Path, content: Config, compress: bool = False,
+) -> Path:
     return text_export(export_path, config_dump(content, compress=compress))

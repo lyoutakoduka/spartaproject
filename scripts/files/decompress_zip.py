@@ -25,7 +25,7 @@ class DecompressZip:
             try:
                 int(names[-1])
                 return True
-            except:
+            except BaseException:
                 pass
 
         return False
@@ -33,14 +33,18 @@ class DecompressZip:
     def sequential_archives(self, source_archive: Path) -> Paths:
         sequential: Paths = [source_archive]
 
-        for path in walk_iterator(source_archive.parent, directory=False, depth=1, suffix='zip'):
+        for path in walk_iterator(
+            source_archive.parent, directory=False, depth=1, suffix='zip'
+        ):
             if source_archive != path:
                 if self._is_sequential_archive(path):
                     sequential += [path]
 
         return sequential
 
-    def _decompress_file(self, file_path: Path, relative: Path, zip_file: ZipFile) -> None:
+    def _decompress_file(
+        self, file_path: Path, relative: Path, zip_file: ZipFile,
+    ) -> None:
         create_parent_dir(file_path)
         byte_export(file_path, zip_file.read(relative.as_posix()))
 

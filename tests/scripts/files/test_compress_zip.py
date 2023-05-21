@@ -68,9 +68,7 @@ def _compare_file_size(sorted_paths: Paths2) -> None:
 def _compare_compress_size(outputs: Paths, archived: Paths) -> None:
     file_sizes: Decs = [
         Decimal(str(sum([
-            path.stat().st_size
-            for path in paths
-            if path.is_file()
+            path.stat().st_size for path in paths if path.is_file()
         ])))
         for paths in [outputs, archived]
     ]
@@ -82,21 +80,16 @@ def _compare_archived_count(archived: Paths) -> None:
     assert 1 == len(archived)
 
 
-def _get_sorted_paths(walk_paths: Paths, archived: Paths, tmp_root: Path) -> Paths2:
+def _get_sorted_paths(
+    walk_paths: Paths, archived: Paths, tmp_root: Path,
+) -> Paths2:
     inputs: Paths = _get_input_paths(walk_paths, tmp_root)
     outputs: Paths = _get_output_paths(archived, tmp_root)
 
-    return [
-        sorted(list(set(paths)))
-        for paths in [inputs, outputs]
-    ]
+    return [sorted(list(set(paths))) for paths in [inputs, outputs]]
 
 
-def _common_test(
-    archived: Paths,
-    tmp_root: Path,
-    walk_paths: Paths,
-) -> Paths2:
+def _common_test(archived: Paths, tmp_root: Path, walk_paths: Paths) -> Paths2:
     sorted_paths: Paths2 = _get_sorted_paths(walk_paths, archived, tmp_root)
 
     _compare_path_name(sorted_paths, tmp_root)
@@ -191,8 +184,7 @@ def test_id() -> None:
         create_tree(tree_root)
 
         compress_zip = CompressZip(
-            Path(tmp_root, 'archive'),
-            archive_id=ARCHIVE_NAME
+            Path(tmp_root, 'archive'), archive_id=ARCHIVE_NAME
         )
 
         for path in walk_iterator(tree_root, directory=False, depth=1):

@@ -20,13 +20,13 @@ set_decimal_context()
 
 class CompressZip:
     def __init__(
-            self, output_root: Path,
-            archive_id: str = '',
-            limit_byte: int = 0,
-            compress: bool = False,
+        self,
+        output_root: Path,
+        archive_id: str = '',
+        limit_byte: int = 0,
+        compress: bool = False,
     ) -> None:
         self._output_root: Path = output_root
-
         self._compress: bool = compress
 
         self._init_limit_byte(limit_byte)
@@ -71,14 +71,12 @@ class CompressZip:
             file_names += [str(self._output_index).zfill(4)]
         self._output_index += 1
 
-        return Path(self._output_root, '#'.join(file_names)).with_suffix('.zip')
+        archived_path: Path = Path(self._output_root, '#'.join(file_names))
+        return archived_path.with_suffix('.zip')
 
     def _reset_archive_byte(self) -> None:
         self._archived += [self._get_archive_path()]
-        self._file_zip = ZipFile(
-            self._archived[-1],
-            mode='w',
-        )
+        self._file_zip = ZipFile(self._archived[-1], mode='w')
 
     def _convert_comment(self, attribute: Json) -> bytes:
         comment: str = json_dump(attribute, compress=True)
@@ -88,19 +86,28 @@ class CompressZip:
         return self._convert_comment({'latest': time.isoformat()})
 
     def _store_timestamp(self, time: datetime) -> IntTuple:
-        return (time.year, time.month, time.day, time.hour, time.minute, time.second)
+        return (
+            time.year,
+            time.month,
+            time.day,
+            time.hour,
+            time.minute,
+            time.second,
+        )
 
     def _get_zip_info(self, target: Path, relative: Path) -> ZipInfo:
         zip_info: ZipInfo = ZipInfo(filename=str(relative))
 
-        zip_info.compress_type = (ZIP_LZMA if self._compress else ZIP_STORED)
+        zip_info.compress_type = ZIP_LZMA if self._compress else ZIP_STORED
         latest: datetime = get_latest(target)
         zip_info.date_time = self._store_timestamp(latest)
         zip_info.comment = self._store_timestamp_detail(latest)
 
         return zip_info
 
-    def _add_file_to_archive(self, is_dir: bool, reset: bool, target: Path, root: Path) -> None:
+    def _add_file_to_archive(
+        self, is_dir: bool, reset: bool, target: Path, root: Path,
+    ) -> None:
         if reset:
             self._reset_archive_byte()
 
@@ -109,8 +116,7 @@ class CompressZip:
             self._file_zip.mkdir(str(relative))
         else:
             self._file_zip.writestr(
-                self._get_zip_info(target, relative),
-                byte_import(target),
+                self._get_zip_info(target, relative), byte_import(target),
             )
 
     def _within_allowance(self, target_byte: Decimal) -> bool:
@@ -121,7 +127,9 @@ class CompressZip:
         return Decimal(str(current_archive.stat().st_size))
 
     def _archive_inside_byte(self) -> Decimal:
-        return Decimal(str(sum([info.file_size for info in self._file_zip.infolist()])))
+        return Decimal(str(sum([
+            info.file_size for info in self._file_zip.infolist()
+        ])))
 
     def _archive_include_files(self) -> bool:
         return 0 < self._archive_inside_byte()
@@ -148,7 +156,9 @@ class CompressZip:
 
             if self._within_allowance(src_byte):
                 if include_files:
-                    if not self._within_allowance(self._estimate_archived_size(src_byte)):
+                    if not self._within_allowance(
+                        self._estimate_archived_size(src_byte)
+                    ):
                         archive_reset = True
             elif include_files:
                 archive_reset = True
@@ -158,7 +168,9 @@ class CompressZip:
         self._add_file_to_archive(False, archive_reset, target, root)
 
     def _not_still_archived(self, is_dir: bool, target: Path) -> bool:
-        archived: Paths = self._walk_directories if is_dir else self._walk_files
+        archived: Paths = (
+            self._walk_directories if is_dir else self._walk_files
+        )
 
         not_still: bool = target not in archived
         if not_still:
@@ -178,7 +190,9 @@ class CompressZip:
             if self._not_still_archived(False, target):
                 self._update_archive_byte(target, root)
 
-    def compress_archive(self, archive_target: Path, archive_root: Path = Path()) -> None:
+    def compress_archive(
+        self, archive_target: Path, archive_root: Path = Path(),
+    ) -> None:
         has_initial: bool = '.' != str(archive_root)
 
         if has_initial and archive_target.is_relative_to(archive_root):

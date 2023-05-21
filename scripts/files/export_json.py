@@ -23,9 +23,6 @@ def json_dump(content: Json, compress: bool = False) -> str:
 
 
 def json_export(
-    export_path: Path,
-    content: Json,
-    compress: bool = False,
+    export_path: Path, content: Json, compress: bool = False,
 ) -> Path:
-
     return text_export(export_path, json_dump(content, compress=compress))

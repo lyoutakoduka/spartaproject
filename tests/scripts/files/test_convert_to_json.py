@@ -8,7 +8,9 @@ from contexts.integer_context import Ints2, IntPair2
 from contexts.json_context import Json, Array2, Pair2
 from contexts.path_context import Path, Paths2, PathPair2
 from contexts.string_context import Strs, Strs2, StrPair2
-from scripts.files.convert_to_json import get_safe_json, json_from_array2, json_from_pair2
+from scripts.files.convert_to_json import (
+    get_safe_json, json_from_array2, json_from_pair2
+)
 from scripts.files.export_json import json_dump
 
 

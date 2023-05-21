@@ -24,7 +24,10 @@ def _convert_unknown(content: Single, key: str) -> Single:
 
 def _deserialize_json(content: Json, key: str = '') -> Json:
     if isinstance(content, Dict):
-        return {key: _deserialize_json(value, key=key) for key, value in content.items()}
+        return {
+            key: _deserialize_json(value, key=key)
+            for key, value in content.items()
+        }
 
     if isinstance(content, List):
         return [_deserialize_json(value) for value in content]
