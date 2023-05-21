@@ -11,7 +11,9 @@ from scripts.files.import_file import text_import
 
 
 class StdoutText(TransferFunc):
-    def wrapper(self, func: Callable[CP, CR], *args: CP.args, **kwargs: CP.kwargs) -> CR:
+    def wrapper(
+        self, func: Callable[CP, CR], *args: CP.args, **kwargs: CP.kwargs,
+    ) -> CR:
         def _execute_func() -> CR:
             return func(*args, **kwargs)
 

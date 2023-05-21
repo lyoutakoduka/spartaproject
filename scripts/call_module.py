@@ -74,8 +74,7 @@ def _check_test_path(call_context: PathPair) -> bool:
 
 def _get_common_directory(call_context: PathPair) -> Path:
     return Path(commonpath([
-        str(call_context[type].parents[1])
-        for type in _get_path_key()
+        str(call_context[type].parents[1]) for type in _get_path_key()
     ]))
 
 
@@ -89,8 +88,7 @@ def _add_system_path(imports: Paths) -> None:
 
 def _check_system_path(call_context: PathPair) -> None:
     _add_system_path([
-        _get_common_directory(call_context),
-        call_context['module'].parent,
+        _get_common_directory(call_context), call_context['module'].parent,
     ])
 
 
@@ -114,11 +112,10 @@ def _check_call_environment(call_target: PathPair, func_name: str) -> None:
     _call_target_function(module_name, func_name)
 
 
-def call_function(src_path: Path, module_path: Path, func_name: str = 'main') -> bool:
-    call_context: PathPair = {
-        'src': src_path,
-        'module': module_path,
-    }
+def call_function(
+    src_path: Path, module_path: Path, func_name: str = 'main',
+) -> bool:
+    call_context: PathPair = {'src': src_path, 'module': module_path}
 
     _check_absolute_path(call_context)
     _check_same_path(call_context)

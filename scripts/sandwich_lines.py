@@ -6,12 +6,16 @@ from scripts.deco_generator import TransferFunc
 
 
 class SandWich(TransferFunc):
-    def __init__(self, count: int = 79, begin: str = '.', end: str = '-') -> None:
+    def __init__(
+        self, count: int = 79, begin: str = '.', end: str = '-',
+    ) -> None:
         self._count = count
         self._begin = begin
         self._end = end
 
-    def wrapper(self, func: Callable[CP, CR], *args: CP.args, **kwargs: CP.kwargs) -> CR:
+    def wrapper(
+        self, func: Callable[CP, CR], *args: CP.args, **kwargs: CP.kwargs,
+    ) -> CR:
         def line(id: str) -> None:
             print(id * self._count)
 

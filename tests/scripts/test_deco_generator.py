@@ -9,7 +9,9 @@ class TestDeco(TransferFunc):
     def __init__(self, text: str = '') -> None:
         self.text = text
 
-    def wrapper(self, func: Callable[CP, CR], *args: CP.args, **kwargs: CP.kwargs) -> CR:
+    def wrapper(
+        self, func: Callable[CP, CR], *args: CP.args, **kwargs: CP.kwargs,
+    ) -> CR:
         result: CR = func(*args, **kwargs)
         self.text *= 2
         return result

@@ -13,10 +13,7 @@ def test_stdout() -> None:
     INPUT: str = """
         Hallo!
     """
-    EXPECTED: Strs = [
-        "Hallo!",
-        "",
-    ]
+    EXPECTED: Strs = ["Hallo!", ""]
     shared_compare(EXPECTED, INPUT, stdout=True)
 
 
@@ -26,9 +23,7 @@ def test_vertical() -> None:
         Hallo!
     　\n
     """
-    EXPECTED: Strs = [
-        "Hallo!",
-    ]
+    EXPECTED: Strs = ["Hallo!"]
     shared_compare(EXPECTED, INPUT)
 
 
@@ -36,9 +31,7 @@ def test_horizontal() -> None:
     INPUT: str = """
     \t　    Hallo!    　\n
     """
-    EXPECTED: Strs = [
-        "Hallo!",
-    ]
+    EXPECTED: Strs = ["Hallo!"]
     shared_compare(EXPECTED, INPUT)
 
 

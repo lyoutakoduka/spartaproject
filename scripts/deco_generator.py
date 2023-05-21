@@ -7,7 +7,9 @@ from contexts.callable_context import CP, CR, Callable
 
 
 class TransferFunc:
-    def wrapper(self, func: Callable[CP, CR], *args: CP.args, **kwargs: CP.kwargs) -> CR:
+    def wrapper(
+        self, func: Callable[CP, CR], *args: CP.args, **kwargs: CP.kwargs,
+    ) -> CR:
         return func(*args, **kwargs)
 
     def deco(self, func: Callable[CP, CR]) -> Callable[CP, CR]:
