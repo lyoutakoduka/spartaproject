@@ -4,8 +4,12 @@
 from contexts.bool_context import Bools, BoolPair
 from contexts.path_context import Path, Paths, PathPair
 from scripts.bools.compare_value import bool_compare_array, bool_compare_pair
-from scripts.paths.check_exists import path_exists, path_array_exists, path_pair_exists
-from scripts.paths.get_absolute import path_absolute, path_array_absolute, path_pair_absolute
+from scripts.paths.check_exists import (
+    path_exists, path_array_exists, path_pair_exists
+)
+from scripts.paths.get_absolute import (
+    path_absolute, path_array_absolute, path_pair_absolute
+)
 
 
 _BASE_PATH: Path = Path('project', 'sparta')
@@ -23,10 +27,7 @@ def test_single() -> None:
 
 
 def test_array() -> None:
-    RELATIVE_PATHS: Paths = [
-        _BASE_PATH,
-        _EMPTY_HEAD,
-    ]
+    RELATIVE_PATHS: Paths = [_BASE_PATH, _EMPTY_HEAD]
     EXPECTS: Bools = [True, False]
 
     absolute_paths: Paths = path_array_absolute(RELATIVE_PATHS)

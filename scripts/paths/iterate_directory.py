@@ -6,7 +6,9 @@ from contexts.path_context import Path, PathGene
 _DEFAULT_FILTER: str = '**/*'
 
 
-def _create_filter(depth: int, file: bool, directory: bool, suffix: str) -> str:
+def _create_filter(
+    depth: int, file: bool, directory: bool, suffix: str,
+) -> str:
     if not file and not directory:
         return ''
 
@@ -35,7 +37,6 @@ def walk_iterator(
     suffix: str = '*',
     filter: str = _DEFAULT_FILTER,
 ) -> PathGene:
-
     if _DEFAULT_FILTER == filter:
         filter = _create_filter(depth, file, directory, suffix)
 

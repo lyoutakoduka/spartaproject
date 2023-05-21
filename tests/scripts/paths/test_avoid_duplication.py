@@ -22,8 +22,7 @@ def test_exists() -> None:
     def individual_test(src_path: Path) -> None:
         src_path = json_export(src_path, 'test')
         _common_test(
-            get_avoid_path(src_path),
-            src_path.with_name(src_path.name + '_')
+            get_avoid_path(src_path), src_path.with_name(src_path.name + '_')
         )
 
     _inside_tmp_directory(individual_test)

@@ -15,10 +15,7 @@ def test_single() -> None:
 
 
 def test_array() -> None:
-    PATHS: Paths = [
-        _CURRENT_PATH,
-        _UNKNOWN_PATH
-    ]
+    PATHS: Paths = [_CURRENT_PATH, _UNKNOWN_PATH]
     EXPECTS: Bools = [True, False]
 
     assert bool_compare_array(EXPECTS, path_array_exists(PATHS))

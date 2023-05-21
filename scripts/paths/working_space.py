@@ -23,10 +23,14 @@ def get_time_data(time: datetime) -> Ints2:
     ]
 
 
-def current_working_space(root: Path, override: bool = False, jst: bool = False) -> Path:
+def current_working_space(
+    root: Path, override: bool = False, jst: bool = False,
+) -> Path:
     time_texts: Strs = [
         str(time_count).zfill(order)
-        for order, time_count in get_time_data(get_current_time(override=override, jst=jst))
+        for order, time_count in get_time_data(
+            get_current_time(override=override, jst=jst)
+        )
     ]
 
     return path_mkdir(path_absolute(Path(root, *time_texts)))

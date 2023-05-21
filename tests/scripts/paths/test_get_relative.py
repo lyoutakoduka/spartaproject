@@ -6,7 +6,9 @@ from pytest import raises
 from contexts.path_context import Path, Paths, PathPair
 from contexts.string_context import Strs, Strs2
 from scripts.bools.same_value import bool_same_array
-from scripts.paths.get_relative import path_relative, path_array_relative, path_pair_relative
+from scripts.paths.get_relative import (
+    path_relative, path_array_relative, path_pair_relative
+)
 
 
 _BASE_PATH: Path = Path('project')
@@ -22,8 +24,7 @@ _EXPECTED: Strs2 = [
 ]
 
 _input_paths: Paths = [
-    Path(*_HEAD_PATH.parts[:i + 1])
-    for i in range(len(_HEAD_PATH.parts))
+    Path(*_HEAD_PATH.parts[:i + 1]) for i in range(len(_HEAD_PATH.parts))
 ]
 
 
@@ -47,16 +48,15 @@ def test_pair() -> None:
     KEYS: Strs = ['A', 'B', 'C', 'D', 'E']
 
     input_path_pair: PathPair = {
-        key: path
-        for key, path in zip(KEYS, _input_paths)
+        key: path for key, path in zip(KEYS, _input_paths)
     }
 
     results: PathPair = path_pair_relative(
-        input_path_pair, root_path=_BASE_PATH)
+        input_path_pair, root_path=_BASE_PATH
+    )
 
     expected: PathPair = {
-        key: Path(*path_names)
-        for key, path_names in zip(KEYS, _EXPECTED)
+        key: Path(*path_names) for key, path_names in zip(KEYS, _EXPECTED)
     }
 
     assert bool_same_array([results[key] == expected[key] for key in KEYS])
