@@ -21,14 +21,8 @@ def test_array() -> None:
 
 
 def test_type() -> None:
-    assert is_same_json(
-        {
-            'A': [None, True, 0, 0.1, 'test'],
-        },
-        {
-            'A': [None, True, 0, 0.1, 'test'],
-        },
-    )
+    for input in [None, True, 0, 0.1, 'test']:
+        assert is_same_json(input, input)
 
 
 def main() -> bool:
