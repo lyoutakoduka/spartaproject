@@ -25,10 +25,7 @@ def bool_compare_array(lefts: Bools, rights: Bools) -> bool:
 def bool_compare_pair(lefts: BoolPair, rights: BoolPair) -> bool:
     _check_args_size(lefts, rights)
 
-    sorted_keys: Strs2 = [
-        sorted(flags.keys())
-        for flags in [lefts, rights]
-    ]
+    sorted_keys: Strs2 = [sorted(flags.keys()) for flags in [lefts, rights]]
 
     if sorted_keys[0] != sorted_keys[1]:
         raise KeyError('unmatch')
