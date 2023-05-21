@@ -19,9 +19,9 @@ def _cleanup_text(test: str, compress: bool) -> str:
     return test.replace(' = ', '=')
 
 
-def config_dump(content: Config, compress: bool = False) -> str:
+def config_dump(input: Config, compress: bool = False) -> str:
     config = ConfigParser()
-    config.read_dict(content)
+    config.read_dict(input)
 
     with StringIO() as file:
         config.write(file)
@@ -29,6 +29,6 @@ def config_dump(content: Config, compress: bool = False) -> str:
 
 
 def config_export(
-    export_path: Path, content: Config, compress: bool = False,
+    export_path: Path, input: Config, compress: bool = False,
 ) -> Path:
-    return text_export(export_path, config_dump(content, compress=compress))
+    return text_export(export_path, config_dump(input, compress=compress))

@@ -18,14 +18,14 @@ def _convert_unknown(input: Single) -> Single:
     return input
 
 
-def to_safe_json(content: Json) -> Json:
-    if isinstance(content, Dict):
-        return {key: to_safe_json(value) for key, value in content.items()}
+def to_safe_json(input: Json) -> Json:
+    if isinstance(input, Dict):
+        return {key: to_safe_json(value) for key, value in input.items()}
 
-    if isinstance(content, List):
-        return [to_safe_json(value) for value in content]
+    if isinstance(input, List):
+        return [to_safe_json(value) for value in input]
 
-    return _convert_unknown(content)
+    return _convert_unknown(input)
 
 
 def array_to_json(input: Array) -> Json:

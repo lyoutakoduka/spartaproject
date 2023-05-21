@@ -25,9 +25,9 @@ def _load_each_type(config: ConfigParser, section: str, option: str) -> Basic:
     return Path(text) if 'path' in option else text
 
 
-def config_load(content: str) -> Config:
+def config_load(input: str) -> Config:
     config = ConfigParser()
-    config.read_string(content)
+    config.read_string(input)
 
     key_groups = {
         section: config.options(section) for section in config.sections()
