@@ -5,7 +5,9 @@ from decimal import Decimal
 from pathlib import Path
 from typing import List, Dict
 
-from contexts.json_context import Json, Single, Array, Array2, Pair, Pair2
+from contexts.json_context import (
+    Json, Single, Array, Array2, Pair, Pair2, Multi, Multi2
+)
 
 
 def _convert_unknown(input: Single) -> Single:
@@ -42,3 +44,17 @@ def pair_to_json(input: Pair) -> Json:
 
 def pair2_to_json(input: Pair2) -> Json:
     return {key: pair_to_json(value) for key, value in input.items()}
+
+
+def multi_to_json(input: Multi) -> Json:
+    if isinstance(input, List):
+        return [_convert_unknown(value) for value in input]
+
+    return {key: _convert_unknown(value) for key, value in input.items()}
+
+
+def multi2_to_json(input: Multi2) -> Json:
+    if isinstance(input, List):
+        return [multi_to_json(value) for value in input]
+
+    return {key: multi_to_json(value) for key, value in input.items()}
