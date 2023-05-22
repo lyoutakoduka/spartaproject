@@ -1,42 +1,42 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from decimal import Decimal
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Dict
 
-from contexts.json_context import Json
+from contexts.json_context import Json, Single
 from scripts.files.export_json import json_export
 from scripts.files.import_json import json_load, json_import
 
 
+def _common_test(input: Single, result: Json) -> None:
+    if isinstance(result, Dict):
+        assert input == result['group']
+
+
 def _get_input_json(input: str) -> str:
-    return '{"group": ' + input + '}'
+    return '{"group": %s}' % input
 
 
 def test_bool() -> None:
-    content: Json = json_load(_get_input_json('true'))
-    if isinstance(content, Dict):
-        assert content['group']
+    input: bool = True
+    _common_test(input, json_load(_get_input_json('true')))
 
 
 def test_int() -> None:
-    content: Json = json_load(_get_input_json('1'))
-    if isinstance(content, Dict):
-        assert 1 == content['group']
+    input: int = 1
+    _common_test(input, json_load(_get_input_json(str(input))))
 
 
 def test_float() -> None:
-    content: Json = json_load(_get_input_json('0.1'))
-    if isinstance(content, Dict):
-        assert 0.1 == content['group']
+    input: float = 0.1
+    _common_test(input, json_load(_get_input_json(str(input))))
 
 
 def test_string() -> None:
-    content: Json = json_load(_get_input_json('"test"'))
-    if isinstance(content, Dict):
-        assert 'test' == content['group']
+    input: str = 'test'
+    _common_test(input, json_load(_get_input_json('"%s"' % input)))
 
 
 def test_export() -> None:
