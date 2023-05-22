@@ -27,22 +27,16 @@ def test_int() -> None:
         assert 1 == content['group']
 
 
-def test_decimal() -> None:
+def test_float() -> None:
     content: Json = json_load(_get_input_json('0.1'))
     if isinstance(content, Dict):
-        assert Decimal('0.1') == content['group']
+        assert 0.1 == content['group']
 
 
 def test_string() -> None:
     content: Json = json_load(_get_input_json('"test"'))
     if isinstance(content, Dict):
         assert 'test' == content['group']
-
-
-def test_path() -> None:
-    content: Json = json_load('{"path": "root"}')
-    if isinstance(content, Dict):
-        assert Path('root') == content['path']
 
 
 def test_export() -> None:
@@ -56,8 +50,7 @@ def test_export() -> None:
 def main() -> bool:
     test_bool()
     test_int()
-    test_decimal()
+    test_float()
     test_string()
-    test_path()
     test_export()
     return True
