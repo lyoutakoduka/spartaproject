@@ -11,9 +11,8 @@ from scripts.files.import_json import json_load, json_import
 
 
 def _common_test(input: Single, result: Json) -> None:
-    if isinstance(result, Dict):
-        print(input, result['group'])
-        assert input == result['group']
+    assert isinstance(result, Dict)
+    assert input == result['group']
 
 
 def _get_input_json(input: str) -> str:
