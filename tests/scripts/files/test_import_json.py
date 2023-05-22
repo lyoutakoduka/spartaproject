@@ -12,11 +12,17 @@ from scripts.files.import_json import json_load, json_import
 
 def _common_test(input: Single, result: Json) -> None:
     if isinstance(result, Dict):
+        print(input, result['group'])
         assert input == result['group']
 
 
 def _get_input_json(input: str) -> str:
     return '{"group": %s}' % input
+
+
+def test_none() -> None:
+    input: None = None
+    _common_test(input, json_load(_get_input_json('null')))
 
 
 def test_bool() -> None:
@@ -48,6 +54,7 @@ def test_export() -> None:
 
 
 def main() -> bool:
+    test_none()
     test_bool()
     test_int()
     test_float()
