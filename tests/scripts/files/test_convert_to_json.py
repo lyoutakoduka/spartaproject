@@ -5,27 +5,25 @@ from contexts.bool_context import Bools2, BoolPair2
 from contexts.decimal_context import Decimal, Decs2, DecPair2
 from contexts.float_context import Floats2, FloatPair2
 from contexts.integer_context import Ints2, IntPair2
-from contexts.json_context import Json, Array2, Pair2
+from contexts.json_context import Json, Multi2
 from contexts.path_context import Path, Paths2, PathPair2
 from contexts.string_context import Strs, Strs2, StrPair2
-from scripts.files.convert_to_json import (
-    to_safe_json, array2_to_json, pair2_to_json
-)
+from scripts.files.convert_to_json import to_safe_json, multi2_to_json
 from scripts.files.export_json import json_dump
 
 
-def _common_test(expected: str, result: Json) -> None:
-    assert expected == json_dump(result, compress=True)
+def _common_test(expected: str, input: Multi2) -> None:
+    assert expected == json_dump(multi2_to_json(input), compress=True)
 
 
-def _common_test_array(expected: Strs, input: Array2) -> None:
+def _common_test_array(expected: Strs, input: Multi2) -> None:
     expected_array: str = '[[' + ','.join(expected) + ']]'
-    _common_test(expected_array, array2_to_json(input))
+    _common_test(expected_array, input)
 
 
-def _common_test_pair(expected: str, input: Pair2) -> None:
+def _common_test_pair(expected: str, input: Multi2) -> None:
     expected_pair: str = '''{"A":{"B":%s}}''' % expected
-    _common_test(expected_pair, pair2_to_json(input))
+    _common_test(expected_pair, input)
 
 
 def test_bool_array() -> None:
