@@ -38,13 +38,13 @@ def test_bool_pair() -> None:
     _common_test_pair(EXPECTED, INPUT)
 
 
-def test_int_array() -> None:
+def test_integer_array() -> None:
     INPUT: Ints2 = [[-1, 1]]
     EXPECTED: Strs = ['-1', '1']
     _common_test_array(EXPECTED, INPUT)
 
 
-def test_int_pair() -> None:
+def test_integer_pair() -> None:
     INPUT: IntPair2 = {'A': {'B': 1}}
     EXPECTED: str = '1'
     _common_test_pair(EXPECTED, INPUT)
@@ -107,8 +107,8 @@ def test_tree() -> None:
 def main() -> bool:
     test_bool_array()
     test_bool_pair()
-    test_int_array()
-    test_int_pair()
+    test_integer_array()
+    test_integer_pair()
     test_float_array()
     test_float_pair()
     test_string_array()

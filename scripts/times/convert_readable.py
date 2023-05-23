@@ -58,11 +58,11 @@ def _get_decimal_count_texts(
     return '.'.join(second_numbers) + 's'
 
 
-def _get_int_count_texts(counts: IntPair) -> Strs:
-    int_types: Strs = ['year', 'month', 'day', 'hour', 'minute']
+def _get_integer_count_texts(counts: IntPair) -> Strs:
+    integer_types: Strs = ['year', 'month', 'day', 'hour', 'minute']
     return [
         str(counts[type]) + type[0]
-        for type in int_types
+        for type in integer_types
         if 0 < counts[type]
     ]
 
@@ -72,7 +72,7 @@ def readable_time(second: Decimal, order: int = 0) -> str:
         datetime.min + timedelta(seconds=float(second))
     )
 
-    count_texts: Strs = _get_int_count_texts(counts)
+    count_texts: Strs = _get_integer_count_texts(counts)
     count_texts += [_get_decimal_count_texts(second, counts, order)]
 
     return ' '.join(count_texts)
