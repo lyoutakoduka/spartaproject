@@ -1,35 +1,45 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from contexts.bool_context import Bools2, BoolPair2
-from contexts.decimal_context import Decimal, Decs2, DecPair2
-from contexts.float_context import Floats2, FloatPair2
-from contexts.integer_context import Ints2, IntPair2
-from contexts.json_context import Json, Multi2
-from contexts.path_context import Path, Paths2, PathPair2
+from contexts.bool_context import Bools, Bools2, BoolPair2
+from contexts.decimal_context import Decimal, Decs, Decs2, DecPair2
+from contexts.float_context import Floats, Floats2, FloatPair2
+from contexts.integer_context import Ints, Ints2, IntPair2
+from contexts.json_context import Json, Multi, Multi2
+from contexts.path_context import Path, Paths, Paths2, PathPair2
 from contexts.string_context import Strs, Strs2, StrPair2
-from scripts.files.convert_to_json import to_safe_json, multi2_to_json
+from scripts.files.convert_to_json import (
+    to_safe_json, multi_to_json, multi2_to_json
+)
 from scripts.files.export_json import json_dump
 
 
-def _common_test(expected: str, input: Multi2) -> None:
-    assert expected == json_dump(multi2_to_json(input), compress=True)
+def _common_test(expected: str, input: Json) -> None:
+    assert expected == json_dump(input, compress=True)
 
 
-def _common_test_array(expected: Strs, input: Multi2) -> None:
-    expected_array: str = '[[' + ','.join(expected) + ']]'
-    _common_test(expected_array, input)
+def _common_test_array(expected: str, input: Multi) -> None:
+    expected_array: str = f'[{expected}]'
+    _common_test(expected_array, multi_to_json(input))
+
+
+def _common_test_array2(expected: str, input: Multi2) -> None:
+    expected_array: str = f'[[{expected}]]'
+    _common_test(expected_array, multi2_to_json(input))
 
 
 def _common_test_pair(expected: str, input: Multi2) -> None:
     expected_pair: str = '''{"A":{"B":%s}}''' % expected
-    _common_test(expected_pair, input)
+    _common_test(expected_pair, multi2_to_json(input))
 
 
 def test_bool_array() -> None:
-    INPUT: Bools2 = [[True, False]]
-    EXPECTED: Strs = ['true', 'false']
-    _common_test_array(EXPECTED, INPUT)
+    INPUT: bool = True
+    input1: Bools = [INPUT]
+    input2: Bools2 = [input1]
+    EXPECTED: str = 'true'
+    _common_test_array(EXPECTED, input1)
+    _common_test_array2(EXPECTED, input2)
 
 
 def test_bool_pair() -> None:
@@ -39,9 +49,12 @@ def test_bool_pair() -> None:
 
 
 def test_integer_array() -> None:
-    INPUT: Ints2 = [[-1, 1]]
-    EXPECTED: Strs = ['-1', '1']
-    _common_test_array(EXPECTED, INPUT)
+    INPUT: int = 1
+    input1: Ints = [INPUT]
+    input2: Ints2 = [input1]
+    EXPECTED: str = '1'
+    _common_test_array(EXPECTED, input1)
+    _common_test_array2(EXPECTED, input2)
 
 
 def test_integer_pair() -> None:
@@ -51,9 +64,12 @@ def test_integer_pair() -> None:
 
 
 def test_float_array() -> None:
-    INPUT: Floats2 = [[-1.0, 1.0]]
-    EXPECTED: Strs = ['-1.0', '1.0']
-    _common_test_array(EXPECTED, INPUT)
+    INPUT: float = 1.0
+    input1: Floats = [INPUT]
+    input2: Floats2 = [input1]
+    EXPECTED: str = '1.0'
+    _common_test_array(EXPECTED, input1)
+    _common_test_array2(EXPECTED, input2)
 
 
 def test_float_pair() -> None:
@@ -63,9 +79,12 @@ def test_float_pair() -> None:
 
 
 def test_string_array() -> None:
-    INPUT: Strs2 = [['R', 'G']]
-    EXPECTED: Strs = ['"R"', '"G"']
-    _common_test_array(EXPECTED, INPUT)
+    INPUT: str = 'R'
+    input1: Strs = [INPUT]
+    input2: Strs2 = [input1]
+    EXPECTED: str = '"R"'
+    _common_test_array(EXPECTED, input1)
+    _common_test_array2(EXPECTED, input2)
 
 
 def test_string_pair() -> None:
@@ -75,9 +94,12 @@ def test_string_pair() -> None:
 
 
 def test_decimal_array() -> None:
-    INPUT: Decs2 = [[Decimal('-1.0'), Decimal('1.0')]]
-    EXPECTED: Strs = ['-1.0', '1.0']
-    _common_test_array(EXPECTED, INPUT)
+    INPUT: Decimal = Decimal('1.0')
+    input1: Decs = [INPUT]
+    input2: Decs2 = [input1]
+    EXPECTED: str = '1.0'
+    _common_test_array(EXPECTED, input1)
+    _common_test_array2(EXPECTED, input2)
 
 
 def test_decimal_pair() -> None:
@@ -87,9 +109,12 @@ def test_decimal_pair() -> None:
 
 
 def test_path_array() -> None:
-    INPUT: Paths2 = [[Path('test'), Path('root')]]
-    EXPECTED: Strs = ['"test"', '"root"']
-    _common_test_array(EXPECTED, INPUT)
+    INPUT: Path = Path('root')
+    input1: Paths = [INPUT]
+    input2: Paths2 = [input1]
+    EXPECTED: str = '"root"'
+    _common_test_array(EXPECTED, input1)
+    _common_test_array2(EXPECTED, input2)
 
 
 def test_path_pair() -> None:
