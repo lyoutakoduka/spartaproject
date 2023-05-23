@@ -74,13 +74,13 @@ def test_str_pair() -> None:
     _common_test_pair(EXPECTED, INPUT)
 
 
-def test_dec_array() -> None:
+def test_decimal_array() -> None:
     INPUT: Decs2 = [[Decimal('-1.0'), Decimal('1.0')]]
     EXPECTED: Strs = ['-1.0', '1.0']
     _common_test_array(EXPECTED, INPUT)
 
 
-def test_dec_pair() -> None:
+def test_decimal_pair() -> None:
     INPUT: DecPair2 = {'A': {'B': Decimal('1.0')}}
     EXPECTED: str = '1.0'
     _common_test_pair(EXPECTED, INPUT)
@@ -113,8 +113,8 @@ def main() -> bool:
     test_float_pair()
     test_str_array()
     test_str_pair()
-    test_dec_array()
-    test_dec_pair()
+    test_decimal_array()
+    test_decimal_pair()
     test_path_array()
     test_path_pair()
     test_tree()
