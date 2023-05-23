@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from contexts.bool_context import Bools, Bools2, BoolPair2
-from contexts.decimal_context import Decimal, Decs, Decs2, DecPair2
-from contexts.float_context import Floats, Floats2, FloatPair2
-from contexts.integer_context import Ints, Ints2, IntPair2
+from contexts.bool_context import Bools, Bools2, BoolPair, BoolPair2
+from contexts.decimal_context import Decimal, Decs, Decs2, DecPair, DecPair2
+from contexts.float_context import Floats, Floats2, FloatPair, FloatPair2
+from contexts.integer_context import Ints, Ints2, IntPair, IntPair2
 from contexts.json_context import Json, Multi, Multi2
-from contexts.path_context import Path, Paths, Paths2, PathPair2
-from contexts.string_context import Strs, Strs2, StrPair2
+from contexts.path_context import Path, Paths, Paths2, PathPair, PathPair2
+from contexts.string_context import Strs, Strs2, StrPair, StrPair2
 from scripts.files.convert_to_json import (
     to_safe_json, multi_to_json, multi2_to_json
 )
@@ -28,7 +28,12 @@ def _common_test_array2(expected: str, input: Multi2) -> None:
     _common_test(expected_array, multi2_to_json(input))
 
 
-def _common_test_pair(expected: str, input: Multi2) -> None:
+def _common_test_pair(expected: str, input: Multi) -> None:
+    expected_pair: str = '{"B":%s}' % expected
+    _common_test(expected_pair, multi_to_json(input))
+
+
+def _common_test_pair2(expected: str, input: Multi2) -> None:
     expected_pair: str = '''{"A":{"B":%s}}''' % expected
     _common_test(expected_pair, multi2_to_json(input))
 
@@ -43,9 +48,12 @@ def test_bool_array() -> None:
 
 
 def test_bool_pair() -> None:
-    INPUT: BoolPair2 = {'A': {'B': True}}
+    INPUT: bool = True
+    input1: BoolPair = {'B': INPUT}
+    input2: BoolPair2 = {'A': input1}
     EXPECTED: str = 'true'
-    _common_test_pair(EXPECTED, INPUT)
+    _common_test_pair(EXPECTED, input1)
+    _common_test_pair2(EXPECTED, input2)
 
 
 def test_integer_array() -> None:
@@ -58,9 +66,12 @@ def test_integer_array() -> None:
 
 
 def test_integer_pair() -> None:
-    INPUT: IntPair2 = {'A': {'B': 1}}
+    INPUT: bool = 1
+    input1: IntPair = {'B': INPUT}
+    input2: IntPair2 = {'A': input1}
     EXPECTED: str = '1'
-    _common_test_pair(EXPECTED, INPUT)
+    _common_test_pair(EXPECTED, input1)
+    _common_test_pair2(EXPECTED, input2)
 
 
 def test_float_array() -> None:
@@ -73,9 +84,12 @@ def test_float_array() -> None:
 
 
 def test_float_pair() -> None:
-    INPUT: FloatPair2 = {'A': {'B': 1.0}}
+    INPUT: float = 1.0
+    input1: FloatPair = {'B': INPUT}
+    input2: FloatPair2 = {'A': input1}
     EXPECTED: str = '1.0'
-    _common_test_pair(EXPECTED, INPUT)
+    _common_test_pair(EXPECTED, input1)
+    _common_test_pair2(EXPECTED, input2)
 
 
 def test_string_array() -> None:
@@ -88,9 +102,12 @@ def test_string_array() -> None:
 
 
 def test_string_pair() -> None:
-    INPUT: StrPair2 = {'A': {'B': 'R'}}
+    INPUT: str = 'R'
+    input1: StrPair = {'B': INPUT}
+    input2: StrPair2 = {'A': input1}
     EXPECTED: str = '"R"'
-    _common_test_pair(EXPECTED, INPUT)
+    _common_test_pair(EXPECTED, input1)
+    _common_test_pair2(EXPECTED, input2)
 
 
 def test_decimal_array() -> None:
@@ -103,9 +120,12 @@ def test_decimal_array() -> None:
 
 
 def test_decimal_pair() -> None:
-    INPUT: DecPair2 = {'A': {'B': Decimal('1.0')}}
+    INPUT: Decimal = Decimal('1.0')
+    input1: DecPair = {'B': INPUT}
+    input2: DecPair2 = {'A': input1}
     EXPECTED: str = '1.0'
-    _common_test_pair(EXPECTED, INPUT)
+    _common_test_pair(EXPECTED, input1)
+    _common_test_pair2(EXPECTED, input2)
 
 
 def test_path_array() -> None:
@@ -118,9 +138,12 @@ def test_path_array() -> None:
 
 
 def test_path_pair() -> None:
-    INPUT: PathPair2 = {'A': {'B': Path('root')}}
+    INPUT: Path = Path('root')
+    input1: PathPair = {'B': INPUT}
+    input2: PathPair2 = {'A': input1}
     EXPECTED: str = '"root"'
-    _common_test_pair(EXPECTED, INPUT)
+    _common_test_pair(EXPECTED, input1)
+    _common_test_pair2(EXPECTED, input2)
 
 
 def test_tree() -> None:
