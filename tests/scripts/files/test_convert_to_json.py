@@ -62,13 +62,13 @@ def test_float_pair() -> None:
     _common_test_pair(EXPECTED, INPUT)
 
 
-def test_str_array() -> None:
+def test_string_array() -> None:
     INPUT: Strs2 = [['R', 'G']]
     EXPECTED: Strs = ['"R"', '"G"']
     _common_test_array(EXPECTED, INPUT)
 
 
-def test_str_pair() -> None:
+def test_string_pair() -> None:
     INPUT: StrPair2 = {'A': {'B': 'R'}}
     EXPECTED: str = '"R"'
     _common_test_pair(EXPECTED, INPUT)
@@ -111,8 +111,8 @@ def main() -> bool:
     test_int_pair()
     test_float_array()
     test_float_pair()
-    test_str_array()
-    test_str_pair()
+    test_string_array()
+    test_string_pair()
     test_decimal_array()
     test_decimal_pair()
     test_path_array()
