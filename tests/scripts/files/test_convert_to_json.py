@@ -101,7 +101,7 @@ def test_path_pair() -> None:
 def test_tree() -> None:
     INPUT: Json = {'A': {'B': {'C': [None, Decimal('-1.0'), Path('root')]}}}
     EXPECTED: str = '''{"A":{"B":{"C":[null,-1.0,"root"]}}}'''
-    _common_test(EXPECTED, to_safe_json(INPUT))
+    assert EXPECTED == json_dump(to_safe_json(INPUT), compress=True)
 
 
 def main() -> bool:
