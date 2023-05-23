@@ -66,7 +66,7 @@ def test_integer_array() -> None:
 
 
 def test_integer_pair() -> None:
-    INPUT: bool = 1
+    INPUT: int = 1
     input1: IntPair = {'B': INPUT}
     input2: IntPair2 = {'A': input1}
     EXPECTED: str = '1'
