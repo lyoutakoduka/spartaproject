@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from typing import Dict
 from datetime import datetime
 from zipfile import ZipFile, ZipInfo
 
 from contexts.path_context import Path, Paths
-from contexts.string_context import Strs
+from contexts.string_context import Strs, StrPair
+from scripts.files.convert_from_json import string_pair_from_json
 from scripts.files.export_file import byte_export
-from scripts.files.import_json import json_load, Json
+from scripts.files.import_json import json_load
 from scripts.paths.create_directory import path_mkdir
 from scripts.paths.iterate_directory import walk_iterator
 from scripts.paths.parent_directory import create_parent_dir
@@ -53,12 +53,11 @@ class DecompressZip:
 
         comment: bytes = zip_info.comment
         if 0 < len(comment):
-            content: Json = json_load(comment.decode('utf-8'))
-            if isinstance(content, Dict):
-                if 'latest' in content:
-                    timestamp: Json = content['latest']
-                    if isinstance(timestamp, str):
-                        latest = datetime.fromisoformat(timestamp)
+            content: StrPair = string_pair_from_json(
+                json_load(comment.decode('utf-8'))
+            )
+            if 'latest' in content:
+                latest = datetime.fromisoformat(content['latest'])
 
         set_latest(file_path, latest)
 
