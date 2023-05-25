@@ -14,14 +14,14 @@ def _common_test(times: Times) -> None:
     assert times[0] == times[1]
 
 
-def _inside_tmp_directory(func: Callable[[Path], None]) -> None:
+def _inside_tmp_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as tmp_path:
-        func(json_export(Path(tmp_path, 'tmp.json'), 'test'))
+        function(json_export(Path(tmp_path, 'tmp.json'), 'test'))
 
 
 def test_utc() -> None:
     def individual_test(path: Path) -> None:
-        _common_test([func(path) for func in [get_latest, get_access]])
+        _common_test([function(path) for function in [get_latest, get_access]])
 
     _inside_tmp_directory(individual_test)
 
@@ -29,7 +29,7 @@ def test_utc() -> None:
 def test_jst() -> None:
     def individual_test(path: Path) -> None:
         times: Times = [
-            func(path, jst=True) for func in [get_latest, get_access]
+            function(path, jst=True) for function in [get_latest, get_access]
         ]
         _common_test(times)
 

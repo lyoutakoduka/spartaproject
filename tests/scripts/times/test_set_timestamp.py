@@ -24,22 +24,22 @@ def _convert_input_time(times: Strs) -> Times:
 
 def _common_test(path: Path) -> None:
     times: Times = _convert_input_time(_TIMES)
-    results: Times = [func(path) for func in [get_latest, get_access]]
+    results: Times = [function(path) for function in [get_latest, get_access]]
 
     for expected, result in zip(times, results):
         assert result == expected
 
 
-def _inside_tmp_directory(func: Callable[[Path], None]) -> None:
+def _inside_tmp_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as tmp_path:
-        func(json_export(Path(tmp_path, 'tmp.json'), 'test'))
+        function(json_export(Path(tmp_path, 'tmp.json'), 'test'))
 
 
 def test_utc() -> None:
     def individual_test(path: Path) -> None:
         times: Times = _convert_input_time(_TIMES)
-        for func, time in zip([set_latest, set_access], times):
-            func(path, time)
+        for function, time in zip([set_latest, set_access], times):
+            function(path, time)
         _common_test(path)
 
     _inside_tmp_directory(individual_test)
@@ -53,8 +53,8 @@ def test_jst() -> None:
 
     def individual_test(path: Path) -> None:
         times: Times = _convert_input_time(TIMES_JST)
-        for func, time in zip([set_latest, set_access], times):
-            func(path, time)
+        for function, time in zip([set_latest, set_access], times):
+            function(path, time)
         _common_test(path)
 
     _inside_tmp_directory(individual_test)
