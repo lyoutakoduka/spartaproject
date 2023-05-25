@@ -16,7 +16,7 @@ def test_pass() -> None:
 
     stdout_text = StdoutText()
 
-    @stdout_text.deco
+    @stdout_text.decorator
     def _messages() -> None:
         print(MESSAGE)
         print(MESSAGE)

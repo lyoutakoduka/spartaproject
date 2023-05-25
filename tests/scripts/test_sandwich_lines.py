@@ -19,8 +19,8 @@ def test_pass() -> None:
     stdout_text = StdoutText()
     sandwich = SandWich(count=len(MESSAGE), begin='-', end='=')
 
-    @stdout_text.deco
-    @sandwich.deco
+    @stdout_text.decorator
+    @sandwich.decorator
     def _messages_sand() -> None:
         print(MESSAGE)
 

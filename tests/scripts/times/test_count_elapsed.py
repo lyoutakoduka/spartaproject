@@ -22,7 +22,7 @@ def _stdout_check(
 
     stdout_text = StdoutText()
 
-    @stdout_text.deco
+    @stdout_text.decorator
     def _show_log() -> None:
         for i in range(count):
             show(timer, i)
