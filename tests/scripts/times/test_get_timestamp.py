@@ -6,7 +6,7 @@ from tempfile import TemporaryDirectory
 from typing import Callable
 
 from contexts.time_context import Times
-from scripts.files.export_json import json_export
+from scripts.paths.create_temporary_file import create_temporary_file
 from scripts.times.get_timestamp import get_latest, get_access
 
 
@@ -16,7 +16,7 @@ def _common_test(times: Times) -> None:
 
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as temporary_path:
-        function(json_export(Path(temporary_path, 'temporary.json'), 'test'))
+        function(create_temporary_file(Path(temporary_path)))
 
 
 def test_utc() -> None:
