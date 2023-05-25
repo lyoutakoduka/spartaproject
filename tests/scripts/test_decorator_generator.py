@@ -21,9 +21,9 @@ class TestDeco(TransferFunc):
 
 
 def test_name() -> None:
-    test_deco = TestDeco()
+    test_instance = TestDeco()
 
-    @test_deco.decorator
+    @test_instance.decorator
     def text_print() -> None: pass
     text_print()
 
@@ -32,9 +32,9 @@ def test_name() -> None:
 
 
 def test_doc() -> None:
-    test_deco = TestDeco()
+    test_instance = TestDeco()
 
-    @test_deco.decorator
+    @test_instance.decorator
     def text_print() -> None:
         """text doc"""
         pass
@@ -46,14 +46,14 @@ def test_doc() -> None:
 
 def test_text() -> None:
     MESSAGE: str = "Hello!"
-    test_deco = TestDeco(MESSAGE)
+    test_instance = TestDeco(MESSAGE)
 
-    @test_deco.decorator
+    @test_instance.decorator
     def text_print() -> None: pass
     text_print()
 
     EXPECTED_TEXT: str = 'Hello!Hello!'
-    assert EXPECTED_TEXT == test_deco.show()
+    assert EXPECTED_TEXT == test_instance.show()
 
 
 def main() -> bool:
