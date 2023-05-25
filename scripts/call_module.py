@@ -4,7 +4,6 @@
 from importlib import import_module, util
 from os.path import commonpath
 from sys import path as system_path
-from typing import Any
 
 from contexts.path_context import Path, Paths, PathPair
 from contexts.string_context import Strs
@@ -101,8 +100,7 @@ def _check_callable_target(module_name: str, function: str) -> None:
 
 
 def _call_target_function(module_name: str, function: str) -> None:
-    func: Any = getattr(import_module(module_name), function)
-    func()
+    getattr(import_module(module_name), function)()
 
 
 def _check_call_environment(call_target: PathPair, function: str) -> None:
