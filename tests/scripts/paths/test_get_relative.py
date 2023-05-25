@@ -7,7 +7,7 @@ from contexts.path_context import Path, Paths, PathPair
 from contexts.string_context import Strs, Strs2
 from scripts.bools.same_value import bool_same_array
 from scripts.paths.get_relative import (
-    path_relative, path_array_relative, path_pair_relative
+    get_relative, get_relative_array, get_relative_pair
 )
 
 
@@ -30,15 +30,15 @@ _input_paths: Paths = [
 
 def test_unmatch() -> None:
     with raises(ValueError):
-        path_relative(_HEAD_PATH)
+        get_relative(_HEAD_PATH)
 
 
 def test_single() -> None:
-    assert _HEAD_PATH == path_relative(Path(__file__).parent)
+    assert _HEAD_PATH == get_relative(Path(__file__).parent)
 
 
 def test_array() -> None:
-    results: Paths = path_array_relative(_input_paths, root_path=_BASE_PATH)
+    results: Paths = get_relative_array(_input_paths, root_path=_BASE_PATH)
     expected: Paths = [Path(*path_names) for path_names in _EXPECTED]
 
     assert expected == results
@@ -51,7 +51,7 @@ def test_pair() -> None:
         key: path for key, path in zip(KEYS, _input_paths)
     }
 
-    results: PathPair = path_pair_relative(
+    results: PathPair = get_relative_pair(
         input_path_pair, root_path=_BASE_PATH
     )
 
