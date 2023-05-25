@@ -7,7 +7,7 @@ from scripts.times.current_datetime import get_current_time
 
 
 def _common_test(time: datetime, expected: str) -> None:
-    assert datetime.fromisoformat(expected) == time
+    assert expected == time.isoformat()
 
 
 def test_utc() -> None:
