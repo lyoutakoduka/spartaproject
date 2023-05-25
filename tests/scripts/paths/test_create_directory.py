@@ -19,9 +19,9 @@ def _get_head_path(index: int) -> Path:
     return Path(*[_ELEMENT_NAMES[i] for i in range(index + 1)])
 
 
-def _inside_tmp_directory(func: Callable[[Path], bool]) -> None:
+def _inside_tmp_directory(function: Callable[[Path], bool]) -> None:
     with TemporaryDirectory() as tmp_path:
-        assert func(Path(tmp_path))
+        assert function(Path(tmp_path))
 
 
 def test_single() -> None:

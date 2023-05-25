@@ -12,10 +12,10 @@ from scripts.paths.get_relative import get_relative_array
 from scripts.paths.iterate_directory import walk_iterator
 
 
-def _inside_tmp_directory(func: Callable[[Path], None]) -> Paths:
+def _inside_tmp_directory(function: Callable[[Path], None]) -> Paths:
     with TemporaryDirectory() as tmp_path:
         root_path: Path = Path(tmp_path)
-        func(root_path)
+        function(root_path)
         return get_relative_array(
             list(walk_iterator(root_path)), root_path=root_path
         )

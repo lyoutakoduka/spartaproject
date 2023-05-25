@@ -8,9 +8,9 @@ from typing import Callable
 from scripts.paths.parent_directory import create_parent_directory
 
 
-def _inside_tmp_directory(func: Callable[[Path], None]) -> None:
+def _inside_tmp_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as tmp_path:
-        func(Path(tmp_path))
+        function(Path(tmp_path))
 
 
 def test_pass() -> None:

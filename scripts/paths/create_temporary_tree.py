@@ -44,15 +44,15 @@ def _sample_json(root: Path, weight: int) -> None:
     section_order: int = len(str(weight))
     line_text: str = '-' * width
 
-    def func(count: int) -> Json:
+    def function(count: int) -> Json:
         if 0 < count:
             return {
-                str(i).zfill(section_order): func(count - 1)
+                str(i).zfill(section_order): function(count - 1)
                 for i in range(weight)
             }
         return line_text
 
-    input: Json = func(weight)
+    input: Json = function(weight)
 
     json_export(Path(root, _NAME + '.json'), input)
 

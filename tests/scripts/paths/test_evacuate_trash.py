@@ -23,9 +23,9 @@ def _common_test(target_paths: Paths, evacuated_paths: Paths) -> None:
     assert bool_same_array(same_bools)
 
 
-def _inside_tmp_directory(func: Callable[[Path], None]) -> None:
+def _inside_tmp_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as tmp_path:
-        func(Path(tmp_path))
+        function(Path(tmp_path))
 
 
 def test_default() -> None:

@@ -33,11 +33,11 @@ def _check_walk_result(
 
 
 def _inside_tmp_directory(
-        expected: Strs2, func: Callable[[Path], PathGene]) -> None:
+        expected: Strs2, function: Callable[[Path], PathGene]) -> None:
     with TemporaryDirectory() as tmp_path:
         root_path: Path = Path(tmp_path)
         create_tree(root_path, tree_deep=_TREE_DEEP)
-        _check_walk_result(expected, func(root_path), root_path)
+        _check_walk_result(expected, function(root_path), root_path)
 
 
 def test_all() -> None:

@@ -13,9 +13,9 @@ def _common_test(src_path: Path, dist_path: Path) -> None:
     assert src_path == dist_path
 
 
-def _inside_tmp_directory(func: Callable[[Path], None]) -> None:
+def _inside_tmp_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as tmp_path:
-        func(Path(tmp_path, 'tmp.json'))
+        function(Path(tmp_path, 'tmp.json'))
 
 
 def test_exists() -> None:
