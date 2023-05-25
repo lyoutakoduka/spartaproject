@@ -63,7 +63,7 @@ def test_float() -> None:
     _common_test(EXPECTED, input_pair)
 
 
-def test_str() -> None:
+def test_string() -> None:
     INPUT: StrPair = {'b': 'test'}
     input_pair: StrPair2 = {'A': INPUT}
     EXPECTED: str = """
@@ -187,7 +187,7 @@ def main() -> bool:
     test_bool()
     test_integer()
     test_float()
-    test_str()
+    test_string()
     test_decimal()
     test_path()
     test_mix_option()
