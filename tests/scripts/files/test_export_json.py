@@ -14,7 +14,7 @@ def _common_test(expected: str, input: Json) -> None:
     assert format_indent(expected) == json_dump(input)
 
 
-def test_default() -> None:
+def test_type() -> None:
     INPUT: Json = {
         'None': None,
         'bool': True,
@@ -85,7 +85,7 @@ def test_export() -> None:
 
 
 def main() -> bool:
-    test_default()
+    test_type()
     test_tree()
     test_compress()
     test_export()

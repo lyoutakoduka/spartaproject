@@ -28,7 +28,7 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
         function(Path(temporary_path))
 
 
-def test_default() -> None:
+def test_pass() -> None:
     def individual_test(temporary_root: Path) -> None:
         create_temporary_tree(temporary_root)
 
@@ -75,7 +75,7 @@ def test_select() -> None:
 
 
 def main() -> bool:
-    test_default()
+    test_pass()
     test_tree()
     test_select()
     return True

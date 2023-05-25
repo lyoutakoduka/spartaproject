@@ -107,7 +107,7 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
         function(Path(temporary_path))
 
 
-def test_simple() -> None:
+def test_pass() -> None:
     def individual_test(temporary_root: Path) -> None:
         tree_root: Path = Path(temporary_root, 'tree')
         create_temporary_tree(tree_root)
@@ -248,7 +248,7 @@ def test_heavy() -> None:
 
 
 def main() -> bool:
-    test_simple()
+    test_pass()
     test_directory()
     test_tree()
     test_compress()
