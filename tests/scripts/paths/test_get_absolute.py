@@ -6,7 +6,7 @@ from contexts.path_context import Path, Paths, PathPair
 from scripts.bools.compare_value import bool_compare_array, bool_compare_pair
 from scripts.paths.check_exists import check_exists_array, check_exists_pair
 from scripts.paths.get_absolute import (
-    path_absolute, path_array_absolute, path_pair_absolute
+    get_absolute, get_absolute_array, get_absolute_pair
 )
 
 
@@ -17,18 +17,18 @@ _EMPTY_PATH: Path = Path(_BASE_PATH, _EMPTY_HEAD)
 
 def test_ignore() -> None:
     path: Path = Path(__file__)
-    assert path == path_absolute(path)
+    assert path == get_absolute(path)
 
 
 def test_single() -> None:
-    assert path_absolute(_EMPTY_PATH).exists()
+    assert get_absolute(_EMPTY_PATH).exists()
 
 
 def test_array() -> None:
     RELATIVE_PATHS: Paths = [_BASE_PATH, _EMPTY_HEAD]
     EXPECTS: Bools = [True, False]
 
-    absolute_paths: Paths = path_array_absolute(RELATIVE_PATHS)
+    absolute_paths: Paths = get_absolute_array(RELATIVE_PATHS)
     assert bool_compare_array(EXPECTS, check_exists_array(absolute_paths))
 
 
@@ -40,7 +40,7 @@ def test_pair() -> None:
     }
     EXPECTS: BoolPair = {'R': True, 'G': False, 'B': True}
 
-    absolute_paths: PathPair = path_pair_absolute(RELATIVE_PATHS)
+    absolute_paths: PathPair = get_absolute_pair(RELATIVE_PATHS)
     assert bool_compare_pair(EXPECTS, check_exists_pair(absolute_paths))
 
 
