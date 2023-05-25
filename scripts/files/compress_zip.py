@@ -96,15 +96,15 @@ class CompressZip:
             time.second,
         )
 
-    def _get_zip_info(self, target: Path, relative: Path) -> ZipInfo:
-        zip_info: ZipInfo = ZipInfo(filename=str(relative))
+    def _get_zip_information(self, target: Path, relative: Path) -> ZipInfo:
+        information: ZipInfo = ZipInfo(filename=str(relative))
 
-        zip_info.compress_type = ZIP_LZMA if self._compress else ZIP_STORED
+        information.compress_type = ZIP_LZMA if self._compress else ZIP_STORED
         latest: datetime = get_latest(target)
-        zip_info.date_time = self._store_timestamp(latest)
-        zip_info.comment = self._store_timestamp_detail(latest)
+        information.date_time = self._store_timestamp(latest)
+        information.comment = self._store_timestamp_detail(latest)
 
-        return zip_info
+        return information
 
     def _add_file_to_archive(
         self, is_dir: bool, reset: bool, target: Path, root: Path,
@@ -117,7 +117,8 @@ class CompressZip:
             self._file_zip.mkdir(str(relative))
         else:
             self._file_zip.writestr(
-                self._get_zip_info(target, relative), byte_import(target),
+                self._get_zip_information(target, relative),
+                byte_import(target),
             )
 
     def _within_allowance(self, target_byte: Decimal) -> bool:
@@ -129,7 +130,7 @@ class CompressZip:
 
     def _archive_inside_byte(self) -> Decimal:
         return Decimal(str(sum([
-            info.file_size for info in self._file_zip.infolist()
+            information.file_size for information in self._file_zip.infolist()
         ])))
 
     def _archive_include_files(self) -> bool:

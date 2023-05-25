@@ -48,10 +48,12 @@ class DecompressZip:
         create_parent_directory(file_path)
         byte_export(file_path, zip_file.read(relative.as_posix()))
 
-    def _restore_timestamp(self, file_path: Path, zip_info: ZipInfo) -> None:
-        latest: datetime = datetime(*zip_info.date_time)
+    def _restore_timestamp(
+        self, file_path: Path, information: ZipInfo,
+    ) -> None:
+        latest: datetime = datetime(*information.date_time)
 
-        comment: bytes = zip_info.comment
+        comment: bytes = information.comment
         if 0 < len(comment):
             content: StrPair = string_pair_from_json(
                 json_load(comment.decode('utf-8'))
@@ -63,12 +65,12 @@ class DecompressZip:
 
     def decompress_archive(self, decompress_target: Path) -> None:
         with ZipFile(decompress_target) as zip_file:
-            for zip_info in zip_file.infolist():
-                relative: Path = Path(zip_info.filename)
+            for information in zip_file.infolist():
+                relative: Path = Path(information.filename)
                 file_path: Path = Path(self._output_root, relative)
 
-                if zip_info.is_dir():
+                if information.is_dir():
                     create_directory(file_path)
                 else:
                     self._decompress_file(file_path, relative, zip_file)
-                    self._restore_timestamp(file_path, zip_info)
+                    self._restore_timestamp(file_path, information)
