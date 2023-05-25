@@ -92,28 +92,28 @@ def _check_system_path(call_context: PathPair) -> None:
     ])
 
 
-def _check_callable_target(module_name: str, func_name: str) -> None:
+def _check_callable_target(module_name: str, function: str) -> None:
     if not util.find_spec(module_name):
         raise FileNotFoundError(module_name)
 
-    if not hasattr(import_module(module_name), func_name):
-        raise ModuleNotFoundError(func_name)
+    if not hasattr(import_module(module_name), function):
+        raise ModuleNotFoundError(function)
 
 
-def _call_target_function(module_name: str, func_name: str) -> None:
-    func: Any = getattr(import_module(module_name), func_name)
+def _call_target_function(module_name: str, function: str) -> None:
+    func: Any = getattr(import_module(module_name), function)
     func()
 
 
-def _check_call_environment(call_target: PathPair, func_name: str) -> None:
+def _check_call_environment(call_target: PathPair, function: str) -> None:
     module_name: str = call_target['module'].stem
 
-    _check_callable_target(module_name, func_name)
-    _call_target_function(module_name, func_name)
+    _check_callable_target(module_name, function)
+    _call_target_function(module_name, function)
 
 
 def call_function(
-    src_path: Path, module_path: Path, func_name: str = 'main',
+    src_path: Path, module_path: Path, function: str = 'main',
 ) -> bool:
     call_context: PathPair = {'src': src_path, 'module': module_path}
 
@@ -121,9 +121,9 @@ def call_function(
     _check_same_path(call_context)
 
     if _check_test_path(call_context):
-        func_name = 'main'
+        function = 'main'
 
     _check_system_path(call_context)
-    _check_call_environment(call_context, func_name)
+    _check_call_environment(call_context, function)
 
     return True
