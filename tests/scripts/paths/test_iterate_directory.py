@@ -6,7 +6,7 @@ from typing import Callable
 
 from contexts.path_context import Path, Paths, PathGene
 from contexts.string_context import Strs, Strs2
-from scripts.paths.create_temporary_tree import create_tree
+from scripts.paths.create_temporary_tree import create_temporary_tree
 from scripts.paths.get_relative import get_relative_array
 from scripts.paths.iterate_directory import walk_iterator
 
@@ -36,7 +36,7 @@ def _inside_temporary_directory(
         expected: Strs2, function: Callable[[Path], PathGene]) -> None:
     with TemporaryDirectory() as temporary_path:
         root_path: Path = Path(temporary_path)
-        create_tree(root_path, tree_deep=_TREE_DEEP)
+        create_temporary_tree(root_path, tree_deep=_TREE_DEEP)
         _check_walk_result(expected, function(root_path), root_path)
 
 

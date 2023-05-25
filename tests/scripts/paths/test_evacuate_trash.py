@@ -8,7 +8,7 @@ from contexts.bool_context import Bools
 from contexts.path_context import Path, Paths
 from scripts.bools.same_value import bool_same_array
 from scripts.paths.check_exists import check_exists_array
-from scripts.paths.create_temporary_tree import create_tree
+from scripts.paths.create_temporary_tree import create_temporary_tree
 from scripts.paths.evacuate_trash import TrashBox
 from scripts.paths.iterate_directory import walk_iterator
 
@@ -30,7 +30,7 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 
 def test_default() -> None:
     def individual_test(temporary_root: Path) -> None:
-        create_tree(temporary_root)
+        create_temporary_tree(temporary_root)
 
         trash_box = TrashBox()
         walk_paths: Paths = []
@@ -45,7 +45,7 @@ def test_default() -> None:
 
 def test_tree() -> None:
     def individual_test(temporary_root: Path) -> None:
-        create_tree(temporary_root, tree_deep=3)
+        create_temporary_tree(temporary_root, tree_deep=3)
 
         trash_box = TrashBox()
         walk_paths: Paths = []
@@ -61,7 +61,7 @@ def test_tree() -> None:
 def test_select() -> None:
     with TemporaryDirectory() as temporary_path:
         def individual_test(temporary_root: Path) -> None:
-            create_tree(temporary_root)
+            create_temporary_tree(temporary_root)
 
             trash_box = TrashBox(trash_path=Path(temporary_path))
             walk_paths: Paths = []
