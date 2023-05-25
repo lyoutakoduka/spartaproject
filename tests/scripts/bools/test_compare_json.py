@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from project.sparta.scripts.bools.compare_json import is_same_json
+from scripts.bools.compare_json import is_same_json
 
 
 def test_simple_pair() -> None:
