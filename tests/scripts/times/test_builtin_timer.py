@@ -24,7 +24,7 @@ def _check_counter_result(expected: Decs, timer: TimerSelect) -> None:
     assert expected == results
 
 
-def test_int() -> None:
+def test_integer() -> None:
     _check_counter_result(_INI_EXPECTED, TimerSelect(override=True))
 
 
@@ -47,7 +47,7 @@ def test_builtin() -> None:
 
 
 def main() -> bool:
-    test_int()
+    test_integer()
     test_interval()
     test_builtin()
     return True

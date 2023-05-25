@@ -41,7 +41,7 @@ def test_bool() -> None:
     _common_test(EXPECTED, input_pair)
 
 
-def test_int() -> None:
+def test_integer() -> None:
     INPUT: IntPair = {'b': 1}
     input_pair: IntPair2 = {'A': INPUT}
     EXPECTED: str = """
@@ -185,7 +185,7 @@ def test_export() -> None:
 def main() -> bool:
     test_lower()
     test_bool()
-    test_int()
+    test_integer()
     test_float()
     test_str()
     test_decimal()

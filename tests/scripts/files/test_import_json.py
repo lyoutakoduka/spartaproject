@@ -29,7 +29,7 @@ def test_bool() -> None:
     _common_test(input, json_load(_get_input_json('true')))
 
 
-def test_int() -> None:
+def test_integer() -> None:
     input: int = 1
     _common_test(input, json_load(_get_input_json(str(input))))
 
@@ -55,7 +55,7 @@ def test_export() -> None:
 def main() -> bool:
     test_none()
     test_bool()
-    test_int()
+    test_integer()
     test_float()
     test_string()
     test_export()

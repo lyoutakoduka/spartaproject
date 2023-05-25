@@ -20,7 +20,7 @@ def test_bool() -> None:
     assert _get_section(INPUT)
 
 
-def test_int() -> None:
+def test_integer() -> None:
     INPUT: str = "[section]\noption=1"
     EXPECTED: int = 1
     assert EXPECTED == _get_section(INPUT)
@@ -56,7 +56,7 @@ def test_import() -> None:
 
 def main() -> bool:
     test_bool()
-    test_int()
+    test_integer()
     test_decimal()
     test_string()
     test_path()
