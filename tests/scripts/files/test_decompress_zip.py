@@ -13,7 +13,7 @@ from scripts.files.compress_zip import CompressZip
 from scripts.files.decompress_zip import DecompressZip
 from scripts.paths.create_temporary_tree import create_tree
 from scripts.paths.evacuate_trash import TrashBox
-from scripts.paths.get_relative import path_array_relative
+from scripts.paths.get_relative import get_relative_array
 from scripts.paths.iterate_directory import walk_iterator
 from scripts.times.get_timestamp import get_latest
 from scripts.times.set_timestamp import set_latest
@@ -34,7 +34,7 @@ def _compare_timestamp(sorted_paths: Paths2, expected: datetime) -> None:
 
 def _compare_path_name(sorted_paths: Paths2, tmp_root: Path) -> None:
     relative_paths: Paths2 = [
-        path_array_relative(paths, root_path=Path(tmp_root, directory))
+        get_relative_array(paths, root_path=Path(tmp_root, directory))
         for directory, paths in zip(['tree', 'extract'], sorted_paths)
     ]
 

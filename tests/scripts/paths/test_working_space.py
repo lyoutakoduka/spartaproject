@@ -3,7 +3,7 @@
 
 from pathlib import Path
 
-from scripts.paths.get_relative import path_relative
+from scripts.paths.get_relative import get_relative
 from scripts.paths.working_space import current_working_space
 
 
@@ -16,7 +16,7 @@ def test_pass() -> None:
     time_path: Path = current_working_space(Path(NAME), override=True)
 
     assert time_path.exists()
-    assert EXPECTED == path_relative(time_path)
+    assert EXPECTED == get_relative(time_path)
 
 
 def main() -> bool:

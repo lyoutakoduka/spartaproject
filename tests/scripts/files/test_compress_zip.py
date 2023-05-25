@@ -10,7 +10,7 @@ from contexts.integer_context import Ints2
 from contexts.path_context import Path, Paths, Paths2
 from scripts.files.compress_zip import CompressZip
 from scripts.paths.create_temporary_tree import create_tree
-from scripts.paths.get_relative import path_array_relative
+from scripts.paths.get_relative import get_relative_array
 from scripts.paths.iterate_directory import walk_iterator
 
 set_decimal_context()
@@ -49,7 +49,7 @@ def _get_output_paths(archived: Paths, tmp_root: Path) -> Paths:
 
 def _compare_path_name(sorted_paths: Paths2, tmp_root: Path) -> None:
     relative_paths: Paths2 = [
-        path_array_relative(paths, root_path=Path(tmp_root, directory))
+        get_relative_array(paths, root_path=Path(tmp_root, directory))
         for directory, paths in zip(['tree', 'extract'], sorted_paths)
     ]
 

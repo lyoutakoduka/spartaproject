@@ -12,7 +12,7 @@ from scripts.files.convert_to_json import multi_to_json
 from scripts.files.export_json import json_dump
 from scripts.files.import_file import byte_import
 from scripts.paths.create_directory import create_directory
-from scripts.paths.get_relative import path_relative
+from scripts.paths.get_relative import get_relative
 from scripts.paths.iterate_directory import walk_iterator
 from scripts.times.get_timestamp import get_latest
 
@@ -112,7 +112,7 @@ class CompressZip:
         if reset:
             self._reset_archive_byte()
 
-        relative: Path = path_relative(target, root_path=root)
+        relative: Path = get_relative(target, root_path=root)
         if is_dir:
             self._file_zip.mkdir(str(relative))
         else:

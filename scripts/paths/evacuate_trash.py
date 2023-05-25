@@ -4,7 +4,7 @@
 from shutil import move
 
 from contexts.path_context import Path, Paths
-from scripts.paths.get_relative import path_relative
+from scripts.paths.get_relative import get_relative
 from scripts.paths.parent_directory import create_parent_dir
 from scripts.paths.working_space import current_working_space
 
@@ -27,7 +27,7 @@ class TrashBox:
     def _move_file(self, target: Path, root: Path) -> None:
         if target.exists():
             trash_path: Path = Path(
-                self._trash_path, path_relative(target, root_path=root)
+                self._trash_path, get_relative(target, root_path=root)
             )
 
             create_parent_dir(trash_path)
