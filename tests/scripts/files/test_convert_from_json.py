@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import List, Dict
 
 from contexts.json_context import Json, Single, Array, Array2, Pair, Pair2
+from scripts.bools.same_value import bool_same_array
 from scripts.files.convert_from_json import (
     bool_array_from_json,
     integer_array_from_json,
@@ -141,14 +142,14 @@ def test_tree() -> None:
 
     assert isinstance(result, Dict)
     result_outside: Json = result['A']
-
     assert isinstance(result_outside, Dict)
-    assert INPUT_PATH == result_outside['path']
     result_inside: Json = result_outside['B']
-
     assert isinstance(result_inside, List)
-    input_inside: Json = [None, INPUT_DECIMAL]
-    assert input_inside == result_inside
+
+    assert bool_same_array([
+        INPUT_PATH == result_outside['path'],
+        [None, INPUT_DECIMAL] == result_inside,
+    ])
 
 
 def main() -> bool:
