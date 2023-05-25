@@ -9,7 +9,7 @@ from contexts.string_context import Strs
 from scripts.bools.same_value import bool_same_array, bool_same_pair
 from scripts.paths.check_exists import path_array_exists, path_pair_exists
 from scripts.paths.create_directory import (
-    path_mkdir, path_array_mkdir, path_pair_mkdir
+    create_directory, create_directory_array, create_directory_pair
 )
 
 _ELEMENT_NAMES: Strs = ['R', 'G', 'B']
@@ -26,7 +26,7 @@ def _inside_tmp_directory(func: Callable[[Path], bool]) -> None:
 
 def test_single() -> None:
     def individual_test(tmp_path: Path) -> bool:
-        return path_mkdir(Path(tmp_path, _ELEMENT_NAMES[0])).exists()
+        return create_directory(Path(tmp_path, _ELEMENT_NAMES[0])).exists()
 
     _inside_tmp_directory(individual_test)
 
@@ -37,9 +37,9 @@ def test_array() -> None:
     ]
 
     def individual_test(tmp_path: Path) -> bool:
-        paths: Paths = [Path(tmp_path, head_path) for head_path in head_paths]
-
-        return bool_same_array(path_array_exists(path_array_mkdir(paths)))
+        return bool_same_array(path_array_exists(create_directory_array(
+            [Path(tmp_path, head_path) for head_path in head_paths]
+        )))
 
     _inside_tmp_directory(individual_test)
 
@@ -54,8 +54,7 @@ def test_pair() -> None:
             name: Path(tmp_path, head_path)
             for name, head_path in head_paths.items()
         }
-
-        return bool_same_pair(path_pair_exists(path_pair_mkdir(paths)))
+        return bool_same_pair(path_pair_exists(create_directory_pair(paths)))
 
     _inside_tmp_directory(individual_test)
 
