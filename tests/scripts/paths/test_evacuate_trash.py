@@ -7,7 +7,7 @@ from typing import Callable
 from contexts.bool_context import Bools
 from contexts.path_context import Path, Paths
 from scripts.bools.same_value import bool_same_array
-from scripts.paths.check_exists import path_array_exists
+from scripts.paths.check_exists import check_exists_array
 from scripts.paths.create_temporary_tree import create_tree
 from scripts.paths.evacuate_trash import TrashBox
 from scripts.paths.iterate_directory import walk_iterator
@@ -17,7 +17,7 @@ def _common_test(target_paths: Paths, evacuated_paths: Paths) -> None:
     same_bools: Bools = []
 
     for i, paths in enumerate([target_paths, evacuated_paths]):
-        exists: Bools = path_array_exists(paths)
+        exists: Bools = check_exists_array(paths)
         same_bools += [bool_same_array(exists, invert=(0 == i))]
 
     assert bool_same_array(same_bools)

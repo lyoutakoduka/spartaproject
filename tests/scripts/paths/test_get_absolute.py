@@ -4,7 +4,7 @@
 from contexts.bool_context import Bools, BoolPair
 from contexts.path_context import Path, Paths, PathPair
 from scripts.bools.compare_value import bool_compare_array, bool_compare_pair
-from scripts.paths.check_exists import path_array_exists, path_pair_exists
+from scripts.paths.check_exists import check_exists_array, check_exists_pair
 from scripts.paths.get_absolute import (
     path_absolute, path_array_absolute, path_pair_absolute
 )
@@ -29,7 +29,7 @@ def test_array() -> None:
     EXPECTS: Bools = [True, False]
 
     absolute_paths: Paths = path_array_absolute(RELATIVE_PATHS)
-    assert bool_compare_array(EXPECTS, path_array_exists(absolute_paths))
+    assert bool_compare_array(EXPECTS, check_exists_array(absolute_paths))
 
 
 def test_pair() -> None:
@@ -41,7 +41,7 @@ def test_pair() -> None:
     EXPECTS: BoolPair = {'R': True, 'G': False, 'B': True}
 
     absolute_paths: PathPair = path_pair_absolute(RELATIVE_PATHS)
-    assert bool_compare_pair(EXPECTS, path_pair_exists(absolute_paths))
+    assert bool_compare_pair(EXPECTS, check_exists_pair(absolute_paths))
 
 
 def main() -> bool:

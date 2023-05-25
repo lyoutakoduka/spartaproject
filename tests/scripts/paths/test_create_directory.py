@@ -7,7 +7,7 @@ from typing import Callable
 from contexts.path_context import Path, Paths, PathPair
 from contexts.string_context import Strs
 from scripts.bools.same_value import bool_same_array, bool_same_pair
-from scripts.paths.check_exists import path_array_exists, path_pair_exists
+from scripts.paths.check_exists import check_exists_array, check_exists_pair
 from scripts.paths.create_directory import (
     create_directory, create_directory_array, create_directory_pair
 )
@@ -37,7 +37,7 @@ def test_array() -> None:
     ]
 
     def individual_test(tmp_path: Path) -> bool:
-        return bool_same_array(path_array_exists(create_directory_array(
+        return bool_same_array(check_exists_array(create_directory_array(
             [Path(tmp_path, head_path) for head_path in head_paths]
         )))
 
@@ -54,7 +54,7 @@ def test_pair() -> None:
             name: Path(tmp_path, head_path)
             for name, head_path in head_paths.items()
         }
-        return bool_same_pair(path_pair_exists(create_directory_pair(paths)))
+        return bool_same_pair(check_exists_pair(create_directory_pair(paths)))
 
     _inside_tmp_directory(individual_test)
 
