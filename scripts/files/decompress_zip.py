@@ -9,7 +9,7 @@ from contexts.string_context import Strs, StrPair
 from scripts.files.convert_from_json import string_pair_from_json
 from scripts.files.export_file import byte_export
 from scripts.files.import_json import json_load
-from scripts.paths.create_directory import path_mkdir
+from scripts.paths.create_directory import create_directory
 from scripts.paths.iterate_directory import walk_iterator
 from scripts.paths.parent_directory import create_parent_dir
 from scripts.times.set_timestamp import set_latest
@@ -68,7 +68,7 @@ class DecompressZip:
                 file_path: Path = Path(self._output_root, relative)
 
                 if zip_info.is_dir():
-                    path_mkdir(file_path)
+                    create_directory(file_path)
                 else:
                     self._decompress_file(file_path, relative, zip_file)
                     self._restore_timestamp(file_path, zip_info)

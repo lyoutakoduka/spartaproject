@@ -7,7 +7,7 @@ from contexts.string_context import StrPair2
 from scripts.files.export_config import config_export
 from scripts.files.export_file import text_export
 from scripts.files.export_json import json_export, Json
-from scripts.paths.create_directory import path_mkdir
+from scripts.paths.create_directory import create_directory_array
 
 _NAME: str = 'file'
 
@@ -58,8 +58,7 @@ def _sample_json(root: Path, weight: int) -> None:
 
 
 def _recursive_tree(root: Path, tree_deep: int, deep: int, weight: int):
-    path_mkdir(root)
-    path_mkdir(Path(root, 'empty'))
+    create_directory_array([root, Path(root, 'empty')])
     _sample_text(root, weight)
     _sample_config(root, weight)
     _sample_json(root, weight)

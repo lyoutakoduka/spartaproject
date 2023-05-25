@@ -3,11 +3,11 @@
 
 from pathlib import Path
 
-from scripts.paths.create_directory import path_mkdir
+from scripts.paths.create_directory import create_directory
 
 
 def create_parent_dir(child_path: Path) -> Path:
     path: Path = child_path.parent
     if path.exists():
         return path
-    return path_mkdir(path)
+    return create_directory(path)

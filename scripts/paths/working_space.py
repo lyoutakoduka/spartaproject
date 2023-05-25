@@ -6,7 +6,7 @@ from pathlib import Path
 
 from contexts.integer_context import Ints2
 from contexts.string_context import Strs
-from scripts.paths.create_directory import path_mkdir
+from scripts.paths.create_directory import create_directory
 from scripts.paths.get_absolute import path_absolute
 from scripts.times.current_datetime import get_current_time
 
@@ -33,4 +33,4 @@ def current_working_space(
         )
     ]
 
-    return path_mkdir(path_absolute(Path(root, *time_texts)))
+    return create_directory(path_absolute(Path(root, *time_texts)))

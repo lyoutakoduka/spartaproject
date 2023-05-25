@@ -11,7 +11,7 @@ from contexts.string_context import Strs, StrPair
 from scripts.files.convert_to_json import multi_to_json
 from scripts.files.export_json import json_dump
 from scripts.files.import_file import byte_import
-from scripts.paths.create_directory import path_mkdir
+from scripts.paths.create_directory import create_directory
 from scripts.paths.get_relative import path_relative
 from scripts.paths.iterate_directory import walk_iterator
 from scripts.times.get_timestamp import get_latest
@@ -56,7 +56,7 @@ class CompressZip:
 
     def _init_archive_output(self) -> None:
         self._output_index: int = 0
-        path_mkdir(self._output_root)
+        create_directory(self._output_root)
 
     def close_archived(self) -> Paths:
         self._file_zip.close()
