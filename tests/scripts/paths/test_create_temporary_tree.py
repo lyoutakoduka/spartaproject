@@ -7,7 +7,7 @@ from typing import Callable
 from contexts.integer_context import Ints
 from contexts.path_context import Path, Paths
 from contexts.string_context import Strs, Strs2
-from scripts.paths.create_temporary_tree import create_tree
+from scripts.paths.create_temporary_tree import create_temporary_tree
 from scripts.paths.get_relative import get_relative_array
 from scripts.paths.iterate_directory import walk_iterator
 
@@ -51,7 +51,7 @@ def test_three() -> None:
     expected: Paths = [Path(*path_names) for path_names in EXPECTED]
 
     def individual_test(temporary_path: Path) -> None:
-        create_tree(temporary_path, tree_deep=3)
+        create_temporary_tree(temporary_path, tree_deep=3)
 
     assert expected == _inside_temporary_directory(individual_test)
 
@@ -61,7 +61,7 @@ def test_deep() -> None:
 
     def individual_test(temporary_path: Path) -> None:
         for index in OUTRANGE_INDICES:
-            create_tree(temporary_path, tree_deep=index)
+            create_temporary_tree(temporary_path, tree_deep=index)
 
     assert 0 == len(_inside_temporary_directory(individual_test))
 
@@ -71,7 +71,7 @@ def test_weight() -> None:
 
     def individual_test(temporary_path: Path) -> None:
         for index in OUTRANGE_INDICES:
-            create_tree(temporary_path, tree_weight=index)
+            create_temporary_tree(temporary_path, tree_weight=index)
 
     assert 0 == len(_inside_temporary_directory(individual_test))
 
