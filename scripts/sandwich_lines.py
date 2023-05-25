@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from contexts.callable_context import CP, CR, Callable
-from scripts.deco_generator import TransferFunc
+from scripts.decorator_generator import TransferFunc
 
 
 class SandWich(TransferFunc):

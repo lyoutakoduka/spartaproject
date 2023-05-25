@@ -6,7 +6,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from contexts.callable_context import CP, CR, Callable
-from scripts.deco_generator import TransferFunc
+from scripts.decorator_generator import TransferFunc
 from scripts.files.import_file import text_import
 
 
