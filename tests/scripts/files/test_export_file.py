@@ -12,10 +12,10 @@ def _common_test(text_path: Path, count: int) -> None:
     assert text_path.stat().st_size == count
 
 
-def _inside_tmp_directory(func: Callable[[Path], None]) -> None:
+def _inside_tmp_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as tmp_path:
         text_path: Path = Path(tmp_path, 'tmp.txt')
-        func(text_path)
+        function(text_path)
 
 
 def test_text() -> None:

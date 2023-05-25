@@ -78,9 +78,9 @@ def _compress_to_decompress(tmp_root: Path) -> None:
     decompress_zip.decompress_archive(archived)
 
 
-def _inside_tmp_directory(func: Callable[[Path], None]) -> None:
+def _inside_tmp_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as tmp_path:
-        func(Path(tmp_path))
+        function(Path(tmp_path))
 
 
 def test_directory() -> None:

@@ -15,9 +15,9 @@ def _common_test(result: str) -> None:
     assert _INPUT == result
 
 
-def _inside_tmp_directory(func: Callable[[Path], None]) -> None:
+def _inside_tmp_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as tmp_path:
-        func(text_export(Path(tmp_path, 'tmp.txt'), _INPUT))
+        function(text_export(Path(tmp_path, 'tmp.txt'), _INPUT))
 
 
 def test_text() -> None:
