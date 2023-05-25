@@ -9,8 +9,8 @@ from scripts.files.export_json import json_export
 from scripts.paths.avoid_duplication import get_avoid_path
 
 
-def _common_test(src_path: Path, dist_path: Path) -> None:
-    assert src_path == dist_path
+def _common_test(src_path: Path, destination_path: Path) -> None:
+    assert src_path == destination_path
 
 
 def _inside_tmp_directory(function: Callable[[Path], None]) -> None:
