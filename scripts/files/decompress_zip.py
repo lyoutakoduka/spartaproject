@@ -11,7 +11,7 @@ from scripts.files.export_file import byte_export
 from scripts.files.import_json import json_load
 from scripts.paths.create_directory import create_directory
 from scripts.paths.iterate_directory import walk_iterator
-from scripts.paths.parent_directory import create_parent_directory
+from scripts.paths.create_directory_parent import create_parent_directory
 from scripts.times.set_timestamp import set_latest
 
 
