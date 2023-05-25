@@ -8,7 +8,7 @@ from typing import Any
 
 from contexts.path_context import Path, Paths, PathPair
 from contexts.string_context import Strs
-from scripts.paths.get_absolute import path_absolute
+from scripts.paths.get_absolute import get_absolute
 
 
 def _get_path_key() -> Strs:
@@ -17,7 +17,7 @@ def _get_path_key() -> Strs:
 
 def _check_absolute_path(call_context: PathPair) -> None:
     call_context.update({
-        type: path_absolute(call_context[type])
+        type: get_absolute(call_context[type])
         for type in _get_path_key()
     })
 
@@ -45,7 +45,7 @@ def _update_module_path(
     head_added_path: Path,
     index: int,
 ) -> bool:
-    root_path: Path = path_absolute(Path(*root_names[:index + 1]))
+    root_path: Path = get_absolute(Path(*root_names[:index + 1]))
     if not head_added_path.is_relative_to(root_path):
         return False
 
