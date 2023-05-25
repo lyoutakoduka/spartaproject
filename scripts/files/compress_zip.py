@@ -136,30 +136,30 @@ class CompressZip:
     def _archive_include_files(self) -> bool:
         return 0 < self._archive_inside_byte()
 
-    def _estimate_compressed_size(self, src_byte: Decimal) -> Decimal:
+    def _estimate_compressed_size(self, source_byte: Decimal) -> Decimal:
         outside_byte: Decimal = self._archive_outside_byte()
         inside_byte: Decimal = self._archive_inside_byte()
 
-        return src_byte * (outside_byte / inside_byte)
+        return source_byte * (outside_byte / inside_byte)
 
-    def _estimate_archived_size(self, src_byte: Decimal) -> Decimal:
+    def _estimate_archived_size(self, source_byte: Decimal) -> Decimal:
         outside_byte: Decimal = self._archive_outside_byte()
-        return src_byte + outside_byte
+        return source_byte + outside_byte
 
     def _update_archive_byte(self, target: Path, root: Path) -> None:
         archive_reset: bool = False
 
         if self._has_archived():
-            src_byte: Decimal = Decimal(str(target.stat().st_size))
+            source_byte: Decimal = Decimal(str(target.stat().st_size))
             include_files: bool = self._archive_include_files()
 
             if include_files:
-                src_byte = self._estimate_compressed_size(src_byte)
+                source_byte = self._estimate_compressed_size(source_byte)
 
-            if self._within_allowance(src_byte):
+            if self._within_allowance(source_byte):
                 if include_files:
                     if not self._within_allowance(
-                        self._estimate_archived_size(src_byte)
+                        self._estimate_archived_size(source_byte)
                     ):
                         archive_reset = True
             elif include_files:

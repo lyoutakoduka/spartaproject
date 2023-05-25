@@ -11,7 +11,7 @@ from scripts.paths.get_absolute import get_absolute
 
 
 def _get_path_key() -> Strs:
-    return ['src', 'module']
+    return ['source', 'module']
 
 
 def _check_absolute_path(call_context: PathPair) -> None:
@@ -58,7 +58,7 @@ def _update_module_path(
 
 def _check_test_path(call_context: PathPair) -> bool:
     HEAD: str = 'test' + '_'
-    if call_context['src'].name.startswith(HEAD):
+    if call_context['source'].name.startswith(HEAD):
         return False
 
     ROOT_NAMES: Strs = ['project', 'sparta']
@@ -111,9 +111,9 @@ def _check_call_environment(call_target: PathPair, function: str) -> None:
 
 
 def call_function(
-    src_path: Path, module_path: Path, function: str = 'main',
+    source_path: Path, module_path: Path, function: str = 'main',
 ) -> bool:
-    call_context: PathPair = {'src': src_path, 'module': module_path}
+    call_context: PathPair = {'source': source_path, 'module': module_path}
 
     _check_absolute_path(call_context)
     _check_same_path(call_context)

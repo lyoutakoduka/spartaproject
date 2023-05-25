@@ -9,8 +9,8 @@ from scripts.files.export_json import json_export
 from scripts.paths.avoid_duplication import get_avoid_path
 
 
-def _common_test(src_path: Path, destination_path: Path) -> None:
-    assert src_path == destination_path
+def _common_test(source_path: Path, destination_path: Path) -> None:
+    assert source_path == destination_path
 
 
 def _inside_tmp_directory(function: Callable[[Path], None]) -> None:
@@ -19,18 +19,19 @@ def _inside_tmp_directory(function: Callable[[Path], None]) -> None:
 
 
 def test_exists() -> None:
-    def individual_test(src_path: Path) -> None:
-        src_path = json_export(src_path, 'test')
+    def individual_test(source_path: Path) -> None:
+        source_path = json_export(source_path, 'test')
         _common_test(
-            get_avoid_path(src_path), src_path.with_name(src_path.name + '_')
+            get_avoid_path(source_path),
+            source_path.with_name(source_path.name + '_'),
         )
 
     _inside_tmp_directory(individual_test)
 
 
 def test_empty() -> None:
-    def individual_test(src_path: Path) -> None:
-        _common_test(get_avoid_path(src_path), src_path)
+    def individual_test(source_path: Path) -> None:
+        _common_test(get_avoid_path(source_path), source_path)
 
     _inside_tmp_directory(individual_test)
 
