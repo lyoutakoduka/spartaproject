@@ -6,11 +6,11 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from contexts.callable_context import CP, CR, Callable
-from scripts.decorator_generator import TransferFunc
+from scripts.decorator_generator import TransferFunction
 from scripts.files.import_file import text_import
 
 
-class StdoutText(TransferFunc):
+class StdoutText(TransferFunction):
     def wrapper(
         self,
         function: Callable[CP, CR],

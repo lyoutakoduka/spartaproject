@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 
 from contexts.callable_context import CP, CR, Callable
-from scripts.decorator_generator import TransferFunc
+from scripts.decorator_generator import TransferFunction
 
 
-class SandWich(TransferFunc):
+class SandWich(TransferFunction):
     def __init__(
         self, count: int = 79, begin: str = '.', end: str = '-',
     ) -> None:
