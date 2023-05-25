@@ -17,14 +17,14 @@ class StdoutText(TransferFunc):
         def _execute_function() -> CR:
             return function(*args, **kwargs)
 
-        with TemporaryDirectory() as tmp_directory:
-            tmp_path: Path = Path(tmp_directory, 'tmp')
+        with TemporaryDirectory() as temporary_directory:
+            temporary_path: Path = Path(temporary_directory, 'temporary')
 
-            with open(tmp_path, 'w') as file:
+            with open(temporary_path, 'w') as file:
                 with redirect_stdout(file):
                     result: CR = _execute_function()
 
-            self.stdout = text_import(tmp_path)
+            self.stdout = text_import(temporary_path)
 
         return result
 
