@@ -52,9 +52,7 @@ def _sample_json(root: Path, weight: int) -> None:
             }
         return line_text
 
-    input: Json = function(weight)
-
-    json_export(Path(root, _NAME + '.json'), input)
+    json_export(Path(root, _NAME + '.json'), function(weight))
 
 
 def _recursive_tree(root: Path, tree_deep: int, deep: int, weight: int):
