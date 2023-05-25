@@ -28,15 +28,15 @@ def to_safe_json(input: Json) -> Json:
     return _convert_unknown(input)
 
 
-def multi_to_json(input: Multi) -> Json:
+def multiple_to_json(input: Multi) -> Json:
     if isinstance(input, List):
         return [_convert_unknown(value) for value in input]
 
     return {key: _convert_unknown(value) for key, value in input.items()}
 
 
-def multi2_to_json(input: Multi2) -> Json:
+def multiple2_to_json(input: Multi2) -> Json:
     if isinstance(input, List):
-        return [multi_to_json(value) for value in input]
+        return [multiple_to_json(value) for value in input]
 
-    return {key: multi_to_json(value) for key, value in input.items()}
+    return {key: multiple_to_json(value) for key, value in input.items()}

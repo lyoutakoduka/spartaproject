@@ -9,7 +9,7 @@ from contexts.json_context import Json, Multi, Multi2
 from contexts.path_context import Path, Paths, Paths2, PathPair, PathPair2
 from contexts.string_context import Strs, Strs2, StrPair, StrPair2
 from scripts.files.convert_to_json import (
-    to_safe_json, multi_to_json, multi2_to_json
+    to_safe_json, multiple_to_json, multiple2_to_json
 )
 from scripts.files.export_json import json_dump
 
@@ -20,22 +20,22 @@ def _common_test(expected: str, input: Json) -> None:
 
 def _common_test_array(expected: str, input: Multi) -> None:
     expected_array: str = f'[{expected}]'
-    _common_test(expected_array, multi_to_json(input))
+    _common_test(expected_array, multiple_to_json(input))
 
 
 def _common_test_array2(expected: str, input: Multi2) -> None:
     expected_array: str = f'[[{expected}]]'
-    _common_test(expected_array, multi2_to_json(input))
+    _common_test(expected_array, multiple2_to_json(input))
 
 
 def _common_test_pair(expected: str, input: Multi) -> None:
     expected_pair: str = '{"B":%s}' % expected
-    _common_test(expected_pair, multi_to_json(input))
+    _common_test(expected_pair, multiple_to_json(input))
 
 
 def _common_test_pair2(expected: str, input: Multi2) -> None:
     expected_pair: str = '''{"A":{"B":%s}}''' % expected
-    _common_test(expected_pair, multi2_to_json(input))
+    _common_test(expected_pair, multiple2_to_json(input))
 
 
 def test_bool_array() -> None:
