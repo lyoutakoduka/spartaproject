@@ -30,9 +30,9 @@ def _common_test(path: Path) -> None:
         assert result == expected
 
 
-def _inside_tmp_directory(function: Callable[[Path], None]) -> None:
-    with TemporaryDirectory() as tmp_path:
-        function(json_export(Path(tmp_path, 'tmp.json'), 'test'))
+def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
+    with TemporaryDirectory() as temporary_path:
+        function(json_export(Path(temporary_path, 'temporary.json'), 'test'))
 
 
 def test_utc() -> None:
@@ -42,7 +42,7 @@ def test_utc() -> None:
             function(path, time)
         _common_test(path)
 
-    _inside_tmp_directory(individual_test)
+    _inside_temporary_directory(individual_test)
 
 
 def test_jst() -> None:
@@ -57,7 +57,7 @@ def test_jst() -> None:
             function(path, time)
         _common_test(path)
 
-    _inside_tmp_directory(individual_test)
+    _inside_temporary_directory(individual_test)
 
 
 def main() -> bool:
