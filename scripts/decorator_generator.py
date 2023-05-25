@@ -6,7 +6,7 @@ from functools import wraps
 from contexts.callable_context import CP, CR, Callable
 
 
-class TransferFunc:
+class TransferFunction:
     def wrapper(
         self,
         function: Callable[CP, CR],

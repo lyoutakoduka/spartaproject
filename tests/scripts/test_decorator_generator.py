@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 
 from contexts.callable_context import CP, CR, Callable
-from scripts.decorator_generator import TransferFunc
+from scripts.decorator_generator import TransferFunction
 
 
-class TestDeco(TransferFunc):
+class TestDeco(TransferFunction):
     def __init__(self, text: str = '') -> None:
         self.text = text
 
