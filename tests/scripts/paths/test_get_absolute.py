@@ -4,9 +4,7 @@
 from contexts.bool_context import Bools, BoolPair
 from contexts.path_context import Path, Paths, PathPair
 from scripts.bools.compare_value import bool_compare_array, bool_compare_pair
-from scripts.paths.check_exists import (
-    path_exists, path_array_exists, path_pair_exists
-)
+from scripts.paths.check_exists import path_array_exists, path_pair_exists
 from scripts.paths.get_absolute import (
     path_absolute, path_array_absolute, path_pair_absolute
 )
@@ -23,7 +21,7 @@ def test_ignore() -> None:
 
 
 def test_single() -> None:
-    assert path_exists(path_absolute(_EMPTY_PATH))
+    assert path_absolute(_EMPTY_PATH).exists()
 
 
 def test_array() -> None:

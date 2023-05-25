@@ -5,7 +5,6 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from scripts.paths.check_exists import path_exists
 from scripts.paths.parent_directory import create_parent_dir
 
 
@@ -20,7 +19,7 @@ def test_pass() -> None:
         parent_path: Path = create_parent_dir(Path(EXPECTED, 'tmp.json'))
 
         assert EXPECTED == parent_path
-        assert path_exists(parent_path)
+        assert parent_path.exists()
 
     _inside_tmp_directory(individual_test)
 

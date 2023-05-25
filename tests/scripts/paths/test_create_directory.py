@@ -7,9 +7,7 @@ from typing import Callable
 from contexts.path_context import Path, Paths, PathPair
 from contexts.string_context import Strs
 from scripts.bools.same_value import bool_same_array, bool_same_pair
-from scripts.paths.check_exists import (
-    path_exists, path_array_exists, path_pair_exists
-)
+from scripts.paths.check_exists import path_array_exists, path_pair_exists
 from scripts.paths.create_directory import (
     path_mkdir, path_array_mkdir, path_pair_mkdir
 )
@@ -28,7 +26,7 @@ def _inside_tmp_directory(func: Callable[[Path], bool]) -> None:
 
 def test_single() -> None:
     def individual_test(tmp_path: Path) -> bool:
-        return path_exists(path_mkdir(Path(tmp_path, _ELEMENT_NAMES[0])))
+        return path_mkdir(Path(tmp_path, _ELEMENT_NAMES[0])).exists()
 
     _inside_tmp_directory(individual_test)
 
