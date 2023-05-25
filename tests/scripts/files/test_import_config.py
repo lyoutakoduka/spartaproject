@@ -48,9 +48,10 @@ def test_path() -> None:
 def test_import() -> None:
     INPUT: str = "[section]\noption=text"
     EXPECTED: str = 'text'
-    with TemporaryDirectory() as tmp_path:
-        config_path: Path = text_export(Path(tmp_path, 'tmp.ini'), INPUT)
-        config: Config = config_import(config_path)
+    with TemporaryDirectory() as temporary_path:
+        config: Config = config_import(
+            text_export(Path(temporary_path, 'temporary.ini'), INPUT)
+        )
         assert EXPECTED == config['section']['option']
 
 

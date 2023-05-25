@@ -15,16 +15,16 @@ def _common_test(result: str) -> None:
     assert _INPUT == result
 
 
-def _inside_tmp_directory(function: Callable[[Path], None]) -> None:
-    with TemporaryDirectory() as tmp_path:
-        function(text_export(Path(tmp_path, 'tmp.txt'), _INPUT))
+def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
+    with TemporaryDirectory() as temporary_path:
+        function(text_export(Path(temporary_path, 'temporary.txt'), _INPUT))
 
 
 def test_text() -> None:
     def individual_test(text_path: Path) -> None:
         _common_test(text_import(text_path))
 
-    _inside_tmp_directory(individual_test)
+    _inside_temporary_directory(individual_test)
 
 
 def test_byte() -> None:
@@ -32,7 +32,7 @@ def test_byte() -> None:
         result: bytes = byte_import(text_path)
         _common_test(result.decode('utf-8'))
 
-    _inside_tmp_directory(individual_test)
+    _inside_temporary_directory(individual_test)
 
 
 def main() -> bool:

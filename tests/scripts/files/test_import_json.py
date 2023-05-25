@@ -47,9 +47,10 @@ def test_string() -> None:
 def test_export() -> None:
     INPUT: Json = [None, True, 1, 'test']
 
-    with TemporaryDirectory() as tmp_path:
-        json_path: Path = json_export(Path(tmp_path, 'tmp.ini'), INPUT)
-        assert INPUT == json_import(json_path)
+    with TemporaryDirectory() as temporary_path:
+        assert INPUT == json_import(
+            json_export(Path(temporary_path, 'temporary.ini'), INPUT)
+        )
 
 
 def main() -> bool:

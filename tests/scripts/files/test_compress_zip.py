@@ -16,9 +16,9 @@ from scripts.paths.iterate_directory import walk_iterator
 set_decimal_context()
 
 
-def _get_input_paths(walk_paths: Paths, tmp_root: Path) -> Paths:
+def _get_input_paths(walk_paths: Paths, temporary_root: Path) -> Paths:
     inputs: Paths = []
-    tree_root: Path = Path(tmp_root, 'tree')
+    tree_root: Path = Path(temporary_root, 'tree')
 
     for walk_path in walk_paths:
         inputs += [walk_path]
@@ -34,9 +34,9 @@ def _get_input_paths(walk_paths: Paths, tmp_root: Path) -> Paths:
     return inputs
 
 
-def _get_output_paths(archived: Paths, tmp_root: Path) -> Paths:
+def _get_output_paths(archived: Paths, temporary_root: Path) -> Paths:
     outputs: Paths = []
-    extract_root: Path = Path(tmp_root, 'extract')
+    extract_root: Path = Path(temporary_root, 'extract')
 
     for archived_path in archived:
         unpack_archive(archived_path, extract_dir=extract_root)
@@ -47,9 +47,9 @@ def _get_output_paths(archived: Paths, tmp_root: Path) -> Paths:
     return outputs
 
 
-def _compare_path_name(sorted_paths: Paths2, tmp_root: Path) -> None:
+def _compare_path_name(sorted_paths: Paths2, temporary_root: Path) -> None:
     relative_paths: Paths2 = [
-        get_relative_array(paths, root_path=Path(tmp_root, directory))
+        get_relative_array(paths, root_path=Path(temporary_root, directory))
         for directory, paths in zip(['tree', 'extract'], sorted_paths)
     ]
 
@@ -81,110 +81,118 @@ def _compare_archived_count(archived: Paths) -> None:
 
 
 def _get_sorted_paths(
-    walk_paths: Paths, archived: Paths, tmp_root: Path,
+    walk_paths: Paths, archived: Paths, temporary_root: Path,
 ) -> Paths2:
-    inputs: Paths = _get_input_paths(walk_paths, tmp_root)
-    outputs: Paths = _get_output_paths(archived, tmp_root)
+    inputs: Paths = _get_input_paths(walk_paths, temporary_root)
+    outputs: Paths = _get_output_paths(archived, temporary_root)
 
     return [sorted(list(set(paths))) for paths in [inputs, outputs]]
 
 
-def _common_test(archived: Paths, tmp_root: Path, walk_paths: Paths) -> Paths2:
-    sorted_paths: Paths2 = _get_sorted_paths(walk_paths, archived, tmp_root)
+def _common_test(
+    archived: Paths, temporary_root: Path, walk_paths: Paths,
+) -> Paths2:
+    sorted_paths: Paths2 = _get_sorted_paths(
+        walk_paths, archived, temporary_root,
+    )
 
-    _compare_path_name(sorted_paths, tmp_root)
+    _compare_path_name(sorted_paths, temporary_root)
     _compare_file_size(sorted_paths)
 
     return sorted_paths
 
 
-def _inside_tmp_directory(function: Callable[[Path], None]) -> None:
-    with TemporaryDirectory() as tmp_path:
-        function(Path(tmp_path))
+def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
+    with TemporaryDirectory() as temporary_path:
+        function(Path(temporary_path))
 
 
 def test_simple() -> None:
-    def individual_test(tmp_root: Path) -> None:
-        tree_root: Path = Path(tmp_root, 'tree')
+    def individual_test(temporary_root: Path) -> None:
+        tree_root: Path = Path(temporary_root, 'tree')
         create_tree(tree_root)
 
         walk_paths: Paths = []
-        compress_zip = CompressZip(Path(tmp_root, 'archive'))
+        compress_zip = CompressZip(Path(temporary_root, 'archive'))
         for path in walk_iterator(tree_root, directory=False, depth=1):
             compress_zip.compress_archive(path)
             walk_paths += [path]
 
         archived: Paths = compress_zip.close_archived()
-        _common_test(archived, tmp_root, walk_paths)
+        _common_test(archived, temporary_root, walk_paths)
         _compare_archived_count(archived)
 
-    _inside_tmp_directory(individual_test)
+    _inside_temporary_directory(individual_test)
 
 
 def test_directory() -> None:
-    def individual_test(tmp_root: Path) -> None:
-        tree_root: Path = Path(tmp_root, 'tree')
+    def individual_test(temporary_root: Path) -> None:
+        tree_root: Path = Path(temporary_root, 'tree')
         create_tree(tree_root, tree_deep=2)
 
         walk_paths: Paths = []
-        compress_zip = CompressZip(Path(tmp_root, 'archive'))
+        compress_zip = CompressZip(Path(temporary_root, 'archive'))
         for path in walk_iterator(tree_root, file=False, depth=1):
             compress_zip.compress_archive(path)
             walk_paths += [path]
 
         archived: Paths = compress_zip.close_archived()
-        _common_test(archived, tmp_root, walk_paths)
+        _common_test(archived, temporary_root, walk_paths)
         _compare_archived_count(archived)
 
-    _inside_tmp_directory(individual_test)
+    _inside_temporary_directory(individual_test)
 
 
 def test_tree() -> None:
-    def individual_test(tmp_root: Path) -> None:
-        tree_root: Path = Path(tmp_root, 'tree')
+    def individual_test(temporary_root: Path) -> None:
+        tree_root: Path = Path(temporary_root, 'tree')
         create_tree(tree_root, tree_deep=3)
 
         walk_paths: Paths = []
-        compress_zip = CompressZip(Path(tmp_root, 'archive'))
+        compress_zip = CompressZip(Path(temporary_root, 'archive'))
         for path in walk_iterator(tree_root, directory=False, suffix='txt'):
             compress_zip.compress_archive(path, archive_root=tree_root)
             walk_paths += [path]
 
         archived: Paths = compress_zip.close_archived()
-        _common_test(archived, tmp_root, walk_paths)
+        _common_test(archived, temporary_root, walk_paths)
         _compare_archived_count(archived)
 
-    _inside_tmp_directory(individual_test)
+    _inside_temporary_directory(individual_test)
 
 
 def test_compress() -> None:
-    def individual_test(tmp_root: Path) -> None:
-        tree_root: Path = Path(tmp_root, 'tree')
+    def individual_test(temporary_root: Path) -> None:
+        tree_root: Path = Path(temporary_root, 'tree')
         create_tree(tree_root, tree_weight=4)
 
         walk_paths: Paths = []
-        compress_zip = CompressZip(Path(tmp_root, 'archive'), compress=True)
+        compress_zip = CompressZip(
+            Path(temporary_root, 'archive'), compress=True,
+        )
         for path in walk_iterator(tree_root, directory=False, suffix='json'):
             compress_zip.compress_archive(path)
             walk_paths += [path]
 
         archived: Paths = compress_zip.close_archived()
-        sorted_paths: Paths2 = _common_test(archived, tmp_root, walk_paths)
+        sorted_paths: Paths2 = _common_test(
+            archived, temporary_root, walk_paths,
+        )
         _compare_archived_count(archived)
         _compare_compress_size(sorted_paths[-1], archived)
 
-    _inside_tmp_directory(individual_test)
+    _inside_temporary_directory(individual_test)
 
 
 def test_id() -> None:
     ARCHIVE_NAME: str = 'test'
 
-    def individual_test(tmp_root: Path) -> None:
-        tree_root: Path = Path(tmp_root, 'tree')
+    def individual_test(temporary_root: Path) -> None:
+        tree_root: Path = Path(temporary_root, 'tree')
         create_tree(tree_root)
 
         compress_zip = CompressZip(
-            Path(tmp_root, 'archive'), archive_id=ARCHIVE_NAME
+            Path(temporary_root, 'archive'), archive_id=ARCHIVE_NAME
         )
 
         for path in walk_iterator(tree_root, directory=False, depth=1):
@@ -194,41 +202,49 @@ def test_id() -> None:
         archived_path = archived[0]
         assert ARCHIVE_NAME == archived_path.stem
 
-    _inside_tmp_directory(individual_test)
+    _inside_temporary_directory(individual_test)
 
 
 def test_limit() -> None:
-    def individual_test(tmp_root: Path) -> None:
-        tree_root: Path = Path(tmp_root, 'tree')
+    def individual_test(temporary_root: Path) -> None:
+        tree_root: Path = Path(temporary_root, 'tree')
         create_tree(tree_root, tree_deep=3)
 
         walk_paths: Paths = []
-        compress_zip = CompressZip(Path(tmp_root, 'archive'), limit_byte=256)
+        compress_zip = CompressZip(
+            Path(
+                temporary_root,
+                'archive'),
+            limit_byte=256)
         for path in walk_iterator(tree_root, directory=False):
             compress_zip.compress_archive(path, archive_root=tree_root)
             walk_paths += [path]
 
         archived: Paths = compress_zip.close_archived()
-        _common_test(archived, tmp_root, walk_paths)
+        _common_test(archived, temporary_root, walk_paths)
 
-    _inside_tmp_directory(individual_test)
+    _inside_temporary_directory(individual_test)
 
 
 def test_heavy() -> None:
-    def individual_test(tmp_root: Path) -> None:
-        tree_root: Path = Path(tmp_root, 'tree')
+    def individual_test(temporary_root: Path) -> None:
+        tree_root: Path = Path(temporary_root, 'tree')
         create_tree(tree_root, tree_deep=3, tree_weight=2)
 
         walk_paths: Paths = []
-        compress_zip = CompressZip(Path(tmp_root, 'archive'), limit_byte=64)
+        compress_zip = CompressZip(
+            Path(
+                temporary_root,
+                'archive'),
+            limit_byte=64)
         for path in walk_iterator(tree_root, directory=False, suffix='json'):
             compress_zip.compress_archive(path, archive_root=tree_root)
             walk_paths += [path]
 
         archived: Paths = compress_zip.close_archived()
-        _common_test(archived, tmp_root, walk_paths)
+        _common_test(archived, temporary_root, walk_paths)
 
-    _inside_tmp_directory(individual_test)
+    _inside_temporary_directory(individual_test)
 
 
 def main() -> bool:

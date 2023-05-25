@@ -12,9 +12,9 @@ def _common_test(text_path: Path, count: int) -> None:
     assert text_path.stat().st_size == count
 
 
-def _inside_tmp_directory(function: Callable[[Path], None]) -> None:
-    with TemporaryDirectory() as tmp_path:
-        text_path: Path = Path(tmp_path, 'tmp.txt')
+def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
+    with TemporaryDirectory() as temporary_path:
+        text_path: Path = Path(temporary_path, 'temporary.txt')
         function(text_path)
 
 
@@ -24,7 +24,7 @@ def test_text() -> None:
     def individual_test(text_path: Path) -> None:
         _common_test(text_export(text_path, INPUT), len(INPUT))
 
-    _inside_tmp_directory(individual_test)
+    _inside_temporary_directory(individual_test)
 
 
 def test_byte() -> None:
@@ -33,7 +33,7 @@ def test_byte() -> None:
     def individual_test(text_path: Path) -> None:
         _common_test(byte_export(text_path, INPUT), len(INPUT))
 
-    _inside_tmp_directory(individual_test)
+    _inside_temporary_directory(individual_test)
 
 
 def main() -> bool:

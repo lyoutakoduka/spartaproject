@@ -177,9 +177,10 @@ def test_export() -> None:
 
     expected: str = format_indent(EXPECTED)
 
-    with TemporaryDirectory() as tmp_path:
-        config_path: Path = config_export(Path(tmp_path, 'tmp.ini'), INPUT)
-        assert expected == text_import(config_path)
+    with TemporaryDirectory() as temporary_path:
+        assert expected == text_import(
+            config_export(Path(temporary_path, 'temporary.ini'), INPUT)
+        )
 
 
 def main() -> bool:
