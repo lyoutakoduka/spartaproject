@@ -5,7 +5,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from scripts.paths.parent_directory import create_parent_directory
+from scripts.paths.create_directory_parent import create_parent_directory
 
 
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
