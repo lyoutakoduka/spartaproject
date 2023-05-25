@@ -4,14 +4,10 @@
 from contexts.bool_context import Bools, BoolPair
 from contexts.path_context import Path, Paths, PathPair
 from scripts.bools.compare_value import bool_compare_array, bool_compare_pair
-from scripts.paths.check_exists import path_exists, path_array_exists, path_pair_exists
+from scripts.paths.check_exists import path_array_exists, path_pair_exists
 
 _CURRENT_PATH: Path = Path(__file__)
 _UNKNOWN_PATH: Path = _CURRENT_PATH.with_name('unknown.py')
-
-
-def test_single() -> None:
-    assert path_exists(_CURRENT_PATH)
 
 
 def test_array() -> None:
@@ -33,7 +29,6 @@ def test_pair() -> None:
 
 
 def main() -> bool:
-    test_single()
     test_array()
     test_pair()
     return True
