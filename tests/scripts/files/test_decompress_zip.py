@@ -11,7 +11,7 @@ from contexts.path_context import Path, Paths, Paths2
 from contexts.time_context import datetime, Times2
 from scripts.files.compress_zip import CompressZip
 from scripts.files.decompress_zip import DecompressZip
-from scripts.paths.create_tmp_tree import create_tree
+from scripts.paths.create_temporary_tree import create_tree
 from scripts.paths.evacuate_trash import TrashBox
 from scripts.paths.get_relative import path_array_relative
 from scripts.paths.iterate_directory import walk_iterator

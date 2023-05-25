@@ -7,7 +7,7 @@ from typing import Callable
 from contexts.integer_context import Ints
 from contexts.path_context import Path, Paths
 from contexts.string_context import Strs, Strs2
-from scripts.paths.create_tmp_tree import create_tree
+from scripts.paths.create_temporary_tree import create_tree
 from scripts.paths.get_relative import path_array_relative
 from scripts.paths.iterate_directory import walk_iterator
 
@@ -16,7 +16,10 @@ def _inside_tmp_directory(func: Callable[[Path], None]) -> Paths:
     with TemporaryDirectory() as tmp_path:
         root_path: Path = Path(tmp_path)
         func(root_path)
-        return path_array_relative(list(walk_iterator(root_path)), root_path=root_path)
+        return path_array_relative(
+            list(
+                walk_iterator(root_path)),
+            root_path=root_path)
 
 
 def test_three() -> None:

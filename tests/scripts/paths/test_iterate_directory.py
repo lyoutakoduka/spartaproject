@@ -6,7 +6,7 @@ from typing import Callable
 
 from contexts.path_context import Path, Paths, PathGene
 from contexts.string_context import Strs, Strs2
-from scripts.paths.create_tmp_tree import create_tree
+from scripts.paths.create_temporary_tree import create_tree
 from scripts.paths.get_relative import path_array_relative
 from scripts.paths.iterate_directory import walk_iterator
 
@@ -22,14 +22,18 @@ _NAME_JSON: str = 'file.json'
 _NAME_TEXT: str = 'file.txt'
 
 
-def _check_walk_result(expected: Strs2, path_gene: PathGene, root_path: Path) -> None:
+def _check_walk_result(
+        expected: Strs2,
+        path_gene: PathGene,
+        root_path: Path) -> None:
     results: Paths = path_array_relative(list(path_gene), root_path=root_path)
     expected_paths: Paths = [Path(*path_names) for path_names in expected]
 
     assert expected_paths == results
 
 
-def _inside_tmp_directory(expected: Strs2, func: Callable[[Path], PathGene]) -> None:
+def _inside_tmp_directory(
+        expected: Strs2, func: Callable[[Path], PathGene]) -> None:
     with TemporaryDirectory() as tmp_path:
         root_path: Path = Path(tmp_path)
         create_tree(root_path, tree_deep=_TREE_DEEP)
