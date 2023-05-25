@@ -12,7 +12,7 @@ class TransferFunc:
     ) -> CR:
         return func(*args, **kwargs)
 
-    def deco(self, func: Callable[CP, CR]) -> Callable[CP, CR]:
+    def decorator(self, func: Callable[CP, CR]) -> Callable[CP, CR]:
         @wraps(func)
         def register_func(*args: CP.args, **kwargs: CP.kwargs) -> CR:
             return self.wrapper(func, *args, **kwargs)
