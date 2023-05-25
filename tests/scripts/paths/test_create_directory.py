@@ -19,16 +19,17 @@ def _get_head_path(index: int) -> Path:
     return Path(*[_ELEMENT_NAMES[i] for i in range(index + 1)])
 
 
-def _inside_tmp_directory(function: Callable[[Path], bool]) -> None:
-    with TemporaryDirectory() as tmp_path:
-        assert function(Path(tmp_path))
+def _inside_temporary_directory(function: Callable[[Path], bool]) -> None:
+    with TemporaryDirectory() as temporary_path:
+        assert function(Path(temporary_path))
 
 
 def test_single() -> None:
-    def individual_test(tmp_path: Path) -> bool:
-        return create_directory(Path(tmp_path, _ELEMENT_NAMES[0])).exists()
+    def individual_test(temporary_path: Path) -> bool:
+        path: Path = create_directory(Path(temporary_path, _ELEMENT_NAMES[0]))
+        return path.exists()
 
-    _inside_tmp_directory(individual_test)
+    _inside_temporary_directory(individual_test)
 
 
 def test_array() -> None:
@@ -36,12 +37,12 @@ def test_array() -> None:
         _get_head_path(i) for i, _ in enumerate(_ELEMENT_NAMES)
     ]
 
-    def individual_test(tmp_path: Path) -> bool:
+    def individual_test(temporary_path: Path) -> bool:
         return bool_same_array(check_exists_array(create_directory_array(
-            [Path(tmp_path, head_path) for head_path in head_paths]
+            [Path(temporary_path, head_path) for head_path in head_paths]
         )))
 
-    _inside_tmp_directory(individual_test)
+    _inside_temporary_directory(individual_test)
 
 
 def test_pair() -> None:
@@ -49,14 +50,14 @@ def test_pair() -> None:
         name: _get_head_path(i) for i, name in enumerate(_ELEMENT_NAMES)
     }
 
-    def individual_test(tmp_path: Path) -> bool:
+    def individual_test(temporary_path: Path) -> bool:
         paths: PathPair = {
-            name: Path(tmp_path, head_path)
+            name: Path(temporary_path, head_path)
             for name, head_path in head_paths.items()
         }
         return bool_same_pair(check_exists_pair(create_directory_pair(paths)))
 
-    _inside_tmp_directory(individual_test)
+    _inside_temporary_directory(individual_test)
 
 
 def main() -> bool:

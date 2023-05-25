@@ -32,10 +32,10 @@ def _check_walk_result(
     assert expected_paths == results
 
 
-def _inside_tmp_directory(
+def _inside_temporary_directory(
         expected: Strs2, function: Callable[[Path], PathGene]) -> None:
-    with TemporaryDirectory() as tmp_path:
-        root_path: Path = Path(tmp_path)
+    with TemporaryDirectory() as temporary_path:
+        root_path: Path = Path(temporary_path)
         create_tree(root_path, tree_deep=_TREE_DEEP)
         _check_walk_result(expected, function(root_path), root_path)
 
@@ -60,7 +60,7 @@ def test_all() -> None:
 
     def individual_test(root_path: Path) -> PathGene:
         return walk_iterator(root_path)
-    _inside_tmp_directory(EXPECTED, individual_test)
+    _inside_temporary_directory(EXPECTED, individual_test)
 
 
 def test_depth() -> None:
@@ -74,7 +74,7 @@ def test_depth() -> None:
 
     def individual_test(root_path: Path) -> PathGene:
         return walk_iterator(root_path, depth=2)
-    _inside_tmp_directory(EXPECTED, individual_test)
+    _inside_temporary_directory(EXPECTED, individual_test)
 
 
 def test_directory() -> None:
@@ -92,7 +92,7 @@ def test_directory() -> None:
 
     def individual_test(root_path: Path) -> PathGene:
         return walk_iterator(root_path, directory=False)
-    _inside_tmp_directory(EXPECTED, individual_test)
+    _inside_temporary_directory(EXPECTED, individual_test)
 
 
 def test_file() -> None:
@@ -106,7 +106,7 @@ def test_file() -> None:
 
     def individual_test(root_path: Path) -> PathGene:
         return walk_iterator(root_path, file=False)
-    _inside_tmp_directory(EXPECTED, individual_test)
+    _inside_temporary_directory(EXPECTED, individual_test)
 
 
 def test_suffix() -> None:
@@ -118,7 +118,7 @@ def test_suffix() -> None:
 
     def individual_test(root_path: Path) -> PathGene:
         return walk_iterator(root_path, directory=False, suffix='json')
-    _inside_tmp_directory(EXPECTED, individual_test)
+    _inside_temporary_directory(EXPECTED, individual_test)
 
 
 def test_filter() -> None:
@@ -126,7 +126,7 @@ def test_filter() -> None:
 
     def individual_test(root_path: Path) -> PathGene:
         return walk_iterator(root_path, filter='*/*/*.txt')
-    _inside_tmp_directory(EXPECTED, individual_test)
+    _inside_temporary_directory(EXPECTED, individual_test)
 
 
 def main() -> bool:
