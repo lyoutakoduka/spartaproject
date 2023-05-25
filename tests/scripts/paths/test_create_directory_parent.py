@@ -5,7 +5,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from scripts.paths.create_directory_parent import create_parent_directory
+from scripts.paths.create_directory_parent import create_directory_parent
 
 
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
@@ -16,7 +16,7 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 def test_pass() -> None:
     def individual_test(temporary_root: Path) -> None:
         EXPECTED: Path = Path(temporary_root, 'parent')
-        parent_path: Path = create_parent_directory(
+        parent_path: Path = create_directory_parent(
             Path(EXPECTED, 'temporary.json')
         )
 

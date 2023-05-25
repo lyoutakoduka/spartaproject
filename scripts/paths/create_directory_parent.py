@@ -6,7 +6,7 @@ from pathlib import Path
 from scripts.paths.create_directory import create_directory
 
 
-def create_parent_directory(child_path: Path) -> Path:
+def create_directory_parent(child_path: Path) -> Path:
     path: Path = child_path.parent
     if path.exists():
         return path
