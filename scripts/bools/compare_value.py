@@ -6,7 +6,7 @@ from contexts.integer_context import Ints
 from contexts.string_context import Strs2
 
 
-def _check_args_size(lefts: BoolType, rights: BoolType) -> None:
+def _check_arguments_size(lefts: BoolType, rights: BoolType) -> None:
     flag_counts: Ints = list(set([len(flags) for flags in [lefts, rights]]))
     count: int = len(flag_counts)
 
@@ -18,12 +18,12 @@ def _check_args_size(lefts: BoolType, rights: BoolType) -> None:
 
 
 def bool_compare_array(lefts: Bools, rights: Bools) -> bool:
-    _check_args_size(lefts, rights)
+    _check_arguments_size(lefts, rights)
     return lefts == rights
 
 
 def bool_compare_pair(lefts: BoolPair, rights: BoolPair) -> bool:
-    _check_args_size(lefts, rights)
+    _check_arguments_size(lefts, rights)
 
     sorted_keys: Strs2 = [sorted(flags.keys()) for flags in [lefts, rights]]
 
