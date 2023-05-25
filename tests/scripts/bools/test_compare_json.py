@@ -12,7 +12,7 @@ def test_nest_pair() -> None:
     assert is_same_json({'A': {'B': True}}, {'A': {'B': True}})
 
 
-def test_multi_pair() -> None:
+def test_multiple_pair() -> None:
     assert is_same_json({'A': True, 'B': False}, {'B': False, 'A': True})
 
 
@@ -28,7 +28,7 @@ def test_type() -> None:
 def main() -> bool:
     test_simple_pair()
     test_nest_pair()
-    test_multi_pair()
+    test_multiple_pair()
     test_array()
     test_type()
     return True
