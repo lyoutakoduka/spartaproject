@@ -14,11 +14,11 @@ class StdoutText(TransferFunc):
     def wrapper(
         self,
         function: Callable[CP, CR],
-        *args: CP.args,
+        *arguments: CP.args,
         **key_arguments: CP.kwargs,
     ) -> CR:
         def _execute_function() -> CR:
-            return function(*args, **key_arguments)
+            return function(*arguments, **key_arguments)
 
         with TemporaryDirectory() as temporary_directory:
             temporary_path: Path = Path(temporary_directory, 'temporary')
