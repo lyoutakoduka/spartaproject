@@ -11,7 +11,7 @@ from scripts.files.export_file import byte_export
 from scripts.files.import_json import json_load
 from scripts.paths.create_directory import create_directory
 from scripts.paths.iterate_directory import walk_iterator
-from scripts.paths.parent_directory import create_parent_dir
+from scripts.paths.parent_directory import create_parent_directory
 from scripts.times.set_timestamp import set_latest
 
 
@@ -45,7 +45,7 @@ class DecompressZip:
     def _decompress_file(
         self, file_path: Path, relative: Path, zip_file: ZipFile,
     ) -> None:
-        create_parent_dir(file_path)
+        create_parent_directory(file_path)
         byte_export(file_path, zip_file.read(relative.as_posix()))
 
     def _restore_timestamp(self, file_path: Path, zip_info: ZipInfo) -> None:

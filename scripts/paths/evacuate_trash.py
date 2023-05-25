@@ -5,7 +5,7 @@ from shutil import move
 
 from contexts.path_context import Path, Paths
 from scripts.paths.get_relative import get_relative
-from scripts.paths.parent_directory import create_parent_dir
+from scripts.paths.parent_directory import create_parent_directory
 from scripts.paths.working_space import current_working_space
 
 
@@ -30,7 +30,7 @@ class TrashBox:
                 self._trash_path, get_relative(target, root_path=root)
             )
 
-            create_parent_dir(trash_path)
+            create_parent_directory(trash_path)
             move(target, trash_path)
 
             self._evacuated += [trash_path]
