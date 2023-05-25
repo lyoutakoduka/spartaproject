@@ -12,10 +12,13 @@ from scripts.files.import_file import text_import
 
 class StdoutText(TransferFunc):
     def wrapper(
-        self, function: Callable[CP, CR], *args: CP.args, **kwargs: CP.kwargs,
+        self,
+        function: Callable[CP, CR],
+        *args: CP.args,
+        **key_arguments: CP.kwargs,
     ) -> CR:
         def _execute_function() -> CR:
-            return function(*args, **kwargs)
+            return function(*args, **key_arguments)
 
         with TemporaryDirectory() as temporary_directory:
             temporary_path: Path = Path(temporary_directory, 'temporary')

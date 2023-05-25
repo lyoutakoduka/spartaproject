@@ -14,13 +14,16 @@ class SandWich(TransferFunc):
         self._end = end
 
     def wrapper(
-        self, function: Callable[CP, CR], *args: CP.args, **kwargs: CP.kwargs,
+        self,
+        function: Callable[CP, CR],
+        *args: CP.args,
+        **key_arguments: CP.kwargs,
     ) -> CR:
         def line(id: str) -> None:
             print(id * self._count)
 
         line(self._begin)
-        result: CR = function(*args, **kwargs)
+        result: CR = function(*args, **key_arguments)
         line(self._end)
 
         return result
