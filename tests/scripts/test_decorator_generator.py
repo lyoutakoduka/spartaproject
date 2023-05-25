@@ -10,9 +10,9 @@ class TestDeco(TransferFunc):
         self.text = text
 
     def wrapper(
-        self, func: Callable[CP, CR], *args: CP.args, **kwargs: CP.kwargs,
+        self, function: Callable[CP, CR], *args: CP.args, **kwargs: CP.kwargs,
     ) -> CR:
-        result: CR = func(*args, **kwargs)
+        result: CR = function(*args, **kwargs)
         self.text *= 2
         return result
 
@@ -27,8 +27,8 @@ def test_name() -> None:
     def text_print() -> None: pass
     text_print()
 
-    EXPECTED_FUNC: str = 'text_print'
-    assert EXPECTED_FUNC == text_print.__name__
+    EXPECTED_FUNCTION: str = 'text_print'
+    assert EXPECTED_FUNCTION == text_print.__name__
 
 
 def test_doc() -> None:

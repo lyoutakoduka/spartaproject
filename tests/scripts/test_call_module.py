@@ -17,7 +17,7 @@ def test_unknown_module() -> None:
         call_function(_SRC_PATH, error_path)
 
 
-def test_unknown_func() -> None:
+def test_unknown_function() -> None:
     with raises(ModuleNotFoundError, match=_UNKNOWN):
         call_function(_SRC_PATH, _SRC_PATH, function=_UNKNOWN)
 
