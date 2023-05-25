@@ -47,12 +47,9 @@ def test_array() -> None:
 def test_pair() -> None:
     KEYS: Strs = ['A', 'B', 'C', 'D', 'E']
 
-    input_path_pair: PathPair = {
-        key: path for key, path in zip(KEYS, _input_paths)
-    }
-
     results: PathPair = get_relative_pair(
-        input_path_pair, root_path=_BASE_PATH
+        {key: path for key, path in zip(KEYS, _input_paths)},
+        root_path=_BASE_PATH,
     )
 
     expected: PathPair = {
