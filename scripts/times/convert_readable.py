@@ -4,8 +4,8 @@
 from datetime import datetime, timedelta
 
 from contexts.decimal_context import Decimal, set_decimal_context
-from contexts.integer_context import IntPair
-from contexts.string_context import Strs
+from contexts.defaults.integer_context import IntPair
+from contexts.defaults.string_context import Strs
 
 set_decimal_context()
 
