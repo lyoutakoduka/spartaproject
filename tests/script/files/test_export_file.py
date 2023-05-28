@@ -5,7 +5,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from scripts.files.export_file import text_export, byte_export
+from script.files.export_file import text_export, byte_export
 
 
 def _common_test(text_path: Path, count: int) -> None:

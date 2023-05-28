@@ -9,14 +9,14 @@ from typing import Callable
 from context.defaults.integer_context import Ints2
 from context.path_context import Path, Paths, Paths2
 from context.time_context import datetime, Times2
-from scripts.files.compress_zip import CompressZip
-from scripts.files.decompress_zip import DecompressZip
-from scripts.paths.create_temporary_tree import create_temporary_tree
-from scripts.paths.get_relative import get_relative_array
-from scripts.paths.iterate_directory import walk_iterator
-from scripts.paths.safes.safe_trash import TrashBox
-from scripts.times.get_timestamp import get_latest
-from scripts.times.set_timestamp import set_latest
+from script.files.compress_zip import CompressZip
+from script.files.decompress_zip import DecompressZip
+from script.paths.create_temporary_tree import create_temporary_tree
+from script.paths.get_relative import get_relative_array
+from script.paths.iterate_directory import walk_iterator
+from script.paths.safes.safe_trash import TrashBox
+from script.times.get_timestamp import get_latest
+from script.times.set_timestamp import set_latest
 
 
 def _compare_timestamp(sorted_paths: Paths2, expected: datetime) -> None:

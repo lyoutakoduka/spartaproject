@@ -8,13 +8,13 @@ from context.decimal_context import Decimal, set_decimal_context
 from context.defaults.integer_context import IntTuple
 from context.path_context import Path, Paths
 from project.sparta.context.defaults.string_context import Strs, StrPair
-from scripts.directories.create_directory import create_directory
-from scripts.files.import_file import byte_import
-from scripts.files.jsons.convert_to_json import multiple_to_json
-from scripts.files.jsons.export_json import json_dump
-from scripts.paths.get_relative import get_relative
-from scripts.paths.iterate_directory import walk_iterator
-from scripts.times.get_timestamp import get_latest
+from script.directories.create_directory import create_directory
+from script.files.import_file import byte_import
+from script.files.jsons.convert_to_json import multiple_to_json
+from script.files.jsons.export_json import json_dump
+from script.paths.get_relative import get_relative
+from script.paths.iterate_directory import walk_iterator
+from script.times.get_timestamp import get_latest
 
 set_decimal_context()
 

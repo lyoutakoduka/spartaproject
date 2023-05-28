@@ -5,8 +5,8 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from scripts.files.export_file import text_export
-from scripts.files.import_file import text_import, byte_import
+from script.files.export_file import text_export
+from script.files.import_file import text_import, byte_import
 
 _INPUT: str = 'test'
 

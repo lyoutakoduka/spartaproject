@@ -6,13 +6,13 @@ from zipfile import ZipFile, ZipInfo
 
 from context.defaults.string_context import Strs, StrPair
 from context.path_context import Path, Paths
-from scripts.directories.create_directory import create_directory
-from scripts.directories.create_directory_parent import create_directory_parent
-from scripts.files.export_file import byte_export
-from scripts.files.jsons.convert_from_json import string_pair_from_json
-from scripts.files.jsons.import_json import json_load
-from scripts.paths.iterate_directory import walk_iterator
-from scripts.times.set_timestamp import set_latest
+from script.directories.create_directory import create_directory
+from script.directories.create_directory_parent import create_directory_parent
+from script.files.export_file import byte_export
+from script.files.jsons.convert_from_json import string_pair_from_json
+from script.files.jsons.import_json import json_load
+from script.paths.iterate_directory import walk_iterator
+from script.times.set_timestamp import set_latest
 
 
 class DecompressZip:
