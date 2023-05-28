@@ -6,9 +6,9 @@ from shutil import make_archive
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from contexts.defaults.integer_context import Ints2
-from contexts.path_context import Path, Paths, Paths2
-from contexts.time_context import datetime, Times2
+from context.defaults.integer_context import Ints2
+from context.path_context import Path, Paths, Paths2
+from context.time_context import datetime, Times2
 from scripts.files.compress_zip import CompressZip
 from scripts.files.decompress_zip import DecompressZip
 from scripts.paths.create_temporary_tree import create_temporary_tree

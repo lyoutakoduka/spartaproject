@@ -5,7 +5,7 @@ from configparser import ConfigParser
 from decimal import Decimal
 from pathlib import Path
 
-from contexts.config_context import Config, Basic
+from context.config_context import Config, Basic
 from scripts.files.import_file import text_import
 
 

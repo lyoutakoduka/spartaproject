@@ -5,7 +5,7 @@ from configparser import ConfigParser
 from io import StringIO
 from pathlib import Path
 
-from contexts.config_context import Config
+from context.config_context import Config
 from scripts.files.export_file import text_export
 
 

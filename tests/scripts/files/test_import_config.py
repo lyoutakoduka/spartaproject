@@ -5,7 +5,7 @@ from decimal import Decimal
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from contexts.config_context import Config, Basic
+from context.config_context import Config, Basic
 from scripts.files.export_file import text_export
 from scripts.files.import_config import config_load, config_import
 
