@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from contexts.bool_context import Bools, BoolPair
+from contexts.defaults.bool_context import Bools, BoolPair
 
 
 def bool_same_array(flags: Bools, invert: bool = False) -> bool:
