@@ -6,8 +6,8 @@ from tempfile import TemporaryDirectory
 from typing import Callable
 
 from context.time_context import Times
-from scripts.paths.create_temporary_file import create_temporary_file
-from scripts.times.get_timestamp import get_latest, get_access
+from script.paths.create_temporary_file import create_temporary_file
+from script.times.get_timestamp import get_latest, get_access
 
 
 def _common_test(times: Times) -> None:

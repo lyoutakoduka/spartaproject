@@ -3,8 +3,8 @@
 
 from context.decimal_context import Decimal, set_decimal_context
 from context.defaults.string_context import Strs
-from scripts.times.builtin_timer import TimerSelect
-from scripts.times.convert_readable import readable_time
+from script.times.builtin_timer import TimerSelect
+from script.times.convert_readable import readable_time
 
 set_decimal_context()
 

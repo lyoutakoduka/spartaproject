@@ -4,7 +4,7 @@
 from datetime import datetime
 from decimal import Decimal
 
-from scripts.times.from_timestamp import time_from_timestamp
+from script.times.from_timestamp import time_from_timestamp
 
 _INPUT_UTC: str = '2023-04-15T20:09:30.936886+00:00'
 _input_time: datetime = datetime.fromisoformat(_INPUT_UTC)

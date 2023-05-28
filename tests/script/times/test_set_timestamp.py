@@ -8,9 +8,9 @@ from typing import Callable
 
 from context.defaults.string_context import Strs
 from context.time_context import Times
-from scripts.paths.create_temporary_file import create_temporary_file
-from scripts.times.get_timestamp import get_latest, get_access
-from scripts.times.set_timestamp import set_latest, set_access
+from script.paths.create_temporary_file import create_temporary_file
+from script.times.get_timestamp import get_latest, get_access
+from script.times.set_timestamp import set_latest, set_access
 
 _TIMES: Strs = [
     '2023-04-01T00:00:00.000001+00:00',

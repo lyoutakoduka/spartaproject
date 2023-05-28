@@ -5,7 +5,7 @@ from datetime import datetime
 from os import utime
 from pathlib import Path
 
-from scripts.times.offset_timezone import offset_time
+from script.times.offset_timezone import offset_time
 
 
 def _convert_timestamp(time: datetime) -> float:
