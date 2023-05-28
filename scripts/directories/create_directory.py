@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from contexts.path_context import Path, Paths, PathPair
+from context.path_context import Path, Paths, PathPair
 
 
 def create_directory(path: Path) -> Path:

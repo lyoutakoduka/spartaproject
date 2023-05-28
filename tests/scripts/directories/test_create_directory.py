@@ -4,8 +4,8 @@
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from contexts.defaults.string_context import Strs
-from contexts.path_context import Path, Paths, PathPair
+from context.defaults.string_context import Strs
+from context.path_context import Path, Paths, PathPair
 from scripts.bools.same_value import bool_same_array, bool_same_pair
 from scripts.directories.create_directory import (
     create_directory, create_directory_array, create_directory_pair
