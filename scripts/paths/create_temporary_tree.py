@@ -3,7 +3,7 @@
 
 from pathlib import Path
 
-from contexts.string_context import StrPair2
+from contexts.defaults.string_context import StrPair2
 from scripts.directories.create_directory import create_directory_array
 from scripts.files.export_config import config_export
 from scripts.files.export_file import text_export

@@ -4,9 +4,9 @@
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from contexts.integer_context import Ints
+from contexts.defaults.integer_context import Ints
+from contexts.defaults.string_context import Strs, Strs2
 from contexts.path_context import Path, Paths
-from contexts.string_context import Strs, Strs2
 from scripts.paths.create_temporary_tree import create_temporary_tree
 from scripts.paths.get_relative import get_relative_array
 from scripts.paths.iterate_directory import walk_iterator
