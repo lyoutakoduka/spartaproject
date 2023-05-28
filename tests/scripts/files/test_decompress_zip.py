@@ -14,7 +14,7 @@ from scripts.files.decompress_zip import DecompressZip
 from scripts.paths.create_temporary_tree import create_temporary_tree
 from scripts.paths.get_relative import get_relative_array
 from scripts.paths.iterate_directory import walk_iterator
-from scripts.paths.safes.evacuate_trash import TrashBox
+from scripts.paths.safes.safe_trash import TrashBox
 from scripts.times.get_timestamp import get_latest
 from scripts.times.set_timestamp import set_latest
 
