@@ -3,8 +3,8 @@
 
 from pytest import raises
 
-from contexts.path_context import Path, Paths, PathPair
-from contexts.defaults.string_context import Strs, Strs2
+from context.path_context import Path, Paths, PathPair
+from context.defaults.string_context import Strs, Strs2
 from scripts.bools.same_value import bool_same_array
 from scripts.paths.get_relative import (
     get_relative, get_relative_array, get_relative_pair
