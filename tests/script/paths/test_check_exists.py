@@ -3,8 +3,8 @@
 
 from context.defaults.bool_context import Bools, BoolPair
 from context.path_context import Path, Paths, PathPair
-from scripts.bools.compare_value import bool_compare_array, bool_compare_pair
-from scripts.paths.check_exists import check_exists_array, check_exists_pair
+from script.bools.compare_value import bool_compare_array, bool_compare_pair
+from script.paths.check_exists import check_exists_array, check_exists_pair
 
 _CURRENT_PATH: Path = Path(__file__)
 _UNKNOWN_PATH: Path = _CURRENT_PATH.with_name('unknown.py')

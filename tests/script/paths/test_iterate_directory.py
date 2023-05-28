@@ -6,9 +6,9 @@ from typing import Callable
 
 from context.defaults.string_context import Strs, Strs2
 from context.path_context import Path, Paths, PathGene
-from scripts.paths.create_temporary_tree import create_temporary_tree
-from scripts.paths.get_relative import get_relative_array
-from scripts.paths.iterate_directory import walk_iterator
+from script.paths.create_temporary_tree import create_temporary_tree
+from script.paths.get_relative import get_relative_array
+from script.paths.iterate_directory import walk_iterator
 
 _TREE_DEEP: int = 3
 

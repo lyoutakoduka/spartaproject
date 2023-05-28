@@ -3,15 +3,15 @@
 
 from context.defaults.bool_context import Bools, BoolPair
 from context.path_context import Path, Paths, PathPair
-from scripts.bools.compare_value import bool_compare_array, bool_compare_pair
-from scripts.paths.check_exists import check_exists_array, check_exists_pair
-from scripts.paths.get_absolute import (
+from script.bools.compare_value import bool_compare_array, bool_compare_pair
+from script.paths.check_exists import check_exists_array, check_exists_pair
+from script.paths.get_absolute import (
     get_absolute, get_absolute_array, get_absolute_pair
 )
 
 
 _BASE_PATH: Path = Path('project', 'sparta')
-_EMPTY_HEAD: Path = Path('scripts', 'debug_empty.py')
+_EMPTY_HEAD: Path = Path('script', 'debug_empty.py')
 _EMPTY_PATH: Path = Path(_BASE_PATH, _EMPTY_HEAD)
 
 

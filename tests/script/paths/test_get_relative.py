@@ -5,22 +5,22 @@ from pytest import raises
 
 from context.path_context import Path, Paths, PathPair
 from context.defaults.string_context import Strs, Strs2
-from scripts.bools.same_value import bool_same_array
-from scripts.paths.get_relative import (
+from script.bools.same_value import bool_same_array
+from script.paths.get_relative import (
     get_relative, get_relative_array, get_relative_pair
 )
 
 
 _BASE_PATH: Path = Path('project')
-_HEAD_PATH: Path = Path(_BASE_PATH, 'sparta', 'tests', 'scripts', 'paths')
+_HEAD_PATH: Path = Path(_BASE_PATH, 'sparta', 'tests', 'script', 'paths')
 
 _TEST_PATH: Strs = ['sparta', 'tests']
 _EXPECTED: Strs2 = [
     ['.'],
     ['sparta'],
     _TEST_PATH,
-    _TEST_PATH + ['scripts'],
-    _TEST_PATH + ['scripts', 'paths'],
+    _TEST_PATH + ['script'],
+    _TEST_PATH + ['script', 'paths'],
 ]
 
 _input_paths: Paths = [

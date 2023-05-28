@@ -5,7 +5,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from scripts.paths.create_temporary_file import create_temporary_file
+from script.paths.create_temporary_file import create_temporary_file
 
 
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:

@@ -7,9 +7,9 @@ from typing import Callable
 from context.defaults.integer_context import Ints
 from context.defaults.string_context import Strs, Strs2
 from context.path_context import Path, Paths
-from scripts.paths.create_temporary_tree import create_temporary_tree
-from scripts.paths.get_relative import get_relative_array
-from scripts.paths.iterate_directory import walk_iterator
+from script.paths.create_temporary_tree import create_temporary_tree
+from script.paths.get_relative import get_relative_array
+from script.paths.iterate_directory import walk_iterator
 
 
 def _inside_temporary_directory(function: Callable[[Path], None]) -> Paths:
