@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from contexts.json_context import Json
-from scripts.files.export_json import json_dump
+from scripts.files.jsons.export_json import json_dump
 
 
 def is_same_json(left: Json, right: Json) -> bool:
