@@ -4,7 +4,7 @@
 from pathlib import Path
 from sys import exit, argv
 
-from contexts.defaults.string_context import Strs
+from context.defaults.string_context import Strs
 from scripts.call_module import call_function
 
 
