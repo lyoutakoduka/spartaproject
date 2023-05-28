@@ -6,9 +6,9 @@ from pathlib import Path
 
 from context.defaults.integer_context import Ints2
 from context.defaults.string_context import Strs
-from scripts.directories.create_directory import create_directory
-from scripts.paths.get_absolute import get_absolute
-from scripts.times.current_datetime import get_current_time
+from script.directories.create_directory import create_directory
+from script.paths.get_absolute import get_absolute
+from script.times.current_datetime import get_current_time
 
 
 def get_time_data(time: datetime) -> Ints2:

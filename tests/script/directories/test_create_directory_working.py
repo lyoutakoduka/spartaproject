@@ -3,8 +3,8 @@
 
 from pathlib import Path
 
-from scripts.directories.create_directory_working import current_working_space
-from scripts.paths.get_relative import get_relative
+from script.directories.create_directory_working import current_working_space
+from script.paths.get_relative import get_relative
 
 
 def test_pass() -> None:
