@@ -1,18 +1,18 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from decimal import Decimal  # not from contexts
-from pathlib import Path  # not from contexts
+from decimal import Decimal  # not from context
+from pathlib import Path  # not from context
 from typing import List, Dict
 
-from contexts.decimal_context import Decs, Decs2, DecPair, DecPair2
-from contexts.defaults.bool_context import Bools, Bools2, BoolPair, BoolPair2
-from contexts.defaults.float_context import (
+from context.decimal_context import Decs, Decs2, DecPair, DecPair2
+from context.defaults.bool_context import Bools, Bools2, BoolPair, BoolPair2
+from context.defaults.float_context import (
     Floats, Floats2, FloatPair, FloatPair2
 )
-from contexts.defaults.integer_context import Ints, Ints2, IntPair, IntPair2
-from contexts.defaults.string_context import Strs, Strs2, StrPair, StrPair2
-from contexts.path_context import Paths, Paths2, PathPair, PathPair2
+from context.defaults.integer_context import Ints, Ints2, IntPair, IntPair2
+from context.defaults.string_context import Strs, Strs2, StrPair, StrPair2
+from context.path_context import Paths, Paths2, PathPair, PathPair2
 
 Array = Bools | Ints | Floats | Strs | Decs | Paths
 Array2 = Bools2 | Ints2 | Floats2 | Strs2 | Decs2 | Paths2
