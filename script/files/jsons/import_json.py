@@ -5,7 +5,7 @@ from json import loads
 from pathlib import Path
 
 from context.json_context import Json
-from scripts.files.import_file import text_import
+from script.files.import_file import text_import
 
 
 def json_load(input: str) -> Json:

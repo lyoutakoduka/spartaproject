@@ -6,7 +6,7 @@ from pathlib import Path
 
 from context.defaults.string_context import StrTuple
 from context.json_context import Json
-from scripts.files.export_file import text_export
+from script.files.export_file import text_export
 
 
 def json_dump(input: Json, compress: bool = False) -> str:

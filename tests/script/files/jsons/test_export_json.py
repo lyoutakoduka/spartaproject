@@ -5,9 +5,9 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from context.json_context import Json
-from scripts.files.import_file import text_import
-from scripts.files.jsons.export_json import json_dump, json_export
-from scripts.format_texts import format_indent
+from script.files.import_file import text_import
+from script.files.jsons.export_json import json_dump, json_export
+from script.format_texts import format_indent
 
 
 def _common_test(expected: str, input: Json) -> None:
