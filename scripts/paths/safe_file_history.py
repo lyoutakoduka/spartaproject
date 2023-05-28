@@ -3,10 +3,10 @@
 
 from itertools import count
 
-from contexts.path_context import Path, PathPair2
 from contexts.json_context import Json
-from scripts.files.convert_to_json import multiple2_to_json
-from scripts.files.export_json import json_export
+from contexts.path_context import Path, PathPair2
+from scripts.files.jsons.convert_to_json import multiple2_to_json
+from scripts.files.jsons.export_json import json_export
 from scripts.paths.working_space import current_working_space
 from scripts.times.current_datetime import get_current_time
 
