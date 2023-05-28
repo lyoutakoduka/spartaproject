@@ -3,7 +3,7 @@
 
 from pathlib import Path
 
-from scripts.paths.create_directory import create_directory
+from scripts.directories.create_directory import create_directory
 
 
 def create_directory_parent(child_path: Path) -> Path:
