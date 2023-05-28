@@ -4,10 +4,10 @@
 from pathlib import Path
 
 from contexts.string_context import StrPair2
+from scripts.directories.create_directory import create_directory_array
 from scripts.files.export_config import config_export
 from scripts.files.export_file import text_export
 from scripts.files.jsons.export_json import json_export, Json
-from scripts.paths.create_directory import create_directory_array
 
 _NAME: str = 'file'
 

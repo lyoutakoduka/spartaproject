@@ -3,8 +3,8 @@
 
 from pathlib import Path
 
+from scripts.directories.create_directory_parent import create_directory_parent
 from scripts.files.jsons.export_json import json_export
-from scripts.paths.create_directory_parent import create_directory_parent
 
 
 def create_temporary_file(file_root: Path) -> Path:
