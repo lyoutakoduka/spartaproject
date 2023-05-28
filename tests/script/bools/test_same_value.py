@@ -3,7 +3,7 @@
 
 from pytest import raises
 
-from scripts.bools.same_value import bool_same_array, bool_same_pair
+from script.bools.same_value import bool_same_array, bool_same_pair
 
 
 def test_empty() -> None:

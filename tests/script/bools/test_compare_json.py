@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from scripts.bools.compare_json import is_same_json
+from script.bools.compare_json import is_same_json
 
 
 def test_pass() -> None:

@@ -3,7 +3,7 @@
 
 from pytest import raises
 
-from scripts.bools.compare_value import bool_compare_array, bool_compare_pair
+from script.bools.compare_value import bool_compare_array, bool_compare_pair
 
 
 def test_size() -> None:
