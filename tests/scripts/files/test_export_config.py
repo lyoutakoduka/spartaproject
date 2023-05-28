@@ -3,13 +3,13 @@
 
 from tempfile import TemporaryDirectory
 
-from contexts.bool_context import BoolPair, BoolPair2
 from contexts.config_context import Config
 from contexts.decimal_context import Decimal, DecPair, DecPair2
-from contexts.float_context import FloatPair, FloatPair2
-from contexts.integer_context import IntPair, IntPair2
+from contexts.defaults.bool_context import BoolPair, BoolPair2
+from contexts.defaults.float_context import FloatPair, FloatPair2
+from contexts.defaults.integer_context import IntPair, IntPair2
+from contexts.defaults.string_context import StrPair, StrPair2
 from contexts.path_context import Path, PathPair, PathPair2
-from contexts.string_context import StrPair, StrPair2
 from scripts.files.export_config import config_dump, config_export
 from scripts.files.import_file import text_import
 from scripts.format_texts import format_indent

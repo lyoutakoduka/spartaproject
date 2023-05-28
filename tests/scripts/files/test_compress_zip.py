@@ -6,7 +6,7 @@ from tempfile import TemporaryDirectory
 from typing import Callable
 
 from contexts.decimal_context import Decimal, Decs, set_decimal_context
-from contexts.integer_context import Ints2
+from contexts.defaults.integer_context import Ints2
 from contexts.path_context import Path, Paths, Paths2
 from scripts.files.compress_zip import CompressZip
 from scripts.paths.create_temporary_tree import create_temporary_tree
