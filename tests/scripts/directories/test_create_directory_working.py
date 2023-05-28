@@ -3,7 +3,7 @@
 
 from pathlib import Path
 
-from scripts.directories.working_space import current_working_space
+from scripts.directories.create_directory_working import current_working_space
 from scripts.paths.get_relative import get_relative
 
 
