@@ -11,7 +11,7 @@ from scripts.files.jsons.convert_from_json import path_pair2_from_json
 from scripts.files.jsons.import_json import json_import
 from scripts.paths.check_exists import check_exists_pair
 from scripts.paths.create_temporary_file import create_temporary_file
-from scripts.paths.safe_rename import SafeRename
+from scripts.paths.safes.safe_rename import SafeRename
 
 
 def _common_test(rename_path: Path) -> None:

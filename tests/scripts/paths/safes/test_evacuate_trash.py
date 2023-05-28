@@ -10,8 +10,8 @@ from scripts.bools.same_value import bool_same_array
 from scripts.paths.check_exists import check_exists_array
 from scripts.paths.create_temporary_file import create_temporary_file
 from scripts.paths.create_temporary_tree import create_temporary_tree
-from scripts.paths.evacuate_trash import TrashBox
 from scripts.paths.iterate_directory import walk_iterator
+from scripts.paths.safes.evacuate_trash import TrashBox
 
 
 def _common_test(target_paths: Paths, evacuated_paths: Paths) -> None:

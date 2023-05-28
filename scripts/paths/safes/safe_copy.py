@@ -5,7 +5,7 @@ from shutil import copy2
 
 from contexts.path_context import Path
 from scripts.paths.avoid_duplication import get_avoid_path
-from scripts.paths.safe_file_history import FileHistory
+from scripts.paths.safes.safe_file_history import FileHistory
 
 
 class SafeCopy(FileHistory):
