@@ -5,7 +5,7 @@ from contextlib import redirect_stdout
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from contexts.callable_context import CP, CR, Callable
+from context.callable_context import CP, CR, Callable
 from scripts.decorator_generator import TransferFunction
 from scripts.files.import_file import text_import
 

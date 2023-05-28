@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from contexts.callable_context import CP, CR, Callable
+from context.callable_context import CP, CR, Callable
 from scripts.decorator_generator import TransferFunction
 
 

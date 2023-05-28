@@ -3,7 +3,7 @@
 
 from functools import wraps
 
-from contexts.callable_context import CP, CR, Callable
+from context.callable_context import CP, CR, Callable
 
 
 class TransferFunction:
