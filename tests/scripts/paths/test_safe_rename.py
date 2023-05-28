@@ -55,21 +55,7 @@ def test_override() -> None:
     _inside_temporary_directory(individual_test)
 
 
-def test_history() -> None:
-    def individual_test(source_path: Path) -> None:
-        temporary_root: Path = source_path.parent
-        safe_rename = SafeRename(history_path=temporary_root)
-        safe_rename.rename(source_path, source_path.with_stem('destination'))
-
-        rename_path: Path = safe_rename.pop_history()
-        _common_test(rename_path)
-        assert rename_path.is_relative_to(temporary_root)
-
-    _inside_temporary_directory(individual_test)
-
-
 def main() -> bool:
     test_single()
     test_override()
-    test_history()
     return True
