@@ -5,7 +5,7 @@ from decimal import Decimal
 from pathlib import Path
 from typing import List, Dict
 
-from contexts.json_context import Json, Single, Multi, Multi2
+from context.json_context import Json, Single, Multi, Multi2
 
 
 def _convert_unknown(input: Single) -> Single:

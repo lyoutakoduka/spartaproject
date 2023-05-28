@@ -3,12 +3,12 @@
 
 from typing import List, Dict
 
-from contexts.decimal_context import Decimal, Decs, Decs2, DecPair, DecPair2
-from contexts.defaults.bool_context import Bools, Bools2, BoolPair, BoolPair2
-from contexts.defaults.integer_context import Ints, Ints2, IntPair, IntPair2
-from contexts.defaults.string_context import Strs, Strs2, StrPair, StrPair2
-from contexts.json_context import Json, Single
-from contexts.path_context import Path, Paths, Paths2, PathPair, PathPair2
+from context.decimal_context import Decimal, Decs, Decs2, DecPair, DecPair2
+from context.defaults.bool_context import Bools, Bools2, BoolPair, BoolPair2
+from context.defaults.integer_context import Ints, Ints2, IntPair, IntPair2
+from context.defaults.string_context import Strs, Strs2, StrPair, StrPair2
+from context.json_context import Json, Single
+from context.path_context import Path, Paths, Paths2, PathPair, PathPair2
 
 
 def _convert_unknown(input: Single, key: str) -> Single:

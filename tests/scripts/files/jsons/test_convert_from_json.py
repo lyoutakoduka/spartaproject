@@ -5,7 +5,7 @@ from decimal import Decimal
 from pathlib import Path
 from typing import List, Dict
 
-from contexts.json_context import Json, Single, Array, Array2, Pair, Pair2
+from context.json_context import Json, Single, Array, Array2, Pair, Pair2
 from scripts.bools.same_value import bool_same_array
 from scripts.files.jsons.convert_from_json import (
     bool_array_from_json,

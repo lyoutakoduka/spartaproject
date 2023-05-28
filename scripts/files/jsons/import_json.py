@@ -4,7 +4,7 @@
 from json import loads
 from pathlib import Path
 
-from contexts.json_context import Json
+from context.json_context import Json
 from scripts.files.import_file import text_import
 
 
