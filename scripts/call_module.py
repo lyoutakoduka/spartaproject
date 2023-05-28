@@ -5,8 +5,8 @@ from importlib import import_module, util
 from os.path import commonpath
 from sys import path as system_path
 
+from contexts.defaults.string_context import Strs
 from contexts.path_context import Path, Paths, PathPair
-from contexts.string_context import Strs
 from scripts.paths.get_absolute import get_absolute
 
 

@@ -4,8 +4,8 @@
 from itertools import takewhile
 from typing import List, TypedDict
 
-from contexts.integer_context import Ints
-from contexts.string_context import Strs
+from contexts.defaults.integer_context import Ints
+from project.sparta.contexts.defaults.string_context import Strs
 
 
 class _LinePair(TypedDict):
