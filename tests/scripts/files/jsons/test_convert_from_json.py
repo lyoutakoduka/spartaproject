@@ -7,7 +7,7 @@ from typing import List, Dict
 
 from contexts.json_context import Json, Single, Array, Array2, Pair, Pair2
 from scripts.bools.same_value import bool_same_array
-from scripts.files.convert_from_json import (
+from scripts.files.jsons.convert_from_json import (
     bool_array_from_json,
     integer_array_from_json,
     string_array_from_json,

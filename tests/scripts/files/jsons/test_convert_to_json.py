@@ -8,10 +8,10 @@ from contexts.integer_context import Ints, Ints2, IntPair, IntPair2
 from contexts.json_context import Json, Multi, Multi2
 from contexts.path_context import Path, Paths, Paths2, PathPair, PathPair2
 from contexts.string_context import Strs, Strs2, StrPair, StrPair2
-from scripts.files.convert_to_json import (
+from scripts.files.jsons.convert_to_json import (
     to_safe_json, multiple_to_json, multiple2_to_json
 )
-from scripts.files.export_json import json_dump
+from scripts.files.jsons.export_json import json_dump
 
 
 def _common_test(expected: str, input: Json) -> None:
