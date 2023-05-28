@@ -5,7 +5,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from contexts.time_context import Times
+from context.time_context import Times
 from scripts.paths.create_temporary_file import create_temporary_file
 from scripts.times.get_timestamp import get_latest, get_access
 

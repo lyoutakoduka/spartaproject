@@ -3,7 +3,7 @@
 
 from time import sleep
 
-from contexts.decimal_context import Decimal, Decs, set_decimal_context
+from context.decimal_context import Decimal, Decs, set_decimal_context
 from scripts.times.builtin_timer import TimerSelect
 
 

@@ -3,7 +3,7 @@
 
 from datetime import timezone, datetime
 
-from contexts.decimal_context import Decimal, set_decimal_context
+from context.decimal_context import Decimal, set_decimal_context
 
 set_decimal_context()
 
