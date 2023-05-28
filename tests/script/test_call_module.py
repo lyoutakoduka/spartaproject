@@ -4,7 +4,7 @@
 from pathlib import Path
 from pytest import raises
 
-from scripts.call_module import call_function
+from script.call_module import call_function
 
 
 _SOURCE_PATH: Path = Path(__file__)

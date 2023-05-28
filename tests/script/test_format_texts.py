@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from context.defaults.string_context import Strs
-from scripts.format_texts import format_indent
+from script.format_texts import format_indent
 
 
 def shared_compare(expected: Strs, input: str, stdout: bool = False) -> None:

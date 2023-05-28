@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from scripts.format_texts import format_indent
-from scripts.off_stdout import StdoutText
+from script.format_texts import format_indent
+from script.off_stdout import StdoutText
 
 
 def test_pass() -> None:

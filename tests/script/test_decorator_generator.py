@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from context.callable_context import CP, CR, Callable
-from scripts.decorator_generator import TransferFunction
+from script.decorator_generator import TransferFunction
 
 
 class TestDecorator(TransferFunction):

@@ -7,7 +7,7 @@ from sys import path as system_path
 
 from context.defaults.string_context import Strs
 from context.path_context import Path, Paths, PathPair
-from scripts.paths.get_absolute import get_absolute
+from script.paths.get_absolute import get_absolute
 
 
 def _get_path_key() -> Strs:
