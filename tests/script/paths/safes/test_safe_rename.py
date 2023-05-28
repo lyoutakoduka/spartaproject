@@ -6,12 +6,12 @@ from typing import Callable
 
 from context.defaults.bool_context import BoolPair
 from context.path_context import Path, PathPair2
-from scripts.bools.same_value import bool_same_array
-from scripts.files.jsons.convert_from_json import path_pair2_from_json
-from scripts.files.jsons.import_json import json_import
-from scripts.paths.check_exists import check_exists_pair
-from scripts.paths.create_temporary_file import create_temporary_file
-from scripts.paths.safes.safe_rename import SafeRename
+from script.bools.same_value import bool_same_array
+from script.files.jsons.convert_from_json import path_pair2_from_json
+from script.files.jsons.import_json import json_import
+from script.paths.check_exists import check_exists_pair
+from script.paths.create_temporary_file import create_temporary_file
+from script.paths.safes.safe_rename import SafeRename
 
 
 def _common_test(rename_path: Path) -> None:

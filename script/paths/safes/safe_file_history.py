@@ -5,10 +5,10 @@ from itertools import count
 
 from context.json_context import Json
 from context.path_context import Path, PathPair2
-from scripts.directories.create_directory_working import current_working_space
-from scripts.files.jsons.convert_to_json import multiple2_to_json
-from scripts.files.jsons.export_json import json_export
-from scripts.times.current_datetime import get_current_time
+from script.directories.create_directory_working import current_working_space
+from script.files.jsons.convert_to_json import multiple2_to_json
+from script.files.jsons.export_json import json_export
+from script.times.current_datetime import get_current_time
 
 
 class FileHistory:
