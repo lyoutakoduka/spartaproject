@@ -4,8 +4,8 @@
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from contexts.defaults.bool_context import BoolPair
-from contexts.path_context import Path, PathPair2
+from context.defaults.bool_context import BoolPair
+from context.path_context import Path, PathPair2
 from scripts.bools.same_value import bool_same_array
 from scripts.files.jsons.convert_from_json import path_pair2_from_json
 from scripts.files.jsons.import_json import json_import

@@ -3,8 +3,8 @@
 
 from itertools import count
 
-from contexts.json_context import Json
-from contexts.path_context import Path, PathPair2
+from context.json_context import Json
+from context.path_context import Path, PathPair2
 from scripts.directories.create_directory_working import current_working_space
 from scripts.files.jsons.convert_to_json import multiple2_to_json
 from scripts.files.jsons.export_json import json_export
