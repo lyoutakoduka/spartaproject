@@ -6,7 +6,7 @@ from pathlib import Path
 
 from contexts.integer_context import Ints2
 from contexts.string_context import Strs
-from scripts.paths.create_directory import create_directory
+from scripts.directories.create_directory import create_directory
 from scripts.paths.get_absolute import get_absolute
 from scripts.times.current_datetime import get_current_time
 
