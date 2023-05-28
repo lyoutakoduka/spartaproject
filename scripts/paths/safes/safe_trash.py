@@ -4,9 +4,9 @@
 from shutil import move
 
 from contexts.path_context import Path, Paths
+from scripts.directories.create_directory_parent import create_directory_parent
+from scripts.directories.working_space import current_working_space
 from scripts.paths.get_relative import get_relative
-from scripts.paths.create_directory_parent import create_directory_parent
-from scripts.paths.working_space import current_working_space
 
 
 class TrashBox:
