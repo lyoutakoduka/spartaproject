@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from contexts.json_context import Json
+from context.json_context import Json
 from scripts.files.jsons.export_json import json_dump
 
 
