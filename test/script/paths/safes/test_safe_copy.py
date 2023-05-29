@@ -6,8 +6,8 @@ from typing import Callable
 
 from context.path_context import Path, PathPair2
 from script.bool.same_value import bool_same_pair
-from script.files.jsons.convert_from_json import path_pair2_from_json
-from script.files.jsons.import_json import json_import
+from script.files.json.convert_from_json import path_pair2_from_json
+from script.files.json.import_json import json_import
 from script.paths.check_exists import check_exists_pair
 from script.paths.create_temporary_file import create_temporary_file
 from script.paths.safes.safe_copy import SafeCopy
