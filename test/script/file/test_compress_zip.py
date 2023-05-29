@@ -83,7 +83,7 @@ def _compare_archived_count(archived: Paths) -> None:
 
 
 def _get_sorted_paths(
-    walk_paths: Paths, archived: Paths, temporary_root: Path,
+    walk_paths: Paths, archived: Paths, temporary_root: Path
 ) -> Paths2:
     inputs: Paths = _get_input_paths(walk_paths, temporary_root)
     outputs: Paths = _get_output_paths(archived, temporary_root)
@@ -92,10 +92,10 @@ def _get_sorted_paths(
 
 
 def _common_test(
-    archived: Paths, temporary_root: Path, walk_paths: Paths,
+    archived: Paths, temporary_root: Path, walk_paths: Paths
 ) -> Paths2:
     sorted_paths: Paths2 = _get_sorted_paths(
-        walk_paths, archived, temporary_root,
+        walk_paths, archived, temporary_root
     )
 
     _compare_path_name(sorted_paths, temporary_root)
@@ -170,7 +170,7 @@ def test_compress() -> None:
 
         walk_paths: Paths = []
         compress_zip = CompressZip(
-            Path(temporary_root, 'archive'), compress=True,
+            Path(temporary_root, 'archive'), compress=True
         )
         for path in walk_iterator(tree_root, directory=False, suffix='json'):
             compress_zip.compress_archive(path)

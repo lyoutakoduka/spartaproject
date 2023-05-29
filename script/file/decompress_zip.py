@@ -43,13 +43,13 @@ class DecompressZip:
         return sequential
 
     def _decompress_file(
-        self, file_path: Path, relative: Path, zip_file: ZipFile,
+        self, file_path: Path, relative: Path, zip_file: ZipFile
     ) -> None:
         create_directory_parent(file_path)
         byte_export(file_path, zip_file.read(relative.as_posix()))
 
     def _restore_timestamp(
-        self, file_path: Path, information: ZipInfo,
+        self, file_path: Path, information: ZipInfo
     ) -> None:
         latest: datetime = datetime(*information.date_time)
 

@@ -25,7 +25,7 @@ class CompressZip:
         output_root: Path,
         archive_id: str = '',
         limit_byte: int = 0,
-        compress: bool = False,
+        compress: bool = False
     ) -> None:
         self._output_root: Path = output_root
         self._compress: bool = compress
@@ -93,7 +93,7 @@ class CompressZip:
             time.day,
             time.hour,
             time.minute,
-            time.second,
+            time.second
         )
 
     def _get_zip_information(self, target: Path, relative: Path) -> ZipInfo:
@@ -107,7 +107,7 @@ class CompressZip:
         return information
 
     def _add_file_to_archive(
-        self, is_dir: bool, reset: bool, target: Path, root: Path,
+        self, is_dir: bool, reset: bool, target: Path, root: Path
     ) -> None:
         if reset:
             self._reset_archive_byte()
@@ -118,7 +118,7 @@ class CompressZip:
         else:
             self._file_zip.writestr(
                 self._get_zip_information(target, relative),
-                byte_import(target),
+                byte_import(target)
             )
 
     def _within_allowance(self, target_byte: Decimal) -> bool:
@@ -193,7 +193,7 @@ class CompressZip:
                 self._update_archive_byte(target, root)
 
     def compress_archive(
-        self, archive_target: Path, archive_root: Path = Path(),
+        self, archive_target: Path, archive_root: Path = Path()
     ) -> None:
         has_initial: bool = '.' != str(archive_root)
 

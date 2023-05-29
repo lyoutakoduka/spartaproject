@@ -104,7 +104,7 @@ def test_mix_option() -> None:
             'float': 1.0,
             'str': 'test',
             'decimal': Decimal('0.1'),
-            'path': Path('root'),
+            'path': Path('root')
         }
     }
 
@@ -135,7 +135,7 @@ def test_mix_section() -> None:
         'numbers': numbers,
         'texts': texts,
         'decimals': decimals,
-        'paths': paths,
+        'paths': paths
     }
 
     EXPECTED: str = """
