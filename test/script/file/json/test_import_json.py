@@ -6,8 +6,8 @@ from tempfile import TemporaryDirectory
 from typing import Dict
 
 from context.json_context import Json, Single
-from script.files.json.export_json import json_export
-from script.files.json.import_json import json_load, json_import
+from script.file.json.export_json import json_export
+from script.file.json.import_json import json_load, json_import
 
 
 def _common_test(input: Single, result: Json) -> None:

@@ -5,8 +5,8 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from context.json_context import Json
-from script.files.import_file import text_import
-from script.files.json.export_json import json_dump, json_export
+from script.file.import_file import text_import
+from script.file.json.export_json import json_dump, json_export
 from script.format_texts import format_indent
 
 
