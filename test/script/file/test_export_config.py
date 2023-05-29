@@ -10,8 +10,8 @@ from context.default.float_context import FloatPair, FloatPair2
 from context.default.integer_context import IntPair, IntPair2
 from context.default.string_context import StrPair, StrPair2
 from context.path_context import Path, PathPair, PathPair2
-from script.files.export_config import config_dump, config_export
-from script.files.import_file import text_import
+from script.file.export_config import config_dump, config_export
+from script.file.import_file import text_import
 from script.format_texts import format_indent
 
 

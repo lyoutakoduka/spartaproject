@@ -8,9 +8,9 @@ from context.default.string_context import Strs, StrPair
 from context.path_context import Path, Paths
 from script.directory.create_directory import create_directory
 from script.directory.create_directory_parent import create_directory_parent
-from script.files.export_file import byte_export
-from script.files.json.convert_from_json import string_pair_from_json
-from script.files.json.import_json import json_load
+from script.file.export_file import byte_export
+from script.file.json.convert_from_json import string_pair_from_json
+from script.file.json.import_json import json_load
 from script.paths.iterate_directory import walk_iterator
 from script.time.set_timestamp import set_latest
 

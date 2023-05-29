@@ -9,8 +9,8 @@ from typing import Callable
 from context.default.integer_context import Ints2
 from context.path_context import Path, Paths, Paths2
 from context.time_context import datetime, Times2
-from script.files.compress_zip import CompressZip
-from script.files.decompress_zip import DecompressZip
+from script.file.compress_zip import CompressZip
+from script.file.decompress_zip import DecompressZip
 from script.paths.create_temporary_tree import create_temporary_tree
 from script.paths.get_relative import get_relative_array
 from script.paths.iterate_directory import walk_iterator

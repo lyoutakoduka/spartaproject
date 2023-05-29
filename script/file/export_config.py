@@ -6,7 +6,7 @@ from io import StringIO
 from pathlib import Path
 
 from context.config_context import Config
-from script.files.export_file import text_export
+from script.file.export_file import text_export
 
 
 def _cleanup_text(test: str, compress: bool) -> str:
