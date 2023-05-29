@@ -13,7 +13,7 @@ class TestDecorator(TransferFunction):
         self,
         function: Callable[CP, CR],
         *arguments: CP.args,
-        **key_arguments: CP.kwargs,
+        **key_arguments: CP.kwargs
     ) -> CR:
         result: CR = function(*arguments, **key_arguments)
         self.text *= 2

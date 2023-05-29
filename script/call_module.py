@@ -39,10 +39,7 @@ def _switch_test_root(head_added_path: Path, root_path: Path) -> Path:
 
 
 def _update_module_path(
-    call_context: PathPair,
-    root_names: Strs,
-    head_added_path: Path,
-    index: int,
+    call_context: PathPair, root_names: Strs, head_added_path: Path, index: int
 ) -> bool:
     root_path: Path = get_absolute(Path(*root_names[:index + 1]))
     if not head_added_path.is_relative_to(root_path):
@@ -87,7 +84,7 @@ def _add_system_path(imports: Paths) -> None:
 
 def _check_system_path(call_context: PathPair) -> None:
     _add_system_path([
-        _get_common_directory(call_context), call_context['module'].parent,
+        _get_common_directory(call_context), call_context['module'].parent
     ])
 
 
@@ -111,7 +108,7 @@ def _check_call_environment(call_target: PathPair, function: str) -> None:
 
 
 def call_function(
-    source_path: Path, module_path: Path, function: str = 'main',
+    source_path: Path, module_path: Path, function: str = 'main'
 ) -> bool:
     call_context: PathPair = {'source': source_path, 'module': module_path}
 

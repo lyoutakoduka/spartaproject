@@ -15,7 +15,7 @@ class StdoutText(TransferFunction):
         self,
         function: Callable[CP, CR],
         *arguments: CP.args,
-        **key_arguments: CP.kwargs,
+        **key_arguments: CP.kwargs
     ) -> CR:
         def _execute_function() -> CR:
             return function(*arguments, **key_arguments)

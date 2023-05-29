@@ -44,7 +44,7 @@ def test_indent() -> None:
     EXPECTED: Strs = [
         "    Hallo!",
         "Hallo!",
-        "        Hallo!",
+        "        Hallo!"
     ]
     shared_compare(EXPECTED, INPUT)
 
@@ -60,7 +60,7 @@ def test_inner() -> None:
         "Hallo!    Hallo!",
         "",
         "",
-        "Hallo!    Hallo!",
+        "Hallo!    Hallo!"
     ]
     shared_compare(EXPECTED, INPUT)
 
