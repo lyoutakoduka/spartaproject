@@ -12,7 +12,7 @@ from script.path.get_relative import (
 
 
 _BASE_PATH: Path = Path('project')
-_HEAD_PATH: Path = Path(_BASE_PATH, 'sparta', 'test', 'script', 'paths')
+_HEAD_PATH: Path = Path(_BASE_PATH, 'sparta', 'test', 'script', 'path')
 
 _TEST_PATH: Strs = ['sparta', 'test']
 _EXPECTED: Strs2 = [
@@ -20,7 +20,7 @@ _EXPECTED: Strs2 = [
     ['sparta'],
     _TEST_PATH,
     _TEST_PATH + ['script'],
-    _TEST_PATH + ['script', 'paths'],
+    _TEST_PATH + ['script', 'path'],
 ]
 
 _input_paths: Paths = [
