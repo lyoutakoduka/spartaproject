@@ -5,7 +5,7 @@ from importlib import import_module, util
 from os.path import commonpath
 from sys import path as system_path
 
-from context.defaults.string_context import Strs
+from context.default.string_context import Strs
 from context.path_context import Path, Paths, PathPair
 from script.paths.get_absolute import get_absolute
 

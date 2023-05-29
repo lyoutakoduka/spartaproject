@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from context.defaults.string_context import Strs
+from context.default.string_context import Strs
 from script.format_texts import format_indent
 
 
