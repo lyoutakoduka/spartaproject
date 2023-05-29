@@ -8,7 +8,7 @@ from context.decimal_context import Decimal, set_decimal_context
 from context.default.integer_context import IntTuple
 from context.path_context import Path, Paths
 from project.sparta.context.default.string_context import Strs, StrPair
-from script.directories.create_directory import create_directory
+from script.directory.create_directory import create_directory
 from script.files.import_file import byte_import
 from script.files.jsons.convert_to_json import multiple_to_json
 from script.files.jsons.export_json import json_dump

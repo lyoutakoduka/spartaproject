@@ -6,8 +6,8 @@ from zipfile import ZipFile, ZipInfo
 
 from context.default.string_context import Strs, StrPair
 from context.path_context import Path, Paths
-from script.directories.create_directory import create_directory
-from script.directories.create_directory_parent import create_directory_parent
+from script.directory.create_directory import create_directory
+from script.directory.create_directory_parent import create_directory_parent
 from script.files.export_file import byte_export
 from script.files.jsons.convert_from_json import string_pair_from_json
 from script.files.jsons.import_json import json_load
