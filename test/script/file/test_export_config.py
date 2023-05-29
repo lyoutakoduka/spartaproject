@@ -3,7 +3,7 @@
 
 from tempfile import TemporaryDirectory
 
-from context.config_context import Config
+from context.file.config_context import Config
 from context.default.bool_context import BoolPair, BoolPair2
 from context.default.float_context import FloatPair, FloatPair2
 from context.default.integer_context import IntPair, IntPair2
