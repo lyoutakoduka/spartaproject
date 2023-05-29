@@ -12,9 +12,7 @@ set_decimal_context()
 
 def _get_datetime_counts(counter: datetime) -> IntPair:
     counts: IntPair = {
-        'year': counter.year,
-        'month': counter.month,
-        'day': counter.day,
+        'year': counter.year, 'month': counter.month, 'day': counter.day
     }
 
     counts = {id: count - 1 for id, count in counts.items()}
@@ -23,14 +21,14 @@ def _get_datetime_counts(counter: datetime) -> IntPair:
         'hour': counter.hour,
         'minute': counter.minute,
         'second': counter.second,
-        'micro': counter.microsecond,
+        'micro': counter.microsecond
     })
 
     return counts
 
 
 def _get_micro_second_text(
-    second: Decimal, counts: IntPair, order: int, order_limit: int,
+    second: Decimal, counts: IntPair, order: int, order_limit: int
 ) -> str:
     count_text: str = str(counts['micro'])
 
@@ -42,7 +40,7 @@ def _get_micro_second_text(
 
 
 def _get_decimal_count_texts(
-    second: Decimal, counts: IntPair, order: int,
+    second: Decimal, counts: IntPair, order: int
 ) -> str:
     second_numbers: Strs = [str(counts['second'])]
 

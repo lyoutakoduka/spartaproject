@@ -44,7 +44,7 @@ class LogTimer:
         return count_changed
 
     def show(
-        self, force: bool = False, header: Strs = [], footer: Strs = [],
+        self, force: bool = False, header: Strs = [], footer: Strs = []
     ) -> None:
         elapsed: Decimal = self._timer_current() - self._start_time
 

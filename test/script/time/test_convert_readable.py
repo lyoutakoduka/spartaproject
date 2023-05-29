@@ -35,7 +35,7 @@ def test_day() -> None:
         "1d 0s": DAY,
         "1d 1h 0s": DAY + HOUR,
         "1d 1h 1m 0s": DAY + HOUR + MINUTE,
-        "1d 1h 1m 1s": DAY + HOUR + MINUTE + SECOND,
+        "1d 1h 1m 1s": DAY + HOUR + MINUTE + SECOND
     }
 
     assert bool_same_array([
@@ -55,7 +55,7 @@ def test_second() -> None:
         "0.000100s",
         "0.000010s",
         "0.000001s",
-        "0.000000s",
+        "0.000000s"
     ]
 
     assert bool_same_array([
@@ -73,7 +73,7 @@ def test_order() -> None:
         "0.666s": 3,
         "0.6666s": 4,
         "0.66666s": 5,
-        "0.666666s": 6,
+        "0.666666s": 6
     }
 
     assert bool_same_array([
