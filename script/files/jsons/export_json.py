@@ -4,7 +4,7 @@
 from json import dumps
 from pathlib import Path
 
-from context.defaults.string_context import StrTuple
+from context.default.string_context import StrTuple
 from context.json_context import Json
 from script.files.export_file import text_export
 
