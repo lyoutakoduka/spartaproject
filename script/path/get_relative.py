@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from context.path_context import Path, Paths, PathPair
+from context.extension.path_context import Path, Paths, PathPair
 
 
 def get_relative(absolute_path: Path, root_path: Path = Path()) -> Path:

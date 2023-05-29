@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from context.default.bool_context import Bools, BoolPair
-from context.path_context import Path, Paths, PathPair
+from context.extension.path_context import Path, Paths, PathPair
 
 
 def _check_exists(path: Path) -> bool:

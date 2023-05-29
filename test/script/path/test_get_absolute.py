@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from context.default.bool_context import Bools, BoolPair
-from context.path_context import Path, Paths, PathPair
+from context.extension.path_context import Path, Paths, PathPair
 from script.bool.compare_value import bool_compare_array, bool_compare_pair
 from script.path.check_exists import check_exists_array, check_exists_pair
 from script.path.get_absolute import (
