@@ -35,7 +35,7 @@ def _replace_file_name(head: str, module_path: Path) -> Path:
 
 
 def _switch_test_root(head_added_path: Path, root_path: Path) -> Path:
-    return Path(root_path, 'tests', head_added_path.relative_to(root_path))
+    return Path(root_path, 'test', head_added_path.relative_to(root_path))
 
 
 def _update_module_path(
