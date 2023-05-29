@@ -3,7 +3,7 @@
 
 from shutil import copy2
 
-from context.path_context import Path
+from context.extension.path_context import Path
 from script.path.avoid_duplication import get_avoid_path
 from script.path.safe.safe_file_history import FileHistory
 

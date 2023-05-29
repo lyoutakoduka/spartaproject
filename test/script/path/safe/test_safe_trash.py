@@ -5,7 +5,7 @@ from tempfile import TemporaryDirectory
 from typing import Callable
 
 from context.default.bool_context import Bools
-from context.path_context import Path, Paths
+from context.extension.path_context import Path, Paths
 from script.bool.same_value import bool_same_array
 from script.path.check_exists import check_exists_array
 from script.path.create_temporary_file import create_temporary_file
