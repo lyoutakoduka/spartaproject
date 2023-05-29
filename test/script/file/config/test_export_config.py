@@ -11,7 +11,7 @@ from context.extension.decimal_context import Decimal, DecPair, DecPair2
 from context.extension.path_context import Path, PathPair, PathPair2
 from context.file.config_context import Config
 from script.file.config.export_config import config_dump, config_export
-from script.file.import_file import text_import
+from script.file.text.import_file import text_import
 from script.format_texts import format_indent
 
 

@@ -6,7 +6,7 @@ from decimal import Decimal
 from pathlib import Path
 
 from context.file.config_context import Config, Basic
-from script.file.import_file import text_import
+from script.file.text.import_file import text_import
 
 
 def _load_each_type(config: ConfigParser, section: str, option: str) -> Basic:
