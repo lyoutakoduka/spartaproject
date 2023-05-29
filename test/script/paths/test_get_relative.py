@@ -12,9 +12,9 @@ from script.paths.get_relative import (
 
 
 _BASE_PATH: Path = Path('project')
-_HEAD_PATH: Path = Path(_BASE_PATH, 'sparta', 'tests', 'script', 'paths')
+_HEAD_PATH: Path = Path(_BASE_PATH, 'sparta', 'test', 'script', 'paths')
 
-_TEST_PATH: Strs = ['sparta', 'tests']
+_TEST_PATH: Strs = ['sparta', 'test']
 _EXPECTED: Strs2 = [
     ['.'],
     ['sparta'],
