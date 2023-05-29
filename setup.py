@@ -19,7 +19,8 @@ _README_PATH = 'README.md'
 _INSTALL_REQUIRES = [
     'PySide6>=6.4.3',
     'PyOpenGL>=3.1.6',
-    'numpy>=1.24.2']
+    'numpy>=1.24.2'
+]
 
 _CLASSIFIERS = [
     'Development Status :: 1 - Planning',
@@ -32,7 +33,8 @@ _CLASSIFIERS = [
     'Programming Language :: Python :: 3.11',
     'Programming Language :: C++',
     'Topic :: Artistic Software',
-    'Topic :: Multimedia :: Graphics :: 3D Modeling']
+    'Topic :: Multimedia :: Graphics :: 3D Modeling'
+]
 
 _ENCODING_TYPE = 'utf-8'
 
@@ -53,5 +55,5 @@ setup(
     keywords=_SEARCH_KEYWORDS,
     packages=[_PACKAGE_NAME],
     install_requires=_INSTALL_REQUIRES,
-    classifiers=_CLASSIFIERS,
+    classifiers=_CLASSIFIERS
 )
