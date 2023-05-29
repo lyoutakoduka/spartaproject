@@ -6,7 +6,7 @@ from typing import Callable
 
 from context.default.bool_context import BoolPair
 from context.path_context import Path, PathPair2
-from script.bools.same_value import bool_same_array
+from script.bool.same_value import bool_same_array
 from script.files.jsons.convert_from_json import path_pair2_from_json
 from script.files.jsons.import_json import json_import
 from script.paths.check_exists import check_exists_pair

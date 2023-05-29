@@ -5,7 +5,7 @@ from tempfile import TemporaryDirectory
 from typing import Callable
 
 from context.path_context import Path, PathPair2
-from script.bools.same_value import bool_same_pair
+from script.bool.same_value import bool_same_pair
 from script.files.jsons.convert_from_json import path_pair2_from_json
 from script.files.jsons.import_json import json_import
 from script.paths.check_exists import check_exists_pair

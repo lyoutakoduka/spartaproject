@@ -5,7 +5,7 @@ from tempfile import TemporaryDirectory
 
 from context.default.bool_context import Bools
 from context.path_context import Path, Paths2, PathPair2
-from script.bools.same_value import bool_same_array
+from script.bool.same_value import bool_same_array
 from script.files.jsons.convert_from_json import path_pair2_from_json
 from script.files.jsons.import_json import json_import
 from script.paths.safes.safe_file_history import FileHistory
