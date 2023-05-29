@@ -5,14 +5,14 @@ from decimal import Decimal  # not from context
 from pathlib import Path  # not from context
 from typing import List, Dict
 
-from context.decimal_context import Decs, Decs2, DecPair, DecPair2
 from context.default.bool_context import Bools, Bools2, BoolPair, BoolPair2
 from context.default.float_context import (
     Floats, Floats2, FloatPair, FloatPair2
 )
 from context.default.integer_context import Ints, Ints2, IntPair, IntPair2
 from context.default.string_context import Strs, Strs2, StrPair, StrPair2
-from context.path_context import Paths, Paths2, PathPair, PathPair2
+from context.extension.decimal_context import Decs, Decs2, DecPair, DecPair2
+from context.extension.path_context import Paths, Paths2, PathPair, PathPair2
 
 Array = Bools | Ints | Floats | Strs | Decs | Paths
 Array2 = Bools2 | Ints2 | Floats2 | Strs2 | Decs2 | Paths2
