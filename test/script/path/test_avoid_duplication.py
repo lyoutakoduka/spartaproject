@@ -6,7 +6,7 @@ from tempfile import TemporaryDirectory
 from typing import Callable
 
 from script.file.json.export_json import json_export
-from script.paths.avoid_duplication import get_avoid_path
+from script.path.avoid_duplication import get_avoid_path
 
 
 def _common_test(source_path: Path, destination_path: Path) -> None:
