@@ -20,7 +20,7 @@ def test_key() -> None:
     with raises(KeyError, match='unmatch'):
         bool_compare_pair(
             {'R': False, 'G': True, 'B': True},
-            {'R': True, 'error': False, 'B': True},
+            {'R': True, 'error': False, 'B': True}
         )
 
 
@@ -31,7 +31,7 @@ def test_array() -> None:
 def test_pair() -> None:
     assert bool_compare_pair(
         {'R': True, 'G': False, 'B': True},
-        {'R': True, 'G': False, 'B': True},
+        {'R': True, 'G': False, 'B': True}
     )
 
 
