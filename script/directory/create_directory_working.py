@@ -19,12 +19,12 @@ def get_time_data(time: datetime) -> Ints2:
         [2, time.hour],
         [2, time.minute],
         [2, time.second],
-        [6, time.microsecond],
+        [6, time.microsecond]
     ]
 
 
 def current_working_space(
-    root: Path, override: bool = False, jst: bool = False,
+    root: Path, override: bool = False, jst: bool = False
 ) -> Path:
     time_texts: Strs = [
         str(time_count).zfill(order)
