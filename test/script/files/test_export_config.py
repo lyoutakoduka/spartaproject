@@ -5,10 +5,10 @@ from tempfile import TemporaryDirectory
 
 from context.config_context import Config
 from context.decimal_context import Decimal, DecPair, DecPair2
-from context.defaults.bool_context import BoolPair, BoolPair2
-from context.defaults.float_context import FloatPair, FloatPair2
-from context.defaults.integer_context import IntPair, IntPair2
-from context.defaults.string_context import StrPair, StrPair2
+from context.default.bool_context import BoolPair, BoolPair2
+from context.default.float_context import FloatPair, FloatPair2
+from context.default.integer_context import IntPair, IntPair2
+from context.default.string_context import StrPair, StrPair2
 from context.path_context import Path, PathPair, PathPair2
 from script.files.export_config import config_dump, config_export
 from script.files.import_file import text_import

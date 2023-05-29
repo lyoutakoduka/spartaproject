@@ -4,7 +4,7 @@
 from datetime import datetime
 from zipfile import ZipFile, ZipInfo
 
-from context.defaults.string_context import Strs, StrPair
+from context.default.string_context import Strs, StrPair
 from context.path_context import Path, Paths
 from script.directories.create_directory import create_directory
 from script.directories.create_directory_parent import create_directory_parent

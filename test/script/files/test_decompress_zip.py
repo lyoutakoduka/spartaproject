@@ -6,7 +6,7 @@ from shutil import make_archive
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from context.defaults.integer_context import Ints2
+from context.default.integer_context import Ints2
 from context.path_context import Path, Paths, Paths2
 from context.time_context import datetime, Times2
 from script.files.compress_zip import CompressZip
