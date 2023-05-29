@@ -28,7 +28,7 @@ from script.file.json.convert_from_json import (
     string_pair2_from_json,
     decimal_pair2_from_json,
     path_pair2_from_json,
-    from_safe_json,
+    from_safe_json
 )
 
 
@@ -148,7 +148,7 @@ def test_tree() -> None:
 
     assert bool_same_array([
         INPUT_PATH == result_outside['path'],
-        [None, INPUT_DECIMAL] == result_inside,
+        [None, INPUT_DECIMAL] == result_inside
     ])
 
 

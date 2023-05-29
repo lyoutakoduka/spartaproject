@@ -18,11 +18,11 @@ def json_dump(input: Json, compress: bool = False) -> str:
         ensure_ascii=False,
         sort_keys=True,
         indent=indent,
-        separators=separators,
+        separators=separators
     )
 
 
 def json_export(
-    export_path: Path, input: Json, compress: bool = False,
+    export_path: Path, input: Json, compress: bool = False
 ) -> Path:
     return text_export(export_path, json_dump(input, compress=compress))

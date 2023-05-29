@@ -20,7 +20,7 @@ def test_type() -> None:
         'bool': True,
         'int': 1,
         'float': 1.0,
-        'str': '1',
+        'str': '1'
     }
 
     # 2 space indent
