@@ -5,7 +5,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from script.files.json.export_json import json_export
+from script.file.json.export_json import json_export
 from script.paths.avoid_duplication import get_avoid_path
 
 

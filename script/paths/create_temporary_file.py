@@ -4,7 +4,7 @@
 from pathlib import Path
 
 from script.directory.create_directory_parent import create_directory_parent
-from script.files.json.export_json import json_export
+from script.file.json.export_json import json_export
 
 
 def create_temporary_file(file_root: Path) -> Path:
