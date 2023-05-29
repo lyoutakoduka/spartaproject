@@ -11,7 +11,7 @@ from script.paths.check_exists import check_exists_array
 from script.paths.create_temporary_file import create_temporary_file
 from script.paths.create_temporary_tree import create_temporary_tree
 from script.paths.iterate_directory import walk_iterator
-from script.paths.safes.safe_trash import TrashBox
+from script.paths.safe.safe_trash import TrashBox
 
 
 def _common_test(target_paths: Paths, evacuated_paths: Paths) -> None:

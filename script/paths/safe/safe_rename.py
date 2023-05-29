@@ -1,15 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from shutil import copy2
+from shutil import move
 
 from context.path_context import Path
 from script.paths.avoid_duplication import get_avoid_path
-from script.paths.safes.safe_file_history import FileHistory
+from script.paths.safe.safe_file_history import FileHistory
 
 
-class SafeCopy(FileHistory):
-    def copy(
+class SafeRename(FileHistory):
+    def rename(
         self, source_path: Path,
         destination_path: Path,
         override: bool = False,
@@ -17,7 +17,11 @@ class SafeCopy(FileHistory):
         if override:
             destination_path = get_avoid_path(destination_path)
 
-        copy2(source_path, destination_path)
+        if source_path.drive == destination_path.drive:
+            source_path.rename(destination_path)
+        else:
+            move(source_path, destination_path)  # to move other drive
+
         self.add_history(source_path, destination_path)
 
         return destination_path
