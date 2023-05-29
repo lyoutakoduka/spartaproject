@@ -4,8 +4,8 @@
 from datetime import datetime
 from pathlib import Path
 
-from context.defaults.integer_context import Ints2
-from context.defaults.string_context import Strs
+from context.default.integer_context import Ints2
+from context.default.string_context import Strs
 from script.directories.create_directory import create_directory
 from script.paths.get_absolute import get_absolute
 from script.times.current_datetime import get_current_time
