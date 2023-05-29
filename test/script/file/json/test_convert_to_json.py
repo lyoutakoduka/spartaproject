@@ -13,7 +13,7 @@ from context.extension.decimal_context import (
 from context.extension.path_context import (
     Path, Paths, Paths2, PathPair, PathPair2
 )
-from context.json_context import Json, Multi, Multi2
+from context.file.json_context import Json, Multi, Multi2
 from script.file.json.convert_to_json import (
     to_safe_json, multiple_to_json, multiple2_to_json
 )

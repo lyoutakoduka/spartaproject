@@ -12,7 +12,7 @@ from context.extension.decimal_context import (
 from context.extension.path_context import (
     Path, Paths, Paths2, PathPair, PathPair2
 )
-from context.json_context import Json, Single
+from context.file.json_context import Json, Single
 
 
 def _convert_unknown(input: Single, key: str) -> Single:
