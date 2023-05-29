@@ -24,9 +24,7 @@ class PySpartaSilent:
 
 class PySpartaAPI:
     def create_silent_sparta(
-        self,
-        online: bool = True,
-        offline: bool = True
+        self, online: bool = True, offline: bool = True
     ) -> PySpartaSilent:
 
         silent_app = PySpartaSilent()
