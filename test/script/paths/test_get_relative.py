@@ -5,7 +5,7 @@ from pytest import raises
 
 from context.path_context import Path, Paths, PathPair
 from context.default.string_context import Strs, Strs2
-from script.bools.same_value import bool_same_array
+from script.bool.same_value import bool_same_array
 from script.paths.get_relative import (
     get_relative, get_relative_array, get_relative_pair
 )
