@@ -7,11 +7,11 @@ from typing import Callable
 from context.default.bool_context import Bools
 from context.path_context import Path, Paths
 from script.bool.same_value import bool_same_array
-from script.paths.check_exists import check_exists_array
-from script.paths.create_temporary_file import create_temporary_file
-from script.paths.create_temporary_tree import create_temporary_tree
-from script.paths.iterate_directory import walk_iterator
-from script.paths.safe.safe_trash import TrashBox
+from script.path.check_exists import check_exists_array
+from script.path.create_temporary_file import create_temporary_file
+from script.path.create_temporary_tree import create_temporary_tree
+from script.path.iterate_directory import walk_iterator
+from script.path.safe.safe_trash import TrashBox
 
 
 def _common_test(target_paths: Paths, evacuated_paths: Paths) -> None:

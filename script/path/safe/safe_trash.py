@@ -6,7 +6,7 @@ from shutil import move
 from context.path_context import Path, Paths
 from script.directory.create_directory_parent import create_directory_parent
 from script.directory.create_directory_working import current_working_space
-from script.paths.get_relative import get_relative
+from script.path.get_relative import get_relative
 
 
 class TrashBox:
