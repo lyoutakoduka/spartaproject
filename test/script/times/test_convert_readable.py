@@ -4,7 +4,7 @@
 from context.decimal_context import Decimal, Decs, set_decimal_context
 from context.default.integer_context import IntPair
 from project.sparta.context.default.string_context import Strs
-from script.bools.same_value import bool_same_array
+from script.bool.same_value import bool_same_array
 from script.times.convert_readable import readable_time
 
 set_decimal_context()
