@@ -5,7 +5,7 @@ from itertools import takewhile
 from typing import List, TypedDict
 
 from context.default.integer_context import Ints
-from project.sparta.context.default.string_context import Strs
+from context.default.string_context import Strs
 
 
 class _LinePair(TypedDict):

@@ -3,7 +3,7 @@
 
 from context.default.bool_context import Bools, BoolPair, Bools2, BoolType
 from context.default.integer_context import Ints
-from project.sparta.context.default.string_context import Strs2
+from context.default.string_context import Strs2
 
 
 def _check_arguments_size(lefts: BoolType, rights: BoolType) -> None:
