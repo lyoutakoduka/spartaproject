@@ -7,7 +7,7 @@ from context.default.string_context import StrPair2
 from script.directory.create_directory import create_directory_array
 from script.files.export_config import config_export
 from script.files.export_file import text_export
-from script.files.jsons.export_json import json_export, Json
+from script.files.json.export_json import json_export, Json
 
 _NAME: str = 'file'
 
