@@ -9,8 +9,8 @@ from script.bool.same_value import bool_same_pair
 from script.file.json.convert_from_json import path_pair2_from_json
 from script.file.json.import_json import json_import
 from script.path.check_exists import check_exists_pair
-from script.path.create_temporary_file import create_temporary_file
 from script.path.safe.safe_copy import SafeCopy
+from script.path.temporary.create_temporary_file import create_temporary_file
 
 
 def _common_test(rename_path: Path) -> None:
