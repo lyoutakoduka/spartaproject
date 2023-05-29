@@ -12,7 +12,7 @@ from script.files.export_file import byte_export
 from script.files.jsons.convert_from_json import string_pair_from_json
 from script.files.jsons.import_json import json_load
 from script.paths.iterate_directory import walk_iterator
-from script.times.set_timestamp import set_latest
+from script.time.set_timestamp import set_latest
 
 
 class DecompressZip:
