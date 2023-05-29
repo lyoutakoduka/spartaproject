@@ -12,8 +12,8 @@ from script.directory.create_directory import create_directory
 from script.file.import_file import byte_import
 from script.file.json.convert_to_json import multiple_to_json
 from script.file.json.export_json import json_dump
-from script.paths.get_relative import get_relative
-from script.paths.iterate_directory import walk_iterator
+from script.path.get_relative import get_relative
+from script.path.iterate_directory import walk_iterator
 from script.time.get_timestamp import get_latest
 
 set_decimal_context()

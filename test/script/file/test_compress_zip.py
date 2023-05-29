@@ -9,9 +9,9 @@ from context.decimal_context import Decimal, Decs, set_decimal_context
 from context.default.integer_context import Ints2
 from context.path_context import Path, Paths, Paths2
 from script.file.compress_zip import CompressZip
-from script.paths.create_temporary_tree import create_temporary_tree
-from script.paths.get_relative import get_relative_array
-from script.paths.iterate_directory import walk_iterator
+from script.path.create_temporary_tree import create_temporary_tree
+from script.path.get_relative import get_relative_array
+from script.path.iterate_directory import walk_iterator
 
 set_decimal_context()
 

@@ -11,10 +11,10 @@ from context.path_context import Path, Paths, Paths2
 from context.time_context import datetime, Times2
 from script.file.compress_zip import CompressZip
 from script.file.decompress_zip import DecompressZip
-from script.paths.create_temporary_tree import create_temporary_tree
-from script.paths.get_relative import get_relative_array
-from script.paths.iterate_directory import walk_iterator
-from script.paths.safe.safe_trash import TrashBox
+from script.path.create_temporary_tree import create_temporary_tree
+from script.path.get_relative import get_relative_array
+from script.path.iterate_directory import walk_iterator
+from script.path.safe.safe_trash import TrashBox
 from script.time.get_timestamp import get_latest
 from script.time.set_timestamp import set_latest
 
