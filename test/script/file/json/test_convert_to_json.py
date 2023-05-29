@@ -1,15 +1,19 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from context.decimal_context import Decimal, Decs, Decs2, DecPair, DecPair2
 from context.default.bool_context import Bools, Bools2, BoolPair, BoolPair2
 from context.default.float_context import (
     Floats, Floats2, FloatPair, FloatPair2
 )
 from context.default.integer_context import Ints, Ints2, IntPair, IntPair2
 from context.default.string_context import Strs, Strs2, StrPair, StrPair2
+from context.extension.decimal_context import (
+    Decimal, Decs, Decs2, DecPair, DecPair2
+)
+from context.extension.path_context import (
+    Path, Paths, Paths2, PathPair, PathPair2
+)
 from context.json_context import Json, Multi, Multi2
-from context.path_context import Path, Paths, Paths2, PathPair, PathPair2
 from script.file.json.convert_to_json import (
     to_safe_json, multiple_to_json, multiple2_to_json
 )
