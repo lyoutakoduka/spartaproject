@@ -3,7 +3,7 @@
 
 from datetime import datetime
 
-from script.times.current_datetime import get_current_time
+from script.time.current_datetime import get_current_time
 
 
 def _common_test(time: datetime, expected: str) -> None:
