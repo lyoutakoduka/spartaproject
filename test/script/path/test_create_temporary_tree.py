@@ -45,7 +45,7 @@ def test_three() -> None:
         NAME_DIRS + [NAME_DIR_EMPTY],
         NAME_DIRS + [NAME_INI],
         NAME_DIRS + [NAME_JSON],
-        NAME_DIRS + [NAME_TEXT],
+        NAME_DIRS + [NAME_TEXT]
     ]
 
     expected: Paths = [Path(*path_names) for path_names in EXPECTED]

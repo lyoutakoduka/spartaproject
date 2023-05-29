@@ -23,9 +23,8 @@ _NAME_TEXT: str = 'file.txt'
 
 
 def _check_walk_result(
-        expected: Strs2,
-        path_gene: PathGene,
-        root_path: Path) -> None:
+    expected: Strs2, path_gene: PathGene, root_path: Path
+) -> None:
     results: Paths = get_relative_array(list(path_gene), root_path=root_path)
     expected_paths: Paths = [Path(*path_names) for path_names in expected]
 
@@ -55,7 +54,7 @@ def test_all() -> None:
         _NAME_DIRS + [_NAME_DIR_EMPTY],
         _NAME_DIRS + [_NAME_INI],
         _NAME_DIRS + [_NAME_JSON],
-        _NAME_DIRS + [_NAME_TEXT],
+        _NAME_DIRS + [_NAME_TEXT]
     ]
 
     def individual_test(root_path: Path) -> PathGene:
@@ -69,7 +68,7 @@ def test_depth() -> None:
         [_NAME_DIR_1, _NAME_DIR_EMPTY],
         [_NAME_DIR_1, _NAME_INI],
         [_NAME_DIR_1, _NAME_JSON],
-        [_NAME_DIR_1, _NAME_TEXT],
+        [_NAME_DIR_1, _NAME_TEXT]
     ]
 
     def individual_test(root_path: Path) -> PathGene:
@@ -87,7 +86,7 @@ def test_directory() -> None:
         [_NAME_DIR_1, _NAME_TEXT],
         _NAME_DIRS + [_NAME_INI],
         _NAME_DIRS + [_NAME_JSON],
-        _NAME_DIRS + [_NAME_TEXT],
+        _NAME_DIRS + [_NAME_TEXT]
     ]
 
     def individual_test(root_path: Path) -> PathGene:
@@ -101,7 +100,7 @@ def test_file() -> None:
         [_NAME_DIR_EMPTY],
         _NAME_DIRS,
         [_NAME_DIR_1, _NAME_DIR_EMPTY],
-        _NAME_DIRS + [_NAME_DIR_EMPTY],
+        _NAME_DIRS + [_NAME_DIR_EMPTY]
     ]
 
     def individual_test(root_path: Path) -> PathGene:
@@ -113,7 +112,7 @@ def test_suffix() -> None:
     EXPECTED: Strs2 = [
         [_NAME_JSON],
         [_NAME_DIR_1, _NAME_JSON],
-        _NAME_DIRS + [_NAME_JSON],
+        _NAME_DIRS + [_NAME_JSON]
     ]
 
     def individual_test(root_path: Path) -> PathGene:

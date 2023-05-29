@@ -12,7 +12,7 @@ def get_relative(absolute_path: Path, root_path: Path = Path()) -> Path:
 
 
 def get_relative_array(
-    absolute_paths: Paths, root_path: Path = Path(),
+    absolute_paths: Paths, root_path: Path = Path()
 ) -> Paths:
     return [
         get_relative(path, root_path=root_path)
@@ -21,7 +21,7 @@ def get_relative_array(
 
 
 def get_relative_pair(
-    absolute_pair: PathPair, root_path: Path = Path(),
+    absolute_pair: PathPair, root_path: Path = Path()
 ) -> PathPair:
     return {
         key: get_relative(path, root_path=root_path)

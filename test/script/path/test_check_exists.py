@@ -19,9 +19,7 @@ def test_array() -> None:
 
 def test_pair() -> None:
     PATHS: PathPair = {
-        'R': _CURRENT_PATH,
-        'G': _UNKNOWN_PATH,
-        'B': _CURRENT_PATH.parent,
+        'R': _CURRENT_PATH, 'G': _UNKNOWN_PATH, 'B': _CURRENT_PATH.parent
     }
     EXPECTS: BoolPair = {'R': True, 'G': False, 'B': True}
 

@@ -34,9 +34,7 @@ def test_array() -> None:
 
 def test_pair() -> None:
     RELATIVE_PATHS: PathPair = {
-        'R': _EMPTY_PATH,
-        'G': _EMPTY_HEAD,
-        'B': _EMPTY_PATH,
+        'R': _EMPTY_PATH, 'G': _EMPTY_HEAD, 'B': _EMPTY_PATH
     }
     EXPECTS: BoolPair = {'R': True, 'G': False, 'B': True}
 

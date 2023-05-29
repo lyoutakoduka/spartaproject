@@ -20,7 +20,7 @@ _EXPECTED: Strs2 = [
     ['sparta'],
     _TEST_PATH,
     _TEST_PATH + ['script'],
-    _TEST_PATH + ['script', 'path'],
+    _TEST_PATH + ['script', 'path']
 ]
 
 _input_paths: Paths = [
@@ -49,7 +49,7 @@ def test_pair() -> None:
 
     results: PathPair = get_relative_pair(
         {key: path for key, path in zip(KEYS, _input_paths)},
-        root_path=_BASE_PATH,
+        root_path=_BASE_PATH
     )
 
     expected: PathPair = {
