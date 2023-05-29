@@ -5,9 +5,11 @@ from shutil import unpack_archive
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from context.decimal_context import Decimal, Decs, set_decimal_context
 from context.default.integer_context import Ints2
-from context.path_context import Path, Paths, Paths2
+from context.extension.decimal_context import (
+    Decimal, Decs, set_decimal_context
+)
+from context.extension.path_context import Path, Paths, Paths2
 from script.file.compress_zip import CompressZip
 from script.path.create_temporary_tree import create_temporary_tree
 from script.path.get_relative import get_relative_array

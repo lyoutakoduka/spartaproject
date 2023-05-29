@@ -4,10 +4,10 @@
 from datetime import datetime
 from zipfile import ZipFile, ZipInfo, ZIP_LZMA, ZIP_STORED
 
-from context.decimal_context import Decimal, set_decimal_context
 from context.default.integer_context import IntTuple
 from context.default.string_context import Strs, StrPair
-from context.path_context import Path, Paths
+from context.extension.decimal_context import Decimal, set_decimal_context
+from context.extension.path_context import Path, Paths
 from script.directory.create_directory import create_directory
 from script.file.import_file import byte_import
 from script.file.json.convert_to_json import multiple_to_json
