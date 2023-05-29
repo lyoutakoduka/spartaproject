@@ -4,7 +4,7 @@
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from context.defaults.string_context import Strs, Strs2
+from context.default.string_context import Strs, Strs2
 from context.path_context import Path, Paths, PathGene
 from script.paths.create_temporary_tree import create_temporary_tree
 from script.paths.get_relative import get_relative_array
