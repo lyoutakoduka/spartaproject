@@ -5,7 +5,7 @@ from decimal import getcontext, setcontext, FloatOperation, Context
 from pytest import raises
 
 from context.decimal_context import Decimal, set_decimal_context
-from context.defaults.string_context import Strs
+from context.default.string_context import Strs
 
 
 def test_float() -> None:
