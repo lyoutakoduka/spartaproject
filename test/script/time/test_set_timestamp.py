@@ -13,8 +13,7 @@ from script.time.get_timestamp import get_latest, get_access
 from script.time.set_timestamp import set_latest, set_access
 
 _TIMES: Strs = [
-    '2023-04-01T00:00:00.000001+00:00',
-    '2023-04-15T20:09:30.936886+00:00'
+    '2023-04-01T00:00:00.000001+00:00', '2023-04-15T20:09:30.936886+00:00'
 ]
 
 
@@ -47,8 +46,7 @@ def test_utc() -> None:
 
 def test_jst() -> None:
     TIMES_JST: Strs = [
-        '2023-04-01T09:00:00.000001+09:00',
-        '2023-04-16T05:09:30.936886+09:00'
+        '2023-04-01T09:00:00.000001+09:00', '2023-04-16T05:09:30.936886+09:00'
     ]
 
     def individual_test(path: Path) -> None:
