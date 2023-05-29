@@ -7,7 +7,7 @@ from tempfile import TemporaryDirectory
 
 from context.callable_context import CP, CR, Callable
 from script.decorator_generator import TransferFunction
-from script.files.import_file import text_import
+from script.file.import_file import text_import
 
 
 class StdoutText(TransferFunction):
