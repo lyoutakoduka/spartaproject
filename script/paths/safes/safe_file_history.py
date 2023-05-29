@@ -5,7 +5,7 @@ from itertools import count
 
 from context.json_context import Json
 from context.path_context import Path, PathPair2
-from script.directories.create_directory_working import current_working_space
+from script.directory.create_directory_working import current_working_space
 from script.files.jsons.convert_to_json import multiple2_to_json
 from script.files.jsons.export_json import json_export
 from script.times.current_datetime import get_current_time
