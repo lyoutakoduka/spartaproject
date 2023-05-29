@@ -31,7 +31,7 @@ def _common_test(source: Paths2, rename_path: Path) -> None:
 
 
 def _add_single_history(
-    file_history: FileHistory, source_history: Paths2, name: str,
+    file_history: FileHistory, source_history: Paths2, name: str
 ) -> None:
     source_path: Path = Path(__file__).parent.with_name('source.json')
     destination_path: Path = source_path.with_stem(name)

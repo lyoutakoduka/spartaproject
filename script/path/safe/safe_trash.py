@@ -36,7 +36,7 @@ class TrashBox:
             self._evacuated += [trash_path]
 
     def throw_away_trash(
-        self, trash_path: Path, trash_root: Path = Path(),
+        self, trash_path: Path, trash_root: Path = Path()
     ) -> None:
         has_initial: bool = '.' != str(trash_root)
 

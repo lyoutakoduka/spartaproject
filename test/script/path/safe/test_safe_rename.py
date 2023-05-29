@@ -21,7 +21,7 @@ def _common_test(rename_path: Path) -> None:
     for _, path_pair in history.items():
         exists_pair: BoolPair = check_exists_pair(path_pair)
         assert bool_same_array([
-            not exists_pair['source'], exists_pair['destination'],
+            not exists_pair['source'], exists_pair['destination']
         ])
 
 
@@ -46,7 +46,7 @@ def test_override() -> None:
     def individual_test(source_path: Path) -> None:
         safe_rename = SafeRename()
         destination_path: Path = safe_rename.rename(
-            source_path, source_path, override=True,
+            source_path, source_path, override=True
         )
 
         _common_test(safe_rename.pop_history())

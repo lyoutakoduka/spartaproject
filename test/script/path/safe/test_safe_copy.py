@@ -42,7 +42,7 @@ def test_override() -> None:
     def individual_test(source_path: Path) -> None:
         safe_copy = SafeCopy()
         destination_path: Path = safe_copy.copy(
-            source_path, source_path, override=True,
+            source_path, source_path, override=True
         )
 
         _common_test(safe_copy.pop_history())
