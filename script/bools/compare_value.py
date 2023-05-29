@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from context.defaults.bool_context import Bools, BoolPair, Bools2, BoolType
-from context.defaults.integer_context import Ints
-from project.sparta.context.defaults.string_context import Strs2
+from context.default.bool_context import Bools, BoolPair, Bools2, BoolType
+from context.default.integer_context import Ints
+from project.sparta.context.default.string_context import Strs2
 
 
 def _check_arguments_size(lefts: BoolType, rights: BoolType) -> None:
