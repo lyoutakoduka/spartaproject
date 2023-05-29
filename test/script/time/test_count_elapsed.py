@@ -3,7 +3,7 @@
 
 from typing import Callable
 
-from context.decimal_context import Decimal, set_decimal_context
+from context.extension.decimal_context import Decimal, set_decimal_context
 from script.format_texts import format_indent
 from script.off_stdout import StdoutText
 from script.time.count_elapsed import LogTimer

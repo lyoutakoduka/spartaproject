@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from context.decimal_context import Decimal, set_decimal_context
 from context.default.string_context import Strs
+from context.extension.decimal_context import Decimal, set_decimal_context
 from script.time.builtin_timer import TimerSelect
 from script.time.convert_readable import readable_time
 

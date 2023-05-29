@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from context.time_context import datetime
+from context.extension.time_context import datetime
 from script.time.offset_timezone import offset_time
 
 

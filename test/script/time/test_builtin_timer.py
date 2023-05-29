@@ -3,7 +3,9 @@
 
 from time import sleep
 
-from context.decimal_context import Decimal, Decs, set_decimal_context
+from context.extension.decimal_context import (
+    Decimal, Decs, set_decimal_context
+)
 from script.time.builtin_timer import TimerSelect
 
 
