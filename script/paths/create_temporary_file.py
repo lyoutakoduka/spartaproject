@@ -3,7 +3,7 @@
 
 from pathlib import Path
 
-from script.directories.create_directory_parent import create_directory_parent
+from script.directory.create_directory_parent import create_directory_parent
 from script.files.jsons.export_json import json_export
 
 
