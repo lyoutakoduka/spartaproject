@@ -7,8 +7,8 @@ from typing import Callable
 from context.default.integer_context import Ints
 from context.default.string_context import Strs, Strs2
 from context.extension.path_context import Path, Paths
-from script.path.get_relative import get_relative_array
 from script.path.iterate_directory import walk_iterator
+from script.path.modify.get_relative import get_relative_array
 from script.path.temporary.create_temporary_tree import create_temporary_tree
 
 
