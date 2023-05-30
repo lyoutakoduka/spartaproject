@@ -4,7 +4,7 @@
 from pathlib import Path
 
 from script.directory.create_directory_working import current_working_space
-from script.path.get_relative import get_relative
+from script.path.modify.get_relative import get_relative
 
 
 def test_pass() -> None:
