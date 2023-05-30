@@ -15,11 +15,7 @@ class SafeRename(FileHistory):
         if override:
             destination_path = get_avoid_path(destination_path)
 
-        if source_path.drive == destination_path.drive:
-            source_path.rename(destination_path)
-        else:
-            move(source_path, destination_path)  # to move other drive
-
+        move(source_path, destination_path)  # not use rename
         self.add_history(source_path, destination_path)
 
         return destination_path
