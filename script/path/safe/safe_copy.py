@@ -10,9 +10,7 @@ from script.path.safe.safe_file_history import FileHistory
 
 class SafeCopy(FileHistory):
     def copy(
-        self, source_path: Path,
-        destination_path: Path,
-        override: bool = False
+        self, source_path: Path, destination_path: Path, override: bool = False
     ) -> Path:
         if override:
             destination_path = get_avoid_path(destination_path)
