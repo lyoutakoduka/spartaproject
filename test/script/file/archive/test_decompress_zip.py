@@ -15,8 +15,8 @@ from script.path.iterate_directory import walk_iterator
 from script.path.modify.get_relative import get_relative_array
 from script.path.safe.safe_trash import TrashBox
 from script.path.temporary.create_temporary_tree import create_temporary_tree
-from script.time.get_timestamp import get_latest
-from script.time.set_timestamp import set_latest
+from script.time.stamp.get_timestamp import get_latest
+from script.time.stamp.set_timestamp import set_latest
 
 
 def _compare_timestamp(sorted_paths: Paths2, expected: datetime) -> None:

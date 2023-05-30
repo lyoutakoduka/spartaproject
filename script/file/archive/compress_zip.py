@@ -14,7 +14,7 @@ from script.file.json.export_json import json_dump
 from script.file.text.import_file import byte_import
 from script.path.iterate_directory import walk_iterator
 from script.path.modify.get_relative import get_relative
-from script.time.get_timestamp import get_latest
+from script.time.stamp.get_timestamp import get_latest
 
 set_decimal_context()
 
