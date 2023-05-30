@@ -6,13 +6,15 @@ from pytest import raises
 from context.default.string_context import Strs, Strs2
 from context.extension.path_context import Path, Paths, PathPair
 from script.bool.same_value import bool_same_array
-from script.path.get_relative import (
+from script.path.modify.get_relative import (
     get_relative, get_relative_array, get_relative_pair
 )
 
 
 _BASE_PATH: Path = Path('project')
-_HEAD_PATH: Path = Path(_BASE_PATH, 'sparta', 'test', 'script', 'path')
+_HEAD_PATH: Path = Path(
+    _BASE_PATH, 'sparta', 'test', 'script', 'path', 'modify'
+)
 
 _TEST_PATH: Strs = ['sparta', 'test']
 _EXPECTED: Strs2 = [
@@ -20,7 +22,8 @@ _EXPECTED: Strs2 = [
     ['sparta'],
     _TEST_PATH,
     _TEST_PATH + ['script'],
-    _TEST_PATH + ['script', 'path']
+    _TEST_PATH + ['script', 'path'],
+    _TEST_PATH + ['script', 'path', 'modify']
 ]
 
 _input_paths: Paths = [

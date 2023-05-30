@@ -5,7 +5,7 @@ from context.default.bool_context import Bools, BoolPair
 from context.extension.path_context import Path, Paths, PathPair
 from script.bool.compare_value import bool_compare_array, bool_compare_pair
 from script.path.check_exists import check_exists_array, check_exists_pair
-from script.path.get_absolute import (
+from script.path.modify.get_absolute import (
     get_absolute, get_absolute_array, get_absolute_pair
 )
 
