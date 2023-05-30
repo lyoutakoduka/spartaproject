@@ -5,7 +5,7 @@ from datetime import datetime
 from decimal import Decimal
 from pathlib import Path
 
-from script.time.from_timestamp import time_from_timestamp
+from script.time.stamp.from_timestamp import time_from_timestamp
 
 
 def _convert_timestamp(time: float, jst: bool) -> datetime:

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from context.extension.time_context import datetime
-from script.time.offset_timezone import offset_time
+from script.time.stamp.offset_timezone import offset_time
 
 
 def _common_text(input: str) -> None:

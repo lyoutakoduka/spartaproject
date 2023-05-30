@@ -7,7 +7,7 @@ from typing import Callable
 
 from context.extension.time_context import Times
 from script.path.temporary.create_temporary_file import create_temporary_file
-from script.time.get_timestamp import get_latest, get_access
+from script.time.stamp.get_timestamp import get_latest, get_access
 
 
 def _common_test(times: Times) -> None:
