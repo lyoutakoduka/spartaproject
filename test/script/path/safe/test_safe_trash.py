@@ -11,7 +11,7 @@ from script.file.json.convert_from_json import path_pair2_from_json
 from script.file.json.import_json import json_import
 from script.path.check_exists import check_exists_pair
 from script.path.iterate_directory import walk_iterator
-from script.path.safe.safe_trash import TrashBox
+from script.path.safe.safe_trash import SafeTrash
 from script.path.temporary.create_temporary_file import create_temporary_file
 from script.path.temporary.create_temporary_tree import create_temporary_tree
 
@@ -34,7 +34,7 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 
 def test_pass() -> None:
     def individual_test(temporary_root: Path) -> None:
-        trash_box = TrashBox()
+        trash_box = SafeTrash()
         trash_box.throw_away_trash(create_temporary_file(temporary_root))
         _common_test(1, trash_box.pop_history())
 
@@ -44,7 +44,7 @@ def test_pass() -> None:
 def test_exists() -> None:
     def individual_test(temporary_root: Path) -> None:
         source_root: Path = create_temporary_file(temporary_root)
-        trash_box = TrashBox()
+        trash_box = SafeTrash()
         for _ in range(2):
             trash_box.throw_away_trash(source_root)
         _common_test(1, trash_box.pop_history())
@@ -56,7 +56,7 @@ def test_tree() -> None:
     def individual_test(temporary_root: Path) -> None:
         create_temporary_tree(temporary_root, tree_deep=3)
 
-        trash_box = TrashBox()
+        trash_box = SafeTrash()
         paths: Paths = list(walk_iterator(temporary_root, depth=1))
         for path in paths:
             trash_box.throw_away_trash(path, trash_root=temporary_root)
@@ -71,7 +71,7 @@ def test_select() -> None:
         def individual_test(temporary_root: Path) -> None:
             create_temporary_tree(temporary_root)
 
-            trash_box = TrashBox(history_path=Path(temporary_path))
+            trash_box = SafeTrash(history_path=Path(temporary_path))
             paths: Paths = list(walk_iterator(temporary_root, depth=1))
             for path in paths:
                 trash_box.throw_away_trash(path)

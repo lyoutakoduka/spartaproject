@@ -7,7 +7,7 @@ from script.path.modify.get_relative import get_relative
 from script.path.safe.safe_rename import SafeRename
 
 
-class TrashBox(SafeRename):
+class SafeTrash(SafeRename):
     def _move_file(self, target: Path, root: Path) -> None:
         if target.exists():
             trash_path: Path = Path(
