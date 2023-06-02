@@ -35,7 +35,7 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 def test_pass() -> None:
     def individual_test(temporary_root: Path) -> None:
         safe_trash = SafeTrash()
-        safe_trash.throw_away_trash(create_temporary_file(temporary_root))
+        safe_trash.trash(create_temporary_file(temporary_root))
         _common_test(1, safe_trash.pop_history())
 
     _inside_temporary_directory(individual_test)
@@ -46,7 +46,7 @@ def test_exists() -> None:
         source_root: Path = create_temporary_file(temporary_root)
         safe_trash = SafeTrash()
         for _ in range(2):
-            safe_trash.throw_away_trash(source_root)
+            safe_trash.trash(source_root)
         _common_test(1, safe_trash.pop_history())
 
     _inside_temporary_directory(individual_test)
@@ -59,7 +59,7 @@ def test_tree() -> None:
         safe_trash = SafeTrash()
         paths: Paths = list(walk_iterator(temporary_root, depth=1))
         for path in paths:
-            safe_trash.throw_away_trash(path, trash_root=temporary_root)
+            safe_trash.trash(path, trash_root=temporary_root)
 
         _common_test(len(paths), safe_trash.pop_history())
 
@@ -74,7 +74,7 @@ def test_select() -> None:
             safe_trash = SafeTrash(history_path=Path(temporary_path))
             paths: Paths = list(walk_iterator(temporary_root, depth=1))
             for path in paths:
-                safe_trash.throw_away_trash(path)
+                safe_trash.trash(path)
 
             _common_test(len(paths), safe_trash.pop_history())
 

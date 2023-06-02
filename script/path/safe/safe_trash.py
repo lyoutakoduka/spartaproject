@@ -16,7 +16,7 @@ class SafeTrash(SafeRename):
             create_directory_parent(trash_path)
             self.rename(target, trash_path, override=True)
 
-    def throw_away_trash(
+    def trash(
         self, trash_path: Path, trash_root: Path = Path()
     ) -> None:
         has_initial: bool = '.' != str(trash_root)
