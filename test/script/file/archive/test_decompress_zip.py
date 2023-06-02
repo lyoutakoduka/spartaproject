@@ -13,7 +13,7 @@ from script.file.archive.compress_zip import CompressZip
 from script.file.archive.decompress_zip import DecompressZip
 from script.path.iterate_directory import walk_iterator
 from script.path.modify.get_relative import get_relative_array
-from script.path.safe.safe_trash import TrashBox
+from script.path.safe.safe_trash import SafeTrash
 from script.path.temporary.create_temporary_tree import create_temporary_tree
 from script.time.stamp.get_timestamp import get_latest
 from script.time.stamp.set_timestamp import set_latest
@@ -88,7 +88,7 @@ def test_directory() -> None:
         tree_root: Path = Path(temporary_root, 'tree')
         create_temporary_tree(tree_root, tree_deep=3)
 
-        trash_box = TrashBox()
+        trash_box = SafeTrash()
         for path in walk_iterator(tree_root, directory=False):
             trash_box.throw_away_trash(path)
 
@@ -103,7 +103,7 @@ def test_tree() -> None:
         tree_root: Path = Path(temporary_root, 'tree')
         create_temporary_tree(tree_root, tree_deep=2)
 
-        trash_box = TrashBox()
+        trash_box = SafeTrash()
         for path in walk_iterator(tree_root, file=False):
             if 0 == len(list(walk_iterator(path, depth=1))):
                 trash_box.throw_away_trash(path)
