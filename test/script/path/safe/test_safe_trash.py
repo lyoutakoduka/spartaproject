@@ -4,24 +4,27 @@
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from context.default.bool_context import Bools
-from context.extension.path_context import Path, Paths
+from context.default.bool_context import BoolPair
+from context.extension.path_context import Path, Paths, PathPair2
 from script.bool.same_value import bool_same_array
-from script.path.check_exists import check_exists_array
+from script.file.json.convert_from_json import path_pair2_from_json
+from script.file.json.import_json import json_import
+from script.path.check_exists import check_exists_pair
 from script.path.iterate_directory import walk_iterator
 from script.path.safe.safe_trash import TrashBox
 from script.path.temporary.create_temporary_file import create_temporary_file
 from script.path.temporary.create_temporary_tree import create_temporary_tree
 
 
-def _common_test(target_paths: Paths, evacuated_paths: Paths) -> None:
-    same_bools: Bools = []
+def _common_test(history_size: int, history_path: Path) -> None:
+    history: PathPair2 = path_pair2_from_json(json_import(history_path))
+    assert history_size == len(history)
 
-    for i, paths in enumerate([target_paths, evacuated_paths]):
-        exists: Bools = check_exists_array(paths)
-        same_bools += [bool_same_array(exists, invert=(0 == i))]
-
-    assert bool_same_array(same_bools)
+    for _, path_pair in history.items():
+        exists_pair: BoolPair = check_exists_pair(path_pair)
+        assert bool_same_array([
+            not exists_pair['source'], exists_pair['destination']
+        ])
 
 
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
@@ -31,10 +34,9 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 
 def test_pass() -> None:
     def individual_test(temporary_root: Path) -> None:
-        file_path: Path = create_temporary_file(temporary_root)
         trash_box = TrashBox()
-        trash_box.throw_away_trash(file_path)
-        _common_test([file_path], trash_box.pop_evacuated())
+        trash_box.throw_away_trash(create_temporary_file(temporary_root))
+        _common_test(1, trash_box.pop_history())
 
     _inside_temporary_directory(individual_test)
 
@@ -44,12 +46,11 @@ def test_tree() -> None:
         create_temporary_tree(temporary_root, tree_deep=3)
 
         trash_box = TrashBox()
-        walk_paths: Paths = []
-        for path in walk_iterator(temporary_root):
+        paths: Paths = list(walk_iterator(temporary_root, depth=1))
+        for path in paths:
             trash_box.throw_away_trash(path, trash_root=temporary_root)
-            walk_paths += [path]
 
-        _common_test(walk_paths, trash_box.pop_evacuated())
+        _common_test(len(paths), trash_box.pop_history())
 
     _inside_temporary_directory(individual_test)
 
@@ -59,13 +60,12 @@ def test_select() -> None:
         def individual_test(temporary_root: Path) -> None:
             create_temporary_tree(temporary_root)
 
-            trash_box = TrashBox(trash_path=Path(temporary_path))
-            walk_paths: Paths = []
-            for path in walk_iterator(temporary_root):
+            trash_box = TrashBox(history_path=Path(temporary_path))
+            paths: Paths = list(walk_iterator(temporary_root, depth=1))
+            for path in paths:
                 trash_box.throw_away_trash(path)
-                walk_paths += [path]
 
-            _common_test(walk_paths, trash_box.pop_evacuated())
+            _common_test(len(paths), trash_box.pop_history())
 
         _inside_temporary_directory(individual_test)
 
