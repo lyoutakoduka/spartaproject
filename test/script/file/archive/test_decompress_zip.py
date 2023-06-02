@@ -90,7 +90,7 @@ def test_directory() -> None:
 
         safe_trash = SafeTrash()
         for path in walk_iterator(tree_root, directory=False):
-            safe_trash.throw_away_trash(path)
+            safe_trash.trash(path)
 
         _compress_to_decompress(temporary_root)
         _common_test(temporary_root)
@@ -106,7 +106,7 @@ def test_tree() -> None:
         safe_trash = SafeTrash()
         for path in walk_iterator(tree_root, file=False):
             if 0 == len(list(walk_iterator(path, depth=1))):
-                safe_trash.throw_away_trash(path)
+                safe_trash.trash(path)
 
         _compress_to_decompress(temporary_root)
         _common_test(temporary_root)
