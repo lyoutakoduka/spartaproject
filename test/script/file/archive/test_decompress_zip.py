@@ -88,9 +88,9 @@ def test_directory() -> None:
         tree_root: Path = Path(temporary_root, 'tree')
         create_temporary_tree(tree_root, tree_deep=3)
 
-        trash_box = SafeTrash()
+        safe_trash = SafeTrash()
         for path in walk_iterator(tree_root, directory=False):
-            trash_box.throw_away_trash(path)
+            safe_trash.throw_away_trash(path)
 
         _compress_to_decompress(temporary_root)
         _common_test(temporary_root)
@@ -103,10 +103,10 @@ def test_tree() -> None:
         tree_root: Path = Path(temporary_root, 'tree')
         create_temporary_tree(tree_root, tree_deep=2)
 
-        trash_box = SafeTrash()
+        safe_trash = SafeTrash()
         for path in walk_iterator(tree_root, file=False):
             if 0 == len(list(walk_iterator(path, depth=1))):
-                trash_box.throw_away_trash(path)
+                safe_trash.throw_away_trash(path)
 
         _compress_to_decompress(temporary_root)
         _common_test(temporary_root)

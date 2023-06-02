@@ -34,9 +34,9 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 
 def test_pass() -> None:
     def individual_test(temporary_root: Path) -> None:
-        trash_box = SafeTrash()
-        trash_box.throw_away_trash(create_temporary_file(temporary_root))
-        _common_test(1, trash_box.pop_history())
+        safe_trash = SafeTrash()
+        safe_trash.throw_away_trash(create_temporary_file(temporary_root))
+        _common_test(1, safe_trash.pop_history())
 
     _inside_temporary_directory(individual_test)
 
@@ -44,10 +44,10 @@ def test_pass() -> None:
 def test_exists() -> None:
     def individual_test(temporary_root: Path) -> None:
         source_root: Path = create_temporary_file(temporary_root)
-        trash_box = SafeTrash()
+        safe_trash = SafeTrash()
         for _ in range(2):
-            trash_box.throw_away_trash(source_root)
-        _common_test(1, trash_box.pop_history())
+            safe_trash.throw_away_trash(source_root)
+        _common_test(1, safe_trash.pop_history())
 
     _inside_temporary_directory(individual_test)
 
@@ -56,12 +56,12 @@ def test_tree() -> None:
     def individual_test(temporary_root: Path) -> None:
         create_temporary_tree(temporary_root, tree_deep=3)
 
-        trash_box = SafeTrash()
+        safe_trash = SafeTrash()
         paths: Paths = list(walk_iterator(temporary_root, depth=1))
         for path in paths:
-            trash_box.throw_away_trash(path, trash_root=temporary_root)
+            safe_trash.throw_away_trash(path, trash_root=temporary_root)
 
-        _common_test(len(paths), trash_box.pop_history())
+        _common_test(len(paths), safe_trash.pop_history())
 
     _inside_temporary_directory(individual_test)
 
@@ -71,12 +71,12 @@ def test_select() -> None:
         def individual_test(temporary_root: Path) -> None:
             create_temporary_tree(temporary_root)
 
-            trash_box = SafeTrash(history_path=Path(temporary_path))
+            safe_trash = SafeTrash(history_path=Path(temporary_path))
             paths: Paths = list(walk_iterator(temporary_root, depth=1))
             for path in paths:
-                trash_box.throw_away_trash(path)
+                safe_trash.throw_away_trash(path)
 
-            _common_test(len(paths), trash_box.pop_history())
+            _common_test(len(paths), safe_trash.pop_history())
 
         _inside_temporary_directory(individual_test)
 
