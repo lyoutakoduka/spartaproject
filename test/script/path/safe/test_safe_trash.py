@@ -41,6 +41,17 @@ def test_pass() -> None:
     _inside_temporary_directory(individual_test)
 
 
+def test_exists() -> None:
+    def individual_test(temporary_root: Path) -> None:
+        source_root: Path = create_temporary_file(temporary_root)
+        trash_box = TrashBox()
+        for _ in range(2):
+            trash_box.throw_away_trash(source_root)
+        _common_test(1, trash_box.pop_history())
+
+    _inside_temporary_directory(individual_test)
+
+
 def test_tree() -> None:
     def individual_test(temporary_root: Path) -> None:
         create_temporary_tree(temporary_root, tree_deep=3)
@@ -72,6 +83,7 @@ def test_select() -> None:
 
 def main() -> bool:
     test_pass()
+    test_exists()
     test_tree()
     test_select()
     return True
