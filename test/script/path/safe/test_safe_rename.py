@@ -25,9 +25,7 @@ def _common_test(rename_path: Path) -> None:
         ])
 
 
-def _inside_temporary_directory(
-    function: Callable[[Path], None]
-) -> None:
+def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as temporary_path:
         function(create_temporary_file(Path(temporary_path)))
 
