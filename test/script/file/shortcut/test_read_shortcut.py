@@ -16,8 +16,7 @@ def _common_test(shortcut_target: Path, shortcut_root: Path) -> None:
     shortcut_path: Path = get_shortcut_path(shortcut_target, shortcut_root)
     create_shortcut(shortcut_target, shortcut_path)
 
-    result: Path = read_shortcut(shortcut_path)
-    assert result == shortcut_target
+    assert shortcut_target == read_shortcut(shortcut_path)
 
 
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
