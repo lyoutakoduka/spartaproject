@@ -7,14 +7,16 @@ from tempfile import TemporaryDirectory
 from typing import Callable
 
 from script.file.shortcut.create_shortcut import create_shortcut
+from script.file.shortcut.get_shortcut_path import get_shortcut_path
 from script.file.shortcut.read_shortcut import read_shortcut
 from script.path.temporary.create_temporary_file import create_temporary_file
 
 
 def _common_test(shortcut_target: Path, shortcut_root: Path) -> None:
-    result: Path = read_shortcut(
-        create_shortcut(shortcut_target, shortcut_root)
-    )
+    shortcut_path: Path = get_shortcut_path(shortcut_target, shortcut_root)
+    create_shortcut(shortcut_target, shortcut_path)
+
+    result: Path = read_shortcut(shortcut_path)
     assert result == shortcut_target
 
 
