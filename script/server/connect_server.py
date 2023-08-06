@@ -92,15 +92,15 @@ class ConnectServer:
         self._initialize_connect()
 
     def _connect_detail(self) -> None:
-        milliseconds: int = self._numbers['connectTimeout']
+        milliseconds: int = self.get_type_number('connectTimeout')
         seconds: Decimal = Decimal(str(milliseconds)) / Decimal('1000.0')
 
         if ssh := self.get_ssh():
             ssh.connect(
-                hostname=self._texts['host'],
-                port=self._numbers['port'],
-                username=self._texts['username'],
-                key_filename=self._texts['privateKeyPath'],
+                hostname=self.get_type_text('host'),
+                port=self.get_type_number('port'),
+                username=self.get_type_text('username'),
+                key_filename=self.get_type_text('privateKeyPath'),
                 timeout=float(seconds)
             )
 
@@ -151,7 +151,7 @@ class ConnectServer:
             self._shell.send(command.encode('utf-8'))
 
     def _ssh_remote_path(self) -> None:
-        self._execute_ssh(['cd', self._texts['remotePath']])
+        self._execute_ssh(['cd', self.get_type_text('remotePath')])
         self._receive_ssh()
 
     def _correct_path(self, expected: Strs, result: Strs) -> bool:
@@ -191,7 +191,7 @@ class ConnectServer:
 
     def _sftp_remote_path(self) -> None:
         if self._sftp is not None:
-            self._sftp.chdir(self._texts['remotePath'])
+            self._sftp.chdir(self.get_type_text('remotePath'))
 
     def _create_sftp(self) -> None:
         if ssh := self.get_ssh():
