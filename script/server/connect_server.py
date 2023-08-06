@@ -76,6 +76,12 @@ class ConnectServer:
     def get_sftp(self) -> SFTPClient | None:
         return self._sftp
 
+    def get_type_text(self, type: str) -> str:
+        return self._texts[type]
+
+    def get_type_number(self, type: str) -> int:
+        return self._numbers[type]
+
     def __del__(self) -> None:
         if ssh := self.get_ssh():
             ssh.close()
