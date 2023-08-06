@@ -77,11 +77,11 @@ class ConnectServer:
         return self._sftp
 
     def __del__(self) -> None:
-        if self._ssh is not None:
-            self._ssh.close()
+        if ssh := self.get_ssh():
+            ssh.close()
 
-        if self._sftp is not None:
-            self._sftp.close()
+        if sftp := self.get_sftp():
+            sftp.close()
 
         self._initialize_connect()
 
@@ -159,8 +159,8 @@ class ConnectServer:
     def _connect_ssh(self) -> bool:
         self._create_ssh()
 
-        if self._ssh is not None:
-            self._shell = self._ssh.invoke_shell()
+        if ssh := self.get_ssh():
+            self._shell = ssh.invoke_shell()
 
         self._receive_ssh()
 
@@ -184,8 +184,8 @@ class ConnectServer:
             self._sftp.chdir(self._texts['remotePath'])
 
     def _create_sftp(self) -> None:
-        if self._ssh is not None:
-            self._sftp = self._ssh.open_sftp()
+        if ssh := self.get_ssh():
+            self._sftp = ssh.open_sftp()
 
     def _connect_sftp(self) -> bool:
         self._create_sftp()
