@@ -85,22 +85,26 @@ class ConnectServer:
 
         self._initialize_connect()
 
+    def _connect_detail(self) -> None:
+        milliseconds: int = self._numbers['connectTimeout']
+        seconds: Decimal = Decimal(str(milliseconds)) / Decimal('1000.0')
+
+        if ssh := self.get_ssh():
+            ssh.connect(
+                hostname=self._texts['host'],
+                port=self._numbers['port'],
+                username=self._texts['username'],
+                key_filename=self._texts['privateKeyPath'],
+                timeout=float(seconds)
+            )
+
     def _create_ssh(self) -> None:
         self._ssh = SSHClient()
 
         self._ssh.load_system_host_keys()
         self._ssh.set_missing_host_key_policy(AutoAddPolicy())
 
-        milliseconds: int = self._numbers['connectTimeout']
-        seconds: Decimal = Decimal(str(milliseconds)) / Decimal('1000.0')
-
-        self._ssh.connect(
-            hostname=self._texts['host'],
-            port=self._numbers['port'],
-            username=self._texts['username'],
-            key_filename=self._texts['privateKeyPath'],
-            timeout=float(seconds)
-        )
+        self._connect_detail()
 
     def _sleep(self) -> None:
         sleep(0.01)
