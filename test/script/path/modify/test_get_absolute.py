@@ -24,6 +24,10 @@ def test_single() -> None:
     assert get_absolute(_EMPTY_PATH).exists()
 
 
+def test_root() -> None:
+    assert _EMPTY_PATH == get_absolute(_EMPTY_HEAD, root_path=_BASE_PATH)
+
+
 def test_array() -> None:
     RELATIVE_PATHS: Paths = [_BASE_PATH, _EMPTY_HEAD]
     EXPECTS: Bools = [True, False]
@@ -43,8 +47,9 @@ def test_pair() -> None:
 
 
 def main() -> bool:
-    test_ignore()
-    test_single()
-    test_array()
-    test_pair()
+    # test_ignore()
+    # test_single()
+    test_root()
+    # test_array()
+    # test_pair()
     return True
