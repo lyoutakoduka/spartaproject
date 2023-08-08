@@ -8,6 +8,9 @@ def get_relative(absolute_path: Path, root_path: Path = Path()) -> Path:
     if '.' == str(root_path):
         root_path = Path.cwd()
 
+    if not absolute_path.is_relative_to(root_path):
+        raise ValueError
+
     return absolute_path.relative_to(root_path)
 
 
