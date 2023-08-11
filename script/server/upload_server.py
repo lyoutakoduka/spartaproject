@@ -46,6 +46,11 @@ class UploadServer(ConnectServer):
 
         return False
 
+    def _remove_directory(self, path: Path) -> None:
+        if self._exists_directory(path):
+            if sftp := self.get_sftp():
+                sftp.rmdir(path.as_posix())
+
     def _create_upload_tree(self, tree: Paths) -> None:
         for path in reversed(tree):
             self._create_directory(path)
@@ -58,6 +63,7 @@ class UploadServer(ConnectServer):
         self._create_upload_tree(self._get_upload_tree(destination_path))
 
         if source_path.is_dir():
+            self._remove_directory(destination_path)
             return self._create_directory(destination_path)
 
         status: stat_result = source_path.stat()
