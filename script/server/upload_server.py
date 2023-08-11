@@ -55,6 +55,18 @@ class UploadServer(ConnectServer):
         for path in reversed(tree):
             self._create_directory(path)
 
+    def _upload_file(self, source_path: Path, destination_path: Path) -> bool:
+        status: stat_result = source_path.stat()
+        paths: Strs = [
+            path.as_posix() for path in [source_path, destination_path]
+        ]
+
+        if sftp := self.get_sftp():
+            result: SFTPAttributes = sftp.put(paths[0], paths[1])
+            return status.st_size == result.st_size
+
+        return False
+
     def upload(self, source_path: Path, destination_local: Path) -> bool:
         destination_path = Path(
             self.get_type_text('remotePath'), destination_local
@@ -66,13 +78,4 @@ class UploadServer(ConnectServer):
             self._remove_directory(destination_path)
             return self._create_directory(destination_path)
 
-        status: stat_result = source_path.stat()
-        paths: Strs = [
-            path.as_posix() for path in [source_path, destination_path]
-        ]
-
-        if sftp := self.get_sftp():
-            result: SFTPAttributes = sftp.put(paths[0], paths[1])
-            return status.st_size == result.st_size
-
-        return False
+        return self._upload_file(source_path, destination_path)
