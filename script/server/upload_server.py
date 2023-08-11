@@ -51,11 +51,14 @@ class UploadServer(ConnectServer):
             if sftp := self.get_sftp():
                 sftp.rmdir(path.as_posix())
 
-    def _create_upload_tree(self, tree: Paths) -> None:
-        for path in reversed(tree):
+    def _create_upload_tree(self, path: Path) -> None:
+        for path in reversed(self._get_upload_tree(path)):
             self._create_directory(path)
 
-    def _upload_file(self, source_path: Path, destination_path: Path) -> bool:
+    def _convert_remote_path(self, local: Path) -> Path:
+        return Path(self.get_type_text('remotePath'), local)
+
+    def _create_file(self, source_path: Path, destination_path: Path) -> bool:
         status: stat_result = source_path.stat()
         paths: Strs = [
             path.as_posix() for path in [source_path, destination_path]
@@ -67,18 +70,23 @@ class UploadServer(ConnectServer):
 
         return False
 
-    def _upload_directory(self, destination_path: Path) -> bool:
-        self._remove_directory(destination_path)
-        return self._create_directory(destination_path)
+    def _upload_file(self, source_path: Path, destination_local: Path) -> bool:
+        destination_path: Path = self._convert_remote_path(destination_local)
+
+        self._create_upload_tree(destination_path)
+
+        return self._create_file(source_path, destination_path)
+
+    def _upload_directory(self, local: Path) -> bool:
+        path: Path = self._convert_remote_path(local)
+
+        self._create_upload_tree(path)
+        self._remove_directory(path)
+
+        return self._create_directory(path)
 
     def upload(self, source_path: Path, destination_local: Path) -> bool:
-        destination_path = Path(
-            self.get_type_text('remotePath'), destination_local
-        )
-
-        self._create_upload_tree(self._get_upload_tree(destination_path))
-
         if source_path.is_dir():
-            return self._upload_directory(destination_path)
+            return self._upload_directory(destination_local)
 
-        return self._upload_file(source_path, destination_path)
+        return self._upload_file(source_path, destination_local)
