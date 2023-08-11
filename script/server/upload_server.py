@@ -31,13 +31,24 @@ class UploadServer(ConnectServer):
 
         return tree
 
-    def _create_upload_tree(self, tree: Paths) -> None:
+    def _exists_directory(self, path: Path) -> bool:
         if sftp := self.get_sftp():
-            for path in reversed(tree):
-                if path.name in sftp.listdir(path.parent.as_posix()):
-                    continue
+            if path.name in sftp.listdir(path.parent.as_posix()):
+                return True
 
+        return False
+
+    def _create_directory(self, path: Path) -> bool:
+        if not self._exists_directory(path):
+            if sftp := self.get_sftp():
                 sftp.mkdir(path.as_posix())
+                return True
+
+        return False
+
+    def _create_upload_tree(self, tree: Paths) -> None:
+        for path in reversed(tree):
+            self._create_directory(path)
 
     def upload(self, source_path: Path, destination_local: Path) -> bool:
         destination_path = Path(
@@ -45,6 +56,9 @@ class UploadServer(ConnectServer):
         )
 
         self._create_upload_tree(self._get_upload_tree(destination_path))
+
+        if source_path.is_dir():
+            return self._create_directory(destination_path)
 
         status: stat_result = source_path.stat()
         paths: Strs = [
