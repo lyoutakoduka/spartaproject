@@ -67,6 +67,10 @@ class UploadServer(ConnectServer):
 
         return False
 
+    def _upload_directory(self, destination_path: Path) -> bool:
+        self._remove_directory(destination_path)
+        return self._create_directory(destination_path)
+
     def upload(self, source_path: Path, destination_local: Path) -> bool:
         destination_path = Path(
             self.get_type_text('remotePath'), destination_local
@@ -75,7 +79,6 @@ class UploadServer(ConnectServer):
         self._create_upload_tree(self._get_upload_tree(destination_path))
 
         if source_path.is_dir():
-            self._remove_directory(destination_path)
-            return self._create_directory(destination_path)
+            return self._upload_directory(destination_path)
 
         return self._upload_file(source_path, destination_path)
