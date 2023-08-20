@@ -58,7 +58,7 @@ class ConnectServer:
 
     def _initialize_connect(self) -> None:
         self._ssh: SSHClient | None = None
-        self._shell: Channel | None = None
+        self._channel: Channel | None = None
         self._sftp: SFTPClient | None = None
 
     def __init__(self) -> None:
@@ -70,8 +70,8 @@ class ConnectServer:
     def get_ssh(self) -> SSHClient | None:
         return self._ssh
 
-    def get_shell(self) -> Channel | None:
-        return self._shell
+    def get_channel(self) -> Channel | None:
+        return self._channel
 
     def get_sftp(self) -> SFTPClient | None:
         return self._sftp
@@ -116,13 +116,13 @@ class ConnectServer:
         sleep(0.01)
 
     def _receive_ssh(self) -> Strs:
-        if shell := self.get_shell():
+        if channel := self.get_channel():
             self._sleep()
 
-            while not shell.recv_ready():
+            while not channel.recv_ready():
                 self._sleep()
 
-            byte: bytes = shell.recv(9999)
+            byte: bytes = channel.recv(9999)
             text: str = byte.decode('utf-8')
 
             lines: Strs = text.splitlines()
@@ -130,12 +130,11 @@ class ConnectServer:
 
         return []
 
-
     def _execute_ssh(self, commands: Strs) -> None:
         command: str = ' '.join(commands) + '\n'
 
-        if shell := self.get_shell():
-            shell.send(command.encode('utf-8'))
+        if channel := self.get_channel():
+            channel.send(command.encode('utf-8'))
 
     def execute_ssh(self, commands: Strs) -> Strs:
         self._execute_ssh(commands)
@@ -157,7 +156,7 @@ class ConnectServer:
         self._create_ssh()
 
         if ssh := self.get_ssh():
-            self._shell = ssh.invoke_shell()
+            self._channel = ssh.invoke_shell()
 
         self._receive_ssh()
 
