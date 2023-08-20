@@ -115,21 +115,6 @@ class ConnectServer:
     def _sleep(self) -> None:
         sleep(0.01)
 
-    def receive_ssh(self) -> Strs:
-        if self._shell is None:
-            return []
-
-        self._sleep()
-
-        while not self._shell.recv_ready():
-            self._sleep()
-
-        byte: bytes = self._shell.recv(9999)
-        text: str = byte.decode('utf-8')
-
-        lines: Strs = text.splitlines()
-        return lines
-
     def _receive_ssh(self) -> Strs:
         if self._shell is None:
             return []
