@@ -135,9 +135,9 @@ class ConnectServer:
             command: str = ' '.join(commands) + '\n'
             self._shell.send(command.encode('utf-8'))
 
-    def _ssh_remote_path(self) -> None:
-        self._execute_ssh(['cd', self.get_type_text('remotePath')])
-        self._receive_ssh()
+    def execute_ssh(self, commands: Strs) -> Strs:
+        self._execute_ssh(commands)
+        return self._receive_ssh()
 
     def _correct_path(self, expected: Strs, result: Strs) -> bool:
         name_sorted: Strs2 = [sorted(name) for name in [expected, result]]
@@ -159,7 +159,7 @@ class ConnectServer:
 
         self._receive_ssh()
 
-        self._ssh_remote_path()
+        self.execute_ssh(['cd', self.get_type_text('remotePath')])
         return self._ssh_correct_path()
 
     def _receive_sftp(self) -> Strs:
