@@ -163,20 +163,17 @@ class ConnectServer:
         return self._ssh_correct_path()
 
     def _receive_sftp(self) -> Strs:
-        if self._sftp is None:
-            return []
+        if sftp := self.get_sftp():
+            return sftp.listdir()
 
-        return self._sftp.listdir()
+        return []
 
     def _sftp_correct_path(self) -> bool:
-        if self._sftp is not None:
-            return self._correct_path(self._EXPECTED, self._receive_sftp())
-
-        return False
+        return self._correct_path(self._EXPECTED, self._receive_sftp())
 
     def _sftp_remote_path(self) -> None:
-        if self._sftp is not None:
-            self._sftp.chdir(self.get_type_text('remotePath'))
+        if sftp := self.get_sftp():
+            sftp.chdir(self.get_type_text('remotePath'))
 
     def _create_sftp(self) -> None:
         if ssh := self.get_ssh():
