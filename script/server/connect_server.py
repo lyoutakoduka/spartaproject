@@ -104,25 +104,30 @@ class ConnectServer:
                 timeout=float(seconds)
             )
 
+    def _ssh_setting(self) -> None:
+        if ssh := self.get_ssh():
+            ssh.load_system_host_keys()
+            ssh.set_missing_host_key_policy(AutoAddPolicy())
+
     def _create_ssh(self) -> None:
         self._ssh = SSHClient()
 
-        self._ssh.load_system_host_keys()
-        self._ssh.set_missing_host_key_policy(AutoAddPolicy())
-
+        self._ssh_setting()
         self._connect_detail()
 
     def _sleep(self) -> None:
         sleep(0.01)
 
     def _receive_ssh(self) -> Strs:
+        buffer: int = 9999
+
         if channel := self.get_channel():
             self._sleep()
 
             while not channel.recv_ready():
                 self._sleep()
 
-            byte: bytes = channel.recv(9999)
+            byte: bytes = channel.recv(buffer)
             text: str = byte.decode('utf-8')
 
             lines: Strs = text.splitlines()
@@ -155,8 +160,9 @@ class ConnectServer:
     def _connect_ssh(self) -> bool:
         self._create_ssh()
 
+        size: int = 1000
         if ssh := self.get_ssh():
-            self._channel = ssh.invoke_shell()
+            self._channel = ssh.invoke_shell(width=size, height=size)
 
         self._receive_ssh()
 
