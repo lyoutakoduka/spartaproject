@@ -47,9 +47,9 @@ def test_pair() -> None:
 
 
 def main() -> bool:
-    # test_ignore()
-    # test_single()
+    test_ignore()
+    test_single()
     test_root()
-    # test_array()
-    # test_pair()
+    test_array()
+    test_pair()
     return True
