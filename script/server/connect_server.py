@@ -133,6 +133,16 @@ class ConnectServer:
 
         return []
 
+    def _extract_result(
+        self, text: str, index: int, escape: str
+    ) -> str | None:
+        lines: Strs = text.split(escape)
+
+        if 2 == len(lines):
+            return lines[index]
+
+        return None
+
     def _execute_ssh(self, commands: Strs) -> None:
         command: str = ' '.join(commands) + '\n'
 
