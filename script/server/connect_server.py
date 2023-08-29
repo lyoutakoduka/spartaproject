@@ -7,7 +7,7 @@ from time import sleep
 from typing import Dict
 
 from context.default.integer_context import IntPair
-from context.default.string_context import Strs, Strs2, StrPair
+from context.default.string_context import Strs, StrPair
 from context.extension.decimal_context import Decimal, set_decimal_context
 from context.file.json_context import Json
 from script.file.json.import_json import json_import
