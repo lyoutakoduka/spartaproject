@@ -122,8 +122,6 @@ class ConnectServer:
         buffer: int = 9999
 
         if channel := self.get_channel():
-            self._sleep()
-
             while not channel.recv_ready():
                 self._sleep()
 
@@ -140,6 +138,7 @@ class ConnectServer:
 
         if channel := self.get_channel():
             channel.send(command.encode('utf-8'))
+            self._sleep()
 
     def execute_ssh(self, commands: Strs) -> Strs:
         self._execute_ssh(commands)
