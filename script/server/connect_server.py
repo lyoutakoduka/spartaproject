@@ -116,7 +116,7 @@ class ConnectServer:
         self._connect_detail()
 
     def _sleep(self) -> None:
-        sleep(0.01)
+        sleep(0.04)
 
     def _receive_ssh(self) -> Strs:
         buffer: int = 9999
