@@ -118,16 +118,26 @@ class ConnectServer:
     def _sleep(self) -> None:
         sleep(0.04)
 
-    def _receive_ssh(self) -> Strs:
+    def _receive_byte(self) -> str | None:
         buffer: int = 9999
 
         if channel := self.get_channel():
-            while not channel.recv_ready():
+            text_byte: bytes = b''
+
+            for _ in range(2):
+                if channel.recv_ready():
+                    byte: bytes = channel.recv(buffer)
+                    text_byte += byte
+                    break
+
                 self._sleep()
 
-            byte: bytes = channel.recv(buffer)
-            text: str = byte.decode('utf-8')
+            return text_byte.decode('utf-8')
 
+        return None
+
+    def _receive_ssh(self) -> Strs:
+        if text := self._receive_byte():
             lines: Strs = text.splitlines()
             return lines[2:-1]
 
