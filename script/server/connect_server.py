@@ -116,7 +116,7 @@ class ConnectServer:
         self._connect_detail()
 
     def _sleep(self) -> None:
-        sleep(0.04)
+        sleep(0.05)
 
     def _receive_byte(self) -> str | None:
         buffer: int = 9999
