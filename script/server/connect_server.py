@@ -143,6 +143,11 @@ class ConnectServer:
 
         return None
 
+    def _split_result(self, text: str) -> Strs:
+        lines: Strs = text.split('\r\n')
+
+        return [lines[0][1:]] + lines[1:-1]
+
     def _execute_ssh(self, commands: Strs) -> None:
         command: str = ' '.join(commands) + '\n'
 
