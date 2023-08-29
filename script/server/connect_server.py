@@ -146,9 +146,9 @@ class ConnectServer:
         return self._receive_ssh()
 
     def _correct_path(self, expected: Strs, result: Strs) -> bool:
-        name_sorted: Strs2 = [sorted(name) for name in [expected, result]]
-
-        return name_sorted[0] == name_sorted[1]
+        return 1 == len(set(
+            [str(sorted(name)) for name in [expected, result]]
+        ))
 
     def _ssh_correct_path(self) -> bool:
         return self._correct_path(
