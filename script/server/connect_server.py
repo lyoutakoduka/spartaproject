@@ -151,10 +151,9 @@ class ConnectServer:
         return name_sorted[0] == name_sorted[1]
 
     def _ssh_correct_path(self) -> bool:
-        self._execute_ssh(['ls', '-1', '-p'])
-
         return self._correct_path(
-            [name + '/' for name in self._EXPECTED], self._receive_ssh()
+            [name + '/' for name in self._EXPECTED],
+            self.execute_ssh(['ls', '-1', '-p'])
         )
 
     def _connect_ssh(self) -> bool:
