@@ -136,13 +136,6 @@ class ConnectServer:
 
         return None
 
-    def _receive_ssh(self) -> Strs:
-        if text := self._receive_byte():
-            lines: Strs = text.splitlines()
-            return lines[2:-1]
-
-        return []
-
     def _extract_result(
         self, text: str, index: int, escape: str
     ) -> str | None:
@@ -157,6 +150,13 @@ class ConnectServer:
         lines: Strs = text.split('\r\n')
 
         return [lines[0][1:]] + lines[1:-1]
+
+    def _receive_ssh(self) -> Strs:
+        if text := self._receive_byte():
+            lines: Strs = text.splitlines()
+            return lines[2:-1]
+
+        return []
 
     def _execute_ssh(self, commands: Strs) -> None:
         command: str = ' '.join(commands) + '\n'
