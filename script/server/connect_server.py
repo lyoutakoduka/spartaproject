@@ -153,8 +153,15 @@ class ConnectServer:
 
     def _receive_ssh(self) -> Strs:
         if text := self._receive_byte():
-            lines: Strs = text.splitlines()
-            return lines[2:-1]
+            base: str = '\x1b[?2004'
+
+            if head_removed := self._extract_result(
+                text, -1, base + 'l'
+            ):
+                if foot_removed := self._extract_result(
+                    head_removed, 0, base + 'h'
+                ):
+                    return self._split_result(foot_removed)
 
         return []
 
