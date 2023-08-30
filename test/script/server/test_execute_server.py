@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from pathlib import Path
+from pytest import raises
 
 from context.default.string_context import Strs
 from script.server.execute_server import ExecuteServer
@@ -39,6 +40,12 @@ def test_directory() -> None:
 def test_file() -> None:
     type: str = 'file'
     assert _common_test(True, type)
+
+
+def test_error() -> None:
+    type: str = 'error'
+    with raises(ValueError):
+        _execute_python(True, type)
 
 
 def main() -> bool:

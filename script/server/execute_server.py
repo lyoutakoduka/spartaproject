@@ -25,4 +25,11 @@ class ExecuteServer(UploadServer):
         if not self.upload(source_root, destination_root):
             return None
 
-        return self.execute_ssh(['python', destination_root.as_posix()])
+        result: Strs = self.execute_ssh(
+            ['python', destination_root.as_posix()]
+        )
+
+        if self._get_error_identifier() in result:
+            raise ValueError
+
+        return result
