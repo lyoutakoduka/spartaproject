@@ -14,6 +14,10 @@ class ExecuteServer(UploadServer):
     def __del__(self) -> None:
         super().__del__()
 
+    def _get_error_identifier(self) -> str:
+        body: str = ' '.join(['most', 'recent', 'call', 'last'])
+        return ' '.join(['traceback'.capitalize(), '(' + body + ')']) + ':'
+
     def execute(self, source_root: Path) -> Strs | None:
         DESTINATION: Path = Path('private', 'work', 'execute')
         destination_root: Path = Path(DESTINATION, source_root.name)
