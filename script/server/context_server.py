@@ -52,24 +52,12 @@ class ContextServer:
 
     def get_integer(self, type: str) -> int | None:
         context: IntPair = integer_pair_from_json(self._current_context)
-
-        if type not in context:
-            return None
-
         return context[type]
 
     def get_string(self, type: str) -> str | None:
         context: StrPair = string_pair_from_json(self._current_context)
-
-        if type not in context:
-            return None
-
         return context[type]
 
     def get_path(self, type: str) -> Path | None:
         context: PathPair = path_pair_from_json(self._current_context)
-
-        if type not in context:
-            return None
-
         return context[type]
