@@ -2,61 +2,16 @@
 # -*- coding: utf-8 -*-
 
 from paramiko import SSHClient, SFTPClient, AutoAddPolicy, Channel
-from pathlib import Path
 from time import sleep
-from typing import Dict
 
-from context.default.integer_context import IntPair
-from context.default.string_context import Strs, StrPair
+from context.default.string_context import Strs
 from context.extension.decimal_context import Decimal, set_decimal_context
-from context.file.json_context import Json
-from script.file.json.import_json import json_import
-from script.path.modify.get_absolute import get_absolute
 from script.server.context_server import ContextServer
 
 set_decimal_context()
 
 
 class ConnectServer(ContextServer):
-    def _filter_condition(self, key: str, ftp_context: Json) -> Json | None:
-        if not isinstance(ftp_context, Dict):
-            return None
-
-        if key not in ftp_context:
-            return None
-
-        return ftp_context[key]
-
-    def _get_type_text(self, ftp_context: Json) -> StrPair:
-        context_texts: StrPair = {}
-
-        for key in [
-            'host', 'username', 'privateKeyPath', 'remotePath', 'context'
-        ]:
-            if value := self._filter_condition(key, ftp_context):
-                if isinstance(value, str):
-                    context_texts[key] = value
-
-        return context_texts
-
-    def _get_type_number(self, ftp_context: Json) -> IntPair:
-        context_numbers: IntPair = {}
-
-        for key in ['connectTimeout', 'port']:
-            if value := self._filter_condition(key, ftp_context):
-                if isinstance(value, int):
-                    context_numbers[key] = value
-
-        return context_numbers
-
-    def _get_ftp_context(self) -> Json:
-        ftp_context: Json = json_import(
-            get_absolute(Path('.vscode', 'sftp.json'))
-        )
-
-        self._texts: StrPair = self._get_type_text(ftp_context)
-        self._numbers: IntPair = self._get_type_number(ftp_context)
-
     def _initialize_connect(self) -> None:
         self._ssh: SSHClient | None = None
         self._channel: Channel | None = None
@@ -66,7 +21,6 @@ class ConnectServer(ContextServer):
         super().__init__()
 
         self._initialize_connect()
-        self._get_ftp_context()
 
         self._EXPECTED: Strs = ['private', 'public']
 
@@ -79,12 +33,6 @@ class ConnectServer(ContextServer):
     def get_sftp(self) -> SFTPClient | None:
         return self._sftp
 
-    def get_type_text(self, type: str) -> str:
-        return self._texts[type]
-
-    def get_type_number(self, type: str) -> int:
-        return self._numbers[type]
-
     def __del__(self) -> None:
         if ssh := self.get_ssh():
             ssh.close()
@@ -93,10 +41,6 @@ class ConnectServer(ContextServer):
             sftp.close()
 
         self._initialize_connect()
-
-    def _path_as_string(self, type: str) -> str:
-        path: Path = self.get_path(type)
-        return path.as_posix()
 
     def _connect_detail(self) -> None:
         milliseconds: int = self.get_integer('timeout')
