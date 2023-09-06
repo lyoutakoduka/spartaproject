@@ -50,14 +50,14 @@ class ContextServer:
     def __init__(self) -> None:
         self._load_default()
 
-    def get_integer(self, type: str) -> int | None:
+    def get_integer(self, type: str) -> int:
         context: IntPair = integer_pair_from_json(self._current_context)
         return context[type]
 
-    def get_string(self, type: str) -> str | None:
+    def get_string(self, type: str) -> str:
         context: StrPair = string_pair_from_json(self._current_context)
         return context[type]
 
-    def get_path(self, type: str) -> Path | None:
+    def get_path(self, type: str) -> Path:
         context: PathPair = path_pair_from_json(self._current_context)
         return context[type]
