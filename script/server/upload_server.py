@@ -19,7 +19,7 @@ class UploadServer(ConnectServer):
         super().__del__()
 
     def _get_upload_tree(self, path: Path) -> Paths:
-        remote: Path = Path(self.get_type_text('remotePath'))
+        remote: Path = self.get_path('remote_root')
 
         tree: Paths = []
 
@@ -49,7 +49,7 @@ class UploadServer(ConnectServer):
             self._create_directory(path)
 
     def _convert_remote_path(self, local: Path) -> Path:
-        return Path(self.get_type_text('remotePath'), local)
+        return Path(self.get_path('remote_root'), local)
 
     def _create_file(self, source_path: Path, destination_path: Path) -> bool:
         status: stat_result = source_path.stat()
