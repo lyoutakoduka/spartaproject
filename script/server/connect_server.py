@@ -107,7 +107,7 @@ class ConnectServer(ContextServer):
                 hostname=self.get_string('host'),
                 port=self.get_integer('port'),
                 username=self.get_string('user_name'),
-                key_filename=self._path_as_string('private_key'),
+                key_filename=self.get_path_string('private_key'),
                 timeout=float(seconds)
             )
 
@@ -203,7 +203,7 @@ class ConnectServer(ContextServer):
 
         self._receive_ssh()
 
-        self.execute_ssh(['cd', self._path_as_string('remote_root')])
+        self.execute_ssh(['cd', self.get_path_string('remote_root')])
         return self._ssh_correct_path()
 
     def _receive_sftp(self) -> Strs:
@@ -217,7 +217,7 @@ class ConnectServer(ContextServer):
 
     def _sftp_remote_path(self) -> None:
         if sftp := self.get_sftp():
-            sftp.chdir(self._path_as_string('remote_root'))
+            sftp.chdir(self.get_path_string('remote_root'))
 
     def _create_sftp(self) -> None:
         if ssh := self.get_ssh():
