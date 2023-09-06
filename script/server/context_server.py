@@ -62,6 +62,6 @@ class ContextServer:
         context: PathPair = path_pair_from_json(self._current_context)
         return context[type]
 
-    def _get_path_string(self, type: str) -> str:
+    def get_path_string(self, type: str) -> str:
         path: Path = self.get_path(type)
         return path.as_posix()
