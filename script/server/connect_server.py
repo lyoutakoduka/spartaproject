@@ -12,11 +12,12 @@ from context.extension.decimal_context import Decimal, set_decimal_context
 from context.file.json_context import Json
 from script.file.json.import_json import json_import
 from script.path.modify.get_absolute import get_absolute
+from script.server.context_server import ContextServer
 
 set_decimal_context()
 
 
-class ConnectServer:
+class ConnectServer(ContextServer):
     def _filter_condition(self, key: str, ftp_context: Json) -> Json | None:
         if not isinstance(ftp_context, Dict):
             return None
@@ -62,6 +63,8 @@ class ConnectServer:
         self._sftp: SFTPClient | None = None
 
     def __init__(self) -> None:
+        super().__init__()
+
         self._initialize_connect()
         self._get_ftp_context()
 
@@ -92,15 +95,16 @@ class ConnectServer:
         self._initialize_connect()
 
     def _connect_detail(self) -> None:
-        milliseconds: int = self.get_type_number('connectTimeout')
+        milliseconds: int = self.get_integer('timeout')
         seconds: Decimal = Decimal(str(milliseconds)) / Decimal('1000.0')
+        path: Path = self.get_path('private_key')
 
         if ssh := self.get_ssh():
             ssh.connect(
-                hostname=self.get_type_text('host'),
-                port=self.get_type_number('port'),
-                username=self.get_type_text('username'),
-                key_filename=self.get_type_text('privateKeyPath'),
+                hostname=self.get_string('host'),
+                port=self.get_integer('port'),
+                username=self.get_string('user_name'),
+                key_filename=path.as_posix(),
                 timeout=float(seconds)
             )
 
@@ -196,7 +200,8 @@ class ConnectServer:
 
         self._receive_ssh()
 
-        self.execute_ssh(['cd', self.get_type_text('remotePath')])
+        path: Path = self.get_path('remote_root')
+        self.execute_ssh(['cd', path.as_posix()])
         return self._ssh_correct_path()
 
     def _receive_sftp(self) -> Strs:
@@ -210,7 +215,8 @@ class ConnectServer:
 
     def _sftp_remote_path(self) -> None:
         if sftp := self.get_sftp():
-            sftp.chdir(self.get_type_text('remotePath'))
+            path: Path = self.get_path('remote_root')
+            sftp.chdir(path.as_posix())
 
     def _create_sftp(self) -> None:
         if ssh := self.get_ssh():
