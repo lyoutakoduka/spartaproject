@@ -18,6 +18,13 @@ class UploadServer(ConnectServer):
     def __del__(self) -> None:
         super().__del__()
 
+    def _get_remote_root(self) -> Path:
+        if sftp := self.get_sftp():
+            if root := sftp.getcwd():
+                return Path(root)
+
+        return Path('')
+
     def _get_upload_tree(self, path: Path) -> Paths:
         remote: Path = self.get_path('remote_root')
 
