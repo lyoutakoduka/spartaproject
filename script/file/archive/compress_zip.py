@@ -4,7 +4,6 @@
 from datetime import datetime
 from zipfile import ZipFile, ZipInfo, ZIP_LZMA, ZIP_STORED
 
-from context.default.integer_context import IntTuple
 from context.default.string_context import Strs, StrPair
 from context.extension.decimal_context import Decimal, set_decimal_context
 from context.extension.path_context import Path, Paths
@@ -86,8 +85,8 @@ class CompressZip:
     def _store_timestamp_detail(self, time: datetime) -> bytes:
         return self._convert_comment({'latest': time.isoformat()})
 
-    def _store_timestamp(self, time: datetime) -> IntTuple:
-        return (
+    def _store_timestamp(self, time: datetime, information: ZipInfo) -> None:
+        information.date_time = (
             time.year,
             time.month,
             time.day,
@@ -101,7 +100,7 @@ class CompressZip:
 
         information.compress_type = ZIP_LZMA if self._compress else ZIP_STORED
         latest: datetime = get_latest(target)
-        information.date_time = self._store_timestamp(latest)
+        self._store_timestamp(latest, information)
         information.comment = self._store_timestamp_detail(latest)
 
         return information
