@@ -4,7 +4,7 @@
 from typing import Dict
 
 from context.default.integer_context import IntPair
-from context.default.string_context import StrPair
+from context.default.string_context import Strs, StrPair
 from context.extension.path_context import Path, PathPair
 from context.file.json_context import Json
 from script.file.json.convert_from_json import (
@@ -17,6 +17,17 @@ from script.path.modify.get_absolute import get_absolute
 
 
 class ContextServer:
+    def _get_table(self) -> StrPair:
+        return {
+            'timeout': 'integer',
+            'port': 'integer',
+            'host': 'string',
+            'user_name': 'string',
+            'private_key': 'path',
+            'remote_root': 'path',
+            'local_root': 'path'
+        }
+
     def _get_vscode_table(self) -> StrPair:
         return {
             'host': 'host',
