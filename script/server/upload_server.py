@@ -26,8 +26,7 @@ class UploadServer(ConnectServer):
         return Path('')
 
     def _get_upload_tree(self, path: Path) -> Paths:
-        remote: Path = self.get_path('remote_root')
-
+        remote: Path = self._get_remote_root()
         tree: Paths = []
 
         for parent in path.parents:
@@ -56,7 +55,7 @@ class UploadServer(ConnectServer):
             self._create_directory(path)
 
     def _convert_remote_path(self, local: Path) -> Path:
-        return Path(self.get_path('remote_root'), local)
+        return Path(self._get_remote_root(), local)
 
     def _create_file(self, source_path: Path, destination_path: Path) -> bool:
         status: stat_result = source_path.stat()
