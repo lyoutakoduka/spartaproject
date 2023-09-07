@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from copy import deepcopy
 from typing import Dict
 
 from context.default.integer_context import IntPair
@@ -60,7 +61,7 @@ class ContextServer:
             json_import(get_absolute(Path('.vscode', 'sftp.json')))
         )
 
-        self._current_context = self._default_context
+        self._current_context = deepcopy(self._default_context)
 
     def __init__(self) -> None:
         self._load_default()
