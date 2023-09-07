@@ -56,12 +56,15 @@ class ContextServer:
             if key in vscode_table
         }
 
+    def revert_default(self) -> None:
+        self._current_context = deepcopy(self._default_context)
+
     def _load_default(self) -> None:
         self._default_context: Json = self._from_vscode(
             json_import(get_absolute(Path('.vscode', 'sftp.json')))
         )
 
-        self._current_context = deepcopy(self._default_context)
+        self.revert_default()
 
     def __init__(self) -> None:
         self._load_default()
