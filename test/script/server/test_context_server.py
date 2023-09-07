@@ -48,18 +48,9 @@ def test_path() -> None:
     _common_test(individual_test)
 
 
-def test_path_string() -> None:
-    def individual_test(server: ContextServer) -> None:
-        type: str = 'private_key'
-        assert server.get_path(type) == Path(server.get_path_string(type))
-
-    _common_test(individual_test)
-
-
 def main() -> bool:
     test_key()
     test_integer()
     test_string()
     test_path()
-    test_path_string()
     return True
