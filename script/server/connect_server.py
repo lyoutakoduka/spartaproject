@@ -6,12 +6,12 @@ from time import sleep
 
 from context.default.string_context import Strs
 from context.extension.decimal_context import Decimal, set_decimal_context
-from script.server.context_server import ContextServer
+from script.server.path_server import PathServer
 
 set_decimal_context()
 
 
-class ConnectServer(ContextServer):
+class ConnectServer(PathServer):
     def _initialize_connect(self) -> None:
         self._ssh: SSHClient | None = None
         self._channel: Channel | None = None
