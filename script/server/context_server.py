@@ -28,6 +28,9 @@ class ContextServer:
             'local_root': 'path'
         }
 
+    def get_table(self, type: str) -> Strs:
+        return [key for key, value in self._get_table() if value == type]
+
     def _get_vscode_table(self) -> StrPair:
         return {
             'host': 'host',
