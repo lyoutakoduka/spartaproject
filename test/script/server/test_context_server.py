@@ -12,6 +12,18 @@ def _common_test(function: Callable[[ContextServer], None]) -> None:
     function(server)
 
 
+def test_key() -> None:
+    EXPECTED: int = 7
+
+    def individual_test(server: ContextServer) -> None:
+        assert EXPECTED == sum([
+            len(server.get_table(type))
+            for type in ['integer', 'string', 'path']
+        ])
+
+    _common_test(individual_test)
+
+
 def test_integer() -> None:
     def individual_test(server: ContextServer) -> None:
         for type in ['timeout', 'port']:
@@ -45,6 +57,7 @@ def test_path_string() -> None:
 
 
 def main() -> bool:
+    test_key()
     test_integer()
     test_string()
     test_path()
