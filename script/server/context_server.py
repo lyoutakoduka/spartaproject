@@ -29,7 +29,8 @@ class ContextServer:
         }
 
     def get_table(self, type: str) -> Strs:
-        return [key for key, value in self._get_table() if value == type]
+        table: StrPair = self._get_table()
+        return [key for key, value in table.items() if value == type]
 
     def _get_vscode_table(self) -> StrPair:
         return {
