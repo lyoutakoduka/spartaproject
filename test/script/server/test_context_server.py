@@ -26,7 +26,7 @@ def test_key() -> None:
 
 def test_integer() -> None:
     def individual_test(server: ContextServer) -> None:
-        for type in ['timeout', 'port']:
+        for type in server.get_table('integer'):
             assert isinstance(server.get_integer(type), int)
 
     _common_test(individual_test)
@@ -34,7 +34,7 @@ def test_integer() -> None:
 
 def test_string() -> None:
     def individual_test(server: ContextServer) -> None:
-        for type in ['host', 'user_name']:
+        for type in server.get_table('string'):
             assert isinstance(server.get_string(type), str)
 
     _common_test(individual_test)
@@ -42,7 +42,7 @@ def test_string() -> None:
 
 def test_path() -> None:
     def individual_test(server: ContextServer) -> None:
-        for type in ['private_key', 'remote_root', 'local_root']:
+        for type in server.get_table('path'):
             assert isinstance(server.get_path(type), Path)
 
     _common_test(individual_test)
