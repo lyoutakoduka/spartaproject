@@ -29,7 +29,7 @@ class ContextServer:
             'local_root': 'path'
         }
 
-    def get_table(self, type: str) -> Strs:
+    def get_context_table(self, type: str) -> Strs:
         table: StrPair = self._get_table()
         return [key for key, value in table.items() if value == type]
 
@@ -82,7 +82,7 @@ class ContextServer:
         return context[type]
 
     def set_path(self, type: str, path: Path) -> bool:
-        if type in self.get_table('path'):
+        if type in self.get_context_table('path'):
             if isinstance(self._current_context, Dict):
                 self._current_context[type] = path.as_posix()
                 return True
