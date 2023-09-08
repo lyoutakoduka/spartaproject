@@ -80,3 +80,11 @@ class ContextServer:
     def get_path(self, type: str) -> Path:
         context: PathPair = path_pair_from_json(self._current_context)
         return context[type]
+
+    def set_path(self, type: str, path: Path) -> bool:
+        if type in self.get_table('path'):
+            if isinstance(self._current_context, Dict):
+                self._current_context[type] = path.as_posix()
+                return True
+
+        return False
