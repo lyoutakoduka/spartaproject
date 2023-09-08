@@ -48,9 +48,21 @@ def test_path() -> None:
     _common_test(individual_test)
 
 
+def test_set_path() -> None:
+    expected: Path = Path(__file__)
+
+    def individual_test(server: ContextServer) -> None:
+        for type in server.get_table('path'):
+            server.set_path(type, expected)
+            assert expected == server.get_path(type)
+
+    _common_test(individual_test)
+
+
 def main() -> bool:
     test_key()
     test_integer()
     test_string()
     test_path()
+    test_set_path()
     return True
