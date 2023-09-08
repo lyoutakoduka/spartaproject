@@ -127,15 +127,14 @@ class ConnectServer(PathServer):
         self._execute_ssh(commands)
         return self._receive_ssh()
 
-    def _correct_path(self, expected: Strs, result: Strs) -> bool:
+    def _correct_path(self, result: Strs) -> bool:
         return 1 == len(set(
-            [str(sorted(name)) for name in [expected, result]]
+            [str(sorted(name)) for name in [self._EXPECTED, result]]
         ))
 
     def _ssh_correct_path(self) -> bool:
         return self._correct_path(
-            [name + '/' for name in self._EXPECTED],
-            self.execute_ssh(['ls', '-1', '-p'])
+            [name[:-1] for name in self.execute_ssh(['ls', '-1', '-p'])]
         )
 
     def _connect_ssh(self) -> bool:
@@ -157,7 +156,7 @@ class ConnectServer(PathServer):
         return []
 
     def _sftp_correct_path(self) -> bool:
-        return self._correct_path(self._EXPECTED, self._receive_sftp())
+        return self._correct_path(self._receive_sftp())
 
     def _sftp_remote_path(self) -> None:
         if sftp := self.get_sftp():
