@@ -18,7 +18,7 @@ class PathServer(ContextServer):
         self._build_path_table()
 
     def get_path(self, type: str) -> Path:
-        if type in self.get_table('path'):
+        if type in self.get_context_table('path'):
             return super().get_path(type)
 
         return self._path_table[type]

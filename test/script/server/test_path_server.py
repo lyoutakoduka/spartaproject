@@ -14,7 +14,7 @@ def _common_test(function: Callable[[PathServer], None]) -> None:
 
 def test_path_string() -> None:
     def individual_test(server: PathServer) -> None:
-        for type in server.get_table('path'):
+        for type in server.get_context_table('path'):
             assert server.get_path(type) == Path(server.get_path_string(type))
 
     _common_test(individual_test)
