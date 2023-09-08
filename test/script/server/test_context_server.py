@@ -59,10 +59,24 @@ def test_set_path() -> None:
     _common_test(individual_test)
 
 
+def test_revert() -> None:
+    input: Path = Path(__file__)
+
+    def individual_test(server: ContextServer) -> None:
+        for type in server.get_table('path'):
+            current: Path = server.get_path(type)
+            server.set_path(type, input)
+            server.revert_default()
+            assert current == server.get_path(type)
+
+    _common_test(individual_test)
+
+
 def main() -> bool:
     test_key()
     test_integer()
     test_string()
     test_path()
     test_set_path()
+    test_revert()
     return True
