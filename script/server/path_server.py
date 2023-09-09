@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from context.default.string_context import Strs
+from context.default.string_context import Strs, StrPair
 from context.extension.path_context import Path, PathPair
 from script.server.context_server import ContextServer
 
@@ -12,6 +12,10 @@ class PathServer(ContextServer):
             child = Path(self.get_path(parent), child)
 
         self._path_table[type] = child
+
+    def _add_directory(self, table: StrPair, parent: str = '') -> None:
+        for type, name in table.items():
+            self._add_path(type, Path(name), parent=parent)
 
     def _build_path_table(self) -> None:
         self._path_table: PathPair = {
