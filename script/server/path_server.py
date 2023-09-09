@@ -7,6 +7,12 @@ from script.server.context_server import ContextServer
 
 
 class PathServer(ContextServer):
+    def _add_path(self, type: str, child: Path, parent: str = '') -> None:
+        if 0 < len(parent):
+            child = Path(self.get_path(parent), child)
+
+        self._path_table[type] = child
+
     def _build_path_table(self) -> None:
         self._path_table: PathPair = {
             '_'.join([type, 'root']): Path(type)
