@@ -102,3 +102,6 @@ class UploadServer(ConnectServer):
             return self._upload_tree(source_path, destination_local)
 
         return self._upload_file(source_path, destination_local)
+
+    def upload_new(self, source: Path) -> bool:
+        return self.upload(source, self.to_remote_path(source))
