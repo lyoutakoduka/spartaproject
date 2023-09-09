@@ -17,7 +17,7 @@ def test_table() -> None:
 
     def individual_test(server: PathServer) -> None:
         assert EXPECTED == len(
-            [type for type in server.get_path_table('path')]
+            [type for type in server.get_path_table()]
         )
 
     _common_test(individual_test)
@@ -25,7 +25,7 @@ def test_table() -> None:
 
 def test_path() -> None:
     def individual_test(server: PathServer) -> None:
-        for type in server.get_path_table('path'):
+        for type in server.get_path_table():
             server.get_path(type)
             assert True
 

@@ -18,7 +18,7 @@ class PathServer(ContextServer):
 
         self._build_path_table()
 
-    def get_path_table(self, type: str) -> Strs:
+    def get_path_table(self) -> Strs:
         return list(self._path_table.keys())
 
     def get_path(self, type: str) -> Path:
