@@ -128,8 +128,13 @@ class ConnectServer(PathServer):
         return self._receive_ssh()
 
     def _correct_path(self, result: Strs) -> bool:
+        expected: Strs = [
+            str(self.get_path(type))
+            for type in ['private_root', 'public_root']
+        ]
+
         return 1 == len(set(
-            [str(sorted(name)) for name in [self._EXPECTED, result]]
+            [str(sorted(name)) for name in [expected, result]]
         ))
 
     def _ssh_correct_path(self) -> bool:
