@@ -23,6 +23,15 @@ def test_table() -> None:
     _common_test(individual_test)
 
 
+def test_path() -> None:
+    def individual_test(server: PathServer) -> None:
+        for type in server.get_path_table('path'):
+            server.get_path(type)
+            assert True
+
+    _common_test(individual_test)
+
+
 def test_path_string() -> None:
     def individual_test(server: PathServer) -> None:
         for type in server.get_context_table('path'):
@@ -33,5 +42,6 @@ def test_path_string() -> None:
 
 def main() -> bool:
     test_table()
+    test_path()
     test_path_string()
     return True
