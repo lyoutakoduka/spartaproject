@@ -5,6 +5,7 @@ from context.default.string_context import Strs, StrPair
 from context.extension.path_context import Path, PathPair
 from script.directory.create_directory_working import create_working_space
 from script.path.modify.get_absolute import get_absolute
+from script.path.modify.get_relative import get_relative
 from script.server.context_server import ContextServer
 
 
@@ -51,3 +52,8 @@ class PathServer(ContextServer):
         )
 
         return create_working_space(get_absolute(path), jst=True)
+
+    def to_remote_path(self, local: Path) -> Path:
+        return get_relative(
+            local, root_path=get_absolute(self.get_path('local_root'))
+        )

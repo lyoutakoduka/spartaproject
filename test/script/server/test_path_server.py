@@ -4,6 +4,7 @@
 from pathlib import Path
 from typing import Callable
 
+from script.path.modify.get_absolute import get_absolute
 from script.server.path_server import PathServer
 
 
@@ -48,9 +49,21 @@ def test_working() -> None:
     _common_test(individual_test)
 
 
+def test_to_remote() -> None:
+    EXPECTED: Path = Path('temp')
+
+    def individual_test(server: PathServer) -> None:
+        assert EXPECTED == server.to_remote_path(
+            Path(get_absolute(server.get_path('local_root')), EXPECTED)
+        )
+
+    _common_test(individual_test)
+
+
 def main() -> bool:
     test_table()
     test_path()
     test_path_string()
     test_working()
+    test_to_remote()
     return True
