@@ -18,10 +18,11 @@ class PathServer(ContextServer):
             self._add_path(type, Path(name), parent=parent)
 
     def _build_path_table(self) -> None:
-        self._path_table: PathPair = {
-            '_'.join([type, 'root']): Path(type)
-            for type in ['private', 'public']
-        }
+        self._path_table: PathPair = {}
+
+        self._add_directory(
+            {'private_root': 'private', 'public_root': 'public'}
+        )
 
     def __init__(self) -> None:
         super().__init__()
