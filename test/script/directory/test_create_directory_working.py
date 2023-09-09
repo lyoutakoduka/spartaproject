@@ -3,7 +3,7 @@
 
 from pathlib import Path
 
-from script.directory.create_directory_working import current_working_space
+from script.directory.create_directory_working import create_working_space
 from script.path.modify.get_relative import get_relative
 
 
@@ -13,7 +13,7 @@ def test_pass() -> None:
         NAME, '2023', '04', '01', '00', '00', '00', '000000'
     )
 
-    time_path: Path = current_working_space(Path(NAME), override=True)
+    time_path: Path = create_working_space(Path(NAME), override=True)
 
     assert time_path.exists()
     assert EXPECTED == get_relative(time_path)

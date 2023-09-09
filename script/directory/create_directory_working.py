@@ -23,7 +23,7 @@ def get_time_data(time: datetime) -> Ints2:
     ]
 
 
-def current_working_space(
+def create_working_space(
     root: Path, override: bool = False, jst: bool = False
 ) -> Path:
     time_texts: Strs = [
