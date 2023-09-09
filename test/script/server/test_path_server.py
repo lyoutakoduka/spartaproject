@@ -12,6 +12,17 @@ def _common_test(function: Callable[[PathServer], None]) -> None:
     function(server)
 
 
+def test_table() -> None:
+    EXPECTED: int = 2
+
+    def individual_test(server: PathServer) -> None:
+        assert EXPECTED == len(
+            [type for type in server.get_path_table('path')]
+        )
+
+    _common_test(individual_test)
+
+
 def test_path_string() -> None:
     def individual_test(server: PathServer) -> None:
         for type in server.get_context_table('path'):
@@ -21,5 +32,6 @@ def test_path_string() -> None:
 
 
 def main() -> bool:
+    test_table()
     test_path_string()
     return True

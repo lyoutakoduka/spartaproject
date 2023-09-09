@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from context.default.string_context import Strs
 from context.extension.path_context import Path, PathPair
 from script.server.context_server import ContextServer
 
@@ -16,6 +17,9 @@ class PathServer(ContextServer):
         super().__init__()
 
         self._build_path_table()
+
+    def get_path_table(self, type: str) -> Strs:
+        return list(self._path_table.keys())
 
     def get_path(self, type: str) -> Path:
         if type in self.get_context_table('path'):
