@@ -22,8 +22,6 @@ class ConnectServer(PathServer):
 
         self._initialize_connect()
 
-        self._EXPECTED: Strs = ['private', 'public']
-
     def get_ssh(self) -> SSHClient | None:
         return self._ssh
 
