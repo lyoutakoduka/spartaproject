@@ -3,6 +3,8 @@
 
 from context.default.string_context import Strs, StrPair
 from context.extension.path_context import Path, PathPair
+from script.directory.create_directory_working import create_working_space
+from script.path.modify.get_absolute import get_absolute
 from script.server.context_server import ContextServer
 
 
@@ -42,3 +44,10 @@ class PathServer(ContextServer):
     def get_path_string(self, type: str) -> str:
         path: Path = self.get_path(type)
         return path.as_posix()
+
+    def get_working_space(self) -> Path:
+        path: Path = Path(
+            self.get_path('local_root'), self.get_path('work_root')
+        )
+
+        return create_working_space(get_absolute(path), jst=True)

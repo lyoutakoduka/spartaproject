@@ -40,8 +40,17 @@ def test_path_string() -> None:
     _common_test(individual_test)
 
 
+def test_working() -> None:
+    def individual_test(server: PathServer) -> None:
+        working: Path = server.get_working_space()
+        assert working.exists()
+
+    _common_test(individual_test)
+
+
 def main() -> bool:
     test_table()
     test_path()
     test_path_string()
+    test_working()
     return True
