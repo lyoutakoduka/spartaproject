@@ -23,6 +23,7 @@ class PathServer(ContextServer):
         self._add_directory(
             {'private_root': 'private', 'public_root': 'public'}
         )
+        self._add_path('work_root', Path('work'), parent='private_root')
 
     def __init__(self) -> None:
         super().__init__()

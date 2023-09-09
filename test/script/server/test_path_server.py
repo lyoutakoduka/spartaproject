@@ -13,7 +13,7 @@ def _common_test(function: Callable[[PathServer], None]) -> None:
 
 
 def test_table() -> None:
-    EXPECTED: int = 2
+    EXPECTED: int = 3
 
     def individual_test(server: PathServer) -> None:
         assert EXPECTED == len(
