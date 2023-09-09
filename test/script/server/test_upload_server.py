@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 from pathlib import Path
-from tempfile import TemporaryDirectory
 from typing import Callable
 
 from script.directory.create_directory import create_directory
@@ -23,8 +22,7 @@ def _inside_temporary_directory(
     server: UploadServer = UploadServer()
 
     if server.connect():
-        with TemporaryDirectory() as temporary_path:
-            function(server, Path(temporary_path))
+        function(server, server.get_working_space())
 
 
 def test_file() -> None:
