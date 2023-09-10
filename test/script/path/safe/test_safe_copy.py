@@ -23,7 +23,7 @@ def _common_test(rename_path: Path) -> None:
 
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as temporary_path:
-        function(create_temporary_file(Path(temporary_path)))
+        function(Path(temporary_path))
 
 
 def _copy(path: Path) -> Path:
@@ -33,7 +33,8 @@ def _copy(path: Path) -> Path:
 
 
 def test_file() -> None:
-    def individual_test(source_path: Path) -> None:
+    def individual_test(temporary_path: Path) -> None:
+        source_path: Path = create_temporary_file(temporary_path)
         safe_copy = SafeCopy()
         safe_copy.copy(source_path, source_path.with_stem('destination'))
 
@@ -43,7 +44,8 @@ def test_file() -> None:
 
 
 def test_override() -> None:
-    def individual_test(source_path: Path) -> None:
+    def individual_test(temporary_path: Path) -> None:
+        source_path: Path = create_temporary_file(temporary_path)
         safe_copy = SafeCopy()
         destination_path: Path = safe_copy.copy(
             source_path, source_path, override=True
