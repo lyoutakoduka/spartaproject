@@ -31,11 +31,21 @@ class PathServer(ContextServer):
             parent='private_root'
         )
 
+    def _build_path_develop(self) -> None:
+        self._add_directory(
+            {
+                'internal_root': Path('internal'),
+                'python_root': Path('external', 'python')
+            },
+            parent='develop_root'
+        )
+
     def _build_path_table(self) -> None:
         self._path_table: PathPair = {}
 
         self._build_path_root()
         self._build_path_private()
+        self._build_path_develop()
 
     def __init__(self) -> None:
         super().__init__()
