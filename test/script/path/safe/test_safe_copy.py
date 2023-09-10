@@ -6,6 +6,7 @@ from typing import Callable
 
 from context.extension.path_context import Path, PathPair2
 from script.bool.same_value import bool_same_pair
+from script.directory.create_directory import create_directory
 from script.file.json.convert_from_json import path_pair2_from_json
 from script.file.json.import_json import json_import
 from script.path.check_exists import check_exists_pair
@@ -57,7 +58,17 @@ def test_override() -> None:
     _inside_temporary_directory(individual_test)
 
 
+def test_directory() -> None:
+    def individual_test(temporary_path: Path) -> None:
+        _common_test(
+            _copy(create_directory(Path(temporary_path, 'temporary')))
+        )
+
+    _inside_temporary_directory(individual_test)
+
+
 def main() -> bool:
     test_file()
     test_override()
+    test_directory()
     return True
