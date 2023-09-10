@@ -23,6 +23,11 @@ class ExecuteServer(UploadServer):
             '-'.join([language.capitalize(), version])
         )
 
+    def _set_version_path(self, version_root: Path) -> None:
+        self._python_path: Path = Path(
+            version_root, 'local', 'python', 'bin', 'python3'
+        )
+
     def __init__(self) -> None:
         super().__init__()
 
