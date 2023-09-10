@@ -61,6 +61,15 @@ def test_directory() -> None:
     assert _common_test(False, type, server)
 
 
+def test_version() -> None:
+    type: str = 'version'
+    EXPECTED: Ints = [3, 11, 5]
+    server: ExecuteServer = ExecuteServer(versions=EXPECTED)
+
+    if result := _execute_python(True, type, server):
+        assert EXPECTED == _get_version_number(result)
+
+
 def test_error() -> None:
     type: str = 'error'
     server: ExecuteServer = ExecuteServer()
@@ -72,4 +81,5 @@ def test_error() -> None:
 def main() -> bool:
     test_file()
     test_directory()
+    test_version()
     return True
