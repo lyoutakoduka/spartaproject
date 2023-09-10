@@ -4,6 +4,7 @@
 from pathlib import Path
 from pytest import raises
 
+from context.default.integer_context import Ints
 from context.default.string_context import Strs
 from script.path.safe.safe_copy import SafeCopy
 from script.server.execute_server import ExecuteServer
@@ -36,6 +37,14 @@ def _common_test(is_file: bool, type: str, server: ExecuteServer) -> bool:
         return result == _expected_result(type)
 
     return False
+
+
+def _get_version_number(result: Strs) -> Ints:
+    version_text = result[0]
+    texts: Strs = version_text.split(' ')
+    text: str = texts[0]
+
+    return [int(number) for number in text.split('.')]
 
 
 def test_file() -> None:
