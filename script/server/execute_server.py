@@ -19,12 +19,10 @@ class ExecuteServer(UploadServer):
         return ' '.join(['traceback'.capitalize(), '(' + body + ')']) + ':'
 
     def execute(self, source_root: Path) -> Strs | None:
-        DESTINATION: Path = Path('private', 'work', 'execute')
-        destination_root: Path = Path(DESTINATION, source_root.name)
-
-        if not self.upload(source_root, destination_root):
+        if not self.upload_new(source_root):
             return None
 
+        destination_root: Path = self.to_remote_path(source_root)
         result: Strs = self.execute_ssh(
             ['python', destination_root.as_posix()]
         )
