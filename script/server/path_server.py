@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from context.default.string_context import Strs, StrPair
+from context.default.string_context import Strs
 from context.extension.path_context import Path, PathPair
 from script.directory.create_directory_working import create_working_space
 from script.path.modify.get_absolute import get_absolute
@@ -16,7 +16,7 @@ class PathServer(ContextServer):
 
         self._path_table[type] = child
 
-    def _add_directory(self, table: StrPair, parent: str = '') -> None:
+    def _add_directory(self, table: PathPair, parent: str = '') -> None:
         for type, name in table.items():
             self._add_path(type, Path(name), parent=parent)
 
@@ -24,7 +24,7 @@ class PathServer(ContextServer):
         self._path_table: PathPair = {}
 
         self._add_directory(
-            {'private_root': 'private', 'public_root': 'public'}
+            {'private_root': Path('private'), 'public_root': Path('public')}
         )
         self._add_path('work_root', Path('work'), parent='private_root')
 
