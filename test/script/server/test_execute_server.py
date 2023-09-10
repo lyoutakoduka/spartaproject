@@ -9,9 +9,9 @@ from script.path.safe.safe_copy import SafeCopy
 from script.server.execute_server import ExecuteServer
 
 
-def _execute_python(is_file: bool, type: str) -> Strs | None:
-    server: ExecuteServer = ExecuteServer()
-
+def _execute_python(
+    is_file: bool, type: str, server: ExecuteServer
+) -> Strs | None:
     if not server.connect():
         return None
 
@@ -31,8 +31,8 @@ def _expected_result(type: str) -> Strs:
     return [type + str(i) for i in range(3)]
 
 
-def _common_test(is_file: bool, type: str) -> bool:
-    if result := _execute_python(is_file, type):
+def _common_test(is_file: bool, type: str, server: ExecuteServer) -> bool:
+    if result := _execute_python(is_file, type, server):
         return result == _expected_result(type)
 
     return False
@@ -40,18 +40,24 @@ def _common_test(is_file: bool, type: str) -> bool:
 
 def test_file() -> None:
     type: str = 'file'
-    assert _common_test(True, type)
+    server: ExecuteServer = ExecuteServer()
+
+    assert _common_test(True, type, server)
 
 
 def test_directory() -> None:
     type: str = 'directory'
-    assert _common_test(False, type)
+    server: ExecuteServer = ExecuteServer()
+
+    assert _common_test(False, type, server)
 
 
 def test_error() -> None:
     type: str = 'error'
+    server: ExecuteServer = ExecuteServer()
+
     with raises(ValueError):
-        _execute_python(True, type)
+        _execute_python(True, type, server)
 
 
 def main() -> bool:
