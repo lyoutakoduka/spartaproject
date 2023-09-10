@@ -5,6 +5,7 @@ from pathlib import Path
 from pytest import raises
 
 from context.default.string_context import Strs
+from script.path.safe.safe_copy import SafeCopy
 from script.server.execute_server import ExecuteServer
 
 
@@ -15,10 +16,15 @@ def _execute_python(is_file: bool, type: str) -> Strs | None:
         return None
 
     current: Path = Path(__file__)
+    upload_target: str = type + '.py' if is_file else type
+    destination_path: Path = Path(server.get_working_space(), upload_target)
 
-    return server.execute(
-        Path(current.parent, 'execute', type + '.py' if is_file else type)
+    safe_copy = SafeCopy()
+    safe_copy.copy(
+        Path(current.parent, 'execute', upload_target), destination_path
     )
+
+    return server.execute(destination_path)
 
 
 def _expected_result(type: str) -> Strs:
