@@ -42,6 +42,12 @@ class ExecuteServer(UploadServer):
         body: str = ' '.join(['most', 'recent', 'call', 'last'])
         return ' '.join(['traceback'.capitalize(), '(' + body + ')']) + ':'
 
+    def _get_command(self, source_root: Path) -> Strs:
+        return [
+            path.as_posix()
+            for path in [self._python_path, self.to_remote_path(source_root)]
+        ]
+
     def execute(self, source_root: Path) -> Strs | None:
         if not self.upload(source_root):
             return None
