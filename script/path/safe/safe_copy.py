@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from shutil import copy2
+from shutil import copy2, copytree
 
 from context.extension.path_context import Path
 from script.path.modify.avoid_duplication import get_avoid_path
@@ -15,7 +15,11 @@ class SafeCopy(FileHistory):
         if override:
             destination_path = get_avoid_path(destination_path)
 
-        copy2(source_path, destination_path)
+        if source_path.is_dir():
+            copytree(source_path, destination_path)
+        else:
+            copy2(source_path, destination_path)
+
         self.add_history(source_path, destination_path)
 
         return destination_path
