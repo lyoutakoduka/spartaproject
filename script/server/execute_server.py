@@ -3,11 +3,18 @@
 
 from pathlib import Path
 
+from context.default.integer_context import Ints
 from context.default.string_context import Strs
 from script.server.upload_server import UploadServer
 
 
 class ExecuteServer(UploadServer):
+    def _set_version(self, versions: Ints) -> str:
+        if 0 == len(versions):
+            versions = [3, 11, 3]
+
+        return '.'.join([str(i) for i in versions])
+
     def __init__(self) -> None:
         super().__init__()
 
