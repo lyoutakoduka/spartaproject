@@ -13,6 +13,7 @@ from script.file.json.import_json import json_import
 from script.path.check_exists import check_exists_pair
 from script.path.safe.safe_rename import SafeRename
 from script.path.temporary.create_temporary_file import create_temporary_file
+from script.path.temporary.create_temporary_tree import create_temporary_tree
 
 
 def _common_test(rename_path: Path) -> None:
@@ -67,8 +68,21 @@ def test_directory() -> None:
     _inside_temporary_directory(individual_test)
 
 
+def test_tree() -> None:
+    def individual_test(temporary_path: Path) -> None:
+        safe_rename = SafeRename()
+        source_path: Path = Path(temporary_path, 'temporary')
+        create_temporary_tree(source_path, tree_deep=2)
+        safe_rename.rename(source_path, source_path.with_stem('destination'))
+
+        _common_test(safe_rename.pop_history())
+
+    _inside_temporary_directory(individual_test)
+
+
 def main() -> bool:
     test_file()
     test_override()
     test_directory()
+    test_tree()
     return True
