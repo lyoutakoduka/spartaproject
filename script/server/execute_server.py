@@ -28,8 +28,12 @@ class ExecuteServer(UploadServer):
             version_root, 'local', 'python', 'bin', 'python3'
         )
 
-    def __init__(self) -> None:
+    def __init__(self, versions: Ints = []) -> None:
         super().__init__()
+
+        self._set_version_path(
+            self._get_version_root(self._set_version(versions))
+        )
 
     def __del__(self) -> None:
         super().__del__()
