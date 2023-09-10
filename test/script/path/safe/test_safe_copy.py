@@ -26,6 +26,12 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
         function(create_temporary_file(Path(temporary_path)))
 
 
+def _copy(path: Path) -> Path:
+    safe_copy = SafeCopy()
+    safe_copy.copy(path, path.with_stem('destination'))
+    return safe_copy.pop_history()
+
+
 def test_file() -> None:
     def individual_test(source_path: Path) -> None:
         safe_copy = SafeCopy()
