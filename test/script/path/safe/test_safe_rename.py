@@ -32,6 +32,12 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
         function(Path(temporary_path))
 
 
+def _rename(path: Path) -> Path:
+    safe_rename = SafeRename()
+    safe_rename.rename(path, path.with_stem('destination'))
+    return safe_rename.pop_history()
+
+
 def test_file() -> None:
     def individual_test(temporary_path: Path) -> None:
         safe_rename = SafeRename()
