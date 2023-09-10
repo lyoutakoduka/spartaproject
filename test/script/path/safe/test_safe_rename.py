@@ -27,12 +27,13 @@ def _common_test(rename_path: Path) -> None:
 
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as temporary_path:
-        function(create_temporary_file(Path(temporary_path)))
+        function(Path(temporary_path))
 
 
 def test_file() -> None:
-    def individual_test(source_path: Path) -> None:
+    def individual_test(temporary_path: Path) -> None:
         safe_rename = SafeRename()
+        source_path: Path = create_temporary_file(temporary_path)
         safe_rename.rename(source_path, source_path.with_stem('destination'))
 
         _common_test(safe_rename.pop_history())
@@ -41,8 +42,9 @@ def test_file() -> None:
 
 
 def test_override() -> None:
-    def individual_test(source_path: Path) -> None:
+    def individual_test(temporary_path: Path) -> None:
         safe_rename = SafeRename()
+        source_path: Path = create_temporary_file(temporary_path)
         destination_path: Path = safe_rename.rename(
             source_path, source_path, override=True
         )
