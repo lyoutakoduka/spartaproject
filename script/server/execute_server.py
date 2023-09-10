@@ -15,6 +15,14 @@ class ExecuteServer(UploadServer):
 
         return '.'.join([str(i) for i in versions])
 
+    def _get_version_root(self, version: str) -> Path:
+        language: str = 'python'
+
+        return Path(
+            self.get_path('python_root'),
+            '-'.join([language.capitalize(), version])
+        )
+
     def __init__(self) -> None:
         super().__init__()
 
