@@ -11,7 +11,7 @@ from script.server.upload_server import UploadServer
 
 
 def _common_test(server: UploadServer, source_path: Path) -> None:
-    assert server.upload_new(source_path)
+    assert server.upload(source_path)
 
 
 def _inside_temporary_directory(

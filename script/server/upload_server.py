@@ -84,7 +84,7 @@ class UploadServer(ConnectServer):
 
     def _upload_tree(self, source_path: Path, destination_local: Path) -> bool:
         for source_child in walk_iterator(source_path, depth=1):
-            if not self.upload(
+            if not self._upload(
                 source_child,
                 Path(
                     destination_local,
@@ -97,11 +97,11 @@ class UploadServer(ConnectServer):
 
         return True
 
-    def upload(self, source_path: Path, destination_local: Path) -> bool:
+    def _upload(self, source_path: Path, destination_local: Path) -> bool:
         if source_path.is_dir():
             return self._upload_tree(source_path, destination_local)
 
         return self._upload_file(source_path, destination_local)
 
-    def upload_new(self, source: Path) -> bool:
-        return self.upload(source, self.to_remote_path(source))
+    def upload(self, source: Path) -> bool:
+        return self._upload(source, self.to_remote_path(source))
