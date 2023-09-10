@@ -40,11 +40,7 @@ def _rename(path: Path) -> Path:
 
 def test_file() -> None:
     def individual_test(temporary_path: Path) -> None:
-        safe_rename = SafeRename()
-        source_path: Path = create_temporary_file(temporary_path)
-        safe_rename.rename(source_path, source_path.with_stem('destination'))
-
-        _common_test(safe_rename.pop_history())
+        _common_test(_rename(create_temporary_file(temporary_path)))
 
     _inside_temporary_directory(individual_test)
 
@@ -65,23 +61,18 @@ def test_override() -> None:
 
 def test_directory() -> None:
     def individual_test(temporary_path: Path) -> None:
-        safe_rename = SafeRename()
-        source_path: Path = create_directory(Path(temporary_path, 'temporary'))
-        safe_rename.rename(source_path, source_path.with_stem('destination'))
-
-        _common_test(safe_rename.pop_history())
+        _common_test(
+            _rename(create_directory(Path(temporary_path, 'temporary')))
+        )
 
     _inside_temporary_directory(individual_test)
 
 
 def test_tree() -> None:
     def individual_test(temporary_path: Path) -> None:
-        safe_rename = SafeRename()
         source_path: Path = Path(temporary_path, 'temporary')
         create_temporary_tree(source_path, tree_deep=2)
-        safe_rename.rename(source_path, source_path.with_stem('destination'))
-
-        _common_test(safe_rename.pop_history())
+        _common_test(_rename(source_path))
 
     _inside_temporary_directory(individual_test)
 
