@@ -26,7 +26,7 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
         function(create_temporary_file(Path(temporary_path)))
 
 
-def test_single() -> None:
+def test_file() -> None:
     def individual_test(source_path: Path) -> None:
         safe_copy = SafeCopy()
         safe_copy.copy(source_path, source_path.with_stem('destination'))
@@ -50,6 +50,6 @@ def test_override() -> None:
 
 
 def main() -> bool:
-    test_single()
+    test_file()
     test_override()
     return True
