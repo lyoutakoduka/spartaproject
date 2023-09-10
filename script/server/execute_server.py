@@ -19,7 +19,7 @@ class ExecuteServer(UploadServer):
         return ' '.join(['traceback'.capitalize(), '(' + body + ')']) + ':'
 
     def execute(self, source_root: Path) -> Strs | None:
-        if not self.upload_new(source_root):
+        if not self.upload(source_root):
             return None
 
         destination_root: Path = self.to_remote_path(source_root)
