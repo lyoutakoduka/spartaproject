@@ -25,7 +25,7 @@ def _inside_temporary_directory(
 
 def test_file() -> None:
     def individual_test(server: UploadServer, temporary_path: Path) -> None:
-        _common_test(server, create_temporary_file(Path(temporary_path)))
+        _common_test(server, create_temporary_file(temporary_path))
 
     _inside_temporary_directory(individual_test)
 
