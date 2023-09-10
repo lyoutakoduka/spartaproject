@@ -52,10 +52,7 @@ class ExecuteServer(UploadServer):
         if not self.upload(source_root):
             return None
 
-        destination_root: Path = self.to_remote_path(source_root)
-        result: Strs = self.execute_ssh(
-            ['python', destination_root.as_posix()]
-        )
+        result: Strs = self.execute_ssh(self._get_command(source_root))
 
         if self._get_error_identifier() in result:
             raise ValueError
