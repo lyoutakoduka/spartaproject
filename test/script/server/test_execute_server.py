@@ -38,14 +38,14 @@ def _common_test(is_file: bool, type: str) -> bool:
     return False
 
 
-def test_directory() -> None:
-    type: str = 'directory'
-    assert _common_test(False, type)
-
-
 def test_file() -> None:
     type: str = 'file'
     assert _common_test(True, type)
+
+
+def test_directory() -> None:
+    type: str = 'directory'
+    assert _common_test(False, type)
 
 
 def test_error() -> None:
@@ -55,6 +55,6 @@ def test_error() -> None:
 
 
 def main() -> bool:
-    test_directory()
     test_file()
+    test_directory()
     return True
