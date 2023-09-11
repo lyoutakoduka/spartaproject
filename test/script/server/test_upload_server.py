@@ -6,6 +6,7 @@ from tempfile import TemporaryDirectory
 from typing import Callable
 
 from script.directory.create_directory import create_directory
+from script.directory.create_directory_working import get_working_space
 from script.path.temporary.create_temporary_file import create_temporary_file
 from script.path.temporary.create_temporary_tree import create_temporary_tree
 from script.server.upload_server import UploadServer
@@ -53,12 +54,16 @@ def test_tree() -> None:
 def test_place() -> None:
     def individual_test(server: UploadServer) -> None:
         with TemporaryDirectory() as temporary_path:
-            source_path: Path = create_temporary_file(Path(temporary_path))
+            working_path: Path = get_working_space(jst=True)
+            source_path: Path = create_temporary_file(
+                Path(temporary_path, working_path)
+            )
 
             assert server.upload(
                 source_path,
                 destination=Path(
-                    server.to_remote_path(server.get_working_space()),
+                    server.get_path('work_root'),
+                    working_path,
                     source_path.name
                 )
             )
