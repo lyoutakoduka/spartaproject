@@ -7,7 +7,7 @@ from script.directory.create_directory_working import create_working_space
 from script.path.modify.get_relative import get_relative
 
 
-def test_pass() -> None:
+def test_create() -> None:
     NAME: str = '.trash'
     EXPECTED: Path = Path(
         NAME, '2023', '04', '01', '00', '00', '00', '000000'
@@ -20,5 +20,5 @@ def test_pass() -> None:
 
 
 def main() -> bool:
-    test_pass()
+    test_create()
     return True
