@@ -25,25 +25,24 @@ def _inside_temporary_directory(
 
 def test_file() -> None:
     def individual_test(server: UploadServer) -> None:
-        temporary_path: Path = server.get_working_space()
-        _common_test(server, create_temporary_file(temporary_path))
+        _common_test(server, create_temporary_file(server.get_working_space()))
 
     _inside_temporary_directory(individual_test)
 
 
 def test_directory() -> None:
     def individual_test(server: UploadServer) -> None:
-        temporary_path: Path = server.get_working_space()
-        source_path: Path = create_directory(Path(temporary_path, 'directory'))
-        _common_test(server, source_path)
+        _common_test(
+            server,
+            create_directory(Path(server.get_working_space(), 'directory'))
+        )
 
     _inside_temporary_directory(individual_test)
 
 
 def test_tree() -> None:
     def individual_test(server: UploadServer) -> None:
-        temporary_path: Path = server.get_working_space()
-        source_path: Path = Path(temporary_path, 'tree')
+        source_path: Path = Path(server.get_working_space(), 'tree')
         create_temporary_tree(source_path, tree_deep=2)
         _common_test(server, source_path)
 
