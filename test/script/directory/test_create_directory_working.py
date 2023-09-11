@@ -3,8 +3,16 @@
 
 from pathlib import Path
 
-from script.directory.create_directory_working import create_working_space
+from script.directory.create_directory_working import (
+    get_working_space, create_working_space
+)
 from script.path.modify.get_relative import get_relative
+
+
+def test_name() -> None:
+    EXPECTED: Path = Path('2023', '04', '01', '00', '00', '00', '000000')
+
+    assert EXPECTED == get_working_space(override=True)
 
 
 def test_create() -> None:
@@ -20,5 +28,6 @@ def test_create() -> None:
 
 
 def main() -> bool:
+    test_name()
     test_create()
     return True
