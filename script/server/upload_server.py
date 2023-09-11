@@ -23,7 +23,7 @@ class UploadServer(ConnectServer):
             if root := sftp.getcwd():
                 return Path(root)
 
-        return Path('')
+        return Path()
 
     def _get_upload_tree(self, path: Path) -> Paths:
         remote: Path = self._get_remote_root()
