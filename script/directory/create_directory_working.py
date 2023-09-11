@@ -35,5 +35,6 @@ def get_working_space(override: bool = False, jst: bool = False) -> Path:
 def create_working_space(
     root: Path, override: bool = False, jst: bool = False
 ) -> Path:
-    time_texts: Path = get_working_space(override=override, jst=jst)
-    return create_directory(get_absolute(Path(root, time_texts)))
+    return create_directory(get_absolute(
+        Path(root, get_working_space(override=override, jst=jst))
+    ))
