@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from pathlib import Path
+from tempfile import TemporaryDirectory
 from typing import Callable
 
 from script.directory.create_directory import create_directory
@@ -49,8 +50,25 @@ def test_tree() -> None:
     _inside_temporary_directory(individual_test)
 
 
+def test_place() -> None:
+    def individual_test(server: UploadServer) -> None:
+        with TemporaryDirectory() as temporary_path:
+            source_path: Path = create_temporary_file(Path(temporary_path))
+
+            assert server.upload(
+                source_path,
+                destination=Path(
+                    server.to_remote_path(server.get_working_space()),
+                    source_path.name
+                )
+            )
+
+    _inside_temporary_directory(individual_test)
+
+
 def main() -> bool:
     test_file()
     test_directory()
     test_tree()
+    test_place()
     return True
