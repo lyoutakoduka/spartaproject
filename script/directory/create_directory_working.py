@@ -11,7 +11,7 @@ from script.path.modify.get_absolute import get_absolute
 from script.time.current_datetime import get_current_time
 
 
-def get_time_data(time: datetime) -> Ints2:
+def _get_time_data(time: datetime) -> Ints2:
     return [
         [4, time.year],
         [2, time.month],
@@ -28,7 +28,7 @@ def create_working_space(
 ) -> Path:
     time_texts: Strs = [
         str(time_count).zfill(order)
-        for order, time_count in get_time_data(
+        for order, time_count in _get_time_data(
             get_current_time(override=override, jst=jst)
         )
     ]
