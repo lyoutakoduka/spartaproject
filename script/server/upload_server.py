@@ -12,12 +12,6 @@ from script.server.connect_server import ConnectServer
 
 
 class UploadServer(ConnectServer):
-    def __init__(self) -> None:
-        super().__init__()
-
-    def __del__(self) -> None:
-        super().__del__()
-
     def _get_remote_root(self) -> Path:
         if sftp := self.get_sftp():
             if root := sftp.getcwd():

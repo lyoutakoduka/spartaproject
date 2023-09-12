@@ -35,9 +35,6 @@ class ExecuteServer(UploadServer):
             self._get_version_root(self._set_version(versions))
         )
 
-    def __del__(self) -> None:
-        super().__del__()
-
     def _get_error_identifier(self) -> str:
         body: str = ' '.join(['most', 'recent', 'call', 'last'])
         return ' '.join(['traceback'.capitalize(), '(' + body + ')']) + ':'
