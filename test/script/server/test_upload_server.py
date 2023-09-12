@@ -20,9 +20,9 @@ def _inside_temporary_directory(
     function: Callable[[UploadServer], None]
 ) -> None:
     server: UploadServer = UploadServer()
+    assert server.connect()
 
-    if server.connect():
-        function(server)
+    function(server)
 
 
 def test_file() -> None:
