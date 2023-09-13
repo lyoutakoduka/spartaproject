@@ -60,10 +60,22 @@ def test_to_remote() -> None:
     _common_test(individual_test)
 
 
+def test_to_local() -> None:
+    EXPECTED: Path = Path('temp')
+
+    def individual_test(server: PathServer) -> None:
+        assert EXPECTED == server.to_remote_path(
+            server.to_local_path(EXPECTED)
+        )
+
+    _common_test(individual_test)
+
+
 def main() -> bool:
     test_table()
     test_path()
     test_path_string()
     test_working()
     test_to_remote()
+    test_to_local()
     return True
