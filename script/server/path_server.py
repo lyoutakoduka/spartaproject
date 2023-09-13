@@ -65,9 +65,12 @@ class PathServer(ContextServer):
         path: Path = self.get_path(type)
         return path.as_posix()
 
+    def _get_local_absolute(self) -> Path:
+        return get_absolute(self.get_path('local_root'))
+
     def get_working_space(self) -> Path:
         path: Path = Path(
-            get_absolute(self.get_path('local_root')),
+            self._get_local_absolute(),
             self.get_path('work_root')
         )
 
@@ -75,8 +78,8 @@ class PathServer(ContextServer):
 
     def to_remote_path(self, local: Path) -> Path:
         return get_relative(
-            local, root_path=get_absolute(self.get_path('local_root'))
+            local, root_path=self._get_local_absolute()
         )
 
     def to_local_path(self, local: Path) -> Path:
-        return Path(get_absolute(self.get_path('local_root')), local)
+        return Path(self._get_local_absolute(), local)
