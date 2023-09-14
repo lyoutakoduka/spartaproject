@@ -77,6 +77,8 @@ class UploadServer(ConnectServer):
         self._create_directory(self._path_with_tree(local))
 
     def _upload_tree(self, source_path: Path, destination_local: Path) -> bool:
+        self._upload_directory(destination_local)
+
         for source_child in walk_iterator(source_path, depth=1):
             if not self._upload(
                 source_child,
@@ -86,8 +88,6 @@ class UploadServer(ConnectServer):
                 )
             ):
                 return False
-        else:
-            self._upload_directory(destination_local)
 
         return True
 
