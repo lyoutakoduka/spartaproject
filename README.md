@@ -18,7 +18,7 @@ getting ready...
 
 ## License
 
-"pyspartaproj" is under [MIT license](https://en.wikipedia.org/wiki/MIT_License).
+"spartaproject" is under [MIT license](https://en.wikipedia.org/wiki/MIT_License).
 
 ## Author
 
