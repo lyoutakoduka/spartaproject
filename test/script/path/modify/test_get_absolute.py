@@ -31,7 +31,11 @@ def test_single() -> None:
 
 
 def test_root() -> None:
-    assert _EMPTY_PATH == get_absolute(_EMPTY_HEAD, root_path=_BASE_PATH)
+    EXPECTED: Path = Path(__file__)
+
+    assert EXPECTED == get_absolute(
+        Path(EXPECTED.name), root_path=EXPECTED.parent
+    )
 
 
 def test_array() -> None:
