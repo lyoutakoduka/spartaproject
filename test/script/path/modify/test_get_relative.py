@@ -33,7 +33,7 @@ _input_paths: Paths = [
 
 def test_unmatch() -> None:
     with raises(ValueError):
-        get_relative(_HEAD_PATH)
+        get_relative(Path('empty'))
 
 
 def test_single() -> None:
