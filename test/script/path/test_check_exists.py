@@ -12,18 +12,18 @@ _UNKNOWN_PATH: Path = _CURRENT_PATH.with_name('unknown.py')
 
 def test_array() -> None:
     PATHS: Paths = [_CURRENT_PATH, _UNKNOWN_PATH]
-    EXPECTS: Bools = [True, False]
+    EXPECTED: Bools = [True, False]
 
-    assert bool_compare_array(EXPECTS, check_exists_array(PATHS))
+    assert bool_compare_array(EXPECTED, check_exists_array(PATHS))
 
 
 def test_pair() -> None:
     PATHS: PathPair = {
         'R': _CURRENT_PATH, 'G': _UNKNOWN_PATH, 'B': _CURRENT_PATH.parent
     }
-    EXPECTS: BoolPair = {'R': True, 'G': False, 'B': True}
+    EXPECTED: BoolPair = {'R': True, 'G': False, 'B': True}
 
-    assert bool_compare_pair(EXPECTS, check_exists_pair(PATHS))
+    assert bool_compare_pair(EXPECTED, check_exists_pair(PATHS))
 
 
 def main() -> bool:
