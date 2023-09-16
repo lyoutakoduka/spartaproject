@@ -9,11 +9,6 @@ from script.path.modify.get_absolute import (
 )
 
 
-_BASE_PATH: Path = Path('project', 'sparta')
-_EMPTY_HEAD: Path = Path('script', 'debug_empty.py')
-_EMPTY_PATH: Path = Path(_BASE_PATH, _EMPTY_HEAD)
-
-
 def to_relative(path: Path) -> Path:
     current: Path = Path.cwd()
     path_text: str = path.as_posix()
