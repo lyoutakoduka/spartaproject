@@ -48,21 +48,6 @@ def _switch_test_root(call_context: PathPair, head_added_path: Path) -> bool:
     return False
 
 
-def _update_module_path(
-    call_context: PathPair, root_names: Strs, head_added_path: Path, index: int
-) -> bool:
-    root_path: Path = get_absolute(Path(*root_names[:index + 1]))
-    if not head_added_path.is_relative_to(root_path):
-        return False
-
-    module_path: Path = _switch_test_root(head_added_path, root_path)
-    if not module_path.exists():
-        return False
-
-    call_context.update({'module': module_path})
-    return True
-
-
 def _check_test_path(call_context: PathPair) -> bool:
     HEAD: str = 'test' + '_'
     if call_context['source'].name.startswith(HEAD):
