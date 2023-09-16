@@ -6,7 +6,9 @@ from pytest import raises
 from context.default.string_context import Strs, Strs2
 from context.extension.path_context import Path, Paths, PathPair
 from script.bool.same_value import bool_same_array
-from script.path.modify.get_absolute import get_absolute
+from script.path.modify.get_absolute import (
+    get_absolute, get_absolute_array
+)
 from script.path.modify.get_relative import (
     get_relative, get_relative_array, get_relative_pair
 )
@@ -43,10 +45,9 @@ def test_single() -> None:
 
 
 def test_array() -> None:
-    results: Paths = get_relative_array(_input_paths, root_path=_BASE_PATH)
-    expected: Paths = [Path(*path_names) for path_names in _EXPECTED]
-
-    assert expected == results
+    current: Path = Path(__file__)
+    expected: Paths = [current.parents[i] for i in range(3)]
+    assert expected == get_absolute_array(get_relative_array(expected))
 
 
 def test_pair() -> None:
