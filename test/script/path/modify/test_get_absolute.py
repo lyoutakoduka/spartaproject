@@ -21,20 +21,20 @@ def test_ignore() -> None:
 
 
 def test_single() -> None:
-    EXPECTED: Path = Path(__file__)
+    expected: Path = Path(__file__)
 
     current: Path = Path.cwd()
-    expected_text: str = EXPECTED.as_posix()
+    expected_text: str = expected.as_posix()
     input: Path = Path(expected_text[len(current.as_posix()) + 1:])
 
-    assert EXPECTED == get_absolute(input)
+    assert expected == get_absolute(input)
 
 
 def test_root() -> None:
-    EXPECTED: Path = Path(__file__)
+    expected: Path = Path(__file__)
 
-    assert EXPECTED == get_absolute(
-        Path(EXPECTED.name), root_path=EXPECTED.parent
+    assert expected == get_absolute(
+        Path(expected.name), root_path=expected.parent
     )
 
 
