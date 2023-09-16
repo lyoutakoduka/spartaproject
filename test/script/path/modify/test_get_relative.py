@@ -7,7 +7,7 @@ from context.default.string_context import Strs, Strs2
 from context.extension.path_context import Path, Paths, PathPair
 from script.bool.same_value import bool_same_array
 from script.path.modify.get_absolute import (
-    get_absolute, get_absolute_array
+    get_absolute, get_absolute_array, get_absolute_pair
 )
 from script.path.modify.get_relative import (
     get_relative, get_relative_array, get_relative_pair
@@ -34,6 +34,10 @@ _input_paths: Paths = [
 ]
 
 
+def to_pair(types: Strs, paths: Paths) -> PathPair:
+    return {type: path for type, path in zip(types, paths)}
+
+
 def test_unmatch() -> None:
     with raises(ValueError):
         get_relative(Path('empty'))
@@ -51,18 +55,13 @@ def test_array() -> None:
 
 
 def test_pair() -> None:
-    KEYS: Strs = ['A', 'B', 'C', 'D', 'E']
+    current: Path = Path(__file__)
+    types: Strs = ['R', 'G', 'B']
 
-    results: PathPair = get_relative_pair(
-        {key: path for key, path in zip(KEYS, _input_paths)},
-        root_path=_BASE_PATH
-    )
+    expected: PathPair = to_pair(types, [current.parents[i] for i in range(3)])
+    result: PathPair = get_absolute_pair(get_relative_pair(expected))
 
-    expected: PathPair = {
-        key: Path(*path_names) for key, path_names in zip(KEYS, _EXPECTED)
-    }
-
-    assert bool_same_array([results[key] == expected[key] for key in KEYS])
+    assert bool_same_array([expected[type] == result[type] for type in types])
 
 
 def main() -> bool:
