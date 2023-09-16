@@ -28,6 +28,14 @@ def test_single() -> None:
     assert expected == get_absolute(get_relative(expected))
 
 
+def test_root() -> None:
+    current: Path = Path(__file__)
+
+    assert Path(current.name) == get_relative(
+        current, root_path=current.parent
+    )
+
+
 def test_array() -> None:
     current: Path = Path(__file__)
     expected: Paths = [current.parents[i] for i in range(3)]
@@ -46,6 +54,7 @@ def test_pair() -> None:
 
 def main() -> bool:
     test_single()
+    test_root()
     test_array()
     test_pair()
     return True
