@@ -40,11 +40,12 @@ def test_root() -> None:
 
 
 def test_array() -> None:
-    RELATIVE_PATHS: Paths = [_BASE_PATH, _EMPTY_HEAD]
-    EXPECTS: Bools = [True, False]
+    current: Path = Path(__file__)
+    expected: Paths = [current.parents[i] for i in range(3)]
 
-    absolute_paths: Paths = get_absolute_array(RELATIVE_PATHS)
-    assert bool_compare_array(EXPECTS, check_exists_array(absolute_paths))
+    assert expected == get_absolute_array(
+        [to_relative(path) for path in expected]
+    )
 
 
 def test_pair() -> None:
