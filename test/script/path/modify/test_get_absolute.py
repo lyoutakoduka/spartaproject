@@ -15,6 +15,12 @@ _EMPTY_HEAD: Path = Path('script', 'debug_empty.py')
 _EMPTY_PATH: Path = Path(_BASE_PATH, _EMPTY_HEAD)
 
 
+def to_relative(path: Path) -> Path:
+    current: Path = Path.cwd()
+    path_text: str = path.as_posix()
+    return Path(path_text[len(current.as_posix()) + 1:])
+
+
 def test_ignore() -> None:
     path: Path = Path(__file__)
     assert path == get_absolute(path)
@@ -22,12 +28,7 @@ def test_ignore() -> None:
 
 def test_single() -> None:
     expected: Path = Path(__file__)
-
-    current: Path = Path.cwd()
-    expected_text: str = expected.as_posix()
-    input: Path = Path(expected_text[len(current.as_posix()) + 1:])
-
-    assert expected == get_absolute(input)
+    assert expected == get_absolute(to_relative(expected))
 
 
 def test_root() -> None:
