@@ -6,6 +6,7 @@ from pytest import raises
 from context.default.string_context import Strs, Strs2
 from context.extension.path_context import Path, Paths, PathPair
 from script.bool.same_value import bool_same_array
+from script.path.modify.get_absolute import get_absolute
 from script.path.modify.get_relative import (
     get_relative, get_relative_array, get_relative_pair
 )
@@ -37,7 +38,8 @@ def test_unmatch() -> None:
 
 
 def test_single() -> None:
-    assert _HEAD_PATH == get_relative(Path(__file__).parent)
+    expected: Path = Path(__file__)
+    assert expected == get_absolute(get_relative(expected))
 
 
 def test_array() -> None:
