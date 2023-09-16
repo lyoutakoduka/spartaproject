@@ -21,7 +21,13 @@ def test_ignore() -> None:
 
 
 def test_single() -> None:
-    assert get_absolute(_EMPTY_PATH).exists()
+    EXPECTED: Path = Path(__file__)
+
+    current: Path = Path.cwd()
+    expected_text: str = EXPECTED.as_posix()
+    input: Path = Path(expected_text[len(current.as_posix()) + 1:])
+
+    assert EXPECTED == get_absolute(input)
 
 
 def test_root() -> None:
