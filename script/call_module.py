@@ -8,6 +8,7 @@ from sys import path as system_path
 from context.default.string_context import Strs
 from context.extension.path_context import Path, Paths, PathPair
 from script.path.modify.get_absolute import get_absolute
+from script.path.modify.get_relative import get_relative
 
 
 def _get_path_key() -> Strs:
@@ -34,8 +35,17 @@ def _replace_file_name(head: str, module_path: Path) -> Path:
     return module_path.with_name(head + module_path.name)
 
 
-def _switch_test_root(head_added_path: Path, root_path: Path) -> Path:
-    return Path(root_path, 'test', head_added_path.relative_to(root_path))
+def _switch_test_root(call_context: PathPair, head_added_path: Path) -> bool:
+    root_path: Path = call_context['source'].parent
+    module_path: Path = Path(
+        root_path, 'test', get_relative(head_added_path, root_path=root_path)
+    )
+
+    if module_path.exists():
+        call_context.update({'module': module_path})
+        return True
+
+    return False
 
 
 def _update_module_path(
@@ -58,14 +68,9 @@ def _check_test_path(call_context: PathPair) -> bool:
     if call_context['source'].name.startswith(HEAD):
         return False
 
-    ROOT_NAMES: Strs = ['project', 'sparta']
-    head_added_path: Path = _replace_file_name(HEAD, call_context['module'])
-
-    for i in range(len(ROOT_NAMES)):
-        if _update_module_path(call_context, ROOT_NAMES, head_added_path, i):
-            return True
-
-    return False
+    return _switch_test_root(
+        call_context, _replace_file_name(HEAD, call_context['module'])
+    )
 
 
 def _get_common_directory(call_context: PathPair) -> Path:
