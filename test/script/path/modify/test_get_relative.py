@@ -14,26 +14,6 @@ from script.path.modify.get_relative import (
 )
 
 
-_BASE_PATH: Path = Path('project')
-_HEAD_PATH: Path = Path(
-    _BASE_PATH, 'sparta', 'test', 'script', 'path', 'modify'
-)
-
-_TEST_PATH: Strs = ['sparta', 'test']
-_EXPECTED: Strs2 = [
-    ['.'],
-    ['sparta'],
-    _TEST_PATH,
-    _TEST_PATH + ['script'],
-    _TEST_PATH + ['script', 'path'],
-    _TEST_PATH + ['script', 'path', 'modify']
-]
-
-_input_paths: Paths = [
-    Path(*_HEAD_PATH.parts[:i + 1]) for i in range(len(_HEAD_PATH.parts))
-]
-
-
 def to_pair(types: Strs, paths: Paths) -> PathPair:
     return {type: path for type, path in zip(types, paths)}
 
