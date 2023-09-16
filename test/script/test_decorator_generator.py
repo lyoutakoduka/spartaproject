@@ -5,7 +5,7 @@ from context.callable_context import CP, CR, Callable
 from script.decorator_generator import TransferFunction
 
 
-class TestDecorator(TransferFunction):
+class TemporaryDecorator(TransferFunction):
     def __init__(self, text: str = '') -> None:
         self.text = text
 
@@ -24,7 +24,7 @@ class TestDecorator(TransferFunction):
 
 
 def test_name() -> None:
-    test_instance = TestDecorator()
+    test_instance = TemporaryDecorator()
 
     @test_instance.decorator
     def text_print() -> None: pass
@@ -35,7 +35,7 @@ def test_name() -> None:
 
 
 def test_doc() -> None:
-    test_instance = TestDecorator()
+    test_instance = TemporaryDecorator()
 
     @test_instance.decorator
     def text_print() -> None:
@@ -49,7 +49,7 @@ def test_doc() -> None:
 
 def test_text() -> None:
     MESSAGE: str = "Hello!"
-    test_instance = TestDecorator(MESSAGE)
+    test_instance = TemporaryDecorator(MESSAGE)
 
     @test_instance.decorator
     def text_print() -> None: pass
