@@ -2,7 +2,9 @@
 # -*- coding: utf-8 -*-
 
 from context.default.bool_context import Bools, BoolPair
+from context.default.string_context import Strs
 from context.extension.path_context import Path, Paths, PathPair
+from script.bool.same_value import bool_same_array
 from script.bool.compare_value import bool_compare_array, bool_compare_pair
 from script.path.check_exists import check_exists_array, check_exists_pair
 from script.path.modify.get_absolute import (
@@ -19,6 +21,10 @@ def to_relative(path: Path) -> Path:
     current: Path = Path.cwd()
     path_text: str = path.as_posix()
     return Path(path_text[len(current.as_posix()) + 1:])
+
+
+def to_pair(types: Strs, paths: Paths) -> PathPair:
+    return {type: path for type, path in zip(types, paths)}
 
 
 def test_ignore() -> None:
@@ -49,13 +55,16 @@ def test_array() -> None:
 
 
 def test_pair() -> None:
-    RELATIVE_PATHS: PathPair = {
-        'R': _EMPTY_PATH, 'G': _EMPTY_HEAD, 'B': _EMPTY_PATH
-    }
-    EXPECTS: BoolPair = {'R': True, 'G': False, 'B': True}
+    current: Path = Path(__file__)
+    types: Strs = ['R', 'G', 'B']
+    parents: Paths = [current.parents[i] for i in range(3)]
 
-    absolute_paths: PathPair = get_absolute_pair(RELATIVE_PATHS)
-    assert bool_compare_pair(EXPECTS, check_exists_pair(absolute_paths))
+    expected: PathPair = to_pair(types, parents)
+    result: PathPair = get_absolute_pair(
+        to_pair(types, [to_relative(path) for path in parents])
+    )
+
+    assert bool_same_array([expected[type] == result[type] for type in types])
 
 
 def main() -> bool:
