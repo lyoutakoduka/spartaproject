@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from typing import List, Dict, Tuple
+from typing import Dict, List, Tuple
 
 IntPair = Dict[str, int]
 Ints = List[int]
