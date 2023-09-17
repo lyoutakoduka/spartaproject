@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Call designated function of designated module."""
+
 from importlib import import_module, util
 from os.path import commonpath
 from sys import path as system_path
@@ -98,6 +100,16 @@ def _check_call_environment(call_target: PathPair, function: str) -> None:
 
 
 def call_function(source: Path, module: Path, function: str = 'main') -> bool:
+    """Call function and return True.
+
+    Args:
+        source (Path): module path of call source
+        module (Path): designated module path
+        function (str, optional): designated function name. Defaults to 'main'.
+
+    Returns:
+        bool: success if get to the end of function
+    """
     call_context: PathPair = {
         key: path
         for key, path in zip(_get_path_key(), [source, module])
