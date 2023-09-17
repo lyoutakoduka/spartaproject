@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from context.default.bool_context import Bools, BoolPair, Bools2, BoolType
+from context.default.bool_context import BoolPair, Bools, Bools2, BoolType
 from context.default.integer_context import Ints
 from context.default.string_context import Strs2
 
