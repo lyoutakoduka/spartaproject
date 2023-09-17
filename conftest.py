@@ -6,7 +6,7 @@ from sys import path as system_path
 
 
 def main() -> bool:
-    system_path.append(str(Path(__file__).parent))
+    system_path.append(str(Path(__file__).parents[1]))
     return True
 
 
