@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from decimal import setcontext, Context, ROUND_FLOOR, FloatOperation, Decimal
-from typing import List, Dict
+from decimal import ROUND_FLOOR, Context, Decimal, FloatOperation, setcontext
+from typing import Dict, List
 
 DecPair = Dict[str, Decimal]
 Decs = List[Decimal]
