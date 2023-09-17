@@ -3,9 +3,8 @@
 
 from pathlib import Path
 
-from script.directory.create_directory_working import (
-    get_working_space, create_working_space
-)
+from script.directory.create_directory_working import (create_working_space,
+                                                       get_working_space)
 from script.path.modify.get_relative import get_relative
 
 
