@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from typing import Dict
 from decimal import Decimal
 from pathlib import Path
+from typing import Dict
 
 Basic = bool | int | float | str | Decimal | Path
 

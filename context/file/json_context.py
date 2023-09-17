@@ -3,16 +3,15 @@
 
 from decimal import Decimal  # not from context
 from pathlib import Path  # not from context
-from typing import List, Dict
+from typing import Dict, List
 
-from context.default.bool_context import Bools, Bools2, BoolPair, BoolPair2
-from context.default.float_context import (
-    Floats, Floats2, FloatPair, FloatPair2
-)
-from context.default.integer_context import Ints, Ints2, IntPair, IntPair2
-from context.default.string_context import Strs, Strs2, StrPair, StrPair2
-from context.extension.decimal_context import Decs, Decs2, DecPair, DecPair2
-from context.extension.path_context import Paths, Paths2, PathPair, PathPair2
+from context.default.bool_context import BoolPair, BoolPair2, Bools, Bools2
+from context.default.float_context import (FloatPair, FloatPair2, Floats,
+                                           Floats2)
+from context.default.integer_context import IntPair, IntPair2, Ints, Ints2
+from context.default.string_context import StrPair, StrPair2, Strs, Strs2
+from context.extension.decimal_context import DecPair, DecPair2, Decs, Decs2
+from context.extension.path_context import PathPair, PathPair2, Paths, Paths2
 
 Array = Bools | Ints | Floats | Strs | Decs | Paths
 Array2 = Bools2 | Ints2 | Floats2 | Strs2 | Decs2 | Paths2
