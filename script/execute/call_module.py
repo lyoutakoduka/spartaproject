@@ -97,12 +97,10 @@ def _check_call_environment(call_target: PathPair, function: str) -> None:
     _call_target_function(module_name, function)
 
 
-def call_function(
-    source_path: Path, module_path: Path, function: str = 'main'
-) -> bool:
+def call_function(source: Path, module: Path, function: str = 'main') -> bool:
     call_context: PathPair = {
         key: path
-        for key, path in zip(_get_path_key(), [source_path, module_path])
+        for key, path in zip(_get_path_key(), [source, module])
     }
 
     _check_absolute_path(call_context)
