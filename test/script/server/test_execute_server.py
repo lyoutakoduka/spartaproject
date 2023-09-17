@@ -63,7 +63,7 @@ def test_directory() -> None:
 
 def test_version() -> None:
     type: str = 'version'
-    EXPECTED: Ints = [3, 11, 5]
+    EXPECTED: Ints = [3, 11, 3]
     server: ExecuteServer = ExecuteServer(versions=EXPECTED)
 
     if result := _execute_python(True, type, server):

@@ -11,7 +11,7 @@ from script.server.upload_server import UploadServer
 class ExecuteServer(UploadServer):
     def _set_version(self, versions: Ints) -> str:
         if 0 == len(versions):
-            versions = [3, 11, 3]
+            versions = [3, 11, 5]
 
         return '.'.join([str(i) for i in versions])
 
