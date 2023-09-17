@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 from pytest import raises
-
 from script.bool.same_value import bool_same_array, bool_same_pair
 
 

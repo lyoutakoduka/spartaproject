@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 from pytest import raises
-
 from script.bool.compare_value import bool_compare_array, bool_compare_pair
 
 
