@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 
 from pathlib import Path
-from pytest import raises
 
 from context.default.integer_context import Ints
 from context.default.string_context import Strs
+from pytest import raises
 from script.path.safe.safe_copy import SafeCopy
 from script.server.execute_server import ExecuteServer
 
