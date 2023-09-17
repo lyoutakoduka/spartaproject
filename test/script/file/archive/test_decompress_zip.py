@@ -8,7 +8,7 @@ from typing import Callable
 
 from context.default.integer_context import Ints2
 from context.extension.path_context import Path, Paths, Paths2
-from context.extension.time_context import datetime, Times2
+from context.extension.time_context import Times2, datetime
 from script.file.archive.compress_zip import CompressZip
 from script.file.archive.decompress_zip import DecompressZip
 from script.path.iterate_directory import walk_iterator
