@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from codecs import open
+
 from setuptools import setup
 
 _PACKAGE_NAME = 'pyspartaproj'
