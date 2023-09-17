@@ -1,17 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from typing import List, Dict
+from typing import Dict, List
 
-from context.default.bool_context import Bools, Bools2, BoolPair, BoolPair2
-from context.default.integer_context import Ints, Ints2, IntPair, IntPair2
-from context.default.string_context import Strs, Strs2, StrPair, StrPair2
-from context.extension.decimal_context import (
-    Decimal, Decs, Decs2, DecPair, DecPair2
-)
-from context.extension.path_context import (
-    Path, Paths, Paths2, PathPair, PathPair2
-)
+from context.default.bool_context import BoolPair, BoolPair2, Bools, Bools2
+from context.default.integer_context import IntPair, IntPair2, Ints, Ints2
+from context.default.string_context import StrPair, StrPair2, Strs, Strs2
+from context.extension.decimal_context import (Decimal, DecPair, DecPair2,
+                                               Decs, Decs2)
+from context.extension.path_context import (Path, PathPair, PathPair2, Paths,
+                                            Paths2)
 from context.file.json_context import Json, Single
 
 

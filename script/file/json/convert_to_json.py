@@ -3,9 +3,9 @@
 
 from decimal import Decimal
 from pathlib import Path
-from typing import List, Dict
+from typing import Dict, List
 
-from context.file.json_context import Json, Single, Multi, Multi2
+from context.file.json_context import Json, Multi, Multi2, Single
 
 
 def _convert_unknown(input: Single) -> Single:
