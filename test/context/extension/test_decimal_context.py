@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from decimal import getcontext, setcontext, FloatOperation, Context
-from pytest import raises
+from decimal import Context, FloatOperation, getcontext, setcontext
 
 from context.default.string_context import Strs
 from context.extension.decimal_context import Decimal, set_decimal_context
+from pytest import raises
 
 
 def test_float() -> None:
