@@ -5,10 +5,10 @@ from importlib import import_module, util
 from os.path import commonpath
 from sys import path as system_path
 
-from context.default.string_context import Strs
-from context.extension.path_context import Path, PathPair, Paths
-from script.path.modify.get_absolute import get_absolute
-from script.path.modify.get_relative import get_relative
+from spartaproject.context.default.string_context import Strs
+from spartaproject.context.extension.path_context import Path, PathPair, Paths
+from spartaproject.script.path.modify.get_absolute import get_absolute
+from spartaproject.script.path.modify.get_relative import get_relative
 
 
 def _get_path_key() -> Strs:
