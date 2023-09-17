@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from typing import List, Dict, Generator
 from pathlib import Path
+from typing import Dict, Generator, List
 
 PathGene = Generator[Path, None, None]
 PathPair = Dict[str, Path]

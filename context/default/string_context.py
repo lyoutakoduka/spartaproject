@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from typing import List, Dict, Tuple
+from typing import Dict, List, Tuple
 
 StrPair = Dict[str, str]
 StrTuple = Tuple[str, str]
