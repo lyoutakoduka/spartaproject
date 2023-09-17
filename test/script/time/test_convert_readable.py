@@ -3,9 +3,8 @@
 
 from context.default.integer_context import IntPair
 from context.default.string_context import Strs
-from context.extension.decimal_context import (
-    Decimal, Decs, set_decimal_context
-)
+from context.extension.decimal_context import (Decimal, Decs,
+                                               set_decimal_context)
 from script.bool.same_value import bool_same_array
 from script.time.convert_readable import readable_time
 
