@@ -3,10 +3,10 @@
 
 from pathlib import Path
 from platform import uname
-from pytest import raises
 from tempfile import TemporaryDirectory
 from typing import Callable
 
+from pytest import raises
 from script.file.shortcut.create_shortcut import create_shortcut
 from script.file.shortcut.get_shortcut_path import get_shortcut_path
 from script.path.temporary.create_temporary_file import create_temporary_file
