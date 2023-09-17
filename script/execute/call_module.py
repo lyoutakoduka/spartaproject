@@ -6,7 +6,7 @@ from os.path import commonpath
 from sys import path as system_path
 
 from context.default.string_context import Strs
-from context.extension.path_context import Path, Paths, PathPair
+from context.extension.path_context import Path, PathPair, Paths
 from script.path.modify.get_absolute import get_absolute
 from script.path.modify.get_relative import get_relative
 
