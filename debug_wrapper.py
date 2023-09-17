@@ -5,7 +5,7 @@ from pathlib import Path
 from sys import exit, argv
 
 from context.default.string_context import Strs
-from script.call_module import call_function
+from script.execute.call_module import call_function
 
 
 def main() -> bool:
