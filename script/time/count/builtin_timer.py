@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from datetime import timezone, datetime
+from datetime import datetime, timezone
 
 from context.extension.decimal_context import Decimal, set_decimal_context
 
