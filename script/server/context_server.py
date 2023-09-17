@@ -5,14 +5,12 @@ from copy import deepcopy
 from typing import Dict
 
 from context.default.integer_context import IntPair
-from context.default.string_context import Strs, StrPair
+from context.default.string_context import StrPair, Strs
 from context.extension.path_context import Path, PathPair
 from context.file.json_context import Json
-from script.file.json.convert_from_json import (
-    integer_pair_from_json,
-    string_pair_from_json,
-    path_pair_from_json
-)
+from script.file.json.convert_from_json import (integer_pair_from_json,
+                                                path_pair_from_json,
+                                                string_pair_from_json)
 from script.file.json.import_json import json_import
 from script.path.modify.get_absolute import get_absolute
 

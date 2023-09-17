@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from paramiko import SSHClient, SFTPClient, AutoAddPolicy, Channel
 from time import sleep
 
 from context.default.string_context import Strs
 from context.extension.decimal_context import Decimal, set_decimal_context
+from paramiko import AutoAddPolicy, Channel, SFTPClient, SSHClient
 from script.server.path_server import PathServer
 
 set_decimal_context()
