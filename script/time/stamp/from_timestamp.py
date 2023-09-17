@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 
 from datetime import datetime
-from dateutil.tz import gettz
 from decimal import Decimal
+
+from dateutil.tz import gettz
 
 
 def time_from_timestamp(timestamp: Decimal, jst: bool = False) -> datetime:
