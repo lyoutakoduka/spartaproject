@@ -3,7 +3,7 @@
 
 from decimal import Decimal
 from pathlib import Path
-from typing import Dict
+from typing import Dict, Union
 
 Basic = bool | int | float | str | Decimal | Path
 
@@ -15,15 +15,9 @@ _IntPair = Dict[str, int]
 _PathPair = Dict[str, Path]
 _StrPair = Dict[str, str]
 
-_Section = (
-    _BoolPair |
-    _IntPair |
-    _FloatPair |
-    _StrPair |
-    _DecPair |
-    _PathPair |
-    _BasicPair
-)
+_Section = Union[
+    _BoolPair, _IntPair, _FloatPair, _StrPair, _DecPair, _PathPair, _BasicPair
+]
 
 _BasicPair2 = Dict[str, _Section]
 _BoolPair2 = Dict[str, _BoolPair]
@@ -33,12 +27,7 @@ _IntPair2 = Dict[str, _IntPair]
 _PathPair2 = Dict[str, _PathPair]
 _StrPair2 = Dict[str, _StrPair]
 
-Config = (
-    _BoolPair2 |
-    _IntPair2 |
-    _FloatPair2 |
-    _StrPair2 |
-    _DecPair2 |
-    _PathPair2 |
-    _BasicPair2
-)
+Config = Union[
+    _BoolPair2, _IntPair2, _FloatPair2,
+    _StrPair2, _DecPair2, _PathPair2, _BasicPair2
+]
