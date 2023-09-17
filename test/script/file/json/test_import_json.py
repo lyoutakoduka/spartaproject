@@ -7,7 +7,7 @@ from typing import Dict
 
 from context.file.json_context import Json, Single
 from script.file.json.export_json import json_export
-from script.file.json.import_json import json_load, json_import
+from script.file.json.import_json import json_import, json_load
 
 
 def _common_test(input: Single, result: Json) -> None:
