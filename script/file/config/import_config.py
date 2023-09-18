@@ -5,8 +5,8 @@ from configparser import ConfigParser
 from decimal import Decimal
 from pathlib import Path
 
-from context.file.config_context import Basic, Config
-from script.file.text.import_file import text_import
+from spartaproject.context.file.config_context import Basic, Config
+from spartaproject.script.file.text.import_file import text_import
 
 
 def _load_each_type(config: ConfigParser, section: str, option: str) -> Basic:

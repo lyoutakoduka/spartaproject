@@ -3,16 +3,19 @@
 
 from tempfile import TemporaryDirectory
 
-from context.default.bool_context import BoolPair, BoolPair2
-from context.default.float_context import FloatPair, FloatPair2
-from context.default.integer_context import IntPair, IntPair2
-from context.default.string_context import StrPair, StrPair2
-from context.extension.decimal_context import Decimal, DecPair, DecPair2
-from context.extension.path_context import Path, PathPair, PathPair2
-from context.file.config_context import Config
-from script.file.config.export_config import config_dump, config_export
-from script.file.text.import_file import text_import
-from script.format_texts import format_indent
+from spartaproject.context.default.bool_context import BoolPair, BoolPair2
+from spartaproject.context.default.float_context import FloatPair, FloatPair2
+from spartaproject.context.default.integer_context import IntPair, IntPair2
+from spartaproject.context.default.string_context import StrPair, StrPair2
+from spartaproject.context.extension.decimal_context import (Decimal, DecPair,
+                                                             DecPair2)
+from spartaproject.context.extension.path_context import (Path, PathPair,
+                                                          PathPair2)
+from spartaproject.context.file.config_context import Config
+from spartaproject.script.file.config.export_config import (config_dump,
+                                                            config_export)
+from spartaproject.script.file.text.import_file import text_import
+from spartaproject.script.format_texts import format_indent
 
 
 def _common_test(expected: str, input: Config) -> None:
