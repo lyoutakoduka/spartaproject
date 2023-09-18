@@ -3,9 +3,9 @@
 
 from pathlib import Path
 
-from script.directory.create_directory_working import (create_working_space,
-                                                       get_working_space)
-from script.path.modify.get_relative import get_relative
+from spartaproject.script.directory.create_directory_working import (
+    create_working_space, get_working_space)
+from spartaproject.script.path.modify.get_relative import get_relative
 
 
 def test_name() -> None:

@@ -4,13 +4,14 @@
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from context.default.string_context import Strs
-from context.extension.path_context import Path, PathPair, Paths
-from script.bool.same_value import bool_same_array, bool_same_pair
-from script.directory.create_directory import (create_directory,
-                                               create_directory_array,
-                                               create_directory_pair)
-from script.path.check_exists import check_exists_array, check_exists_pair
+from spartaproject.context.default.string_context import Strs
+from spartaproject.context.extension.path_context import Path, PathPair, Paths
+from spartaproject.script.bool.same_value import (bool_same_array,
+                                                  bool_same_pair)
+from spartaproject.script.directory.create_directory import (
+    create_directory, create_directory_array, create_directory_pair)
+from spartaproject.script.path.check_exists import (check_exists_array,
+                                                    check_exists_pair)
 
 _ELEMENT_NAMES: Strs = ['R', 'G', 'B']
 

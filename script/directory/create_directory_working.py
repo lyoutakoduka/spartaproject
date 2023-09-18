@@ -4,10 +4,10 @@
 from datetime import datetime
 from pathlib import Path
 
-from context.default.integer_context import Ints2
-from script.directory.create_directory import create_directory
-from script.path.modify.get_absolute import get_absolute
-from script.time.current_datetime import get_current_time
+from spartaproject.context.default.integer_context import Ints2
+from spartaproject.script.directory.create_directory import create_directory
+from spartaproject.script.path.modify.get_absolute import get_absolute
+from spartaproject.script.time.current_datetime import get_current_time
 
 
 def _get_time_data(time: datetime) -> Ints2:
