@@ -5,8 +5,8 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from script.file.text.export_file import text_export
-from script.file.text.import_file import byte_import, text_import
+from spartaproject.script.file.text.export_file import text_export
+from spartaproject.script.file.text.import_file import byte_import, text_import
 
 _INPUT: str = 'test'
 
