@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from context.default.bool_context import BoolPair, Bools
+from spartaproject.context.default.bool_context import BoolPair, Bools
 
 
 def bool_same_array(flags: Bools, invert: bool = False) -> bool:

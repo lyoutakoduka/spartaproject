@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from context.file.json_context import Json
-from script.file.json.export_json import json_dump
+from spartaproject.context.file.json_context import Json
+from spartaproject.script.file.json.export_json import json_dump
 
 
 def is_same_json(left: Json, right: Json) -> bool:

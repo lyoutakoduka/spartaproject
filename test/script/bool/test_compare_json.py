@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from script.bool.compare_json import is_same_json
+from spartaproject.script.bool.compare_json import is_same_json
 
 
 def test_pass() -> None:

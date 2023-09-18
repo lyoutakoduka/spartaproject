@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from context.default.bool_context import BoolPair, Bools, Bools2, BoolType
-from context.default.integer_context import Ints
-from context.default.string_context import Strs2
+from spartaproject.context.default.bool_context import (BoolPair, Bools,
+                                                        Bools2, BoolType)
+from spartaproject.context.default.integer_context import Ints
+from spartaproject.context.default.string_context import Strs2
 
 
 def _check_arguments_size(lefts: BoolType, rights: BoolType) -> None:
