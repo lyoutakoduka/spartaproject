@@ -1,19 +1,25 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from context.default.bool_context import BoolPair, BoolPair2, Bools, Bools2
-from context.default.float_context import (FloatPair, FloatPair2, Floats,
-                                           Floats2)
-from context.default.integer_context import IntPair, IntPair2, Ints, Ints2
-from context.default.string_context import StrPair, StrPair2, Strs, Strs2
-from context.extension.decimal_context import (Decimal, DecPair, DecPair2,
-                                               Decs, Decs2)
-from context.extension.path_context import (Path, PathPair, PathPair2, Paths,
-                                            Paths2)
-from context.file.json_context import Json, Multi, Multi2
-from script.file.json.convert_to_json import (multiple2_to_json,
-                                              multiple_to_json, to_safe_json)
-from script.file.json.export_json import json_dump
+from spartaproject.context.default.bool_context import (BoolPair, BoolPair2,
+                                                        Bools, Bools2)
+from spartaproject.context.default.float_context import (FloatPair, FloatPair2,
+                                                         Floats, Floats2)
+from spartaproject.context.default.integer_context import (IntPair, IntPair2,
+                                                           Ints, Ints2)
+from spartaproject.context.default.string_context import (StrPair, StrPair2,
+                                                          Strs, Strs2)
+from spartaproject.context.extension.decimal_context import (Decimal, DecPair,
+                                                             DecPair2, Decs,
+                                                             Decs2)
+from spartaproject.context.extension.path_context import (Path, PathPair,
+                                                          PathPair2, Paths,
+                                                          Paths2)
+from spartaproject.context.file.json_context import Json, Multi, Multi2
+from spartaproject.script.file.json.convert_to_json import (multiple2_to_json,
+                                                            multiple_to_json,
+                                                            to_safe_json)
+from spartaproject.script.file.json.export_json import json_dump
 
 
 def _common_test(expected: str, input: Json) -> None:

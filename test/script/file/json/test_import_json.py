@@ -5,9 +5,9 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Dict
 
-from context.file.json_context import Json, Single
-from script.file.json.export_json import json_export
-from script.file.json.import_json import json_import, json_load
+from spartaproject.context.file.json_context import Json, Single
+from spartaproject.script.file.json.export_json import json_export
+from spartaproject.script.file.json.import_json import json_import, json_load
 
 
 def _common_test(input: Single, result: Json) -> None:

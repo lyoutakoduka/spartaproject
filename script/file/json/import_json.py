@@ -4,8 +4,8 @@
 from json import loads
 from pathlib import Path
 
-from context.file.json_context import Json
-from script.file.text.import_file import text_import
+from spartaproject.context.file.json_context import Json
+from spartaproject.script.file.text.import_file import text_import
 
 
 def json_load(input: str) -> Json:

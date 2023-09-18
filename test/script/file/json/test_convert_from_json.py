@@ -5,29 +5,17 @@ from decimal import Decimal
 from pathlib import Path
 from typing import Dict, List
 
-from context.file.json_context import Array, Array2, Json, Pair, Pair2, Single
-from script.bool.same_value import bool_same_array
-from script.file.json.convert_from_json import (bool_array2_from_json,
-                                                bool_array_from_json,
-                                                bool_pair2_from_json,
-                                                bool_pair_from_json,
-                                                decimal_array2_from_json,
-                                                decimal_array_from_json,
-                                                decimal_pair2_from_json,
-                                                decimal_pair_from_json,
-                                                from_safe_json,
-                                                integer_array2_from_json,
-                                                integer_array_from_json,
-                                                integer_pair2_from_json,
-                                                integer_pair_from_json,
-                                                path_array2_from_json,
-                                                path_array_from_json,
-                                                path_pair2_from_json,
-                                                path_pair_from_json,
-                                                string_array2_from_json,
-                                                string_array_from_json,
-                                                string_pair2_from_json,
-                                                string_pair_from_json)
+from spartaproject.context.file.json_context import (Array, Array2, Json, Pair,
+                                                     Pair2, Single)
+from spartaproject.script.bool.same_value import bool_same_array
+from spartaproject.script.file.json.convert_from_json import (
+    bool_array2_from_json, bool_array_from_json, bool_pair2_from_json,
+    bool_pair_from_json, decimal_array2_from_json, decimal_array_from_json,
+    decimal_pair2_from_json, decimal_pair_from_json, from_safe_json,
+    integer_array2_from_json, integer_array_from_json, integer_pair2_from_json,
+    integer_pair_from_json, path_array2_from_json, path_array_from_json,
+    path_pair2_from_json, path_pair_from_json, string_array2_from_json,
+    string_array_from_json, string_pair2_from_json, string_pair_from_json)
 
 
 def _common_test(input: Single, result: Single) -> None:

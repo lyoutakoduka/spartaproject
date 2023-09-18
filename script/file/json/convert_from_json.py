@@ -3,14 +3,19 @@
 
 from typing import Dict, List
 
-from context.default.bool_context import BoolPair, BoolPair2, Bools, Bools2
-from context.default.integer_context import IntPair, IntPair2, Ints, Ints2
-from context.default.string_context import StrPair, StrPair2, Strs, Strs2
-from context.extension.decimal_context import (Decimal, DecPair, DecPair2,
-                                               Decs, Decs2)
-from context.extension.path_context import (Path, PathPair, PathPair2, Paths,
-                                            Paths2)
-from context.file.json_context import Json, Single
+from spartaproject.context.default.bool_context import (BoolPair, BoolPair2,
+                                                        Bools, Bools2)
+from spartaproject.context.default.integer_context import (IntPair, IntPair2,
+                                                           Ints, Ints2)
+from spartaproject.context.default.string_context import (StrPair, StrPair2,
+                                                          Strs, Strs2)
+from spartaproject.context.extension.decimal_context import (Decimal, DecPair,
+                                                             DecPair2, Decs,
+                                                             Decs2)
+from spartaproject.context.extension.path_context import (Path, PathPair,
+                                                          PathPair2, Paths,
+                                                          Paths2)
+from spartaproject.context.file.json_context import Json, Single
 
 
 def _convert_unknown(input: Single, key: str) -> Single:

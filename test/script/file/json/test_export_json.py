@@ -4,10 +4,10 @@
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from context.file.json_context import Json
-from script.file.json.export_json import json_dump, json_export
-from script.file.text.import_file import text_import
-from script.format_texts import format_indent
+from spartaproject.context.file.json_context import Json
+from spartaproject.script.file.json.export_json import json_dump, json_export
+from spartaproject.script.file.text.import_file import text_import
+from spartaproject.script.format_texts import format_indent
 
 
 def _common_test(expected: str, input: Json) -> None:
