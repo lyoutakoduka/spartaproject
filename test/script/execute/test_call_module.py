@@ -6,8 +6,7 @@
 from pathlib import Path
 
 from pytest import raises
-
-from ....script.execute.call_module import call_function
+from spartaproject.script.execute.call_module import call_function
 
 _SOURCE_PATH: Path = Path(__file__)
 _UNKNOWN: str = 'unknown'
