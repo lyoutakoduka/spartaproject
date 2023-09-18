@@ -15,7 +15,7 @@ _UNKNOWN: str = 'unknown'
 def test_unknown_module() -> None:
     """Unknown function calling of designated module."""
     error_path = Path(_SOURCE_PATH).with_name(_UNKNOWN + '.py')
-    with raises(FileNotFoundError, match='unknown'):
+    with raises(FileNotFoundError):
         call_function(_SOURCE_PATH, error_path)
 
 

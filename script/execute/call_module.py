@@ -4,8 +4,10 @@
 """Call designated function of designated module."""
 
 from importlib import import_module, util
+from importlib.machinery import SourceFileLoader
 from os.path import commonpath
 from sys import path as system_path
+from types import ModuleType
 
 from spartaproject.context.default.string_context import Strs
 from spartaproject.context.extension.path_context import Path, PathPair, Paths
@@ -90,15 +92,16 @@ def _check_callable_target(module_name: str, function: str) -> None:
         raise ModuleNotFoundError(function)
 
 
-def _call_target_function(module_name: str, function: str) -> None:
-    getattr(import_module(module_name), function)()
+def _call_target_function(module: ModuleType, function: str) -> None:
+    if not hasattr(module, function):
+        raise ModuleNotFoundError(function)
+
+    return getattr(module, function)()
 
 
 def _check_call_environment(call_target: PathPair, function: str) -> None:
-    module_name: str = call_target['module'].stem
-
-    _check_callable_target(module_name, function)
-    _call_target_function(module_name, function)
+    loader = SourceFileLoader('temporary', call_target['module'].as_posix())
+    _call_target_function(loader.load_module(), function)
 
 
 def call_function(source: Path, module: Path, function: str = 'main') -> bool:
@@ -123,7 +126,6 @@ def call_function(source: Path, module: Path, function: str = 'main') -> bool:
     if _check_test_path(call_context):
         function = 'main'
 
-    _check_system_path(call_context)
     _check_call_environment(call_context, function)
 
     return True
