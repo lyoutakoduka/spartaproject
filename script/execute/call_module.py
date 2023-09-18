@@ -8,7 +8,7 @@ from os.path import commonpath
 from sys import path as system_path
 
 from spartaproject.context.default.string_context import Strs
-from spartaproject.context.extension.path_context import Path, PathPair
+from spartaproject.context.extension.path_context import Path, PathPair, Paths
 from spartaproject.script.path.modify.get_absolute import get_absolute
 from spartaproject.script.path.modify.get_relative import get_relative
 
