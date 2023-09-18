@@ -4,16 +4,19 @@
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from context.default.bool_context import BoolPair
-from context.extension.path_context import Path, PathPair2, Paths
-from script.bool.same_value import bool_same_array
-from script.file.json.convert_from_json import path_pair2_from_json
-from script.file.json.import_json import json_import
-from script.path.check_exists import check_exists_pair
-from script.path.iterate_directory import walk_iterator
-from script.path.safe.safe_trash import SafeTrash
-from script.path.temporary.create_temporary_file import create_temporary_file
-from script.path.temporary.create_temporary_tree import create_temporary_tree
+from spartaproject.context.default.bool_context import BoolPair
+from spartaproject.context.extension.path_context import Path, PathPair2, Paths
+from spartaproject.script.bool.same_value import bool_same_array
+from spartaproject.script.file.json.convert_from_json import \
+    path_pair2_from_json
+from spartaproject.script.file.json.import_json import json_import
+from spartaproject.script.path.check_exists import check_exists_pair
+from spartaproject.script.path.iterate_directory import walk_iterator
+from spartaproject.script.path.safe.safe_trash import SafeTrash
+from spartaproject.script.path.temporary.create_temporary_file import \
+    create_temporary_file
+from spartaproject.script.path.temporary.create_temporary_tree import \
+    create_temporary_tree
 
 
 def _common_test(history_size: int, history_path: Path) -> None:

@@ -3,12 +3,13 @@
 
 from itertools import count
 
-from context.extension.path_context import Path, PathPair2
-from context.file.json_context import Json
-from script.directory.create_directory_working import create_working_space
-from script.file.json.convert_to_json import multiple2_to_json
-from script.file.json.export_json import json_export
-from script.time.current_datetime import get_current_time
+from spartaproject.context.extension.path_context import Path, PathPair2
+from spartaproject.context.file.json_context import Json
+from spartaproject.script.directory.create_directory_working import \
+    create_working_space
+from spartaproject.script.file.json.convert_to_json import multiple2_to_json
+from spartaproject.script.file.json.export_json import json_export
+from spartaproject.script.time.current_datetime import get_current_time
 
 
 class FileHistory:
