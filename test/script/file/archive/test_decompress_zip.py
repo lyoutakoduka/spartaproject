@@ -6,17 +6,18 @@ from shutil import make_archive
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from context.default.integer_context import Ints2
-from context.extension.path_context import Path, Paths, Paths2
-from context.extension.time_context import Times2, datetime
-from script.file.archive.compress_zip import CompressZip
-from script.file.archive.decompress_zip import DecompressZip
-from script.path.iterate_directory import walk_iterator
-from script.path.modify.get_relative import get_relative_array
-from script.path.safe.safe_trash import SafeTrash
-from script.path.temporary.create_temporary_tree import create_temporary_tree
-from script.time.stamp.get_timestamp import get_latest
-from script.time.stamp.set_timestamp import set_latest
+from spartaproject.context.default.integer_context import Ints2
+from spartaproject.context.extension.path_context import Path, Paths, Paths2
+from spartaproject.context.extension.time_context import Times2, datetime
+from spartaproject.script.file.archive.compress_zip import CompressZip
+from spartaproject.script.file.archive.decompress_zip import DecompressZip
+from spartaproject.script.path.iterate_directory import walk_iterator
+from spartaproject.script.path.modify.get_relative import get_relative_array
+from spartaproject.script.path.safe.safe_trash import SafeTrash
+from spartaproject.script.path.temporary.create_temporary_tree import \
+    create_temporary_tree
+from spartaproject.script.time.stamp.get_timestamp import get_latest
+from spartaproject.script.time.stamp.set_timestamp import set_latest
 
 
 def _compare_timestamp(sorted_paths: Paths2, expected: datetime) -> None:

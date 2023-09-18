@@ -4,16 +4,17 @@
 from datetime import datetime
 from zipfile import ZIP_LZMA, ZIP_STORED, ZipFile, ZipInfo
 
-from context.default.string_context import StrPair, Strs
-from context.extension.decimal_context import Decimal, set_decimal_context
-from context.extension.path_context import Path, Paths
-from script.directory.create_directory import create_directory
-from script.file.json.convert_to_json import multiple_to_json
-from script.file.json.export_json import json_dump
-from script.file.text.import_file import byte_import
-from script.path.iterate_directory import walk_iterator
-from script.path.modify.get_relative import get_relative
-from script.time.stamp.get_timestamp import get_latest
+from spartaproject.context.default.string_context import StrPair, Strs
+from spartaproject.context.extension.decimal_context import (
+    Decimal, set_decimal_context)
+from spartaproject.context.extension.path_context import Path, Paths
+from spartaproject.script.directory.create_directory import create_directory
+from spartaproject.script.file.json.convert_to_json import multiple_to_json
+from spartaproject.script.file.json.export_json import json_dump
+from spartaproject.script.file.text.import_file import byte_import
+from spartaproject.script.path.iterate_directory import walk_iterator
+from spartaproject.script.path.modify.get_relative import get_relative
+from spartaproject.script.time.stamp.get_timestamp import get_latest
 
 set_decimal_context()
 

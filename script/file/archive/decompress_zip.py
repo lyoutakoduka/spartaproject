@@ -4,15 +4,17 @@
 from datetime import datetime
 from zipfile import ZipFile, ZipInfo
 
-from context.default.string_context import StrPair, Strs
-from context.extension.path_context import Path, Paths
-from script.directory.create_directory import create_directory
-from script.directory.create_directory_parent import create_directory_parent
-from script.file.json.convert_from_json import string_pair_from_json
-from script.file.json.import_json import json_load
-from script.file.text.export_file import byte_export
-from script.path.iterate_directory import walk_iterator
-from script.time.stamp.set_timestamp import set_latest
+from spartaproject.context.default.string_context import StrPair, Strs
+from spartaproject.context.extension.path_context import Path, Paths
+from spartaproject.script.directory.create_directory import create_directory
+from spartaproject.script.directory.create_directory_parent import \
+    create_directory_parent
+from spartaproject.script.file.json.convert_from_json import \
+    string_pair_from_json
+from spartaproject.script.file.json.import_json import json_load
+from spartaproject.script.file.text.export_file import byte_export
+from spartaproject.script.path.iterate_directory import walk_iterator
+from spartaproject.script.time.stamp.set_timestamp import set_latest
 
 
 class DecompressZip:
