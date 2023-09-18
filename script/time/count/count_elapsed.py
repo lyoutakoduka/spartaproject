@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from context.default.string_context import Strs
-from context.extension.decimal_context import Decimal, set_decimal_context
-from script.time.convert_readable import readable_time
-from script.time.count.builtin_timer import TimerSelect
+from spartaproject.context.default.string_context import Strs
+from spartaproject.context.extension.decimal_context import (
+    Decimal, set_decimal_context)
+from spartaproject.script.time.convert_readable import readable_time
+from spartaproject.script.time.count.builtin_timer import TimerSelect
 
 set_decimal_context()
 

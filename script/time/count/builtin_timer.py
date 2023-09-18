@@ -3,7 +3,8 @@
 
 from datetime import datetime, timezone
 
-from context.extension.decimal_context import Decimal, set_decimal_context
+from spartaproject.context.extension.decimal_context import (
+    Decimal, set_decimal_context)
 
 set_decimal_context()
 
