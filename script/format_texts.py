@@ -13,7 +13,6 @@ class _LinePair(TypedDict):
     count: int
 
 
-Strs = List[str]
 _LinePairs = List[_LinePair]
 
 
