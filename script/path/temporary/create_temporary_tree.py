@@ -3,11 +3,12 @@
 
 from pathlib import Path
 
-from context.default.string_context import StrPair2
-from script.directory.create_directory import create_directory_array
-from script.file.config.export_config import config_export
-from script.file.json.export_json import Json, json_export
-from script.file.text.export_file import text_export
+from spartaproject.context.default.string_context import StrPair2
+from spartaproject.script.directory.create_directory import \
+    create_directory_array
+from spartaproject.script.file.config.export_config import config_export
+from spartaproject.script.file.json.export_json import Json, json_export
+from spartaproject.script.file.text.export_file import text_export
 
 _NAME: str = 'file'
 
