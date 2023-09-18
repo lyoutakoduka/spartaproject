@@ -5,9 +5,11 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from context.extension.time_context import Times
-from script.path.temporary.create_temporary_file import create_temporary_file
-from script.time.stamp.get_timestamp import get_access, get_latest
+from spartaproject.context.extension.time_context import Times
+from spartaproject.script.path.temporary.create_temporary_file import \
+    create_temporary_file
+from spartaproject.script.time.stamp.get_timestamp import (get_access,
+                                                           get_latest)
 
 
 def _common_test(times: Times) -> None:

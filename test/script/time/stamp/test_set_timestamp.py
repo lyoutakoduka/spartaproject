@@ -6,11 +6,14 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from context.default.string_context import Strs
-from context.extension.time_context import Times
-from script.path.temporary.create_temporary_file import create_temporary_file
-from script.time.stamp.get_timestamp import get_access, get_latest
-from script.time.stamp.set_timestamp import set_access, set_latest
+from spartaproject.context.default.string_context import Strs
+from spartaproject.context.extension.time_context import Times
+from spartaproject.script.path.temporary.create_temporary_file import \
+    create_temporary_file
+from spartaproject.script.time.stamp.get_timestamp import (get_access,
+                                                           get_latest)
+from spartaproject.script.time.stamp.set_timestamp import (set_access,
+                                                           set_latest)
 
 _TIMES: Strs = [
     '2023-04-01T00:00:00.000001+00:00', '2023-04-15T20:09:30.936886+00:00'
