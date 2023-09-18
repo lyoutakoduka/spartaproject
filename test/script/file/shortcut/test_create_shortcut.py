@@ -7,9 +7,11 @@ from tempfile import TemporaryDirectory
 from typing import Callable
 
 from pytest import raises
-from script.file.shortcut.create_shortcut import create_shortcut
-from script.file.shortcut.get_shortcut_path import get_shortcut_path
-from script.path.temporary.create_temporary_file import create_temporary_file
+from spartaproject.script.file.shortcut.create_shortcut import create_shortcut
+from spartaproject.script.file.shortcut.get_shortcut_path import \
+    get_shortcut_path
+from spartaproject.script.path.temporary.create_temporary_file import \
+    create_temporary_file
 
 
 def _common_test(shortcut_target: Path, shortcut_root: Path) -> None:

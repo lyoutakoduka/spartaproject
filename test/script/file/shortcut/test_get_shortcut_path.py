@@ -3,7 +3,8 @@
 
 from pathlib import Path
 
-from script.file.shortcut.get_shortcut_path import get_shortcut_path
+from spartaproject.script.file.shortcut.get_shortcut_path import \
+    get_shortcut_path
 
 
 def test_name() -> None:
