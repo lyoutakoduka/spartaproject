@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from context.callable_context import CP, CR, Callable
-from script.decorator_generator import TransferFunction
+from spartaproject.context.callable_context import CP, CR, Callable
+from spartaproject.script.decorator_generator import TransferFunction
 
 
 class TemporaryDecorator(TransferFunction):

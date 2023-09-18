@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from script.format_texts import format_indent
-from script.off_stdout import StdoutText
+from spartaproject.script.format_texts import format_indent
+from spartaproject.script.off_stdout import StdoutText
 
 
 def test_pass() -> None:

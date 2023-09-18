@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from context.default.string_context import Strs
-from script.format_texts import format_indent
+from spartaproject.context.default.string_context import Strs
+from spartaproject.script.format_texts import format_indent
 
 
 def shared_compare(expected: Strs, input: str, stdout: bool = False) -> None:

@@ -5,9 +5,9 @@ from contextlib import redirect_stdout
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from context.callable_context import CP, CR, Callable
-from script.decorator_generator import TransferFunction
-from script.file.text.import_file import text_import
+from spartaproject.context.callable_context import CP, CR, Callable
+from spartaproject.script.decorator_generator import TransferFunction
+from spartaproject.script.file.text.import_file import text_import
 
 
 class StdoutText(TransferFunction):
