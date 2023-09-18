@@ -35,8 +35,8 @@ def _expected_result(type: str) -> Strs:
 def _common_test(is_file: bool, type: str, server: ExecuteServer) -> bool:
     if result := _execute_python(is_file, type, server):
         assert result == _expected_result(type)
-
-    assert False
+    else:
+        assert False
 
 
 def _get_version_number(result: Strs) -> Ints:
