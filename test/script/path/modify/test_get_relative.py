@@ -56,4 +56,5 @@ def main() -> bool:
     test_root()
     test_array()
     test_pair()
+    test_unmatch()
     return True

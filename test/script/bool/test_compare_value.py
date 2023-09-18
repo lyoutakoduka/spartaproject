@@ -38,4 +38,7 @@ def test_pair() -> None:
 def main() -> bool:
     test_array()
     test_pair()
+    test_size()
+    test_empty()
+    test_key()
     return True

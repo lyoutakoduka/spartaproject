@@ -37,4 +37,7 @@ def main() -> bool:
     test_array()
     test_invert()
     test_pair()
+    test_empty()
+    test_mixed()
+    test_false()
     return True

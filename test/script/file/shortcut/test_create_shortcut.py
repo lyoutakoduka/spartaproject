@@ -56,4 +56,5 @@ def test_exist() -> None:
 def main() -> bool:
     test_file()
     test_directory()
+    test_exist()
     return True

@@ -30,4 +30,5 @@ def test_accuracy() -> None:
 
 def main() -> bool:
     test_accuracy()
+    test_float()
     return True
