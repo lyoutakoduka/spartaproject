@@ -5,7 +5,7 @@ from spartaproject.script.format_texts import format_indent
 from spartaproject.script.off_stdout import StdoutText
 
 
-def test_pass() -> None:
+def test_messages() -> None:
     MESSAGE: str = "Hello, World!"
     EXPECTED: str = """
         Hello, World!
@@ -27,5 +27,5 @@ def test_pass() -> None:
 
 
 def main() -> bool:
-    test_pass()
+    test_messages()
     return True

@@ -4,7 +4,7 @@
 from spartaproject.script.bool.compare_json import is_same_json
 
 
-def test_pass() -> None:
+def test_single() -> None:
     assert is_same_json({'A': True}, {'A': True})
 
 
@@ -26,7 +26,7 @@ def test_type() -> None:
 
 
 def main() -> bool:
-    test_pass()
+    test_single()
     test_nest()
     test_multiple()
     test_array()

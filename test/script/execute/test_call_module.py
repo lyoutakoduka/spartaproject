@@ -25,7 +25,7 @@ def test_unknown_function() -> None:
         call_function(_SOURCE_PATH, _SOURCE_PATH, function=_UNKNOWN)
 
 
-def test_pass() -> None:
+def test_success() -> None:
     """Main function calling of designated module."""
     assert call_function(_SOURCE_PATH, _SOURCE_PATH)
 
@@ -36,5 +36,5 @@ def main() -> bool:
     Returns:
         bool: success if get to the end of function
     """
-    test_pass()
+    test_success()
     return True

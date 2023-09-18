@@ -14,7 +14,7 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
         function(Path(temporary_path))
 
 
-def test_pass() -> None:
+def test_file() -> None:
     def individual_test(temporary_path: Path) -> None:
         EXPECTED: Path = Path(temporary_path, 'temporary.json')
         file_path: Path = create_temporary_file(temporary_path)
@@ -25,5 +25,5 @@ def test_pass() -> None:
 
 
 def main() -> bool:
-    test_pass()
+    test_file()
     return True

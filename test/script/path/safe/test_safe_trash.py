@@ -35,7 +35,7 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
         function(Path(temporary_path))
 
 
-def test_pass() -> None:
+def test_file() -> None:
     def individual_test(temporary_root: Path) -> None:
         safe_trash = SafeTrash()
         safe_trash.trash(create_temporary_file(temporary_root))
@@ -85,7 +85,7 @@ def test_select() -> None:
 
 
 def main() -> bool:
-    test_pass()
+    test_file()
     test_exists()
     test_tree()
     test_select()

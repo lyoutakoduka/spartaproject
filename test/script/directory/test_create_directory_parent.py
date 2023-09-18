@@ -14,7 +14,7 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
         function(Path(temporary_path))
 
 
-def test_pass() -> None:
+def test_directory() -> None:
     def individual_test(temporary_root: Path) -> None:
         EXPECTED: Path = Path(temporary_root, 'parent')
         parent_path: Path = create_directory_parent(
@@ -28,5 +28,5 @@ def test_pass() -> None:
 
 
 def main() -> bool:
-    test_pass()
+    test_directory()
     return True
