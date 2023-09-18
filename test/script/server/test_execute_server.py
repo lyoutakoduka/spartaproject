@@ -34,9 +34,9 @@ def _expected_result(type: str) -> Strs:
 
 def _common_test(is_file: bool, type: str, server: ExecuteServer) -> bool:
     if result := _execute_python(is_file, type, server):
-        return result == _expected_result(type)
+        assert result == _expected_result(type)
 
-    return False
+    assert False
 
 
 def _get_version_number(result: Strs) -> Ints:
@@ -51,14 +51,14 @@ def test_file() -> None:
     type: str = 'file'
     server: ExecuteServer = ExecuteServer()
 
-    assert _common_test(True, type, server)
+    _common_test(True, type, server)
 
 
 def test_directory() -> None:
     type: str = 'directory'
     server: ExecuteServer = ExecuteServer()
 
-    assert _common_test(False, type, server)
+    _common_test(False, type, server)
 
 
 def test_version() -> None:
