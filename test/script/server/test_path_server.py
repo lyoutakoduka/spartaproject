@@ -4,8 +4,8 @@
 from pathlib import Path
 from typing import Callable
 
-from script.path.modify.get_absolute import get_absolute
-from script.server.path_server import PathServer
+from spartaproject.script.path.modify.get_absolute import get_absolute
+from spartaproject.script.server.path_server import PathServer
 
 
 def _common_test(function: Callable[[PathServer], None]) -> None:

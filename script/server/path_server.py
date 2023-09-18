@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from context.default.string_context import Strs
-from context.extension.path_context import Path, PathPair
-from script.directory.create_directory_working import create_working_space
-from script.path.modify.get_absolute import get_absolute
-from script.path.modify.get_relative import get_relative
-from script.server.context_server import ContextServer
+from spartaproject.context.default.string_context import Strs
+from spartaproject.context.extension.path_context import Path, PathPair
+from spartaproject.script.directory.create_directory_working import \
+    create_working_space
+from spartaproject.script.path.modify.get_absolute import get_absolute
+from spartaproject.script.path.modify.get_relative import get_relative
+from spartaproject.script.server.context_server import ContextServer
 
 
 class PathServer(ContextServer):

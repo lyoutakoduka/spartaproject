@@ -3,9 +3,9 @@
 
 from pathlib import Path
 
-from context.default.integer_context import Ints
-from context.default.string_context import Strs
-from script.server.upload_server import UploadServer
+from spartaproject.context.default.integer_context import Ints
+from spartaproject.context.default.string_context import Strs
+from spartaproject.script.server.upload_server import UploadServer
 
 
 class ExecuteServer(UploadServer):

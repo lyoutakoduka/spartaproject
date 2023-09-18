@@ -3,10 +3,11 @@
 
 from time import sleep
 
-from context.default.string_context import Strs
-from context.extension.decimal_context import Decimal, set_decimal_context
 from paramiko import AutoAddPolicy, Channel, SFTPClient, SSHClient
-from script.server.path_server import PathServer
+from spartaproject.context.default.string_context import Strs
+from spartaproject.context.extension.decimal_context import (
+    Decimal, set_decimal_context)
+from spartaproject.script.server.path_server import PathServer
 
 set_decimal_context()
 

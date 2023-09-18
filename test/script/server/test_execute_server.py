@@ -3,11 +3,11 @@
 
 from pathlib import Path
 
-from context.default.integer_context import Ints
-from context.default.string_context import Strs
 from pytest import raises
-from script.path.safe.safe_copy import SafeCopy
-from script.server.execute_server import ExecuteServer
+from spartaproject.context.default.integer_context import Ints
+from spartaproject.context.default.string_context import Strs
+from spartaproject.script.path.safe.safe_copy import SafeCopy
+from spartaproject.script.server.execute_server import ExecuteServer
 
 
 def _execute_python(

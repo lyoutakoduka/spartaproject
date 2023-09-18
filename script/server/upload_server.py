@@ -3,12 +3,12 @@
 
 from os import stat_result
 
-from context.default.string_context import Strs
-from context.extension.path_context import Path, Paths
 from paramiko import SFTPAttributes
-from script.path.iterate_directory import walk_iterator
-from script.path.modify.get_relative import get_relative
-from script.server.connect_server import ConnectServer
+from spartaproject.context.default.string_context import Strs
+from spartaproject.context.extension.path_context import Path, Paths
+from spartaproject.script.path.iterate_directory import walk_iterator
+from spartaproject.script.path.modify.get_relative import get_relative
+from spartaproject.script.server.connect_server import ConnectServer
 
 
 class UploadServer(ConnectServer):

@@ -4,7 +4,7 @@
 from pathlib import Path
 from typing import Callable
 
-from script.server.context_server import ContextServer
+from spartaproject.script.server.context_server import ContextServer
 
 
 def _common_test(function: Callable[[ContextServer], None]) -> None:
