@@ -5,13 +5,18 @@ from decimal import Decimal  # not from context
 from pathlib import Path  # not from context
 from typing import Dict, List
 
-from context.default.bool_context import BoolPair, BoolPair2, Bools, Bools2
-from context.default.float_context import (FloatPair, FloatPair2, Floats,
-                                           Floats2)
-from context.default.integer_context import IntPair, IntPair2, Ints, Ints2
-from context.default.string_context import StrPair, StrPair2, Strs, Strs2
-from context.extension.decimal_context import DecPair, DecPair2, Decs, Decs2
-from context.extension.path_context import PathPair, PathPair2, Paths, Paths2
+from spartaproject.context.default.bool_context import (BoolPair, BoolPair2,
+                                                        Bools, Bools2)
+from spartaproject.context.default.float_context import (FloatPair, FloatPair2,
+                                                         Floats, Floats2)
+from spartaproject.context.default.integer_context import (IntPair, IntPair2,
+                                                           Ints, Ints2)
+from spartaproject.context.default.string_context import (StrPair, StrPair2,
+                                                          Strs, Strs2)
+from spartaproject.context.extension.decimal_context import (DecPair, DecPair2,
+                                                             Decs, Decs2)
+from spartaproject.context.extension.path_context import (PathPair, PathPair2,
+                                                          Paths, Paths2)
 
 Array = Bools | Ints | Floats | Strs | Decs | Paths
 Array2 = Bools2 | Ints2 | Floats2 | Strs2 | Decs2 | Paths2
