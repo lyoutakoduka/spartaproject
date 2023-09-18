@@ -39,8 +39,10 @@ def _replace_file_name(head: str, module_path: Path) -> Path:
 
 def _switch_test_root(call_context: PathPair, head_added_path: Path) -> bool:
     root_path: Path = call_context['source'].parent
+    relative: Path = get_relative(head_added_path, root_path=root_path)
+
     module_path: Path = Path(
-        root_path, 'test', get_relative(head_added_path, root_path=root_path)
+        root_path, relative.parts[0], 'test', *list(relative.parts[1:])
     )
 
     if module_path.exists():
