@@ -64,34 +64,6 @@ def _check_test_path(call_context: PathPair) -> bool:
     )
 
 
-def _get_common_directory(call_context: PathPair) -> Path:
-    return Path(commonpath([
-        str(call_context[type].parents[1]) for type in _get_path_key()
-    ]))
-
-
-def _add_system_path(imports: Paths) -> None:
-    for import_path in imports:
-        path: str = str(import_path)
-        if path in system_path:
-            system_path.remove(path)
-        system_path.insert(0, path)
-
-
-def _check_system_path(call_context: PathPair) -> None:
-    _add_system_path([
-        _get_common_directory(call_context), call_context['module'].parent
-    ])
-
-
-def _check_callable_target(module_name: str, function: str) -> None:
-    if not util.find_spec(module_name):
-        raise FileNotFoundError(module_name)
-
-    if not hasattr(import_module(module_name), function):
-        raise ModuleNotFoundError(function)
-
-
 def _call_target_function(module: ModuleType, function: str) -> None:
     if not hasattr(module, function):
         raise ModuleNotFoundError(function)
