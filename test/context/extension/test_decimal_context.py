@@ -3,9 +3,10 @@
 
 from decimal import Context, FloatOperation, getcontext, setcontext
 
-from context.default.string_context import Strs
-from context.extension.decimal_context import Decimal, set_decimal_context
 from pytest import raises
+from spartaproject.context.default.string_context import Strs
+from spartaproject.context.extension.decimal_context import (
+    Decimal, set_decimal_context)
 
 
 def test_float() -> None:
