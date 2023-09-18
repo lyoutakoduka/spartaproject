@@ -1,14 +1,16 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from context.default.string_context import Strs
-from context.extension.path_context import Path, PathPair, Paths
 from pytest import raises
-from script.bool.same_value import bool_same_array
-from script.path.modify.get_absolute import (get_absolute, get_absolute_array,
-                                             get_absolute_pair)
-from script.path.modify.get_relative import (get_relative, get_relative_array,
-                                             get_relative_pair)
+from spartaproject.context.default.string_context import Strs
+from spartaproject.context.extension.path_context import Path, PathPair, Paths
+from spartaproject.script.bool.same_value import bool_same_array
+from spartaproject.script.path.modify.get_absolute import (get_absolute,
+                                                           get_absolute_array,
+                                                           get_absolute_pair)
+from spartaproject.script.path.modify.get_relative import (get_relative,
+                                                           get_relative_array,
+                                                           get_relative_pair)
 
 
 def to_pair(types: Strs, paths: Paths) -> PathPair:
