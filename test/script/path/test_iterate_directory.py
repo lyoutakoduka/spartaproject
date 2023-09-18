@@ -4,11 +4,12 @@
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from context.default.string_context import Strs, Strs2
-from context.extension.path_context import Path, PathGene, Paths
-from script.path.iterate_directory import walk_iterator
-from script.path.modify.get_relative import get_relative_array
-from script.path.temporary.create_temporary_tree import create_temporary_tree
+from spartaproject.context.default.string_context import Strs, Strs2
+from spartaproject.context.extension.path_context import Path, PathGene, Paths
+from spartaproject.script.path.iterate_directory import walk_iterator
+from spartaproject.script.path.modify.get_relative import get_relative_array
+from spartaproject.script.path.temporary.create_temporary_tree import \
+    create_temporary_tree
 
 _TREE_DEEP: int = 3
 

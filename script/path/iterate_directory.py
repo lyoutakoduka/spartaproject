@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from context.extension.path_context import Path, PathGene
+from spartaproject.context.extension.path_context import Path, PathGene
 
 _DEFAULT_FILTER: str = '**/*'
 
