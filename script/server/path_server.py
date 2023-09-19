@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from shutil import rmtree
+from tempfile import mkdtemp
+
 from spartaproject.context.default.string_context import Strs
 from spartaproject.context.extension.path_context import Path, PathPair
 from spartaproject.script.directory.create_directory_working import \
@@ -52,6 +55,10 @@ class PathServer(ContextServer):
         super().__init__()
 
         self._build_path_table()
+        self.temporary_root: Path = Path(mkdtemp())
+
+    def __del__(self) -> None:
+        rmtree(str(self.temporary_root))
 
     def get_path_table(self) -> Strs:
         return list(self._path_table.keys())
@@ -69,13 +76,16 @@ class PathServer(ContextServer):
     def _get_local_absolute(self) -> Path:
         return get_absolute(self.get_path('local_root'))
 
-    def get_working_space(self) -> Path:
-        return create_working_space(
-            get_absolute(
-                Path(self._get_local_absolute(), self.get_path('work_root'))
-            ),
-            jst=True
+    def get_working_space(
+        self, override: bool = False, jst: bool = False
+    ) -> PathPair:
+        temporary_path: Path = create_working_space(
+            Path(self.temporary_root, self.get_path('work_root')),
+            override=override,
+            jst=jst
         )
+
+        return {'root': self.temporary_root, 'path': temporary_path}
 
     def to_remote_path(self, local: Path) -> Path:
         return get_relative(local, root_path=self._get_local_absolute())

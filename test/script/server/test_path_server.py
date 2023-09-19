@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from pathlib import Path
 from typing import Callable
 
+from spartaproject.context.extension.path_context import Path, PathPair
 from spartaproject.script.path.modify.get_absolute import get_absolute
+from spartaproject.script.path.modify.get_relative import get_relative
 from spartaproject.script.server.path_server import PathServer
 
 
@@ -42,9 +43,19 @@ def test_path_string() -> None:
 
 
 def test_working() -> None:
+    expected: Path = Path(
+        'private', 'work', '2023', '04', '01', '00', '00', '00', '000000'
+    )
+
     def individual_test(server: PathServer) -> None:
-        working: Path = server.get_working_space()
-        assert working.exists()
+        path_pair: PathPair = server.get_working_space(override=True)
+
+        temporary_path: Path = path_pair['path']
+        assert temporary_path.exists()
+
+        assert expected == get_relative(
+            temporary_path, root_path=path_pair['root']
+        )
 
     _common_test(individual_test)
 
