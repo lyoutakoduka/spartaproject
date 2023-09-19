@@ -58,7 +58,8 @@ class PathServer(ContextServer):
         self.temporary_root: Path | None = Path(mkdtemp())
 
     def __del__(self) -> None:
-        rmtree(str(self.temporary_root))
+        if root := self.get_temporary_root():
+            rmtree(str(root))
 
     def get_temporary_root(self) -> Path | None:
         return self.temporary_root
