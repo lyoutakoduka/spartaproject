@@ -22,9 +22,10 @@ class FileHistory:
         self.pop_history()
 
     def _init_history_path(self, path: Path) -> Path:
-        if '.' != str(path):
-            return path
-        return create_working_space(get_absolute(Path('trash')), jst=True)
+        if '.' == str(path):
+            path = get_absolute(Path('trash'))
+
+        return create_working_space(path, jst=True)
 
     def _export_history(self, history: Json) -> Path:
         return json_export(Path(self.history_path, 'rename.json'), history)
