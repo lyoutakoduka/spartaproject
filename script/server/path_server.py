@@ -55,13 +55,12 @@ class PathServer(ContextServer):
         super().__init__()
 
         self._build_path_table()
-        self.temporary_root: Path | None = Path(mkdtemp())
+        self.temporary_root: Path = Path(mkdtemp())
 
     def __del__(self) -> None:
-        if root := self.get_temporary_root():
-            rmtree(str(root))
+        rmtree(str(self.temporary_root))
 
-    def get_temporary_root(self) -> Path | None:
+    def get_temporary_root(self) -> Path:
         return self.temporary_root
 
     def get_path_table(self) -> Strs:

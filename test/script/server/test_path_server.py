@@ -44,10 +44,8 @@ def test_path_string() -> None:
 
 def test_temporary() -> None:
     def individual_test(server: PathServer) -> None:
-        if root := server.get_temporary_root():
-            assert root.exists()
-        else:
-            assert False
+        root: Path = server.get_temporary_root()
+        assert root.exists()
 
     _common_test(individual_test)
 
@@ -59,12 +57,11 @@ def test_working() -> None:
 
     def individual_test(server: PathServer) -> None:
         temporary_path: Path = server.get_working_space(override=True)
-        assert temporary_path.exists()
 
-        if root := server.get_temporary_root():
-            assert expected == get_relative(temporary_path, root_path=root)
-        else:
-            assert False
+        assert temporary_path.exists()
+        assert expected == get_relative(
+            temporary_path, root_path=server.get_temporary_root()
+        )
 
     _common_test(individual_test)
 
