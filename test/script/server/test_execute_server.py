@@ -31,7 +31,7 @@ def _expected_result(name: str) -> Strs:
     return [identifier + str(i) for i in range(3)]
 
 
-def _common_test(name: str, server: ExecuteServer) -> bool:
+def _common_test(name: str, server: ExecuteServer) -> None:
     if result := _execute_python(name, server):
         assert result == _expected_result(name)
     else:
