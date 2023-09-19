@@ -5,6 +5,7 @@ from pathlib import Path
 
 from spartaproject.script.directory.create_directory_working import (
     create_working_space, get_working_space)
+from spartaproject.script.path.modify.get_absolute import get_absolute
 from spartaproject.script.path.modify.get_relative import get_relative
 
 
@@ -20,7 +21,9 @@ def test_create() -> None:
         NAME, '2023', '04', '01', '00', '00', '00', '000000'
     )
 
-    time_path: Path = create_working_space(Path(NAME), override=True)
+    time_path: Path = create_working_space(
+        get_absolute(Path(NAME)), override=True
+    )
 
     assert time_path.exists()
     assert EXPECTED == get_relative(time_path)

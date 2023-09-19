@@ -6,7 +6,6 @@ from pathlib import Path
 
 from spartaproject.context.default.integer_context import Ints2
 from spartaproject.script.directory.create_directory import create_directory
-from spartaproject.script.path.modify.get_absolute import get_absolute
 from spartaproject.script.time.current_datetime import get_current_time
 
 
@@ -34,6 +33,6 @@ def get_working_space(override: bool = False, jst: bool = False) -> Path:
 def create_working_space(
     root: Path, override: bool = False, jst: bool = False
 ) -> Path:
-    return create_directory(get_absolute(
+    return create_directory(
         Path(root, get_working_space(override=override, jst=jst))
-    ))
+    )
