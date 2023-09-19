@@ -10,14 +10,18 @@ from spartaproject.script.path.safe.safe_copy import SafeCopy
 from spartaproject.script.server.execute_server import ExecuteServer
 
 
+def _get_execute_source(name: str) -> Path:
+    current: Path = Path(__file__)
+    return Path(current.parent, 'execute', name)
+
+
 def _execute_python(name: str, server: ExecuteServer) -> Strs | None:
     assert server.connect()
 
-    current: Path = Path(__file__)
     destination_path: Path = Path(server.get_working_space(), name)
 
     safe_copy = SafeCopy()
-    safe_copy.copy(Path(current.parent, 'execute', name), destination_path)
+    safe_copy.copy(_get_execute_source(name), destination_path)
 
     return server.execute(destination_path)
 
