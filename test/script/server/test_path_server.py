@@ -42,6 +42,16 @@ def test_path_string() -> None:
     _common_test(individual_test)
 
 
+def test_temporary() -> None:
+    def individual_test(server: PathServer) -> None:
+        if root := server.get_temporary_root():
+            assert root.exists()
+        else:
+            assert False
+
+    _common_test(individual_test)
+
+
 def test_working() -> None:
     expected: Path = Path(
         'private', 'work', '2023', '04', '01', '00', '00', '00', '000000'
@@ -86,6 +96,7 @@ def main() -> bool:
     test_table()
     test_path()
     test_path_string()
+    test_temporary()
     test_working()
     test_to_remote()
     test_to_local()
