@@ -9,6 +9,7 @@ from spartaproject.script.directory.create_directory_working import \
     create_working_space
 from spartaproject.script.file.json.convert_to_json import multiple2_to_json
 from spartaproject.script.file.json.export_json import json_export
+from spartaproject.script.path.modify.get_absolute import get_absolute
 from spartaproject.script.time.current_datetime import get_current_time
 
 
@@ -23,7 +24,7 @@ class FileHistory:
     def _init_history_path(self, path: Path) -> Path:
         if '.' != str(path):
             return path
-        return create_working_space(Path('trash'), jst=True)
+        return create_working_space(get_absolute(Path('trash')), jst=True)
 
     def _export_history(self, history: Json) -> Path:
         return json_export(Path(self.history_path, 'rename.json'), history)

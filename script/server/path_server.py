@@ -71,7 +71,9 @@ class PathServer(ContextServer):
 
     def get_working_space(self) -> Path:
         return create_working_space(
-            Path(self._get_local_absolute(), self.get_path('work_root')),
+            get_absolute(
+                Path(self._get_local_absolute(), self.get_path('work_root'))
+            ),
             jst=True
         )
 
