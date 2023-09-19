@@ -82,14 +82,12 @@ class PathServer(ContextServer):
 
     def get_working_space(
         self, override: bool = False, jst: bool = False
-    ) -> PathPair:
-        temporary_path: Path = create_working_space(
+    ) -> Path:
+        return create_working_space(
             Path(self.temporary_root, self.get_path('work_root')),
             override=override,
             jst=jst
         )
-
-        return {'root': self.temporary_root, 'path': temporary_path}
 
     def to_remote_path(self, local: Path) -> Path:
         return get_relative(local, root_path=self._get_local_absolute())

@@ -3,7 +3,7 @@
 
 from typing import Callable
 
-from spartaproject.context.extension.path_context import Path, PathPair
+from spartaproject.context.extension.path_context import Path
 from spartaproject.script.path.modify.get_absolute import get_absolute
 from spartaproject.script.path.modify.get_relative import get_relative
 from spartaproject.script.server.path_server import PathServer
@@ -58,14 +58,13 @@ def test_working() -> None:
     )
 
     def individual_test(server: PathServer) -> None:
-        path_pair: PathPair = server.get_working_space(override=True)
-
-        temporary_path: Path = path_pair['path']
+        temporary_path: Path = server.get_working_space(override=True)
         assert temporary_path.exists()
 
-        assert expected == get_relative(
-            temporary_path, root_path=path_pair['root']
-        )
+        if root := server.get_temporary_root():
+            assert expected == get_relative(temporary_path, root_path=root)
+        else:
+            assert False
 
     _common_test(individual_test)
 
