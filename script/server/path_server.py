@@ -8,7 +8,6 @@ from spartaproject.context.default.string_context import Strs
 from spartaproject.context.extension.path_context import Path, PathPair
 from spartaproject.script.directory.create_directory_working import \
     create_working_space
-from spartaproject.script.path.modify.get_absolute import get_absolute
 from spartaproject.script.path.modify.get_relative import get_relative
 from spartaproject.script.server.context_server import ContextServer
 
@@ -75,9 +74,6 @@ class PathServer(ContextServer):
     def get_path_string(self, type: str) -> str:
         path: Path = self.get_path(type)
         return path.as_posix()
-
-    def _get_local_absolute(self) -> Path:
-        return get_absolute(self.get_path('local_root'))
 
     def get_working_space(
         self, override: bool = False, jst: bool = False
