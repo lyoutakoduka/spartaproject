@@ -20,34 +20,34 @@ def _common_test(server: UploadServer, source_path: Path) -> None:
 
 
 def _inside_temporary_directory(
-    function: Callable[[UploadServer], None]
+    function: Callable[[UploadServer, Path], None]
 ) -> None:
     server: UploadServer = UploadServer()
     assert server.connect()
 
-    function(server)
+    function(server, server.get_working_space(jst=True))
 
 
 def test_file() -> None:
-    def individual_test(server: UploadServer) -> None:
-        _common_test(server, create_temporary_file(server.get_working_space()))
+    def individual_test(server: UploadServer, temporary_path: Path) -> None:
+        _common_test(server, create_temporary_file(temporary_path))
 
     _inside_temporary_directory(individual_test)
 
 
 def test_directory() -> None:
-    def individual_test(server: UploadServer) -> None:
+    def individual_test(server: UploadServer, temporary_path: Path) -> None:
         _common_test(
             server,
-            create_directory(Path(server.get_working_space(), 'directory'))
+            create_directory(Path(temporary_path, 'directory'))
         )
 
     _inside_temporary_directory(individual_test)
 
 
 def test_tree() -> None:
-    def individual_test(server: UploadServer) -> None:
-        source_path: Path = Path(server.get_working_space(), 'tree')
+    def individual_test(server: UploadServer, temporary_path: Path) -> None:
+        source_path: Path = Path(temporary_path, 'tree')
         create_temporary_tree(source_path, tree_deep=2)
         _common_test(server, source_path)
 
