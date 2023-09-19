@@ -10,26 +10,26 @@ from spartaproject.script.path.safe.safe_copy import SafeCopy
 from spartaproject.script.server.execute_server import ExecuteServer
 
 
-def _execute_python(type: str, server: ExecuteServer) -> Strs | None:
+def _execute_python(name: str, server: ExecuteServer) -> Strs | None:
     assert server.connect()
 
     current: Path = Path(__file__)
-    destination_path: Path = Path(server.get_working_space(), type)
+    destination_path: Path = Path(server.get_working_space(), name)
 
     safe_copy = SafeCopy()
-    safe_copy.copy(Path(current.parent, 'execute', type), destination_path)
+    safe_copy.copy(Path(current.parent, 'execute', name), destination_path)
 
     return server.execute(destination_path)
 
 
-def _expected_result(type: str) -> Strs:
-    identifier: str = Path(type).stem
+def _expected_result(name: str) -> Strs:
+    identifier: str = Path(name).stem
     return [identifier + str(i) for i in range(3)]
 
 
-def _common_test(type: str, server: ExecuteServer) -> bool:
-    if result := _execute_python(type, server):
-        assert result == _expected_result(type)
+def _common_test(name: str, server: ExecuteServer) -> bool:
+    if result := _execute_python(name, server):
+        assert result == _expected_result(name)
     else:
         assert False
 
@@ -43,34 +43,34 @@ def _get_version_number(result: Strs) -> Ints:
 
 
 def test_file() -> None:
-    type: str = 'file.py'
+    name: str = 'file.py'
     server: ExecuteServer = ExecuteServer()
 
-    _common_test(type, server)
+    _common_test(name, server)
 
 
 def test_directory() -> None:
-    type: str = 'directory'
+    name: str = 'directory'
     server: ExecuteServer = ExecuteServer()
 
-    _common_test(type, server)
+    _common_test(name, server)
 
 
 def test_version() -> None:
-    type: str = 'version.py'
+    name: str = 'version.py'
     EXPECTED: Ints = [3, 11, 3]
     server: ExecuteServer = ExecuteServer(versions=EXPECTED)
 
-    if result := _execute_python(type, server):
+    if result := _execute_python(name, server):
         assert EXPECTED == _get_version_number(result)
 
 
 def test_error() -> None:
-    type: str = 'error.py'
+    name: str = 'error.py'
     server: ExecuteServer = ExecuteServer()
 
     with raises(ValueError):
-        _execute_python(type, server)
+        _execute_python(name, server)
 
 
 def main() -> bool:
