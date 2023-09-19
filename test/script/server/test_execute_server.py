@@ -13,8 +13,7 @@ from spartaproject.script.server.execute_server import ExecuteServer
 def _execute_python(
     is_file: bool, type: str, server: ExecuteServer
 ) -> Strs | None:
-    if not server.connect():
-        return None
+    assert server.connect()
 
     current: Path = Path(__file__)
     upload_target: str = type + '.py' if is_file else type
