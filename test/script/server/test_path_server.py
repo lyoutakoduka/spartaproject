@@ -50,22 +50,6 @@ def test_temporary() -> None:
     _common_test(individual_test)
 
 
-def test_working() -> None:
-    expected: Path = Path(
-        'private', 'work', '2023', '04', '01', '00', '00', '00', '000000'
-    )
-
-    def individual_test(server: PathServer) -> None:
-        temporary_path: Path = server.get_working_space(override=True)
-
-        assert temporary_path.exists()
-        assert expected == get_relative(
-            temporary_path, root_path=server.get_temporary_root()
-        )
-
-    _common_test(individual_test)
-
-
 def test_to_remote() -> None:
     EXPECTED: Path = Path('temp')
 
@@ -88,12 +72,28 @@ def test_to_local() -> None:
     _common_test(individual_test)
 
 
+def test_working() -> None:
+    expected: Path = Path(
+        'private', 'work', '2023', '04', '01', '00', '00', '00', '000000'
+    )
+
+    def individual_test(server: PathServer) -> None:
+        temporary_path: Path = server.get_working_space(override=True)
+
+        assert temporary_path.exists()
+        assert expected == get_relative(
+            temporary_path, root_path=server.get_temporary_root()
+        )
+
+    _common_test(individual_test)
+
+
 def main() -> bool:
     test_table()
     test_path()
     test_path_string()
     test_temporary()
-    test_working()
     test_to_remote()
     test_to_local()
+    test_working()
     return True
