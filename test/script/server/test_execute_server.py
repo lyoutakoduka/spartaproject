@@ -38,6 +38,13 @@ def _common_test(name: str, server: ExecuteServer) -> None:
         assert False
 
 
+def _version_test(name: str, server: ExecuteServer, expected: Ints) -> None:
+    if result := _execute_python(name, server):
+        assert expected == _get_version_number(result)
+    else:
+        assert False
+
+
 def _get_version_number(result: Strs) -> Ints:
     version_text = result[0]
     texts: Strs = version_text.split(' ')
@@ -65,10 +72,7 @@ def test_version() -> None:
     EXPECTED: Ints = [3, 11, 3]
     server: ExecuteServer = ExecuteServer(versions=EXPECTED)
 
-    if result := _execute_python(name, server):
-        assert EXPECTED == _get_version_number(result)
-    else:
-        assert False
+    _version_test(name, server, EXPECTED)
 
 
 def test_error() -> None:
