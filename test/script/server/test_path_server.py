@@ -55,7 +55,7 @@ def test_to_remote() -> None:
 
     def individual_test(server: PathServer) -> None:
         assert EXPECTED == server.to_remote_path(
-            Path(get_absolute(server.get_path('local_root')), EXPECTED)
+            Path(server.get_temporary_root(), EXPECTED)
         )
 
     _common_test(individual_test)

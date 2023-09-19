@@ -89,7 +89,7 @@ class PathServer(ContextServer):
         )
 
     def to_remote_path(self, local: Path) -> Path:
-        return get_relative(local, root_path=self._get_local_absolute())
+        return get_relative(local, root_path=self.temporary_root)
 
     def to_local_path(self, local: Path) -> Path:
         return Path(self._get_local_absolute(), local)
