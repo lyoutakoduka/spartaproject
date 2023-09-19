@@ -16,7 +16,7 @@ def test_name() -> None:
 
 
 def test_create() -> None:
-    NAME: str = '.trash'
+    NAME: str = 'trash'
     EXPECTED: Path = Path(
         NAME, '2023', '04', '01', '00', '00', '00', '000000'
     )
