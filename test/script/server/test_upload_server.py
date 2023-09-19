@@ -55,23 +55,20 @@ def test_tree() -> None:
 
 
 def test_place() -> None:
-    def individual_test(server: UploadServer) -> None:
-        with TemporaryDirectory() as temporary_path:
-            working_path: Path = get_working_space(jst=True)
-            source_path: Path = create_temporary_file(
-                Path(temporary_path, working_path)
-            )
+    server: UploadServer = UploadServer()
+    assert server.connect()
 
-            assert server.upload(
-                source_path,
-                destination=Path(
-                    server.get_path('work_root'),
-                    working_path,
-                    source_path.name
-                )
-            )
+    with TemporaryDirectory() as temporary_path:
+        working_path: Path = Path(
+            server.get_path('work_root'), get_working_space(jst=True)
+        )
+        source_path: Path = create_temporary_file(
+            Path(temporary_path, working_path)
+        )
 
-    _inside_temporary_directory(individual_test)
+        assert server.upload(
+            source_path, destination=Path(working_path, source_path.name)
+        )
 
 
 def main() -> bool:
