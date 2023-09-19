@@ -67,6 +67,8 @@ def test_version() -> None:
 
     if result := _execute_python(name, server):
         assert EXPECTED == _get_version_number(result)
+    else:
+        assert False
 
 
 def test_error() -> None:
