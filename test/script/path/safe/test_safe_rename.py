@@ -34,8 +34,7 @@ def _inside_temporary_directory(
     function: Callable[[SafeRename, Path], None]
 ) -> None:
     with TemporaryDirectory() as temporary_path:
-        safe_rename = SafeRename()
-        function(safe_rename, Path(temporary_path))
+        function(SafeRename(), Path(temporary_path))
 
 
 def _rename(safe_rename: SafeRename, path: Path) -> Path:
