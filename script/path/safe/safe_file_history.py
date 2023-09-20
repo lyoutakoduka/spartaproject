@@ -2,11 +2,10 @@
 # -*- coding: utf-8 -*-
 
 from itertools import count
-from shutil import rmtree
-from tempfile import mkdtemp
 
 from spartaproject.context.extension.path_context import Path, PathPair2
 from spartaproject.context.file.json_context import Json
+from spartaproject.script.directory.create_directory_temporary import WorkSpace
 from spartaproject.script.directory.create_directory_working import \
     create_working_space
 from spartaproject.script.file.json.convert_to_json import multiple2_to_json
@@ -14,21 +13,21 @@ from spartaproject.script.file.json.export_json import json_export
 from spartaproject.script.time.current_datetime import get_current_time
 
 
-class FileHistory():
+class FileHistory(WorkSpace):
     def __init__(self, history_path: Path = Path()) -> None:
+        super().__init__()
+
         self._history: PathPair2 = {}
         self.history_path: Path = self._init_history_path(history_path)
 
     def __del__(self) -> None:
+        super().__del__()
+
         self.pop_history()
-        rmtree(str(self.temporary_root))
 
     def _init_history_path(self, path: Path) -> Path:
-        self.temporary_root: Path | None = None
-
         if '.' == str(path):
-            self.temporary_root = Path(mkdtemp())
-            path = Path(self.temporary_root, 'trash')
+            path = Path(self.get_root(), 'trash')
 
         return create_working_space(path, jst=True)
 
