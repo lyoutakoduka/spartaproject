@@ -5,7 +5,7 @@ from pathlib import Path
 
 from spartaproject.context.default.integer_context import Ints
 from spartaproject.context.default.string_context import Strs
-from spartaproject.script.execute.script_version import version_to_string
+from spartaproject.script.execute.script_version import get_version_name
 from spartaproject.script.server.upload_server import UploadServer
 
 
@@ -14,25 +14,22 @@ class ExecuteServer(UploadServer):
         if 0 == len(versions):
             versions = [3, 11, 5]
 
-        return version_to_string(versions)
+        return get_version_name(versions)
 
-    def _get_version_root(self, version: str) -> Path:
-        return Path(
-            self.get_path('python_root'),
-            'python'.capitalize() + '-' + version
-        )
-
-    def _set_version_path(self, version_root: Path) -> None:
+    def _set_version_path(self, version: str) -> None:
         self._python_path: Path = Path(
-            version_root, 'local', 'python', 'bin', 'python3'
+            self.get_path('python_root'),
+            version,
+            'local',
+            'python',
+            'bin',
+            'python3'
         )
 
     def __init__(self, versions: Ints = []) -> None:
         super().__init__()
 
-        self._set_version_path(
-            self._get_version_root(self._set_version(versions))
-        )
+        self._set_version_path(self._set_version(versions))
 
     def _get_error_identifier(self) -> str:
         body: str = ' '.join(['most', 'recent', 'call', 'last'])
