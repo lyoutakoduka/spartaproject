@@ -6,7 +6,6 @@ from tempfile import TemporaryDirectory
 
 from spartaproject.script.directory.create_directory_working import (
     create_working_space, get_working_space)
-from spartaproject.script.path.modify.get_absolute import get_absolute
 from spartaproject.script.path.modify.get_relative import get_relative
 
 
