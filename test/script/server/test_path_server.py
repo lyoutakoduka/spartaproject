@@ -44,7 +44,7 @@ def test_path_string() -> None:
 
 def test_temporary() -> None:
     def individual_test(server: PathServer) -> None:
-        root: Path = server.get_temporary_root()
+        root: Path = server.get_root()
         assert root.exists()
 
     _common_test(individual_test)
@@ -55,7 +55,7 @@ def test_to_remote() -> None:
 
     def individual_test(server: PathServer) -> None:
         assert EXPECTED == server.to_remote_path(
-            Path(server.get_temporary_root(), EXPECTED)
+            Path(server.get_root(), EXPECTED)
         )
 
     _common_test(individual_test)
@@ -82,7 +82,7 @@ def test_working() -> None:
 
         assert temporary_path.exists()
         assert expected == get_relative(
-            temporary_path, root_path=server.get_temporary_root()
+            temporary_path, root_path=server.get_root()
         )
 
     _common_test(individual_test)

@@ -1,18 +1,16 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from shutil import rmtree
-from tempfile import mkdtemp
-
 from spartaproject.context.default.string_context import Strs
 from spartaproject.context.extension.path_context import Path, PathPair
+from spartaproject.script.directory.create_directory_temporary import WorkSpace
 from spartaproject.script.directory.create_directory_working import \
     create_working_space
 from spartaproject.script.path.modify.get_relative import get_relative
 from spartaproject.script.server.context_server import ContextServer
 
 
-class PathServer(ContextServer):
+class PathServer(ContextServer, WorkSpace):
     def _add_path(self, type: str, child: Path, parent: str = '') -> None:
         if 0 < len(parent):
             child = Path(self.get_path(parent), child)
@@ -50,17 +48,13 @@ class PathServer(ContextServer):
         self._build_path_private()
         self._build_path_develop()
 
+    def _initialize_multiple_inheritance(self) -> None:
+        ContextServer.__init__(self)
+        WorkSpace.__init__(self)
+
     def __init__(self) -> None:
-        super().__init__()
-
+        self._initialize_multiple_inheritance()
         self._build_path_table()
-        self.temporary_root: Path = Path(mkdtemp())
-
-    def __del__(self) -> None:
-        rmtree(str(self.temporary_root))
-
-    def get_temporary_root(self) -> Path:
-        return self.temporary_root
 
     def get_path_table(self) -> Strs:
         return list(self._path_table.keys())
@@ -79,13 +73,13 @@ class PathServer(ContextServer):
         self, override: bool = False, jst: bool = False
     ) -> Path:
         return create_working_space(
-            Path(self.temporary_root, self.get_path('work_root')),
+            Path(self.get_root(), self.get_path('work_root')),
             override=override,
             jst=jst
         )
 
     def to_remote_path(self, local: Path) -> Path:
-        return get_relative(local, root_path=self.temporary_root)
+        return get_relative(local, root_path=self.get_root())
 
     def to_local_path(self, local: Path) -> Path:
-        return Path(self.temporary_root, local)
+        return Path(self.get_root(), local)
