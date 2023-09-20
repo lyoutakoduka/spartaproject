@@ -5,6 +5,7 @@ from platform import python_version
 
 from spartaproject.context.default.integer_context import Ints
 from spartaproject.script.execute.script_version import (execute_version,
+                                                         get_version_name,
                                                          version_from_string,
                                                          version_to_string)
 
@@ -19,6 +20,11 @@ def test_number() -> None:
     assert EXPECTED == version_from_string('0.0.0')
 
 
+def test_name() -> None:
+    EXPECTED: str = 'Python-0.0.0'
+    assert EXPECTED == get_version_name([0, 0, 0])
+
+
 def test_version() -> None:
     assert execute_version() == version_from_string(python_version())
 
@@ -31,5 +37,6 @@ def main() -> bool:
     """
     test_string()
     test_number()
+    test_name()
     test_version()
     return True

@@ -16,6 +16,10 @@ def version_from_string(version: str) -> Ints:
     return [int(number) for number in version.split('.')]
 
 
+def get_version_name(versions: Ints) -> str:
+    return 'python'.capitalize() + '-' + version_to_string(versions)
+
+
 def execute_version() -> Ints:
     results: Strs = execute_command([executable, '-V'])
 
