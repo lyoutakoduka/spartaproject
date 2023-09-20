@@ -21,9 +21,9 @@ class FileHistory(WorkSpace):
         self.history_path: Path = self._init_history_path(history_path)
 
     def __del__(self) -> None:
-        super().__del__()
-
         self.pop_history()
+
+        super().__del__()
 
     def _init_history_path(self, path: Path) -> Path:
         if '.' == str(path):
