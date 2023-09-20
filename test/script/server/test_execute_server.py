@@ -6,6 +6,7 @@ from pathlib import Path
 from pytest import raises
 from spartaproject.context.default.integer_context import Ints
 from spartaproject.context.default.string_context import Strs
+from spartaproject.script.execute.script_version import version_from_string
 from spartaproject.script.path.safe.safe_copy import SafeCopy
 from spartaproject.script.server.execute_server import ExecuteServer
 
@@ -48,9 +49,8 @@ def _version_test(name: str, server: ExecuteServer, expected: Ints) -> None:
 def _get_version_number(result: Strs) -> Ints:
     version_text = result[0]
     texts: Strs = version_text.split(' ')
-    text: str = texts[0]
 
-    return [int(number) for number in text.split('.')]
+    return version_from_string(texts[0])
 
 
 def test_file() -> None:

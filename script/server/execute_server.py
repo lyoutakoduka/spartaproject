@@ -5,6 +5,7 @@ from pathlib import Path
 
 from spartaproject.context.default.integer_context import Ints
 from spartaproject.context.default.string_context import Strs
+from spartaproject.script.execute.script_version import version_to_string
 from spartaproject.script.server.upload_server import UploadServer
 
 
@@ -13,7 +14,7 @@ class ExecuteServer(UploadServer):
         if 0 == len(versions):
             versions = [3, 11, 5]
 
-        return '.'.join([str(i) for i in versions])
+        return version_to_string(versions)
 
     def _get_version_root(self, version: str) -> Path:
         language: str = 'python'
