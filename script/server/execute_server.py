@@ -17,11 +17,9 @@ class ExecuteServer(UploadServer):
         return version_to_string(versions)
 
     def _get_version_root(self, version: str) -> Path:
-        language: str = 'python'
-
         return Path(
             self.get_path('python_root'),
-            language.capitalize() + '-' + version
+            'python'.capitalize() + '-' + version
         )
 
     def _set_version_path(self, version_root: Path) -> None:
