@@ -19,7 +19,7 @@ def test_create() -> None:
     EXPECTED: Path = Path('2023', '04', '01', '00', '00', '00', '000000')
 
     with TemporaryDirectory() as temporary_directory:
-        temporary_path: Path = Path(temporary_directory, 'temporary')
+        temporary_path: Path = Path(temporary_directory)
         time_path: Path = create_working_space(temporary_path, override=True)
 
         assert time_path.exists()
