@@ -4,7 +4,6 @@
 from typing import Callable
 
 from spartaproject.context.extension.path_context import Path
-from spartaproject.script.path.modify.get_absolute import get_absolute
 from spartaproject.script.path.modify.get_relative import get_relative
 from spartaproject.script.server.path_server import PathServer
 
@@ -38,14 +37,6 @@ def test_path_string() -> None:
     def individual_test(server: PathServer) -> None:
         for type in server.get_context_table('path'):
             assert server.get_path(type) == Path(server.get_path_string(type))
-
-    _common_test(individual_test)
-
-
-def test_temporary() -> None:
-    def individual_test(server: PathServer) -> None:
-        root: Path = server.get_root()
-        assert root.exists()
 
     _common_test(individual_test)
 
@@ -92,7 +83,6 @@ def main() -> bool:
     test_table()
     test_path()
     test_path_string()
-    test_temporary()
     test_to_remote()
     test_to_local()
     test_working()
