@@ -30,27 +30,30 @@ def _common_test(rename_path: Path) -> None:
         ])
 
 
-def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
+def _inside_temporary_directory(
+    function: Callable[[SafeRename, Path], None]
+) -> None:
     with TemporaryDirectory() as temporary_path:
-        function(Path(temporary_path))
+        safe_rename = SafeRename()
+        function(safe_rename, Path(temporary_path))
 
 
-def _rename(path: Path) -> Path:
-    safe_rename = SafeRename()
+def _rename(safe_rename: SafeRename, path: Path) -> Path:
     safe_rename.rename(path, path.with_stem('destination'))
     return safe_rename.pop_history()
 
 
 def test_file() -> None:
-    def individual_test(temporary_path: Path) -> None:
-        _common_test(_rename(create_temporary_file(temporary_path)))
+    def individual_test(safe_rename: SafeRename, temporary_path: Path) -> None:
+        _common_test(
+            _rename(safe_rename, create_temporary_file(temporary_path))
+        )
 
     _inside_temporary_directory(individual_test)
 
 
 def test_override() -> None:
-    def individual_test(temporary_path: Path) -> None:
-        safe_rename = SafeRename()
+    def individual_test(safe_rename: SafeRename, temporary_path: Path) -> None:
         source_path: Path = create_temporary_file(temporary_path)
         destination_path: Path = safe_rename.rename(
             source_path, source_path, override=True
@@ -63,19 +66,22 @@ def test_override() -> None:
 
 
 def test_directory() -> None:
-    def individual_test(temporary_path: Path) -> None:
+    def individual_test(safe_rename: SafeRename, temporary_path: Path) -> None:
         _common_test(
-            _rename(create_directory(Path(temporary_path, 'temporary')))
+            _rename(
+                safe_rename,
+                create_directory(Path(temporary_path, 'temporary'))
+            )
         )
 
     _inside_temporary_directory(individual_test)
 
 
 def test_tree() -> None:
-    def individual_test(temporary_path: Path) -> None:
+    def individual_test(safe_rename: SafeRename, temporary_path: Path) -> None:
         source_path: Path = Path(temporary_path, 'temporary')
         create_temporary_tree(source_path, tree_deep=2)
-        _common_test(_rename(source_path))
+        _common_test(_rename(safe_rename, source_path))
 
     _inside_temporary_directory(individual_test)
 
