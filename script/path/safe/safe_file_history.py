@@ -46,7 +46,7 @@ class FileHistory(WorkSpace):
         time: str = get_current_time(jst=True).isoformat()
 
         for i in count():
-            time_index: str = '_'.join([time, str(i).zfill(4)])
+            time_index: str = time + '_' + str(i).zfill(4)
             if time_index not in self._history:
                 return time_index
         return ''
