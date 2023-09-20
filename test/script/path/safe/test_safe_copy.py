@@ -26,21 +26,21 @@ def _common_test(rename_path: Path) -> None:
         assert bool_same_pair(check_exists_pair(path_pair))
 
 
-def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
+def _inside_temporary_directory(
+        function: Callable[[SafeCopy, Path], None]
+) -> None:
     with TemporaryDirectory() as temporary_path:
-        function(Path(temporary_path))
+        function(SafeCopy(), Path(temporary_path))
 
 
-def _copy(path: Path) -> Path:
-    safe_copy = SafeCopy()
+def _copy(safe_copy: SafeCopy, path: Path) -> Path:
     safe_copy.copy(path, path.with_stem('destination'))
     return safe_copy.pop_history()
 
 
 def test_file() -> None:
-    def individual_test(temporary_path: Path) -> None:
+    def individual_test(safe_copy: SafeCopy, temporary_path: Path) -> None:
         source_path: Path = create_temporary_file(temporary_path)
-        safe_copy = SafeCopy()
         safe_copy.copy(source_path, source_path.with_stem('destination'))
 
         _common_test(safe_copy.pop_history())
@@ -49,9 +49,8 @@ def test_file() -> None:
 
 
 def test_override() -> None:
-    def individual_test(temporary_path: Path) -> None:
+    def individual_test(safe_copy: SafeCopy, temporary_path: Path) -> None:
         source_path: Path = create_temporary_file(temporary_path)
-        safe_copy = SafeCopy()
         destination_path: Path = safe_copy.copy(
             source_path, source_path, override=True
         )
@@ -63,19 +62,21 @@ def test_override() -> None:
 
 
 def test_directory() -> None:
-    def individual_test(temporary_path: Path) -> None:
+    def individual_test(safe_copy: SafeCopy, temporary_path: Path) -> None:
         _common_test(
-            _copy(create_directory(Path(temporary_path, 'temporary')))
+            _copy(
+                safe_copy, create_directory(Path(temporary_path, 'temporary'))
+            )
         )
 
     _inside_temporary_directory(individual_test)
 
 
 def test_tree() -> None:
-    def individual_test(temporary_path: Path) -> None:
+    def individual_test(safe_copy: SafeCopy, temporary_path: Path) -> None:
         source_path: Path = Path(temporary_path, 'temporary')
         create_temporary_tree(source_path, tree_deep=2)
-        _common_test(_copy(source_path))
+        _common_test(_copy(safe_copy, source_path))
 
     _inside_temporary_directory(individual_test)
 
