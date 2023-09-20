@@ -21,7 +21,7 @@ class ExecuteServer(UploadServer):
 
         return Path(
             self.get_path('python_root'),
-            '-'.join([language.capitalize(), version])
+            language.capitalize() + '-' + version
         )
 
     def _set_version_path(self, version_root: Path) -> None:
@@ -38,7 +38,7 @@ class ExecuteServer(UploadServer):
 
     def _get_error_identifier(self) -> str:
         body: str = ' '.join(['most', 'recent', 'call', 'last'])
-        return ' '.join(['traceback'.capitalize(), '(' + body + ')']) + ':'
+        return 'traceback'.capitalize() + ' ' + '(' + body + ')' + ':'
 
     def _get_command(self, source_root: Path) -> Strs:
         return [
