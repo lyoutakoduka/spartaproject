@@ -30,7 +30,7 @@ def test_text() -> None:
 def test_byte() -> None:
     def individual_test(text_path: Path) -> None:
         result: bytes = byte_import(text_path)
-        _common_test(result.decode('utf-8'))
+        _common_test(result.decode())
 
     _inside_temporary_directory(individual_test)
 

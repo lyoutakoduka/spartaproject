@@ -82,7 +82,7 @@ class ConnectServer(PathServer):
 
                 self._sleep()
 
-            return text_byte.decode('utf-8')
+            return text_byte.decode()
 
         return None
 

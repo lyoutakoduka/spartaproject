@@ -11,5 +11,5 @@ def byte_import(import_path: Path) -> bytes:
 
 def text_import(import_path: Path) -> str:
     byte: bytes = byte_import(import_path)
-    content: str = byte.decode('utf-8')
+    content: str = byte.decode()
     return content.replace('\r\n', '\n')

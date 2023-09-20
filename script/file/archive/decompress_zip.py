@@ -58,7 +58,7 @@ class DecompressZip:
         comment: bytes = information.comment
         if 0 < len(comment):
             content: StrPair = string_pair_from_json(
-                json_load(comment.decode('utf-8'))
+                json_load(comment.decode())
             )
             if 'latest' in content:
                 latest = datetime.fromisoformat(content['latest'])
