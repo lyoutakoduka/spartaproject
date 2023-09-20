@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
 from spartaproject.script.directory.create_directory_working import (
     create_working_space, get_working_space)
@@ -16,17 +17,14 @@ def test_name() -> None:
 
 
 def test_create() -> None:
-    NAME: str = 'trash'
-    EXPECTED: Path = Path(
-        NAME, '2023', '04', '01', '00', '00', '00', '000000'
-    )
+    EXPECTED: Path = Path('2023', '04', '01', '00', '00', '00', '000000')
 
-    time_path: Path = create_working_space(
-        get_absolute(Path(NAME)), override=True
-    )
+    with TemporaryDirectory() as temporary_directory:
+        temporary_path: Path = Path(temporary_directory, 'temporary')
+        time_path: Path = create_working_space(temporary_path, override=True)
 
-    assert time_path.exists()
-    assert EXPECTED == get_relative(time_path)
+        assert time_path.exists()
+        assert EXPECTED == get_relative(time_path, root_path=temporary_path)
 
 
 def main() -> bool:
