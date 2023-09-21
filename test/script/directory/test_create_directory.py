@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
 from spartaproject.context.default.string_context import Strs
-from spartaproject.context.extension.path_context import Path, PathPair, Paths
+from spartaproject.context.extension.path_context import PathPair, Paths
 from spartaproject.script.bool.same_value import (bool_same_array,
                                                   bool_same_pair)
 from spartaproject.script.directory.create_directory import (
