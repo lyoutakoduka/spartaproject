@@ -35,10 +35,18 @@ def _get_module_root(versions: Ints) -> Path:
     return Path(execute.parents[1], _set_version(versions))
 
 
-def virtual_environment(environment_root: Path) -> bool:
+def _get_execute_path(environment_root: Path, name: str) -> Path:
+    return Path(
+        environment_root,
+        'scripts'.capitalize(),
+        name + '.exe'
+    )
+
+
+def virtual_environment(environment_root: Path, modules: Strs = []) -> bool:
     versions: Ints = []
-    module_root: Path = _get_module_root(versions)
-    module_path: Path = Path(module_root, 'python.exe')
+    module_path: Path = Path(_get_module_root(versions), 'python.exe')
 
     execute_command([str(module_path), '-m', 'venv', str(environment_root)])
-    return _build_success(module_path)
+
+    return _build_success(_get_execute_path(environment_root, 'python'))
