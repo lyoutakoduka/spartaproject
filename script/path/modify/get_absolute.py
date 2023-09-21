@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from spartaproject.context.extension.path_context import Path, PathPair, Paths
+from pathlib import Path
+
+from spartaproject.context.extension.path_context import PathPair, Paths
 
 
 def get_absolute(relative_path: Path, root_path: Path = Path()) -> Path:

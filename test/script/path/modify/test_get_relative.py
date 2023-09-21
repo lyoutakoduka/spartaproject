@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from pathlib import Path
+
 from pytest import raises
 from spartaproject.context.default.string_context import Strs
-from spartaproject.context.extension.path_context import Path, PathPair, Paths
+from spartaproject.context.extension.path_context import PathPair, Paths
 from spartaproject.script.bool.same_value import bool_same_array
 from spartaproject.script.path.modify.get_absolute import (get_absolute,
                                                            get_absolute_array,
