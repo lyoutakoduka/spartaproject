@@ -69,7 +69,7 @@ def test_directory() -> None:
 
 def test_version() -> None:
     name: str = 'version.py'
-    EXPECTED: Ints = [3, 11, 3]
+    EXPECTED: Ints = [3, 10, 11]
     server: ExecuteServer = ExecuteServer(versions=EXPECTED)
 
     _version_test(name, server, EXPECTED)
