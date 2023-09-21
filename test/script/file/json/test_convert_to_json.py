@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from decimal import Decimal
+from pathlib import Path
+
 from spartaproject.context.default.bool_context import (BoolPair, BoolPair2,
                                                         Bools, Bools2)
 from spartaproject.context.default.float_context import (FloatPair, FloatPair2,
@@ -9,12 +12,10 @@ from spartaproject.context.default.integer_context import (IntPair, IntPair2,
                                                            Ints, Ints2)
 from spartaproject.context.default.string_context import (StrPair, StrPair2,
                                                           Strs, Strs2)
-from spartaproject.context.extension.decimal_context import (Decimal, DecPair,
-                                                             DecPair2, Decs,
-                                                             Decs2)
-from spartaproject.context.extension.path_context import (Path, PathPair,
-                                                          PathPair2, Paths,
-                                                          Paths2)
+from spartaproject.context.extension.decimal_context import (DecPair, DecPair2,
+                                                             Decs, Decs2)
+from spartaproject.context.extension.path_context import (PathPair, PathPair2,
+                                                          Paths, Paths2)
 from spartaproject.context.file.json_context import Json, Multi, Multi2
 from spartaproject.script.file.json.convert_to_json import (multiple2_to_json,
                                                             multiple_to_json,

@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from decimal import Decimal
+from pathlib import Path
 from typing import Dict, List
 
 from spartaproject.context.default.bool_context import (BoolPair, BoolPair2,
@@ -9,12 +11,10 @@ from spartaproject.context.default.integer_context import (IntPair, IntPair2,
                                                            Ints, Ints2)
 from spartaproject.context.default.string_context import (StrPair, StrPair2,
                                                           Strs, Strs2)
-from spartaproject.context.extension.decimal_context import (Decimal, DecPair,
-                                                             DecPair2, Decs,
-                                                             Decs2)
-from spartaproject.context.extension.path_context import (Path, PathPair,
-                                                          PathPair2, Paths,
-                                                          Paths2)
+from spartaproject.context.extension.decimal_context import (DecPair, DecPair2,
+                                                             Decs, Decs2)
+from spartaproject.context.extension.path_context import (PathPair, PathPair2,
+                                                          Paths, Paths2)
 from spartaproject.context.file.json_context import Json, Single
 
 
