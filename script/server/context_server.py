@@ -2,11 +2,12 @@
 # -*- coding: utf-8 -*-
 
 from copy import deepcopy
+from pathlib import Path
 from typing import Dict
 
 from spartaproject.context.default.integer_context import IntPair
 from spartaproject.context.default.string_context import StrPair, Strs
-from spartaproject.context.extension.path_context import Path, PathPair
+from spartaproject.context.extension.path_context import PathPair
 from spartaproject.context.file.json_context import Json
 from spartaproject.script.file.json.convert_from_json import (
     integer_pair_from_json, path_pair_from_json, string_pair_from_json)

@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from pathlib import Path
+
 from spartaproject.context.default.string_context import Strs
-from spartaproject.context.extension.path_context import Path, PathPair
+from spartaproject.context.extension.path_context import PathPair
 from spartaproject.script.directory.create_directory_temporary import WorkSpace
 from spartaproject.script.directory.create_directory_working import \
     create_working_space
