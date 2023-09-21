@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from decimal import Decimal  # not from context
-from pathlib import Path  # not from context
+from decimal import Decimal
+from pathlib import Path
 from typing import Dict, List
 
 from spartaproject.context.default.bool_context import (BoolPair, BoolPair2,
