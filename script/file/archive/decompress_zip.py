@@ -2,10 +2,11 @@
 # -*- coding: utf-8 -*-
 
 from datetime import datetime
+from pathlib import Path
 from zipfile import ZipFile, ZipInfo
 
 from spartaproject.context.default.string_context import StrPair, Strs
-from spartaproject.context.extension.path_context import Path, Paths
+from spartaproject.context.extension.path_context import Paths
 from spartaproject.script.directory.create_directory import create_directory
 from spartaproject.script.directory.create_directory_parent import \
     create_directory_parent

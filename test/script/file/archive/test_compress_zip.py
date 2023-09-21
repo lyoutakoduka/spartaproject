@@ -1,14 +1,16 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from decimal import Decimal
+from pathlib import Path
 from shutil import unpack_archive
 from tempfile import TemporaryDirectory
 from typing import Callable
 
 from spartaproject.context.default.integer_context import Ints2
 from spartaproject.context.extension.decimal_context import (
-    Decimal, Decs, set_decimal_context)
-from spartaproject.context.extension.path_context import Path, Paths, Paths2
+    Decs, set_decimal_context)
+from spartaproject.context.extension.path_context import Paths, Paths2
 from spartaproject.script.file.archive.compress_zip import CompressZip
 from spartaproject.script.path.iterate_directory import walk_iterator
 from spartaproject.script.path.modify.get_relative import get_relative_array

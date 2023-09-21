@@ -2,12 +2,13 @@
 # -*- coding: utf-8 -*-
 
 from itertools import chain
+from pathlib import Path
 from shutil import make_archive
 from tempfile import TemporaryDirectory
 from typing import Callable
 
 from spartaproject.context.default.integer_context import Ints2
-from spartaproject.context.extension.path_context import Path, Paths, Paths2
+from spartaproject.context.extension.path_context import Paths, Paths2
 from spartaproject.context.extension.time_context import Times2, datetime
 from spartaproject.script.file.archive.compress_zip import CompressZip
 from spartaproject.script.file.archive.decompress_zip import DecompressZip
