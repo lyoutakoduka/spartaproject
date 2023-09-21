@@ -98,12 +98,15 @@ We use gow for the compatibility layer of Linux from Windows. But if it works, a
 ## STEP6: Create spartaproject development directory
 
 1. Create current working directory
+
 `mkdir project`
 
 2. Move current working directory 
+
 `cd project`
 
 3. Clone repository from github
+
 `git clone https://github.com/lyoutakoduka/spartaproject.git spartaproject`
 
 4. Generated directory tree (Top three tiers)
