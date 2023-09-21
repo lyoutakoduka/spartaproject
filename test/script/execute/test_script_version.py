@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from pathlib import Path
 from platform import python_version
+from sys import executable
 
 from spartaproject.context.default.integer_context import Ints
 from spartaproject.script.execute.script_version import (execute_version,
@@ -26,7 +28,9 @@ def test_name() -> None:
 
 
 def test_version() -> None:
-    assert execute_version() == version_from_string(python_version())
+    assert execute_version(Path(executable)) == version_from_string(
+        python_version()
+    )
 
 
 def main() -> bool:
