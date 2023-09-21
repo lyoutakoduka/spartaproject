@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from decimal import Decimal
+
 from spartaproject.context.default.integer_context import IntPair
 from spartaproject.context.default.string_context import Strs
 from spartaproject.context.extension.decimal_context import (
-    Decimal, Decs, set_decimal_context)
+    Decs, set_decimal_context)
 from spartaproject.script.bool.same_value import bool_same_array
 from spartaproject.script.time.convert_readable import readable_time
 

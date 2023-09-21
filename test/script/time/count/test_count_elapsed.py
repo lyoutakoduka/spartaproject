@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from decimal import Decimal
 from typing import Callable
 
-from spartaproject.context.extension.decimal_context import (
-    Decimal, set_decimal_context)
+from spartaproject.context.extension.decimal_context import set_decimal_context
 from spartaproject.script.format_texts import format_indent
 from spartaproject.script.off_stdout import StdoutText
 from spartaproject.script.time.count.count_elapsed import LogTimer

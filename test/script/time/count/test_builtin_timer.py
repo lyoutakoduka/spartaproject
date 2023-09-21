@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from decimal import Decimal
 from time import sleep
 
 from spartaproject.context.extension.decimal_context import (
-    Decimal, Decs, set_decimal_context)
+    Decs, set_decimal_context)
 from spartaproject.script.time.count.builtin_timer import TimerSelect
 
 set_decimal_context()

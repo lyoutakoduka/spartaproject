@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 
 from datetime import datetime, timedelta
+from decimal import Decimal
 
 from spartaproject.context.default.integer_context import IntPair
 from spartaproject.context.default.string_context import Strs
-from spartaproject.context.extension.decimal_context import (
-    Decimal, set_decimal_context)
+from spartaproject.context.extension.decimal_context import set_decimal_context
 
 set_decimal_context()
 
