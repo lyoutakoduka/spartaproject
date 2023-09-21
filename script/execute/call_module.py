@@ -4,10 +4,11 @@
 """Call designated function of designated module."""
 
 from importlib.machinery import SourceFileLoader
+from pathlib import Path
 from types import ModuleType
 
 from spartaproject.context.default.string_context import Strs
-from spartaproject.context.extension.path_context import Path, PathPair
+from spartaproject.context.extension.path_context import PathPair
 from spartaproject.script.path.modify.get_absolute import get_absolute
 from spartaproject.script.path.modify.get_relative import get_relative
 
