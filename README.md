@@ -1,4 +1,4 @@
-# cleanup point cloud intuitively
+# Cleanup point cloud intuitively
 
 ## Version
 
@@ -6,20 +6,24 @@
 
 ## Note
 
-we sometimes call this product sparta simply instead of spartaproject or pyspartaproj.
+We sometimes call this product sparta simply instead of spartaproject or pyspartaproj.
+
 
 ## Language
 
-our tech support is provided by full japanese or simple english.
+All documents must written as English. But, author's english isn't great. If you need perfect tech support, it was provided by Japanese :)
+
+*Note: all documents are written on the premise that translation service like Google Translate.*
 
 ## Contribution
 
-getting ready...
+[CONTRIBUTING.md](https://github.com/lyoutakoduka/spartaproject/blob/main/CONTRIBUTING.md)
 
 ## License
 
-"spartaproject" is under [MIT license](https://en.wikipedia.org/wiki/MIT_License).
+[LICENSE](https://github.com/lyoutakoduka/spartaproject/blob/main/LICENSE)
 
 ## Author
 
-[lyouta](https://github.com/lyoutakoduka)
+* [github](https://github.com/lyoutakoduka)
+* [twitter](https://twitter.com/lyouta_koduka)
