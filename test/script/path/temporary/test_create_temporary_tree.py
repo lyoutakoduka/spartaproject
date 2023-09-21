@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
 from spartaproject.context.default.integer_context import Ints
 from spartaproject.context.default.string_context import Strs, Strs2
-from spartaproject.context.extension.path_context import Path, Paths
+from spartaproject.context.extension.path_context import Paths
 from spartaproject.script.path.iterate_directory import walk_iterator
 from spartaproject.script.path.modify.get_relative import get_relative_array
 from spartaproject.script.path.temporary.create_temporary_tree import \
