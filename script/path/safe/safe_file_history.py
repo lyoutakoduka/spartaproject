@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 
 from itertools import count
+from pathlib import Path
 
-from spartaproject.context.extension.path_context import Path, PathPair2
+from spartaproject.context.extension.path_context import PathPair2
 from spartaproject.context.file.json_context import Json
 from spartaproject.script.directory.create_directory_temporary import WorkSpace
 from spartaproject.script.directory.create_directory_working import \

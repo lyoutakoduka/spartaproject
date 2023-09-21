@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
 from spartaproject.context.default.bool_context import BoolPair
-from spartaproject.context.extension.path_context import Path, PathPair2, Paths
+from spartaproject.context.extension.path_context import PathPair2, Paths
 from spartaproject.script.bool.same_value import bool_same_array
 from spartaproject.script.file.json.convert_from_json import \
     path_pair2_from_json
