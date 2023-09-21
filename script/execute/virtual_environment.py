@@ -11,14 +11,15 @@ from spartaproject.script.execute.script_version import (execute_version,
                                                          get_version_name)
 
 
-def _filter_execute_version(source_path: Path, module_path: Path) -> bool:
-    return 1 == len(set(
-        [str(execute_version(path)) for path in [source_path, module_path]]
-    ))
+def _filter_execute_version(source_path: Path, destination_path: Path) -> bool:
+    return 1 == len(set([
+        str(execute_version(path))
+        for path in [source_path, destination_path]
+    ]))
 
 
-def _build_success(source_path: Path, module_path: Path) -> bool:
-    return _filter_execute_version(source_path, module_path)
+def _build_success(source_path: Path, destination_path: Path) -> bool:
+    return _filter_execute_version(source_path, destination_path)
 
 
 def _set_version(versions: Ints) -> str:
@@ -43,10 +44,10 @@ def _get_execute_path(environment_root: Path, name: str) -> Path:
 
 def virtual_environment(environment_root: Path, modules: Strs = []) -> bool:
     versions: Ints = []
-    module_path: Path = Path(_get_module_root(versions), 'python.exe')
+    source_path: Path = Path(_get_module_root(versions), 'python.exe')
 
-    execute_command([str(module_path), '-m', 'venv', str(environment_root)])
+    execute_command([str(source_path), '-m', 'venv', str(environment_root)])
 
     return _build_success(
-        module_path, _get_execute_path(environment_root, 'python')
+        source_path, _get_execute_path(environment_root, 'python')
     )
