@@ -5,6 +5,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
+from spartaproject.context.default.integer_context import Ints
 from spartaproject.script.execute.virtual_environment import \
     virtual_environment
 
@@ -22,11 +23,22 @@ def test_simple() -> None:
     _inside_temporary_directory(individual_test)
 
 
+def test_version() -> None:
+    """Creating primitive mode virtual environment."""
+    versions: Ints = [3, 10, 11]
+
+    def individual_test(environment_root: Path) -> None:
+        assert virtual_environment(environment_root, versions=versions)
+
+    _inside_temporary_directory(individual_test)
+
+
 def main() -> bool:
     """Run all tests.
 
     Returns:
         bool: success if get to the end of function
     """
-    test_simple()
+    # test_simple()
+    test_version()
     return True

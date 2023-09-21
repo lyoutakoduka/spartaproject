@@ -42,8 +42,9 @@ def _get_execute_path(environment_root: Path, name: str) -> Path:
     )
 
 
-def virtual_environment(environment_root: Path, modules: Strs = []) -> bool:
-    versions: Ints = []
+def virtual_environment(
+    environment_root: Path, versions: Ints = [], modules: Strs = []
+) -> bool:
     source_path: Path = Path(_get_module_root(versions), 'python.exe')
 
     execute_command([str(source_path), '-m', 'venv', str(environment_root)])
