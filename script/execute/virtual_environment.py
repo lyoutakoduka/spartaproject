@@ -2,25 +2,23 @@
 # -*- coding: utf-8 -*-
 
 from pathlib import Path
-from platform import python_version
 from sys import executable
 
 from spartaproject.context.default.integer_context import Ints
 from spartaproject.context.default.string_context import Strs
 from spartaproject.script.execute.execute_command import execute_command
-from spartaproject.script.execute.script_version import get_version_name
+from spartaproject.script.execute.script_version import (execute_version,
+                                                         get_version_name)
 
 
-def _filter_execute_version(module_path: Path) -> bool:
-    results: Strs = execute_command([str(module_path), '-V'])
-    version_test: str = results[0]
-    version_tests = version_test.split(' ')
-
-    return python_version() == version_tests[-1]
+def _filter_execute_version(source_path: Path, module_path: Path) -> bool:
+    return 1 == len(set(
+        [str(execute_version(path)) for path in [source_path, module_path]]
+    ))
 
 
-def _build_success(module_path: Path) -> bool:
-    return _filter_execute_version(module_path)
+def _build_success(source_path: Path, module_path: Path) -> bool:
+    return _filter_execute_version(source_path, module_path)
 
 
 def _set_version(versions: Ints) -> str:
@@ -49,4 +47,6 @@ def virtual_environment(environment_root: Path, modules: Strs = []) -> bool:
 
     execute_command([str(module_path), '-m', 'venv', str(environment_root)])
 
-    return _build_success(_get_execute_path(environment_root, 'python'))
+    return _build_success(
+        module_path, _get_execute_path(environment_root, 'python')
+    )
