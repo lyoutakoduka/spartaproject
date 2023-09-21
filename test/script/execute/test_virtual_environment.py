@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""Test to creating python virtual environment."""
 
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -24,7 +25,10 @@ def test_simple() -> None:
 
 
 def test_version() -> None:
-    """Creating primitive mode virtual environment."""
+    """Creating primitive mode virtual environment.
+
+    by specific python version
+    """
     versions: Ints = [3, 10, 11]
 
     def individual_test(environment_root: Path) -> None:
