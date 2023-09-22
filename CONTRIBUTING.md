@@ -2,7 +2,7 @@
 
 ## STEP1: Communication language
 
-See Language section of [README.md](https://github.com/lyoutakoduka/spartaproject/blob/main/README.md)
+See Language section of [README.md](README.md)
 
 ## STEP2: Operating system (OS)
 

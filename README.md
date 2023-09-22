@@ -16,11 +16,11 @@ _Note: all documents are written on the premise that translation service like Go
 
 ## Contribution
 
-[CONTRIBUTING.md](https://github.com/lyoutakoduka/spartaproject/blob/main/CONTRIBUTING.md)
+[CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## License
 
-[LICENSE](https://github.com/lyoutakoduka/spartaproject/blob/main/LICENSE)
+[LICENSE](LICENSE)
 
 ## Author
 
