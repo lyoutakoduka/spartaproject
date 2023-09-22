@@ -29,9 +29,10 @@ Helpful extensions for development of spartaproject
 **Edit source code**
 
 - [autoDocstring](https://marketplace.visualstudio.com/items?itemName=njpwerner.autodocstring)
-- [autopep8](https://marketplace.visualstudio.com/items?itemName=ms-python.autopep8)
 - [Better Comments](https://marketplace.visualstudio.com/items?itemName=aaron-bond.better-comments)
+- [Black Formatter](https://marketplace.visualstudio.com/items?itemName=ms-python.black-formatter)
 - [isort](https://marketplace.visualstudio.com/items?itemName=ms-python.isort)
+- [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 
 **Advice source code**
 
@@ -72,7 +73,7 @@ After installed Python, please install following dependent libraries by using pi
 
 To develop spartaproject on VSCode, please install following dependent libraries by using pip.
 
-- [autopep8](https://pypi.org/project/autopep8/)
+- [black](https://pypi.org/project/black/)
 - [flake8](https://pypi.org/project/flake8/)
 - [flake8-docstrings](https://pypi.org/project/flake8-docstrings/)
 - [isort](https://pypi.org/project/isort/)
