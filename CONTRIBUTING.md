@@ -2,9 +2,7 @@
 
 ## STEP1: Communication language
 
-All documents must written as English. But, author [lyouta](https://github.com/lyoutakoduka) english isn't great. If you need perfect tech support, it was provided by Japanese :)
-
-_Note: all documents are written on the premise that translation service like Google Translate._
+See Language section of [README.md](https://github.com/lyoutakoduka/spartaproject/blob/main/README.md)
 
 ## STEP2: Operating system (OS)
 

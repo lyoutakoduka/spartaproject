@@ -10,7 +10,7 @@ We sometimes call this product sparta simply instead of spartaproject or pyspart
 
 ## Language
 
-All documents must written as English. But, author's english isn't great. If you need perfect tech support, it was provided by Japanese :)
+All documents written by English. But, perfect tech support can only provide Japanese because author's english isn't great :)
 
 _Note: all documents are written on the premise that translation service like Google Translate._
 
