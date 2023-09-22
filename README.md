@@ -8,12 +8,11 @@
 
 We sometimes call this product sparta simply instead of spartaproject or pyspartaproj.
 
-
 ## Language
 
 All documents must written as English. But, author's english isn't great. If you need perfect tech support, it was provided by Japanese :)
 
-*Note: all documents are written on the premise that translation service like Google Translate.*
+_Note: all documents are written on the premise that translation service like Google Translate._
 
 ## Contribution
 
@@ -25,5 +24,5 @@ All documents must written as English. But, author's english isn't great. If you
 
 ## Author
 
-* [github](https://github.com/lyoutakoduka)
-* [twitter](https://twitter.com/lyouta_koduka)
+- [github](https://github.com/lyoutakoduka)
+- [twitter](https://twitter.com/lyouta_koduka)
