@@ -3,11 +3,11 @@
 
 from pathlib import Path
 
-from spartaproject.context.default.bool_context import BoolPair, Bools
-from spartaproject.context.extension.path_context import PathPair, Paths
-from spartaproject.script.bool.compare_value import (bool_compare_array,
+from pyspartaproj.context.default.bool_context import BoolPair, Bools
+from pyspartaproj.context.extension.path_context import PathPair, Paths
+from pyspartaproj.script.bool.compare_value import (bool_compare_array,
                                                      bool_compare_pair)
-from spartaproject.script.path.check_exists import (check_exists_array,
+from pyspartaproj.script.path.check_exists import (check_exists_array,
                                                     check_exists_pair)
 
 _CURRENT_PATH: Path = Path(__file__)

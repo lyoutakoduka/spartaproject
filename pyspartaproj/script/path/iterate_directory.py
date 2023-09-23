@@ -3,7 +3,7 @@
 
 from pathlib import Path
 
-from spartaproject.context.extension.path_context import PathGene
+from pyspartaproj.context.extension.path_context import PathGene
 
 _DEFAULT_FILTER: str = '**/*'
 

@@ -5,11 +5,11 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from spartaproject.context.default.string_context import Strs, Strs2
-from spartaproject.context.extension.path_context import PathGene, Paths
-from spartaproject.script.path.iterate_directory import walk_iterator
-from spartaproject.script.path.modify.get_relative import get_relative_array
-from spartaproject.script.path.temporary.create_temporary_tree import \
+from pyspartaproj.context.default.string_context import Strs, Strs2
+from pyspartaproj.context.extension.path_context import PathGene, Paths
+from pyspartaproj.script.path.iterate_directory import walk_iterator
+from pyspartaproj.script.path.modify.get_relative import get_relative_array
+from pyspartaproj.script.path.temporary.create_temporary_tree import \
     create_temporary_tree
 
 _TREE_DEEP: int = 3
