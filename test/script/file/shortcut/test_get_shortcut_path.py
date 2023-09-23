@@ -3,7 +3,7 @@
 
 from pathlib import Path
 
-from spartaproject.script.file.shortcut.get_shortcut_path import \
+from pyspartaproj.script.file.shortcut.get_shortcut_path import \
     get_shortcut_path
 
 
