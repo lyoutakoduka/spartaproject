@@ -5,17 +5,17 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from spartaproject.context.extension.path_context import PathPair2
-from spartaproject.script.bool.same_value import bool_same_pair
-from spartaproject.script.directory.create_directory import create_directory
-from spartaproject.script.file.json.convert_from_json import \
+from pyspartaproj.context.extension.path_context import PathPair2
+from pyspartaproj.script.bool.same_value import bool_same_pair
+from pyspartaproj.script.directory.create_directory import create_directory
+from pyspartaproj.script.file.json.convert_from_json import \
     path_pair2_from_json
-from spartaproject.script.file.json.import_json import json_import
-from spartaproject.script.path.check_exists import check_exists_pair
-from spartaproject.script.path.safe.safe_copy import SafeCopy
-from spartaproject.script.path.temporary.create_temporary_file import \
+from pyspartaproj.script.file.json.import_json import json_import
+from pyspartaproj.script.path.check_exists import check_exists_pair
+from pyspartaproj.script.path.safe.safe_copy import SafeCopy
+from pyspartaproj.script.path.temporary.create_temporary_file import \
     create_temporary_file
-from spartaproject.script.path.temporary.create_temporary_tree import \
+from pyspartaproj.script.path.temporary.create_temporary_tree import \
     create_temporary_tree
 
 

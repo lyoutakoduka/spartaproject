@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from spartaproject.context.extension.path_context import Path
-from spartaproject.script.directory.create_directory_parent import \
+from pyspartaproj.context.extension.path_context import Path
+from pyspartaproj.script.directory.create_directory_parent import \
     create_directory_parent
-from spartaproject.script.path.modify.get_relative import get_relative
-from spartaproject.script.path.safe.safe_rename import SafeRename
+from pyspartaproj.script.path.modify.get_relative import get_relative
+from pyspartaproj.script.path.safe.safe_rename import SafeRename
 
 
 class SafeTrash(SafeRename):

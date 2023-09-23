@@ -4,13 +4,13 @@
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from spartaproject.context.default.bool_context import Bools
-from spartaproject.context.extension.path_context import PathPair2, Paths2
-from spartaproject.script.bool.same_value import bool_same_array
-from spartaproject.script.file.json.convert_from_json import \
+from pyspartaproj.context.default.bool_context import Bools
+from pyspartaproj.context.extension.path_context import PathPair2, Paths2
+from pyspartaproj.script.bool.same_value import bool_same_array
+from pyspartaproj.script.file.json.convert_from_json import \
     path_pair2_from_json
-from spartaproject.script.file.json.import_json import json_import
-from spartaproject.script.path.safe.safe_file_history import FileHistory
+from pyspartaproj.script.file.json.import_json import json_import
+from pyspartaproj.script.path.safe.safe_file_history import FileHistory
 
 
 def _compare_path_count(source: Paths2, destination: PathPair2) -> bool:

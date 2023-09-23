@@ -3,9 +3,9 @@
 
 from shutil import move
 
-from spartaproject.context.extension.path_context import Path
-from spartaproject.script.path.modify.avoid_duplication import get_avoid_path
-from spartaproject.script.path.safe.safe_file_history import FileHistory
+from pyspartaproj.context.extension.path_context import Path
+from pyspartaproj.script.path.modify.avoid_duplication import get_avoid_path
+from pyspartaproj.script.path.safe.safe_file_history import FileHistory
 
 
 class SafeRename(FileHistory):

@@ -4,14 +4,14 @@
 from itertools import count
 from pathlib import Path
 
-from spartaproject.context.extension.path_context import PathPair2
-from spartaproject.context.file.json_context import Json
-from spartaproject.script.directory.create_directory_temporary import WorkSpace
-from spartaproject.script.directory.create_directory_working import \
+from pyspartaproj.context.extension.path_context import PathPair2
+from pyspartaproj.context.file.json_context import Json
+from pyspartaproj.script.directory.create_directory_temporary import WorkSpace
+from pyspartaproj.script.directory.create_directory_working import \
     create_working_space
-from spartaproject.script.file.json.convert_to_json import multiple2_to_json
-from spartaproject.script.file.json.export_json import json_export
-from spartaproject.script.time.current_datetime import get_current_time
+from pyspartaproj.script.file.json.convert_to_json import multiple2_to_json
+from pyspartaproj.script.file.json.export_json import json_export
+from pyspartaproj.script.time.current_datetime import get_current_time
 
 
 class FileHistory(WorkSpace):
