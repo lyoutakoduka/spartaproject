@@ -5,17 +5,17 @@ from decimal import Decimal
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from spartaproject.context.default.bool_context import BoolPair, BoolPair2
-from spartaproject.context.default.float_context import FloatPair, FloatPair2
-from spartaproject.context.default.integer_context import IntPair, IntPair2
-from spartaproject.context.default.string_context import StrPair, StrPair2
-from spartaproject.context.extension.decimal_context import DecPair, DecPair2
-from spartaproject.context.extension.path_context import PathPair, PathPair2
-from spartaproject.context.file.config_context import Config
-from spartaproject.script.file.config.export_config import (config_dump,
+from pyspartaproj.context.default.bool_context import BoolPair, BoolPair2
+from pyspartaproj.context.default.float_context import FloatPair, FloatPair2
+from pyspartaproj.context.default.integer_context import IntPair, IntPair2
+from pyspartaproj.context.default.string_context import StrPair, StrPair2
+from pyspartaproj.context.extension.decimal_context import DecPair, DecPair2
+from pyspartaproj.context.extension.path_context import PathPair, PathPair2
+from pyspartaproj.context.file.config_context import Config
+from pyspartaproj.script.file.config.export_config import (config_dump,
                                                             config_export)
-from spartaproject.script.file.text.import_file import text_import
-from spartaproject.script.format_texts import format_indent
+from pyspartaproj.script.file.text.import_file import text_import
+from pyspartaproj.script.format_texts import format_indent
 
 
 def _common_test(expected: str, input: Config) -> None:

@@ -5,8 +5,8 @@ from configparser import ConfigParser
 from io import StringIO
 from pathlib import Path
 
-from spartaproject.context.file.config_context import Config
-from spartaproject.script.file.text.export_file import text_export
+from pyspartaproj.context.file.config_context import Config
+from pyspartaproj.script.file.text.export_file import text_export
 
 
 def _cleanup_text(test: str, compress: bool) -> str:
