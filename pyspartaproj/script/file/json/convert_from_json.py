@@ -5,17 +5,17 @@ from decimal import Decimal
 from pathlib import Path
 from typing import Dict, List
 
-from spartaproject.context.default.bool_context import (BoolPair, BoolPair2,
+from pyspartaproj.context.default.bool_context import (BoolPair, BoolPair2,
                                                         Bools, Bools2)
-from spartaproject.context.default.integer_context import (IntPair, IntPair2,
+from pyspartaproj.context.default.integer_context import (IntPair, IntPair2,
                                                            Ints, Ints2)
-from spartaproject.context.default.string_context import (StrPair, StrPair2,
+from pyspartaproj.context.default.string_context import (StrPair, StrPair2,
                                                           Strs, Strs2)
-from spartaproject.context.extension.decimal_context import (DecPair, DecPair2,
+from pyspartaproj.context.extension.decimal_context import (DecPair, DecPair2,
                                                              Decs, Decs2)
-from spartaproject.context.extension.path_context import (PathPair, PathPair2,
+from pyspartaproj.context.extension.path_context import (PathPair, PathPair2,
                                                           Paths, Paths2)
-from spartaproject.context.file.json_context import Json, Single
+from pyspartaproj.context.file.json_context import Json, Single
 
 
 def _convert_unknown(input: Single, key: str) -> Single:

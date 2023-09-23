@@ -5,10 +5,10 @@ from decimal import Decimal
 from pathlib import Path
 from typing import Dict, List
 
-from spartaproject.context.file.json_context import (Array, Array2, Json, Pair,
+from pyspartaproj.context.file.json_context import (Array, Array2, Json, Pair,
                                                      Pair2, Single)
-from spartaproject.script.bool.same_value import bool_same_array
-from spartaproject.script.file.json.convert_from_json import (
+from pyspartaproj.script.bool.same_value import bool_same_array
+from pyspartaproj.script.file.json.convert_from_json import (
     bool_array2_from_json, bool_array_from_json, bool_pair2_from_json,
     bool_pair_from_json, decimal_array2_from_json, decimal_array_from_json,
     decimal_pair2_from_json, decimal_pair_from_json, from_safe_json,

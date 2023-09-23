@@ -5,7 +5,7 @@ from decimal import Decimal
 from pathlib import Path
 from typing import Dict, List
 
-from spartaproject.context.file.json_context import Json, Multi, Multi2, Single
+from pyspartaproj.context.file.json_context import Json, Multi, Multi2, Single
 
 
 def _convert_unknown(input: Single) -> Single:
