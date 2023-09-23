@@ -3,7 +3,7 @@
 
 from functools import wraps
 
-from spartaproject.context.callable_context import CP, CR, Callable
+from pyspartaproj.context.callable_context import CP, CR, Callable
 
 
 class TransferFunction:

@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from spartaproject.script.format_texts import format_indent
-from spartaproject.script.off_stdout import StdoutText
+from pyspartaproj.script.format_texts import format_indent
+from pyspartaproj.script.off_stdout import StdoutText
 
 
 def test_messages() -> None:
