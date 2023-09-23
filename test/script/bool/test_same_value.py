@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from pytest import raises
-from spartaproject.script.bool.same_value import (bool_same_array,
+from pyspartaproj.script.bool.same_value import (bool_same_array,
                                                   bool_same_pair)
 
 

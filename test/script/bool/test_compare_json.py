@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from spartaproject.script.bool.compare_json import is_same_json
+from pyspartaproj.script.bool.compare_json import is_same_json
 
 
 def test_single() -> None:

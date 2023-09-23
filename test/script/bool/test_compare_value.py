@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from pytest import raises
-from spartaproject.script.bool.compare_value import (bool_compare_array,
+from pyspartaproj.script.bool.compare_value import (bool_compare_array,
                                                      bool_compare_pair)
 
 
