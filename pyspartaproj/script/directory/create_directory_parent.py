@@ -3,7 +3,7 @@
 
 from pathlib import Path
 
-from spartaproject.script.directory.create_directory import create_directory
+from pyspartaproj.script.directory.create_directory import create_directory
 
 
 def create_directory_parent(child_path: Path) -> Path:

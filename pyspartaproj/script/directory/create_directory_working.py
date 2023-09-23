@@ -4,9 +4,9 @@
 from datetime import datetime
 from pathlib import Path
 
-from spartaproject.context.default.integer_context import Ints2
-from spartaproject.script.directory.create_directory import create_directory
-from spartaproject.script.time.current_datetime import get_current_time
+from pyspartaproj.context.default.integer_context import Ints2
+from pyspartaproj.script.directory.create_directory import create_directory
+from pyspartaproj.script.time.current_datetime import get_current_time
 
 
 def _get_time_data(time: datetime) -> Ints2:

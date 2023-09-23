@@ -5,13 +5,13 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from spartaproject.context.default.string_context import Strs
-from spartaproject.context.extension.path_context import PathPair, Paths
-from spartaproject.script.bool.same_value import (bool_same_array,
+from pyspartaproj.context.default.string_context import Strs
+from pyspartaproj.context.extension.path_context import PathPair, Paths
+from pyspartaproj.script.bool.same_value import (bool_same_array,
                                                   bool_same_pair)
-from spartaproject.script.directory.create_directory import (
+from pyspartaproj.script.directory.create_directory import (
     create_directory, create_directory_array, create_directory_pair)
-from spartaproject.script.path.check_exists import (check_exists_array,
+from pyspartaproj.script.path.check_exists import (check_exists_array,
                                                     check_exists_pair)
 
 _ELEMENT_NAMES: Strs = ['R', 'G', 'B']

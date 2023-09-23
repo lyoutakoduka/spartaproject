@@ -3,7 +3,7 @@
 
 from pathlib import Path
 
-from spartaproject.script.directory.create_directory_temporary import WorkSpace
+from pyspartaproj.script.directory.create_directory_temporary import WorkSpace
 
 
 class TemporaryWorkSpace(WorkSpace):
