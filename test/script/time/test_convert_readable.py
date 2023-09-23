@@ -3,12 +3,12 @@
 
 from decimal import Decimal
 
-from spartaproject.context.default.integer_context import IntPair
-from spartaproject.context.default.string_context import Strs
-from spartaproject.context.extension.decimal_context import (
+from pyspartaproj.context.default.integer_context import IntPair
+from pyspartaproj.context.default.string_context import Strs
+from pyspartaproj.context.extension.decimal_context import (
     Decs, set_decimal_context)
-from spartaproject.script.bool.same_value import bool_same_array
-from spartaproject.script.time.convert_readable import readable_time
+from pyspartaproj.script.bool.same_value import bool_same_array
+from pyspartaproj.script.time.convert_readable import readable_time
 
 set_decimal_context()
 

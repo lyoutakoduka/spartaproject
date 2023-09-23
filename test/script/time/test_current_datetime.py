@@ -3,7 +3,7 @@
 
 from datetime import datetime
 
-from spartaproject.script.time.current_datetime import get_current_time
+from pyspartaproj.script.time.current_datetime import get_current_time
 
 
 def _common_test(time: datetime, expected: str) -> None:
