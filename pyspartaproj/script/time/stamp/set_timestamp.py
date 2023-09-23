@@ -5,7 +5,7 @@ from datetime import datetime
 from os import utime
 from pathlib import Path
 
-from spartaproject.script.time.stamp.offset_timezone import offset_time
+from pyspartaproj.script.time.stamp.offset_timezone import offset_time
 
 
 def _convert_timestamp(time: datetime) -> float:

@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from spartaproject.context.extension.time_context import datetime
-from spartaproject.script.time.stamp.offset_timezone import offset_time
+from pyspartaproj.context.extension.time_context import datetime
+from pyspartaproj.script.time.stamp.offset_timezone import offset_time
 
 
 def _common_text(input: str) -> None:

@@ -6,13 +6,13 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from spartaproject.context.default.string_context import Strs
-from spartaproject.context.extension.time_context import Times
-from spartaproject.script.path.temporary.create_temporary_file import \
+from pyspartaproj.context.default.string_context import Strs
+from pyspartaproj.context.extension.time_context import Times
+from pyspartaproj.script.path.temporary.create_temporary_file import \
     create_temporary_file
-from spartaproject.script.time.stamp.get_timestamp import (get_access,
+from pyspartaproj.script.time.stamp.get_timestamp import (get_access,
                                                            get_latest)
-from spartaproject.script.time.stamp.set_timestamp import (set_access,
+from pyspartaproj.script.time.stamp.set_timestamp import (set_access,
                                                            set_latest)
 
 _TIMES: Strs = [
