@@ -5,14 +5,14 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from spartaproject.script.directory.create_directory import create_directory
-from spartaproject.script.directory.create_directory_working import \
+from pyspartaproj.script.directory.create_directory import create_directory
+from pyspartaproj.script.directory.create_directory_working import \
     get_working_space
-from spartaproject.script.path.temporary.create_temporary_file import \
+from pyspartaproj.script.path.temporary.create_temporary_file import \
     create_temporary_file
-from spartaproject.script.path.temporary.create_temporary_tree import \
+from pyspartaproj.script.path.temporary.create_temporary_tree import \
     create_temporary_tree
-from spartaproject.script.server.upload_server import UploadServer
+from pyspartaproj.script.server.upload_server import UploadServer
 
 
 def _common_test(server: UploadServer, source_path: Path) -> None:

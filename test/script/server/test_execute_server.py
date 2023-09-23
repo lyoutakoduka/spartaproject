@@ -4,11 +4,11 @@
 from pathlib import Path
 
 from pytest import raises
-from spartaproject.context.default.integer_context import Ints
-from spartaproject.context.default.string_context import Strs
-from spartaproject.script.execute.script_version import version_from_string
-from spartaproject.script.path.safe.safe_copy import SafeCopy
-from spartaproject.script.server.execute_server import ExecuteServer
+from pyspartaproj.context.default.integer_context import Ints
+from pyspartaproj.context.default.string_context import Strs
+from pyspartaproj.script.execute.script_version import version_from_string
+from pyspartaproj.script.path.safe.safe_copy import SafeCopy
+from pyspartaproj.script.server.execute_server import ExecuteServer
 
 
 def _get_execute_source(name: str) -> Path:

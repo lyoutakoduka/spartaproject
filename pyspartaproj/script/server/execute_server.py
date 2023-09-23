@@ -3,10 +3,10 @@
 
 from pathlib import Path
 
-from spartaproject.context.default.integer_context import Ints
-from spartaproject.context.default.string_context import Strs
-from spartaproject.script.execute.script_version import get_version_name
-from spartaproject.script.server.upload_server import UploadServer
+from pyspartaproj.context.default.integer_context import Ints
+from pyspartaproj.context.default.string_context import Strs
+from pyspartaproj.script.execute.script_version import get_version_name
+from pyspartaproj.script.server.upload_server import UploadServer
 
 
 class ExecuteServer(UploadServer):

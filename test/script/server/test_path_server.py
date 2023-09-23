@@ -3,9 +3,9 @@
 
 from typing import Callable
 
-from spartaproject.context.extension.path_context import Path
-from spartaproject.script.path.modify.get_relative import get_relative
-from spartaproject.script.server.path_server import PathServer
+from pyspartaproj.context.extension.path_context import Path
+from pyspartaproj.script.path.modify.get_relative import get_relative
+from pyspartaproj.script.server.path_server import PathServer
 
 
 def _common_test(function: Callable[[PathServer], None]) -> None:

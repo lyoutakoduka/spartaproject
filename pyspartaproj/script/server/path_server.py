@@ -3,13 +3,13 @@
 
 from pathlib import Path
 
-from spartaproject.context.default.string_context import Strs
-from spartaproject.context.extension.path_context import PathPair
-from spartaproject.script.directory.create_directory_temporary import WorkSpace
-from spartaproject.script.directory.create_directory_working import \
+from pyspartaproj.context.default.string_context import Strs
+from pyspartaproj.context.extension.path_context import PathPair
+from pyspartaproj.script.directory.create_directory_temporary import WorkSpace
+from pyspartaproj.script.directory.create_directory_working import \
     create_working_space
-from spartaproject.script.path.modify.get_relative import get_relative
-from spartaproject.script.server.context_server import ContextServer
+from pyspartaproj.script.path.modify.get_relative import get_relative
+from pyspartaproj.script.server.context_server import ContextServer
 
 
 class PathServer(ContextServer, WorkSpace):

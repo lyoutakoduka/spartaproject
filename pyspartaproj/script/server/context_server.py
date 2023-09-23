@@ -5,14 +5,14 @@ from copy import deepcopy
 from pathlib import Path
 from typing import Dict
 
-from spartaproject.context.default.integer_context import IntPair
-from spartaproject.context.default.string_context import StrPair, Strs
-from spartaproject.context.extension.path_context import PathPair
-from spartaproject.context.file.json_context import Json
-from spartaproject.script.file.json.convert_from_json import (
+from pyspartaproj.context.default.integer_context import IntPair
+from pyspartaproj.context.default.string_context import StrPair, Strs
+from pyspartaproj.context.extension.path_context import PathPair
+from pyspartaproj.context.file.json_context import Json
+from pyspartaproj.script.file.json.convert_from_json import (
     integer_pair_from_json, path_pair_from_json, string_pair_from_json)
-from spartaproject.script.file.json.import_json import json_import
-from spartaproject.script.path.modify.get_absolute import get_absolute
+from pyspartaproj.script.file.json.import_json import json_import
+from pyspartaproj.script.path.modify.get_absolute import get_absolute
 
 
 class ContextServer:

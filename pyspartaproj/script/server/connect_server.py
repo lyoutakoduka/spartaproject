@@ -5,9 +5,9 @@ from decimal import Decimal
 from time import sleep
 
 from paramiko import AutoAddPolicy, Channel, SFTPClient, SSHClient
-from spartaproject.context.default.string_context import Strs
-from spartaproject.context.extension.decimal_context import set_decimal_context
-from spartaproject.script.server.path_server import PathServer
+from pyspartaproj.context.default.string_context import Strs
+from pyspartaproj.context.extension.decimal_context import set_decimal_context
+from pyspartaproj.script.server.path_server import PathServer
 
 set_decimal_context()
 
