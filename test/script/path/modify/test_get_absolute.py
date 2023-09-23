@@ -3,10 +3,10 @@
 
 from pathlib import Path
 
-from spartaproject.context.default.string_context import Strs
-from spartaproject.context.extension.path_context import PathPair, Paths
-from spartaproject.script.bool.same_value import bool_same_array
-from spartaproject.script.path.modify.get_absolute import (get_absolute,
+from pyspartaproj.context.default.string_context import Strs
+from pyspartaproj.context.extension.path_context import PathPair, Paths
+from pyspartaproj.script.bool.same_value import bool_same_array
+from pyspartaproj.script.path.modify.get_absolute import (get_absolute,
                                                            get_absolute_array,
                                                            get_absolute_pair)
 

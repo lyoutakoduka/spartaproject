@@ -3,7 +3,7 @@
 
 from pathlib import Path
 
-from spartaproject.context.extension.path_context import PathPair, Paths
+from pyspartaproj.context.extension.path_context import PathPair, Paths
 
 
 def get_absolute(relative_path: Path, root_path: Path = Path()) -> Path:
