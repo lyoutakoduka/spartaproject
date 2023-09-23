@@ -6,16 +6,16 @@ from decimal import Decimal
 from pathlib import Path
 from zipfile import ZIP_LZMA, ZIP_STORED, ZipFile, ZipInfo
 
-from spartaproject.context.default.string_context import StrPair, Strs
-from spartaproject.context.extension.decimal_context import set_decimal_context
-from spartaproject.context.extension.path_context import Paths
-from spartaproject.script.directory.create_directory import create_directory
-from spartaproject.script.file.json.convert_to_json import multiple_to_json
-from spartaproject.script.file.json.export_json import json_dump
-from spartaproject.script.file.text.import_file import byte_import
-from spartaproject.script.path.iterate_directory import walk_iterator
-from spartaproject.script.path.modify.get_relative import get_relative
-from spartaproject.script.time.stamp.get_timestamp import get_latest
+from pyspartaproj.context.default.string_context import StrPair, Strs
+from pyspartaproj.context.extension.decimal_context import set_decimal_context
+from pyspartaproj.context.extension.path_context import Paths
+from pyspartaproj.script.directory.create_directory import create_directory
+from pyspartaproj.script.file.json.convert_to_json import multiple_to_json
+from pyspartaproj.script.file.json.export_json import json_dump
+from pyspartaproj.script.file.text.import_file import byte_import
+from pyspartaproj.script.path.iterate_directory import walk_iterator
+from pyspartaproj.script.path.modify.get_relative import get_relative
+from pyspartaproj.script.time.stamp.get_timestamp import get_latest
 
 set_decimal_context()
 

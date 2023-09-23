@@ -5,17 +5,17 @@ from datetime import datetime
 from pathlib import Path
 from zipfile import ZipFile, ZipInfo
 
-from spartaproject.context.default.string_context import StrPair, Strs
-from spartaproject.context.extension.path_context import Paths
-from spartaproject.script.directory.create_directory import create_directory
-from spartaproject.script.directory.create_directory_parent import \
+from pyspartaproj.context.default.string_context import StrPair, Strs
+from pyspartaproj.context.extension.path_context import Paths
+from pyspartaproj.script.directory.create_directory import create_directory
+from pyspartaproj.script.directory.create_directory_parent import \
     create_directory_parent
-from spartaproject.script.file.json.convert_from_json import \
+from pyspartaproj.script.file.json.convert_from_json import \
     string_pair_from_json
-from spartaproject.script.file.json.import_json import json_load
-from spartaproject.script.file.text.export_file import byte_export
-from spartaproject.script.path.iterate_directory import walk_iterator
-from spartaproject.script.time.stamp.set_timestamp import set_latest
+from pyspartaproj.script.file.json.import_json import json_load
+from pyspartaproj.script.file.text.export_file import byte_export
+from pyspartaproj.script.path.iterate_directory import walk_iterator
+from pyspartaproj.script.time.stamp.set_timestamp import set_latest
 
 
 class DecompressZip:

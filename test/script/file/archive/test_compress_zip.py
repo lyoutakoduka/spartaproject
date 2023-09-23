@@ -7,14 +7,14 @@ from shutil import unpack_archive
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from spartaproject.context.default.integer_context import Ints2
-from spartaproject.context.extension.decimal_context import (
+from pyspartaproj.context.default.integer_context import Ints2
+from pyspartaproj.context.extension.decimal_context import (
     Decs, set_decimal_context)
-from spartaproject.context.extension.path_context import Paths, Paths2
-from spartaproject.script.file.archive.compress_zip import CompressZip
-from spartaproject.script.path.iterate_directory import walk_iterator
-from spartaproject.script.path.modify.get_relative import get_relative_array
-from spartaproject.script.path.temporary.create_temporary_tree import \
+from pyspartaproj.context.extension.path_context import Paths, Paths2
+from pyspartaproj.script.file.archive.compress_zip import CompressZip
+from pyspartaproj.script.path.iterate_directory import walk_iterator
+from pyspartaproj.script.path.modify.get_relative import get_relative_array
+from pyspartaproj.script.path.temporary.create_temporary_tree import \
     create_temporary_tree
 
 set_decimal_context()

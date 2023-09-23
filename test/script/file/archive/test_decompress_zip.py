@@ -7,18 +7,18 @@ from shutil import make_archive
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from spartaproject.context.default.integer_context import Ints2
-from spartaproject.context.extension.path_context import Paths, Paths2
-from spartaproject.context.extension.time_context import Times2, datetime
-from spartaproject.script.file.archive.compress_zip import CompressZip
-from spartaproject.script.file.archive.decompress_zip import DecompressZip
-from spartaproject.script.path.iterate_directory import walk_iterator
-from spartaproject.script.path.modify.get_relative import get_relative_array
-from spartaproject.script.path.safe.safe_trash import SafeTrash
-from spartaproject.script.path.temporary.create_temporary_tree import \
+from pyspartaproj.context.default.integer_context import Ints2
+from pyspartaproj.context.extension.path_context import Paths, Paths2
+from pyspartaproj.context.extension.time_context import Times2, datetime
+from pyspartaproj.script.file.archive.compress_zip import CompressZip
+from pyspartaproj.script.file.archive.decompress_zip import DecompressZip
+from pyspartaproj.script.path.iterate_directory import walk_iterator
+from pyspartaproj.script.path.modify.get_relative import get_relative_array
+from pyspartaproj.script.path.safe.safe_trash import SafeTrash
+from pyspartaproj.script.path.temporary.create_temporary_tree import \
     create_temporary_tree
-from spartaproject.script.time.stamp.get_timestamp import get_latest
-from spartaproject.script.time.stamp.set_timestamp import set_latest
+from pyspartaproj.script.time.stamp.get_timestamp import get_latest
+from pyspartaproj.script.time.stamp.set_timestamp import set_latest
 
 
 def _compare_timestamp(sorted_paths: Paths2, expected: datetime) -> None:
