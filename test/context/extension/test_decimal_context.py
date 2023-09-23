@@ -4,8 +4,8 @@
 from decimal import Context, Decimal, FloatOperation, getcontext, setcontext
 
 from pytest import raises
-from spartaproject.context.default.string_context import Strs
-from spartaproject.context.extension.decimal_context import set_decimal_context
+from pyspartaproj.context.default.string_context import Strs
+from pyspartaproj.context.extension.decimal_context import set_decimal_context
 
 
 def test_float() -> None:
