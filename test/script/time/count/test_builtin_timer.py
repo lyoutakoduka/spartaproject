@@ -4,9 +4,9 @@
 from decimal import Decimal
 from time import sleep
 
-from spartaproject.context.extension.decimal_context import (
+from pyspartaproj.context.extension.decimal_context import (
     Decs, set_decimal_context)
-from spartaproject.script.time.count.builtin_timer import TimerSelect
+from pyspartaproj.script.time.count.builtin_timer import TimerSelect
 
 set_decimal_context()
 

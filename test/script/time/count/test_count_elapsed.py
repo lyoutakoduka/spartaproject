@@ -4,10 +4,10 @@
 from decimal import Decimal
 from typing import Callable
 
-from spartaproject.context.extension.decimal_context import set_decimal_context
-from spartaproject.script.format_texts import format_indent
-from spartaproject.script.off_stdout import StdoutText
-from spartaproject.script.time.count.count_elapsed import LogTimer
+from pyspartaproj.context.extension.decimal_context import set_decimal_context
+from pyspartaproj.script.format_texts import format_indent
+from pyspartaproj.script.off_stdout import StdoutText
+from pyspartaproj.script.time.count.count_elapsed import LogTimer
 
 set_decimal_context()
 

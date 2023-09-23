@@ -4,10 +4,10 @@
 
 from decimal import Decimal
 
-from spartaproject.context.default.string_context import Strs
-from spartaproject.context.extension.decimal_context import set_decimal_context
-from spartaproject.script.time.convert_readable import readable_time
-from spartaproject.script.time.count.builtin_timer import TimerSelect
+from pyspartaproj.context.default.string_context import Strs
+from pyspartaproj.context.extension.decimal_context import set_decimal_context
+from pyspartaproj.script.time.convert_readable import readable_time
+from pyspartaproj.script.time.count.builtin_timer import TimerSelect
 
 set_decimal_context()
 

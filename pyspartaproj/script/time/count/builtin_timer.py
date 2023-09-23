@@ -4,7 +4,7 @@
 from datetime import datetime, timezone
 from decimal import Decimal
 
-from spartaproject.context.extension.decimal_context import set_decimal_context
+from pyspartaproj.context.extension.decimal_context import set_decimal_context
 
 set_decimal_context()
 
