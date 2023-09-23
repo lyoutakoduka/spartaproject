@@ -5,7 +5,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from spartaproject.script.file.text.export_file import byte_export, text_export
+from pyspartaproj.script.file.text.export_file import byte_export, text_export
 
 
 def _common_test(text_path: Path, count: int) -> None:
