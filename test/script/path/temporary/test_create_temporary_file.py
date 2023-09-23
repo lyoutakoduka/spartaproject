@@ -5,7 +5,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from spartaproject.script.path.temporary.create_temporary_file import \
+from pyspartaproj.script.path.temporary.create_temporary_file import \
     create_temporary_file
 
 

@@ -3,9 +3,9 @@
 
 from pathlib import Path
 
-from spartaproject.script.directory.create_directory_parent import \
+from pyspartaproj.script.directory.create_directory_parent import \
     create_directory_parent
-from spartaproject.script.file.json.export_json import json_export
+from pyspartaproj.script.file.json.export_json import json_export
 
 
 def create_temporary_file(file_root: Path) -> Path:
