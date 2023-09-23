@@ -6,8 +6,8 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from spartaproject.context.default.integer_context import Ints
-from spartaproject.script.execute.virtual_environment import \
+from pyspartaproj.context.default.integer_context import Ints
+from pyspartaproj.script.execute.virtual_environment import \
     virtual_environment
 
 

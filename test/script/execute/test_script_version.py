@@ -5,8 +5,8 @@ from pathlib import Path
 from platform import python_version
 from sys import executable
 
-from spartaproject.context.default.integer_context import Ints
-from spartaproject.script.execute.script_version import (execute_version,
+from pyspartaproj.context.default.integer_context import Ints
+from pyspartaproj.script.execute.script_version import (execute_version,
                                                          get_version_name,
                                                          version_from_string,
                                                          version_to_string)

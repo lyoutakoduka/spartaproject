@@ -4,8 +4,8 @@
 
 from pathlib import Path
 
-from spartaproject.context.default.string_context import Strs
-from spartaproject.script.execute.execute_command import execute_command
+from pyspartaproj.context.default.string_context import Strs
+from pyspartaproj.script.execute.execute_command import execute_command
 
 
 def test_current() -> None:

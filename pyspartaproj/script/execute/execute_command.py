@@ -3,7 +3,7 @@
 
 from subprocess import PIPE, Popen
 
-from spartaproject.context.default.string_context import Strs
+from pyspartaproj.context.default.string_context import Strs
 
 
 def execute_command(commands: Strs) -> Strs:
