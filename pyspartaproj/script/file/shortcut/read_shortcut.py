@@ -3,8 +3,8 @@
 
 from pathlib import Path
 
-from win32com.client import Dispatch
-from win32com.client.dynamic import CDispatch
+from pyspartaproj.extend.win32com.client import Dispatch
+from pyspartaproj.extend.win32com.client.dynamic import CDispatch
 
 
 def read_shortcut(shortcut_path: Path) -> Path:
