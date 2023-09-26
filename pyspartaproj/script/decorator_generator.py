@@ -21,4 +21,5 @@ class TransferFunction:
             *arguments: CP.args, **key_arguments: CP.kwargs
         ) -> CR:
             return self.wrapper(function, *arguments, **key_arguments)
+
         return register_function

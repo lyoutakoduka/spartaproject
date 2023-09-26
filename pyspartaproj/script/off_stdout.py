@@ -21,9 +21,9 @@ class StdoutText(TransferFunction):
             return function(*arguments, **key_arguments)
 
         with TemporaryDirectory() as temporary_directory:
-            temporary_path: Path = Path(temporary_directory, 'temporary')
+            temporary_path: Path = Path(temporary_directory, "temporary")
 
-            with open(temporary_path, 'w') as file:
+            with open(temporary_path, "w") as file:
                 with redirect_stdout(file):
                     result: CR = _execute_function()
 

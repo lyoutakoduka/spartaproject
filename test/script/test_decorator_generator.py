@@ -6,7 +6,7 @@ from pyspartaproj.script.decorator_generator import TransferFunction
 
 
 class TemporaryDecorator(TransferFunction):
-    def __init__(self, text: str = '') -> None:
+    def __init__(self, text: str = "") -> None:
         self.text = text
 
     def wrapper(
@@ -27,10 +27,12 @@ def test_name() -> None:
     test_instance = TemporaryDecorator()
 
     @test_instance.decorator
-    def text_print() -> None: pass
+    def text_print() -> None:
+        pass
+
     text_print()
 
-    EXPECTED_FUNCTION: str = 'text_print'
+    EXPECTED_FUNCTION: str = "text_print"
     assert EXPECTED_FUNCTION == text_print.__name__
 
 
@@ -41,9 +43,10 @@ def test_doc() -> None:
     def text_print() -> None:
         """text doc"""
         pass
+
     text_print()
 
-    EXPECTED_DOC: str = 'text doc'
+    EXPECTED_DOC: str = "text doc"
     assert EXPECTED_DOC == text_print.__doc__
 
 
@@ -52,10 +55,12 @@ def test_text() -> None:
     test_instance = TemporaryDecorator(MESSAGE)
 
     @test_instance.decorator
-    def text_print() -> None: pass
+    def text_print() -> None:
+        pass
+
     text_print()
 
-    EXPECTED_TEXT: str = 'Hello!Hello!'
+    EXPECTED_TEXT: str = "Hello!Hello!"
     assert EXPECTED_TEXT == test_instance.show()
 
 
