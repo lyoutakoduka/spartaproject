@@ -5,6 +5,7 @@ from os import stat_result
 from pathlib import Path
 
 from paramiko import SFTPAttributes
+
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.extension.path_context import Paths
 from pyspartaproj.script.path.iterate_directory import walk_iterator
@@ -28,7 +29,7 @@ class UploadServer(ConnectServer):
             if not parent.is_relative_to(remote):
                 continue
 
-            if '.' != str(get_relative(parent, root_path=remote)):
+            if "." != str(get_relative(parent, root_path=remote)):
                 tree += [parent]
 
         return tree
@@ -85,8 +86,8 @@ class UploadServer(ConnectServer):
                 source_child,
                 Path(
                     destination_local,
-                    get_relative(source_child, root_path=source_path)
-                )
+                    get_relative(source_child, root_path=source_path),
+                ),
             ):
                 return False
 
@@ -99,7 +100,7 @@ class UploadServer(ConnectServer):
         return self._upload_file(source_path, destination_local)
 
     def upload(self, source: Path, destination: Path = Path()) -> bool:
-        if '.' == str(destination):
+        if "." == str(destination):
             destination = self.to_remote_path(source)
 
         return self._upload(source, destination)

@@ -5,6 +5,7 @@ from decimal import Decimal
 from time import sleep
 
 from paramiko import AutoAddPolicy, Channel, SFTPClient, SSHClient
+
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.extension.decimal_context import set_decimal_context
 from pyspartaproj.script.server.path_server import PathServer
@@ -42,16 +43,16 @@ class ConnectServer(PathServer):
         self._initialize_connect()
 
     def _connect_detail(self) -> None:
-        milliseconds: int = self.get_integer('timeout')
-        seconds: Decimal = Decimal(str(milliseconds)) / Decimal('1000.0')
+        milliseconds: int = self.get_integer("timeout")
+        seconds: Decimal = Decimal(str(milliseconds)) / Decimal("1000.0")
 
         if ssh := self.get_ssh():
             ssh.connect(
-                hostname=self.get_string('host'),
-                port=self.get_integer('port'),
-                username=self.get_string('user_name'),
-                key_filename=self.get_path_string('private_key'),
-                timeout=float(seconds)
+                hostname=self.get_string("host"),
+                port=self.get_integer("port"),
+                username=self.get_string("user_name"),
+                key_filename=self.get_path_string("private_key"),
+                timeout=float(seconds),
             )
 
     def _ssh_setting(self) -> None:
@@ -72,7 +73,7 @@ class ConnectServer(PathServer):
         buffer: int = 9999
 
         if channel := self.get_channel():
-            text_byte: bytes = b''
+            text_byte: bytes = b""
 
             for _ in range(2):
                 if channel.recv_ready():
@@ -97,29 +98,27 @@ class ConnectServer(PathServer):
         return None
 
     def _split_result(self, text: str) -> Strs:
-        lines: Strs = text.split('\r\n')
+        lines: Strs = text.split("\r\n")
 
         return [lines[0][1:]] + lines[1:-1]
 
     def _receive_ssh(self) -> Strs:
         if text := self._receive_byte():
-            base: str = '\x1b[?2004'
+            base: str = "\x1b[?2004"
 
-            if head_removed := self._extract_result(
-                text, -1, base + 'l'
-            ):
+            if head_removed := self._extract_result(text, -1, base + "l"):
                 if foot_removed := self._extract_result(
-                    head_removed, 0, base + 'h'
+                    head_removed, 0, base + "h"
                 ):
                     return self._split_result(foot_removed)
 
         return []
 
     def _execute_ssh(self, commands: Strs) -> None:
-        command: str = ' '.join(commands) + '\n'
+        command: str = " ".join(commands) + "\n"
 
         if channel := self.get_channel():
-            channel.send(command.encode('utf-8'))
+            channel.send(command.encode("utf-8"))
             self._sleep()
 
     def execute_ssh(self, commands: Strs) -> Strs:
@@ -129,16 +128,16 @@ class ConnectServer(PathServer):
     def _correct_path(self, result: Strs) -> bool:
         expected: Strs = [
             str(self.get_path(type))
-            for type in ['private_root', 'public_root']
+            for type in ["private_root", "public_root"]
         ]
 
-        return 1 == len(set(
-            [str(sorted(name)) for name in [expected, result]]
-        ))
+        return 1 == len(
+            set([str(sorted(name)) for name in [expected, result]])
+        )
 
     def _ssh_correct_path(self) -> bool:
         return self._correct_path(
-            [name[:-1] for name in self.execute_ssh(['ls', '-1', '-p'])]
+            [name[:-1] for name in self.execute_ssh(["ls", "-1", "-p"])]
         )
 
     def _connect_ssh(self) -> bool:
@@ -150,7 +149,7 @@ class ConnectServer(PathServer):
 
         self._receive_ssh()
 
-        self.execute_ssh(['cd', self.get_path_string('remote_root')])
+        self.execute_ssh(["cd", self.get_path_string("remote_root")])
         return self._ssh_correct_path()
 
     def _receive_sftp(self) -> Strs:
@@ -164,7 +163,7 @@ class ConnectServer(PathServer):
 
     def _sftp_remote_path(self) -> None:
         if sftp := self.get_sftp():
-            sftp.chdir(self.get_path_string('remote_root'))
+            sftp.chdir(self.get_path_string("remote_root"))
 
     def _create_sftp(self) -> None:
         if ssh := self.get_ssh():
