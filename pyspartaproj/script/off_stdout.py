@@ -4,8 +4,9 @@
 from contextlib import redirect_stdout
 from pathlib import Path
 from tempfile import TemporaryDirectory
+from typing import Callable
 
-from pyspartaproj.context.callable_context import CP, CR, Callable
+from pyspartaproj.context.callable_context import CP, CR
 from pyspartaproj.script.decorator_generator import TransferFunction
 from pyspartaproj.script.file.text.import_file import text_import
 

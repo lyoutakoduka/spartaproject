@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from pyspartaproj.context.callable_context import CP, CR, Callable
+from typing import Callable
+
+from pyspartaproj.context.callable_context import CP, CR
 from pyspartaproj.script.decorator_generator import TransferFunction
 
 

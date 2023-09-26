@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 
 from functools import wraps
+from typing import Callable
 
-from pyspartaproj.context.callable_context import CP, CR, Callable
+from pyspartaproj.context.callable_context import CP, CR
 
 
 class TransferFunction:
