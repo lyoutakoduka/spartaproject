@@ -4,10 +4,14 @@
 from decimal import Decimal
 from time import sleep
 
-from paramiko import AutoAddPolicy, Channel, SFTPClient, SSHClient
-
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.extension.decimal_context import set_decimal_context
+from pyspartaproj.extend.paramiko import (
+    AutoAddPolicy,
+    Channel,
+    SFTPClient,
+    SSHClient,
+)
 from pyspartaproj.script.server.path_server import PathServer
 
 set_decimal_context()
