@@ -7,11 +7,13 @@ from tempfile import TemporaryDirectory
 from typing import Callable
 
 from pyspartaproj.script.file.shortcut.create_shortcut import create_shortcut
-from pyspartaproj.script.file.shortcut.get_shortcut_path import \
-    get_shortcut_path
+from pyspartaproj.script.file.shortcut.get_shortcut_path import (
+    get_shortcut_path,
+)
 from pyspartaproj.script.file.shortcut.read_shortcut import read_shortcut
-from pyspartaproj.script.path.temporary.create_temporary_file import \
-    create_temporary_file
+from pyspartaproj.script.path.temporary.create_temporary_file import (
+    create_temporary_file,
+)
 
 
 def _common_test(shortcut_target: Path, shortcut_root: Path) -> None:
@@ -23,7 +25,7 @@ def _common_test(shortcut_target: Path, shortcut_root: Path) -> None:
 
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
     platform_name = uname()
-    if 'Windows' == platform_name.system:
+    if "Windows" == platform_name.system:
         with TemporaryDirectory() as temporary_path:
             function(Path(temporary_path))
 

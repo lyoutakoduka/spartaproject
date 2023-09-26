@@ -14,9 +14,9 @@ def create_shortcut(shortcut_target: Path, shortcut_path: Path) -> bool:
     if shortcut_path.exists():
         return False
 
-    shell: CDispatch = Dispatch('WScript.Shell')
+    shell: CDispatch = Dispatch("WScript.Shell")
     shortcut: CDispatch = shell.CreateShortcut(shortcut_path.as_posix())
-    shortcut.Targetpath = 'file:/' + shortcut_target.as_posix()
+    shortcut.Targetpath = "file:/" + shortcut_target.as_posix()
     shortcut.Save()
 
     return True
