@@ -16,17 +16,19 @@ def test_key() -> None:
     EXPECTED: int = 7
 
     def individual_test(server: ContextServer) -> None:
-        assert EXPECTED == sum([
-            len(server.get_context_table(type))
-            for type in ['integer', 'string', 'path']
-        ])
+        assert EXPECTED == sum(
+            [
+                len(server.get_context_table(type))
+                for type in ["integer", "string", "path"]
+            ]
+        )
 
     _common_test(individual_test)
 
 
 def test_integer() -> None:
     def individual_test(server: ContextServer) -> None:
-        for type in server.get_context_table('integer'):
+        for type in server.get_context_table("integer"):
             assert isinstance(server.get_integer(type), int)
 
     _common_test(individual_test)
@@ -34,7 +36,7 @@ def test_integer() -> None:
 
 def test_string() -> None:
     def individual_test(server: ContextServer) -> None:
-        for type in server.get_context_table('string'):
+        for type in server.get_context_table("string"):
             assert isinstance(server.get_string(type), str)
 
     _common_test(individual_test)
@@ -42,7 +44,7 @@ def test_string() -> None:
 
 def test_path() -> None:
     def individual_test(server: ContextServer) -> None:
-        for type in server.get_context_table('path'):
+        for type in server.get_context_table("path"):
             assert isinstance(server.get_path(type), Path)
 
     _common_test(individual_test)
@@ -52,7 +54,7 @@ def test_set_path() -> None:
     expected: Path = Path(__file__)
 
     def individual_test(server: ContextServer) -> None:
-        for type in server.get_context_table('path'):
+        for type in server.get_context_table("path"):
             server.set_path(type, expected)
             assert expected == server.get_path(type)
 
@@ -63,7 +65,7 @@ def test_revert() -> None:
     input: Path = Path(__file__)
 
     def individual_test(server: ContextServer) -> None:
-        for type in server.get_context_table('path'):
+        for type in server.get_context_table("path"):
             current: Path = server.get_path(type)
             server.set_path(type, input)
             server.revert_default()
