@@ -61,9 +61,9 @@ class ContextServer:
         self._current_context = deepcopy(self._default_context)
 
     def _load_default(self) -> None:
-        self._default_context: Json = self._from_vscode(
-            json_import(get_absolute(Path(".vscode", "sftp.json")))
-        )
+        context: Json = json_import(Path(Path.cwd(), "spartaproject.json"))
+        if isinstance(context, Dict):
+            self._default_context: Json = context["server"]
 
         self.revert_default()
 
