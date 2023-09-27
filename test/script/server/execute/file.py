@@ -4,7 +4,7 @@
 
 def main() -> None:
     for i in range(3):
-        print('file' + str(i))
+        print("file" + str(i))
 
 
 if __name__ == "__main__":

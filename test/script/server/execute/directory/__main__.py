@@ -4,7 +4,7 @@
 
 def main() -> None:
     for i in range(3):
-        print('directory' + str(i))
+        print("directory" + str(i))
 
 
 if __name__ == "__main__":
