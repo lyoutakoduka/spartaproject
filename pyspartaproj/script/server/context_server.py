@@ -15,7 +15,6 @@ from pyspartaproj.script.file.json.convert_from_json import (
     string_pair_from_json,
 )
 from pyspartaproj.script.file.json.import_json import json_import
-from pyspartaproj.script.path.modify.get_absolute import get_absolute
 
 
 class ContextServer:
