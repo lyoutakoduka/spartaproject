@@ -8,7 +8,7 @@ from typing import Callable
 from pyspartaproj.script.file.text.export_file import text_export
 from pyspartaproj.script.file.text.import_file import byte_import, text_import
 
-_INPUT: str = 'test'
+_INPUT: str = "test"
 
 
 def _common_test(result: str) -> None:
@@ -17,7 +17,7 @@ def _common_test(result: str) -> None:
 
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as temporary_path:
-        function(text_export(Path(temporary_path, 'temporary.txt'), _INPUT))
+        function(text_export(Path(temporary_path, "temporary.txt"), _INPUT))
 
 
 def test_text() -> None:
