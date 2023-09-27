@@ -5,22 +5,42 @@ from decimal import Decimal
 from pathlib import Path
 from typing import Dict, List
 
-from pyspartaproj.context.default.bool_context import (BoolPair, BoolPair2,
-                                                        Bools, Bools2)
-from pyspartaproj.context.default.integer_context import (IntPair, IntPair2,
-                                                           Ints, Ints2)
-from pyspartaproj.context.default.string_context import (StrPair, StrPair2,
-                                                          Strs, Strs2)
-from pyspartaproj.context.extension.decimal_context import (DecPair, DecPair2,
-                                                             Decs, Decs2)
-from pyspartaproj.context.extension.path_context import (PathPair, PathPair2,
-                                                          Paths, Paths2)
+from pyspartaproj.context.default.bool_context import (
+    BoolPair,
+    BoolPair2,
+    Bools,
+    Bools2,
+)
+from pyspartaproj.context.default.integer_context import (
+    IntPair,
+    IntPair2,
+    Ints,
+    Ints2,
+)
+from pyspartaproj.context.default.string_context import (
+    StrPair,
+    StrPair2,
+    Strs,
+    Strs2,
+)
+from pyspartaproj.context.extension.decimal_context import (
+    DecPair,
+    DecPair2,
+    Decs,
+    Decs2,
+)
+from pyspartaproj.context.extension.path_context import (
+    PathPair,
+    PathPair2,
+    Paths,
+    Paths2,
+)
 from pyspartaproj.context.file.json_context import Json, Single
 
 
 def _convert_unknown(input: Single, key: str) -> Single:
     if isinstance(input, str):
-        if 'path' in key:
+        if "path" in key:
             return Path(input)
 
     if isinstance(input, float):
@@ -29,11 +49,10 @@ def _convert_unknown(input: Single, key: str) -> Single:
     return input
 
 
-def from_safe_json(input: Json, key: str = '') -> Json:
+def from_safe_json(input: Json, key: str = "") -> Json:
     if isinstance(input, Dict):
         return {
-            key: from_safe_json(value, key=key)
-            for key, value in input.items()
+            key: from_safe_json(value, key=key) for key, value in input.items()
         }
 
     if isinstance(input, List):
@@ -71,9 +90,7 @@ def string_array_from_json(input: Json) -> Strs:
 def decimal_array_from_json(input: Json) -> Decs:
     if not isinstance(input, List):
         return []
-    return [
-        _to_decimal(value) for value in input if isinstance(value, float)
-    ]
+    return [_to_decimal(value) for value in input if isinstance(value, float)]
 
 
 def path_array_from_json(input: Json) -> Paths:
@@ -159,38 +176,28 @@ def path_array2_from_json(input: Json) -> Paths2:
 def bool_pair2_from_json(input: Json) -> BoolPair2:
     if not isinstance(input, Dict):
         return {}
-    return {
-        key: bool_pair_from_json(value) for key, value in input.items()
-    }
+    return {key: bool_pair_from_json(value) for key, value in input.items()}
 
 
 def integer_pair2_from_json(input: Json) -> IntPair2:
     if not isinstance(input, Dict):
         return {}
-    return {
-        key: integer_pair_from_json(value) for key, value in input.items()
-    }
+    return {key: integer_pair_from_json(value) for key, value in input.items()}
 
 
 def string_pair2_from_json(input: Json) -> StrPair2:
     if not isinstance(input, Dict):
         return {}
-    return {
-        key: string_pair_from_json(value) for key, value in input.items()
-    }
+    return {key: string_pair_from_json(value) for key, value in input.items()}
 
 
 def decimal_pair2_from_json(input: Json) -> DecPair2:
     if not isinstance(input, Dict):
         return {}
-    return {
-        key: decimal_pair_from_json(value) for key, value in input.items()
-    }
+    return {key: decimal_pair_from_json(value) for key, value in input.items()}
 
 
 def path_pair2_from_json(input: Json) -> PathPair2:
     if not isinstance(input, Dict):
         return {}
-    return {
-        key: path_pair_from_json(value) for key, value in input.items()
-    }
+    return {key: path_pair_from_json(value) for key, value in input.items()}
