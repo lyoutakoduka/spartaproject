@@ -143,11 +143,17 @@ def decimal_pair_from_json(input: Json) -> DecPair:
 def path_pair_from_json(input: Json) -> PathPair:
     if not isinstance(input, Dict):
         return {}
-    return {
-        key: _to_path(value)
-        for key, value in input.items()
-        if isinstance(value, str)
-    }
+
+    paths: PathPair = {}
+
+    for key, value in input.items():
+        if not isinstance(value, str):
+            continue
+
+        if path := _filter_path(value, key):
+            paths[key] = path
+
+    return paths
 
 
 def bool_array2_from_json(input: Json) -> Bools2:
