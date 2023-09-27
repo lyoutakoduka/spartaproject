@@ -10,7 +10,10 @@ from pyspartaproj.context.default.string_context import StrPair, Strs
 from pyspartaproj.context.extension.path_context import PathPair
 from pyspartaproj.context.file.json_context import Json
 from pyspartaproj.script.file.json.convert_from_json import (
-    integer_pair_from_json, path_pair_from_json, string_pair_from_json)
+    integer_pair_from_json,
+    path_pair_from_json,
+    string_pair_from_json,
+)
 from pyspartaproj.script.file.json.import_json import json_import
 from pyspartaproj.script.path.modify.get_absolute import get_absolute
 
@@ -18,13 +21,13 @@ from pyspartaproj.script.path.modify.get_absolute import get_absolute
 class ContextServer:
     def _get_table(self) -> StrPair:
         return {
-            'timeout': 'integer',
-            'port': 'integer',
-            'host': 'string',
-            'user_name': 'string',
-            'private_key': 'path',
-            'remote_root': 'path',
-            'local_root': 'path'
+            "timeout": "integer",
+            "port": "integer",
+            "host": "string",
+            "user_name": "string",
+            "private_key": "path",
+            "remote_root": "path",
+            "local_root": "path",
         }
 
     def get_context_table(self, type: str) -> Strs:
@@ -33,13 +36,13 @@ class ContextServer:
 
     def _get_vscode_table(self) -> StrPair:
         return {
-            'host': 'host',
-            'username': 'user_name',
-            'privateKeyPath': 'private_key',
-            'remotePath': 'remote_root',
-            'context': 'local_root',
-            'connectTimeout': 'timeout',
-            'port': 'port'
+            "host": "host",
+            "username": "user_name",
+            "privateKeyPath": "private_key",
+            "remotePath": "remote_root",
+            "context": "local_root",
+            "connectTimeout": "timeout",
+            "port": "port",
         }
 
     def _from_vscode(self, context: Json) -> Json:
@@ -59,7 +62,7 @@ class ContextServer:
 
     def _load_default(self) -> None:
         self._default_context: Json = self._from_vscode(
-            json_import(get_absolute(Path('.vscode', 'sftp.json')))
+            json_import(get_absolute(Path(".vscode", "sftp.json")))
         )
 
         self.revert_default()
@@ -80,7 +83,7 @@ class ContextServer:
         return context[type]
 
     def set_path(self, type: str, path: Path) -> bool:
-        if type in self.get_context_table('path'):
+        if type in self.get_context_table("path"):
             if isinstance(self._current_context, Dict):
                 self._current_context[type] = path.as_posix()
                 return True
