@@ -9,20 +9,23 @@ from typing import Callable
 
 from pyspartaproj.context.default.integer_context import Ints2
 from pyspartaproj.context.extension.decimal_context import (
-    Decs, set_decimal_context)
+    Decs,
+    set_decimal_context,
+)
 from pyspartaproj.context.extension.path_context import Paths, Paths2
 from pyspartaproj.script.file.archive.compress_zip import CompressZip
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.modify.get_relative import get_relative_array
-from pyspartaproj.script.path.temporary.create_temporary_tree import \
-    create_temporary_tree
+from pyspartaproj.script.path.temporary.create_temporary_tree import (
+    create_temporary_tree,
+)
 
 set_decimal_context()
 
 
 def _get_input_paths(walk_paths: Paths, temporary_root: Path) -> Paths:
     inputs: Paths = []
-    tree_root: Path = Path(temporary_root, 'tree')
+    tree_root: Path = Path(temporary_root, "tree")
 
     for walk_path in walk_paths:
         inputs += [walk_path]
@@ -40,7 +43,7 @@ def _get_input_paths(walk_paths: Paths, temporary_root: Path) -> Paths:
 
 def _get_output_paths(archived: Paths, temporary_root: Path) -> Paths:
     outputs: Paths = []
-    extract_root: Path = Path(temporary_root, 'extract')
+    extract_root: Path = Path(temporary_root, "extract")
 
     for archived_path in archived:
         unpack_archive(archived_path, extract_dir=extract_root)
@@ -54,7 +57,7 @@ def _get_output_paths(archived: Paths, temporary_root: Path) -> Paths:
 def _compare_path_name(sorted_paths: Paths2, temporary_root: Path) -> None:
     relative_paths: Paths2 = [
         get_relative_array(paths, root_path=Path(temporary_root, directory))
-        for directory, paths in zip(['tree', 'extract'], sorted_paths)
+        for directory, paths in zip(["tree", "extract"], sorted_paths)
     ]
 
     assert relative_paths[0] == relative_paths[1]
@@ -71,13 +74,13 @@ def _compare_file_size(sorted_paths: Paths2) -> None:
 
 def _compare_compress_size(outputs: Paths, archived: Paths) -> None:
     file_sizes: Decs = [
-        Decimal(str(sum([
-            path.stat().st_size for path in paths if path.is_file()
-        ])))
+        Decimal(
+            str(sum([path.stat().st_size for path in paths if path.is_file()]))
+        )
         for paths in [outputs, archived]
     ]
 
-    assert Decimal('0.05') > (file_sizes[1] / file_sizes[0])
+    assert Decimal("0.05") > (file_sizes[1] / file_sizes[0])
 
 
 def _compare_archived_count(archived: Paths) -> None:
@@ -113,11 +116,11 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 
 def test_file() -> None:
     def individual_test(temporary_root: Path) -> None:
-        tree_root: Path = Path(temporary_root, 'tree')
+        tree_root: Path = Path(temporary_root, "tree")
         create_temporary_tree(tree_root)
 
         walk_paths: Paths = []
-        compress_zip = CompressZip(Path(temporary_root, 'archive'))
+        compress_zip = CompressZip(Path(temporary_root, "archive"))
         for path in walk_iterator(tree_root, directory=False, depth=1):
             compress_zip.compress_archive(path)
             walk_paths += [path]
@@ -131,11 +134,11 @@ def test_file() -> None:
 
 def test_directory() -> None:
     def individual_test(temporary_root: Path) -> None:
-        tree_root: Path = Path(temporary_root, 'tree')
+        tree_root: Path = Path(temporary_root, "tree")
         create_temporary_tree(tree_root, tree_deep=2)
 
         walk_paths: Paths = []
-        compress_zip = CompressZip(Path(temporary_root, 'archive'))
+        compress_zip = CompressZip(Path(temporary_root, "archive"))
         for path in walk_iterator(tree_root, file=False, depth=1):
             compress_zip.compress_archive(path)
             walk_paths += [path]
@@ -149,12 +152,12 @@ def test_directory() -> None:
 
 def test_tree() -> None:
     def individual_test(temporary_root: Path) -> None:
-        tree_root: Path = Path(temporary_root, 'tree')
+        tree_root: Path = Path(temporary_root, "tree")
         create_temporary_tree(tree_root, tree_deep=3)
 
         walk_paths: Paths = []
-        compress_zip = CompressZip(Path(temporary_root, 'archive'))
-        for path in walk_iterator(tree_root, directory=False, suffix='txt'):
+        compress_zip = CompressZip(Path(temporary_root, "archive"))
+        for path in walk_iterator(tree_root, directory=False, suffix="txt"):
             compress_zip.compress_archive(path, archive_root=tree_root)
             walk_paths += [path]
 
@@ -167,20 +170,22 @@ def test_tree() -> None:
 
 def test_compress() -> None:
     def individual_test(temporary_root: Path) -> None:
-        tree_root: Path = Path(temporary_root, 'tree')
+        tree_root: Path = Path(temporary_root, "tree")
         create_temporary_tree(tree_root, tree_weight=4)
 
         walk_paths: Paths = []
         compress_zip = CompressZip(
-            Path(temporary_root, 'archive'), compress=True
+            Path(temporary_root, "archive"), compress=True
         )
-        for path in walk_iterator(tree_root, directory=False, suffix='json'):
+        for path in walk_iterator(tree_root, directory=False, suffix="json"):
             compress_zip.compress_archive(path)
             walk_paths += [path]
 
         archived: Paths = compress_zip.close_archived()
         sorted_paths: Paths2 = _common_test(
-            archived, temporary_root, walk_paths,
+            archived,
+            temporary_root,
+            walk_paths,
         )
         _compare_archived_count(archived)
         _compare_compress_size(sorted_paths[-1], archived)
@@ -189,14 +194,14 @@ def test_compress() -> None:
 
 
 def test_id() -> None:
-    ARCHIVE_NAME: str = 'test'
+    ARCHIVE_NAME: str = "test"
 
     def individual_test(temporary_root: Path) -> None:
-        tree_root: Path = Path(temporary_root, 'tree')
+        tree_root: Path = Path(temporary_root, "tree")
         create_temporary_tree(tree_root)
 
         compress_zip = CompressZip(
-            Path(temporary_root, 'archive'), archive_id=ARCHIVE_NAME
+            Path(temporary_root, "archive"), archive_id=ARCHIVE_NAME
         )
 
         for path in walk_iterator(tree_root, directory=False, depth=1):
@@ -211,15 +216,13 @@ def test_id() -> None:
 
 def test_limit() -> None:
     def individual_test(temporary_root: Path) -> None:
-        tree_root: Path = Path(temporary_root, 'tree')
+        tree_root: Path = Path(temporary_root, "tree")
         create_temporary_tree(tree_root, tree_deep=3)
 
         walk_paths: Paths = []
         compress_zip = CompressZip(
-            Path(
-                temporary_root,
-                'archive'),
-            limit_byte=256)
+            Path(temporary_root, "archive"), limit_byte=256
+        )
         for path in walk_iterator(tree_root, directory=False):
             compress_zip.compress_archive(path, archive_root=tree_root)
             walk_paths += [path]
@@ -232,16 +235,14 @@ def test_limit() -> None:
 
 def test_heavy() -> None:
     def individual_test(temporary_root: Path) -> None:
-        tree_root: Path = Path(temporary_root, 'tree')
+        tree_root: Path = Path(temporary_root, "tree")
         create_temporary_tree(tree_root, tree_deep=3, tree_weight=2)
 
         walk_paths: Paths = []
         compress_zip = CompressZip(
-            Path(
-                temporary_root,
-                'archive'),
-            limit_byte=64)
-        for path in walk_iterator(tree_root, directory=False, suffix='json'):
+            Path(temporary_root, "archive"), limit_byte=64
+        )
+        for path in walk_iterator(tree_root, directory=False, suffix="json"):
             compress_zip.compress_archive(path, archive_root=tree_root)
             walk_paths += [path]
 

@@ -24,9 +24,9 @@ class CompressZip:
     def __init__(
         self,
         output_root: Path,
-        archive_id: str = '',
+        archive_id: str = "",
         limit_byte: int = 0,
-        compress: bool = False
+        compress: bool = False,
     ) -> None:
         self._output_root: Path = output_root
         self._compress: bool = compress
@@ -40,7 +40,7 @@ class CompressZip:
         if 0 == byte:
             byte = 1
             for _ in range(3):
-                byte *= (2 ** 10)
+                byte *= 2**10
             byte *= 4  # 4GB
 
         self._limit_byte: Decimal = Decimal(str(byte))
@@ -73,19 +73,19 @@ class CompressZip:
             file_names += [str(self._output_index).zfill(4)]
         self._output_index += 1
 
-        archived_path: Path = Path(self._output_root, '#'.join(file_names))
-        return archived_path.with_suffix('.zip')
+        archived_path: Path = Path(self._output_root, "#".join(file_names))
+        return archived_path.with_suffix(".zip")
 
     def _reset_archive_byte(self) -> None:
         self._archived += [self._get_archive_path()]
-        self._file_zip = ZipFile(self._archived[-1], mode='w')
+        self._file_zip = ZipFile(self._archived[-1], mode="w")
 
     def _convert_comment(self, attribute: StrPair) -> bytes:
         comment: str = json_dump(multiple_to_json(attribute), compress=True)
-        return comment.encode('utf-8')
+        return comment.encode("utf-8")
 
     def _store_timestamp_detail(self, time: datetime) -> bytes:
-        return self._convert_comment({'latest': time.isoformat()})
+        return self._convert_comment({"latest": time.isoformat()})
 
     def _store_timestamp(self, time: datetime, information: ZipInfo) -> None:
         information.date_time = (
@@ -94,7 +94,7 @@ class CompressZip:
             time.day,
             time.hour,
             time.minute,
-            time.second
+            time.second,
         )
 
     def _get_zip_information(self, target: Path, relative: Path) -> ZipInfo:
@@ -119,7 +119,7 @@ class CompressZip:
         else:
             self._file_zip.writestr(
                 self._get_zip_information(target, relative),
-                byte_import(target)
+                byte_import(target),
             )
 
     def _within_allowance(self, target_byte: Decimal) -> bool:
@@ -130,9 +130,16 @@ class CompressZip:
         return Decimal(str(current_archive.stat().st_size))
 
     def _archive_inside_byte(self) -> Decimal:
-        return Decimal(str(sum([
-            information.file_size for information in self._file_zip.infolist()
-        ])))
+        return Decimal(
+            str(
+                sum(
+                    [
+                        information.file_size
+                        for information in self._file_zip.infolist()
+                    ]
+                )
+            )
+        )
 
     def _archive_include_files(self) -> bool:
         return 0 < self._archive_inside_byte()
@@ -196,7 +203,7 @@ class CompressZip:
     def compress_archive(
         self, archive_target: Path, archive_root: Path = Path()
     ) -> None:
-        has_initial: bool = '.' != str(archive_root)
+        has_initial: bool = "." != str(archive_root)
 
         if has_initial and archive_target.is_relative_to(archive_root):
             self._compress_child(archive_target, archive_root)

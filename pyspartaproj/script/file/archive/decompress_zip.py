@@ -8,10 +8,12 @@ from zipfile import ZipFile, ZipInfo
 from pyspartaproj.context.default.string_context import StrPair, Strs
 from pyspartaproj.context.extension.path_context import Paths
 from pyspartaproj.script.directory.create_directory import create_directory
-from pyspartaproj.script.directory.create_directory_parent import \
-    create_directory_parent
-from pyspartaproj.script.file.json.convert_from_json import \
-    string_pair_from_json
+from pyspartaproj.script.directory.create_directory_parent import (
+    create_directory_parent,
+)
+from pyspartaproj.script.file.json.convert_from_json import (
+    string_pair_from_json,
+)
 from pyspartaproj.script.file.json.import_json import json_load
 from pyspartaproj.script.file.text.export_file import byte_export
 from pyspartaproj.script.path.iterate_directory import walk_iterator
@@ -23,7 +25,7 @@ class DecompressZip:
         self._output_root: Path = output_root
 
     def _is_sequential_archive(self, path: Path) -> bool:
-        names: Strs = path.stem.split('#')
+        names: Strs = path.stem.split("#")
         if 1 < len(names):
             try:
                 int(names[-1])
@@ -37,7 +39,7 @@ class DecompressZip:
         sequential: Paths = [source_archive]
 
         for path in walk_iterator(
-            source_archive.parent, directory=False, depth=1, suffix='zip'
+            source_archive.parent, directory=False, depth=1, suffix="zip"
         ):
             if source_archive != path:
                 if self._is_sequential_archive(path):
@@ -61,8 +63,8 @@ class DecompressZip:
             content: StrPair = string_pair_from_json(
                 json_load(comment.decode())
             )
-            if 'latest' in content:
-                latest = datetime.fromisoformat(content['latest'])
+            if "latest" in content:
+                latest = datetime.fromisoformat(content["latest"])
 
         set_latest(file_path, latest)
 
