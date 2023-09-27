@@ -10,8 +10,8 @@ from pyspartaproj.script.server.local.upload_server import UploadServer
 
 
 class ExecuteServer(UploadServer):
-    def _set_version(self, versions: Ints) -> str:
-        if 0 == len(versions):
+    def _set_version(self, versions: Ints | None) -> str:
+        if versions is None:
             versions = [3, 11, 5]
 
         return get_version_name(versions)
@@ -21,7 +21,7 @@ class ExecuteServer(UploadServer):
             self.get_path("python_root"), version, "bin", "python3"
         )
 
-    def __init__(self, versions: Ints = []) -> None:
+    def __init__(self, versions: Ints | None = None) -> None:
         super().__init__()
 
         self._set_version_path(self._set_version(versions))
