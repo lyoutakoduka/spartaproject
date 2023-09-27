@@ -15,8 +15,8 @@ def _cleanup_text(test: str, compress: bool) -> str:
     if not compress:
         return test
 
-    test = test.replace('\n' * 2, '\n')
-    return test.replace(' = ', '=')
+    test = test.replace("\n" * 2, "\n")
+    return test.replace(" = ", "=")
 
 
 def config_dump(input: Config, compress: bool = False) -> str:

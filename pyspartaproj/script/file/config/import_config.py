@@ -22,7 +22,7 @@ def _load_each_type(config: ConfigParser, section: str, option: str) -> Basic:
             pass
 
     text: str = config.get(section, option)
-    return Path(text) if 'path' in option else text
+    return Path(text) if "path" in option else text
 
 
 def config_load(input: str) -> Config:

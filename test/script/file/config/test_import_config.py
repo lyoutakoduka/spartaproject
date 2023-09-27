@@ -6,14 +6,16 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from pyspartaproj.context.file.config_context import Basic, Config
-from pyspartaproj.script.file.config.import_config import (config_import,
-                                                            config_load)
+from pyspartaproj.script.file.config.import_config import (
+    config_import,
+    config_load,
+)
 from pyspartaproj.script.file.text.export_file import text_export
 
 
 def _get_section(input: str) -> Basic:
     config: Config = config_load(input)
-    return config['section']['option']
+    return config["section"]["option"]
 
 
 def test_bool() -> None:
@@ -29,31 +31,31 @@ def test_integer() -> None:
 
 def test_decimal() -> None:
     INPUT: str = "[section]\noption=1.0"
-    EXPECTED: Decimal = Decimal('1.0')
+    EXPECTED: Decimal = Decimal("1.0")
     assert EXPECTED == _get_section(INPUT)
 
 
 def test_string() -> None:
     INPUT: str = "[section]\noption=text"
-    EXPECTED: str = 'text'
+    EXPECTED: str = "text"
     assert EXPECTED == _get_section(INPUT)
 
 
 def test_path() -> None:
     INPUT: str = "[section]\npath=text"
-    EXPECTED: Path = Path('text')
+    EXPECTED: Path = Path("text")
     config: Config = config_load(INPUT)
-    assert EXPECTED == config['section']['path']
+    assert EXPECTED == config["section"]["path"]
 
 
 def test_import() -> None:
     INPUT: str = "[section]\noption=text"
-    EXPECTED: str = 'text'
+    EXPECTED: str = "text"
     with TemporaryDirectory() as temporary_path:
         config: Config = config_import(
-            text_export(Path(temporary_path, 'temporary.ini'), INPUT)
+            text_export(Path(temporary_path, "temporary.ini"), INPUT)
         )
-        assert EXPECTED == config['section']['option']
+        assert EXPECTED == config["section"]["option"]
 
 
 def main() -> bool:
