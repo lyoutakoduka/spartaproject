@@ -56,6 +56,6 @@ class FileHistory(WorkSpace):
 
     def add_history(self, source_path: Path, destination_path: Path) -> None:
         self._history[self._get_key_time()] = {
-            "source": source_path,
-            "destination": destination_path,
+            "source_path": source_path,
+            "destination_path": destination_path,
         }
