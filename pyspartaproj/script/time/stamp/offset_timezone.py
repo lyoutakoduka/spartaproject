@@ -8,7 +8,7 @@ def offset_time(time: datetime) -> datetime:
     offset: timedelta | None = time.utcoffset()
 
     if offset is None:
-        return datetime.fromisoformat(time.isoformat() + '+00:00')
+        return datetime.fromisoformat(time.isoformat() + "+00:00")
 
     time_offset: datetime = time - offset
     return time_offset.replace(tzinfo=timezone.utc)

@@ -6,10 +6,10 @@ from tempfile import TemporaryDirectory
 from typing import Callable
 
 from pyspartaproj.context.extension.time_context import Times
-from pyspartaproj.script.path.temporary.create_temporary_file import \
-    create_temporary_file
-from pyspartaproj.script.time.stamp.get_timestamp import (get_access,
-                                                           get_latest)
+from pyspartaproj.script.path.temporary.create_temporary_file import (
+    create_temporary_file,
+)
+from pyspartaproj.script.time.stamp.get_timestamp import get_access, get_latest
 
 
 def _common_test(times: Times) -> None:
@@ -35,7 +35,7 @@ def test_jst() -> None:
         ]
         _common_test(times)
 
-        assert '9:00:00' == str(times[0].utcoffset())
+        assert "9:00:00" == str(times[0].utcoffset())
 
     _inside_temporary_directory(individual_test)
 

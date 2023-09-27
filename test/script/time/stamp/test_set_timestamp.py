@@ -8,20 +8,20 @@ from typing import Callable
 
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.extension.time_context import Times
-from pyspartaproj.script.path.temporary.create_temporary_file import \
-    create_temporary_file
-from pyspartaproj.script.time.stamp.get_timestamp import (get_access,
-                                                           get_latest)
-from pyspartaproj.script.time.stamp.set_timestamp import (set_access,
-                                                           set_latest)
+from pyspartaproj.script.path.temporary.create_temporary_file import (
+    create_temporary_file,
+)
+from pyspartaproj.script.time.stamp.get_timestamp import get_access, get_latest
+from pyspartaproj.script.time.stamp.set_timestamp import set_access, set_latest
 
 _TIMES: Strs = [
-    '2023-04-01T00:00:00.000001+00:00', '2023-04-15T20:09:30.936886+00:00'
+    "2023-04-01T00:00:00.000001+00:00",
+    "2023-04-15T20:09:30.936886+00:00",
 ]
 
 
 def _convert_input_time(times: Strs) -> Times:
-    return [datetime.fromisoformat(time)for time in times]
+    return [datetime.fromisoformat(time) for time in times]
 
 
 def _common_test(path: Path) -> None:
@@ -49,7 +49,8 @@ def test_utc() -> None:
 
 def test_jst() -> None:
     TIMES_JST: Strs = [
-        '2023-04-01T09:00:00.000001+09:00', '2023-04-16T05:09:30.936886+09:00'
+        "2023-04-01T09:00:00.000001+09:00",
+        "2023-04-16T05:09:30.936886+09:00",
     ]
 
     def individual_test(path: Path) -> None:
