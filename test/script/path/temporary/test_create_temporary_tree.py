@@ -10,8 +10,9 @@ from pyspartaproj.context.default.string_context import Strs, Strs2
 from pyspartaproj.context.extension.path_context import Paths
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.modify.get_relative import get_relative_array
-from pyspartaproj.script.path.temporary.create_temporary_tree import \
-    create_temporary_tree
+from pyspartaproj.script.path.temporary.create_temporary_tree import (
+    create_temporary_tree,
+)
 
 
 def _inside_temporary_directory(function: Callable[[Path], None]) -> Paths:
@@ -24,14 +25,14 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> Paths:
 
 
 def test_three() -> None:
-    NAME_DIR_1: str = 'dir001'
-    NAME_DIR_2: str = 'dir002'
+    NAME_DIR_1: str = "dir001"
+    NAME_DIR_2: str = "dir002"
     NAME_DIRS: Strs = [NAME_DIR_1, NAME_DIR_2]
-    NAME_DIR_EMPTY: str = 'empty'
+    NAME_DIR_EMPTY: str = "empty"
 
-    NAME_INI: str = 'file.ini'
-    NAME_JSON: str = 'file.json'
-    NAME_TEXT: str = 'file.txt'
+    NAME_INI: str = "file.ini"
+    NAME_JSON: str = "file.json"
+    NAME_TEXT: str = "file.txt"
 
     EXPECTED: Strs2 = [
         [NAME_DIR_1],
@@ -47,7 +48,7 @@ def test_three() -> None:
         NAME_DIRS + [NAME_DIR_EMPTY],
         NAME_DIRS + [NAME_INI],
         NAME_DIRS + [NAME_JSON],
-        NAME_DIRS + [NAME_TEXT]
+        NAME_DIRS + [NAME_TEXT],
     ]
 
     expected: Paths = [Path(*path_names) for path_names in EXPECTED]

@@ -4,31 +4,32 @@
 from pathlib import Path
 
 from pyspartaproj.context.default.string_context import StrPair2
-from pyspartaproj.script.directory.create_directory import \
-    create_directory_array
+from pyspartaproj.script.directory.create_directory import (
+    create_directory_array,
+)
 from pyspartaproj.script.file.config.export_config import config_export
 from pyspartaproj.script.file.json.export_json import Json, json_export
 from pyspartaproj.script.file.text.export_file import text_export
 
-_NAME: str = 'file'
+_NAME: str = "file"
 
 
 def _sample_text(root: Path, weight: int) -> None:
     line_width: int = 10
     index_order: int = len(str(weight))
-    line_text: str = '-' * (line_width - index_order)
+    line_text: str = "-" * (line_width - index_order)
 
-    INPUT: str = '\n'.join([
-        str(i).zfill(index_order) + line_text for i in range(weight)
-    ])
+    INPUT: str = "\n".join(
+        [str(i).zfill(index_order) + line_text for i in range(weight)]
+    )
 
-    text_export(Path(root, _NAME + '.txt'), INPUT)
+    text_export(Path(root, _NAME + ".txt"), INPUT)
 
 
 def _sample_config(root: Path, weight: int) -> None:
     width: int = 10
     section_order: int = len(str(weight))
-    line_text: str = '-' * width
+    line_text: str = "-" * width
 
     INPUT: StrPair2 = {
         str(i).zfill(section_order): {
@@ -37,13 +38,13 @@ def _sample_config(root: Path, weight: int) -> None:
         for i in range(weight)
     }
 
-    config_export(Path(root, _NAME + '.ini'), INPUT)
+    config_export(Path(root, _NAME + ".ini"), INPUT)
 
 
 def _sample_json(root: Path, weight: int) -> None:
     width: int = 10
     section_order: int = len(str(weight))
-    line_text: str = '-' * width
+    line_text: str = "-" * width
 
     def function(count: int) -> Json:
         if 0 < count:
@@ -53,18 +54,18 @@ def _sample_json(root: Path, weight: int) -> None:
             }
         return line_text
 
-    json_export(Path(root, _NAME + '.json'), function(weight))
+    json_export(Path(root, _NAME + ".json"), function(weight))
 
 
 def _recursive_tree(root: Path, tree_deep: int, deep: int, weight: int):
-    create_directory_array([root, Path(root, 'empty')])
+    create_directory_array([root, Path(root, "empty")])
     _sample_text(root, weight)
     _sample_config(root, weight)
     _sample_json(root, weight)
 
     if 1 < deep:
         directory_name: Path = Path(
-            root, 'dir' + str(tree_deep - deep + 1).zfill(3)
+            root, "dir" + str(tree_deep - deep + 1).zfill(3)
         )
         _recursive_tree(directory_name, tree_deep, deep - 1, weight)
 
