@@ -4,6 +4,7 @@
 from pathlib import Path
 
 from pytest import raises
+
 from pyspartaproj.context.default.integer_context import Ints
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.script.execute.script_version import version_from_string
@@ -13,7 +14,7 @@ from pyspartaproj.script.server.execute_server import ExecuteServer
 
 def _get_execute_source(name: str) -> Path:
     current: Path = Path(__file__)
-    return Path(current.parent, 'execute', name)
+    return Path(current.parent, "execute", name)
 
 
 def _execute_python(name: str, server: ExecuteServer) -> Strs | None:
@@ -48,27 +49,27 @@ def _version_test(name: str, server: ExecuteServer, expected: Ints) -> None:
 
 def _get_version_number(result: Strs) -> Ints:
     version_text = result[0]
-    texts: Strs = version_text.split(' ')
+    texts: Strs = version_text.split(" ")
 
     return version_from_string(texts[0])
 
 
 def test_file() -> None:
-    name: str = 'file.py'
+    name: str = "file.py"
     server: ExecuteServer = ExecuteServer()
 
     _common_test(name, server)
 
 
 def test_directory() -> None:
-    name: str = 'directory'
+    name: str = "directory"
     server: ExecuteServer = ExecuteServer()
 
     _common_test(name, server)
 
 
 def test_version() -> None:
-    name: str = 'version.py'
+    name: str = "version.py"
     EXPECTED: Ints = [3, 10, 11]
     server: ExecuteServer = ExecuteServer(versions=EXPECTED)
 
@@ -76,7 +77,7 @@ def test_version() -> None:
 
 
 def test_error() -> None:
-    name: str = 'error.py'
+    name: str = "error.py"
     server: ExecuteServer = ExecuteServer()
 
     with raises(ValueError):

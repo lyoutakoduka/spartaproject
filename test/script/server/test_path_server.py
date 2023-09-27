@@ -17,9 +17,7 @@ def test_table() -> None:
     EXPECTED: int = 6
 
     def individual_test(server: PathServer) -> None:
-        assert EXPECTED == len(
-            [type for type in server.get_path_table()]
-        )
+        assert EXPECTED == len([type for type in server.get_path_table()])
 
     _common_test(individual_test)
 
@@ -35,14 +33,14 @@ def test_path() -> None:
 
 def test_path_string() -> None:
     def individual_test(server: PathServer) -> None:
-        for type in server.get_context_table('path'):
+        for type in server.get_context_table("path"):
             assert server.get_path(type) == Path(server.get_path_string(type))
 
     _common_test(individual_test)
 
 
 def test_to_remote() -> None:
-    EXPECTED: Path = Path('temp')
+    EXPECTED: Path = Path("temp")
 
     def individual_test(server: PathServer) -> None:
         assert EXPECTED == server.to_remote_path(
@@ -53,7 +51,7 @@ def test_to_remote() -> None:
 
 
 def test_to_local() -> None:
-    EXPECTED: Path = Path('temp')
+    EXPECTED: Path = Path("temp")
 
     def individual_test(server: PathServer) -> None:
         assert EXPECTED == server.to_remote_path(
@@ -65,7 +63,7 @@ def test_to_local() -> None:
 
 def test_working() -> None:
     expected: Path = Path(
-        'private', 'work', '2023', '04', '01', '00', '00', '00', '000000'
+        "private", "work", "2023", "04", "01", "00", "00", "00", "000000"
     )
 
     def individual_test(server: PathServer) -> None:

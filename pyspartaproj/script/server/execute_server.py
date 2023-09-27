@@ -18,7 +18,7 @@ class ExecuteServer(UploadServer):
 
     def _set_version_path(self, version: str) -> None:
         self._python_path: Path = Path(
-            self.get_path('python_root'), version, 'bin', 'python3'
+            self.get_path("python_root"), version, "bin", "python3"
         )
 
     def __init__(self, versions: Ints = []) -> None:
@@ -27,8 +27,8 @@ class ExecuteServer(UploadServer):
         self._set_version_path(self._set_version(versions))
 
     def _get_error_identifier(self) -> str:
-        body: str = ' '.join(['most', 'recent', 'call', 'last'])
-        return 'traceback'.capitalize() + ' ' + '(' + body + ')' + ':'
+        body: str = " ".join(["most", "recent", "call", "last"])
+        return "traceback".capitalize() + " " + "(" + body + ")" + ":"
 
     def _get_command(self, source_root: Path) -> Strs:
         return [
