@@ -10,7 +10,7 @@ from pyspartaproj.script.file.text.export_file import text_export
 
 
 def json_dump(input: Json, compress: bool = False) -> str:
-    separators: StrTuple | None = (',', ':') if compress else None
+    separators: StrTuple | None = (",", ":") if compress else None
     indent: int | None = None if compress else 2
 
     return dumps(
@@ -18,7 +18,7 @@ def json_dump(input: Json, compress: bool = False) -> str:
         ensure_ascii=False,
         sort_keys=True,
         indent=indent,
-        separators=separators
+        separators=separators,
     )
 
 

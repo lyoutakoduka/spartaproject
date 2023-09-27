@@ -16,11 +16,11 @@ def _common_test(expected: str, input: Json) -> None:
 
 def test_type() -> None:
     INPUT: Json = {
-        'None': None,
-        'bool': True,
-        'int': 1,
-        'float': 1.0,
-        'str': '1'
+        "None": None,
+        "bool": True,
+        "int": 1,
+        "float": 1.0,
+        "str": "1",
     }
 
     # 2 space indent
@@ -38,7 +38,7 @@ def test_type() -> None:
 
 
 def test_tree() -> None:
-    INPUT: Json = {'0': {'1': {'2': {'3': {'4': {'5': {'6': None}}}}}}}
+    INPUT: Json = {"0": {"1": {"2": {"3": {"4": {"5": {"6": None}}}}}}}
     EXPECTED: str = """
     {
       "0": {
@@ -61,13 +61,13 @@ def test_tree() -> None:
 
 
 def test_compress() -> None:
-    INPUT: Json = {'0': {'1': {'2': {'3': {'4': {'5': {'6': None}}}}}}}
-    EXPECTED: str = '''{"0":{"1":{"2":{"3":{"4":{"5":{"6":null}}}}}}}'''
+    INPUT: Json = {"0": {"1": {"2": {"3": {"4": {"5": {"6": None}}}}}}}
+    EXPECTED: str = """{"0":{"1":{"2":{"3":{"4":{"5":{"6":null}}}}}}}"""
     assert EXPECTED == json_dump(INPUT, compress=True)
 
 
 def test_export() -> None:
-    INPUT: Json = ['R', 'G', 'B']
+    INPUT: Json = ["R", "G", "B"]
     EXPECTED: str = """
       [
         "R",
@@ -80,7 +80,7 @@ def test_export() -> None:
 
     with TemporaryDirectory() as temporary_path:
         assert expected == text_import(
-            json_export(Path(temporary_path, 'temporary.json'), INPUT)
+            json_export(Path(temporary_path, "temporary.json"), INPUT)
         )
 
 
