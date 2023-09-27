@@ -6,7 +6,7 @@ from pyspartaproj.script.format_texts import format_indent
 
 
 def shared_compare(expected: Strs, input: str, stdout: bool = False) -> None:
-    assert '\n'.join(expected) == format_indent(input, stdout=stdout)
+    assert "\n".join(expected) == format_indent(input, stdout=stdout)
 
 
 def test_stdout() -> None:
@@ -41,11 +41,7 @@ def test_indent() -> None:
         Hallo!
                 Hallo!
     """
-    EXPECTED: Strs = [
-        "    Hallo!",
-        "Hallo!",
-        "        Hallo!"
-    ]
+    EXPECTED: Strs = ["    Hallo!", "Hallo!", "        Hallo!"]
     shared_compare(EXPECTED, INPUT)
 
 
@@ -56,12 +52,7 @@ def test_inner() -> None:
 
         Hallo!    Hallo!
     """
-    EXPECTED: Strs = [
-        "Hallo!    Hallo!",
-        "",
-        "",
-        "Hallo!    Hallo!"
-    ]
+    EXPECTED: Strs = ["Hallo!    Hallo!", "", "", "Hallo!    Hallo!"]
     shared_compare(EXPECTED, INPUT)
 
 
