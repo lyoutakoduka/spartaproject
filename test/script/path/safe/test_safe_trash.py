@@ -30,7 +30,7 @@ def _common_test(history_size: int, history_path: Path) -> None:
     for _, path_pair in history.items():
         exists_pair: BoolPair = check_exists_pair(path_pair)
         assert bool_same_array(
-            [not exists_pair["source"], exists_pair["destination"]]
+            [not exists_pair["source_path"], exists_pair["destination_path"]]
         )
 
 
