@@ -28,6 +28,11 @@ _PathPair2 = Dict[str, _PathPair]
 _StrPair2 = Dict[str, _StrPair]
 
 Config = Union[
-    _BoolPair2, _IntPair2, _FloatPair2,
-    _StrPair2, _DecPair2, _PathPair2, _BasicPair2
+    _BoolPair2,
+    _IntPair2,
+    _FloatPair2,
+    _StrPair2,
+    _DecPair2,
+    _PathPair2,
+    _BasicPair2,
 ]
