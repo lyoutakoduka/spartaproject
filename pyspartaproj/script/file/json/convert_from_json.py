@@ -38,6 +38,14 @@ from pyspartaproj.context.extension.path_context import (
 from pyspartaproj.context.file.json_context import Json, Single
 
 
+def _to_decimal(input: float) -> Decimal:
+    return Decimal(str(input))
+
+
+def _to_path(input: str) -> Path:
+    return Path(input)
+
+
 def _convert_unknown(input: Single, key: str) -> Single:
     if isinstance(input, str):
         if "path" in key:
@@ -59,14 +67,6 @@ def from_safe_json(input: Json, key: str = "") -> Json:
         return [from_safe_json(value) for value in input]
 
     return _convert_unknown(input, key)
-
-
-def _to_decimal(input: float) -> Decimal:
-    return Decimal(str(input))
-
-
-def _to_path(input: str) -> Path:
-    return Path(input)
 
 
 def bool_array_from_json(input: Json) -> Bools:
