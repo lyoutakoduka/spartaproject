@@ -10,7 +10,7 @@ def get_absolute(relative_path: Path, root_path: Path = Path()) -> Path:
     if relative_path.is_absolute():
         return relative_path
 
-    if '.' == str(root_path):
+    if "." == str(root_path):
         return relative_path.absolute()  # resolve() ignore symbolic link
 
     return Path(root_path, relative_path)

@@ -4,15 +4,20 @@
 from pathlib import Path
 
 from pytest import raises
+
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.extension.path_context import PathPair, Paths
 from pyspartaproj.script.bool.same_value import bool_same_array
-from pyspartaproj.script.path.modify.get_absolute import (get_absolute,
-                                                           get_absolute_array,
-                                                           get_absolute_pair)
-from pyspartaproj.script.path.modify.get_relative import (get_relative,
-                                                           get_relative_array,
-                                                           get_relative_pair)
+from pyspartaproj.script.path.modify.get_absolute import (
+    get_absolute,
+    get_absolute_array,
+    get_absolute_pair,
+)
+from pyspartaproj.script.path.modify.get_relative import (
+    get_relative,
+    get_relative_array,
+    get_relative_pair,
+)
 
 
 def to_pair(types: Strs, paths: Paths) -> PathPair:
@@ -21,7 +26,7 @@ def to_pair(types: Strs, paths: Paths) -> PathPair:
 
 def test_unmatch() -> None:
     with raises(ValueError):
-        get_relative(Path('empty'))
+        get_relative(Path("empty"))
 
 
 def test_single() -> None:
@@ -45,7 +50,7 @@ def test_array() -> None:
 
 def test_pair() -> None:
     current: Path = Path(__file__)
-    types: Strs = ['R', 'G', 'B']
+    types: Strs = ["R", "G", "B"]
 
     expected: PathPair = to_pair(types, [current.parents[i] for i in range(3)])
     result: PathPair = get_absolute_pair(get_relative_pair(expected))

@@ -15,15 +15,15 @@ def _common_test(source_path: Path, destination_path: Path) -> None:
 
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as temporary_path:
-        function(Path(temporary_path, 'temporary.json'))
+        function(Path(temporary_path, "temporary.json"))
 
 
 def test_exists() -> None:
     def individual_test(source_path: Path) -> None:
-        source_path = json_export(source_path, 'test')
+        source_path = json_export(source_path, "test")
         _common_test(
             get_avoid_path(source_path),
-            source_path.with_name(source_path.name + '_')
+            source_path.with_name(source_path.name + "_"),
         )
 
     _inside_temporary_directory(individual_test)
