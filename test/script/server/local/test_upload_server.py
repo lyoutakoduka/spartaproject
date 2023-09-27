@@ -15,7 +15,7 @@ from pyspartaproj.script.path.temporary.create_temporary_file import (
 from pyspartaproj.script.path.temporary.create_temporary_tree import (
     create_temporary_tree,
 )
-from pyspartaproj.script.server.upload_server import UploadServer
+from pyspartaproj.script.server.local.upload_server import UploadServer
 
 
 def _common_test(server: UploadServer, source_path: Path) -> None:

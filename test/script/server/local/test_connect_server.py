@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from pyspartaproj.script.server.connect_server import ConnectServer
+from pyspartaproj.script.server.local.connect_server import ConnectServer
 
 
 def test_connect() -> None:
