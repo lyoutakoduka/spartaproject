@@ -12,7 +12,7 @@ from pyspartaproj.extend.paramiko import (
     SFTPClient,
     SSHClient,
 )
-from pyspartaproj.script.server.path_server import PathServer
+from pyspartaproj.script.server.local.path_server import PathServer
 
 set_decimal_context()
 

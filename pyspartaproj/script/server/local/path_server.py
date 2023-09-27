@@ -10,7 +10,7 @@ from pyspartaproj.script.directory.create_directory_working import (
     create_working_space,
 )
 from pyspartaproj.script.path.modify.get_relative import get_relative
-from pyspartaproj.script.server.context_server import ContextServer
+from pyspartaproj.script.server.local.context_server import ContextServer
 
 
 class PathServer(ContextServer, WorkSpace):
