@@ -5,28 +5,28 @@ from pathlib import Path
 
 from pyspartaproj.context.extension.path_context import PathGene
 
-_DEFAULT_FILTER: str = '**/*'
+_DEFAULT_FILTER: str = "**/*"
 
 
 def _create_filter(
     depth: int, file: bool, directory: bool, suffix: str
 ) -> str:
     if not file and not directory:
-        return ''
+        return ""
 
     if 0 < depth:
-        filter = '*/' * (depth - 1)
+        filter = "*/" * (depth - 1)
     else:
-        filter = '**/'
+        filter = "**/"
 
     if file and directory:
-        filter += '*'
+        filter += "*"
 
     if file and not directory:
-        filter += '*.' + suffix
+        filter += "*." + suffix
 
     if not file and directory:
-        filter += '*/'
+        filter += "*/"
 
     return filter
 
@@ -36,8 +36,8 @@ def walk_iterator(
     depth: int = 0,
     file: bool = True,
     directory: bool = True,
-    suffix: str = '*',
-    filter: str = _DEFAULT_FILTER
+    suffix: str = "*",
+    filter: str = _DEFAULT_FILTER,
 ) -> PathGene:
     if _DEFAULT_FILTER == filter:
         filter = _create_filter(depth, file, directory, suffix)

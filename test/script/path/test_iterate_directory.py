@@ -9,19 +9,20 @@ from pyspartaproj.context.default.string_context import Strs, Strs2
 from pyspartaproj.context.extension.path_context import PathGene, Paths
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.modify.get_relative import get_relative_array
-from pyspartaproj.script.path.temporary.create_temporary_tree import \
-    create_temporary_tree
+from pyspartaproj.script.path.temporary.create_temporary_tree import (
+    create_temporary_tree,
+)
 
 _TREE_DEEP: int = 3
 
-_NAME_DIR_1: str = 'dir001'
-_NAME_DIR_2: str = 'dir002'
+_NAME_DIR_1: str = "dir001"
+_NAME_DIR_2: str = "dir002"
 _NAME_DIRS: Strs = [_NAME_DIR_1, _NAME_DIR_2]
-_NAME_DIR_EMPTY: str = 'empty'
+_NAME_DIR_EMPTY: str = "empty"
 
-_NAME_INI: str = 'file.ini'
-_NAME_JSON: str = 'file.json'
-_NAME_TEXT: str = 'file.txt'
+_NAME_INI: str = "file.ini"
+_NAME_JSON: str = "file.json"
+_NAME_TEXT: str = "file.txt"
 
 
 def _check_walk_result(
@@ -34,7 +35,8 @@ def _check_walk_result(
 
 
 def _inside_temporary_directory(
-        expected: Strs2, function: Callable[[Path], PathGene]) -> None:
+    expected: Strs2, function: Callable[[Path], PathGene]
+) -> None:
     with TemporaryDirectory() as temporary_path:
         root_path: Path = Path(temporary_path)
         create_temporary_tree(root_path, tree_deep=_TREE_DEEP)
@@ -56,11 +58,12 @@ def test_all() -> None:
         _NAME_DIRS + [_NAME_DIR_EMPTY],
         _NAME_DIRS + [_NAME_INI],
         _NAME_DIRS + [_NAME_JSON],
-        _NAME_DIRS + [_NAME_TEXT]
+        _NAME_DIRS + [_NAME_TEXT],
     ]
 
     def individual_test(root_path: Path) -> PathGene:
         return walk_iterator(root_path)
+
     _inside_temporary_directory(EXPECTED, individual_test)
 
 
@@ -70,11 +73,12 @@ def test_depth() -> None:
         [_NAME_DIR_1, _NAME_DIR_EMPTY],
         [_NAME_DIR_1, _NAME_INI],
         [_NAME_DIR_1, _NAME_JSON],
-        [_NAME_DIR_1, _NAME_TEXT]
+        [_NAME_DIR_1, _NAME_TEXT],
     ]
 
     def individual_test(root_path: Path) -> PathGene:
         return walk_iterator(root_path, depth=2)
+
     _inside_temporary_directory(EXPECTED, individual_test)
 
 
@@ -88,11 +92,12 @@ def test_directory() -> None:
         [_NAME_DIR_1, _NAME_TEXT],
         _NAME_DIRS + [_NAME_INI],
         _NAME_DIRS + [_NAME_JSON],
-        _NAME_DIRS + [_NAME_TEXT]
+        _NAME_DIRS + [_NAME_TEXT],
     ]
 
     def individual_test(root_path: Path) -> PathGene:
         return walk_iterator(root_path, directory=False)
+
     _inside_temporary_directory(EXPECTED, individual_test)
 
 
@@ -102,11 +107,12 @@ def test_file() -> None:
         [_NAME_DIR_EMPTY],
         _NAME_DIRS,
         [_NAME_DIR_1, _NAME_DIR_EMPTY],
-        _NAME_DIRS + [_NAME_DIR_EMPTY]
+        _NAME_DIRS + [_NAME_DIR_EMPTY],
     ]
 
     def individual_test(root_path: Path) -> PathGene:
         return walk_iterator(root_path, file=False)
+
     _inside_temporary_directory(EXPECTED, individual_test)
 
 
@@ -114,11 +120,12 @@ def test_suffix() -> None:
     EXPECTED: Strs2 = [
         [_NAME_JSON],
         [_NAME_DIR_1, _NAME_JSON],
-        _NAME_DIRS + [_NAME_JSON]
+        _NAME_DIRS + [_NAME_JSON],
     ]
 
     def individual_test(root_path: Path) -> PathGene:
-        return walk_iterator(root_path, directory=False, suffix='json')
+        return walk_iterator(root_path, directory=False, suffix="json")
+
     _inside_temporary_directory(EXPECTED, individual_test)
 
 
@@ -126,7 +133,8 @@ def test_filter() -> None:
     EXPECTED: Strs2 = [_NAME_DIRS + [_NAME_TEXT]]
 
     def individual_test(root_path: Path) -> PathGene:
-        return walk_iterator(root_path, filter='*/*/*.txt')
+        return walk_iterator(root_path, filter="*/*/*.txt")
+
     _inside_temporary_directory(EXPECTED, individual_test)
 
 
