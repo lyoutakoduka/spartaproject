@@ -16,7 +16,7 @@ def _stdout_check(
     expected: str,
     count: int,
     restart: Callable[[LogTimer], None],
-    show: Callable[[LogTimer, int], None]
+    show: Callable[[LogTimer, int], None],
 ) -> None:
     timer = LogTimer()
     restart(timer)
@@ -28,6 +28,7 @@ def _stdout_check(
         for i in range(count):
             show(timer, i)
             timer.increase_timer()
+
     _show_log()
 
     assert format_indent(expected, stdout=True) == stdout_text.stdout
@@ -59,7 +60,7 @@ def test_day() -> None:
             override=True,
             timer_interval=Decimal(str(1)),
             interval=Decimal(str(hour)),
-            order=0
+            order=0,
         )
 
     def show_timer(timer: LogTimer, _: int) -> None:
@@ -88,7 +89,7 @@ def test_show() -> None:
 
     def show_timer(timer: LogTimer, index: int) -> None:
         timer.show(
-            header=[f'i={index}', 'Almost'], footer=['have', 'passed...']
+            header=[f"i={index}", "Almost"], footer=["have", "passed..."]
         )
 
     _stdout_check(EXPECTED, increase_count, restart_timer, show_timer)
@@ -114,7 +115,7 @@ def test_force() -> None:
         timer.restart(override=True, order=2)
 
     def show_timer(timer: LogTimer, index: int) -> None:
-        print(f'i={index}')
+        print(f"i={index}")
         timer.show(force=True)
 
     _stdout_check(EXPECTED, increase_count, restart_timer, show_timer)

@@ -25,9 +25,9 @@ class LogTimer:
     def restart(
         self,
         override: bool = False,
-        timer_interval: Decimal = Decimal('0.01'),
-        interval: Decimal = Decimal('0.1'),
-        order: int = 1
+        timer_interval: Decimal = Decimal("0.01"),
+        interval: Decimal = Decimal("0.1"),
+        order: int = 1,
     ):
         self._timer: TimerSelect = TimerSelect(
             override=override, interval=timer_interval
@@ -53,4 +53,4 @@ class LogTimer:
 
         if force or self._is_force_show(elapsed):
             elapsed_text: str = readable_time(elapsed, order=self._order)
-            print(' '.join(header + [elapsed_text] + footer))
+            print(" ".join(header + [elapsed_text] + footer))

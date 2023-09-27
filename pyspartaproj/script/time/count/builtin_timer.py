@@ -15,16 +15,16 @@ class TimerSelect:
         return Decimal(str(current_time.timestamp()))
 
     def _initialize_current(self) -> None:
-        self._count: Decimal = Decimal('0')
+        self._count: Decimal = Decimal("0")
 
         if self._override:
-            self.APRIL_1_2023_EPOCH: Decimal = Decimal('1680307200')
+            self.APRIL_1_2023_EPOCH: Decimal = Decimal("1680307200")
             self._count = self.APRIL_1_2023_EPOCH
         else:
             self._count = self._get_current()
 
     def __init__(
-        self, override: bool = False, interval: Decimal = Decimal('1')
+        self, override: bool = False, interval: Decimal = Decimal("1")
     ) -> None:
         self._override: bool = override
         self._interval: Decimal = interval

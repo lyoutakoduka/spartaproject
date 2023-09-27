@@ -5,7 +5,9 @@ from decimal import Decimal
 from time import sleep
 
 from pyspartaproj.context.extension.decimal_context import (
-    Decs, set_decimal_context)
+    Decs,
+    set_decimal_context,
+)
 from pyspartaproj.script.time.count.builtin_timer import TimerSelect
 
 set_decimal_context()
@@ -30,21 +32,21 @@ def test_integer() -> None:
 
 
 def test_interval() -> None:
-    micro_scale: Decimal = Decimal('0.000001')
+    micro_scale: Decimal = Decimal("0.000001")
 
     _check_counter_result(
         [expected * micro_scale for expected in _INI_EXPECTED],
-        TimerSelect(override=True, interval=micro_scale)
+        TimerSelect(override=True, interval=micro_scale),
     )
 
 
 def test_builtin() -> None:
     timer = TimerSelect()
-    interval: Decimal = Decimal('0.005')
+    interval: Decimal = Decimal("0.005")
     begin: Decimal = timer()
     sleep(float(interval))
     compute_error: Decimal = timer() - begin
-    assert Decimal('0.015') > compute_error
+    assert Decimal("0.015") > compute_error
 
 
 def main() -> bool:
