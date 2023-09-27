@@ -9,7 +9,7 @@ from pyspartaproj.script.execute.execute_command import execute_command
 
 
 def test_current() -> None:
-    result: Strs = execute_command(['pwd'])
+    result: Strs = execute_command(["pwd"])
     if 1 != len(result):
         assert False
 
