@@ -46,13 +46,20 @@ def _to_path(input: str) -> Path:
     return Path(input)
 
 
+def _filter_path(input: str, key: str) -> Path | None:
+    if "path" in key:
+        return _to_path(input)
+
+    return None
+
+
 def _convert_unknown(input: Single, key: str) -> Single:
     if isinstance(input, float):
         return _to_decimal(input)
 
     if isinstance(input, str):
-        if "path" in key:
-            return _to_path(input)
+        if path := _filter_path(input, key):
+            return path
 
     return input
 
