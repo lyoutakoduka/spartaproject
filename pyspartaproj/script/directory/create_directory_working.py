@@ -17,17 +17,19 @@ def _get_time_data(time: datetime) -> Ints2:
         [2, time.hour],
         [2, time.minute],
         [2, time.second],
-        [6, time.microsecond]
+        [6, time.microsecond],
     ]
 
 
 def get_working_space(override: bool = False, jst: bool = False) -> Path:
-    return Path(*[
-        str(time_count).zfill(order)
-        for order, time_count in _get_time_data(
-            get_current_time(override=override, jst=jst)
-        )
-    ])
+    return Path(
+        *[
+            str(time_count).zfill(order)
+            for order, time_count in _get_time_data(
+                get_current_time(override=override, jst=jst)
+            )
+        ]
+    )
 
 
 def create_working_space(

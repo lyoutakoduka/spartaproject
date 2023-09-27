@@ -7,14 +7,18 @@ from typing import Callable
 
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.extension.path_context import PathPair, Paths
-from pyspartaproj.script.bool.same_value import (bool_same_array,
-                                                  bool_same_pair)
+from pyspartaproj.script.bool.same_value import bool_same_array, bool_same_pair
 from pyspartaproj.script.directory.create_directory import (
-    create_directory, create_directory_array, create_directory_pair)
-from pyspartaproj.script.path.check_exists import (check_exists_array,
-                                                    check_exists_pair)
+    create_directory,
+    create_directory_array,
+    create_directory_pair,
+)
+from pyspartaproj.script.path.check_exists import (
+    check_exists_array,
+    check_exists_pair,
+)
 
-_ELEMENT_NAMES: Strs = ['R', 'G', 'B']
+_ELEMENT_NAMES: Strs = ["R", "G", "B"]
 
 
 def _get_head_path(index: int) -> Path:
@@ -40,9 +44,16 @@ def test_array() -> None:
     ]
 
     def individual_test(temporary_path: Path) -> bool:
-        return bool_same_array(check_exists_array(create_directory_array(
-            [Path(temporary_path, head_path) for head_path in head_paths]
-        )))
+        return bool_same_array(
+            check_exists_array(
+                create_directory_array(
+                    [
+                        Path(temporary_path, head_path)
+                        for head_path in head_paths
+                    ]
+                )
+            )
+        )
 
     _inside_temporary_directory(individual_test)
 
