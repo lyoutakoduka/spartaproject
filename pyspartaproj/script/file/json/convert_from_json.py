@@ -49,10 +49,10 @@ def _to_path(input: str) -> Path:
 def _convert_unknown(input: Single, key: str) -> Single:
     if isinstance(input, str):
         if "path" in key:
-            return Path(input)
+            return _to_path(input)
 
     if isinstance(input, float):
-        return Decimal(str(input))
+        return _to_decimal(input)
 
     return input
 
