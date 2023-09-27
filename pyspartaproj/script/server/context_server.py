@@ -34,29 +34,6 @@ class ContextServer:
         table: StrPair = self._get_table()
         return [key for key, value in table.items() if value == type]
 
-    def _get_vscode_table(self) -> StrPair:
-        return {
-            "host": "host",
-            "username": "user_name",
-            "privateKeyPath": "private_key",
-            "remotePath": "remote_root",
-            "context": "local_root",
-            "connectTimeout": "timeout",
-            "port": "port",
-        }
-
-    def _from_vscode(self, context: Json) -> Json:
-        vscode_table: StrPair = self._get_vscode_table()
-
-        if not isinstance(context, Dict):
-            return {}
-
-        return {
-            vscode_table[key]: value
-            for key, value in context.items()
-            if key in vscode_table
-        }
-
     def revert_default(self) -> None:
         self._current_context = deepcopy(self._default_context)
 
