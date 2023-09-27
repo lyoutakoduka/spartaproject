@@ -9,15 +9,18 @@ from pyspartaproj.context.default.bool_context import BoolPair
 from pyspartaproj.context.extension.path_context import PathPair2
 from pyspartaproj.script.bool.same_value import bool_same_array
 from pyspartaproj.script.directory.create_directory import create_directory
-from pyspartaproj.script.file.json.convert_from_json import \
-    path_pair2_from_json
+from pyspartaproj.script.file.json.convert_from_json import (
+    path_pair2_from_json,
+)
 from pyspartaproj.script.file.json.import_json import json_import
 from pyspartaproj.script.path.check_exists import check_exists_pair
 from pyspartaproj.script.path.safe.safe_rename import SafeRename
-from pyspartaproj.script.path.temporary.create_temporary_file import \
-    create_temporary_file
-from pyspartaproj.script.path.temporary.create_temporary_tree import \
-    create_temporary_tree
+from pyspartaproj.script.path.temporary.create_temporary_file import (
+    create_temporary_file,
+)
+from pyspartaproj.script.path.temporary.create_temporary_tree import (
+    create_temporary_tree,
+)
 
 
 def _common_test(rename_path: Path) -> None:
@@ -26,9 +29,9 @@ def _common_test(rename_path: Path) -> None:
 
     for _, path_pair in history.items():
         exists_pair: BoolPair = check_exists_pair(path_pair)
-        assert bool_same_array([
-            not exists_pair['source'], exists_pair['destination']
-        ])
+        assert bool_same_array(
+            [not exists_pair["source"], exists_pair["destination"]]
+        )
 
 
 def _inside_temporary_directory(
@@ -39,7 +42,7 @@ def _inside_temporary_directory(
 
 
 def _rename(safe_rename: SafeRename, path: Path) -> Path:
-    safe_rename.rename(path, path.with_stem('destination'))
+    safe_rename.rename(path, path.with_stem("destination"))
     return safe_rename.pop_history()
 
 
@@ -60,7 +63,7 @@ def test_override() -> None:
         )
 
         _common_test(safe_rename.pop_history())
-        assert destination_path.name.endswith('_')
+        assert destination_path.name.endswith("_")
 
     _inside_temporary_directory(individual_test)
 
@@ -70,7 +73,7 @@ def test_directory() -> None:
         _common_test(
             _rename(
                 safe_rename,
-                create_directory(Path(temporary_path, 'temporary'))
+                create_directory(Path(temporary_path, "temporary")),
             )
         )
 
@@ -79,7 +82,7 @@ def test_directory() -> None:
 
 def test_tree() -> None:
     def individual_test(safe_rename: SafeRename, temporary_path: Path) -> None:
-        source_path: Path = Path(temporary_path, 'temporary')
+        source_path: Path = Path(temporary_path, "temporary")
         create_temporary_tree(source_path, tree_deep=2)
         _common_test(_rename(safe_rename, source_path))
 
