@@ -7,8 +7,9 @@ from pathlib import Path
 from pyspartaproj.context.extension.path_context import PathPair2
 from pyspartaproj.context.file.json_context import Json
 from pyspartaproj.script.directory.create_directory_temporary import WorkSpace
-from pyspartaproj.script.directory.create_directory_working import \
-    create_working_space
+from pyspartaproj.script.directory.create_directory_working import (
+    create_working_space,
+)
 from pyspartaproj.script.file.json.convert_to_json import multiple2_to_json
 from pyspartaproj.script.file.json.export_json import json_export
 from pyspartaproj.script.time.current_datetime import get_current_time
@@ -27,13 +28,13 @@ class FileHistory(WorkSpace):
         super().__del__()
 
     def _init_history_path(self, path: Path) -> Path:
-        if '.' == str(path):
-            path = Path(self.get_root(), 'trash')
+        if "." == str(path):
+            path = Path(self.get_root(), "trash")
 
         return create_working_space(path, jst=True)
 
     def _export_history(self, history: Json) -> Path:
-        return json_export(Path(self.history_path, 'rename.json'), history)
+        return json_export(Path(self.history_path, "rename.json"), history)
 
     def pop_history(self) -> Path:
         if 0 == len(self._history):
@@ -47,12 +48,14 @@ class FileHistory(WorkSpace):
         time: str = get_current_time(jst=True).isoformat()
 
         for i in count():
-            time_index: str = time + '_' + str(i).zfill(4)
+            time_index: str = time + "_" + str(i).zfill(4)
             if time_index not in self._history:
                 return time_index
-        return ''
+
+        return ""
 
     def add_history(self, source_path: Path, destination_path: Path) -> None:
         self._history[self._get_key_time()] = {
-            'source': source_path, 'destination': destination_path
+            "source": source_path,
+            "destination": destination_path,
         }

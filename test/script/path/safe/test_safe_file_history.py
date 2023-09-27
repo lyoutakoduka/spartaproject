@@ -7,8 +7,9 @@ from tempfile import TemporaryDirectory
 from pyspartaproj.context.default.bool_context import Bools
 from pyspartaproj.context.extension.path_context import PathPair2, Paths2
 from pyspartaproj.script.bool.same_value import bool_same_array
-from pyspartaproj.script.file.json.convert_from_json import \
-    path_pair2_from_json
+from pyspartaproj.script.file.json.convert_from_json import (
+    path_pair2_from_json,
+)
 from pyspartaproj.script.file.json.import_json import json_import
 from pyspartaproj.script.path.safe.safe_file_history import FileHistory
 
@@ -20,7 +21,7 @@ def _compare_path_count(source: Paths2, destination: PathPair2) -> bool:
 def _compare_path_name(source: Paths2, destination: PathPair2) -> bool:
     same_paths: Bools = []
     for lefts, (_, rights) in zip(source, sorted(destination.items())):
-        for i, type in enumerate(['source', 'destination']):
+        for i, type in enumerate(["source", "destination"]):
             same_paths += [lefts[i] == rights[type]]
     return bool_same_array(same_paths)
 
@@ -35,7 +36,7 @@ def _common_test(source: Paths2, rename_path: Path) -> None:
 def _add_single_history(
     file_history: FileHistory, source_history: Paths2, name: str
 ) -> None:
-    source_path: Path = Path(__file__).parent.with_name('source.json')
+    source_path: Path = Path(__file__).parent.with_name("source.json")
     destination_path: Path = source_path.with_stem(name)
     file_history.add_history(source_path, destination_path)
     source_history += [[source_path, destination_path]]
@@ -44,7 +45,7 @@ def _add_single_history(
 def test_single() -> None:
     file_history = FileHistory()
     source_history: Paths2 = []
-    _add_single_history(file_history, source_history, 'destination')
+    _add_single_history(file_history, source_history, "destination")
 
     _common_test(source_history, file_history.pop_history())
 
@@ -63,7 +64,7 @@ def test_history() -> None:
         temporary_root = Path(temporary_path)
         file_history = FileHistory(history_path=temporary_root)
         source_history: Paths2 = []
-        _add_single_history(file_history, source_history, 'destination')
+        _add_single_history(file_history, source_history, "destination")
 
         history_path: Path = file_history.pop_history()
         _common_test(source_history, history_path)
