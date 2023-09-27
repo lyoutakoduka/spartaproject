@@ -2,22 +2,22 @@
 # -*- coding: utf-8 -*-
 
 from pytest import raises
-from pyspartaproj.script.bool.same_value import (bool_same_array,
-                                                  bool_same_pair)
+
+from pyspartaproj.script.bool.same_value import bool_same_array, bool_same_pair
 
 
 def test_empty() -> None:
-    with raises(ValueError, match='empty'):
+    with raises(ValueError, match="empty"):
         bool_same_array([])
 
 
 def test_mixed() -> None:
-    with raises(ValueError, match='true_false'):
+    with raises(ValueError, match="true_false"):
         bool_same_array([False, True, False])
 
 
 def test_false() -> None:
-    with raises(ValueError, match='false'):
+    with raises(ValueError, match="false"):
         bool_same_array([False, False, False])
 
 
@@ -30,7 +30,7 @@ def test_invert() -> None:
 
 
 def test_pair() -> None:
-    assert bool_same_pair({'R': True, 'G': True, 'B': True})
+    assert bool_same_pair({"R": True, "G": True, "B": True})
 
 
 def main() -> bool:

@@ -1,8 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from pyspartaproj.context.default.bool_context import (BoolPair, Bools,
-                                                        Bools2, BoolType)
+from pyspartaproj.context.default.bool_context import (
+    BoolPair,
+    Bools,
+    Bools2,
+    BoolType,
+)
 from pyspartaproj.context.default.integer_context import Ints
 from pyspartaproj.context.default.string_context import Strs2
 
@@ -12,10 +16,10 @@ def _check_arguments_size(lefts: BoolType, rights: BoolType) -> None:
     count: int = len(flag_counts)
 
     if 1 != count:
-        raise ValueError('size')
+        raise ValueError("size")
 
     if 0 == flag_counts[0]:
-        raise ValueError('empty')
+        raise ValueError("empty")
 
 
 def bool_compare_array(lefts: Bools, rights: Bools) -> bool:
@@ -29,7 +33,7 @@ def bool_compare_pair(lefts: BoolPair, rights: BoolPair) -> bool:
     sorted_keys: Strs2 = [sorted(flags.keys()) for flags in [lefts, rights]]
 
     if sorted_keys[0] != sorted_keys[1]:
-        raise KeyError('unmatch')
+        raise KeyError("unmatch")
 
     sorted_flags: Bools2 = [
         [flags[key] for key in keys]
