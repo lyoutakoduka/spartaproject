@@ -6,6 +6,7 @@
 from importlib.machinery import SourceFileLoader
 from pathlib import Path
 from types import ModuleType
+from typing import Any
 
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.extension.path_context import PathPair
@@ -62,7 +63,8 @@ def _call_target_function(module: ModuleType, function: str) -> None:
     if not hasattr(module, function):
         raise ModuleNotFoundError(function)
 
-    return getattr(module, function)()
+    func: Any = getattr(module, function)
+    return func()
 
 
 def _check_call_environment(call_target: PathPair, function: str) -> None:
