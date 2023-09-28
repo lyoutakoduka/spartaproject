@@ -48,4 +48,5 @@ max-complexity = 10
 max-line-length = 79
 
 [tool.mypy]
+implicit_reexport = true
 strict = true
