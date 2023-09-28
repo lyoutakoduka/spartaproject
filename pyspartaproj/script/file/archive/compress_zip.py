@@ -203,9 +203,11 @@ class CompressZip:
     def compress_archive(
         self, archive_target: Path, archive_root: Path | None = None
     ) -> None:
-        has_initial: bool = archive_root is not None
+        parent_root: Path = archive_target.parent
 
-        if has_initial and archive_target.is_relative_to(archive_root):
+        if archive_root is None:
+            self._compress_child(archive_target, parent_root)
+        elif archive_target.is_relative_to(archive_root):
             self._compress_child(archive_target, archive_root)
         else:
-            self._compress_child(archive_target, archive_target.parent)
+            self._compress_child(archive_target, parent_root)
