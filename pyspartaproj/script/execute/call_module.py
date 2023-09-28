@@ -64,7 +64,7 @@ def _call_target_function(module: ModuleType, function: str) -> None:
         raise ModuleNotFoundError(function)
 
     func: Any = getattr(module, function)
-    return func()  # type: ignore
+    func()
 
 
 def _check_call_environment(call_target: PathPair, function: str) -> None:
