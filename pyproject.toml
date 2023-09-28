@@ -36,7 +36,6 @@ build-backend = "poetry.core.masonry.api"
 requires = ["poetry-core"]
 
 [tool.isort]
-known_first_party = ["pyspartaproj"]
 line_length = 79
 profile = "black"
 
