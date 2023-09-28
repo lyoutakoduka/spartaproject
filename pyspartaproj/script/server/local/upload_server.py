@@ -46,8 +46,8 @@ class UploadServer(ConnectServer):
                 sftp.mkdir(path.as_posix())
 
     def _create_upload_tree(self, path: Path) -> None:
-        for path in reversed(self._get_upload_tree(path)):
-            self._create_directory(path)
+        for path_child in reversed(self._get_upload_tree(path)):
+            self._create_directory(path_child)
 
     def _convert_remote_path(self, local: Path) -> Path:
         return Path(self._get_remote_root(), local)
