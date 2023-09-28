@@ -6,8 +6,8 @@ from pathlib import Path
 from pyspartaproj.context.extension.path_context import PathPair, Paths
 
 
-def get_relative(absolute_path: Path, root_path: Path = Path()) -> Path:
-    if "." == str(root_path):
+def get_relative(absolute_path: Path, root_path: Path | None = None) -> Path:
+    if root_path is None:
         root_path = Path.cwd()
 
     if not absolute_path.is_relative_to(root_path):
@@ -17,13 +17,13 @@ def get_relative(absolute_path: Path, root_path: Path = Path()) -> Path:
 
 
 def get_relative_array(
-    absolute_paths: Paths, root_path: Path = Path()
+    absolute_paths: Paths, root_path: Path | None = None
 ) -> Paths:
     return [get_relative(path, root_path=root_path) for path in absolute_paths]
 
 
 def get_relative_pair(
-    absolute_pair: PathPair, root_path: Path = Path()
+    absolute_pair: PathPair, root_path: Path | None = None
 ) -> PathPair:
     return {
         key: get_relative(path, root_path=root_path)

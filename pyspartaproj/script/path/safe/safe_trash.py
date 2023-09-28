@@ -18,8 +18,8 @@ class SafeTrash(SafeRename):
             create_directory_parent(trash_path)
             self.rename(target, trash_path, override=True)
 
-    def trash(self, trash_path: Path, trash_root: Path = Path()) -> None:
-        has_initial: bool = "." != str(trash_root)
+    def trash(self, trash_path: Path, trash_root: Path | None = None) -> None:
+        has_initial: bool = trash_root is not None
 
         if has_initial and trash_path.is_relative_to(trash_root):
             self._move_file(trash_path, trash_root)

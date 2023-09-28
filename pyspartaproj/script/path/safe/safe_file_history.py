@@ -16,7 +16,7 @@ from pyspartaproj.script.time.current_datetime import get_current_time
 
 
 class FileHistory(WorkSpace):
-    def __init__(self, history_path: Path = Path()) -> None:
+    def __init__(self, history_path: Path | None = None) -> None:
         super().__init__()
 
         self._history: PathPair2 = {}
@@ -27,8 +27,8 @@ class FileHistory(WorkSpace):
 
         super().__del__()
 
-    def _init_history_path(self, path: Path) -> Path:
-        if "." == str(path):
+    def _init_history_path(self, path: Path | None) -> Path:
+        if path is None:
             path = Path(self.get_root(), "trash")
 
         return create_working_space(path, jst=True)

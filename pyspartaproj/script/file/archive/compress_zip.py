@@ -201,9 +201,9 @@ class CompressZip:
                 self._update_archive_byte(target, root)
 
     def compress_archive(
-        self, archive_target: Path, archive_root: Path = Path()
+        self, archive_target: Path, archive_root: Path | None = None
     ) -> None:
-        has_initial: bool = "." != str(archive_root)
+        has_initial: bool = archive_root is not None
 
         if has_initial and archive_target.is_relative_to(archive_root):
             self._compress_child(archive_target, archive_root)

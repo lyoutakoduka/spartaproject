@@ -98,8 +98,8 @@ class UploadServer(ConnectServer):
 
         return self._upload_file(source_path, destination_local)
 
-    def upload(self, source: Path, destination: Path = Path()) -> bool:
-        if "." == str(destination):
+    def upload(self, source: Path, destination: Path | None = None) -> bool:
+        if destination is None:
             destination = self.to_remote_path(source)
 
         return self._upload(source, destination)

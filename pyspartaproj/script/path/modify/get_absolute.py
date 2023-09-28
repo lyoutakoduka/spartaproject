@@ -6,11 +6,11 @@ from pathlib import Path
 from pyspartaproj.context.extension.path_context import PathPair, Paths
 
 
-def get_absolute(relative_path: Path, root_path: Path = Path()) -> Path:
+def get_absolute(relative_path: Path, root_path: Path | None = None) -> Path:
     if relative_path.is_absolute():
         return relative_path
 
-    if "." == str(root_path):
+    if root_path is None:
         return relative_path.absolute()  # resolve() ignore symbolic link
 
     return Path(root_path, relative_path)
