@@ -9,7 +9,8 @@ from pyspartaproj.script.file.text.import_file import text_import
 
 
 def json_load(input: str) -> Json:
-    return loads(input)
+    result: Json = loads(input)
+    return result
 
 
 def json_import(import_path: Path) -> Json:
