@@ -28,7 +28,7 @@ class LogTimer:
         timer_interval: Decimal = Decimal("0.01"),
         interval: Decimal = Decimal("0.1"),
         order: int = 1,
-    ):
+    ) -> None:
         self._timer: TimerSelect = TimerSelect(
             override=override, interval=timer_interval
         )
