@@ -36,6 +36,7 @@ build-backend = "poetry.core.masonry.api"
 requires = ["poetry-core"]
 
 [tool.isort]
+known_first_party = ["pyspartaproj"]
 line_length = 79
 profile = "black"
 
@@ -43,6 +44,6 @@ profile = "black"
 line-length = 79
 
 [tool.flake8]
-exclude = [".venv"]
+
 max-complexity = 10
 max-line-length = 79
