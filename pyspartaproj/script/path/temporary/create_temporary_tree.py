@@ -57,7 +57,9 @@ def _sample_json(root: Path, weight: int) -> None:
     json_export(Path(root, _NAME + ".json"), function(weight))
 
 
-def _recursive_tree(root: Path, tree_deep: int, deep: int, weight: int):
+def _recursive_tree(
+    root: Path, tree_deep: int, deep: int, weight: int
+) -> None:
     create_directory_array([root, Path(root, "empty")])
     _sample_text(root, weight)
     _sample_config(root, weight)
