@@ -4,7 +4,6 @@
 from pathlib import Path
 from typing import Callable
 
-from pyspartaproj.context.default.integer_context import Ints
 from pyspartaproj.script.server.local.context_server import ContextServer
 
 
