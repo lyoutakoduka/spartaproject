@@ -52,21 +52,6 @@ class ContextServer:
         context: PathPair = self._filter_path()
         return context[type]
 
-    def get_context_table(self, type: str) -> Strs:
-        if "integer" == type:
-            context_integer: IntPair = self._filter_integer()
-            return list(context_integer.keys())
-
-        elif "string" == type:
-            context_string: StrPair = self._filter_string()
-            return list(context_string.keys())
-
-        elif "path" == type:
-            context_path: PathPair = self._filter_path()
-            return list(context_path.keys())
-
-        return []
-
     def get_integer_table(self) -> Strs:
         context_integer: IntPair = self._filter_integer()
         return list(context_integer.keys())
