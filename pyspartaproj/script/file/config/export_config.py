@@ -22,14 +22,14 @@ def _cleanup_text_default(text: str) -> str:
     return text
 
 
-def _cleanup(text: str) -> str:
+def _cleanup_key(text: str) -> str:
     return text.strip()
 
 
 def _cleanup_key_default(input: Config) -> Config:
     return {
-        _cleanup(section_key): {
-            _cleanup(key): value for key, value in section.items()
+        _cleanup_key(section_key): {
+            _cleanup_key(key): value for key, value in section.items()
         }
         for section_key, section in input.items()
     }
