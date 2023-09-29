@@ -9,14 +9,17 @@ from pyspartaproj.context.file.config_context import Config
 from pyspartaproj.script.file.text.export_file import text_export
 
 
-def _cleanup_text(text: str, compress: bool) -> str:
+def _cleanup_text(text: str) -> str:
     text = text.strip()
-
-    if not compress:
-        return text
-
     text = text.replace("\n" * 2, "\n")
     return text.replace(" = ", "=")
+
+
+def _cleanup_text_default(text: str) -> str:
+    if text.endswith("\n" * 2):
+        return text[:-1]
+
+    return text
 
 
 def config_dump(input: Config, compress: bool = False) -> str:
@@ -25,7 +28,8 @@ def config_dump(input: Config, compress: bool = False) -> str:
 
     with StringIO() as file:
         config.write(file)
-        return _cleanup_text(file.getvalue(), compress)
+        text: str = _cleanup_text_default(file.getvalue())
+        return _cleanup_text(text) if compress else text
 
 
 def config_export(

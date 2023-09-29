@@ -21,7 +21,7 @@ from pyspartaproj.script.format_texts import format_indent
 
 
 def _common_test(expected: str, input: Config) -> None:
-    assert format_indent(expected) == config_dump(input)
+    assert format_indent(expected, stdout=True) == config_dump(input)
 
 
 def test_lower() -> None:
