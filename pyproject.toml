@@ -47,5 +47,11 @@ max-complexity = 10
 max-line-length = 79
 
 [tool.mypy]
+disallow_any_decorated = true
+disallow_any_explicit = true
+disallow_any_expr = true
+disallow_any_unimported = true
+implicit_optional = true
 implicit_reexport = true
 strict = true
+warn_unreachable = true
