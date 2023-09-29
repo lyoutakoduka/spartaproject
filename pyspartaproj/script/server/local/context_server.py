@@ -67,6 +67,18 @@ class ContextServer:
 
         return []
 
+    def get_integer_table(self) -> Strs:
+        context_integer: IntPair = self._filter_integer()
+        return list(context_integer.keys())
+
+    def get_string_table(self) -> Strs:
+        context_string: StrPair = self._filter_string()
+        return list(context_string.keys())
+
+    def get_path_table(self) -> Strs:
+        context_path: PathPair = self._filter_path()
+        return list(context_path.keys())
+
     def set_path(self, type: str, path: Path) -> bool:
         if type in self.get_context_table("path"):
             if isinstance(self._current_context, Dict):
