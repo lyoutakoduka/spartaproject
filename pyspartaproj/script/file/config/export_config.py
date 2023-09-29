@@ -22,7 +22,22 @@ def _cleanup_text_default(text: str) -> str:
     return text
 
 
+def _cleanup(text: str) -> str:
+    return text.strip()
+
+
+def _cleanup_key_default(input: Config) -> Config:
+    return {
+        _cleanup(section_key): {
+            _cleanup(key): value for key, value in section.items()
+        }
+        for section_key, section in input.items()
+    }
+
+
 def config_dump(input: Config, compress: bool = False) -> str:
+    input = _cleanup_key_default(input)
+
     config = ConfigParser()
     config.read_dict(input)
 

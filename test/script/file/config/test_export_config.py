@@ -8,7 +8,7 @@ from tempfile import TemporaryDirectory
 from pyspartaproj.context.default.bool_context import BoolPair, BoolPair2
 from pyspartaproj.context.default.float_context import FloatPair, FloatPair2
 from pyspartaproj.context.default.integer_context import IntPair, IntPair2
-from pyspartaproj.context.default.string_context import StrPair, StrPair2
+from pyspartaproj.context.default.string_context import StrPair, StrPair2, Strs
 from pyspartaproj.context.extension.decimal_context import DecPair, DecPair2
 from pyspartaproj.context.extension.path_context import PathPair, PathPair2
 from pyspartaproj.context.file.config_context import Config
@@ -179,6 +179,17 @@ def test_lower() -> None:
     _common_test(EXPECTED, INPUT)
 
 
+def test_key() -> None:
+    noise: Strs = [" 　\n\t"] * 2
+    INPUT: Config = {"section".join(noise): {"key".join(noise): True}}
+    EXPECTED: str = """
+        [section]
+        key = True
+    """
+
+    _common_test(EXPECTED, INPUT)
+
+
 def test_export() -> None:
     INPUT: Config = {"true": {"true": True}, "false": {"false": False}}
     EXPECTED: str = """
@@ -208,5 +219,6 @@ def main() -> bool:
     test_mix_section()
     test_compress()
     test_lower()
+    test_key()
     test_export()
     return True
