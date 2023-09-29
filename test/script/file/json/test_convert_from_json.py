@@ -146,11 +146,9 @@ def test_path_pair() -> None:
 
 
 def test_tree() -> None:
-    INPUT_DECIMAL: Decimal = Decimal("1.0")
-    INPUT_PATH: Path = Path("root")
-    input: Json = {
-        "A": {"B": [None, float(INPUT_DECIMAL)], "path": str(INPUT_PATH)}
-    }
+    INPUT_LEFT: int = 1
+    INPUT_RIGHT: str = "test"
+    input: Json = {"A": {"B": [None, INPUT_LEFT], "C": INPUT_RIGHT}}
     result: Json = from_safe_json(input)
 
     assert isinstance(result, Dict)
@@ -161,8 +159,8 @@ def test_tree() -> None:
 
     assert bool_same_array(
         [
-            INPUT_PATH == result_outside["path"],
-            [None, INPUT_DECIMAL] == result_inside,
+            INPUT_RIGHT == result_outside["C"],
+            [None, INPUT_LEFT] == result_inside,
         ]
     )
 
