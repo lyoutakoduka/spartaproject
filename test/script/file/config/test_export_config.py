@@ -168,9 +168,15 @@ def test_mix_section() -> None:
 
 def test_compress() -> None:
     INPUT: Config = {"bool": {"true": True}, "int": {"one": 1}}
-    EXPECTED: str = "[bool]\ntrue=True\n[int]\none=1"
+    EXPECTED: str = """
+        [bool]
+        true=True
+        [int]
+        one=1
+    """
+    expected: str = format_indent(EXPECTED)
 
-    assert EXPECTED == config_dump(INPUT, compress=True)
+    assert expected == config_dump(INPUT, compress=True)
 
 
 def test_export() -> None:
