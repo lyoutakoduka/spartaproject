@@ -24,17 +24,6 @@ def _common_test(expected: str, input: Config) -> None:
     assert format_indent(expected, stdout=True) == config_dump(input)
 
 
-def test_lower() -> None:
-    INPUT: Config = {"SECTION": {"TRUE": True, "FALSE": False}}
-    EXPECTED: str = """
-        [SECTION]
-        true = True
-        false = False
-    """
-
-    _common_test(EXPECTED, INPUT)
-
-
 def test_bool() -> None:
     INPUT: BoolPair = {"b": True}
     input_pair: BoolPair2 = {"A": INPUT}
@@ -179,6 +168,17 @@ def test_compress() -> None:
     assert expected == config_dump(INPUT, compress=True)
 
 
+def test_lower() -> None:
+    INPUT: Config = {"SECTION": {"TRUE": True, "FALSE": False}}
+    EXPECTED: str = """
+        [SECTION]
+        true = True
+        false = False
+    """
+
+    _common_test(EXPECTED, INPUT)
+
+
 def test_export() -> None:
     INPUT: Config = {"section": {"option": "value"}}
     EXPECTED: str = """
@@ -195,7 +195,6 @@ def test_export() -> None:
 
 
 def main() -> bool:
-    test_lower()
     test_bool()
     test_integer()
     test_float()
@@ -205,5 +204,6 @@ def main() -> bool:
     test_mix_option()
     test_mix_section()
     test_compress()
+    test_lower()
     test_export()
     return True
