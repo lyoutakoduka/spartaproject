@@ -5,6 +5,7 @@ from decimal import Decimal
 from pathlib import Path
 from typing import Dict, List
 
+from pyspartaproj.context.default.string_context import StrPair, StrPair2
 from pyspartaproj.context.extension.path_context import PathPair, PathPair2
 from pyspartaproj.context.file.json_context import (
     Array,
@@ -103,10 +104,17 @@ def test_string_array() -> None:
 
 def test_string_pair() -> None:
     INPUT: str = "test"
-    input1: Json = {"B": INPUT}
+    input1: Json = {"B": INPUT, "C.path": Path("remove")}
     input2: Json = {"A": input1}
     _common_test_pair(INPUT, string_pair_from_json(input1))
     _common_test_pair2(INPUT, string_pair2_from_json(input2))
+
+    result: StrPair = string_pair_from_json(input1)
+    _common_test(INPUT, result["B"], len(result))
+
+    result_parent: StrPair2 = string_pair2_from_json(input2)
+    result_child: StrPair = result_parent["A"]
+    _common_test(INPUT, result_child["B"], len(result_child))
 
 
 def test_decimal_array() -> None:
