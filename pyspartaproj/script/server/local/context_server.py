@@ -80,7 +80,7 @@ class ContextServer:
         return list(context_path.keys())
 
     def set_path(self, type: str, path: Path) -> bool:
-        if type in self.get_context_table("path"):
+        if type in self.get_path_table():
             if isinstance(self._current_context, Dict):
                 self._current_context[type] = path.as_posix()
                 return True

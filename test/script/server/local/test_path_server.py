@@ -33,7 +33,7 @@ def test_path() -> None:
 
 def test_path_string() -> None:
     def individual_test(server: PathServer) -> None:
-        for type in server.get_context_table("path"):
+        for type in server.get_path_table():
             assert server.get_path(type) == Path(server.get_path_string(type))
 
     _common_test(individual_test)
