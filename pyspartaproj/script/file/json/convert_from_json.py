@@ -47,7 +47,7 @@ def _to_path(input: str) -> Path:
 
 
 def _filter_path(input: str, key: str) -> Path | None:
-    if "path" in key:
+    if key.endswith(".path"):
         return _to_path(input)
 
     return None
