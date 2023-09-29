@@ -41,32 +41,28 @@ class ContextServer:
         return path_pair_from_json(self._current_context)
 
     def get_integer(self, type: str) -> int:
-        context: IntPair = integer_pair_from_json(self._current_context)
+        context: IntPair = self._filter_integer()
         return context[type]
 
     def get_string(self, type: str) -> str:
-        context: StrPair = string_pair_from_json(self._current_context)
+        context: StrPair = self._filter_string()
         return context[type]
 
     def get_path(self, type: str) -> Path:
-        context: PathPair = path_pair_from_json(self._current_context)
+        context: PathPair = self._filter_path()
         return context[type]
 
     def get_context_table(self, type: str) -> Strs:
         if "integer" == type:
-            context_integer: IntPair = integer_pair_from_json(
-                self._current_context
-            )
+            context_integer: IntPair = self._filter_integer()
             return list(context_integer.keys())
 
         elif "string" == type:
-            context_string: StrPair = string_pair_from_json(
-                self._current_context
-            )
+            context_string: StrPair = self._filter_string()
             return list(context_string.keys())
 
         elif "path" == type:
-            context_path: PathPair = path_pair_from_json(self._current_context)
+            context_path: PathPair = self._filter_path()
             return list(context_path.keys())
 
         return []
