@@ -126,7 +126,9 @@ def string_pair_from_json(input: Json) -> StrPair:
     if not isinstance(input, Dict):
         return {}
     return {
-        key: value for key, value in input.items() if isinstance(value, str)
+        key: value
+        for key, value in input.items()
+        if isinstance(value, str) and not _filter_path(value, key)
     }
 
 
