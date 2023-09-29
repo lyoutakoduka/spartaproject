@@ -18,17 +18,6 @@ from pyspartaproj.script.file.json.import_json import json_import
 
 
 class ContextServer:
-    def _get_table(self) -> StrPair:
-        return {
-            "timeout": "integer",
-            "port": "integer",
-            "host": "string",
-            "user_name": "string",
-            "private_key": "path",
-            "remote_root": "path",
-            "local_root": "path",
-        }
-
     def get_context_table(self, type: str) -> Strs:
         if "integer" == type:
             context_integer: IntPair = integer_pair_from_json(
