@@ -180,13 +180,16 @@ def test_lower() -> None:
 
 
 def test_export() -> None:
-    INPUT: Config = {"section": {"option": "value"}}
+    INPUT: Config = {"true": {"true": True}, "false": {"false": False}}
     EXPECTED: str = """
-        [section]
-        option = value
+        [true]
+        true = True
+
+        [false]
+        false = False
     """
 
-    expected: str = format_indent(EXPECTED)
+    expected: str = format_indent(EXPECTED, stdout=True)
 
     with TemporaryDirectory() as temporary_path:
         assert expected == text_import(
