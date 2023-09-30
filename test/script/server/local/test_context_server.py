@@ -32,7 +32,7 @@ def test_key() -> None:
 def test_integer() -> None:
     def individual_test(server: ContextServer) -> None:
         for type in server.get_integer_context_keys():
-            assert isinstance(server.get_integer(type), int)
+            assert isinstance(server.get_integer_context(type), int)
 
     _common_test(individual_test)
 
@@ -40,7 +40,7 @@ def test_integer() -> None:
 def test_string() -> None:
     def individual_test(server: ContextServer) -> None:
         for type in server.get_string_context_keys():
-            assert isinstance(server.get_string(type), str)
+            assert isinstance(server.get_string_context(type), str)
 
     _common_test(individual_test)
 
@@ -48,7 +48,7 @@ def test_string() -> None:
 def test_path() -> None:
     def individual_test(server: ContextServer) -> None:
         for type in server.get_path_context_keys():
-            assert isinstance(server.get_path(type), Path)
+            assert isinstance(server.get_path_context(type), Path)
 
     _common_test(individual_test)
 
@@ -59,7 +59,7 @@ def test_set_path() -> None:
     def individual_test(server: ContextServer) -> None:
         for type in server.get_path_context_keys():
             server.set_path(type, expected)
-            assert expected == server.get_path(type)
+            assert expected == server.get_path_context(type)
 
     _common_test(individual_test)
 
@@ -69,10 +69,10 @@ def test_revert() -> None:
 
     def individual_test(server: ContextServer) -> None:
         for type in server.get_path_context_keys():
-            current: Path = server.get_path(type)
+            current: Path = server.get_path_context(type)
             server.set_path(type, input)
             server.revert_default()
-            assert current == server.get_path(type)
+            assert current == server.get_path_context(type)
 
     _common_test(individual_test)
 

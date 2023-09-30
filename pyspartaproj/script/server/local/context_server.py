@@ -40,15 +40,15 @@ class ContextServer:
     def _filter_path(self) -> PathPair:
         return path_pair_from_json(self._current_context)
 
-    def get_integer(self, type: str) -> int:
+    def get_integer_context(self, type: str) -> int:
         context: IntPair = self._filter_integer()
         return context[type]
 
-    def get_string(self, type: str) -> str:
+    def get_string_context(self, type: str) -> str:
         context: StrPair = self._filter_string()
         return context[type]
 
-    def get_path(self, type: str) -> Path:
+    def get_path_context(self, type: str) -> Path:
         context: PathPair = self._filter_path()
         return context[type]
 

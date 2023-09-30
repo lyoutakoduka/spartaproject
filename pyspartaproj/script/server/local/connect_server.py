@@ -47,14 +47,14 @@ class ConnectServer(PathServer):
         self._initialize_connect()
 
     def _connect_detail(self) -> None:
-        milliseconds: int = self.get_integer("timeout")
+        milliseconds: int = self.get_integer_context("timeout")
         seconds: Decimal = Decimal(str(milliseconds)) / Decimal("1000.0")
 
         if ssh := self.get_ssh():
             ssh.connect(
-                hostname=self.get_string("host"),
-                port=self.get_integer("port"),
-                username=self.get_string("user_name"),
+                hostname=self.get_string_context("host"),
+                port=self.get_integer_context("port"),
+                username=self.get_string_context("user_name"),
                 key_filename=self.get_path_string("private_key.path"),
                 timeout=float(seconds),
             )
