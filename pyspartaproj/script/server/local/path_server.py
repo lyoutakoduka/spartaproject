@@ -65,9 +65,6 @@ class PathServer(ContextServer, WorkSpace):
         return list(self._path_table.keys())
 
     def get_path(self, type: str) -> Path:
-        if type in self.get_path_table():
-            return super().get_path_context(type)
-
         return self._path_table[type]
 
     def get_working_space(
