@@ -4,6 +4,7 @@
 from pathlib import Path
 from typing import Callable
 
+from pyspartaproj.context.default.integer_context import Ints
 from pyspartaproj.script.server.local.context_server import ContextServer
 
 
@@ -13,19 +14,17 @@ def _common_test(function: Callable[[ContextServer], None]) -> None:
 
 
 def test_key() -> None:
-    EXPECTED: int = 7
+    EXPECTED: Ints = [2, 2, 3]
 
     def individual_test(server: ContextServer) -> None:
-        assert EXPECTED == sum(
-            [
-                len(function())
-                for function in [
-                    server.get_integer_table,
-                    server.get_string_table,
-                    server.get_path_table,
-                ]
+        assert EXPECTED == [
+            len(function())
+            for function in [
+                server.get_integer_table,
+                server.get_string_table,
+                server.get_path_table,
             ]
-        )
+        ]
 
     _common_test(individual_test)
 
