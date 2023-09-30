@@ -20,9 +20,9 @@ def test_key() -> None:
         assert EXPECTED == [
             len(function())
             for function in [
-                server.get_integer_table,
-                server.get_string_table,
-                server.get_path_table,
+                server.get_integer_context_keys,
+                server.get_string_context_keys,
+                server.get_path_context_keys,
             ]
         ]
 
@@ -31,7 +31,7 @@ def test_key() -> None:
 
 def test_integer() -> None:
     def individual_test(server: ContextServer) -> None:
-        for type in server.get_integer_table():
+        for type in server.get_integer_context_keys():
             assert isinstance(server.get_integer(type), int)
 
     _common_test(individual_test)
@@ -39,7 +39,7 @@ def test_integer() -> None:
 
 def test_string() -> None:
     def individual_test(server: ContextServer) -> None:
-        for type in server.get_string_table():
+        for type in server.get_string_context_keys():
             assert isinstance(server.get_string(type), str)
 
     _common_test(individual_test)
@@ -47,7 +47,7 @@ def test_string() -> None:
 
 def test_path() -> None:
     def individual_test(server: ContextServer) -> None:
-        for type in server.get_path_table():
+        for type in server.get_path_context_keys():
             assert isinstance(server.get_path(type), Path)
 
     _common_test(individual_test)
@@ -57,7 +57,7 @@ def test_set_path() -> None:
     expected: Path = Path(__file__)
 
     def individual_test(server: ContextServer) -> None:
-        for type in server.get_path_table():
+        for type in server.get_path_context_keys():
             server.set_path(type, expected)
             assert expected == server.get_path(type)
 
@@ -68,7 +68,7 @@ def test_revert() -> None:
     input: Path = Path(__file__)
 
     def individual_test(server: ContextServer) -> None:
-        for type in server.get_path_table():
+        for type in server.get_path_context_keys():
             current: Path = server.get_path(type)
             server.set_path(type, input)
             server.revert_default()

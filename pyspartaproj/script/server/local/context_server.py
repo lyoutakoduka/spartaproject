@@ -52,20 +52,20 @@ class ContextServer:
         context: PathPair = self._filter_path()
         return context[type]
 
-    def get_integer_table(self) -> Strs:
+    def get_integer_context_keys(self) -> Strs:
         context_integer: IntPair = self._filter_integer()
         return list(context_integer.keys())
 
-    def get_string_table(self) -> Strs:
+    def get_string_context_keys(self) -> Strs:
         context_string: StrPair = self._filter_string()
         return list(context_string.keys())
 
-    def get_path_table(self) -> Strs:
+    def get_path_context_keys(self) -> Strs:
         context_path: PathPair = self._filter_path()
         return list(context_path.keys())
 
     def set_path(self, type: str, path: Path) -> bool:
-        if type in self.get_path_table():
+        if type in self.get_path_context_keys():
             if isinstance(self._current_context, Dict):
                 self._current_context[type] = path.as_posix()
                 return True
