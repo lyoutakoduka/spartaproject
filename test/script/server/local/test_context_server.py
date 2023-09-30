@@ -58,7 +58,7 @@ def test_set_path() -> None:
 
     def individual_test(server: ContextServer) -> None:
         for type in server.get_path_context_keys():
-            server.set_path(type, expected)
+            server.set_path_context(type, expected)
             assert expected == server.get_path_context(type)
 
     _common_test(individual_test)
@@ -70,7 +70,7 @@ def test_revert() -> None:
     def individual_test(server: ContextServer) -> None:
         for type in server.get_path_context_keys():
             current: Path = server.get_path_context(type)
-            server.set_path(type, input)
+            server.set_path_context(type, input)
             server.revert_default()
             assert current == server.get_path_context(type)
 

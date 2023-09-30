@@ -64,7 +64,7 @@ class ContextServer:
         context_path: PathPair = self._filter_path()
         return list(context_path.keys())
 
-    def set_path(self, type: str, path: Path) -> bool:
+    def set_path_context(self, type: str, path: Path) -> bool:
         if type in self.get_path_context_keys():
             if isinstance(self._current_context, Dict):
                 self._current_context[type] = path.as_posix()
