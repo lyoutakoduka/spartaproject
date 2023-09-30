@@ -55,7 +55,7 @@ class ConnectServer(PathServer):
                 hostname=self.get_string("host"),
                 port=self.get_integer("port"),
                 username=self.get_string("user_name"),
-                key_filename=self.get_path_string("private_key"),
+                key_filename=self.get_path_string("private_key.path"),
                 timeout=float(seconds),
             )
 
@@ -153,7 +153,7 @@ class ConnectServer(PathServer):
 
         self._receive_ssh()
 
-        self.execute_ssh(["cd", self.get_path_string("remote_root")])
+        self.execute_ssh(["cd", self.get_path_string("remote_root.path")])
         return self._ssh_correct_path()
 
     def _receive_sftp(self) -> Strs:
@@ -167,7 +167,7 @@ class ConnectServer(PathServer):
 
     def _sftp_remote_path(self) -> None:
         if sftp := self.get_sftp():
-            sftp.chdir(self.get_path_string("remote_root"))
+            sftp.chdir(self.get_path_string("remote_root.path"))
 
     def _create_sftp(self) -> None:
         if ssh := self.get_ssh():
