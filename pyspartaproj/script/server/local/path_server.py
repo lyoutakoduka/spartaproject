@@ -70,10 +70,6 @@ class PathServer(ContextServer, WorkSpace):
 
         return self._path_table[type]
 
-    def get_path_string(self, type: str) -> str:
-        path: Path = self.get_path(type)
-        return path.as_posix()
-
     def get_working_space(
         self, override: bool = False, jst: bool = False
     ) -> Path:

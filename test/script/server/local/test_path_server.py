@@ -31,14 +31,6 @@ def test_path() -> None:
     _common_test(individual_test)
 
 
-def test_path_string() -> None:
-    def individual_test(server: PathServer) -> None:
-        for type in server.get_path_table():
-            assert server.get_path(type) == Path(server.get_path_string(type))
-
-    _common_test(individual_test)
-
-
 def test_to_remote() -> None:
     EXPECTED: Path = Path("temp")
 
@@ -80,7 +72,6 @@ def test_working() -> None:
 def main() -> bool:
     test_table()
     test_path()
-    test_path_string()
     test_to_remote()
     test_to_local()
     test_working()
