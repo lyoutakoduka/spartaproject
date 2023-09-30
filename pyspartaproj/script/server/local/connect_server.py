@@ -146,6 +146,9 @@ class ConnectServer(PathServer):
             [name[:-1] for name in self.execute_ssh(["ls", "-1", "-p"])]
         )
 
+    def _get_remote_path(self) -> str:
+        return self.get_path_context("remote_root.path").as_posix()
+
     def _connect_ssh(self) -> bool:
         self._create_ssh()
 
@@ -155,9 +158,7 @@ class ConnectServer(PathServer):
 
         self._receive_ssh()
 
-        self.execute_ssh(
-            ["cd", self.get_path_context("remote_root.path").as_posix()]
-        )
+        self.execute_ssh(["cd", self._get_remote_path()])
         return self._ssh_correct_path()
 
     def _receive_sftp(self) -> Strs:
@@ -171,7 +172,7 @@ class ConnectServer(PathServer):
 
     def _sftp_remote_path(self) -> None:
         if sftp := self.get_sftp():
-            sftp.chdir(self.get_path_context("remote_root.path").as_posix())
+            sftp.chdir(self._get_remote_path())
 
     def _create_sftp(self) -> None:
         if ssh := self.get_ssh():
