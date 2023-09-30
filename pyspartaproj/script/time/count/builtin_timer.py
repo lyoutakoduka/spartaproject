@@ -24,8 +24,11 @@ class TimerSelect:
             self._count = self._get_current()
 
     def __init__(
-        self, override: bool = False, interval: Decimal = Decimal("1")
+        self, override: bool = False, interval: Decimal | None = None
     ) -> None:
+        if interval is None:
+            interval = Decimal("1")
+
         self._override: bool = override
         self._interval: Decimal = interval
 

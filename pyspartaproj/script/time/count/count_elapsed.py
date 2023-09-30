@@ -25,10 +25,16 @@ class LogTimer:
     def restart(
         self,
         override: bool = False,
-        timer_interval: Decimal = Decimal("0.01"),
-        interval: Decimal = Decimal("0.1"),
+        timer_interval: Decimal | None = None,
+        interval: Decimal | None = None,
         order: int = 1,
     ) -> None:
+        if timer_interval is None:
+            timer_interval = Decimal("0.01")
+
+        if interval is None:
+            interval = Decimal("0.1")
+
         self._timer: TimerSelect = TimerSelect(
             override=override, interval=timer_interval
         )
