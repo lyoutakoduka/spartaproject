@@ -8,7 +8,10 @@ from pyspartaproj.script.decorator_generator import TransferFunction
 
 
 class TemporaryDecorator(TransferFunction):
-    def __init__(self, text: str = "") -> None:
+    def __init__(self, text: str | None = None) -> None:
+        if text is None:
+            text = ""
+
         self.text = text
 
     def wrapper(

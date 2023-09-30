@@ -14,13 +14,15 @@ from pyspartaproj.script.server.local.context_server import ContextServer
 
 
 class PathServer(ContextServer, WorkSpace):
-    def _add_path(self, type: str, child: Path, parent: str = "") -> None:
-        if 0 < len(parent):
+    def _add_path(self, type: str, child: Path, parent: str | None) -> None:
+        if parent is not None:
             child = Path(self.get_path(parent), child)
 
         self._path_table[type] = child
 
-    def _add_directory(self, table: PathPair, parent: str = "") -> None:
+    def _add_directory(
+        self, table: PathPair, parent: str | None = None
+    ) -> None:
         for type, name in table.items():
             self._add_path(type, Path(name), parent=parent)
 

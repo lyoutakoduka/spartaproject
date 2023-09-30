@@ -53,18 +53,19 @@ def _filter_path(input: str, key: str) -> Path | None:
     return None
 
 
-def _convert_unknown(input: Single, key: str) -> Single:
+def _convert_unknown(input: Single, key: str | None) -> Single:
     if isinstance(input, float):
         return _to_decimal(input)
 
     if isinstance(input, str):
-        if path := _filter_path(input, key):
-            return path
+        if key is not None:
+            if path := _filter_path(input, key):
+                return path
 
     return input
 
 
-def from_safe_json(input: Json, key: str = "") -> Json:
+def from_safe_json(input: Json, key: str | None = None) -> Json:
     if isinstance(input, Dict):
         return {
             key: from_safe_json(value, key=key) for key, value in input.items()

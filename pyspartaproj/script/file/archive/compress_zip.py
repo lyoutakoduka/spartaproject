@@ -24,7 +24,7 @@ class CompressZip:
     def __init__(
         self,
         output_root: Path,
-        archive_id: str = "",
+        archive_id: str | None = None,
         limit_byte: int = 0,
         compress: bool = False,
     ) -> None:
@@ -45,8 +45,8 @@ class CompressZip:
 
         self._limit_byte: Decimal = Decimal(str(byte))
 
-    def _init_archive_id(self, archive_id: str) -> None:
-        if 0 == len(archive_id):
+    def _init_archive_id(self, archive_id: str | None) -> None:
+        if archive_id is None:
             archive_id = self._output_root.name
         self._archive_id = archive_id
 
