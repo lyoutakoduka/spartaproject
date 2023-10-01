@@ -1,4 +1,10 @@
-### Python ###
-# Byte-compiled / optimized / DLL files
+# Permanent
 __pycache__/
+
+# In development
+docs/tmp/
 typings/
+
+# Isolate
+.vscode/sftp.json
+spartaproject.json
