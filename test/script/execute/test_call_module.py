@@ -27,7 +27,7 @@ def test_unknown_function() -> None:
 
 
 def test_same() -> None:
-    """Main function calling of designated module."""
+    """Source and destination path was same."""
     with raises(ValueError):
         call_function(_SOURCE_PATH, _SOURCE_PATH)
 
