@@ -21,7 +21,7 @@ def test_unknown_module() -> None:
 
 def test_unknown_function() -> None:
     """Main function calling of unknown module."""
-    other_path = Path(_SOURCE_PATH).with_name("debug.py")
+    other_path = Path(_SOURCE_PATH).with_name("debug_launcher.py")
     with raises(ModuleNotFoundError):
         call_function(other_path, _SOURCE_PATH, function="unknown")
 
