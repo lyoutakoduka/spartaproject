@@ -26,8 +26,7 @@ def _check_absolute_path(call_context: PathPair) -> None:
 
 def _check_same_path(call_context: PathPair) -> None:
     if 1 == len(set([call_context[type].name for type in _get_path_key()])):
-        OVERRIDE_FILE: str = "debug_empty.py"
-        call_context["module"] = Path(__file__).with_name(OVERRIDE_FILE)
+        raise ValueError
 
 
 def _replace_file_name(head: str, module_path: Path) -> Path:

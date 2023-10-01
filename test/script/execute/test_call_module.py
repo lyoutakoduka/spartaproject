@@ -28,7 +28,8 @@ def test_unknown_function() -> None:
 
 def test_success() -> None:
     """Main function calling of designated module."""
-    assert call_function(_SOURCE_PATH, _SOURCE_PATH)
+    with raises(ValueError):
+        call_function(_SOURCE_PATH, _SOURCE_PATH)
 
 
 def main() -> bool:
