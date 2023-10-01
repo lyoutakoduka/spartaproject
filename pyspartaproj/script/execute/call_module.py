@@ -60,7 +60,7 @@ def _check_test_path(call_context: PathPair) -> bool:
 
 def _call_target_function(module: ModuleType, function: str) -> None:
     if not hasattr(module, function):
-        raise ModuleNotFoundError(function)
+        raise ModuleNotFoundError
 
     func: Any = getattr(module, function)
     func()
