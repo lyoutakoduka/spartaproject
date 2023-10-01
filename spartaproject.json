@@ -1,0 +1,11 @@
+{
+  "server": {
+    "host": "*******.******.**.**",
+    "user_name": "*******",
+    "private_key.path": "*:/*****/*/.ssh/*************",
+    "remote_root.path": "www/*************",
+    "local_root.path": "*:/*******/******/local",
+    "timeout": 1000,
+    "port": 99
+  }
+}
