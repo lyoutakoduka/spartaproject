@@ -19,7 +19,7 @@ def debug_test() -> bool:
 
 
 def main() -> int:
-    """Call main function of designated module.
+    """An error has occurred if called from this this module by VSCode.
 
     Returns:
         bool: success if get to the end of function
