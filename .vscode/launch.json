@@ -1,0 +1,15 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Test Launcher",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/pyspartaproj/script/execute/debug_launcher.py",
+      "cwd": "${workspaceFolder}",
+      "console": "internalConsole",
+      "internalConsoleOptions": "neverOpen",
+      "args": ["${file}"]
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "autoDocstring.docstringFormat": "google",
+  "black-formatter.importStrategy": "fromEnvironment",
+  "black-formatter.args": ["--line-length", "79"],
+  "cSpell.diagnosticLevel": "Warning",
+  "cSpell.userWords": [
+    "dateutil",
+    "docstrings",
+    "getcontext",
+    "gettz",
+    "mypy",
+    "paramiko",
+    "planarize",
+    "planarized",
+    "prec",
+    "pylance",
+    "pyodide",
+    "pypiwin",
+    "pyscript",
+    "pyspartaproj",
+    "pytest",
+    "pywin",
+    "setcontext",
+    "unmatch",
+    "Targetpath",
+    "isort",
+    "pyenv",
+    "venv"
+  ],
+  "debug.console.fontFamily": "editor",
+  "debug.console.fontSize": 13,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  },
+  "editor.fontFamily": "UDEV Gothic JPDOC",
+  "editor.fontSize": 15,
+  "editor.formatOnSave": true,
+  "editor.minimap.enabled": false,
+  "editor.rulers": [79],
+  "explorer.excludeGitIgnore": false,
+  "flake8.args": ["--max-complexity", "10", "--ignore=I004"],
+  "flake8.importStrategy": "fromEnvironment",
+  "flake8.severity": {
+    "D": "Warning"
+  },
+  "files.exclude": {
+    "**/__pycache__/": true,
+    "**/.mypy_cache/": true,
+    "**/.pytest_cache/": true,
+    "**/.venv/": true,
+    "**/.tox/": true
+  },
+  "git.autoRepositoryDetection": "openEditors",
+  "isort.args": ["--settings=pyproject.toml"],
+  "liveServer.settings.NoBrowser": true,
+  "liveServer.settings.root": "/docs",
+  "mypy-type-checker.args": ["--config-file=pyproject.toml"],
+  "projectManager.supportSymlinksOnBaseFolders": true,
+  "python.analysis.diagnosticMode": "workspace",
+  "python.analysis.diagnosticSeverityOverrides": {
+    "reportShadowedImports": "information",
+    "reportMissingTypeStubs": "information"
+  },
+  "python.analysis.extraPaths": ["docs", "typings"],
+  "python.analysis.ignore": [
+    "**/__pycache__/",
+    "**/.mypy_cache/",
+    "**/.pytest_cache/",
+    "**/.tox/",
+    "**/.venv/"
+  ],
+  "python.analysis.stubPath": "typings",
+  "python.analysis.typeCheckingMode": "strict",
+  "python.languageServer": "Pylance",
+  "python.testing.pytestArgs": ["-s"],
+  "python.testing.pytestEnabled": true,
+  "search.followSymlinks": false,
+  "terminal.integrated.fontSize": 14,
+  "testing.gutterEnabled": false,
+  "workbench.colorTheme": "Dracula Soft",
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  }
+}
