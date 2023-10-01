@@ -26,12 +26,6 @@ def test_unknown_function() -> None:
         call_function(other_path, _SOURCE_PATH, function="unknown")
 
 
-def test_same() -> None:
-    """Source and destination path was same."""
-    with raises(ValueError):
-        call_function(_SOURCE_PATH, _SOURCE_PATH)
-
-
 def main() -> bool:
     """Test all public functions.
 
@@ -40,5 +34,4 @@ def main() -> bool:
     """
     test_unknown_module()
     test_unknown_function()
-    test_same()
     return True

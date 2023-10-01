@@ -24,11 +24,6 @@ def _check_absolute_path(call_context: PathPair) -> None:
     )
 
 
-def _check_same_path(call_context: PathPair) -> None:
-    if 1 == len(set([call_context[type].name for type in _get_path_key()])):
-        raise ValueError
-
-
 def _replace_file_name(head: str, module_path: Path) -> Path:
     return module_path.with_name(head + module_path.name)
 
@@ -87,7 +82,6 @@ def call_function(source: Path, module: Path, function: str = "main") -> bool:
     }
 
     _check_absolute_path(call_context)
-    _check_same_path(call_context)
 
     if _check_test_path(call_context):
         function = "main"
