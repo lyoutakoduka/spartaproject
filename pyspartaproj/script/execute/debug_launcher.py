@@ -9,6 +9,15 @@ from sys import argv
 from pyspartaproj.script.execute.call_module import call_function
 
 
+def debug_test() -> bool:
+    """Function is used for test for function call.
+
+    Returns:
+        bool: just return True.
+    """
+    return True
+
+
 def main() -> int:
     """Call main function of designated module.
 
