@@ -68,7 +68,7 @@ def test_directory() -> None:
     _common_test(name, server)
 
 
-def test_version() -> None:
+def test_path() -> None:
     name: str = "version.py"
     EXPECTED: Ints = [3, 10, 11]
     server: ExecuteServer = ExecuteServer(versions=EXPECTED)
@@ -87,5 +87,5 @@ def test_error() -> None:
 def main() -> bool:
     test_file()
     test_directory()
-    test_version()
+    test_path()
     return True
