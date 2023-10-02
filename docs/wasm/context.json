@@ -1,0 +1,4 @@
+{
+  "pyscript.path": "https://pyscript.net/snapshots/2023.09.1.RC1/core.js",
+  "main.path": "./wasm/main.py"
+}
