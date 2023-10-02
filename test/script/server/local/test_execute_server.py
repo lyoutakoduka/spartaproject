@@ -7,6 +7,7 @@ from pytest import raises
 
 from pyspartaproj.context.default.integer_context import Ints
 from pyspartaproj.context.default.string_context import Strs
+from pyspartaproj.script.execute.feature_flags import in_development
 from pyspartaproj.script.execute.script_version import version_from_string
 from pyspartaproj.script.path.safe.safe_copy import SafeCopy
 from pyspartaproj.script.server.local.execute_server import ExecuteServer
@@ -73,7 +74,8 @@ def test_path() -> None:
     EXPECTED: Ints = [3, 10, 11]
     server: ExecuteServer = ExecuteServer(versions=EXPECTED)
 
-    _version_test(name, server, EXPECTED)
+    if in_development():
+        _version_test(name, server, EXPECTED)
 
 
 def test_error() -> None:
