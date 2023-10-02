@@ -14,7 +14,7 @@ from pyspartaproj.script.server.local.execute_server import ExecuteServer
 
 def _get_execute_source(name: str) -> Path:
     current: Path = Path(__file__)
-    return Path(current.parent, "execute", name)
+    return Path(current.parents[1], "execute", name)
 
 
 def _execute_python(name: str, server: ExecuteServer) -> Strs | None:
