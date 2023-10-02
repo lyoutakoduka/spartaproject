@@ -25,7 +25,8 @@
     "Targetpath",
     "isort",
     "pyenv",
-    "venv"
+    "venv",
+    "levelname"
   ],
   "debug.console.fontFamily": "editor",
   "debug.console.fontSize": 13,
