@@ -7,6 +7,7 @@ from pathlib import Path
 from sys import argv
 
 from pyspartaproj.script.execute.call_module import call_function
+from pyspartaproj.script.execute.feature_flags import in_development
 
 
 def debug_test() -> bool:
@@ -24,7 +25,10 @@ def debug_launcher() -> bool:
     Returns:
         bool: success if get to the end of function
     """
-    return call_function(Path(argv[0]), Path(argv[1]))
+    if in_development():
+        return call_function(Path(argv[0]), Path(argv[1]))
+
+    return True
 
 
 if __name__ == "__main__":

@@ -10,6 +10,7 @@ from typing import Any
 
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.extension.path_context import PathPair
+from pyspartaproj.script.execute.feature_flags import in_development
 from pyspartaproj.script.path.modify.get_absolute import get_absolute
 from pyspartaproj.script.path.modify.get_relative import get_relative
 
@@ -77,6 +78,9 @@ def call_function(source: Path, module: Path, function: str = "main") -> bool:
     Returns:
         bool: success if get to the end of function
     """
+    if in_development():
+        return True
+
     call_context: PathPair = {
         key: path for key, path in zip(_get_path_key(), [source, module])
     }

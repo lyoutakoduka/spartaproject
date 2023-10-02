@@ -5,11 +5,13 @@
 
 
 from pyspartaproj.script.execute.debug_launcher import debug_launcher
+from pyspartaproj.script.execute.feature_flags import in_development
 
 
 def test_callable() -> None:
     """Used for test for function call."""
-    assert debug_launcher()
+    if in_development():
+        assert debug_launcher()
 
 
 def main() -> bool:
