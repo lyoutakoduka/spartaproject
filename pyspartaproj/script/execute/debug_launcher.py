@@ -18,7 +18,7 @@ def debug_test() -> bool:
     return True
 
 
-def main() -> bool:
+def debug_launcher() -> bool:
     """An error has occurred if called from this this module by VSCode.
 
     Returns:
@@ -28,4 +28,4 @@ def main() -> bool:
 
 
 if __name__ == "__main__":
-    main()
+    debug_launcher()

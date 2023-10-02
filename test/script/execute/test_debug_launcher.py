@@ -4,12 +4,12 @@
 """Connector to for execution and debugging from VSCode."""
 
 
-from pyspartaproj.script.execute.debug_launcher import main
+from pyspartaproj.script.execute.debug_launcher import debug_launcher
 
 
 def test_callable() -> None:
     """Used for test for function call."""
-    assert main()
+    assert debug_launcher()
 
 
 def main() -> bool:
