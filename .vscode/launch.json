@@ -10,6 +10,15 @@
       "console": "internalConsole",
       "internalConsoleOptions": "neverOpen",
       "args": ["${file}"]
+    },
+    {
+      "name": "python_launcher",
+      "type": "python",
+      "request": "launch",
+      "program": "${file}",
+      "cwd": "${workspaceFolder}",
+      "console": "internalConsole",
+      "internalConsoleOptions": "neverOpen"
     }
   ]
 }
