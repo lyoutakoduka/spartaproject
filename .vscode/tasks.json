@@ -1,0 +1,15 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "bash_profile_download",
+      "type": "shell",
+      "command": "rsync ~/.bash_profile ${workspaceFolder}/link/.bash_profile"
+    },
+    {
+      "label": "bash_profile_upload",
+      "type": "shell",
+      "command": "rsync ${workspaceFolder}/link/.bash_profile ~/.bash_profile"
+    }
+  ]
+}
