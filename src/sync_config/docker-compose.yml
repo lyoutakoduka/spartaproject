@@ -1,9 +1,7 @@
-version: "3"
 services:
   app:
     restart: always
-    build: .
-    container_name: "spartaproject"
+    container_name: "sync_config"
     working_dir: "/root"
     tty: true
-      - .:/root
+    command: /usr/bin/bash
