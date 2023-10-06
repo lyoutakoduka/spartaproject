@@ -48,7 +48,7 @@
     "**/__pycache__/": true,
     "**/.mypy_cache/": true,
     "**/.pytest_cache/": true,
-    "**/.venv/": true,
+    "**/venv/": true,
     "**/.tox/": true
   },
   "git.autoRepositoryDetection": "openEditors",
@@ -68,7 +68,7 @@
     "**/.mypy_cache/",
     "**/.pytest_cache/",
     "**/.tox/",
-    "**/.venv/"
+    "**/venv/"
   ],
   "python.analysis.stubPath": "typings",
   "python.analysis.typeCheckingMode": "strict",
