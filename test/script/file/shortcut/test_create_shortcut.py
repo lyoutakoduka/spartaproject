@@ -18,7 +18,7 @@ from pyspartaproj.script.path.temporary.create_temporary_file import (
 
 
 def _common_test(shortcut_target: Path, shortcut_root: Path) -> None:
-    shortcut_path: Path = get_shortcut_path(shortcut_target, shortcut_root)
+    shortcut_path: Path = Path(shortcut_root, shortcut_target.name + ".lnk")
     create_shortcut(shortcut_target, shortcut_path)
 
     assert shortcut_path.exists()
