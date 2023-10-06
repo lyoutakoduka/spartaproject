@@ -4,11 +4,12 @@
 from pyspartaproj.script.string.find_encoding import find_encoding
 
 
+def _common_test(encoding: str) -> None:
+    assert encoding == find_encoding(chr(12354).encode(encoding))
+
+
 def test_utf() -> None:
-    target: str = chr(12354)
-    byte: bytes = target.encode()
-    encoding: str = find_encoding(byte)
-    assert "utf-8" == encoding
+    _common_test("utf-8")
 
 
 def main() -> bool:
