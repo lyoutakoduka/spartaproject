@@ -3,11 +3,6 @@
 
 from pathlib import Path
 
-from pyspartaproj.extend.win32com.client import Dispatch
-from pyspartaproj.extend.win32com.client.dynamic import CDispatch
-
 
 def read_shortcut(shortcut_path: Path) -> Path:
-    shell: CDispatch = Dispatch("WScript.Shell")
-    shortcut: CDispatch = shell.CreateShortcut(shortcut_path.as_posix())
-    return Path(shortcut.Targetpath)
+    return shortcut_path
