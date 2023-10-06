@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.script.format_texts import format_indent
+from pyspartaproj.script.string.format_texts import format_indent
 
 
 def shared_compare(expected: Strs, input: str, stdout: bool = False) -> None:

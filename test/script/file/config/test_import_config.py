@@ -11,7 +11,7 @@ from pyspartaproj.script.file.config.import_config import (
     config_load,
 )
 from pyspartaproj.script.file.text.export_file import text_export
-from pyspartaproj.script.format_texts import format_indent
+from pyspartaproj.script.string.format_texts import format_indent
 
 
 def _get_section(input: str) -> Basic:

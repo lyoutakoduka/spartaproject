@@ -17,7 +17,7 @@ from pyspartaproj.script.file.config.export_config import (
     config_export,
 )
 from pyspartaproj.script.file.text.import_file import text_import
-from pyspartaproj.script.format_texts import format_indent
+from pyspartaproj.script.string.format_texts import format_indent
 
 
 def _common_test(expected: str, input: Config) -> None:
