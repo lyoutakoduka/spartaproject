@@ -893,6 +893,6 @@ test = [
 ]
 
 [metadata]
-content-hash = "66975ddfec222f3aaf70c01dcd1c03b4f3e83d98839c3784a4c81aa984aa6a91"
+content-hash = "30f6acb36eb27da08427a85db26df03a34971209c17ba5f0fd601aeaa2265a66"
 lock-version = "2.0"
 python-versions = "^3.11"
