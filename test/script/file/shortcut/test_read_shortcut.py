@@ -7,9 +7,6 @@ from tempfile import TemporaryDirectory
 from typing import Callable
 
 from pyspartaproj.script.file.shortcut.create_shortcut import create_shortcut
-from pyspartaproj.script.file.shortcut.get_shortcut_path import (
-    get_shortcut_path,
-)
 from pyspartaproj.script.file.shortcut.read_shortcut import read_shortcut
 from pyspartaproj.script.path.temporary.create_temporary_file import (
     create_temporary_file,

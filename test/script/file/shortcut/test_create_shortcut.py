@@ -9,9 +9,6 @@ from typing import Callable
 from pytest import raises
 
 from pyspartaproj.script.file.shortcut.create_shortcut import create_shortcut
-from pyspartaproj.script.file.shortcut.get_shortcut_path import (
-    get_shortcut_path,
-)
 from pyspartaproj.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
