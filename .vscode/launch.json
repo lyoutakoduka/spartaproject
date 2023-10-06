@@ -2,7 +2,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Test Launcher",
+      "name": "python_test_launcher",
       "type": "python",
       "request": "launch",
       "program": "${workspaceFolder}/pyspartaproj/script/execute/debug_launcher.py",
