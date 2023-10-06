@@ -79,7 +79,13 @@
   "terminal.integrated.fontSize": 14,
   "testing.gutterEnabled": false,
   "workbench.colorTheme": "Dracula Soft",
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[json]": {
