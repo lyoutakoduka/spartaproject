@@ -12,6 +12,11 @@ def test_utf() -> None:
     _common_test("utf-8")
 
 
+def test_sjis() -> None:
+    _common_test("shift-jis")
+
+
 def main() -> bool:
     test_utf()
+    test_sjis()
     return True

@@ -15,4 +15,10 @@ def find_encoding(byte: bytes) -> str:
         if "Windows-1254" == candidate:
             encoding = "shift-jis"
 
+        elif "Windows-1252" == candidate:
+            encoding = "shift-jis"
+
+        else:
+            encoding = candidate
+
     return encoding
