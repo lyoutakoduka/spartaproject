@@ -52,3 +52,6 @@ implicit_optional = true
 implicit_reexport = true
 strict = true
 warn_unreachable = true
+
+[tool.pytest.ini_options]
+addopts = "-s"
