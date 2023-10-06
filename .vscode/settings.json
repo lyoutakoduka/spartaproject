@@ -57,6 +57,7 @@
   "liveServer.settings.root": "/docs",
   "mypy-type-checker.args": ["--config-file=pyproject.toml"],
   "projectManager.supportSymlinksOnBaseFolders": true,
+  "pythonTestExplorer.testFramework": "pytest",
   "python.analysis.diagnosticMode": "workspace",
   "python.analysis.diagnosticSeverityOverrides": {
     "reportShadowedImports": "information",
@@ -73,7 +74,6 @@
   "python.analysis.stubPath": "typings",
   "python.analysis.typeCheckingMode": "strict",
   "python.languageServer": "Pylance",
-  "python.testing.pytestArgs": ["-s"],
   "python.testing.pytestEnabled": true,
   "search.followSymlinks": false,
   "terminal.integrated.fontSize": 14,
