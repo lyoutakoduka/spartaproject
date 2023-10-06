@@ -4,6 +4,6 @@ export PATH=$HOME/.local/bin:$PATH
 export PATH=/usr/local/bin:$PATH
 export PYENV_ROOT=$HOME/develop/external/pyenv:$PYENV_ROOT
 
-python3 ~/develop/external/dropbox/dropbox.py start
-
+alias python='python3.11'
+python ~/develop/external/dropbox/dropbox.py start
 cd ~/develop/project/spartaproject
