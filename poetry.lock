@@ -675,20 +675,6 @@ python-versions = ">=3.8"
 version = "0.24.1"
 
 [[package]]
-description = ""
-files = [
-  {file = "pypiwin32-223-py3-none-any.whl", hash = "sha256:67adf399debc1d5d14dffc1ab5acacb800da569754fafdc576b2a039485aa775"},
-  {file = "pypiwin32-223.tar.gz", hash = "sha256:71be40c1fbd28594214ecaecb58e7aa8b708eabfa0125c8a109ebd51edbd776a"},
-]
-name = "pypiwin32"
-optional = false
-python-versions = "*"
-version = "223"
-
-[package.dependencies]
-pywin32 = ">=223"
-
-[[package]]
 description = "API to interact with the python pyproject.toml based projects"
 files = [
   {file = "pyproject_api-1.6.1-py3-none-any.whl", hash = "sha256:4c0116d60476b0786c88692cf4e325a9814965e2469c5998b830bba16b183675"},
@@ -753,29 +739,6 @@ version = "2.8.2"
 
 [package.dependencies]
 six = ">=1.5"
-
-[[package]]
-description = "Python for Window Extensions"
-files = [
-  {file = "pywin32-306-cp310-cp310-win32.whl", hash = "sha256:06d3420a5155ba65f0b72f2699b5bacf3109f36acbe8923765c22938a69dfc8d"},
-  {file = "pywin32-306-cp310-cp310-win_amd64.whl", hash = "sha256:84f4471dbca1887ea3803d8848a1616429ac94a4a8d05f4bc9c5dcfd42ca99c8"},
-  {file = "pywin32-306-cp311-cp311-win32.whl", hash = "sha256:e65028133d15b64d2ed8f06dd9fbc268352478d4f9289e69c190ecd6818b6407"},
-  {file = "pywin32-306-cp311-cp311-win_amd64.whl", hash = "sha256:a7639f51c184c0272e93f244eb24dafca9b1855707d94c192d4a0b4c01e1100e"},
-  {file = "pywin32-306-cp311-cp311-win_arm64.whl", hash = "sha256:70dba0c913d19f942a2db25217d9a1b726c278f483a919f1abfed79c9cf64d3a"},
-  {file = "pywin32-306-cp312-cp312-win32.whl", hash = "sha256:383229d515657f4e3ed1343da8be101000562bf514591ff383ae940cad65458b"},
-  {file = "pywin32-306-cp312-cp312-win_amd64.whl", hash = "sha256:37257794c1ad39ee9be652da0462dc2e394c8159dfd913a8a4e8eb6fd346da0e"},
-  {file = "pywin32-306-cp312-cp312-win_arm64.whl", hash = "sha256:5821ec52f6d321aa59e2db7e0a35b997de60c201943557d108af9d4ae1ec7040"},
-  {file = "pywin32-306-cp37-cp37m-win32.whl", hash = "sha256:1c73ea9a0d2283d889001998059f5eaaba3b6238f767c9cf2833b13e6a685f65"},
-  {file = "pywin32-306-cp37-cp37m-win_amd64.whl", hash = "sha256:72c5f621542d7bdd4fdb716227be0dd3f8565c11b280be6315b06ace35487d36"},
-  {file = "pywin32-306-cp38-cp38-win32.whl", hash = "sha256:e4c092e2589b5cf0d365849e73e02c391c1349958c5ac3e9d5ccb9a28e017b3a"},
-  {file = "pywin32-306-cp38-cp38-win_amd64.whl", hash = "sha256:e8ac1ae3601bee6ca9f7cb4b5363bf1c0badb935ef243c4733ff9a393b1690c0"},
-  {file = "pywin32-306-cp39-cp39-win32.whl", hash = "sha256:e25fd5b485b55ac9c057f67d94bc203f3f6595078d1fb3b458c9c28b7153a802"},
-  {file = "pywin32-306-cp39-cp39-win_amd64.whl", hash = "sha256:39b61c15272833b5c329a2989999dcae836b1eed650252ab1b7bfbe1d59f30f4"},
-]
-name = "pywin32"
-optional = false
-python-versions = "*"
-version = "306"
 
 [[package]]
 description = "Python 2 and 3 compatibility utilities"
@@ -878,17 +841,6 @@ python-versions = "*"
 version = "2.8.19.14"
 
 [[package]]
-description = "Typing stubs for pywin32"
-files = [
-  {file = "types-pywin32-306.0.0.4.tar.gz", hash = "sha256:ae4bbec80d535053236d4bebedf55f58dee89cf5883d277f0fa89e857f3ff337"},
-  {file = "types_pywin32-306.0.0.4-py3-none-any.whl", hash = "sha256:f76a343ed6933008af85e158063963f923e54f2f461e697b2929b4178c7b77a1"},
-]
-name = "types-pywin32"
-optional = false
-python-versions = "*"
-version = "306.0.0.4"
-
-[[package]]
 description = "Backported and Experimental Type Hints for Python 3.8+"
 files = [
   {file = "typing_extensions-4.8.0-py3-none-any.whl", hash = "sha256:8f92fc8806f9a6b641eaa5318da32b44d401efaac0f6678c9bc448ba3605faa0"},
@@ -941,6 +893,6 @@ test = [
 ]
 
 [metadata]
-content-hash = "53a7a83e8ea7379548705eb0c6a2155f133019916dc3b8b8daafcc16fc97fb19"
+content-hash = "66975ddfec222f3aaf70c01dcd1c03b4f3e83d98839c3784a4c81aa984aa6a91"
 lock-version = "2.0"
 python-versions = "^3.11"
