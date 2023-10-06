@@ -73,6 +73,7 @@
   ],
   "python.analysis.stubPath": "typings",
   "python.analysis.typeCheckingMode": "strict",
+  "python.envFile": "",
   "python.languageServer": "Pylance",
   "python.testing.pytestEnabled": true,
   "search.followSymlinks": false,
