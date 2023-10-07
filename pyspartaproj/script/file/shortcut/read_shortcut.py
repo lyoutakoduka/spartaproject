@@ -3,7 +3,9 @@
 
 from pathlib import Path
 
+from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.script.execute.execute_powershell import (
+    execute_powershell,
     get_path_string,
     get_quoted_paths,
     get_script_executable,
@@ -23,8 +25,14 @@ def _get_shortcut_command(shortcut_path: Path) -> str:
     )
 
 
-def read_shortcut(shortcut_path: Path) -> Path:
+def read_shortcut(shortcut_path: Path) -> Path | None:
     if not shortcut_path.exists():
         raise FileNotFoundError()
 
-    return shortcut_path
+    command_text: str = _get_shortcut_command(shortcut_path)
+    result: Strs = execute_powershell(command_text)
+
+    if 1 == len(result):
+        return Path(result[0])
+
+    return None
