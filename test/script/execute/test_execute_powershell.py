@@ -4,6 +4,7 @@
 """Test to execute commands in PowerShell."""
 
 from pathlib import Path
+from platform import uname
 
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.script.execute.execute_powershell import (
@@ -19,7 +20,8 @@ def test_write() -> None:
     expected: Strs = [str(i).zfill(3) for i in range(3)]
     command: str = "; ".join(["Write-Output " + text for text in expected])
 
-    assert expected == execute_powershell(command)
+    if "Windows" == uname().system:
+        assert expected == execute_powershell(command)
 
 
 def test_script() -> None:
