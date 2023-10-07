@@ -1,7 +1,0 @@
-services:
-  app:
-    restart: always
-    container_name: "sync_config"
-    working_dir: "/root"
-    tty: true
-    command: /usr/bin/bash
