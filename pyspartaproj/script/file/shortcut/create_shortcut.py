@@ -4,7 +4,12 @@
 from pathlib import Path
 
 from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.script.execute.execute_powershell import execute_powershell
+from pyspartaproj.script.execute.execute_powershell import (
+    execute_powershell,
+    get_path_string,
+    get_quoted_paths,
+    get_script_executable,
+)
 from pyspartaproj.script.path.safe.safe_trash import SafeTrash
 
 
@@ -31,10 +36,12 @@ def _get_powershell_command(commands_execute: Strs) -> str:
 
 
 def _get_shortcut_command(shortcut_target: Path, shortcut_path: Path) -> str:
-    shortcut_target_text: str = _get_path_string(_get_script_path())
-    commands_quoted: Strs = _get_quoted_paths(shortcut_target, shortcut_path)
+    shortcut_target_text: str = get_path_string(_get_script_path())
+    commands_quoted: Strs = [
+        get_quoted_paths(path) for path in [shortcut_target, shortcut_path]
+    ]
     commands_execute: Strs = [shortcut_target_text] + commands_quoted
-    return _get_powershell_command(commands_execute)
+    return get_script_executable(commands_execute)
 
 
 def create_shortcut(shortcut_target: Path, shortcut_path: Path) -> bool:
