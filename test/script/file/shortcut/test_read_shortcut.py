@@ -6,6 +6,8 @@ from platform import uname
 from tempfile import TemporaryDirectory
 from typing import Callable
 
+from pytest import raises
+
 from pyspartaproj.script.file.shortcut.create_shortcut import create_shortcut
 from pyspartaproj.script.file.shortcut.read_shortcut import read_shortcut
 from pyspartaproj.script.path.temporary.create_temporary_file import (
@@ -40,7 +42,19 @@ def test_directory() -> None:
     _inside_temporary_directory(individual_test)
 
 
+def test_exist() -> None:
+    def individual_test(temporary_root: Path) -> None:
+        empty_path: Path = Path("empty.lnk")
+
+        if "Windows" == uname().system:
+            with raises(FileNotFoundError):
+                read_shortcut(empty_path)
+
+    _inside_temporary_directory(individual_test)
+
+
 def main() -> bool:
     test_file()
     test_directory()
+    test_exist()
     return True

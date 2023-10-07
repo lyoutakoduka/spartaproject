@@ -5,4 +5,7 @@ from pathlib import Path
 
 
 def read_shortcut(shortcut_path: Path) -> Path:
+    if not shortcut_path.exists():
+        raise FileNotFoundError()
+
     return shortcut_path
