@@ -6,6 +6,8 @@
 from os import environ
 from pathlib import Path
 
+from pyspartaproj.script.execute.execute_command import execute_command
+
 
 def get_current() -> Path:
     """Get current working directory that allow symbolic link.
@@ -15,4 +17,9 @@ def get_current() -> Path:
     Returns:
         Path: current working directory
     """
-    return Path(environ["PWD"])
+    key: str = "PWD"
+
+    if key not in environ:
+        environ[key] = execute_command(["pwd"])[0]
+
+    return Path(environ[key])
