@@ -19,3 +19,7 @@ def execute_powershell(command: str) -> Strs:
         system(" ".join(shell_commands))
 
         return text_import(stdout_path).splitlines()
+
+
+def get_path_string(path: Path) -> str:
+    return str(path)  # Not as_posix()

@@ -3,8 +3,13 @@
 
 """Test to execute commands in PowerShell."""
 
+from pathlib import Path
+
 from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.script.execute.execute_powershell import execute_powershell
+from pyspartaproj.script.execute.execute_powershell import (
+    execute_powershell,
+    get_path_string,
+)
 
 
 def test_write() -> None:
@@ -16,6 +21,13 @@ def test_write() -> None:
     assert expected == execute_powershell(command)
 
 
+def test_script() -> None:
+    """Test for converting path to text that executable in PowerShell."""
+
+    expected: Path = Path(__file__)
+    assert expected == Path(get_path_string(expected))
+
+
 def main() -> bool:
     """Run all tests.
 
@@ -23,4 +35,5 @@ def main() -> bool:
         bool: success if get to the end of function
     """
     test_write()
+    test_script()
     return True
