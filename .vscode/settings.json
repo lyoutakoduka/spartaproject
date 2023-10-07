@@ -75,13 +75,6 @@
     "reportMissingTypeStubs": "information"
   },
   "python.analysis.extraPaths": ["docs", "typings"],
-  "python.analysis.ignore": [
-    "**/__pycache__/",
-    "**/.mypy_cache/",
-    "**/.pytest_cache/",
-    "**/.tox/",
-    "**/venv/"
-  ],
   "python.analysis.stubPath": "typings",
   "python.analysis.typeCheckingMode": "strict",
   "python.envFile": "",
