@@ -1,0 +1,21 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from os import system
+from pathlib import Path
+from tempfile import TemporaryDirectory
+
+from pyspartaproj.context.default.string_context import Strs
+from pyspartaproj.script.file.text.import_file import text_import
+
+
+def execute_powershell(command: str) -> Strs:
+    shell_commands: Strs = ["powershell", command]
+
+    with TemporaryDirectory() as temporary_directory:
+        stdout_path: Path = Path(temporary_directory, "stdout.txt")
+        shell_commands += [">", stdout_path.as_posix()]
+
+        system(" ".join(shell_commands))
+
+        return text_import(stdout_path).splitlines()
