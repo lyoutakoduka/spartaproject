@@ -58,7 +58,8 @@
     "**/__pycache__/": true,
     "**/.mypy_cache/": true,
     "**/.pytest_cache/": true,
-    "**/venv/": true,
+    "poetry/ubuntu/.venv/": true,
+    "poetry/windows/.venv/": true,
     "**/.tox/": true
   },
   "git.autoRepositoryDetection": "openEditors",

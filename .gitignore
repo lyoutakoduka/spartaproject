@@ -1,6 +1,5 @@
 # Permanent
 __pycache__/
-venv/
 
 # In development
 temporary/
