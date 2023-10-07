@@ -29,6 +29,10 @@ def _get_quoted_paths(shortcut_target: Path, shortcut_path: Path) -> Strs:
     ]
 
 
+def _get_powershell_command(commands_execute: Strs) -> str:
+    return " ".join(commands_execute).join(['"'] * 2)
+
+
 def create_shortcut(shortcut_target: Path, shortcut_path: Path) -> bool:
     if not shortcut_target.exists():
         raise FileNotFoundError(shortcut_target)
