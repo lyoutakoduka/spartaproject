@@ -23,3 +23,7 @@ def execute_powershell(command: str) -> Strs:
 
 def get_path_string(path: Path) -> str:
     return str(path)  # Not as_posix()
+
+
+def get_quoted_paths(path: Path) -> str:
+    return get_path_string(path).join(["'"] * 2)
