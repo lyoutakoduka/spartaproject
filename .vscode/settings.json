@@ -59,8 +59,7 @@
     ".mypy_cache/": true,
     ".pytest_cache/": true,
     "poetry/ubuntu/.venv/": true,
-    "poetry/windows/.venv/": true,
-    "**/.tox/": true
+    "poetry/windows/.venv/": true
   },
   "git.autoRepositoryDetection": "openEditors",
   "isort.args": ["--settings=pyproject.toml"],
