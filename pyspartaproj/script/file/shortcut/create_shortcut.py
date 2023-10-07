@@ -33,6 +33,13 @@ def _get_powershell_command(commands_execute: Strs) -> str:
     return " ".join(commands_execute).join(['"'] * 2)
 
 
+def _get_shortcut_command(shortcut_target: Path, shortcut_path: Path) -> str:
+    shortcut_target_text: str = _get_path_string(_get_script_path())
+    commands_quoted: Strs = _get_quoted_paths(shortcut_target, shortcut_path)
+    commands_execute: Strs = [shortcut_target_text] + commands_quoted
+    return _get_powershell_command(commands_execute)
+
+
 def create_shortcut(shortcut_target: Path, shortcut_path: Path) -> bool:
     if not shortcut_target.exists():
         raise FileNotFoundError(shortcut_target)
