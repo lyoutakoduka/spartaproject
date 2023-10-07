@@ -4,6 +4,7 @@
 from pathlib import Path
 
 from pyspartaproj.context.default.string_context import Strs
+from pyspartaproj.script.execute.execute_powershell import execute_powershell
 from pyspartaproj.script.path.safe.safe_trash import SafeTrash
 
 
@@ -48,5 +49,7 @@ def create_shortcut(shortcut_target: Path, shortcut_path: Path) -> bool:
     if shortcut_path.exists():
         safe_trash = SafeTrash()
         safe_trash.trash(shortcut_path)
+
+    execute_powershell(_get_shortcut_command(shortcut_target, shortcut_path))
 
     return True
