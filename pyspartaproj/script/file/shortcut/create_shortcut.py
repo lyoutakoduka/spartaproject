@@ -13,12 +13,7 @@ def _get_path_string(path: Path) -> str:
 
 
 def _get_script_path() -> Path:
-    current: Path = Path(__file__)
-    return Path(
-        current.parent,
-        "execute",
-        current.with_suffix(".ps1").name,
-    )
+    return Path(Path(__file__).parent, "execute", "create.ps1")
 
 
 def _get_quoted_paths(shortcut_target: Path, shortcut_path: Path) -> Strs:
