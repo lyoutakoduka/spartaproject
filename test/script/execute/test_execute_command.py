@@ -6,6 +6,7 @@ from pathlib import Path
 
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.script.execute.execute_command import execute_command
+from pyspartaproj.script.path.modify.get_current import get_current
 
 
 def test_current() -> None:
@@ -16,7 +17,7 @@ def test_current() -> None:
     current: Path = Path(result[0])
 
     assert current.exists()
-    assert current == Path.cwd()
+    assert current == get_current()
 
 
 def main() -> bool:

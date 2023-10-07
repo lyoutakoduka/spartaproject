@@ -11,10 +11,11 @@ from pyspartaproj.script.path.modify.get_absolute import (
     get_absolute_array,
     get_absolute_pair,
 )
+from pyspartaproj.script.path.modify.get_current import get_current
 
 
 def to_relative(path: Path) -> Path:
-    current: Path = Path.cwd()
+    current: Path = get_current()
     path_text: str = path.as_posix()
     return Path(path_text[len(current.as_posix()) + 1 :])
 

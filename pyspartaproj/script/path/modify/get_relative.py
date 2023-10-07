@@ -4,11 +4,12 @@
 from pathlib import Path
 
 from pyspartaproj.context.extension.path_context import PathPair, Paths
+from pyspartaproj.script.path.modify.get_current import get_current
 
 
 def get_relative(absolute_path: Path, root_path: Path | None = None) -> Path:
     if root_path is None:
-        root_path = Path.cwd()
+        root_path = get_current()
 
     if not absolute_path.is_relative_to(root_path):
         raise ValueError

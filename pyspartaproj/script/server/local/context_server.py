@@ -15,6 +15,7 @@ from pyspartaproj.script.file.json.convert_from_json import (
     string_pair_from_json,
 )
 from pyspartaproj.script.file.json.import_json import json_import
+from pyspartaproj.script.path.modify.get_current import get_current
 
 
 class ContextServer:
@@ -22,7 +23,7 @@ class ContextServer:
         self._current_context = deepcopy(self._default_context)
 
     def _load_default(self) -> None:
-        context: Json = json_import(Path(Path.cwd(), "spartaproject.json"))
+        context: Json = json_import(Path(get_current(), "spartaproject.json"))
         if isinstance(context, Dict):
             self._default_context: Json = context["server"]
 
