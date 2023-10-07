@@ -44,7 +44,7 @@ def _get_shortcut_command(shortcut_target: Path, shortcut_path: Path) -> str:
 
 def create_shortcut(shortcut_target: Path, shortcut_path: Path) -> bool:
     if not shortcut_target.exists():
-        raise FileNotFoundError(shortcut_target)
+        raise FileNotFoundError()
 
     if shortcut_path.exists():
         safe_trash = SafeTrash()

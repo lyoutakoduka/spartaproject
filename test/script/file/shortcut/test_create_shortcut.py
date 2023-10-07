@@ -46,9 +46,8 @@ def test_directory() -> None:
 
 def test_exist() -> None:
     def individual_test(temporary_root: Path) -> None:
-        empty_path: Path = Path("empty")
-        with raises(FileNotFoundError, match=str(empty_path)):
-            _common_test(empty_path, temporary_root)
+        with raises(FileNotFoundError):
+            _common_test(Path("empty"), temporary_root)
 
     _inside_temporary_directory(individual_test)
 
