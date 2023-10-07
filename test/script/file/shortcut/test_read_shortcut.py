@@ -6,7 +6,7 @@ from platform import uname
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from pytest import raises
+from pytest import fail, raises
 
 from pyspartaproj.script.file.shortcut.create_shortcut import create_shortcut
 from pyspartaproj.script.file.shortcut.read_shortcut import read_shortcut
@@ -20,7 +20,11 @@ def _common_test(shortcut_target: Path, shortcut_root: Path) -> None:
 
     if "Windows" == uname().system:
         create_shortcut(shortcut_target, shortcut_path)
-        assert shortcut_target == read_shortcut(shortcut_path)
+
+        if returned_target := read_shortcut(shortcut_path):
+            assert shortcut_target == returned_target
+        else:
+            fail()
 
 
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
