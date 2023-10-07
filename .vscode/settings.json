@@ -38,6 +38,16 @@
   "editor.formatOnSave": true,
   "editor.minimap.enabled": false,
   "editor.rulers": [79],
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "scope": "string.quoted.docstring.multi.python",
+        "settings": {
+          "foreground": "#ffBB00"
+        }
+      }
+    ]
+  },
   "explorer.excludeGitIgnore": false,
   "flake8.args": ["--max-complexity", "10", "--ignore=I004"],
   "flake8.importStrategy": "fromEnvironment",
