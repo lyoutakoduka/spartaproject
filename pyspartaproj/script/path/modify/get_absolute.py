@@ -4,6 +4,7 @@
 from pathlib import Path
 
 from pyspartaproj.context.extension.path_context import PathPair, Paths
+from pyspartaproj.script.path.modify.get_current import get_current
 
 
 def get_absolute(relative_path: Path, root_path: Path | None = None) -> Path:
@@ -11,7 +12,7 @@ def get_absolute(relative_path: Path, root_path: Path | None = None) -> Path:
         return relative_path
 
     if root_path is None:
-        return relative_path.absolute()  # resolve() ignore symbolic link
+        root_path = get_current()
 
     return Path(root_path, relative_path)
 
