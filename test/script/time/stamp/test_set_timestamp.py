@@ -48,13 +48,13 @@ def test_utc() -> None:
 
 
 def test_jst() -> None:
-    TIMES_JST: Strs = [
+    times_jst: Strs = [
         "2023-04-01T09:00:00.000001+09:00",
         "2023-04-16T05:09:30.936886+09:00",
     ]
 
     def individual_test(path: Path) -> None:
-        times: Times = _convert_input_time(TIMES_JST)
+        times: Times = _convert_input_time(times_jst)
         for function, time in zip([set_latest, set_access], times):
             function(path, time)
         _common_test(path)
