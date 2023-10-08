@@ -73,8 +73,8 @@
     "reportShadowedImports": "information",
     "reportMissingTypeStubs": "information"
   },
-  "python.analysis.extraPaths": ["docs", "typings"],
-  "python.analysis.stubPath": "typings",
+  "python.analysis.extraPaths": ["docs", "temporary/typings"],
+  "python.analysis.stubPath": "temporary/typings",
   "python.analysis.typeCheckingMode": "strict",
   "python.envFile": "",
   "python.languageServer": "Pylance",
