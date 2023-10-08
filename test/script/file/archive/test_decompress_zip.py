@@ -141,8 +141,8 @@ def test_limit() -> None:
 
 
 def test_timestamp() -> None:
-    EXPECTED: str = "2023-04-15T20:09:30.936886+00:00"
-    expected: datetime = datetime.fromisoformat(EXPECTED)
+    expected: str = "2023-04-15T20:09:30.936886+00:00"
+    expected: datetime = datetime.fromisoformat(expected)
 
     def individual_test(temporary_root: Path) -> None:
         tree_root: Path = Path(temporary_root, "tree")
