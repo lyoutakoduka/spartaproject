@@ -15,18 +15,18 @@ from pyspartaproj.script.server.script_version import (
 
 
 def test_string() -> None:
-    EXPECTED: str = "0.0.0"
-    assert EXPECTED == version_to_string([0, 0, 0])
+    expected: str = "0.0.0"
+    assert expected == version_to_string([0, 0, 0])
 
 
 def test_number() -> None:
-    EXPECTED: Ints = [0, 0, 0]
-    assert EXPECTED == version_from_string("0.0.0")
+    expected: Ints = [0, 0, 0]
+    assert expected == version_from_string("0.0.0")
 
 
 def test_name() -> None:
-    EXPECTED: str = "Python-0.0.0"
-    assert EXPECTED == get_version_name([0, 0, 0])
+    expected: str = "Python-0.0.0"
+    assert expected == get_version_name([0, 0, 0])
 
 
 def test_version() -> None:
