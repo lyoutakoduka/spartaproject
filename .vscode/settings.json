@@ -83,6 +83,7 @@
   "terminal.integrated.fontSize": 14,
   "testing.gutterEnabled": false,
   "workbench.colorTheme": "Dracula Soft",
+  "workbench.startupEditor": "none",
   "[css]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
