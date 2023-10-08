@@ -6,7 +6,7 @@ from time import sleep
 
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.extension.decimal_context import set_decimal_context
-from pyspartaproj.extend.paramiko import (
+from pyspartaproj.interface.paramiko import (
     AutoAddPolicy,
     Channel,
     SFTPClient,
