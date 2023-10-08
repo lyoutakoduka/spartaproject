@@ -4,12 +4,12 @@
     {
       "label": "bash_profile_download",
       "type": "shell",
-      "command": "rsync ~/.bash_profile ${workspaceFolder}/sync/.bash_profile"
+      "command": "rsync ~/.bash_profile ${workspaceFolder}/external/sync/.bash_profile"
     },
     {
       "label": "bash_profile_upload",
       "type": "shell",
-      "command": "rsync ${workspaceFolder}/sync/.bash_profile ~/.bash_profile"
+      "command": "rsync ${workspaceFolder}/external/sync/.bash_profile ~/.bash_profile"
     }
   ]
 }
