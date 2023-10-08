@@ -15,7 +15,7 @@ from pyspartaproj.script.server.script_version import version_from_string
 
 def _get_execute_source(name: str) -> Path:
     current: Path = Path(__file__)
-    return Path(current.parents[1], "execute", name)
+    return Path(current.parent, "resource", name)
 
 
 def _execute_python(name: str, server: ExecuteServer) -> Strs | None:
