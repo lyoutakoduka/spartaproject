@@ -2,24 +2,24 @@ param([String]$Group)
 
 $Interpreter = "poetry/windows/.venv/Scripts/python.exe"
 
-Function Integration {
+Function Filter {
     param([String]$Module)
     $Argument = "-m " + $Module
     Start-Process -FilePath $Interpreter -ArgumentList $Argument -NoNewWindow -Wait
 }
 
 If($Group -eq "pytest") {
-    Integration "pytest"
+    Filter "pytest"
 }
 
 If($Group -eq "isort") {
-    Integration "isort . --check-only"
+    Filter "isort . --check-only"
 }
 
 If($Group -eq "black") {
-    Integration "black . --check"
+    Filter "black . --check"
 }
 
 If($Group -eq "flake") {
-    Integration "pflake8 ."
+    Filter "pflake8 ."
 }
