@@ -5,7 +5,7 @@
 
 
 from pyspartaproj.script.execute.debug_launcher import debug_launcher
-from pyspartaproj.script.execute.feature_flags import in_development
+from pyspartaproj.script.feature_flags import in_development
 
 
 def test_callable() -> None:

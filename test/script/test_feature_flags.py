@@ -3,7 +3,7 @@
 
 """Test of feature flags module."""
 
-from pyspartaproj.script.execute.feature_flags import in_development
+from pyspartaproj.script.feature_flags import in_development
 
 
 def test_develop() -> None:

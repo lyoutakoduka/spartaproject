@@ -10,7 +10,7 @@ from typing import Any
 
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.extension.path_context import PathPair
-from pyspartaproj.script.execute.feature_flags import in_development
+from pyspartaproj.script.feature_flags import in_development
 from pyspartaproj.script.path.modify.get_absolute import get_absolute
 from pyspartaproj.script.path.modify.get_relative import get_relative
 

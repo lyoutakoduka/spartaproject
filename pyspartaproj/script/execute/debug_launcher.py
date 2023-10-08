@@ -7,7 +7,7 @@ from pathlib import Path
 from sys import argv
 
 from pyspartaproj.script.execute.call_module import call_function
-from pyspartaproj.script.execute.feature_flags import in_development
+from pyspartaproj.script.feature_flags import in_development
 
 
 def debug_test() -> bool:
