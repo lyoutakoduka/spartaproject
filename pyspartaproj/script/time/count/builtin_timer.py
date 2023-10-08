@@ -4,9 +4,9 @@
 from datetime import datetime, timezone
 from decimal import Decimal
 
-from pyspartaproj.context.extension.decimal_context import set_decimal_context
+from pyspartaproj.context.extension.decimal_context import initialize_decimal
 
-set_decimal_context()
+initialize_decimal()
 
 
 class TimerSelect:

@@ -7,7 +7,7 @@ from pathlib import Path
 from zipfile import ZIP_LZMA, ZIP_STORED, ZipFile, ZipInfo
 
 from pyspartaproj.context.default.string_context import StrPair, Strs
-from pyspartaproj.context.extension.decimal_context import set_decimal_context
+from pyspartaproj.context.extension.decimal_context import initialize_decimal
 from pyspartaproj.context.extension.path_context import Paths
 from pyspartaproj.script.directory.create_directory import create_directory
 from pyspartaproj.script.file.json.convert_to_json import multiple_to_json
@@ -17,7 +17,7 @@ from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.modify.get_relative import get_relative
 from pyspartaproj.script.time.stamp.get_timestamp import get_latest
 
-set_decimal_context()
+initialize_decimal()
 
 
 class CompressZip:

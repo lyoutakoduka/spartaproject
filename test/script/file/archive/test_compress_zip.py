@@ -10,7 +10,7 @@ from typing import Callable
 from pyspartaproj.context.default.integer_context import Ints2
 from pyspartaproj.context.extension.decimal_context import (
     Decs,
-    set_decimal_context,
+    initialize_decimal,
 )
 from pyspartaproj.context.extension.path_context import Paths, Paths2
 from pyspartaproj.script.file.archive.compress_zip import CompressZip
@@ -20,7 +20,7 @@ from pyspartaproj.script.path.temporary.create_temporary_tree import (
     create_temporary_tree,
 )
 
-set_decimal_context()
+initialize_decimal()
 
 
 def _get_input_paths(walk_paths: Paths, temporary_root: Path) -> Paths:

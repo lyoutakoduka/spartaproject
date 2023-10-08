@@ -5,7 +5,7 @@ from decimal import Decimal
 from time import sleep
 
 from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.context.extension.decimal_context import set_decimal_context
+from pyspartaproj.context.extension.decimal_context import initialize_decimal
 from pyspartaproj.interface.paramiko import (
     AutoAddPolicy,
     Channel,
@@ -14,7 +14,7 @@ from pyspartaproj.interface.paramiko import (
 )
 from pyspartaproj.script.server.local.path_server import PathServer
 
-set_decimal_context()
+initialize_decimal()
 
 
 class ConnectServer(PathServer):

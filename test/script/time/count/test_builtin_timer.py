@@ -6,11 +6,11 @@ from time import sleep
 
 from pyspartaproj.context.extension.decimal_context import (
     Decs,
-    set_decimal_context,
+    initialize_decimal,
 )
 from pyspartaproj.script.time.count.builtin_timer import TimerSelect
 
-set_decimal_context()
+initialize_decimal()
 
 _count: int = 10
 _ini_expected: Decs = [Decimal(str(i)) for i in range(_count)]

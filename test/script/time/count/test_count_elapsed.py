@@ -4,12 +4,12 @@
 from decimal import Decimal
 from typing import Callable
 
-from pyspartaproj.context.extension.decimal_context import set_decimal_context
+from pyspartaproj.context.extension.decimal_context import initialize_decimal
 from pyspartaproj.script.string.format_texts import format_indent
 from pyspartaproj.script.string.off_stdout import StdoutText
 from pyspartaproj.script.time.count.count_elapsed import LogTimer
 
-set_decimal_context()
+initialize_decimal()
 
 
 def _stdout_check(
