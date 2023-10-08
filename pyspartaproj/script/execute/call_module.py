@@ -45,12 +45,12 @@ def _switch_test_root(call_context: PathPair, head_added_path: Path) -> bool:
 
 
 def _check_test_path(call_context: PathPair) -> bool:
-    HEAD: str = "test" + "_"
-    if call_context["source"].name.startswith(HEAD):
+    head: str = "test" + "_"
+    if call_context["source"].name.startswith(head):
         return False
 
     return _switch_test_root(
-        call_context, _replace_file_name(HEAD, call_context["module"])
+        call_context, _replace_file_name(head, call_context["module"])
     )
 
 
