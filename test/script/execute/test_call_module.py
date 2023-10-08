@@ -9,25 +9,25 @@ from pyspartaproj.interface.pytest import raises
 from pyspartaproj.script.execute.call_module import call_function
 from pyspartaproj.script.feature_flags import in_development
 
-_SOURCE_PATH: Path = Path(__file__)
+_source_path: Path = Path(__file__)
 
 
 def test_unknown_module() -> None:
     """Unknown function calling of designated module."""
-    error_path = Path(_SOURCE_PATH).with_name("unknown.py")
+    error_path = Path(_source_path).with_name("unknown.py")
 
     if in_development():
         with raises(FileNotFoundError):
-            call_function(_SOURCE_PATH, error_path)
+            call_function(_source_path, error_path)
 
 
 def test_unknown_function() -> None:
     """Main function calling of unknown module."""
-    other_path = Path(_SOURCE_PATH).with_name("debug_launcher.py")
+    other_path = Path(_source_path).with_name("debug_launcher.py")
 
     if in_development():
         with raises(ModuleNotFoundError):
-            call_function(other_path, _SOURCE_PATH, function="unknown")
+            call_function(other_path, _source_path, function="unknown")
 
 
 def main() -> bool:

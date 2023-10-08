@@ -25,33 +25,33 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> Paths:
 
 
 def test_three() -> None:
-    NAME_DIR_1: str = "dir001"
-    NAME_DIR_2: str = "dir002"
-    NAME_DIRS: Strs = [NAME_DIR_1, NAME_DIR_2]
-    NAME_DIR_EMPTY: str = "empty"
+    name_dir_1: str = "dir001"
+    name_dir_2: str = "dir002"
+    name_dirs: Strs = [name_dir_1, name_dir_2]
+    name_dir_empty: str = "empty"
 
-    NAME_INI: str = "file.ini"
-    NAME_JSON: str = "file.json"
-    NAME_TEXT: str = "file.txt"
+    name_ini: str = "file.ini"
+    name_json: str = "file.json"
+    name_text: str = "file.txt"
 
-    EXPECTED: Strs2 = [
-        [NAME_DIR_1],
-        [NAME_DIR_EMPTY],
-        [NAME_INI],
-        [NAME_JSON],
-        [NAME_TEXT],
-        NAME_DIRS,
-        [NAME_DIR_1, NAME_DIR_EMPTY],
-        [NAME_DIR_1, NAME_INI],
-        [NAME_DIR_1, NAME_JSON],
-        [NAME_DIR_1, NAME_TEXT],
-        NAME_DIRS + [NAME_DIR_EMPTY],
-        NAME_DIRS + [NAME_INI],
-        NAME_DIRS + [NAME_JSON],
-        NAME_DIRS + [NAME_TEXT],
+    expected_source: Strs2 = [
+        [name_dir_1],
+        [name_dir_empty],
+        [name_ini],
+        [name_json],
+        [name_text],
+        name_dirs,
+        [name_dir_1, name_dir_empty],
+        [name_dir_1, name_ini],
+        [name_dir_1, name_json],
+        [name_dir_1, name_text],
+        name_dirs + [name_dir_empty],
+        name_dirs + [name_ini],
+        name_dirs + [name_json],
+        name_dirs + [name_text],
     ]
 
-    expected: Paths = [Path(*path_names) for path_names in EXPECTED]
+    expected: Paths = [Path(*path_names) for path_names in expected_source]
 
     def individual_test(temporary_path: Path) -> None:
         create_temporary_tree(temporary_path, tree_deep=3)
@@ -60,20 +60,20 @@ def test_three() -> None:
 
 
 def test_deep() -> None:
-    OUTRANGE_INDICES: Ints = [-1, 0, 11, 12, 13]
+    outrange_indices: Ints = [-1, 0, 11, 12, 13]
 
     def individual_test(temporary_path: Path) -> None:
-        for index in OUTRANGE_INDICES:
+        for index in outrange_indices:
             create_temporary_tree(temporary_path, tree_deep=index)
 
     assert 0 == len(_inside_temporary_directory(individual_test))
 
 
 def test_weight() -> None:
-    OUTRANGE_INDICES: Ints = [-2, -1, 0, 11, 12, 13]
+    outrange_indices: Ints = [-2, -1, 0, 11, 12, 13]
 
     def individual_test(temporary_path: Path) -> None:
-        for index in OUTRANGE_INDICES:
+        for index in outrange_indices:
             create_temporary_tree(temporary_path, tree_weight=index)
 
     assert 0 == len(_inside_temporary_directory(individual_test))
