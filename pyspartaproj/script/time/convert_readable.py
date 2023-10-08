@@ -6,9 +6,9 @@ from decimal import Decimal
 
 from pyspartaproj.context.default.integer_context import IntPair
 from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.context.extension.decimal_context import set_decimal_context
+from pyspartaproj.script.initialize_decimal import initialize_decimal
 
-set_decimal_context()
+initialize_decimal()
 
 
 def _get_datetime_counts(counter: datetime) -> IntPair:

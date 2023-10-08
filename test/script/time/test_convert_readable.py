@@ -5,14 +5,12 @@ from decimal import Decimal
 
 from pyspartaproj.context.default.integer_context import IntPair
 from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.context.extension.decimal_context import (
-    Decs,
-    set_decimal_context,
-)
+from pyspartaproj.context.extension.decimal_context import Decs
 from pyspartaproj.script.bool.same_value import bool_same_array
+from pyspartaproj.script.initialize_decimal import initialize_decimal
 from pyspartaproj.script.time.convert_readable import readable_time
 
-set_decimal_context()
+initialize_decimal()
 
 
 def test_datetime() -> None:

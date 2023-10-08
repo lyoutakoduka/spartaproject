@@ -4,13 +4,13 @@
 from decimal import Context, Decimal, FloatOperation, getcontext, setcontext
 
 from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.context.extension.decimal_context import set_decimal_context
 from pyspartaproj.interface.pytest import raises
+from pyspartaproj.script.initialize_decimal import initialize_decimal
 
 
 def test_float() -> None:
     with raises(FloatOperation):
-        set_decimal_context()
+        initialize_decimal()
         Decimal(1.0)
 
 
@@ -21,7 +21,7 @@ def test_accuracy() -> None:
 
     setcontext(Context())
     before: Strs = get_changed()
-    set_decimal_context()
+    initialize_decimal()
     after: Strs = get_changed()
 
     assert before != after
