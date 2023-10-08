@@ -6,7 +6,7 @@
 from os import environ
 from pathlib import Path
 
-from pyspartaproj.script.execute.execute_command import execute_command
+from pyspartaproj.script.shell.execute_command import execute_command
 
 
 def get_current() -> Path:

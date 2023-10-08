@@ -5,7 +5,7 @@ from pathlib import Path
 
 from pyspartaproj.context.default.integer_context import Ints
 from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.script.execute.execute_command import execute_command
+from pyspartaproj.script.shell.execute_command import execute_command
 
 
 def version_to_string(versions: Ints) -> str:
