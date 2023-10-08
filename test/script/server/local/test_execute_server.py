@@ -5,7 +5,7 @@ from pathlib import Path
 
 from pyspartaproj.context.default.integer_context import Ints
 from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.interface.pytest import raises
+from pyspartaproj.interface.pytest import fail, raises
 from pyspartaproj.script.feature_flags import in_development
 from pyspartaproj.script.path.safe.safe_copy import SafeCopy
 from pyspartaproj.script.server.local.execute_server import ExecuteServer
@@ -37,14 +37,14 @@ def _common_test(name: str, server: ExecuteServer) -> None:
     if result := _execute_python(name, server):
         assert _expected_result(name) == result
     else:
-        assert False
+        fail()
 
 
 def _version_test(name: str, server: ExecuteServer, expected: Ints) -> None:
     if result := _execute_python(name, server):
         assert expected == _get_version_number(result)
     else:
-        assert False
+        fail()
 
 
 def _get_version_number(result: Strs) -> Ints:

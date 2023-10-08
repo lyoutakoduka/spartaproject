@@ -5,14 +5,16 @@
 from pathlib import Path
 
 from pyspartaproj.context.default.string_context import Strs
+from pyspartaproj.interface.pytest import fail
 from pyspartaproj.script.path.modify.get_current import get_current
 from pyspartaproj.script.shell.execute_command import execute_command
 
 
 def test_current() -> None:
     result: Strs = execute_command(["pwd"])
+
     if 1 != len(result):
-        assert False
+        fail()
 
     current: Path = Path(result[0])
 
