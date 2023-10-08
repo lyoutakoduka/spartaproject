@@ -9,8 +9,9 @@ from logging import Formatter, Handler, Logger, StreamHandler, getLogger
 def _config_logger(handler_name: str, handler: Handler) -> Logger:
     logger: Logger = getLogger(handler_name)
     logger.addHandler(handler)
+
     handler.setFormatter(
-        Formatter(f"%(levelname)s (%(asctime)s) [%(name)s] %(message)s")
+        Formatter("%(levelname)s (%(asctime)s) [%(name)s] %(message)s")
     )
     return logger
 
