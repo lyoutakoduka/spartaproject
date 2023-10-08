@@ -51,7 +51,7 @@ def test_doc() -> None:
 
     text_print()
 
-    expected_doc: str = "text doc"
+    expected_doc: str = "Text doc."
     assert expected_doc == text_print.__doc__
 
 
