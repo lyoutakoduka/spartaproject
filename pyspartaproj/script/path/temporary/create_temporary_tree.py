@@ -11,7 +11,7 @@ from pyspartaproj.script.file.config.export_config import config_export
 from pyspartaproj.script.file.json.export_json import Json, json_export
 from pyspartaproj.script.file.text.export_file import text_export
 
-_NAME: str = "file"
+_name: str = "file"
 
 
 def _sample_text(root: Path, weight: int) -> None:
@@ -19,11 +19,11 @@ def _sample_text(root: Path, weight: int) -> None:
     index_order: int = len(str(weight))
     line_text: str = "-" * (line_width - index_order)
 
-    INPUT: str = "\n".join(
+    input: str = "\n".join(
         [str(i).zfill(index_order) + line_text for i in range(weight)]
     )
 
-    text_export(Path(root, _NAME + ".txt"), INPUT)
+    text_export(Path(root, _name + ".txt"), input)
 
 
 def _sample_config(root: Path, weight: int) -> None:
@@ -31,14 +31,14 @@ def _sample_config(root: Path, weight: int) -> None:
     section_order: int = len(str(weight))
     line_text: str = "-" * width
 
-    INPUT: StrPair2 = {
+    input: StrPair2 = {
         str(i).zfill(section_order): {
             str(j).zfill(section_order): line_text for j in range(weight)
         }
         for i in range(weight)
     }
 
-    config_export(Path(root, _NAME + ".ini"), INPUT)
+    config_export(Path(root, _name + ".ini"), input)
 
 
 def _sample_json(root: Path, weight: int) -> None:
@@ -54,7 +54,7 @@ def _sample_json(root: Path, weight: int) -> None:
             }
         return line_text
 
-    json_export(Path(root, _NAME + ".json"), function(weight))
+    json_export(Path(root, _name + ".json"), function(weight))
 
 
 def _recursive_tree(

@@ -10,7 +10,7 @@ from pyspartaproj.script.file.json.export_json import json_export
 
 
 def create_temporary_file(file_root: Path) -> Path:
-    NAME: str = "temporary"
-    file_path: Path = Path(file_root, NAME + ".json")
+    name: str = "temporary"
+    file_path: Path = Path(file_root, name + ".json")
     create_directory_parent(file_path)
-    return json_export(file_path, NAME)
+    return json_export(file_path, name)
