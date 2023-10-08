@@ -3,9 +3,9 @@
 
 """Module to get current working directory that allow symbolic link."""
 
-from os import environ
 from pathlib import Path
 
+from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.script.shell.execute_command import execute_command
 
 
@@ -17,9 +17,9 @@ def get_current() -> Path:
     Returns:
         Path: current working directory
     """
-    key: str = "PWD"
+    results: Strs = execute_command(["pwd"])
 
-    if key not in environ:
-        environ[key] = execute_command(["pwd"])[0]
+    if 1 == len(results):
+        return Path(results[0])
 
-    return Path(environ[key])
+    raise ValueError

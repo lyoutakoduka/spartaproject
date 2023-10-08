@@ -1,15 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from pathlib import Path
-
 from pyspartaproj.script.path.modify.get_current import get_current
-from pyspartaproj.script.shell.execute_command import execute_command
 
 
 def test_current() -> None:
-    result: Path = get_current()
-    assert result == Path(execute_command(["pwd"])[0])
+    assert get_current().exists()
 
 
 def main() -> bool:
