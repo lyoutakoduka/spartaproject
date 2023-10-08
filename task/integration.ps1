@@ -11,3 +11,7 @@ Function Integration {
 If($Group -eq "pytest") {
     Integration "pytest"
 }
+
+If($Group -eq "isort") {
+    Integration "isort . --check-only"
+}
