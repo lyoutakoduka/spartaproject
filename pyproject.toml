@@ -21,3 +21,4 @@ warn_unreachable = true
 
 [tool.pytest.ini_options]
 addopts = "--capture=no --exitfirst --new-first"
+cache_dir = "./temporary/.pytest_cache"
