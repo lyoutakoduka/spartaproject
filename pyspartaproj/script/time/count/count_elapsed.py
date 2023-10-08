@@ -53,8 +53,17 @@ class LogTimer:
         return count_changed
 
     def show(
-        self, force: bool = False, header: Strs = [], footer: Strs = []
+        self,
+        force: bool = False,
+        header: Strs | None = None,
+        footer: Strs | None = None,
     ) -> None:
+        if header is None:
+            header = []
+
+        if footer is None:
+            footer = []
+
         elapsed: Decimal = self._timer_current() - self._start_time
 
         if force or self._is_force_show(elapsed):
