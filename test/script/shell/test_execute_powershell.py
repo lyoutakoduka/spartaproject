@@ -19,7 +19,6 @@ from pyspartaproj.script.shell.execute_powershell import (
 
 def test_write() -> None:
     """Test for Write-Output that is shown three line number."""
-
     expected: Strs = [str(i).zfill(3) for i in range(3)]
     command: str = "; ".join(["Write-Output " + text for text in expected])
 
@@ -29,14 +28,14 @@ def test_write() -> None:
 
 def test_script() -> None:
     """Test for converting path to text that executable in PowerShell."""
-
     expected: Path = Path(__file__)
     assert expected == Path(get_path_string(expected))
 
 
 def test_argument() -> None:
-    """Test for converting path to text of argument
-    that is executable in PowerShell.
+    """Test for converting path to text of argument.
+
+    It's executable in PowerShell.
     """
     expected: Path = Path(__file__)
     assert expected == Path(get_quoted_paths(expected).replace("'", ""))
@@ -48,7 +47,6 @@ def test_command() -> None:
     Execute simple Write-Output script
     that takes the path you want to print as argument.
     """
-
     expected: Path = Path(__file__)
     script_text: str = "\n".join(
         ["Param([String]$text)", "Write-Output $text"]

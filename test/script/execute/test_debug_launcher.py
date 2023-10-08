@@ -20,6 +20,5 @@ def main() -> bool:
     Returns:
         bool: success if get to the end of function
     """
-
     test_callable()
     return True
