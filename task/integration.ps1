@@ -8,10 +8,6 @@ Function Filter {
     Start-Process -FilePath $Interpreter -ArgumentList $Argument -NoNewWindow -Wait
 }
 
-If($Group -eq "pytest") {
-    Filter "pytest"
-}
-
 If($Group -eq "isort") {
     Filter "isort . --check-only"
 }
@@ -22,4 +18,8 @@ If($Group -eq "black") {
 
 If($Group -eq "flake") {
     Filter "pflake8 ."
+}
+
+If($Group -eq "pytest") {
+    Filter "pytest"
 }
