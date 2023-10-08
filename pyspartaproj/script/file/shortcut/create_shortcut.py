@@ -4,13 +4,13 @@
 from pathlib import Path
 
 from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.script.execute.execute_powershell import (
+from pyspartaproj.script.path.safe.safe_trash import SafeTrash
+from pyspartaproj.script.shell.execute_powershell import (
     execute_powershell,
     get_path_string,
     get_quoted_paths,
     get_script_executable,
 )
-from pyspartaproj.script.path.safe.safe_trash import SafeTrash
 
 
 def _get_script_path() -> Path:

@@ -4,7 +4,7 @@
 from pathlib import Path
 
 from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.script.execute.execute_powershell import (
+from pyspartaproj.script.shell.execute_powershell import (
     execute_powershell,
     get_path_string,
     get_quoted_paths,
