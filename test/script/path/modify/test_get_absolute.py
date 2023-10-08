@@ -17,7 +17,8 @@ from pyspartaproj.script.path.modify.get_current import get_current
 def to_relative(path: Path) -> Path:
     current: Path = get_current()
     path_text: str = path.as_posix()
-    return Path(path_text[len(current.as_posix()) + 1 :])
+    index: int = len(current.as_posix()) + 1
+    return Path(path_text[index:])
 
 
 def to_pair(types: Strs, paths: Paths) -> PathPair:
