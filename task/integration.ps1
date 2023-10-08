@@ -15,3 +15,7 @@ If($Group -eq "pytest") {
 If($Group -eq "isort") {
     Integration "isort . --check-only"
 }
+
+If($Group -eq "black") {
+    Integration "black . --check"
+}
