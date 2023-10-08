@@ -19,3 +19,7 @@ If($Group -eq "isort") {
 If($Group -eq "black") {
     Integration "black . --check"
 }
+
+If($Group -eq "flake") {
+    Integration "pflake8 ."
+}
