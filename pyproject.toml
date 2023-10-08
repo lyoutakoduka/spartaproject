@@ -20,4 +20,4 @@ strict = true
 warn_unreachable = true
 
 [tool.pytest.ini_options]
-addopts = "-s"
+addopts = "--capture=no --exitfirst --new-first"
