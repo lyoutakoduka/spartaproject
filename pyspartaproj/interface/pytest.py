@@ -3,7 +3,7 @@
 
 """Interface module to separate pure python code and other.
 
-paramiko: pytest
+pytest: pytest
 """
 
 from pytest import fail, raises  # noqa: F401 # type: ignore
