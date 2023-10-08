@@ -6,20 +6,20 @@ from pyspartaproj.script.string.off_stdout import StdoutText
 
 
 def test_messages() -> None:
-    MESSAGE: str = "Hello, World!"
-    EXPECTED: str = """
+    message: str = "Hello, World!"
+    expected: str = """
         Hello, World!
         Hello, World!
         """
 
-    expected: str = format_indent(EXPECTED, stdout=True)
+    expected: str = format_indent(expected, stdout=True)
 
     stdout_text = StdoutText()
 
     @stdout_text.decorator
     def _messages() -> None:
-        print(MESSAGE)
-        print(MESSAGE)
+        print(message)
+        print(message)
 
     _messages()
 

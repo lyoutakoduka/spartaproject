@@ -10,50 +10,50 @@ def shared_compare(expected: Strs, input: str, stdout: bool = False) -> None:
 
 
 def test_stdout() -> None:
-    INPUT: str = """
+    input: str = """
         Hallo!
     """
-    EXPECTED: Strs = ["Hallo!", ""]
-    shared_compare(EXPECTED, INPUT, stdout=True)
+    expected: Strs = ["Hallo!", ""]
+    shared_compare(expected, input, stdout=True)
 
 
 def test_vertical() -> None:
-    INPUT: str = """
+    input: str = """
     　\t
         Hallo!
     　\n
     """
-    EXPECTED: Strs = ["Hallo!"]
-    shared_compare(EXPECTED, INPUT)
+    expected: Strs = ["Hallo!"]
+    shared_compare(expected, input)
 
 
 def test_horizontal() -> None:
-    INPUT: str = """
+    input: str = """
     \t　    Hallo!    　\n
     """
-    EXPECTED: Strs = ["Hallo!"]
-    shared_compare(EXPECTED, INPUT)
+    expected: Strs = ["Hallo!"]
+    shared_compare(expected, input)
 
 
 def test_indent() -> None:
-    INPUT: str = """
+    input: str = """
             Hallo!
         Hallo!
                 Hallo!
     """
-    EXPECTED: Strs = ["    Hallo!", "Hallo!", "        Hallo!"]
-    shared_compare(EXPECTED, INPUT)
+    expected: Strs = ["    Hallo!", "Hallo!", "        Hallo!"]
+    shared_compare(expected, input)
 
 
 def test_inner() -> None:
-    INPUT: str = """
+    input: str = """
         Hallo!    Hallo!
 
 
         Hallo!    Hallo!
     """
-    EXPECTED: Strs = ["Hallo!    Hallo!", "", "", "Hallo!    Hallo!"]
-    shared_compare(EXPECTED, INPUT)
+    expected: Strs = ["Hallo!    Hallo!", "", "", "Hallo!    Hallo!"]
+    shared_compare(expected, input)
 
 
 def main() -> bool:

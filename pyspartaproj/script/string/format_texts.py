@@ -51,9 +51,9 @@ def _clip_line(empty_size: int, line_attributes: _LinePairs) -> Strs:
 
 
 def _strip_lines(lines: Strs) -> Strs:
-    striped_Lines: Strs = list(takewhile(lambda line: 0 == len(line), lines))
+    striped_lines: Strs = list(takewhile(lambda line: 0 == len(line), lines))
 
-    return lines[len(striped_Lines) :]
+    return lines[len(striped_lines) :]
 
 
 def format_indent(input: str, stdout: bool = False) -> str:
