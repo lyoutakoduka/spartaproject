@@ -17,12 +17,12 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 
 def test_directory() -> None:
     def individual_test(temporary_root: Path) -> None:
-        EXPECTED: Path = Path(temporary_root, "parent")
+        expected: Path = Path(temporary_root, "parent")
         parent_path: Path = create_directory_parent(
-            Path(EXPECTED, "temporary.json")
+            Path(expected, "temporary.json")
         )
 
-        assert EXPECTED == parent_path
+        assert expected == parent_path
         assert parent_path.exists()
 
     _inside_temporary_directory(individual_test)
