@@ -14,26 +14,26 @@ from pyspartaproj.script.path.check_exists import (
     check_exists_pair,
 )
 
-_CURRENT_PATH: Path = Path(__file__)
-_UNKNOWN_PATH: Path = _CURRENT_PATH.with_name("unknown.py")
+_current_path: Path = Path(__file__)
+_unknown_path: Path = _current_path.with_name("unknown.py")
 
 
 def test_array() -> None:
-    PATHS: Paths = [_CURRENT_PATH, _UNKNOWN_PATH]
-    EXPECTED: Bools = [True, False]
+    paths: Paths = [_current_path, _unknown_path]
+    expected: Bools = [True, False]
 
-    assert bool_compare_array(EXPECTED, check_exists_array(PATHS))
+    assert bool_compare_array(expected, check_exists_array(paths))
 
 
 def test_pair() -> None:
-    PATHS: PathPair = {
-        "R": _CURRENT_PATH,
-        "G": _UNKNOWN_PATH,
-        "B": _CURRENT_PATH.parent,
+    paths: PathPair = {
+        "R": _current_path,
+        "G": _unknown_path,
+        "B": _current_path.parent,
     }
-    EXPECTED: BoolPair = {"R": True, "G": False, "B": True}
+    expected: BoolPair = {"R": True, "G": False, "B": True}
 
-    assert bool_compare_pair(EXPECTED, check_exists_pair(PATHS))
+    assert bool_compare_pair(expected, check_exists_pair(paths))
 
 
 def main() -> bool:
