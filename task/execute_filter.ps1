@@ -1,25 +1,28 @@
 param([String]$Group)
 
-$Interpreter = "poetry/windows/.venv/Scripts/python.exe"
+$Interpreter = "poetry/windows/.venv/Scripts/"
 
 Function ExecuteFilter {
-    param([String]$Module)
-    $Argument = "-m " + $Module
-    Start-Process -FilePath $Interpreter -ArgumentList $Argument -NoNewWindow -Wait
+    param([String]$Module, [String]$Argument)
+
+    $Executable = $Interpreter + $Module
+
+    Start-Process `
+        -FilePath $Executable -ArgumentList $Argument -NoNewWindow -Wait
 }
 
 If($Group -eq "isort") {
-    ExecuteFilter "isort . --check-only"
+    ExecuteFilter "isort.exe" "--check-only ."
 }
 
 If($Group -eq "black") {
-    ExecuteFilter "black . --check"
+    ExecuteFilter "black.exe" "--check ."
 }
 
 If($Group -eq "flake") {
-    ExecuteFilter "pflake8 ."
+    ExecuteFilter "pflake8.exe" "."
 }
 
 If($Group -eq "pytest") {
-    ExecuteFilter "pytest"
+    ExecuteFilter "python.exe" "-m pytest"
 }
