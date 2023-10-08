@@ -5,8 +5,7 @@
 
 from pathlib import Path
 
-from pytest import raises
-
+from pyspartaproj.interface.pytest import raises
 from pyspartaproj.script.execute.call_module import call_function
 from pyspartaproj.script.feature_flags import in_development
 

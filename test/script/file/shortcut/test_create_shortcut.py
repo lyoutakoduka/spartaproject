@@ -6,8 +6,7 @@ from platform import uname
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from pytest import raises
-
+from pyspartaproj.interface.pytest import raises
 from pyspartaproj.script.file.shortcut.create_shortcut import create_shortcut
 from pyspartaproj.script.path.temporary.create_temporary_file import (
     create_temporary_file,

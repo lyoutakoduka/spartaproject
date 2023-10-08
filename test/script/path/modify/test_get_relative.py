@@ -3,10 +3,9 @@
 
 from pathlib import Path
 
-from pytest import raises
-
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.extension.path_context import PathPair, Paths
+from pyspartaproj.interface.pytest import raises
 from pyspartaproj.script.bool.same_value import bool_same_array
 from pyspartaproj.script.path.modify.get_absolute import (
     get_absolute,
