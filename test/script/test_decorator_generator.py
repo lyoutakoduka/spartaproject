@@ -37,8 +37,8 @@ def test_name() -> None:
 
     text_print()
 
-    EXPECTED_FUNCTION: str = "text_print"
-    assert EXPECTED_FUNCTION == text_print.__name__
+    expected_function: str = "text_print"
+    assert expected_function == text_print.__name__
 
 
 def test_doc() -> None:
@@ -51,13 +51,13 @@ def test_doc() -> None:
 
     text_print()
 
-    EXPECTED_DOC: str = "text doc"
-    assert EXPECTED_DOC == text_print.__doc__
+    expected_doc: str = "text doc"
+    assert expected_doc == text_print.__doc__
 
 
 def test_text() -> None:
-    MESSAGE: str = "Hello!"
-    test_instance = TemporaryDecorator(MESSAGE)
+    message: str = "Hello!"
+    test_instance = TemporaryDecorator(message)
 
     @test_instance.decorator
     def text_print() -> None:
@@ -65,8 +65,8 @@ def test_text() -> None:
 
     text_print()
 
-    EXPECTED_TEXT: str = "Hello!Hello!"
-    assert EXPECTED_TEXT == test_instance.show()
+    expected_text: str = "Hello!Hello!"
+    assert expected_text == test_instance.show()
 
 
 def main() -> bool:
