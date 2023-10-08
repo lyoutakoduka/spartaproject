@@ -14,7 +14,7 @@ from pyspartaproj.script.path.temporary.create_temporary_file import (
 from pyspartaproj.script.time.stamp.get_timestamp import get_access, get_latest
 from pyspartaproj.script.time.stamp.set_timestamp import set_access, set_latest
 
-_TIMES: Strs = [
+_times: Strs = [
     "2023-04-01T00:00:00.000001+00:00",
     "2023-04-15T20:09:30.936886+00:00",
 ]
@@ -25,7 +25,7 @@ def _convert_input_time(times: Strs) -> Times:
 
 
 def _common_test(path: Path) -> None:
-    times: Times = _convert_input_time(_TIMES)
+    times: Times = _convert_input_time(_times)
     results: Times = [function(path) for function in [get_latest, get_access]]
 
     for expected, result in zip(times, results):
@@ -39,7 +39,7 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 
 def test_utc() -> None:
     def individual_test(path: Path) -> None:
-        times: Times = _convert_input_time(_TIMES)
+        times: Times = _convert_input_time(_times)
         for function, time in zip([set_latest, set_access], times):
             function(path, time)
         _common_test(path)
