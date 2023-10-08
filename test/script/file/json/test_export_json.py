@@ -15,7 +15,7 @@ def _common_test(expected: str, input: Json) -> None:
 
 
 def test_type() -> None:
-    INPUT: Json = {
+    input: Json = {
         "None": None,
         "bool": True,
         "int": 1,
@@ -24,7 +24,7 @@ def test_type() -> None:
     }
 
     # 2 space indent
-    EXPECTED: str = """
+    expected: str = """
       {
         "None": null,
         "bool": true,
@@ -34,12 +34,12 @@ def test_type() -> None:
       }
     """
 
-    _common_test(EXPECTED, INPUT)
+    _common_test(expected, input)
 
 
 def test_tree() -> None:
-    INPUT: Json = {"0": {"1": {"2": {"3": {"4": {"5": {"6": None}}}}}}}
-    EXPECTED: str = """
+    input: Json = {"0": {"1": {"2": {"3": {"4": {"5": {"6": None}}}}}}}
+    expected: str = """
     {
       "0": {
         "1": {
@@ -57,18 +57,18 @@ def test_tree() -> None:
     }
     """
 
-    _common_test(EXPECTED, INPUT)
+    _common_test(expected, input)
 
 
 def test_compress() -> None:
-    INPUT: Json = {"0": {"1": {"2": {"3": {"4": {"5": {"6": None}}}}}}}
-    EXPECTED: str = """{"0":{"1":{"2":{"3":{"4":{"5":{"6":null}}}}}}}"""
-    assert EXPECTED == json_dump(INPUT, compress=True)
+    input: Json = {"0": {"1": {"2": {"3": {"4": {"5": {"6": None}}}}}}}
+    expected: str = """{"0":{"1":{"2":{"3":{"4":{"5":{"6":null}}}}}}}"""
+    assert expected == json_dump(input, compress=True)
 
 
 def test_export() -> None:
-    INPUT: Json = ["R", "G", "B"]
-    EXPECTED: str = """
+    input: Json = ["R", "G", "B"]
+    expected: str = """
       [
         "R",
         "G",
@@ -76,11 +76,11 @@ def test_export() -> None:
       ]
     """
 
-    expected: str = format_indent(EXPECTED)
+    expected: str = format_indent(expected)
 
     with TemporaryDirectory() as temporary_path:
         assert expected == text_import(
-            json_export(Path(temporary_path, "temporary.json"), INPUT)
+            json_export(Path(temporary_path, "temporary.json"), input)
         )
 
 

@@ -63,101 +63,101 @@ def _common_test_pair2(input: Single, result: Pair2) -> None:
 
 
 def test_bool_array() -> None:
-    INPUT: bool = True
-    input1: Json = [INPUT]
+    input: bool = True
+    input1: Json = [input]
     input2: Json = [input1]
-    _common_test_array(INPUT, bool_array_from_json(input1))
-    _common_test_array2(INPUT, bool_array2_from_json(input2))
+    _common_test_array(input, bool_array_from_json(input1))
+    _common_test_array2(input, bool_array2_from_json(input2))
 
 
 def test_bool_pair() -> None:
-    INPUT: bool = True
-    input1: Json = {"B": INPUT}
+    input: bool = True
+    input1: Json = {"B": input}
     input2: Json = {"A": input1}
-    _common_test_pair(INPUT, bool_pair_from_json(input1))
-    _common_test_pair2(INPUT, bool_pair2_from_json(input2))
+    _common_test_pair(input, bool_pair_from_json(input1))
+    _common_test_pair2(input, bool_pair2_from_json(input2))
 
 
 def test_integer_array() -> None:
-    INPUT: int = 1
-    input1: Json = [INPUT]
+    input: int = 1
+    input1: Json = [input]
     input2: Json = [input1]
-    _common_test_array(INPUT, integer_array_from_json(input1))
-    _common_test_array2(INPUT, integer_array2_from_json(input2))
+    _common_test_array(input, integer_array_from_json(input1))
+    _common_test_array2(input, integer_array2_from_json(input2))
 
 
 def test_integer_pair() -> None:
-    INPUT: int = 1
-    input1: Json = {"B": INPUT}
+    input: int = 1
+    input1: Json = {"B": input}
     input2: Json = {"A": input1}
-    _common_test_pair(INPUT, integer_pair_from_json(input1))
-    _common_test_pair2(INPUT, integer_pair2_from_json(input2))
+    _common_test_pair(input, integer_pair_from_json(input1))
+    _common_test_pair2(input, integer_pair2_from_json(input2))
 
 
 def test_string_array() -> None:
-    INPUT: str = "test"
-    input1: Json = [INPUT]
+    input: str = "test"
+    input1: Json = [input]
     input2: Json = [input1]
-    _common_test_array(INPUT, string_array_from_json(input1))
-    _common_test_array2(INPUT, string_array2_from_json(input2))
+    _common_test_array(input, string_array_from_json(input1))
+    _common_test_array2(input, string_array2_from_json(input2))
 
 
 def test_string_pair() -> None:
-    INPUT: str = "test"
-    input1: Json = {"B": INPUT, "C.path": Path("remove")}
+    input: str = "test"
+    input1: Json = {"B": input, "C.path": Path("remove")}
     input2: Json = {"A": input1}
-    _common_test_pair(INPUT, string_pair_from_json(input1))
-    _common_test_pair2(INPUT, string_pair2_from_json(input2))
+    _common_test_pair(input, string_pair_from_json(input1))
+    _common_test_pair2(input, string_pair2_from_json(input2))
 
     result: StrPair = string_pair_from_json(input1)
-    _common_test(INPUT, result["B"], len(result))
+    _common_test(input, result["B"], len(result))
 
     result_parent: StrPair2 = string_pair2_from_json(input2)
     result_child: StrPair = result_parent["A"]
-    _common_test(INPUT, result_child["B"], len(result_child))
+    _common_test(input, result_child["B"], len(result_child))
 
 
 def test_decimal_array() -> None:
-    INPUT: Decimal = Decimal("1.0")
-    input1: Json = [float(INPUT)]
+    input: Decimal = Decimal("1.0")
+    input1: Json = [float(input)]
     input2: Json = [input1]
-    _common_test_array(INPUT, decimal_array_from_json(input1))
-    _common_test_array2(INPUT, decimal_array2_from_json(input2))
+    _common_test_array(input, decimal_array_from_json(input1))
+    _common_test_array2(input, decimal_array2_from_json(input2))
 
 
 def test_decimal_pair() -> None:
-    INPUT: Decimal = Decimal("1.0")
-    input1: Json = {"B": float(INPUT)}
+    input: Decimal = Decimal("1.0")
+    input1: Json = {"B": float(input)}
     input2: Json = {"A": input1}
-    _common_test_pair(INPUT, decimal_pair_from_json(input1))
-    _common_test_pair2(INPUT, decimal_pair2_from_json(input2))
+    _common_test_pair(input, decimal_pair_from_json(input1))
+    _common_test_pair2(input, decimal_pair2_from_json(input2))
 
 
 def test_path_array() -> None:
-    INPUT: Path = Path("root")
-    input1: Json = [str(INPUT)]
+    input: Path = Path("root")
+    input1: Json = [str(input)]
     input2: Json = [input1]
-    _common_test_array(INPUT, path_array_from_json(input1))
-    _common_test_array2(INPUT, path_array2_from_json(input2))
+    _common_test_array(input, path_array_from_json(input1))
+    _common_test_array2(input, path_array2_from_json(input2))
 
 
 def test_path_pair() -> None:
-    INPUT: Path = Path("root")
-    input1: Json = {"B.path": str(INPUT), "C": "remove"}
+    input: Path = Path("root")
+    input1: Json = {"B.path": str(input), "C": "remove"}
     input2: Json = {"A": input1}
 
     result: PathPair = path_pair_from_json(input1)
-    _common_test(INPUT, result["B.path"], len(result))
+    _common_test(input, result["B.path"], len(result))
 
     result_parent: PathPair2 = path_pair2_from_json(input2)
     result_child: PathPair = result_parent["A"]
-    _common_test(INPUT, result_child["B.path"], len(result_child))
+    _common_test(input, result_child["B.path"], len(result_child))
 
 
 def test_tree() -> None:
-    INPUT_LEFT: int = 1
-    INPUT_RIGHT: str = "test"
-    input: Json = {"A": {"B": [None, INPUT_LEFT], "C": INPUT_RIGHT}}
+    input_left: int = 1
+    input_right: str = "test"
+    input: Json = {"A": {"B": [None, input_left], "C": input_right}}
     result: Json = from_safe_json(input)
 
     assert isinstance(result, Dict)
@@ -168,8 +168,8 @@ def test_tree() -> None:
 
     assert bool_same_array(
         [
-            INPUT_RIGHT == result_outside["C"],
-            [None, INPUT_LEFT] == result_inside,
+            input_right == result_outside["C"],
+            [None, input_left] == result_inside,
         ]
     )
 

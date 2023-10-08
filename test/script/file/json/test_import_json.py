@@ -45,11 +45,11 @@ def test_string() -> None:
 
 
 def test_export() -> None:
-    INPUT: Json = [None, True, 1, "test"]
+    input: Json = [None, True, 1, "test"]
 
     with TemporaryDirectory() as temporary_path:
-        assert INPUT == json_import(
-            json_export(Path(temporary_path, "temporary.ini"), INPUT)
+        assert input == json_import(
+            json_export(Path(temporary_path, "temporary.ini"), input)
         )
 
 
