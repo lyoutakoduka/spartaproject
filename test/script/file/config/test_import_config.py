@@ -20,69 +20,69 @@ def _get_section(input: str) -> Basic:
 
 
 def test_bool() -> None:
-    INPUT: str = """
+    input: str = """
         [section]
         option=True
     """
 
-    assert _get_section(format_indent(INPUT))
+    assert _get_section(format_indent(input))
 
 
 def test_integer() -> None:
-    INPUT: str = """
+    input: str = """
         [section]
         option=1
     """
-    EXPECTED: int = 1
+    expected: int = 1
 
-    assert EXPECTED == _get_section(format_indent(INPUT))
+    assert expected == _get_section(format_indent(input))
 
 
 def test_decimal() -> None:
-    INPUT: str = """
+    input: str = """
         [section]
         option=1.0
     """
-    EXPECTED: Decimal = Decimal("1.0")
+    expected: Decimal = Decimal("1.0")
 
-    assert EXPECTED == _get_section(format_indent(INPUT))
+    assert expected == _get_section(format_indent(input))
 
 
 def test_string() -> None:
-    INPUT: str = """
+    input: str = """
         [section]
         option=text
     """
-    EXPECTED: str = "text"
+    expected: str = "text"
 
-    assert EXPECTED == _get_section(format_indent(INPUT))
+    assert expected == _get_section(format_indent(input))
 
 
 def test_path() -> None:
-    INPUT: str = """
+    input: str = """
         [section]
         path=text
     """
-    EXPECTED: Path = Path("text")
+    expected: Path = Path("text")
 
-    config: Config = config_load(format_indent(INPUT))
-    assert EXPECTED == config["section"]["path"]
+    config: Config = config_load(format_indent(input))
+    assert expected == config["section"]["path"]
 
 
 def test_import() -> None:
-    INPUT: str = """
+    input: str = """
         [section]
         option=text
     """
-    EXPECTED: str = "text"
+    expected: str = "text"
 
     with TemporaryDirectory() as temporary_path:
         config: Config = config_import(
             text_export(
-                Path(temporary_path, "temporary.ini"), format_indent(INPUT)
+                Path(temporary_path, "temporary.ini"), format_indent(input)
             )
         )
-        assert EXPECTED == config["section"]["option"]
+        assert expected == config["section"]["option"]
 
 
 def main() -> bool:

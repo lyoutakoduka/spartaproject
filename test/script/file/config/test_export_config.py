@@ -25,73 +25,73 @@ def _common_test(expected: str, input: Config) -> None:
 
 
 def test_bool() -> None:
-    INPUT: BoolPair = {"b": True}
-    input_pair: BoolPair2 = {"A": INPUT}
-    EXPECTED: str = """
+    input: BoolPair = {"b": True}
+    input_pair: BoolPair2 = {"A": input}
+    expected: str = """
         [A]
         b = True
     """
-    _common_test(EXPECTED, {"A": INPUT})
-    _common_test(EXPECTED, input_pair)
+    _common_test(expected, {"A": input})
+    _common_test(expected, input_pair)
 
 
 def test_integer() -> None:
-    INPUT: IntPair = {"b": 1}
-    input_pair: IntPair2 = {"A": INPUT}
-    EXPECTED: str = """
+    input: IntPair = {"b": 1}
+    input_pair: IntPair2 = {"A": input}
+    expected: str = """
         [A]
         b = 1
     """
-    _common_test(EXPECTED, {"A": INPUT})
-    _common_test(EXPECTED, input_pair)
+    _common_test(expected, {"A": input})
+    _common_test(expected, input_pair)
 
 
 def test_float() -> None:
-    INPUT: FloatPair = {"b": 1.0}
-    input_pair: FloatPair2 = {"A": INPUT}
-    EXPECTED: str = """
+    input: FloatPair = {"b": 1.0}
+    input_pair: FloatPair2 = {"A": input}
+    expected: str = """
         [A]
         b = 1.0
     """
-    _common_test(EXPECTED, {"A": INPUT})
-    _common_test(EXPECTED, input_pair)
+    _common_test(expected, {"A": input})
+    _common_test(expected, input_pair)
 
 
 def test_string() -> None:
-    INPUT: StrPair = {"b": "test"}
-    input_pair: StrPair2 = {"A": INPUT}
-    EXPECTED: str = """
+    input: StrPair = {"b": "test"}
+    input_pair: StrPair2 = {"A": input}
+    expected: str = """
         [A]
         b = test
     """
-    _common_test(EXPECTED, {"A": INPUT})
-    _common_test(EXPECTED, input_pair)
+    _common_test(expected, {"A": input})
+    _common_test(expected, input_pair)
 
 
 def test_decimal() -> None:
-    INPUT: DecPair = {"b": Decimal("0.1")}
-    input_pair: DecPair2 = {"A": INPUT}
-    EXPECTED: str = """
+    input: DecPair = {"b": Decimal("0.1")}
+    input_pair: DecPair2 = {"A": input}
+    expected: str = """
         [A]
         b = 0.1
     """
-    _common_test(EXPECTED, {"A": INPUT})
-    _common_test(EXPECTED, input_pair)
+    _common_test(expected, {"A": input})
+    _common_test(expected, input_pair)
 
 
 def test_path() -> None:
-    INPUT: PathPair = {"path": Path("root")}
-    input_pair: PathPair2 = {"A": INPUT}
-    EXPECTED: str = """
+    input: PathPair = {"path": Path("root")}
+    input_pair: PathPair2 = {"A": input}
+    expected: str = """
         [A]
         path = root
     """
-    _common_test(EXPECTED, {"A": INPUT})
-    _common_test(EXPECTED, input_pair)
+    _common_test(expected, {"A": input})
+    _common_test(expected, input_pair)
 
 
 def test_mix_option() -> None:
-    INPUT: Config = {
+    input: Config = {
         "section": {
             "bool": True,
             "int": 1,
@@ -102,7 +102,7 @@ def test_mix_option() -> None:
         }
     }
 
-    EXPECTED: str = """
+    expected: str = """
         [section]
         bool = True
         int = 1
@@ -112,7 +112,7 @@ def test_mix_option() -> None:
         path = root
     """
 
-    _common_test(EXPECTED, INPUT)
+    _common_test(expected, input)
 
 
 def test_mix_section() -> None:
@@ -123,7 +123,7 @@ def test_mix_section() -> None:
     decimals: DecPair = {"decimal": Decimal("0.1")}
     paths: PathPair = {"path": Path("root")}
 
-    INPUT: Config = {
+    input: Config = {
         "flags": flags,
         "indies": indies,
         "numbers": numbers,
@@ -132,7 +132,7 @@ def test_mix_section() -> None:
         "paths": paths,
     }
 
-    EXPECTED: str = """
+    expected: str = """
         [flags]
         bool = True
 
@@ -152,47 +152,47 @@ def test_mix_section() -> None:
         path = root
     """
 
-    _common_test(EXPECTED, INPUT)
+    _common_test(expected, input)
 
 
 def test_compress() -> None:
-    INPUT: Config = {"bool": {"true": True}, "int": {"one": 1}}
-    EXPECTED: str = """
+    input: Config = {"bool": {"true": True}, "int": {"one": 1}}
+    expected: str = """
         [bool]
         true=True
         [int]
         one=1
     """
-    expected: str = format_indent(EXPECTED)
+    expected: str = format_indent(expected)
 
-    assert expected == config_dump(INPUT, compress=True)
+    assert expected == config_dump(input, compress=True)
 
 
 def test_lower() -> None:
-    INPUT: Config = {"SECTION": {"TRUE": True, "FALSE": False}}
-    EXPECTED: str = """
+    input: Config = {"SECTION": {"TRUE": True, "FALSE": False}}
+    expected: str = """
         [SECTION]
         true = True
         false = False
     """
 
-    _common_test(EXPECTED, INPUT)
+    _common_test(expected, input)
 
 
 def test_key() -> None:
     noise: Strs = [" 　\n\t"] * 2
-    INPUT: Config = {"section".join(noise): {"key".join(noise): True}}
-    EXPECTED: str = """
+    input: Config = {"section".join(noise): {"key".join(noise): True}}
+    expected: str = """
         [section]
         key = True
     """
 
-    _common_test(EXPECTED, INPUT)
+    _common_test(expected, input)
 
 
 def test_export() -> None:
-    INPUT: Config = {"true": {"true": True}, "false": {"false": False}}
-    EXPECTED: str = """
+    input: Config = {"true": {"true": True}, "false": {"false": False}}
+    expected: str = """
         [true]
         true = True
 
@@ -200,11 +200,11 @@ def test_export() -> None:
         false = False
     """
 
-    expected: str = format_indent(EXPECTED, stdout=True)
+    expected: str = format_indent(expected, stdout=True)
 
     with TemporaryDirectory() as temporary_path:
         assert expected == text_import(
-            config_export(Path(temporary_path, "temporary.ini"), INPUT)
+            config_export(Path(temporary_path, "temporary.ini"), input)
         )
 
 
