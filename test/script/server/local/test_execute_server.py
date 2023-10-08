@@ -8,9 +8,9 @@ from pytest import raises
 from pyspartaproj.context.default.integer_context import Ints
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.script.execute.feature_flags import in_development
-from pyspartaproj.script.execute.script_version import version_from_string
 from pyspartaproj.script.path.safe.safe_copy import SafeCopy
 from pyspartaproj.script.server.local.execute_server import ExecuteServer
+from pyspartaproj.script.server.script_version import version_from_string
 
 
 def _get_execute_source(name: str) -> Path:

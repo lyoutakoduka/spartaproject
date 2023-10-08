@@ -6,7 +6,7 @@ from platform import python_version
 from sys import executable
 
 from pyspartaproj.context.default.integer_context import Ints
-from pyspartaproj.script.execute.script_version import (
+from pyspartaproj.script.server.script_version import (
     execute_version,
     get_version_name,
     version_from_string,
