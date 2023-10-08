@@ -11,13 +11,13 @@ def _common_test(time: datetime, expected: str) -> None:
 
 
 def test_utc() -> None:
-    EXPECTED: str = "2023-04-01T00:00:00+00:00"
-    _common_test(get_current_time(override=True), EXPECTED)
+    expected: str = "2023-04-01T00:00:00+00:00"
+    _common_test(get_current_time(override=True), expected)
 
 
 def test_jst() -> None:
-    EXPECTED: str = "2023-04-01T09:00:00+09:00"
-    _common_test(get_current_time(override=True, jst=True), EXPECTED)
+    expected: str = "2023-04-01T09:00:00+09:00"
+    _common_test(get_current_time(override=True, jst=True), expected)
 
 
 def main() -> bool:

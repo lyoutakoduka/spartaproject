@@ -16,43 +16,43 @@ set_decimal_context()
 
 
 def test_datetime() -> None:
-    INPUT_UTC_EPOCH: Decimal = Decimal("63849679147.012345")
-    EXPECT: str = "2023y 3m 24d 21h 59m 7s"
+    input_utc_epoch: Decimal = Decimal("63849679147.012345")
+    expected: str = "2023y 3m 24d 21h 59m 7s"
 
-    assert EXPECT == readable_time(INPUT_UTC_EPOCH)
+    assert expected == readable_time(input_utc_epoch)
 
 
 def test_day() -> None:
-    SECOND: int = 1
-    MINUTE: int = SECOND * 60
-    HOUR: int = MINUTE * 60
-    DAY: int = HOUR * 24
+    second: int = 1
+    minute: int = second * 60
+    hour: int = minute * 60
+    day: int = hour * 24
 
-    INPUT_TIMES: IntPair = {
-        "1s": SECOND,
-        "1m 0s": MINUTE,
-        "1m 1s": MINUTE + SECOND,
-        "1h 0s": HOUR,
-        "1h 1m 0s": HOUR + MINUTE,
-        "1h 1m 1s": HOUR + MINUTE + SECOND,
-        "1d 0s": DAY,
-        "1d 1h 0s": DAY + HOUR,
-        "1d 1h 1m 0s": DAY + HOUR + MINUTE,
-        "1d 1h 1m 1s": DAY + HOUR + MINUTE + SECOND,
+    input_times: IntPair = {
+        "1s": second,
+        "1m 0s": minute,
+        "1m 1s": minute + second,
+        "1h 0s": hour,
+        "1h 1m 0s": hour + minute,
+        "1h 1m 1s": hour + minute + second,
+        "1d 0s": day,
+        "1d 1h 0s": day + hour,
+        "1d 1h 1m 0s": day + hour + minute,
+        "1d 1h 1m 1s": day + hour + minute + second,
     }
 
     assert bool_same_array(
         [
             expected == readable_time(Decimal(str(input)))
-            for expected, input in INPUT_TIMES.items()
+            for expected, input in input_times.items()
         ]
     )
 
 
 def test_second() -> None:
-    INPUTS: Decs = [Decimal("0.1") ** Decimal(str(i)) for i in range(9)]
+    inputs: Decs = [Decimal("0.1") ** Decimal(str(i)) for i in range(9)]
 
-    EXPECTED: Strs = [
+    expected: Strs = [
         "1.000000s",
         "0.100000s",
         "0.010000s",
@@ -66,14 +66,14 @@ def test_second() -> None:
     assert bool_same_array(
         [
             expected == readable_time(input, order=6)
-            for expected, input in zip(EXPECTED, INPUTS)
+            for expected, input in zip(expected, inputs)
         ]
     )
 
 
 def test_order() -> None:
-    INPUT_TIME: Decimal = Decimal("0.6666666")
-    INPUT_ORDERS: IntPair = {
+    input_time: Decimal = Decimal("0.6666666")
+    input_orders: IntPair = {
         "0s": 0,
         "0.6s": 1,
         "0.66s": 2,
@@ -85,8 +85,8 @@ def test_order() -> None:
 
     assert bool_same_array(
         [
-            expected == readable_time(INPUT_TIME, order=order)
-            for expected, order in INPUT_ORDERS.items()
+            expected == readable_time(input_time, order=order)
+            for expected, order in input_orders.items()
         ]
     )
 

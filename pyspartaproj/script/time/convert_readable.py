@@ -49,13 +49,13 @@ def _get_decimal_count_texts(
 ) -> str:
     second_numbers: Strs = [str(counts["second"])]
 
-    ORDER_LIMIT: int = 6
-    if ORDER_LIMIT < order:
-        order = ORDER_LIMIT
+    order_limit: int = 6
+    if order_limit < order:
+        order = order_limit
 
     if 0 < order:
         second_numbers += [
-            _get_micro_second_text(second, counts, order, ORDER_LIMIT)
+            _get_micro_second_text(second, counts, order, order_limit)
         ]
 
     return ".".join(second_numbers) + "s"
