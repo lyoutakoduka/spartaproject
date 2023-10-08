@@ -14,10 +14,10 @@ def _common_test(function: Callable[[ContextServer], None]) -> None:
 
 
 def test_key() -> None:
-    EXPECTED: Ints = [2, 2, 3]
+    expected: Ints = [2, 2, 3]
 
     def individual_test(server: ContextServer) -> None:
-        assert EXPECTED == [
+        assert expected == [
             len(function())
             for function in [
                 server.get_integer_context_keys,

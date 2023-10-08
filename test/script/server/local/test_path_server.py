@@ -14,10 +14,10 @@ def _common_test(function: Callable[[PathServer], None]) -> None:
 
 
 def test_table() -> None:
-    EXPECTED: int = 6
+    expected: int = 6
 
     def individual_test(server: PathServer) -> None:
-        assert EXPECTED == len([type for type in server.get_path_table()])
+        assert expected == len([type for type in server.get_path_table()])
 
     _common_test(individual_test)
 
@@ -32,22 +32,22 @@ def test_path() -> None:
 
 
 def test_to_remote() -> None:
-    EXPECTED: Path = Path("temp")
+    expected: Path = Path("temp")
 
     def individual_test(server: PathServer) -> None:
-        assert EXPECTED == server.to_remote_path(
-            Path(server.get_root(), EXPECTED)
+        assert expected == server.to_remote_path(
+            Path(server.get_root(), expected)
         )
 
     _common_test(individual_test)
 
 
 def test_to_local() -> None:
-    EXPECTED: Path = Path("temp")
+    expected: Path = Path("temp")
 
     def individual_test(server: PathServer) -> None:
-        assert EXPECTED == server.to_remote_path(
-            server.to_local_path(EXPECTED)
+        assert expected == server.to_remote_path(
+            server.to_local_path(expected)
         )
 
     _common_test(individual_test)
