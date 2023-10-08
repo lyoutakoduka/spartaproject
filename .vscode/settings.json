@@ -56,7 +56,7 @@
   },
   "files.exclude": {
     "**/__pycache__/": true,
-    ".mypy_cache/": true,
+    "temporary/.mypy_cache/": true,
     "poetry/linux/.venv/": true,
     "poetry/windows/.venv/": true
   },

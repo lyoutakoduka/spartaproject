@@ -10,6 +10,7 @@ max-complexity = 10
 max-line-length = 79
 
 [tool.mypy]
+cache_dir = "./temporary/.mypy_cache"
 disallow_any_decorated = true
 disallow_any_explicit = true
 disallow_any_expr = true
