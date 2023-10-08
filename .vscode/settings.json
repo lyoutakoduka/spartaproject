@@ -57,7 +57,7 @@
   "files.exclude": {
     "**/__pycache__/": true,
     ".mypy_cache/": true,
-    "poetry/ubuntu/.venv/": true,
+    "poetry/linux/.venv/": true,
     "poetry/windows/.venv/": true
   },
   "git.autoRepositoryDetection": "openEditors",
