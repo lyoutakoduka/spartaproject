@@ -7,12 +7,12 @@ from pathlib import Path
 from zipfile import ZIP_LZMA, ZIP_STORED, ZipFile, ZipInfo
 
 from pyspartaproj.context.default.string_context import StrPair, Strs
-from pyspartaproj.context.extension.decimal_context import initialize_decimal
 from pyspartaproj.context.extension.path_context import Paths
 from pyspartaproj.script.directory.create_directory import create_directory
 from pyspartaproj.script.file.json.convert_to_json import multiple_to_json
 from pyspartaproj.script.file.json.export_json import json_dump
 from pyspartaproj.script.file.text.import_file import byte_import
+from pyspartaproj.script.initialize_decimal import initialize_decimal
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.modify.get_relative import get_relative
 from pyspartaproj.script.time.stamp.get_timestamp import get_latest

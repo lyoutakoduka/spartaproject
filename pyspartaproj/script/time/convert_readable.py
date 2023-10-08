@@ -6,7 +6,7 @@ from decimal import Decimal
 
 from pyspartaproj.context.default.integer_context import IntPair
 from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.context.extension.decimal_context import initialize_decimal
+from pyspartaproj.script.initialize_decimal import initialize_decimal
 
 initialize_decimal()
 
