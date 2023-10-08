@@ -7,6 +7,7 @@ line-length = 79
 
 [tool.flake8]
 extend-exclude = ["temporary", "poetry"]
+extend-ignore = "I004,"
 max-complexity = 10
 max-doc-length = 79
 max-line-length = 79
