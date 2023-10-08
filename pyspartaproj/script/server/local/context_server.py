@@ -23,7 +23,11 @@ class ContextServer:
         self._current_context = deepcopy(self._default_context)
 
     def _load_default(self) -> None:
-        context: Json = json_import(Path(get_current(), "spartaproject.json"))
+        context: Json = json_import(
+            Path(
+                get_current(), "pyspartaproj", "resource", "spartaproject.json"
+            )
+        )
         if isinstance(context, Dict):
             self._default_context: Json = context["server"]
 
