@@ -12,15 +12,15 @@ from pyspartaproj.script.time.count.builtin_timer import TimerSelect
 
 set_decimal_context()
 
-_COUNT: int = 10
-_INI_EXPECTED: Decs = [Decimal(str(i)) for i in range(_COUNT)]
+_count: int = 10
+_ini_expected: Decs = [Decimal(str(i)) for i in range(_count)]
 
 
 def _check_counter_result(expected: Decs, timer: TimerSelect) -> None:
     expected = [count + timer.APRIL_1_2023_EPOCH for count in expected]
 
     results: Decs = []
-    for _ in range(_COUNT):
+    for _ in range(_count):
         results += [timer()]
         timer.increase_timer()
 
@@ -28,14 +28,14 @@ def _check_counter_result(expected: Decs, timer: TimerSelect) -> None:
 
 
 def test_integer() -> None:
-    _check_counter_result(_INI_EXPECTED, TimerSelect(override=True))
+    _check_counter_result(_ini_expected, TimerSelect(override=True))
 
 
 def test_interval() -> None:
     micro_scale: Decimal = Decimal("0.000001")
 
     _check_counter_result(
-        [expected * micro_scale for expected in _INI_EXPECTED],
+        [expected * micro_scale for expected in _ini_expected],
         TimerSelect(override=True, interval=micro_scale),
     )
 

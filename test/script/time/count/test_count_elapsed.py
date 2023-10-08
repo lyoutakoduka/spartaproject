@@ -35,7 +35,7 @@ def _stdout_check(
 
 
 def test_day() -> None:
-    EXPECTED: str = """
+    expected: str = """
         1h 0s
         2h 0s
         3h 0s
@@ -66,11 +66,11 @@ def test_day() -> None:
     def show_timer(timer: LogTimer, _: int) -> None:
         timer.show()
 
-    _stdout_check(EXPECTED, increase_count, restart_timer, show_timer)
+    _stdout_check(expected, increase_count, restart_timer, show_timer)
 
 
 def test_show() -> None:
-    EXPECTED: str = """
+    expected: str = """
         i=10 Almost 0.1s have passed...
         i=20 Almost 0.2s have passed...
         i=30 Almost 0.3s have passed...
@@ -92,11 +92,11 @@ def test_show() -> None:
             header=[f"i={index}", "Almost"], footer=["have", "passed..."]
         )
 
-    _stdout_check(EXPECTED, increase_count, restart_timer, show_timer)
+    _stdout_check(expected, increase_count, restart_timer, show_timer)
 
 
 def test_force() -> None:
-    EXPECTED: str = """
+    expected: str = """
         i=0
         0.00s
         i=1
@@ -118,7 +118,7 @@ def test_force() -> None:
         print(f"i={index}")
         timer.show(force=True)
 
-    _stdout_check(EXPECTED, increase_count, restart_timer, show_timer)
+    _stdout_check(expected, increase_count, restart_timer, show_timer)
 
 
 def main() -> bool:
