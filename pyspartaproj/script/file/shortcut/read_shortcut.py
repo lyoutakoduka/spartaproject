@@ -13,7 +13,7 @@ from pyspartaproj.script.shell.execute_powershell import (
 
 
 def _get_script_path() -> Path:
-    return Path(Path(__file__).parent, "execute", "read.ps1")
+    return Path(Path(__file__).parent, "resource", "read.ps1")
 
 
 def _get_shortcut_command(shortcut_path: Path) -> str:
