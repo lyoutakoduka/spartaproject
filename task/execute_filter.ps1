@@ -14,15 +14,12 @@ Function ExecuteFilter {
 If($Group -eq "isort") {
     ExecuteFilter "isort.exe" "--check-only ."
 }
-
-If($Group -eq "black") {
+ElseIf ($Group -eq "black") {
     ExecuteFilter "black.exe" "--check ."
 }
-
-If($Group -eq "flake") {
+ElseIf ($Group -eq "flake") {
     ExecuteFilter "pflake8.exe" "."
 }
-
-If($Group -eq "pytest") {
+ElseIf ($Group -eq "pytest") {
     ExecuteFilter "python.exe" "-m pytest"
 }
