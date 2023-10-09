@@ -7,5 +7,7 @@ from pyspartaproj.script.file.json.export_json import json_dump
 
 def is_same_json(left: Json, right: Json) -> bool:
     return 1 == len(
-        list(set([json_dump(input, compress=True) for input in [left, right]]))
+        list(
+            set([json_dump(source, compress=True) for source in [left, right]])
+        )
     )
