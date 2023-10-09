@@ -10,38 +10,36 @@ from pyspartaproj.script.file.json.export_json import json_export
 from pyspartaproj.script.file.json.import_json import json_import, json_load
 
 
-def _common_test(input: Single, result: Json) -> None:
+def _common_test(input: Single, source: str) -> None:
+    result: Json = json_load('{"group": %s}' % source)
+
     assert isinstance(result, Dict)
     assert input == result["group"]
 
 
-def _get_input_json(input: str) -> str:
-    return '{"group": %s}' % input
-
-
 def test_none() -> None:
     input: None = None
-    _common_test(input, json_load(_get_input_json("null")))
+    _common_test(input, "null")
 
 
 def test_bool() -> None:
     input: bool = True
-    _common_test(input, json_load(_get_input_json("true")))
+    _common_test(input, "true")
 
 
 def test_integer() -> None:
     input: int = 1
-    _common_test(input, json_load(_get_input_json(str(input))))
+    _common_test(input, str(input))
 
 
 def test_float() -> None:
     input: float = 0.1
-    _common_test(input, json_load(_get_input_json(str(input))))
+    _common_test(input, str(input))
 
 
 def test_string() -> None:
     input: str = "test"
-    _common_test(input, json_load(_get_input_json('"%s"' % input)))
+    _common_test(input, '"%s"' % input)
 
 
 def test_export() -> None:
