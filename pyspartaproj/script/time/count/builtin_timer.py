@@ -18,8 +18,8 @@ class TimerSelect:
         self._count: Decimal = Decimal("0")
 
         if self._override:
-            self.APRIL_1_2023_EPOCH: Decimal = Decimal("1680307200")
-            self._count = self.APRIL_1_2023_EPOCH
+            self.april_1_2023_epoch: Decimal = Decimal("1680307200")
+            self._count = self.april_1_2023_epoch
         else:
             self._count = self._get_current()
 
