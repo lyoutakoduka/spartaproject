@@ -6,7 +6,7 @@ profile = "black"
 line-length = 79
 
 [tool.flake8]
-extend-exclude = ["./temporary", "./poetry"]
+extend-exclude = ["./.temp", "./poetry"]
 ignore = [
   "PT013",
   "D401",
@@ -24,7 +24,7 @@ max-doc-length = 79
 max-line-length = 79
 
 [tool.mypy]
-cache_dir = "./temporary/.mypy_cache"
+cache_dir = "./.temp/.mypy_cache"
 disallow_any_decorated = true
 disallow_any_explicit = true
 disallow_any_expr = true
@@ -36,5 +36,5 @@ warn_unreachable = true
 
 [tool.pytest.ini_options]
 addopts = "--capture=no --exitfirst --new-first --quiet"
-cache_dir = "./temporary/.pytest_cache"
+cache_dir = "./.temp/.pytest_cache"
 testpaths = ["test"]
