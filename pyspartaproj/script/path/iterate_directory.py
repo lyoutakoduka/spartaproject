@@ -15,20 +15,20 @@ def _create_filter(
         return ""
 
     if 0 < depth:
-        filter = "*/" * (depth - 1)
+        glob_filter = "*/" * (depth - 1)
     else:
-        filter = "**/"
+        glob_filter = "**/"
 
     if file and directory:
-        filter += "*"
+        glob_filter += "*"
 
     if file and not directory:
-        filter += "*." + suffix
+        glob_filter += "*." + suffix
 
     if not file and directory:
-        filter += "*/"
+        glob_filter += "*/"
 
-    return filter
+    return glob_filter
 
 
 def walk_iterator(
@@ -37,12 +37,12 @@ def walk_iterator(
     file: bool = True,
     directory: bool = True,
     suffix: str = "*",
-    filter: str = default_filter,
+    glob_filter: str = default_filter,
 ) -> PathGene:
-    if default_filter == filter:
-        filter = _create_filter(depth, file, directory, suffix)
+    if default_filter == glob_filter:
+        glob_filter = _create_filter(depth, file, directory, suffix)
 
-    if 0 < len(filter):
-        for path in root.glob(filter):
+    if 0 < len(glob_filter):
+        for path in root.glob(glob_filter):
             if root != path:
                 yield path

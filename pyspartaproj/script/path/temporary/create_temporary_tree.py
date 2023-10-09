@@ -19,11 +19,11 @@ def _sample_text(root: Path, weight: int) -> None:
     index_order: int = len(str(weight))
     line_text: str = "-" * (line_width - index_order)
 
-    input: str = "\n".join(
+    source: str = "\n".join(
         [str(i).zfill(index_order) + line_text for i in range(weight)]
     )
 
-    text_export(Path(root, _name + ".txt"), input)
+    text_export(Path(root, _name + ".txt"), source)
 
 
 def _sample_config(root: Path, weight: int) -> None:
@@ -31,14 +31,14 @@ def _sample_config(root: Path, weight: int) -> None:
     section_order: int = len(str(weight))
     line_text: str = "-" * width
 
-    input: StrPair2 = {
+    source_pairs: StrPair2 = {
         str(i).zfill(section_order): {
             str(j).zfill(section_order): line_text for j in range(weight)
         }
         for i in range(weight)
     }
 
-    config_export(Path(root, _name + ".ini"), input)
+    config_export(Path(root, _name + ".ini"), source_pairs)
 
 
 def _sample_json(root: Path, weight: int) -> None:
