@@ -45,17 +45,17 @@ class ContextServer:
     def _filter_path(self) -> PathPair:
         return path_pair_from_json(self._current_context)
 
-    def get_integer_context(self, type: str) -> int:
+    def get_integer_context(self, context_key: str) -> int:
         context: IntPair = self._filter_integer()
-        return context[type]
+        return context[context_key]
 
-    def get_string_context(self, type: str) -> str:
+    def get_string_context(self, context_key: str) -> str:
         context: StrPair = self._filter_string()
-        return context[type]
+        return context[context_key]
 
-    def get_path_context(self, type: str) -> Path:
+    def get_path_context(self, context_key: str) -> Path:
         context: PathPair = self._filter_path()
-        return context[type]
+        return context[context_key]
 
     def get_integer_context_keys(self) -> Strs:
         context_integer: IntPair = self._filter_integer()
@@ -69,10 +69,10 @@ class ContextServer:
         context_path: PathPair = self._filter_path()
         return list(context_path.keys())
 
-    def set_path_context(self, type: str, path: Path) -> bool:
-        if type in self.get_path_context_keys():
+    def set_path_context(self, context_key: str, path: Path) -> bool:
+        if context_key in self.get_path_context_keys():
             if isinstance(self._current_context, Dict):
-                self._current_context[type] = path.as_posix()
+                self._current_context[context_key] = path.as_posix()
                 return True
 
         return False
