@@ -20,78 +20,78 @@ from pyspartaproj.script.file.text.import_file import text_import
 from pyspartaproj.script.string.format_texts import format_indent
 
 
-def _common_test(expected: str, input: Config) -> None:
-    assert format_indent(expected, stdout=True) == config_dump(input)
+def _common_test(expected: str, source: Config) -> None:
+    assert format_indent(expected, stdout=True) == config_dump(source)
 
 
 def test_bool() -> None:
-    input: BoolPair = {"b": True}
-    input_pair: BoolPair2 = {"A": input}
+    source_pair: BoolPair = {"b": True}
+    source_pairs: BoolPair2 = {"A": source_pair}
     expected: str = """
         [A]
         b = True
     """
-    _common_test(expected, {"A": input})
-    _common_test(expected, input_pair)
+    _common_test(expected, {"A": source_pair})
+    _common_test(expected, source_pairs)
 
 
 def test_integer() -> None:
-    input: IntPair = {"b": 1}
-    input_pair: IntPair2 = {"A": input}
+    source_pair: IntPair = {"b": 1}
+    source_pairs: IntPair2 = {"A": source_pair}
     expected: str = """
         [A]
         b = 1
     """
-    _common_test(expected, {"A": input})
-    _common_test(expected, input_pair)
+    _common_test(expected, {"A": source_pair})
+    _common_test(expected, source_pairs)
 
 
 def test_float() -> None:
-    input: FloatPair = {"b": 1.0}
-    input_pair: FloatPair2 = {"A": input}
+    source_pair: FloatPair = {"b": 1.0}
+    source_pairs: FloatPair2 = {"A": source_pair}
     expected: str = """
         [A]
         b = 1.0
     """
-    _common_test(expected, {"A": input})
-    _common_test(expected, input_pair)
+    _common_test(expected, {"A": source_pair})
+    _common_test(expected, source_pairs)
 
 
 def test_string() -> None:
-    input: StrPair = {"b": "test"}
-    input_pair: StrPair2 = {"A": input}
+    source_pair: StrPair = {"b": "test"}
+    source_pairs: StrPair2 = {"A": source_pair}
     expected: str = """
         [A]
         b = test
     """
-    _common_test(expected, {"A": input})
-    _common_test(expected, input_pair)
+    _common_test(expected, {"A": source_pair})
+    _common_test(expected, source_pairs)
 
 
 def test_decimal() -> None:
-    input: DecPair = {"b": Decimal("0.1")}
-    input_pair: DecPair2 = {"A": input}
+    source_pair: DecPair = {"b": Decimal("0.1")}
+    source_pairs: DecPair2 = {"A": source_pair}
     expected: str = """
         [A]
         b = 0.1
     """
-    _common_test(expected, {"A": input})
-    _common_test(expected, input_pair)
+    _common_test(expected, {"A": source_pair})
+    _common_test(expected, source_pairs)
 
 
 def test_path() -> None:
-    input: PathPair = {"path": Path("root")}
-    input_pair: PathPair2 = {"A": input}
+    source_pair: PathPair = {"path": Path("root")}
+    source_pairs: PathPair2 = {"A": source_pair}
     expected: str = """
         [A]
         path = root
     """
-    _common_test(expected, {"A": input})
-    _common_test(expected, input_pair)
+    _common_test(expected, {"A": source_pair})
+    _common_test(expected, source_pairs)
 
 
 def test_mix_option() -> None:
-    input: Config = {
+    source_pairs: Config = {
         "section": {
             "bool": True,
             "int": 1,
@@ -112,7 +112,7 @@ def test_mix_option() -> None:
         path = root
     """
 
-    _common_test(expected, input)
+    _common_test(expected, source_pairs)
 
 
 def test_mix_section() -> None:
@@ -123,7 +123,7 @@ def test_mix_section() -> None:
     decimals: DecPair = {"decimal": Decimal("0.1")}
     paths: PathPair = {"path": Path("root")}
 
-    input: Config = {
+    source_pairs: Config = {
         "flags": flags,
         "indies": indies,
         "numbers": numbers,
@@ -152,11 +152,11 @@ def test_mix_section() -> None:
         path = root
     """
 
-    _common_test(expected, input)
+    _common_test(expected, source_pairs)
 
 
 def test_compress() -> None:
-    input: Config = {"bool": {"true": True}, "int": {"one": 1}}
+    source_pairs: Config = {"bool": {"true": True}, "int": {"one": 1}}
     expected: str = """
         [bool]
         true=True
@@ -165,33 +165,33 @@ def test_compress() -> None:
     """
     expected: str = format_indent(expected)
 
-    assert expected == config_dump(input, compress=True)
+    assert expected == config_dump(source_pairs, compress=True)
 
 
 def test_lower() -> None:
-    input: Config = {"SECTION": {"TRUE": True, "FALSE": False}}
+    source_pairs: Config = {"SECTION": {"TRUE": True, "FALSE": False}}
     expected: str = """
         [SECTION]
         true = True
         false = False
     """
 
-    _common_test(expected, input)
+    _common_test(expected, source_pairs)
 
 
 def test_key() -> None:
     noise: Strs = [" 　\n\t"] * 2
-    input: Config = {"section".join(noise): {"key".join(noise): True}}
+    source_pairs: Config = {"section".join(noise): {"key".join(noise): True}}
     expected: str = """
         [section]
         key = True
     """
 
-    _common_test(expected, input)
+    _common_test(expected, source_pairs)
 
 
 def test_export() -> None:
-    input: Config = {"true": {"true": True}, "false": {"false": False}}
+    source_pairs: Config = {"true": {"true": True}, "false": {"false": False}}
     expected: str = """
         [true]
         true = True
@@ -204,7 +204,7 @@ def test_export() -> None:
 
     with TemporaryDirectory() as temporary_path:
         assert expected == text_import(
-            config_export(Path(temporary_path, "temporary.ini"), input)
+            config_export(Path(temporary_path, "temporary.ini"), source_pairs)
         )
 
 

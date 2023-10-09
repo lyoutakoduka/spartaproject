@@ -26,20 +26,20 @@ def _cleanup_key(text: str) -> str:
     return text.strip()
 
 
-def _cleanup_key_default(input: Config) -> Config:
+def _cleanup_key_default(source_config: Config) -> Config:
     return {
         _cleanup_key(section_key): {
             _cleanup_key(key): value for key, value in section.items()
         }
-        for section_key, section in input.items()
+        for section_key, section in source_config.items()
     }
 
 
-def config_dump(input: Config, compress: bool = False) -> str:
-    input = _cleanup_key_default(input)
+def config_dump(source_config: Config, compress: bool = False) -> str:
+    cleanup = _cleanup_key_default(source_config)
 
     config = ConfigParser()
-    config.read_dict(input)
+    config.read_dict(cleanup)
 
     with StringIO() as file:
         config.write(file)
@@ -48,6 +48,8 @@ def config_dump(input: Config, compress: bool = False) -> str:
 
 
 def config_export(
-    export_path: Path, input: Config, compress: bool = False
+    export_path: Path, source_config: Config, compress: bool = False
 ) -> Path:
-    return text_export(export_path, config_dump(input, compress=compress))
+    return text_export(
+        export_path, config_dump(source_config, compress=compress)
+    )
