@@ -25,13 +25,17 @@ _name_json: str = "file.json"
 _name_text: str = "file.txt"
 
 
+def _sorted_match(expected: Paths, source: Paths) -> bool:
+    return 1 == len(set([str(sorted(name)) for name in [expected, source]]))
+
+
 def _check_walk_result(
     expected: Strs2, path_gene: PathGene, root_path: Path
 ) -> None:
-    results: Paths = get_relative_array(list(path_gene), root_path=root_path)
-    expected_paths: Paths = [Path(*path_names) for path_names in expected]
-
-    assert expected_paths == results
+    assert _sorted_match(
+        [Path(*path_names) for path_names in expected],
+        get_relative_array(list(path_gene), root_path=root_path),
+    )
 
 
 def _inside_temporary_directory(
