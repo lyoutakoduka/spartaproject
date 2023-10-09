@@ -21,8 +21,8 @@ def test_array() -> None:
 
 
 def test_type() -> None:
-    for input in [None, True, 0, 0.1, "test"]:
-        assert is_same_json(input, input)
+    for source in [None, True, 0, 0.1, "test"]:
+        assert is_same_json(source, source)
 
 
 def main() -> bool:

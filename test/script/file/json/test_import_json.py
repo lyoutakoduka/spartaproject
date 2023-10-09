@@ -10,46 +10,44 @@ from pyspartaproj.script.file.json.export_json import json_export
 from pyspartaproj.script.file.json.import_json import json_import, json_load
 
 
-def _common_test(input: Single, result: Json) -> None:
+def _common_test(expected: Single, source: str) -> None:
+    result: Json = json_load('{"group": %s}' % source)
+
     assert isinstance(result, Dict)
-    assert input == result["group"]
-
-
-def _get_input_json(input: str) -> str:
-    return '{"group": %s}' % input
+    assert expected == result["group"]
 
 
 def test_none() -> None:
-    input: None = None
-    _common_test(input, json_load(_get_input_json("null")))
+    expected: None = None
+    _common_test(expected, "null")
 
 
 def test_bool() -> None:
-    input: bool = True
-    _common_test(input, json_load(_get_input_json("true")))
+    expected: bool = True
+    _common_test(expected, "true")
 
 
 def test_integer() -> None:
-    input: int = 1
-    _common_test(input, json_load(_get_input_json(str(input))))
+    expected: int = 1
+    _common_test(expected, str(expected))
 
 
 def test_float() -> None:
-    input: float = 0.1
-    _common_test(input, json_load(_get_input_json(str(input))))
+    expected: float = 0.1
+    _common_test(expected, str(expected))
 
 
 def test_string() -> None:
-    input: str = "test"
-    _common_test(input, json_load(_get_input_json('"%s"' % input)))
+    expected: str = "test"
+    _common_test(expected, '"%s"' % expected)
 
 
 def test_export() -> None:
-    input: Json = [None, True, 1, "test"]
+    expected: Json = [None, True, 1, "test"]
 
     with TemporaryDirectory() as temporary_path:
-        assert input == json_import(
-            json_export(Path(temporary_path, "temporary.ini"), input)
+        assert expected == json_import(
+            json_export(Path(temporary_path, "temporary.ini"), expected)
         )
 
 

@@ -21,7 +21,10 @@ def _get_path_key() -> Strs:
 
 def _check_absolute_path(call_context: PathPair) -> None:
     call_context.update(
-        {type: get_absolute(call_context[type]) for type in _get_path_key()}
+        {
+            path_key: get_absolute(call_context[path_key])
+            for path_key in _get_path_key()
+        }
     )
 
 

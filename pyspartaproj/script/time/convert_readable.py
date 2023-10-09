@@ -18,7 +18,7 @@ def _get_datetime_counts(counter: datetime) -> IntPair:
         "day": counter.day,
     }
 
-    counts = {id: count - 1 for id, count in counts.items()}
+    counts = {key: count - 1 for key, count in counts.items()}
 
     counts.update(
         {
@@ -62,11 +62,11 @@ def _get_decimal_count_texts(
 
 
 def _get_integer_count_texts(counts: IntPair) -> Strs:
-    integer_types: Strs = ["year", "month", "day", "hour", "minute"]
+    time_types: Strs = ["year", "month", "day", "hour", "minute"]
     return [
-        str(counts[type]) + type[0]
-        for type in integer_types
-        if 0 < counts[type]
+        str(counts[time_type]) + time_type[0]
+        for time_type in time_types
+        if 0 < counts[time_type]
     ]
 
 

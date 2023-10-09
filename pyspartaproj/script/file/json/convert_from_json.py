@@ -38,118 +38,125 @@ from pyspartaproj.context.extension.path_context import (
 from pyspartaproj.context.file.json_context import Json, Single
 
 
-def _to_decimal(input: float) -> Decimal:
-    return Decimal(str(input))
+def _to_decimal(number: float) -> Decimal:
+    return Decimal(str(number))
 
 
-def _to_path(input: str) -> Path:
-    return Path(input)
+def _to_path(text: str) -> Path:
+    return Path(text)
 
 
-def _filter_path(input: str, key: str) -> Path | None:
+def _filter_path(text: str, key: str) -> Path | None:
     if key.endswith(".path"):
-        return _to_path(input)
+        return _to_path(text)
 
     return None
 
 
-def _convert_unknown(input: Single, key: str | None) -> Single:
-    if isinstance(input, float):
-        return _to_decimal(input)
+def _convert_unknown(value: Single, key: str | None) -> Single:
+    if isinstance(value, float):
+        return _to_decimal(value)
 
-    if isinstance(input, str):
+    if isinstance(value, str):
         if key is not None:
-            if path := _filter_path(input, key):
+            if path := _filter_path(value, key):
                 return path
 
-    return input
+    return value
 
 
-def from_safe_json(input: Json, key: str | None = None) -> Json:
-    if isinstance(input, Dict):
+def from_safe_json(value_json: Json, key: str | None = None) -> Json:
+    if isinstance(value_json, Dict):
         return {
-            key: from_safe_json(value, key=key) for key, value in input.items()
+            key: from_safe_json(value, key=key)
+            for key, value in value_json.items()
         }
 
-    if isinstance(input, List):
-        return [from_safe_json(value) for value in input]
+    if isinstance(value_json, List):
+        return [from_safe_json(value) for value in value_json]
 
-    return _convert_unknown(input, key)
+    return _convert_unknown(value_json, key)
 
 
-def bool_array_from_json(input: Json) -> Bools:
-    if not isinstance(input, List):
+def bool_array_from_json(value_json: Json) -> Bools:
+    if not isinstance(value_json, List):
         return []
-    return [value for value in input if isinstance(value, bool)]
+    return [value for value in value_json if isinstance(value, bool)]
 
 
-def integer_array_from_json(input: Json) -> Ints:
-    if not isinstance(input, List):
+def integer_array_from_json(value_json: Json) -> Ints:
+    if not isinstance(value_json, List):
         return []
-    return [value for value in input if isinstance(value, int)]
+    return [value for value in value_json if isinstance(value, int)]
 
 
-def string_array_from_json(input: Json) -> Strs:
-    if not isinstance(input, List):
+def string_array_from_json(value_json: Json) -> Strs:
+    if not isinstance(value_json, List):
         return []
-    return [value for value in input if isinstance(value, str)]
+    return [value for value in value_json if isinstance(value, str)]
 
 
-def decimal_array_from_json(input: Json) -> Decs:
-    if not isinstance(input, List):
+def decimal_array_from_json(value_json: Json) -> Decs:
+    if not isinstance(value_json, List):
         return []
-    return [_to_decimal(value) for value in input if isinstance(value, float)]
+    return [
+        _to_decimal(value) for value in value_json if isinstance(value, float)
+    ]
 
 
-def path_array_from_json(input: Json) -> Paths:
-    if not isinstance(input, List):
+def path_array_from_json(value_json: Json) -> Paths:
+    if not isinstance(value_json, List):
         return []
-    return [_to_path(value) for value in input if isinstance(value, str)]
+    return [_to_path(value) for value in value_json if isinstance(value, str)]
 
 
-def bool_pair_from_json(input: Json) -> BoolPair:
-    if not isinstance(input, Dict):
-        return {}
-    return {
-        key: value for key, value in input.items() if isinstance(value, bool)
-    }
-
-
-def integer_pair_from_json(input: Json) -> IntPair:
-    if not isinstance(input, Dict):
-        return {}
-    return {
-        key: value for key, value in input.items() if isinstance(value, int)
-    }
-
-
-def string_pair_from_json(input: Json) -> StrPair:
-    if not isinstance(input, Dict):
+def bool_pair_from_json(value_json: Json) -> BoolPair:
+    if not isinstance(value_json, Dict):
         return {}
     return {
         key: value
-        for key, value in input.items()
+        for key, value in value_json.items()
+        if isinstance(value, bool)
+    }
+
+
+def integer_pair_from_json(value_json: Json) -> IntPair:
+    if not isinstance(value_json, Dict):
+        return {}
+    return {
+        key: value
+        for key, value in value_json.items()
+        if isinstance(value, int)
+    }
+
+
+def string_pair_from_json(value_json: Json) -> StrPair:
+    if not isinstance(value_json, Dict):
+        return {}
+    return {
+        key: value
+        for key, value in value_json.items()
         if isinstance(value, str) and not _filter_path(value, key)
     }
 
 
-def decimal_pair_from_json(input: Json) -> DecPair:
-    if not isinstance(input, Dict):
+def decimal_pair_from_json(value_json: Json) -> DecPair:
+    if not isinstance(value_json, Dict):
         return {}
     return {
         key: _to_decimal(value)
-        for key, value in input.items()
+        for key, value in value_json.items()
         if isinstance(value, float)
     }
 
 
-def path_pair_from_json(input: Json) -> PathPair:
-    if not isinstance(input, Dict):
+def path_pair_from_json(value_json: Json) -> PathPair:
+    if not isinstance(value_json, Dict):
         return {}
 
     paths: PathPair = {}
 
-    for key, value in input.items():
+    for key, value in value_json.items():
         if not isinstance(value, str):
             continue
 
@@ -159,61 +166,71 @@ def path_pair_from_json(input: Json) -> PathPair:
     return paths
 
 
-def bool_array2_from_json(input: Json) -> Bools2:
-    if not isinstance(input, List):
+def bool_array2_from_json(value_json: Json) -> Bools2:
+    if not isinstance(value_json, List):
         return []
-    return [bool_array_from_json(value) for value in input]
+    return [bool_array_from_json(value) for value in value_json]
 
 
-def integer_array2_from_json(input: Json) -> Ints2:
-    if not isinstance(input, List):
+def integer_array2_from_json(value_json: Json) -> Ints2:
+    if not isinstance(value_json, List):
         return []
-    return [integer_array_from_json(value) for value in input]
+    return [integer_array_from_json(value) for value in value_json]
 
 
-def string_array2_from_json(input: Json) -> Strs2:
-    if not isinstance(input, List):
+def string_array2_from_json(value_json: Json) -> Strs2:
+    if not isinstance(value_json, List):
         return []
-    return [string_array_from_json(value) for value in input]
+    return [string_array_from_json(value) for value in value_json]
 
 
-def decimal_array2_from_json(input: Json) -> Decs2:
-    if not isinstance(input, List):
+def decimal_array2_from_json(value_json: Json) -> Decs2:
+    if not isinstance(value_json, List):
         return []
-    return [decimal_array_from_json(value) for value in input]
+    return [decimal_array_from_json(value) for value in value_json]
 
 
-def path_array2_from_json(input: Json) -> Paths2:
-    if not isinstance(input, List):
+def path_array2_from_json(value_json: Json) -> Paths2:
+    if not isinstance(value_json, List):
         return []
-    return [path_array_from_json(value) for value in input]
+    return [path_array_from_json(value) for value in value_json]
 
 
-def bool_pair2_from_json(input: Json) -> BoolPair2:
-    if not isinstance(input, Dict):
+def bool_pair2_from_json(value_json: Json) -> BoolPair2:
+    if not isinstance(value_json, Dict):
         return {}
-    return {key: bool_pair_from_json(value) for key, value in input.items()}
+    return {
+        key: bool_pair_from_json(value) for key, value in value_json.items()
+    }
 
 
-def integer_pair2_from_json(input: Json) -> IntPair2:
-    if not isinstance(input, Dict):
+def integer_pair2_from_json(value_json: Json) -> IntPair2:
+    if not isinstance(value_json, Dict):
         return {}
-    return {key: integer_pair_from_json(value) for key, value in input.items()}
+    return {
+        key: integer_pair_from_json(value) for key, value in value_json.items()
+    }
 
 
-def string_pair2_from_json(input: Json) -> StrPair2:
-    if not isinstance(input, Dict):
+def string_pair2_from_json(value_json: Json) -> StrPair2:
+    if not isinstance(value_json, Dict):
         return {}
-    return {key: string_pair_from_json(value) for key, value in input.items()}
+    return {
+        key: string_pair_from_json(value) for key, value in value_json.items()
+    }
 
 
-def decimal_pair2_from_json(input: Json) -> DecPair2:
-    if not isinstance(input, Dict):
+def decimal_pair2_from_json(value_json: Json) -> DecPair2:
+    if not isinstance(value_json, Dict):
         return {}
-    return {key: decimal_pair_from_json(value) for key, value in input.items()}
+    return {
+        key: decimal_pair_from_json(value) for key, value in value_json.items()
+    }
 
 
-def path_pair2_from_json(input: Json) -> PathPair2:
-    if not isinstance(input, Dict):
+def path_pair2_from_json(value_json: Json) -> PathPair2:
+    if not isinstance(value_json, Dict):
         return {}
-    return {key: path_pair_from_json(value) for key, value in input.items()}
+    return {
+        key: path_pair_from_json(value) for key, value in value_json.items()
+    }

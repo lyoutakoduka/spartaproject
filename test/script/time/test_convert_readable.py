@@ -4,8 +4,7 @@
 from decimal import Decimal
 
 from pyspartaproj.context.default.integer_context import IntPair
-from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.context.extension.decimal_context import Decs
+from pyspartaproj.context.extension.decimal_context import DecPair
 from pyspartaproj.script.bool.same_value import bool_same_array
 from pyspartaproj.script.initialize_decimal import initialize_decimal
 from pyspartaproj.script.time.convert_readable import readable_time
@@ -26,7 +25,7 @@ def test_day() -> None:
     hour: int = minute * 60
     day: int = hour * 24
 
-    input_times: IntPair = {
+    test_case: IntPair = {
         "1s": second,
         "1m 0s": minute,
         "1m 1s": minute + second,
@@ -41,37 +40,39 @@ def test_day() -> None:
 
     assert bool_same_array(
         [
-            expected == readable_time(Decimal(str(input)))
-            for expected, input in input_times.items()
+            expected == readable_time(Decimal(str(source)))
+            for expected, source in test_case.items()
         ]
     )
 
 
 def test_second() -> None:
-    inputs: Decs = [Decimal("0.1") ** Decimal(str(i)) for i in range(9)]
-
-    expected: Strs = [
-        "1.000000s",
-        "0.100000s",
-        "0.010000s",
-        "0.001000s",
-        "0.000100s",
-        "0.000010s",
-        "0.000001s",
-        "0.000000s",
-    ]
+    test_case: DecPair = dict(
+        zip(
+            [
+                "1.000000s",
+                "0.100000s",
+                "0.010000s",
+                "0.001000s",
+                "0.000100s",
+                "0.000010s",
+                "0.000001s",
+                "0.000000s",
+            ],
+            [Decimal("0.1") ** Decimal(str(i)) for i in range(9)],
+        )
+    )
 
     assert bool_same_array(
         [
-            expected == readable_time(input, order=6)
-            for expected, input in zip(expected, inputs)
+            expected == readable_time(source, order=6)
+            for expected, source in test_case.items()
         ]
     )
 
 
 def test_order() -> None:
-    input_time: Decimal = Decimal("0.6666666")
-    input_orders: IntPair = {
+    test_case: IntPair = {
         "0s": 0,
         "0.6s": 1,
         "0.66s": 2,
@@ -83,8 +84,8 @@ def test_order() -> None:
 
     assert bool_same_array(
         [
-            expected == readable_time(input_time, order=order)
-            for expected, order in input_orders.items()
+            expected == readable_time(Decimal("0.6666666"), order=source)
+            for expected, source in test_case.items()
         ]
     )
 

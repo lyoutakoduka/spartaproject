@@ -133,7 +133,7 @@ def test_filter() -> None:
     expected: Strs2 = [_name_dirs + [_name_text]]
 
     def individual_test(root_path: Path) -> PathGene:
-        return walk_iterator(root_path, filter="*/*/*.txt")
+        return walk_iterator(root_path, glob_filter="*/*/*.txt")
 
     _inside_temporary_directory(expected, individual_test)
 

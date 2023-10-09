@@ -15,7 +15,7 @@ _ini_expected: Decs = [Decimal(str(i)) for i in range(_count)]
 
 
 def _check_counter_result(expected: Decs, timer: TimerSelect) -> None:
-    expected = [count + timer.APRIL_1_2023_EPOCH for count in expected]
+    expected = [count + timer.april_1_2023_epoch for count in expected]
 
     results: Decs = []
     for _ in range(_count):

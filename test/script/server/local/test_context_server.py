@@ -31,24 +31,24 @@ def test_key() -> None:
 
 def test_integer() -> None:
     def individual_test(server: ContextServer) -> None:
-        for type in server.get_integer_context_keys():
-            assert isinstance(server.get_integer_context(type), int)
+        for context_key in server.get_integer_context_keys():
+            assert isinstance(server.get_integer_context(context_key), int)
 
     _common_test(individual_test)
 
 
 def test_string() -> None:
     def individual_test(server: ContextServer) -> None:
-        for type in server.get_string_context_keys():
-            assert isinstance(server.get_string_context(type), str)
+        for context_key in server.get_string_context_keys():
+            assert isinstance(server.get_string_context(context_key), str)
 
     _common_test(individual_test)
 
 
 def test_path() -> None:
     def individual_test(server: ContextServer) -> None:
-        for type in server.get_path_context_keys():
-            assert isinstance(server.get_path_context(type), Path)
+        for context_key in server.get_path_context_keys():
+            assert isinstance(server.get_path_context(context_key), Path)
 
     _common_test(individual_test)
 
@@ -57,22 +57,22 @@ def test_set_path() -> None:
     expected: Path = Path(__file__)
 
     def individual_test(server: ContextServer) -> None:
-        for type in server.get_path_context_keys():
-            server.set_path_context(type, expected)
-            assert expected == server.get_path_context(type)
+        for context_key in server.get_path_context_keys():
+            server.set_path_context(context_key, expected)
+            assert expected == server.get_path_context(context_key)
 
     _common_test(individual_test)
 
 
 def test_revert() -> None:
-    input: Path = Path(__file__)
+    context_value: Path = Path(__file__)
 
     def individual_test(server: ContextServer) -> None:
-        for type in server.get_path_context_keys():
-            current: Path = server.get_path_context(type)
-            server.set_path_context(type, input)
+        for context_key in server.get_path_context_keys():
+            expected: Path = server.get_path_context(context_key)
+            server.set_path_context(context_key, context_value)
             server.revert_default()
-            assert current == server.get_path_context(type)
+            assert expected == server.get_path_context(context_key)
 
     _common_test(individual_test)
 

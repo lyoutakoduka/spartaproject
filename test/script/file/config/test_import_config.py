@@ -14,63 +14,63 @@ from pyspartaproj.script.file.text.export_file import text_export
 from pyspartaproj.script.string.format_texts import format_indent
 
 
-def _get_section(input: str) -> Basic:
-    config: Config = config_load(input)
+def _get_section(formatted: str) -> Basic:
+    config: Config = config_load(formatted)
     return config["section"]["option"]
 
 
 def test_bool() -> None:
-    input: str = """
+    source: str = """
         [section]
         option=True
     """
 
-    assert _get_section(format_indent(input))
+    assert _get_section(format_indent(source))
 
 
 def test_integer() -> None:
-    input: str = """
+    source: str = """
         [section]
         option=1
     """
     expected: int = 1
 
-    assert expected == _get_section(format_indent(input))
+    assert expected == _get_section(format_indent(source))
 
 
 def test_decimal() -> None:
-    input: str = """
+    source: str = """
         [section]
         option=1.0
     """
     expected: Decimal = Decimal("1.0")
 
-    assert expected == _get_section(format_indent(input))
+    assert expected == _get_section(format_indent(source))
 
 
 def test_string() -> None:
-    input: str = """
+    source: str = """
         [section]
         option=text
     """
     expected: str = "text"
 
-    assert expected == _get_section(format_indent(input))
+    assert expected == _get_section(format_indent(source))
 
 
 def test_path() -> None:
-    input: str = """
+    source: str = """
         [section]
         path=text
     """
     expected: Path = Path("text")
 
-    config: Config = config_load(format_indent(input))
+    config: Config = config_load(format_indent(source))
     assert expected == config["section"]["path"]
 
 
 def test_import() -> None:
-    input: str = """
+    source: str = """
         [section]
         option=text
     """
@@ -79,7 +79,7 @@ def test_import() -> None:
     with TemporaryDirectory() as temporary_path:
         config: Config = config_import(
             text_export(
-                Path(temporary_path, "temporary.ini"), format_indent(input)
+                Path(temporary_path, "temporary.ini"), format_indent(source)
             )
         )
         assert expected == config["section"]["option"]

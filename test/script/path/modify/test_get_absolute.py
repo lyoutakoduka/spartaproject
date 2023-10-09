@@ -21,8 +21,8 @@ def to_relative(path: Path) -> Path:
     return Path(path_text[index:])
 
 
-def to_pair(types: Strs, paths: Paths) -> PathPair:
-    return {type: path for type, path in zip(types, paths)}
+def to_pair(keys: Strs, paths: Paths) -> PathPair:
+    return {key: path for key, path in zip(keys, paths)}
 
 
 def test_ignore() -> None:
@@ -54,15 +54,15 @@ def test_array() -> None:
 
 def test_pair() -> None:
     current: Path = Path(__file__)
-    types: Strs = ["R", "G", "B"]
+    keys: Strs = ["R", "G", "B"]
     parents: Paths = [current.parents[i] for i in range(3)]
 
-    expected: PathPair = to_pair(types, parents)
+    expected: PathPair = to_pair(keys, parents)
     result: PathPair = get_absolute_pair(
-        to_pair(types, [to_relative(path) for path in parents])
+        to_pair(keys, [to_relative(path) for path in parents])
     )
 
-    assert bool_same_array([expected[type] == result[type] for type in types])
+    assert bool_same_array([expected[key] == result[key] for key in keys])
 
 
 def main() -> bool:

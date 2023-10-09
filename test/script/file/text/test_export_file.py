@@ -19,19 +19,19 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 
 
 def test_text() -> None:
-    input: str = "test"
+    source_text: str = "test"
 
     def individual_test(text_path: Path) -> None:
-        _common_test(text_export(text_path, input), len(input))
+        _common_test(text_export(text_path, source_text), len(source_text))
 
     _inside_temporary_directory(individual_test)
 
 
 def test_byte() -> None:
-    input: bytes = b"test"
+    source_byte: bytes = b"test"
 
     def individual_test(text_path: Path) -> None:
-        _common_test(byte_export(text_path, input), len(input))
+        _common_test(byte_export(text_path, source_byte), len(source_byte))
 
     _inside_temporary_directory(individual_test)
 

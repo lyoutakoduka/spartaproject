@@ -8,8 +8,8 @@ from pyspartaproj.context.file.json_context import Json
 from pyspartaproj.script.file.text.import_file import text_import
 
 
-def json_load(input: str) -> Json:
-    result: Json = loads(input)
+def json_load(source: str) -> Json:
+    result: Json = loads(source)
     return result
 
 

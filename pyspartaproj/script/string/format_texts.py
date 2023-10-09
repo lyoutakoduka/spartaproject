@@ -16,10 +16,10 @@ class _LinePair(TypedDict):
 _LinePairs = List[_LinePair]
 
 
-def _strip_line(input: str) -> _LinePairs:
+def _strip_line(source_text: str) -> _LinePairs:
     line_attributes: _LinePairs = []
 
-    for line in input.splitlines():
+    for line in source_text.splitlines():
         striped_right: str = line.rstrip()
         count_right: int = len(striped_right)
         space_size: int = 0
@@ -56,8 +56,8 @@ def _strip_lines(lines: Strs) -> Strs:
     return lines[index:]
 
 
-def format_indent(input: str, stdout: bool = False) -> str:
-    line_attributes: _LinePairs = _strip_line(input)
+def format_indent(source_text: str, stdout: bool = False) -> str:
+    line_attributes: _LinePairs = _strip_line(source_text)
 
     counts: Ints = [
         line_attribute["count"] for line_attribute in line_attributes

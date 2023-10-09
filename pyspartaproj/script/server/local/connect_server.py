@@ -133,8 +133,8 @@ class ConnectServer(PathServer):
 
     def _correct_path(self, result: Strs) -> bool:
         expected: Strs = [
-            str(self.get_path(type))
-            for type in ["private_root", "public_root"]
+            str(self.get_path(root))
+            for root in ["private_root", "public_root"]
         ]
 
         return 1 == len(

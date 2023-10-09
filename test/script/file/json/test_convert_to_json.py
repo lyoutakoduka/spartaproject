@@ -49,142 +49,144 @@ from pyspartaproj.script.file.json.convert_to_json import (
 from pyspartaproj.script.file.json.export_json import json_dump
 
 
-def _common_test(expected: str, input: Json) -> None:
-    assert expected == json_dump(input, compress=True)
+def _common_test(expected: str, source: Json) -> None:
+    assert expected == json_dump(source, compress=True)
 
 
-def _common_test_array(expected: str, input: Multi) -> None:
+def _common_test_array(expected: str, source_array: Multi) -> None:
     expected_array: str = f"[{expected}]"
-    _common_test(expected_array, multiple_to_json(input))
+    _common_test(expected_array, multiple_to_json(source_array))
 
 
-def _common_test_array2(expected: str, input: Multi2) -> None:
+def _common_test_array2(expected: str, source_arrays: Multi2) -> None:
     expected_array: str = f"[[{expected}]]"
-    _common_test(expected_array, multiple2_to_json(input))
+    _common_test(expected_array, multiple2_to_json(source_arrays))
 
 
-def _common_test_pair(expected: str, input: Multi) -> None:
+def _common_test_pair(expected: str, source_pair: Multi) -> None:
     expected_pair: str = '{"B":%s}' % expected
-    _common_test(expected_pair, multiple_to_json(input))
+    _common_test(expected_pair, multiple_to_json(source_pair))
 
 
-def _common_test_pair2(expected: str, input: Multi2) -> None:
+def _common_test_pair2(expected: str, source_pairs: Multi2) -> None:
     expected_pair: str = """{"A":{"B":%s}}""" % expected
-    _common_test(expected_pair, multiple2_to_json(input))
+    _common_test(expected_pair, multiple2_to_json(source_pairs))
 
 
 def test_bool_array() -> None:
-    input: bool = True
-    input1: Bools = [input]
-    input2: Bools2 = [input1]
+    source: bool = True
+    source_array: Bools = [source]
+    source_arrays: Bools2 = [source_array]
     expected: str = "true"
-    _common_test_array(expected, input1)
-    _common_test_array2(expected, input2)
+    _common_test_array(expected, source_array)
+    _common_test_array2(expected, source_arrays)
 
 
 def test_bool_pair() -> None:
-    input: bool = True
-    input1: BoolPair = {"B": input}
-    input2: BoolPair2 = {"A": input1}
+    source: bool = True
+    source_pair: BoolPair = {"B": source}
+    source_pairs: BoolPair2 = {"A": source_pair}
     expected: str = "true"
-    _common_test_pair(expected, input1)
-    _common_test_pair2(expected, input2)
+    _common_test_pair(expected, source_pair)
+    _common_test_pair2(expected, source_pairs)
 
 
 def test_integer_array() -> None:
-    input: int = 1
-    input1: Ints = [input]
-    input2: Ints2 = [input1]
+    source: int = 1
+    source_array: Ints = [source]
+    source_arrays: Ints2 = [source_array]
     expected: str = "1"
-    _common_test_array(expected, input1)
-    _common_test_array2(expected, input2)
+    _common_test_array(expected, source_array)
+    _common_test_array2(expected, source_arrays)
 
 
 def test_integer_pair() -> None:
-    input: int = 1
-    input1: IntPair = {"B": input}
-    input2: IntPair2 = {"A": input1}
+    source: int = 1
+    source_pair: IntPair = {"B": source}
+    source_pairs: IntPair2 = {"A": source_pair}
     expected: str = "1"
-    _common_test_pair(expected, input1)
-    _common_test_pair2(expected, input2)
+    _common_test_pair(expected, source_pair)
+    _common_test_pair2(expected, source_pairs)
 
 
 def test_float_array() -> None:
-    input: float = 1.0
-    input1: Floats = [input]
-    input2: Floats2 = [input1]
+    source: float = 1.0
+    source_array: Floats = [source]
+    source_arrays: Floats2 = [source_array]
     expected: str = "1.0"
-    _common_test_array(expected, input1)
-    _common_test_array2(expected, input2)
+    _common_test_array(expected, source_array)
+    _common_test_array2(expected, source_arrays)
 
 
 def test_float_pair() -> None:
-    input: float = 1.0
-    input1: FloatPair = {"B": input}
-    input2: FloatPair2 = {"A": input1}
+    source: float = 1.0
+    source_pair: FloatPair = {"B": source}
+    source_pairs: FloatPair2 = {"A": source_pair}
     expected: str = "1.0"
-    _common_test_pair(expected, input1)
-    _common_test_pair2(expected, input2)
+    _common_test_pair(expected, source_pair)
+    _common_test_pair2(expected, source_pairs)
 
 
 def test_string_array() -> None:
-    input: str = "R"
-    input1: Strs = [input]
-    input2: Strs2 = [input1]
+    source: str = "R"
+    source_array: Strs = [source]
+    source_arrays: Strs2 = [source_array]
     expected: str = '"R"'
-    _common_test_array(expected, input1)
-    _common_test_array2(expected, input2)
+    _common_test_array(expected, source_array)
+    _common_test_array2(expected, source_arrays)
 
 
 def test_string_pair() -> None:
-    input: str = "R"
-    input1: StrPair = {"B": input}
-    input2: StrPair2 = {"A": input1}
+    source: str = "R"
+    source_pair: StrPair = {"B": source}
+    source_pairs: StrPair2 = {"A": source_pair}
     expected: str = '"R"'
-    _common_test_pair(expected, input1)
-    _common_test_pair2(expected, input2)
+    _common_test_pair(expected, source_pair)
+    _common_test_pair2(expected, source_pairs)
 
 
 def test_decimal_array() -> None:
-    input: Decimal = Decimal("1.0")
-    input1: Decs = [input]
-    input2: Decs2 = [input1]
+    source: Decimal = Decimal("1.0")
+    source_array: Decs = [source]
+    source_arrays: Decs2 = [source_array]
     expected: str = "1.0"
-    _common_test_array(expected, input1)
-    _common_test_array2(expected, input2)
+    _common_test_array(expected, source_array)
+    _common_test_array2(expected, source_arrays)
 
 
 def test_decimal_pair() -> None:
-    input: Decimal = Decimal("1.0")
-    input1: DecPair = {"B": input}
-    input2: DecPair2 = {"A": input1}
+    source: Decimal = Decimal("1.0")
+    source_pair: DecPair = {"B": source}
+    source_pairs: DecPair2 = {"A": source_pair}
     expected: str = "1.0"
-    _common_test_pair(expected, input1)
-    _common_test_pair2(expected, input2)
+    _common_test_pair(expected, source_pair)
+    _common_test_pair2(expected, source_pairs)
 
 
 def test_path_array() -> None:
-    input: Path = Path("root")
-    input1: Paths = [input]
-    input2: Paths2 = [input1]
+    source: Path = Path("root")
+    source_array: Paths = [source]
+    source_arrays: Paths2 = [source_array]
     expected: str = '"root"'
-    _common_test_array(expected, input1)
-    _common_test_array2(expected, input2)
+    _common_test_array(expected, source_array)
+    _common_test_array2(expected, source_arrays)
 
 
 def test_path_pair() -> None:
-    input: Path = Path("root")
-    input1: PathPair = {"B": input}
-    input2: PathPair2 = {"A": input1}
+    source: Path = Path("root")
+    source_pair: PathPair = {"B": source}
+    source_pairs: PathPair2 = {"A": source_pair}
     expected: str = '"root"'
-    _common_test_pair(expected, input1)
-    _common_test_pair2(expected, input2)
+    _common_test_pair(expected, source_pair)
+    _common_test_pair2(expected, source_pairs)
 
 
 def test_tree() -> None:
-    input: Json = {"A": {"B": {"C": [None, Decimal("-1.0"), Path("root")]}}}
+    source_pairs: Json = {
+        "A": {"B": {"C": [None, Decimal("-1.0"), Path("root")]}}
+    }
     expected: str = """{"A":{"B":{"C":[null,-1.0,"root"]}}}"""
-    assert expected == json_dump(to_safe_json(input), compress=True)
+    assert expected == json_dump(to_safe_json(source_pairs), compress=True)
 
 
 def main() -> bool:

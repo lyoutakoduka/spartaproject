@@ -19,8 +19,8 @@ from pyspartaproj.script.path.modify.get_relative import (
 )
 
 
-def to_pair(types: Strs, paths: Paths) -> PathPair:
-    return {type: path for type, path in zip(types, paths)}
+def to_pair(path_types: Strs, paths: Paths) -> PathPair:
+    return {path_type: path for path_type, path in zip(path_types, paths)}
 
 
 def test_unmatch() -> None:
@@ -49,12 +49,12 @@ def test_array() -> None:
 
 def test_pair() -> None:
     current: Path = Path(__file__)
-    types: Strs = ["R", "G", "B"]
+    keys: Strs = ["R", "G", "B"]
 
-    expected: PathPair = to_pair(types, [current.parents[i] for i in range(3)])
+    expected: PathPair = to_pair(keys, [current.parents[i] for i in range(3)])
     result: PathPair = get_absolute_pair(get_relative_pair(expected))
 
-    assert bool_same_array([expected[type] == result[type] for type in types])
+    assert bool_same_array([expected[key] == result[key] for key in keys])
 
 
 def main() -> bool:
