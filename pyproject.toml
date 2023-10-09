@@ -33,6 +33,7 @@ strict = true
 warn_unreachable = true
 
 [tool.pytest.ini_options]
-addopts = "--capture=no --exitfirst --new-first --quiet"
+# addopts = "--capture=no --exitfirst --new-first --quiet"
+addopts = "--capture=no --new-first"
 cache_dir = "./.temp/.pytest_cache"
 testpaths = ["test"]
