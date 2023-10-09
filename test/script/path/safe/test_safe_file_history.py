@@ -21,8 +21,8 @@ def _compare_path_count(source: Paths2, destination: PathPair2) -> bool:
 def _compare_path_name(source: Paths2, destination: PathPair2) -> bool:
     same_paths: Bools = []
     for lefts, (_, rights) in zip(source, sorted(destination.items())):
-        for i, type in enumerate(["source.path", "destination.path"]):
-            same_paths += [lefts[i] == rights[type]]
+        for i, path in enumerate(["source.path", "destination.path"]):
+            same_paths += [lefts[i] == rights[path]]
     return bool_same_array(same_paths)
 
 
