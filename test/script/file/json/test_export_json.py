@@ -67,7 +67,7 @@ def test_compress() -> None:
 
 
 def test_export() -> None:
-    source: Json = ["R", "G", "B"]
+    keys: Json = ["R", "G", "B"]
     expected: str = """
       [
         "R",
@@ -80,7 +80,7 @@ def test_export() -> None:
 
     with TemporaryDirectory() as temporary_path:
         assert expected == text_import(
-            json_export(Path(temporary_path, "temporary.json"), source)
+            json_export(Path(temporary_path, "temporary.json"), keys)
         )
 
 
