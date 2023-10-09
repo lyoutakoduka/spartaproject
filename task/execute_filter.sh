@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+export PYTHONPATH=${CWD}:${PYTHONPATH}
+
 group=$1
 interpreter="./poetry/linux/.venv/bin/"
 
