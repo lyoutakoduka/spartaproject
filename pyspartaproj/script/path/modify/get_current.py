@@ -27,16 +27,9 @@ def get_current_symbolic() -> Path:
 
 
 def get_current() -> Path:
-    """Get current working directory that allow symbolic link.
-
-    Not Path.cwd() or os.getcwd()
+    """Get current working directory.
 
     Returns:
         Path: current working directory
     """
-    results: Strs = execute_command(["pwd"])
-
-    if 1 == len(results):
-        return Path(results[0])
-
-    raise ValueError
+    return Path.cwd()
