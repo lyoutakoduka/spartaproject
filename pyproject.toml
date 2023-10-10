@@ -7,7 +7,7 @@ skip = ["./poetry", "./.vscode", "./.temp", "./external", "./.git"]
 
 [tool.black]
 exclude = """(
-  .poetry/ | .vscode/ | .temp/ | external/ | .git/
+  poetry/ | .vscode/ | .temp/ | external/ | .git/
 )"""
 line-length = 79
 
