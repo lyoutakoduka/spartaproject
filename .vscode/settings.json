@@ -65,7 +65,6 @@
   "liveServer.settings.NoBrowser": true,
   "liveServer.settings.root": "/docs",
   "mypy-type-checker.args": ["--config-file=pyproject.toml"],
-  "projectManager.supportSymlinksOnBaseFolders": true,
   "pythonTestExplorer.testFramework": "pytest",
   "python.analysis.diagnosticMode": "workspace",
   "python.analysis.diagnosticSeverityOverrides": {
@@ -78,7 +77,6 @@
   "python.envFile": "",
   "python.languageServer": "Pylance",
   "python.testing.pytestEnabled": true,
-  "search.followSymlinks": false,
   "terminal.integrated.fontSize": 14,
   "testing.gutterEnabled": false,
   "workbench.colorTheme": "Dracula Soft",
