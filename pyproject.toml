@@ -12,7 +12,7 @@ exclude = """(
 line-length = 79
 
 [tool.flake8]
-extend-exclude = ["./.temp", "./poetry"]
+extend-exclude = ["./poetry", "./.vscode", "./.temp", "./external"]
 ignore = [
   "PT013",
   "D401",
