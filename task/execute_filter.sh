@@ -2,7 +2,7 @@
 
 export PYTHONPATH=${CWD}:${PYTHONPATH}
 
-group=$1
+filter_group=$1
 interpreter="./poetry/linux/.venv/bin/"
 
 execute_filter () {
@@ -11,12 +11,12 @@ execute_filter () {
     exec "$interpreter$executable" $argument
 }
 
-if [ "isort" = $group ]; then
+if [ "isort" = $filter_group ]; then
     execute_filter "isort" "--check-only ."
-elif [ "black" = $group ]; then
+elif [ "black" = $filter_group ]; then
     execute_filter "black" "--check ."
-elif [ "flake" = $group ]; then
+elif [ "flake" = $filter_group ]; then
     execute_filter "pflake8" "."
-elif [ "pytest" = $group ]; then
+elif [ "pytest" = $filter_group ]; then
     execute_filter "pytest" ""
 fi
