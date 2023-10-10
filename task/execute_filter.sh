@@ -3,8 +3,12 @@
 export PYTHONPATH=${CWD}:${PYTHONPATH}
 
 filter_group=$1
-execute_target="."
+execute_target=$2
 interpreter="./poetry/linux/.venv/bin/"
+
+if [[ -z "$execute_target" ]]; then
+    execute_target="."
+fi
 
 execute_filter () {
     executable=$1
