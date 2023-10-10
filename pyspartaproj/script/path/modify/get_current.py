@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Module to get current working directory that allow symbolic link."""
+"""Module to get current working directory."""
 
 from pathlib import Path
 
