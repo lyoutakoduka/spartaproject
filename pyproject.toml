@@ -1,12 +1,18 @@
 [tool.isort]
+format_error = "[sparta.isort.error]:{message}"
 line_length = 79
 profile = "black"
+quiet = true
+skip = ["./poetry", "./.vscode", "./.temp", "./external", "./.git"]
 
 [tool.black]
+exclude = """(
+  poetry/ | .vscode/ | .temp/ | external/ | .git/
+)"""
 line-length = 79
 
 [tool.flake8]
-extend-exclude = ["./.temp", "./poetry"]
+extend-exclude = ["./poetry", "./.vscode", "./.temp", "./external"]
 ignore = [
   "PT013",
   "D401",
@@ -33,6 +39,11 @@ strict = true
 warn_unreachable = true
 
 [tool.pytest.ini_options]
-addopts = "--capture=no --exitfirst --new-first --quiet"
+addopts = """
+  --quiet
+  --capture=no
+  --new-first
+  --ignore ./poetry
+  --ignore ./external
+"""
 cache_dir = "./.temp/.pytest_cache"
-testpaths = ["test"]
