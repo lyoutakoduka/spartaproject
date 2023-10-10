@@ -6,6 +6,9 @@ quiet = true
 skip = ["./poetry", "./.vscode", "./.temp", "./external"]
 
 [tool.black]
+exclude = """(
+  poetry/ | .vscode/ | .temp/ | external/
+)"""
 line-length = 79
 
 [tool.flake8]
