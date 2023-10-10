@@ -1,6 +1,8 @@
 [tool.isort]
+format_error = "[sparta.isort.error]:{message}"
 line_length = 79
 profile = "black"
+quiet = true
 skip = ["./poetry", "./.vscode", "./.temp", "./external"]
 
 [tool.black]
