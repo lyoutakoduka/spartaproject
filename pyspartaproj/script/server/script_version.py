@@ -1,28 +1,32 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Module to get version information of Python interpreter."""
+
 from pathlib import Path
 
-from pyspartaproj.context.default.integer_context import Ints
-from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.script.shell.execute_command import execute_command
 
 
-def version_to_string(versions: Ints) -> str:
-    return ".".join([str(number) for number in versions])
+def get_version_name(version: str) -> str:
+    """Function to convert version string as default directory name.
+
+    Args:
+        version (str): version information formatted like "3.12.0"
+
+    Returns:
+        str: formatted version string like "Python-3.12.0"
+    """
+    return "python".capitalize() + "-" + version
 
 
-def version_from_string(version: str) -> Ints:
-    return [int(number) for number in version.split(".")]
+def get_interpreter_version(executable: Path) -> str:
+    """Function to get version information of specific interpreter.
 
+    Args:
+        executable (Path): interpreter path you want to get version
 
-def get_version_name(versions: Ints) -> str:
-    return "python".capitalize() + "-" + version_to_string(versions)
-
-
-def execute_version(executable: Path) -> Ints:
-    results: Strs = execute_command([str(executable), "-V"])
-
-    version_test: str = results[0]
-    version_tests = version_test.split(" ")
-    return version_from_string(version_tests[-1])
+    Returns:
+        str: version information formatted like "3.12.0"
+    """
+    return execute_command([str(executable), "-V"])[0].split(" ")[-1]

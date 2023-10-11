@@ -1,38 +1,26 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to get version information of Python interpreter."""
+
 from pathlib import Path
 from platform import python_version
 from sys import executable
 
-from pyspartaproj.context.default.integer_context import Ints
 from pyspartaproj.script.server.script_version import (
-    execute_version,
+    get_interpreter_version,
     get_version_name,
-    version_from_string,
-    version_to_string,
 )
 
 
-def test_string() -> None:
-    expected: str = "0.0.0"
-    assert expected == version_to_string([0, 0, 0])
-
-
-def test_number() -> None:
-    expected: Ints = [0, 0, 0]
-    assert expected == version_from_string("0.0.0")
-
-
 def test_name() -> None:
-    expected: str = "Python-0.0.0"
-    assert expected == get_version_name([0, 0, 0])
+    """Test function to compare version string like default directory name."""
+    assert "Python-0.0.0" == get_version_name("0.0.0")
 
 
 def test_version() -> None:
-    assert execute_version(Path(executable)) == version_from_string(
-        python_version()
-    )
+    """Test function to compare version information of specific interpreter."""
+    assert python_version() == get_interpreter_version(Path(executable))
 
 
 def main() -> bool:
@@ -41,8 +29,6 @@ def main() -> bool:
     Returns:
         bool: success if get to the end of function
     """
-    test_string()
-    test_number()
     test_name()
     test_version()
     return True

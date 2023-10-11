@@ -1,15 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to execute python code on server you can use ssh connection."""
+
 from pathlib import Path
 
-from pyspartaproj.context.default.integer_context import Ints
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.interface.pytest import fail, raises
 from pyspartaproj.script.feature_flags import in_development
 from pyspartaproj.script.path.safe.safe_copy import SafeCopy
 from pyspartaproj.script.server.local.execute_server import ExecuteServer
-from pyspartaproj.script.server.script_version import version_from_string
 
 
 def _get_execute_source(name: str) -> Path:
@@ -40,21 +40,19 @@ def _common_test(name: str, server: ExecuteServer) -> None:
         fail()
 
 
-def _version_test(name: str, server: ExecuteServer, expected: Ints) -> None:
+def _version_test(name: str, server: ExecuteServer, expected: str) -> None:
     if result := _execute_python(name, server):
         assert expected == _get_version_number(result)
     else:
         fail()
 
 
-def _get_version_number(result: Strs) -> Ints:
-    version_text = result[0]
-    texts: Strs = version_text.split(" ")
-
-    return version_from_string(texts[0])
+def _get_version_number(result: Strs) -> str:
+    return result[0].split(" ")[0]
 
 
 def test_file() -> None:
+    """Test to execute Python module that is single file."""
     name: str = "file.py"
     server: ExecuteServer = ExecuteServer()
 
@@ -62,6 +60,7 @@ def test_file() -> None:
 
 
 def test_directory() -> None:
+    """Test to execute Python module including directory."""
     name: str = "directory"
     server: ExecuteServer = ExecuteServer()
 
@@ -69,15 +68,17 @@ def test_directory() -> None:
 
 
 def test_path() -> None:
+    """Test to execute selected version of Python interpreter."""
     name: str = "version.py"
-    expected: Ints = [3, 10, 11]
-    server: ExecuteServer = ExecuteServer(versions=expected)
+    expected: str = "3.10.11"
+    server: ExecuteServer = ExecuteServer(version=expected)
 
     if in_development():
         _version_test(name, server, expected)
 
 
 def test_error() -> None:
+    """Test to catch and print error of Python code on server."""
     name: str = "error.py"
     server: ExecuteServer = ExecuteServer()
 
@@ -86,6 +87,11 @@ def test_error() -> None:
 
 
 def main() -> bool:
+    """Run all tests.
+
+    Returns:
+        bool: success if get to the end of function
+    """
     test_file()
     test_directory()
     test_path()
