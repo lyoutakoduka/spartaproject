@@ -10,21 +10,21 @@ from pyspartaproj.script.server.script_version import get_version_name
 
 
 class ExecuteServer(UploadServer):
-    def _set_version(self, versions: str | None) -> str:
-        if versions is None:
-            versions = "3.11.5"
+    def _set_version(self, version: str | None) -> str:
+        if version is None:
+            version = "3.11.5"
 
-        return get_version_name(versions)
+        return get_version_name(version)
 
     def _set_version_path(self, version: str) -> None:
         self._python_path: Path = Path(
             self.get_path("python_root"), version, "bin", "python3"
         )
 
-    def __init__(self, versions: str | None = None) -> None:
+    def __init__(self, version: str | None = None) -> None:
         super().__init__()
 
-        self._set_version_path(self._set_version(versions))
+        self._set_version_path(self._set_version(version))
 
     def _get_error_identifier(self) -> str:
         body: str = " ".join(["most", "recent", "call", "last"])
