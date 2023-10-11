@@ -3,13 +3,20 @@
 
 from subprocess import PIPE, Popen
 
-from pyspartaproj.context.default.string_context import Strs
+from pyspartaproj.context.default.string_context import StrGene, Strs
 
 
-def execute_command(commands: Strs) -> Strs:
+def execute_command(commands: Strs) -> StrGene:
     subprocess = Popen(
         " ".join(commands), stdout=PIPE, stderr=PIPE, shell=True
     )
-    stdout_byte, _ = subprocess.communicate()
-    stdout: str = stdout_byte.decode()
-    return stdout.splitlines()
+    if subprocess.stdout is None:
+        raise ValueError
+
+    while True:
+        line: bytes = subprocess.stdout.readline()
+        if line:
+            yield line.decode().replace("\n", "")
+
+        if not line and subprocess.poll() is not None:
+            break
