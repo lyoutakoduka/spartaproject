@@ -17,9 +17,7 @@ def test_name() -> None:
 
 
 def test_version() -> None:
-    assert execute_version(Path(executable)) == version_from_string(
-        python_version()
-    )
+    assert execute_version(Path(executable)) == python_version()
 
 
 def main() -> bool:
