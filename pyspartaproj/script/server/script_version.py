@@ -3,8 +3,6 @@
 
 from pathlib import Path
 
-from pyspartaproj.context.default.integer_context import Ints
-from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.script.shell.execute_command import execute_command
 
 
