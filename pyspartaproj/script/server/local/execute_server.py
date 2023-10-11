@@ -21,7 +21,7 @@ class ExecuteServer(UploadServer):
             self.get_path("python_root"), version, "bin", "python3"
         )
 
-    def __init__(self, versions: Ints | None = None) -> None:
+    def __init__(self, versions: str | None = None) -> None:
         super().__init__()
 
         self._set_version_path(self._set_version(versions))
