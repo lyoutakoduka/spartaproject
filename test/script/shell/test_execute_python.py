@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Test to execute Python depends on OS."""
+"""Test to execute Python according to OS."""
 
 from pathlib import Path
 
@@ -14,8 +14,11 @@ from pyspartaproj.script.shell.execute_python import (
 
 
 def test_command() -> None:
-    results: Strs = execute_python(
-        [Path(Path(__file__).parent, "resource", "version.py").as_posix()]
+    """Test to execute Python script that return version of interpreter."""
+    results: Strs = list(
+        execute_python(
+            [Path(Path(__file__).parent, "resource", "version.py").as_posix()]
+        )
     )
 
     if 1 == len(results):

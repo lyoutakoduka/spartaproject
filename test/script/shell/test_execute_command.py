@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to execute CLI (Command Line Interface) script on subprocess."""
 
 from pathlib import Path
 
@@ -11,7 +12,12 @@ from pyspartaproj.script.shell.execute_command import execute_command
 
 
 def test_current() -> None:
-    result: Strs = execute_command(["pwd"])
+    """Test to execute generic script.
+
+    Suppose that the test environment of Windows
+        can execute simple Linux commands.
+    """
+    result: Strs = list(execute_command(["pwd"]))
 
     if 1 != len(result):
         fail()
