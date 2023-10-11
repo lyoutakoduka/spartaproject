@@ -12,8 +12,7 @@ from pyspartaproj.script.server.script_version import (
 
 
 def test_name() -> None:
-    expected: str = "Python-0.0.0"
-    assert expected == get_version_name("0.0.0")
+    assert "Python-0.0.0" == get_version_name("0.0.0")
 
 
 def test_version() -> None:
