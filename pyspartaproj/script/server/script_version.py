@@ -10,5 +10,5 @@ def get_version_name(version: str) -> str:
     return "python".capitalize() + "-" + version
 
 
-def execute_version(executable: Path) -> str:
+def get_interpreter_version(executable: Path) -> str:
     return execute_command([str(executable), "-V"])[0].split(" ")[-1]

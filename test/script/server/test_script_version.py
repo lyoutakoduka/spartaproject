@@ -6,7 +6,7 @@ from platform import python_version
 from sys import executable
 
 from pyspartaproj.script.server.script_version import (
-    execute_version,
+    get_interpreter_version,
     get_version_name,
 )
 
@@ -16,7 +16,7 @@ def test_name() -> None:
 
 
 def test_version() -> None:
-    assert python_version() == execute_version(Path(executable))
+    assert python_version() == get_interpreter_version(Path(executable))
 
 
 def main() -> bool:
