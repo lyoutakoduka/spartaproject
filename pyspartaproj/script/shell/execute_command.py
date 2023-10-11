@@ -17,6 +17,6 @@ def execute_command(commands: Strs) -> StrGene:
         line: bytes = subprocess.stdout.readline()
         if line:
             yield line.decode().replace("\n", "")
-
-        if not line and subprocess.poll() is not None:
-            break
+        else:
+            if subprocess.poll() is not None:
+                break
