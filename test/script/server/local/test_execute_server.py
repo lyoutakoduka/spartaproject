@@ -70,8 +70,8 @@ def test_directory() -> None:
 
 def test_path() -> None:
     name: str = "version.py"
-    expected: Ints = [3, 10, 11]
-    server: ExecuteServer = ExecuteServer(versions=expected)
+    expected: str = "3.10.11"
+    server: ExecuteServer = ExecuteServer(version=expected)
 
     if in_development():
         _version_test(name, server, expected)
