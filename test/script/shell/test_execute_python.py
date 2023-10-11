@@ -14,8 +14,10 @@ from pyspartaproj.script.shell.execute_python import (
 
 
 def test_command() -> None:
-    results: Strs = execute_python(
-        [Path(Path(__file__).parent, "resource", "version.py").as_posix()]
+    results: Strs = list(
+        execute_python(
+            [Path(Path(__file__).parent, "resource", "version.py").as_posix()]
+        )
     )
 
     if 1 == len(results):

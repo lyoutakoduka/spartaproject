@@ -11,7 +11,7 @@ from pyspartaproj.script.shell.execute_command import execute_command
 
 
 def test_current() -> None:
-    result: Strs = execute_command(["pwd"])
+    result: Strs = list(execute_command(["pwd"]))
 
     if 1 != len(result):
         fail()
