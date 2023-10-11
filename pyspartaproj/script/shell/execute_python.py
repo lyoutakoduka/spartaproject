@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Module to execute Python depends on OS."""
+"""Module to execute Python according to OS."""
 
 from pathlib import Path
 from platform import uname
@@ -13,6 +13,14 @@ from pyspartaproj.script.shell.execute_command import execute_command
 
 
 def get_interpreter_path() -> Path:
+    """Function to get interpreter path of Python according to OS.
+
+    Raises:
+        FileNotFoundError: raise error when selected platform isn't defined
+
+    Returns:
+        Path: relative path of Python interpreter
+    """
     platform: str = uname().system
 
     platform_pythons: PathPair = {
@@ -27,12 +35,12 @@ def get_interpreter_path() -> Path:
 
 
 def execute_python(commands: Strs) -> StrGene:
-    """Execute Python depends on OS.
+    """Execute Python according to OS.
 
     Args:
         commands (Strs): Script you want execute and arguments of itself
 
     Returns:
-        Strs: Stdout of Script path you want execute
+        StrGene: Stdout of Script path you want execute
     """
     return execute_command([get_interpreter_path().as_posix()] + commands)
