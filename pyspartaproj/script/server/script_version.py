@@ -11,4 +11,4 @@ def get_version_name(versions: str) -> str:
 
 
 def execute_version(executable: Path) -> str:
-    return execute_command([str(executable), "-V"])[0]
+    return execute_command([str(executable), "-V"])[0].split(" ")[-1]
