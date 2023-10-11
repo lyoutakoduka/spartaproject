@@ -8,8 +8,8 @@ from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.script.shell.execute_command import execute_command
 
 
-def get_version_name(versions: Ints) -> str:
-    return "python".capitalize() + "-" + version_to_string(versions)
+def get_version_name(versions: str) -> str:
+    return "python".capitalize() + "-" + versions
 
 
 def execute_version(executable: Path) -> Ints:
