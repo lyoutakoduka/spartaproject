@@ -6,8 +6,8 @@ from pathlib import Path
 from pyspartaproj.script.shell.execute_command import execute_command
 
 
-def get_version_name(versions: str) -> str:
-    return "python".capitalize() + "-" + versions
+def get_version_name(version: str) -> str:
+    return "python".capitalize() + "-" + version
 
 
 def execute_version(executable: Path) -> str:
