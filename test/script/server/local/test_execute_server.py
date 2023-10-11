@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to execute python code on server you can use ssh connection."""
+
 from pathlib import Path
 
 from pyspartaproj.context.default.string_context import Strs
@@ -50,6 +52,7 @@ def _get_version_number(result: Strs) -> str:
 
 
 def test_file() -> None:
+    """Test to execute Python module that is single file."""
     name: str = "file.py"
     server: ExecuteServer = ExecuteServer()
 
@@ -57,6 +60,7 @@ def test_file() -> None:
 
 
 def test_directory() -> None:
+    """Test to execute Python module including directory."""
     name: str = "directory"
     server: ExecuteServer = ExecuteServer()
 
@@ -64,6 +68,7 @@ def test_directory() -> None:
 
 
 def test_path() -> None:
+    """Test to execute selected version of Python interpreter."""
     name: str = "version.py"
     expected: str = "3.10.11"
     server: ExecuteServer = ExecuteServer(version=expected)
@@ -73,6 +78,7 @@ def test_path() -> None:
 
 
 def test_error() -> None:
+    """Test to catch and print error of Python code on server."""
     name: str = "error.py"
     server: ExecuteServer = ExecuteServer()
 
@@ -81,6 +87,11 @@ def test_error() -> None:
 
 
 def main() -> bool:
+    """Run all tests.
+
+    Returns:
+        bool: success if get to the end of function
+    """
     test_file()
     test_directory()
     test_path()
