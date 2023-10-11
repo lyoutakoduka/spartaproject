@@ -40,18 +40,15 @@ def _common_test(name: str, server: ExecuteServer) -> None:
         fail()
 
 
-def _version_test(name: str, server: ExecuteServer, expected: Ints) -> None:
+def _version_test(name: str, server: ExecuteServer, expected: str) -> None:
     if result := _execute_python(name, server):
         assert expected == _get_version_number(result)
     else:
         fail()
 
 
-def _get_version_number(result: Strs) -> Ints:
-    version_text = result[0]
-    texts: Strs = version_text.split(" ")
-
-    return version_from_string(texts[0])
+def _get_version_number(result: Strs) -> str:
+    return result[0].split(" ")[0]
 
 
 def test_file() -> None:
