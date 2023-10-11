@@ -10,9 +10,9 @@ from pyspartaproj.script.server.script_version import get_version_name
 
 
 class ExecuteServer(UploadServer):
-    def _set_version(self, versions: Ints | None) -> str:
+    def _set_version(self, versions: str | None) -> str:
         if versions is None:
-            versions = [3, 11, 5]
+            versions = "3.11.5"
 
         return get_version_name(versions)
 
