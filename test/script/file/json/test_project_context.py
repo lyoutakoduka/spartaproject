@@ -4,7 +4,7 @@
 from pathlib import Path
 
 from pyspartaproj.context.default.integer_context import IntPair
-from pyspartaproj.context.default.string_context import Strs2
+from pyspartaproj.context.default.string_context import StrPair, Strs2
 from pyspartaproj.script.file.json.project_context import ProjectContext
 
 
@@ -26,6 +26,21 @@ def test_integer() -> None:
         assert value == integer_context[key]
 
 
+def test_string() -> None:
+    expected: StrPair = {"name": "name", "language": "language"}
+
+    project = ProjectContext(
+        forward=Path(Path(__file__).parent, "resource", "forward.json")
+    )
+    string_context: StrPair = project.get_string_context("test")
+
+    _common_test([list(items.keys()) for items in [expected, string_context]])
+
+    for key, value in expected.items():
+        assert value == string_context[key]
+
+
 def main() -> bool:
     test_integer()
+    test_string()
     return True
