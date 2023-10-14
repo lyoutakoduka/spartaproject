@@ -5,6 +5,7 @@ from pathlib import Path
 
 from pyspartaproj.context.default.integer_context import IntPair
 from pyspartaproj.context.default.string_context import StrPair, Strs2
+from pyspartaproj.context.extension.path_context import PathPair
 from pyspartaproj.script.file.json.project_context import ProjectContext
 
 
@@ -42,7 +43,23 @@ def test_string() -> None:
         assert value == string_context[key]
 
 
+def test_path() -> None:
+    expected: PathPair = {
+        "root.path": Path("root"),
+        "head.path": Path("root", "head"),
+    }
+
+    project = _import_context()
+    path_context: PathPair = project.get_path_context("test")
+
+    _common_test([list(items.keys()) for items in [expected, path_context]])
+
+    for key, value in expected.items():
+        assert value == path_context[key]
+
+
 def main() -> bool:
     test_integer()
     test_string()
+    test_path()
     return True
