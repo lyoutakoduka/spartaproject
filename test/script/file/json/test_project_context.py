@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to import a context of whole project from outside Json."""
+
 from pathlib import Path
 
 from pyspartaproj.context.default.integer_context import IntPair
@@ -20,6 +22,7 @@ def _import_context() -> ProjectContext:
 
 
 def test_integer() -> None:
+    """Test to filter and get project context by integer type."""
     expected: IntPair = {"index": 0, "count": 1}
 
     project: ProjectContext = _import_context()
@@ -32,6 +35,7 @@ def test_integer() -> None:
 
 
 def test_string() -> None:
+    """Test to filter and get project context by string type."""
     expected: StrPair = {"name": "name", "language": "language"}
 
     project: ProjectContext = _import_context()
@@ -44,6 +48,7 @@ def test_string() -> None:
 
 
 def test_path() -> None:
+    """Test to filter and get project context by path type."""
     expected: PathPair = {
         "root.path": Path("root"),
         "head.path": Path("root", "head"),
@@ -59,6 +64,11 @@ def test_path() -> None:
 
 
 def main() -> bool:
+    """Run all tests.
+
+    Returns:
+        bool: success if get to the end of function
+    """
     test_integer()
     test_string()
     test_path()
