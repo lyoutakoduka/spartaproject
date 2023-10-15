@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Module to import a context of whole project from outside Json."""
+
 from pathlib import Path
 
 from pyspartaproj.context.default.integer_context import IntPair
@@ -17,6 +19,8 @@ from pyspartaproj.script.file.json.import_json import json_import
 
 
 class ProjectContext:
+    """Class to import a context of whole project."""
+
     def _get_context_path(self, forward: Path | None) -> Path:
         if forward is None:
             return Path("pyspartaproj", "resource", "project_context.json")
@@ -34,15 +38,56 @@ class ProjectContext:
         self._path_context = path_pair2_from_json(base_context)
 
     def __init__(self, forward: Path | None = None) -> None:
+        """Import a project context file.
+
+        The path of the context file is defined at a path forwarding file.
+
+        e.g. in the following cases
+        The project context file named "config.json"
+        The path forwarding file named "forward.json"
+
+        ProjectContext module import "forward.json" first,
+            then find a path of "config.json" in therefore,
+            finally import it.
+
+        Args:
+            forward (Path | None, optional): Defaults to None.
+                alternative path of the path forwarding file,
+                and mainly used at test of this module.
+        """
         self._serialize_path(
             self._load_context(self._get_context_path(forward))
         )
 
     def get_integer_context(self, group: str) -> IntPair:
+        """Filter and get project context by integer type.
+
+        Args:
+            group (str): select group of project context
+
+        Returns:
+            IntPair: project context of integer type
+        """
         return self._integer_context[group]
 
     def get_string_context(self, group: str) -> StrPair:
+        """Filter and get project context by string type.
+
+        Args:
+            group (str): select group of project context
+
+        Returns:
+            StrPair: project context of string type
+        """
         return self._string_context[group]
 
     def get_path_context(self, group: str) -> PathPair:
+        """Filter and get project context by path type.
+
+        Args:
+            group (str): select group of project context
+
+        Returns:
+            PathPair: project context of path type
+        """
         return self._path_context[group]
