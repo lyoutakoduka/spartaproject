@@ -2,6 +2,8 @@
   "server": {
     "host": "***",
     "user_name": ""***
+    "passphrase_linux": "***",
+    "passphrase_windows": ""***",
     "private_key.path": ""***",
     "remote_root.path": ""***",
     "local_root.path": ""***",
