@@ -10,10 +10,9 @@ from pyspartaproj.script.directory.create_directory_working import (
     create_working_space,
 )
 from pyspartaproj.script.path.modify.get_relative import get_relative
-from pyspartaproj.script.server.local.context_server import ContextServer
 
 
-class PathServer(ContextServer, WorkSpace):
+class PathServer(WorkSpace):
     def _add_path(self, key: str, child: Path, parent: str | None) -> None:
         if parent is not None:
             child = Path(self.get_path(parent), child)
@@ -54,7 +53,6 @@ class PathServer(ContextServer, WorkSpace):
         self._build_path_develop()
 
     def _initialize_multiple_inheritance(self) -> None:
-        ContextServer.__init__(self)
         WorkSpace.__init__(self)
 
     def __init__(self) -> None:
