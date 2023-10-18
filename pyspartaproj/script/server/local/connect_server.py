@@ -12,20 +12,22 @@ from pyspartaproj.interface.paramiko import (
     SFTPClient,
     SSHClient,
 )
+from pyspartaproj.script.file.json.project_context import ProjectContext
 from pyspartaproj.script.initialize_decimal import initialize_decimal
 from pyspartaproj.script.server.local.path_server import PathServer
 
 initialize_decimal()
 
 
-class ConnectServer(PathServer):
+class ConnectServer(PathServer, ProjectContext):
     def _initialize_connect(self) -> None:
         self._ssh: SSHClient | None = None
         self._channel: Channel | None = None
         self._sftp: SFTPClient | None = None
 
     def __init__(self) -> None:
-        super().__init__()
+        PathServer.__init__(self)
+        ProjectContext.__init__(self)
 
         self._initialize_connect()
 
