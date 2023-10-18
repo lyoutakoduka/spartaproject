@@ -4,7 +4,8 @@
     "user_name": ""***
     "passphrase_linux": "***",
     "passphrase_windows": ""***",
-    "private_key.path": ""***",
+    "private_key_linux.path": "***",
+    "private_key_windows.path": ""***",
     "remote_root.path": ""***",
     "local_root.path": ""***",
     "timeout": 1000,
