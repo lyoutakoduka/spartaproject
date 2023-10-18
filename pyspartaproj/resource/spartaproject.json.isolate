@@ -1,13 +1,13 @@
 {
   "server": {
     "host": "***",
-    "user_name": ""***
+    "user_name": "***"
     "passphrase_linux": "***",
-    "passphrase_windows": ""***",
+    "passphrase_windows": "***",
     "private_key_linux.path": "***",
-    "private_key_windows.path": ""***",
-    "remote_root.path": ""***",
-    "local_root.path": ""***",
+    "private_key_windows.path": "***",
+    "remote_root.path": "***",
+    "local_root.path": "***",
     "timeout": 1000,
     "port": 99
   }
