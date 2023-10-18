@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from decimal import Decimal
+from platform import uname
 from time import sleep
 
 from pyspartaproj.context.default.string_context import Strs
@@ -45,6 +46,9 @@ class ConnectServer(PathServer):
             sftp.close()
 
         self._initialize_connect()
+
+    def _get_platform_key(self, keys: Strs) -> str:
+        return "_".join(keys + [uname().system.lower()])
 
     def _connect_detail(self) -> None:
         milliseconds: int = self.get_integer_context("timeout")
