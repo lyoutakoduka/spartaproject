@@ -57,6 +57,11 @@ class ConnectServer(PathServer, ProjectContext):
             self._get_platform_key(["passphrase"])
         ]
 
+    def _get_private_key(self) -> str:
+        return self.get_path_context("server")[
+            self._get_platform_key(["private", "key"]) + ".path"
+        ].as_posix()
+
     def _get_timeout(self) -> float:
         milliseconds: int = self.get_integer_context("server")["timeout"]
         return float(Decimal(str(milliseconds)) / Decimal("1000.0"))
@@ -68,9 +73,7 @@ class ConnectServer(PathServer, ProjectContext):
             ssh.connect(
                 hostname=string_context["host"],
                 username=string_context["user_name"],
-                key_filename=self.get_path_context(
-                    "private_key.path"
-                ).as_posix(),
+                key_filename=self._get_private_key(),
                 passphrase=self._get_passphrase(),
                 port=self.get_integer_context("server")["port"],
                 timeout=self._get_timeout(),
