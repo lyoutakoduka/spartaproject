@@ -52,6 +52,11 @@ class ConnectServer(PathServer, ProjectContext):
     def _get_platform_key(self, keys: Strs) -> str:
         return "_".join(keys + [uname().system.lower()])
 
+    def _get_passphrase(self) -> str:
+        return self.get_string_context("server")[
+            self._get_platform_key(["passphrase"])
+        ]
+
     def _connect_detail(self) -> None:
         milliseconds: int = self.get_integer_context("timeout")
         seconds: Decimal = Decimal(str(milliseconds)) / Decimal("1000.0")
@@ -64,6 +69,7 @@ class ConnectServer(PathServer, ProjectContext):
                 key_filename=self.get_path_context(
                     "private_key.path"
                 ).as_posix(),
+                passphrase=self._get_passphrase(),
                 port=self.get_integer_context("server")["port"],
                 timeout=float(seconds),
             )
