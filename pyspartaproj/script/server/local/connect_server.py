@@ -57,9 +57,11 @@ class ConnectServer(PathServer, ProjectContext):
             self._get_platform_key(["passphrase"])
         ]
 
+    def _get_timeout(self) -> float:
+        milliseconds: int = self.get_integer_context("server")["timeout"]
+        return float(Decimal(str(milliseconds)) / Decimal("1000.0"))
+
     def _connect_detail(self) -> None:
-        milliseconds: int = self.get_integer_context("timeout")
-        seconds: Decimal = Decimal(str(milliseconds)) / Decimal("1000.0")
         string_context: StrPair = self.get_string_context("server")
 
         if ssh := self.get_ssh():
@@ -71,7 +73,7 @@ class ConnectServer(PathServer, ProjectContext):
                 ).as_posix(),
                 passphrase=self._get_passphrase(),
                 port=self.get_integer_context("server")["port"],
-                timeout=float(seconds),
+                timeout=self._get_timeout(),
             )
 
     def _ssh_setting(self) -> None:
