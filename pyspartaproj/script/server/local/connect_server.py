@@ -5,7 +5,7 @@ from decimal import Decimal
 from platform import uname
 from time import sleep
 
-from pyspartaproj.context.default.string_context import Strs
+from pyspartaproj.context.default.string_context import StrPair, Strs
 from pyspartaproj.interface.paramiko import (
     AutoAddPolicy,
     Channel,
@@ -55,15 +55,16 @@ class ConnectServer(PathServer, ProjectContext):
     def _connect_detail(self) -> None:
         milliseconds: int = self.get_integer_context("timeout")
         seconds: Decimal = Decimal(str(milliseconds)) / Decimal("1000.0")
+        string_context: StrPair = self.get_string_context("server")
 
         if ssh := self.get_ssh():
             ssh.connect(
-                hostname=self.get_string_context("host"),
-                port=self.get_integer_context("port"),
-                username=self.get_string_context("user_name"),
+                hostname=string_context["host"],
+                username=string_context["user_name"],
                 key_filename=self.get_path_context(
                     "private_key.path"
                 ).as_posix(),
+                port=self.get_integer_context("server")["port"],
                 timeout=float(seconds),
             )
 
@@ -153,7 +154,7 @@ class ConnectServer(PathServer, ProjectContext):
         )
 
     def _get_remote_path(self) -> str:
-        return self.get_path_context("remote_root.path").as_posix()
+        return self.get_path_context("server")["remote_root.path"].as_posix()
 
     def _connect_ssh(self) -> bool:
         self._create_ssh()
