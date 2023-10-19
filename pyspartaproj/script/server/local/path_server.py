@@ -52,11 +52,9 @@ class PathServer(WorkSpace):
         self._build_path_private()
         self._build_path_develop()
 
-    def _initialize_multiple_inheritance(self) -> None:
-        WorkSpace.__init__(self)
-
     def __init__(self) -> None:
-        self._initialize_multiple_inheritance()
+        super().__init__()
+
         self._build_path_table()
 
     def get_path_table(self) -> Strs:
