@@ -20,7 +20,7 @@ def _get_execute_source(name: str) -> Path:
 def _execute_python(name: str, server: ExecuteServer) -> Strs | None:
     assert server.connect()
 
-    destination_path: Path = Path(server.get_working_space(), name)
+    destination_path: Path = Path(server.create_local_working_space(), name)
 
     safe_copy = SafeCopy()
     safe_copy.copy(_get_execute_source(name), destination_path)

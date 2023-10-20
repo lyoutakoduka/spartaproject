@@ -28,7 +28,7 @@ def _inside_temporary_directory(
     server: UploadServer = UploadServer()
     assert server.connect()
 
-    function(server, server.get_working_space(jst=True))
+    function(server, server.create_local_working_space(jst=True))
 
 
 def test_file() -> None:
