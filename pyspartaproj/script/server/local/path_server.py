@@ -15,7 +15,10 @@ from pyspartaproj.script.path.modify.get_relative import get_relative
 
 
 class PathServer(WorkSpace):
-    """Class to handle paths about file and directory on server."""
+    """Class to handle paths about file and directory on server.
+
+    WorkSpace: class to treat temporary working space on local environment.
+    """
 
     def _add_path(self, key: str, child: Path, parent: str | None) -> None:
         if parent is not None:
