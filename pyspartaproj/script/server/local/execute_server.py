@@ -48,7 +48,7 @@ class ExecuteServer(UploadServer):
             path.as_posix()
             for path in [
                 self._python_path,
-                self.to_remote_relative(source_root),
+                self.to_relative_path(source_root),
             ]
         ]
 

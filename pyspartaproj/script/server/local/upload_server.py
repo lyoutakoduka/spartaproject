@@ -100,6 +100,6 @@ class UploadServer(ConnectServer):
 
     def upload(self, source: Path, destination: Path | None = None) -> bool:
         if destination is None:
-            destination = self.to_remote_relative(source)
+            destination = self.to_relative_path(source)
 
         return self._upload(source, destination)
