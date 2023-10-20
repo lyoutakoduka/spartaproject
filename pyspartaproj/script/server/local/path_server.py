@@ -81,7 +81,7 @@ class PathServer(WorkSpace):
         """
         return self._path_table[path_type]
 
-    def to_remote_relative(self, local_full: Path) -> Path:
+    def to_relative_path(self, local_full: Path) -> Path:
         """Convert full path to relative path.
 
         e.g. full path is "<Python default temporary directory>/example/",
