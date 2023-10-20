@@ -81,6 +81,35 @@ class PathServer(WorkSpace):
         """
         return self._path_table[path_type]
 
+    def to_remote_relative(self, local_full: Path) -> Path:
+        """Convert full path to relative path.
+
+        e.g. full path is "<Python default temporary directory>/example/",
+            and returned relative path is "example/"
+
+        Args:
+            local (Path): full path
+
+        Returns:
+            Path: returned relative path
+        """
+        return get_relative(local_full, root_path=self.get_root())
+
+    def to_remote_full(self, local_relative: Path) -> Path:
+        """Convert relative path to full path.
+
+        e.g. relative path is "example/",
+            and returned full path is
+            "<Python default temporary directory>>/example/"
+
+        Args:
+            local (Path): relative path
+
+        Returns:
+            Path: returned full path
+        """
+        return Path(self.get_root(), local_relative)
+
     def create_local_working_space(
         self, override: bool = False, jst: bool = False
     ) -> Path:
@@ -114,32 +143,3 @@ class PathServer(WorkSpace):
             override=override,
             jst=jst,
         )
-
-    def to_remote_relative(self, local_full: Path) -> Path:
-        """Convert full path to relative path.
-
-        e.g. full path is "<Python default temporary directory>/example/",
-            and returned relative path is "example/"
-
-        Args:
-            local (Path): full path
-
-        Returns:
-            Path: returned relative path
-        """
-        return get_relative(local_full, root_path=self.get_root())
-
-    def to_remote_full(self, local_relative: Path) -> Path:
-        """Convert relative path to full path.
-
-        e.g. relative path is "example/",
-            and returned full path is
-            "<Python default temporary directory>>/example/"
-
-        Args:
-            local (Path): relative path
-
-        Returns:
-            Path: returned full path
-        """
-        return Path(self.get_root(), local_relative)
