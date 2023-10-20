@@ -115,7 +115,7 @@ class PathServer(WorkSpace):
             jst=jst,
         )
 
-    def to_remote_path(self, local: Path) -> Path:
+    def to_remote_relative(self, local: Path) -> Path:
         """Convert full path based on project root directory to relative path.
 
         e.g. full path based on project root directory is

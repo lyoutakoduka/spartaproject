@@ -35,7 +35,7 @@ def test_to_remote() -> None:
     expected: Path = Path("temp")
 
     def individual_test(server: PathServer) -> None:
-        assert expected == server.to_remote_path(
+        assert expected == server.to_remote_relative(
             Path(server.get_root(), expected)
         )
 
@@ -46,7 +46,7 @@ def test_to_local() -> None:
     expected: Path = Path("temp")
 
     def individual_test(server: PathServer) -> None:
-        assert expected == server.to_remote_path(
+        assert expected == server.to_remote_relative(
             server.to_local_path(expected)
         )
 
