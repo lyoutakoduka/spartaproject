@@ -59,7 +59,7 @@ def test_working() -> None:
     )
 
     def individual_test(server: PathServer) -> None:
-        temporary_path: Path = server.get_working_space(override=True)
+        temporary_path: Path = server.create_local_working_space(override=True)
 
         assert temporary_path.exists()
         assert expected == get_relative(

@@ -81,7 +81,7 @@ class PathServer(WorkSpace):
         """
         return self._path_table[path_type]
 
-    def get_working_space(
+    def create_local_working_space(
         self, override: bool = False, jst: bool = False
     ) -> Path:
         """Get a path of temporary working space on server.
