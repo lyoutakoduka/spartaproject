@@ -84,14 +84,14 @@ class PathServer(WorkSpace):
     def create_local_working_space(
         self, override: bool = False, jst: bool = False
     ) -> Path:
-        """Get a path of temporary working space on server.
+        """Create temporary working space on local environment.
 
         the path is used when uploading file or directory to server
 
         basic path of temporary working space is follow
         a datetime element in path is current datetime by default
 
-        "<project root directory>/
+        "<Python default temporary directory>/
             private/work/<year>/<month>/<day>/<hour>/<second>/<millisecond>/"
 
         Args:
@@ -99,7 +99,7 @@ class PathServer(WorkSpace):
                 if True, the datetime element in path become follow,
                     it's commonly used for test.
 
-                "<project root directory>/
+                "<Python default temporary directory>/
                     private/work/2023/04/01/00/00/000000/"
 
             jst (bool, optional): Defaults to False.
@@ -116,11 +116,10 @@ class PathServer(WorkSpace):
         )
 
     def to_remote_relative(self, local: Path) -> Path:
-        """Convert full path based on project root directory to relative path.
+        """Convert full path to relative path.
 
-        e.g. full path based on project root directory is
-            "<project root directory>/example/",
-            then returned relative path is "example/"
+        e.g. full path is "<Python default temporary directory>/example/",
+            and returned relative path is "example/"
 
         Args:
             local (Path): full path
@@ -131,11 +130,11 @@ class PathServer(WorkSpace):
         return get_relative(local, root_path=self.get_root())
 
     def to_remote_full(self, local: Path) -> Path:
-        """Convert relative path to full path based on project root directory.
+        """Convert relative path to full path.
 
         e.g. relative path is "example/",
-            then returned full path based on project root directory is
-            "<project root directory>/example/"
+            and returned full path is
+            "<Python default temporary directory>>/example/"
 
         Args:
             local (Path): relative path
