@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""test module to handle paths about file and directory on server."""
+
 from typing import Callable
 
 from pyspartaproj.context.extension.path_context import Path
@@ -13,6 +15,7 @@ def _common_test(function: Callable[[PathServer], None]) -> None:
 
 
 def test_table() -> None:
+    """Test to get keys of predefined all paths about server."""
     expected: int = 6
 
     def individual_test(server: PathServer) -> None:
@@ -22,6 +25,8 @@ def test_table() -> None:
 
 
 def test_path() -> None:
+    """Test to get all paths about server."""
+
     def individual_test(server: PathServer) -> None:
         for path in server.get_path_table():
             server.get_path(path)
@@ -31,6 +36,10 @@ def test_path() -> None:
 
 
 def test_to_remote() -> None:
+    """Test to convert full path to relative path.
+
+    full path is based on Python default temporary directory
+    """
     expected: Path = Path("temp")
 
     def individual_test(server: PathServer) -> None:
@@ -42,6 +51,10 @@ def test_to_remote() -> None:
 
 
 def test_to_local() -> None:
+    """Test to convert relative path to full path.
+
+    full path is based on Python default temporary directory
+    """
     expected: Path = Path("temp")
 
     def individual_test(server: PathServer) -> None:
@@ -53,6 +66,7 @@ def test_to_local() -> None:
 
 
 def test_working() -> None:
+    """Test to create temporary working space on local environment."""
     expected: Path = Path(
         "private", "work", "2023", "04", "01", "00", "00", "00", "000000"
     )
@@ -67,6 +81,11 @@ def test_working() -> None:
 
 
 def main() -> bool:
+    """Run all tests.
+
+    Returns:
+        bool: success if get to the end of function
+    """
     test_table()
     test_path()
     test_to_remote()
