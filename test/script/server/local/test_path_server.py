@@ -59,7 +59,7 @@ def test_to_local() -> None:
 
     def individual_test(server: PathServer) -> None:
         assert expected == server.to_relative_path(
-            server.to_remote_full(expected)
+            server.to_full_path(expected)
         )
 
     _common_test(individual_test)

@@ -95,7 +95,7 @@ class PathServer(WorkSpace):
         """
         return get_relative(local_full, root_path=self.get_root())
 
-    def to_remote_full(self, local_relative: Path) -> Path:
+    def to_full_path(self, local_relative: Path) -> Path:
         """Convert relative path to full path.
 
         e.g. relative path is "example/",
