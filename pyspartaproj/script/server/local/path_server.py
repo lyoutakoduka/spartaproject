@@ -115,7 +115,7 @@ class PathServer(WorkSpace):
             jst=jst,
         )
 
-    def to_remote_relative(self, local: Path) -> Path:
+    def to_remote_relative(self, local_full: Path) -> Path:
         """Convert full path to relative path.
 
         e.g. full path is "<Python default temporary directory>/example/",
@@ -127,9 +127,9 @@ class PathServer(WorkSpace):
         Returns:
             Path: returned relative path
         """
-        return get_relative(local, root_path=self.get_root())
+        return get_relative(local_full, root_path=self.get_root())
 
-    def to_remote_full(self, local: Path) -> Path:
+    def to_remote_full(self, local_relative: Path) -> Path:
         """Convert relative path to full path.
 
         e.g. relative path is "example/",
@@ -142,4 +142,4 @@ class PathServer(WorkSpace):
         Returns:
             Path: returned full path
         """
-        return Path(self.get_root(), local)
+        return Path(self.get_root(), local_relative)
