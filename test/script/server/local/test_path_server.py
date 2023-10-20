@@ -35,7 +35,7 @@ def test_path() -> None:
     _common_test(individual_test)
 
 
-def test_to_remote() -> None:
+def test_relative() -> None:
     """Test to convert full path to relative path.
 
     full path is based on Python default temporary directory
@@ -50,7 +50,7 @@ def test_to_remote() -> None:
     _common_test(individual_test)
 
 
-def test_to_local() -> None:
+def test_full() -> None:
     """Test to convert relative path to full path.
 
     full path is based on Python default temporary directory
@@ -88,7 +88,7 @@ def main() -> bool:
     """
     test_table()
     test_path()
-    test_to_remote()
-    test_to_local()
+    test_relative()
+    test_full()
     test_working()
     return True
