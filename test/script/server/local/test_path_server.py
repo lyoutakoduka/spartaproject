@@ -4,7 +4,6 @@
 from typing import Callable
 
 from pyspartaproj.context.extension.path_context import Path
-from pyspartaproj.script.path.modify.get_relative import get_relative
 from pyspartaproj.script.server.local.path_server import PathServer
 
 
@@ -62,9 +61,7 @@ def test_working() -> None:
         temporary_path: Path = server.create_local_working_space(override=True)
 
         assert temporary_path.exists()
-        assert expected == get_relative(
-            temporary_path, root_path=server.get_root()
-        )
+        assert expected == server.to_remote_relative(temporary_path)
 
     _common_test(individual_test)
 
