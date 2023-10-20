@@ -46,7 +46,10 @@ class ExecuteServer(UploadServer):
     def _get_command(self, source_root: Path) -> Strs:
         return [
             path.as_posix()
-            for path in [self._python_path, self.to_remote_path(source_root)]
+            for path in [
+                self._python_path,
+                self.to_remote_relative(source_root),
+            ]
         ]
 
     def execute(self, source_root: Path) -> Strs | None:
