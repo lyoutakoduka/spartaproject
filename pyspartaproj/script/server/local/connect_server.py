@@ -206,13 +206,15 @@ class ConnectServer(PathServer, ProjectContext):
     def _get_remote_path(self) -> str:
         return self.get_path_context("server")["remote_root.path"].as_posix()
 
-    def _connect_ssh(self) -> bool:
-        self._create_ssh()
-
+    def _create_channel_object(self) -> None:
         size: int = 1000
+
         if ssh := self.get_ssh():
             self._channel = ssh.invoke_shell(width=size, height=size)
 
+    def _connect_ssh(self) -> bool:
+        self._create_ssh()
+        self._create_channel_object()
         self._receive_ssh()
 
         self.execute_ssh(["cd", self._get_remote_path()])
