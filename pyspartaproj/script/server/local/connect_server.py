@@ -33,11 +33,13 @@ class ConnectServer(PathServer, ProjectContext):
         self._channel: Channel | None = None
         self._sftp: SFTPClient | None = None
 
-    def __init__(self) -> None:
-        """Initialize super class and network objects."""
+    def _initialize_super_class(self) -> None:
         PathServer.__init__(self)
         ProjectContext.__init__(self)
 
+    def __init__(self) -> None:
+        """Initialize super class and network objects."""
+        self._initialize_super_class()
         self._initialize_connect()
 
     def get_ssh(self) -> SSHClient | None:
