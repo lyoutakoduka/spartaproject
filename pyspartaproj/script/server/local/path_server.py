@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Module to handle paths about file and directory on server."""
+
 from pathlib import Path
 
 from pyspartaproj.context.default.string_context import Strs
@@ -10,10 +12,14 @@ from pyspartaproj.script.directory.create_directory_working import (
     create_working_space,
 )
 from pyspartaproj.script.path.modify.get_relative import get_relative
-from pyspartaproj.script.server.local.context_server import ContextServer
 
 
-class PathServer(ContextServer, WorkSpace):
+class PathServer(WorkSpace):
+    """Class to handle paths about file and directory on server.
+
+    WorkSpace: class to treat temporary working space on local environment.
+    """
+
     def _add_path(self, key: str, child: Path, parent: str | None) -> None:
         if parent is not None:
             child = Path(self.get_path(parent), child)
@@ -53,31 +59,90 @@ class PathServer(ContextServer, WorkSpace):
         self._build_path_private()
         self._build_path_develop()
 
-    def _initialize_multiple_inheritance(self) -> None:
-        ContextServer.__init__(self)
-        WorkSpace.__init__(self)
-
     def __init__(self) -> None:
-        self._initialize_multiple_inheritance()
+        """Generate string path pair about server directory."""
+        super().__init__()
+
         self._build_path_table()
 
     def get_path_table(self) -> Strs:
+        """Get keys of predefined all paths about server.
+
+        Returns:
+            Strs: all path keys
+        """
         return list(self._path_table.keys())
 
     def get_path(self, path_type: str) -> Path:
+        """Get path related with specific key about server.
+
+        Args:
+            path_type (str): key of path you want to get
+
+        Returns:
+            Path: path related with specific key
+        """
         return self._path_table[path_type]
 
-    def get_working_space(
+    def to_relative_path(self, local_full: Path) -> Path:
+        """Convert full path to relative path.
+
+        e.g. full path is "<Python default temporary directory>/example/",
+            and returned relative path is "example/"
+
+        Args:
+            local (Path): full path
+
+        Returns:
+            Path: returned relative path
+        """
+        return get_relative(local_full, root_path=self.get_root())
+
+    def to_full_path(self, local_relative: Path) -> Path:
+        """Convert relative path to full path.
+
+        e.g. relative path is "example/",
+            and returned full path is
+            "<Python default temporary directory>>/example/"
+
+        Args:
+            local (Path): relative path
+
+        Returns:
+            Path: returned full path
+        """
+        return Path(self.get_root(), local_relative)
+
+    def create_local_working_space(
         self, override: bool = False, jst: bool = False
     ) -> Path:
+        """Create temporary working space on local environment.
+
+        the path is used when uploading file or directory to server
+
+        basic path of temporary working space is follow
+        a datetime element in path is current datetime by default
+
+        "<Python default temporary directory>/
+            private/work/<year>/<month>/<day>/<hour>/<second>/<millisecond>/"
+
+        Args:
+            override (bool, optional): Defaults to False.
+                if True, the datetime element in path become follow,
+                    it's commonly used for test.
+
+                "<Python default temporary directory>/
+                    private/work/2023/04/01/00/00/000000/"
+
+            jst (bool, optional): Defaults to False.
+                if True, the datetime element is represented
+                    by timezone of Asia/Tokyo
+
+        Returns:
+            Path: path of temporary working space
+        """
         return create_working_space(
             Path(self.get_root(), self.get_path("work_root")),
             override=override,
             jst=jst,
         )
-
-    def to_remote_path(self, local: Path) -> Path:
-        return get_relative(local, root_path=self.get_root())
-
-    def to_local_path(self, local: Path) -> Path:
-        return Path(self.get_root(), local)

@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""test module to handle paths about file and directory on server."""
+
 from typing import Callable
 
 from pyspartaproj.context.extension.path_context import Path
-from pyspartaproj.script.path.modify.get_relative import get_relative
 from pyspartaproj.script.server.local.path_server import PathServer
 
 
@@ -14,6 +15,7 @@ def _common_test(function: Callable[[PathServer], None]) -> None:
 
 
 def test_table() -> None:
+    """Test to get keys of predefined all paths about server."""
     expected: int = 6
 
     def individual_test(server: PathServer) -> None:
@@ -23,6 +25,8 @@ def test_table() -> None:
 
 
 def test_path() -> None:
+    """Test to get all paths about server."""
+
     def individual_test(server: PathServer) -> None:
         for path in server.get_path_table():
             server.get_path(path)
@@ -31,48 +35,60 @@ def test_path() -> None:
     _common_test(individual_test)
 
 
-def test_to_remote() -> None:
+def test_relative() -> None:
+    """Test to convert full path to relative path.
+
+    full path is based on Python default temporary directory
+    """
     expected: Path = Path("temp")
 
     def individual_test(server: PathServer) -> None:
-        assert expected == server.to_remote_path(
+        assert expected == server.to_relative_path(
             Path(server.get_root(), expected)
         )
 
     _common_test(individual_test)
 
 
-def test_to_local() -> None:
+def test_full() -> None:
+    """Test to convert relative path to full path.
+
+    full path is based on Python default temporary directory
+    """
     expected: Path = Path("temp")
 
     def individual_test(server: PathServer) -> None:
-        assert expected == server.to_remote_path(
-            server.to_local_path(expected)
+        assert expected == server.to_relative_path(
+            server.to_full_path(expected)
         )
 
     _common_test(individual_test)
 
 
 def test_working() -> None:
+    """Test to create temporary working space on local environment."""
     expected: Path = Path(
         "private", "work", "2023", "04", "01", "00", "00", "00", "000000"
     )
 
     def individual_test(server: PathServer) -> None:
-        temporary_path: Path = server.get_working_space(override=True)
+        temporary_path: Path = server.create_local_working_space(override=True)
 
         assert temporary_path.exists()
-        assert expected == get_relative(
-            temporary_path, root_path=server.get_root()
-        )
+        assert expected == server.to_relative_path(temporary_path)
 
     _common_test(individual_test)
 
 
 def main() -> bool:
+    """Run all tests.
+
+    Returns:
+        bool: success if get to the end of function
+    """
     test_table()
     test_path()
-    test_to_remote()
-    test_to_local()
+    test_relative()
+    test_full()
     test_working()
     return True

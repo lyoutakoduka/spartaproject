@@ -1,64 +1,111 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Module to use SSH and SFTP functionality."""
+
 from decimal import Decimal
+from platform import uname
 from time import sleep
 
-from pyspartaproj.context.default.string_context import Strs
+from pyspartaproj.context.default.string_context import StrPair, Strs
 from pyspartaproj.interface.paramiko import (
     AutoAddPolicy,
     Channel,
     SFTPClient,
     SSHClient,
 )
+from pyspartaproj.script.file.json.project_context import ProjectContext
 from pyspartaproj.script.initialize_decimal import initialize_decimal
 from pyspartaproj.script.server.local.path_server import PathServer
 
 initialize_decimal()
 
 
-class ConnectServer(PathServer):
+class ConnectServer(PathServer, ProjectContext):
+    """Class to use SSH and SFTP functionality.
+
+    PathServer: class to handle paths about file and directory.
+    ProjectContext: class to import a context of whole project.
+    """
+
     def _initialize_connect(self) -> None:
         self._ssh: SSHClient | None = None
         self._channel: Channel | None = None
         self._sftp: SFTPClient | None = None
 
-    def __init__(self) -> None:
-        super().__init__()
+    def _initialize_super_class(self) -> None:
+        PathServer.__init__(self)
+        ProjectContext.__init__(self)
 
+    def __init__(self) -> None:
+        """Initialize super class and network objects."""
+        self._initialize_super_class()
         self._initialize_connect()
 
     def get_ssh(self) -> SSHClient | None:
+        """Get network object about SSH.
+
+        Returns:
+            SSHClient | None: network object if exists
+        """
         return self._ssh
 
     def get_channel(self) -> Channel | None:
+        """Get network object about shell of SSH.
+
+        Returns:
+            Channel | None: network object if exists
+        """
         return self._channel
 
     def get_sftp(self) -> SFTPClient | None:
+        """Get network object about SFTP.
+
+        Returns:
+            SFTPClient | None: network object if exists
+        """
         return self._sftp
 
-    def __del__(self) -> None:
+    def _finalize_network_objects(self) -> None:
         if ssh := self.get_ssh():
             ssh.close()
 
         if sftp := self.get_sftp():
             sftp.close()
 
+    def __del__(self) -> None:
+        """Close network objects."""
+        self._finalize_network_objects()
         self._initialize_connect()
 
+    def _get_platform_key(self, keys: Strs) -> str:
+        return "_".join(keys + [uname().system.lower()])
+
+    def _get_passphrase(self) -> str:
+        return self.get_string_context("server")[
+            self._get_platform_key(["passphrase"])
+        ]
+
+    def _get_private_key(self) -> str:
+        return self.get_path_context("server")[
+            self._get_platform_key(["private", "key"]) + ".path"
+        ].as_posix()
+
+    def _get_timeout(self) -> float:
+        milliseconds: int = self.get_integer_context("server")["timeout"]
+        return float(Decimal(str(milliseconds)) / Decimal("1000.0"))
+
     def _connect_detail(self) -> None:
-        milliseconds: int = self.get_integer_context("timeout")
-        seconds: Decimal = Decimal(str(milliseconds)) / Decimal("1000.0")
+        string_context: StrPair = self.get_string_context("server")
 
         if ssh := self.get_ssh():
             ssh.connect(
-                hostname=self.get_string_context("host"),
-                port=self.get_integer_context("port"),
-                username=self.get_string_context("user_name"),
-                key_filename=self.get_path_context(
-                    "private_key.path"
-                ).as_posix(),
-                timeout=float(seconds),
+                hostname=string_context["host"],
+                username=string_context["user_name"],
+                key_filename=self._get_private_key(),
+                passphrase=self._get_passphrase(),
+                port=self.get_integer_context("server")["port"],
+                timeout=self._get_timeout(),
             )
 
     def _ssh_setting(self) -> None:
@@ -128,6 +175,16 @@ class ConnectServer(PathServer):
             self._sleep()
 
     def execute_ssh(self, commands: Strs) -> Strs:
+        """Execute command by using SSH functionality.
+
+        Args:
+            commands (Strs): elements of command which will merged by space.
+                e.g. if command is "ls -la",
+                you can input ["ls", "-la"] or ["ls -la"]
+
+        Returns:
+            Strs: execution result of command
+        """
         self._execute_ssh(commands)
         return self._receive_ssh()
 
@@ -147,15 +204,17 @@ class ConnectServer(PathServer):
         )
 
     def _get_remote_path(self) -> str:
-        return self.get_path_context("remote_root.path").as_posix()
+        return self.get_path_context("server")["remote_root.path"].as_posix()
 
-    def _connect_ssh(self) -> bool:
-        self._create_ssh()
-
+    def _create_channel_object(self) -> None:
         size: int = 1000
+
         if ssh := self.get_ssh():
             self._channel = ssh.invoke_shell(width=size, height=size)
 
+    def _connect_ssh(self) -> bool:
+        self._create_ssh()
+        self._create_channel_object()
         self._receive_ssh()
 
         self.execute_ssh(["cd", self._get_remote_path()])
@@ -185,6 +244,11 @@ class ConnectServer(PathServer):
         return self._sftp_correct_path()
 
     def connect(self) -> bool:
+        """Connect to server by using SSH and SFTP.
+
+        Returns:
+            bool: True if connecting process to server is success
+        """
         if self._connect_ssh():
             if self._connect_sftp():
                 return True
