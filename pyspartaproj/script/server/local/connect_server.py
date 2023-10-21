@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Module to use SSH and SFTP functionality."""
+
 from decimal import Decimal
 from platform import uname
 from time import sleep
@@ -20,27 +22,50 @@ initialize_decimal()
 
 
 class ConnectServer(PathServer, ProjectContext):
+    """Class to use SSH and SFTP functionality.
+
+    PathServer: class to handle paths about file and directory.
+    ProjectContext: class to import a context of whole project.
+    """
+
     def _initialize_connect(self) -> None:
         self._ssh: SSHClient | None = None
         self._channel: Channel | None = None
         self._sftp: SFTPClient | None = None
 
     def __init__(self) -> None:
+        """Initialize super class and network objects."""
         PathServer.__init__(self)
         ProjectContext.__init__(self)
 
         self._initialize_connect()
 
     def get_ssh(self) -> SSHClient | None:
+        """Get network object about SSH.
+
+        Returns:
+            SSHClient | None: network object if exists
+        """
         return self._ssh
 
     def get_channel(self) -> Channel | None:
+        """Get network object about shell of SSH.
+
+        Returns:
+            Channel | None: network object if exists
+        """
         return self._channel
 
     def get_sftp(self) -> SFTPClient | None:
+        """Get network object about SFTP.
+
+        Returns:
+            SFTPClient | None: network object if exists
+        """
         return self._sftp
 
     def __del__(self) -> None:
+        """Close network objects."""
         if ssh := self.get_ssh():
             ssh.close()
 
@@ -146,6 +171,16 @@ class ConnectServer(PathServer, ProjectContext):
             self._sleep()
 
     def execute_ssh(self, commands: Strs) -> Strs:
+        """Execute command by using SSH functionality.
+
+        Args:
+            commands (Strs): elements of command which will merged by space.
+                e.g. if command is "ls -la",
+                you can input ["ls", "-la"] or ["ls -la"]
+
+        Returns:
+            Strs: execution result of command
+        """
         self._execute_ssh(commands)
         return self._receive_ssh()
 
@@ -203,6 +238,11 @@ class ConnectServer(PathServer, ProjectContext):
         return self._sftp_correct_path()
 
     def connect(self) -> bool:
+        """Connect to server by using SSH and SFTP.
+
+        Returns:
+            bool: True if connecting process to server is success
+        """
         if self._connect_ssh():
             if self._connect_sftp():
                 return True
