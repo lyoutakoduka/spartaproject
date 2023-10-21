@@ -66,14 +66,16 @@ class ConnectServer(PathServer, ProjectContext):
         """
         return self._sftp
 
-    def __del__(self) -> None:
-        """Close network objects."""
+    def _finalize_network_objects(self) -> None:
         if ssh := self.get_ssh():
             ssh.close()
 
         if sftp := self.get_sftp():
             sftp.close()
 
+    def __del__(self) -> None:
+        """Close network objects."""
+        self._finalize_network_objects()
         self._initialize_connect()
 
     def _get_platform_key(self, keys: Strs) -> str:
