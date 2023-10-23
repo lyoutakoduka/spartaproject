@@ -17,6 +17,10 @@ from pyspartaproj.script.shell.execute_powershell import (
 )
 
 
+def _get_resource_path(current: str, target: str) -> Path:
+    return Path(Path(current).parent, "resource", target)
+
+
 def test_script() -> None:
     """Test for converting path to text that executable in PowerShell."""
     expected: Path = Path(__file__)
@@ -44,9 +48,11 @@ def test_write() -> None:
     expected: Strs = [str(i).zfill(3) for i in range(3)]
 
     assert expected == execute_powershell(
-        get_script_executable(
-            ["; ".join(["Write-Output " + text for text in expected])]
-        )
+        [
+            get_script_executable(
+                ["; ".join(["Write-Output " + text for text in expected])]
+            )
+        ]
     )
 
 
