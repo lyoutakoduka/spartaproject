@@ -4,11 +4,8 @@
 """Test to execute commands in PowerShell."""
 
 from pathlib import Path
-from platform import uname
-from tempfile import TemporaryDirectory
 
 from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.script.file.text.export_file import text_export
 from pyspartaproj.script.shell.execute_powershell import (
     execute_powershell,
     get_path_string,
