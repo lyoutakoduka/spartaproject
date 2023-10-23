@@ -17,8 +17,8 @@ def _get_powershell_path() -> str:
     ].as_posix()
 
 
-def execute_powershell(command: str) -> Strs:
-    shell_commands: Strs = [_get_powershell_path(), command]
+def execute_powershell(commands: Strs) -> Strs:
+    shell_commands: Strs = [_get_powershell_path()] + commands
 
     with TemporaryDirectory() as temporary_directory:
         stdout_path: Path = Path(temporary_directory, "stdout.txt")
