@@ -4,7 +4,6 @@
 """Module to use SSH and SFTP functionality."""
 
 from decimal import Decimal
-from platform import uname
 from time import sleep
 
 from pyspartaproj.context.default.string_context import StrPair, Strs
@@ -78,17 +77,14 @@ class ConnectServer(PathServer, ProjectContext):
         self._finalize_network_objects()
         self._initialize_connect()
 
-    def _get_platform_key(self, keys: Strs) -> str:
-        return "_".join(keys + [uname().system.lower()])
-
     def _get_passphrase(self) -> str:
         return self.get_string_context("server")[
-            self._get_platform_key(["passphrase"])
+            self.get_platform_key(["passphrase"])
         ]
 
     def _get_private_key(self) -> str:
         return self.get_path_context("server")[
-            self._get_platform_key(["private", "key"]) + ".path"
+            self.get_platform_key(["private", "key"]) + ".path"
         ].as_posix()
 
     def _get_timeout(self) -> float:
