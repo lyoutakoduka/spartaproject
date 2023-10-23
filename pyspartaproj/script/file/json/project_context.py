@@ -4,9 +4,10 @@
 """Module to import a context of whole project from outside Json."""
 
 from pathlib import Path
+from platform import uname
 
 from pyspartaproj.context.default.integer_context import IntPair
-from pyspartaproj.context.default.string_context import StrPair
+from pyspartaproj.context.default.string_context import StrPair, Strs
 from pyspartaproj.context.extension.path_context import PathPair
 from pyspartaproj.context.file.json_context import Json
 from pyspartaproj.script.file.json.convert_from_json import (
@@ -91,3 +92,6 @@ class ProjectContext:
             PathPair: project context of path type
         """
         return self._path_context[group]
+
+    def get_platform_key(self, keys: Strs) -> str:
+        return "_".join(keys + [uname().system.lower()])

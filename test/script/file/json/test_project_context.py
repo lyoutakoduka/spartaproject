@@ -4,9 +4,10 @@
 """Test module to import a context of whole project from outside Json."""
 
 from pathlib import Path
+from platform import uname
 
 from pyspartaproj.context.default.integer_context import IntPair
-from pyspartaproj.context.default.string_context import StrPair, Strs2
+from pyspartaproj.context.default.string_context import StrPair, Strs, Strs2
 from pyspartaproj.context.extension.path_context import PathPair
 from pyspartaproj.script.file.json.project_context import ProjectContext
 
@@ -63,6 +64,15 @@ def test_path() -> None:
         assert value == path_context[key]
 
 
+def test_key() -> None:
+    expected: Strs = ["group", "type"]
+    context_key: str = _import_context().get_platform_key(expected)
+    key_elements: Strs = context_key.split("_")
+
+    assert expected == key_elements[:2]
+    assert uname().system == key_elements[-1].capitalize()
+
+
 def main() -> bool:
     """Run all tests.
 
@@ -72,4 +82,5 @@ def main() -> bool:
     test_integer()
     test_string()
     test_path()
+    test_key()
     return True
