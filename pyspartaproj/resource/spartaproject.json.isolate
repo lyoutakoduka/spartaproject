@@ -10,5 +10,9 @@
     "local_root.path": "***",
     "timeout": 1000,
     "port": 99
+  },
+  "runtime": {
+    "powershell_linux.path": "***",
+    "powershell_windows.path": ""***"
   }
 }
