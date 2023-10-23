@@ -32,6 +32,13 @@ def test_argument() -> None:
     assert expected == Path(get_quoted_paths(expected).replace("'", ""))
 
 
+def test_all() -> None:
+    expected: Strs = ["Write-Output", "Test"]
+    assert expected == get_script_executable(expected).replace('"', "").split(
+        " "
+    )
+
+
 def test_write() -> None:
     """Test for Write-Output that is shown three line number."""
     expected: Strs = [str(i).zfill(3) for i in range(3)]
@@ -76,6 +83,7 @@ def main() -> bool:
     """
     test_script()
     test_argument()
+    test_all()
     test_write()
     test_command()
     return True
