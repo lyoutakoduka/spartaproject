@@ -62,23 +62,14 @@ def test_command() -> None:
     Execute simple Write-Output script
     that takes the path you want to print as argument.
     """
-    expected: Path = Path(__file__)
-    script_text: str = "\n".join(
-        ["Param([String]$text)", "Write-Output $text"]
+    expected: Path = _get_resource_path(__file__, "command.ps1")
+
+    assert [str(expected)] == execute_powershell(
+        [
+            get_path_string(expected),
+            get_script_executable([get_quoted_paths(expected)] * 2),
+        ]
     )
-
-    with TemporaryDirectory() as temporary_path:
-        stdout_path: Path = Path(temporary_path, "temporary.ps1")
-        text_export(stdout_path, script_text)
-        executable_test: str = get_script_executable(
-            [get_path_string(stdout_path), get_quoted_paths(expected)]
-        )
-
-        if "Windows" == uname().system:
-            result: Strs = execute_powershell(executable_test)
-
-            assert 1 == len(result)
-            assert expected == Path(result[0])
 
 
 def main() -> bool:
