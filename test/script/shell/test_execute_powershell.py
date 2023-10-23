@@ -20,10 +20,12 @@ from pyspartaproj.script.shell.execute_powershell import (
 def test_write() -> None:
     """Test for Write-Output that is shown three line number."""
     expected: Strs = [str(i).zfill(3) for i in range(3)]
-    command: str = "; ".join(["Write-Output " + text for text in expected])
 
-    if "Windows" == uname().system:
-        assert expected == execute_powershell(command)
+    assert expected == execute_powershell(
+        get_script_executable(
+            ["; ".join(["Write-Output " + text for text in expected])]
+        )
+    )
 
 
 def test_script() -> None:
