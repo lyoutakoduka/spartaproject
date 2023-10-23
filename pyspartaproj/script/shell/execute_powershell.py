@@ -6,11 +6,19 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from pyspartaproj.context.default.string_context import Strs
+from pyspartaproj.script.file.json.project_context import ProjectContext
 from pyspartaproj.script.file.text.import_file import text_import
 
 
+def _get_powershell_path() -> str:
+    project = ProjectContext()
+    return project.get_path_context("runtime")[
+        project.get_platform_key(["powershell"]) + ".path"
+    ].as_posix()
+
+
 def execute_powershell(command: str) -> Strs:
-    shell_commands: Strs = ["powershell", command]
+    shell_commands: Strs = [_get_powershell_path(), command]
 
     with TemporaryDirectory() as temporary_directory:
         stdout_path: Path = Path(temporary_directory, "stdout.txt")
