@@ -18,7 +18,11 @@ def _get_powershell_path() -> str:
 
 
 def execute_powershell(commands: Strs) -> Strs:
-    shell_commands: Strs = [_get_powershell_path()] + commands
+    shell_commands: Strs = [
+        _get_powershell_path(),
+        "-ExecutionPolicy",
+        "Bypass",
+    ] + commands
 
     with TemporaryDirectory() as temporary_directory:
         stdout_path: Path = Path(temporary_directory, "stdout.txt")
