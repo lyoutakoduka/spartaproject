@@ -6,6 +6,7 @@ from platform import uname
 
 from pyspartaproj.context.default.string_context import StrGene, Strs
 from pyspartaproj.script.file.json.project_context import ProjectContext
+from pyspartaproj.script.path.modify.get_relative import get_relative
 from pyspartaproj.script.shell.execute_command import execute_command
 
 
@@ -45,3 +46,16 @@ def get_quoted_paths(path: Path) -> str:
 
 def get_script_executable(commands_execute: Strs) -> str:
     return " ".join(commands_execute).join(['"'] * 2)
+
+
+def convert_mount_path(path: Path) -> Path:
+    mount: Path = Path("/", "mnt")
+
+    if mount != path.parents[-2]:
+        return path
+
+    drive: Path = path.parents[-3]
+
+    return Path(
+        drive.name.capitalize() + ":", get_relative(path, root_path=drive)
+    )
