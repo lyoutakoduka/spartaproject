@@ -34,6 +34,6 @@ def create_shortcut(shortcut_target: Path, shortcut_path: Path) -> bool:
         safe_trash = SafeTrash()
         safe_trash.trash(shortcut_path)
 
-    execute_powershell(_get_shortcut_command(shortcut_target, shortcut_path))
+    execute_powershell([_get_shortcut_command(shortcut_target, shortcut_path)])
 
     return True
