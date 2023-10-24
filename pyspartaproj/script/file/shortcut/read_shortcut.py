@@ -29,8 +29,9 @@ def read_shortcut(shortcut_path: Path) -> Path | None:
     if not shortcut_path.exists():
         raise FileNotFoundError()
 
-    command_text: str = _get_shortcut_command(shortcut_path)
-    result: Strs = execute_powershell(command_text)
+    result: Strs = list(
+        execute_powershell([_get_shortcut_command(shortcut_path)])
+    )
 
     if 1 == len(result):
         return Path(result[0])
