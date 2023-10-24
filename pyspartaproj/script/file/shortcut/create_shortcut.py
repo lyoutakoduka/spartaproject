@@ -11,6 +11,7 @@ from pyspartaproj.script.shell.execute_powershell import (
     get_path_string,
     get_quoted_paths,
     get_script_executable,
+    get_script_string,
 )
 
 
@@ -19,7 +20,7 @@ def _get_script_path() -> Path:
 
 
 def _get_shortcut_command(shortcut_target: Path, shortcut_path: Path) -> str:
-    shortcut_target_text: str = get_path_string(_get_script_path())
+    shortcut_target_text: str = get_script_string(_get_script_path())
     commands_quoted: Strs = [
         get_quoted_paths(convert_mount_path(path))
         for path in [shortcut_target, shortcut_path]
