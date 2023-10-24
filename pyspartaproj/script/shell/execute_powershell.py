@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from pathlib import Path
+from platform import uname
 
 from pyspartaproj.context.default.string_context import StrGene, Strs
 from pyspartaproj.script.file.json.project_context import ProjectContext
@@ -26,7 +27,12 @@ def execute_powershell(commands: Strs) -> StrGene:
 
 
 def get_path_string(path: Path) -> str:
-    return str(path)  # Not as_posix()
+    path_text: str = str(path)
+
+    if "Linux" == uname().system:
+        return path_text.replace("/", "\\")
+
+    return path_text
 
 
 def get_quoted_paths(path: Path) -> str:
