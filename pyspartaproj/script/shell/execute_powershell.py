@@ -26,6 +26,10 @@ def execute_powershell(commands: Strs) -> StrGene:
     return execute_command(shell_commands)
 
 
+def get_script_string(path: Path) -> str:
+    return path.as_posix()  # Not str()
+
+
 def get_path_string(path: Path) -> str:
     path_text: str = str(path)
 
