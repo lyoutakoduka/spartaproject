@@ -8,7 +8,6 @@ from pyspartaproj.script.path.safe.safe_trash import SafeTrash
 from pyspartaproj.script.shell.execute_powershell import (
     convert_mount_path,
     execute_powershell,
-    get_path_string,
     get_quoted_paths,
     get_script_executable,
     get_script_string,
