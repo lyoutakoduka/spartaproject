@@ -5,9 +5,10 @@ from os import system
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from pyspartaproj.context.default.string_context import Strs
+from pyspartaproj.context.default.string_context import StrGene, Strs
 from pyspartaproj.script.file.json.project_context import ProjectContext
 from pyspartaproj.script.file.text.import_file import text_import
+from pyspartaproj.script.shell.execute_command import execute_command
 
 
 def _get_powershell_path() -> str:
@@ -17,20 +18,14 @@ def _get_powershell_path() -> str:
     ].as_posix()
 
 
-def execute_powershell(commands: Strs) -> Strs:
+def execute_powershell(commands: Strs) -> StrGene:
     shell_commands: Strs = [
         _get_powershell_path(),
         "-ExecutionPolicy",
         "Bypass",
     ] + commands
 
-    with TemporaryDirectory() as temporary_directory:
-        stdout_path: Path = Path(temporary_directory, "stdout.txt")
-        shell_commands += [">", stdout_path.as_posix()]
-
-        system(" ".join(shell_commands))
-
-        return text_import(stdout_path).splitlines()
+    return execute_command(shell_commands)
 
 
 def get_path_string(path: Path) -> str:
