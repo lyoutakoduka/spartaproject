@@ -19,13 +19,14 @@ def _get_script_path() -> Path:
 
 
 def _get_shortcut_command(shortcut_target: Path, shortcut_path: Path) -> str:
-    shortcut_target_text: str = get_script_string(_get_script_path())
     commands_quoted: Strs = [
         get_quoted_paths(convert_mount_path(path))
         for path in [shortcut_target, shortcut_path]
     ]
-    commands_execute: Strs = [shortcut_target_text] + commands_quoted
-    return get_script_executable(commands_execute)
+
+    return get_script_executable(
+        [get_script_string(_get_script_path())] + commands_quoted
+    )
 
 
 def create_shortcut(shortcut_target: Path, shortcut_path: Path) -> bool:
