@@ -1,13 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from os import system
 from pathlib import Path
-from tempfile import TemporaryDirectory
 
 from pyspartaproj.context.default.string_context import StrGene, Strs
 from pyspartaproj.script.file.json.project_context import ProjectContext
-from pyspartaproj.script.file.text.import_file import text_import
 from pyspartaproj.script.shell.execute_command import execute_command
 
 
