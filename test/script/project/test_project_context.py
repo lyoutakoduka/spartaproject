@@ -9,7 +9,7 @@ from platform import uname
 from pyspartaproj.context.default.integer_context import IntPair
 from pyspartaproj.context.default.string_context import StrPair, Strs, Strs2
 from pyspartaproj.context.extension.path_context import PathPair
-from pyspartaproj.script.file.json.project_context import ProjectContext
+from pyspartaproj.script.project.project_context import ProjectContext
 
 
 def _common_test(keys_pair: Strs2) -> None:

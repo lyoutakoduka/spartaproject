@@ -5,8 +5,8 @@ from pathlib import Path
 from platform import uname
 
 from pyspartaproj.context.default.string_context import StrGene, Strs
-from pyspartaproj.script.file.json.project_context import ProjectContext
 from pyspartaproj.script.path.modify.get_relative import get_relative
+from pyspartaproj.script.project.project_context import ProjectContext
 from pyspartaproj.script.shell.execute_command import execute_command
 
 
