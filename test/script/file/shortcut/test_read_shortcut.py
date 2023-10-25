@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 from pathlib import Path
-from platform import uname
 from tempfile import TemporaryDirectory
 from typing import Callable
 
@@ -47,9 +46,8 @@ def test_exist() -> None:
     def individual_test(temporary_root: Path) -> None:
         empty_path: Path = Path("empty.lnk")
 
-        if "Windows" == uname().system:
-            with raises(FileNotFoundError):
-                read_shortcut(empty_path)
+        with raises(FileNotFoundError):
+            read_shortcut(empty_path)
 
     _inside_temporary_directory(individual_test)
 
