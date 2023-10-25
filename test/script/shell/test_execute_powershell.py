@@ -35,8 +35,9 @@ def test_argument() -> None:
 
     It's executable in PowerShell.
     """
-    expected: Path = Path(__file__)
-    assert expected == Path(get_quoted_paths(expected).replace("'", ""))
+    path_elements: Strs = ["A", "B", "C"]
+    expected: str = _get_formatted_path(path_elements).join(["'"] * 2)
+    assert expected == get_quoted_paths(Path(*path_elements))
 
 
 def test_all() -> None:
