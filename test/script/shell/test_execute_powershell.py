@@ -43,13 +43,10 @@ def test_all() -> None:
 def test_write() -> None:
     """Test for Write-Output that is shown three line number."""
     expected: Strs = [str(i).zfill(3) for i in range(3)]
+    commands: Strs = ["; ".join(["Write-Output " + text for text in expected])]
 
-    assert expected == execute_powershell(
-        [
-            get_script_executable(
-                ["; ".join(["Write-Output " + text for text in expected])]
-            )
-        ]
+    assert expected == list(
+        execute_powershell([get_script_executable(commands)])
     )
 
 
@@ -61,11 +58,13 @@ def test_command() -> None:
     """
     expected: Path = _get_resource_path(__file__, "command.ps1")
 
-    assert [str(expected)] == execute_powershell(
-        [
-            get_path_string(expected),
-            get_script_executable([get_quoted_paths(expected)] * 2),
-        ]
+    assert [str(expected)] == list(
+        execute_powershell(
+            [
+                get_path_string(expected),
+                get_script_executable([get_quoted_paths(expected)] * 2),
+            ]
+        )
     )
 
 
