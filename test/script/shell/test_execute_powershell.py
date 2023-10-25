@@ -23,7 +23,7 @@ def _get_formatted_path(path_elements: Strs) -> str:
     return "\\".join(path_elements)
 
 
-def test_script() -> None:
+def test_path() -> None:
     """Test for converting path to text that executable in PowerShell."""
     path_elements: Strs = ["A", "B", "C"]
     assert _get_formatted_path(path_elements) == get_path_string(
@@ -82,7 +82,7 @@ def main() -> bool:
     Returns:
         bool: success if get to the end of function
     """
-    test_script()
+    test_path()
     test_argument()
     test_all()
     test_write()
