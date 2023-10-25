@@ -11,6 +11,7 @@ from pyspartaproj.script.shell.execute_powershell import (
     get_path_string,
     get_quoted_paths,
     get_script_executable,
+    get_script_string,
 )
 
 
@@ -65,10 +66,10 @@ def test_command() -> None:
     """
     expected: Path = _get_resource_path(__file__, "command.ps1")
 
-    assert [str(expected)] == list(
+    assert [get_path_string(expected)] == list(
         execute_powershell(
             [
-                get_path_string(expected),
+                get_script_string(expected),
                 get_script_executable([get_quoted_paths(expected)] * 2),
             ]
         )
