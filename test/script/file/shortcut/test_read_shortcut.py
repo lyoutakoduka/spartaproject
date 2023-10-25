@@ -16,14 +16,12 @@ from pyspartaproj.script.path.temporary.create_temporary_file import (
 
 def _common_test(shortcut_target: Path, shortcut_root: Path) -> None:
     shortcut_path: Path = Path(shortcut_root, shortcut_target.name + ".lnk")
+    create_shortcut(shortcut_target, shortcut_path)
 
-    if "Windows" == uname().system:
-        create_shortcut(shortcut_target, shortcut_path)
-
-        if returned_target := read_shortcut(shortcut_path):
-            assert shortcut_target == returned_target
-        else:
-            fail()
+    if returned_target := read_shortcut(shortcut_path):
+        assert shortcut_target == returned_target
+    else:
+        fail()
 
 
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
