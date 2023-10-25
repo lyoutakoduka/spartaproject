@@ -42,12 +42,14 @@ def _check_shortcut_exists(shortcut_target: Path) -> None:
         raise FileNotFoundError()
 
 
-def create_shortcut(shortcut_target: Path, shortcut_path: Path) -> bool:
-    _check_shortcut_exists(shortcut_target)
-
+def _cleanup_shortcut(shortcut_path: Path) -> None:
     if shortcut_path.exists():
         safe_trash = SafeTrash()
         safe_trash.trash(shortcut_path)
 
+
+def create_shortcut(shortcut_target: Path, shortcut_path: Path) -> bool:
+    _check_shortcut_exists(shortcut_target)
+    _cleanup_shortcut(shortcut_path)
     _execute_script(shortcut_target, shortcut_path)
     return True
