@@ -18,10 +18,16 @@ def _get_resource_path(current: str, target: str) -> Path:
     return Path(Path(current).parent, "resource", target)
 
 
+def _get_formatted_path(path_elements: Strs) -> str:
+    return "\\".join(path_elements)
+
+
 def test_script() -> None:
     """Test for converting path to text that executable in PowerShell."""
     path_elements: Strs = ["A", "B", "C"]
-    assert "\\".join(path_elements) == get_path_string(Path(*path_elements))
+    assert _get_formatted_path(path_elements) == get_path_string(
+        Path(*path_elements)
+    )
 
 
 def test_argument() -> None:
