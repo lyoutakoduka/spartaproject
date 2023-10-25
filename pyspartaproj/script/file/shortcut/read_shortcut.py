@@ -29,9 +29,13 @@ def _execute_script(shortcut_path: Path) -> Strs:
     return list(execute_powershell([_get_shortcut_command(shortcut_path)]))
 
 
-def read_shortcut(shortcut_path: Path) -> Path | None:
+def _check_shortcut_exists(shortcut_path: Path) -> None:
     if not shortcut_path.exists():
         raise FileNotFoundError()
+
+
+def read_shortcut(shortcut_path: Path) -> Path | None:
+    _check_shortcut_exists(shortcut_path)
 
     result: Strs = _execute_script(shortcut_path)
 
