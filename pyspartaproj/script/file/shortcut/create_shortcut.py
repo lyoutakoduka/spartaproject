@@ -29,6 +29,14 @@ def _get_shortcut_command(shortcut_target: Path, shortcut_path: Path) -> str:
     )
 
 
+def _execute_script(shortcut_target: Path, shortcut_path: Path) -> None:
+    list(
+        execute_powershell(
+            [_get_shortcut_command(shortcut_target, shortcut_path)]
+        )
+    )
+
+
 def create_shortcut(shortcut_target: Path, shortcut_path: Path) -> bool:
     if not shortcut_target.exists():
         raise FileNotFoundError()
@@ -37,6 +45,5 @@ def create_shortcut(shortcut_target: Path, shortcut_path: Path) -> bool:
         safe_trash = SafeTrash()
         safe_trash.trash(shortcut_path)
 
-    execute_powershell([_get_shortcut_command(shortcut_target, shortcut_path)])
-
+    _execute_script(shortcut_target, shortcut_path)
     return True
