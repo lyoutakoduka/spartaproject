@@ -43,13 +43,8 @@ def test_directory() -> None:
 
 
 def test_exist() -> None:
-    def individual_test(temporary_root: Path) -> None:
-        empty_path: Path = Path("empty.lnk")
-
-        with raises(FileNotFoundError):
-            read_shortcut(empty_path)
-
-    _inside_temporary_directory(individual_test)
+    with raises(FileNotFoundError):
+        read_shortcut(Path("empty.lnk"))
 
 
 def main() -> bool:
