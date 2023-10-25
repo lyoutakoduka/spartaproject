@@ -20,8 +20,8 @@ def _get_resource_path(current: str, target: str) -> Path:
 
 def test_script() -> None:
     """Test for converting path to text that executable in PowerShell."""
-    expected: Path = Path(__file__)
-    assert expected == Path(get_path_string(expected))
+    path_elements: Strs = ["A", "B", "C"]
+    assert "\\".join(path_elements) == get_path_string(Path(*path_elements))
 
 
 def test_argument() -> None:
