@@ -7,6 +7,7 @@ from pathlib import Path
 
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.script.shell.execute_powershell import (
+    convert_mount_path,
     execute_powershell,
     get_path_string,
     get_quoted_paths,
@@ -81,6 +82,14 @@ def test_command() -> None:
     )
 
 
+def test_mount() -> None:
+    name: str = "test"
+    expected: Path = Path("C:/", name)
+
+    assert expected == convert_mount_path(Path("/", "mnt", "c", name))
+    assert expected == convert_mount_path(expected)
+
+
 def main() -> bool:
     """Run all tests.
 
@@ -93,4 +102,5 @@ def main() -> bool:
     test_all()
     test_write()
     test_command()
+    test_mount()
     return True
