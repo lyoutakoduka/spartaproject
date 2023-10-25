@@ -6,9 +6,9 @@ from pathlib import Path
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.script.shell.execute_powershell import (
     execute_powershell,
-    get_path_string,
     get_quoted_paths,
     get_script_executable,
+    get_script_string,
 )
 
 
@@ -19,7 +19,7 @@ def _get_script_path() -> Path:
 def _get_shortcut_command(shortcut_path: Path) -> str:
     return get_script_executable(
         [
-            get_path_string(_get_script_path()),
+            get_script_string(_get_script_path()),
             get_quoted_paths(shortcut_path),
         ]
     )
