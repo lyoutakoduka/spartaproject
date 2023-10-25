@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from pathlib import Path
+from platform import uname
 
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.script.shell.execute_powershell import (
@@ -34,12 +35,23 @@ def _check_shortcut_exists(shortcut_path: Path) -> None:
         raise FileNotFoundError()
 
 
+def _remove_drive_head(path_text: str) -> Path:
+    if "Linux" == uname().system:
+        if "C:" == path_text[:2]:
+            path: Path = Path(path_text[2:].replace("\\", "/"))
+
+            if path.exists():
+                return path
+
+    return Path(path_text)
+
+
 def read_shortcut(shortcut_path: Path) -> Path | None:
     _check_shortcut_exists(shortcut_path)
 
     result: Strs = _execute_script(shortcut_path)
 
     if 1 == len(result):
-        return Path(result[0])
+        return _remove_drive_head(result[0])
 
     return None
