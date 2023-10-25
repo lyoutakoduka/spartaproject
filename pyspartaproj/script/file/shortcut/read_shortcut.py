@@ -12,14 +12,14 @@ from pyspartaproj.script.shell.execute_powershell import (
 )
 
 
-def _get_script_path() -> Path:
+def _get_resource_path() -> Path:
     return Path(Path(__file__).parent, "resource", "read.ps1")
 
 
 def _get_shortcut_command(shortcut_path: Path) -> str:
     return get_script_executable(
         [
-            get_script_string(_get_script_path()),
+            get_script_string(_get_resource_path()),
             get_quoted_paths(shortcut_path),
         ]
     )

@@ -14,7 +14,7 @@ from pyspartaproj.script.shell.execute_powershell import (
 )
 
 
-def _get_script_path() -> Path:
+def _get_resource_path() -> Path:
     return Path(Path(__file__).parent, "resource", "create.ps1")
 
 
@@ -25,7 +25,7 @@ def _get_shortcut_command(shortcut_target: Path, shortcut_path: Path) -> str:
     ]
 
     return get_script_executable(
-        [get_script_string(_get_script_path())] + commands_quoted
+        [get_script_string(_get_resource_path())] + commands_quoted
     )
 
 
