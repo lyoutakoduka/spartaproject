@@ -12,7 +12,7 @@ from pyspartaproj.script.path.modify.get_resource import get_resource
 
 
 def _common_test(expected: str, path_elements: Strs) -> None:
-    result_path: Path = get_resource(path_elements)
+    result_path: Path = get_resource(Path(*path_elements))
     assert expected == string_pair_from_json(json_import(result_path))["name"]
 
 
