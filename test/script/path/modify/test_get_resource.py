@@ -21,6 +21,12 @@ def test_file() -> None:
     _common_test(expected, [expected + ".json"])
 
 
+def test_directory() -> None:
+    expected: str = "directory"
+    _common_test(expected, [expected, "file.json"])
+
+
 def main() -> bool:
     test_file()
+    test_directory()
     return True
