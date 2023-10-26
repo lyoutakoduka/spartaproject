@@ -5,6 +5,7 @@ from pathlib import Path
 from platform import uname
 
 from pyspartaproj.context.default.string_context import Strs
+from pyspartaproj.script.path.modify.get_resource import get_resource
 from pyspartaproj.script.shell.execute_powershell import (
     execute_powershell,
     get_quoted_paths,
@@ -13,14 +14,10 @@ from pyspartaproj.script.shell.execute_powershell import (
 )
 
 
-def _get_resource_path() -> Path:
-    return Path(Path(__file__).parent, "resource", "read.ps1")
-
-
 def _get_shortcut_command(shortcut_path: Path) -> str:
     return get_script_executable(
         [
-            get_script_string(_get_resource_path()),
+            get_script_string(get_resource(["read.ps1"])),
             get_quoted_paths(shortcut_path),
         ]
     )

@@ -7,6 +7,7 @@ from pathlib import Path
 
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.interface.pytest import fail
+from pyspartaproj.script.path.modify.get_resource import get_resource
 from pyspartaproj.script.shell.execute_python import (
     execute_python,
     get_interpreter_path,
@@ -16,14 +17,11 @@ from pyspartaproj.script.shell.execute_python import (
 def test_command() -> None:
     """Test to execute Python script that return version of interpreter."""
     results: Strs = list(
-        execute_python(
-            [Path(Path(__file__).parent, "resource", "version.py").as_posix()]
-        )
+        execute_python([get_resource(["version.py"]).as_posix()])
     )
 
     if 1 == len(results):
-        interpreter_path: Path = Path(results[0])
-        assert interpreter_path == get_interpreter_path()
+        assert Path(results[0]) == get_interpreter_path()
     else:
         fail()
 

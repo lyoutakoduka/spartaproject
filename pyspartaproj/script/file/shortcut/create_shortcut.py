@@ -4,6 +4,7 @@
 from pathlib import Path
 
 from pyspartaproj.context.default.string_context import Strs
+from pyspartaproj.script.path.modify.get_resource import get_resource
 from pyspartaproj.script.path.safe.safe_trash import SafeTrash
 from pyspartaproj.script.shell.execute_powershell import (
     convert_mount_path,
@@ -14,10 +15,6 @@ from pyspartaproj.script.shell.execute_powershell import (
 )
 
 
-def _get_resource_path() -> Path:
-    return Path(Path(__file__).parent, "resource", "create.ps1")
-
-
 def _get_shortcut_command(shortcut_target: Path, shortcut_path: Path) -> str:
     commands_quoted: Strs = [
         get_quoted_paths(convert_mount_path(path))
@@ -25,7 +22,7 @@ def _get_shortcut_command(shortcut_target: Path, shortcut_path: Path) -> str:
     ]
 
     return get_script_executable(
-        [get_script_string(_get_resource_path())] + commands_quoted
+        [get_script_string(get_resource(["create.ps1"]))] + commands_quoted
     )
 
 

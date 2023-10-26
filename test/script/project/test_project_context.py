@@ -9,6 +9,7 @@ from platform import uname
 from pyspartaproj.context.default.integer_context import IntPair
 from pyspartaproj.context.default.string_context import StrPair, Strs, Strs2
 from pyspartaproj.context.extension.path_context import PathPair
+from pyspartaproj.script.path.modify.get_resource import get_resource
 from pyspartaproj.script.project.project_context import ProjectContext
 
 
@@ -17,9 +18,7 @@ def _common_test(keys_pair: Strs2) -> None:
 
 
 def _import_context() -> ProjectContext:
-    return ProjectContext(
-        forward=Path(Path(__file__).parent, "resource", "forward.json")
-    )
+    return ProjectContext(forward=get_resource(["forward.json"]))
 
 
 def test_integer() -> None:

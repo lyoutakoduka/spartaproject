@@ -17,6 +17,7 @@ from pyspartaproj.script.file.json.convert_from_json import (
     string_pair2_from_json,
 )
 from pyspartaproj.script.file.json.import_json import json_import
+from pyspartaproj.script.path.modify.get_resource import get_resource
 
 
 class ProjectContext:
@@ -24,7 +25,7 @@ class ProjectContext:
 
     def _get_context_path(self, forward: Path | None) -> Path:
         if forward is None:
-            return Path("pyspartaproj", "resource", "project_context.json")
+            return get_resource(["project_context.json"])
 
         return forward
 
