@@ -14,5 +14,11 @@
   "runtime": {
     "powershell_linux.path": "***",
     "powershell_windows.path": ""***"
+  },
+  "filter": {
+    "platform_linux.path": "***",
+    "platform_windows.path": "***",
+    "interpreter_linux": "***",
+    "interpreter_windows": "***"
   }
 }
