@@ -80,11 +80,11 @@ def test_command() -> None:
 
 
 def test_mount() -> None:
-    name: str = "test"
-    expected: Path = Path("C:/", name)
+    path_elements: Strs = ["A", "B", "C"]
+    expected: Path = Path("C:/", *path_elements)
 
-    assert expected == convert_mount_path(Path("/", "mnt", "c", name))
-    assert expected == convert_mount_path(expected)
+    for path in [Path("/", "mnt", "c", *path_elements), expected]:
+        assert expected == convert_mount_path(path)
 
 
 def main() -> bool:

@@ -5,7 +5,6 @@ from pathlib import Path
 from platform import uname
 
 from pyspartaproj.context.default.string_context import StrGene, Strs
-from pyspartaproj.script.path.modify.get_relative import get_relative
 from pyspartaproj.script.project.project_context import ProjectContext
 from pyspartaproj.script.shell.execute_command import execute_command
 
@@ -49,13 +48,13 @@ def get_script_executable(commands_execute: Strs) -> str:
 
 
 def convert_mount_path(path: Path) -> Path:
-    mount: Path = Path("/", "mnt")
+    path_text: str = path.as_posix()
+    mount: str = "/mnt/"
 
-    if mount != path.parents[-2]:
+    if not path_text.startswith(mount):
         return path
 
-    drive: Path = path.parents[-3]
+    index: int = len(mount)
+    index_right: int = index + 1
 
-    return Path(
-        drive.name.capitalize() + ":", get_relative(path, root_path=drive)
-    )
+    return Path(path_text[index].capitalize() + ":" + path_text[index_right:])
