@@ -22,7 +22,7 @@ def _get_shortcut_command(shortcut_target: Path, shortcut_path: Path) -> str:
     ]
 
     return get_script_executable(
-        [get_script_string(get_resource(["create.ps1"]))] + commands_quoted
+        [get_script_string(get_resource(Path("create.ps1")))] + commands_quoted
     )
 
 

@@ -3,6 +3,7 @@
 
 """Test to execute Python according to OS."""
 
+from pathlib import Path
 
 from pyspartaproj.script.path.modify.get_resource import get_resource
 from pyspartaproj.script.shell.execute_python import (
@@ -14,7 +15,7 @@ from pyspartaproj.script.shell.execute_python import (
 def test_command() -> None:
     """Test to execute Python script that return version of interpreter."""
     assert [str(i).zfill(3) for i in range(3)] == list(
-        execute_python([get_script_string(get_resource(["indices.py"]))])
+        execute_python([get_script_string(get_resource(Path("indices.py")))])
     )
 
 

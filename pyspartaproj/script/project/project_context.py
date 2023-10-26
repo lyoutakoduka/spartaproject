@@ -25,7 +25,7 @@ class ProjectContext:
 
     def _get_context_path(self, forward: Path | None) -> Path:
         if forward is None:
-            return get_resource(["project_context.json"])
+            return get_resource(Path("project_context.json"))
 
         return forward
 
