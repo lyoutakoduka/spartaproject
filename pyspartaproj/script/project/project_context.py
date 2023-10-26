@@ -96,3 +96,16 @@ class ProjectContext:
 
     def get_platform_key(self, keys: Strs) -> str:
         return "_".join(keys + [uname().system.lower()])
+
+    def merge_platform_path(
+        self, group: str, path_type: str, file_type: str
+    ) -> Path:
+        context_types: Strs = [
+            self.get_platform_key([context_type])
+            for context_type in [path_type, file_type]
+        ]
+
+        return Path(
+            self.get_path_context(group)[context_types[0] + ".path"],
+            self.get_string_context(group)[context_types[1]],
+        )

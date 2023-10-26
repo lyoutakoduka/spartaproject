@@ -72,6 +72,15 @@ def test_key() -> None:
     assert uname().system == key_elements[-1].capitalize()
 
 
+def test_merge() -> None:
+    expected: Strs = ["directory", "file"]
+    project: ProjectContext = _import_context()
+
+    assert Path(*expected) == project.merge_platform_path(
+        "platform", *expected
+    )
+
+
 def main() -> bool:
     """Run all tests.
 
@@ -82,4 +91,5 @@ def main() -> bool:
     test_string()
     test_path()
     test_key()
+    test_merge()
     return True
