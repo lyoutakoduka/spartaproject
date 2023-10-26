@@ -7,20 +7,24 @@ from pyspartaproj.script.path.modify.get_relative import get_relative
 from pyspartaproj.script.stack_frame import StackFrame, current_frame
 
 
+def _get_file_expected() -> Path:
+    return get_relative(Path(__file__))
+
+
 def test_current() -> None:
     expected: StackFrame = {
-        "file": get_relative(Path(__file__)),
+        "file": _get_file_expected(),
         "function": "test_current",
-        "line": 16,
+        "line": 20,
     }
     assert expected == current_frame()
 
 
 def test_offset() -> None:
     expected: StackFrame = {
-        "file": get_relative(Path(__file__)),
+        "file": _get_file_expected(),
         "function": "test_offset",
-        "line": 29,
+        "line": 33,
     }
 
     def inside_function() -> None:
