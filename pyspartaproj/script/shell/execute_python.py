@@ -20,6 +20,10 @@ def get_interpreter_path() -> Path:
     return project.merge_platform_path("filter", "platform", "interpreter")
 
 
+def get_script_string(path: Path) -> str:
+    return str(path)  # Not as_posix()
+
+
 def execute_python(commands: Strs) -> StrGene:
     """Execute Python according to OS.
 
@@ -29,4 +33,6 @@ def execute_python(commands: Strs) -> StrGene:
     Returns:
         StrGene: Stdout of Script path you want execute
     """
-    return execute_command([get_interpreter_path().as_posix()] + commands)
+    return execute_command(
+        [get_script_string(get_interpreter_path())] + commands
+    )
