@@ -3,27 +3,16 @@
 
 """Test to execute Python according to OS."""
 
-from pathlib import Path
 
-from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.interface.pytest import fail
 from pyspartaproj.script.path.modify.get_resource import get_resource
-from pyspartaproj.script.shell.execute_python import (
-    execute_python,
-    get_interpreter_path,
-)
+from pyspartaproj.script.shell.execute_python import execute_python
 
 
 def test_command() -> None:
     """Test to execute Python script that return version of interpreter."""
-    results: Strs = list(
-        execute_python([get_resource(["version.py"]).as_posix()])
+    assert [str(i).zfill(3) for i in range(3)] == list(
+        execute_python([get_resource(["indices.py"]).as_posix()])
     )
-
-    if 1 == len(results):
-        assert Path(results[0]) == get_interpreter_path()
-    else:
-        fail()
 
 
 def main() -> bool:
