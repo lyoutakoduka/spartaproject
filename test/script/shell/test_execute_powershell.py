@@ -6,6 +6,7 @@
 from pathlib import Path
 
 from pyspartaproj.context.default.string_context import Strs
+from pyspartaproj.script.path.modify.get_resource import get_resource
 from pyspartaproj.script.shell.execute_powershell import (
     convert_mount_path,
     execute_powershell,
@@ -14,10 +15,6 @@ from pyspartaproj.script.shell.execute_powershell import (
     get_script_executable,
     get_script_string,
 )
-
-
-def _get_resource_path(current: str, target: str) -> Path:
-    return Path(Path(current).parent, "resource", target)
 
 
 def _get_formatted_path(path_elements: Strs) -> str:
@@ -70,7 +67,7 @@ def test_command() -> None:
     Execute simple Write-Output script
     that takes the path you want to print as argument.
     """
-    expected: Path = _get_resource_path(__file__, "command.ps1")
+    expected: Path = get_resource(["command.ps1"])
 
     assert [get_path_string(expected)] == list(
         execute_powershell(

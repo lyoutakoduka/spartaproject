@@ -8,13 +8,9 @@ from pathlib import Path
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.interface.pytest import fail, raises
 from pyspartaproj.script.feature_flags import in_development
+from pyspartaproj.script.path.modify.get_resource import get_resource
 from pyspartaproj.script.path.safe.safe_copy import SafeCopy
 from pyspartaproj.script.server.local.execute_server import ExecuteServer
-
-
-def _get_execute_source(name: str) -> Path:
-    current: Path = Path(__file__)
-    return Path(current.parent, "resource", name)
 
 
 def _execute_python(name: str, server: ExecuteServer) -> Strs | None:
@@ -23,7 +19,7 @@ def _execute_python(name: str, server: ExecuteServer) -> Strs | None:
     destination_path: Path = Path(server.create_local_working_space(), name)
 
     safe_copy = SafeCopy()
-    safe_copy.copy(_get_execute_source(name), destination_path)
+    safe_copy.copy(get_resource([name]), destination_path)
 
     return server.execute(destination_path)
 
