@@ -18,7 +18,7 @@ def test_current() -> None:
     expected: StackFrame = {
         "file": _get_file_expected(),
         "function": "test_current",
-        "line": 20,
+        "line": 23,
     }
     assert expected == current_frame()
 
@@ -28,7 +28,7 @@ def test_offset() -> None:
     expected: StackFrame = {
         "file": _get_file_expected(),
         "function": "test_offset",
-        "line": 33,
+        "line": 37,
     }
 
     def inside_function() -> None:
