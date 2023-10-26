@@ -26,7 +26,7 @@ def test_integer() -> None:
     expected: IntPair = {"index": 0, "count": 1}
 
     project: ProjectContext = _import_context()
-    integer_context: IntPair = project.get_integer_context("test")
+    integer_context: IntPair = project.get_integer_context("type")
 
     _common_test([list(items.keys()) for items in [expected, integer_context]])
 
@@ -39,7 +39,7 @@ def test_string() -> None:
     expected: StrPair = {"name": "name", "language": "language"}
 
     project: ProjectContext = _import_context()
-    string_context: StrPair = project.get_string_context("test")
+    string_context: StrPair = project.get_string_context("type")
 
     _common_test([list(items.keys()) for items in [expected, string_context]])
 
@@ -55,7 +55,7 @@ def test_path() -> None:
     }
 
     project: ProjectContext = _import_context()
-    path_context: PathPair = project.get_path_context("test")
+    path_context: PathPair = project.get_path_context("type")
 
     _common_test([list(items.keys()) for items in [expected, path_context]])
 

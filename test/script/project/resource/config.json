@@ -1,5 +1,5 @@
 {
-  "test": {
+  "type": {
     "name": "name",
     "language": "language",
     "root.path": "root",
