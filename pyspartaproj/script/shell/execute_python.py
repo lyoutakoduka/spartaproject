@@ -4,11 +4,9 @@
 """Module to execute Python according to OS."""
 
 from pathlib import Path
-from platform import uname
 
 from pyspartaproj.context.default.string_context import StrGene, Strs
-from pyspartaproj.context.extension.path_context import PathPair
-from pyspartaproj.script.path.modify.get_absolute import get_absolute
+from pyspartaproj.script.project.project_context import ProjectContext
 from pyspartaproj.script.shell.execute_command import execute_command
 
 
@@ -21,17 +19,8 @@ def get_interpreter_path() -> Path:
     Returns:
         Path: relative path of Python interpreter
     """
-    platform: str = uname().system
-
-    platform_pythons: PathPair = {
-        "Linux": Path("poetry", "linux", ".venv", "bin", "python"),
-        "Windows": Path("poetry", "windows", ".venv", "Scripts", "python.exe"),
-    }
-
-    if platform in platform_pythons:
-        return get_absolute(platform_pythons[platform])
-    else:
-        raise FileNotFoundError
+    project = ProjectContext()
+    return project.merge_platform_path("filter", "platform", "interpreter")
 
 
 def execute_python(commands: Strs) -> StrGene:
