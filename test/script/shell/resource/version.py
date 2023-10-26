@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from sys import executable
-
 
 def _main() -> None:
-    print(executable)
+    for i in range(3):
+        print(str(i).zfill(3))
 
 
 if __name__ == "__main__":
