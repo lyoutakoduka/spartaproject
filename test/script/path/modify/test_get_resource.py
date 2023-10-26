@@ -1,6 +1,8 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to get path in local resource directory."""
+
 from pathlib import Path
 
 from pyspartaproj.context.default.string_context import Strs
@@ -17,16 +19,23 @@ def _common_test(expected: str, path_elements: Strs) -> None:
 
 
 def test_file() -> None:
+    """Test to get path in local resource file."""
     expected: str = "file"
     _common_test(expected, [expected + ".json"])
 
 
 def test_directory() -> None:
+    """Test to get path in local resource directory and file."""
     expected: str = "directory"
     _common_test(expected, [expected, "file.json"])
 
 
 def main() -> bool:
+    """All test of feature flags module.
+
+    Returns:
+        bool: success if get to the end of function
+    """
     test_file()
     test_directory()
     return True
