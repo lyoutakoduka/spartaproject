@@ -13,9 +13,6 @@ from pyspartaproj.script.shell.execute_command import execute_command
 def get_interpreter_path() -> Path:
     """Function to get interpreter path of Python according to OS.
 
-    Raises:
-        FileNotFoundError: raise error when selected platform isn't defined
-
     Returns:
         Path: relative path of Python interpreter
     """
