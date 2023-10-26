@@ -6,5 +6,11 @@
     "head.path": "root/head",
     "index": 0,
     "count": 1
+  },
+  "platform": {
+    "file_linux": "file",
+    "file_windows": "file",
+    "directory_linux.path": "directory",
+    "directory_windows.path": "directory"
   }
 }
