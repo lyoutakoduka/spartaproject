@@ -1,6 +1,8 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to get stack frames information."""
+
 from pathlib import Path
 
 from pyspartaproj.script.path.modify.get_relative import get_relative
@@ -12,6 +14,7 @@ def _get_file_expected() -> Path:
 
 
 def test_current() -> None:
+    """Test to get current frame information in stack frames."""
     expected: StackFrame = {
         "file": _get_file_expected(),
         "function": "test_current",
@@ -21,6 +24,7 @@ def test_current() -> None:
 
 
 def test_offset() -> None:
+    """Test to get current frame information with index offset."""
     expected: StackFrame = {
         "file": _get_file_expected(),
         "function": "test_offset",
