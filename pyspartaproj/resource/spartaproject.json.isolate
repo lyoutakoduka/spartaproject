@@ -13,7 +13,7 @@
   },
   "runtime": {
     "powershell_linux.path": "***",
-    "powershell_windows.path": ""***"
+    "powershell_windows.path": "***"
   },
   "filter": {
     "platform_linux.path": "***",
