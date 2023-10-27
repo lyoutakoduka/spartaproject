@@ -39,8 +39,8 @@ def get_path_string(path: Path) -> str:
     return path_text
 
 
-def get_quoted_paths(path: Path) -> str:
-    return get_path_string(path).join(["'"] * 2)
+def get_quoted_path(path: str) -> str:
+    return path.join(["'"] * 2)
 
 
 def get_script_executable(commands_execute: Strs) -> str:
