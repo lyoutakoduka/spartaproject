@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Module for test to execute specific script in Python."""
+
 
 def _main() -> None:
     for i in range(3):
