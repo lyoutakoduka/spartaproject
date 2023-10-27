@@ -15,6 +15,7 @@ from pyspartaproj.script.shell.execute_python import (
 
 
 def test_path() -> None:
+    """Test to convert path to the format for executing script in Python."""
     path_elements: Strs = ["A", "B", "C"]
     identifier: str = "/" if "Linux" == uname().system else "\\"
 
