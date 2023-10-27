@@ -9,7 +9,8 @@ from pyspartaproj.script.path.safe.safe_trash import SafeTrash
 from pyspartaproj.script.shell.execute_powershell import (
     convert_mount_path,
     execute_powershell,
-    get_quoted_paths,
+    get_path_string,
+    get_quoted_path,
     get_script_executable,
     get_script_string,
 )
@@ -17,7 +18,7 @@ from pyspartaproj.script.shell.execute_powershell import (
 
 def _get_shortcut_command(shortcut_target: Path, shortcut_path: Path) -> str:
     commands_quoted: Strs = [
-        get_quoted_paths(convert_mount_path(path))
+        get_quoted_path(get_path_string(convert_mount_path(path)))
         for path in [shortcut_target, shortcut_path]
     ]
 
