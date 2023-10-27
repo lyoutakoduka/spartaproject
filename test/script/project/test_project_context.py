@@ -64,6 +64,7 @@ def test_path() -> None:
 
 
 def test_key() -> None:
+    """Test to get key of project context corresponding to OS."""
     expected: Strs = ["group", "type"]
     context_key: str = _import_context().get_platform_key(expected)
     key_elements: Strs = context_key.split("_")
@@ -73,6 +74,7 @@ def test_key() -> None:
 
 
 def test_merge() -> None:
+    """Test to get path merged with single directory and single file."""
     expected: Strs = ["directory", "file"]
     project: ProjectContext = _import_context()
 
