@@ -98,7 +98,7 @@ def get_quoted_path(path: str) -> str:
     return path.join(["'"] * 2)
 
 
-def get_script_executable(commands_execute: Strs) -> str:
+def get_script_executable(commands: Strs) -> str:
     """Convert command string in order to execute command in PowerShell.
 
     e.g. Simplified command for execution in PowerShell is follow.
@@ -108,16 +108,16 @@ def get_script_executable(commands_execute: Strs) -> str:
     The path will convert is called "command part",
         and its "script.ps1 argument" in above example.
 
-    If you select argument (commands_execute) like ["script.ps1", "argument"],
+    If you select argument (commands) like ["script.ps1", "argument"],
         '"script.ps1 argument"' is returned.
 
     Args:
-        commands_execute (Strs): Command part path you want to convert.
+        commands (Strs): Command part path you want to convert.
 
     Returns:
         str: Converted command part surrounded by double quotation.
     """
-    return " ".join(commands_execute).join(['"'] * 2)
+    return " ".join(commands).join(['"'] * 2)
 
 
 def convert_mount_path(path: Path) -> Path:
