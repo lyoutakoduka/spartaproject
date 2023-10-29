@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Module to execute specific commands in PowerShell."""
+
 from pathlib import Path
 from platform import uname
 
@@ -17,6 +19,16 @@ def _get_powershell_path() -> str:
 
 
 def execute_powershell(commands: Strs) -> StrGene:
+    """Function to execute specific command in PowerShell.
+
+    Args:
+        commands (Strs): Elements of command which will merged by space.
+            e.g. If command is "Write-Output Test",
+            you can input ["Write-Output", "Test"] or ["Write-Output Test"].
+
+    Returns:
+        StrGene: Generator for getting stdout of command  you want execute.
+    """
     shell_commands: Strs = [
         _get_powershell_path(),
         "-ExecutionPolicy",
@@ -27,10 +39,42 @@ def execute_powershell(commands: Strs) -> StrGene:
 
 
 def get_script_string(path: Path) -> str:
+    """Convert path string in order to execute command in PowerShell.
+
+    e.g. Simplified command for execution in PowerShell is follow.
+
+    "powershell.exe directory/script.ps1 argument"
+
+    The path will convert is called "script part",
+        and its "directory/script.ps1" in above example.
+
+    Args:
+        path (Path): Script part path you want to convert.
+
+    Returns:
+        str: Converted script part which used "slash"
+            as directory separator character.
+    """
     return path.as_posix()  # Not str()
 
 
 def get_path_string(path: Path) -> str:
+    """Convert path string in order to execute command in PowerShell.
+
+    e.g. Simplified command for execution in PowerShell is follow.
+
+    "powershell.exe script.ps1 directory/argument"
+
+    The path will convert is called "argument part",
+        and its "directory/argument" in above example.
+
+    Args:
+        path (Path): Argument part path you want to convert.
+
+    Returns:
+        str: Converted argument part which used "back slash"
+            as directory separator character.
+    """
     path_text: str = str(path)
 
     if "Linux" == uname().system:
@@ -40,14 +84,54 @@ def get_path_string(path: Path) -> str:
 
 
 def get_quoted_path(path: str) -> str:
+    """Get path surrounded by quotation for executing command on PowerShell.
+
+    If you select argument (path) is "root/directory/file",
+        "'root/directory/file'" is returned.
+
+    Args:
+        path (str): Path you want surround by quotation.
+
+    Returns:
+        str: Path surrounded by quotation.
+    """
     return path.join(["'"] * 2)
 
 
 def get_script_executable(commands_execute: Strs) -> str:
+    """Convert command string in order to execute command in PowerShell.
+
+    e.g. Simplified command for execution in PowerShell is follow.
+
+    "powershell.exe script.ps1 argument"
+
+    The path will convert is called "command part",
+        and its "script.ps1 argument" in above example.
+
+    If you select argument (commands_execute) like ["script.ps1", "argument"],
+        '"script.ps1 argument"' is returned.
+
+    Args:
+        commands_execute (Strs): Command part path you want to convert.
+
+    Returns:
+        str: Converted command part surrounded by double quotation.
+    """
     return " ".join(commands_execute).join(['"'] * 2)
 
 
 def convert_mount_path(path: Path) -> Path:
+    """Convert shared path between Linux and Windows.
+
+    e.g. If you select argument (path) like "/mnt/c/Users/user",
+        "C:/Users/user" is returned.
+
+    Args:
+        path (Path): Linux path which is starts from mount string.
+
+    Returns:
+        Path: Converted Windows path which is starts from drive letter.
+    """
     path_text: str = path.as_posix()
     mount: str = "/mnt/"
 
