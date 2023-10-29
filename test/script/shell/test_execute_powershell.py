@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Test to execute commands in PowerShell."""
+"""Test module to execute specific commands in PowerShell."""
 
 from pathlib import Path
 
@@ -22,12 +22,13 @@ def _get_formatted_path(path_elements: Strs) -> str:
 
 
 def test_script() -> None:
+    """Test to convert script part of command string on PowerShell."""
     path_elements: Strs = ["A", "B", "C"]
     assert "/".join(path_elements) == get_script_string(Path(*path_elements))
 
 
 def test_path() -> None:
-    """Test for converting path to text that executable in PowerShell."""
+    """Test to convert argument part of command string on PowerShell."""
     path_elements: Strs = ["A", "B", "C"]
     assert _get_formatted_path(path_elements) == get_path_string(
         Path(*path_elements)
@@ -35,16 +36,14 @@ def test_path() -> None:
 
 
 def test_argument() -> None:
-    """Test for converting path to text of argument.
-
-    It's executable in PowerShell.
-    """
+    """Test to get path surrounded by quotation for executing on PowerShell."""
     path_elements: Strs = ["A", "B", "C"]
     expected: str = _get_formatted_path(path_elements).join(["'"] * 2)
     assert expected == get_quoted_path(get_path_string(Path(*path_elements)))
 
 
 def test_all() -> None:
+    """Test to convert command part of command string on PowerShell."""
     expected: Strs = ["Write-Output", "Test"]
     assert expected == get_script_executable(expected).replace('"', "").split(
         " "
@@ -52,7 +51,7 @@ def test_all() -> None:
 
 
 def test_write() -> None:
-    """Test for Write-Output that is shown three line number."""
+    """Test for executing simple command on PowerShell."""
     expected: Strs = [str(i).zfill(3) for i in range(3)]
     commands: Strs = ["; ".join(["Write-Output " + text for text in expected])]
 
@@ -62,10 +61,10 @@ def test_write() -> None:
 
 
 def test_command() -> None:
-    """Test to get string that is executable in PowerShell.
+    """Test for executing simple script on PowerShell.
 
     Execute simple Write-Output script
-    that takes the path you want to print as argument.
+        that takes the path you want to print as argument.
     """
     expected: Path = get_resource(Path("command.ps1"))
 
@@ -82,6 +81,7 @@ def test_command() -> None:
 
 
 def test_mount() -> None:
+    """Test to convert shared path between Linux and Windows."""
     path_elements: Strs = ["A", "B", "C"]
     expected: Path = Path("C:/", *path_elements)
 
