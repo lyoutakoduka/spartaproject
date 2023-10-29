@@ -98,7 +98,7 @@ def get_quoted_path(path: str) -> str:
     return path.join(["'"] * 2)
 
 
-def get_script_executable(commands: Strs) -> str:
+def get_double_quoted_command(commands: Strs) -> str:
     """Convert command string in order to execute command in PowerShell.
 
     e.g. Simplified command for execution in PowerShell is follow.

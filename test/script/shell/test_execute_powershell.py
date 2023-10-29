@@ -10,9 +10,9 @@ from pyspartaproj.script.path.modify.get_resource import get_resource
 from pyspartaproj.script.shell.execute_powershell import (
     convert_mount_path,
     execute_powershell,
+    get_double_quoted_command,
     get_path_string,
     get_quoted_path,
-    get_script_executable,
     get_script_string,
 )
 
@@ -45,9 +45,9 @@ def test_argument() -> None:
 def test_all() -> None:
     """Test to convert command part of command string on PowerShell."""
     expected: Strs = ["Write-Output", "Test"]
-    assert expected == get_script_executable(expected).replace('"', "").split(
-        " "
-    )
+    assert expected == get_double_quoted_command(expected).replace(
+        '"', ""
+    ).split(" ")
 
 
 def test_write() -> None:
@@ -56,7 +56,7 @@ def test_write() -> None:
     commands: Strs = ["; ".join(["Write-Output " + text for text in expected])]
 
     assert expected == list(
-        execute_powershell([get_script_executable(commands)])
+        execute_powershell([get_double_quoted_command(commands)])
     )
 
 
@@ -72,7 +72,7 @@ def test_command() -> None:
         execute_powershell(
             [
                 get_script_string(expected),
-                get_script_executable(
+                get_double_quoted_command(
                     [get_quoted_path(get_path_string(expected))] * 2
                 ),
             ]
