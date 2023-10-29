@@ -9,9 +9,9 @@ from pyspartaproj.script.path.safe.safe_trash import SafeTrash
 from pyspartaproj.script.shell.execute_powershell import (
     convert_mount_path,
     execute_powershell,
+    get_double_quoted_command,
     get_path_string,
     get_quoted_path,
-    get_script_executable,
     get_script_string,
 )
 
@@ -22,7 +22,7 @@ def _get_shortcut_command(shortcut_target: Path, shortcut_path: Path) -> str:
         for path in [shortcut_target, shortcut_path]
     ]
 
-    return get_script_executable(
+    return get_double_quoted_command(
         [get_script_string(get_resource(Path("create.ps1")))] + commands_quoted
     )
 

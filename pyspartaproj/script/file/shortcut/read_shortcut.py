@@ -8,15 +8,15 @@ from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.script.path.modify.get_resource import get_resource
 from pyspartaproj.script.shell.execute_powershell import (
     execute_powershell,
+    get_double_quoted_command,
     get_path_string,
     get_quoted_path,
-    get_script_executable,
     get_script_string,
 )
 
 
 def _get_shortcut_command(shortcut_path: Path) -> str:
-    return get_script_executable(
+    return get_double_quoted_command(
         [
             get_script_string(get_resource(Path("read.ps1"))),
             get_quoted_path(get_path_string(shortcut_path)),
