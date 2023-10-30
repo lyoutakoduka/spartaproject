@@ -1,13 +1,13 @@
 {
-  "name": "*************",
-  "host": "*******.******.**.**",
-  "protocol": "sftp",
-  "username": "*******",
-  "remotePath": "***/*************",
-  "context": "*:/*******/******/local",
-  "privateKeyPath": "*:/*****/*/.ssh/*************",
-  "passphrase": "********************",
-  "port": 99,
-  "connectTimeout": 1000,
-  "uploadOnSave": false
+  "connectTimeout": 0,
+  "port": 0,
+  "uploadOnSave": 0,
+  "host": "***",
+  "name": "***",
+  "passphrase": "***",
+  "protocol": "***",
+  "username": "***",
+  "context": "***",
+  "remotePath": "***",
+  "privateKeyPath": "***"
 }
