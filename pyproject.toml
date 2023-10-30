@@ -12,7 +12,11 @@ skip = [
 
 [tool.black]
 exclude = """(
-  poetry/ | .vscode/ | .temp/ | external/ | .git/
+  .git/ |
+  .temp/ |
+  .vscode/ |
+  external/ |
+  poetry/
 )"""
 line-length = 79
 
