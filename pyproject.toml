@@ -21,16 +21,21 @@ exclude = """(
 line-length = 79
 
 [tool.flake8]
-extend-exclude = ["./poetry", "./.vscode", "./.temp", "./external"]
+extend-exclude = [
+  "./.temp",
+  "./.vscode",
+  "./external",
+  "./poetry",
+]
 ignore = [
   "PT013",
   "D401",
   "D100",
   "D101",
+  "D102",
   "D103",
   "D105",
   "D107",
-  "D102",
 ]
 max-complexity = 10
 max-doc-length = 79
