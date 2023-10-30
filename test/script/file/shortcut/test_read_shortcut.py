@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to read Windows shortcut information from PowerShell."""
+
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
@@ -29,6 +31,8 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 
 
 def test_file() -> None:
+    """Test to read file type shortcut of Windows from PowerShell."""
+
     def individual_test(temporary_root: Path) -> None:
         _common_test(create_temporary_file(temporary_root), temporary_root)
 
@@ -36,6 +40,8 @@ def test_file() -> None:
 
 
 def test_directory() -> None:
+    """Test to read directory type shortcut of Windows from PowerShell."""
+
     def individual_test(temporary_root: Path) -> None:
         _common_test(temporary_root, temporary_root)
 
@@ -43,11 +49,17 @@ def test_directory() -> None:
 
 
 def test_exist() -> None:
+    """Test to exists shortcut file before read inside it."""
     with raises(FileNotFoundError):
         read_shortcut(Path("empty.lnk"))
 
 
 def main() -> bool:
+    """Run all tests.
+
+    Returns:
+        bool: success if get to the end of function
+    """
     test_file()
     test_directory()
     test_exist()
