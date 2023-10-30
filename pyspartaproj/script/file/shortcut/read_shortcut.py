@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Module to read Windows shortcut information from PowerShell."""
+
 from pathlib import Path
 from platform import uname
 
@@ -45,6 +47,14 @@ def _remove_drive_head(path_text: str) -> Path:
 
 
 def read_shortcut(shortcut_path: Path) -> Path | None:
+    """Read Windows shortcut information from PowerShell.
+
+    Args:
+        shortcut_path (Path): Path of shortcut you want to read inside.
+
+    Returns:
+        Path | None: Path which is a link destination of shortcut.
+    """
     _check_shortcut_exists(shortcut_path)
 
     result: Strs = _execute_script(shortcut_path)
