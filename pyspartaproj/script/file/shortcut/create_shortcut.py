@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Module to create Windows shortcut from PowerShell."""
+
 from pathlib import Path
 
 from pyspartaproj.context.default.string_context import Strs
@@ -47,6 +49,17 @@ def _cleanup_shortcut(shortcut_path: Path) -> None:
 
 
 def create_shortcut(shortcut_target: Path, shortcut_path: Path) -> bool:
+    """Create Windows shortcut from PowerShell.
+
+    Args:
+        shortcut_target (Path): Path which is a link destination of shortcut.
+
+        shortcut_path (Path): Path of shortcut you want to create.
+            Extension of shortcut should be ".lnk".
+
+    Returns:
+        bool: True if creating shortcut is success.
+    """
     _check_shortcut_exists(shortcut_target)
     _cleanup_shortcut(shortcut_path)
     _execute_script(shortcut_target, shortcut_path)
