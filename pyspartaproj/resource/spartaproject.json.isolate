@@ -1,24 +1,24 @@
 {
   "server": {
+    "port": 0,
+    "timeout": 0,
     "host": "***",
-    "user_name": "***"
     "passphrase_linux": "***",
     "passphrase_windows": "***",
+    "user_name": "***",
+    "local_root.path": "***",
     "private_key_linux.path": "***",
     "private_key_windows.path": "***",
-    "remote_root.path": "***",
-    "local_root.path": "***",
-    "timeout": 1000,
-    "port": 99
+    "remote_root.path": "***"
   },
   "runtime": {
     "powershell_linux.path": "***",
     "powershell_windows.path": "***"
   },
   "filter": {
-    "platform_linux.path": "***",
-    "platform_windows.path": "***",
     "interpreter_linux": "***",
-    "interpreter_windows": "***"
+    "interpreter_windows": "***",
+    "platform_linux.path": "***",
+    "platform_windows.path": "***"
   }
 }

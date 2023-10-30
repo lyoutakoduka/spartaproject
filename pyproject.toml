@@ -1,27 +1,41 @@
 [tool.isort]
-format_error = "[sparta.isort.error]:{message}"
 line_length = 79
 profile = "black"
 quiet = true
-skip = ["./poetry", "./.vscode", "./.temp", "./external", "./.git"]
+skip = [
+  "./.git",
+  "./.temp",
+  "./.vscode",
+  "./external",
+  "./poetry",
+]
 
 [tool.black]
 exclude = """(
-  poetry/ | .vscode/ | .temp/ | external/ | .git/
+  .git/ |
+  .temp/ |
+  .vscode/ |
+  external/ |
+  poetry/
 )"""
 line-length = 79
 
 [tool.flake8]
-extend-exclude = ["./poetry", "./.vscode", "./.temp", "./external"]
+extend-exclude = [
+  "./.temp",
+  "./.vscode",
+  "./external",
+  "./poetry",
+]
 ignore = [
   "PT013",
   "D401",
   "D100",
   "D101",
+  "D102",
   "D103",
   "D105",
   "D107",
-  "D102",
 ]
 max-complexity = 10
 max-doc-length = 79
