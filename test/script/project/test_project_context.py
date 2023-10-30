@@ -4,11 +4,13 @@
 """Test module to import a context of whole project from outside Json."""
 
 from pathlib import Path
+from platform import uname
 
 from pyspartaproj.context.default.integer_context import IntPair
-from pyspartaproj.context.default.string_context import StrPair, Strs2
+from pyspartaproj.context.default.string_context import StrPair, Strs, Strs2
 from pyspartaproj.context.extension.path_context import PathPair
-from pyspartaproj.script.file.json.project_context import ProjectContext
+from pyspartaproj.script.path.modify.get_resource import get_resource
+from pyspartaproj.script.project.project_context import ProjectContext
 
 
 def _common_test(keys_pair: Strs2) -> None:
@@ -16,9 +18,7 @@ def _common_test(keys_pair: Strs2) -> None:
 
 
 def _import_context() -> ProjectContext:
-    return ProjectContext(
-        forward=Path(Path(__file__).parent, "resource", "forward.json")
-    )
+    return ProjectContext(forward=get_resource(Path("forward.json")))
 
 
 def test_integer() -> None:
@@ -26,7 +26,7 @@ def test_integer() -> None:
     expected: IntPair = {"index": 0, "count": 1}
 
     project: ProjectContext = _import_context()
-    integer_context: IntPair = project.get_integer_context("test")
+    integer_context: IntPair = project.get_integer_context("type")
 
     _common_test([list(items.keys()) for items in [expected, integer_context]])
 
@@ -39,7 +39,7 @@ def test_string() -> None:
     expected: StrPair = {"name": "name", "language": "language"}
 
     project: ProjectContext = _import_context()
-    string_context: StrPair = project.get_string_context("test")
+    string_context: StrPair = project.get_string_context("type")
 
     _common_test([list(items.keys()) for items in [expected, string_context]])
 
@@ -55,12 +55,32 @@ def test_path() -> None:
     }
 
     project: ProjectContext = _import_context()
-    path_context: PathPair = project.get_path_context("test")
+    path_context: PathPair = project.get_path_context("type")
 
     _common_test([list(items.keys()) for items in [expected, path_context]])
 
     for key, value in expected.items():
         assert value == path_context[key]
+
+
+def test_key() -> None:
+    """Test to get key of project context corresponding to OS."""
+    expected: Strs = ["group", "type"]
+    context_key: str = _import_context().get_platform_key(expected)
+    key_elements: Strs = context_key.split("_")
+
+    assert expected == key_elements[:2]
+    assert uname().system == key_elements[-1].capitalize()
+
+
+def test_merge() -> None:
+    """Test to get path merged with single directory and single file."""
+    expected: Strs = ["directory", "file"]
+    project: ProjectContext = _import_context()
+
+    assert Path(*expected) == project.merge_platform_path(
+        "platform", *expected
+    )
 
 
 def main() -> bool:
@@ -72,4 +92,6 @@ def main() -> bool:
     test_integer()
     test_string()
     test_path()
+    test_key()
+    test_merge()
     return True

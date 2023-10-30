@@ -4,9 +4,10 @@
 """Module to import a context of whole project from outside Json."""
 
 from pathlib import Path
+from platform import uname
 
 from pyspartaproj.context.default.integer_context import IntPair
-from pyspartaproj.context.default.string_context import StrPair
+from pyspartaproj.context.default.string_context import StrPair, Strs
 from pyspartaproj.context.extension.path_context import PathPair
 from pyspartaproj.context.file.json_context import Json
 from pyspartaproj.script.file.json.convert_from_json import (
@@ -16,6 +17,7 @@ from pyspartaproj.script.file.json.convert_from_json import (
     string_pair2_from_json,
 )
 from pyspartaproj.script.file.json.import_json import json_import
+from pyspartaproj.script.path.modify.get_resource import get_resource
 
 
 class ProjectContext:
@@ -23,7 +25,7 @@ class ProjectContext:
 
     def _get_context_path(self, forward: Path | None) -> Path:
         if forward is None:
-            return Path("pyspartaproj", "resource", "project_context.json")
+            return get_resource(Path("project_context.json"))
 
         return forward
 
@@ -91,3 +93,62 @@ class ProjectContext:
             PathPair: project context of path type
         """
         return self._path_context[group]
+
+    def get_platform_key(self, keys: Strs) -> str:
+        """Get key of project context corresponding to OS.
+
+        Args:
+            keys (Strs): Elements of key represented by string list.
+
+            e.g. If you want to get key like "something_key_linux" in Linux,
+                argument (keys) must "['something', 'key']".
+
+        Returns:
+            str: The key corresponding to OS.
+        """
+        return "_".join(keys + [uname().system.lower()])
+
+    def merge_platform_path(
+        self, group: str, path_type: str, file_type: str
+    ) -> Path:
+        """Get path merged with single directory and single file.
+
+        The path is corresponding to OS, and created from project context file.
+
+        e.g. The project context file for explaining is follow.
+
+        {
+            "group": {
+                "file_linux": "file_B",
+                "file_windows": "file_C",
+                "directory_linux.path": "root/directory_B",
+                "directory_windows.path": "root/directory_C"
+            }
+        }
+
+        Args:
+            group (str): sub-group of the project context,
+                select "group" if in the project context above.
+
+            path_type (str): Identifier of directory you want to merge,
+                select "directory" if in the project context above.
+
+            file_type (str): Identifier of file you want to merge,
+                select "file" if in the project context above.
+
+        Returns:
+            Path: Merged path corresponding to OS.
+
+            If you select group is "group", path_type is "directory",
+                and file_type is "file" in Linux environment,
+                "root/directory_B/file_B" is returned.
+        """
+        context_types: Strs = [
+            self.get_platform_key([context_type])
+            for context_type in [path_type, file_type]
+        ]
+
+        return Path(
+            self.get_path_context(group)[context_types[0] + ".path"],
+            self.get_string_context(group)[context_types[1]],
+        )

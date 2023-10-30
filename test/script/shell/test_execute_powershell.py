@@ -1,69 +1,92 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Test to execute commands in PowerShell."""
+"""Test module to execute specific commands in PowerShell."""
 
 from pathlib import Path
-from platform import uname
-from tempfile import TemporaryDirectory
 
 from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.script.file.text.export_file import text_export
+from pyspartaproj.script.path.modify.get_resource import get_resource
 from pyspartaproj.script.shell.execute_powershell import (
+    convert_mount_path,
     execute_powershell,
+    get_double_quoted_command,
     get_path_string,
-    get_quoted_paths,
-    get_script_executable,
+    get_quoted_path,
+    get_script_string,
 )
 
 
-def test_write() -> None:
-    """Test for Write-Output that is shown three line number."""
-    expected: Strs = [str(i).zfill(3) for i in range(3)]
-    command: str = "; ".join(["Write-Output " + text for text in expected])
-
-    if "Windows" == uname().system:
-        assert expected == execute_powershell(command)
+def _get_formatted_path(path_elements: Strs) -> str:
+    return "\\".join(path_elements)
 
 
 def test_script() -> None:
-    """Test for converting path to text that executable in PowerShell."""
-    expected: Path = Path(__file__)
-    assert expected == Path(get_path_string(expected))
+    """Test to convert script part of command string on PowerShell."""
+    path_elements: Strs = ["A", "B", "C"]
+    assert "/".join(path_elements) == get_script_string(Path(*path_elements))
+
+
+def test_path() -> None:
+    """Test to convert argument part of command string on PowerShell."""
+    path_elements: Strs = ["A", "B", "C"]
+    assert _get_formatted_path(path_elements) == get_path_string(
+        Path(*path_elements)
+    )
 
 
 def test_argument() -> None:
-    """Test for converting path to text of argument.
+    """Test to get path surrounded by quotation for executing on PowerShell."""
+    path_elements: Strs = ["A", "B", "C"]
+    expected: str = _get_formatted_path(path_elements).join(["'"] * 2)
+    assert expected == get_quoted_path(get_path_string(Path(*path_elements)))
 
-    It's executable in PowerShell.
-    """
-    expected: Path = Path(__file__)
-    assert expected == Path(get_quoted_paths(expected).replace("'", ""))
+
+def test_all() -> None:
+    """Test to convert command part of command string on PowerShell."""
+    expected: Strs = ["Write-Output", "Test"]
+    assert expected == get_double_quoted_command(expected).replace(
+        '"', ""
+    ).split(" ")
+
+
+def test_write() -> None:
+    """Test for executing simple command on PowerShell."""
+    expected: Strs = [str(i).zfill(3) for i in range(3)]
+    commands: Strs = ["; ".join(["Write-Output " + text for text in expected])]
+
+    assert expected == list(
+        execute_powershell([get_double_quoted_command(commands)])
+    )
 
 
 def test_command() -> None:
-    """Test to get string that is executable in PowerShell.
+    """Test for executing simple script on PowerShell.
 
     Execute simple Write-Output script
-    that takes the path you want to print as argument.
+        that takes the path you want to print as argument.
     """
-    expected: Path = Path(__file__)
-    script_text: str = "\n".join(
-        ["Param([String]$text)", "Write-Output $text"]
+    expected: Path = get_resource(Path("command.ps1"))
+
+    assert [get_path_string(expected)] == list(
+        execute_powershell(
+            [
+                get_script_string(expected),
+                get_double_quoted_command(
+                    [get_quoted_path(get_path_string(expected))] * 2
+                ),
+            ]
+        )
     )
 
-    with TemporaryDirectory() as temporary_path:
-        stdout_path: Path = Path(temporary_path, "temporary.ps1")
-        text_export(stdout_path, script_text)
-        executable_test: str = get_script_executable(
-            [get_path_string(stdout_path), get_quoted_paths(expected)]
-        )
 
-        if "Windows" == uname().system:
-            result: Strs = execute_powershell(executable_test)
+def test_mount() -> None:
+    """Test to convert shared path between Linux and Windows."""
+    path_elements: Strs = ["A", "B", "C"]
+    expected: Path = Path("C:/", *path_elements)
 
-            assert 1 == len(result)
-            assert expected == Path(result[0])
+    for path in [Path("/", "mnt", "c", *path_elements), expected]:
+        assert expected == convert_mount_path(path)
 
 
 def main() -> bool:
@@ -72,8 +95,11 @@ def main() -> bool:
     Returns:
         bool: success if get to the end of function
     """
-    test_write()
     test_script()
+    test_path()
     test_argument()
+    test_all()
+    test_write()
     test_command()
+    test_mount()
     return True
