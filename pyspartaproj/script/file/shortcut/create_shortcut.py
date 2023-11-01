@@ -25,11 +25,13 @@ def _get_quoted_command(shortcut_target: Path, shortcut_path: Path) -> Strs:
     ]
 
 
+def _get_resource_script() -> str:
+    return get_script_string(get_resource(local_path=Path("create.ps1")))
+
+
 def _get_shortcut_command(shortcut_target: Path, shortcut_path: Path) -> str:
     commands_quoted: Strs = _get_quoted_command(shortcut_target, shortcut_path)
-    command_script: str = get_script_string(
-        get_resource(local_path=Path("create.ps1"))
-    )
+    command_script: str = _get_resource_script()
     return get_double_quoted_command([command_script] + commands_quoted)
 
 
