@@ -18,11 +18,15 @@ from pyspartaproj.script.shell.execute_powershell import (
 )
 
 
-def _get_shortcut_command(shortcut_target: Path, shortcut_path: Path) -> str:
-    commands_quoted: Strs = [
+def _get_quoted_command(shortcut_target: Path, shortcut_path: Path) -> Strs:
+    return [
         get_quoted_path(get_path_string(convert_mount_path(path)))
         for path in [shortcut_target, shortcut_path]
     ]
+
+
+def _get_shortcut_command(shortcut_target: Path, shortcut_path: Path) -> str:
+    commands_quoted: Strs = _get_quoted_command(shortcut_target, shortcut_path)
     command_script: str = get_script_string(
         get_resource(local_path=Path("create.ps1"))
     )
