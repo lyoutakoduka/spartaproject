@@ -45,7 +45,9 @@ class ProjectContext:
 
         self.platform = platform
 
-    def __init__(self, forward: Path | None = None) -> None:
+    def __init__(
+        self, forward: Path | None = None, platform: str | None = None
+    ) -> None:
         """Import a project context file.
 
         The path of the context file is defined at a path forwarding file.
@@ -66,6 +68,7 @@ class ProjectContext:
         self._serialize_path(
             self._load_context(self._get_context_path(forward))
         )
+        self._override_platform(platform)
 
     def get_integer_context(self, group: str) -> IntPair:
         """Filter and get project context by integer type.
@@ -112,7 +115,7 @@ class ProjectContext:
         Returns:
             str: The key corresponding to OS.
         """
-        return "_".join(keys + [uname().system.lower()])
+        return "_".join(keys + [self.platform])
 
     def merge_platform_path(
         self, group: str, path_type: str, file_type: str
