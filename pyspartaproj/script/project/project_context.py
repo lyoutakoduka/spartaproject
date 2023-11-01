@@ -60,10 +60,18 @@ class ProjectContext:
             then find a path of "config.json" in therefore,
             finally import it.
 
+        Default platform is automatically selected from current environment.
+
         Args:
             forward (Path | None, optional): Defaults to None.
                 alternative path of the path forwarding file,
                 and mainly used at test of this module.
+
+            platform (str | None, optional): Defaults to None.
+                platform information should be "linux" or "windows",
+                and it's used in the project context file like follow.
+
+                e.g. path type "key_linux.path", string type "key_windows".
         """
         self._serialize_path(
             self._load_context(self._get_context_path(forward))
