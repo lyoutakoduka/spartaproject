@@ -149,6 +149,18 @@ class ProjectContext:
             ]
         )
 
+    def _merged_string_context(
+        self,
+        group: str,
+        file_type: str,
+        platform_root: Path,
+        context_types: StrPair,
+    ) -> Path:
+        return Path(
+            platform_root,
+            self.get_string_context(group)[context_types[file_type]],
+        )
+
     def merge_platform_path(
         self, group: str, path_types: Strs, file_type: str | None = None
     ) -> Path:
@@ -193,7 +205,6 @@ class ProjectContext:
         if file_type is None:
             return platform_root
 
-        return Path(
-            platform_root,
-            self.get_string_context(group)[context_types[file_type]],
+        return self._merged_string_context(
+            group, file_type, platform_root, context_types
         )
