@@ -17,10 +17,12 @@ def _common_test(keys_pair: Strs2) -> None:
     assert 1 == len(set([str(sorted(keys)) for keys in keys_pair]))
 
 
+def _get_config_file() -> Path:
+    return get_resource(local_path=Path("forward.json"))
+
+
 def _import_context() -> ProjectContext:
-    return ProjectContext(
-        forward=get_resource(local_path=Path("forward.json"))
-    )
+    return ProjectContext(forward=_get_config_file())
 
 
 def test_integer() -> None:
