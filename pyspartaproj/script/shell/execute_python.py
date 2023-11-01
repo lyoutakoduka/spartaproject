@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Module to execute Python corresponding to OS."""
+"""Module to execute Python corresponding to platform."""
 
 from pathlib import Path
 
@@ -11,7 +11,7 @@ from pyspartaproj.script.shell.execute_command import execute_command
 
 
 def get_interpreter_path() -> Path:
-    """Function to get interpreter path of Python corresponding to OS.
+    """Function to get interpreter path of Python corresponding to platform.
 
     Returns:
         Path: Relative path of Python interpreter.
@@ -33,7 +33,7 @@ def get_script_string(path: Path) -> str:
 
 
 def execute_python(commands: Strs) -> StrGene:
-    """Execute Python corresponding to OS.
+    """Execute Python corresponding to platform.
 
     Args:
         commands (Strs): Script you want execute and arguments of itself
