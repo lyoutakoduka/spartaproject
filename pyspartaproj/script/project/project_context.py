@@ -39,6 +39,12 @@ class ProjectContext:
         self._string_context = string_pair2_from_json(base_context)
         self._path_context = path_pair2_from_json(base_context)
 
+    def _override_platform(self, platform: str | None) -> None:
+        if platform is None:
+            platform = uname().system.lower()
+
+        self.platform = platform
+
     def __init__(self, forward: Path | None = None) -> None:
         """Import a project context file.
 
