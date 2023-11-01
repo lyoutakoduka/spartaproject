@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Test to execute Python according to OS."""
+"""Test to execute Python corresponding to platform."""
 
 from pathlib import Path
 from platform import uname
@@ -38,7 +38,7 @@ def main() -> bool:
     """Run all tests.
 
     Returns:
-        bool: success if get to the end of function
+        bool: Success if get to the end of function.
     """
     test_path()
     test_command()
