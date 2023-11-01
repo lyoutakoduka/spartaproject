@@ -20,16 +20,16 @@ def execute_command(commands: Strs) -> StrGene:
     """Function to execute CLI script on subprocess.
 
     Args:
-        commands (Strs): script you want to execute according to OS
+        commands (Strs): Script you want to execute corresponding to platform.
 
     Raises:
-        ValueError: raise error when execution of script fail
+        ValueError: Raise error when execution of script fail.
 
     Returns:
-        StrGene: string generator, not string list
+        StrGene: String generator, not string list.
 
     Yields:
-        Iterator[StrGene]: string generator
+        Iterator[StrGene]: String generator.
     """
     subprocess = Popen(
         " ".join(commands), stdout=PIPE, stderr=PIPE, shell=True
