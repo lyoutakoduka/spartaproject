@@ -138,6 +138,17 @@ class ProjectContext:
             for context_key in context_keys
         }
 
+    def _get_platform_root(
+        self, group: str, path_types: Strs, context_types: StrPair
+    ) -> Path:
+        path_context: PathPair = self.get_path_context(group)
+        return Path(
+            *[
+                path_context[context_types[path_type] + ".path"]
+                for path_type in path_types
+            ]
+        )
+
     def merge_platform_path(
         self, group: str, path_types: Strs, file_type: str | None = None
     ) -> Path:
@@ -175,13 +186,8 @@ class ProjectContext:
                 "root/directory_B/file_B" is returned.
         """
         context_types: StrPair = self._get_context_types(path_types, file_type)
-
-        path_context: PathPair = self.get_path_context(group)
-        platform_root: Path = Path(
-            *[
-                path_context[context_types[path_type] + ".path"]
-                for path_type in path_types
-            ]
+        platform_root: Path = self._get_platform_root(
+            group, path_types, context_types
         )
 
         if file_type is None:
