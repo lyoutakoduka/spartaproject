@@ -15,6 +15,7 @@ from pyspartaproj.script.shell.execute_powershell import (
     get_quoted_path,
     get_script_string,
 )
+from pyspartaproj.script.string.temporary_text import temporary_text
 
 
 def _get_formatted_path(path_elements: Strs) -> str:
@@ -52,7 +53,7 @@ def test_all() -> None:
 
 def test_write() -> None:
     """Test for executing simple command on PowerShell."""
-    expected: Strs = [str(i).zfill(3) for i in range(3)]
+    expected: Strs = temporary_text(3, 3)
     commands: Strs = ["; ".join(["Write-Output " + text for text in expected])]
 
     assert expected == list(

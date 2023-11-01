@@ -3,10 +3,12 @@
 
 """Module for test to execute specific script in Python."""
 
+from pyspartaproj.script.string.temporary_text import temporary_text
+
 
 def _main() -> None:
-    for i in range(3):
-        print(str(i).zfill(3))
+    for test in temporary_text(3, 3):
+        print(test)
 
 
 if __name__ == "__main__":
