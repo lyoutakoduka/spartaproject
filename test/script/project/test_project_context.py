@@ -84,6 +84,7 @@ def test_key() -> None:
 
 
 def test_platform() -> None:
+    """Test to get key of project context corresponding to specific OS."""
     for platform in ["linux", "windows"]:
         _platform_key_test(
             platform,
