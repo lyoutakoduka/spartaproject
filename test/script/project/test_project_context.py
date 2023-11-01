@@ -83,6 +83,14 @@ def test_key() -> None:
     )
 
 
+def test_platform() -> None:
+    for platform in ["linux", "windows"]:
+        _platform_key_test(
+            platform,
+            ProjectContext(forward=_get_config_file(), platform=platform),
+        )
+
+
 def test_merge() -> None:
     """Test to get path merged with single directory and single file."""
     expected: Strs = ["directory", "file"]
@@ -103,5 +111,6 @@ def main() -> bool:
     test_string()
     test_path()
     test_key()
+    test_platform()
     test_merge()
     return True
