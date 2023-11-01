@@ -167,8 +167,8 @@ class ProjectContext:
             context_keys += [file_type]
 
         context_types: StrPair = {
-            context_type: self.get_platform_key([context_type])
-            for context_type in context_keys
+            context_key: self.get_platform_key([context_key])
+            for context_key in context_keys
         }
 
         path_context: PathPair = self.get_path_context(group)
