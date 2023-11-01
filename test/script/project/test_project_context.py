@@ -25,6 +25,15 @@ def _import_context() -> ProjectContext:
     return ProjectContext(forward=_get_config_file())
 
 
+def _platform_key_test(platform: str, project: ProjectContext) -> None:
+    expected: Strs = ["group", "type"]
+    context_key: str = project.get_platform_key(expected)
+    key_elements: Strs = context_key.split("_")
+
+    assert expected == key_elements[:2]
+    assert platform == key_elements[-1]
+
+
 def test_integer() -> None:
     """Test to filter and get project context by integer type."""
     expected: IntPair = {"index": 0, "count": 1}
@@ -69,12 +78,9 @@ def test_path() -> None:
 
 def test_key() -> None:
     """Test to get key of project context corresponding to OS."""
-    expected: Strs = ["group", "type"]
-    context_key: str = _import_context().get_platform_key(expected)
-    key_elements: Strs = context_key.split("_")
-
-    assert expected == key_elements[:2]
-    assert uname().system == key_elements[-1].capitalize()
+    _platform_key_test(
+        uname().system.lower(), ProjectContext(forward=_get_config_file())
+    )
 
 
 def test_merge() -> None:
