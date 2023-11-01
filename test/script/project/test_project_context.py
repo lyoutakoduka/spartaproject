@@ -77,14 +77,17 @@ def test_path() -> None:
 
 
 def test_key() -> None:
-    """Test to get key of project context corresponding to OS."""
+    """Test to get key of project context file corresponding to platform."""
     _platform_key_test(
         uname().system.lower(), ProjectContext(forward=_get_config_file())
     )
 
 
 def test_platform() -> None:
-    """Test to get key of project context corresponding to specific OS."""
+    """Test to get key of project context file.
+
+    The key is corresponding to specific platform.
+    """
     for platform in ["linux", "windows"]:
         _platform_key_test(
             platform,
@@ -106,7 +109,7 @@ def main() -> bool:
     """Run all tests.
 
     Returns:
-        bool: success if get to the end of function
+        bool: Success if get to the end of function.
     """
     test_integer()
     test_string()
