@@ -64,11 +64,11 @@ class ProjectContext:
 
         Args:
             forward (Path | None, optional): Defaults to None.
-                alternative path of the path forwarding file,
+                Alternative path of the path forwarding file,
                 and mainly used at test of this module.
 
             platform (str | None, optional): Defaults to None.
-                platform information should be "linux" or "windows",
+                Platform information should be "linux" or "windows",
                 and it's used in the project context file like follow.
 
                 e.g. path type "key_linux.path", string type "key_windows".
@@ -82,10 +82,10 @@ class ProjectContext:
         """Filter and get project context by integer type.
 
         Args:
-            group (str): select group of project context
+            group (str): Select group of project context.
 
         Returns:
-            IntPair: project context of integer type
+            IntPair: Project context of integer type.
         """
         return self._integer_context[group]
 
@@ -93,10 +93,10 @@ class ProjectContext:
         """Filter and get project context by string type.
 
         Args:
-            group (str): select group of project context
+            group (str): Select group of project context.
 
         Returns:
-            StrPair: project context of string type
+            StrPair: Project context of string type.
         """
         return self._string_context[group]
 
@@ -104,15 +104,15 @@ class ProjectContext:
         """Filter and get project context by path type.
 
         Args:
-            group (str): select group of project context
+            group (str): Select group of project context.
 
         Returns:
-            PathPair: project context of path type
+            PathPair: Project context of path type.
         """
         return self._path_context[group]
 
     def get_platform_key(self, keys: Strs) -> str:
-        """Get key of project context corresponding to OS.
+        """Get key of project context corresponding to platform.
 
         Args:
             keys (Strs): Elements of key represented by string list.
@@ -121,7 +121,7 @@ class ProjectContext:
                 argument (keys) must "['something', 'key']".
 
         Returns:
-            str: The key corresponding to OS.
+            str: The key corresponding to platform.
         """
         return "_".join(keys + [self.platform])
 
@@ -130,7 +130,8 @@ class ProjectContext:
     ) -> Path:
         """Get path merged with single directory and single file.
 
-        The path is corresponding to OS, and created from project context file.
+        The path is corresponding to platform,
+            and created from project context file.
 
         e.g. The project context file for explaining is follow.
 
@@ -144,7 +145,7 @@ class ProjectContext:
         }
 
         Args:
-            group (str): sub-group of the project context,
+            group (str): Sub-group of the project context,
                 select "group" if in the project context above.
 
             path_type (str): Identifier of directory you want to merge,
@@ -154,7 +155,7 @@ class ProjectContext:
                 select "file" if in the project context above.
 
         Returns:
-            Path: Merged path corresponding to OS.
+            Path: Merged path corresponding to platform.
 
             If you select group is "group", path_type is "directory",
                 and file_type is "file" in Linux environment,
