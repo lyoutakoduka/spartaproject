@@ -18,7 +18,9 @@ def _common_test(keys_pair: Strs2) -> None:
 
 
 def _import_context() -> ProjectContext:
-    return ProjectContext(forward=get_resource(Path("forward.json")))
+    return ProjectContext(
+        forward=get_resource(local_path=Path("forward.json"))
+    )
 
 
 def test_integer() -> None:

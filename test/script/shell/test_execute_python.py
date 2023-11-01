@@ -27,7 +27,9 @@ def test_path() -> None:
 def test_command() -> None:
     """Test to execute Python script that return version of interpreter."""
     assert [str(i).zfill(3) for i in range(3)] == list(
-        execute_python([get_script_string(get_resource(Path("indices.py")))])
+        execute_python(
+            [get_script_string(get_resource(local_path=Path("indices.py")))]
+        )
     )
 
 
