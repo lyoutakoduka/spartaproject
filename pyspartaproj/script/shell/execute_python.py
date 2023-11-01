@@ -31,7 +31,10 @@ def execute_python(commands: Strs, platform: str | None = None) -> StrGene:
     """Execute Python corresponding to platform.
 
     Args:
-        commands (Strs): Script you want execute and arguments of itself
+        commands (Strs): Script you want execute and arguments of itself.
+
+        platform (str | None, optional): Defaults to None.
+            You can select execution platform of from "linux" or "windows".
 
     Returns:
         StrGene: Generator for getting stdout of the script you want execute.
