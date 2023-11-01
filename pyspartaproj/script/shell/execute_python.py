@@ -10,12 +10,7 @@ from pyspartaproj.script.project.project_context import ProjectContext
 from pyspartaproj.script.shell.execute_command import execute_command
 
 
-def get_interpreter_path(platform: str | None) -> Path:
-    """Function to get interpreter path of Python corresponding to platform.
-
-    Returns:
-        Path: Relative path of Python interpreter.
-    """
+def _get_interpreter_path(platform: str | None) -> Path:
     project = ProjectContext(platform=platform)
     return project.merge_platform_path("filter", "platform", "interpreter")
 
@@ -42,5 +37,5 @@ def execute_python(commands: Strs, platform: str | None = None) -> StrGene:
         StrGene: Generator for getting stdout of the script you want execute.
     """
     return execute_command(
-        [get_script_string(get_interpreter_path(platform))] + commands
+        [get_script_string(_get_interpreter_path(platform))] + commands
     )
