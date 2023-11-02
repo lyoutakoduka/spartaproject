@@ -110,17 +110,13 @@ def test_platform() -> None:
 
 def test_directory() -> None:
     """Test to get path merged with single directory and single file."""
-    platform: str = uname().system.lower()
-    expected: Path = Path(
-        *[
-            Path(*[directories[0], directories[1] + "_" + platform])
-            for directories in [["root", "body"], ["directory", "head"]]
-        ]
-    )
+    path_roots: Strs = ["root", "directory"]
+    path_heads: Strs = ["body", "head"]
 
-    project: ProjectContext = _import_context()
-    assert expected == project.merge_platform_path(
-        "project", ["root", "directory"]
+    expected: Path = _get_expected_path(path_roots, path_heads)
+
+    assert expected == _import_context().merge_platform_path(
+        "project", path_roots
     )
 
 
