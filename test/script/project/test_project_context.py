@@ -38,6 +38,15 @@ def _add_platform(file: str) -> str:
     return file + "_" + uname().system.lower()
 
 
+def _get_expected_path(path_roots: Strs, path_heads: Strs) -> Path:
+    return Path(
+        *[
+            Path(*[root, _add_platform(head)])
+            for root, head in zip(path_roots, path_heads)
+        ]
+    )
+
+
 def test_integer() -> None:
     """Test to filter and get project context by integer type."""
     expected: IntPair = {"index": 0, "count": 1}
