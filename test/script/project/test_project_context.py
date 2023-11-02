@@ -101,7 +101,7 @@ def test_merge() -> None:
     project: ProjectContext = _import_context()
 
     assert Path(*expected) == project.merge_platform_path(
-        "platform", *expected
+        "project", [expected[0]]
     )
 
 
