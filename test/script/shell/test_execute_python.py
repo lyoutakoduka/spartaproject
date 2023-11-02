@@ -15,6 +15,10 @@ from pyspartaproj.script.shell.execute_python import (
 from pyspartaproj.script.string.temporary_text import temporary_text
 
 
+def _get_script_text(script_text: str) -> str:
+    return get_script_string(get_resource(local_path=Path(script_text)))
+
+
 def test_path() -> None:
     """Test to convert path to the format for executing script in Python."""
     path_elements: Strs = ["A", "B", "C"]
@@ -28,9 +32,7 @@ def test_path() -> None:
 def test_command() -> None:
     """Test to execute Python script that return version of interpreter."""
     assert temporary_text(3, 3) == list(
-        execute_python(
-            [get_script_string(get_resource(local_path=Path("indices.py")))]
-        )
+        execute_python([_get_script_text("indices.py")])
     )
 
 
