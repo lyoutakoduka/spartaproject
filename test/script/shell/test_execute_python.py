@@ -36,6 +36,19 @@ def test_command() -> None:
     )
 
 
+def test_platform() -> None:
+    expected: Strs = ["linux", "windows"]
+
+    assert expected == [
+        result.lower()
+        for platform in expected
+        for result in execute_python(
+            [_get_script_text("execute_platform.py")],
+            platform=platform,
+        )
+    ]
+
+
 def main() -> bool:
     """Run all tests.
 
@@ -44,4 +57,5 @@ def main() -> bool:
     """
     test_path()
     test_command()
+    test_platform()
     return True
