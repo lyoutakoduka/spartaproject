@@ -11,6 +11,8 @@
     "file_linux": "file",
     "file_windows": "file",
     "directory_linux.path": "directory",
-    "directory_windows.path": "directory"
+    "directory_windows.path": "directory",
+    "root_linux.path": "root",
+    "root_windows.path": "root"
   }
 }
