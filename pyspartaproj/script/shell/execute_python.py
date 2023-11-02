@@ -12,7 +12,9 @@ from pyspartaproj.script.shell.execute_command import execute_command
 
 def _get_interpreter_path(platform: str | None) -> Path:
     project = ProjectContext(platform=platform)
-    return project.merge_platform_path("project", "platform", "interpreter")
+    return project.merge_platform_path(
+        "project", ["working", "platform"], file_type="interpreter"
+    )
 
 
 def get_script_string(path: Path) -> str:
