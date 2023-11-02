@@ -109,7 +109,7 @@ def test_platform() -> None:
 
 
 def test_directory() -> None:
-    """Test to get path merged with single directory and single file."""
+    """Test to get path which is merged by multiple directories."""
     path_roots: Strs = ["root", "directory"]
     path_heads: Strs = ["body", "head"]
 
@@ -121,6 +121,7 @@ def test_directory() -> None:
 
 
 def test_file() -> None:
+    """Test to get path which is merged by single directory and single file."""
     file_type: str = "file"
     path_roots: Strs = ["root"]
     path_heads: Strs = ["body"]
