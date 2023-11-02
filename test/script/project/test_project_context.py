@@ -120,6 +120,21 @@ def test_directory() -> None:
     )
 
 
+def test_file() -> None:
+    file_type: str = "file"
+    path_roots: Strs = ["root"]
+    path_heads: Strs = ["body"]
+
+    expected: Path = Path(
+        _get_expected_path(path_roots, path_heads),
+        _add_platform(file_type),
+    )
+
+    assert expected == _import_context().merge_platform_path(
+        "project", path_roots, file_type=file_type
+    )
+
+
 def main() -> bool:
     """Run all tests.
 
@@ -132,4 +147,5 @@ def main() -> bool:
     test_key()
     test_platform()
     test_directory()
+    test_file()
     return True
