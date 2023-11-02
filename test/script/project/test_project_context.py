@@ -97,11 +97,11 @@ def test_platform() -> None:
 
 def test_merge() -> None:
     """Test to get path merged with single directory and single file."""
-    expected: Strs = ["directory", "file"]
+    expected: Path = Path("root", "body", "directory", "head")
     project: ProjectContext = _import_context()
 
-    assert Path(*expected) == project.merge_platform_path(
-        "project", [expected[0]]
+    assert expected == project.merge_platform_path(
+        "project", ["root", "directory"]
     )
 
 
