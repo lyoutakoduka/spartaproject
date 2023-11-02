@@ -131,10 +131,10 @@ class ProjectContext:
             for context_key in context_keys
         }
 
-    def _merged_path_context(
-        self, group: str, path_types: Strs, context_types: StrPair
-    ) -> Path:
+    def _merged_path_context(self, group: str, path_types: Strs) -> Path:
+        context_types: StrPair = self._get_context_types(path_types)
         path_context: PathPair = self.get_path_context(group)
+
         return Path(
             *[
                 path_context[context_types[path_type] + ".path"]
@@ -195,11 +195,7 @@ class ProjectContext:
         if file_type is not None:
             context_keys += [file_type]
 
-        context_types: StrPair = self._get_context_types(context_keys)
-
-        platform_root: Path = self._merged_path_context(
-            group, path_types, context_types
-        )
+        platform_root: Path = self._merged_path_context(group, path_types)
 
         if file_type is None:
             return platform_root
