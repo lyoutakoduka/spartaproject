@@ -30,13 +30,14 @@ def test_path() -> None:
 
 
 def test_command() -> None:
-    """Test to execute Python script that return version of interpreter."""
+    """Test to execute simple Python script."""
     assert temporary_text(3, 3) == list(
         execute_python([_get_script_text("indices.py")])
     )
 
 
 def test_platform() -> None:
+    """Test to execute Python script for all executable platform."""
     expected: Strs = ["linux", "windows"]
 
     assert expected == [
