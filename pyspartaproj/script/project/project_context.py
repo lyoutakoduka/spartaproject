@@ -125,14 +125,7 @@ class ProjectContext:
         """
         return "_".join(keys + [self.platform])
 
-    def _get_context_types(
-        self, path_types: Strs, file_type: str | None
-    ) -> StrPair:
-        context_keys: Strs = path_types[:]
-
-        if file_type is not None:
-            context_keys += [file_type]
-
+    def _get_context_types(self, context_keys: Strs) -> StrPair:
         return {
             context_key: self.get_platform_key([context_key])
             for context_key in context_keys
@@ -197,7 +190,13 @@ class ProjectContext:
                 and file_type is "file" in Linux environment,
                 "root/directory_B/file_B" is returned.
         """
-        context_types: StrPair = self._get_context_types(path_types, file_type)
+        context_keys: Strs = path_types[:]
+
+        if file_type is not None:
+            context_keys += [file_type]
+
+        context_types: StrPair = self._get_context_types(context_keys)
+
         platform_root: Path = self._merged_path_context(
             group, path_types, context_types
         )
