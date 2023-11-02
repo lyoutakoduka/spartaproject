@@ -95,7 +95,7 @@ def test_platform() -> None:
         )
 
 
-def test_merge() -> None:
+def test_directory() -> None:
     """Test to get path merged with single directory and single file."""
     expected: Path = Path("root", "body", "directory", "head")
     project: ProjectContext = _import_context()
@@ -116,5 +116,5 @@ def main() -> bool:
     test_path()
     test_key()
     test_platform()
-    test_merge()
+    test_directory()
     return True
