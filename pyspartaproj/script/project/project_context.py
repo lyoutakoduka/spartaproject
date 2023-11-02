@@ -147,8 +147,9 @@ class ProjectContext:
         group: str,
         file_type: str,
         platform_root: Path,
-        context_types: StrPair,
     ) -> Path:
+        context_types: StrPair = self._get_context_types([file_type])
+
         return Path(
             platform_root,
             self.get_string_context(group)[context_types[file_type]],
@@ -190,16 +191,9 @@ class ProjectContext:
                 and file_type is "file" in Linux environment,
                 "root/directory_B/file_B" is returned.
         """
-        context_keys: Strs = path_types[:]
-
-        if file_type is not None:
-            context_keys += [file_type]
-
         platform_root: Path = self._merged_path_context(group, path_types)
 
         if file_type is None:
             return platform_root
 
-        return self._merged_string_context(
-            group, file_type, platform_root, context_types
-        )
+        return self._merged_string_context(group, file_type, platform_root)
