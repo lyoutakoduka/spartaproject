@@ -34,6 +34,10 @@ def _platform_key_test(platform: str, project: ProjectContext) -> None:
     assert platform == key_elements[-1]
 
 
+def _add_platform(file: str) -> str:
+    return file + "_" + uname().system.lower()
+
+
 def test_integer() -> None:
     """Test to filter and get project context by integer type."""
     expected: IntPair = {"index": 0, "count": 1}
