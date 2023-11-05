@@ -16,6 +16,20 @@ def _cleanup_new_lines(text: str) -> str:
     return text
 
 
+def _execute(command: str) -> StrGene:
+    subprocess = Popen(command, stdout=PIPE, stderr=PIPE, shell=True)
+    if subprocess.stdout is None:
+        raise ValueError
+
+    while True:
+        line: bytes = subprocess.stdout.readline()
+        if line:
+            yield _cleanup_new_lines(line.decode())
+        else:
+            if subprocess.poll() is not None:
+                break
+
+
 def execute_command(commands: Strs) -> StrGene:
     """Function to execute CLI script on subprocess.
 
@@ -31,16 +45,4 @@ def execute_command(commands: Strs) -> StrGene:
     Yields:
         Iterator[StrGene]: String generator.
     """
-    subprocess = Popen(
-        " ".join(commands), stdout=PIPE, stderr=PIPE, shell=True
-    )
-    if subprocess.stdout is None:
-        raise ValueError
-
-    while True:
-        line: bytes = subprocess.stdout.readline()
-        if line:
-            yield _cleanup_new_lines(line.decode())
-        else:
-            if subprocess.poll() is not None:
-                break
+    return _execute(" ".join(commands))
