@@ -6,8 +6,9 @@
 from pathlib import Path
 
 from pyspartaproj.context.default.string_context import StrGene, Strs
+from pyspartaproj.context.extension.path_context import Paths
 from pyspartaproj.script.project.project_context import ProjectContext
-from pyspartaproj.script.shell.execute_command import execute_command
+from pyspartaproj.script.shell.execute_command import execute_single
 
 
 def _get_interpreter_path(platform: str | None) -> Path:
@@ -29,7 +30,11 @@ def get_script_string(path: Path) -> str:
     return str(path)  # Not as_posix()
 
 
-def execute_python(commands: Strs, platform: str | None = None) -> StrGene:
+def execute_python(
+    commands: Strs,
+    python_paths: Paths | None = None,
+    platform: str | None = None,
+) -> StrGene:
     """Execute Python corresponding to platform.
 
     Args:
@@ -41,6 +46,6 @@ def execute_python(commands: Strs, platform: str | None = None) -> StrGene:
     Returns:
         StrGene: Generator for getting stdout of the script you want execute.
     """
-    return execute_command(
+    return execute_single(
         [get_script_string(_get_interpreter_path(platform))] + commands
     )
