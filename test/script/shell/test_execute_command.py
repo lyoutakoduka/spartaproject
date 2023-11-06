@@ -11,7 +11,7 @@ from pyspartaproj.script.path.modify.get_current import get_current
 from pyspartaproj.script.shell.execute_command import execute_command
 
 
-def test_current() -> None:
+def test_single() -> None:
     """Test to execute generic script.
 
     Suppose that the test environment of Windows
@@ -34,5 +34,5 @@ def main() -> bool:
     Returns:
         bool: success if get to the end of function
     """
-    test_current()
+    test_single()
     return True
