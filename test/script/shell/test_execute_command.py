@@ -8,7 +8,7 @@ from pathlib import Path
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.interface.pytest import fail
 from pyspartaproj.script.path.modify.get_current import get_current
-from pyspartaproj.script.shell.execute_command import execute_command
+from pyspartaproj.script.shell.execute_command import execute_single
 
 
 def test_single() -> None:
@@ -17,7 +17,7 @@ def test_single() -> None:
     Suppose that the test environment of Windows
         can execute simple Linux commands.
     """
-    result: Strs = list(execute_command(["pwd"]))
+    result: Strs = list(execute_single(["pwd"]))
 
     if 1 != len(result):
         fail()
@@ -34,5 +34,6 @@ def main() -> bool:
     Returns:
         bool: success if get to the end of function
     """
+    test_single()
     test_single()
     return True

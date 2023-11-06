@@ -30,7 +30,7 @@ def _execute(command: str) -> StrGene:
                 break
 
 
-def execute_command(commands: Strs) -> StrGene:
+def execute_single(commands: Strs) -> StrGene:
     """Function to execute CLI script on subprocess.
 
     Args:
