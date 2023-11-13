@@ -5,7 +5,7 @@
 
 from subprocess import PIPE, Popen
 
-from pyspartaproj.context.default.string_context import StrGene, Strs
+from pyspartaproj.context.default.string_context import StrGene, Strs, Strs2
 
 
 def _cleanup_new_lines(text: str) -> str:
@@ -46,3 +46,9 @@ def execute_single(commands: Strs) -> StrGene:
         Iterator[StrGene]: String generator.
     """
     return _execute(" ".join(commands))
+
+
+def execute_multiple(command_multiple: Strs2) -> StrGene:
+    return _execute(
+        "; ".join([" ".join(commands) for commands in command_multiple])
+    )
