@@ -39,6 +39,13 @@ def _get_system_path_value(python_paths: Paths) -> str:
     return ":".join(path_texts + ["$" + _get_environment()])
 
 
+def _get_python_system_path(python_paths: Paths) -> Strs:
+    return [
+        "export",
+        _get_environment() + "=" + _get_system_path_value(python_paths),
+    ]
+
+
 def execute_python(
     commands: Strs,
     python_paths: Paths | None = None,
