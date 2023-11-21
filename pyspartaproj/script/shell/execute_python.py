@@ -46,6 +46,10 @@ def _get_python_system_path(python_paths: Paths) -> Strs:
     ]
 
 
+def _get_python_command(commands: Strs, platform: str | None) -> Strs:
+    return [get_script_string(_get_interpreter_path(platform))] + commands
+
+
 def execute_python(
     commands: Strs,
     python_paths: Paths | None = None,
@@ -62,6 +66,4 @@ def execute_python(
     Returns:
         StrGene: Generator for getting stdout of the script you want execute.
     """
-    return execute_single(
-        [get_script_string(_get_interpreter_path(platform))] + commands
-    )
+    return execute_single(_get_python_command(commands, platform))
