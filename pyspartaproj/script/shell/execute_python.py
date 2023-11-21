@@ -66,6 +66,11 @@ def execute_python(
     Returns:
         StrGene: Generator for getting stdout of the script you want execute.
     """
-    command_multiple: Strs2 = [_get_python_command(commands, platform)]
+    command_multiple: Strs2 = []
+
+    if python_paths is not None and 0 < len(python_paths):
+        command_multiple += [_get_python_system_path(python_paths)]
+
+    command_multiple += [_get_python_command(commands, platform)]
 
     return execute_multiple(command_multiple)
