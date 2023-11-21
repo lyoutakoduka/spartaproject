@@ -30,6 +30,10 @@ def get_script_string(path: Path) -> str:
     return str(path)  # Not as_posix()
 
 
+def _get_environment() -> str:
+    return "pythonpath".upper()
+
+
 def execute_python(
     commands: Strs,
     python_paths: Paths | None = None,
