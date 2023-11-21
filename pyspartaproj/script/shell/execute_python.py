@@ -5,10 +5,10 @@
 
 from pathlib import Path
 
-from pyspartaproj.context.default.string_context import StrGene, Strs
+from pyspartaproj.context.default.string_context import StrGene, Strs, Strs2
 from pyspartaproj.context.extension.path_context import Paths
 from pyspartaproj.script.project.project_context import ProjectContext
-from pyspartaproj.script.shell.execute_command import execute_single
+from pyspartaproj.script.shell.execute_command import execute_multiple
 
 
 def _get_interpreter_path(platform: str | None) -> Path:
@@ -66,4 +66,6 @@ def execute_python(
     Returns:
         StrGene: Generator for getting stdout of the script you want execute.
     """
-    return execute_single(_get_python_command(commands, platform))
+    command_multiple: Strs2 = [_get_python_command(commands, platform)]
+
+    return execute_multiple(command_multiple)
