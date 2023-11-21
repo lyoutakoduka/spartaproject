@@ -34,6 +34,11 @@ def _get_environment() -> str:
     return "pythonpath".upper()
 
 
+def _get_system_path_value(python_paths: Paths) -> str:
+    path_texts: Strs = [str(python_path) for python_path in python_paths]
+    return ":".join(path_texts + ["$" + _get_environment()])
+
+
 def execute_python(
     commands: Strs,
     python_paths: Paths | None = None,
