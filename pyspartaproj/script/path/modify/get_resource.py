@@ -23,11 +23,11 @@ def get_resource(local_path: Path | None = None) -> Path:
         ├ script
 
     Args:
-        resource_path (Path):
+        local_path (Path | None, optional): _description_. Defaults to None.
             path you want to get in resource directory as relative path
 
         if you want to get "resource/directory/file"
-            resource_path is "directory/file"
+            local_path is "directory/file"
 
     Returns:
         Path: path based on resource directory
