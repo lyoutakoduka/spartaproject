@@ -36,6 +36,10 @@ def _get_system_paths(expected: Paths, first_root: Path) -> Paths:
     return system_paths
 
 
+def _compare_system_paths(expected: Paths, results: Paths) -> None:
+    assert 1 == len(set([str(sorted(paths)) for paths in [expected, results]]))
+
+
 def test_path() -> None:
     """Test to convert path to the format for executing script in Python."""
     path_elements: Strs = ["A", "B", "C"]
