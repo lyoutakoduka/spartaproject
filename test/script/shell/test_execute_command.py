@@ -33,6 +33,11 @@ def test_single() -> None:
 
 
 def test_multiple() -> None:
+    """Test to execute generic script which is multiple lines.
+
+    Suppose that the test environment of Windows
+        can execute simple Linux commands.
+    """
     with TemporaryDirectory() as temporary_directory:
         expected: Path = Path(temporary_directory)
 
