@@ -71,6 +71,13 @@ def test_platform() -> None:
     ]
 
 
+def test_system() -> None:
+    first_root: Path = Path(get_resource(), "local_import", "directory_first")
+    expected: Paths = [first_root, Path(first_root, "directory_second")]
+
+    _compare_system_paths(expected, _get_system_paths(expected, first_root))
+
+
 def main() -> bool:
     """Run all tests.
 
@@ -80,4 +87,5 @@ def main() -> bool:
     test_path()
     test_command()
     test_platform()
+    test_system()
     return True
