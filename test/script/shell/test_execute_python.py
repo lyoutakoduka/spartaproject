@@ -7,6 +7,9 @@ from pathlib import Path
 from platform import uname
 
 from pyspartaproj.context.default.string_context import Strs
+from pyspartaproj.context.extension.path_context import Paths
+from pyspartaproj.script.path.modify.get_absolute import get_absolute
+from pyspartaproj.script.path.modify.get_relative import get_relative
 from pyspartaproj.script.path.modify.get_resource import get_resource
 from pyspartaproj.script.shell.execute_python import (
     execute_python,
@@ -17,6 +20,20 @@ from pyspartaproj.script.string.temporary_text import temporary_text
 
 def _get_script_text(script_text: str) -> str:
     return get_script_string(get_resource(local_path=Path(script_text)))
+
+
+def _get_system_paths(expected: Paths, first_root: Path) -> Paths:
+    system_paths: Paths = []
+
+    for result in execute_python(
+        [_get_script_text("local_import.py")], python_paths=expected
+    ):
+        path: Path = Path(result)
+
+        if path.is_relative_to(get_absolute(first_root)):
+            system_paths += [get_relative(path)]
+
+    return system_paths
 
 
 def test_path() -> None:
