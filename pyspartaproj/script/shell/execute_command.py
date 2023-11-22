@@ -49,6 +49,22 @@ def execute_single(commands: Strs) -> StrGene:
 
 
 def execute_multiple(command_multiple: Strs2) -> StrGene:
+    """Function to execute CLI script which is multiple lines on subprocess.
+
+    Args:
+        command_multiple (Strs2):
+            Script which is multiple lines
+            you want to execute corresponding to platform.
+
+    Raises:
+        ValueError: Raise error when execution of script fail.
+
+    Returns:
+        StrGene: String generator, not string list.
+
+    Yields:
+        Iterator[StrGene]: String generator.
+    """
     return _execute(
         "; ".join([" ".join(commands) for commands in command_multiple])
     )
