@@ -11,7 +11,7 @@ from pyspartaproj.script.project.project_context import ProjectContext
 from pyspartaproj.script.shell.execute_command import execute_multiple
 
 
-def _get_interpreter_path(platform: str | None) -> Path:
+def get_interpreter_path(platform: str | None) -> Path:
     project = ProjectContext(platform=platform)
     interpreter_path: Path = project.merge_platform_path(
         "project", ["working", "platform"], file_type="interpreter"
@@ -52,7 +52,7 @@ def _get_python_system_path(python_paths: Paths) -> Strs:
 
 
 def _get_python_command(commands: Strs, platform: str | None) -> Strs:
-    return [get_script_string(_get_interpreter_path(platform))] + commands
+    return [get_script_string(get_interpreter_path(platform))] + commands
 
 
 def execute_python(
