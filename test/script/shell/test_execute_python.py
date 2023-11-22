@@ -7,12 +7,13 @@ from pathlib import Path
 from platform import uname
 
 from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.context.extension.path_context import Paths
+from pyspartaproj.context.extension.path_context import PathPair, Paths
 from pyspartaproj.script.path.modify.get_absolute import get_absolute
 from pyspartaproj.script.path.modify.get_relative import get_relative
 from pyspartaproj.script.path.modify.get_resource import get_resource
 from pyspartaproj.script.shell.execute_python import (
     execute_python,
+    get_interpreter_path,
     get_script_string,
 )
 from pyspartaproj.script.string.temporary_text import temporary_text
@@ -50,6 +51,22 @@ def test_path() -> None:
     )
 
 
+def test_interpreter() -> None:
+    platforms: Strs = ["linux", "windows"]
+
+    interpreter_paths: PathPair = {
+        "linux": Path("bin", "python"),
+        "windows": Path("Scripts", "python.exe"),
+    }
+
+    for platform in platforms:
+        interpreter_path: Path = get_interpreter_path(platform=platform)
+        expected: Path = Path(
+            "poetry", platform, ".venv", interpreter_paths[platform]
+        )
+        assert expected == Path(*interpreter_path.parts[-5:])
+
+
 def test_command() -> None:
     """Test to execute simple Python script."""
     assert temporary_text(3, 3) == list(
@@ -85,6 +102,7 @@ def main() -> bool:
         bool: Success if get to the end of function.
     """
     test_path()
+    test_interpreter()
     test_command()
     test_platform()
     test_system()
