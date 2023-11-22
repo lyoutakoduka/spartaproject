@@ -118,7 +118,7 @@ class ProjectContext:
             keys (Strs): Elements of key represented by string list.
 
             e.g. If you want to get key like "something_key_linux" in Linux,
-                argument (keys) must "['something', 'key']".
+                argument (keys) must ["something", "key"].
 
         Returns:
             str: The key corresponding to platform.
@@ -158,7 +158,7 @@ class ProjectContext:
     def merge_platform_path(
         self, group: str, path_types: Strs, file_type: str | None = None
     ) -> Path:
-        """Get path merged with single directory and single file.
+        """Get path merged with multiple directories and single file.
 
         The path is corresponding to platform,
             and created from project context file.
@@ -169,6 +169,8 @@ class ProjectContext:
             "group": {
                 "file_linux": "file_B",
                 "file_windows": "file_C",
+                "group_linux.path": "root/group_B",
+                "group_windows.path": "root/group_C",
                 "directory_linux.path": "root/directory_B",
                 "directory_windows.path": "root/directory_C"
             }
@@ -178,16 +180,19 @@ class ProjectContext:
             group (str): Sub-group of the project context,
                 select "group" if in the project context above.
 
-            path_type (str): Identifier of directory you want to merge,
-                select "directory" if in the project context above.
+            path_types (Strs):
+                List of identifier of directory you want to merge,
+                select ["group", "directory"] if in the project context above.
 
-            file_type (str): Identifier of file you want to merge,
+            file_type (str | None, optional): Defaults to None.
+                Identifier of file you want to merge,
                 select "file" if in the project context above.
 
         Returns:
             Path: Merged path corresponding to platform.
 
-            If you select group is "group", path_type is "directory",
+            If you select group is "group",
+                path_types is ["group", "directory"],
                 and file_type is "file" in Linux environment,
                 "root/directory_B/file_B" is returned.
         """
