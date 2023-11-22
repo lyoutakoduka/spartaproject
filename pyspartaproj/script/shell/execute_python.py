@@ -13,9 +13,14 @@ from pyspartaproj.script.shell.execute_command import execute_multiple
 
 def _get_interpreter_path(platform: str | None) -> Path:
     project = ProjectContext(platform=platform)
-    return project.merge_platform_path(
+    interpreter_path: Path = project.merge_platform_path(
         "project", ["working", "platform"], file_type="interpreter"
     )
+
+    if not interpreter_path.exists():
+        raise FileNotFoundError()
+
+    return interpreter_path
 
 
 def get_script_string(path: Path) -> str:
