@@ -17,6 +17,7 @@ def get_interpreter_path(platform: str | None = None) -> Path:
     Args:
         platform (str | None, optional): Defaults to None.
             You can select an execution platform from "linux" or "windows".
+            Current execution platform is selected if argument is None.
 
     Raises:
         FileNotFoundError:
@@ -83,6 +84,7 @@ def execute_python(
 
         platform (str | None, optional): Defaults to None.
             You can select an execution platform from "linux" or "windows".
+            Current execution platform is selected if argument is None.
 
     Returns:
         StrGene: Generator for getting stdout of the script you want execute.
