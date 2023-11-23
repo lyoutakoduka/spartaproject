@@ -52,6 +52,7 @@ def test_path() -> None:
 
 
 def test_interpreter() -> None:
+    """Test to get interpreter path of Python corresponding to platform."""
     platforms: Strs = ["linux", "windows"]
 
     interpreter_paths: PathPair = {
@@ -89,6 +90,7 @@ def test_platform() -> None:
 
 
 def test_system() -> None:
+    """Test to add Python system path before execute Python."""
     first_root: Path = Path(get_resource(), "local_import", "directory_first")
     expected: Paths = [first_root, Path(first_root, "directory_second")]
 
