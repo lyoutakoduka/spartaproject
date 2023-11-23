@@ -12,6 +12,19 @@ from pyspartaproj.script.shell.execute_command import execute_multiple
 
 
 def get_interpreter_path(platform: str | None) -> Path:
+    """Function to get interpreter path of Python corresponding to platform.
+
+    Args:
+        platform (str | None, optional): Defaults to None.
+            You can select an execution platform from "linux" or "windows".
+
+    Raises:
+        FileNotFoundError:
+            Raise error if interpreter path you selected isn't exists.
+
+    Returns:
+        Path: Relative path of Python interpreter.
+    """
     project = ProjectContext(platform=platform)
     interpreter_path: Path = project.merge_platform_path(
         "project", ["working", "platform"], file_type="interpreter"
@@ -65,8 +78,11 @@ def execute_python(
     Args:
         commands (Strs): Script you want execute and arguments of itself.
 
+        python_paths (Paths | None, optional): Defaults to None.
+            paths you want to add to Python system path before execute Python.
+
         platform (str | None, optional): Defaults to None.
-            You can select execution platform of from "linux" or "windows".
+            You can select an execution platform from "linux" or "windows".
 
     Returns:
         StrGene: Generator for getting stdout of the script you want execute.
