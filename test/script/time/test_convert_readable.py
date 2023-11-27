@@ -65,7 +65,7 @@ def test_second() -> None:
 
     assert bool_same_array(
         [
-            expected == readable_time(source, order=6)
+            expected == readable_time(source, digit=6)
             for expected, source in test_case.items()
         ]
     )
@@ -84,7 +84,7 @@ def test_order() -> None:
 
     assert bool_same_array(
         [
-            expected == readable_time(Decimal("0.6666666"), order=source)
+            expected == readable_time(Decimal("0.6666666"), digit=source)
             for expected, source in test_case.items()
         ]
     )

@@ -6,7 +6,7 @@
 from pyspartaproj.context.default.string_context import Strs
 
 
-def temporary_text(count: int, order: int) -> Strs:
+def temporary_text(count: int, digit: int) -> Strs:
     """Function to show simple numbers as string.
 
     Args:
@@ -23,4 +23,4 @@ def temporary_text(count: int, order: int) -> Strs:
         Strs: Numbers as string type which is filled by zero.
 
     """
-    return [str(i).zfill(order) for i in range(count)]
+    return [str(i).zfill(digit) for i in range(count)]

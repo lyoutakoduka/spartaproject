@@ -27,7 +27,7 @@ class LogTimer:
         override: bool = False,
         timer_interval: Decimal | None = None,
         interval: Decimal | None = None,
-        order: int = 1,
+        digit: int = 1,
     ) -> None:
         if timer_interval is None:
             timer_interval = Decimal("0.01")
@@ -43,7 +43,7 @@ class LogTimer:
         self._old_time: int = 0
         self._interval: Decimal = interval
 
-        self._order: int = order
+        self._digit: int = digit
 
     def _is_force_show(self, elapsed: Decimal) -> bool:
         current_interval: int = int(elapsed / self._interval)
@@ -67,5 +67,5 @@ class LogTimer:
         elapsed: Decimal = self._timer_current() - self._start_time
 
         if force or self._is_force_show(elapsed):
-            elapsed_text: str = readable_time(elapsed, order=self._order)
+            elapsed_text: str = readable_time(elapsed, digit=self._digit)
             print(" ".join(header + [elapsed_text] + footer))

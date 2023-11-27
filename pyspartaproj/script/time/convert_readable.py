@@ -33,29 +33,29 @@ def _get_datetime_counts(counter: datetime) -> IntPair:
 
 
 def _get_micro_second_text(
-    second: Decimal, counts: IntPair, order: int, order_limit: int
+    second: Decimal, counts: IntPair, digit: int, digit_limit: int
 ) -> str:
     count_text: str = str(counts["micro"])
 
     if "0" != count_text:
         count_text = str(second).split(".")[-1]
 
-    count_text += "0" * order_limit
-    return count_text[:order]
+    count_text += "0" * digit_limit
+    return count_text[:digit]
 
 
 def _get_decimal_count_texts(
-    second: Decimal, counts: IntPair, order: int
+    second: Decimal, counts: IntPair, digit: int
 ) -> str:
     second_numbers: Strs = [str(counts["second"])]
 
-    order_limit: int = 6
-    if order_limit < order:
-        order = order_limit
+    digit_limit: int = 6
+    if digit_limit < digit:
+        digit = digit_limit
 
-    if 0 < order:
+    if 0 < digit:
         second_numbers += [
-            _get_micro_second_text(second, counts, order, order_limit)
+            _get_micro_second_text(second, counts, digit, digit_limit)
         ]
 
     return ".".join(second_numbers) + "s"
@@ -70,12 +70,12 @@ def _get_integer_count_texts(counts: IntPair) -> Strs:
     ]
 
 
-def readable_time(second: Decimal, order: int = 0) -> str:
+def readable_time(second: Decimal, digit: int = 0) -> str:
     counts: IntPair = _get_datetime_counts(
         datetime.min + timedelta(seconds=float(second))
     )
 
     count_texts: Strs = _get_integer_count_texts(counts)
-    count_texts += [_get_decimal_count_texts(second, counts, order)]
+    count_texts += [_get_decimal_count_texts(second, counts, digit)]
 
     return " ".join(count_texts)
