@@ -71,7 +71,7 @@ def test_second() -> None:
     )
 
 
-def test_order() -> None:
+def test_digit() -> None:
     test_case: IntPair = {
         "0s": 0,
         "0.6s": 1,
@@ -94,5 +94,5 @@ def main() -> bool:
     test_datetime()
     test_day()
     test_second()
-    test_order()
+    test_digit()
     return True
