@@ -8,7 +8,7 @@ from platform import uname
 
 from pyspartaproj.context.default.string_context import StrGene, Strs
 from pyspartaproj.script.project.project_context import ProjectContext
-from pyspartaproj.script.shell.execute_command import execute_command
+from pyspartaproj.script.shell.execute_command import execute_single
 
 
 def _get_powershell_path() -> str:
@@ -35,7 +35,7 @@ def execute_powershell(commands: Strs) -> StrGene:
         "Bypass",
     ] + commands
 
-    return execute_command(shell_commands)
+    return execute_single(shell_commands)
 
 
 def get_script_string(path: Path) -> str:

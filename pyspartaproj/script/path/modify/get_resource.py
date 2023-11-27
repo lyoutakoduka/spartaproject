@@ -8,7 +8,7 @@ from pathlib import Path
 from pyspartaproj.script.stack_frame import current_frame
 
 
-def get_resource(resource_path: Path) -> Path:
+def get_resource(local_path: Path | None = None) -> Path:
     """Function to get path in local resource directory.
 
     resource directory is directory named "resource"
@@ -23,15 +23,18 @@ def get_resource(resource_path: Path) -> Path:
         ├ script
 
     Args:
-        resource_path (Path):
+        local_path (Path | None, optional): _description_. Defaults to None.
             path you want to get in resource directory as relative path
 
         if you want to get "resource/directory/file"
-            resource_path is "directory/file"
+            local_path is "directory/file"
 
     Returns:
         Path: path based on resource directory
     """
-    return Path(
-        current_frame(offset=1)["file"].parent, "resource", resource_path
-    )
+    resource: Path = Path(current_frame(offset=1)["file"].parent, "resource")
+
+    if local_path is None:
+        return resource
+
+    return Path(resource, local_path)

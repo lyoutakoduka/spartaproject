@@ -60,7 +60,7 @@ def test_day() -> None:
             override=True,
             timer_interval=Decimal(str(1)),
             interval=Decimal(str(hour)),
-            order=0,
+            digit=0,
         )
 
     def show_timer(timer: LogTimer, _: int) -> None:
@@ -112,7 +112,7 @@ def test_force() -> None:
     increase_count: int = 5
 
     def restart_timer(timer: LogTimer) -> None:
-        timer.restart(override=True, order=2)
+        timer.restart(override=True, digit=2)
 
     def show_timer(timer: LogTimer, index: int) -> None:
         print(f"i={index}")

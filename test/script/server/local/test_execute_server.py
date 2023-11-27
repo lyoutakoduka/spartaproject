@@ -19,7 +19,7 @@ def _execute_python(name: str, server: ExecuteServer) -> Strs | None:
     destination_path: Path = Path(server.create_local_working_space(), name)
 
     safe_copy = SafeCopy()
-    safe_copy.copy(get_resource(Path(name)), destination_path)
+    safe_copy.copy(get_resource(local_path=Path(name)), destination_path)
 
     return server.execute(destination_path)
 

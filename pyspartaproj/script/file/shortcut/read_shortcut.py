@@ -20,7 +20,7 @@ from pyspartaproj.script.shell.execute_powershell import (
 def _get_shortcut_command(shortcut_path: Path) -> str:
     return get_double_quoted_command(
         [
-            get_script_string(get_resource(Path("read.ps1"))),
+            get_script_string(get_resource(local_path=Path("read.ps1"))),
             get_quoted_path(get_path_string(shortcut_path)),
         ]
     )

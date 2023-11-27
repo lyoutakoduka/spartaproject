@@ -16,11 +16,11 @@ _name: str = "file"
 
 def _sample_text(root: Path, weight: int) -> None:
     line_width: int = 10
-    index_order: int = len(str(weight))
-    line_text: str = "-" * (line_width - index_order)
+    index_digit: int = len(str(weight))
+    line_text: str = "-" * (line_width - index_digit)
 
     source: str = "\n".join(
-        [str(i).zfill(index_order) + line_text for i in range(weight)]
+        [str(i).zfill(index_digit) + line_text for i in range(weight)]
     )
 
     text_export(Path(root, _name + ".txt"), source)
@@ -28,12 +28,12 @@ def _sample_text(root: Path, weight: int) -> None:
 
 def _sample_config(root: Path, weight: int) -> None:
     width: int = 10
-    section_order: int = len(str(weight))
+    section_digit: int = len(str(weight))
     line_text: str = "-" * width
 
     source_pairs: StrPair2 = {
-        str(i).zfill(section_order): {
-            str(j).zfill(section_order): line_text for j in range(weight)
+        str(i).zfill(section_digit): {
+            str(j).zfill(section_digit): line_text for j in range(weight)
         }
         for i in range(weight)
     }
@@ -43,13 +43,13 @@ def _sample_config(root: Path, weight: int) -> None:
 
 def _sample_json(root: Path, weight: int) -> None:
     width: int = 10
-    section_order: int = len(str(weight))
+    section_digit: int = len(str(weight))
     line_text: str = "-" * width
 
     def function(count: int) -> Json:
         if 0 < count:
             return {
-                str(i).zfill(section_order): function(count - 1)
+                str(i).zfill(section_digit): function(count - 1)
                 for i in range(weight)
             }
         return line_text

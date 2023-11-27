@@ -25,7 +25,7 @@ class ProjectContext:
 
     def _get_context_path(self, forward: Path | None) -> Path:
         if forward is None:
-            return get_resource(Path("project_context.json"))
+            return get_resource(local_path=Path("project_context.json"))
 
         return forward
 
@@ -39,7 +39,15 @@ class ProjectContext:
         self._string_context = string_pair2_from_json(base_context)
         self._path_context = path_pair2_from_json(base_context)
 
-    def __init__(self, forward: Path | None = None) -> None:
+    def _override_platform(self, platform: str | None) -> None:
+        if platform is None:
+            platform = uname().system.lower()
+
+        self.platform = platform
+
+    def __init__(
+        self, forward: Path | None = None, platform: str | None = None
+    ) -> None:
         """Import a project context file.
 
         The path of the context file is defined at a path forwarding file.
@@ -52,23 +60,32 @@ class ProjectContext:
             then find a path of "config.json" in therefore,
             finally import it.
 
+        Default platform is automatically selected from current environment.
+
         Args:
             forward (Path | None, optional): Defaults to None.
-                alternative path of the path forwarding file,
+                Alternative path of the path forwarding file,
                 and mainly used at test of this module.
+
+            platform (str | None, optional): Defaults to None.
+                Platform information should be "linux" or "windows",
+                and it's used in the project context file like follow.
+
+                e.g. path type "key_linux.path", string type "key_windows".
         """
         self._serialize_path(
             self._load_context(self._get_context_path(forward))
         )
+        self._override_platform(platform)
 
     def get_integer_context(self, group: str) -> IntPair:
         """Filter and get project context by integer type.
 
         Args:
-            group (str): select group of project context
+            group (str): Select group of project context.
 
         Returns:
-            IntPair: project context of integer type
+            IntPair: Project context of integer type.
         """
         return self._integer_context[group]
 
@@ -76,10 +93,10 @@ class ProjectContext:
         """Filter and get project context by string type.
 
         Args:
-            group (str): select group of project context
+            group (str): Select group of project context.
 
         Returns:
-            StrPair: project context of string type
+            StrPair: Project context of string type.
         """
         return self._string_context[group]
 
@@ -87,33 +104,64 @@ class ProjectContext:
         """Filter and get project context by path type.
 
         Args:
-            group (str): select group of project context
+            group (str): Select group of project context.
 
         Returns:
-            PathPair: project context of path type
+            PathPair: Project context of path type.
         """
         return self._path_context[group]
 
     def get_platform_key(self, keys: Strs) -> str:
-        """Get key of project context corresponding to OS.
+        """Get key of project context corresponding to platform.
 
         Args:
             keys (Strs): Elements of key represented by string list.
 
             e.g. If you want to get key like "something_key_linux" in Linux,
-                argument (keys) must "['something', 'key']".
+                argument (keys) must ["something", "key"].
 
         Returns:
-            str: The key corresponding to OS.
+            str: The key corresponding to platform.
         """
-        return "_".join(keys + [uname().system.lower()])
+        return "_".join(keys + [self.platform])
+
+    def _get_context_types(self, context_keys: Strs) -> StrPair:
+        return {
+            context_key: self.get_platform_key([context_key])
+            for context_key in context_keys
+        }
+
+    def _merged_path_context(self, group: str, path_types: Strs) -> Path:
+        context_types: StrPair = self._get_context_types(path_types)
+        path_context: PathPair = self.get_path_context(group)
+
+        return Path(
+            *[
+                path_context[context_types[path_type] + ".path"]
+                for path_type in path_types
+            ]
+        )
+
+    def _merged_string_context(
+        self,
+        group: str,
+        file_type: str,
+        platform_root: Path,
+    ) -> Path:
+        context_types: StrPair = self._get_context_types([file_type])
+
+        return Path(
+            platform_root,
+            self.get_string_context(group)[context_types[file_type]],
+        )
 
     def merge_platform_path(
-        self, group: str, path_type: str, file_type: str
+        self, group: str, path_types: Strs, file_type: str | None = None
     ) -> Path:
-        """Get path merged with single directory and single file.
+        """Get path merged with multiple directories and single file.
 
-        The path is corresponding to OS, and created from project context file.
+        The path is corresponding to platform,
+            and created from project context file.
 
         e.g. The project context file for explaining is follow.
 
@@ -121,34 +169,36 @@ class ProjectContext:
             "group": {
                 "file_linux": "file_B",
                 "file_windows": "file_C",
+                "group_linux.path": "root/group_B",
+                "group_windows.path": "root/group_C",
                 "directory_linux.path": "root/directory_B",
                 "directory_windows.path": "root/directory_C"
             }
         }
 
         Args:
-            group (str): sub-group of the project context,
+            group (str): Sub-group of the project context,
                 select "group" if in the project context above.
 
-            path_type (str): Identifier of directory you want to merge,
-                select "directory" if in the project context above.
+            path_types (Strs):
+                List of identifier of directory you want to merge,
+                select ["group", "directory"] if in the project context above.
 
-            file_type (str): Identifier of file you want to merge,
+            file_type (str | None, optional): Defaults to None.
+                Identifier of file you want to merge,
                 select "file" if in the project context above.
 
         Returns:
-            Path: Merged path corresponding to OS.
+            Path: Merged path corresponding to platform.
 
-            If you select group is "group", path_type is "directory",
+            If you select group is "group",
+                path_types is ["group", "directory"],
                 and file_type is "file" in Linux environment,
                 "root/directory_B/file_B" is returned.
         """
-        context_types: Strs = [
-            self.get_platform_key([context_type])
-            for context_type in [path_type, file_type]
-        ]
+        platform_root: Path = self._merged_path_context(group, path_types)
 
-        return Path(
-            self.get_path_context(group)[context_types[0] + ".path"],
-            self.get_string_context(group)[context_types[1]],
-        )
+        if file_type is None:
+            return platform_root
+
+        return self._merged_string_context(group, file_type, platform_root)

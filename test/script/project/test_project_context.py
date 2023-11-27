@@ -17,8 +17,34 @@ def _common_test(keys_pair: Strs2) -> None:
     assert 1 == len(set([str(sorted(keys)) for keys in keys_pair]))
 
 
+def _get_config_file() -> Path:
+    return get_resource(local_path=Path("forward.json"))
+
+
 def _import_context() -> ProjectContext:
-    return ProjectContext(forward=get_resource(Path("forward.json")))
+    return ProjectContext(forward=_get_config_file())
+
+
+def _platform_key_test(platform: str, project: ProjectContext) -> None:
+    expected: Strs = ["group", "type"]
+    context_key: str = project.get_platform_key(expected)
+    key_elements: Strs = context_key.split("_")
+
+    assert expected == key_elements[:2]
+    assert platform == key_elements[-1]
+
+
+def _add_platform(file: str) -> str:
+    return file + "_" + uname().system.lower()
+
+
+def _get_expected_path(path_roots: Strs, path_heads: Strs) -> Path:
+    return Path(
+        *[
+            Path(*[root, _add_platform(head)])
+            for root, head in zip(path_roots, path_heads)
+        ]
+    )
 
 
 def test_integer() -> None:
@@ -64,22 +90,49 @@ def test_path() -> None:
 
 
 def test_key() -> None:
-    """Test to get key of project context corresponding to OS."""
-    expected: Strs = ["group", "type"]
-    context_key: str = _import_context().get_platform_key(expected)
-    key_elements: Strs = context_key.split("_")
-
-    assert expected == key_elements[:2]
-    assert uname().system == key_elements[-1].capitalize()
+    """Test to get key of project context file corresponding to platform."""
+    _platform_key_test(
+        uname().system.lower(), ProjectContext(forward=_get_config_file())
+    )
 
 
-def test_merge() -> None:
-    """Test to get path merged with single directory and single file."""
-    expected: Strs = ["directory", "file"]
-    project: ProjectContext = _import_context()
+def test_platform() -> None:
+    """Test to get key of project context file.
 
-    assert Path(*expected) == project.merge_platform_path(
-        "platform", *expected
+    The key is corresponding to specific platform.
+    """
+    for platform in ["linux", "windows"]:
+        _platform_key_test(
+            platform,
+            ProjectContext(forward=_get_config_file(), platform=platform),
+        )
+
+
+def test_directory() -> None:
+    """Test to get path which is merged by multiple directories."""
+    path_roots: Strs = ["root", "directory"]
+    path_heads: Strs = ["body", "head"]
+
+    expected: Path = _get_expected_path(path_roots, path_heads)
+
+    assert expected == _import_context().merge_platform_path(
+        "project", path_roots
+    )
+
+
+def test_file() -> None:
+    """Test to get path which is merged by single directory and single file."""
+    file_type: str = "file"
+    path_roots: Strs = ["root"]
+    path_heads: Strs = ["body"]
+
+    expected: Path = Path(
+        _get_expected_path(path_roots, path_heads),
+        _add_platform(file_type),
+    )
+
+    assert expected == _import_context().merge_platform_path(
+        "project", path_roots, file_type=file_type
     )
 
 
@@ -87,11 +140,13 @@ def main() -> bool:
     """Run all tests.
 
     Returns:
-        bool: success if get to the end of function
+        bool: Success if get to the end of function.
     """
     test_integer()
     test_string()
     test_path()
     test_key()
-    test_merge()
+    test_platform()
+    test_directory()
+    test_file()
     return True

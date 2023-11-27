@@ -7,10 +7,12 @@
     "index": 0,
     "count": 1
   },
-  "platform": {
-    "file_linux": "file",
-    "file_windows": "file",
-    "directory_linux.path": "directory",
-    "directory_windows.path": "directory"
+  "project": {
+    "file_linux": "file_linux",
+    "file_windows": "file_windows",
+    "directory_linux.path": "directory/head_linux",
+    "directory_windows.path": "directory/head_windows",
+    "root_linux.path": "root/body_linux",
+    "root_windows.path": "root/body_windows"
   }
 }

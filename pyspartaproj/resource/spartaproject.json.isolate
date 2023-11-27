@@ -15,10 +15,12 @@
     "powershell_linux.path": "***",
     "powershell_windows.path": "***"
   },
-  "filter": {
+  "project": {
     "interpreter_linux": "***",
     "interpreter_windows": "***",
     "platform_linux.path": "***",
-    "platform_windows.path": "***"
+    "platform_windows.path": "***",
+    "working_linux.path": "***",
+    "working_windows.path": "***"
   }
 }
