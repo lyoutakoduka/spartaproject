@@ -17,7 +17,7 @@ from pyspartaproj.script.path.modify.get_relative import get_relative
 class PathServer(WorkSpace):
     """Class to handle paths about file and directory on server.
 
-    WorkSpace: Class to treat temporary working space on local environment.
+    WorkSpace: Class to create temporary working directory shared in class.
     """
 
     def _add_path(self, key: str, child: Path, parent: str | None) -> None:
