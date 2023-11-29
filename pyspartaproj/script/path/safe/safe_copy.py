@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from pathlib import Path
 from shutil import copy2, copytree
 
-from pyspartaproj.context.extension.path_context import Path
 from pyspartaproj.script.path.modify.avoid_duplication import get_avoid_path
 from pyspartaproj.script.path.safe.safe_file_history import FileHistory
 

@@ -3,9 +3,9 @@
 
 """test module to handle paths about file and directory on server."""
 
+from pathlib import Path
 from typing import Callable
 
-from pyspartaproj.context.extension.path_context import Path
 from pyspartaproj.script.server.local.path_server import PathServer
 
 

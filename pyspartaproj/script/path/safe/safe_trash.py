@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from pyspartaproj.context.extension.path_context import Path
+from pathlib import Path
+
 from pyspartaproj.script.directory.create_directory_parent import (
     create_directory_parent,
 )
