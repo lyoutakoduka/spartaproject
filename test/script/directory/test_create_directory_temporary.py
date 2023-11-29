@@ -8,13 +8,9 @@ from pathlib import Path
 from pyspartaproj.script.directory.create_directory_temporary import WorkSpace
 
 
-class TemporaryWorkSpace(WorkSpace):
-    pass
-
-
 def test_create() -> None:
     """Test to check existing of temporary working directory."""
-    work_space = TemporaryWorkSpace()
+    work_space = WorkSpace()
     work_space_root: Path = work_space.get_root()
     assert work_space_root.exists()
 
