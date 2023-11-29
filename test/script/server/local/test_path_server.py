@@ -10,8 +10,7 @@ from pyspartaproj.script.server.local.path_server import PathServer
 
 
 def _common_test(function: Callable[[PathServer], None]) -> None:
-    server: PathServer = PathServer()
-    function(server)
+    function(PathServer())
 
 
 def test_table() -> None:
