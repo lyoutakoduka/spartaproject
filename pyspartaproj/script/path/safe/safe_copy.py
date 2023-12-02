@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Module to copy file or directory and log history."""
+
 from pathlib import Path
 from shutil import copy2, copytree
 
@@ -9,9 +11,29 @@ from pyspartaproj.script.path.safe.safe_file_history import FileHistory
 
 
 class SafeCopy(FileHistory):
+    """Class to copy file or directory and log history.
+
+    Args:
+        FileHistory: Class to record path which is used for file operation.
+    """
+
     def copy(
         self, source_path: Path, destination_path: Path, override: bool = False
     ) -> Path:
+        """Copy file or directory and log history.
+
+        Args:
+            source_path (Path): Path you want to copy.
+
+            destination_path (Path): Path which is copy destination.
+
+            override (bool, optional): Defaults to False.
+                Add under bar to back of destination path
+                if destination path is exists.
+
+        Returns:
+            Path: Final destination copied path.
+        """
         if override:
             destination_path = get_avoid_path(destination_path)
 
