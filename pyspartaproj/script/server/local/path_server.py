@@ -17,7 +17,7 @@ from pyspartaproj.script.path.modify.get_relative import get_relative
 class PathServer(WorkSpace):
     """Class to handle paths about file and directory on server.
 
-    WorkSpace: class to treat temporary working space on local environment.
+    WorkSpace: Class to create temporary working directory shared in class.
     """
 
     def _add_path(self, key: str, child: Path, parent: str | None) -> None:
@@ -69,7 +69,7 @@ class PathServer(WorkSpace):
         """Get keys of predefined all paths about server.
 
         Returns:
-            Strs: all path keys
+            Strs: All keys of path.
         """
         return list(self._path_table.keys())
 
@@ -77,39 +77,39 @@ class PathServer(WorkSpace):
         """Get path related with specific key about server.
 
         Args:
-            path_type (str): key of path you want to get
+            path_type (str): Key of path you want to get.
 
         Returns:
-            Path: path related with specific key
+            Path: Path related with specific key.
         """
         return self._path_table[path_type]
 
     def to_relative_path(self, local_full: Path) -> Path:
         """Convert full path to relative path.
 
-        e.g. full path is "<Python default temporary directory>/example/",
-            and returned relative path is "example/"
+        e.g.The full path is "<Python default temporary directory>/example/",
+            and returned relative path is "example/".
 
         Args:
-            local (Path): full path
+            local (Path): Full path.
 
         Returns:
-            Path: returned relative path
+            Path: Returned relative path.
         """
         return get_relative(local_full, root_path=self.get_root())
 
     def to_full_path(self, local_relative: Path) -> Path:
         """Convert relative path to full path.
 
-        e.g. relative path is "example/",
+        e.g. The relative path is "example/",
             and returned full path is
-            "<Python default temporary directory>>/example/"
+            "<Python default temporary directory>>/example/".
 
         Args:
-            local (Path): relative path
+            local (Path): Relative path.
 
         Returns:
-            Path: returned full path
+            Path: Returned full path.
         """
         return Path(self.get_root(), local_relative)
 
@@ -118,28 +118,28 @@ class PathServer(WorkSpace):
     ) -> Path:
         """Create temporary working space on local environment.
 
-        the path is used when uploading file or directory to server
+        The path is used when uploading file or directory to server.
 
-        basic path of temporary working space is follow
-        a datetime element in path is current datetime by default
+        Basic path of temporary working space is follow.
+        A datetime element in path is current datetime by default.
 
         "<Python default temporary directory>/
             private/work/<year>/<month>/<day>/<hour>/<second>/<millisecond>/"
 
         Args:
             override (bool, optional): Defaults to False.
-                if True, the datetime element in path become follow,
+                If True, the datetime element in path become follow,
                     it's commonly used for test.
 
                 "<Python default temporary directory>/
                     private/work/2023/04/01/00/00/000000/"
 
             jst (bool, optional): Defaults to False.
-                if True, the datetime element is represented
-                    by timezone of Asia/Tokyo
+                If True, the datetime element is represented by
+                    timezone of Asia/Tokyo.
 
         Returns:
-            Path: path of temporary working space
+            Path: Path of temporary working space.
         """
         return create_working_space(
             Path(self.get_root(), self.get_path("work_root")),

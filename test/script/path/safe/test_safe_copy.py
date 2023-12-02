@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to copy file or directory and log history."""
+
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
@@ -43,6 +45,8 @@ def _copy(safe_copy: SafeCopy, path: Path) -> Path:
 
 
 def test_file() -> None:
+    """Test to copy file, and log history."""
+
     def individual_test(safe_copy: SafeCopy, temporary_path: Path) -> None:
         source_path: Path = create_temporary_file(temporary_path)
         safe_copy.copy(source_path, source_path.with_stem("destination"))
@@ -53,6 +57,8 @@ def test_file() -> None:
 
 
 def test_override() -> None:
+    """Test to copy file for the situation that destination is existing."""
+
     def individual_test(safe_copy: SafeCopy, temporary_path: Path) -> None:
         source_path: Path = create_temporary_file(temporary_path)
         destination_path: Path = safe_copy.copy(
@@ -66,6 +72,8 @@ def test_override() -> None:
 
 
 def test_directory() -> None:
+    """Test to copy directory, and log history."""
+
     def individual_test(safe_copy: SafeCopy, temporary_path: Path) -> None:
         _common_test(
             _copy(
@@ -77,6 +85,8 @@ def test_directory() -> None:
 
 
 def test_tree() -> None:
+    """Test to copy files and directories, and log history."""
+
     def individual_test(safe_copy: SafeCopy, temporary_path: Path) -> None:
         source_path: Path = Path(temporary_path, "temporary")
         create_temporary_tree(source_path, tree_deep=2)
@@ -86,6 +96,11 @@ def test_tree() -> None:
 
 
 def main() -> bool:
+    """Run all tests.
+
+    Returns:
+        bool: Success if get to the end of function.
+    """
     test_file()
     test_override()
     test_directory()

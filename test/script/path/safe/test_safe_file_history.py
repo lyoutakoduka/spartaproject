@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to record paths which is source and destination pair."""
+
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
@@ -43,6 +45,7 @@ def _add_single_history(
 
 
 def test_single() -> None:
+    """Test to record single source and destination path pair."""
     file_history = FileHistory()
     source_history: Paths2 = []
     _add_single_history(file_history, source_history, "destination")
@@ -51,6 +54,7 @@ def test_single() -> None:
 
 
 def test_array() -> None:
+    """Test to record multiple source and destination path pair."""
     file_history = FileHistory()
     source_history: Paths2 = []
     for i in range(10):
@@ -60,6 +64,7 @@ def test_array() -> None:
 
 
 def test_history() -> None:
+    """Test for specific directory for exporting paths you recorded."""
     with TemporaryDirectory() as temporary_path:
         temporary_root = Path(temporary_path)
         file_history = FileHistory(history_path=temporary_root)
@@ -72,6 +77,11 @@ def test_history() -> None:
 
 
 def main() -> bool:
+    """Run all tests.
+
+    Returns:
+        bool: Success if get to the end of function.
+    """
     test_single()
     test_array()
     test_history()

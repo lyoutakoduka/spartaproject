@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to remove file or directory and log history."""
+
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
@@ -40,6 +42,8 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 
 
 def test_file() -> None:
+    """Test to remove file, and log history."""
+
     def individual_test(temporary_root: Path) -> None:
         safe_trash = SafeTrash()
         safe_trash.trash(create_temporary_file(temporary_root))
@@ -49,6 +53,8 @@ def test_file() -> None:
 
 
 def test_exists() -> None:
+    """Test to remove same files at twice."""
+
     def individual_test(temporary_root: Path) -> None:
         source_root: Path = create_temporary_file(temporary_root)
         safe_trash = SafeTrash()
@@ -60,6 +66,8 @@ def test_exists() -> None:
 
 
 def test_tree() -> None:
+    """Test to remove files and directories, and log history."""
+
     def individual_test(temporary_root: Path) -> None:
         create_temporary_tree(temporary_root, tree_deep=3)
 
@@ -74,6 +82,7 @@ def test_tree() -> None:
 
 
 def test_select() -> None:
+    """Test to remove file, and using specific trash box path."""
     with TemporaryDirectory() as temporary_path:
 
         def individual_test(temporary_root: Path) -> None:
@@ -90,6 +99,11 @@ def test_select() -> None:
 
 
 def main() -> bool:
+    """Run all tests.
+
+    Returns:
+        bool: Success if get to the end of function.
+    """
     test_file()
     test_exists()
     test_tree()

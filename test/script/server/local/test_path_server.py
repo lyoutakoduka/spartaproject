@@ -1,17 +1,16 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""test module to handle paths about file and directory on server."""
+"""Test module to handle paths about file and directory on server."""
 
+from pathlib import Path
 from typing import Callable
 
-from pyspartaproj.context.extension.path_context import Path
 from pyspartaproj.script.server.local.path_server import PathServer
 
 
 def _common_test(function: Callable[[PathServer], None]) -> None:
-    server: PathServer = PathServer()
-    function(server)
+    function(PathServer())
 
 
 def test_table() -> None:
@@ -38,7 +37,7 @@ def test_path() -> None:
 def test_relative() -> None:
     """Test to convert full path to relative path.
 
-    full path is based on Python default temporary directory
+    The full path is based on Python default temporary directory.
     """
     expected: Path = Path("temp")
 
@@ -53,7 +52,7 @@ def test_relative() -> None:
 def test_full() -> None:
     """Test to convert relative path to full path.
 
-    full path is based on Python default temporary directory
+    The full path is based on Python default temporary directory.
     """
     expected: Path = Path("temp")
 
@@ -84,7 +83,7 @@ def main() -> bool:
     """Run all tests.
 
     Returns:
-        bool: success if get to the end of function
+        bool: Success if get to the end of function.
     """
     test_table()
     test_path()
