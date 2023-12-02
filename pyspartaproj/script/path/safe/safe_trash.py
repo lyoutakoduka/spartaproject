@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Module to remove file or directory and log history."""
+
 from pathlib import Path
 
 from pyspartaproj.script.directory.create_directory_parent import (
@@ -11,6 +13,12 @@ from pyspartaproj.script.path.safe.safe_rename import SafeRename
 
 
 class SafeTrash(SafeRename):
+    """Class to remove file or directory and log history.
+
+    Args:
+        SafeRename: class to import a context of whole project.
+    """
+
     def _move_file(self, target: Path, root: Path) -> None:
         if target.exists():
             trash_path: Path = Path(
@@ -20,6 +28,14 @@ class SafeTrash(SafeRename):
             self.rename(target, trash_path, override=True)
 
     def trash(self, trash_path: Path, trash_root: Path | None = None) -> None:
+        """Remove file or directory and log history.
+
+        Args:
+            trash_path (Path): Path you want to remove.
+
+            trash_root (Path | None, optional): Defaults to None.
+                Path of trash box directory.
+        """
         parent_root: Path = trash_path.parent
 
         if trash_root is None:
