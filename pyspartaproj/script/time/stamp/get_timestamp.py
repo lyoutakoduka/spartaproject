@@ -18,8 +18,13 @@ def get_access(path: Path, jst: bool = False) -> datetime:
     return _convert_timestamp(path.stat().st_atime, jst)
 
 
-def get_latest(path: Path, jst: bool = False) -> datetime:
-    return _convert_timestamp(path.stat().st_mtime, jst)
+def get_latest(
+    path: Path, jst: bool = False, access: bool = False
+) -> datetime:
+    status = path.stat()
+    return _convert_timestamp(
+        status.st_atime if access else status.st_mtime, jst
+    )
 
 
 def get_directory_latest(
