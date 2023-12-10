@@ -28,9 +28,9 @@ def get_latest(
 
 
 def get_directory_latest(
-    walk_generator: PathGene, jst: bool = False
+    walk_generator: PathGene, jst: bool = False, access: bool = False
 ) -> StrPair:
     return {
-        str(path): get_latest(path, jst=jst).isoformat()
+        str(path): get_latest(path, jst=jst, access=access).isoformat()
         for path in walk_generator
     }
