@@ -9,7 +9,7 @@ from pyspartaproj.context.extension.time_context import Times
 from pyspartaproj.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
-from pyspartaproj.script.time.stamp.get_timestamp import get_access, get_latest
+from pyspartaproj.script.time.stamp.get_timestamp import get_latest
 
 
 def _common_test(times: Times) -> None:
@@ -23,7 +23,9 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 
 def test_utc() -> None:
     def individual_test(path: Path) -> None:
-        _common_test([function(path) for function in [get_latest, get_access]])
+        _common_test(
+            [get_latest(path, access=status) for status in [False, True]]
+        )
 
     _inside_temporary_directory(individual_test)
 
@@ -31,7 +33,8 @@ def test_utc() -> None:
 def test_jst() -> None:
     def individual_test(path: Path) -> None:
         times: Times = [
-            function(path, jst=True) for function in [get_latest, get_access]
+            get_latest(path, access=status, jst=True)
+            for status in [False, True]
         ]
         _common_test(times)
 
