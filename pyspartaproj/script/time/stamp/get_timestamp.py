@@ -15,10 +15,6 @@ def _convert_timestamp(time: float, jst: bool) -> datetime:
     return time_from_timestamp(Decimal(str(time)), jst=jst)
 
 
-def get_access(path: Path, jst: bool = False) -> datetime:
-    return _convert_timestamp(path.stat().st_atime, jst)
-
-
 def get_latest(
     path: Path, jst: bool = False, access: bool = False
 ) -> datetime:
