@@ -18,13 +18,14 @@ def _common_test(times: Times) -> None:
 
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as temporary_path:
-        function(create_temporary_file(Path(temporary_path)))
+        function(Path(temporary_path))
 
 
 def test_utc() -> None:
     def individual_test(path: Path) -> None:
+        file_path: Path = create_temporary_file(path)
         _common_test(
-            [get_latest(path, access=status) for status in [False, True]]
+            [get_latest(file_path, access=status) for status in [False, True]]
         )
 
     _inside_temporary_directory(individual_test)
@@ -32,8 +33,9 @@ def test_utc() -> None:
 
 def test_jst() -> None:
     def individual_test(path: Path) -> None:
+        file_path: Path = create_temporary_file(path)
         times: Times = [
-            get_latest(path, access=status, jst=True)
+            get_latest(file_path, access=status, jst=True)
             for status in [False, True]
         ]
         _common_test(times)
