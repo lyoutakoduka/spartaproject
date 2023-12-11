@@ -114,12 +114,14 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 
 def test_file() -> None:
     def individual_test(temporary_root: Path) -> None:
-        tree_root: Path = Path(temporary_root, "tree")
-        create_temporary_tree(tree_root)
-
         walk_paths: Paths = []
         compress_zip = CompressZip(Path(temporary_root, "archive"))
-        for path in walk_iterator(tree_root, directory=False, depth=1):
+
+        for path in walk_iterator(
+            create_temporary_tree(Path(temporary_root, "tree")),
+            directory=False,
+            depth=1,
+        ):
             compress_zip.compress_archive(path)
             walk_paths += [path]
 
@@ -132,12 +134,14 @@ def test_file() -> None:
 
 def test_directory() -> None:
     def individual_test(temporary_root: Path) -> None:
-        tree_root: Path = Path(temporary_root, "tree")
-        create_temporary_tree(tree_root, tree_deep=2)
-
         walk_paths: Paths = []
         compress_zip = CompressZip(Path(temporary_root, "archive"))
-        for path in walk_iterator(tree_root, file=False, depth=1):
+
+        for path in walk_iterator(
+            create_temporary_tree(Path(temporary_root, "tree"), tree_deep=2),
+            file=False,
+            depth=1,
+        ):
             compress_zip.compress_archive(path)
             walk_paths += [path]
 
@@ -150,11 +154,13 @@ def test_directory() -> None:
 
 def test_tree() -> None:
     def individual_test(temporary_root: Path) -> None:
-        tree_root: Path = Path(temporary_root, "tree")
-        create_temporary_tree(tree_root, tree_deep=3)
+        tree_root: Path = create_temporary_tree(
+            Path(temporary_root, "tree"), tree_deep=3
+        )
 
         walk_paths: Paths = []
         compress_zip = CompressZip(Path(temporary_root, "archive"))
+
         for path in walk_iterator(tree_root, directory=False, suffix="txt"):
             compress_zip.compress_archive(path, archive_root=tree_root)
             walk_paths += [path]
@@ -168,14 +174,16 @@ def test_tree() -> None:
 
 def test_compress() -> None:
     def individual_test(temporary_root: Path) -> None:
-        tree_root: Path = Path(temporary_root, "tree")
-        create_temporary_tree(tree_root, tree_weight=4)
-
         walk_paths: Paths = []
         compress_zip = CompressZip(
             Path(temporary_root, "archive"), compress=True
         )
-        for path in walk_iterator(tree_root, directory=False, suffix="json"):
+
+        for path in walk_iterator(
+            create_temporary_tree(Path(temporary_root, "tree"), tree_weight=4),
+            directory=False,
+            suffix="json",
+        ):
             compress_zip.compress_archive(path)
             walk_paths += [path]
 
@@ -195,14 +203,15 @@ def test_id() -> None:
     archive_name: str = "test"
 
     def individual_test(temporary_root: Path) -> None:
-        tree_root: Path = Path(temporary_root, "tree")
-        create_temporary_tree(tree_root)
-
         compress_zip = CompressZip(
             Path(temporary_root, "archive"), archive_id=archive_name
         )
 
-        for path in walk_iterator(tree_root, directory=False, depth=1):
+        for path in walk_iterator(
+            create_temporary_tree(Path(temporary_root, "tree")),
+            directory=False,
+            depth=1,
+        ):
             compress_zip.compress_archive(path)
 
         archived: Paths = compress_zip.close_archived()
@@ -214,8 +223,9 @@ def test_id() -> None:
 
 def test_limit() -> None:
     def individual_test(temporary_root: Path) -> None:
-        tree_root: Path = Path(temporary_root, "tree")
-        create_temporary_tree(tree_root, tree_deep=3)
+        tree_root: Path = create_temporary_tree(
+            Path(temporary_root, "tree"), tree_deep=3
+        )
 
         walk_paths: Paths = []
         compress_zip = CompressZip(
@@ -233,8 +243,9 @@ def test_limit() -> None:
 
 def test_heavy() -> None:
     def individual_test(temporary_root: Path) -> None:
-        tree_root: Path = Path(temporary_root, "tree")
-        create_temporary_tree(tree_root, tree_deep=3, tree_weight=2)
+        tree_root: Path = create_temporary_tree(
+            Path(temporary_root, "tree"), tree_deep=3, tree_weight=2
+        )
 
         walk_paths: Paths = []
         compress_zip = CompressZip(
