@@ -7,10 +7,14 @@ from typing import Callable
 
 from pyspartaproj.context.extension.time_context import Times
 from pyspartaproj.context.file.json_context import Json
+from pyspartaproj.script.bool.compare_json import is_same_json
 from pyspartaproj.script.file.json.convert_to_json import multiple_to_json
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.temporary.create_temporary_file import (
     create_temporary_file,
+)
+from pyspartaproj.script.path.temporary.create_temporary_tree import (
+    create_temporary_tree,
 )
 from pyspartaproj.script.time.stamp.get_timestamp import (
     get_directory_latest,
@@ -57,7 +61,19 @@ def test_jst() -> None:
     _inside_temporary_directory(individual_test)
 
 
+def test_tree() -> None:
+    def individual_test(path: Path) -> None:
+        file_path: Path = create_temporary_tree(Path(path, "tree"))
+
+        assert is_same_json(
+            *[_get_json_latest(file_path, status) for status in [False, True]]
+        )
+
+    _inside_temporary_directory(individual_test)
+
+
 def main() -> bool:
     test_utc()
     test_jst()
+    test_tree()
     return True
