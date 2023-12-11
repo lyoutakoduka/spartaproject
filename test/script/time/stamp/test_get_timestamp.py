@@ -6,14 +6,26 @@ from tempfile import TemporaryDirectory
 from typing import Callable
 
 from pyspartaproj.context.extension.time_context import Times
+from pyspartaproj.context.file.json_context import Json
+from pyspartaproj.script.file.json.convert_to_json import multiple_to_json
+from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
-from pyspartaproj.script.time.stamp.get_timestamp import get_latest
+from pyspartaproj.script.time.stamp.get_timestamp import (
+    get_directory_latest,
+    get_latest,
+)
 
 
 def _common_test(times: Times) -> None:
     assert times[0] == times[1]
+
+
+def _get_json_latest(file_path: Path, status: bool) -> Json:
+    return multiple_to_json(
+        get_directory_latest(walk_iterator(file_path), access=status)
+    )
 
 
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
