@@ -74,9 +74,11 @@ def _recursive_tree(
 
 def create_temporary_tree(
     root_path: Path, tree_deep: int = 1, tree_weight: int = 1
-) -> None:
+) -> Path:
     enable_deep: bool = 1 <= tree_deep <= 10
     enable_weight: bool = 1 <= tree_weight <= 10
 
     if enable_deep and enable_weight:
         _recursive_tree(root_path, tree_deep, tree_deep, tree_weight)
+
+    return root_path
