@@ -88,9 +88,14 @@ def test_tree() -> None:
     """Test to copy files and directories, and log history."""
 
     def individual_test(safe_copy: SafeCopy, temporary_path: Path) -> None:
-        source_path: Path = Path(temporary_path, "temporary")
-        create_temporary_tree(source_path, tree_deep=2)
-        _common_test(_copy(safe_copy, source_path))
+        _common_test(
+            _copy(
+                safe_copy,
+                create_temporary_tree(
+                    Path(temporary_path, "temporary"), tree_deep=2
+                ),
+            )
+        )
 
     _inside_temporary_directory(individual_test)
 
