@@ -42,8 +42,9 @@ def _inside_temporary_directory(
     expected: Strs2, function: Callable[[Path], PathGene]
 ) -> None:
     with TemporaryDirectory() as temporary_path:
-        root_path: Path = Path(temporary_path)
-        create_temporary_tree(root_path, tree_deep=_tree_deep)
+        root_path: Path = create_temporary_tree(
+            Path(temporary_path), tree_deep=_tree_deep
+        )
         _check_walk_result(expected, function(root_path), root_path)
 
 
