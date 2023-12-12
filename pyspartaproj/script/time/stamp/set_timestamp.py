@@ -12,14 +12,14 @@ from pyspartaproj.script.time.stamp.get_file_epoch import get_file_epoch
 from pyspartaproj.script.time.stamp.offset_timezone import offset_time
 
 
-def _convert_timestamp(time: datetime) -> float:
+def _convert_timestamp(time: datetime) -> Decimal:
     time = offset_time(time)
-    return time.timestamp()
+    return Decimal(str(time.timestamp()))
 
 
 def set_latest(path: Path, time: datetime, access: bool = False) -> Path:
     path_times: Decs = [
-        Decimal(str(_convert_timestamp(time))),
+        _convert_timestamp(time),
         get_file_epoch(path, access=(not access)),
     ]
 
