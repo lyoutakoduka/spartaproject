@@ -4,7 +4,7 @@
 from decimal import Decimal
 from typing import Callable
 
-from pyspartaproj.script.initialize_decimal import initialize_decimal
+from pyspartaproj.script.decimal.initialize_decimal import initialize_decimal
 from pyspartaproj.script.string.format_texts import format_indent
 from pyspartaproj.script.string.off_stdout import StdoutText
 from pyspartaproj.script.time.count.count_elapsed import LogTimer

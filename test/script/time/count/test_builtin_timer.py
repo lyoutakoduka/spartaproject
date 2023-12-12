@@ -5,7 +5,7 @@ from decimal import Decimal
 from time import sleep
 
 from pyspartaproj.context.extension.decimal_context import Decs
-from pyspartaproj.script.initialize_decimal import initialize_decimal
+from pyspartaproj.script.decimal.initialize_decimal import initialize_decimal
 from pyspartaproj.script.time.count.builtin_timer import TimerSelect
 
 initialize_decimal()

@@ -4,7 +4,7 @@
 from datetime import datetime, timezone
 from decimal import Decimal
 
-from pyspartaproj.script.initialize_decimal import initialize_decimal
+from pyspartaproj.script.decimal.initialize_decimal import initialize_decimal
 
 initialize_decimal()
 
