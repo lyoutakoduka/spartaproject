@@ -8,6 +8,7 @@ from pathlib import Path
 
 from pyspartaproj.context.default.float_context import Floats
 from pyspartaproj.context.extension.decimal_context import Decs
+from pyspartaproj.script.decimal.convert_float import convert_float_array
 from pyspartaproj.script.time.stamp.get_file_epoch import get_file_epoch
 from pyspartaproj.script.time.stamp.offset_timezone import offset_time
 
@@ -26,7 +27,7 @@ def set_latest(path: Path, time: datetime, access: bool = False) -> Path:
     if not access:
         path_times.reverse()
 
-    path_numbers: Floats = [float(path_time) for path_time in path_times]
+    path_numbers: Floats = convert_float_array(path_times)
     utime(path, (path_numbers[0], path_numbers[1]))
 
     return path
