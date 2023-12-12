@@ -17,11 +17,6 @@ def _convert_timestamp(time: datetime) -> float:
     return time.timestamp()
 
 
-def set_access(path: Path, time: datetime) -> Path:
-    utime(path, (_convert_timestamp(time), path.stat().st_mtime))
-    return path
-
-
 def set_latest(path: Path, time: datetime, access: bool = False) -> Path:
     path_times: Decs = [
         Decimal(str(_convert_timestamp(time))),
