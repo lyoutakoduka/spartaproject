@@ -38,7 +38,7 @@ def _convert_input_time(times: Strs) -> Times:
 
 
 def _common_test(path: Path) -> None:
-    times: Times = _convert_input_time(_times)
+    times: Times = _convert_input_time(_get_time_text())
     results: Times = [
         get_latest(path, access=status) for status in [False, True]
     ]
@@ -54,7 +54,7 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 
 def test_utc() -> None:
     def individual_test(path: Path) -> None:
-        times: Times = _convert_input_time(_times)
+        times: Times = _convert_input_time(_get_time_text())
 
         for status, time in zip([False, True], times):
             set_latest(path, time, access=status)
@@ -71,7 +71,7 @@ def test_jst() -> None:
     ]
 
     def individual_test(path: Path) -> None:
-        times: Times = _convert_input_time(times_jst)
+        times: Times = _convert_input_time(_get_time_text(jst=True))
 
         for status, time in zip([False, True], times):
             set_latest(path, time, access=status)
