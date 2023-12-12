@@ -6,7 +6,7 @@ from decimal import Decimal
 from pyspartaproj.context.default.integer_context import IntPair
 from pyspartaproj.context.extension.decimal_context import DecPair
 from pyspartaproj.script.bool.same_value import bool_same_array
-from pyspartaproj.script.initialize_decimal import initialize_decimal
+from pyspartaproj.script.decimal.initialize_decimal import initialize_decimal
 from pyspartaproj.script.time.convert_readable import readable_time
 
 initialize_decimal()
