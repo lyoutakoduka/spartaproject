@@ -13,7 +13,7 @@ from pyspartaproj.interface.paramiko import (
     SFTPClient,
     SSHClient,
 )
-from pyspartaproj.script.initialize_decimal import initialize_decimal
+from pyspartaproj.script.decimal.initialize_decimal import initialize_decimal
 from pyspartaproj.script.project.project_context import ProjectContext
 from pyspartaproj.script.server.local.path_server import PathServer
 
