@@ -27,7 +27,7 @@ def set_latest(path: Path, time: datetime, access: bool = False) -> Path:
     if not access:
         path_times.reverse()
 
-    path_numbers: Floats = convert_float_array(path_times)
-    utime(path, (path_numbers[0], path_numbers[1]))
+    numbers: Floats = convert_float_array(path_times)
+    utime(path, (numbers[0], numbers[1]))
 
     return path
