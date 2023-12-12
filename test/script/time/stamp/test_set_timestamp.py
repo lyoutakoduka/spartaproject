@@ -20,6 +20,19 @@ _times: Strs = [
 ]
 
 
+def _get_time_text(jst: bool = False) -> Strs:
+    times: Strs = [
+        "2023-04-01T00:00:00.000001+00:00",
+        "2023-04-15T20:09:30.936886+00:00",
+    ]
+    times_jst: Strs = [
+        "2023-04-01T09:00:00.000001+09:00",
+        "2023-04-16T05:09:30.936886+09:00",
+    ]
+
+    return times_jst if jst else times
+
+
 def _convert_input_time(times: Strs) -> Times:
     return [datetime.fromisoformat(time) for time in times]
 
