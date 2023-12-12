@@ -14,11 +14,6 @@ from pyspartaproj.script.path.temporary.create_temporary_file import (
 from pyspartaproj.script.time.stamp.get_timestamp import get_latest
 from pyspartaproj.script.time.stamp.set_timestamp import set_latest
 
-_times: Strs = [
-    "2023-04-01T00:00:00.000001+00:00",
-    "2023-04-15T20:09:30.936886+00:00",
-]
-
 
 def _get_time_text(jst: bool = False) -> Strs:
     times: Strs = [
@@ -65,11 +60,6 @@ def test_utc() -> None:
 
 
 def test_jst() -> None:
-    times_jst: Strs = [
-        "2023-04-01T09:00:00.000001+09:00",
-        "2023-04-16T05:09:30.936886+09:00",
-    ]
-
     def individual_test(path: Path) -> None:
         times: Times = _convert_input_time(_get_time_text(jst=True))
 
