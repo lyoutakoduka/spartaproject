@@ -27,7 +27,7 @@ class SafeTrash(SafeRename):
             create_directory_parent(trash_path)
             self.rename(target, trash_path, override=True)
 
-    def trash(self, trash_path: Path, trash_root: Path | None = None) -> None:
+    def trash(self, trash_path: Path, trash_root: Path | None = None) -> Path:
         """Remove file or directory and log history.
 
         Args:
@@ -44,3 +44,5 @@ class SafeTrash(SafeRename):
             self._move_file(trash_path, trash_root)
         else:
             self._move_file(trash_path, parent_root)
+
+        return trash_path
