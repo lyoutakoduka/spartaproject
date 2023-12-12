@@ -11,8 +11,8 @@ from pyspartaproj.context.extension.time_context import Times
 from pyspartaproj.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
-from pyspartaproj.script.time.stamp.get_timestamp import get_access, get_latest
-from pyspartaproj.script.time.stamp.set_timestamp import set_access, set_latest
+from pyspartaproj.script.time.stamp.get_timestamp import get_latest
+from pyspartaproj.script.time.stamp.set_timestamp import set_latest
 
 _times: Strs = [
     "2023-04-01T00:00:00.000001+00:00",
