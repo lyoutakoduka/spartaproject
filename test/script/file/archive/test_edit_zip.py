@@ -197,6 +197,27 @@ def test_single() -> None:
     _inside_temporary_directory(individual_test)
 
 
+def test_multiple() -> None:
+    limit_byte: int = 50
+
+    def individual_test(temporary_root: Path, stamp_before: StrPair) -> None:
+        _common_test(
+            temporary_root,
+            stamp_before,
+            EditZip(
+                _add_archive(
+                    temporary_root,
+                    CompressZip(
+                        Path(temporary_root, "archive"), limit_byte=limit_byte
+                    ),
+                ),
+                limit_byte=limit_byte,
+            ),
+        )
+
+    _inside_temporary_directory(individual_test)
+
+
 def main() -> bool:
     """All test of feature flags module.
 
@@ -204,4 +225,5 @@ def main() -> bool:
         bool: Success if get to the end of function.
     """
     test_single()
+    test_multiple()
     return True
