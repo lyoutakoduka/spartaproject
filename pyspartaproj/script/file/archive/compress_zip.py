@@ -25,81 +25,6 @@ initialize_decimal()
 class CompressZip:
     """Class to compress file or directory by zip format."""
 
-    def __init__(
-        self,
-        output_root: Path,
-        archive_id: str | None = None,
-        limit_byte: int = 0,
-        compress: bool = False,
-    ) -> None:
-        """Initialize compress conditions and exporting directory.
-
-        Args:
-            output_root (Path): Path you want to export archives.
-
-            archive_id (str | None, optional): Defaults to None.
-                Name of archive you create.
-                If it's None, file or directory name of path "output_root"
-                    is used for archive name.
-
-            limit_byte (int, optional): Defaults to 0.
-                If it's not 0, archive are dividedly compressed.
-                The value of "limit_byte" is represented by byte unit.
-
-                Suppose "limit_byte" is 10 byte.
-
-                e.g., first sample to explain divided archive is follow.
-
-                target/
-                    |--file1.txt (4 byte)
-                    |--file2.txt (4 byte)
-                    |--file3.txt (4 byte)
-
-                Archives of first sample are compressed as follow.
-
-                output_root/
-                    |--target.zip (file1.txt + file2.txt)
-                    |--target#0001.zip (file3.txt)
-
-                e.g., second sample to explain divided archive is follow.
-
-                target/
-                    |--file1.txt (12 byte)
-                    |--file2.txt (4 byte)
-                    |--file3.txt (4 byte)
-
-                Archives of first sample are compressed as follow.
-
-                output_root/
-                    |--target.zip (file1.txt)
-                    |--target#0001.zip (file2.txt + file3.txt)
-
-                e.g., third sample to explain divided archive is follow.
-
-                target/
-                    |--file1.txt (10 byte)
-                    |--file2.txt (10 byte)
-                    |--file3.txt (10 byte)
-
-                Archives of first sample are compressed as follow.
-
-                output_root/
-                    |--target.zip (file1.txt)
-                    |--target#0001.zip (file2.txt)
-                    |--target#0002.zip (file3.txt)
-
-            compress (bool, optional): Defaults to False.
-                If it's True, you can compress archive by LZMA format.
-                Default is no compressed.
-        """
-        self._output_root: Path = output_root
-        self._compress: bool = compress
-
-        self._init_limit_byte(limit_byte)
-        self._init_archive_id(archive_id)
-        self._init_walk_history()
-        self._init_archive_output()
-
     def _init_limit_byte(self, byte: int) -> None:
         if 0 == byte:
             byte = 1
@@ -122,27 +47,6 @@ class CompressZip:
     def _init_archive_output(self) -> None:
         self._output_index: int = 0
         create_directory(self._output_root)
-
-    def close_archived(self) -> Paths:
-        """Close archive and return archived list.
-
-        Returns:
-            Paths: list of archives.
-
-            If archives isn't divided, following list is returned.
-
-            [<export directory>/<archive name>.zip]
-
-            If archive is divided by three, following list is returned.
-
-            [
-                <export directory>/<archive name>.zip,
-                <export directory>/<archive name>#0001.zip,
-                <export directory>/<archive name>#0002.zip
-            ]
-        """
-        self._file_zip.close()
-        return self._archived
 
     def _has_archived(self) -> bool:
         return 0 < self._output_index
@@ -281,6 +185,27 @@ class CompressZip:
             if self._not_still_archived(False, target):
                 self._update_archive_byte(target, root)
 
+    def close_archived(self) -> Paths:
+        """Close archive and return archived list.
+
+        Returns:
+            Paths: list of archives.
+
+            If archives isn't divided, following list is returned.
+
+            [<export directory>/<archive name>.zip]
+
+            If archive is divided by three, following list is returned.
+
+            [
+                <export directory>/<archive name>.zip,
+                <export directory>/<archive name>#0001.zip,
+                <export directory>/<archive name>#0002.zip
+            ]
+        """
+        self._file_zip.close()
+        return self._archived
+
     def compress_archive(
         self, archive_target: Path, archive_root: Path | None = None
     ) -> None:
@@ -317,3 +242,78 @@ class CompressZip:
             self._compress_child(archive_target, archive_root)
         else:
             self._compress_child(archive_target, parent_root)
+
+    def __init__(
+        self,
+        output_root: Path,
+        archive_id: str | None = None,
+        limit_byte: int = 0,
+        compress: bool = False,
+    ) -> None:
+        """Initialize compress conditions and exporting directory.
+
+        Args:
+            output_root (Path): Path you want to export archives.
+
+            archive_id (str | None, optional): Defaults to None.
+                Name of archive you create.
+                If it's None, file or directory name of path "output_root"
+                    is used for archive name.
+
+            limit_byte (int, optional): Defaults to 0.
+                If it's not 0, archive are dividedly compressed.
+                The value of "limit_byte" is represented by byte unit.
+
+                Suppose "limit_byte" is 10 byte.
+
+                e.g., first sample to explain divided archive is follow.
+
+                target/
+                    |--file1.txt (4 byte)
+                    |--file2.txt (4 byte)
+                    |--file3.txt (4 byte)
+
+                Archives of first sample are compressed as follow.
+
+                output_root/
+                    |--target.zip (file1.txt + file2.txt)
+                    |--target#0001.zip (file3.txt)
+
+                e.g., second sample to explain divided archive is follow.
+
+                target/
+                    |--file1.txt (12 byte)
+                    |--file2.txt (4 byte)
+                    |--file3.txt (4 byte)
+
+                Archives of first sample are compressed as follow.
+
+                output_root/
+                    |--target.zip (file1.txt)
+                    |--target#0001.zip (file2.txt + file3.txt)
+
+                e.g., third sample to explain divided archive is follow.
+
+                target/
+                    |--file1.txt (10 byte)
+                    |--file2.txt (10 byte)
+                    |--file3.txt (10 byte)
+
+                Archives of first sample are compressed as follow.
+
+                output_root/
+                    |--target.zip (file1.txt)
+                    |--target#0001.zip (file2.txt)
+                    |--target#0002.zip (file3.txt)
+
+            compress (bool, optional): Defaults to False.
+                If it's True, you can compress archive by LZMA format.
+                Default is no compressed.
+        """
+        self._output_root: Path = output_root
+        self._compress: bool = compress
+
+        self._init_limit_byte(limit_byte)
+        self._init_archive_id(archive_id)
+        self._init_walk_history()
+        self._init_archive_output()
