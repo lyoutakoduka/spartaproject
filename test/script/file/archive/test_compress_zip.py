@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to compress file or directory by zip format."""
+
 from decimal import Decimal
 from pathlib import Path
 from shutil import unpack_archive
@@ -113,6 +115,8 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 
 
 def test_file() -> None:
+    """Test to compress multiple files."""
+
     def individual_test(temporary_root: Path) -> None:
         walk_paths: Paths = []
         compress_zip = CompressZip(Path(temporary_root, "archive"))
@@ -133,6 +137,8 @@ def test_file() -> None:
 
 
 def test_directory() -> None:
+    """Test to compress multiple empty directories."""
+
     def individual_test(temporary_root: Path) -> None:
         walk_paths: Paths = []
         compress_zip = CompressZip(Path(temporary_root, "archive"))
@@ -153,6 +159,8 @@ def test_directory() -> None:
 
 
 def test_tree() -> None:
+    """Test to compress multiple files and directories."""
+
     def individual_test(temporary_root: Path) -> None:
         tree_root: Path = create_temporary_tree(
             Path(temporary_root, "tree"), tree_deep=3
@@ -173,6 +181,8 @@ def test_tree() -> None:
 
 
 def test_compress() -> None:
+    """Test to compress multiple files by LZMA format."""
+
     def individual_test(temporary_root: Path) -> None:
         walk_paths: Paths = []
         compress_zip = CompressZip(
@@ -200,6 +210,7 @@ def test_compress() -> None:
 
 
 def test_id() -> None:
+    """Test to compress multiple files by specific archive name."""
     archive_name: str = "test"
 
     def individual_test(temporary_root: Path) -> None:
@@ -222,6 +233,8 @@ def test_id() -> None:
 
 
 def test_limit() -> None:
+    """Test to compress multiple files and directories dividedly."""
+
     def individual_test(temporary_root: Path) -> None:
         tree_root: Path = create_temporary_tree(
             Path(temporary_root, "tree"), tree_deep=3
@@ -236,12 +249,15 @@ def test_limit() -> None:
             walk_paths += [path]
 
         archived: Paths = compress_zip.close_archived()
+        print(archived)
         _common_test(archived, temporary_root, walk_paths)
 
     _inside_temporary_directory(individual_test)
 
 
 def test_heavy() -> None:
+    """Test to compress multiple files larger than byte limit dividedly."""
+
     def individual_test(temporary_root: Path) -> None:
         tree_root: Path = create_temporary_tree(
             Path(temporary_root, "tree"), tree_deep=3, tree_weight=2
@@ -262,6 +278,11 @@ def test_heavy() -> None:
 
 
 def main() -> bool:
+    """Run all tests.
+
+    Returns:
+        bool: Success if get to the end of function.
+    """
     test_file()
     test_directory()
     test_tree()
