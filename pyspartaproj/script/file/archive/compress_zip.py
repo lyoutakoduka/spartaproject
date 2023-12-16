@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Module to compress file or directory by zip format."""
+
 from datetime import datetime
 from decimal import Decimal
 from pathlib import Path
@@ -21,6 +23,8 @@ initialize_decimal()
 
 
 class CompressZip:
+    """Class to compress file or directory by zip format."""
+
     def __init__(
         self,
         output_root: Path,
@@ -28,6 +32,66 @@ class CompressZip:
         limit_byte: int = 0,
         compress: bool = False,
     ) -> None:
+        """Initialize compress conditions and exporting directory.
+
+        Args:
+            output_root (Path): Path you want to export archives.
+
+            archive_id (str | None, optional): Defaults to None.
+                Name of archive you create.
+                If it's None, file or directory name of path "output_root"
+                    is used for archive name.
+
+            limit_byte (int, optional): Defaults to 0.
+                If it's not 0, archive are dividedly compressed.
+                The value of "limit_byte" is represented by byte unit.
+
+                Suppose "limit_byte" is 10 byte.
+
+                e.g., first sample to explain divided archive is follow.
+
+                target/
+                    |--file1.txt (4 byte)
+                    |--file2.txt (4 byte)
+                    |--file3.txt (4 byte)
+
+                Archives of first sample are compressed as follow.
+
+                output_root/
+                    |--target.zip (file1.txt + file2.txt)
+                    |--target#0001.zip (file3.txt)
+
+                e.g., second sample to explain divided archive is follow.
+
+                target/
+                    |--file1.txt (12 byte)
+                    |--file2.txt (4 byte)
+                    |--file3.txt (4 byte)
+
+                Archives of first sample are compressed as follow.
+
+                output_root/
+                    |--target.zip (file1.txt)
+                    |--target#0001.zip (file2.txt + file3.txt)
+
+                e.g., third sample to explain divided archive is follow.
+
+                target/
+                    |--file1.txt (10 byte)
+                    |--file2.txt (10 byte)
+                    |--file3.txt (10 byte)
+
+                Archives of first sample are compressed as follow.
+
+                output_root/
+                    |--target.zip (file1.txt)
+                    |--target#0001.zip (file2.txt)
+                    |--target#0002.zip (file3.txt)
+
+            compress (bool, optional): Defaults to False.
+                If it's True, you can compress archive by LZMA format.
+                Default is no compressed.
+        """
         self._output_root: Path = output_root
         self._compress: bool = compress
 
@@ -60,6 +124,23 @@ class CompressZip:
         create_directory(self._output_root)
 
     def close_archived(self) -> Paths:
+        """Close archive and return archived list.
+
+        Returns:
+            Paths: list of archives.
+
+            If archives isn't divided, following list is returned.
+
+            [<export directory>/<archive name>.zip]
+
+            If archive is divided by three, following list is returned.
+
+            [
+                <export directory>/<archive name>.zip,
+                <export directory>/<archive name>#0001.zip,
+                <export directory>/<archive name>#0002.zip
+            ]
+        """
         self._file_zip.close()
         return self._archived
 
@@ -203,6 +284,31 @@ class CompressZip:
     def compress_archive(
         self, archive_target: Path, archive_root: Path | None = None
     ) -> None:
+        """Compress file or directory you selected.
+
+        Args:
+            archive_target (Path): Path of compress target.
+
+            archive_root (Path | None, optional): Defaults to None.
+                Root directory of compress target
+                    which is use to record relative path.
+
+            e.g., if contents of archive target is follow,
+                and archive_root is "root/group/".
+
+            root/
+                |--group/
+                    |--file1.txt
+                    |--type/
+                        |--file2.txt
+
+            Compressed archive will contain following file and directory
+                as relative path.
+
+            |--file1.txt
+            |--type/
+                |--file2.txt
+        """
         parent_root: Path = archive_target.parent
 
         if archive_root is None:
