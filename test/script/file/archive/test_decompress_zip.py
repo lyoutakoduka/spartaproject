@@ -140,9 +140,11 @@ def test_limit() -> None:
         ):
             compress_zip.compress_archive(path)
 
-        archived_paths: Paths = compress_zip.close_archived()
         decompress_zip = DecompressZip(Path(temporary_root, "extract"))
-        for path in decompress_zip.sequential_archives(archived_paths[0]):
+
+        for path in decompress_zip.sequential_archives(
+            compress_zip.close_archived()[0]
+        ):
             decompress_zip.decompress_archive(path)
 
         _common_test(temporary_root)
@@ -164,6 +166,7 @@ def test_timestamp() -> None:
         ):
             if path.is_file():
                 set_latest(path, expected)
+
             compress_zip.compress_archive(path)
 
         decompress_zip = DecompressZip(Path(temporary_root, "extract"))
@@ -171,8 +174,7 @@ def test_timestamp() -> None:
         for path in compress_zip.close_archived():
             decompress_zip.decompress_archive(path)
 
-        sorted_paths: Paths2 = _common_test(temporary_root)
-        _compare_timestamp(sorted_paths, expected)
+        _compare_timestamp(_common_test(temporary_root), expected)
 
     _inside_temporary_directory(individual_test)
 
