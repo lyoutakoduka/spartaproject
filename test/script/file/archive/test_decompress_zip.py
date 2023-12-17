@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to decompress archive which is zip format."""
+
 from itertools import chain
 from pathlib import Path
 from shutil import make_archive
@@ -89,6 +91,8 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 
 
 def test_directory() -> None:
+    """Test to decompress archive including only files."""
+
     def individual_test(temporary_root: Path) -> None:
         safe_trash = SafeTrash()
 
@@ -105,6 +109,8 @@ def test_directory() -> None:
 
 
 def test_tree() -> None:
+    """Test to decompress archive including only directories."""
+
     def individual_test(temporary_root: Path) -> None:
         safe_trash = SafeTrash()
 
@@ -122,6 +128,8 @@ def test_tree() -> None:
 
 
 def test_limit() -> None:
+    """Test to decompress sequential archives."""
+
     def individual_test(temporary_root: Path) -> None:
         compress_zip = CompressZip(
             Path(temporary_root, "archive"), limit_byte=200
@@ -143,6 +151,7 @@ def test_limit() -> None:
 
 
 def test_timestamp() -> None:
+    """Test for timestamp consistency of contents in archive."""
     expected: datetime = datetime.fromisoformat(
         "2023-04-15T20:09:30.936886+00:00"
     )
@@ -169,6 +178,11 @@ def test_timestamp() -> None:
 
 
 def main() -> bool:
+    """Run all tests.
+
+    Returns:
+        bool: Success if get to the end of function.
+    """
     test_directory()
     test_tree()
     test_limit()
