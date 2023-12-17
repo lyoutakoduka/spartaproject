@@ -25,14 +25,6 @@ from pyspartaproj.script.time.stamp.set_timestamp import set_latest
 class DecompressZip:
     """Class to decompress archive which is zip format."""
 
-    def __init__(self, output_root: Path) -> None:
-        """Initialize decompress directory.
-
-        Args:
-            output_root (Path): Path of decompress directory.
-        """
-        self._output_root: Path = output_root
-
     def _is_sequential_archive(self, path: Path) -> bool:
         names: Strs = path.stem.split("#")
         if 1 < len(names):
@@ -43,6 +35,27 @@ class DecompressZip:
                 pass
 
         return False
+
+    def _decompress_file(
+        self, file_path: Path, relative: Path, zip_file: ZipFile
+    ) -> None:
+        create_directory_parent(file_path)
+        byte_export(file_path, zip_file.read(relative.as_posix()))
+
+    def _restore_timestamp(
+        self, file_path: Path, information: ZipInfo
+    ) -> None:
+        latest: datetime = datetime(*information.date_time)
+
+        comment: bytes = information.comment
+        if 0 < len(comment):
+            content: StrPair = string_pair_from_json(
+                json_load(comment.decode())
+            )
+            if "latest" in content:
+                latest = datetime.fromisoformat(content["latest"])
+
+        set_latest(file_path, latest)
 
     def sequential_archives(self, source_archive: Path) -> Paths:
         """Get list of archives which is compressed dividedly.
@@ -88,27 +101,6 @@ class DecompressZip:
 
         return sequential
 
-    def _decompress_file(
-        self, file_path: Path, relative: Path, zip_file: ZipFile
-    ) -> None:
-        create_directory_parent(file_path)
-        byte_export(file_path, zip_file.read(relative.as_posix()))
-
-    def _restore_timestamp(
-        self, file_path: Path, information: ZipInfo
-    ) -> None:
-        latest: datetime = datetime(*information.date_time)
-
-        comment: bytes = information.comment
-        if 0 < len(comment):
-            content: StrPair = string_pair_from_json(
-                json_load(comment.decode())
-            )
-            if "latest" in content:
-                latest = datetime.fromisoformat(content["latest"])
-
-        set_latest(file_path, latest)
-
     def decompress_archive(self, decompress_target: Path) -> None:
         """Decompress archive which is zip format.
 
@@ -125,3 +117,11 @@ class DecompressZip:
                 else:
                     self._decompress_file(file_path, relative, zip_file)
                     self._restore_timestamp(file_path, information)
+
+    def __init__(self, output_root: Path) -> None:
+        """Initialize decompress directory.
+
+        Args:
+            output_root (Path): Path of decompress directory.
+        """
+        self._output_root: Path = output_root
