@@ -25,6 +25,9 @@ from pyspartaproj.script.time.stamp.set_timestamp import set_latest
 class DecompressZip:
     """Class to decompress archive which is zip format."""
 
+    def _initialize_paths(self, output_root: Path) -> None:
+        self._output_root: Path = output_root
+
     def _is_sequential_archive(self, path: Path) -> bool:
         names: Strs = path.stem.split("#")
         if 1 < len(names):
@@ -124,4 +127,4 @@ class DecompressZip:
         Args:
             output_root (Path): Path of decompress directory.
         """
-        self._output_root: Path = output_root
+        self._initialize_paths(output_root)
