@@ -88,6 +88,9 @@ class EditZip(WorkSpace):
 
         return archived
 
+    def get_decompressed_root(self) -> Path:
+        return self.get_root()
+
     def close_archive(self) -> Paths | None:
         if self._still_removed:
             return None
@@ -103,6 +106,3 @@ class EditZip(WorkSpace):
         super().__init__()
         self._initialize_variables(archive_path, limit_byte)
         self._initialize_archive()
-
-    def get_decompressed_root(self) -> Path:
-        return self.get_root()
