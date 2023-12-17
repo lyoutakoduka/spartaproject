@@ -35,6 +35,7 @@ class EditZip(WorkSpace):
 
     def _is_difference_archive(self) -> StrPair | None:
         archive_stamp: StrPair = self._get_archive_stamp()
+
         if is_same_json(
             *[
                 multiple_to_json(stamp)
@@ -104,5 +105,6 @@ class EditZip(WorkSpace):
 
     def __init__(self, archive_path: Path, limit_byte: int = 0) -> None:
         super().__init__()
+
         self._initialize_variables(archive_path, limit_byte)
         self._initialize_archive()
