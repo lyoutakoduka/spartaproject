@@ -30,6 +30,7 @@ class DecompressZip:
 
     def _is_sequential_archive(self, path: Path) -> bool:
         names: Strs = path.stem.split("#")
+
         if 1 < len(names):
             try:
                 int(names[-1])
@@ -50,10 +51,12 @@ class DecompressZip:
     ) -> None:
         latest: datetime = datetime(*information.date_time)
         comment: bytes = information.comment
+
         if 0 < len(comment):
             content: StrPair = string_pair_from_json(
                 json_load(comment.decode())
             )
+
             if "latest" in content:
                 latest = datetime.fromisoformat(content["latest"])
 
