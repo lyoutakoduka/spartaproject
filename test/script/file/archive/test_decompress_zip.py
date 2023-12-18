@@ -91,7 +91,7 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 
 
 def test_directory() -> None:
-    """Test to decompress archive including only files."""
+    """Test to decompress archive including only directories."""
 
     def individual_test(temporary_root: Path) -> None:
         safe_trash = SafeTrash()
@@ -109,7 +109,7 @@ def test_directory() -> None:
 
 
 def test_tree() -> None:
-    """Test to decompress archive including only directories."""
+    """Test to decompress archive including only files."""
 
     def individual_test(temporary_root: Path) -> None:
         safe_trash = SafeTrash()
