@@ -5,7 +5,7 @@
 
 from datetime import datetime
 from pathlib import Path
-from zipfile import ZipFile, ZipInfo
+from zipfile import ZIP_STORED, ZipFile, ZipInfo
 
 from pyspartaproj.context.default.string_context import StrPair, Strs
 from pyspartaproj.context.extension.path_context import Paths
@@ -49,7 +49,6 @@ class DecompressZip:
         self, file_path: Path, information: ZipInfo
     ) -> None:
         latest: datetime = datetime(*information.date_time)
-
         comment: bytes = information.comment
         if 0 < len(comment):
             content: StrPair = string_pair_from_json(
@@ -120,6 +119,17 @@ class DecompressZip:
                 else:
                     self._decompress_file(file_path, relative, zip_file)
                     self._restore_timestamp(file_path, information)
+
+    def is_not_compressed(self, decompress_target: Path) -> bool:
+        with ZipFile(decompress_target) as zip_file:
+            return 1 == len(
+                set(
+                    [
+                        ZIP_STORED == information.compress_type
+                        for information in zip_file.infolist()
+                    ]
+                )
+            )
 
     def __init__(self, output_root: Path) -> None:
         """Initialize decompress directory.
