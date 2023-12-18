@@ -90,9 +90,22 @@ class EditZip(WorkSpace):
         return archived
 
     def get_decompressed_root(self) -> Path:
+        """Get path of temporary working directory.
+
+        The directory is used for placing decompressed contents of archive.
+
+        Returns:
+            Path: Path of temporary working directory.
+        """
         return self.get_root()
 
     def close_archive(self) -> Paths | None:
+        """Compress the contents of temporary working directory to zip archive.
+
+        Returns:
+            Paths | None: Path of compressed archive.
+                Return None if the archive you want to edit isn't changed.
+        """
         if self._still_removed:
             return None
 
@@ -101,9 +114,20 @@ class EditZip(WorkSpace):
         return self._finalize_archive()
 
     def __del__(self) -> None:
+        """Close and recompress archive you want to edit automatically."""
         self.close_archive()
 
     def __init__(self, archive_path: Path, limit_byte: int = 0) -> None:
+        """Initialize variables and decompress archive you selected.
+
+        Args:
+            archive_path (Path): Path of archive you want to edit.
+
+            limit_byte (int, optional): Defaults to 0.
+                If it's not 0, archive are dividedly compressed.
+
+            It's used for "limit_byte" of class "CompressZip".
+        """
         super().__init__()
 
         self._initialize_variables(archive_path, limit_byte)
