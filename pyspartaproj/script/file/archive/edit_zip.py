@@ -24,11 +24,12 @@ class EditZip(WorkSpace):
     """
 
     def _initialize_variables(
-        self, archive_path: Path, limit_byte: int
+        self, archive_path: Path, limit_byte: int, compress: bool
     ) -> None:
         self._still_removed: bool = False
         self._archive_path: Path = archive_path
         self._limit_byte: int = limit_byte
+        self._compress: bool = compress
 
     def _get_archive_stamp(self) -> StrPair:
         return get_directory_latest(walk_iterator(self.get_root()))
@@ -56,7 +57,9 @@ class EditZip(WorkSpace):
         self._cleanup_before_override()
 
         compress_zip = CompressZip(
-            self._archive_path.parent, limit_byte=self._limit_byte
+            self._archive_path.parent,
+            limit_byte=self._limit_byte,
+            compress=self._compress,
         )
 
         for path_text in archive_stamp.keys():
@@ -117,7 +120,9 @@ class EditZip(WorkSpace):
         """Close and recompress archive you want to edit automatically."""
         self.close_archive()
 
-    def __init__(self, archive_path: Path, limit_byte: int = 0) -> None:
+    def __init__(
+        self, archive_path: Path, limit_byte: int = 0, compress: bool = False
+    ) -> None:
         """Initialize variables and decompress archive you selected.
 
         Args:
@@ -130,5 +135,5 @@ class EditZip(WorkSpace):
         """
         super().__init__()
 
-        self._initialize_variables(archive_path, limit_byte)
+        self._initialize_variables(archive_path, limit_byte, compress)
         self._initialize_archive()
