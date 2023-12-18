@@ -108,7 +108,7 @@ def test_directory() -> None:
     _inside_temporary_directory(individual_test)
 
 
-def test_tree() -> None:
+def test_file() -> None:
     """Test to decompress archive including only files."""
 
     def individual_test(temporary_root: Path) -> None:
@@ -186,7 +186,7 @@ def main() -> bool:
         bool: Success if get to the end of function.
     """
     test_directory()
-    test_tree()
+    test_file()
     test_limit()
     test_timestamp()
     return True
