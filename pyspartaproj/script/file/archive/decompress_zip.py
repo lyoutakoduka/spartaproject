@@ -124,6 +124,15 @@ class DecompressZip:
                     self._restore_timestamp(file_path, information)
 
     def is_not_compressed(self, decompress_target: Path) -> bool:
+        """Method to get status of compression format.
+
+        Args:
+            decompress_target (Path): Path of archive
+                which you want to get status of compression format.
+
+        Returns:
+            bool: Return True if archive isn't compressed.
+        """
         with ZipFile(decompress_target) as zip_file:
             return 1 == len(
                 set(
