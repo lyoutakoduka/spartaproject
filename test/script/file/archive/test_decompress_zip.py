@@ -90,24 +90,6 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
         function(Path(temporary_path))
 
 
-def test_directory() -> None:
-    """Test to decompress archive including only directories."""
-
-    def individual_test(temporary_root: Path) -> None:
-        safe_trash = SafeTrash()
-
-        for path in walk_iterator(
-            create_temporary_tree(Path(temporary_root, "tree"), tree_deep=3),
-            directory=False,
-        ):
-            safe_trash.trash(path)
-
-        _compress_to_decompress(temporary_root)
-        _common_test(temporary_root)
-
-    _inside_temporary_directory(individual_test)
-
-
 def test_file() -> None:
     """Test to decompress archive including only files."""
 
@@ -120,6 +102,24 @@ def test_file() -> None:
         ):
             if 0 == len(list(walk_iterator(path, depth=1))):
                 safe_trash.trash(path)
+
+        _compress_to_decompress(temporary_root)
+        _common_test(temporary_root)
+
+    _inside_temporary_directory(individual_test)
+
+
+def test_directory() -> None:
+    """Test to decompress archive including only directories."""
+
+    def individual_test(temporary_root: Path) -> None:
+        safe_trash = SafeTrash()
+
+        for path in walk_iterator(
+            create_temporary_tree(Path(temporary_root, "tree"), tree_deep=3),
+            directory=False,
+        ):
+            safe_trash.trash(path)
 
         _compress_to_decompress(temporary_root)
         _common_test(temporary_root)
@@ -185,8 +185,8 @@ def main() -> bool:
     Returns:
         bool: Success if get to the end of function.
     """
-    test_directory()
     test_file()
+    test_directory()
     test_limit()
     test_timestamp()
     return True
