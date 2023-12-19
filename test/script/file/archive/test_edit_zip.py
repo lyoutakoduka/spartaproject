@@ -190,7 +190,7 @@ def test_single() -> None:
                 _add_archive(
                     temporary_root,
                     CompressZip(Path(temporary_root, "archive")),
-                ),
+                )
             ),
         )
 
