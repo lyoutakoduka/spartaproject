@@ -132,6 +132,19 @@ def test_directory() -> None:
     _inside_temporary_directory(individual_test)
 
 
+def test_status() -> None:
+    """Test to get status of compression format from archive."""
+
+    def individual_test(temporary_root: Path, tree_root: Path) -> None:
+        create_temporary_tree(tree_root)
+
+        assert not DecompressZip(temporary_root).is_lzma_archive(
+            _create_archive(temporary_root, tree_root)
+        )
+
+    _inside_temporary_directory(individual_test)
+
+
 def test_limit() -> None:
     """Test to decompress sequential archives."""
 
@@ -190,6 +203,7 @@ def main() -> bool:
     """
     test_file()
     test_directory()
+    test_status()
     test_limit()
     test_timestamp()
     return True
