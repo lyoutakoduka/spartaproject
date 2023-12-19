@@ -165,12 +165,14 @@ def _get_stamp_after(
     return stamp_after
 
 
+def _get_edit_history(edit_zip: EditZip) -> PathPair:
+    return _edit_to_archived(edit_zip.get_decompressed_root())
+
+
 def _common_test(
     temporary_root: Path, stamp_before: StrPair, edit_zip: EditZip
 ) -> None:
-    edit_history: PathPair = _edit_to_archived(
-        edit_zip.get_decompressed_root()
-    )
+    edit_history: PathPair = _get_edit_history(edit_zip)
 
     if archived := edit_zip.close_archive():
         assert _compare_time_stamp(
