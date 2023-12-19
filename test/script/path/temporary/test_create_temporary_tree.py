@@ -26,8 +26,7 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> Paths:
         )
 
 
-def test_three() -> None:
-    """Test for contents of the temporary tree which is three hierarchy."""
+def _get_three_hierarchy() -> Strs2:
     name_dir_1: str = "dir001"
     name_dir_2: str = "dir002"
     name_dirs: Strs = [name_dir_1, name_dir_2]
@@ -37,7 +36,7 @@ def test_three() -> None:
     name_json: str = "file.json"
     name_text: str = "file.txt"
 
-    expected_source: Strs2 = [
+    return [
         [name_dir_1],
         [name_dir_empty],
         [name_ini],
@@ -54,7 +53,12 @@ def test_three() -> None:
         name_dirs + [name_text],
     ]
 
-    expected: Paths = [Path(*path_names) for path_names in expected_source]
+
+def test_three() -> None:
+    """Test for contents of the temporary tree which is three hierarchy."""
+    expected: Paths = [
+        Path(*path_names) for path_names in _get_three_hierarchy()
+    ]
 
     def individual_test(temporary_path: Path) -> None:
         create_temporary_tree(temporary_path, tree_deep=3)
