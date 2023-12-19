@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to create temporary files and directories tree."""
+
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
@@ -25,6 +27,7 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> Paths:
 
 
 def test_three() -> None:
+    """Test for contents of the temporary tree which is three hierarchy."""
     name_dir_1: str = "dir001"
     name_dir_2: str = "dir002"
     name_dirs: Strs = [name_dir_1, name_dir_2]
@@ -60,6 +63,7 @@ def test_three() -> None:
 
 
 def test_deep() -> None:
+    """Test for count of hierarchy of the temporary tree."""
     outrange_indices: Ints = [-1, 0, 11, 12, 13]
 
     def individual_test(temporary_path: Path) -> None:
@@ -70,6 +74,7 @@ def test_deep() -> None:
 
 
 def test_weight() -> None:
+    """Test for scale of file size which is placed on the temporary tree."""
     outrange_indices: Ints = [-2, -1, 0, 11, 12, 13]
 
     def individual_test(temporary_path: Path) -> None:
@@ -80,6 +85,11 @@ def test_weight() -> None:
 
 
 def main() -> bool:
+    """All test of feature flags module.
+
+    Returns:
+        bool: Success if get to the end of function.
+    """
     test_three()
     test_deep()
     test_weight()
