@@ -123,7 +123,7 @@ class DecompressZip:
                     self._decompress_file(file_path, relative, zip_file)
                     self._restore_timestamp(file_path, information)
 
-    def is_not_compressed(self, decompress_target: Path) -> bool:
+    def is_lzma_archive(self, decompress_target: Path) -> bool:
         """Method to get status of compression format.
 
         Args:
