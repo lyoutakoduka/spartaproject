@@ -85,15 +85,18 @@ def _compress_to_decompress(temporary_root: Path) -> None:
     decompress_zip.decompress_archive(archived)
 
 
-def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
+def _inside_temporary_directory(
+    function: Callable[[Path, Path], None]
+) -> None:
     with TemporaryDirectory() as temporary_path:
-        function(Path(temporary_path))
+        temporary_root: Path = Path(temporary_path)
+        function(temporary_root, Path(temporary_root, "tree"))
 
 
 def test_file() -> None:
     """Test to decompress archive including only files."""
 
-    def individual_test(temporary_root: Path) -> None:
+    def individual_test(temporary_root: Path, tree_root: Path) -> None:
         safe_trash = SafeTrash()
 
         for path in walk_iterator(
@@ -112,11 +115,11 @@ def test_file() -> None:
 def test_directory() -> None:
     """Test to decompress archive including only directories."""
 
-    def individual_test(temporary_root: Path) -> None:
+    def individual_test(temporary_root: Path, tree_root: Path) -> None:
         safe_trash = SafeTrash()
 
         for path in walk_iterator(
-            create_temporary_tree(Path(temporary_root, "tree"), tree_deep=3),
+            create_temporary_tree(tree_root, tree_deep=3),
             directory=False,
         ):
             safe_trash.trash(path)
@@ -130,13 +133,13 @@ def test_directory() -> None:
 def test_limit() -> None:
     """Test to decompress sequential archives."""
 
-    def individual_test(temporary_root: Path) -> None:
+    def individual_test(temporary_root: Path, tree_root: Path) -> None:
         compress_zip = CompressZip(
             Path(temporary_root, "archive"), limit_byte=200
         )
 
         for path in walk_iterator(
-            create_temporary_tree(Path(temporary_root, "tree"), tree_deep=5)
+            create_temporary_tree(tree_root, tree_deep=5)
         ):
             compress_zip.compress_archive(path)
 
@@ -158,12 +161,10 @@ def test_timestamp() -> None:
         "2023-04-15T20:09:30.936886+00:00"
     )
 
-    def individual_test(temporary_root: Path) -> None:
+    def individual_test(temporary_root: Path, tree_root: Path) -> None:
         compress_zip = CompressZip(Path(temporary_root, "archive"))
 
-        for path in walk_iterator(
-            create_temporary_tree(Path(temporary_root, "tree"))
-        ):
+        for path in walk_iterator(create_temporary_tree(tree_root)):
             if path.is_file():
                 set_latest(path, expected)
 
