@@ -11,8 +11,6 @@ from pyspartaproj.script.file.config.export_config import config_export
 from pyspartaproj.script.file.json.export_json import Json, json_export
 from pyspartaproj.script.file.text.export_file import text_export
 
-_name: str = "file"
-
 
 def _sample_text(root: Path, weight: int) -> None:
     line_width: int = 10
@@ -23,7 +21,7 @@ def _sample_text(root: Path, weight: int) -> None:
         [str(i).zfill(index_digit) + line_text for i in range(weight)]
     )
 
-    text_export(Path(root, _name + ".txt"), source)
+    text_export(Path(root, "file.txt"), source)
 
 
 def _sample_config(root: Path, weight: int) -> None:
@@ -38,7 +36,7 @@ def _sample_config(root: Path, weight: int) -> None:
         for i in range(weight)
     }
 
-    config_export(Path(root, _name + ".ini"), source_pairs)
+    config_export(Path(root, "file.ini"), source_pairs)
 
 
 def _sample_json(root: Path, weight: int) -> None:
@@ -54,7 +52,7 @@ def _sample_json(root: Path, weight: int) -> None:
             }
         return line_text
 
-    json_export(Path(root, _name + ".json"), function(weight))
+    json_export(Path(root, "file.json"), function(weight))
 
 
 def _recursive_tree(
