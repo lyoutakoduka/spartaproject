@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Module to create temporary files and directories tree."""
+
 from pathlib import Path
 
 from pyspartaproj.context.default.string_context import StrPair2
@@ -75,6 +77,20 @@ def _recursive_tree(
 def create_temporary_tree(
     root_path: Path, tree_deep: int = 1, tree_weight: int = 1
 ) -> Path:
+    """Create temporary files and directories tree.
+
+    Args:
+        root_path (Path): Path of directory that the temporary tree is created.
+
+        tree_deep (int, optional): Defaults to 1.
+            Count of hierarchy of the temporary tree
+
+        tree_weight (int, optional): Defaults to 1.
+            Scale of file size which is placed on the temporary tree.
+
+    Returns:
+        Path: "root_path" is returned.
+    """
     enable_deep: bool = 1 <= tree_deep <= 10
     enable_weight: bool = 1 <= tree_weight <= 10
 
