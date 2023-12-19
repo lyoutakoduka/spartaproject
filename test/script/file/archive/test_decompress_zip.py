@@ -71,9 +71,8 @@ def _common_test(temporary_root: Path) -> Paths2:
     return sorted_paths
 
 
-def _compress_to_decompress(temporary_root: Path) -> None:
-    tree_root: Path = Path(temporary_root, "tree")
-    archived: Path = Path(
+def _create_archive(temporary_root: Path, tree_root: Path) -> Path:
+    return Path(
         make_archive(
             str(Path(temporary_root, *["archive"] * 2)),
             format="zip",
@@ -81,6 +80,9 @@ def _compress_to_decompress(temporary_root: Path) -> None:
         )
     )
 
+
+def _compress_to_decompress(temporary_root: Path, tree_root: Path) -> None:
+    archived: Path = _create_archive(temporary_root, tree_root)
     decompress_zip = DecompressZip(Path(temporary_root, "extract"))
     decompress_zip.decompress_archive(archived)
 
@@ -106,7 +108,7 @@ def test_file() -> None:
             if 0 == len(list(walk_iterator(path, depth=1))):
                 safe_trash.trash(path)
 
-        _compress_to_decompress(temporary_root)
+        _compress_to_decompress(temporary_root, tree_root)
         _common_test(temporary_root)
 
     _inside_temporary_directory(individual_test)
@@ -124,7 +126,7 @@ def test_directory() -> None:
         ):
             safe_trash.trash(path)
 
-        _compress_to_decompress(temporary_root)
+        _compress_to_decompress(temporary_root, tree_root)
         _common_test(temporary_root)
 
     _inside_temporary_directory(individual_test)
