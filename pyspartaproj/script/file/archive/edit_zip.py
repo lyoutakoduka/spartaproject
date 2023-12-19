@@ -78,7 +78,7 @@ class EditZip(WorkSpace):
             decompress_zip.decompress_archive(path)
 
     def _record_compress_type(self, decompress_zip: DecompressZip) -> None:
-        self.is_lzma_before: bool = decompress_zip.is_lzma_archive(
+        self._is_lzma_before: bool = decompress_zip.is_lzma_archive(
             self._archive_path
         )
 
