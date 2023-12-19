@@ -5,7 +5,7 @@
 
 from datetime import datetime
 from pathlib import Path
-from zipfile import ZIP_STORED, ZipFile, ZipInfo
+from zipfile import ZIP_LZMA, ZipFile, ZipInfo
 
 from pyspartaproj.context.default.string_context import StrPair, Strs
 from pyspartaproj.context.extension.path_context import Paths
@@ -134,14 +134,11 @@ class DecompressZip:
             bool: Return True if archive isn't compressed.
         """
         with ZipFile(decompress_target) as zip_file:
-            return 1 == len(
-                set(
-                    [
-                        ZIP_STORED == information.compress_type
-                        for information in zip_file.infolist()
-                    ]
-                )
-            )
+            for information in zip_file.infolist():
+                if ZIP_LZMA == information.compress_type:
+                    return True
+
+        return False
 
     def __init__(self, output_root: Path) -> None:
         """Initialize decompress directory.
