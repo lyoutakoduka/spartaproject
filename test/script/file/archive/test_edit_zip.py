@@ -172,6 +172,10 @@ def _get_edit_history(edit_zip: EditZip) -> PathPair:
     return _edit_to_archived(edit_zip.get_decompressed_root())
 
 
+def _get_archive_size(archive_path: Path) -> int:
+    return archive_path.stat().st_size
+
+
 def _common_test(
     temporary_root: Path, stamp_before: StrPair, edit_zip: EditZip
 ) -> None:
