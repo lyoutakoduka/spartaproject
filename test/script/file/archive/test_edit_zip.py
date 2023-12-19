@@ -64,9 +64,7 @@ def _create_archive(temporary_root: Path) -> None:
 
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as temporary_path:
-        temporary_root: Path = Path(temporary_path)
-        _create_archive(temporary_root)
-        function(temporary_root)
+        function(Path(temporary_path))
 
 
 def _add_to_archived(archive_root: Path) -> Path:
@@ -187,6 +185,7 @@ def _common_test(
 
 def test_single() -> None:
     def individual_test(temporary_root: Path) -> None:
+        _create_archive(temporary_root)
         stamp_before: StrPair = _get_archive_stamp_before(temporary_root)
 
         compress_zip = CompressZip(Path(temporary_root, "archive"))
@@ -201,6 +200,7 @@ def test_multiple() -> None:
     limit_byte: int = 50
 
     def individual_test(temporary_root: Path) -> None:
+        _create_archive(temporary_root)
         stamp_before: StrPair = _get_archive_stamp_before(temporary_root)
 
         compress_zip = CompressZip(
