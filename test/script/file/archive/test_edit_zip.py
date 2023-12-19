@@ -50,18 +50,15 @@ def _get_archive_stamp(stamp_root: Path) -> StrPair:
     }
 
 
-def _create_archive(temporary_root: Path) -> StrPair:
-    before_root: Path = Path(temporary_root, "before")
-    create_temporary_tree(before_root)
-    return _get_archive_stamp(before_root)
+def _create_archive(temporary_root: Path) -> None:
+    create_temporary_tree(Path(temporary_root, "before"))
 
 
-def _inside_temporary_directory(
-    function: Callable[[Path, StrPair], None]
-) -> None:
+def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as temporary_path:
         temporary_root: Path = Path(temporary_path)
-        function(temporary_root, _create_archive(temporary_root))
+        _create_archive(temporary_root)
+        function(temporary_root)
 
 
 def _add_to_archived(archive_root: Path) -> Path:
@@ -180,7 +177,11 @@ def _common_test(
 
 
 def test_single() -> None:
-    def individual_test(temporary_root: Path, stamp_before: StrPair) -> None:
+    def individual_test(temporary_root: Path) -> None:
+        stamp_before: StrPair = _get_archive_stamp(
+            Path(temporary_root, "before")
+        )
+
         _common_test(
             temporary_root,
             stamp_before,
@@ -198,7 +199,11 @@ def test_single() -> None:
 def test_multiple() -> None:
     limit_byte: int = 50
 
-    def individual_test(temporary_root: Path, stamp_before: StrPair) -> None:
+    def individual_test(temporary_root: Path) -> None:
+        stamp_before: StrPair = _get_archive_stamp(
+            Path(temporary_root, "before")
+        )
+
         _common_test(
             temporary_root,
             stamp_before,
