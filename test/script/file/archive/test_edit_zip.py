@@ -50,6 +50,14 @@ def _get_archive_stamp(stamp_root: Path) -> StrPair:
     }
 
 
+def _get_archive_stamp_before(temporary_root: Path) -> StrPair:
+    return _get_archive_stamp(Path(temporary_root, "before"))
+
+
+def _get_archive_stamp_after(temporary_root: Path) -> StrPair:
+    return _get_archive_stamp(Path(temporary_root, "after"))
+
+
 def _create_archive(temporary_root: Path) -> None:
     create_temporary_tree(Path(temporary_root, "before"))
 
