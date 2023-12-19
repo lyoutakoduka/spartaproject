@@ -131,7 +131,7 @@ class DecompressZip:
                 which you want to get status of compression format.
 
         Returns:
-            bool: Return True if archive isn't compressed.
+            bool: Return True if archive is compressed by LZMA.
         """
         with ZipFile(decompress_target) as zip_file:
             for information in zip_file.infolist():
