@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to edit internal of zip archive file."""
+
+
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
@@ -193,6 +196,8 @@ def _common_test(
 
 
 def test_single() -> None:
+    """Test to edit edit internal of single zip archive file."""
+
     def individual_test(temporary_root: Path) -> None:
         stamp_before: StrPair = _initialize_archive(temporary_root)
 
@@ -205,6 +210,7 @@ def test_single() -> None:
 
 
 def test_multiple() -> None:
+    """Test to edit edit internal of multiple zip archive files."""
     limit_byte: int = 50
 
     def individual_test(temporary_root: Path) -> None:
@@ -224,6 +230,8 @@ def test_multiple() -> None:
 
 
 def test_compress() -> None:
+    """Test to compare size fo zip archive files."""
+
     def individual_test(temporary_root: Path) -> None:
         create_temporary_tree(Path(temporary_root, "before"), tree_weight=3)
 
