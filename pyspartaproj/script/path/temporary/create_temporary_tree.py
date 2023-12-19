@@ -50,6 +50,7 @@ def _sample_json(root: Path, weight: int) -> None:
                 str(i).zfill(section_digit): function(count - 1)
                 for i in range(weight)
             }
+
         return line_text
 
     json_export(Path(root, "file.json"), function(weight))
@@ -59,6 +60,7 @@ def _recursive_tree(
     root: Path, tree_deep: int, deep: int, weight: int
 ) -> None:
     create_directory_array([root, Path(root, "empty")])
+
     _sample_text(root, weight)
     _sample_config(root, weight)
     _sample_json(root, weight)
