@@ -82,9 +82,9 @@ def _create_archive(temporary_root: Path, tree_root: Path) -> Path:
 
 
 def _compress_to_decompress(temporary_root: Path, tree_root: Path) -> None:
-    archived: Path = _create_archive(temporary_root, tree_root)
-    decompress_zip = DecompressZip(Path(temporary_root, "extract"))
-    decompress_zip.decompress_archive(archived)
+    DecompressZip(Path(temporary_root, "extract")).decompress_archive(
+        _create_archive(temporary_root, tree_root)
+    )
 
 
 def _inside_temporary_directory(
