@@ -77,10 +77,16 @@ class EditZip(WorkSpace):
         for path in self._decompressed:
             decompress_zip.decompress_archive(path)
 
+    def _record_compress_type(self, decompress_zip: DecompressZip) -> None:
+        self.is_lzma_before: bool = decompress_zip.is_lzma_archive(
+            self._archive_path
+        )
+
     def _initialize_archive(self) -> None:
         decompress_zip = DecompressZip(self.get_root())
 
         self._decompress_archive(decompress_zip)
+        self._record_compress_type(decompress_zip)
 
         self._archive_stamp: StrPair = self._get_archive_stamp()
 
