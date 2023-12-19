@@ -69,13 +69,11 @@ def _add_to_archived(archive_root: Path) -> Path:
 
 
 def _remove_from_archived(archive_root: Path) -> Path:
-    safe_trash = SafeTrash()
-    return safe_trash.trash(Path(archive_root, "file.txt"))
+    return SafeTrash().trash(Path(archive_root, "file.txt"))
 
 
 def _update_to_archived(archive_root: Path) -> Path:
-    file_name: str = "file.ini"
-    rename_path: Path = Path(archive_root, file_name)
+    rename_path: Path = Path(archive_root, "file.ini")
 
     safe_rename = SafeRename()
     safe_rename.rename(rename_path, rename_path.with_name("rename"))
