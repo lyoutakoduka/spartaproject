@@ -223,6 +223,24 @@ def test_multiple() -> None:
     _inside_temporary_directory(individual_test)
 
 
+def test_compress() -> None:
+    def individual_test(temporary_root: Path) -> None:
+        create_temporary_tree(Path(temporary_root, "before"), tree_weight=3)
+
+        archive_path = _add_archive(
+            temporary_root,
+            CompressZip(Path(temporary_root, "archive")),
+        )
+        archive_size_before = _get_archive_size(archive_path)
+
+        if EditZip(archive_path, compress=True).close_archive():
+            assert archive_size_before > _get_archive_size(archive_path)
+        else:
+            fail()
+
+    _inside_temporary_directory(individual_test)
+
+
 def main() -> bool:
     """All test of feature flags module.
 
@@ -231,4 +249,5 @@ def main() -> bool:
     """
     test_single()
     test_multiple()
+    test_compress()
     return True
