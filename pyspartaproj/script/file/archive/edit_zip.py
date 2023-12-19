@@ -42,8 +42,14 @@ class EditZip(WorkSpace):
             ]
         )
 
+    def _is_difference_compress_type(self) -> bool:
+        return self._is_lzma_before != self._is_lzma_after
+
     def _is_difference_archive(self) -> StrPair | None:
         archive_stamp: StrPair = self._get_archive_stamp()
+
+        if self._is_difference_compress_type():
+            return archive_stamp
 
         if self._is_difference_archive_stamp(archive_stamp):
             return archive_stamp
