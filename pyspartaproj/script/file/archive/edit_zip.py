@@ -34,18 +34,21 @@ class EditZip(WorkSpace):
     def _get_archive_stamp(self) -> StrPair:
         return get_directory_latest(walk_iterator(self.get_root()))
 
-    def _is_difference_archive(self) -> StrPair | None:
-        archive_stamp: StrPair = self._get_archive_stamp()
-
-        if is_same_json(
+    def _is_difference_archive_stamp(self, archive_stamp: StrPair) -> bool:
+        return not is_same_json(
             *[
                 multiple_to_json(stamp)
                 for stamp in [self._archive_stamp, archive_stamp]
             ]
-        ):
-            return None
+        )
 
-        return archive_stamp
+    def _is_difference_archive(self) -> StrPair | None:
+        archive_stamp: StrPair = self._get_archive_stamp()
+
+        if self._is_difference_archive_stamp(archive_stamp):
+            return archive_stamp
+
+        return None
 
     def _cleanup_before_override(self) -> None:
         safe_trash = SafeTrash()
