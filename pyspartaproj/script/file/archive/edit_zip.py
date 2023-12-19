@@ -29,7 +29,7 @@ class EditZip(WorkSpace):
         self._still_removed: bool = False
         self._archive_path: Path = archive_path
         self._limit_byte: int = limit_byte
-        self._compress: bool = compress
+        self._is_lzma_after: bool = compress
 
     def _get_archive_stamp(self) -> StrPair:
         return get_directory_latest(walk_iterator(self.get_root()))
@@ -59,7 +59,7 @@ class EditZip(WorkSpace):
         compress_zip = CompressZip(
             self._archive_path.parent,
             limit_byte=self._limit_byte,
-            compress=self._compress,
+            compress=self._is_lzma_after,
         )
 
         for path_text in archive_stamp.keys():
