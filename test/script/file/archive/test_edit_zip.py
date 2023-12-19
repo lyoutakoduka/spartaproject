@@ -157,10 +157,9 @@ def _get_stamp_after(
     edit_history: PathPair,
     archived: Paths,
 ) -> StrPair:
-    after_root: Path = Path(temporary_root, "after")
-    _decompress_archive(after_root, archived)
+    _decompress_archive(Path(temporary_root, "after"), archived)
 
-    stamp_after: StrPair = _get_archive_stamp(after_root)
+    stamp_after: StrPair = _get_archive_stamp_after(temporary_root)
     _edit_time_stamp(edit_history, stamp_before, stamp_after)
 
     return stamp_after
@@ -186,9 +185,7 @@ def _common_test(
 
 def test_single() -> None:
     def individual_test(temporary_root: Path) -> None:
-        stamp_before: StrPair = _get_archive_stamp(
-            Path(temporary_root, "before")
-        )
+        stamp_before: StrPair = _get_archive_stamp_before(temporary_root)
 
         _common_test(
             temporary_root,
@@ -208,9 +205,7 @@ def test_multiple() -> None:
     limit_byte: int = 50
 
     def individual_test(temporary_root: Path) -> None:
-        stamp_before: StrPair = _get_archive_stamp(
-            Path(temporary_root, "before")
-        )
+        stamp_before: StrPair = _get_archive_stamp_before(temporary_root)
 
         _common_test(
             temporary_root,
