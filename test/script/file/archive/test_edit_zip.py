@@ -62,6 +62,11 @@ def _create_archive(temporary_root: Path) -> None:
     create_temporary_tree(Path(temporary_root, "before"))
 
 
+def _initialize_archive(temporary_root: Path) -> StrPair:
+    _create_archive(temporary_root)
+    return _get_archive_stamp_before(temporary_root)
+
+
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
@@ -185,8 +190,7 @@ def _common_test(
 
 def test_single() -> None:
     def individual_test(temporary_root: Path) -> None:
-        _create_archive(temporary_root)
-        stamp_before: StrPair = _get_archive_stamp_before(temporary_root)
+        stamp_before: StrPair = _initialize_archive(temporary_root)
 
         compress_zip = CompressZip(Path(temporary_root, "archive"))
         edit_zip = EditZip(_add_archive(temporary_root, compress_zip))
@@ -200,8 +204,7 @@ def test_multiple() -> None:
     limit_byte: int = 50
 
     def individual_test(temporary_root: Path) -> None:
-        _create_archive(temporary_root)
-        stamp_before: StrPair = _get_archive_stamp_before(temporary_root)
+        stamp_before: StrPair = _initialize_archive(temporary_root)
 
         compress_zip = CompressZip(
             Path(temporary_root, "archive"), limit_byte=limit_byte
