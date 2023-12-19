@@ -23,6 +23,10 @@ def _get_tree_contents(temporary_root: Path) -> Paths:
     )
 
 
+def _common_test(temporary_root: Path) -> None:
+    assert 0 == len(_get_tree_contents(temporary_root))
+
+
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
@@ -77,7 +81,7 @@ def test_deep() -> None:
         for index in outrange_indices:
             create_temporary_tree(temporary_path, tree_deep=index)
 
-        assert 0 == len(_get_tree_contents(temporary_path))
+        _common_test(temporary_path)
 
     _inside_temporary_directory(individual_test)
 
@@ -90,7 +94,7 @@ def test_weight() -> None:
         for index in outrange_indices:
             create_temporary_tree(temporary_path, tree_weight=index)
 
-        assert 0 == len(_get_tree_contents(temporary_path))
+        _common_test(temporary_path)
 
     _inside_temporary_directory(individual_test)
 
