@@ -69,8 +69,7 @@ class EditZip(WorkSpace):
 
         return compress_zip.close_archived()
 
-    def _decompress_archive(self) -> None:
-        decompress_zip = DecompressZip(self.get_root())
+    def _decompress_archive(self, decompress_zip: DecompressZip) -> None:
         self._decompressed: Paths = decompress_zip.sequential_archives(
             self._archive_path
         )
@@ -79,7 +78,10 @@ class EditZip(WorkSpace):
             decompress_zip.decompress_archive(path)
 
     def _initialize_archive(self) -> None:
-        self._decompress_archive()
+        decompress_zip = DecompressZip(self.get_root())
+
+        self._decompress_archive(decompress_zip)
+
         self._archive_stamp: StrPair = self._get_archive_stamp()
 
     def _finalize_archive(self) -> Paths | None:
