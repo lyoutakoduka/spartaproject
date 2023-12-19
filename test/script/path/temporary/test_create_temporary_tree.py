@@ -17,13 +17,15 @@ from pyspartaproj.script.path.temporary.create_temporary_tree import (
 )
 
 
-def _inside_temporary_directory(function: Callable[[Path], None]) -> Paths:
+def _get_tree_contents(temporary_root: Path) -> Paths:
+    return get_relative_array(
+        list(walk_iterator(temporary_root)), root_path=temporary_root
+    )
+
+
+def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as temporary_path:
-        root_path: Path = Path(temporary_path)
-        function(root_path)
-        return get_relative_array(
-            list(walk_iterator(root_path)), root_path=root_path
-        )
+        function(Path(temporary_path))
 
 
 def _get_three_hierarchy() -> Strs2:
@@ -62,8 +64,9 @@ def test_three() -> None:
 
     def individual_test(temporary_path: Path) -> None:
         create_temporary_tree(temporary_path, tree_deep=3)
+        assert expected == _get_tree_contents(temporary_path)
 
-    assert expected == _inside_temporary_directory(individual_test)
+    _inside_temporary_directory(individual_test)
 
 
 def test_deep() -> None:
@@ -74,7 +77,9 @@ def test_deep() -> None:
         for index in outrange_indices:
             create_temporary_tree(temporary_path, tree_deep=index)
 
-    assert 0 == len(_inside_temporary_directory(individual_test))
+        assert 0 == len(_get_tree_contents(temporary_path))
+
+    _inside_temporary_directory(individual_test)
 
 
 def test_weight() -> None:
@@ -85,7 +90,9 @@ def test_weight() -> None:
         for index in outrange_indices:
             create_temporary_tree(temporary_path, tree_weight=index)
 
-    assert 0 == len(_inside_temporary_directory(individual_test))
+        assert 0 == len(_get_tree_contents(temporary_path))
+
+    _inside_temporary_directory(individual_test)
 
 
 def main() -> bool:
