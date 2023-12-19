@@ -187,16 +187,10 @@ def test_single() -> None:
     def individual_test(temporary_root: Path) -> None:
         stamp_before: StrPair = _get_archive_stamp_before(temporary_root)
 
-        _common_test(
-            temporary_root,
-            stamp_before,
-            EditZip(
-                _add_archive(
-                    temporary_root,
-                    CompressZip(Path(temporary_root, "archive")),
-                )
-            ),
-        )
+        compress_zip = CompressZip(Path(temporary_root, "archive"))
+        edit_zip = EditZip(_add_archive(temporary_root, compress_zip))
+
+        _common_test(temporary_root, stamp_before, edit_zip)
 
     _inside_temporary_directory(individual_test)
 
@@ -207,19 +201,15 @@ def test_multiple() -> None:
     def individual_test(temporary_root: Path) -> None:
         stamp_before: StrPair = _get_archive_stamp_before(temporary_root)
 
-        _common_test(
-            temporary_root,
-            stamp_before,
-            EditZip(
-                _add_archive(
-                    temporary_root,
-                    CompressZip(
-                        Path(temporary_root, "archive"), limit_byte=limit_byte
-                    ),
-                ),
-                limit_byte=limit_byte,
-            ),
+        compress_zip = CompressZip(
+            Path(temporary_root, "archive"), limit_byte=limit_byte
         )
+        edit_zip = EditZip(
+            _add_archive(temporary_root, compress_zip),
+            limit_byte=limit_byte,
+        )
+
+        _common_test(temporary_root, stamp_before, edit_zip)
 
     _inside_temporary_directory(individual_test)
 
