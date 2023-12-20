@@ -33,6 +33,14 @@ def _get_second_empty() -> Strs:
     return [_name_dir_1, _name_dir_empty]
 
 
+def _get_second_files() -> Strs2:
+    return [
+        [_name_dir_1, _name_ini],
+        _get_second_json(),
+        [_name_dir_1, _name_text],
+    ]
+
+
 def _get_third_text() -> Strs:
     return _name_dirs + [_name_text]
 
@@ -78,9 +86,7 @@ def test_all() -> None:
         [_name_text],
         _name_dirs,
         _get_second_empty(),
-        [_name_dir_1, _name_ini],
-        _get_second_json(),
-        [_name_dir_1, _name_text],
+        *_get_second_files(),
         _get_third_empty(),
         *_get_third_files(),
     ]
@@ -92,13 +98,7 @@ def test_all() -> None:
 
 
 def test_depth() -> None:
-    expected: Strs2 = [
-        _name_dirs,
-        _get_second_empty(),
-        [_name_dir_1, _name_ini],
-        _get_second_json(),
-        [_name_dir_1, _name_text],
-    ]
+    expected: Strs2 = [_name_dirs, _get_second_empty(), *_get_second_files()]
 
     def individual_test(root_path: Path) -> None:
         _common_test(expected, walk_iterator(root_path, depth=2), root_path)
@@ -111,9 +111,7 @@ def test_directory() -> None:
         [_name_ini],
         [_name_json],
         [_name_text],
-        [_name_dir_1, _name_ini],
-        _get_second_json(),
-        [_name_dir_1, _name_text],
+        *_get_second_files(),
         *_get_third_files(),
     ]
 
