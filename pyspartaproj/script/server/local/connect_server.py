@@ -36,46 +36,12 @@ class ConnectServer(PathServer, ProjectContext):
         PathServer.__init__(self)
         ProjectContext.__init__(self)
 
-    def __init__(self) -> None:
-        """Initialize super class and network objects."""
-        self._initialize_super_class()
-        self._initialize_connect()
-
-    def get_ssh(self) -> SSHClient | None:
-        """Get network object about SSH.
-
-        Returns:
-            SSHClient | None: network object if exists
-        """
-        return self._ssh
-
-    def get_channel(self) -> Channel | None:
-        """Get network object about shell of SSH.
-
-        Returns:
-            Channel | None: network object if exists
-        """
-        return self._channel
-
-    def get_sftp(self) -> SFTPClient | None:
-        """Get network object about SFTP.
-
-        Returns:
-            SFTPClient | None: network object if exists
-        """
-        return self._sftp
-
     def _finalize_network_objects(self) -> None:
         if ssh := self.get_ssh():
             ssh.close()
 
         if sftp := self.get_sftp():
             sftp.close()
-
-    def __del__(self) -> None:
-        """Close network objects."""
-        self._finalize_network_objects()
-        self._initialize_connect()
 
     def _get_passphrase(self) -> str:
         return self.get_string_context("server")[
@@ -170,20 +136,6 @@ class ConnectServer(PathServer, ProjectContext):
             channel.send(command.encode("utf-8"))
             self._sleep()
 
-    def execute_ssh(self, commands: Strs) -> Strs:
-        """Execute command by using SSH functionality.
-
-        Args:
-            commands (Strs): elements of command which will merged by space.
-                e.g. if command is "ls -la",
-                you can input ["ls", "-la"] or ["ls -la"]
-
-        Returns:
-            Strs: execution result of command
-        """
-        self._execute_ssh(commands)
-        return self._receive_ssh()
-
     def _correct_path(self, result: Strs) -> bool:
         expected: Strs = [
             str(self.get_path(root))
@@ -239,6 +191,44 @@ class ConnectServer(PathServer, ProjectContext):
         self._sftp_remote_path()
         return self._sftp_correct_path()
 
+    def get_ssh(self) -> SSHClient | None:
+        """Get network object about SSH.
+
+        Returns:
+            SSHClient | None: network object if exists
+        """
+        return self._ssh
+
+    def get_channel(self) -> Channel | None:
+        """Get network object about shell of SSH.
+
+        Returns:
+            Channel | None: network object if exists
+        """
+        return self._channel
+
+    def get_sftp(self) -> SFTPClient | None:
+        """Get network object about SFTP.
+
+        Returns:
+            SFTPClient | None: network object if exists
+        """
+        return self._sftp
+
+    def execute_ssh(self, commands: Strs) -> Strs:
+        """Execute command by using SSH functionality.
+
+        Args:
+            commands (Strs): elements of command which will merged by space.
+                e.g. if command is "ls -la",
+                you can input ["ls", "-la"] or ["ls -la"]
+
+        Returns:
+            Strs: execution result of command
+        """
+        self._execute_ssh(commands)
+        return self._receive_ssh()
+
     def connect(self) -> bool:
         """Connect to server by using SSH and SFTP.
 
@@ -250,3 +240,13 @@ class ConnectServer(PathServer, ProjectContext):
                 return True
 
         return False
+
+    def __del__(self) -> None:
+        """Close network objects."""
+        self._finalize_network_objects()
+        self._initialize_connect()
+
+    def __init__(self) -> None:
+        """Initialize super class and network objects."""
+        self._initialize_super_class()
+        self._initialize_connect()
