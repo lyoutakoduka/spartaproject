@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Module to get list of contents in the directory you select."""
+
 from pathlib import Path
 
 from pyspartaproj.context.extension.path_context import PathGene
@@ -39,6 +41,36 @@ def walk_iterator(
     suffix: str = "*",
     glob_filter: str = default_filter,
 ) -> PathGene:
+    """Function to get list of contents in the directory you search.
+
+    Args:
+        root (Path): Path of directory you  want to get contents.
+
+        depth (int, optional): Defaults to 0.
+            Additional depth of directory hierarchy which you want to search.
+            Only surface in the directory is searched, if it's 0.
+
+        file (bool, optional): Defaults to True.
+            Search file. If it's False, Ignore file when search.
+
+        directory (bool, optional): Defaults to True.
+            Search directory. If it's False, Ignore directory when search.
+
+        suffix (str, optional): Defaults to "*".
+            Filter by file extension.
+            If it's "*", all type files become search target.
+
+        glob_filter (str, optional): Defaults to default_filter.
+            String used for glob filter.
+            If it's not default, following argument are ignored.
+            ("depth", "file", "directory", and "suffix")
+
+    Returns:
+        PathGene: Path generator, not list of Path.
+
+    Yields:
+        Iterator[PathGene]: Path of file or directory found by search.
+    """
     if default_filter == glob_filter:
         glob_filter = _create_filter(depth, file, directory, suffix)
 
