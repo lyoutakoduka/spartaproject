@@ -10,6 +10,10 @@ initialize_decimal()
 
 
 class TimerSelect:
+    def _initialize_variable(self, override: bool, interval: Decimal) -> None:
+        self._override: bool = override
+        self._interval: Decimal = interval
+
     def _get_current(self) -> Decimal:
         current_time: datetime = datetime.now(timezone.utc)
         return Decimal(str(current_time.timestamp()))
@@ -29,9 +33,7 @@ class TimerSelect:
         if interval is None:
             interval = Decimal("1")
 
-        self._override: bool = override
-        self._interval: Decimal = interval
-
+        self._initialize_variable(override, interval)
         self._initialize_current()
 
     def increase_timer(self) -> None:
