@@ -59,12 +59,6 @@ class PathServer(WorkSpace):
         self._build_path_private()
         self._build_path_develop()
 
-    def __init__(self) -> None:
-        """Generate string path pair about server directory."""
-        super().__init__()
-
-        self._build_path_table()
-
     def get_path_table(self) -> Strs:
         """Get keys of predefined all paths about server.
 
@@ -146,3 +140,9 @@ class PathServer(WorkSpace):
             override=override,
             jst=jst,
         )
+
+    def __init__(self) -> None:
+        """Generate string path pair about server directory."""
+        super().__init__()
+
+        self._build_path_table()
