@@ -29,7 +29,7 @@ def _sorted_match(expected: Paths, source: Paths) -> bool:
     return 1 == len(set([str(sorted(name)) for name in [expected, source]]))
 
 
-def _check_walk_result(
+def _common_test(
     expected: Strs2, path_gene: PathGene, root_path: Path
 ) -> None:
     assert _sorted_match(
@@ -64,7 +64,7 @@ def test_all() -> None:
     ]
 
     def individual_test(root_path: Path) -> None:
-        _check_walk_result(expected, walk_iterator(root_path), root_path)
+        _common_test(expected, walk_iterator(root_path), root_path)
 
     _inside_temporary_directory(individual_test)
 
@@ -79,9 +79,7 @@ def test_depth() -> None:
     ]
 
     def individual_test(root_path: Path) -> None:
-        _check_walk_result(
-            expected, walk_iterator(root_path, depth=2), root_path
-        )
+        _common_test(expected, walk_iterator(root_path, depth=2), root_path)
 
     _inside_temporary_directory(individual_test)
 
@@ -100,7 +98,7 @@ def test_directory() -> None:
     ]
 
     def individual_test(root_path: Path) -> None:
-        _check_walk_result(
+        _common_test(
             expected, walk_iterator(root_path, directory=False), root_path
         )
 
@@ -117,9 +115,7 @@ def test_file() -> None:
     ]
 
     def individual_test(root_path: Path) -> None:
-        _check_walk_result(
-            expected, walk_iterator(root_path, file=False), root_path
-        )
+        _common_test(expected, walk_iterator(root_path, file=False), root_path)
 
     _inside_temporary_directory(individual_test)
 
@@ -132,7 +128,7 @@ def test_suffix() -> None:
     ]
 
     def individual_test(root_path: Path) -> None:
-        _check_walk_result(
+        _common_test(
             expected,
             walk_iterator(root_path, directory=False, suffix="json"),
             root_path,
@@ -145,7 +141,7 @@ def test_filter() -> None:
     expected: Strs2 = [_name_dirs + [_name_text]]
 
     def individual_test(root_path: Path) -> None:
-        _check_walk_result(
+        _common_test(
             expected,
             walk_iterator(root_path, glob_filter="*/*/*.txt"),
             root_path,
