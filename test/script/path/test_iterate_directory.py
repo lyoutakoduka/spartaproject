@@ -71,6 +71,10 @@ def _get_third_text() -> Strs:
     return _get_third_root() + _get_first_text()
 
 
+def _get_third_ini() -> Strs:
+    return _get_third_root() + _get_first_ini()
+
+
 def _get_third_json() -> Strs:
     return _get_third_root() + _get_first_json()
 
@@ -81,7 +85,7 @@ def _get_third_empty() -> Strs:
 
 def _get_third_files() -> Strs2:
     return [
-        _get_third_root() + _get_first_ini(),
+        _get_third_ini(),
         _get_third_json(),
         _get_third_text(),
     ]
