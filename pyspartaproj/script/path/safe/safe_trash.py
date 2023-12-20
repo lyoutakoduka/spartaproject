@@ -35,6 +35,9 @@ class SafeTrash(SafeRename):
 
             trash_root (Path | None, optional): Defaults to None.
                 Path of trash box directory.
+
+        Returns:
+            Path: "trash_path" is returned.
         """
         parent_root: Path = trash_path.parent
 
