@@ -23,6 +23,12 @@ def _get_tree_contents(temporary_root: Path) -> Paths:
     )
 
 
+def _sort_test(expected: Paths, result: Paths) -> None:
+    assert 1 == len(
+        set([str(sorted(contents)) for contents in [expected, result]])
+    )
+
+
 def _common_test(temporary_root: Path) -> None:
     assert 0 == len(_get_tree_contents(temporary_root))
 
@@ -68,7 +74,7 @@ def test_three() -> None:
 
     def individual_test(temporary_path: Path) -> None:
         create_temporary_tree(temporary_path, tree_deep=3)
-        assert expected == _get_tree_contents(temporary_path)
+        _sort_test(expected, _get_tree_contents(temporary_path))
 
     _inside_temporary_directory(individual_test)
 
