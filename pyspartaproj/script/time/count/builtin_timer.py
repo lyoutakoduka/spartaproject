@@ -27,15 +27,6 @@ class TimerSelect:
         else:
             self._count = self._get_current()
 
-    def __init__(
-        self, override: bool = False, interval: Decimal | None = None
-    ) -> None:
-        if interval is None:
-            interval = Decimal("1")
-
-        self._initialize_variable(override, interval)
-        self._initialize_current()
-
     def increase_timer(self) -> None:
         self._count += self._interval
 
@@ -44,3 +35,12 @@ class TimerSelect:
             return self._count
 
         return self._get_current()
+
+    def __init__(
+        self, override: bool = False, interval: Decimal | None = None
+    ) -> None:
+        if interval is None:
+            interval = Decimal("1")
+
+        self._initialize_variable(override, interval)
+        self._initialize_current()
