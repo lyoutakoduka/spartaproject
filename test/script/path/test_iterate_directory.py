@@ -143,7 +143,7 @@ def test_depth() -> None:
     _inside_temporary_directory(individual_test)
 
 
-def test_directory() -> None:
+def test_file() -> None:
     """Test to get files of selected directory."""
     expected: Strs2 = [
         *_get_first_files(),
@@ -159,7 +159,7 @@ def test_directory() -> None:
     _inside_temporary_directory(individual_test)
 
 
-def test_file() -> None:
+def test_directory() -> None:
     """Test to get directories of selected directory."""
     expected: Strs2 = [
         _get_first_empty(),
@@ -215,8 +215,8 @@ def main() -> bool:
     """
     test_all()
     test_depth()
-    test_directory()
     test_file()
+    test_directory()
     test_suffix()
     test_filter()
     return True
