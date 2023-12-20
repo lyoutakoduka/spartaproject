@@ -45,6 +45,10 @@ def _get_third_empty() -> Strs:
     return _name_dirs + [_name_dir_empty]
 
 
+def _get_third_files() -> Strs2:
+    return [_name_dirs + [_name_ini], _get_third_json(), _get_third_text()]
+
+
 def _sorted_match(expected: Paths, source: Paths) -> bool:
     return 1 == len(set([str(sorted(name)) for name in [expected, source]]))
 
@@ -78,9 +82,7 @@ def test_all() -> None:
         _get_second_json(),
         [_name_dir_1, _name_text],
         _get_third_empty(),
-        _name_dirs + [_name_ini],
-        _get_third_json(),
-        _get_third_text(),
+        *_get_third_files(),
     ]
 
     def individual_test(root_path: Path) -> None:
@@ -112,9 +114,7 @@ def test_directory() -> None:
         [_name_dir_1, _name_ini],
         _get_second_json(),
         [_name_dir_1, _name_text],
-        _name_dirs + [_name_ini],
-        _get_third_json(),
-        _get_third_text(),
+        *_get_third_files(),
     ]
 
     def individual_test(root_path: Path) -> None:
