@@ -38,14 +38,11 @@ def _check_walk_result(
     )
 
 
-def _inside_temporary_directory(
-    expected: Strs2, function: Callable[[Path], PathGene]
-) -> None:
+def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as temporary_path:
-        root_path: Path = create_temporary_tree(
-            Path(temporary_path), tree_deep=_tree_deep
+        function(
+            create_temporary_tree(Path(temporary_path), tree_deep=_tree_deep)
         )
-        _check_walk_result(expected, function(root_path), root_path)
 
 
 def test_all() -> None:
@@ -66,10 +63,10 @@ def test_all() -> None:
         _name_dirs + [_name_text],
     ]
 
-    def individual_test(root_path: Path) -> PathGene:
-        return walk_iterator(root_path)
+    def individual_test(root_path: Path) -> None:
+        _check_walk_result(expected, walk_iterator(root_path), root_path)
 
-    _inside_temporary_directory(expected, individual_test)
+    _inside_temporary_directory(individual_test)
 
 
 def test_depth() -> None:
@@ -81,10 +78,12 @@ def test_depth() -> None:
         [_name_dir_1, _name_text],
     ]
 
-    def individual_test(root_path: Path) -> PathGene:
-        return walk_iterator(root_path, depth=2)
+    def individual_test(root_path: Path) -> None:
+        _check_walk_result(
+            expected, walk_iterator(root_path, depth=2), root_path
+        )
 
-    _inside_temporary_directory(expected, individual_test)
+    _inside_temporary_directory(individual_test)
 
 
 def test_directory() -> None:
@@ -100,10 +99,12 @@ def test_directory() -> None:
         _name_dirs + [_name_text],
     ]
 
-    def individual_test(root_path: Path) -> PathGene:
-        return walk_iterator(root_path, directory=False)
+    def individual_test(root_path: Path) -> None:
+        _check_walk_result(
+            expected, walk_iterator(root_path, directory=False), root_path
+        )
 
-    _inside_temporary_directory(expected, individual_test)
+    _inside_temporary_directory(individual_test)
 
 
 def test_file() -> None:
@@ -115,10 +116,12 @@ def test_file() -> None:
         _name_dirs + [_name_dir_empty],
     ]
 
-    def individual_test(root_path: Path) -> PathGene:
-        return walk_iterator(root_path, file=False)
+    def individual_test(root_path: Path) -> None:
+        _check_walk_result(
+            expected, walk_iterator(root_path, file=False), root_path
+        )
 
-    _inside_temporary_directory(expected, individual_test)
+    _inside_temporary_directory(individual_test)
 
 
 def test_suffix() -> None:
@@ -128,19 +131,27 @@ def test_suffix() -> None:
         _name_dirs + [_name_json],
     ]
 
-    def individual_test(root_path: Path) -> PathGene:
-        return walk_iterator(root_path, directory=False, suffix="json")
+    def individual_test(root_path: Path) -> None:
+        _check_walk_result(
+            expected,
+            walk_iterator(root_path, directory=False, suffix="json"),
+            root_path,
+        )
 
-    _inside_temporary_directory(expected, individual_test)
+    _inside_temporary_directory(individual_test)
 
 
 def test_filter() -> None:
     expected: Strs2 = [_name_dirs + [_name_text]]
 
-    def individual_test(root_path: Path) -> PathGene:
-        return walk_iterator(root_path, glob_filter="*/*/*.txt")
+    def individual_test(root_path: Path) -> None:
+        _check_walk_result(
+            expected,
+            walk_iterator(root_path, glob_filter="*/*/*.txt"),
+            root_path,
+        )
 
-    _inside_temporary_directory(expected, individual_test)
+    _inside_temporary_directory(individual_test)
 
 
 def main() -> bool:
