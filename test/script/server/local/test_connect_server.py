@@ -8,8 +8,7 @@ from pyspartaproj.script.server.local.connect_server import ConnectServer
 
 def test_connect() -> None:
     """Test to connect server by using SSH and SFTP functionality."""
-    server: ConnectServer = ConnectServer()
-    assert server.connect()
+    assert ConnectServer().connect()
 
 
 def main() -> bool:
