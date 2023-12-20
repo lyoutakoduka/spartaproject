@@ -25,6 +25,18 @@ _name_json: str = "file.json"
 _name_text: str = "file.txt"
 
 
+def _get_third_text() -> Strs:
+    return _name_dirs + [_name_text]
+
+
+def _get_third_json() -> Strs:
+    return _name_dirs + [_name_json]
+
+
+def _get_third_empty() -> Strs:
+    return _name_dirs + [_name_dir_empty]
+
+
 def _sorted_match(expected: Paths, source: Paths) -> bool:
     return 1 == len(set([str(sorted(name)) for name in [expected, source]]))
 
@@ -57,10 +69,10 @@ def test_all() -> None:
         [_name_dir_1, _name_ini],
         [_name_dir_1, _name_json],
         [_name_dir_1, _name_text],
-        _name_dirs + [_name_dir_empty],
+        _get_third_empty(),
         _name_dirs + [_name_ini],
-        _name_dirs + [_name_json],
-        _name_dirs + [_name_text],
+        _get_third_json(),
+        _get_third_text(),
     ]
 
     def individual_test(root_path: Path) -> None:
@@ -93,8 +105,8 @@ def test_directory() -> None:
         [_name_dir_1, _name_json],
         [_name_dir_1, _name_text],
         _name_dirs + [_name_ini],
-        _name_dirs + [_name_json],
-        _name_dirs + [_name_text],
+        _get_third_json(),
+        _get_third_text(),
     ]
 
     def individual_test(root_path: Path) -> None:
@@ -111,7 +123,7 @@ def test_file() -> None:
         [_name_dir_empty],
         _name_dirs,
         [_name_dir_1, _name_dir_empty],
-        _name_dirs + [_name_dir_empty],
+        _get_third_empty(),
     ]
 
     def individual_test(root_path: Path) -> None:
@@ -124,7 +136,7 @@ def test_suffix() -> None:
     expected: Strs2 = [
         [_name_json],
         [_name_dir_1, _name_json],
-        _name_dirs + [_name_json],
+        _get_third_json(),
     ]
 
     def individual_test(root_path: Path) -> None:
@@ -138,7 +150,7 @@ def test_suffix() -> None:
 
 
 def test_filter() -> None:
-    expected: Strs2 = [_name_dirs + [_name_text]]
+    expected: Strs2 = [_get_third_text()]
 
     def individual_test(root_path: Path) -> None:
         _common_test(
