@@ -17,9 +17,7 @@ _tree_deep: int = 3
 
 _name_dir_1: str = "dir001"
 _name_dir_2: str = "dir002"
-_name_dirs: Strs = [_name_dir_1, _name_dir_2]
 _name_dir_empty: str = "empty"
-
 _name_ini: str = "file.ini"
 _name_json: str = "file.json"
 _name_text: str = "file.txt"
@@ -45,37 +43,45 @@ def _get_first_files() -> Strs2:
     return [_get_first_ini(), _get_first_json(), _get_first_text()]
 
 
+def _get_second_root() -> Strs:
+    return [_name_dir_1]
+
+
 def _get_second_json() -> Strs:
-    return [_name_dir_1] + _get_first_json()
+    return _get_second_root() + _get_first_json()
 
 
 def _get_second_empty() -> Strs:
-    return [_name_dir_1] + _get_first_empty()
+    return _get_second_root() + _get_first_empty()
 
 
 def _get_second_files() -> Strs2:
     return [
-        [_name_dir_1] + _get_first_ini(),
+        _get_second_root() + _get_first_ini(),
         _get_second_json(),
-        [_name_dir_1] + _get_first_text(),
+        _get_second_root() + _get_first_text(),
     ]
 
 
+def _get_third_root() -> Strs:
+    return _get_second_root() + [_name_dir_2]
+
+
 def _get_third_text() -> Strs:
-    return _name_dirs + _get_first_text()
+    return _get_third_root() + _get_first_text()
 
 
 def _get_third_json() -> Strs:
-    return _name_dirs + _get_first_json()
+    return _get_third_root() + _get_first_json()
 
 
 def _get_third_empty() -> Strs:
-    return _name_dirs + _get_first_empty()
+    return _get_third_root() + _get_first_empty()
 
 
 def _get_third_files() -> Strs2:
     return [
-        _name_dirs + _get_first_ini(),
+        _get_third_root() + _get_first_ini(),
         _get_third_json(),
         _get_third_text(),
     ]
@@ -103,12 +109,12 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 
 def test_all() -> None:
     expected: Strs2 = [
-        [_name_dir_1],
         _get_first_empty(),
         *_get_first_files(),
-        _name_dirs,
+        _get_second_root(),
         _get_second_empty(),
         *_get_second_files(),
+        _get_third_root(),
         _get_third_empty(),
         *_get_third_files(),
     ]
@@ -120,7 +126,11 @@ def test_all() -> None:
 
 
 def test_depth() -> None:
-    expected: Strs2 = [_name_dirs, _get_second_empty(), *_get_second_files()]
+    expected: Strs2 = [
+        _get_second_empty(),
+        *_get_second_files(),
+        _get_third_root(),
+    ]
 
     def individual_test(root_path: Path) -> None:
         _common_test(expected, walk_iterator(root_path, depth=2), root_path)
@@ -145,10 +155,10 @@ def test_directory() -> None:
 
 def test_file() -> None:
     expected: Strs2 = [
-        [_name_dir_1],
         _get_first_empty(),
-        _name_dirs,
+        _get_second_root(),
         _get_second_empty(),
+        _get_third_root(),
         _get_third_empty(),
     ]
 
