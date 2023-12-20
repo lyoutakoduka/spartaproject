@@ -46,18 +46,18 @@ def _get_first_files() -> Strs2:
 
 
 def _get_second_json() -> Strs:
-    return [_name_dir_1, _name_json]
+    return [_name_dir_1] + _get_first_json()
 
 
 def _get_second_empty() -> Strs:
-    return [_name_dir_1, _name_dir_empty]
+    return [_name_dir_1] + _get_first_empty()
 
 
 def _get_second_files() -> Strs2:
     return [
-        [_name_dir_1, _name_ini],
+        [_name_dir_1] + _get_first_ini(),
         _get_second_json(),
-        [_name_dir_1, _name_text],
+        [_name_dir_1] + _get_first_text(),
     ]
 
 
