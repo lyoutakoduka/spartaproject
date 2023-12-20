@@ -13,30 +13,21 @@ from pyspartaproj.script.path.temporary.create_temporary_tree import (
     create_temporary_tree,
 )
 
-_tree_deep: int = 3
-
-_name_dir_1: str = "dir001"
-_name_dir_2: str = "dir002"
-_name_dir_empty: str = "empty"
-_name_ini: str = "file.ini"
-_name_json: str = "file.json"
-_name_text: str = "file.txt"
-
 
 def _get_first_ini() -> Strs:
-    return [_name_ini]
+    return ["file.ini"]
 
 
 def _get_first_json() -> Strs:
-    return [_name_json]
+    return ["file.json"]
 
 
 def _get_first_text() -> Strs:
-    return [_name_text]
+    return ["file.txt"]
 
 
 def _get_first_empty() -> Strs:
-    return [_name_dir_empty]
+    return ["empty"]
 
 
 def _get_first_files() -> Strs2:
@@ -44,7 +35,7 @@ def _get_first_files() -> Strs2:
 
 
 def _get_second_root() -> Strs:
-    return [_name_dir_1]
+    return ["dir001"]
 
 
 def _get_second_ini() -> Strs:
@@ -72,7 +63,7 @@ def _get_second_files() -> Strs2:
 
 
 def _get_third_root() -> Strs:
-    return _get_second_root() + [_name_dir_2]
+    return _get_second_root() + ["dir002"]
 
 
 def _get_third_text() -> Strs:
@@ -114,9 +105,7 @@ def _common_test(
 
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as temporary_path:
-        function(
-            create_temporary_tree(Path(temporary_path), tree_deep=_tree_deep)
-        )
+        function(create_temporary_tree(Path(temporary_path), tree_deep=3))
 
 
 def test_all() -> None:
