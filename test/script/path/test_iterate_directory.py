@@ -25,8 +25,24 @@ _name_json: str = "file.json"
 _name_text: str = "file.txt"
 
 
+def _get_first_ini() -> Strs:
+    return [_name_ini]
+
+
+def _get_first_json() -> Strs:
+    return [_name_json]
+
+
+def _get_first_text() -> Strs:
+    return [_name_text]
+
+
+def _get_first_empty() -> Strs:
+    return [_name_dir_empty]
+
+
 def _get_first_files() -> Strs2:
-    return [[_name_ini], [_name_json], [_name_text]]
+    return [_get_first_ini(), _get_first_json(), _get_first_text()]
 
 
 def _get_second_json() -> Strs:
@@ -46,19 +62,23 @@ def _get_second_files() -> Strs2:
 
 
 def _get_third_text() -> Strs:
-    return _name_dirs + [_name_text]
+    return _name_dirs + _get_first_text()
 
 
 def _get_third_json() -> Strs:
-    return _name_dirs + [_name_json]
+    return _name_dirs + _get_first_json()
 
 
 def _get_third_empty() -> Strs:
-    return _name_dirs + [_name_dir_empty]
+    return _name_dirs + _get_first_empty()
 
 
 def _get_third_files() -> Strs2:
-    return [_name_dirs + [_name_ini], _get_third_json(), _get_third_text()]
+    return [
+        _name_dirs + _get_first_ini(),
+        _get_third_json(),
+        _get_third_text(),
+    ]
 
 
 def _sorted_match(expected: Paths, source: Paths) -> bool:
@@ -84,7 +104,7 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 def test_all() -> None:
     expected: Strs2 = [
         [_name_dir_1],
-        [_name_dir_empty],
+        _get_first_empty(),
         *_get_first_files(),
         _name_dirs,
         _get_second_empty(),
@@ -126,7 +146,7 @@ def test_directory() -> None:
 def test_file() -> None:
     expected: Strs2 = [
         [_name_dir_1],
-        [_name_dir_empty],
+        _get_first_empty(),
         _name_dirs,
         _get_second_empty(),
         _get_third_empty(),
@@ -140,7 +160,7 @@ def test_file() -> None:
 
 def test_suffix() -> None:
     expected: Strs2 = [
-        [_name_json],
+        _get_first_json(),
         _get_second_json(),
         _get_third_json(),
     ]
