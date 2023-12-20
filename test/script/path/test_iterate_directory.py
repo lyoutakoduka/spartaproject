@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to get list of contents in the directory you select."""
+
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
@@ -109,6 +111,7 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 
 
 def test_all() -> None:
+    """Test to get contents of specific directory."""
     expected: Strs2 = [
         _get_first_empty(),
         *_get_first_files(),
@@ -127,6 +130,7 @@ def test_all() -> None:
 
 
 def test_depth() -> None:
+    """Test to get contents of specific directory layer."""
     expected: Strs2 = [
         _get_second_empty(),
         *_get_second_files(),
@@ -140,6 +144,7 @@ def test_depth() -> None:
 
 
 def test_directory() -> None:
+    """Test to get files of selected directory."""
     expected: Strs2 = [
         *_get_first_files(),
         *_get_second_files(),
@@ -155,6 +160,7 @@ def test_directory() -> None:
 
 
 def test_file() -> None:
+    """Test to get directories of selected directory."""
     expected: Strs2 = [
         _get_first_empty(),
         _get_second_root(),
@@ -170,6 +176,7 @@ def test_file() -> None:
 
 
 def test_suffix() -> None:
+    """Test to get files of specific file format."""
     expected: Strs2 = [
         _get_first_json(),
         _get_second_json(),
@@ -187,6 +194,7 @@ def test_suffix() -> None:
 
 
 def test_filter() -> None:
+    """Test to get contents of specific directory by Glob format filter."""
     expected: Strs2 = [_get_third_text()]
 
     def individual_test(root_path: Path) -> None:
@@ -200,6 +208,11 @@ def test_filter() -> None:
 
 
 def main() -> bool:
+    """All test of feature flags module.
+
+    Returns:
+        bool: Success if get to the end of function.
+    """
     test_all()
     test_depth()
     test_directory()
