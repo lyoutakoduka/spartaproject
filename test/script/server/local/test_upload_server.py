@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to upload file or directory by SFTP functionality."""
+
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
@@ -32,6 +34,8 @@ def _inside_temporary_directory(
 
 
 def test_file() -> None:
+    """Test to upload single file to server."""
+
     def individual_test(server: UploadServer, temporary_path: Path) -> None:
         _common_test(server, create_temporary_file(temporary_path))
 
@@ -39,6 +43,8 @@ def test_file() -> None:
 
 
 def test_directory() -> None:
+    """Test to upload single directory to server."""
+
     def individual_test(server: UploadServer, temporary_path: Path) -> None:
         _common_test(
             server, create_directory(Path(temporary_path, "directory"))
@@ -48,6 +54,8 @@ def test_directory() -> None:
 
 
 def test_tree() -> None:
+    """Test to upload multiple files and directories to server."""
+
     def individual_test(server: UploadServer, temporary_path: Path) -> None:
         _common_test(
             server,
@@ -58,6 +66,7 @@ def test_tree() -> None:
 
 
 def test_place() -> None:
+    """Test to upload single file from selected local root to server."""
     server: UploadServer = UploadServer()
     assert server.connect()
 
@@ -75,6 +84,11 @@ def test_place() -> None:
 
 
 def main() -> bool:
+    """Run all tests.
+
+    Returns:
+        bool: Success if get to the end of function.
+    """
     test_file()
     test_directory()
     test_tree()
