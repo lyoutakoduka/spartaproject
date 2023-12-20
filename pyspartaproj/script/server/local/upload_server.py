@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Module to upload file or directory by SFTP functionality."""
+
 from os import stat_result
 from pathlib import Path
 
@@ -13,6 +15,11 @@ from pyspartaproj.script.server.local.connect_server import ConnectServer
 
 
 class UploadServer(ConnectServer):
+    """Class to upload file or directory by SFTP functionality.
+
+    ConnectServer: Class to use SSH and SFTP functionality.
+    """
+
     def _get_remote_root(self) -> Path:
         if sftp := self.get_sftp():
             if root := sftp.getcwd():
@@ -99,6 +106,17 @@ class UploadServer(ConnectServer):
         return self._upload_file(source_path, destination_local)
 
     def upload(self, source: Path, destination: Path | None = None) -> bool:
+        """Upload file or directory by SFTP functionality.
+
+        Args:
+            source (Path): Local path of file or directory you want to upload.
+
+            destination (Path | None, optional): Defaults to None.
+                Uploaded path of file or directory on server.
+
+        Returns:
+            bool: True if uploading succeed.
+        """
         if destination is None:
             destination = self.to_relative_path(source)
 
