@@ -47,8 +47,16 @@ def _get_second_root() -> Strs:
     return [_name_dir_1]
 
 
+def _get_second_ini() -> Strs:
+    return _get_second_root() + _get_first_ini()
+
+
 def _get_second_json() -> Strs:
     return _get_second_root() + _get_first_json()
+
+
+def _get_second_text() -> Strs:
+    return _get_second_root() + _get_first_text()
 
 
 def _get_second_empty() -> Strs:
@@ -57,9 +65,9 @@ def _get_second_empty() -> Strs:
 
 def _get_second_files() -> Strs2:
     return [
-        _get_second_root() + _get_first_ini(),
+        _get_second_ini(),
         _get_second_json(),
-        _get_second_root() + _get_first_text(),
+        _get_second_text(),
     ]
 
 
