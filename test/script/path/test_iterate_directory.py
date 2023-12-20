@@ -25,6 +25,10 @@ _name_json: str = "file.json"
 _name_text: str = "file.txt"
 
 
+def _get_first_files() -> Strs2:
+    return [[_name_ini], [_name_json], [_name_text]]
+
+
 def _get_second_json() -> Strs:
     return [_name_dir_1, _name_json]
 
@@ -81,9 +85,7 @@ def test_all() -> None:
     expected: Strs2 = [
         [_name_dir_1],
         [_name_dir_empty],
-        [_name_ini],
-        [_name_json],
-        [_name_text],
+        *_get_first_files(),
         _name_dirs,
         _get_second_empty(),
         *_get_second_files(),
@@ -108,9 +110,7 @@ def test_depth() -> None:
 
 def test_directory() -> None:
     expected: Strs2 = [
-        [_name_ini],
-        [_name_json],
-        [_name_text],
+        *_get_first_files(),
         *_get_second_files(),
         *_get_third_files(),
     ]
