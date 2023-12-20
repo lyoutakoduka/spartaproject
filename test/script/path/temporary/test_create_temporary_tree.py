@@ -72,9 +72,9 @@ def test_three() -> None:
         Path(*path_names) for path_names in _get_three_hierarchy()
     ]
 
-    def individual_test(temporary_path: Path) -> None:
-        create_temporary_tree(temporary_path, tree_deep=3)
-        _sort_test(expected, _get_tree_contents(temporary_path))
+    def individual_test(temporary_root: Path) -> None:
+        create_temporary_tree(temporary_root, tree_deep=3)
+        _sort_test(expected, _get_tree_contents(temporary_root))
 
     _inside_temporary_directory(individual_test)
 
@@ -83,11 +83,11 @@ def test_deep() -> None:
     """Test for count of hierarchy of the temporary tree."""
     outrange_indices: Ints = [-1, 0, 11, 12, 13]
 
-    def individual_test(temporary_path: Path) -> None:
+    def individual_test(temporary_root: Path) -> None:
         for index in outrange_indices:
-            create_temporary_tree(temporary_path, tree_deep=index)
+            create_temporary_tree(temporary_root, tree_deep=index)
 
-        _common_test(temporary_path)
+        _common_test(temporary_root)
 
     _inside_temporary_directory(individual_test)
 
@@ -96,11 +96,11 @@ def test_weight() -> None:
     """Test for scale of file size which is placed on the temporary tree."""
     outrange_indices: Ints = [-2, -1, 0, 11, 12, 13]
 
-    def individual_test(temporary_path: Path) -> None:
+    def individual_test(temporary_root: Path) -> None:
         for index in outrange_indices:
-            create_temporary_tree(temporary_path, tree_weight=index)
+            create_temporary_tree(temporary_root, tree_weight=index)
 
-        _common_test(temporary_path)
+        _common_test(temporary_root)
 
     _inside_temporary_directory(individual_test)
 
