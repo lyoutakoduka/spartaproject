@@ -10,18 +10,16 @@ from pyspartaproj.script.time.count.builtin_timer import TimerSelect
 
 initialize_decimal()
 
-_count: int = 10
-
 
 def _get_time_array() -> Decs:
-    return [Decimal(str(i)) for i in range(_count)]
+    return [Decimal(str(i)) for i in range(10)]
 
 
 def _check_counter_result(expected: Decs, timer: TimerSelect) -> None:
     expected = [count + timer.april_1_2023_epoch for count in expected]
 
     results: Decs = []
-    for _ in range(_count):
+    for _ in range(10):
         results += [timer()]
         timer.increase_timer()
 
