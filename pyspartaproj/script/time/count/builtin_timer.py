@@ -19,8 +19,7 @@ class TimerSelect:
         self._interval: Decimal = interval
 
     def _get_current(self) -> Decimal:
-        current_time: datetime = datetime.now(timezone.utc)
-        return Decimal(str(current_time.timestamp()))
+        return Decimal(str(datetime.now(timezone.utc).timestamp()))
 
     def _initialize_current(self) -> None:
         self._count: Decimal = Decimal("0")
