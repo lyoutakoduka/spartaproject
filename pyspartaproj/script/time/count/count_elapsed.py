@@ -13,6 +13,23 @@ initialize_decimal()
 
 
 class LogTimer:
+    def _initialize_variables(
+        self,
+        override: bool,
+        timer_interval: Decimal,
+        interval: Decimal,
+        digit: int,
+    ) -> None:
+        self._timer: TimerSelect = TimerSelect(
+            override=override, interval=timer_interval
+        )
+        self._start_time: Decimal = self._timer_current()
+
+        self._old_time: int = 0
+        self._interval: Decimal = interval
+
+        self._digit: int = digit
+
     def _timer_current(self) -> Decimal:
         return self._timer()
 
@@ -39,15 +56,7 @@ class LogTimer:
         if interval is None:
             interval = Decimal("0.1")
 
-        self._timer: TimerSelect = TimerSelect(
-            override=override, interval=timer_interval
-        )
-        self._start_time: Decimal = self._timer_current()
-
-        self._old_time: int = 0
-        self._interval: Decimal = interval
-
-        self._digit: int = digit
+        self._initialize_variables(override, timer_interval, interval, digit)
 
     def show(
         self,
