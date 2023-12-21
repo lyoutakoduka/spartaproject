@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to count time like a timer."""
+
 from decimal import Decimal
 from time import sleep
 
@@ -26,10 +28,12 @@ def _check_counter_result(expected: Decs, timer: TimerSelect) -> None:
 
 
 def test_integer() -> None:
+    """Test to count timer with test mode."""
     _check_counter_result(_get_time_array(), TimerSelect(override=True))
 
 
 def test_interval() -> None:
+    """Test to count timer with test mode by specific interval."""
     micro_scale: Decimal = Decimal("0.000001")
 
     _check_counter_result(
@@ -39,6 +43,7 @@ def test_interval() -> None:
 
 
 def test_builtin() -> None:
+    """Test to count timer."""
     timer = TimerSelect()
     begin: Decimal = timer()
 
@@ -48,6 +53,11 @@ def test_builtin() -> None:
 
 
 def main() -> bool:
+    """Run all tests.
+
+    Returns:
+        bool: Success if get to the end of function.
+    """
     test_integer()
     test_interval()
     test_builtin()
