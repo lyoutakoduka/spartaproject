@@ -13,11 +13,15 @@ initialize_decimal()
 
 
 class LogTimer:
-    def __init__(self) -> None:
-        self.restart()
-
     def _timer_current(self) -> Decimal:
         return self._timer()
+
+    def _is_force_show(self, elapsed: Decimal) -> bool:
+        current_interval: int = int(elapsed / self._interval)
+        count_changed: bool = current_interval != self._old_time
+        self._old_time = current_interval
+
+        return count_changed
 
     def increase_timer(self) -> None:
         self._timer.increase_timer()
@@ -45,13 +49,6 @@ class LogTimer:
 
         self._digit: int = digit
 
-    def _is_force_show(self, elapsed: Decimal) -> bool:
-        current_interval: int = int(elapsed / self._interval)
-        count_changed: bool = current_interval != self._old_time
-        self._old_time = current_interval
-
-        return count_changed
-
     def show(
         self,
         force: bool = False,
@@ -69,3 +66,6 @@ class LogTimer:
         if force or self._is_force_show(elapsed):
             elapsed_text: str = readable_time(elapsed, digit=self._digit)
             print(" ".join(header + [elapsed_text] + footer))
+
+    def __init__(self) -> None:
+        self.restart()
