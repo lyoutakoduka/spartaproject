@@ -16,14 +16,13 @@ def _get_time_array() -> Decs:
 
 
 def _check_counter_result(expected: Decs, timer: TimerSelect) -> None:
-    expected = [count + timer.april_1_2023_epoch for count in expected]
-
     results: Decs = []
+
     for _ in range(10):
         results += [timer()]
         timer.increase_timer()
 
-    assert expected == results
+    assert results == [count + timer.april_1_2023_epoch for count in expected]
 
 
 def test_integer() -> None:
@@ -41,11 +40,11 @@ def test_interval() -> None:
 
 def test_builtin() -> None:
     timer = TimerSelect()
-    interval: Decimal = Decimal("0.005")
     begin: Decimal = timer()
-    sleep(float(interval))
-    compute_error: Decimal = timer() - begin
-    assert Decimal("0.015") > compute_error
+
+    sleep(float(Decimal("0.005")))
+
+    assert Decimal("0.015") > (timer() - begin)
 
 
 def main() -> bool:
