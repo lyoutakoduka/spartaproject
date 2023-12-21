@@ -27,6 +27,16 @@ def _check_counter_result(expected: Decs, timer: TimerSelect) -> None:
     assert results == [count + timer.april_1_2023_epoch for count in expected]
 
 
+def test_builtin() -> None:
+    """Test to count timer."""
+    timer = TimerSelect()
+    begin: Decimal = timer()
+
+    sleep(float(Decimal("0.005")))
+
+    assert Decimal("0.015") > (timer() - begin)
+
+
 def test_integer() -> None:
     """Test to count timer with test mode."""
     _check_counter_result(_get_time_array(), TimerSelect(override=True))
@@ -42,23 +52,13 @@ def test_interval() -> None:
     )
 
 
-def test_builtin() -> None:
-    """Test to count timer."""
-    timer = TimerSelect()
-    begin: Decimal = timer()
-
-    sleep(float(Decimal("0.005")))
-
-    assert Decimal("0.015") > (timer() - begin)
-
-
 def main() -> bool:
     """Run all tests.
 
     Returns:
         bool: Success if get to the end of function.
     """
+    test_builtin()
     test_integer()
     test_interval()
-    test_builtin()
     return True
