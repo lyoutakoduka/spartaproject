@@ -4,9 +4,9 @@
 from decimal import Decimal
 from typing import Callable
 
+from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.script.decimal.initialize_decimal import initialize_decimal
 from pyspartaproj.script.string.format_texts import format_indent
-from pyspartaproj.script.string.off_stdout import StdoutText
 from pyspartaproj.script.time.count.count_elapsed import LogTimer
 
 initialize_decimal()
@@ -16,22 +16,20 @@ def _stdout_check(
     expected: str,
     count: int,
     restart: Callable[[LogTimer], None],
-    show: Callable[[LogTimer, int], None],
+    show: Callable[[LogTimer, int], str | None],
 ) -> None:
     timer = LogTimer()
     restart(timer)
 
-    stdout_text = StdoutText()
+    results: Strs = []
 
-    @stdout_text.decorator
-    def _show_log() -> None:
-        for i in range(count):
-            show(timer, i)
-            timer.increase_timer()
+    for i in range(count):
+        if time_text := show(timer, i):
+            results += [time_text]
 
-    _show_log()
+        timer.increase_timer()
 
-    assert format_indent(expected, stdout=True) == stdout_text.stdout
+    assert format_indent(expected) == "\n".join(results)
 
 
 def test_day() -> None:
@@ -63,9 +61,8 @@ def test_day() -> None:
             digit=0,
         )
 
-    def show_timer(timer: LogTimer, _: int) -> None:
-        if time_text := timer.show():
-            print(time_text)
+    def show_timer(timer: LogTimer, _: int) -> str | None:
+        return timer.show()
 
     _stdout_check(expected, increase_count, restart_timer, show_timer)
 
@@ -88,9 +85,11 @@ def test_show() -> None:
     def restart_timer(timer: LogTimer) -> None:
         timer.restart(override=True)
 
-    def show_timer(timer: LogTimer, index: int) -> None:
+    def show_timer(timer: LogTimer, index: int) -> str | None:
         if time_text := timer.show():
-            print(f"i={index} Almost {time_text} have passed...")
+            return f"i={index} Almost {time_text} have passed..."
+
+        return None
 
     _stdout_check(expected, increase_count, restart_timer, show_timer)
 
@@ -109,13 +108,13 @@ def test_force() -> None:
     def restart_timer(timer: LogTimer) -> None:
         timer.restart(override=True, digit=2)
 
-    def show_timer(timer: LogTimer, index: int) -> None:
+    def show_timer(timer: LogTimer, index: int) -> str | None:
         result: str = f"i={index}"
 
         if time_text := timer.show(force=True):
             result += ", " + time_text
 
-        print(result)
+        return result
 
     _stdout_check(expected, increase_count, restart_timer, show_timer)
 
