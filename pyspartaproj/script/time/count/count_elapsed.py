@@ -40,7 +40,7 @@ class LogTimer:
 
         return count_changed
 
-    def _show_timer(self, force: bool) -> str | None:
+    def show(self, force: bool = False) -> str | None:
         elapsed: Decimal = self._timer_current() - self._start_time
 
         if force or self._is_force_show(elapsed):
@@ -65,9 +65,6 @@ class LogTimer:
             interval = Decimal("0.1")
 
         self._initialize_variables(override, timer_interval, interval, digit)
-
-    def show(self, force: bool = False) -> str | None:
-        return self._show_timer(force)
 
     def __init__(self) -> None:
         self.restart()
