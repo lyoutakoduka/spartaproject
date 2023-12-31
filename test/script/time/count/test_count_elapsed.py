@@ -64,7 +64,8 @@ def test_day() -> None:
         )
 
     def show_timer(timer: LogTimer, _: int) -> None:
-        timer.show()
+        if time_text := timer.show():
+            print(time_text)
 
     _stdout_check(expected, increase_count, restart_timer, show_timer)
 
@@ -88,9 +89,8 @@ def test_show() -> None:
         timer.restart(override=True)
 
     def show_timer(timer: LogTimer, index: int) -> None:
-        timer.show(
-            header=[f"i={index}", "Almost"], footer=["have", "passed..."]
-        )
+        if time_text := timer.show():
+            print(f"i={index} Almost {time_text} have passed...")
 
     _stdout_check(expected, increase_count, restart_timer, show_timer)
 
@@ -115,8 +115,9 @@ def test_force() -> None:
         timer.restart(override=True, digit=2)
 
     def show_timer(timer: LogTimer, index: int) -> None:
-        print(f"i={index}")
-        timer.show(force=True)
+        if time_text := timer.show(force=True):
+            print(f"i={index}")
+            print(time_text)
 
     _stdout_check(expected, increase_count, restart_timer, show_timer)
 
