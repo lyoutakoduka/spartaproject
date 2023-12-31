@@ -39,7 +39,7 @@ class LogTimer:
 
         return count_changed
 
-    def show(self, force: bool = False) -> str | None:
+    def get_readable_time(self, force: bool = False) -> str | None:
         elapsed: Decimal = self._timer_current() - self._start_time
 
         if force or self._is_force_show(elapsed):

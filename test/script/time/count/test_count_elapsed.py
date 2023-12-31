@@ -62,7 +62,7 @@ def test_day() -> None:
         )
 
     def show_timer(timer: LogTimer, _: int) -> str | None:
-        return timer.show()
+        return timer.get_readable_time()
 
     _stdout_check(expected, increase_count, restart_timer, show_timer)
 
@@ -86,7 +86,7 @@ def test_show() -> None:
         timer.restart(override=True)
 
     def show_timer(timer: LogTimer, index: int) -> str | None:
-        return timer.show()
+        return timer.get_readable_time()
 
     _stdout_check(expected, increase_count, restart_timer, show_timer)
 
@@ -108,7 +108,7 @@ def test_force() -> None:
     def show_timer(timer: LogTimer, index: int) -> str | None:
         result: str = f"i={index}"
 
-        if time_text := timer.show(force=True):
+        if time_text := timer.get_readable_time(force=True):
             result += ", " + time_text
 
         return result
