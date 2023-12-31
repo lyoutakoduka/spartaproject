@@ -53,10 +53,27 @@ class TimerSelect:
         Args:
             override (bool, optional): Defaults to False.
                 Override initial time count to "2023/4/1:12:00:00-00 (AM)".
-                Default is current datetime, it's mainly used for test.
+                The argument is mainly used for test.
 
             interval (Decimal | None, optional): Defaults to None.
                 Interval of timer count, use 1 if None.
+                The argument is mainly used for test.
+
+        Use this class as like follow script,
+            if you want to get current datetime represented by epoch time.
+
+        >>> timer = TimerSelect() # Create class instance.
+        >>> timer() # Use __call___ method, and get current datetime.
+        1704010505.85167
+
+        if in the test environment
+
+        >>> timer = TimerSelect(override=True, interval=Decimal("0.1"))
+        >>> timer()
+        1680307200
+        >>> timer.increase_timer() # Increase timer count by 0.1.
+        >>> timer()
+        1680307200.1
         """
         if interval is None:
             interval = Decimal("1")
