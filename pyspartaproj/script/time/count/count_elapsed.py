@@ -40,12 +40,15 @@ class LogTimer:
 
         return count_changed
 
-    def _show_timer(self, force: bool, header: Strs, footer: Strs) -> None:
+    def _show_timer(
+        self, force: bool, header: Strs, footer: Strs
+    ) -> str | None:
         elapsed: Decimal = self._timer_current() - self._start_time
 
         if force or self._is_force_show(elapsed):
-            elapsed_text: str = readable_time(elapsed, digit=self._digit)
-            print(" ".join(header + [elapsed_text] + footer))
+            return readable_time(elapsed, digit=self._digit)
+
+        return None
 
     def increase_timer(self) -> None:
         self._timer.increase_timer()
@@ -70,14 +73,14 @@ class LogTimer:
         force: bool = False,
         header: Strs | None = None,
         footer: Strs | None = None,
-    ) -> None:
+    ) -> str | None:
         if header is None:
             header = []
 
         if footer is None:
             footer = []
 
-        self._show_timer(force, header, footer)
+        return self._show_timer(force, header, footer)
 
     def __init__(self) -> None:
         self.restart()
