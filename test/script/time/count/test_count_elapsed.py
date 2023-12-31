@@ -67,7 +67,7 @@ def test_day() -> None:
     _stdout_check(expected, increase_count, restart_timer, show_timer)
 
 
-def test_show() -> None:
+def test_second() -> None:
     expected: str = """
         0.1s
         0.2s
@@ -118,6 +118,6 @@ def test_force() -> None:
 
 def main() -> bool:
     test_day()
-    test_show()
+    test_second()
     test_force()
     return True
