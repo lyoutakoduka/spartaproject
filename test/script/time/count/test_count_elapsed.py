@@ -32,6 +32,30 @@ def _stdout_check(
     assert format_indent(expected) == "\n".join(results)
 
 
+def test_second() -> None:
+    expected: str = """
+        0.1s
+        0.2s
+        0.3s
+        0.4s
+        0.5s
+        0.6s
+        0.7s
+        0.8s
+        0.9s
+    """
+
+    increase_count: int = 100
+
+    def restart_timer(timer: LogTimer) -> None:
+        timer.restart(override=True)
+
+    def show_timer(timer: LogTimer, index: int) -> str | None:
+        return timer.get_readable_time()
+
+    _stdout_check(expected, increase_count, restart_timer, show_timer)
+
+
 def test_day() -> None:
     expected: str = """
         1h 0s
@@ -67,30 +91,6 @@ def test_day() -> None:
     _stdout_check(expected, increase_count, restart_timer, show_timer)
 
 
-def test_second() -> None:
-    expected: str = """
-        0.1s
-        0.2s
-        0.3s
-        0.4s
-        0.5s
-        0.6s
-        0.7s
-        0.8s
-        0.9s
-    """
-
-    increase_count: int = 100
-
-    def restart_timer(timer: LogTimer) -> None:
-        timer.restart(override=True)
-
-    def show_timer(timer: LogTimer, index: int) -> str | None:
-        return timer.get_readable_time()
-
-    _stdout_check(expected, increase_count, restart_timer, show_timer)
-
-
 def test_force() -> None:
     expected: str = """
         i=0, 0.00s
@@ -117,7 +117,7 @@ def test_force() -> None:
 
 
 def main() -> bool:
-    test_day()
     test_second()
+    test_day()
     test_force()
     return True
