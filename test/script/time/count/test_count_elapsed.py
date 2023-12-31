@@ -69,15 +69,15 @@ def test_day() -> None:
 
 def test_show() -> None:
     expected: str = """
-        i=10 Almost 0.1s have passed...
-        i=20 Almost 0.2s have passed...
-        i=30 Almost 0.3s have passed...
-        i=40 Almost 0.4s have passed...
-        i=50 Almost 0.5s have passed...
-        i=60 Almost 0.6s have passed...
-        i=70 Almost 0.7s have passed...
-        i=80 Almost 0.8s have passed...
-        i=90 Almost 0.9s have passed...
+        0.1s
+        0.2s
+        0.3s
+        0.4s
+        0.5s
+        0.6s
+        0.7s
+        0.8s
+        0.9s
     """
 
     increase_count: int = 100
@@ -86,10 +86,7 @@ def test_show() -> None:
         timer.restart(override=True)
 
     def show_timer(timer: LogTimer, index: int) -> str | None:
-        if time_text := timer.show():
-            return f"i={index} Almost {time_text} have passed..."
-
-        return None
+        return timer.show()
 
     _stdout_check(expected, increase_count, restart_timer, show_timer)
 
