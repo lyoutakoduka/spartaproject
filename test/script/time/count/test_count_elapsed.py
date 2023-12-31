@@ -97,16 +97,11 @@ def test_show() -> None:
 
 def test_force() -> None:
     expected: str = """
-        i=0
-        0.00s
-        i=1
-        0.01s
-        i=2
-        0.02s
-        i=3
-        0.03s
-        i=4
-        0.04s
+        i=0, 0.00s
+        i=1, 0.01s
+        i=2, 0.02s
+        i=3, 0.03s
+        i=4, 0.04s
     """
 
     increase_count: int = 5
@@ -115,9 +110,12 @@ def test_force() -> None:
         timer.restart(override=True, digit=2)
 
     def show_timer(timer: LogTimer, index: int) -> None:
+        result: str = f"i={index}"
+
         if time_text := timer.show(force=True):
-            print(f"i={index}")
-            print(time_text)
+            result += ", " + time_text
+
+        print(result)
 
     _stdout_check(expected, increase_count, restart_timer, show_timer)
 
