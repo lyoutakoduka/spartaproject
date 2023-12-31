@@ -62,11 +62,15 @@ class TimerSelect:
         Use this class as like follow script,
             if you want to get current datetime represented by epoch time.
 
+        >>> import time
         >>> timer = TimerSelect() # Create class instance.
         >>> timer() # Use __call___ method, and get current datetime.
-        1704010505.85167
+        1704010500
+        >>> time.sleep(1)
+        >>> timer()
+        1704010501
 
-        if in the test environment
+        If in the test environment.
 
         >>> timer = TimerSelect(override=True, interval=Decimal("0.1"))
         >>> timer()
