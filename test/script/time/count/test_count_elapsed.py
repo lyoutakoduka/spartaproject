@@ -58,31 +58,29 @@ def test_count() -> None:
 
 def test_interval() -> None:
     expected: str = """
-        1h 0s
-        2h 0s
-        3h 0s
-        4h 0s
-        5h 0s
-        6h 0s
-        7h 0s
-        8h 0s
-        9h 0s
-        10h 0s
-        11h 0s
-        12h 0s
+        30m 0.0s
+        1h 0.0s
+        1h 30m 0.0s
+        2h 0.0s
+        2h 30m 0.0s
+        3h 0.0s
+        3h 30m 0.0s
+        4h 0.0s
+        4h 30m 0.0s
+        5h 0.0s
     """
 
     minutes: int = 60
-    hour: int = minutes * 60
-    day: int = hour * 12
-    increase_count: int = day + 1
+    timer_interval: Decimal = Decimal(str(minutes * 10))
+    interval: Decimal = Decimal(str(minutes * 30))
+
+    increase_count: int = 30 + 1
 
     def restart_timer(timer: LogTimer) -> None:
         timer.restart(
             override=True,
-            timer_interval=Decimal(str(1)),
-            interval=Decimal(str(hour)),
-            digit=0,
+            timer_interval=timer_interval,
+            interval=interval,
         )
 
     def show_timer(timer: LogTimer, _: int) -> str | None:
