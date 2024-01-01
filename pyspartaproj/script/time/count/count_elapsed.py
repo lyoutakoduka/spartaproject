@@ -87,7 +87,7 @@ class LogTimer:
                 Interval which is use for showing timer count.
 
             digit (int, optional): Defaults to 1.
-                Digit of timer count when showing.
+                Digit of decimal point about timer count when showing.
 
         Use this class as like follow script,
             if you want to get current datetime represented by readable time.
