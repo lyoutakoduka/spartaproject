@@ -103,7 +103,12 @@ def test_force() -> None:
     increase_count: int = 5
 
     def restart_timer(timer: LogTimer) -> None:
-        timer.restart(override=True, digit=2)
+        timer.restart(
+            override=True,
+            timer_interval=Decimal(str(0.01)),
+            interval=Decimal(str(0.1)),
+            digit=2,
+        )
 
     def show_timer(timer: LogTimer, index: int) -> str | None:
         result: str = f"i={index}"
