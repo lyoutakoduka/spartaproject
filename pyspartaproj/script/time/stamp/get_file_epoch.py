@@ -15,9 +15,7 @@ def get_file_epoch(path: Path, access: bool = False) -> Decimal:
         path (Path): Path of file or directory you want to get datetime.
 
         access (bool, optional): Defaults to False.
-            Return latest update time, if it's False.
-            Return latest access time, if it's True.
-
+            Return update time if it's False, and access time if True.
     Returns:
         Decimal: Latest datetime according to condition you select.
     """
