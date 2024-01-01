@@ -43,9 +43,10 @@ def test_count() -> None:
         7.0s
         8.0s
         9.0s
+        10.0s
     """
 
-    increase_count: int = 20
+    increase_count: int = 20 + 1
 
     def restart_timer(timer: LogTimer) -> None:
         timer.restart(override=True)
