@@ -147,13 +147,11 @@ class EditZip(WorkSpace):
 
             limit_byte (int, optional): Defaults to 0.
                 If it's not 0, archive are dividedly compressed.
-
-            It's used for argument "limit_byte" of class "CompressZip".
+                It's used for argument "limit_byte" of class "CompressZip".
 
             compress (bool, optional): Defaults to False.
                 If it's True, you can compress archive by LZMA format.
-
-            It's used for argument "compress" of class "CompressZip".
+                It's used for argument "compress" of class "CompressZip".
         """
         super().__init__()
 
