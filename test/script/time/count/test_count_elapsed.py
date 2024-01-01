@@ -89,6 +89,39 @@ def test_interval() -> None:
     _stdout_check(expected, increase_count, restart_timer, show_timer)
 
 
+def test_digit() -> None:
+    expected: str = """
+        0.010s
+        0.020s
+        0.030s
+        0.040s
+        0.050s
+        0.060s
+        0.070s
+        0.080s
+        0.090s
+        0.100s
+    """
+
+    interval: Decimal = Decimal(str(0.01))
+    digit: int = 3
+
+    increase_count: int = 10 + 1
+
+    def restart_timer(timer: LogTimer) -> None:
+        timer.restart(
+            override=True,
+            timer_interval=interval,
+            interval=interval,
+            digit=digit,
+        )
+
+    def show_timer(timer: LogTimer, _: int) -> str | None:
+        return timer.get_readable_time()
+
+    _stdout_check(expected, increase_count, restart_timer, show_timer)
+
+
 def test_force() -> None:
     expected: str = """
         i=0, 0.0s
@@ -127,5 +160,6 @@ def test_force() -> None:
 def main() -> bool:
     test_count()
     test_interval()
+    test_digit()
     test_force()
     return True
