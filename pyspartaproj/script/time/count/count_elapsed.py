@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Module to count time and show by readable format."""
+"""Module to count timer and return time by readable format."""
 
 from decimal import Decimal
 
@@ -13,7 +13,7 @@ initialize_decimal()
 
 
 class LogTimer:
-    """Class to count time, and show by readable format."""
+    """Class to count timer and return time by readable format."""
 
     def _initialize_variables(
         self,
@@ -43,6 +43,17 @@ class LogTimer:
         return count_changed
 
     def get_readable_time(self, force: bool = False) -> str | None:
+        """Get current timer count as readable string format.
+
+        Args:
+            force (bool, optional): Defaults to False.
+                Timer count is forcibly returned if it's True.
+
+        Returns:
+            str | None:
+                Timer count is returned one time at every specific interval.
+                Return None, if timer count is in interval.
+        """
         elapsed: Decimal = self._timer_current() - self._start_time
 
         if force or self._is_force_show(elapsed):
@@ -109,4 +120,5 @@ class LogTimer:
         self._initialize_variables(override, timer_interval, interval, digit)
 
     def __init__(self) -> None:
+        """Initialize instance by method "restart"."""
         self.restart()
