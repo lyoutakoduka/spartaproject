@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to get datetime about selected file or directory."""
+
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
@@ -24,6 +26,8 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 
 
 def test_file() -> None:
+    """Test to get latest datetime about file you select."""
+
     def individual_test(path: Path) -> None:
         _common_test(create_temporary_file(path))
 
@@ -31,6 +35,8 @@ def test_file() -> None:
 
 
 def test_directory() -> None:
+    """Test to get latest datetime about directory you select."""
+
     def individual_test(path: Path) -> None:
         _common_test(create_directory(Path(path, "temporary")))
 
@@ -38,6 +44,11 @@ def test_directory() -> None:
 
 
 def main() -> bool:
+    """Run all tests.
+
+    Returns:
+        bool: Success if get to the end of function.
+    """
     test_file()
     test_directory()
     return True
