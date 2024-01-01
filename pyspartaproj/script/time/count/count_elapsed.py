@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Module to count timer and return time by readable format."""
+"""Module to count timer and get timer count by readable format."""
 
 from decimal import Decimal
 
@@ -13,7 +13,7 @@ initialize_decimal()
 
 
 class LogTimer:
-    """Class to count timer and return time by readable format."""
+    """Class to count timer and get timer count by readable format."""
 
     def _initialize_variables(
         self,
@@ -62,7 +62,7 @@ class LogTimer:
         return None
 
     def increase_timer(self) -> None:
-        """Increase time count by specific interval."""
+        """Increase timer count by specific interval."""
         self._timer.increase_timer()
 
     def restart(
@@ -76,7 +76,7 @@ class LogTimer:
 
         Args:
             override (bool, optional): Defaults to False.
-                Override initial time count to "2023/4/1:12:00:00-00 (AM)".
+                Override initial timer count to "2023/4/1:12:00:00-00 (AM)".
                 Use for argument "override" on class "TimerSelect".
 
             timer_interval (Decimal | None, optional): Defaults to None.
