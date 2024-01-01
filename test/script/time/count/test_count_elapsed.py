@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to count timer and get timer count by readable format."""
+
 from decimal import Decimal
 from typing import Callable
 
@@ -33,6 +35,7 @@ def _stdout_check(
 
 
 def test_count() -> None:
+    """Test to get timer count by readable format."""
     expected: str = """
         1.0s
         2.0s
@@ -58,6 +61,7 @@ def test_count() -> None:
 
 
 def test_interval() -> None:
+    """Test to get timer count with specific interval."""
     expected: str = """
         30m 0.0s
         1h 0.0s
@@ -91,6 +95,7 @@ def test_interval() -> None:
 
 
 def test_digit() -> None:
+    """Test to get timer count with digit of decimal point."""
     expected: str = """
         0.010s
         0.020s
@@ -124,6 +129,7 @@ def test_digit() -> None:
 
 
 def test_force() -> None:
+    """Test to get timer count forcibly."""
     expected: str = """
         i=0, 0.0s
         i=1, 0.1s
@@ -159,6 +165,11 @@ def test_force() -> None:
 
 
 def main() -> bool:
+    """Run all tests.
+
+    Returns:
+        bool: Success if get to the end of function.
+    """
     test_count()
     test_interval()
     test_digit()
