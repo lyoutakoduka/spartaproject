@@ -22,7 +22,7 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
         function(Path(temporary_path))
 
 
-def test_create() -> None:
+def test_file() -> None:
     def individual_test(path: Path) -> None:
         _common_test(create_temporary_file(path))
 
@@ -30,5 +30,5 @@ def test_create() -> None:
 
 
 def main() -> bool:
-    test_create()
+    test_file()
     return True
