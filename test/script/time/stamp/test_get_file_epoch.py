@@ -5,6 +5,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
+from pyspartaproj.script.directory.create_directory import create_directory
 from pyspartaproj.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
@@ -29,6 +30,14 @@ def test_file() -> None:
     _inside_temporary_directory(individual_test)
 
 
+def test_directory() -> None:
+    def individual_test(path: Path) -> None:
+        _common_test(create_directory(Path(path, "temporary")))
+
+    _inside_temporary_directory(individual_test)
+
+
 def main() -> bool:
     test_file()
+    test_directory()
     return True
