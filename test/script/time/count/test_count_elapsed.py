@@ -91,21 +91,26 @@ def test_interval() -> None:
 
 def test_force() -> None:
     expected: str = """
-        i=0, 0.00s
-        i=1, 0.01s
-        i=2, 0.02s
-        i=3, 0.03s
-        i=4, 0.04s
+        i=0, 0.0s
+        i=1, 0.1s
+        i=2, 0.2s
+        i=3, 0.3s
+        i=4, 0.4s
+        i=5, 0.5s
+        i=6, 0.6s
+        i=7, 0.7s
+        i=8, 0.8s
+        i=9, 0.9s
     """
 
-    increase_count: int = 5
+    timer_interval: Decimal = Decimal(str(0.1))
+    interval: Decimal = Decimal(str(1.0))
+
+    increase_count: int = 10
 
     def restart_timer(timer: LogTimer) -> None:
         timer.restart(
-            override=True,
-            timer_interval=Decimal(str(0.01)),
-            interval=Decimal(str(0.1)),
-            digit=2,
+            override=True, timer_interval=timer_interval, interval=interval
         )
 
     def show_timer(timer: LogTimer, index: int) -> str | None:
