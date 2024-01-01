@@ -101,10 +101,10 @@ class LogTimer:
         1.0s
         """
         if timer_interval is None:
-            timer_interval = Decimal("0.01")
+            timer_interval = Decimal("0.5")
 
         if interval is None:
-            interval = Decimal("0.1")
+            interval = Decimal("1")
 
         self._initialize_variables(override, timer_interval, interval, digit)
 
