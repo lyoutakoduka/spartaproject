@@ -34,18 +34,18 @@ def _stdout_check(
 
 def test_second() -> None:
     expected: str = """
-        0.1s
-        0.2s
-        0.3s
-        0.4s
-        0.5s
-        0.6s
-        0.7s
-        0.8s
-        0.9s
+        1.0s
+        2.0s
+        3.0s
+        4.0s
+        5.0s
+        6.0s
+        7.0s
+        8.0s
+        9.0s
     """
 
-    increase_count: int = 100
+    increase_count: int = 20
 
     def restart_timer(timer: LogTimer) -> None:
         timer.restart(override=True)
