@@ -32,7 +32,7 @@ def _stdout_check(
     assert format_indent(expected) == "\n".join(results)
 
 
-def test_second() -> None:
+def test_count() -> None:
     expected: str = """
         1.0s
         2.0s
@@ -56,7 +56,7 @@ def test_second() -> None:
     _stdout_check(expected, increase_count, restart_timer, show_timer)
 
 
-def test_day() -> None:
+def test_interval() -> None:
     expected: str = """
         1h 0s
         2h 0s
@@ -122,7 +122,7 @@ def test_force() -> None:
 
 
 def main() -> bool:
-    test_second()
-    test_day()
+    test_count()
+    test_interval()
     test_force()
     return True
