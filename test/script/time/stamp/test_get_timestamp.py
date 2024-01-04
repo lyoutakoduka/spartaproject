@@ -26,6 +26,10 @@ def _common_test(times: Times) -> None:
     assert times[0] == times[1]
 
 
+def _compare_utc_timezone(path: Path) -> None:
+    _common_test([get_latest(path, access=status) for status in [False, True]])
+
+
 def _get_json_latest(file_path: Path, status: bool) -> Json:
     return multiple_to_json(
         get_directory_latest(walk_iterator(file_path), access=status)
@@ -39,10 +43,7 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 
 def test_utc() -> None:
     def individual_test(path: Path) -> None:
-        file_path: Path = create_temporary_file(path)
-        _common_test(
-            [get_latest(file_path, access=status) for status in [False, True]]
-        )
+        _compare_utc_timezone(create_temporary_file(path))
 
     _inside_temporary_directory(individual_test)
 
