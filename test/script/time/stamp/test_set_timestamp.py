@@ -32,9 +32,13 @@ def _convert_input_time(times: Strs) -> Times:
     return [datetime.fromisoformat(time) for time in times]
 
 
-def _common_test(path: Path, time_texts: Strs) -> None:
+def _set_latest_datetime(path: Path, time_texts: Strs) -> None:
     for status, time in zip([False, True], _convert_input_time(time_texts)):
         set_latest(path, time, access=status)
+
+
+def _common_test(path: Path, time_texts: Strs) -> None:
+    _set_latest_datetime(path, time_texts)
 
     times: Times = _convert_input_time(_get_time_text())
     results: Times = [
