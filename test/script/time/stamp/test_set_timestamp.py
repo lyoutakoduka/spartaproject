@@ -48,25 +48,25 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 
 
 def test_utc() -> None:
-    def individual_test(path: Path) -> None:
+    def individual_test(temporary_root: Path) -> None:
         times: Times = _convert_input_time(_get_time_text())
 
         for status, time in zip([False, True], times):
-            set_latest(path, time, access=status)
+            set_latest(temporary_root, time, access=status)
 
-        _common_test(path)
+        _common_test(temporary_root)
 
     _inside_temporary_directory(individual_test)
 
 
 def test_jst() -> None:
-    def individual_test(path: Path) -> None:
+    def individual_test(temporary_root: Path) -> None:
         times: Times = _convert_input_time(_get_time_text(jst=True))
 
         for status, time in zip([False, True], times):
-            set_latest(path, time, access=status)
+            set_latest(temporary_root, time, access=status)
 
-        _common_test(path)
+        _common_test(temporary_root)
 
     _inside_temporary_directory(individual_test)
 

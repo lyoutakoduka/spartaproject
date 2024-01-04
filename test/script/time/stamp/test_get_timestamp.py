@@ -47,8 +47,8 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 def test_file() -> None:
     """Test to get latest datetime of file with readable format."""
 
-    def individual_test(path: Path) -> None:
-        _compare_utc_timezone(create_temporary_file(path))
+    def individual_test(temporary_root: Path) -> None:
+        _compare_utc_timezone(create_temporary_file(temporary_root))
 
     _inside_temporary_directory(individual_test)
 
@@ -56,8 +56,10 @@ def test_file() -> None:
 def test_directory() -> None:
     """Test to get latest datetime of directory with readable format."""
 
-    def individual_test(path: Path) -> None:
-        _compare_utc_timezone(create_directory(Path(path, "temporary")))
+    def individual_test(temporary_root: Path) -> None:
+        _compare_utc_timezone(
+            create_directory(Path(temporary_root, "temporary"))
+        )
 
     _inside_temporary_directory(individual_test)
 
@@ -65,8 +67,8 @@ def test_directory() -> None:
 def test_jst() -> None:
     """Test to get latest datetime of file as JST timezone."""
 
-    def individual_test(path: Path) -> None:
-        file_path: Path = create_temporary_file(path)
+    def individual_test(temporary_root: Path) -> None:
+        file_path: Path = create_temporary_file(temporary_root)
         times: Times = [
             get_latest(file_path, access=status, jst=True)
             for status in [False, True]
@@ -81,8 +83,8 @@ def test_jst() -> None:
 def test_tree() -> None:
     """Test to get latest datetime of contents in the directory you select."""
 
-    def individual_test(path: Path) -> None:
-        file_path: Path = create_temporary_tree(Path(path, "tree"))
+    def individual_test(temporary_root: Path) -> None:
+        file_path: Path = create_temporary_tree(Path(temporary_root, "tree"))
 
         assert is_same_json(
             *[_get_json_latest(file_path, status) for status in [False, True]]
