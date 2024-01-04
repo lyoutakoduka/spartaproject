@@ -32,7 +32,10 @@ def _convert_input_time(times: Strs) -> Times:
     return [datetime.fromisoformat(time) for time in times]
 
 
-def _common_test(path: Path) -> None:
+def _common_test(path: Path, time_texts: Strs) -> None:
+    for status, time in zip([False, True], _convert_input_time(time_texts)):
+        set_latest(path, time, access=status)
+
     times: Times = _convert_input_time(_get_time_text())
     results: Times = [
         get_latest(path, access=status) for status in [False, True]
@@ -44,29 +47,21 @@ def _common_test(path: Path) -> None:
 
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as temporary_path:
-        function(create_temporary_file(Path(temporary_path)))
+        function(Path(temporary_path))
 
 
 def test_file() -> None:
     def individual_test(temporary_root: Path) -> None:
-        times: Times = _convert_input_time(_get_time_text())
-
-        for status, time in zip([False, True], times):
-            set_latest(temporary_root, time, access=status)
-
-        _common_test(temporary_root)
+        _common_test(create_temporary_file(temporary_root), _get_time_text())
 
     _inside_temporary_directory(individual_test)
 
 
 def test_jst() -> None:
     def individual_test(temporary_root: Path) -> None:
-        times: Times = _convert_input_time(_get_time_text(jst=True))
-
-        for status, time in zip([False, True], times):
-            set_latest(temporary_root, time, access=status)
-
-        _common_test(temporary_root)
+        _common_test(
+            create_temporary_file(temporary_root), _get_time_text(jst=True)
+        )
 
     _inside_temporary_directory(individual_test)
 
