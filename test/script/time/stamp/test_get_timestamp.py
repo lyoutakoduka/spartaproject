@@ -8,6 +8,7 @@ from typing import Callable
 from pyspartaproj.context.extension.time_context import Times
 from pyspartaproj.context.file.json_context import Json
 from pyspartaproj.script.bool.compare_json import is_same_json
+from pyspartaproj.script.directory.create_directory import create_directory
 from pyspartaproj.script.file.json.convert_to_json import multiple_to_json
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.temporary.create_temporary_file import (
@@ -48,6 +49,13 @@ def test_utc() -> None:
     _inside_temporary_directory(individual_test)
 
 
+def test_directory() -> None:
+    def individual_test(path: Path) -> None:
+        _compare_utc_timezone(create_directory(Path(path, "temporary")))
+
+    _inside_temporary_directory(individual_test)
+
+
 def test_jst() -> None:
     def individual_test(path: Path) -> None:
         file_path: Path = create_temporary_file(path)
@@ -75,6 +83,7 @@ def test_tree() -> None:
 
 def main() -> bool:
     test_utc()
+    test_directory()
     test_jst()
     test_tree()
     return True
