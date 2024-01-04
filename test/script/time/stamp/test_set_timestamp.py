@@ -47,7 +47,7 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
         function(create_temporary_file(Path(temporary_path)))
 
 
-def test_utc() -> None:
+def test_file() -> None:
     def individual_test(temporary_root: Path) -> None:
         times: Times = _convert_input_time(_get_time_text())
 
@@ -72,6 +72,6 @@ def test_jst() -> None:
 
 
 def main() -> bool:
-    test_utc()
+    test_file()
     test_jst()
     return True
