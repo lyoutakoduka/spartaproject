@@ -8,6 +8,7 @@ from typing import Callable
 
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.extension.time_context import Times
+from pyspartaproj.script.directory.create_directory import create_directory
 from pyspartaproj.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
@@ -66,6 +67,16 @@ def test_file() -> None:
     _inside_temporary_directory(individual_test)
 
 
+def test_directory() -> None:
+    def individual_test(temporary_root: Path) -> None:
+        _common_test(
+            create_directory(Path(temporary_root, "temporary")),
+            _get_time_text(),
+        )
+
+    _inside_temporary_directory(individual_test)
+
+
 def test_jst() -> None:
     def individual_test(temporary_root: Path) -> None:
         _common_test(
@@ -77,5 +88,6 @@ def test_jst() -> None:
 
 def main() -> bool:
     test_file()
+    test_directory()
     test_jst()
     return True
