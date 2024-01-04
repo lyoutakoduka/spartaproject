@@ -41,12 +41,16 @@ def _get_latest_datetime(path: Path) -> Times:
     return [get_latest(path, access=status) for status in [False, True]]
 
 
+def _get_expected_datetime() -> Times:
+    return _convert_input_time(_get_time_text())
+
+
 def _common_test(path: Path, time_texts: Strs) -> None:
     _set_latest_datetime(path, time_texts)
 
-    times: Times = _convert_input_time(_get_time_text())
-
-    for expected, result in zip(times, _get_latest_datetime(path)):
+    for expected, result in zip(
+        _get_expected_datetime(), _get_latest_datetime(path)
+    ):
         assert result == expected
 
 
