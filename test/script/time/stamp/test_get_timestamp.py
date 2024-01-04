@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to get latest datetime of file or directory as time object."""
+
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
@@ -43,6 +45,8 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 
 
 def test_file() -> None:
+    """Test to get latest datetime of file with readable format."""
+
     def individual_test(path: Path) -> None:
         _compare_utc_timezone(create_temporary_file(path))
 
@@ -50,6 +54,8 @@ def test_file() -> None:
 
 
 def test_directory() -> None:
+    """Test to get latest datetime of directory with readable format."""
+
     def individual_test(path: Path) -> None:
         _compare_utc_timezone(create_directory(Path(path, "temporary")))
 
@@ -57,6 +63,8 @@ def test_directory() -> None:
 
 
 def test_jst() -> None:
+    """Test to get latest datetime of file as JST timezone."""
+
     def individual_test(path: Path) -> None:
         file_path: Path = create_temporary_file(path)
         times: Times = [
@@ -71,6 +79,8 @@ def test_jst() -> None:
 
 
 def test_tree() -> None:
+    """Test to get latest datetime of contents in the directory you select."""
+
     def individual_test(path: Path) -> None:
         file_path: Path = create_temporary_tree(Path(path, "tree"))
 
@@ -82,6 +92,11 @@ def test_tree() -> None:
 
 
 def main() -> bool:
+    """Run all tests.
+
+    Returns:
+        bool: Success if get to the end of function.
+    """
     test_file()
     test_directory()
     test_jst()
