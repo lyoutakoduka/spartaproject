@@ -16,8 +16,7 @@ from pyspartaproj.script.time.stamp.offset_timezone import offset_time
 
 
 def _convert_timestamp(time: datetime) -> Decimal:
-    time = offset_time(time)
-    return Decimal(str(time.timestamp()))
+    return Decimal(str(offset_time(time).timestamp()))
 
 
 def set_latest(path: Path, time: datetime, access: bool = False) -> Path:
