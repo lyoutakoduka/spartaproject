@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""test module to set latest datetime of file or directory by time object."""
+
 from datetime import datetime
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -61,6 +63,8 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 
 
 def test_file() -> None:
+    """Test to set latest date time of file."""
+
     def individual_test(temporary_root: Path) -> None:
         _common_test(create_temporary_file(temporary_root), _get_time_text())
 
@@ -68,6 +72,8 @@ def test_file() -> None:
 
 
 def test_directory() -> None:
+    """Test to set latest date time of directory."""
+
     def individual_test(temporary_root: Path) -> None:
         _common_test(
             create_directory(Path(temporary_root, "temporary")),
@@ -78,6 +84,8 @@ def test_directory() -> None:
 
 
 def test_jst() -> None:
+    """Test to set latest date time of file by JST time zone."""
+
     def individual_test(temporary_root: Path) -> None:
         _common_test(
             create_temporary_file(temporary_root), _get_time_text(jst=True)
@@ -87,6 +95,11 @@ def test_jst() -> None:
 
 
 def main() -> bool:
+    """Run all tests.
+
+    Returns:
+        bool: Success if get to the end of function.
+    """
     test_file()
     test_directory()
     test_jst()
