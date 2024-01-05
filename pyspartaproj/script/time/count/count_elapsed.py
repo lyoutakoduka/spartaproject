@@ -90,7 +90,7 @@ class LogTimer:
                 Digit of decimal point about timer count when showing.
 
         Use this class as like follow script,
-            if you want to get current datetime represented by readable time.
+            if you want to get current date time represented by readable time.
 
         >>> import time
         >>> timer = LogTimer() # Create class instance.
