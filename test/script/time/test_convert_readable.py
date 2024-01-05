@@ -13,10 +13,9 @@ initialize_decimal()
 
 
 def test_datetime() -> None:
-    input_utc_epoch: Decimal = Decimal("63849679147.012345")
-    expected: str = "2023y 3m 24d 21h 59m 7s"
-
-    assert expected == readable_time(input_utc_epoch)
+    assert "2023y 3m 24d 21h 59m 7s" == readable_time(
+        Decimal("63849679147.012345")
+    )
 
 
 def test_day() -> None:
