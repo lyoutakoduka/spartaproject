@@ -4,12 +4,17 @@
 from decimal import Decimal
 
 from pyspartaproj.context.default.integer_context import IntPair
+from pyspartaproj.context.default.string_context import StrPair
 from pyspartaproj.context.extension.decimal_context import DecPair
-from pyspartaproj.script.bool.same_value import bool_same_array
 from pyspartaproj.script.decimal.initialize_decimal import initialize_decimal
 from pyspartaproj.script.time.convert_readable import readable_time
 
 initialize_decimal()
+
+
+def _common_test(results: StrPair) -> None:
+    for expected, result in results.items():
+        assert expected == result
 
 
 def test_datetime() -> None:
@@ -37,11 +42,11 @@ def test_day() -> None:
         "1d 1h 1m 1s": day + hour + minute + second,
     }
 
-    assert bool_same_array(
-        [
-            expected == readable_time(Decimal(str(source)))
+    _common_test(
+        {
+            expected: readable_time(Decimal(str(source)))
             for expected, source in test_case.items()
-        ]
+        }
     )
 
 
@@ -62,11 +67,11 @@ def test_second() -> None:
         )
     )
 
-    assert bool_same_array(
-        [
-            expected == readable_time(source, digit=6)
+    _common_test(
+        {
+            expected: readable_time(source, digit=6)
             for expected, source in test_case.items()
-        ]
+        }
     )
 
 
@@ -81,11 +86,11 @@ def test_digit() -> None:
         "0.666666s": 6,
     }
 
-    assert bool_same_array(
-        [
-            expected == readable_time(Decimal("0.6666666"), digit=source)
+    _common_test(
+        {
+            expected: readable_time(Decimal("0.6666666"), digit=source)
             for expected, source in test_case.items()
-        ]
+        }
     )
 
 
