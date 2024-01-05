@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Module to convert time from number to readable string."""
+
 from datetime import datetime, timedelta
 from decimal import Decimal
 
@@ -70,6 +72,17 @@ def _get_integer_count_texts(counts: IntPair) -> Strs:
 
 
 def readable_time(second: Decimal, digit: int = 0) -> str:
+    """Convert time from number to readable string.
+
+    Args:
+        second (Decimal): Number you want to convert to readable string.
+
+        digit (int, optional): Defaults to 0.
+            Digit of decimal point about time string which is returned.
+
+    Returns:
+        str: Time converted to readable string.
+    """
     counts: IntPair = _get_datetime_counts(
         datetime.min + timedelta(seconds=float(second))
     )
