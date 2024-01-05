@@ -225,8 +225,7 @@ def test_id() -> None:
         ):
             compress_zip.compress_archive(path)
 
-        archived: Paths = compress_zip.close_archived()
-        archived_path = archived[0]
+        archived_path = compress_zip.close_archived()[0]
         assert archive_name == archived_path.stem
 
     _inside_temporary_directory(individual_test)
@@ -248,9 +247,7 @@ def test_limit() -> None:
             compress_zip.compress_archive(path, archive_root=tree_root)
             walk_paths += [path]
 
-        archived: Paths = compress_zip.close_archived()
-        print(archived)
-        _common_test(archived, temporary_root, walk_paths)
+        _common_test(compress_zip.close_archived(), temporary_root, walk_paths)
 
     _inside_temporary_directory(individual_test)
 
@@ -271,8 +268,7 @@ def test_heavy() -> None:
             compress_zip.compress_archive(path, archive_root=tree_root)
             walk_paths += [path]
 
-        archived: Paths = compress_zip.close_archived()
-        _common_test(archived, temporary_root, walk_paths)
+        _common_test(compress_zip.close_archived(), temporary_root, walk_paths)
 
     _inside_temporary_directory(individual_test)
 
