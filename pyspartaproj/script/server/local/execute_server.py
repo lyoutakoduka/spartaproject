@@ -28,17 +28,6 @@ class ExecuteServer(UploadServer):
             self.get_path("python_root"), version, "bin", "python3"
         )
 
-    def __init__(self, version: str | None = None) -> None:
-        """Select version of Python, then ready using ssh and sftp connection.
-
-        Args:
-            version (str | None, optional): Defaults to None.
-                version information of Python you want to execute
-        """
-        super().__init__()
-
-        self._set_version_path(self._set_version(version))
-
     def _get_error_identifier(self) -> str:
         body: str = " ".join(["most", "recent", "call", "last"])
         return "traceback".capitalize() + " " + "(" + body + ")" + ":"
@@ -76,3 +65,14 @@ class ExecuteServer(UploadServer):
             raise ValueError
 
         return result
+
+    def __init__(self, version: str | None = None) -> None:
+        """Select version of Python, then ready using ssh and sftp connection.
+
+        Args:
+            version (str | None, optional): Defaults to None.
+                version information of Python you want to execute
+        """
+        super().__init__()
+
+        self._set_version_path(self._set_version(version))

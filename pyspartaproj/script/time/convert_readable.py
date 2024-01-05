@@ -1,12 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Module to convert time from number to readable string."""
+
 from datetime import datetime, timedelta
 from decimal import Decimal
 
 from pyspartaproj.context.default.integer_context import IntPair
 from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.script.initialize_decimal import initialize_decimal
+from pyspartaproj.script.decimal.initialize_decimal import initialize_decimal
 
 initialize_decimal()
 
@@ -62,15 +64,25 @@ def _get_decimal_count_texts(
 
 
 def _get_integer_count_texts(counts: IntPair) -> Strs:
-    time_types: Strs = ["year", "month", "day", "hour", "minute"]
     return [
         str(counts[time_type]) + time_type[0]
-        for time_type in time_types
+        for time_type in ["year", "month", "day", "hour", "minute"]
         if 0 < counts[time_type]
     ]
 
 
 def readable_time(second: Decimal, digit: int = 0) -> str:
+    """Convert time from number to readable string.
+
+    Args:
+        second (Decimal): Number you want to convert to readable string.
+
+        digit (int, optional): Defaults to 0.
+            Digit of decimal point about time string which is returned.
+
+    Returns:
+        str: Time converted to readable string.
+    """
     counts: IntPair = _get_datetime_counts(
         datetime.min + timedelta(seconds=float(second))
     )

@@ -45,38 +45,35 @@ class ProjectContext:
 
         self.platform = platform
 
-    def __init__(
-        self, forward: Path | None = None, platform: str | None = None
-    ) -> None:
-        """Import a project context file.
+    def _get_context_types(self, context_keys: Strs) -> StrPair:
+        return {
+            context_key: self.get_platform_key([context_key])
+            for context_key in context_keys
+        }
 
-        The path of the context file is defined at a path forwarding file.
+    def _merged_path_context(self, group: str, path_types: Strs) -> Path:
+        context_types: StrPair = self._get_context_types(path_types)
+        path_context: PathPair = self.get_path_context(group)
 
-        e.g. in the following cases
-        The project context file named "config.json"
-        The path forwarding file named "forward.json"
-
-        ProjectContext module import "forward.json" first,
-            then find a path of "config.json" in therefore,
-            finally import it.
-
-        Default platform is automatically selected from current environment.
-
-        Args:
-            forward (Path | None, optional): Defaults to None.
-                Alternative path of the path forwarding file,
-                and mainly used at test of this module.
-
-            platform (str | None, optional): Defaults to None.
-                Platform information should be "linux" or "windows",
-                and it's used in the project context file like follow.
-
-                e.g. path type "key_linux.path", string type "key_windows".
-        """
-        self._serialize_path(
-            self._load_context(self._get_context_path(forward))
+        return Path(
+            *[
+                path_context[context_types[path_type] + ".path"]
+                for path_type in path_types
+            ]
         )
-        self._override_platform(platform)
+
+    def _merged_string_context(
+        self,
+        group: str,
+        file_type: str,
+        platform_root: Path,
+    ) -> Path:
+        context_types: StrPair = self._get_context_types([file_type])
+
+        return Path(
+            platform_root,
+            self.get_string_context(group)[context_types[file_type]],
+        )
 
     def get_integer_context(self, group: str) -> IntPair:
         """Filter and get project context by integer type.
@@ -125,36 +122,6 @@ class ProjectContext:
         """
         return "_".join(keys + [self.platform])
 
-    def _get_context_types(self, context_keys: Strs) -> StrPair:
-        return {
-            context_key: self.get_platform_key([context_key])
-            for context_key in context_keys
-        }
-
-    def _merged_path_context(self, group: str, path_types: Strs) -> Path:
-        context_types: StrPair = self._get_context_types(path_types)
-        path_context: PathPair = self.get_path_context(group)
-
-        return Path(
-            *[
-                path_context[context_types[path_type] + ".path"]
-                for path_type in path_types
-            ]
-        )
-
-    def _merged_string_context(
-        self,
-        group: str,
-        file_type: str,
-        platform_root: Path,
-    ) -> Path:
-        context_types: StrPair = self._get_context_types([file_type])
-
-        return Path(
-            platform_root,
-            self.get_string_context(group)[context_types[file_type]],
-        )
-
     def merge_platform_path(
         self, group: str, path_types: Strs, file_type: str | None = None
     ) -> Path:
@@ -202,3 +169,36 @@ class ProjectContext:
             return platform_root
 
         return self._merged_string_context(group, file_type, platform_root)
+
+    def __init__(
+        self, forward: Path | None = None, platform: str | None = None
+    ) -> None:
+        """Import a project context file.
+
+        The path of the context file is defined at a path forwarding file.
+
+        e.g. in the following cases
+        The project context file named "config.json"
+        The path forwarding file named "forward.json"
+
+        ProjectContext module import "forward.json" first,
+            then find a path of "config.json" in therefore,
+            finally import it.
+
+        Default platform is automatically selected from current environment.
+
+        Args:
+            forward (Path | None, optional): Defaults to None.
+                Alternative path of the path forwarding file,
+                and mainly used at test of this module.
+
+            platform (str | None, optional): Defaults to None.
+                Platform information should be "linux" or "windows",
+                and it's used in the project context file like follow.
+
+                e.g. path type "key_linux.path", string type "key_windows".
+        """
+        self._serialize_path(
+            self._load_context(self._get_context_path(forward))
+        )
+        self._override_platform(platform)

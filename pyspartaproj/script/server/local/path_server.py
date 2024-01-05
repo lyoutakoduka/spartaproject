@@ -59,12 +59,6 @@ class PathServer(WorkSpace):
         self._build_path_private()
         self._build_path_develop()
 
-    def __init__(self) -> None:
-        """Generate string path pair about server directory."""
-        super().__init__()
-
-        self._build_path_table()
-
     def get_path_table(self) -> Strs:
         """Get keys of predefined all paths about server.
 
@@ -121,22 +115,22 @@ class PathServer(WorkSpace):
         The path is used when uploading file or directory to server.
 
         Basic path of temporary working space is follow.
-        A datetime element in path is current datetime by default.
+        A date time element in path is current date time by default.
 
         "<Python default temporary directory>/
             private/work/<year>/<month>/<day>/<hour>/<second>/<millisecond>/"
 
         Args:
             override (bool, optional): Defaults to False.
-                If True, the datetime element in path become follow,
+                If True, the date time element in path become follow,
                     it's commonly used for test.
 
                 "<Python default temporary directory>/
                     private/work/2023/04/01/00/00/000000/"
 
             jst (bool, optional): Defaults to False.
-                If True, the datetime element is represented by
-                    timezone of Asia/Tokyo.
+                If True, the date time element is represented by
+                    time zone of Asia/Tokyo.
 
         Returns:
             Path: Path of temporary working space.
@@ -146,3 +140,9 @@ class PathServer(WorkSpace):
             override=override,
             jst=jst,
         )
+
+    def __init__(self) -> None:
+        """Generate string path pair about server directory."""
+        super().__init__()
+
+        self._build_path_table()

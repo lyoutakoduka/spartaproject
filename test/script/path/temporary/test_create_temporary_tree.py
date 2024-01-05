@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to create temporary files and directories tree."""
+
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
@@ -15,16 +17,28 @@ from pyspartaproj.script.path.temporary.create_temporary_tree import (
 )
 
 
-def _inside_temporary_directory(function: Callable[[Path], None]) -> Paths:
+def _get_tree_contents(temporary_root: Path) -> Paths:
+    return get_relative_array(
+        list(walk_iterator(temporary_root)), root_path=temporary_root
+    )
+
+
+def _sort_test(expected: Paths, result: Paths) -> None:
+    assert 1 == len(
+        set([str(sorted(contents)) for contents in [expected, result]])
+    )
+
+
+def _common_test(temporary_root: Path) -> None:
+    assert 0 == len(_get_tree_contents(temporary_root))
+
+
+def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as temporary_path:
-        root_path: Path = Path(temporary_path)
-        function(root_path)
-        return get_relative_array(
-            list(walk_iterator(root_path)), root_path=root_path
-        )
+        function(Path(temporary_path))
 
 
-def test_three() -> None:
+def _get_three_hierarchy() -> Strs2:
     name_dir_1: str = "dir001"
     name_dir_2: str = "dir002"
     name_dirs: Strs = [name_dir_1, name_dir_2]
@@ -34,7 +48,7 @@ def test_three() -> None:
     name_json: str = "file.json"
     name_text: str = "file.txt"
 
-    expected_source: Strs2 = [
+    return [
         [name_dir_1],
         [name_dir_empty],
         [name_ini],
@@ -51,35 +65,52 @@ def test_three() -> None:
         name_dirs + [name_text],
     ]
 
-    expected: Paths = [Path(*path_names) for path_names in expected_source]
 
-    def individual_test(temporary_path: Path) -> None:
-        create_temporary_tree(temporary_path, tree_deep=3)
+def test_three() -> None:
+    """Test for contents of the temporary tree which is three hierarchy."""
+    expected: Paths = [
+        Path(*path_names) for path_names in _get_three_hierarchy()
+    ]
 
-    assert expected == _inside_temporary_directory(individual_test)
+    def individual_test(temporary_root: Path) -> None:
+        create_temporary_tree(temporary_root, tree_deep=3)
+        _sort_test(expected, _get_tree_contents(temporary_root))
+
+    _inside_temporary_directory(individual_test)
 
 
 def test_deep() -> None:
+    """Test for count of hierarchy of the temporary tree."""
     outrange_indices: Ints = [-1, 0, 11, 12, 13]
 
-    def individual_test(temporary_path: Path) -> None:
+    def individual_test(temporary_root: Path) -> None:
         for index in outrange_indices:
-            create_temporary_tree(temporary_path, tree_deep=index)
+            create_temporary_tree(temporary_root, tree_deep=index)
 
-    assert 0 == len(_inside_temporary_directory(individual_test))
+        _common_test(temporary_root)
+
+    _inside_temporary_directory(individual_test)
 
 
 def test_weight() -> None:
+    """Test for scale of file size which is placed on the temporary tree."""
     outrange_indices: Ints = [-2, -1, 0, 11, 12, 13]
 
-    def individual_test(temporary_path: Path) -> None:
+    def individual_test(temporary_root: Path) -> None:
         for index in outrange_indices:
-            create_temporary_tree(temporary_path, tree_weight=index)
+            create_temporary_tree(temporary_root, tree_weight=index)
 
-    assert 0 == len(_inside_temporary_directory(individual_test))
+        _common_test(temporary_root)
+
+    _inside_temporary_directory(individual_test)
 
 
 def main() -> bool:
+    """All test of feature flags module.
+
+    Returns:
+        bool: Success if get to the end of function.
+    """
     test_three()
     test_deep()
     test_weight()

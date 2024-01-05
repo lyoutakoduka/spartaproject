@@ -1,0 +1,159 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""Module to edit internal of zip archive file."""
+
+from pathlib import Path
+
+from pyspartaproj.context.default.string_context import StrPair
+from pyspartaproj.context.extension.path_context import Paths
+from pyspartaproj.script.bool.compare_json import is_same_json
+from pyspartaproj.script.directory.create_directory_temporary import WorkSpace
+from pyspartaproj.script.file.archive.compress_zip import CompressZip
+from pyspartaproj.script.file.archive.decompress_zip import DecompressZip
+from pyspartaproj.script.file.json.convert_to_json import multiple_to_json
+from pyspartaproj.script.path.iterate_directory import walk_iterator
+from pyspartaproj.script.path.safe.safe_trash import SafeTrash
+from pyspartaproj.script.time.stamp.get_timestamp import get_directory_latest
+
+
+class EditZip(WorkSpace):
+    """Class to edit internal of zip archive file.
+
+    WorkSpace: Class to create temporary working directory shared in class.
+    """
+
+    def _initialize_variables(
+        self, archive_path: Path, limit_byte: int, compress: bool
+    ) -> None:
+        self._still_removed: bool = False
+        self._archive_path: Path = archive_path
+        self._limit_byte: int = limit_byte
+        self._is_lzma_after: bool = compress
+
+    def _get_archive_stamp(self) -> StrPair:
+        return get_directory_latest(walk_iterator(self.get_root()))
+
+    def _is_difference_archive_stamp(self, archive_stamp: StrPair) -> bool:
+        return not is_same_json(
+            *[
+                multiple_to_json(stamp)
+                for stamp in [self._archive_stamp, archive_stamp]
+            ]
+        )
+
+    def _is_difference_compress_type(self) -> bool:
+        return self._is_lzma_before != self._is_lzma_after
+
+    def _is_difference_archive(self) -> StrPair | None:
+        archive_stamp: StrPair = self._get_archive_stamp()
+
+        if self._is_difference_compress_type():
+            return archive_stamp
+
+        if self._is_difference_archive_stamp(archive_stamp):
+            return archive_stamp
+
+        return None
+
+    def _cleanup_before_override(self) -> None:
+        safe_trash = SafeTrash()
+
+        for path in self._decompressed:
+            safe_trash.trash(path)
+
+    def _compress_archive(self, archive_stamp: StrPair) -> Paths:
+        self._cleanup_before_override()
+
+        compress_zip = CompressZip(
+            self._archive_path.parent,
+            limit_byte=self._limit_byte,
+            compress=self._is_lzma_after,
+        )
+
+        for path_text in archive_stamp.keys():
+            compress_zip.compress_archive(
+                Path(path_text), archive_root=self.get_root()
+            )
+
+        return compress_zip.close_archived()
+
+    def _decompress_archive(self, decompress_zip: DecompressZip) -> None:
+        self._decompressed: Paths = decompress_zip.sequential_archives(
+            self._archive_path
+        )
+
+        for path in self._decompressed:
+            decompress_zip.decompress_archive(path)
+
+    def _record_compress_type(self, decompress_zip: DecompressZip) -> None:
+        self._is_lzma_before: bool = decompress_zip.is_lzma_archive(
+            self._archive_path
+        )
+
+    def _initialize_archive(self) -> None:
+        decompress_zip = DecompressZip(self.get_root())
+
+        self._decompress_archive(decompress_zip)
+        self._record_compress_type(decompress_zip)
+
+        self._archive_stamp: StrPair = self._get_archive_stamp()
+
+    def _finalize_archive(self) -> Paths | None:
+        archived: Paths | None = None
+
+        if archive_stamp := self._is_difference_archive():
+            archived = self._compress_archive(archive_stamp)
+
+        super().__del__()
+
+        return archived
+
+    def get_decompressed_root(self) -> Path:
+        """Get path of temporary working directory.
+
+        The directory is used for placing decompressed contents of archive.
+
+        Returns:
+            Path: Path of temporary working directory.
+        """
+        return self.get_root()
+
+    def close_archive(self) -> Paths | None:
+        """Compress the contents of temporary working directory to zip archive.
+
+        Returns:
+            Paths | None: Path of compressed archive.
+                Return None if the archive you want to edit isn't changed.
+        """
+        if self._still_removed:
+            return None
+
+        self._still_removed = True
+
+        return self._finalize_archive()
+
+    def __del__(self) -> None:
+        """Close and recompress archive you want to edit automatically."""
+        self.close_archive()
+
+    def __init__(
+        self, archive_path: Path, limit_byte: int = 0, compress: bool = False
+    ) -> None:
+        """Initialize variables and decompress archive you selected.
+
+        Args:
+            archive_path (Path): Path of archive you want to edit.
+
+            limit_byte (int, optional): Defaults to 0.
+                If it's not 0, archive are dividedly compressed.
+                It's used for argument "limit_byte" of class "CompressZip".
+
+            compress (bool, optional): Defaults to False.
+                If it's True, you can compress archive by LZMA format.
+                It's used for argument "compress" of class "CompressZip".
+        """
+        super().__init__()
+
+        self._initialize_variables(archive_path, limit_byte, compress)
+        self._initialize_archive()

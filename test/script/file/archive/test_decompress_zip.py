@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to decompress archive which is zip format."""
+
 from itertools import chain
 from pathlib import Path
 from shutil import make_archive
@@ -8,7 +10,7 @@ from tempfile import TemporaryDirectory
 from typing import Callable
 
 from pyspartaproj.context.default.integer_context import Ints2
-from pyspartaproj.context.extension.path_context import Paths, Paths2
+from pyspartaproj.context.extension.path_context import Paths2
 from pyspartaproj.context.extension.time_context import Times2, datetime
 from pyspartaproj.script.file.archive.compress_zip import CompressZip
 from pyspartaproj.script.file.archive.decompress_zip import DecompressZip
@@ -69,9 +71,8 @@ def _common_test(temporary_root: Path) -> Paths2:
     return sorted_paths
 
 
-def _compress_to_decompress(temporary_root: Path) -> None:
-    tree_root: Path = Path(temporary_root, "tree")
-    archived: Path = Path(
+def _create_archive(temporary_root: Path, tree_root: Path) -> Path:
+    return Path(
         make_archive(
             str(Path(temporary_root, *["archive"] * 2)),
             format="zip",
@@ -79,60 +80,89 @@ def _compress_to_decompress(temporary_root: Path) -> None:
         )
     )
 
-    decompress_zip = DecompressZip(Path(temporary_root, "extract"))
-    decompress_zip.decompress_archive(archived)
+
+def _compress_to_decompress(temporary_root: Path, tree_root: Path) -> None:
+    DecompressZip(Path(temporary_root, "extract")).decompress_archive(
+        _create_archive(temporary_root, tree_root)
+    )
 
 
-def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
+def _inside_temporary_directory(
+    function: Callable[[Path, Path], None]
+) -> None:
     with TemporaryDirectory() as temporary_path:
-        function(Path(temporary_path))
+        temporary_root: Path = Path(temporary_path)
+        function(temporary_root, Path(temporary_root, "tree"))
 
 
-def test_directory() -> None:
-    def individual_test(temporary_root: Path) -> None:
-        tree_root: Path = Path(temporary_root, "tree")
-        create_temporary_tree(tree_root, tree_deep=3)
+def test_file() -> None:
+    """Test to decompress archive including only files."""
 
+    def individual_test(temporary_root: Path, tree_root: Path) -> None:
         safe_trash = SafeTrash()
-        for path in walk_iterator(tree_root, directory=False):
-            safe_trash.trash(path)
 
-        _compress_to_decompress(temporary_root)
+        for path in walk_iterator(
+            create_temporary_tree(Path(temporary_root, "tree"), tree_deep=2),
+            file=False,
+        ):
+            if 0 == len(list(walk_iterator(path, depth=1))):
+                safe_trash.trash(path)
+
+        _compress_to_decompress(temporary_root, tree_root)
         _common_test(temporary_root)
 
     _inside_temporary_directory(individual_test)
 
 
-def test_tree() -> None:
-    def individual_test(temporary_root: Path) -> None:
-        tree_root: Path = Path(temporary_root, "tree")
-        create_temporary_tree(tree_root, tree_deep=2)
+def test_directory() -> None:
+    """Test to decompress archive including only directories."""
 
+    def individual_test(temporary_root: Path, tree_root: Path) -> None:
         safe_trash = SafeTrash()
-        for path in walk_iterator(tree_root, file=False):
-            if 0 == len(list(walk_iterator(path, depth=1))):
-                safe_trash.trash(path)
 
-        _compress_to_decompress(temporary_root)
+        for path in walk_iterator(
+            create_temporary_tree(tree_root, tree_deep=3),
+            directory=False,
+        ):
+            safe_trash.trash(path)
+
+        _compress_to_decompress(temporary_root, tree_root)
         _common_test(temporary_root)
+
+    _inside_temporary_directory(individual_test)
+
+
+def test_status() -> None:
+    """Test to get status of compression format from archive."""
+
+    def individual_test(temporary_root: Path, tree_root: Path) -> None:
+        create_temporary_tree(tree_root)
+
+        assert not DecompressZip(temporary_root).is_lzma_archive(
+            _create_archive(temporary_root, tree_root)
+        )
 
     _inside_temporary_directory(individual_test)
 
 
 def test_limit() -> None:
-    def individual_test(temporary_root: Path) -> None:
-        tree_root: Path = Path(temporary_root, "tree")
-        create_temporary_tree(tree_root, tree_deep=5)
+    """Test to decompress sequential archives."""
 
+    def individual_test(temporary_root: Path, tree_root: Path) -> None:
         compress_zip = CompressZip(
             Path(temporary_root, "archive"), limit_byte=200
         )
-        for path in walk_iterator(tree_root):
+
+        for path in walk_iterator(
+            create_temporary_tree(tree_root, tree_deep=5)
+        ):
             compress_zip.compress_archive(path)
 
-        archived_paths: Paths = compress_zip.close_archived()
         decompress_zip = DecompressZip(Path(temporary_root, "extract"))
-        for path in decompress_zip.sequential_archives(archived_paths[0]):
+
+        for path in decompress_zip.sequential_archives(
+            compress_zip.close_archived()[0]
+        ):
             decompress_zip.decompress_archive(path)
 
         _common_test(temporary_root)
@@ -141,33 +171,39 @@ def test_limit() -> None:
 
 
 def test_timestamp() -> None:
+    """Test for timestamp consistency of contents in archive."""
     expected: datetime = datetime.fromisoformat(
         "2023-04-15T20:09:30.936886+00:00"
     )
 
-    def individual_test(temporary_root: Path) -> None:
-        tree_root: Path = Path(temporary_root, "tree")
-        create_temporary_tree(tree_root)
-
+    def individual_test(temporary_root: Path, tree_root: Path) -> None:
         compress_zip = CompressZip(Path(temporary_root, "archive"))
-        for path in walk_iterator(tree_root):
+
+        for path in walk_iterator(create_temporary_tree(tree_root)):
             if path.is_file():
                 set_latest(path, expected)
+
             compress_zip.compress_archive(path)
 
         decompress_zip = DecompressZip(Path(temporary_root, "extract"))
+
         for path in compress_zip.close_archived():
             decompress_zip.decompress_archive(path)
 
-        sorted_paths: Paths2 = _common_test(temporary_root)
-        _compare_timestamp(sorted_paths, expected)
+        _compare_timestamp(_common_test(temporary_root), expected)
 
     _inside_temporary_directory(individual_test)
 
 
 def main() -> bool:
+    """Run all tests.
+
+    Returns:
+        bool: Success if get to the end of function.
+    """
+    test_file()
     test_directory()
-    test_tree()
+    test_status()
     test_limit()
     test_timestamp()
     return True

@@ -73,6 +73,7 @@ def test_tree() -> None:
 
         safe_trash = SafeTrash()
         paths: Paths = list(walk_iterator(temporary_root, depth=1))
+
         for path in paths:
             safe_trash.trash(path, trash_root=temporary_root)
 
@@ -86,10 +87,11 @@ def test_select() -> None:
     with TemporaryDirectory() as temporary_path:
 
         def individual_test(temporary_root: Path) -> None:
-            create_temporary_tree(temporary_root)
-
             safe_trash = SafeTrash(history_path=Path(temporary_path))
-            paths: Paths = list(walk_iterator(temporary_root, depth=1))
+            paths: Paths = list(
+                walk_iterator(create_temporary_tree(temporary_root), depth=1)
+            )
+
             for path in paths:
                 safe_trash.trash(path)
 

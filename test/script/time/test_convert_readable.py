@@ -1,25 +1,33 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to convert time from number to readable string."""
+
 from decimal import Decimal
 
 from pyspartaproj.context.default.integer_context import IntPair
+from pyspartaproj.context.default.string_context import StrPair
 from pyspartaproj.context.extension.decimal_context import DecPair
-from pyspartaproj.script.bool.same_value import bool_same_array
-from pyspartaproj.script.initialize_decimal import initialize_decimal
+from pyspartaproj.script.decimal.initialize_decimal import initialize_decimal
 from pyspartaproj.script.time.convert_readable import readable_time
 
 initialize_decimal()
 
 
-def test_datetime() -> None:
-    input_utc_epoch: Decimal = Decimal("63849679147.012345")
-    expected: str = "2023y 3m 24d 21h 59m 7s"
+def _common_test(results: StrPair) -> None:
+    for expected, result in results.items():
+        assert expected == result
 
-    assert expected == readable_time(input_utc_epoch)
+
+def test_datetime() -> None:
+    """Test to convert time from number to readable string."""
+    assert "2023y 3m 24d 21h 59m 7s" == readable_time(
+        Decimal("63849679147.012345")
+    )
 
 
 def test_day() -> None:
+    """Test to convert times that is type integer."""
     second: int = 1
     minute: int = second * 60
     hour: int = minute * 60
@@ -38,15 +46,16 @@ def test_day() -> None:
         "1d 1h 1m 1s": day + hour + minute + second,
     }
 
-    assert bool_same_array(
-        [
-            expected == readable_time(Decimal(str(source)))
+    _common_test(
+        {
+            expected: readable_time(Decimal(str(source)))
             for expected, source in test_case.items()
-        ]
+        }
     )
 
 
 def test_second() -> None:
+    """Test to convert times including decimal point."""
     test_case: DecPair = dict(
         zip(
             [
@@ -63,15 +72,16 @@ def test_second() -> None:
         )
     )
 
-    assert bool_same_array(
-        [
-            expected == readable_time(source, digit=6)
+    _common_test(
+        {
+            expected: readable_time(source, digit=6)
             for expected, source in test_case.items()
-        ]
+        }
     )
 
 
 def test_digit() -> None:
+    """Test to convert times including decimal point by specific digit."""
     test_case: IntPair = {
         "0s": 0,
         "0.6s": 1,
@@ -82,15 +92,20 @@ def test_digit() -> None:
         "0.666666s": 6,
     }
 
-    assert bool_same_array(
-        [
-            expected == readable_time(Decimal("0.6666666"), digit=source)
+    _common_test(
+        {
+            expected: readable_time(Decimal("0.6666666"), digit=source)
             for expected, source in test_case.items()
-        ]
+        }
     )
 
 
 def main() -> bool:
+    """Run all tests.
+
+    Returns:
+        bool: Success if get to the end of function.
+    """
     test_datetime()
     test_day()
     test_second()
