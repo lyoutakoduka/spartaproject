@@ -62,10 +62,9 @@ def _get_decimal_count_texts(
 
 
 def _get_integer_count_texts(counts: IntPair) -> Strs:
-    time_types: Strs = ["year", "month", "day", "hour", "minute"]
     return [
         str(counts[time_type]) + time_type[0]
-        for time_type in time_types
+        for time_type in ["year", "month", "day", "hour", "minute"]
         if 0 < counts[time_type]
     ]
 
