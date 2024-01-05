@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to convert time from number to readable string."""
+
 from decimal import Decimal
 
 from pyspartaproj.context.default.integer_context import IntPair
@@ -18,12 +20,14 @@ def _common_test(results: StrPair) -> None:
 
 
 def test_datetime() -> None:
+    """Test to convert time from number to readable string."""
     assert "2023y 3m 24d 21h 59m 7s" == readable_time(
         Decimal("63849679147.012345")
     )
 
 
 def test_day() -> None:
+    """Test to convert times that is type integer."""
     second: int = 1
     minute: int = second * 60
     hour: int = minute * 60
@@ -51,6 +55,7 @@ def test_day() -> None:
 
 
 def test_second() -> None:
+    """Test to convert times including decimal point."""
     test_case: DecPair = dict(
         zip(
             [
@@ -76,6 +81,7 @@ def test_second() -> None:
 
 
 def test_digit() -> None:
+    """Test to convert times including decimal point by specific digit."""
     test_case: IntPair = {
         "0s": 0,
         "0.6s": 1,
@@ -95,6 +101,11 @@ def test_digit() -> None:
 
 
 def main() -> bool:
+    """Run all tests.
+
+    Returns:
+        bool: Success if get to the end of function.
+    """
     test_datetime()
     test_day()
     test_second()
