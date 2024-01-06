@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""User defined types about type "str"."""
+
 from typing import Dict, Generator, List, Tuple
 
 StrPair = Dict[str, str]
