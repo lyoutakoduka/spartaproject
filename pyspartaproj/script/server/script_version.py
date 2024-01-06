@@ -12,10 +12,10 @@ def get_version_name(version: str) -> str:
     """Function to convert version string as default directory name.
 
     Args:
-        version (str): version information formatted like "3.12.0"
+        version (str): Version information formatted like "3.12.0".
 
     Returns:
-        str: formatted version string like "Python-3.12.0"
+        str: Formatted version string like "Python-3.12.0".
     """
     return "python".capitalize() + "-" + version
 
@@ -24,9 +24,9 @@ def get_interpreter_version(executable: Path) -> str:
     """Function to get version information of specific interpreter.
 
     Args:
-        executable (Path): interpreter path you want to get version
+        executable (Path): Interpreter path you want to get version.
 
     Returns:
-        str: version information formatted like "3.12.0"
+        str: Version information formatted like "3.12.0".
     """
     return list(execute_single([str(executable), "-V"]))[0].split(" ")[-1]
