@@ -12,6 +12,6 @@ def get_current() -> Path:
     Call from symbolic link on Linux is not support
 
     Returns:
-        Path: current working directory
+        Path: Current working directory.
     """
     return Path.cwd()
