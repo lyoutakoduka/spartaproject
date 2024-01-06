@@ -3,7 +3,6 @@
 
 """Test module to edit internal of zip archive file."""
 
-
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable

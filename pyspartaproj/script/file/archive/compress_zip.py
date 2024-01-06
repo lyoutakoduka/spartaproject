@@ -189,7 +189,7 @@ class CompressZip:
         """Close archive and return archived list.
 
         Returns:
-            Paths: list of archives.
+            Paths: List of archives.
 
             If archives isn't divided, following list is returned.
 
