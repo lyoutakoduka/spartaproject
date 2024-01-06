@@ -3,7 +3,6 @@
 
 """Connector to for execution and debugging from VSCode."""
 
-
 from pyspartaproj.script.execute.debug_launcher import debug_launcher
 from pyspartaproj.script.feature_flags import in_development
 
@@ -18,7 +17,7 @@ def main() -> bool:
     """Test all public functions.
 
     Returns:
-        bool: success if get to the end of function
+        bool: Success if get to the end of function.
     """
     test_callable()
     return True
