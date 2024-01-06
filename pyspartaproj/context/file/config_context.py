@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""User defined types imitated to file format ".ini"."""
+
 from decimal import Decimal
 from pathlib import Path
 from typing import Dict, Union

@@ -83,7 +83,7 @@ def create_temporary_tree(
         root_path (Path): Path of directory that the temporary tree is created.
 
         tree_deep (int, optional): Defaults to 1.
-            Count of hierarchy of the temporary tree
+            Count of hierarchy of the temporary tree.
 
         tree_weight (int, optional): Defaults to 1.
             Scale of file size which is placed on the temporary tree.

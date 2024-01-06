@@ -74,12 +74,14 @@ def call_function(source: Path, module: Path, function: str = "main") -> bool:
     """Call function and return True.
 
     Args:
-        source (Path): module path of call source
-        module (Path): designated module path
-        function (str, optional): designated function name. Defaults to 'main'.
+        source (Path): Module path of call source.
+
+        module (Path): Designated module path.
+
+        function (str, optional): Designated function name. Defaults to 'main'.
 
     Returns:
-        bool: success if get to the end of function
+        bool: Success if get to the end of function.
     """
     if in_development():
         return True

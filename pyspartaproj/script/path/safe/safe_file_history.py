@@ -20,10 +20,9 @@ from pyspartaproj.script.time.current_datetime import get_current_time
 class FileHistory(WorkSpace):
     """Class to record paths which is source and destination pair.
 
-    The module is used for e.g. custom copy or rename operation.
+    The module is used for e.g., custom copy or rename operation.
 
-    Args:
-        WorkSpace: Class to create temporary working directory shared in class.
+    WorkSpace: Class to create temporary working directory shared in class.
     """
 
     def __init__(self, history_path: Path | None = None) -> None:

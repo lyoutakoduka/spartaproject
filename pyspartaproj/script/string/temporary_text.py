@@ -11,9 +11,10 @@ def temporary_text(count: int, digit: int) -> Strs:
 
     Args:
         count (int): Count of numbers which is start from zero.
+
         digit (int): Digit of numbers as string type which is filled by zero.
 
-        e.g. Following text is shown if "count" is 3, and "digit" is 4.
+        e.g., following text is shown if "count" is 3, and "digit" is 4.
 
         0000
         0001

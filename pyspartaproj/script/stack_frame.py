@@ -46,10 +46,10 @@ def current_frame(offset: int = 0) -> StackFrame:
 
     Args:
         offset (int, optional): Defaults to 0.
-            index offset of stack frames based on current frame
+            Index offset of stack frames based on current frame.
 
     Returns:
-        StackFrame: selected current frame information
+        StackFrame: Selected current frame information.
     """
     stack_frames: _StackFrames = _get_stack_frames()
     return _to_relative_path(stack_frames[2 + offset])

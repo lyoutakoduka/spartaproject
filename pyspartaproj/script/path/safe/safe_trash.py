@@ -15,8 +15,7 @@ from pyspartaproj.script.path.safe.safe_rename import SafeRename
 class SafeTrash(SafeRename):
     """Class to remove file or directory and log history.
 
-    Args:
-        SafeRename: class to import a context of whole project.
+    SafeRename: class to import a context of whole project.
     """
 
     def _move_file(self, target: Path, root: Path) -> None:

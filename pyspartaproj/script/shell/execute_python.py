@@ -80,7 +80,7 @@ def execute_python(
         commands (Strs): Script you want execute and arguments of itself.
 
         python_paths (Paths | None, optional): Defaults to None.
-            paths you want to add to Python system path before execute Python.
+            Paths you want to add to Python system path before execute Python.
 
         platform (str | None, optional): Defaults to None.
             You can select an execution platform from "linux" or "windows".

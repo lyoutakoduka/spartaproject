@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""User defined types about type "float"."""
+
 from typing import Dict, List
 
 FloatPair = Dict[str, float]

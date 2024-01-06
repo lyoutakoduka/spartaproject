@@ -114,7 +114,7 @@ class ProjectContext:
         Args:
             keys (Strs): Elements of key represented by string list.
 
-            e.g. If you want to get key like "something_key_linux" in Linux,
+            e.g., if you want to get key like "something_key_linux" in Linux,
                 argument (keys) must ["something", "key"].
 
         Returns:
@@ -130,7 +130,7 @@ class ProjectContext:
         The path is corresponding to platform,
             and created from project context file.
 
-        e.g. The project context file for explaining is follow.
+        e.g., the project context file for explaining is follow.
 
         {
             "group": {
@@ -177,7 +177,7 @@ class ProjectContext:
 
         The path of the context file is defined at a path forwarding file.
 
-        e.g. in the following cases
+        e.g., in the following cases.
         The project context file named "config.json"
         The path forwarding file named "forward.json"
 
@@ -196,7 +196,7 @@ class ProjectContext:
                 Platform information should be "linux" or "windows",
                 and it's used in the project context file like follow.
 
-                e.g. path type "key_linux.path", string type "key_windows".
+                e.g., path type "key_linux.path", string type "key_windows".
         """
         self._serialize_path(
             self._load_context(self._get_context_path(forward))

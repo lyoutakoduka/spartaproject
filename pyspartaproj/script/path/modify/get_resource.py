@@ -11,26 +11,26 @@ from pyspartaproj.script.stack_frame import current_frame
 def get_resource(local_path: Path | None = None) -> Path:
     """Function to get path in local resource directory.
 
-    resource directory is directory named "resource"
-        which is placed on same hierarchy as some script
+    Resource directory is directory named "resource"
+        which is placed on same hierarchy as some script.
 
-    e.g. the script including resource directory is follow
+    e.g., the script including resource directory is follow.
 
     script_root/
-        ├ resource/
-            ├ directory/
-                ├ file
-        ├ script
+        |--resource/
+            |--directory/
+                |--file
+        |--script
 
     Args:
-        local_path (Path | None, optional): _description_. Defaults to None.
-            path you want to get in resource directory as relative path
+        local_path (Path | None, optional): Defaults to None.
+            Path you want to get in resource directory as relative path.
 
-        if you want to get "resource/directory/file"
-            local_path is "directory/file"
+        If you want to get "resource/directory/file",
+            local_path is "directory/file".
 
     Returns:
-        Path: path based on resource directory
+        Path: Path based on resource directory.
     """
     resource: Path = Path(current_frame(offset=1)["file"].parent, "resource")
 

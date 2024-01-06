@@ -4,7 +4,9 @@
   "black-formatter.args": ["--line-length", "79"],
   "cSpell.diagnosticLevel": "Warning",
   "cSpell.words": [
+    "chardet",
     "dateutil",
+    "dividedly",
     "docstrings",
     "getcontext",
     "gettz",
@@ -24,8 +26,10 @@
     "pytest",
     "pywin",
     "setcontext",
+    "sjis",
     "spartaproject",
     "Targetpath",
+    "universaldetector",
     "unmatch",
     "venv"
   ],

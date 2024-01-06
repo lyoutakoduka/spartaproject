@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""User defined types about type "Decimal"."""
+
 from decimal import Decimal
 from typing import Dict, List
 
