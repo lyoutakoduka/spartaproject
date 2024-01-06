@@ -195,7 +195,7 @@ class ConnectServer(PathServer, ProjectContext):
         """Get network object about SSH.
 
         Returns:
-            SSHClient | None: network object if exists
+            SSHClient | None: Network object if exists.
         """
         return self._ssh
 
@@ -203,7 +203,7 @@ class ConnectServer(PathServer, ProjectContext):
         """Get network object about shell of SSH.
 
         Returns:
-            Channel | None: network object if exists
+            Channel | None: Network object if exists.
         """
         return self._channel
 
@@ -211,7 +211,7 @@ class ConnectServer(PathServer, ProjectContext):
         """Get network object about SFTP.
 
         Returns:
-            SFTPClient | None: network object if exists
+            SFTPClient | None: Network object if exists.
         """
         return self._sftp
 
@@ -219,12 +219,12 @@ class ConnectServer(PathServer, ProjectContext):
         """Execute command by using SSH functionality.
 
         Args:
-            commands (Strs): elements of command which will merged by space.
-                e.g. if command is "ls -la",
-                you can input ["ls", "-la"] or ["ls -la"]
+            commands (Strs): Elements of command which will merged by space.
+                e.g., if command is "ls -la",
+                you can input ["ls", "-la"] or ["ls -la"].
 
         Returns:
-            Strs: execution result of command
+            Strs: Execution result of command.
         """
         self._execute_ssh(commands)
         return self._receive_ssh()
@@ -233,7 +233,7 @@ class ConnectServer(PathServer, ProjectContext):
         """Connect to server by using SSH and SFTP.
 
         Returns:
-            bool: True if connecting process to server is success
+            bool: True if connecting process to server is success.
         """
         if self._connect_ssh():
             if self._connect_sftp():

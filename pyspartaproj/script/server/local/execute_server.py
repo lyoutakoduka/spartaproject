@@ -13,8 +13,7 @@ from pyspartaproj.script.server.script_version import get_version_name
 class ExecuteServer(UploadServer):
     """Class to execute python code on server.
 
-    Inherit:
-        (UploadServer): Class to upload python code to server
+    UploadServer: Class to upload python code to server
     """
 
     def _set_version(self, version: str | None) -> str:
@@ -46,15 +45,15 @@ class ExecuteServer(UploadServer):
 
         Args:
             source_root (Path):
-                local path of Python code you will upload and execute
+                Local path of Python code you will upload and execute.
 
         Raises:
             ValueError:
-                raise error if error raised on server by executed Python code
+                Raise error if error raised on server by executed Python code.
 
         Returns:
             Strs | None:
-                stdout of executed Python code when execution is successful
+                Stdout of executed Python code when execution is successful.
         """
         if not self.upload(source_root):
             return None
@@ -71,7 +70,7 @@ class ExecuteServer(UploadServer):
 
         Args:
             version (str | None, optional): Defaults to None.
-                version information of Python you want to execute
+                Version information of Python you want to execute.
         """
         super().__init__()
 

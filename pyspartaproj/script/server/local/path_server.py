@@ -81,7 +81,7 @@ class PathServer(WorkSpace):
     def to_relative_path(self, local_full: Path) -> Path:
         """Convert full path to relative path.
 
-        e.g.The full path is "<Python default temporary directory>/example/",
+        e.g., the full path is "<Python default temporary directory>/example/",
             and returned relative path is "example/".
 
         Args:
@@ -95,7 +95,7 @@ class PathServer(WorkSpace):
     def to_full_path(self, local_relative: Path) -> Path:
         """Convert relative path to full path.
 
-        e.g. The relative path is "example/",
+        e.g., the relative path is "example/",
             and returned full path is
             "<Python default temporary directory>>/example/".
 
