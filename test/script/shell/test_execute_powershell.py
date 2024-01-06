@@ -94,7 +94,7 @@ def main() -> bool:
     """Run all tests.
 
     Returns:
-        bool: success if get to the end of function
+        bool: Success if get to the end of function.
     """
     test_script()
     test_path()

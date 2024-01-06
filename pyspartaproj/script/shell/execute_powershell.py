@@ -23,7 +23,7 @@ def execute_powershell(commands: Strs) -> StrGene:
 
     Args:
         commands (Strs): Elements of command which will merged by space.
-            e.g. If command is "Write-Output Test",
+            e.g., if command is "Write-Output Test",
             you can input ["Write-Output", "Test"] or ["Write-Output Test"].
 
     Returns:
@@ -41,7 +41,7 @@ def execute_powershell(commands: Strs) -> StrGene:
 def get_script_string(path: Path) -> str:
     """Convert path string in order to execute command in PowerShell.
 
-    e.g. Simplified command for execution in PowerShell is follow.
+    e.g., simplified command for execution in PowerShell is follow.
 
     "powershell.exe directory/script.ps1 argument"
 
@@ -61,7 +61,7 @@ def get_script_string(path: Path) -> str:
 def get_path_string(path: Path) -> str:
     """Convert path string in order to execute command in PowerShell.
 
-    e.g. Simplified command for execution in PowerShell is follow.
+    e.g., simplified command for execution in PowerShell is follow.
 
     "powershell.exe script.ps1 directory/argument"
 
@@ -101,7 +101,7 @@ def get_quoted_path(path: str) -> str:
 def get_double_quoted_command(commands: Strs) -> str:
     """Convert command string in order to execute command in PowerShell.
 
-    e.g. Simplified command for execution in PowerShell is follow.
+    e.g., simplified command for execution in PowerShell is follow.
 
     "powershell.exe script.ps1 argument"
 
@@ -123,7 +123,7 @@ def get_double_quoted_command(commands: Strs) -> str:
 def convert_mount_path(path: Path) -> Path:
     """Convert shared path between Linux and Windows.
 
-    e.g. If you select argument (path) like "/mnt/c/Users/user",
+    e.g., if you select argument (path) like "/mnt/c/Users/user",
         "C:/Users/user" is returned.
 
     Args:
