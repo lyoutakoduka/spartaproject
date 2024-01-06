@@ -20,7 +20,7 @@ def main() -> bool:
     """All test of feature flags module.
 
     Returns:
-        bool: success if get to the end of function
+        bool: Success if get to the end of function.
     """
     test_develop()
     test_production()

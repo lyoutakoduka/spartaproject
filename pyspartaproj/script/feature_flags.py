@@ -21,10 +21,10 @@ def in_development(file: str | None = None) -> bool:
 
     Args:
         flag (str | None, optional): Defaults to None.
-            file path is required if in development.
+            File path is required if in development.
 
     Returns:
-        bool: return True if in development.
+        bool: Return True if in development.
     """
     if file is None:
         return False
