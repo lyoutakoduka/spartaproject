@@ -3,9 +3,17 @@
 
 """Module to get date time about selected file or directory as epoch format."""
 
+from datetime import datetime
 from decimal import Decimal
 from os import stat_result
 from pathlib import Path
+
+
+def _get_broken_time() -> Decimal:
+    broken_time: datetime = datetime.fromisoformat(
+        "1980-01-01T00:00:00.000000+00:00"
+    )
+    return Decimal(str(broken_time.timestamp()))
 
 
 def get_file_epoch(path: Path, access: bool = False) -> Decimal:
