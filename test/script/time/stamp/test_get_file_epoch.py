@@ -3,6 +3,7 @@
 
 """Test module to get date time about selected file or directory."""
 
+from os import utime
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
@@ -12,6 +13,11 @@ from pyspartaproj.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
 from pyspartaproj.script.time.stamp.get_file_epoch import get_file_epoch
+
+
+def _set_invalid_datetime(file_path: Path) -> Path:
+    utime(file_path, (0, 0))
+    return file_path
 
 
 def _common_test(path: Path) -> None:
