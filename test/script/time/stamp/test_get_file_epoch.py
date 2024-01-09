@@ -49,6 +49,17 @@ def test_directory() -> None:
     _inside_temporary_directory(individual_test)
 
 
+def test_empty() -> None:
+    def individual_test(temporary_root: Path) -> None:
+        file_path: Path = _set_invalid_datetime(
+            create_temporary_file(temporary_root)
+        )
+        for status in [False, True]:
+            assert get_file_epoch(file_path, access=status) is None
+
+    _inside_temporary_directory(individual_test)
+
+
 def main() -> bool:
     """Run all tests.
 
@@ -57,4 +68,5 @@ def main() -> bool:
     """
     test_file()
     test_directory()
+    test_empty()
     return True
