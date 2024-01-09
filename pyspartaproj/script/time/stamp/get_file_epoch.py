@@ -24,8 +24,10 @@ def get_file_epoch(path: Path, access: bool = False) -> Decimal | None:
 
         access (bool, optional): Defaults to False.
             Return update time if it's False, and access time if True.
+
     Returns:
-        Decimal: Latest date time according to condition you select.
+        Decimal | None: Latest date time according to condition you select.
+            Return "None" if date time is broke.
     """
     status: stat_result = path.stat()
     time_epoch: Decimal = Decimal(
