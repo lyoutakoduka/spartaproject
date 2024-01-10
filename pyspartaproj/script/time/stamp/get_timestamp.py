@@ -17,6 +17,20 @@ def _convert_timestamp(time: float, jst: bool) -> datetime:
     return time_from_timestamp(Decimal(str(time)), jst=jst)
 
 
+def _get_latest_stamp(
+    walk_generator: PathGene, jst: bool = False, access: bool = False
+) -> StrPair | None:
+    latest_stamp: StrPair = {}
+
+    for path in walk_generator:
+        if time := get_latest(path, jst=jst, access=access):
+            latest_stamp[str(path)] = time.isoformat()
+        else:
+            return None
+
+    return latest_stamp
+
+
 def get_latest(
     path: Path, jst: bool = False, access: bool = False
 ) -> datetime | None:
@@ -44,7 +58,7 @@ def get_latest(
 
 def get_directory_latest(
     walk_generator: PathGene, jst: bool = False, access: bool = False
-) -> StrPair:
+) -> StrPair | None:
     """Get array of latest date time in selected directory as time object.
 
     Args:
@@ -60,7 +74,4 @@ def get_directory_latest(
     Returns:
         StrPair: Dictionary constructed by string path and latest date time.
     """
-    return {
-        str(path): get_latest(path, jst=jst, access=access).isoformat()
-        for path in walk_generator
-    }
+    return _get_latest_stamp(walk_generator, jst, access)
