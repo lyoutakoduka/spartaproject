@@ -32,7 +32,7 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 
 
 def test_file() -> None:
-    """Test to get latest date time about file you select."""
+    """Test to get the date time about file you select."""
 
     def individual_test(temporary_root: Path) -> None:
         _common_test(create_temporary_file(temporary_root))
@@ -41,7 +41,7 @@ def test_file() -> None:
 
 
 def test_directory() -> None:
-    """Test to get latest date time about directory you select."""
+    """Test to get the date time about directory you select."""
 
     def individual_test(temporary_root: Path) -> None:
         _common_test(create_directory(Path(temporary_root, "temporary")))
@@ -50,6 +50,8 @@ def test_directory() -> None:
 
 
 def test_empty() -> None:
+    """Test to check the invalid date time about file you select."""
+
     def individual_test(temporary_root: Path) -> None:
         file_path: Path = _set_invalid_datetime(
             create_temporary_file(temporary_root)
