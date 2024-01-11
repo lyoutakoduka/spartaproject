@@ -29,8 +29,14 @@ def _common_test(times: Times) -> None:
     assert times[0] == times[1]
 
 
+def _get_latest_pair(path: Path, jst: bool) -> Times:
+    return [
+        get_latest(path, access=status, jst=jst) for status in [False, True]
+    ]
+
+
 def _compare_utc_timezone(path: Path) -> None:
-    _common_test([get_latest(path, access=status) for status in [False, True]])
+    _common_test(_get_latest_pair(path, False))
 
 
 def _get_json_latest(file_path: Path, status: bool) -> Json:
