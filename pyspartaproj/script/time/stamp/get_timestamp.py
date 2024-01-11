@@ -7,7 +7,6 @@ from datetime import datetime
 from decimal import Decimal
 from pathlib import Path
 
-from pyspartaproj.context.default.string_context import StrPair
 from pyspartaproj.context.extension.path_context import PathGene
 from pyspartaproj.context.extension.time_context import TimePair
 from pyspartaproj.script.time.stamp.from_timestamp import time_from_timestamp
