@@ -38,6 +38,11 @@ def _get_latest_stamp(
 
 
 def get_invalid_time() -> datetime:
+    """Get invalid time date which is used for comparing time you got.
+
+    Returns:
+        datetime: Invalid time date.
+    """
     return datetime(0, 0, 0)
 
 
@@ -58,8 +63,8 @@ def get_latest(
             Return latest date time as JST time zone if it's True.
 
     Returns:
-        datetime | None: : Latest date time as time object.
-            Return "None" if date time is broke.
+        datetime: Latest date time as time object.
+            Return unique invalid time if time you got is broke is exists.
     """
     if time := get_file_epoch(path, access=access):
         return _convert_timestamp(float(time), jst=jst)
@@ -83,8 +88,7 @@ def get_directory_latest(
             Return latest date time as JST time zone if it's True.
 
     Returns:
-        StrPair | None:
-            Dictionary constructed by string path and latest date time.
-            Return "None" if time you got is broke is exists.
+        TimePair: Dictionary constructed by string path and latest date time.
+            Return unique invalid time if time you got is broke is exists.
     """
     return _get_latest_stamp(walk_generator, jst, access)
