@@ -91,4 +91,4 @@ def get_directory_latest(
         TimePair: Dictionary constructed by string path and latest date time.
             Return unique invalid time if time you got is broke is exists.
     """
-    return _get_latest_stamp(walk_generator, jst, access)
+    return _get_latest_stamp(walk_generator, access, jst)
