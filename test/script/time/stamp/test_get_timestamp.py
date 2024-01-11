@@ -22,6 +22,7 @@ from pyspartaproj.script.path.temporary.create_temporary_tree import (
 )
 from pyspartaproj.script.time.stamp.get_timestamp import (
     get_directory_latest,
+    get_invalid_time,
     get_latest,
 )
 
@@ -62,6 +63,11 @@ def _get_json_latest(file_path: Path, status: bool) -> Json:
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
+
+
+def test_invalid() -> None:
+    """Test to compare the date time used for invalid data check."""
+    assert "0001-01-01T00:00:00" == get_invalid_time().isoformat()
 
 
 def test_file() -> None:
@@ -116,6 +122,7 @@ def main() -> bool:
     Returns:
         bool: Success if get to the end of function.
     """
+    test_invalid()
     test_file()
     test_directory()
     test_jst()
