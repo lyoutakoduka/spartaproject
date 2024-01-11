@@ -39,6 +39,13 @@ def _compare_utc_timezone(path: Path) -> None:
     _common_test(_get_latest_pair(path, False))
 
 
+def _compare_jst_timezone(path: Path) -> Times:
+    times: Times = _get_latest_pair(path, True)
+    _common_test(times)
+
+    return times
+
+
 def _get_json_latest(file_path: Path, status: bool) -> Json:
     return multiple_to_json(
         get_directory_latest(walk_iterator(file_path), access=status)
@@ -74,12 +81,9 @@ def test_jst() -> None:
     """Test to get latest date time of file as JST time zone."""
 
     def individual_test(temporary_root: Path) -> None:
-        file_path: Path = create_temporary_file(temporary_root)
-        times: Times = [
-            get_latest(file_path, access=status, jst=True)
-            for status in [False, True]
-        ]
-        _common_test(times)
+        times: Times = _compare_jst_timezone(
+            create_temporary_file(temporary_root)
+        )
 
         assert "9:00:00" == str(times[0].utcoffset())
 
