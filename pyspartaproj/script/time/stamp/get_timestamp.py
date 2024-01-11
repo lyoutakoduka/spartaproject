@@ -26,14 +26,14 @@ def _add_latest_stamp(
 
 def _get_latest_stamp(
     walk_generator: PathGene, jst: bool = False, access: bool = False
-) -> StrPair | None:
-    latest_stamp: StrPair = {}
+) -> TimePair:
+    latest_stamp: TimePair = {}
 
     for path in walk_generator:
         if time := get_latest(path, jst=jst, access=access):
-            latest_stamp[str(path)] = time.isoformat()
+            _add_latest_stamp(path, time, latest_stamp)
         else:
-            return None
+            _add_latest_stamp(path, datetime(0, 0, 0), latest_stamp)
 
     return latest_stamp
 
@@ -66,7 +66,7 @@ def get_latest(
 
 def get_directory_latest(
     walk_generator: PathGene, jst: bool = False, access: bool = False
-) -> StrPair | None:
+) -> TimePair:
     """Get array of latest date time in selected directory as time object.
 
     Args:
