@@ -32,9 +32,13 @@ def _get_latest_stamp(
         if time := get_latest(path, jst=jst, access=access):
             _add_latest_stamp(path, time, latest_stamp)
         else:
-            _add_latest_stamp(path, datetime(0, 0, 0), latest_stamp)
+            _add_latest_stamp(path, get_invalid_time(), latest_stamp)
 
     return latest_stamp
+
+
+def get_invalid_time() -> datetime:
+    return datetime(0, 0, 0)
 
 
 def get_latest(
