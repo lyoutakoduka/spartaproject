@@ -9,12 +9,19 @@ from pathlib import Path
 
 from pyspartaproj.context.default.string_context import StrPair
 from pyspartaproj.context.extension.path_context import PathGene
+from pyspartaproj.context.extension.time_context import TimePair
 from pyspartaproj.script.time.stamp.from_timestamp import time_from_timestamp
 from pyspartaproj.script.time.stamp.get_file_epoch import get_file_epoch
 
 
 def _convert_timestamp(time: float, jst: bool) -> datetime:
     return time_from_timestamp(Decimal(str(time)), jst=jst)
+
+
+def _add_latest_stamp(
+    path: Path, time: datetime, latest_stamp: TimePair
+) -> None:
+    latest_stamp[str(path)] = time
 
 
 def _get_latest_stamp(
