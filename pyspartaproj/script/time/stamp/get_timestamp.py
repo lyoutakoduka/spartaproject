@@ -43,7 +43,7 @@ def get_invalid_time() -> datetime:
     Returns:
         datetime: Invalid time date.
     """
-    return datetime(0, 0, 0)
+    return datetime(1, 1, 1)
 
 
 def get_latest(
