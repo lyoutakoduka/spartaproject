@@ -7,7 +7,8 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from pyspartaproj.context.extension.time_context import Times
+from pyspartaproj.context.default.string_context import StrPair
+from pyspartaproj.context.extension.time_context import TimePair, Times
 from pyspartaproj.context.file.json_context import Json
 from pyspartaproj.script.bool.compare_json import is_same_json
 from pyspartaproj.script.directory.create_directory import create_directory
@@ -46,9 +47,15 @@ def _compare_jst_timezone(path: Path) -> Times:
     return times
 
 
+def _convert_time_to_text(times: TimePair) -> StrPair:
+    return {path_text: time.isoformat() for path_text, time in times.items()}
+
+
 def _get_json_latest(file_path: Path, status: bool) -> Json:
     return multiple_to_json(
-        get_directory_latest(walk_iterator(file_path), access=status)
+        _convert_time_to_text(
+            get_directory_latest(walk_iterator(file_path), access=status)
+        )
     )
 
 
