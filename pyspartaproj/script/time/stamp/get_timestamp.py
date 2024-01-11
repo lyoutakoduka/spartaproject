@@ -24,7 +24,7 @@ def _add_latest_stamp(
 
 
 def _get_latest_stamp(
-    walk_generator: PathGene, jst: bool = False, access: bool = False
+    walk_generator: PathGene, access: bool = False, jst: bool = False
 ) -> TimePair:
     latest_stamp: TimePair = {}
 
@@ -47,7 +47,7 @@ def get_invalid_time() -> datetime:
 
 
 def get_latest(
-    path: Path, jst: bool = False, access: bool = False
+    path: Path, access: bool = False, jst: bool = False
 ) -> datetime:
     """Get latest date time of file or directory as time object.
 
@@ -73,7 +73,7 @@ def get_latest(
 
 
 def get_directory_latest(
-    walk_generator: PathGene, jst: bool = False, access: bool = False
+    walk_generator: PathGene, access: bool = False, jst: bool = False
 ) -> TimePair:
     """Get array of latest date time in selected directory as time object.
 
