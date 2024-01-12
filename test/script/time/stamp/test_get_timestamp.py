@@ -7,12 +7,8 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from pyspartaproj.context.default.string_context import StrPair
-from pyspartaproj.context.extension.time_context import TimePair, Times
-from pyspartaproj.context.file.json_context import Json
-from pyspartaproj.script.bool.compare_json import is_same_json
+from pyspartaproj.context.extension.time_context import Times
 from pyspartaproj.script.directory.create_directory import create_directory
-from pyspartaproj.script.file.json.convert_to_json import multiple_to_json
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.temporary.create_temporary_file import (
     create_temporary_file,
