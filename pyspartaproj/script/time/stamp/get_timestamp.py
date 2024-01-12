@@ -9,6 +9,8 @@ from pathlib import Path
 
 from pyspartaproj.context.extension.path_context import PathGene
 from pyspartaproj.context.extension.time_context import TimePair
+from pyspartaproj.context.file.json_context import Json
+from pyspartaproj.script.file.json.convert_to_json import multiple_to_json
 from pyspartaproj.script.time.stamp.from_timestamp import time_from_timestamp
 from pyspartaproj.script.time.stamp.get_file_epoch import get_file_epoch
 
@@ -35,6 +37,12 @@ def _get_latest_stamp(
             _add_latest_stamp(path, get_invalid_time(), latest_stamp)
 
     return latest_stamp
+
+
+def _get_stamp_json(times: TimePair) -> Json:
+    return multiple_to_json(
+        {path_text: time.isoformat() for path_text, time in times.items()}
+    )
 
 
 def get_invalid_time() -> datetime:
