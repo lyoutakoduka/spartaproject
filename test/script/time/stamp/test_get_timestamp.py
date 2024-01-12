@@ -24,6 +24,7 @@ from pyspartaproj.script.time.stamp.get_timestamp import (
     get_directory_latest,
     get_invalid_time,
     get_latest,
+    is_same_stamp,
 )
 
 
@@ -103,14 +104,17 @@ def test_jst() -> None:
     _inside_temporary_directory(individual_test)
 
 
-def test_tree() -> None:
+def test_same() -> None:
     """Test to get latest date time of contents in the directory you select."""
 
     def individual_test(temporary_root: Path) -> None:
         file_path: Path = create_temporary_tree(Path(temporary_root, "tree"))
 
-        assert is_same_json(
-            *[_get_json_latest(file_path, status) for status in [False, True]]
+        assert is_same_stamp(
+            *[
+                get_directory_latest(walk_iterator(file_path), access=status)
+                for status in [False, True]
+            ]
         )
 
     _inside_temporary_directory(individual_test)
@@ -126,5 +130,5 @@ def main() -> bool:
     test_file()
     test_directory()
     test_jst()
-    test_tree()
+    test_same()
     return True
