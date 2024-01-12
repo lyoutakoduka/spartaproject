@@ -49,18 +49,6 @@ def _compare_jst_timezone(path: Path) -> Times:
     return times
 
 
-def _convert_time_to_text(times: TimePair) -> StrPair:
-    return {path_text: time.isoformat() for path_text, time in times.items()}
-
-
-def _get_json_latest(file_path: Path, status: bool) -> Json:
-    return multiple_to_json(
-        _convert_time_to_text(
-            get_directory_latest(walk_iterator(file_path), access=status)
-        )
-    )
-
-
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
