@@ -3,6 +3,7 @@
 
 """Test module to get latest date time of file or directory as time object."""
 
+from os import utime
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
@@ -43,6 +44,11 @@ def _compare_jst_timezone(path: Path) -> Times:
     _common_test(times)
 
     return times
+
+
+def _set_invalid_datetime(file_path: Path) -> Path:
+    utime(file_path, (0, 0))
+    return file_path
 
 
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
