@@ -11,6 +11,7 @@ from typing import Callable
 from pyspartaproj.context.extension.time_context import TimePair, Times
 from pyspartaproj.script.directory.create_directory import create_directory
 from pyspartaproj.script.path.iterate_directory import walk_iterator
+from pyspartaproj.script.path.modify.get_relative import get_relative
 from pyspartaproj.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
@@ -58,6 +59,10 @@ def _set_invalid_directory(invalid_root: Path) -> None:
 
 def _get_directory_latest(path: Path) -> TimePair:
     return get_directory_latest(walk_iterator(path))
+
+
+def _get_relative_text(path_text: str, root_path: Path) -> str:
+    return str(get_relative(Path(path_text), root_path=root_path))
 
 
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
