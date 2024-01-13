@@ -56,6 +56,10 @@ def _set_invalid_directory(invalid_root: Path) -> None:
         _set_invalid_datetime(path)
 
 
+def _get_directory_latest(path: Path) -> TimePair:
+    return get_directory_latest(walk_iterator(path))
+
+
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
