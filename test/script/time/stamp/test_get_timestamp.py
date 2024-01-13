@@ -51,6 +51,11 @@ def _set_invalid_datetime(file_path: Path) -> Path:
     return file_path
 
 
+def _set_invalid_directory(directory_path: Path) -> None:
+    for path in walk_iterator(directory_path):
+        _set_invalid_datetime(path)
+
+
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
