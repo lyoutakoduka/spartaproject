@@ -8,7 +8,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from pyspartaproj.context.extension.time_context import Times
+from pyspartaproj.context.extension.time_context import TimePair, Times
 from pyspartaproj.script.directory.create_directory import create_directory
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.temporary.create_temporary_file import (
@@ -46,13 +46,13 @@ def _compare_jst_timezone(path: Path) -> Times:
     return times
 
 
-def _set_invalid_datetime(file_path: Path) -> Path:
-    utime(file_path, (0, 0))
-    return file_path
+def _set_invalid_datetime(path: Path) -> Path:
+    utime(path, (0, 0))
+    return path
 
 
-def _set_invalid_directory(directory_path: Path) -> None:
-    for path in walk_iterator(directory_path):
+def _set_invalid_directory(invalid_root: Path) -> None:
+    for path in walk_iterator(invalid_root):
         _set_invalid_datetime(path)
 
 
