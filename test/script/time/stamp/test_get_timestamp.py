@@ -3,6 +3,7 @@
 
 """Test module to get latest date time of file or directory as time object."""
 
+from datetime import datetime
 from os import utime
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -70,6 +71,13 @@ def _get_relative_latest(path: Path) -> TimePair:
         _get_relative_text(path_text, path): time
         for path_text, time in _get_directory_latest(path).items()
     }
+
+
+def _compare_invalid_times(times: TimePair) -> None:
+    invalid_time: datetime = get_invalid_time()
+
+    for time in times.values():
+        assert invalid_time == time
 
 
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
