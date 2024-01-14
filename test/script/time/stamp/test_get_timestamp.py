@@ -65,6 +65,13 @@ def _get_relative_text(path_text: str, root_path: Path) -> str:
     return str(get_relative(Path(path_text), root_path=root_path))
 
 
+def _get_relative_latest(path: Path) -> TimePair:
+    return {
+        _get_relative_text(path_text, path): time
+        for path_text, time in _get_directory_latest(path).items()
+    }
+
+
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
