@@ -21,23 +21,23 @@ def _convert_timestamp(time: float, jst: bool) -> datetime:
 
 
 def _add_latest_times(
-    path: Path, time: datetime, latest_stamp: TimePair
+    path: Path, time: datetime, latest_times: TimePair
 ) -> None:
-    latest_stamp[str(path)] = time
+    latest_times[str(path)] = time
 
 
 def _get_latest_times(
     walk_generator: PathGene, access: bool = False, jst: bool = False
 ) -> TimePair:
-    latest_stamp: TimePair = {}
+    latest_times: TimePair = {}
 
     for path in walk_generator:
         if time := get_latest(path, jst=jst, access=access):
-            _add_latest_times(path, time, latest_stamp)
+            _add_latest_times(path, time, latest_times)
         else:
-            _add_latest_times(path, get_invalid_time(), latest_stamp)
+            _add_latest_times(path, get_invalid_time(), latest_times)
 
-    return latest_stamp
+    return latest_times
 
 
 def _get_stamp_json(times: TimePair) -> Json:
