@@ -9,6 +9,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
+from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.extension.time_context import TimePair, Times
 from pyspartaproj.script.directory.create_directory import create_directory
 from pyspartaproj.script.path.iterate_directory import walk_iterator
@@ -78,6 +79,13 @@ def _compare_invalid_times(times: TimePair) -> None:
 
     for time in times.values():
         assert invalid_time == time
+
+
+def _compare_invalid_files(times: TimePair) -> None:
+    expected: Strs = ["file.json", "empty", "file.ini", "file.txt"]
+    assert 1 == len(
+        set([str(sorted(files)) for files in [expected, list(times.keys())]])
+    )
 
 
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
