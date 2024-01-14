@@ -44,11 +44,11 @@ def _get_stamp_value(path_text: str, time: str) -> str:
 
 
 def _get_archive_stamp(stamp_root: Path) -> StrPair:
-    stamp: StrPair = get_directory_latest(walk_iterator(stamp_root))
+    latest_times: StrPair = get_directory_latest(walk_iterator(stamp_root))
 
     return {
         _get_stamp_key(key, stamp_root): _get_stamp_value(key, time)
-        for key, time in stamp.items()
+        for key, time in latest_times.items()
     }
 
 
