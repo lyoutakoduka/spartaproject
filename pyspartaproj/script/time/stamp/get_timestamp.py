@@ -20,22 +20,22 @@ def _convert_timestamp(time: float, jst: bool) -> datetime:
     return time_from_timestamp(Decimal(str(time)), jst=jst)
 
 
-def _add_latest_stamp(
+def _add_latest_times(
     path: Path, time: datetime, latest_stamp: TimePair
 ) -> None:
     latest_stamp[str(path)] = time
 
 
-def _get_latest_stamp(
+def _get_latest_times(
     walk_generator: PathGene, access: bool = False, jst: bool = False
 ) -> TimePair:
     latest_stamp: TimePair = {}
 
     for path in walk_generator:
         if time := get_latest(path, jst=jst, access=access):
-            _add_latest_stamp(path, time, latest_stamp)
+            _add_latest_times(path, time, latest_stamp)
         else:
-            _add_latest_stamp(path, get_invalid_time(), latest_stamp)
+            _add_latest_times(path, get_invalid_time(), latest_stamp)
 
     return latest_stamp
 
@@ -114,4 +114,4 @@ def get_directory_latest(
         TimePair: Dictionary constructed by string path and latest date time.
             Return unique invalid time if time you got is broke is exists.
     """
-    return _get_latest_stamp(walk_generator, access, jst)
+    return _get_latest_times(walk_generator, access, jst)
