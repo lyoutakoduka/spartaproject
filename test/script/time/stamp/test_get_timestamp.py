@@ -131,6 +131,21 @@ def test_jst() -> None:
     _inside_temporary_directory(individual_test)
 
 
+def test_tree() -> None:
+    def individual_test(temporary_root: Path) -> None:
+        directory_path: Path = create_temporary_tree(
+            Path(temporary_root, "tree")
+        )
+        _set_invalid_directory(directory_path)
+
+        times: TimePair = _get_relative_latest(directory_path)
+
+        _compare_invalid_times(times)
+        _compare_invalid_files(times)
+
+    _inside_temporary_directory(individual_test)
+
+
 def test_same() -> None:
     """Test to get latest date time of contents in the directory you select."""
 
@@ -157,5 +172,6 @@ def main() -> bool:
     test_file()
     test_directory()
     test_jst()
+    test_tree()
     test_same()
     return True
