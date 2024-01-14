@@ -132,6 +132,8 @@ def test_jst() -> None:
 
 
 def test_tree() -> None:
+    """Test to get latest date time of contents in the directory you select."""
+
     def individual_test(temporary_root: Path) -> None:
         directory_path: Path = create_temporary_tree(
             Path(temporary_root, "tree")
@@ -147,7 +149,7 @@ def test_tree() -> None:
 
 
 def test_same() -> None:
-    """Test to get latest date time of contents in the directory you select."""
+    """Test to compare 2 dictionaries about latest date time you got."""
 
     def individual_test(temporary_root: Path) -> None:
         file_path: Path = create_temporary_tree(Path(temporary_root, "tree"))
