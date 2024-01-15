@@ -8,6 +8,7 @@ from decimal import Decimal
 from pathlib import Path
 from zipfile import ZIP_LZMA, ZIP_STORED, ZipFile, ZipInfo
 
+from pyspartaproj.context.default.integer_context import Ints
 from pyspartaproj.context.default.string_context import StrPair, Strs
 from pyspartaproj.context.extension.path_context import Paths
 from pyspartaproj.script.decimal.initialize_decimal import initialize_decimal
@@ -127,17 +128,13 @@ class CompressZip:
         current_archive: Path = self._archived[-1]
         return Decimal(str(current_archive.stat().st_size))
 
+    def _get_file_size(self) -> Ints:
+        return [
+            information.file_size for information in self._file_zip.infolist()
+        ]
+
     def _archive_inside_byte(self) -> Decimal:
-        return Decimal(
-            str(
-                sum(
-                    [
-                        information.file_size
-                        for information in self._file_zip.infolist()
-                    ]
-                )
-            )
-        )
+        return Decimal(str(sum(self._get_file_size())))
 
     def _archive_include_files(self) -> bool:
         return 0 < self._archive_inside_byte()
