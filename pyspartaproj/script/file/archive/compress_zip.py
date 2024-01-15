@@ -17,7 +17,11 @@ from pyspartaproj.script.file.json.export_json import json_dump
 from pyspartaproj.script.file.text.import_file import byte_import
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.modify.get_relative import get_relative
-from pyspartaproj.script.time.stamp.get_timestamp import get_latest
+from pyspartaproj.script.time.current_datetime import get_current_time
+from pyspartaproj.script.time.stamp.get_timestamp import (
+    get_invalid_time,
+    get_latest,
+)
 
 initialize_decimal()
 
@@ -82,11 +86,20 @@ class CompressZip:
             time.second,
         )
 
+    def _get_zip_timestamp(self, target: Path) -> datetime:
+        latest: datetime = get_latest(target)
+
+        if latest != get_invalid_time():
+            return latest
+
+        return get_current_time()
+
     def _get_zip_information(self, target: Path, relative: Path) -> ZipInfo:
         information: ZipInfo = ZipInfo(filename=str(relative))
 
         information.compress_type = ZIP_LZMA if self._compress else ZIP_STORED
-        latest: datetime = get_latest(target)
+        latest: datetime = self._get_zip_timestamp(target)
+
         self._store_timestamp(latest, information)
         information.comment = self._store_timestamp_detail(latest)
 
