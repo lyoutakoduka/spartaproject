@@ -155,12 +155,6 @@ def _edit_time_stamp(
     _update_time_stamp(edit_history, stamp_before, stamp_after)
 
 
-def _compare_time_stamp(stamp_before: StrPair, stamp_after: StrPair) -> bool:
-    return is_same_json(
-        *[multiple_to_json(stamp) for stamp in [stamp_before, stamp_after]]
-    )
-
-
 def _get_stamp_after(
     temporary_root: Path,
     stamp_before: TimePair,
