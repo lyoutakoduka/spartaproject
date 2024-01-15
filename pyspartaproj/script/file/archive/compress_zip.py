@@ -8,6 +8,7 @@ from decimal import Decimal
 from pathlib import Path
 from zipfile import ZIP_LZMA, ZIP_STORED, ZipFile, ZipInfo
 
+from pyspartaproj.context.default.integer_context import Ints
 from pyspartaproj.context.default.string_context import StrPair, Strs
 from pyspartaproj.context.extension.path_context import Paths
 from pyspartaproj.script.decimal.initialize_decimal import initialize_decimal
@@ -17,7 +18,11 @@ from pyspartaproj.script.file.json.export_json import json_dump
 from pyspartaproj.script.file.text.import_file import byte_import
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.modify.get_relative import get_relative
-from pyspartaproj.script.time.stamp.get_timestamp import get_latest
+from pyspartaproj.script.time.current_datetime import get_current_time
+from pyspartaproj.script.time.stamp.get_timestamp import (
+    get_invalid_time,
+    get_latest,
+)
 
 initialize_decimal()
 
@@ -82,11 +87,20 @@ class CompressZip:
             time.second,
         )
 
+    def _get_zip_timestamp(self, target: Path) -> datetime:
+        latest: datetime = get_latest(target)
+
+        if latest != get_invalid_time():
+            return latest
+
+        return get_current_time()
+
     def _get_zip_information(self, target: Path, relative: Path) -> ZipInfo:
         information: ZipInfo = ZipInfo(filename=str(relative))
 
         information.compress_type = ZIP_LZMA if self._compress else ZIP_STORED
-        latest: datetime = get_latest(target)
+        latest: datetime = self._get_zip_timestamp(target)
+
         self._store_timestamp(latest, information)
         information.comment = self._store_timestamp_detail(latest)
 
@@ -114,17 +128,13 @@ class CompressZip:
         current_archive: Path = self._archived[-1]
         return Decimal(str(current_archive.stat().st_size))
 
+    def _get_file_size(self) -> Ints:
+        return [
+            information.file_size for information in self._file_zip.infolist()
+        ]
+
     def _archive_inside_byte(self) -> Decimal:
-        return Decimal(
-            str(
-                sum(
-                    [
-                        information.file_size
-                        for information in self._file_zip.infolist()
-                    ]
-                )
-            )
-        )
+        return Decimal(str(sum(self._get_file_size())))
 
     def _archive_include_files(self) -> bool:
         return 0 < self._archive_inside_byte()

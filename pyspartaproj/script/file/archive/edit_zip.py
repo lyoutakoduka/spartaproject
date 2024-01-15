@@ -5,23 +5,21 @@
 
 from pathlib import Path
 
-from pyspartaproj.context.default.string_context import StrPair
 from pyspartaproj.context.extension.path_context import Paths
-from pyspartaproj.script.bool.compare_json import is_same_json
+from pyspartaproj.context.extension.time_context import TimePair
 from pyspartaproj.script.directory.create_directory_temporary import WorkSpace
 from pyspartaproj.script.file.archive.compress_zip import CompressZip
 from pyspartaproj.script.file.archive.decompress_zip import DecompressZip
-from pyspartaproj.script.file.json.convert_to_json import multiple_to_json
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.safe.safe_trash import SafeTrash
-from pyspartaproj.script.time.stamp.get_timestamp import get_directory_latest
+from pyspartaproj.script.time.stamp.get_timestamp import (
+    get_directory_latest,
+    is_same_stamp,
+)
 
 
 class EditZip(WorkSpace):
-    """Class to edit internal of zip archive file.
-
-    WorkSpace: Class to create temporary working directory shared in class.
-    """
+    """Class to edit internal of zip archive file."""
 
     def _initialize_variables(
         self, archive_path: Path, limit_byte: int, compress: bool
@@ -31,22 +29,17 @@ class EditZip(WorkSpace):
         self._limit_byte: int = limit_byte
         self._is_lzma_after: bool = compress
 
-    def _get_archive_stamp(self) -> StrPair:
+    def _get_archive_stamp(self) -> TimePair:
         return get_directory_latest(walk_iterator(self.get_root()))
 
-    def _is_difference_archive_stamp(self, archive_stamp: StrPair) -> bool:
-        return not is_same_json(
-            *[
-                multiple_to_json(stamp)
-                for stamp in [self._archive_stamp, archive_stamp]
-            ]
-        )
+    def _is_difference_archive_stamp(self, archive_stamp: TimePair) -> bool:
+        return not is_same_stamp(self._archive_stamp, archive_stamp)
 
     def _is_difference_compress_type(self) -> bool:
         return self._is_lzma_before != self._is_lzma_after
 
-    def _is_difference_archive(self) -> StrPair | None:
-        archive_stamp: StrPair = self._get_archive_stamp()
+    def _is_difference_archive(self) -> TimePair | None:
+        archive_stamp: TimePair = self._get_archive_stamp()
 
         if self._is_difference_compress_type():
             return archive_stamp
@@ -62,7 +55,7 @@ class EditZip(WorkSpace):
         for path in self._decompressed:
             safe_trash.trash(path)
 
-    def _compress_archive(self, archive_stamp: StrPair) -> Paths:
+    def _compress_archive(self, archive_stamp: TimePair) -> Paths:
         self._cleanup_before_override()
 
         compress_zip = CompressZip(
@@ -97,7 +90,7 @@ class EditZip(WorkSpace):
         self._decompress_archive(decompress_zip)
         self._record_compress_type(decompress_zip)
 
-        self._archive_stamp: StrPair = self._get_archive_stamp()
+        self._archive_stamp: TimePair = self._get_archive_stamp()
 
     def _finalize_archive(self) -> Paths | None:
         archived: Paths | None = None
@@ -124,7 +117,7 @@ class EditZip(WorkSpace):
 
         Returns:
             Paths | None: Path of compressed archive.
-                Return None if the archive you want to edit isn't changed.
+                Return "None" if the archive you want to edit isn't changed.
         """
         if self._still_removed:
             return None
