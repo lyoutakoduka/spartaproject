@@ -48,7 +48,7 @@ def walk_iterator(
 
         depth (int, optional): Defaults to 0.
             Additional depth of directory hierarchy which you want to search.
-            Only surface in the directory is searched, if it's 0.
+            Only surface in the directory is searched if it's 0.
 
         file (bool, optional): Defaults to True.
             Search file. If it's False, Ignore file when search.

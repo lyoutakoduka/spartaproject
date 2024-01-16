@@ -52,7 +52,7 @@ class LogTimer:
         Returns:
             str | None:
                 Timer count is returned one time at every specific interval.
-                Return None, if timer count is in interval.
+                Return "None" if timer count is in interval.
         """
         elapsed: Decimal = self._timer_current() - self._start_time
 
