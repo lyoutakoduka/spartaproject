@@ -11,11 +11,7 @@ from pyspartaproj.script.path.safe.safe_file_history import FileHistory
 
 
 class SafeCopy(FileHistory):
-    """Class to copy file or directory and log history.
-
-    Args:
-        FileHistory: Class to record path which is used for file operation.
-    """
+    """Class to copy file or directory and log history."""
 
     def copy(
         self, source_path: Path, destination_path: Path, override: bool = False
