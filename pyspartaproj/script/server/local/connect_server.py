@@ -21,11 +21,7 @@ initialize_decimal()
 
 
 class ConnectServer(PathServer, ProjectContext):
-    """Class to use SSH and SFTP functionality.
-
-    PathServer: class to handle paths about file and directory.
-    ProjectContext: class to import a context of whole project.
-    """
+    """Class to use SSH and SFTP functionality."""
 
     def _initialize_connect(self) -> None:
         self._ssh: SSHClient | None = None

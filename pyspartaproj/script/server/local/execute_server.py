@@ -11,10 +11,7 @@ from pyspartaproj.script.server.script_version import get_version_name
 
 
 class ExecuteServer(UploadServer):
-    """Class to execute python code on server.
-
-    UploadServer: Class to upload python code to server
-    """
+    """Class to execute python code on server."""
 
     def _set_version(self, version: str | None) -> str:
         if version is None:

@@ -15,10 +15,7 @@ from pyspartaproj.script.server.local.connect_server import ConnectServer
 
 
 class UploadServer(ConnectServer):
-    """Class to upload file or directory by SFTP functionality.
-
-    ConnectServer: Class to use SSH and SFTP functionality.
-    """
+    """Class to upload file or directory by SFTP functionality."""
 
     def _get_remote_root(self) -> Path:
         if sftp := self.get_sftp():
