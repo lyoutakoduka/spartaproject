@@ -6,13 +6,15 @@
 
 ## Note
 
-We sometimes call this product sparta simply instead of spartaproject or pyspartaproj.
+We sometimes call this product "Sparta" simply instead of "spartaproject" or "pyspartaproj".
 
 ## Language
 
-All documents written by English. But, perfect tech support can only provide Japanese because author's english isn't great :)
+All documents written by English, and it's on the premise that translation service like Google Translate.
 
-_Note: all documents are written on the premise that translation service like Google Translate._
+## Technical Support
+
+You can get tech support of Sparta only English or Japanese.
 
 ## Contribution
 

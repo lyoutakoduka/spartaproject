@@ -21,8 +21,6 @@ class FileHistory(WorkSpace):
     """Class to record paths which is source and destination pair.
 
     The module is used for e.g., custom copy or rename operation.
-
-    WorkSpace: Class to create temporary working directory shared in class.
     """
 
     def __init__(self, history_path: Path | None = None) -> None:
