@@ -2,14 +2,14 @@
 # -*- coding: utf-8 -*-
 
 from decimal import Decimal
-from pathlib import Path
+from pathlib import PurePath
 from typing import Dict, List
 
 from pyspartaproj.context.file.json_context import Json, Multi, Multi2, Single
 
 
 def _convert_unknown(value: Single) -> Single:
-    if isinstance(value, Path):
+    if isinstance(value, PurePath):
         return str(value)
 
     if isinstance(value, Decimal):
