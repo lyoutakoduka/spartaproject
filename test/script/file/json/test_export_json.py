@@ -76,10 +76,8 @@ def test_export() -> None:
       ]
     """
 
-    expected: str = format_indent(expected)
-
     with TemporaryDirectory() as temporary_path:
-        assert expected == text_import(
+        assert format_indent(expected) == text_import(
             json_export(Path(temporary_path, "temporary.json"), keys)
         )
 

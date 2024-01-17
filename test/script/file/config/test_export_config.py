@@ -200,10 +200,8 @@ def test_export() -> None:
         false = False
     """
 
-    expected: str = format_indent(expected, stdout=True)
-
     with TemporaryDirectory() as temporary_path:
-        assert expected == text_import(
+        assert format_indent(expected, stdout=True) == text_import(
             config_export(Path(temporary_path, "temporary.ini"), source_pairs)
         )
 

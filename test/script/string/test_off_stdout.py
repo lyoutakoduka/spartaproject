@@ -12,8 +12,6 @@ def test_messages() -> None:
         Hello, World!
         """
 
-    expected: str = format_indent(expected, stdout=True)
-
     stdout_text = StdoutText()
 
     @stdout_text.decorator
@@ -23,7 +21,7 @@ def test_messages() -> None:
 
     _messages()
 
-    assert expected == stdout_text.show()
+    assert format_indent(expected, stdout=True) == stdout_text.show()
 
 
 def main() -> bool:
