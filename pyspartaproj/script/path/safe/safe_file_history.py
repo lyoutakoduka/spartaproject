@@ -68,6 +68,7 @@ class FileHistory(WorkSpace):
 
         for i in count():
             time_index: str = time + "_" + str(i).zfill(4)
+
             if time_index not in self._history:
                 return time_index
 

@@ -25,6 +25,7 @@ def _compare_path_name(source: Paths2, destination: PathPair2) -> bool:
     for lefts, (_, rights) in zip(source, sorted(destination.items())):
         for i, path in enumerate(["source.path", "destination.path"]):
             same_paths += [lefts[i] == rights[path]]
+
     return bool_same_array(same_paths)
 
 
@@ -40,6 +41,7 @@ def _add_single_history(
 ) -> None:
     source_path: Path = Path(__file__).parent.with_name("source.json")
     destination_path: Path = source_path.with_stem(name)
+
     file_history.add_history(source_path, destination_path)
     source_history += [[source_path, destination_path]]
 
@@ -48,8 +50,8 @@ def test_single() -> None:
     """Test to record single source and destination path pair."""
     file_history = FileHistory()
     source_history: Paths2 = []
-    _add_single_history(file_history, source_history, "destination")
 
+    _add_single_history(file_history, source_history, "destination")
     _common_test(source_history, file_history.pop_history())
 
 
