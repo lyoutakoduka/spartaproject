@@ -7,6 +7,7 @@ from pathlib import Path
 def byte_export(export_path: Path, source: bytes) -> Path:
     with open(export_path, "wb") as file:
         file.write(source)
+
     return export_path
 
 
