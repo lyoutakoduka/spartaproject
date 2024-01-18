@@ -19,6 +19,7 @@ def test_file() -> None:
     def individual_test(temporary_path: Path) -> None:
         expected: Path = Path(temporary_path, "temporary.json")
         file_path: Path = create_temporary_file(temporary_path)
+
         assert expected == file_path
         assert file_path.exists()
 
