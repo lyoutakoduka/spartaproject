@@ -44,6 +44,7 @@ def test_root() -> None:
 def test_array() -> None:
     current: Path = Path(__file__)
     expected: Paths = [current.parents[i] for i in range(3)]
+
     assert expected == get_absolute_array(get_relative_array(expected))
 
 
