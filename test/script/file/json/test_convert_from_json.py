@@ -66,6 +66,7 @@ def test_bool_array() -> None:
     source: bool = True
     source_array: Json = [source]
     source_arrays: Json = [source_array]
+
     _common_test_array(source, bool_array_from_json(source_array))
     _common_test_array2(source, bool_array2_from_json(source_arrays))
 
@@ -74,6 +75,7 @@ def test_bool_pair() -> None:
     source: bool = True
     source_pair: Json = {"B": source}
     source_pairs: Json = {"A": source_pair}
+
     _common_test_pair(source, bool_pair_from_json(source_pair))
     _common_test_pair2(source, bool_pair2_from_json(source_pairs))
 
@@ -82,6 +84,7 @@ def test_integer_array() -> None:
     source: int = 1
     source_array: Json = [source]
     source_arrays: Json = [source_array]
+
     _common_test_array(source, integer_array_from_json(source_array))
     _common_test_array2(source, integer_array2_from_json(source_arrays))
 
@@ -90,6 +93,7 @@ def test_integer_pair() -> None:
     source: int = 1
     source_pair: Json = {"B": source}
     source_pairs: Json = {"A": source_pair}
+
     _common_test_pair(source, integer_pair_from_json(source_pair))
     _common_test_pair2(source, integer_pair2_from_json(source_pairs))
 
@@ -98,6 +102,7 @@ def test_string_array() -> None:
     source: str = "test"
     source_array: Json = [source]
     source_arrays: Json = [source_array]
+
     _common_test_array(source, string_array_from_json(source_array))
     _common_test_array2(source, string_array2_from_json(source_arrays))
 
@@ -106,6 +111,7 @@ def test_string_pair() -> None:
     source: str = "test"
     source_pair: Json = {"B": source, "C.path": Path("remove")}
     source_pairs: Json = {"A": source_pair}
+
     _common_test_pair(source, string_pair_from_json(source_pair))
     _common_test_pair2(source, string_pair2_from_json(source_pairs))
 
@@ -121,6 +127,7 @@ def test_decimal_array() -> None:
     source: Decimal = Decimal("1.0")
     source_array: Json = [float(source)]
     source_arrays: Json = [source_array]
+
     _common_test_array(source, decimal_array_from_json(source_array))
     _common_test_array2(source, decimal_array2_from_json(source_arrays))
 
@@ -129,6 +136,7 @@ def test_decimal_pair() -> None:
     source: Decimal = Decimal("1.0")
     source_pair: Json = {"B": float(source)}
     source_pairs: Json = {"A": source_pair}
+
     _common_test_pair(source, decimal_pair_from_json(source_pair))
     _common_test_pair2(source, decimal_pair2_from_json(source_pairs))
 
@@ -137,6 +145,7 @@ def test_path_array() -> None:
     source: Path = Path("root")
     source_array: Json = [str(source)]
     source_arrays: Json = [source_array]
+
     _common_test_array(source, path_array_from_json(source_array))
     _common_test_array2(source, path_array2_from_json(source_arrays))
 

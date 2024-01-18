@@ -78,6 +78,7 @@ def test_bool_array() -> None:
     source_array: Bools = [source]
     source_arrays: Bools2 = [source_array]
     expected: str = "true"
+
     _common_test_array(expected, source_array)
     _common_test_array2(expected, source_arrays)
 
@@ -87,6 +88,7 @@ def test_bool_pair() -> None:
     source_pair: BoolPair = {"B": source}
     source_pairs: BoolPair2 = {"A": source_pair}
     expected: str = "true"
+
     _common_test_pair(expected, source_pair)
     _common_test_pair2(expected, source_pairs)
 
@@ -96,6 +98,7 @@ def test_integer_array() -> None:
     source_array: Ints = [source]
     source_arrays: Ints2 = [source_array]
     expected: str = "1"
+
     _common_test_array(expected, source_array)
     _common_test_array2(expected, source_arrays)
 
@@ -105,6 +108,7 @@ def test_integer_pair() -> None:
     source_pair: IntPair = {"B": source}
     source_pairs: IntPair2 = {"A": source_pair}
     expected: str = "1"
+
     _common_test_pair(expected, source_pair)
     _common_test_pair2(expected, source_pairs)
 
@@ -114,6 +118,7 @@ def test_float_array() -> None:
     source_array: Floats = [source]
     source_arrays: Floats2 = [source_array]
     expected: str = "1.0"
+
     _common_test_array(expected, source_array)
     _common_test_array2(expected, source_arrays)
 
@@ -123,6 +128,7 @@ def test_float_pair() -> None:
     source_pair: FloatPair = {"B": source}
     source_pairs: FloatPair2 = {"A": source_pair}
     expected: str = "1.0"
+
     _common_test_pair(expected, source_pair)
     _common_test_pair2(expected, source_pairs)
 
@@ -132,6 +138,7 @@ def test_string_array() -> None:
     source_array: Strs = [source]
     source_arrays: Strs2 = [source_array]
     expected: str = '"R"'
+
     _common_test_array(expected, source_array)
     _common_test_array2(expected, source_arrays)
 
@@ -141,6 +148,7 @@ def test_string_pair() -> None:
     source_pair: StrPair = {"B": source}
     source_pairs: StrPair2 = {"A": source_pair}
     expected: str = '"R"'
+
     _common_test_pair(expected, source_pair)
     _common_test_pair2(expected, source_pairs)
 
@@ -150,6 +158,7 @@ def test_decimal_array() -> None:
     source_array: Decs = [source]
     source_arrays: Decs2 = [source_array]
     expected: str = "1.0"
+
     _common_test_array(expected, source_array)
     _common_test_array2(expected, source_arrays)
 
@@ -159,6 +168,7 @@ def test_decimal_pair() -> None:
     source_pair: DecPair = {"B": source}
     source_pairs: DecPair2 = {"A": source_pair}
     expected: str = "1.0"
+
     _common_test_pair(expected, source_pair)
     _common_test_pair2(expected, source_pairs)
 
@@ -168,6 +178,7 @@ def test_path_array() -> None:
     source_array: Paths = [source]
     source_arrays: Paths2 = [source_array]
     expected: str = '"root"'
+
     _common_test_array(expected, source_array)
     _common_test_array2(expected, source_arrays)
 
@@ -177,6 +188,7 @@ def test_path_pair() -> None:
     source_pair: PathPair = {"B": source}
     source_pairs: PathPair2 = {"A": source_pair}
     expected: str = '"root"'
+
     _common_test_pair(expected, source_pair)
     _common_test_pair2(expected, source_pairs)
 
