@@ -23,6 +23,7 @@ def _execute(command: str) -> StrGene:
 
     while True:
         line: bytes = subprocess.stdout.readline()
+
         if line:
             yield _cleanup_new_lines(line.decode())
         else:

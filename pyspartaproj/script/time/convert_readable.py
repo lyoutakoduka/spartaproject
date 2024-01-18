@@ -50,8 +50,8 @@ def _get_decimal_count_texts(
     second: Decimal, counts: IntPair, digit: int
 ) -> str:
     second_numbers: Strs = [str(counts["second"])]
-
     digit_limit: int = 6
+
     if digit_limit < digit:
         digit = digit_limit
 

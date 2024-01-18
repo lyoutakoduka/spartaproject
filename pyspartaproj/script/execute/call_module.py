@@ -48,6 +48,7 @@ def _switch_test_root(call_context: PathPair, head_added_path: Path) -> bool:
 
 def _check_test_path(call_context: PathPair) -> bool:
     head: str = "test" + "_"
+
     if call_context["source"].name.startswith(head):
         return False
 
