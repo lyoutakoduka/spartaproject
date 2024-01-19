@@ -11,8 +11,12 @@ _input_time: datetime = datetime.fromisoformat(_input_utc)
 _timestamp: Decimal = Decimal(str(_input_time.timestamp()))
 
 
+def _get_input_time() -> datetime:
+    return datetime.fromisoformat("2023-04-15T20:09:30.936886+00:00")
+
+
 def test_utc() -> None:
-    assert _input_time == time_from_timestamp(_timestamp)
+    assert _get_input_time() == time_from_timestamp(_timestamp)
 
 
 def test_jst() -> None:
