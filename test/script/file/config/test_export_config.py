@@ -167,9 +167,8 @@ def test_compress() -> None:
         [int]
         one=1
     """
-    expected: str = format_indent(expected)
 
-    assert expected == config_dump(source_pairs, compress=True)
+    assert format_indent(expected) == config_dump(source_pairs, compress=True)
 
 
 def test_lower() -> None:
