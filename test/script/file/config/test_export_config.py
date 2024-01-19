@@ -11,7 +11,11 @@ from pyspartaproj.context.default.integer_context import IntPair, IntPair2
 from pyspartaproj.context.default.string_context import StrPair, StrPair2, Strs
 from pyspartaproj.context.extension.decimal_context import DecPair, DecPair2
 from pyspartaproj.context.extension.path_context import PathPair, PathPair2
-from pyspartaproj.context.file.config_context import Config
+from pyspartaproj.context.file.config_context import (
+    BasicPair2,
+    Config,
+    SectionPair2,
+)
 from pyspartaproj.script.file.config.export_config import (
     config_dump,
     config_export,
@@ -91,7 +95,7 @@ def test_path() -> None:
 
 
 def test_mix_option() -> None:
-    source_pairs: Config = {
+    source_pairs: BasicPair2 = {
         "section": {
             "bool": True,
             "int": 1,
@@ -123,7 +127,7 @@ def test_mix_section() -> None:
     decimals: DecPair = {"decimal": Decimal("0.1")}
     paths: PathPair = {"path": Path("root")}
 
-    source_pairs: Config = {
+    source_pairs: SectionPair2 = {
         "flags": flags,
         "indies": indies,
         "numbers": numbers,
@@ -156,7 +160,7 @@ def test_mix_section() -> None:
 
 
 def test_compress() -> None:
-    source_pairs: Config = {"bool": {"true": True}, "int": {"one": 1}}
+    source_pairs: SectionPair2 = {"bool": {"true": True}, "int": {"one": 1}}
     expected: str = """
         [bool]
         true=True
