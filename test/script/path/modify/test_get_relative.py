@@ -23,7 +23,7 @@ def _get_current_file() -> Path:
     return Path(__file__)
 
 
-def to_pair(path_types: Strs, paths: Paths) -> PathPair:
+def _to_pair(path_types: Strs, paths: Paths) -> PathPair:
     return {path_type: path for path_type, path in zip(path_types, paths)}
 
 
@@ -56,7 +56,7 @@ def test_pair() -> None:
     expected_base: Path = _get_current_file()
     keys: Strs = ["R", "G", "B"]
 
-    expected: PathPair = to_pair(
+    expected: PathPair = _to_pair(
         keys, [expected_base.parents[i] for i in range(3)]
     )
     result: PathPair = get_absolute_pair(get_relative_pair(expected))
