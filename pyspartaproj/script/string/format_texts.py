@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 from itertools import takewhile
-from typing import List, TypedDict
 
 from pyspartaproj.context.default.integer_context import Ints
 from pyspartaproj.context.default.string_context import Strs
