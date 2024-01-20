@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""test module to create all parent directories of the path you select."""
+
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
@@ -16,6 +18,8 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 
 
 def test_directory() -> None:
+    """Test to create all parent directories of the path you select."""
+
     def individual_test(temporary_root: Path) -> None:
         expected: Path = Path(temporary_root, "parent")
         parent_path: Path = create_directory_parent(
@@ -29,5 +33,10 @@ def test_directory() -> None:
 
 
 def main() -> bool:
+    """All test of feature flags module.
+
+    Returns:
+        bool: Success if get to the end of function.
+    """
     test_directory()
     return True
