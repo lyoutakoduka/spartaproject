@@ -9,14 +9,6 @@ from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.extension.typed_context import LinePair, LinePairs
 
 
-class _LinePair(TypedDict):
-    text: str
-    count: int
-
-
-_LinePairs = List[LinePair]
-
-
 def _strip_line(source_text: str) -> LinePairs:
     line_attributes: LinePairs = []
 
