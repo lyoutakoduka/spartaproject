@@ -26,7 +26,8 @@ def _get_element_names() -> Strs:
 
 
 def _get_head_path(index: int) -> Path:
-    return Path(*[_element_names[i] for i in range(index + 1)])
+    element_names: Strs = _get_element_names()
+    return Path(*[element_names[i] for i in range(index + 1)])
 
 
 def _inside_temporary_directory(function: Callable[[Path], bool]) -> None:
@@ -35,8 +36,10 @@ def _inside_temporary_directory(function: Callable[[Path], bool]) -> None:
 
 
 def test_single() -> None:
+    element_names: Strs = _get_element_names()
+
     def individual_test(temporary_path: Path) -> bool:
-        path: Path = create_directory(Path(temporary_path, _element_names[0]))
+        path: Path = create_directory(Path(temporary_path, element_names[0]))
         return path.exists()
 
     _inside_temporary_directory(individual_test)
@@ -44,7 +47,7 @@ def test_single() -> None:
 
 def test_array() -> None:
     head_paths: Paths = [
-        _get_head_path(i) for i, _ in enumerate(_element_names)
+        _get_head_path(i) for i, _ in enumerate(_get_element_names())
     ]
 
     def individual_test(temporary_path: Path) -> bool:
@@ -64,7 +67,7 @@ def test_array() -> None:
 
 def test_pair() -> None:
     head_paths: PathPair = {
-        name: _get_head_path(i) for i, name in enumerate(_element_names)
+        name: _get_head_path(i) for i, name in enumerate(_get_element_names())
     }
 
     def individual_test(temporary_path: Path) -> bool:
