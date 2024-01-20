@@ -23,6 +23,10 @@ def _get_current_file() -> Path:
     return current_frame()["file"]
 
 
+def _get_unknown_file() -> Path:
+    return _get_current_file().with_name("unknown.py")
+
+
 def test_array() -> None:
     current_file: Path = _get_current_file()
     paths: Paths = [current_file, _unknown_path]
