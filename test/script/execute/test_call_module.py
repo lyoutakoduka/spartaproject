@@ -10,8 +10,6 @@ from pyspartaproj.script.execute.call_module import call_function
 from pyspartaproj.script.feature_flags import in_development
 from pyspartaproj.script.stack_frame import current_frame
 
-_source_path: Path = Path(__file__)
-
 
 def _get_current_file() -> Path:
     return current_frame()["file"]
