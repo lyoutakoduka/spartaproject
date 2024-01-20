@@ -18,8 +18,6 @@ from pyspartaproj.script.path.check_exists import (
     check_exists_pair,
 )
 
-_element_names: Strs = ["R", "G", "B"]
-
 
 def _get_element_names() -> Strs:
     return ["R", "G", "B"]
