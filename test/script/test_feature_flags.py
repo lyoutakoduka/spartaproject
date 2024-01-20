@@ -3,7 +3,14 @@
 
 """Test of feature flags module."""
 
+from pathlib import Path
+
 from pyspartaproj.script.feature_flags import in_development
+from pyspartaproj.script.stack_frame import current_frame
+
+
+def _get_current_file() -> Path:
+    return current_frame()["file"]
 
 
 def test_develop() -> None:
