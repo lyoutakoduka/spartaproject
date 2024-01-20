@@ -7,6 +7,10 @@ import inspect
 from pathlib import Path
 from typing import List, TypedDict
 
+from pyspartaproj.context.extension.typed_context import (
+    StackFrame,
+    StackFrames,
+)
 from pyspartaproj.script.path.modify.get_relative import get_relative
 
 
@@ -21,8 +25,8 @@ class StackFrame(TypedDict):
 _StackFrames = List[StackFrame]
 
 
-def _get_stack_frames() -> _StackFrames:
-    stack_frames: _StackFrames = []
+def _get_stack_frames() -> StackFrames:
+    stack_frames: StackFrames = []
 
     if current_frame := inspect.currentframe():
         for outer_frame in inspect.getouterframes(current_frame):
@@ -51,5 +55,5 @@ def current_frame(offset: int = 0) -> StackFrame:
     Returns:
         StackFrame: Selected current frame information.
     """
-    stack_frames: _StackFrames = _get_stack_frames()
+    stack_frames: StackFrames = _get_stack_frames()
     return _to_relative_path(stack_frames[2 + offset])
