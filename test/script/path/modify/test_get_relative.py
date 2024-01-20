@@ -19,6 +19,10 @@ from pyspartaproj.script.path.modify.get_relative import (
 )
 
 
+def _get_current_file() -> Path:
+    return Path(__file__)
+
+
 def to_pair(path_types: Strs, paths: Paths) -> PathPair:
     return {path_type: path for path_type, path in zip(path_types, paths)}
 
