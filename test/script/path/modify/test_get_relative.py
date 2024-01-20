@@ -33,30 +33,32 @@ def test_unmatch() -> None:
 
 
 def test_single() -> None:
-    expected: Path = Path(__file__)
+    expected: Path = _get_current_file()
     assert expected == get_absolute(get_relative(expected))
 
 
 def test_root() -> None:
-    current: Path = Path(__file__)
+    expected_base: Path = _get_current_file()
 
-    assert Path(current.name) == get_relative(
-        current, root_path=current.parent
+    assert Path(expected_base.name) == get_relative(
+        expected_base, root_path=expected_base.parent
     )
 
 
 def test_array() -> None:
-    current: Path = Path(__file__)
-    expected: Paths = [current.parents[i] for i in range(3)]
+    expected_base: Path = _get_current_file()
+    expected: Paths = [expected_base.parents[i] for i in range(3)]
 
     assert expected == get_absolute_array(get_relative_array(expected))
 
 
 def test_pair() -> None:
-    current: Path = Path(__file__)
+    expected_base: Path = _get_current_file()
     keys: Strs = ["R", "G", "B"]
 
-    expected: PathPair = to_pair(keys, [current.parents[i] for i in range(3)])
+    expected: PathPair = to_pair(
+        keys, [expected_base.parents[i] for i in range(3)]
+    )
     result: PathPair = get_absolute_pair(get_relative_pair(expected))
 
     assert bool_same_array([expected[key] == result[key] for key in keys])
