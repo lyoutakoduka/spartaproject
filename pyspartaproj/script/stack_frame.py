@@ -5,7 +5,6 @@
 
 import inspect
 from pathlib import Path
-from typing import List, TypedDict
 
 from pyspartaproj.context.extension.typed_context import (
     StackFrame,
