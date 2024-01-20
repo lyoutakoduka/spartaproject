@@ -15,7 +15,7 @@ def _get_current_file() -> Path:
 
 def test_develop() -> None:
     """Test when development environment."""
-    assert in_development(__file__)
+    assert in_development(str(_get_current_file()))
 
 
 def test_production() -> None:
