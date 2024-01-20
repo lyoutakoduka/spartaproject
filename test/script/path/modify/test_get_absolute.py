@@ -14,6 +14,10 @@ from pyspartaproj.script.path.modify.get_absolute import (
 from pyspartaproj.script.path.modify.get_current import get_current
 
 
+def _get_current_file() -> Path:
+    return Path(__file__)
+
+
 def to_relative(path: Path) -> Path:
     current: Path = get_current()
     path_text: str = path.as_posix()
