@@ -14,6 +14,11 @@ from pyspartaproj.script.file.json.convert_from_json import (
 )
 from pyspartaproj.script.file.json.import_json import json_import
 from pyspartaproj.script.path.safe.safe_file_history import FileHistory
+from pyspartaproj.script.stack_frame import current_frame
+
+
+def _get_current_file() -> Path:
+    return current_frame()["file"]
 
 
 def _compare_path_count(source: Paths2, destination: PathPair2) -> bool:
