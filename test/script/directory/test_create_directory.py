@@ -21,6 +21,10 @@ from pyspartaproj.script.path.check_exists import (
 _element_names: Strs = ["R", "G", "B"]
 
 
+def _get_element_names() -> Strs:
+    return ["R", "G", "B"]
+
+
 def _get_head_path(index: int) -> Path:
     return Path(*[_element_names[i] for i in range(index + 1)])
 
