@@ -30,8 +30,8 @@ def to_pair(keys: Strs, paths: Paths) -> PathPair:
 
 
 def test_ignore() -> None:
-    path: Path = _get_current_file()
-    assert path == get_absolute(path)
+    expected: Path = _get_current_file()
+    assert expected == get_absolute(expected)
 
 
 def test_single() -> None:
@@ -48,8 +48,8 @@ def test_root() -> None:
 
 
 def test_array() -> None:
-    current: Path = _get_current_file()
-    expected: Paths = [current.parents[i] for i in range(3)]
+    expected_base: Path = _get_current_file()
+    expected: Paths = [expected_base.parents[i] for i in range(3)]
 
     assert expected == get_absolute_array(
         [to_relative(path) for path in expected]
@@ -57,9 +57,9 @@ def test_array() -> None:
 
 
 def test_pair() -> None:
-    current: Path = _get_current_file()
+    expected_base: Path = _get_current_file()
     keys: Strs = ["R", "G", "B"]
-    parents: Paths = [current.parents[i] for i in range(3)]
+    parents: Paths = [expected_base.parents[i] for i in range(3)]
 
     expected: PathPair = to_pair(keys, parents)
     result: PathPair = get_absolute_pair(
