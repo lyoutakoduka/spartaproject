@@ -13,9 +13,14 @@ from pyspartaproj.script.path.check_exists import (
     check_exists_array,
     check_exists_pair,
 )
+from pyspartaproj.script.stack_frame import current_frame
 
 _current_path: Path = Path(__file__)
 _unknown_path: Path = _current_path.with_name("unknown.py")
+
+
+def _get_current_file() -> Path:
+    return current_frame()["file"]
 
 
 def test_array() -> None:
