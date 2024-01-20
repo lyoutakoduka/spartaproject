@@ -24,17 +24,19 @@ def _get_current_file() -> Path:
 
 
 def test_array() -> None:
-    paths: Paths = [_current_path, _unknown_path]
+    current_file: Path = _get_current_file()
+    paths: Paths = [current_file, _unknown_path]
     expected: Bools = [True, False]
 
     assert bool_compare_array(expected, check_exists_array(paths))
 
 
 def test_pair() -> None:
+    current_file: Path = _get_current_file()
     paths: PathPair = {
-        "R": _current_path,
+        "R": current_file,
         "G": _unknown_path,
-        "B": _current_path.parent,
+        "B": current_file.parent,
     }
     expected: BoolPair = {"R": True, "G": False, "B": True}
 
