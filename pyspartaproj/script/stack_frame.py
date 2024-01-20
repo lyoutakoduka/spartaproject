@@ -14,17 +14,6 @@ from pyspartaproj.context.extension.typed_context import (
 from pyspartaproj.script.path.modify.get_relative import get_relative
 
 
-class StackFrame(TypedDict):
-    """Class to represent single frame information in stack frames."""
-
-    file: Path
-    function: str
-    line: int
-
-
-_StackFrames = List[StackFrame]
-
-
 def _get_stack_frames() -> StackFrames:
     stack_frames: StackFrames = []
 
