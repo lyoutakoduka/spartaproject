@@ -20,13 +20,13 @@ def _get_current_file() -> Path:
     return current_frame()["file"]
 
 
-def _get_unknown_file() -> Path:
-    return _get_current_file().with_name("unknown.py")
+def _get_unknown_file(path: Path) -> Path:
+    return path.with_name("unknown.py")
 
 
 def test_array() -> None:
     current_file: Path = _get_current_file()
-    unknown_path: Path = _get_unknown_file()
+    unknown_path: Path = _get_unknown_file(current_file)
 
     paths: Paths = [current_file, unknown_path]
     expected: Bools = [True, False]
@@ -36,7 +36,7 @@ def test_array() -> None:
 
 def test_pair() -> None:
     current_file: Path = _get_current_file()
-    unknown_path: Path = _get_unknown_file()
+    unknown_path: Path = _get_unknown_file(current_file)
 
     paths: PathPair = {
         "R": current_file,
