@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to create empty directory or directories."""
+
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
@@ -34,6 +36,7 @@ def _inside_temporary_directory(function: Callable[[Path], bool]) -> None:
 
 
 def test_single() -> None:
+    """Test to create empty directory to the path you specified."""
     element_names: Strs = _get_element_names()
 
     def individual_test(temporary_path: Path) -> bool:
@@ -44,6 +47,7 @@ def test_single() -> None:
 
 
 def test_array() -> None:
+    """Test to create empty directories which is specified by list."""
     head_paths: Paths = [
         _get_head_path(i) for i, _ in enumerate(_get_element_names())
     ]
@@ -64,6 +68,7 @@ def test_array() -> None:
 
 
 def test_pair() -> None:
+    """Test to create empty directories which is specified by dictionary."""
     head_paths: PathPair = {
         name: _get_head_path(i) for i, name in enumerate(_get_element_names())
     }
@@ -79,6 +84,11 @@ def test_pair() -> None:
 
 
 def main() -> bool:
+    """Run all tests.
+
+    Returns:
+        bool: Success if get to the end of function.
+    """
     test_single()
     test_array()
     test_pair()
