@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Module to convert data from json format."""
+
 from decimal import Decimal
 from pathlib import Path
 from typing import Dict, List
@@ -66,6 +68,26 @@ def _convert_unknown(value: Single, key: str | None) -> Single:
 
 
 def from_safe_json(value_json: Json, key: str | None = None) -> Json:
+    """Convert default json format data to custom json format.
+
+    Difference between custom json format and default are following 2 point.
+
+    1. Type "float" value is represented to type "Decimal".
+    2. Type "str" value is represented to type "Path"
+        if the key of value end with text ".path".
+
+    In this function, type "float" and "str" are
+        automatically converted as noted above.
+
+    Args:
+        value_json (Json): Default json format data you want to convert.
+
+        key (str | None, optional):
+            String key used for converting type "Path" value.
+
+    Returns:
+        Json: Converted data which is custom json format.
+    """
     if isinstance(value_json, Dict):
         return {
             key: from_safe_json(value, key=key)
@@ -79,6 +101,14 @@ def from_safe_json(value_json: Json, key: str | None = None) -> Json:
 
 
 def bool_array_from_json(value_json: Json) -> Bools:
+    """Convert json format data to list of type "bool".
+
+    Args:
+        value_json (Json): Json format data you want to convert.
+
+    Returns:
+        Bools: Converted data which is list of type "bool".
+    """
     if not isinstance(value_json, List):
         return []
 
@@ -86,6 +116,14 @@ def bool_array_from_json(value_json: Json) -> Bools:
 
 
 def integer_array_from_json(value_json: Json) -> Ints:
+    """Convert json format data to list of type "int".
+
+    Args:
+        value_json (Json): Json format data you want to convert.
+
+    Returns:
+        Ints: Converted data which is list of type "int".
+    """
     if not isinstance(value_json, List):
         return []
 
@@ -93,6 +131,14 @@ def integer_array_from_json(value_json: Json) -> Ints:
 
 
 def string_array_from_json(value_json: Json) -> Strs:
+    """Convert json format data to list of type "str".
+
+    Args:
+        value_json (Json): Json format data you want to convert.
+
+    Returns:
+        Strs: Converted data which is list of type "str".
+    """
     if not isinstance(value_json, List):
         return []
 
@@ -100,6 +146,14 @@ def string_array_from_json(value_json: Json) -> Strs:
 
 
 def decimal_array_from_json(value_json: Json) -> Decs:
+    """Convert json format data to list of type "Decimal".
+
+    Args:
+        value_json (Json): Json format data you want to convert.
+
+    Returns:
+        Decs: Converted data which is list of type "Decimal".
+    """
     if not isinstance(value_json, List):
         return []
 
@@ -109,6 +163,14 @@ def decimal_array_from_json(value_json: Json) -> Decs:
 
 
 def path_array_from_json(value_json: Json) -> Paths:
+    """Convert json format data to list of type "Path".
+
+    Args:
+        value_json (Json): Json format data you want to convert.
+
+    Returns:
+        Paths: Converted data which is list of type "Path".
+    """
     if not isinstance(value_json, List):
         return []
 
@@ -116,6 +178,14 @@ def path_array_from_json(value_json: Json) -> Paths:
 
 
 def bool_pair_from_json(value_json: Json) -> BoolPair:
+    """Convert json format data to dictionary of type "bool".
+
+    Args:
+        value_json (Json): Json format data you want to convert.
+
+    Returns:
+        BoolPair: Converted data which is dictionary of type "bool".
+    """
     if not isinstance(value_json, Dict):
         return {}
 
@@ -127,6 +197,14 @@ def bool_pair_from_json(value_json: Json) -> BoolPair:
 
 
 def integer_pair_from_json(value_json: Json) -> IntPair:
+    """Convert json format data to dictionary of type "int".
+
+    Args:
+        value_json (Json): Json format data you want to convert.
+
+    Returns:
+        IntPair: Converted data which is dictionary of type "int".
+    """
     if not isinstance(value_json, Dict):
         return {}
 
@@ -138,6 +216,14 @@ def integer_pair_from_json(value_json: Json) -> IntPair:
 
 
 def string_pair_from_json(value_json: Json) -> StrPair:
+    """Convert json format data to dictionary of type "str".
+
+    Args:
+        value_json (Json): Json format data you want to convert.
+
+    Returns:
+        StrPair: Converted data which is dictionary of type "str".
+    """
     if not isinstance(value_json, Dict):
         return {}
 
@@ -149,6 +235,14 @@ def string_pair_from_json(value_json: Json) -> StrPair:
 
 
 def decimal_pair_from_json(value_json: Json) -> DecPair:
+    """Convert json format data to dictionary of type "Decimal".
+
+    Args:
+        value_json (Json): Json format data you want to convert.
+
+    Returns:
+        DecPair: Converted data which is dictionary of type "Decimal".
+    """
     if not isinstance(value_json, Dict):
         return {}
 
@@ -160,6 +254,14 @@ def decimal_pair_from_json(value_json: Json) -> DecPair:
 
 
 def path_pair_from_json(value_json: Json) -> PathPair:
+    """Convert json format data to dictionary of type "Path".
+
+    Args:
+        value_json (Json): Json format data you want to convert.
+
+    Returns:
+        PathPair: Converted data which is dictionary of type "Path".
+    """
     if not isinstance(value_json, Dict):
         return {}
 
@@ -176,6 +278,14 @@ def path_pair_from_json(value_json: Json) -> PathPair:
 
 
 def bool_array2_from_json(value_json: Json) -> Bools2:
+    """Convert json format data to 2 dimensional list of type "bool".
+
+    Args:
+        value_json (Json): Json format data you want to convert.
+
+    Returns:
+        Bools2: Converted data which is 2 dimensional list of type "bool".
+    """
     if not isinstance(value_json, List):
         return []
 
@@ -183,6 +293,14 @@ def bool_array2_from_json(value_json: Json) -> Bools2:
 
 
 def integer_array2_from_json(value_json: Json) -> Ints2:
+    """Convert json format data to 2 dimensional list of type "int".
+
+    Args:
+        value_json (Json): Json format data you want to convert.
+
+    Returns:
+        Ints2: Converted data which is 2 dimensional list of type "int".
+    """
     if not isinstance(value_json, List):
         return []
 
@@ -190,6 +308,14 @@ def integer_array2_from_json(value_json: Json) -> Ints2:
 
 
 def string_array2_from_json(value_json: Json) -> Strs2:
+    """Convert json format data to 2 dimensional list of type "str".
+
+    Args:
+        value_json (Json): Json format data you want to convert.
+
+    Returns:
+        Strs2: Converted data which is 2 dimensional list of type "str".
+    """
     if not isinstance(value_json, List):
         return []
 
@@ -197,6 +323,14 @@ def string_array2_from_json(value_json: Json) -> Strs2:
 
 
 def decimal_array2_from_json(value_json: Json) -> Decs2:
+    """Convert json format data to 2 dimensional list of type "Decimal".
+
+    Args:
+        value_json (Json): Json format data you want to convert.
+
+    Returns:
+        Decs2: Converted data which is 2 dimensional list of type "Decimal".
+    """
     if not isinstance(value_json, List):
         return []
 
@@ -204,6 +338,14 @@ def decimal_array2_from_json(value_json: Json) -> Decs2:
 
 
 def path_array2_from_json(value_json: Json) -> Paths2:
+    """Convert json format data to 2 dimensional list of type "Path".
+
+    Args:
+        value_json (Json): Json format data you want to convert.
+
+    Returns:
+        Paths2: Converted data which is 2 dimensional list of type "Path".
+    """
     if not isinstance(value_json, List):
         return []
 
@@ -211,6 +353,15 @@ def path_array2_from_json(value_json: Json) -> Paths2:
 
 
 def bool_pair2_from_json(value_json: Json) -> BoolPair2:
+    """Convert json format data to 2 dimensional dictionary of type "bool".
+
+    Args:
+        value_json (Json): Json format data you want to convert.
+
+    Returns:
+        BoolPair2:
+            Converted data which is 2 dimensional dictionary of type "bool".
+    """
     if not isinstance(value_json, Dict):
         return {}
 
@@ -220,6 +371,15 @@ def bool_pair2_from_json(value_json: Json) -> BoolPair2:
 
 
 def integer_pair2_from_json(value_json: Json) -> IntPair2:
+    """Convert json format data to 2 dimensional dictionary of type "int".
+
+    Args:
+        value_json (Json): Json format data you want to convert.
+
+    Returns:
+        IntPair2:
+            Converted data which is 2 dimensional dictionary of type "int".
+    """
     if not isinstance(value_json, Dict):
         return {}
 
@@ -229,6 +389,15 @@ def integer_pair2_from_json(value_json: Json) -> IntPair2:
 
 
 def string_pair2_from_json(value_json: Json) -> StrPair2:
+    """Convert json format data to 2 dimensional dictionary of type "str".
+
+    Args:
+        value_json (Json): Json format data you want to convert.
+
+    Returns:
+        StrPair2:
+            Converted data which is 2 dimensional dictionary of type "str".
+    """
     if not isinstance(value_json, Dict):
         return {}
 
@@ -238,6 +407,15 @@ def string_pair2_from_json(value_json: Json) -> StrPair2:
 
 
 def decimal_pair2_from_json(value_json: Json) -> DecPair2:
+    """Convert json format data to 2 dimensional dictionary of type "Decimal".
+
+    Args:
+        value_json (Json): Json format data you want to convert.
+
+    Returns:
+        DecPair2:
+            Converted data which is 2 dimensional dictionary of type "Decimal".
+    """
     if not isinstance(value_json, Dict):
         return {}
 
@@ -247,6 +425,15 @@ def decimal_pair2_from_json(value_json: Json) -> DecPair2:
 
 
 def path_pair2_from_json(value_json: Json) -> PathPair2:
+    """Convert json format data to 2 dimensional dictionary of type "Path".
+
+    Args:
+        value_json (Json): Json format data you want to convert.
+
+    Returns:
+        PathPair2:
+            Converted data which is 2 dimensional dictionary of type "Path".
+    """
     if not isinstance(value_json, Dict):
         return {}
 
