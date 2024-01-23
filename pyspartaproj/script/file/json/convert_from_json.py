@@ -72,8 +72,9 @@ def from_safe_json(value_json: Json, key: str | None = None) -> Json:
 
     Difference between custom json format and default are following 2 point.
 
-    1. Type "float" value is represented to type "Decimal".
-    2. Type "str" value is represented to type "Path"
+    1. Custom json format treat type "float" of default as type "Decimal".
+
+    2. Custom json format treat type "str" of default as type "Path".
         if the key of value end with text ".path".
 
     In this function, type "float" and "str" are
