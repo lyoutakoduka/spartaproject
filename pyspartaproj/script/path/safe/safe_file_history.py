@@ -28,7 +28,7 @@ class FileHistory(WorkSpace):
 
         Args:
             history_path (Path | None, optional): Defaults to None.
-                Export directory of Json file that paths is recorded.
+                Export directory of Json file witch paths is recorded.
         """
         super().__init__()
 
@@ -78,10 +78,10 @@ class FileHistory(WorkSpace):
         """Record paths which is source and destination pair.
 
         Args:
-            source_path (Path): Path that about "source" of file operation.
+            source_path (Path): Path witch is about "source" of file operation.
 
             destination_path (Path):
-                Path that about "destination" of file operation.
+                Path witch is about "destination" of file operation.
         """
         self._history[self._get_key_time()] = {
             "source.path": source_path,
