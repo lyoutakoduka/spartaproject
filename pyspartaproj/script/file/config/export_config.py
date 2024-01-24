@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Module to export data like system config file as format ".ini"."""
+"""Module to export data used for a configuration file."""
 
 from configparser import ConfigParser
 from io import StringIO
@@ -38,7 +38,7 @@ def _cleanup_key_default(source_config: Config) -> Config:
 
 
 def config_dump(source_config: Config, compress: bool = False) -> str:
-    """Function to convert data like system config file to text.
+    """Function to convert data used for a configuration file to text.
 
     Return following triple quoted text if argument "source_config" is...
 
@@ -54,7 +54,7 @@ def config_dump(source_config: Config, compress: bool = False) -> str:
 
     Args:
         source_config (Config):
-            Data like system config file you want to convert.
+            Data used for a configuration file you want to convert.
 
         compress (bool, optional): Defaults to False.
             Return following triple quoted text if argument "compress" is True.
@@ -67,7 +67,7 @@ def config_dump(source_config: Config, compress: bool = False) -> str:
             '''
 
     Returns:
-        str: Converted text which is like system config file.
+        str: Converted text used for a configuration file.
     """
     cleanup = _cleanup_key_default(source_config)
 
@@ -83,13 +83,13 @@ def config_dump(source_config: Config, compress: bool = False) -> str:
 def config_export(
     export_path: Path, source_config: Config, compress: bool = False
 ) -> Path:
-    """Function to export data like system config file.
+    """Function to export data used for a configuration file.
 
     Args:
         export_path (Path): Path which is used for exporting data.
 
         source_config (Config):
-            Data like system config file you want to export.
+            Data used for a configuration file you want to export.
 
         compress (bool, optional): Defaults to False.
             True if you want to export small and obfuscated text.
