@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Test module to export data used for a configuration file."""
+"""Test module to export data used for configuration file."""
 
 from decimal import Decimal
 from pathlib import Path
@@ -31,7 +31,7 @@ def _common_test(expected: str, source: Config) -> None:
 
 
 def test_bool() -> None:
-    """Test to convert data used for a configuration to text.
+    """Test to convert data used for configuration file to text.
 
     Data is 2 dimensional dictionary created with type "bool".
     """
@@ -46,7 +46,7 @@ def test_bool() -> None:
 
 
 def test_integer() -> None:
-    """Test to convert data used for a configuration to text.
+    """Test to convert data used for configuration file to text.
 
     Data is 2 dimensional dictionary created with type "int".
     """
@@ -61,7 +61,7 @@ def test_integer() -> None:
 
 
 def test_float() -> None:
-    """Test to convert data used for a configuration to text.
+    """Test to convert data used for configuration file to text.
 
     Data is 2 dimensional dictionary created with type "float".
     """
@@ -76,7 +76,7 @@ def test_float() -> None:
 
 
 def test_string() -> None:
-    """Test to convert data used for a configuration to text.
+    """Test to convert data used for configuration file to text.
 
     Data is 2 dimensional dictionary created with type "str".
     """
@@ -91,7 +91,7 @@ def test_string() -> None:
 
 
 def test_decimal() -> None:
-    """Test to convert data used for a configuration to text.
+    """Test to convert data used for configuration file to text.
 
     Data is 2 dimensional dictionary created with type "Decimal".
     """
@@ -106,7 +106,7 @@ def test_decimal() -> None:
 
 
 def test_path() -> None:
-    """Test to convert data used for a configuration to text.
+    """Test to convert data used for configuration file to text.
 
     Data is 2 dimensional dictionary created with type "Path".
     """
@@ -121,7 +121,7 @@ def test_path() -> None:
 
 
 def test_mix_option() -> None:
-    """Test to convert data used for a configuration to text.
+    """Test to convert data used for configuration file to text.
 
     Data is 2 dimensional dictionary created with multiple mixed type.
     """
@@ -150,7 +150,7 @@ def test_mix_option() -> None:
 
 
 def test_mix_section() -> None:
-    """Test to convert data used for a configuration to text.
+    """Test to convert data used for configuration file to text.
 
     Data is 2 dimensional dictionary, the rule of dictionary is follow.
 
@@ -198,7 +198,10 @@ def test_mix_section() -> None:
 
 
 def test_compress() -> None:
-    """Test to convert data used for a configuration with compress option."""
+    """Test to convert data used for configuration file.
+
+    Test for compress option is enable.
+    """
     source_pairs: SectionPair2 = {"bool": {"true": True}, "int": {"one": 1}}
     expected: str = """
         [bool]
@@ -211,7 +214,10 @@ def test_compress() -> None:
 
 
 def test_lower() -> None:
-    """Test to convert data used for a configuration with upper case keys."""
+    """Test to convert data used for configuration file.
+
+    Test for upper case of keys is enable.
+    """
     source_pairs: Config = {"SECTION": {"TRUE": True, "FALSE": False}}
     expected: str = """
         [SECTION]
@@ -223,7 +229,7 @@ def test_lower() -> None:
 
 
 def test_key() -> None:
-    """Test to convert data used for a configuration with noisy keys."""
+    """Test to convert data used for configuration file with noisy keys."""
     noise: Strs = [" 　\n\t"] * 2
     source_pairs: Config = {"section".join(noise): {"key".join(noise): True}}
     expected: str = """
@@ -235,7 +241,7 @@ def test_key() -> None:
 
 
 def test_export() -> None:
-    """Test to export data used for a configuration."""
+    """Test to export data used for configuration file."""
     source_pairs: Config = {"true": {"true": True}, "false": {"false": False}}
     expected: str = """
         [true]
