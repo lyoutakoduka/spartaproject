@@ -20,15 +20,6 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
         function(text_export(Path(temporary_path, "temporary.txt"), "test"))
 
 
-def test_text() -> None:
-    """Test to import text file."""
-
-    def individual_test(text_path: Path) -> None:
-        _common_test(text_import(text_path))
-
-    _inside_temporary_directory(individual_test)
-
-
 def test_byte() -> None:
     """Test to import binary file."""
 
@@ -39,12 +30,21 @@ def test_byte() -> None:
     _inside_temporary_directory(individual_test)
 
 
+def test_text() -> None:
+    """Test to import text file."""
+
+    def individual_test(text_path: Path) -> None:
+        _common_test(text_import(text_path))
+
+    _inside_temporary_directory(individual_test)
+
+
 def main() -> bool:
     """Run all tests.
 
     Returns:
         bool: Success if get to the end of function.
     """
-    test_text()
     test_byte()
+    test_text()
     return True
