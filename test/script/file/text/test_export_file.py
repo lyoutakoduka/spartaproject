@@ -21,6 +21,7 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 
 
 def test_byte() -> None:
+    """Test to export binary file."""
     source_byte: bytes = b"test"
 
     def individual_test(text_path: Path) -> None:
@@ -30,6 +31,7 @@ def test_byte() -> None:
 
 
 def test_text() -> None:
+    """Test to export text file."""
     source_text: str = "test"
 
     def individual_test(text_path: Path) -> None:
