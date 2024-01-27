@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to import text file."""
+
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
@@ -19,6 +21,8 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 
 
 def test_text() -> None:
+    """Test to import text file."""
+
     def individual_test(text_path: Path) -> None:
         _common_test(text_import(text_path))
 
@@ -26,6 +30,8 @@ def test_text() -> None:
 
 
 def test_byte() -> None:
+    """Test to import binary file."""
+
     def individual_test(text_path: Path) -> None:
         result: bytes = byte_import(text_path)
         _common_test(result.decode())
@@ -34,6 +40,11 @@ def test_byte() -> None:
 
 
 def main() -> bool:
+    """Run all tests.
+
+    Returns:
+        bool: Success if get to the end of function.
+    """
     test_text()
     test_byte()
     return True
