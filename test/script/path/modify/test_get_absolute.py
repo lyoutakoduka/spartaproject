@@ -21,7 +21,7 @@ def _get_absolute_current() -> Path:
     return Path(__file__)
 
 
-def to_pair(keys: Strs, paths: Paths) -> PathPair:
+def _to_pair(keys: Strs, paths: Paths) -> PathPair:
     return {key: path for key, path in zip(keys, paths)}
 
 
@@ -62,9 +62,9 @@ def test_pair() -> None:
     keys: Strs = ["R", "G", "B"]
     parents: Paths = [expected_base.parents[i] for i in range(3)]
 
-    expected: PathPair = to_pair(keys, parents)
+    expected: PathPair = _to_pair(keys, parents)
     result: PathPair = get_absolute_pair(
-        to_pair(keys, [get_relative(path) for path in parents])
+        _to_pair(keys, [get_relative(path) for path in parents])
     )
 
     assert bool_same_array([expected[key] == result[key] for key in keys])
