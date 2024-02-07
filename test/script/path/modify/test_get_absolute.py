@@ -19,13 +19,6 @@ def _get_absolute_current() -> Path:
     return Path(__file__)
 
 
-def to_relative(path: Path) -> Path:
-    current: Path = get_current()
-    path_text: str = path.as_posix()
-    index: int = len(current.as_posix()) + 1
-    return Path(path_text[index:])
-
-
 def to_pair(keys: Strs, paths: Paths) -> PathPair:
     return {key: path for key, path in zip(keys, paths)}
 
