@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to convert relative path to absolute."""
+
+
 from pathlib import Path
 
 from pyspartaproj.context.default.string_context import Strs
@@ -23,16 +26,19 @@ def to_pair(keys: Strs, paths: Paths) -> PathPair:
 
 
 def test_ignore() -> None:
+    """Test to convert absolute path to absolute."""
     expected: Path = _get_absolute_current()
     assert expected == get_absolute(expected)
 
 
 def test_single() -> None:
+    """Test to convert relative path to absolute."""
     expected: Path = _get_absolute_current()
     assert expected == get_absolute(get_relative(expected))
 
 
 def test_root() -> None:
+    """Test to convert relative path with specific root path."""
     expected: Path = _get_absolute_current()
 
     assert expected == get_absolute(
@@ -41,6 +47,7 @@ def test_root() -> None:
 
 
 def test_array() -> None:
+    """Test to convert list of relative paths to absolute."""
     expected_base: Path = _get_absolute_current()
     expected: Paths = [expected_base.parents[i] for i in range(3)]
 
@@ -50,6 +57,7 @@ def test_array() -> None:
 
 
 def test_pair() -> None:
+    """Test to convert dictionary of relative paths to absolute."""
     expected_base: Path = _get_absolute_current()
     keys: Strs = ["R", "G", "B"]
     parents: Paths = [expected_base.parents[i] for i in range(3)]
@@ -63,6 +71,11 @@ def test_pair() -> None:
 
 
 def main() -> bool:
+    """Run all tests.
+
+    Returns:
+        bool: Success if get to the end of function.
+    """
     test_ignore()
     test_single()
     test_root()
