@@ -14,7 +14,7 @@ from pyspartaproj.script.path.modify.get_absolute import (
 from pyspartaproj.script.path.modify.get_current import get_current
 
 
-def _get_current_file() -> Path:
+def _get_absolute_current() -> Path:
     return Path(__file__)
 
 
@@ -30,17 +30,17 @@ def to_pair(keys: Strs, paths: Paths) -> PathPair:
 
 
 def test_ignore() -> None:
-    expected: Path = _get_current_file()
+    expected: Path = _get_absolute_current()
     assert expected == get_absolute(expected)
 
 
 def test_single() -> None:
-    expected: Path = _get_current_file()
+    expected: Path = _get_absolute_current()
     assert expected == get_absolute(to_relative(expected))
 
 
 def test_root() -> None:
-    expected: Path = _get_current_file()
+    expected: Path = _get_absolute_current()
 
     assert expected == get_absolute(
         Path(expected.name), root_path=expected.parent
@@ -48,7 +48,7 @@ def test_root() -> None:
 
 
 def test_array() -> None:
-    expected_base: Path = _get_current_file()
+    expected_base: Path = _get_absolute_current()
     expected: Paths = [expected_base.parents[i] for i in range(3)]
 
     assert expected == get_absolute_array(
@@ -57,7 +57,7 @@ def test_array() -> None:
 
 
 def test_pair() -> None:
-    expected_base: Path = _get_current_file()
+    expected_base: Path = _get_absolute_current()
     keys: Strs = ["R", "G", "B"]
     parents: Paths = [expected_base.parents[i] for i in range(3)]
 
