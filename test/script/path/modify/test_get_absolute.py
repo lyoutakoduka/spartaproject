@@ -11,7 +11,6 @@ from pyspartaproj.script.path.modify.get_absolute import (
     get_absolute_array,
     get_absolute_pair,
 )
-from pyspartaproj.script.path.modify.get_current import get_current
 from pyspartaproj.script.path.modify.get_relative import get_relative
 
 
