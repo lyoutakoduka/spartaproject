@@ -38,7 +38,7 @@ def test_single() -> None:
 
 
 def test_root() -> None:
-    """Test to convert relative path with specific root path."""
+    """Test to convert relative path by using specific root path."""
     expected: Path = _get_absolute_current()
 
     assert expected == get_absolute(
