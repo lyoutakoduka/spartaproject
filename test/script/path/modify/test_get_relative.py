@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to convert absolute path to relative."""
+
 from pathlib import Path
 
 from pyspartaproj.context.default.string_context import Strs
@@ -28,16 +30,19 @@ def _to_pair(path_types: Strs, paths: Paths) -> PathPair:
 
 
 def test_unmatch() -> None:
+    """Test to convert absolute path, but using invalid path."""
     with raises(ValueError):
         get_relative(Path("empty"))
 
 
 def test_single() -> None:
+    """Test to convert absolute path by using specific root path."""
     expected: Path = _get_current_file()
     assert expected == get_absolute(get_relative(expected))
 
 
 def test_root() -> None:
+    """Test to convert absolute path with specific root."""
     expected_base: Path = _get_current_file()
 
     assert Path(expected_base.name) == get_relative(
@@ -46,6 +51,7 @@ def test_root() -> None:
 
 
 def test_array() -> None:
+    """Test to convert list of absolute paths to relative."""
     expected_base: Path = _get_current_file()
     expected: Paths = [expected_base.parents[i] for i in range(3)]
 
@@ -53,6 +59,7 @@ def test_array() -> None:
 
 
 def test_pair() -> None:
+    """Test to convert dictionary of absolute paths to relative."""
     expected_base: Path = _get_current_file()
     keys: Strs = ["R", "G", "B"]
 
@@ -65,6 +72,11 @@ def test_pair() -> None:
 
 
 def main() -> bool:
+    """Run all tests.
+
+    Returns:
+        bool: Success if get to the end of function.
+    """
     test_single()
     test_root()
     test_array()
