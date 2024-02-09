@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Module to remove white space at the beginning of a sentence."""
+
 from itertools import takewhile
 
 from pyspartaproj.context.default.integer_context import Ints
@@ -49,6 +51,17 @@ def _strip_lines(lines: Strs) -> Strs:
 
 
 def format_indent(source_text: str, stdout: bool = False) -> str:
+    """Remove white space at the beginning of a sentence.
+
+    Args:
+        source_text (str): Multiple line text you want to remove white space.
+
+        stdout (bool, optional): Defaults to False.
+            If True, add line break to end of the sentence at last line.
+
+    Returns:
+        str: Text which is removed white space.
+    """
     line_attributes: LinePairs = _strip_line(source_text)
 
     counts: Ints = [
