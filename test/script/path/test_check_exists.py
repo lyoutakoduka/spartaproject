@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to check existing of files or directories."""
+
 from pathlib import Path
 
 from pyspartaproj.context.default.bool_context import BoolPair, Bools
@@ -25,6 +27,7 @@ def _get_unknown_file(path: Path) -> Path:
 
 
 def test_array() -> None:
+    """Test to check existing of list of file or directory."""
     current_file: Path = _get_current_file()
     paths: Paths = [current_file, _get_unknown_file(current_file)]
     expected: Bools = [True, False]
@@ -33,6 +36,7 @@ def test_array() -> None:
 
 
 def test_pair() -> None:
+    """Test to check existing of directory of file or directory."""
     current_file: Path = _get_current_file()
     paths: PathPair = {
         "R": current_file,
@@ -45,6 +49,11 @@ def test_pair() -> None:
 
 
 def main() -> bool:
+    """Run all tests.
+
+    Returns:
+        bool: Success if get to the end of function.
+    """
     test_array()
     test_pair()
     return True
