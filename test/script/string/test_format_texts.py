@@ -5,7 +5,7 @@ from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.script.string.format_texts import format_indent
 
 
-def shared_compare(expected: Strs, source: str, stdout: bool = False) -> None:
+def _common_test(expected: Strs, source: str, stdout: bool = False) -> None:
     assert "\n".join(expected) == format_indent(source, stdout=stdout)
 
 
@@ -14,7 +14,7 @@ def test_stdout() -> None:
         Hallo!
     """
     expected: Strs = ["Hallo!", ""]
-    shared_compare(expected, source, stdout=True)
+    _common_test(expected, source, stdout=True)
 
 
 def test_vertical() -> None:
@@ -24,7 +24,7 @@ def test_vertical() -> None:
     　\n
     """
     expected: Strs = ["Hallo!"]
-    shared_compare(expected, source)
+    _common_test(expected, source)
 
 
 def test_horizontal() -> None:
@@ -32,7 +32,7 @@ def test_horizontal() -> None:
     \t　    Hallo!    　\n
     """
     expected: Strs = ["Hallo!"]
-    shared_compare(expected, source)
+    _common_test(expected, source)
 
 
 def test_indent() -> None:
@@ -42,7 +42,7 @@ def test_indent() -> None:
                 Hallo!
     """
     expected: Strs = ["    Hallo!", "Hallo!", "        Hallo!"]
-    shared_compare(expected, source)
+    _common_test(expected, source)
 
 
 def test_inner() -> None:
@@ -53,7 +53,7 @@ def test_inner() -> None:
         Hallo!    Hallo!
     """
     expected: Strs = ["Hallo!    Hallo!", "", "", "Hallo!    Hallo!"]
-    shared_compare(expected, source)
+    _common_test(expected, source)
 
 
 def main() -> bool:
