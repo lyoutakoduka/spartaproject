@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to remove white space at the beginning of a sentence."""
+
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.script.string.format_texts import format_indent
 
@@ -10,6 +12,7 @@ def _common_test(expected: Strs, source: str, stdout: bool = False) -> None:
 
 
 def test_stdout() -> None:
+    """Test to remove white space at the beginning of a sentence."""
     source: str = """
         Hallo!
     """
@@ -18,6 +21,10 @@ def test_stdout() -> None:
 
 
 def test_vertical() -> None:
+    """Test to remove white space, tab character, and line break.
+
+    Characters which should removed are placed to both ends of whole sentence.
+    """
     source: str = """
     　\t
         Hallo!
@@ -28,6 +35,10 @@ def test_vertical() -> None:
 
 
 def test_horizontal() -> None:
+    """Test to remove white space, tab character, and line break.
+
+    Characters which should removed are placed to both ends of one line text.
+    """
     source: str = """
     \t　    Hallo!    　\n
     """
@@ -36,6 +47,10 @@ def test_horizontal() -> None:
 
 
 def test_indent() -> None:
+    """Test to remove white space at the beginning of a sentence.
+
+    Same count of white space are removed for all lines.
+    """
     source: str = """
             Hallo!
         Hallo!
@@ -46,6 +61,11 @@ def test_indent() -> None:
 
 
 def test_inner() -> None:
+    """Test to remove white space at the beginning of a sentence.
+
+    Same count of white space are removed for all lines.
+    But empty line is an exception.
+    """
     source: str = """
         Hallo!    Hallo!
 
@@ -57,6 +77,11 @@ def test_inner() -> None:
 
 
 def main() -> bool:
+    """Run all tests.
+
+    Returns:
+        bool: Success if get to the end of function.
+    """
     test_stdout()
     test_vertical()
     test_horizontal()
