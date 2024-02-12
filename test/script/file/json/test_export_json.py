@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to export data used for json format."""
+
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
@@ -15,6 +17,10 @@ def _common_test(expected: str, source: Json) -> None:
 
 
 def test_type() -> None:
+    """Test to convert data used for json format to text.
+
+    Data is a dictionary created with multiple mixed type.
+    """
     source: Json = {
         "None": None,
         "bool": True,
@@ -38,6 +44,10 @@ def test_type() -> None:
 
 
 def test_tree() -> None:
+    """Test to convert data used for json format to text.
+
+    Data is multiple dimensional dictionary created with None object.
+    """
     source: Json = {"0": {"1": {"2": {"3": {"4": {"5": {"6": None}}}}}}}
     expected: str = """
     {
@@ -61,12 +71,14 @@ def test_tree() -> None:
 
 
 def test_compress() -> None:
+    """Test to convert data used for json format with compress option."""
     source: Json = {"0": {"1": {"2": {"3": {"4": {"5": {"6": None}}}}}}}
     expected: str = """{"0":{"1":{"2":{"3":{"4":{"5":{"6":null}}}}}}}"""
     assert expected == json_dump(source, compress=True)
 
 
 def test_export() -> None:
+    """Test to export data used for json format."""
     keys: Json = ["R", "G", "B"]
     expected: str = """
       [
@@ -76,15 +88,18 @@ def test_export() -> None:
       ]
     """
 
-    expected: str = format_indent(expected)
-
     with TemporaryDirectory() as temporary_path:
-        assert expected == text_import(
+        assert format_indent(expected) == text_import(
             json_export(Path(temporary_path, "temporary.json"), keys)
         )
 
 
 def main() -> bool:
+    """Run all tests.
+
+    Returns:
+        bool: Success if get to the end of function.
+    """
     test_type()
     test_tree()
     test_compress()

@@ -3,12 +3,19 @@
 
 """Test of feature flags module."""
 
+from pathlib import Path
+
 from pyspartaproj.script.feature_flags import in_development
+from pyspartaproj.script.stack_frame import current_frame
+
+
+def _get_current_file() -> Path:
+    return current_frame()["file"]
 
 
 def test_develop() -> None:
     """Test when development environment."""
-    assert in_development(__file__)
+    assert in_development(str(_get_current_file()))
 
 
 def test_production() -> None:

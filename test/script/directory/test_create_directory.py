@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to create empty directory or directories."""
+
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
@@ -18,11 +20,14 @@ from pyspartaproj.script.path.check_exists import (
     check_exists_pair,
 )
 
-_element_names: Strs = ["R", "G", "B"]
+
+def _get_element_names() -> Strs:
+    return ["R", "G", "B"]
 
 
 def _get_head_path(index: int) -> Path:
-    return Path(*[_element_names[i] for i in range(index + 1)])
+    element_names: Strs = _get_element_names()
+    return Path(*[element_names[i] for i in range(index + 1)])
 
 
 def _inside_temporary_directory(function: Callable[[Path], bool]) -> None:
@@ -31,16 +36,20 @@ def _inside_temporary_directory(function: Callable[[Path], bool]) -> None:
 
 
 def test_single() -> None:
+    """Test to create empty directory to the path you specified."""
+    element_names: Strs = _get_element_names()
+
     def individual_test(temporary_path: Path) -> bool:
-        path: Path = create_directory(Path(temporary_path, _element_names[0]))
+        path: Path = create_directory(Path(temporary_path, element_names[0]))
         return path.exists()
 
     _inside_temporary_directory(individual_test)
 
 
 def test_array() -> None:
+    """Test to create empty directories which is specified by list."""
     head_paths: Paths = [
-        _get_head_path(i) for i, _ in enumerate(_element_names)
+        _get_head_path(i) for i, _ in enumerate(_get_element_names())
     ]
 
     def individual_test(temporary_path: Path) -> bool:
@@ -59,8 +68,9 @@ def test_array() -> None:
 
 
 def test_pair() -> None:
+    """Test to create empty directories which is specified by dictionary."""
     head_paths: PathPair = {
-        name: _get_head_path(i) for i, name in enumerate(_element_names)
+        name: _get_head_path(i) for i, name in enumerate(_get_element_names())
     }
 
     def individual_test(temporary_path: Path) -> bool:
@@ -74,6 +84,11 @@ def test_pair() -> None:
 
 
 def main() -> bool:
+    """Run all tests.
+
+    Returns:
+        bool: Success if get to the end of function.
+    """
     test_single()
     test_array()
     test_pair()

@@ -6,7 +6,6 @@
 from importlib.machinery import SourceFileLoader
 from pathlib import Path
 from types import ModuleType
-from typing import Any
 
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.extension.path_context import PathPair
@@ -49,6 +48,7 @@ def _switch_test_root(call_context: PathPair, head_added_path: Path) -> bool:
 
 def _check_test_path(call_context: PathPair) -> bool:
     head: str = "test" + "_"
+
     if call_context["source"].name.startswith(head):
         return False
 
@@ -61,8 +61,7 @@ def _call_target_function(module: ModuleType, function: str) -> None:
     if not hasattr(module, function):
         raise ModuleNotFoundError
 
-    func: Any = getattr(module, function)
-    func()
+    getattr(module, function)()
 
 
 def _check_call_environment(call_target: PathPair, function: str) -> None:

@@ -21,7 +21,7 @@ def get_interpreter_path(platform: str | None = None) -> Path:
 
     Raises:
         FileNotFoundError:
-            Raise error if interpreter path you selected isn't exists.
+            Throw an exception if interpreter path you selected isn't exists.
 
     Returns:
         Path: Relative path of Python interpreter.

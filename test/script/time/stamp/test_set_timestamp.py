@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""test module to set latest datetime of file or directory by time object."""
+"""test module to set latest date time of file or directory by time object."""
 
 from datetime import datetime
 from pathlib import Path

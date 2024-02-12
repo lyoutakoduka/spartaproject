@@ -1,23 +1,17 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Module to remove white space at the beginning of a sentence."""
+
 from itertools import takewhile
-from typing import List, TypedDict
 
 from pyspartaproj.context.default.integer_context import Ints
 from pyspartaproj.context.default.string_context import Strs
+from pyspartaproj.context.extension.typed_context import LinePair, LinePairs
 
 
-class _LinePair(TypedDict):
-    text: str
-    count: int
-
-
-_LinePairs = List[_LinePair]
-
-
-def _strip_line(source_text: str) -> _LinePairs:
-    line_attributes: _LinePairs = []
+def _strip_line(source_text: str) -> LinePairs:
+    line_attributes: LinePairs = []
 
     for line in source_text.splitlines():
         striped_right: str = line.rstrip()
@@ -29,7 +23,7 @@ def _strip_line(source_text: str) -> _LinePairs:
             count_left: int = len(striped_left)
             space_size = count_right - count_left
 
-        line_attribute: _LinePair = {
+        line_attribute: LinePair = {
             "text": striped_right,
             "count": space_size,
         }
@@ -39,7 +33,7 @@ def _strip_line(source_text: str) -> _LinePairs:
     return line_attributes
 
 
-def _clip_line(empty_size: int, line_attributes: _LinePairs) -> Strs:
+def _clip_line(empty_size: int, line_attributes: LinePairs) -> Strs:
     clipped_lines: Strs = []
 
     for line_attribute in line_attributes:
@@ -57,7 +51,18 @@ def _strip_lines(lines: Strs) -> Strs:
 
 
 def format_indent(source_text: str, stdout: bool = False) -> str:
-    line_attributes: _LinePairs = _strip_line(source_text)
+    """Remove white space at the beginning of a sentence.
+
+    Args:
+        source_text (str): Multiple line text you want to remove white space.
+
+        stdout (bool, optional): Defaults to False.
+            If True, add line break to end of the sentence at last line.
+
+    Returns:
+        str: Text which is removed white space.
+    """
+    line_attributes: LinePairs = _strip_line(source_text)
 
     counts: Ints = [
         line_attribute["count"] for line_attribute in line_attributes

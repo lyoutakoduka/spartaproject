@@ -45,8 +45,8 @@ class ExecuteServer(UploadServer):
                 Local path of Python code you will upload and execute.
 
         Raises:
-            ValueError:
-                Raise error if error raised on server by executed Python code.
+            ValueError: Throw an exception
+                if throw an exception on server by executed Python code.
 
         Returns:
             Strs | None:

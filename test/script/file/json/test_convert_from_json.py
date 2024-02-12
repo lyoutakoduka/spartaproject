@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to convert data from json format."""
+
 from decimal import Decimal
 from pathlib import Path
 from typing import Dict, List
@@ -63,49 +65,61 @@ def _common_test_pair2(expected: Single, result: Pair2) -> None:
 
 
 def test_bool_array() -> None:
+    """Test to convert json format data to list of type "bool"."""
     source: bool = True
     source_array: Json = [source]
     source_arrays: Json = [source_array]
+
     _common_test_array(source, bool_array_from_json(source_array))
     _common_test_array2(source, bool_array2_from_json(source_arrays))
 
 
 def test_bool_pair() -> None:
+    """Test to convert json format data to dictionary of type "bool"."""
     source: bool = True
     source_pair: Json = {"B": source}
     source_pairs: Json = {"A": source_pair}
+
     _common_test_pair(source, bool_pair_from_json(source_pair))
     _common_test_pair2(source, bool_pair2_from_json(source_pairs))
 
 
 def test_integer_array() -> None:
+    """Test to convert json format data to list of type "int"."""
     source: int = 1
     source_array: Json = [source]
     source_arrays: Json = [source_array]
+
     _common_test_array(source, integer_array_from_json(source_array))
     _common_test_array2(source, integer_array2_from_json(source_arrays))
 
 
 def test_integer_pair() -> None:
+    """Test to convert json format data to dictionary of type "int"."""
     source: int = 1
     source_pair: Json = {"B": source}
     source_pairs: Json = {"A": source_pair}
+
     _common_test_pair(source, integer_pair_from_json(source_pair))
     _common_test_pair2(source, integer_pair2_from_json(source_pairs))
 
 
 def test_string_array() -> None:
+    """Test to convert json format data to list of type "str"."""
     source: str = "test"
     source_array: Json = [source]
     source_arrays: Json = [source_array]
+
     _common_test_array(source, string_array_from_json(source_array))
     _common_test_array2(source, string_array2_from_json(source_arrays))
 
 
 def test_string_pair() -> None:
+    """Test to convert json format data to dictionary of type "str"."""
     source: str = "test"
     source_pair: Json = {"B": source, "C.path": Path("remove")}
     source_pairs: Json = {"A": source_pair}
+
     _common_test_pair(source, string_pair_from_json(source_pair))
     _common_test_pair2(source, string_pair2_from_json(source_pairs))
 
@@ -118,30 +132,37 @@ def test_string_pair() -> None:
 
 
 def test_decimal_array() -> None:
+    """Test to convert json format data to list of type "Decimal"."""
     source: Decimal = Decimal("1.0")
     source_array: Json = [float(source)]
     source_arrays: Json = [source_array]
+
     _common_test_array(source, decimal_array_from_json(source_array))
     _common_test_array2(source, decimal_array2_from_json(source_arrays))
 
 
 def test_decimal_pair() -> None:
+    """Test to convert json format data to dictionary of type "Decimal"."""
     source: Decimal = Decimal("1.0")
     source_pair: Json = {"B": float(source)}
     source_pairs: Json = {"A": source_pair}
+
     _common_test_pair(source, decimal_pair_from_json(source_pair))
     _common_test_pair2(source, decimal_pair2_from_json(source_pairs))
 
 
 def test_path_array() -> None:
+    """Test to convert json format data to list of type "Path"."""
     source: Path = Path("root")
     source_array: Json = [str(source)]
     source_arrays: Json = [source_array]
+
     _common_test_array(source, path_array_from_json(source_array))
     _common_test_array2(source, path_array2_from_json(source_arrays))
 
 
 def test_path_pair() -> None:
+    """Test to convert json format data to dictionary of type "Path"."""
     source: Path = Path("root")
     source_pair: Json = {"B.path": str(source), "C": "remove"}
     source_pairs: Json = {"A": source_pair}
@@ -155,6 +176,7 @@ def test_path_pair() -> None:
 
 
 def test_tree() -> None:
+    """Test to convert default json format data to custom json format."""
     input_left: int = 1
     input_right: str = "test"
     source_pairs: Json = {"A": {"B": [None, input_left], "C": input_right}}
@@ -175,6 +197,11 @@ def test_tree() -> None:
 
 
 def main() -> bool:
+    """Run all tests.
+
+    Returns:
+        bool: Success if get to the end of function.
+    """
     test_bool_array()
     test_bool_pair()
     test_integer_array()

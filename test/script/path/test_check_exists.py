@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to check existing of files or directories."""
+
 from pathlib import Path
 
 from pyspartaproj.context.default.bool_context import BoolPair, Bools
@@ -13,23 +15,33 @@ from pyspartaproj.script.path.check_exists import (
     check_exists_array,
     check_exists_pair,
 )
+from pyspartaproj.script.stack_frame import current_frame
 
-_current_path: Path = Path(__file__)
-_unknown_path: Path = _current_path.with_name("unknown.py")
+
+def _get_current_file() -> Path:
+    return current_frame()["file"]
+
+
+def _get_unknown_file(path: Path) -> Path:
+    return path.with_name("unknown.py")
 
 
 def test_array() -> None:
-    paths: Paths = [_current_path, _unknown_path]
+    """Test to check existing of list of file or directory."""
+    current_file: Path = _get_current_file()
+    paths: Paths = [current_file, _get_unknown_file(current_file)]
     expected: Bools = [True, False]
 
     assert bool_compare_array(expected, check_exists_array(paths))
 
 
 def test_pair() -> None:
+    """Test to check existing of directory of file or directory."""
+    current_file: Path = _get_current_file()
     paths: PathPair = {
-        "R": _current_path,
-        "G": _unknown_path,
-        "B": _current_path.parent,
+        "R": current_file,
+        "G": _get_unknown_file(current_file),
+        "B": current_file.parent,
     }
     expected: BoolPair = {"R": True, "G": False, "B": True}
 
@@ -37,6 +49,11 @@ def test_pair() -> None:
 
 
 def main() -> bool:
+    """Run all tests.
+
+    Returns:
+        bool: Success if get to the end of function.
+    """
     test_array()
     test_pair()
     return True

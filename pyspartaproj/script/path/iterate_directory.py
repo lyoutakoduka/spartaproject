@@ -7,8 +7,6 @@ from pathlib import Path
 
 from pyspartaproj.context.extension.path_context import PathGene
 
-default_filter: str = "**/*"
-
 
 def _create_filter(
     depth: int, file: bool, directory: bool, suffix: str
@@ -33,13 +31,35 @@ def _create_filter(
     return glob_filter
 
 
+def _iterate_tree(
+    root: Path,
+    depth: int = 0,
+    file: bool = True,
+    directory: bool = True,
+    suffix: str = "*",
+    glob_filter: str | None = None,
+) -> PathGene:
+    default_filter: str = "**/*"
+
+    if glob_filter is None:
+        glob_filter = default_filter
+
+    if default_filter == glob_filter:
+        glob_filter = _create_filter(depth, file, directory, suffix)
+
+    if 0 < len(glob_filter):
+        for path in root.glob(glob_filter):
+            if root != path:
+                yield path
+
+
 def walk_iterator(
     root: Path,
     depth: int = 0,
     file: bool = True,
     directory: bool = True,
     suffix: str = "*",
-    glob_filter: str = default_filter,
+    glob_filter: str | None = None,
 ) -> PathGene:
     """Function to get list of contents in the directory you search.
 
@@ -71,10 +91,7 @@ def walk_iterator(
     Yields:
         Iterator[PathGene]: Path of file or directory found by search.
     """
-    if default_filter == glob_filter:
-        glob_filter = _create_filter(depth, file, directory, suffix)
-
-    if 0 < len(glob_filter):
-        for path in root.glob(glob_filter):
-            if root != path:
-                yield path
+    for path in _iterate_tree(
+        root, depth, file, directory, suffix, glob_filter
+    ):
+        yield path

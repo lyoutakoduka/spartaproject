@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to export text file."""
+
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
@@ -18,16 +20,8 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
         function(text_path)
 
 
-def test_text() -> None:
-    source_text: str = "test"
-
-    def individual_test(text_path: Path) -> None:
-        _common_test(text_export(text_path, source_text), len(source_text))
-
-    _inside_temporary_directory(individual_test)
-
-
 def test_byte() -> None:
+    """Test to export binary file."""
     source_byte: bytes = b"test"
 
     def individual_test(text_path: Path) -> None:
@@ -36,7 +30,22 @@ def test_byte() -> None:
     _inside_temporary_directory(individual_test)
 
 
+def test_text() -> None:
+    """Test to export text file."""
+    source_text: str = "test"
+
+    def individual_test(text_path: Path) -> None:
+        _common_test(text_export(text_path, source_text), len(source_text))
+
+    _inside_temporary_directory(individual_test)
+
+
 def main() -> bool:
-    test_text()
+    """Run all tests.
+
+    Returns:
+        bool: Success if get to the end of function.
+    """
     test_byte()
+    test_text()
     return True

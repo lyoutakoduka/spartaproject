@@ -60,11 +60,11 @@ class TimerSelect:
                 The argument is mainly used for test.
 
         Use this class as like follow script,
-            if you want to get current datetime represented by epoch time.
+            if you want to get current date time represented by epoch time.
 
         >>> import time
         >>> timer = TimerSelect() # Create class instance.
-        >>> timer() # Use __call___ method, and get current datetime.
+        >>> timer() # Use __call___ method, and get current date time.
         1704010500
         >>> time.sleep(1)
         >>> timer()

@@ -23,6 +23,7 @@ def _execute(command: str) -> StrGene:
 
     while True:
         line: bytes = subprocess.stdout.readline()
+
         if line:
             yield _cleanup_new_lines(line.decode())
         else:
@@ -37,7 +38,7 @@ def execute_single(commands: Strs) -> StrGene:
         commands (Strs): Script you want to execute corresponding to platform.
 
     Raises:
-        ValueError: Raise error when execution of script fail.
+        ValueError: Throw an exception if execution of script is failed.
 
     Returns:
         StrGene: String generator, not string list.
@@ -57,7 +58,7 @@ def execute_multiple(command_multiple: Strs2) -> StrGene:
             you want to execute corresponding to platform.
 
     Raises:
-        ValueError: Raise error when execution of script fail.
+        ValueError: Throw an exception if execution of script is failed.
 
     Returns:
         StrGene: String generator, not string list.

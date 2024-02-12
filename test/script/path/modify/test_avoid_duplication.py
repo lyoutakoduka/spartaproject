@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to convert path to avoid existing path."""
+
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
@@ -19,6 +21,8 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 
 
 def test_exists() -> None:
+    """Test to convert path to avoid existing path."""
+
     def individual_test(source_path: Path) -> None:
         source_path = json_export(source_path, "test")
         _common_test(
@@ -30,6 +34,8 @@ def test_exists() -> None:
 
 
 def test_empty() -> None:
+    """Test to convert path, but no path competition."""
+
     def individual_test(source_path: Path) -> None:
         _common_test(get_avoid_path(source_path), source_path)
 
@@ -37,6 +43,11 @@ def test_empty() -> None:
 
 
 def main() -> bool:
+    """Run all tests.
+
+    Returns:
+        bool: Success if get to the end of function.
+    """
     test_exists()
     test_empty()
     return True

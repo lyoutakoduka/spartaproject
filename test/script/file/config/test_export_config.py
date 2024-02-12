@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to export data used for configuration file."""
+
 from decimal import Decimal
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -11,7 +13,11 @@ from pyspartaproj.context.default.integer_context import IntPair, IntPair2
 from pyspartaproj.context.default.string_context import StrPair, StrPair2, Strs
 from pyspartaproj.context.extension.decimal_context import DecPair, DecPair2
 from pyspartaproj.context.extension.path_context import PathPair, PathPair2
-from pyspartaproj.context.file.config_context import Config
+from pyspartaproj.context.file.config_context import (
+    BasicPair2,
+    Config,
+    SectionPair2,
+)
 from pyspartaproj.script.file.config.export_config import (
     config_dump,
     config_export,
@@ -25,6 +31,10 @@ def _common_test(expected: str, source: Config) -> None:
 
 
 def test_bool() -> None:
+    """Test to convert data used for configuration file to text.
+
+    Data is 2 dimensional dictionary created with type "bool".
+    """
     source_pair: BoolPair = {"b": True}
     source_pairs: BoolPair2 = {"A": source_pair}
     expected: str = """
@@ -36,6 +46,10 @@ def test_bool() -> None:
 
 
 def test_integer() -> None:
+    """Test to convert data used for configuration file to text.
+
+    Data is 2 dimensional dictionary created with type "int".
+    """
     source_pair: IntPair = {"b": 1}
     source_pairs: IntPair2 = {"A": source_pair}
     expected: str = """
@@ -47,6 +61,10 @@ def test_integer() -> None:
 
 
 def test_float() -> None:
+    """Test to convert data used for configuration file to text.
+
+    Data is 2 dimensional dictionary created with type "float".
+    """
     source_pair: FloatPair = {"b": 1.0}
     source_pairs: FloatPair2 = {"A": source_pair}
     expected: str = """
@@ -58,6 +76,10 @@ def test_float() -> None:
 
 
 def test_string() -> None:
+    """Test to convert data used for configuration file to text.
+
+    Data is 2 dimensional dictionary created with type "str".
+    """
     source_pair: StrPair = {"b": "test"}
     source_pairs: StrPair2 = {"A": source_pair}
     expected: str = """
@@ -69,6 +91,10 @@ def test_string() -> None:
 
 
 def test_decimal() -> None:
+    """Test to convert data used for configuration file to text.
+
+    Data is 2 dimensional dictionary created with type "Decimal".
+    """
     source_pair: DecPair = {"b": Decimal("0.1")}
     source_pairs: DecPair2 = {"A": source_pair}
     expected: str = """
@@ -80,6 +106,10 @@ def test_decimal() -> None:
 
 
 def test_path() -> None:
+    """Test to convert data used for configuration file to text.
+
+    Data is 2 dimensional dictionary created with type "Path".
+    """
     source_pair: PathPair = {"path": Path("root")}
     source_pairs: PathPair2 = {"A": source_pair}
     expected: str = """
@@ -91,7 +121,11 @@ def test_path() -> None:
 
 
 def test_mix_option() -> None:
-    source_pairs: Config = {
+    """Test to convert data used for configuration file to text.
+
+    Data is 2 dimensional dictionary created with multiple mixed type.
+    """
+    source_pairs: BasicPair2 = {
         "section": {
             "bool": True,
             "int": 1,
@@ -116,6 +150,14 @@ def test_mix_option() -> None:
 
 
 def test_mix_section() -> None:
+    """Test to convert data used for configuration file to text.
+
+    Data is 2 dimensional dictionary, the rule of dictionary is follow.
+
+    1. Child dictionary is structured with same type values.
+
+    2. Parent dictionary is structured with multiple child dictionaries.
+    """
     flags: BoolPair = {"bool": True}
     indies: IntPair = {"int": 1}
     numbers: FloatPair = {"float": 1.0}
@@ -123,7 +165,7 @@ def test_mix_section() -> None:
     decimals: DecPair = {"decimal": Decimal("0.1")}
     paths: PathPair = {"path": Path("root")}
 
-    source_pairs: Config = {
+    source_pairs: SectionPair2 = {
         "flags": flags,
         "indies": indies,
         "numbers": numbers,
@@ -156,19 +198,26 @@ def test_mix_section() -> None:
 
 
 def test_compress() -> None:
-    source_pairs: Config = {"bool": {"true": True}, "int": {"one": 1}}
+    """Test to convert data used for configuration file.
+
+    Test for compress option is enable.
+    """
+    source_pairs: SectionPair2 = {"bool": {"true": True}, "int": {"one": 1}}
     expected: str = """
         [bool]
         true=True
         [int]
         one=1
     """
-    expected: str = format_indent(expected)
 
-    assert expected == config_dump(source_pairs, compress=True)
+    assert format_indent(expected) == config_dump(source_pairs, compress=True)
 
 
 def test_lower() -> None:
+    """Test to convert data used for configuration file.
+
+    Test for upper case of keys is enable.
+    """
     source_pairs: Config = {"SECTION": {"TRUE": True, "FALSE": False}}
     expected: str = """
         [SECTION]
@@ -180,6 +229,7 @@ def test_lower() -> None:
 
 
 def test_key() -> None:
+    """Test to convert data used for configuration file with noisy keys."""
     noise: Strs = [" 　\n\t"] * 2
     source_pairs: Config = {"section".join(noise): {"key".join(noise): True}}
     expected: str = """
@@ -191,6 +241,7 @@ def test_key() -> None:
 
 
 def test_export() -> None:
+    """Test to export data used for configuration file."""
     source_pairs: Config = {"true": {"true": True}, "false": {"false": False}}
     expected: str = """
         [true]
@@ -200,15 +251,18 @@ def test_export() -> None:
         false = False
     """
 
-    expected: str = format_indent(expected, stdout=True)
-
     with TemporaryDirectory() as temporary_path:
-        assert expected == text_import(
+        assert format_indent(expected, stdout=True) == text_import(
             config_export(Path(temporary_path, "temporary.ini"), source_pairs)
         )
 
 
 def main() -> bool:
+    """Run all tests.
+
+    Returns:
+        bool: Success if get to the end of function.
+    """
     test_bool()
     test_integer()
     test_float()

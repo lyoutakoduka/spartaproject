@@ -42,6 +42,7 @@ class CompressZip:
     def _init_archive_id(self, archive_id: str | None) -> None:
         if archive_id is None:
             archive_id = self._output_root.name
+
         self._archive_id = archive_id
 
     def _init_walk_history(self) -> None:
@@ -113,6 +114,7 @@ class CompressZip:
             self._reset_archive_byte()
 
         relative: Path = get_relative(target, root_path=root)
+
         if is_dir:
             self._file_zip.mkdir(str(relative))
         else:
@@ -178,6 +180,7 @@ class CompressZip:
         )
 
         not_still: bool = target not in archived
+
         if not_still:
             archived += [target]
 
