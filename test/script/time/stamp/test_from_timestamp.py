@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to convert time data from epoch format to datetime object."""
+
 from datetime import datetime
 from decimal import Decimal
 
@@ -16,10 +18,12 @@ def _get_timestamp() -> Decimal:
 
 
 def test_utc() -> None:
+    """Test to convert time data from epoch format to datetime object."""
     assert _get_input_time() == time_from_timestamp(_get_timestamp())
 
 
 def test_jst() -> None:
+    """Test to convert time data to datetime object as JST time zone."""
     expected: str = "2023-04-16T05:09:30.936886+09:00"
     assert datetime.fromisoformat(expected) == time_from_timestamp(
         _get_timestamp(), jst=True
@@ -27,6 +31,11 @@ def test_jst() -> None:
 
 
 def main() -> bool:
+    """Run all tests.
+
+    Returns:
+        bool: Success if get to the end of function.
+    """
     test_utc()
     test_jst()
     return True
