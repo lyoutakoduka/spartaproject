@@ -16,7 +16,7 @@ def time_from_timestamp(timestamp: Decimal, jst: bool = False) -> datetime:
         timestamp (Decimal): Epoch format time you want to convert.
 
         jst (bool, optional): Defaults to False.
-            If True, you can get datetime object as JST timezone.
+            If True, you can get datetime object as JST time zone.
 
     Returns:
         datetime: Converted datetime object.
