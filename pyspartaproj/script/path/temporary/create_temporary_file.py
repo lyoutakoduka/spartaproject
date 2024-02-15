@@ -24,4 +24,4 @@ def create_temporary_file(file_root: Path) -> Path:
     name: str = "temporary"
     file_path: Path = Path(file_root, name + ".json")
     create_directory_parent(file_path)
-    return json_export(file_path, name)
+    return json_export(file_path, "empty")
