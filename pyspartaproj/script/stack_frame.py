@@ -6,10 +6,7 @@
 import inspect
 from pathlib import Path
 
-from pyspartaproj.context.extension.typed_context import (
-    StackFrame,
-    StackFrames,
-)
+from pyspartaproj.context.typed.builtin_context import StackFrame, StackFrames
 from pyspartaproj.script.path.modify.get_relative import get_relative
 
 
