@@ -20,6 +20,9 @@ def create_temporary_file(
         file_root (Path):
             Path of directory which empty temporary file is created.
 
+        file_name (str | None, optional): Defaults to None.
+            Name of created file which is json format.
+
     Returns:
         Path: Path of created empty temporary file.
     """
