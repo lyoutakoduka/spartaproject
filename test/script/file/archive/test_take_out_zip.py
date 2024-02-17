@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to take out directory from inside of archive as archive."""
+
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
@@ -55,6 +57,11 @@ def _common_test(archive_status: ArchiveStatus) -> None:
 
 
 def test_compleat() -> None:
+    """Take out directory from inside of archive as archive.
+
+    But, directory doesn't exist in inside of archive.
+    """
+
     def individual_test(working: PathPair) -> None:
         _common_test(_create_compleat_archive(working))
 
@@ -62,5 +69,10 @@ def test_compleat() -> None:
 
 
 def main() -> bool:
+    """Run all tests.
+
+    Returns:
+        bool: Success if get to the end of function.
+    """
     test_compleat()
     return True
