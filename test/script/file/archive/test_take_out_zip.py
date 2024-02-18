@@ -77,6 +77,13 @@ def test_compleat() -> None:
     _inside_temporary_directory(individual_test)
 
 
+def test_empty() -> None:
+    def individual_test(working: PathPair) -> None:
+        _common_test(_create_empty_archive(working))
+
+    _inside_temporary_directory(individual_test)
+
+
 def main() -> bool:
     """Run all tests.
 
@@ -84,4 +91,5 @@ def main() -> bool:
         bool: Success if get to the end of function.
     """
     test_compleat()
+    test_empty()
     return True
