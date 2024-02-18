@@ -13,8 +13,8 @@ from pyspartaproj.script.path.iterate_directory import walk_iterator
 def _get_took_out(decompressed_root: Path) -> Paths:
     took_out: Paths = []
 
-    for path in walk_iterator(decompressed_root, file=False):
-        took_out = [path]
+    for directory_root in walk_iterator(decompressed_root, file=False):
+        took_out = [directory_root]
 
     return took_out
 
