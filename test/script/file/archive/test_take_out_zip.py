@@ -47,6 +47,15 @@ def _create_compleat_archive(working: PathPair) -> ArchiveStatus:
     }
 
 
+def _create_empty_archive(working: PathPair) -> ArchiveStatus:
+    return {
+        "archive": _compress_test_archive(
+            working, [create_directory(Path(working["source"], "directory"))]
+        ),
+        "expected": [],
+    }
+
+
 def _common_test(archive_status: ArchiveStatus) -> None:
     paths_pair: Paths2 = [
         take_out_zip(archive_status["archive"]),
