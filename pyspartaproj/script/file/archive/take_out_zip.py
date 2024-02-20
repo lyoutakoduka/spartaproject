@@ -6,8 +6,20 @@
 from pathlib import Path
 
 from pyspartaproj.context.extension.path_context import Paths
+from pyspartaproj.script.file.archive.compress_zip import CompressZip
 from pyspartaproj.script.file.archive.edit_zip import EditZip
 from pyspartaproj.script.path.iterate_directory import walk_iterator
+
+
+def _take_out_archive(
+    took_out_root: Path, file_paths: Paths, archive_id: str
+) -> Path:
+    compress_zip = CompressZip(took_out_root, archive_id=archive_id)
+
+    for file_path in file_paths:
+        compress_zip.compress_archive(file_path)
+
+    return compress_zip.close_archived()[0]
 
 
 def _get_took_out(decompressed_root: Path) -> Paths:
