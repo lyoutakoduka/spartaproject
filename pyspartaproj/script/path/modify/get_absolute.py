@@ -38,6 +38,9 @@ def get_absolute_array(
     Args:
         relative_paths (Paths): Paths you want to convert to absolute.
 
+        root_path (Path | None, optional): Defaults to None.
+            Root of relative path used for converting path.
+
     Returns:
         Paths: Converted absolute paths.
     """
@@ -51,6 +54,9 @@ def get_absolute_pair(
 
     Args:
         relative_pair (PathPair): Paths you want to convert to absolute.
+
+        root_path (Path | None, optional): Defaults to None.
+            Root of relative path used for converting path.
 
     Returns:
         PathPair: Converted absolute paths.
