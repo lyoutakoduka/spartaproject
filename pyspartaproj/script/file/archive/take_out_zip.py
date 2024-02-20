@@ -29,4 +29,5 @@ def take_out_zip(archive_path: Path) -> Paths:
     Returns:
         Paths: List of directory path which is took out.
     """
-    return _get_took_out(EditZip(archive_path).get_decompressed_root())
+    edit_zip = EditZip(archive_path)
+    return _get_took_out(edit_zip.get_decompressed_root())
