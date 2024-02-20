@@ -30,7 +30,9 @@ def get_absolute(relative_path: Path, root_path: Path | None = None) -> Path:
     return Path(root_path, relative_path)
 
 
-def get_absolute_array(relative_paths: Paths) -> Paths:
+def get_absolute_array(
+    relative_paths: Paths, root_path: Path | None = None
+) -> Paths:
     """Function to convert list of relative paths to absolute.
 
     Args:
@@ -39,10 +41,12 @@ def get_absolute_array(relative_paths: Paths) -> Paths:
     Returns:
         Paths: Converted absolute paths.
     """
-    return [get_absolute(path) for path in relative_paths]
+    return [get_absolute(path, root_path=root_path) for path in relative_paths]
 
 
-def get_absolute_pair(relative_pair: PathPair) -> PathPair:
+def get_absolute_pair(
+    relative_pair: PathPair, root_path: Path | None = None
+) -> PathPair:
     """Function to convert dictionary of relative paths to absolute.
 
     Args:
@@ -51,4 +55,7 @@ def get_absolute_pair(relative_pair: PathPair) -> PathPair:
     Returns:
         PathPair: Converted absolute paths.
     """
-    return {key: get_absolute(path) for key, path in relative_pair.items()}
+    return {
+        key: get_absolute(path, root_path=root_path)
+        for key, path in relative_pair.items()
+    }
