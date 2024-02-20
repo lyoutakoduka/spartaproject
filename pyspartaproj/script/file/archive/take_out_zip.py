@@ -22,7 +22,7 @@ def _take_out_archive(
     return compress_zip.close_archived()[0]
 
 
-def _get_took_out(decompressed_root: Path) -> Paths:
+def _get_took_out(took_out_root: Path, decompressed_root: Path) -> Paths:
     archive_paths: Paths = []
 
     for directory_root in walk_iterator(decompressed_root, file=False):
@@ -33,7 +33,9 @@ def _get_took_out(decompressed_root: Path) -> Paths:
         if 0 == len(file_paths):
             continue
 
-        archive_paths = [directory_root]
+        archive_paths += [
+            _take_out_archive(took_out_root, file_paths, directory_root.name)
+        ]
 
     return archive_paths
 
@@ -48,4 +50,4 @@ def take_out_zip(archive_path: Path) -> Paths:
         Paths: List of directory path which is took out.
     """
     edit_zip = EditZip(archive_path)
-    return _get_took_out(edit_zip.get_decompressed_root())
+    return _get_took_out(archive_path.parent, edit_zip.get_decompressed_root())
