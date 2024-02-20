@@ -14,8 +14,14 @@ def _get_took_out(decompressed_root: Path) -> Paths:
     archive_paths: Paths = []
 
     for directory_root in walk_iterator(decompressed_root, file=False):
-        if 0 < len(list(walk_iterator(directory_root, directory=False))):
-            archive_paths = [directory_root]
+        file_paths: Paths = list(
+            walk_iterator(directory_root, directory=False)
+        )
+
+        if 0 == len(file_paths):
+            continue
+
+        archive_paths = [directory_root]
 
     return archive_paths
 
