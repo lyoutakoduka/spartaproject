@@ -11,13 +11,13 @@ from pyspartaproj.script.path.iterate_directory import walk_iterator
 
 
 def _get_took_out(decompressed_root: Path) -> Paths:
-    took_out: Paths = []
+    archive_paths: Paths = []
 
     for directory_root in walk_iterator(decompressed_root, file=False):
         if 0 < len(list(walk_iterator(directory_root, directory=False))):
-            took_out = [directory_root]
+            archive_paths = [directory_root]
 
-    return took_out
+    return archive_paths
 
 
 def take_out_zip(archive_path: Path) -> Paths:
