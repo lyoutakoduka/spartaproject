@@ -61,6 +61,20 @@ def _get_relative_expected(working: PathPair, target_paths: Paths) -> Paths:
     return get_relative_array(target_paths, root_path=working["source"])
 
 
+def _create_single_archive(working: PathPair) -> ArchiveStatus:
+    directory_root: Path = create_directory(
+        Path(working["source"], "directory")
+    )
+    file_path: Path = create_temporary_file(directory_root)
+
+    return {
+        "archive": _compress_test_archive(working, [directory_root]),
+        "expected": _get_relative_expected(
+            working, [directory_root, file_path]
+        ),
+    }
+
+
 def _common_test(archive_status: ArchiveStatus) -> None:
     paths_pair: Paths2 = [
         take_out_zip(archive_status["archive"]),
