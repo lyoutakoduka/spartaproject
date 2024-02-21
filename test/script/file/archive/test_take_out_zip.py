@@ -47,7 +47,7 @@ def _get_relative_expected(working: PathPair, target_paths: Paths) -> Paths:
     return get_relative_array(target_paths, root_path=working["source"])
 
 
-def _create_shared_archive(
+def _create_archive_shared(
     working: PathPair, archive_paths: Paths, expected_paths: Paths
 ) -> ArchiveStatus:
     return {
@@ -57,13 +57,13 @@ def _create_shared_archive(
 
 
 def _create_compleat_archive(working: PathPair) -> ArchiveStatus:
-    return _create_shared_archive(
+    return _create_archive_shared(
         working, [create_temporary_file(working["source"])], []
     )
 
 
 def _create_empty_archive(working: PathPair) -> ArchiveStatus:
-    return _create_shared_archive(
+    return _create_archive_shared(
         working,
         [create_directory(Path(working["source"], "directory"))],
         [],
@@ -75,7 +75,7 @@ def _create_single_archive(working: PathPair) -> ArchiveStatus:
         Path(working["source"], "directory")
     )
 
-    return _create_shared_archive(
+    return _create_archive_shared(
         working,
         [directory_root],
         [directory_root, create_temporary_file(directory_root)],
