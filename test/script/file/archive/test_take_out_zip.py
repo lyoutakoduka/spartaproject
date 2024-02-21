@@ -167,6 +167,13 @@ def test_single() -> None:
     _inside_temporary_directory(individual_test)
 
 
+def test_multiple() -> None:
+    def individual_test(working: PathPair) -> None:
+        _common_test(_create_archive_multiple(working))
+
+    _inside_temporary_directory(individual_test)
+
+
 def main() -> bool:
     """Run all tests.
 
@@ -176,4 +183,5 @@ def main() -> bool:
     test_compleat()
     test_empty()
     test_single()
+    test_multiple()
     return True
