@@ -82,6 +82,19 @@ def _create_archive_single(working: PathPair) -> ArchiveStatus:
     )
 
 
+def _create_archive_multiple(working: PathPair) -> ArchiveStatus:
+    directory_root: Path = create_directory(
+        Path(working["source"], "directory")
+    )
+    file_paths: Paths = _add_temporary_files(
+        directory_root, ["first", "second", "third"]
+    )
+
+    return _create_archive_shared(
+        working, [directory_root], [directory_root] + file_paths
+    )
+
+
 def _replace_path_root(decompressed_root: Path, archive_root: Path) -> Paths:
     return get_absolute_array(
         get_relative_array(
