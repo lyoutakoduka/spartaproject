@@ -62,7 +62,7 @@ def _create_archive_compleat(working: PathPair) -> ArchiveStatus:
     )
 
 
-def _create_empty_archive(working: PathPair) -> ArchiveStatus:
+def _create_archive_empty(working: PathPair) -> ArchiveStatus:
     return _create_archive_shared(
         working,
         [create_directory(Path(working["source"], "directory"))],
@@ -142,7 +142,7 @@ def test_compleat() -> None:
 
 def test_empty() -> None:
     def individual_test(working: PathPair) -> None:
-        _common_test(_create_empty_archive(working))
+        _common_test(_create_archive_empty(working))
 
     _inside_temporary_directory(individual_test)
 
