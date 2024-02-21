@@ -46,6 +46,15 @@ def _get_relative_expected(working: PathPair, target_paths: Paths) -> Paths:
     return get_relative_array(target_paths, root_path=working["source"])
 
 
+def _create_shared_archive(
+    working: PathPair, archive_paths: Paths, expected_paths: Paths
+) -> ArchiveStatus:
+    return {
+        "archive": _compress_test_archive(working, archive_paths),
+        "expected": _get_relative_expected(working, expected_paths),
+    }
+
+
 def _create_compleat_archive(working: PathPair) -> ArchiveStatus:
     return {
         "archive": _compress_test_archive(
