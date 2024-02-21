@@ -70,7 +70,7 @@ def _create_archive_empty(working: PathPair) -> ArchiveStatus:
     )
 
 
-def _create_single_archive(working: PathPair) -> ArchiveStatus:
+def _create_archive_single(working: PathPair) -> ArchiveStatus:
     directory_root: Path = create_directory(
         Path(working["source"], "directory")
     )
@@ -149,7 +149,7 @@ def test_empty() -> None:
 
 def test_single() -> None:
     def individual_test(working: PathPair) -> None:
-        _common_test(_create_single_archive(working))
+        _common_test(_create_archive_single(working))
 
     _inside_temporary_directory(individual_test)
 
