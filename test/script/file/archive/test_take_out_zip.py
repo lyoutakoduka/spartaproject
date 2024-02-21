@@ -11,6 +11,7 @@ from pyspartaproj.context.extension.path_context import PathPair, Paths, Paths2
 from pyspartaproj.context.typed.user_context import ArchiveStatus
 from pyspartaproj.script.directory.create_directory import create_directory
 from pyspartaproj.script.file.archive.compress_zip import CompressZip
+from pyspartaproj.script.file.archive.edit_zip import EditZip
 from pyspartaproj.script.file.archive.take_out_zip import take_out_zip
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.modify.get_absolute import get_absolute_array
@@ -85,6 +86,17 @@ def _replace_path_root(decompressed_root: Path, archive_root: Path) -> Paths:
         ),
         root_path=archive_root,
     )
+
+
+def _get_took_out(archive_path: Path) -> Paths:
+    edit_zip = EditZip(archive_path)
+
+    archive_root: Path = Path(archive_path.stem)
+    file_paths: Paths = _replace_path_root(
+        edit_zip.get_decompressed_root(), archive_root
+    )
+
+    return [archive_root] + file_paths
 
 
 def _common_test(archive_status: ArchiveStatus) -> None:
