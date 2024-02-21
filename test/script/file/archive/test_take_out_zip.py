@@ -42,6 +42,10 @@ def _compress_test_archive(working: PathPair, target_paths: Paths) -> Path:
     return compress_zip.close_archived()[0]
 
 
+def _get_relative_expected(working: PathPair, target_paths: Paths) -> Paths:
+    return get_relative_array(target_paths, root_path=working["source"])
+
+
 def _create_compleat_archive(working: PathPair) -> ArchiveStatus:
     return {
         "archive": _compress_test_archive(
@@ -58,10 +62,6 @@ def _create_empty_archive(working: PathPair) -> ArchiveStatus:
         ),
         "expected": [],
     }
-
-
-def _get_relative_expected(working: PathPair, target_paths: Paths) -> Paths:
-    return get_relative_array(target_paths, root_path=working["source"])
 
 
 def _create_single_archive(working: PathPair) -> ArchiveStatus:
