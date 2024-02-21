@@ -7,6 +7,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
+from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.extension.path_context import PathPair, Paths, Paths2
 from pyspartaproj.context.typed.user_context import ArchiveStatus
 from pyspartaproj.script.directory.create_directory import create_directory
@@ -118,6 +119,13 @@ def _common_test(archive_status: ArchiveStatus) -> None:
     ]
 
     assert 1 == len(set([str(sorted(paths)) for paths in paths_pair]))
+
+
+def _add_temporary_files(directory_root: Path, file_names: Strs) -> Paths:
+    return [
+        create_temporary_file(directory_root, file_name=file_name)
+        for file_name in file_names
+    ]
 
 
 def test_compleat() -> None:
