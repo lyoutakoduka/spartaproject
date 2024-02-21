@@ -12,6 +12,7 @@ from pyspartaproj.context.typed.user_context import ArchiveStatus
 from pyspartaproj.script.directory.create_directory import create_directory
 from pyspartaproj.script.file.archive.compress_zip import CompressZip
 from pyspartaproj.script.file.archive.take_out_zip import take_out_zip
+from pyspartaproj.script.path.modify.get_relative import get_relative_array
 from pyspartaproj.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
@@ -54,6 +55,10 @@ def _create_empty_archive(working: PathPair) -> ArchiveStatus:
         ),
         "expected": [],
     }
+
+
+def _get_relative_expected(working: PathPair, target_paths: Paths) -> Paths:
+    return get_relative_array(target_paths, root_path=working["source"])
 
 
 def _common_test(archive_status: ArchiveStatus) -> None:
