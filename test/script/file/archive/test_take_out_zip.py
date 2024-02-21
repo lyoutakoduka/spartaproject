@@ -12,6 +12,8 @@ from pyspartaproj.context.typed.user_context import ArchiveStatus
 from pyspartaproj.script.directory.create_directory import create_directory
 from pyspartaproj.script.file.archive.compress_zip import CompressZip
 from pyspartaproj.script.file.archive.take_out_zip import take_out_zip
+from pyspartaproj.script.path.iterate_directory import walk_iterator
+from pyspartaproj.script.path.modify.get_absolute import get_absolute_array
 from pyspartaproj.script.path.modify.get_relative import get_relative_array
 from pyspartaproj.script.path.temporary.create_temporary_file import (
     create_temporary_file,
@@ -73,6 +75,16 @@ def _create_single_archive(working: PathPair) -> ArchiveStatus:
             working, [directory_root, file_path]
         ),
     }
+
+
+def _replace_path_root(decompressed_root: Path, archive_root: Path) -> Paths:
+    return get_absolute_array(
+        get_relative_array(
+            list(walk_iterator(decompressed_root)),
+            root_path=decompressed_root,
+        ),
+        root_path=archive_root,
+    )
 
 
 def _common_test(archive_status: ArchiveStatus) -> None:
