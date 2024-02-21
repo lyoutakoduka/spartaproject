@@ -56,35 +56,29 @@ def _create_shared_archive(
 
 
 def _create_compleat_archive(working: PathPair) -> ArchiveStatus:
-    return {
-        "archive": _compress_test_archive(
-            working, [create_temporary_file(working["source"])]
-        ),
-        "expected": [],
-    }
+    return _create_shared_archive(
+        working, [create_temporary_file(working["source"])], []
+    )
 
 
 def _create_empty_archive(working: PathPair) -> ArchiveStatus:
-    return {
-        "archive": _compress_test_archive(
-            working, [create_directory(Path(working["source"], "directory"))]
-        ),
-        "expected": [],
-    }
+    return _create_shared_archive(
+        working,
+        [create_directory(Path(working["source"], "directory"))],
+        [],
+    )
 
 
 def _create_single_archive(working: PathPair) -> ArchiveStatus:
     directory_root: Path = create_directory(
         Path(working["source"], "directory")
     )
-    file_path: Path = create_temporary_file(directory_root)
 
-    return {
-        "archive": _compress_test_archive(working, [directory_root]),
-        "expected": _get_relative_expected(
-            working, [directory_root, file_path]
-        ),
-    }
+    return _create_shared_archive(
+        working,
+        [directory_root],
+        [directory_root, create_temporary_file(directory_root)],
+    )
 
 
 def _replace_path_root(decompressed_root: Path, archive_root: Path) -> Paths:
