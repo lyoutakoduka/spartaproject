@@ -99,6 +99,15 @@ def _get_took_out(archive_path: Path) -> Paths:
     return [archive_root] + file_paths
 
 
+def _get_took_out_list(archive_paths: Paths) -> Paths:
+    file_paths: Paths = []
+
+    for archive_path in archive_paths:
+        file_paths += _get_took_out(archive_path)
+
+    return file_paths
+
+
 def _common_test(archive_status: ArchiveStatus) -> None:
     paths_pair: Paths2 = [
         take_out_zip(archive_status["archive"]),
