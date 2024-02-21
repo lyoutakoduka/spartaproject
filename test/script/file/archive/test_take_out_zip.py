@@ -110,7 +110,7 @@ def _get_took_out_list(archive_paths: Paths) -> Paths:
 
 def _common_test(archive_status: ArchiveStatus) -> None:
     paths_pair: Paths2 = [
-        take_out_zip(archive_status["archive"]),
+        _get_took_out_list(take_out_zip(archive_status["archive"])),
         archive_status["expected"],
     ]
 
@@ -136,6 +136,13 @@ def test_empty() -> None:
     _inside_temporary_directory(individual_test)
 
 
+def test_single() -> None:
+    def individual_test(working: PathPair) -> None:
+        _common_test(_create_single_archive(working))
+
+    _inside_temporary_directory(individual_test)
+
+
 def main() -> bool:
     """Run all tests.
 
@@ -144,4 +151,5 @@ def main() -> bool:
     """
     test_compleat()
     test_empty()
+    test_single()
     return True
