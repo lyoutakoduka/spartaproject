@@ -54,6 +54,15 @@ def _add_temporary_files(directory_root: Path, file_names: Strs) -> Paths:
     ]
 
 
+def _add_temporary_directory(
+    directory_root: Path, directory_names: Strs
+) -> Paths:
+    return [
+        create_directory(Path(directory_root, directory_name))
+        for directory_name in directory_names
+    ]
+
+
 def _create_archive_shared(
     working: PathPair, archive_paths: Paths, expected_paths: Paths
 ) -> ArchiveStatus:
