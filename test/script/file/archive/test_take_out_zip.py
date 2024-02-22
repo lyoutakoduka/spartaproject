@@ -47,6 +47,13 @@ def _get_relative_expected(working: PathPair, target_paths: Paths) -> Paths:
     return get_relative_array(target_paths, root_path=working["source"])
 
 
+def _add_temporary_files(directory_root: Path, file_names: Strs) -> Paths:
+    return [
+        create_temporary_file(directory_root, file_name=file_name)
+        for file_name in file_names
+    ]
+
+
 def _create_archive_shared(
     working: PathPair, archive_paths: Paths, expected_paths: Paths
 ) -> ArchiveStatus:
@@ -145,13 +152,6 @@ def _common_test(archive_status: ArchiveStatus) -> None:
     ]
 
     assert 1 == len(set([str(sorted(paths)) for paths in paths_pair]))
-
-
-def _add_temporary_files(directory_root: Path, file_names: Strs) -> Paths:
-    return [
-        create_temporary_file(directory_root, file_name=file_name)
-        for file_name in file_names
-    ]
 
 
 def test_compleat() -> None:
