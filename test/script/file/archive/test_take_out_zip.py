@@ -124,6 +124,19 @@ def _create_archive_mix(working: PathPair) -> ArchiveStatus:
     )
 
 
+def _create_archive_list(working: PathPair) -> ArchiveStatus:
+    archive_paths: Paths = _add_temporary_directory(
+        working["source"], ["first", "second", "third"]
+    )
+
+    file_paths: Paths = []
+
+    for archive_path in archive_paths:
+        file_paths += [archive_path, create_temporary_file(archive_path)]
+
+    return _create_archive_shared(working, archive_paths, file_paths)
+
+
 def _replace_path_root(decompressed_root: Path, archive_root: Path) -> Paths:
     return get_absolute_array(
         get_relative_array(
