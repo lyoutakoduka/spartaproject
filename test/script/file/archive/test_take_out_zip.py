@@ -216,6 +216,13 @@ def test_mix() -> None:
     _inside_temporary_directory(individual_test)
 
 
+def test_list() -> None:
+    def individual_test(working: PathPair) -> None:
+        _common_test(_create_archive_list(working))
+
+    _inside_temporary_directory(individual_test)
+
+
 def main() -> bool:
     """Run all tests.
 
@@ -227,4 +234,5 @@ def main() -> bool:
     test_single()
     test_multiple()
     test_mix()
+    test_list()
     return True
