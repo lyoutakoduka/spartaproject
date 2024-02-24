@@ -54,19 +54,9 @@ def _remove_took_out(inside_directory: PathsPair) -> None:
 
 
 def _get_took_out(took_out_root: Path, decompressed_root: Path) -> Paths:
-    archive_paths: Paths = []
-
-    for directory_root in walk_iterator(decompressed_root, file=False):
-        file_paths: Paths = list(
-            walk_iterator(directory_root, directory=False)
-        )
-
-        if 0 == len(file_paths):
-            continue
-
-        archive_paths += [
-            _take_out_archive(took_out_root, file_paths, directory_root.name)
-        ]
+    inside_directory: PathsPair = _get_inside_directory(decompressed_root)
+    archive_paths: Paths = _take_out_archives(took_out_root, inside_directory)
+    _remove_took_out(inside_directory)
 
     return archive_paths
 
