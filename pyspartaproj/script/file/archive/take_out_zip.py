@@ -9,6 +9,7 @@ from pyspartaproj.context.extension.path_context import Paths, PathsPair
 from pyspartaproj.script.file.archive.compress_zip import CompressZip
 from pyspartaproj.script.file.archive.edit_zip import EditZip
 from pyspartaproj.script.path.iterate_directory import walk_iterator
+from pyspartaproj.script.path.safe.safe_trash import SafeTrash
 
 
 def _take_out_archive(
@@ -43,6 +44,13 @@ def _get_inside_directory(decompressed_root: Path) -> PathsPair:
             inside_directory[str(directory_root)] = file_paths
 
     return inside_directory
+
+
+def _remove_took_out(inside_directory: PathsPair) -> None:
+    safe_trash = SafeTrash()
+
+    for directory_text in inside_directory.keys():
+        safe_trash.trash(Path(directory_text))
 
 
 def _get_took_out(took_out_root: Path, decompressed_root: Path) -> Paths:
