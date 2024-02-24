@@ -167,13 +167,15 @@ def _get_took_out_list(archive_paths: Paths) -> Paths:
     return file_paths
 
 
+def _compare_path_test(left: Paths, right: Paths) -> None:
+    assert 1 == len(set([str(sorted(paths)) for paths in [left, right]]))
+
+
 def _common_test(archive_status: ArchiveStatus) -> None:
-    paths_pair: Paths2 = [
+    _compare_path_test(
         _get_took_out_list(take_out_zip(archive_status["archive"])),
         archive_status["expected"],
-    ]
-
-    assert 1 == len(set([str(sorted(paths)) for paths in paths_pair]))
+    )
 
 
 def test_compleat() -> None:
