@@ -15,7 +15,7 @@ from pyspartaproj.script.directory.create_directory import (
     create_directory_array,
     create_directory_pair,
 )
-from pyspartaproj.script.path.check_exists import (
+from pyspartaproj.script.path.status.check_exists import (
     check_exists_array,
     check_exists_pair,
 )
