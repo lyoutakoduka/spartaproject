@@ -10,6 +10,7 @@ from zipfile import ZIP_LZMA, ZIP_STORED, ZipFile, ZipInfo
 
 from pyspartaproj.context.default.integer_context import Ints
 from pyspartaproj.context.default.string_context import StrPair, Strs
+from pyspartaproj.context.extension.archive_context import Zips
 from pyspartaproj.context.extension.path_context import Paths
 from pyspartaproj.script.decimal.initialize_decimal import initialize_decimal
 from pyspartaproj.script.directory.create_directory import create_directory
@@ -125,6 +126,12 @@ class CompressZip:
                 self._get_zip_information(target_path, path),
                 byte_import(target_path),
             )
+
+    def _get_archive_information(self) -> Zips:
+        if file_zip := self._get_file_zip():
+            return file_zip.infolist()
+
+        return []
 
     def _close_archive(self) -> None:
         if file_zip := self._get_file_zip():
