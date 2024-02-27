@@ -115,6 +115,10 @@ class CompressZip:
 
         return information
 
+    def _make_directory(self, path: Path) -> None:
+        if file_zip := self._get_file_zip():
+            file_zip.mkdir(str(path))
+
     def _add_file_to_archive(
         self, is_dir: bool, reset: bool, target: Path, root: Path
     ) -> None:
@@ -124,7 +128,7 @@ class CompressZip:
         relative: Path = get_relative(target, root_path=root)
 
         if is_dir:
-            self._file_zip.mkdir(str(relative))
+            self._make_directory(relative)
         else:
             self._file_zip.writestr(
                 self._get_zip_information(target, relative),
