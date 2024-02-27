@@ -11,7 +11,7 @@ from pyspartaproj.script.bool.compare_value import (
     bool_compare_array,
     bool_compare_pair,
 )
-from pyspartaproj.script.path.check_exists import (
+from pyspartaproj.script.path.status.check_exists import (
     check_exists_array,
     check_exists_pair,
 )
