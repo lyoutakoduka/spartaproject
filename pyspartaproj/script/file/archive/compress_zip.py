@@ -159,7 +159,8 @@ class CompressZip:
 
     def _get_file_size(self) -> Ints:
         return [
-            information.file_size for information in self._file_zip.infolist()
+            information.file_size
+            for information in self._get_archive_information()
         ]
 
     def _archive_inside_byte(self) -> Decimal:
