@@ -115,6 +115,8 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 
 
 def test_empty() -> None:
+    """Test to create empty archive."""
+
     def individual_test(temporary_root: Path) -> None:
         assert 0 == len(
             CompressZip(Path(temporary_root, "archive")).close_archived()
