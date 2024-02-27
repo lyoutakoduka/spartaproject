@@ -356,3 +356,4 @@ class CompressZip:
         self._init_archive_id(archive_id)
         self._init_walk_history()
         self._init_archive_output()
+        self._reset_archive_byte()
