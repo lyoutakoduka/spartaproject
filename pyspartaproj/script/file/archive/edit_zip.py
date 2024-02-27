@@ -94,8 +94,9 @@ class EditZip(WorkSpace):
 
     def _finalize_archive(self) -> Paths | None:
         archived: Paths | None = None
+        archive_stamp: TimePair | None = self._is_difference_archive()
 
-        if archive_stamp := self._is_difference_archive():
+        if archive_stamp is not None:  # Can't using: if value := func()
             archived = self._compress_archive(archive_stamp)
 
         super().__del__()
