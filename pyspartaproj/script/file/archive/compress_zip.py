@@ -30,6 +30,11 @@ initialize_decimal()
 class CompressZip:
     """Class to compress file or directory by zip format."""
 
+    def _init_variables(self, output_root: Path, compress: bool) -> None:
+        self._output_root: Path = output_root
+        self._compress: bool = compress
+        self._file_zip: ZipFile | None = None
+
     def _init_limit_byte(self, byte: int) -> None:
         if 0 == byte:
             byte = 1
@@ -323,9 +328,7 @@ class CompressZip:
                 If it's True, you can compress archive by LZMA format.
                 Default is no compressed.
         """
-        self._output_root: Path = output_root
-        self._compress: bool = compress
-
+        self._init_variables(output_root, compress)
         self._init_limit_byte(limit_byte)
         self._init_archive_id(archive_id)
         self._init_walk_history()
