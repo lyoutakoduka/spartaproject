@@ -114,6 +114,15 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
         function(Path(temporary_path))
 
 
+def test_empty() -> None:
+    def individual_test(temporary_root: Path) -> None:
+        assert 0 == len(
+            CompressZip(Path(temporary_root, "archive")).close_archived()
+        )
+
+    _inside_temporary_directory(individual_test)
+
+
 def test_file() -> None:
     """Test to compress multiple files."""
 
@@ -279,6 +288,7 @@ def main() -> bool:
     Returns:
         bool: Success if get to the end of function.
     """
+    test_empty()
     test_file()
     test_directory()
     test_tree()
