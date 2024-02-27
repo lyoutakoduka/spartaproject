@@ -119,6 +119,13 @@ class CompressZip:
         if file_zip := self._get_file_zip():
             file_zip.mkdir(str(path))
 
+    def _write_string(self, path: Path, target_path: Path) -> None:
+        if file_zip := self._get_file_zip():
+            file_zip.writestr(
+                self._get_zip_information(target_path, path),
+                byte_import(target_path),
+            )
+
     def _add_file_to_archive(
         self, is_dir: bool, reset: bool, target: Path, root: Path
     ) -> None:
@@ -130,10 +137,7 @@ class CompressZip:
         if is_dir:
             self._make_directory(relative)
         else:
-            self._file_zip.writestr(
-                self._get_zip_information(target, relative),
-                byte_import(target),
-            )
+            self._write_string(relative, target)
 
     def _within_allowance(self, target_byte: Decimal) -> bool:
         return self._limit_byte >= target_byte
