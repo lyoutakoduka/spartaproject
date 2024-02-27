@@ -35,6 +35,9 @@ class CompressZip:
         self._compress: bool = compress
         self._file_zip: ZipFile | None = None
 
+    def _get_file_zip(self) -> ZipFile | None:
+        return self._file_zip
+
     def _init_limit_byte(self, byte: int) -> None:
         if 0 == byte:
             byte = 1
