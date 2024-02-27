@@ -126,6 +126,10 @@ class CompressZip:
                 byte_import(target_path),
             )
 
+    def _close_archive(self) -> None:
+        if file_zip := self._get_file_zip():
+            file_zip.close()
+
     def _add_file_to_archive(
         self, is_dir: bool, reset: bool, target: Path, root: Path
     ) -> None:
@@ -232,7 +236,7 @@ class CompressZip:
                 <export directory>/<archive name>#0002.zip
             ]
         """
-        self._file_zip.close()
+        self._close_archive()
         return self._archived
 
     def compress_archive(
