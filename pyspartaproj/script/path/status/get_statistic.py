@@ -22,4 +22,12 @@ def get_file_size(path: Path) -> int:
 
 
 def get_file_size_array(paths: Paths) -> Ints:
+    """Get list of file size.
+
+    Args:
+        paths (Paths): Paths of file you want to get size.
+
+    Returns:
+        Ints: List of file size.
+    """
     return [path.stat().st_size for path in paths if path.is_file()]
