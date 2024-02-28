@@ -64,11 +64,15 @@ def _add_temporary_directory(
 
 
 def _create_archive_shared(
-    working: PathPair, archive_paths: Paths, expected_paths: Paths
+    working: PathPair,
+    archive_paths: Paths,
+    expected_paths: Paths,
+    rest_paths: Paths,
 ) -> ArchiveStatus:
     return {
         "archive": _compress_test_archive(working, archive_paths),
         "expected": _get_relative_paths(working, expected_paths),
+        "rest": _get_relative_paths(working, rest_paths),
     }
 
 
