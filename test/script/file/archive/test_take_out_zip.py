@@ -8,7 +8,7 @@ from tempfile import TemporaryDirectory
 from typing import Callable
 
 from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.context.extension.path_context import PathPair, Paths, Paths2
+from pyspartaproj.context.extension.path_context import PathPair, Paths
 from pyspartaproj.context.typed.user_context import ArchiveStatus
 from pyspartaproj.script.directory.create_directory import create_directory
 from pyspartaproj.script.file.archive.compress_zip import CompressZip
