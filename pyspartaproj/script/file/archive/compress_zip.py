@@ -154,8 +154,11 @@ class CompressZip:
     def _within_allowance(self, target_byte: Decimal) -> bool:
         return self._limit_byte >= target_byte
 
+    def _get_decimal_size(self, path: Path) -> Decimal:
+        return Decimal(str(get_file_size(path)))
+
     def _archive_outside_byte(self) -> Decimal:
-        return Decimal(str(get_file_size(self._archived[-1])))
+        return self._get_decimal_size(self._archived[-1])
 
     def _get_file_size(self) -> Ints:
         return [
@@ -183,7 +186,7 @@ class CompressZip:
         archive_reset: bool = False
 
         if self._has_archived():
-            source_byte: Decimal = Decimal(str(get_file_size(target)))
+            source_byte: Decimal = self._get_decimal_size(target)
             include_files: bool = self._archive_include_files()
 
             if include_files:
