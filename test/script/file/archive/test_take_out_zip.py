@@ -43,7 +43,7 @@ def _compress_test_archive(working: PathPair, target_paths: Paths) -> Path:
     return compress_zip.close_archived()[0]
 
 
-def _get_relative_expected(working: PathPair, target_paths: Paths) -> Paths:
+def _get_relative_paths(working: PathPair, target_paths: Paths) -> Paths:
     return get_relative_array(target_paths, root_path=working["source"])
 
 
@@ -68,7 +68,7 @@ def _create_archive_shared(
 ) -> ArchiveStatus:
     return {
         "archive": _compress_test_archive(working, archive_paths),
-        "expected": _get_relative_expected(working, expected_paths),
+        "expected": _get_relative_paths(working, expected_paths),
     }
 
 
