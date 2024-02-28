@@ -227,11 +227,11 @@ def test_compress() -> None:
     def individual_test(temporary_root: Path) -> None:
         create_temporary_tree(Path(temporary_root, "before"), tree_weight=3)
 
-        archive_path = _add_archive(
+        archive_path: Path = _add_archive(
             temporary_root,
             CompressZip(Path(temporary_root, "archive")),
         )
-        archive_size_before = get_file_size(archive_path)
+        archive_size_before: int = get_file_size(archive_path)
 
         if EditZip(archive_path, compress=True).close_archive():
             assert archive_size_before > get_file_size(archive_path)
