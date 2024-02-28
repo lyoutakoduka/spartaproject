@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to get statistics about file."""
+
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
@@ -15,6 +17,7 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 
 
 def test_single() -> None:
+    """Test to get file size."""
     text: str = "test"
 
     def individual_test(temporary_root: Path) -> None:
@@ -26,5 +29,10 @@ def test_single() -> None:
 
 
 def main() -> bool:
+    """Run all tests.
+
+    Returns:
+        bool: Success if get to the end of function.
+    """
     test_single()
     return True
