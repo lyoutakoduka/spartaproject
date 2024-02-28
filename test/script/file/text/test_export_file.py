@@ -8,10 +8,11 @@ from tempfile import TemporaryDirectory
 from typing import Callable
 
 from pyspartaproj.script.file.text.export_file import byte_export, text_export
+from pyspartaproj.script.path.status.get_statistic import get_file_size
 
 
 def _common_test(text_path: Path, count: int) -> None:
-    assert text_path.stat().st_size == count
+    assert get_file_size(text_path) == count
 
 
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
