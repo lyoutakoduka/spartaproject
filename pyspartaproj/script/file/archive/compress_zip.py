@@ -19,6 +19,7 @@ from pyspartaproj.script.file.json.export_json import json_dump
 from pyspartaproj.script.file.text.import_file import byte_import
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.modify.get_relative import get_relative
+from pyspartaproj.script.path.status.get_statistic import get_file_size
 from pyspartaproj.script.time.current_datetime import get_current_time
 from pyspartaproj.script.time.stamp.get_timestamp import (
     get_invalid_time,
@@ -154,8 +155,7 @@ class CompressZip:
         return self._limit_byte >= target_byte
 
     def _archive_outside_byte(self) -> Decimal:
-        current_archive: Path = self._archived[-1]
-        return Decimal(str(current_archive.stat().st_size))
+        return Decimal(str(get_file_size(self._archived[-1])))
 
     def _get_file_size(self) -> Ints:
         return [
@@ -183,7 +183,7 @@ class CompressZip:
         archive_reset: bool = False
 
         if self._has_archived():
-            source_byte: Decimal = Decimal(str(target.stat().st_size))
+            source_byte: Decimal = Decimal(str(get_file_size(target)))
             include_files: bool = self._archive_include_files()
 
             if include_files:
