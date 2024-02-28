@@ -10,7 +10,7 @@ from pyspartaproj.context.extension.path_context import Paths
 
 
 class ArchiveStatus(TypedDict):
-    """Class to represent an archive information
+    """Class to represent an archive information.
 
     It's used for test to take out directory from inside of archive.
     """
