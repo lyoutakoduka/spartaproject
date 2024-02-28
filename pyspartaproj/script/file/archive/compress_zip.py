@@ -43,8 +43,10 @@ class CompressZip:
     def _init_limit_byte(self, byte: int) -> None:
         if 0 == byte:
             byte = 1
+
             for _ in range(3):
                 byte *= 2**10
+
             byte *= 4  # 4GB
 
         self._limit_byte: Decimal = Decimal(str(byte))
@@ -72,6 +74,7 @@ class CompressZip:
 
         if self._has_archived():
             file_names += [str(self._output_index).zfill(4)]
+
         self._output_index += 1
 
         archived_path: Path = Path(self._output_root, "#".join(file_names))
