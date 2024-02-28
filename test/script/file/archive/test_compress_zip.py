@@ -16,6 +16,7 @@ from pyspartaproj.script.decimal.initialize_decimal import initialize_decimal
 from pyspartaproj.script.file.archive.compress_zip import CompressZip
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.modify.get_relative import get_relative_array
+from pyspartaproj.script.path.status.get_statistic import get_file_size_array
 from pyspartaproj.script.path.temporary.create_temporary_tree import (
     create_temporary_tree,
 )
@@ -65,8 +66,7 @@ def _compare_path_name(sorted_paths: Paths2, temporary_root: Path) -> None:
 
 def _compare_file_size(sorted_paths: Paths2) -> None:
     file_size_pair: Ints2 = [
-        [path.stat().st_size for path in paths if path.is_file()]
-        for paths in sorted_paths
+        get_file_size_array(paths) for paths in sorted_paths
     ]
 
     assert file_size_pair[0] == file_size_pair[1]
@@ -74,9 +74,7 @@ def _compare_file_size(sorted_paths: Paths2) -> None:
 
 def _compare_compress_size(outputs: Paths, archived: Paths) -> None:
     file_sizes: Decs = [
-        Decimal(
-            str(sum([path.stat().st_size for path in paths if path.is_file()]))
-        )
+        Decimal(str(sum(get_file_size_array(paths))))
         for paths in [outputs, archived]
     ]
 
@@ -114,11 +112,18 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
         function(Path(temporary_path))
 
 
+def _confirm_empty_archive(archive_paths: Paths) -> None:
+    assert 1 == len(archive_paths)
+
+    archive_path: Path = archive_paths[0]
+    print("VVV", archive_path)
+
+
 def test_empty() -> None:
     """Test to create empty archive."""
 
     def individual_test(temporary_root: Path) -> None:
-        assert 0 == len(
+        _confirm_empty_archive(
             CompressZip(Path(temporary_root, "archive")).close_archived()
         )
 

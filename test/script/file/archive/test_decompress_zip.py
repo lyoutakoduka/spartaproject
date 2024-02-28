@@ -17,6 +17,7 @@ from pyspartaproj.script.file.archive.decompress_zip import DecompressZip
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.modify.get_relative import get_relative_array
 from pyspartaproj.script.path.safe.safe_trash import SafeTrash
+from pyspartaproj.script.path.status.get_statistic import get_file_size_array
 from pyspartaproj.script.path.temporary.create_temporary_tree import (
     create_temporary_tree,
 )
@@ -48,8 +49,7 @@ def _compare_path_name(sorted_paths: Paths2, temporary_root: Path) -> None:
 
 def _compare_file_size(sorted_paths: Paths2) -> None:
     file_size_pair: Ints2 = [
-        [path.stat().st_size for path in paths if path.is_file()]
-        for paths in sorted_paths
+        get_file_size_array(paths) for paths in sorted_paths
     ]
 
     assert file_size_pair[0] == file_size_pair[1]
