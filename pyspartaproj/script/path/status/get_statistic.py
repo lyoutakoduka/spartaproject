@@ -30,4 +30,4 @@ def get_file_size_array(paths: Paths) -> Ints:
     Returns:
         Ints: List of file size.
     """
-    return [path.stat().st_size for path in paths if path.is_file()]
+    return [get_file_size(path) for path in paths if path.is_file()]
