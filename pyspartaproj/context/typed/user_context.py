@@ -17,3 +17,4 @@ class ArchiveStatus(TypedDict):
 
     archive: Path
     expected: Paths
+    rest: Paths
