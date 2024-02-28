@@ -18,6 +18,7 @@ from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.modify.get_relative import get_relative
 from pyspartaproj.script.path.safe.safe_rename import SafeRename
 from pyspartaproj.script.path.safe.safe_trash import SafeTrash
+from pyspartaproj.script.path.status.get_statistic import get_file_size
 from pyspartaproj.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
@@ -234,10 +235,10 @@ def test_compress() -> None:
             temporary_root,
             CompressZip(Path(temporary_root, "archive")),
         )
-        archive_size_before = _get_archive_size(archive_path)
+        archive_size_before = get_file_size(archive_path)
 
         if EditZip(archive_path, compress=True).close_archive():
-            assert archive_size_before > _get_archive_size(archive_path)
+            assert archive_size_before > get_file_size(archive_path)
         else:
             fail()
 
