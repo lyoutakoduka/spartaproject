@@ -5,6 +5,9 @@
 
 from pathlib import Path
 
+from pyspartaproj.context.default.integer_context import Ints
+from pyspartaproj.context.extension.path_context import Paths
+
 
 def get_file_size(path: Path) -> int:
     """Get size of file.
@@ -16,3 +19,7 @@ def get_file_size(path: Path) -> int:
         int: File size.
     """
     return path.stat().st_size
+
+
+def get_file_size_array(paths: Paths) -> Ints:
+    return [path.stat().st_size for path in paths if path.is_file()]
