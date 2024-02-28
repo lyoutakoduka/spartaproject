@@ -34,6 +34,7 @@ def test_single() -> None:
 
 
 def test_array() -> None:
+    """Test to get list of file size."""
     texts: Strs = ["first", "second", "third"]
     expected: Ints = [len(text) for text in texts]
 
