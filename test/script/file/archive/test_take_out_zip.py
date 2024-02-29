@@ -120,7 +120,7 @@ def _create_archive_multiple(working: PathPair) -> ArchiveStatus:
     )
 
     return _create_archive_shared(
-        working, [directory_root], [directory_root] + file_paths
+        working, [directory_root], [directory_root] + file_paths, []
     )
 
 
