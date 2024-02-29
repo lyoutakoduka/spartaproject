@@ -107,6 +107,7 @@ def _create_archive_single(working: PathPair) -> ArchiveStatus:
         working,
         [directory_root],
         [directory_root, create_temporary_file(directory_root)],
+        [],
     )
 
 
