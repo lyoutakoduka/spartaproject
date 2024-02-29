@@ -175,11 +175,15 @@ def _compare_path_test(left: Paths, right: Paths) -> None:
     assert 1 == len(set([str(sorted(paths)) for paths in [left, right]]))
 
 
-def _common_test(archive_status: ArchiveStatus) -> None:
+def _compare_took_out(archive_status: ArchiveStatus) -> None:
     _compare_path_test(
         _get_took_out_list(take_out_zip(archive_status["archive"])),
         archive_status["expected"],
     )
+
+
+def _common_test(archive_status: ArchiveStatus) -> None:
+    _compare_took_out(archive_status)
 
 
 def test_compleat() -> None:
