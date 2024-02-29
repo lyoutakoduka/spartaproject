@@ -147,7 +147,7 @@ def _create_archive_list(working: PathPair) -> ArchiveStatus:
     for archive_path in archive_paths:
         file_paths += [archive_path, create_temporary_file(archive_path)]
 
-    return _create_archive_shared(working, archive_paths, file_paths)
+    return _create_archive_shared(working, archive_paths, file_paths, [])
 
 
 def _replace_path_root(archive_path: Path, archive_root: Path) -> Paths:
