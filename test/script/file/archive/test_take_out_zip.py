@@ -85,16 +85,15 @@ def _create_archive_shared(
 
 
 def _create_archive_compleat(working: PathPair) -> ArchiveStatus:
-    file_paths: Paths = [create_temporary_file(working["source"])]
-    return _create_archive_shared(working, file_paths, [], file_paths)
+    return _create_archive_shared(
+        working, [], [create_temporary_file(working["source"])]
+    )
 
 
 def _create_archive_empty(working: PathPair) -> ArchiveStatus:
-    archive_roots: Paths = [
-        create_directory(Path(working["source"], "directory"))
-    ]
-
-    return _create_archive_shared(working, archive_roots, [], archive_roots)
+    return _create_archive_shared(
+        working, [], [create_directory(Path(working["source"], "directory"))]
+    )
 
 
 def _create_archive_single(working: PathPair) -> ArchiveStatus:
@@ -103,10 +102,7 @@ def _create_archive_single(working: PathPair) -> ArchiveStatus:
     )
 
     return _create_archive_shared(
-        working,
-        [directory_root],
-        [directory_root, create_temporary_file(directory_root)],
-        [],
+        working, [directory_root, create_temporary_file(directory_root)], []
     )
 
 
@@ -118,35 +114,29 @@ def _create_archive_multiple(working: PathPair) -> ArchiveStatus:
         directory_root, ["first", "second", "third"]
     )
 
-    return _create_archive_shared(
-        working, [directory_root], [directory_root] + file_paths, []
-    )
+    return _create_archive_shared(working, [directory_root] + file_paths, [])
 
 
 def _create_archive_mix(working: PathPair) -> ArchiveStatus:
     file_root: Path = working["source"]
-    file_path: Path = create_temporary_file(file_root)
     directory_root: Path = create_directory(Path(file_root, "directory"))
 
     return _create_archive_shared(
         working,
-        [file_path, directory_root],
         [directory_root, create_temporary_file(directory_root)],
-        [file_path],
+        [create_temporary_file(file_root)],
     )
 
 
 def _create_archive_list(working: PathPair) -> ArchiveStatus:
-    archive_paths: Paths = _add_temporary_directory(
-        working["source"], ["first", "second", "third"]
-    )
-
     file_paths: Paths = []
 
-    for archive_path in archive_paths:
+    for archive_path in _add_temporary_directory(
+        working["source"], ["first", "second", "third"]
+    ):
         file_paths += [archive_path, create_temporary_file(archive_path)]
 
-    return _create_archive_shared(working, archive_paths, file_paths, [])
+    return _create_archive_shared(working, file_paths, [])
 
 
 def _replace_path_root(archive_path: Path, archive_root: Path) -> Paths:
