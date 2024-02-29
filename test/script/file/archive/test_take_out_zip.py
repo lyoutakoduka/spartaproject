@@ -86,9 +86,8 @@ def _create_archive_shared(
 
 
 def _create_archive_compleat(working: PathPair) -> ArchiveStatus:
-    return _create_archive_shared(
-        working, [create_temporary_file(working["source"])], []
-    )
+    file_paths: Paths = [create_temporary_file(working["source"])]
+    return _create_archive_shared(working, file_paths, [], file_paths)
 
 
 def _create_archive_empty(working: PathPair) -> ArchiveStatus:
