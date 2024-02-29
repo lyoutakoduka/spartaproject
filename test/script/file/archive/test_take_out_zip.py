@@ -150,23 +150,15 @@ def _create_archive_list(working: PathPair) -> ArchiveStatus:
     return _create_archive_shared(working, archive_paths, file_paths)
 
 
-def _replace_path_root(decompressed_root: Path, archive_root: Path) -> Paths:
+def _replace_path_root(archive_path: Path, archive_root: Path) -> Paths:
     return get_absolute_array(
-        get_relative_array(
-            list(walk_iterator(decompressed_root)),
-            root_path=decompressed_root,
-        ),
-        root_path=archive_root,
+        _get_relative_archive(archive_path), root_path=archive_root
     )
 
 
 def _get_took_out(archive_path: Path) -> Paths:
-    edit_zip = EditZip(archive_path)
-
     archive_root: Path = Path(archive_path.stem)
-    file_paths: Paths = _replace_path_root(
-        edit_zip.get_decompressed_root(), archive_root
-    )
+    file_paths: Paths = _replace_path_root(archive_path, archive_root)
 
     return [archive_root] + file_paths
 
