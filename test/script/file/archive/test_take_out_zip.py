@@ -126,14 +126,14 @@ def _create_archive_multiple(working: PathPair) -> ArchiveStatus:
 
 def _create_archive_mix(working: PathPair) -> ArchiveStatus:
     file_root: Path = working["source"]
-
+    file_path: Path = create_temporary_file(file_root)
     directory_root: Path = create_directory(Path(file_root, "directory"))
-    create_temporary_file(file_root)
 
     return _create_archive_shared(
         working,
-        [directory_root],
+        [file_path, directory_root],
         [directory_root, create_temporary_file(directory_root)],
+        [file_path],
     )
 
 
