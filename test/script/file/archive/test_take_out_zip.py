@@ -182,8 +182,16 @@ def _compare_took_out(archive_status: ArchiveStatus) -> None:
     )
 
 
+def _compare_rest(archive_status: ArchiveStatus) -> None:
+    _compare_path_test(
+        _get_relative_archive(archive_status["archive"]),
+        archive_status["rest"],
+    )
+
+
 def _common_test(archive_status: ArchiveStatus) -> None:
     _compare_took_out(archive_status)
+    _compare_rest(archive_status)
 
 
 def test_compleat() -> None:
