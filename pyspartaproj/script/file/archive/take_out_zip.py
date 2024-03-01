@@ -61,10 +61,16 @@ def _remove_took_out(inside_directory: PathsPair) -> None:
 
 def _took_out_cycle(took_out_root: Path, decompressed_root: Path) -> Paths:
     inside_directory: PathsPair = _get_inside_directory(decompressed_root)
-    archive_paths: Paths = _take_out_archives(took_out_root, inside_directory)
-    _remove_took_out(inside_directory)
 
-    return archive_paths
+    if 0 < len(inside_directory):
+        archive_paths: Paths = _take_out_archives(
+            took_out_root, inside_directory
+        )
+        _remove_took_out(inside_directory)
+
+        return archive_paths
+
+    return []
 
 
 def take_out_zip(archive_path: Path) -> Paths:
