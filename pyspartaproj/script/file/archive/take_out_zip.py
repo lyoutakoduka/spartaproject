@@ -32,15 +32,23 @@ def _take_out_archives(
     ]
 
 
+def _get_take_out(directory_root: Path) -> Paths | None:
+    file_paths: Paths = []
+
+    for path in walk_iterator(directory_root):
+        if path.is_dir():
+            return None
+
+        file_paths += [path]
+
+    return None if 0 == len(file_paths) else file_paths
+
+
 def _get_inside_directory(decompressed_root: Path) -> PathsPair:
     inside_directory: PathsPair = {}
 
     for directory_root in walk_iterator(decompressed_root, file=False):
-        file_paths: Paths = list(
-            walk_iterator(directory_root, directory=False)
-        )
-
-        if 0 < len(file_paths):
+        if file_paths := _get_take_out(directory_root):
             inside_directory[str(directory_root)] = file_paths
 
     return inside_directory
