@@ -59,7 +59,7 @@ def _remove_took_out(inside_directory: PathsPair) -> None:
         safe_trash.trash(Path(directory_text))
 
 
-def _get_took_out(took_out_root: Path, decompressed_root: Path) -> Paths:
+def _took_out_cycle(took_out_root: Path, decompressed_root: Path) -> Paths:
     inside_directory: PathsPair = _get_inside_directory(decompressed_root)
     archive_paths: Paths = _take_out_archives(took_out_root, inside_directory)
     _remove_took_out(inside_directory)
@@ -77,4 +77,6 @@ def take_out_zip(archive_path: Path) -> Paths:
         Paths: List of directory path which is took out.
     """
     edit_zip = EditZip(archive_path)
-    return _get_took_out(archive_path.parent, edit_zip.get_decompressed_root())
+    return _took_out_cycle(
+        archive_path.parent, edit_zip.get_decompressed_root()
+    )
