@@ -45,13 +45,11 @@ def _get_take_out(directory_root: Path) -> Paths | None:
 
 
 def _get_inside_directory(decompressed_root: Path) -> PathsPair:
-    inside_directory: PathsPair = {}
-
-    for directory_root in walk_iterator(decompressed_root, file=False):
-        if file_paths := _get_take_out(directory_root):
-            inside_directory[str(directory_root)] = file_paths
-
-    return inside_directory
+    return {
+        str(directory_root): file_paths
+        for directory_root in walk_iterator(decompressed_root, file=False)
+        if (file_paths := _get_take_out(directory_root))
+    }
 
 
 def _remove_took_out(inside_directory: PathsPair) -> None:
