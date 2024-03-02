@@ -84,7 +84,11 @@ def _create_archive_shared(
 
 def _create_archive_compleat(working: PathPair) -> ArchiveStatus:
     return _create_archive_shared(
-        working, [], [create_temporary_file(working["source"])]
+        working,
+        [],
+        _get_relative_paths(
+            working, [create_temporary_file(working["source"])]
+        ),
     )
 
 
