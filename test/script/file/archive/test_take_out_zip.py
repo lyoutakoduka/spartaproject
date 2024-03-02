@@ -82,6 +82,10 @@ def _create_archive_shared(
     }
 
 
+def _get_types() -> Strs:
+    return ["first", "second", "third"]
+
+
 def _create_archive_compleat(working: PathPair) -> ArchiveStatus:
     return _create_archive_shared(
         working,
@@ -120,9 +124,7 @@ def _create_archive_multiple(working: PathPair) -> ArchiveStatus:
     directory_root: Path = create_directory(
         Path(working["source"], "directory")
     )
-    file_paths: Paths = _add_temporary_files(
-        directory_root, ["first", "second", "third"]
-    )
+    file_paths: Paths = _add_temporary_files(directory_root, _get_types())
 
     return _create_archive_shared(working, [directory_root] + file_paths, [])
 
@@ -142,7 +144,7 @@ def _create_archive_list(working: PathPair) -> ArchiveStatus:
     file_paths: Paths = []
 
     for archive_path in _add_temporary_directory(
-        working["source"], ["first", "second", "third"]
+        working["source"], _get_types()
     ):
         file_paths += [archive_path, create_temporary_file(archive_path)]
 
