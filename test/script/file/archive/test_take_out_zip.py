@@ -73,14 +73,12 @@ def _add_temporary_directory(
 
 
 def _create_archive_shared(
-    working: PathPair,
-    take_paths: Paths,
-    rest_paths: Paths,
+    working: PathPair, taka_paths: Paths, rest_paths: Paths
 ) -> ArchiveStatus:
     return {
         "archive": _compress_test_archive(working),
-        "take": _get_relative_paths(working, take_paths),
-        "rest": _get_relative_paths(working, rest_paths),
+        "take": taka_paths,
+        "rest": rest_paths,
     }
 
 
