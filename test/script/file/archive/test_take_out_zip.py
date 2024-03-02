@@ -108,7 +108,11 @@ def _create_archive_single(working: PathPair) -> ArchiveStatus:
     )
 
     return _create_archive_shared(
-        working, [directory_root, create_temporary_file(directory_root)], []
+        working,
+        _get_relative_paths(
+            working, [directory_root, create_temporary_file(directory_root)]
+        ),
+        [],
     )
 
 
