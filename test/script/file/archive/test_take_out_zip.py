@@ -132,7 +132,11 @@ def _get_archive_multiple(working: PathPair) -> Paths:
 
 
 def _create_archive_multiple(working: PathPair) -> ArchiveStatus:
-    return _create_archive_shared(working, _get_archive_multiple(working), [])
+    return _create_archive_shared(
+        working,
+        _get_relative_paths(working, _get_archive_multiple(working)),
+        [],
+    )
 
 
 def _create_archive_mix(working: PathPair) -> ArchiveStatus:
