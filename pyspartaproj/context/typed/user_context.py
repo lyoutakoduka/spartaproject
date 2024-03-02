@@ -17,4 +17,4 @@ class ArchiveStatus(TypedDict):
 
     archive: Path
     take: Paths
-    rest: Paths
+    keep: Paths
