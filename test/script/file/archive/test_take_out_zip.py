@@ -73,12 +73,12 @@ def _add_temporary_directory(
 
 
 def _create_archive_shared(
-    working: PathPair, taka_paths: Paths, rest_paths: Paths
+    working: PathPair, taka_paths: Paths, keep_paths: Paths
 ) -> ArchiveStatus:
     return {
         "archive": _compress_test_archive(working),
         "take": taka_paths,
-        "keep": rest_paths,
+        "keep": keep_paths,
     }
 
 
@@ -157,12 +157,12 @@ def _get_rest_mix(working: PathPair) -> Paths:
 
 def _create_archive_mix(working: PathPair) -> ArchiveStatus:
     take_paths: Paths = _get_take_out_mix(working)
-    rest_paths: Paths = _get_rest_mix(working)
+    keep_paths: Paths = _get_rest_mix(working)
 
     return _create_archive_shared(
         working,
         _get_relative_paths(working, take_paths),
-        _get_relative_paths(working, rest_paths),
+        _get_relative_paths(working, keep_paths),
     )
 
 
