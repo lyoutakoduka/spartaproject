@@ -156,13 +156,10 @@ def _get_keep_mix(working: PathPair) -> Paths:
 
 
 def _create_archive_mix(working: PathPair) -> ArchiveStatus:
-    take_paths: Paths = _get_take_out_mix(working)
-    keep_paths: Paths = _get_keep_mix(working)
-
     return _create_archive_shared(
         working,
-        _get_relative_paths(working, take_paths),
-        _get_relative_paths(working, keep_paths),
+        _get_relative_paths(working, _get_take_out_mix(working)),
+        _get_relative_paths(working, _get_keep_mix(working)),
     )
 
 
