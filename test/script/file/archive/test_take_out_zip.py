@@ -163,7 +163,7 @@ def _create_archive_mix(working: PathPair) -> ArchiveStatus:
     )
 
 
-def _create_archive_list(working: PathPair) -> ArchiveStatus:
+def _get_take_out_list(working: PathPair) -> Paths:
     file_paths: Paths = []
 
     for archive_path in _add_temporary_directory(
@@ -171,7 +171,13 @@ def _create_archive_list(working: PathPair) -> ArchiveStatus:
     ):
         file_paths += [archive_path, create_temporary_file(archive_path)]
 
-    return _create_archive_shared(working, file_paths, _get_empty())
+    return file_paths
+
+
+def _create_archive_list(working: PathPair) -> ArchiveStatus:
+    return _create_archive_shared(
+        working, _get_take_out_list(working), _get_empty()
+    )
 
 
 def _replace_path_root(archive_path: Path, archive_root: Path) -> Paths:
