@@ -79,7 +79,7 @@ def _create_archive_shared(
 ) -> ArchiveStatus:
     return {
         "archive": _compress_test_archive(working),
-        "expected": _get_relative_paths(working, expected_paths),
+        "take": _get_relative_paths(working, expected_paths),
         "rest": _get_relative_paths(working, rest_paths),
     }
 
@@ -168,7 +168,7 @@ def _compare_path_test(left: Paths, right: Paths) -> None:
 def _compare_took_out(archive_status: ArchiveStatus) -> None:
     _compare_path_test(
         _get_took_out_list(take_out_zip(archive_status["archive"])),
-        archive_status["expected"],
+        archive_status["take"],
     )
 
 
