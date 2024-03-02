@@ -199,6 +199,12 @@ def _get_take_out_nest(working: PathPair) -> Paths:
     return take_paths
 
 
+def _create_archive_nest(working: PathPair) -> ArchiveStatus:
+    return _create_archive_shared(
+        working, _get_take_out_nest(working), _get_empty()
+    )
+
+
 def _replace_path_root(archive_path: Path, archive_root: Path) -> Paths:
     return get_absolute_array(
         _get_relative_archive(archive_path), root_path=archive_root
