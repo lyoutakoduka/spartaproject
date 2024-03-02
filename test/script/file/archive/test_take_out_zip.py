@@ -182,6 +182,11 @@ def _create_archive_list(working: PathPair) -> ArchiveStatus:
     )
 
 
+def _add_archive_nest(file_root: Path, name: str) -> Paths:
+    file_root = create_directory(Path(file_root, name))
+    return [file_root, create_temporary_file(file_root)]
+
+
 def _replace_path_root(archive_path: Path, archive_root: Path) -> Paths:
     return get_absolute_array(
         _get_relative_archive(archive_path), root_path=archive_root
