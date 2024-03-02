@@ -120,13 +120,19 @@ def _create_archive_single(working: PathPair) -> ArchiveStatus:
     )
 
 
-def _create_archive_multiple(working: PathPair) -> ArchiveStatus:
+def _get_archive_multiple(working: PathPair) -> Paths:
     directory_root: Path = create_directory(
         Path(working["source"], "directory")
     )
-    file_paths: Paths = _add_temporary_files(directory_root, _get_types())
 
-    return _create_archive_shared(working, [directory_root] + file_paths, [])
+    return [
+        directory_root,
+        *_add_temporary_files(directory_root, _get_types()),
+    ]
+
+
+def _create_archive_multiple(working: PathPair) -> ArchiveStatus:
+    return _create_archive_shared(working, _get_archive_multiple(working), [])
 
 
 def _create_archive_mix(working: PathPair) -> ArchiveStatus:
