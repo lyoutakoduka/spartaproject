@@ -187,6 +187,18 @@ def _add_archive_nest(file_root: Path, name: str) -> Paths:
     return [file_root, create_temporary_file(file_root)]
 
 
+def _get_take_out_nest(working: PathPair) -> Paths:
+    file_root: Path = working["source"]
+    take_paths: Paths = []
+
+    for name in _get_types():
+        added_nest: Paths = _add_archive_nest(file_root, name)
+        take_paths += get_relative_array(added_nest, root_path=file_root)
+        file_root = added_nest[0]
+
+    return take_paths
+
+
 def _replace_path_root(archive_path: Path, archive_root: Path) -> Paths:
     return get_absolute_array(
         _get_relative_archive(archive_path), root_path=archive_root
