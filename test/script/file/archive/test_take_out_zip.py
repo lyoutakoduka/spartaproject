@@ -176,7 +176,9 @@ def _get_take_out_list(working: PathPair) -> Paths:
 
 def _create_archive_list(working: PathPair) -> ArchiveStatus:
     return _create_archive_shared(
-        working, _get_take_out_list(working), _get_empty()
+        working,
+        _get_relative_paths(working, _get_take_out_list(working)),
+        _get_empty(),
     )
 
 
