@@ -145,9 +145,7 @@ def _replace_path_root(archive_path: Path, archive_root: Path) -> Paths:
 
 def _get_took_out(archive_path: Path) -> Paths:
     archive_root: Path = Path(archive_path.stem)
-    file_paths: Paths = _replace_path_root(archive_path, archive_root)
-
-    return [archive_root] + file_paths
+    return [archive_root] + _replace_path_root(archive_path, archive_root)
 
 
 def _get_took_out_list(archive_paths: Paths) -> Paths:
