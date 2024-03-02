@@ -86,10 +86,14 @@ def _get_types() -> Strs:
     return ["first", "second", "third"]
 
 
+def _get_empty() -> Paths:
+    return []
+
+
 def _create_archive_compleat(working: PathPair) -> ArchiveStatus:
     return _create_archive_shared(
         working,
-        [],
+        _get_empty(),
         _get_relative_paths(
             working, [create_temporary_file(working["source"])]
         ),
@@ -99,7 +103,7 @@ def _create_archive_compleat(working: PathPair) -> ArchiveStatus:
 def _create_archive_empty(working: PathPair) -> ArchiveStatus:
     return _create_archive_shared(
         working,
-        [],
+        _get_empty(),
         _get_relative_paths(
             working, [create_directory(Path(working["source"], "directory"))]
         ),
@@ -116,7 +120,7 @@ def _create_archive_single(working: PathPair) -> ArchiveStatus:
         _get_relative_paths(
             working, [directory_root, create_temporary_file(directory_root)]
         ),
-        [],
+        _get_empty(),
     )
 
 
@@ -135,7 +139,7 @@ def _create_archive_multiple(working: PathPair) -> ArchiveStatus:
     return _create_archive_shared(
         working,
         _get_relative_paths(working, _get_archive_multiple(working)),
-        [],
+        _get_empty(),
     )
 
 
