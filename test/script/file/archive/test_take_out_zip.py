@@ -94,7 +94,11 @@ def _create_archive_compleat(working: PathPair) -> ArchiveStatus:
 
 def _create_archive_empty(working: PathPair) -> ArchiveStatus:
     return _create_archive_shared(
-        working, [], [create_directory(Path(working["source"], "directory"))]
+        working,
+        [],
+        _get_relative_paths(
+            working, [create_directory(Path(working["source"], "directory"))]
+        ),
     )
 
 
