@@ -124,7 +124,7 @@ def _create_archive_single(working: PathPair) -> ArchiveStatus:
     )
 
 
-def _get_archive_multiple(working: PathPair) -> Paths:
+def _get_take_out_multiple(working: PathPair) -> Paths:
     directory_root: Path = create_directory(
         Path(working["source"], "directory")
     )
@@ -138,12 +138,12 @@ def _get_archive_multiple(working: PathPair) -> Paths:
 def _create_archive_multiple(working: PathPair) -> ArchiveStatus:
     return _create_archive_shared(
         working,
-        _get_relative_paths(working, _get_archive_multiple(working)),
+        _get_relative_paths(working, _get_take_out_multiple(working)),
         _get_empty(),
     )
 
 
-def _get_archive_mix(working: PathPair) -> Paths:
+def _get_take_out_mix(working: PathPair) -> Paths:
     directory_root: Path = create_directory(
         Path(working["source"], "directory")
     )
@@ -152,7 +152,7 @@ def _get_archive_mix(working: PathPair) -> Paths:
 
 
 def _create_archive_mix(working: PathPair) -> ArchiveStatus:
-    take_paths: Paths = _get_archive_mix(working)
+    take_paths: Paths = _get_take_out_mix(working)
     rest_paths: Paths = [create_temporary_file(working["source"])]
 
     return _create_archive_shared(
