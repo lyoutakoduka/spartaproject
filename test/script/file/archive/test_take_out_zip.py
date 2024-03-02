@@ -151,13 +151,13 @@ def _get_take_out_mix(working: PathPair) -> Paths:
     return [directory_root, create_temporary_file(directory_root)]
 
 
-def _get_rest_mix(working: PathPair) -> Paths:
+def _get_keep_mix(working: PathPair) -> Paths:
     return [create_temporary_file(working["source"])]
 
 
 def _create_archive_mix(working: PathPair) -> ArchiveStatus:
     take_paths: Paths = _get_take_out_mix(working)
-    keep_paths: Paths = _get_rest_mix(working)
+    keep_paths: Paths = _get_keep_mix(working)
 
     return _create_archive_shared(
         working,
@@ -208,7 +208,7 @@ def _compare_took_out(archive_status: ArchiveStatus) -> None:
     )
 
 
-def _compare_rest(archive_status: ArchiveStatus) -> None:
+def _compare_keep(archive_status: ArchiveStatus) -> None:
     _compare_path_test(
         _get_relative_archive(archive_status["archive"]),
         archive_status["keep"],
@@ -217,7 +217,7 @@ def _compare_rest(archive_status: ArchiveStatus) -> None:
 
 def _common_test(archive_status: ArchiveStatus) -> None:
     _compare_took_out(archive_status)
-    _compare_rest(archive_status)
+    _compare_keep(archive_status)
 
 
 def test_compleat() -> None:
