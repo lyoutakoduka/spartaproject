@@ -63,6 +63,14 @@ def _add_temporary_files(directory_root: Path, file_names: Strs) -> Paths:
     ]
 
 
+def _get_empty() -> Paths:
+    return []
+
+
+def _get_types() -> Strs:
+    return ["first", "second", "third"]
+
+
 def _add_temporary_directory(
     directory_root: Path, directory_names: Strs
 ) -> Paths:
@@ -85,14 +93,6 @@ def _create_archive_shared(
 def _add_test_tree(file_root: Path, name: str) -> Paths:
     file_root = create_directory(Path(file_root, name))
     return [file_root, create_temporary_file(file_root)]
-
-
-def _get_types() -> Strs:
-    return ["first", "second", "third"]
-
-
-def _get_empty() -> Paths:
-    return []
 
 
 def _create_archive_compleat(working: PathPair) -> ArchiveStatus:
