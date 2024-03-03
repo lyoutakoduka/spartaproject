@@ -188,9 +188,9 @@ def _get_take_out_nest(working: PathPair) -> Paths:
     take_paths: Paths = []
 
     for name in _get_types():
-        added_nest: Paths = _add_test_tree(file_root, name)
-        take_paths += get_relative_array(added_nest, root_path=file_root)
-        file_root = added_nest[0]
+        added_paths: Paths = _add_test_tree(file_root, name)
+        take_paths += get_relative_array(added_paths, root_path=file_root)
+        file_root = added_paths[0]
 
     return take_paths
 
