@@ -115,16 +115,17 @@ def _create_archive_empty(working: PathPair) -> ArchiveStatus:
     )
 
 
-def _create_archive_single(working: PathPair) -> ArchiveStatus:
+def _get_take_out_single(working: PathPair) -> Paths:
     directory_root: Path = create_directory(
         Path(working["source"], "directory")
     )
+    return [directory_root, create_temporary_file(directory_root)]
 
+
+def _create_archive_single(working: PathPair) -> ArchiveStatus:
     return _create_archive_shared(
         working,
-        _get_relative_paths(
-            working, [directory_root, create_temporary_file(directory_root)]
-        ),
+        _get_relative_paths(working, _get_take_out_single(working)),
         _get_empty(),
     )
 
