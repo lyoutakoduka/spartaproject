@@ -80,6 +80,10 @@ def _add_temporary_directory(
     ]
 
 
+def _add_directories_test(working: PathPair) -> Paths:
+    return _add_temporary_directory(working["source"], _get_types())
+
+
 def _create_archive_shared(
     working: PathPair, taka_paths: Paths, keep_paths: Paths
 ) -> ArchiveStatus:
