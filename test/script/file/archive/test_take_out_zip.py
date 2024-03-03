@@ -166,10 +166,8 @@ def _create_archive_mix(working: PathPair) -> ArchiveStatus:
 def _get_take_out_list(working: PathPair) -> Paths:
     file_paths: Paths = []
 
-    for archive_path in _add_temporary_directory(
-        working["source"], _get_types()
-    ):
-        file_paths += [archive_path, create_temporary_file(archive_path)]
+    for file_root in _add_temporary_directory(working["source"], _get_types()):
+        file_paths += [file_root, create_temporary_file(file_root)]
 
     return file_paths
 
