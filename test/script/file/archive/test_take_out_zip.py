@@ -180,7 +180,7 @@ def _create_archive_list(working: PathPair) -> ArchiveStatus:
     )
 
 
-def _add_archive_nest(file_root: Path, name: str) -> Paths:
+def _add_test_tree(file_root: Path, name: str) -> Paths:
     file_root = create_directory(Path(file_root, name))
     return [file_root, create_temporary_file(file_root)]
 
@@ -190,7 +190,7 @@ def _get_take_out_nest(working: PathPair) -> Paths:
     take_paths: Paths = []
 
     for name in _get_types():
-        added_nest: Paths = _add_archive_nest(file_root, name)
+        added_nest: Paths = _add_test_tree(file_root, name)
         take_paths += get_relative_array(added_nest, root_path=file_root)
         file_root = added_nest[0]
 
