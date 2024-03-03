@@ -82,6 +82,11 @@ def _create_archive_shared(
     }
 
 
+def _add_test_tree(file_root: Path, name: str) -> Paths:
+    file_root = create_directory(Path(file_root, name))
+    return [file_root, create_temporary_file(file_root)]
+
+
 def _get_types() -> Strs:
     return ["first", "second", "third"]
 
@@ -178,11 +183,6 @@ def _create_archive_list(working: PathPair) -> ArchiveStatus:
         _get_relative_paths(working, _get_take_out_list(working)),
         _get_empty(),
     )
-
-
-def _add_test_tree(file_root: Path, name: str) -> Paths:
-    file_root = create_directory(Path(file_root, name))
-    return [file_root, create_temporary_file(file_root)]
 
 
 def _get_take_out_nest(working: PathPair) -> Paths:
