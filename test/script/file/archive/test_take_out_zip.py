@@ -116,10 +116,7 @@ def _create_archive_empty(working: PathPair) -> ArchiveStatus:
 
 
 def _get_take_out_single(working: PathPair) -> Paths:
-    directory_root: Path = create_directory(
-        Path(working["source"], "directory")
-    )
-    return [directory_root, create_temporary_file(directory_root)]
+    return _add_test_tree(working["source"], "directory")
 
 
 def _create_archive_single(working: PathPair) -> ArchiveStatus:
