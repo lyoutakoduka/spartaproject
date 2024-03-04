@@ -115,9 +115,6 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 def _confirm_empty_archive(archive_paths: Paths) -> None:
     assert 1 == len(archive_paths)
 
-    archive_path: Path = archive_paths[0]
-    print("VVV", archive_path)
-
 
 def test_empty() -> None:
     """Test to create empty archive."""
