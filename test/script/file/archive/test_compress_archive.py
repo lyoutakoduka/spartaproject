@@ -116,7 +116,7 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 
 
 def _confirm_empty_archive(archive_paths: Paths) -> None:
-    assert 1 == len(archive_paths)
+    _compare_archived_count(archive_paths)
 
     expected: int = 22
     assert expected == get_file_size(archive_paths[0])
