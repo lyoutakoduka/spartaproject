@@ -207,6 +207,10 @@ def _replace_path_override(index: int, path: Path) -> Path:
     return Path(*names)
 
 
+def _replace_paths_override(index: int, paths: Paths) -> Paths:
+    return [_replace_path_override(index, path) for path in paths]
+
+
 def _replace_path_root(archive_path: Path, archive_root: Path) -> Paths:
     return get_absolute_array(
         _get_relative_archive(archive_path), root_path=archive_root
