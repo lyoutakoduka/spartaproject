@@ -16,7 +16,10 @@ from pyspartaproj.script.decimal.initialize_decimal import initialize_decimal
 from pyspartaproj.script.file.archive.compress_archive import CompressArchive
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.modify.get_relative import get_relative_array
-from pyspartaproj.script.path.status.get_statistic import get_file_size_array
+from pyspartaproj.script.path.status.get_statistic import (
+    get_file_size,
+    get_file_size_array,
+)
 from pyspartaproj.script.path.temporary.create_temporary_tree import (
     create_temporary_tree,
 )
@@ -114,6 +117,9 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 
 def _confirm_empty_archive(archive_paths: Paths) -> None:
     assert 1 == len(archive_paths)
+
+    expected: int = 22
+    assert expected == get_file_size(archive_paths[0])
 
 
 def test_empty() -> None:
