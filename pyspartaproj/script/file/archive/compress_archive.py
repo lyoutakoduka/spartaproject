@@ -101,7 +101,7 @@ class CompressArchive:
             time.second,
         )
 
-    def _get_zip_timestamp(self, target: Path) -> datetime:
+    def _get_archive_timestamp(self, target: Path) -> datetime:
         latest: datetime = get_latest(target)
 
         if latest != get_invalid_time():
@@ -113,7 +113,7 @@ class CompressArchive:
         information: ZipInfo = ZipInfo(filename=str(relative))
 
         information.compress_type = ZIP_LZMA if self._compress else ZIP_STORED
-        latest: datetime = self._get_zip_timestamp(target)
+        latest: datetime = self._get_archive_timestamp(target)
 
         self._store_timestamp(latest, information)
         information.comment = self._store_timestamp_detail(latest)
