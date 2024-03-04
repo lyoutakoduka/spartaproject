@@ -76,7 +76,7 @@ def _get_took_out(took_out_root: Path, decompressed_root: Path) -> Paths:
     return archive_paths
 
 
-def take_out_zip(archive_path: Path) -> Paths:
+def take_out_archive(archive_path: Path) -> Paths:
     """Take out directory from inside of archive as archive.
 
     Args:
