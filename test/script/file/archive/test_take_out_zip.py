@@ -201,6 +201,12 @@ def _create_archive_nest(working: PathPair) -> ArchiveStatus:
     )
 
 
+def _replace_path_override(index: int, path: Path) -> Path:
+    names: Strs = list(path.parts)
+    names[0] += "_" * index
+    return Path(*names)
+
+
 def _replace_path_root(archive_path: Path, archive_root: Path) -> Paths:
     return get_absolute_array(
         _get_relative_archive(archive_path), root_path=archive_root
