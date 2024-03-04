@@ -35,10 +35,10 @@ class CompressArchive:
     def _init_variables(self, output_root: Path, compress: bool) -> None:
         self._output_root: Path = output_root
         self._compress: bool = compress
-        self._file_zip: ZipFile | None = None
+        self._archive_file: ZipFile | None = None
 
     def _get_archive_file(self) -> ZipFile | None:
-        return self._file_zip
+        return self._archive_file
 
     def _init_limit_byte(self, byte: int) -> None:
         if 0 == byte:
@@ -82,7 +82,7 @@ class CompressArchive:
 
     def _reset_archive_byte(self) -> None:
         self._archived += [self._get_archive_path()]
-        self._file_zip = ZipFile(self._archived[-1], mode="w")
+        self._archive_file = ZipFile(self._archived[-1], mode="w")
 
     def _convert_comment(self, attribute: StrPair) -> bytes:
         comment: str = json_dump(multiple_to_json(attribute), compress=True)
