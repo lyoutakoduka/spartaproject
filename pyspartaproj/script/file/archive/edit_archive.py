@@ -73,24 +73,28 @@ class EditArchive(WorkSpace):
 
         return compress_archive.close_archived()
 
-    def _decompress_archive(self, decompress_zip: DecompressArchive) -> None:
-        self._decompressed: Paths = decompress_zip.sequential_archives(
+    def _decompress_archive(
+        self, decompress_archive: DecompressArchive
+    ) -> None:
+        self._decompressed: Paths = decompress_archive.sequential_archives(
             self._archive_path
         )
 
         for path in self._decompressed:
-            decompress_zip.decompress_archive(path)
+            decompress_archive.decompress_archive(path)
 
-    def _record_compress_type(self, decompress_zip: DecompressArchive) -> None:
-        self._is_lzma_before: bool = decompress_zip.is_lzma_archive(
+    def _record_compress_type(
+        self, decompress_archive: DecompressArchive
+    ) -> None:
+        self._is_lzma_before: bool = decompress_archive.is_lzma_archive(
             self._archive_path
         )
 
     def _initialize_archive(self) -> None:
-        decompress_zip = DecompressArchive(self.get_root())
+        decompress_archive = DecompressArchive(self.get_root())
 
-        self._decompress_archive(decompress_zip)
-        self._record_compress_type(decompress_zip)
+        self._decompress_archive(decompress_archive)
+        self._record_compress_type(decompress_archive)
 
         self._archive_stamp: TimePair = self._get_archive_stamp()
 

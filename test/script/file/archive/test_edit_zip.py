@@ -112,10 +112,10 @@ def _edit_to_archived(archive_root: Path) -> PathPair:
 
 
 def _decompress_archive(after_root: Path, archived: Paths) -> None:
-    decompress_zip = DecompressArchive(after_root)
+    decompress_archive = DecompressArchive(after_root)
 
     for archived_path in archived:
-        decompress_zip.decompress_archive(archived_path)
+        decompress_archive.decompress_archive(archived_path)
 
 
 def _remove_stamp_after(path_text: str, stamp_after: TimePair) -> None:
