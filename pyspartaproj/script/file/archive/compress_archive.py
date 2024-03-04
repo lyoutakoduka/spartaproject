@@ -109,7 +109,9 @@ class CompressArchive:
 
         return get_current_time()
 
-    def _get_zip_information(self, target: Path, relative: Path) -> ZipInfo:
+    def _get_archive_information(
+        self, target: Path, relative: Path
+    ) -> ZipInfo:
         information: ZipInfo = ZipInfo(filename=str(relative))
 
         information.compress_type = ZIP_LZMA if self._compress else ZIP_STORED
@@ -127,7 +129,7 @@ class CompressArchive:
     def _write_string(self, path: Path, target_path: Path) -> None:
         if file_zip := self._get_file_zip():
             file_zip.writestr(
-                self._get_zip_information(target_path, path),
+                self._get_archive_information(target_path, path),
                 byte_import(target_path),
             )
 
