@@ -41,10 +41,10 @@ class DecompressArchive:
         return False
 
     def _decompress_file(
-        self, file_path: Path, relative: Path, zip_file: ZipFile
+        self, file_path: Path, relative: Path, archive_file: ZipFile
     ) -> None:
         create_directory_parent(file_path)
-        byte_export(file_path, zip_file.read(relative.as_posix()))
+        byte_export(file_path, archive_file.read(relative.as_posix()))
 
     def _restore_timestamp(
         self, file_path: Path, information: ZipInfo
@@ -112,15 +112,15 @@ class DecompressArchive:
         Args:
             decompress_target (Path): Path of archive you want to decompress.
         """
-        with ZipFile(decompress_target) as zip_file:
-            for information in zip_file.infolist():
+        with ZipFile(decompress_target) as archive_file:
+            for information in archive_file.infolist():
                 relative: Path = Path(information.filename)
                 file_path: Path = Path(self._output_root, relative)
 
                 if information.is_dir():
                     create_directory(file_path)
                 else:
-                    self._decompress_file(file_path, relative, zip_file)
+                    self._decompress_file(file_path, relative, archive_file)
                     self._restore_timestamp(file_path, information)
 
     def is_lzma_archive(self, decompress_target: Path) -> bool:
@@ -133,8 +133,8 @@ class DecompressArchive:
         Returns:
             bool: Return True if archive is compressed by LZMA.
         """
-        with ZipFile(decompress_target) as zip_file:
-            for information in zip_file.infolist():
+        with ZipFile(decompress_target) as archive_file:
+            for information in archive_file.infolist():
                 if ZIP_LZMA == information.compress_type:
                     return True
 
