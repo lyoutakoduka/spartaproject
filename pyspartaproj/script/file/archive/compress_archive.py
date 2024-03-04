@@ -123,25 +123,25 @@ class CompressArchive:
         return information
 
     def _make_directory(self, path: Path) -> None:
-        if file_zip := self._get_archive_file():
-            file_zip.mkdir(str(path))
+        if archive_file := self._get_archive_file():
+            archive_file.mkdir(str(path))
 
     def _write_string(self, path: Path, target_path: Path) -> None:
-        if file_zip := self._get_archive_file():
-            file_zip.writestr(
+        if archive_file := self._get_archive_file():
+            archive_file.writestr(
                 self._get_archive_information(target_path, path),
                 byte_import(target_path),
             )
 
     def _get_information_list(self) -> Archives:
-        if file_zip := self._get_archive_file():
-            return file_zip.infolist()
+        if archive_file := self._get_archive_file():
+            return archive_file.infolist()
 
         return []
 
     def _close_archive(self) -> None:
-        if file_zip := self._get_archive_file():
-            file_zip.close()
+        if archive_file := self._get_archive_file():
+            archive_file.close()
 
     def _add_file_to_archive(
         self, is_dir: bool, reset: bool, target: Path, root: Path
