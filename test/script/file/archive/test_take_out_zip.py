@@ -35,12 +35,14 @@ def _inside_temporary_directory(function: Callable[[PathPair], None]) -> None:
 
 
 def _compress_test_archive(working: PathPair) -> Path:
-    compress_zip = CompressArchive(working["archive"], archive_id="archive")
+    compress_archive = CompressArchive(
+        working["archive"], archive_id="archive"
+    )
 
     for target_path in walk_iterator(working["source"], depth=1):
-        compress_zip.compress_archive(target_path)
+        compress_archive.compress_archive(target_path)
 
-    return compress_zip.close_archived()[0]
+    return compress_archive.close_archived()[0]
 
 
 def _get_relative_paths(working: PathPair, target_paths: Paths) -> Paths:

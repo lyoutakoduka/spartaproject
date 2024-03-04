@@ -60,18 +60,18 @@ class EditArchive(WorkSpace):
     def _compress_archive(self, archive_stamp: TimePair) -> Paths:
         self._cleanup_before_override()
 
-        compress_zip = CompressArchive(
+        compress_archive = CompressArchive(
             self._archive_path.parent,
             limit_byte=self._limit_byte,
             compress=self._is_lzma_after,
         )
 
         for path_text in archive_stamp.keys():
-            compress_zip.compress_archive(
+            compress_archive.compress_archive(
                 Path(path_text), archive_root=self.get_root()
             )
 
-        return compress_zip.close_archived()
+        return compress_archive.close_archived()
 
     def _decompress_archive(self, decompress_zip: DecompressArchive) -> None:
         self._decompressed: Paths = decompress_zip.sequential_archives(

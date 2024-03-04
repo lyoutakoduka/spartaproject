@@ -15,12 +15,12 @@ from pyspartaproj.script.path.safe.safe_trash import SafeTrash
 def _take_out_archive(
     took_out_root: Path, file_paths: Paths, archive_id: str
 ) -> Path:
-    compress_zip = CompressArchive(took_out_root, archive_id=archive_id)
+    compress_archive = CompressArchive(took_out_root, archive_id=archive_id)
 
     for file_path in file_paths:
-        compress_zip.compress_archive(file_path)
+        compress_archive.compress_archive(file_path)
 
-    return compress_zip.close_archived()[0]
+    return compress_archive.close_archived()[0]
 
 
 def _take_out_archives(

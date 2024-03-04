@@ -34,11 +34,13 @@ from pyspartaproj.script.time.stamp.get_timestamp import (
 )
 
 
-def _add_archive(temporary_root: Path, compress_zip: CompressArchive) -> Path:
+def _add_archive(
+    temporary_root: Path, compress_archive: CompressArchive
+) -> Path:
     for path in walk_iterator(Path(temporary_root, "before")):
-        compress_zip.compress_archive(path)
+        compress_archive.compress_archive(path)
 
-    return compress_zip.close_archived()[0]
+    return compress_archive.close_archived()[0]
 
 
 def _get_stamp_key(path_text: str, stamp_root: Path) -> str:
@@ -195,8 +197,8 @@ def test_single() -> None:
     def individual_test(temporary_root: Path) -> None:
         stamp_before: TimePair = _initialize_archive(temporary_root)
 
-        compress_zip = CompressArchive(Path(temporary_root, "archive"))
-        edit_zip = EditArchive(_add_archive(temporary_root, compress_zip))
+        compress_archive = CompressArchive(Path(temporary_root, "archive"))
+        edit_zip = EditArchive(_add_archive(temporary_root, compress_archive))
 
         _common_test(temporary_root, stamp_before, edit_zip)
 
@@ -210,11 +212,11 @@ def test_multiple() -> None:
     def individual_test(temporary_root: Path) -> None:
         stamp_before: TimePair = _initialize_archive(temporary_root)
 
-        compress_zip = CompressArchive(
+        compress_archive = CompressArchive(
             Path(temporary_root, "archive"), limit_byte=limit_byte
         )
         edit_zip = EditArchive(
-            _add_archive(temporary_root, compress_zip),
+            _add_archive(temporary_root, compress_archive),
             limit_byte=limit_byte,
         )
 
