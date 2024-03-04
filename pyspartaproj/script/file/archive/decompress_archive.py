@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Module to decompress archive which is zip format."""
+"""Module to decompress file or directory by archive format."""
 
 from datetime import datetime
 from pathlib import Path
@@ -23,7 +23,7 @@ from pyspartaproj.script.time.stamp.set_timestamp import set_latest
 
 
 class DecompressArchive:
-    """Class to decompress archive which is zip format."""
+    """Class to decompress file or directory by archive format."""
 
     def _initialize_paths(self, output_root: Path) -> None:
         self._output_root: Path = output_root
@@ -74,23 +74,23 @@ class DecompressArchive:
         e.g., sequential archives dividedly to three are represented to follow.
 
         root/
-            |--archive.zip
-            |--archive#0001.zip
-            |--archive#0002.zip
+            |--archive.<archive format>
+            |--archive#0001.<archive format>
+            |--archive#0002.<archive format>
 
-        If you select path "source_archive" is "root/archive.zip",
+        If you select path "source_archive" is "root/archive.<archive format>",
             following list is returned.
 
         [
-            root/archive.zip,
-            root/archive#0001.zip,
-            root/archive#0002.zip
+            root/archive.<archive format>,
+            root/archive#0001.<archive format>,
+            root/archive#0002.<archive format>
         ]
 
         Name format of sequential archives are follow.
 
-        Index 0:    <archive name>.zip
-        Index 1~:   <archive name>#<string index>.zip
+        Index 0:    <archive name>.<archive format>
+        Index 1~:   <archive name>#<string index>.<archive format>
 
         <archive name> of all indices must be same.
         <string index> must filled by zero, and digit is optional.
@@ -107,7 +107,7 @@ class DecompressArchive:
         return sequential
 
     def decompress_archive(self, decompress_target: Path) -> None:
-        """Decompress archive which is zip format.
+        """Decompress file or directory by archive format.
 
         Args:
             decompress_target (Path): Path of archive you want to decompress.
