@@ -6,4 +6,4 @@
 from typing import List
 from zipfile import ZipInfo
 
-Zips = List[ZipInfo]
+Archives = List[ZipInfo]
