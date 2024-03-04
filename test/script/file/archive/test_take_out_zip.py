@@ -50,8 +50,8 @@ def _get_relative_paths(working: PathPair, target_paths: Paths) -> Paths:
 
 
 def _get_relative_archive(archive_path: Path) -> Paths:
-    edit_zip = EditArchive(archive_path)
-    root_path: Path = edit_zip.get_decompressed_root()
+    edit_archive = EditArchive(archive_path)
+    root_path: Path = edit_archive.get_decompressed_root()
 
     return get_relative_array(
         list(walk_iterator(root_path)), root_path=root_path

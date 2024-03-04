@@ -171,16 +171,16 @@ def _get_stamp_after(
     return stamp_after
 
 
-def _get_edit_history(edit_zip: EditArchive) -> PathPair:
-    return _edit_to_archived(edit_zip.get_decompressed_root())
+def _get_edit_history(edit_archive: EditArchive) -> PathPair:
+    return _edit_to_archived(edit_archive.get_decompressed_root())
 
 
 def _common_test(
-    temporary_root: Path, stamp_before: TimePair, edit_zip: EditArchive
+    temporary_root: Path, stamp_before: TimePair, edit_archive: EditArchive
 ) -> None:
-    edit_history: PathPair = _get_edit_history(edit_zip)
+    edit_history: PathPair = _get_edit_history(edit_archive)
 
-    if archived := edit_zip.close_archive():
+    if archived := edit_archive.close_archive():
         assert is_same_stamp(
             stamp_before,
             _get_stamp_after(
@@ -198,9 +198,11 @@ def test_single() -> None:
         stamp_before: TimePair = _initialize_archive(temporary_root)
 
         compress_archive = CompressArchive(Path(temporary_root, "archive"))
-        edit_zip = EditArchive(_add_archive(temporary_root, compress_archive))
+        edit_archive = EditArchive(
+            _add_archive(temporary_root, compress_archive)
+        )
 
-        _common_test(temporary_root, stamp_before, edit_zip)
+        _common_test(temporary_root, stamp_before, edit_archive)
 
     _inside_temporary_directory(individual_test)
 
@@ -215,12 +217,12 @@ def test_multiple() -> None:
         compress_archive = CompressArchive(
             Path(temporary_root, "archive"), limit_byte=limit_byte
         )
-        edit_zip = EditArchive(
+        edit_archive = EditArchive(
             _add_archive(temporary_root, compress_archive),
             limit_byte=limit_byte,
         )
 
-        _common_test(temporary_root, stamp_before, edit_zip)
+        _common_test(temporary_root, stamp_before, edit_archive)
 
     _inside_temporary_directory(individual_test)
 
