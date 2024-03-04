@@ -131,7 +131,7 @@ class CompressArchive:
                 byte_import(target_path),
             )
 
-    def _get_archive_information(self) -> Archives:
+    def _get_information_list(self) -> Archives:
         if file_zip := self._get_file_zip():
             return file_zip.infolist()
 
@@ -166,7 +166,7 @@ class CompressArchive:
     def _get_file_size(self) -> Ints:
         return [
             information.file_size
-            for information in self._get_archive_information()
+            for information in self._get_information_list()
         ]
 
     def _archive_inside_byte(self) -> Decimal:
