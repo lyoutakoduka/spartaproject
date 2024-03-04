@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Test module to edit internal of zip archive file."""
+"""Test module to edit internal of archive file."""
 
 from datetime import datetime
 from pathlib import Path
@@ -192,7 +192,7 @@ def _common_test(
 
 
 def test_single() -> None:
-    """Test to edit edit internal of single zip archive file."""
+    """Test to edit edit internal of single archive file."""
 
     def individual_test(temporary_root: Path) -> None:
         stamp_before: TimePair = _initialize_archive(temporary_root)
@@ -208,7 +208,7 @@ def test_single() -> None:
 
 
 def test_multiple() -> None:
-    """Test to edit edit internal of multiple zip archive files."""
+    """Test to edit edit internal of multiple archive files."""
     limit_byte: int = 50
 
     def individual_test(temporary_root: Path) -> None:
@@ -228,7 +228,7 @@ def test_multiple() -> None:
 
 
 def test_compress() -> None:
-    """Test to compare size fo zip archive files."""
+    """Test to compare size of archive files."""
 
     def individual_test(temporary_root: Path) -> None:
         create_temporary_tree(Path(temporary_root, "before"), tree_weight=3)

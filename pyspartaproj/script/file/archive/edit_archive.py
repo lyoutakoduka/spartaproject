@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Module to edit internal of zip archive file."""
+"""Module to edit internal of archive file."""
 
 from pathlib import Path
 
@@ -21,7 +21,7 @@ from pyspartaproj.script.time.stamp.get_timestamp import (
 
 
 class EditArchive(WorkSpace):
-    """Class to edit internal of zip archive file."""
+    """Class to edit internal of archive file."""
 
     def _initialize_variables(
         self, archive_path: Path, limit_byte: int, compress: bool
@@ -120,7 +120,7 @@ class EditArchive(WorkSpace):
         return self.get_root()
 
     def close_archive(self) -> Paths | None:
-        """Compress the contents of temporary working directory to zip archive.
+        """Compress the contents of temporary working directory to archive.
 
         Returns:
             Paths | None: Path of compressed archive.
@@ -147,11 +147,11 @@ class EditArchive(WorkSpace):
 
             limit_byte (int, optional): Defaults to 0.
                 If it's not 0, archive are dividedly compressed.
-                It's used for argument "limit_byte" of class "CompressZip".
+                It's used for argument "limit_byte" of class "CompressArchive".
 
             compress (bool, optional): Defaults to False.
                 If it's True, you can compress archive by LZMA format.
-                It's used for argument "compress" of class "CompressZip".
+                It's used for argument "compress" of class "CompressArchive".
         """
         super().__init__()
 
