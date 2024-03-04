@@ -6,8 +6,8 @@
 from pathlib import Path
 
 from pyspartaproj.context.extension.path_context import Paths, PathsPair
-from pyspartaproj.script.file.archive.compress_archive import CompressZip
-from pyspartaproj.script.file.archive.edit_archive import EditZip
+from pyspartaproj.script.file.archive.compress_archive import CompressArchive
+from pyspartaproj.script.file.archive.edit_archive import EditArchive
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.safe.safe_trash import SafeTrash
 
@@ -15,7 +15,7 @@ from pyspartaproj.script.path.safe.safe_trash import SafeTrash
 def _take_out_archive(
     took_out_root: Path, file_paths: Paths, archive_id: str
 ) -> Path:
-    compress_zip = CompressZip(took_out_root, archive_id=archive_id)
+    compress_zip = CompressArchive(took_out_root, archive_id=archive_id)
 
     for file_path in file_paths:
         compress_zip.compress_archive(file_path)
@@ -85,5 +85,5 @@ def take_out_zip(archive_path: Path) -> Paths:
     Returns:
         Paths: List of directory path which is took out.
     """
-    edit_zip = EditZip(archive_path)
+    edit_zip = EditArchive(archive_path)
     return _get_took_out(archive_path.parent, edit_zip.get_decompressed_root())

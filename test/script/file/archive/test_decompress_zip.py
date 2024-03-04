@@ -12,8 +12,10 @@ from typing import Callable
 from pyspartaproj.context.default.integer_context import Ints2
 from pyspartaproj.context.extension.path_context import Paths2
 from pyspartaproj.context.extension.time_context import Times2, datetime
-from pyspartaproj.script.file.archive.compress_archive import CompressZip
-from pyspartaproj.script.file.archive.decompress_archive import DecompressZip
+from pyspartaproj.script.file.archive.compress_archive import CompressArchive
+from pyspartaproj.script.file.archive.decompress_archive import (
+    DecompressArchive,
+)
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.modify.get_relative import get_relative_array
 from pyspartaproj.script.path.safe.safe_trash import SafeTrash
@@ -82,7 +84,7 @@ def _create_archive(temporary_root: Path, tree_root: Path) -> Path:
 
 
 def _compress_to_decompress(temporary_root: Path, tree_root: Path) -> None:
-    DecompressZip(Path(temporary_root, "extract")).decompress_archive(
+    DecompressArchive(Path(temporary_root, "extract")).decompress_archive(
         _create_archive(temporary_root, tree_root)
     )
 
@@ -138,7 +140,7 @@ def test_status() -> None:
     def individual_test(temporary_root: Path, tree_root: Path) -> None:
         create_temporary_tree(tree_root)
 
-        assert not DecompressZip(temporary_root).is_lzma_archive(
+        assert not DecompressArchive(temporary_root).is_lzma_archive(
             _create_archive(temporary_root, tree_root)
         )
 
@@ -149,7 +151,7 @@ def test_limit() -> None:
     """Test to decompress sequential archives."""
 
     def individual_test(temporary_root: Path, tree_root: Path) -> None:
-        compress_zip = CompressZip(
+        compress_zip = CompressArchive(
             Path(temporary_root, "archive"), limit_byte=200
         )
 
@@ -158,7 +160,7 @@ def test_limit() -> None:
         ):
             compress_zip.compress_archive(path)
 
-        decompress_zip = DecompressZip(Path(temporary_root, "extract"))
+        decompress_zip = DecompressArchive(Path(temporary_root, "extract"))
 
         for path in decompress_zip.sequential_archives(
             compress_zip.close_archived()[0]
@@ -177,7 +179,7 @@ def test_timestamp() -> None:
     )
 
     def individual_test(temporary_root: Path, tree_root: Path) -> None:
-        compress_zip = CompressZip(Path(temporary_root, "archive"))
+        compress_zip = CompressArchive(Path(temporary_root, "archive"))
 
         for path in walk_iterator(create_temporary_tree(tree_root)):
             if path.is_file():
@@ -185,7 +187,7 @@ def test_timestamp() -> None:
 
             compress_zip.compress_archive(path)
 
-        decompress_zip = DecompressZip(Path(temporary_root, "extract"))
+        decompress_zip = DecompressArchive(Path(temporary_root, "extract"))
 
         for path in compress_zip.close_archived():
             decompress_zip.decompress_archive(path)

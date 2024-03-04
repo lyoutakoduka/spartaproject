@@ -11,9 +11,11 @@ from typing import Callable
 from pyspartaproj.context.extension.path_context import PathPair, Paths
 from pyspartaproj.context.extension.time_context import TimePair
 from pyspartaproj.interface.pytest import fail
-from pyspartaproj.script.file.archive.compress_archive import CompressZip
-from pyspartaproj.script.file.archive.decompress_archive import DecompressZip
-from pyspartaproj.script.file.archive.edit_archive import EditZip
+from pyspartaproj.script.file.archive.compress_archive import CompressArchive
+from pyspartaproj.script.file.archive.decompress_archive import (
+    DecompressArchive,
+)
+from pyspartaproj.script.file.archive.edit_archive import EditArchive
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.modify.get_relative import get_relative
 from pyspartaproj.script.path.safe.safe_rename import SafeRename
@@ -32,7 +34,7 @@ from pyspartaproj.script.time.stamp.get_timestamp import (
 )
 
 
-def _add_archive(temporary_root: Path, compress_zip: CompressZip) -> Path:
+def _add_archive(temporary_root: Path, compress_zip: CompressArchive) -> Path:
     for path in walk_iterator(Path(temporary_root, "before")):
         compress_zip.compress_archive(path)
 
@@ -108,7 +110,7 @@ def _edit_to_archived(archive_root: Path) -> PathPair:
 
 
 def _decompress_archive(after_root: Path, archived: Paths) -> None:
-    decompress_zip = DecompressZip(after_root)
+    decompress_zip = DecompressArchive(after_root)
 
     for archived_path in archived:
         decompress_zip.decompress_archive(archived_path)
@@ -167,12 +169,12 @@ def _get_stamp_after(
     return stamp_after
 
 
-def _get_edit_history(edit_zip: EditZip) -> PathPair:
+def _get_edit_history(edit_zip: EditArchive) -> PathPair:
     return _edit_to_archived(edit_zip.get_decompressed_root())
 
 
 def _common_test(
-    temporary_root: Path, stamp_before: TimePair, edit_zip: EditZip
+    temporary_root: Path, stamp_before: TimePair, edit_zip: EditArchive
 ) -> None:
     edit_history: PathPair = _get_edit_history(edit_zip)
 
@@ -193,8 +195,8 @@ def test_single() -> None:
     def individual_test(temporary_root: Path) -> None:
         stamp_before: TimePair = _initialize_archive(temporary_root)
 
-        compress_zip = CompressZip(Path(temporary_root, "archive"))
-        edit_zip = EditZip(_add_archive(temporary_root, compress_zip))
+        compress_zip = CompressArchive(Path(temporary_root, "archive"))
+        edit_zip = EditArchive(_add_archive(temporary_root, compress_zip))
 
         _common_test(temporary_root, stamp_before, edit_zip)
 
@@ -208,10 +210,10 @@ def test_multiple() -> None:
     def individual_test(temporary_root: Path) -> None:
         stamp_before: TimePair = _initialize_archive(temporary_root)
 
-        compress_zip = CompressZip(
+        compress_zip = CompressArchive(
             Path(temporary_root, "archive"), limit_byte=limit_byte
         )
-        edit_zip = EditZip(
+        edit_zip = EditArchive(
             _add_archive(temporary_root, compress_zip),
             limit_byte=limit_byte,
         )
@@ -229,11 +231,11 @@ def test_compress() -> None:
 
         archive_path: Path = _add_archive(
             temporary_root,
-            CompressZip(Path(temporary_root, "archive")),
+            CompressArchive(Path(temporary_root, "archive")),
         )
         archive_size_before: int = get_file_size(archive_path)
 
-        if EditZip(archive_path, compress=True).close_archive():
+        if EditArchive(archive_path, compress=True).close_archive():
             assert archive_size_before > get_file_size(archive_path)
         else:
             fail()

@@ -11,8 +11,8 @@ from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.extension.path_context import PathPair, Paths
 from pyspartaproj.context.typed.user_context import ArchiveStatus
 from pyspartaproj.script.directory.create_directory import create_directory
-from pyspartaproj.script.file.archive.compress_archive import CompressZip
-from pyspartaproj.script.file.archive.edit_archive import EditZip
+from pyspartaproj.script.file.archive.compress_archive import CompressArchive
+from pyspartaproj.script.file.archive.edit_archive import EditArchive
 from pyspartaproj.script.file.archive.take_out_archive import take_out_zip
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.modify.get_absolute import get_absolute_array
@@ -35,7 +35,7 @@ def _inside_temporary_directory(function: Callable[[PathPair], None]) -> None:
 
 
 def _compress_test_archive(working: PathPair) -> Path:
-    compress_zip = CompressZip(working["archive"], archive_id="archive")
+    compress_zip = CompressArchive(working["archive"], archive_id="archive")
 
     for target_path in walk_iterator(working["source"], depth=1):
         compress_zip.compress_archive(target_path)
@@ -48,7 +48,7 @@ def _get_relative_paths(working: PathPair, target_paths: Paths) -> Paths:
 
 
 def _get_relative_archive(archive_path: Path) -> Paths:
-    edit_zip = EditZip(archive_path)
+    edit_zip = EditArchive(archive_path)
     root_path: Path = edit_zip.get_decompressed_root()
 
     return get_relative_array(

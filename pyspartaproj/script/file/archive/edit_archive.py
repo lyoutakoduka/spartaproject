@@ -8,8 +8,10 @@ from pathlib import Path
 from pyspartaproj.context.extension.path_context import Paths
 from pyspartaproj.context.extension.time_context import TimePair
 from pyspartaproj.script.directory.create_directory_temporary import WorkSpace
-from pyspartaproj.script.file.archive.compress_archive import CompressZip
-from pyspartaproj.script.file.archive.decompress_archive import DecompressZip
+from pyspartaproj.script.file.archive.compress_archive import CompressArchive
+from pyspartaproj.script.file.archive.decompress_archive import (
+    DecompressArchive,
+)
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.safe.safe_trash import SafeTrash
 from pyspartaproj.script.time.stamp.get_timestamp import (
@@ -58,7 +60,7 @@ class EditArchive(WorkSpace):
     def _compress_archive(self, archive_stamp: TimePair) -> Paths:
         self._cleanup_before_override()
 
-        compress_zip = CompressZip(
+        compress_zip = CompressArchive(
             self._archive_path.parent,
             limit_byte=self._limit_byte,
             compress=self._is_lzma_after,
@@ -71,7 +73,7 @@ class EditArchive(WorkSpace):
 
         return compress_zip.close_archived()
 
-    def _decompress_archive(self, decompress_zip: DecompressZip) -> None:
+    def _decompress_archive(self, decompress_zip: DecompressArchive) -> None:
         self._decompressed: Paths = decompress_zip.sequential_archives(
             self._archive_path
         )
@@ -79,13 +81,13 @@ class EditArchive(WorkSpace):
         for path in self._decompressed:
             decompress_zip.decompress_archive(path)
 
-    def _record_compress_type(self, decompress_zip: DecompressZip) -> None:
+    def _record_compress_type(self, decompress_zip: DecompressArchive) -> None:
         self._is_lzma_before: bool = decompress_zip.is_lzma_archive(
             self._archive_path
         )
 
     def _initialize_archive(self) -> None:
-        decompress_zip = DecompressZip(self.get_root())
+        decompress_zip = DecompressArchive(self.get_root())
 
         self._decompress_archive(decompress_zip)
         self._record_compress_type(decompress_zip)
