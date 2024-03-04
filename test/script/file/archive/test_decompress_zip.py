@@ -12,8 +12,8 @@ from typing import Callable
 from pyspartaproj.context.default.integer_context import Ints2
 from pyspartaproj.context.extension.path_context import Paths2
 from pyspartaproj.context.extension.time_context import Times2, datetime
-from pyspartaproj.script.file.archive.compress_zip import CompressZip
-from pyspartaproj.script.file.archive.decompress_zip import DecompressZip
+from pyspartaproj.script.file.archive.compress_archive import CompressZip
+from pyspartaproj.script.file.archive.decompress_archive import DecompressZip
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.modify.get_relative import get_relative_array
 from pyspartaproj.script.path.safe.safe_trash import SafeTrash

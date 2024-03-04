@@ -8,8 +8,8 @@ from pathlib import Path
 from pyspartaproj.context.extension.path_context import Paths
 from pyspartaproj.context.extension.time_context import TimePair
 from pyspartaproj.script.directory.create_directory_temporary import WorkSpace
-from pyspartaproj.script.file.archive.compress_zip import CompressZip
-from pyspartaproj.script.file.archive.decompress_zip import DecompressZip
+from pyspartaproj.script.file.archive.compress_archive import CompressZip
+from pyspartaproj.script.file.archive.decompress_archive import DecompressZip
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.safe.safe_trash import SafeTrash
 from pyspartaproj.script.time.stamp.get_timestamp import (

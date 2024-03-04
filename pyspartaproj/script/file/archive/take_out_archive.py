@@ -6,8 +6,8 @@
 from pathlib import Path
 
 from pyspartaproj.context.extension.path_context import Paths, PathsPair
-from pyspartaproj.script.file.archive.compress_zip import CompressZip
-from pyspartaproj.script.file.archive.edit_zip import EditZip
+from pyspartaproj.script.file.archive.compress_archive import CompressZip
+from pyspartaproj.script.file.archive.edit_archive import EditZip
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.safe.safe_trash import SafeTrash
 

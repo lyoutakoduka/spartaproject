@@ -11,9 +11,9 @@ from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.extension.path_context import PathPair, Paths
 from pyspartaproj.context.typed.user_context import ArchiveStatus
 from pyspartaproj.script.directory.create_directory import create_directory
-from pyspartaproj.script.file.archive.compress_zip import CompressZip
-from pyspartaproj.script.file.archive.edit_zip import EditZip
-from pyspartaproj.script.file.archive.take_out_zip import take_out_zip
+from pyspartaproj.script.file.archive.compress_archive import CompressZip
+from pyspartaproj.script.file.archive.edit_archive import EditZip
+from pyspartaproj.script.file.archive.take_out_archive import take_out_zip
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.modify.get_absolute import get_absolute_array
 from pyspartaproj.script.path.modify.get_relative import get_relative_array
