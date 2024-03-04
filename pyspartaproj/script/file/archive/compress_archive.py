@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Module to compress file or directory by zip format."""
+"""Module to compress file or directory by archive format."""
 
 from datetime import datetime
 from decimal import Decimal
@@ -30,7 +30,7 @@ initialize_decimal()
 
 
 class CompressArchive:
-    """Class to compress file or directory by zip format."""
+    """Class to compress file or directory by archive format."""
 
     def _init_variables(self, output_root: Path, compress: bool) -> None:
         self._output_root: Path = output_root
@@ -242,14 +242,14 @@ class CompressArchive:
 
             If archives isn't divided, following list is returned.
 
-            [<export directory>/<archive name>.zip]
+            [<export directory>/<archive name>.<archive format>]
 
             If archive is divided by three, following list is returned.
 
             [
-                <export directory>/<archive name>.zip,
-                <export directory>/<archive name>#0001.zip,
-                <export directory>/<archive name>#0002.zip
+                <export directory>/<archive name>.<archive format>,
+                <export directory>/<archive name>#0001.<archive format>,
+                <export directory>/<archive name>#0002.<archive format>
             ]
         """
         self._close_archive()
@@ -325,8 +325,8 @@ class CompressArchive:
                 Archives of first sample are compressed as follow.
 
                 output_root/
-                    |--target.zip (file1.txt + file2.txt)
-                    |--target#0001.zip (file3.txt)
+                    |--target.<archive format> (file1.txt + file2.txt)
+                    |--target#0001.<archive format> (file3.txt)
 
                 e.g., second sample to explain divided archive is follow.
 
@@ -338,8 +338,8 @@ class CompressArchive:
                 Archives of first sample are compressed as follow.
 
                 output_root/
-                    |--target.zip (file1.txt)
-                    |--target#0001.zip (file2.txt + file3.txt)
+                    |--target.<archive format> (file1.txt)
+                    |--target#0001.<archive format> (file2.txt + file3.txt)
 
                 e.g., third sample to explain divided archive is follow.
 
@@ -351,9 +351,9 @@ class CompressArchive:
                 Archives of first sample are compressed as follow.
 
                 output_root/
-                    |--target.zip (file1.txt)
-                    |--target#0001.zip (file2.txt)
-                    |--target#0002.zip (file3.txt)
+                    |--target.<archive format> (file1.txt)
+                    |--target#0001.<archive format> (file2.txt)
+                    |--target#0002.<archive format> (file3.txt)
 
             compress (bool, optional): Defaults to False.
                 If it's True, you can compress archive by LZMA format.
