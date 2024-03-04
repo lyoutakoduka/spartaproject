@@ -13,7 +13,7 @@ from pyspartaproj.context.typed.user_context import ArchiveStatus
 from pyspartaproj.script.directory.create_directory import create_directory
 from pyspartaproj.script.file.archive.compress_archive import CompressArchive
 from pyspartaproj.script.file.archive.edit_archive import EditArchive
-from pyspartaproj.script.file.archive.take_out_archive import take_out_zip
+from pyspartaproj.script.file.archive.take_out_archive import take_out_archive
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.modify.get_absolute import get_absolute_array
 from pyspartaproj.script.path.modify.get_relative import get_relative_array
@@ -262,7 +262,7 @@ def _compare_path_test(left: Paths, right: Paths) -> None:
 
 def _compare_took_out(archive_status: ArchiveStatus) -> None:
     _compare_path_test(
-        _get_took_out_list(take_out_zip(archive_status["archive"])),
+        _get_took_out_list(take_out_archive(archive_status["archive"])),
         archive_status["take"],
     )
 
