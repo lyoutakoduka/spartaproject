@@ -29,7 +29,7 @@ from pyspartaproj.script.time.stamp.get_timestamp import (
 initialize_decimal()
 
 
-class CompressZip:
+class CompressArchive:
     """Class to compress file or directory by zip format."""
 
     def _init_variables(self, output_root: Path, compress: bool) -> None:

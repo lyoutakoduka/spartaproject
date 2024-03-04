@@ -18,7 +18,7 @@ from pyspartaproj.script.time.stamp.get_timestamp import (
 )
 
 
-class EditZip(WorkSpace):
+class EditArchive(WorkSpace):
     """Class to edit internal of zip archive file."""
 
     def _initialize_variables(

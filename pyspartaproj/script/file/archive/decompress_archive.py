@@ -22,7 +22,7 @@ from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.time.stamp.set_timestamp import set_latest
 
 
-class DecompressZip:
+class DecompressArchive:
     """Class to decompress archive which is zip format."""
 
     def _initialize_paths(self, output_root: Path) -> None:
