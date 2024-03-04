@@ -12,6 +12,7 @@ from typing import Callable
 from pyspartaproj.context.default.integer_context import Ints2
 from pyspartaproj.context.extension.path_context import Paths2
 from pyspartaproj.context.extension.time_context import Times2, datetime
+from pyspartaproj.script.file.archive.archive_format import get_format
 from pyspartaproj.script.file.archive.compress_archive import CompressArchive
 from pyspartaproj.script.file.archive.decompress_archive import (
     DecompressArchive,
@@ -77,7 +78,7 @@ def _create_archive(temporary_root: Path, tree_root: Path) -> Path:
     return Path(
         make_archive(
             str(Path(temporary_root, *["archive"] * 2)),
-            format="zip",
+            format=get_format(),
             root_dir=str(tree_root),
         )
     )

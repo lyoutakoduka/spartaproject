@@ -13,6 +13,7 @@ from pyspartaproj.script.directory.create_directory import create_directory
 from pyspartaproj.script.directory.create_directory_parent import (
     create_directory_parent,
 )
+from pyspartaproj.script.file.archive.archive_format import get_format
 from pyspartaproj.script.file.json.convert_from_json import (
     string_pair_from_json,
 )
@@ -98,7 +99,10 @@ class DecompressArchive:
         sequential: Paths = [source_archive]
 
         for path in walk_iterator(
-            source_archive.parent, directory=False, depth=1, suffix="zip"
+            source_archive.parent,
+            directory=False,
+            depth=1,
+            suffix=get_format(),
         ):
             if source_archive != path:
                 if self._is_sequential_archive(path):
