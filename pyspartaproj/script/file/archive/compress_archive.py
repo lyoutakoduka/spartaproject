@@ -37,7 +37,7 @@ class CompressArchive:
         self._compress: bool = compress
         self._file_zip: ZipFile | None = None
 
-    def _get_file_zip(self) -> ZipFile | None:
+    def _get_archive_file(self) -> ZipFile | None:
         return self._file_zip
 
     def _init_limit_byte(self, byte: int) -> None:
@@ -123,24 +123,24 @@ class CompressArchive:
         return information
 
     def _make_directory(self, path: Path) -> None:
-        if file_zip := self._get_file_zip():
+        if file_zip := self._get_archive_file():
             file_zip.mkdir(str(path))
 
     def _write_string(self, path: Path, target_path: Path) -> None:
-        if file_zip := self._get_file_zip():
+        if file_zip := self._get_archive_file():
             file_zip.writestr(
                 self._get_archive_information(target_path, path),
                 byte_import(target_path),
             )
 
     def _get_information_list(self) -> Archives:
-        if file_zip := self._get_file_zip():
+        if file_zip := self._get_archive_file():
             return file_zip.infolist()
 
         return []
 
     def _close_archive(self) -> None:
-        if file_zip := self._get_file_zip():
+        if file_zip := self._get_archive_file():
             file_zip.close()
 
     def _add_file_to_archive(
