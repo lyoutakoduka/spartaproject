@@ -14,6 +14,7 @@ from pyspartaproj.context.extension.archive_context import Archives
 from pyspartaproj.context.extension.path_context import Paths
 from pyspartaproj.script.decimal.initialize_decimal import initialize_decimal
 from pyspartaproj.script.directory.create_directory import create_directory
+from pyspartaproj.script.file.archive.archive_format import rename_format
 from pyspartaproj.script.file.json.convert_to_json import multiple_to_json
 from pyspartaproj.script.file.json.export_json import json_dump
 from pyspartaproj.script.file.text.import_file import byte_import
@@ -77,8 +78,7 @@ class CompressArchive:
 
         self._output_index += 1
 
-        archived_path: Path = Path(self._output_root, "#".join(file_names))
-        return archived_path.with_suffix(".zip")
+        return rename_format(Path(self._output_root, "#".join(file_names)))
 
     def _reset_archive_byte(self) -> None:
         self._archived += [self._get_archive_path()]
