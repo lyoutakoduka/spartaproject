@@ -6,16 +6,27 @@
 from pathlib import Path
 
 from pyspartaproj.context.extension.path_context import Paths, PathsPair
+from pyspartaproj.script.file.archive.archive_format import rename_format
 from pyspartaproj.script.file.archive.compress_archive import CompressArchive
 from pyspartaproj.script.file.archive.edit_archive import EditArchive
 from pyspartaproj.script.path.iterate_directory import walk_iterator
+from pyspartaproj.script.path.modify.avoid_duplication import get_avoid_path
 from pyspartaproj.script.path.safe.safe_trash import SafeTrash
+
+
+def _get_archive_name(took_out_root: Path, archive_id: str) -> str:
+    archive_path = get_avoid_path(
+        rename_format(Path(took_out_root, archive_id))
+    )
+    return archive_path.stem
 
 
 def _take_out_archive(
     took_out_root: Path, file_paths: Paths, archive_id: str
 ) -> Path:
-    compress_archive = CompressArchive(took_out_root, archive_id=archive_id)
+    compress_archive = CompressArchive(
+        took_out_root, archive_id=_get_archive_name(took_out_root, archive_id)
+    )
 
     for file_path in file_paths:
         compress_archive.compress_archive(file_path)
