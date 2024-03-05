@@ -16,6 +16,6 @@ def get_avoid_path(path: Path) -> Path:
         Path: Path to avoid existing path
     """
     while path.exists():
-        path = path.with_name(path.name + "_")
+        path = path.with_stem(path.stem + "_")
 
     return path
