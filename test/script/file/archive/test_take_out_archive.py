@@ -230,9 +230,13 @@ def _get_take_out_override(working: PathPair) -> Paths:
     return take_paths
 
 
+def _get_keep_override() -> Paths:
+    return [Path(name) for name in _get_types()]
+
+
 def _create_archive_override(working: PathPair) -> ArchiveStatus:
     return _create_archive_shared(
-        working, _get_take_out_override(working), _get_empty()
+        working, _get_take_out_override(working), _get_keep_override()
     )
 
 
