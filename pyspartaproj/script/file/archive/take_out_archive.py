@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Module to take out directory from inside of archive as archive."""
+"""Module to take out directory from inside of archive."""
 
 from pathlib import Path
 
@@ -88,7 +88,7 @@ def _get_took_out(took_out_root: Path, decompressed_root: Path) -> Paths:
 
 
 def take_out_archive(archive_path: Path) -> Paths:
-    """Take out directory from inside of archive as archive.
+    """Take out directory from inside of archive.
 
     Args:
         archive_path (Path): Path of archive you want to take out.

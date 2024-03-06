@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Test module to take out directory from inside of archive as archive."""
+"""Test module to take out directory from inside of archive."""
 
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -280,7 +280,7 @@ def _common_test(archive_status: ArchiveStatus) -> None:
 
 
 def test_compleat() -> None:
-    """Take out directory from inside of archive as archive.
+    """Take out directory from inside of archive.
 
     But, directory doesn't exist in inside of archive.
     """
