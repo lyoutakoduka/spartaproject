@@ -87,7 +87,9 @@ def _get_took_out(took_out_root: Path, decompressed_root: Path) -> Paths:
     return archive_paths
 
 
-def take_out_archive(archive_path: Path) -> Paths:
+def take_out_archive(
+    archive_path: Path, took_out_root: Path | None = None
+) -> Paths:
     """Take out directory from inside of archive.
 
     Args:
@@ -96,7 +98,8 @@ def take_out_archive(archive_path: Path) -> Paths:
     Returns:
         Paths: List of directory path which is took out.
     """
+    if took_out_root is None:
+        took_out_root = archive_path.parent
+
     edit_archive = EditArchive(archive_path)
-    return _get_took_out(
-        archive_path.parent, edit_archive.get_decompressed_root()
-    )
+    return _get_took_out(took_out_root, edit_archive.get_decompressed_root())
