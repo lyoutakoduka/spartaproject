@@ -73,6 +73,10 @@ def _get_types() -> Strs:
     return ["first", "second", "third"]
 
 
+def _get_directory_names() -> Strs:
+    return ["source", "archive"]
+
+
 def _add_temporary_directory(
     directory_root: Path, directory_names: Strs
 ) -> Paths:
