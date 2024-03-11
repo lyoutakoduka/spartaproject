@@ -299,56 +299,72 @@ def test_compleat() -> None:
     """
 
     def individual_test(temporary_root: Path) -> None:
-        _default_test(_create_archive_compleat(working))
+        _default_test(
+            _create_archive_compleat(_create_directory_default(temporary_root))
+        )
 
     _inside_temporary_directory(individual_test)
 
 
 def test_empty() -> None:
     def individual_test(temporary_root: Path) -> None:
-        _default_test(_create_archive_empty(working))
+        _default_test(
+            _create_archive_empty(_create_directory_default(temporary_root))
+        )
 
     _inside_temporary_directory(individual_test)
 
 
 def test_single() -> None:
     def individual_test(temporary_root: Path) -> None:
-        _default_test(_create_archive_single(working))
+        _default_test(
+            _create_archive_single(_create_directory_default(temporary_root))
+        )
 
     _inside_temporary_directory(individual_test)
 
 
 def test_multiple() -> None:
     def individual_test(temporary_root: Path) -> None:
-        _default_test(_create_archive_multiple(working))
+        _default_test(
+            _create_archive_multiple(_create_directory_default(temporary_root))
+        )
 
     _inside_temporary_directory(individual_test)
 
 
 def test_mix() -> None:
     def individual_test(temporary_root: Path) -> None:
-        _default_test(_create_archive_mix(working))
+        _default_test(
+            _create_archive_mix(_create_directory_default(temporary_root))
+        )
 
     _inside_temporary_directory(individual_test)
 
 
 def test_list() -> None:
     def individual_test(temporary_root: Path) -> None:
-        _default_test(_create_archive_list(working))
+        _default_test(
+            _create_archive_list(_create_directory_default(temporary_root))
+        )
 
     _inside_temporary_directory(individual_test)
 
 
 def test_nest() -> None:
     def individual_test(temporary_root: Path) -> None:
-        _default_test(_create_archive_nest(working))
+        _default_test(
+            _create_archive_nest(_create_directory_default(temporary_root))
+        )
 
     _inside_temporary_directory(individual_test)
 
 
 def test_override() -> None:
     def individual_test(temporary_root: Path) -> None:
-        _default_test(_create_archive_override(working))
+        _default_test(
+            _create_archive_override(_create_directory_default(temporary_root))
+        )
 
     _inside_temporary_directory(individual_test)
 
