@@ -240,6 +240,14 @@ def _get_take_out_specific(working: PathPair) -> Paths:
     return _add_test_tree(working["source"], "directory")
 
 
+def _create_archive_specific(working: PathPair) -> ArchiveStatus:
+    return _create_archive_shared(
+        working,
+        _get_relative_paths(working, _get_take_out_specific(working)),
+        _get_empty(),
+    )
+
+
 def _replace_path_root(archive_path: Path, archive_root: Path) -> Paths:
     return get_absolute_array(
         _get_relative_archive(archive_path), root_path=archive_root
