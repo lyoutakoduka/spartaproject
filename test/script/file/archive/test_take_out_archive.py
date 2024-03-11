@@ -80,15 +80,6 @@ def _add_temporary_files(directory_root: Path, file_names: Strs) -> Paths:
     ]
 
 
-def _add_temporary_directory(
-    directory_root: Path, directory_names: Strs
-) -> Paths:
-    return [
-        create_directory(Path(directory_root, directory_name))
-        for directory_name in directory_names
-    ]
-
-
 def _add_directories_test(working: PathPair) -> Paths:
     return list(
         _create_working_directory(working["source"], _get_types()).values()
