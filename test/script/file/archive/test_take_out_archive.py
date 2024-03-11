@@ -22,16 +22,19 @@ from pyspartaproj.script.path.temporary.create_temporary_file import (
 )
 
 
-def _create_working_directory(temporary_root: Path) -> PathPair:
+def _create_working_directory(temporary_root: Path, names: Strs) -> PathPair:
     return {
-        name: create_directory(Path(temporary_root, name))
-        for name in ["source", "archive"]
+        name: create_directory(Path(temporary_root, name)) for name in names
     }
 
 
 def _inside_temporary_directory(function: Callable[[PathPair], None]) -> None:
     with TemporaryDirectory() as temporary_path:
-        function(_create_working_directory(Path(temporary_path)))
+        function(
+            _create_working_directory(
+                Path(temporary_path), ["source", "archive"]
+            )
+        )
 
 
 def _compress_test_archive(working: PathPair) -> Path:
