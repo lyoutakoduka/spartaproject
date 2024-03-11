@@ -90,7 +90,9 @@ def _add_temporary_directory(
 
 
 def _add_directories_test(working: PathPair) -> Paths:
-    return _add_temporary_directory(working["source"], _get_types())
+    return list(
+        _create_working_directory(working["source"], _get_types()).values()
+    )
 
 
 def _create_archive_shared(
