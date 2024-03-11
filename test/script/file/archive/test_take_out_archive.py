@@ -22,6 +22,18 @@ from pyspartaproj.script.path.temporary.create_temporary_file import (
 )
 
 
+def _get_empty() -> Paths:
+    return []
+
+
+def _get_types() -> Strs:
+    return ["first", "second", "third"]
+
+
+def _get_directory_names() -> Strs:
+    return ["source", "archive"]
+
+
 def _create_working_directory(temporary_root: Path, names: Strs) -> PathPair:
     return {
         name: create_directory(Path(temporary_root, name)) for name in names
@@ -66,18 +78,6 @@ def _add_temporary_files(directory_root: Path, file_names: Strs) -> Paths:
         create_temporary_file(directory_root, file_name=file_name)
         for file_name in file_names
     ]
-
-
-def _get_empty() -> Paths:
-    return []
-
-
-def _get_types() -> Strs:
-    return ["first", "second", "third"]
-
-
-def _get_directory_names() -> Strs:
-    return ["source", "archive"]
 
 
 def _add_temporary_directory(
