@@ -288,56 +288,56 @@ def test_compleat() -> None:
     But, directory doesn't exist in inside of archive.
     """
 
-    def individual_test(working: PathPair) -> None:
+    def individual_test(temporary_root: Path) -> None:
         _default_test(_create_archive_compleat(working))
 
     _inside_temporary_directory(individual_test)
 
 
 def test_empty() -> None:
-    def individual_test(working: PathPair) -> None:
+    def individual_test(temporary_root: Path) -> None:
         _default_test(_create_archive_empty(working))
 
     _inside_temporary_directory(individual_test)
 
 
 def test_single() -> None:
-    def individual_test(working: PathPair) -> None:
+    def individual_test(temporary_root: Path) -> None:
         _default_test(_create_archive_single(working))
 
     _inside_temporary_directory(individual_test)
 
 
 def test_multiple() -> None:
-    def individual_test(working: PathPair) -> None:
+    def individual_test(temporary_root: Path) -> None:
         _default_test(_create_archive_multiple(working))
 
     _inside_temporary_directory(individual_test)
 
 
 def test_mix() -> None:
-    def individual_test(working: PathPair) -> None:
+    def individual_test(temporary_root: Path) -> None:
         _default_test(_create_archive_mix(working))
 
     _inside_temporary_directory(individual_test)
 
 
 def test_list() -> None:
-    def individual_test(working: PathPair) -> None:
+    def individual_test(temporary_root: Path) -> None:
         _default_test(_create_archive_list(working))
 
     _inside_temporary_directory(individual_test)
 
 
 def test_nest() -> None:
-    def individual_test(working: PathPair) -> None:
+    def individual_test(temporary_root: Path) -> None:
         _default_test(_create_archive_nest(working))
 
     _inside_temporary_directory(individual_test)
 
 
 def test_override() -> None:
-    def individual_test(working: PathPair) -> None:
+    def individual_test(temporary_root: Path) -> None:
         _default_test(_create_archive_override(working))
 
     _inside_temporary_directory(individual_test)
