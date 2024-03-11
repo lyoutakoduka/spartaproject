@@ -44,7 +44,7 @@ def _inside_temporary_directory(function: Callable[[PathPair], None]) -> None:
     with TemporaryDirectory() as temporary_path:
         function(
             _create_working_directory(
-                Path(temporary_path), ["source", "archive"]
+                Path(temporary_path), _get_directory_names()
             )
         )
 
