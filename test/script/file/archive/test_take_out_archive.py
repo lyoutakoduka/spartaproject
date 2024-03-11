@@ -299,6 +299,16 @@ def _compare_relative(working: PathPair, archive_paths: Paths) -> None:
         assert archive_path.is_relative_to(working["specific"])
 
 
+def _specific_test(working: PathPair, archive_status: ArchiveStatus) -> None:
+    archive_paths: Paths = take_out_archive(
+        archive_status["archive"], took_out_root=working["specific"]
+    )
+
+    _compare_took_out(archive_status, archive_paths)
+    _compare_keep(archive_status)
+    _compare_relative(working, archive_paths)
+
+
 def _create_directory_default(temporary_root: Path) -> PathPair:
     return _create_working_directory(temporary_root, _get_directory_names())
 
