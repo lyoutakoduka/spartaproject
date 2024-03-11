@@ -286,6 +286,12 @@ def _create_directory_default(temporary_root: Path) -> PathPair:
     return _create_working_directory(temporary_root, _get_directory_names())
 
 
+def _create_directory_specific(temporary_root: Path) -> PathPair:
+    return _create_working_directory(
+        temporary_root, _get_directory_names() + ["specific"]
+    )
+
+
 def test_compleat() -> None:
     """Take out directory from inside of archive.
 
