@@ -294,6 +294,11 @@ def _default_test(archive_status: ArchiveStatus) -> None:
     _compare_keep(archive_status)
 
 
+def _compare_relative(working: PathPair, archive_paths: Paths) -> None:
+    for archive_path in archive_paths:
+        assert archive_path.is_relative_to(working["specific"])
+
+
 def _create_directory_default(temporary_root: Path) -> PathPair:
     return _create_working_directory(temporary_root, _get_directory_names())
 
