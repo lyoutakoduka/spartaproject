@@ -40,13 +40,9 @@ def _create_working_directory(temporary_root: Path, names: Strs) -> PathPair:
     }
 
 
-def _inside_temporary_directory(function: Callable[[PathPair], None]) -> None:
+def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as temporary_path:
-        function(
-            _create_working_directory(
-                Path(temporary_path), _get_directory_names()
-            )
-        )
+        function(Path(temporary_path))
 
 
 def _compress_test_archive(working: PathPair) -> Path:
