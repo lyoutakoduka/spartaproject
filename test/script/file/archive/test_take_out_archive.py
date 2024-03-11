@@ -282,6 +282,10 @@ def _default_test(archive_status: ArchiveStatus) -> None:
     _compare_keep(archive_status)
 
 
+def _create_directory_default(temporary_root: Path) -> PathPair:
+    return _create_working_directory(temporary_root, _get_directory_names())
+
+
 def test_compleat() -> None:
     """Take out directory from inside of archive.
 
