@@ -38,6 +38,10 @@ def _get_root_before(temporary_root: Path) -> Path:
     return Path(temporary_root, "before")
 
 
+def _get_root_after(temporary_root: Path) -> Path:
+    return Path(temporary_root, "after")
+
+
 def _add_archive(
     temporary_root: Path, compress_archive: CompressArchive
 ) -> Path:
@@ -68,7 +72,7 @@ def _get_archive_stamp_before(temporary_root: Path) -> TimePair:
 
 
 def _get_archive_stamp_after(temporary_root: Path) -> TimePair:
-    return _get_archive_stamp(Path(temporary_root, "after"))
+    return _get_archive_stamp(_get_root_after(temporary_root))
 
 
 def _create_archive(temporary_root: Path) -> None:
@@ -171,7 +175,7 @@ def _get_stamp_after(
     edit_history: PathPair,
     archived: Paths,
 ) -> TimePair:
-    _decompress_archive(Path(temporary_root, "after"), archived)
+    _decompress_archive(_get_root_after(temporary_root), archived)
 
     stamp_after: TimePair = _get_archive_stamp_after(temporary_root)
     _edit_time_stamp(edit_history, stamp_before, stamp_after)
