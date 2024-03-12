@@ -232,7 +232,8 @@ def test_single() -> None:
     def individual_test(temporary_root: Path) -> None:
         stamp_before: TimePair = _initialize_archive(temporary_root)
 
-        edit_archive = EditArchive(_get_archive_path(temporary_root))
+        archive_path: Path = _get_archive_path(temporary_root)
+        edit_archive = EditArchive(archive_path)
 
         _common_test(temporary_root, stamp_before, edit_archive)
 
@@ -246,10 +247,10 @@ def test_multiple() -> None:
     def individual_test(temporary_root: Path) -> None:
         stamp_before: TimePair = _initialize_archive(temporary_root)
 
-        edit_archive = EditArchive(
-            _get_archive_path_limit(temporary_root, limit_byte),
-            limit_byte=limit_byte,
+        archive_path: Path = _get_archive_path_limit(
+            temporary_root, limit_byte
         )
+        edit_archive = EditArchive(archive_path, limit_byte=limit_byte)
 
         _common_test(temporary_root, stamp_before, edit_archive)
 
