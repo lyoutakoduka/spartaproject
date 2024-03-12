@@ -280,12 +280,14 @@ def test_multiple() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         stamp_before: TimePair = _initialize_archive(temporary_root)
-        archive_path: Path = _get_archive_path_limit(
-            temporary_root, limit_byte
-        )
-        edit_archive = _get_edit_archive_limit(archive_path, limit_byte)
 
-        _common_test(temporary_root, stamp_before, edit_archive)
+        _common_test(
+            temporary_root,
+            stamp_before,
+            _get_edit_archive_limit(
+                _get_archive_path_limit(temporary_root, limit_byte), limit_byte
+            ),
+        )
 
     _inside_temporary_directory(individual_test)
 
