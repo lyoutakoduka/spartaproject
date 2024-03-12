@@ -103,12 +103,16 @@ class EditArchive(WorkSpace):
 
         self._archive_stamp: TimePair = self._get_archive_stamp()
 
-    def _finalize_archive(self) -> Paths | None:
-        archived: Paths | None = None
+    def _filter_time_stamp(self) -> Paths | None:
         archive_stamp: TimePair | None = self._is_difference_archive()
 
-        if archive_stamp is not None:  # Can't using: if value := func()
-            archived = self._compress_archive(archive_stamp)
+        if archive_stamp is None:  # Can't using: if value := func()
+            return None
+
+        return self._compress_archive(archive_stamp)
+
+    def _finalize_archive(self) -> Paths | None:
+        archived: Paths | None = self._filter_time_stamp()
 
         super().__del__()
 
