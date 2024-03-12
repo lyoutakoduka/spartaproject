@@ -236,6 +236,10 @@ def _get_edit_archive_limit(
     return EditArchive(archive_path, limit_byte=limit_byte)
 
 
+def _get_edit_archive_compress(archive_path: Path) -> EditArchive:
+    return EditArchive(archive_path, compress=True)
+
+
 def test_single() -> None:
     """Test to edit edit internal of single archive file."""
 
@@ -275,7 +279,7 @@ def test_compress() -> None:
 
         archive_path: Path = _get_archive_path(temporary_root)
         archive_size_before: int = get_file_size(archive_path)
-        edit_archive = EditArchive(archive_path, compress=True)
+        edit_archive = _get_edit_archive_compress(archive_path)
 
         compress_test(archive_size_before, archive_path, edit_archive)
 
