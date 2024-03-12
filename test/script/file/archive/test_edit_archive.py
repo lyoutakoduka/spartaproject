@@ -217,6 +217,11 @@ def compress_test(archive_path: Path, edit_archive: EditArchive) -> None:
     assert archive_size_before > get_file_size(archive_path)
 
 
+def _protect_test(edit_archive: EditArchive) -> None:
+    if edit_archive.close_archive() is not None:
+        fail()
+
+
 def _get_compress_archive(temporary_root: Path) -> CompressArchive:
     return CompressArchive(_get_root_archive(temporary_root))
 
