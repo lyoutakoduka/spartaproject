@@ -308,10 +308,7 @@ def test_protect() -> None:
     def individual_test(temporary_root: Path) -> None:
         _create_source(temporary_root)
 
-        archive_path: Path = _get_archive_path(temporary_root)
-        edit_archive = _get_edit_archive(archive_path)
-
-        _protect_test(edit_archive)
+        _protect_test(_get_edit_archive(_get_archive_path(temporary_root)))
 
     _inside_temporary_directory(individual_test)
 
