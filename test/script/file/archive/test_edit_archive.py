@@ -230,6 +230,12 @@ def _get_edit_archive(archive_path: Path) -> EditArchive:
     return EditArchive(archive_path)
 
 
+def _get_edit_archive_limit(
+    archive_path: Path, limit_byte: int
+) -> EditArchive:
+    return EditArchive(archive_path, limit_byte=limit_byte)
+
+
 def test_single() -> None:
     """Test to edit edit internal of single archive file."""
 
@@ -254,7 +260,7 @@ def test_multiple() -> None:
         archive_path: Path = _get_archive_path_limit(
             temporary_root, limit_byte
         )
-        edit_archive = EditArchive(archive_path, limit_byte=limit_byte)
+        edit_archive = _get_edit_archive_limit(archive_path, limit_byte)
 
         _common_test(temporary_root, stamp_before, edit_archive)
 
