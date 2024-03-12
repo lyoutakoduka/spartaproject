@@ -190,6 +190,15 @@ def _common_test(
     )
 
 
+def compress_test(
+    archive_size_before: int, archive_path: Path, edit_archive: EditArchive
+) -> None:
+    if edit_archive.close_archive():
+        assert archive_size_before > get_file_size(archive_path)
+    else:
+        fail()
+
+
 def _get_archive_path(temporary_root: Path) -> Path:
     return Path(temporary_root, "archive")
 
@@ -255,11 +264,9 @@ def test_compress() -> None:
 
         archive_path: Path = _get_archive_path(temporary_root)
         archive_size_before: int = get_file_size(archive_path)
+        edit_archive = EditArchive(archive_path, compress=True)
 
-        if EditArchive(archive_path, compress=True).close_archive():
-            assert archive_size_before > get_file_size(archive_path)
-        else:
-            fail()
+        compress_test(archive_size_before, archive_path, edit_archive)
 
     _inside_temporary_directory(individual_test)
 
