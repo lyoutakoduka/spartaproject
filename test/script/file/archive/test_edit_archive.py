@@ -79,16 +79,16 @@ def _get_archive_stamp_after(temporary_root: Path) -> TimePair:
     return _get_archive_stamp(_get_root_after(temporary_root))
 
 
-def _create_archive(temporary_root: Path) -> None:
+def _create_source(temporary_root: Path) -> None:
     create_temporary_tree(_get_root_before(temporary_root))
 
 
-def _create_archive_compress(temporary_root: Path) -> None:
+def _create_source_compress(temporary_root: Path) -> None:
     create_temporary_tree(_get_root_before(temporary_root), tree_weight=3)
 
 
 def _initialize_archive(temporary_root: Path) -> TimePair:
-    _create_archive(temporary_root)
+    _create_source(temporary_root)
     return _get_archive_stamp_before(temporary_root)
 
 
@@ -287,7 +287,7 @@ def test_compress() -> None:
     """Test to compare size of archive files."""
 
     def individual_test(temporary_root: Path) -> None:
-        _create_archive_compress(temporary_root)
+        _create_source_compress(temporary_root)
 
         archive_path: Path = _get_archive_path(temporary_root)
         edit_archive = _get_edit_archive_compress(archive_path)
