@@ -168,6 +168,9 @@ class EditArchive(WorkSpace):
             compress (bool, optional): Defaults to False.
                 If it's True, you can compress archive by LZMA format.
                 It's used for argument "compress" of class "CompressArchive".
+
+            protected (bool, optional): Defaults to False.
+                True if you don't want to update original archive.
         """
         super().__init__()
 
