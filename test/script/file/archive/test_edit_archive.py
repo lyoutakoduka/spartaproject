@@ -42,6 +42,10 @@ def _get_root_after(temporary_root: Path) -> Path:
     return Path(temporary_root, "after")
 
 
+def _get_archive_root(temporary_root: Path) -> Path:
+    return Path(temporary_root, "archive")
+
+
 def _add_archive(
     temporary_root: Path, compress_archive: CompressArchive
 ) -> Path:
@@ -211,10 +215,6 @@ def compress_test(archive_path: Path, edit_archive: EditArchive) -> None:
     _close_archive(edit_archive)
 
     assert archive_size_before > get_file_size(archive_path)
-
-
-def _get_archive_root(temporary_root: Path) -> Path:
-    return Path(temporary_root, "archive")
 
 
 def _get_compress_archive(temporary_root: Path) -> CompressArchive:
