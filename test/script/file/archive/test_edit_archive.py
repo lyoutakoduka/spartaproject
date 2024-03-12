@@ -194,9 +194,8 @@ def _common_test(
     )
 
 
-def compress_test(
-    archive_size_before: int, archive_path: Path, edit_archive: EditArchive
-) -> None:
+def compress_test(archive_path: Path, edit_archive: EditArchive) -> None:
+    archive_size_before: int = get_file_size(archive_path)
     _close_archive(edit_archive)
 
     assert archive_size_before > get_file_size(archive_path)
@@ -281,10 +280,9 @@ def test_compress() -> None:
         create_temporary_tree(Path(temporary_root, "before"), tree_weight=3)
 
         archive_path: Path = _get_archive_path(temporary_root)
-        archive_size_before: int = get_file_size(archive_path)
         edit_archive = _get_edit_archive_compress(archive_path)
 
-        compress_test(archive_size_before, archive_path, edit_archive)
+        compress_test(archive_path, edit_archive)
 
     _inside_temporary_directory(individual_test)
 
