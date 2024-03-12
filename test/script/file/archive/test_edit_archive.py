@@ -34,10 +34,14 @@ from pyspartaproj.script.time.stamp.get_timestamp import (
 )
 
 
+def _get_root_before(temporary_root: Path) -> Path:
+    return Path(temporary_root, "before")
+
+
 def _add_archive(
     temporary_root: Path, compress_archive: CompressArchive
 ) -> Path:
-    for path in walk_iterator(Path(temporary_root, "before")):
+    for path in walk_iterator(_get_root_before(temporary_root)):
         compress_archive.compress_archive(path)
 
     return compress_archive.close_archived()[0]
@@ -60,7 +64,7 @@ def _get_archive_stamp(stamp_root: Path) -> TimePair:
 
 
 def _get_archive_stamp_before(temporary_root: Path) -> TimePair:
-    return _get_archive_stamp(Path(temporary_root, "before"))
+    return _get_archive_stamp(_get_root_before(temporary_root))
 
 
 def _get_archive_stamp_after(temporary_root: Path) -> TimePair:
@@ -68,11 +72,11 @@ def _get_archive_stamp_after(temporary_root: Path) -> TimePair:
 
 
 def _create_archive(temporary_root: Path) -> None:
-    create_temporary_tree(Path(temporary_root, "before"))
+    create_temporary_tree(_get_root_before(temporary_root))
 
 
 def _create_archive_compress(temporary_root: Path) -> None:
-    create_temporary_tree(Path(temporary_root, "before"), tree_weight=3)
+    create_temporary_tree(_get_root_before(temporary_root), tree_weight=3)
 
 
 def _initialize_archive(temporary_root: Path) -> TimePair:
