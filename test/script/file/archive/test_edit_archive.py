@@ -210,6 +210,13 @@ def _get_archive_path(temporary_root: Path) -> Path:
     return _add_archive(temporary_root, _compress_archive(temporary_root))
 
 
+def _get_archive_path_limit(temporary_root: Path, limit_byte: int) -> Path:
+    return _add_archive(
+        temporary_root,
+        _compress_archive_limit(temporary_root, limit_byte),
+    )
+
+
 def test_single() -> None:
     """Test to edit edit internal of single archive file."""
 
@@ -231,10 +238,7 @@ def test_multiple() -> None:
         stamp_before: TimePair = _initialize_archive(temporary_root)
 
         edit_archive = EditArchive(
-            _add_archive(
-                temporary_root,
-                _compress_archive_limit(temporary_root, limit_byte),
-            ),
+            _get_archive_path_limit(temporary_root, limit_byte),
             limit_byte=limit_byte,
         )
 
