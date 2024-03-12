@@ -199,19 +199,19 @@ def compress_test(
         fail()
 
 
-def _get_archive_path(temporary_root: Path) -> Path:
+def _get_archive_root(temporary_root: Path) -> Path:
     return Path(temporary_root, "archive")
 
 
 def _compress_archive(temporary_root: Path) -> CompressArchive:
-    return CompressArchive(_get_archive_path(temporary_root))
+    return CompressArchive(_get_archive_root(temporary_root))
 
 
 def _compress_archive_limit(
     temporary_root: Path, limit_byte: int
 ) -> CompressArchive:
     return CompressArchive(
-        _get_archive_path(temporary_root), limit_byte=limit_byte
+        _get_archive_root(temporary_root), limit_byte=limit_byte
     )
 
 
