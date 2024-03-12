@@ -206,15 +206,17 @@ def _compress_archive_limit(
     )
 
 
+def _get_archive_path(temporary_root: Path) -> Path:
+    return _add_archive(temporary_root, _compress_archive(temporary_root))
+
+
 def test_single() -> None:
     """Test to edit edit internal of single archive file."""
 
     def individual_test(temporary_root: Path) -> None:
         stamp_before: TimePair = _initialize_archive(temporary_root)
 
-        edit_archive = EditArchive(
-            _add_archive(temporary_root, _compress_archive(temporary_root))
-        )
+        edit_archive = EditArchive(_get_archive_path(temporary_root))
 
         _common_test(temporary_root, stamp_before, edit_archive)
 
@@ -247,9 +249,7 @@ def test_compress() -> None:
     def individual_test(temporary_root: Path) -> None:
         create_temporary_tree(Path(temporary_root, "before"), tree_weight=3)
 
-        archive_path: Path = _add_archive(
-            temporary_root, _compress_archive(temporary_root)
-        )
+        archive_path: Path = _get_archive_path(temporary_root)
         archive_size_before: int = get_file_size(archive_path)
 
         if EditArchive(archive_path, compress=True).close_archive():
