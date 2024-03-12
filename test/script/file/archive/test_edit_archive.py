@@ -193,10 +193,12 @@ def _common_test(
 def compress_test(
     archive_size_before: int, archive_path: Path, edit_archive: EditArchive
 ) -> None:
-    if edit_archive.close_archive():
-        assert archive_size_before > get_file_size(archive_path)
-    else:
+    archived: Paths | None = edit_archive.close_archive()
+
+    if archived is None:
         fail()
+
+    assert archive_size_before > get_file_size(archive_path)
 
 
 def _get_archive_root(temporary_root: Path) -> Path:
