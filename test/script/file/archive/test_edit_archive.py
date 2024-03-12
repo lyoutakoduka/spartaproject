@@ -71,6 +71,10 @@ def _create_archive(temporary_root: Path) -> None:
     create_temporary_tree(Path(temporary_root, "before"))
 
 
+def _create_archive_compress(temporary_root: Path) -> None:
+    create_temporary_tree(Path(temporary_root, "before"), tree_weight=3)
+
+
 def _initialize_archive(temporary_root: Path) -> TimePair:
     _create_archive(temporary_root)
     return _get_archive_stamp_before(temporary_root)
@@ -277,7 +281,7 @@ def test_compress() -> None:
     """Test to compare size of archive files."""
 
     def individual_test(temporary_root: Path) -> None:
-        create_temporary_tree(Path(temporary_root, "before"), tree_weight=3)
+        _create_archive_compress(temporary_root)
 
         archive_path: Path = _get_archive_path(temporary_root)
         edit_archive = _get_edit_archive_compress(archive_path)
