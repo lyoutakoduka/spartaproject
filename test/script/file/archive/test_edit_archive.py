@@ -264,10 +264,12 @@ def test_single() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         stamp_before: TimePair = _initialize_archive(temporary_root)
-        archive_path: Path = _get_archive_path(temporary_root)
-        edit_archive = _get_edit_archive(archive_path)
 
-        _common_test(temporary_root, stamp_before, edit_archive)
+        _common_test(
+            temporary_root,
+            stamp_before,
+            _get_edit_archive(_get_archive_path(temporary_root)),
+        )
 
     _inside_temporary_directory(individual_test)
 
@@ -302,6 +304,18 @@ def test_compress() -> None:
     _inside_temporary_directory(individual_test)
 
 
+def test_protect() -> None:
+    def individual_test(temporary_root: Path) -> None:
+        _create_source(temporary_root)
+
+        archive_path: Path = _get_archive_path(temporary_root)
+        edit_archive = _get_edit_archive(archive_path)
+
+        _protect_test(edit_archive)
+
+    _inside_temporary_directory(individual_test)
+
+
 def main() -> bool:
     """All test of feature flags module.
 
@@ -311,4 +325,5 @@ def main() -> bool:
     test_single()
     test_multiple()
     test_compress()
+    test_protect()
     return True
