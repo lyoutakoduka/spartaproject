@@ -176,12 +176,10 @@ def _get_edit_history(edit_archive: EditArchive) -> PathPair:
 
 
 def _close_archive(edit_archive: EditArchive) -> Paths:
-    archived: Paths | None = edit_archive.close_archive()
-
-    if archived is None:
+    if archived := edit_archive.close_archive():
+        return archived
+    else:
         fail()
-
-    return archived
 
 
 def _common_test(
