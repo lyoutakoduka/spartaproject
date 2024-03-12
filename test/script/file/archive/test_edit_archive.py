@@ -42,7 +42,7 @@ def _get_root_after(temporary_root: Path) -> Path:
     return Path(temporary_root, "after")
 
 
-def _get_archive_root(temporary_root: Path) -> Path:
+def _get_root_archive(temporary_root: Path) -> Path:
     return Path(temporary_root, "archive")
 
 
@@ -218,14 +218,14 @@ def compress_test(archive_path: Path, edit_archive: EditArchive) -> None:
 
 
 def _get_compress_archive(temporary_root: Path) -> CompressArchive:
-    return CompressArchive(_get_archive_root(temporary_root))
+    return CompressArchive(_get_root_archive(temporary_root))
 
 
 def _get_compress_archive_limit(
     temporary_root: Path, limit_byte: int
 ) -> CompressArchive:
     return CompressArchive(
-        _get_archive_root(temporary_root), limit_byte=limit_byte
+        _get_root_archive(temporary_root), limit_byte=limit_byte
     )
 
 
