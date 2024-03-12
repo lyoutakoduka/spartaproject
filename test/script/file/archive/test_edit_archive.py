@@ -179,16 +179,15 @@ def _common_test(
     temporary_root: Path, stamp_before: TimePair, edit_archive: EditArchive
 ) -> None:
     edit_history: PathPair = _get_edit_history(edit_archive)
+    archived: Paths | None = edit_archive.close_archive()
 
-    if archived := edit_archive.close_archive():
-        assert is_same_stamp(
-            stamp_before,
-            _get_stamp_after(
-                temporary_root, stamp_before, edit_history, archived
-            ),
-        )
-    else:
+    if archived is None:
         fail()
+
+    assert is_same_stamp(
+        stamp_before,
+        _get_stamp_after(temporary_root, stamp_before, edit_history, archived),
+    )
 
 
 def test_single() -> None:
