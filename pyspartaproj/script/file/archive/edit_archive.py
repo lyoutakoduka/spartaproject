@@ -24,12 +24,17 @@ class EditArchive(WorkSpace):
     """Class to edit internal of archive file."""
 
     def _initialize_variables(
-        self, archive_path: Path, limit_byte: int, compress: bool
+        self,
+        archive_path: Path,
+        limit_byte: int,
+        compress: bool,
+        protected: bool,
     ) -> None:
         self._still_removed: bool = False
         self._archive_path: Path = archive_path
         self._limit_byte: int = limit_byte
         self._is_lzma_after: bool = compress
+        self._protected: bool = protected
 
     def _get_archive_stamp(self) -> TimePair:
         return get_directory_latest(walk_iterator(self.get_root()))
@@ -138,7 +143,11 @@ class EditArchive(WorkSpace):
         self.close_archive()
 
     def __init__(
-        self, archive_path: Path, limit_byte: int = 0, compress: bool = False
+        self,
+        archive_path: Path,
+        limit_byte: int = 0,
+        compress: bool = False,
+        protected: bool = False,
     ) -> None:
         """Initialize variables and decompress archive you selected.
 
@@ -155,5 +164,7 @@ class EditArchive(WorkSpace):
         """
         super().__init__()
 
-        self._initialize_variables(archive_path, limit_byte, compress)
+        self._initialize_variables(
+            archive_path, limit_byte, compress, protected
+        )
         self._initialize_archive()
