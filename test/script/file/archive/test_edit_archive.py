@@ -175,14 +175,20 @@ def _get_edit_history(edit_archive: EditArchive) -> PathPair:
     return _edit_to_archived(edit_archive.get_decompressed_root())
 
 
-def _common_test(
-    temporary_root: Path, stamp_before: TimePair, edit_archive: EditArchive
-) -> None:
-    edit_history: PathPair = _get_edit_history(edit_archive)
+def _close_archive(edit_archive: EditArchive) -> Paths:
     archived: Paths | None = edit_archive.close_archive()
 
     if archived is None:
         fail()
+
+    return archived
+
+
+def _common_test(
+    temporary_root: Path, stamp_before: TimePair, edit_archive: EditArchive
+) -> None:
+    edit_history: PathPair = _get_edit_history(edit_archive)
+    archived: Paths = _close_archive(edit_archive)
 
     assert is_same_stamp(
         stamp_before,
@@ -193,10 +199,7 @@ def _common_test(
 def compress_test(
     archive_size_before: int, archive_path: Path, edit_archive: EditArchive
 ) -> None:
-    archived: Paths | None = edit_archive.close_archive()
-
-    if archived is None:
-        fail()
+    _close_archive(edit_archive)
 
     assert archive_size_before > get_file_size(archive_path)
 
