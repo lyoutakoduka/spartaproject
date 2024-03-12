@@ -299,9 +299,7 @@ def test_compress() -> None:
         _create_source_compress(temporary_root)
 
         archive_path: Path = _get_archive_path(temporary_root)
-        edit_archive = _get_edit_archive_compress(archive_path)
-
-        compress_test(archive_path, edit_archive)
+        compress_test(archive_path, _get_edit_archive_compress(archive_path))
 
     _inside_temporary_directory(individual_test)
 
