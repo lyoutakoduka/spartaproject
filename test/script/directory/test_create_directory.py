@@ -15,7 +15,10 @@ from pyspartaproj.script.directory.create_directory import (
     create_directory_array,
     create_directory_pair,
 )
-from pyspartaproj.script.path.modify.get_absolute import get_absolute_array
+from pyspartaproj.script.path.modify.get_absolute import (
+    get_absolute_array,
+    get_absolute_pair,
+)
 from pyspartaproj.script.path.status.check_exists import (
     check_exists_array,
     check_exists_pair,
@@ -56,11 +59,11 @@ def _get_directory_array(temporary_root: Path, paths: Paths) -> Paths:
 def _get_directory_pair(
     temporary_path: Path, head_paths: PathPair
 ) -> PathPair:
-    paths: PathPair = {
-        name: Path(temporary_path, head_path)
-        for name, head_path in head_paths.items()
-    }
-    return create_directory_pair(create_directory_pair(paths))
+    return create_directory_pair(
+        create_directory_pair(
+            get_absolute_pair(head_paths, root_path=temporary_path)
+        )
+    )
 
 
 def test_array() -> None:
