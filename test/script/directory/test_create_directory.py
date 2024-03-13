@@ -39,18 +39,6 @@ def _inside_temporary_directory(function: Callable[[Path], bool]) -> None:
         assert function(Path(temporary_path))
 
 
-def test_single() -> None:
-    """Test to create empty directory to the path you specified."""
-    element_names: Strs = _get_element_names()
-
-    def individual_test(temporary_path: Path) -> bool:
-        return create_directory(
-            Path(temporary_path, element_names[0])
-        ).exists()
-
-    _inside_temporary_directory(individual_test)
-
-
 def _get_directory_array(root_path: Path, paths: Paths) -> Paths:
     return create_directory_array(
         get_absolute_array(paths, root_path=root_path)
@@ -71,6 +59,18 @@ def _get_relative_pair() -> PathPair:
     return {
         name: _get_head_path(i) for i, name in enumerate(_get_element_names())
     }
+
+
+def test_single() -> None:
+    """Test to create empty directory to the path you specified."""
+    element_names: Strs = _get_element_names()
+
+    def individual_test(temporary_path: Path) -> bool:
+        return create_directory(
+            Path(temporary_path, element_names[0])
+        ).exists()
+
+    _inside_temporary_directory(individual_test)
 
 
 def test_array() -> None:
