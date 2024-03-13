@@ -97,6 +97,10 @@ def take_out_archive(
     Args:
         archive_path (Path): Path of archive you want to take out.
 
+        protected (bool, optional): Defaults to False.
+            True if you don't want to update original archive.
+            It's used for argument "protected" of class "EditArchive".
+
     Returns:
         Paths: List of directory path which is took out.
     """
