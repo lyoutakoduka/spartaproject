@@ -47,7 +47,7 @@ def test_single() -> None:
     _inside_temporary_directory(individual_test)
 
 
-def _add_directory_root(temporary_root: Path, paths: Paths) -> Paths:
+def _get_directory_array(temporary_root: Path, paths: Paths) -> Paths:
     return create_directory_array(
         get_absolute_array(paths, root_path=temporary_root)
     )
@@ -61,7 +61,9 @@ def test_array() -> None:
 
     def individual_test(temporary_path: Path) -> bool:
         return bool_same_array(
-            check_exists_array(_add_directory_root(temporary_path, head_paths))
+            check_exists_array(
+                _get_directory_array(temporary_path, head_paths)
+            )
         )
 
     _inside_temporary_directory(individual_test)
