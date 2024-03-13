@@ -51,19 +51,15 @@ def test_single() -> None:
     _inside_temporary_directory(individual_test)
 
 
-def _get_directory_array(temporary_root: Path, paths: Paths) -> Paths:
+def _get_directory_array(root_path: Path, paths: Paths) -> Paths:
     return create_directory_array(
-        get_absolute_array(paths, root_path=temporary_root)
+        get_absolute_array(paths, root_path=root_path)
     )
 
 
-def _get_directory_pair(
-    temporary_path: Path, head_paths: PathPair
-) -> PathPair:
+def _get_directory_pair(root_path: Path, paths: PathPair) -> PathPair:
     return create_directory_pair(
-        create_directory_pair(
-            get_absolute_pair(head_paths, root_path=temporary_path)
-        )
+        create_directory_pair(get_absolute_pair(paths, root_path=root_path))
     )
 
 
