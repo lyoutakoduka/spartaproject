@@ -53,6 +53,16 @@ def _get_directory_array(temporary_root: Path, paths: Paths) -> Paths:
     )
 
 
+def _get_directory_pair(
+    temporary_path: Path, head_paths: PathPair
+) -> PathPair:
+    paths: PathPair = {
+        name: Path(temporary_path, head_path)
+        for name, head_path in head_paths.items()
+    }
+    return create_directory_pair(create_directory_pair(paths))
+
+
 def test_array() -> None:
     """Test to create empty directories which is specified by list."""
     head_paths: Paths = [
@@ -76,11 +86,9 @@ def test_pair() -> None:
     }
 
     def individual_test(temporary_path: Path) -> bool:
-        paths: PathPair = {
-            name: Path(temporary_path, head_path)
-            for name, head_path in head_paths.items()
-        }
-        return bool_same_pair(check_exists_pair(create_directory_pair(paths)))
+        return bool_same_pair(
+            check_exists_pair(_get_directory_pair(temporary_path, head_paths))
+        )
 
     _inside_temporary_directory(individual_test)
 
