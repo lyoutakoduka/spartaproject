@@ -210,7 +210,7 @@ def _common_test(
     )
 
 
-def compress_test(archive_path: Path, edit_archive: EditArchive) -> None:
+def _compress_test(archive_path: Path, edit_archive: EditArchive) -> None:
     archive_size_before: int = get_file_size(archive_path)
     _close_archive(edit_archive)
 
@@ -299,7 +299,7 @@ def test_compress() -> None:
         _create_source_compress(temporary_root)
 
         archive_path: Path = _get_archive_path(temporary_root)
-        compress_test(archive_path, _get_edit_archive_compress(archive_path))
+        _compress_test(archive_path, _get_edit_archive_compress(archive_path))
 
     _inside_temporary_directory(individual_test)
 
