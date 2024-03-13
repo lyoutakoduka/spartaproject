@@ -15,6 +15,7 @@ from pyspartaproj.script.directory.create_directory import (
     create_directory_array,
     create_directory_pair,
 )
+from pyspartaproj.script.path.modify.get_absolute import get_absolute_array
 from pyspartaproj.script.path.status.check_exists import (
     check_exists_array,
     check_exists_pair,
@@ -47,7 +48,7 @@ def test_single() -> None:
 
 
 def _add_directory_root(temporary_root: Path, paths: Paths) -> Paths:
-    return [Path(temporary_root, path) for path in paths]
+    return get_absolute_array(paths, root_path=temporary_root)
 
 
 def test_array() -> None:
