@@ -419,6 +419,13 @@ def test_specific() -> None:
     _inside_temporary_directory(individual_test)
 
 
+def test_protect() -> None:
+    def individual_test(temporary_root: Path) -> None:
+        _create_archive_protect(_create_directory_default(temporary_root))
+
+    _inside_temporary_directory(individual_test)
+
+
 def main() -> bool:
     """Run all tests.
 
@@ -434,4 +441,5 @@ def main() -> bool:
     test_nest()
     test_override()
     test_specific()
+    test_protect()
     return True
