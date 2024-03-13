@@ -63,11 +63,13 @@ def _get_directory_pair(root_path: Path, paths: PathPair) -> PathPair:
     )
 
 
+def _get_relative_array() -> Paths:
+    return [_get_head_path(i) for i, _ in enumerate(_get_element_names())]
+
+
 def test_array() -> None:
     """Test to create empty directories which is specified by list."""
-    relative_paths: Paths = [
-        _get_head_path(i) for i, _ in enumerate(_get_element_names())
-    ]
+    relative_paths: Paths = _get_relative_array()
 
     def individual_test(temporary_path: Path) -> bool:
         return bool_same_array(
