@@ -252,6 +252,10 @@ def _create_archive_specific(working: PathPair) -> ArchiveStatus:
     )
 
 
+def _get_take_out_protect(working: PathPair) -> Paths:
+    return _add_test_tree_simple(working)
+
+
 def _replace_path_root(archive_path: Path, archive_root: Path) -> Paths:
     return get_absolute_array(
         _get_relative_archive(archive_path), root_path=archive_root
