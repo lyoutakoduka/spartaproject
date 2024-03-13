@@ -44,8 +44,9 @@ def test_single() -> None:
     element_names: Strs = _get_element_names()
 
     def individual_test(temporary_path: Path) -> bool:
-        path: Path = create_directory(Path(temporary_path, element_names[0]))
-        return path.exists()
+        return create_directory(
+            Path(temporary_path, element_names[0])
+        ).exists()
 
     _inside_temporary_directory(individual_test)
 
