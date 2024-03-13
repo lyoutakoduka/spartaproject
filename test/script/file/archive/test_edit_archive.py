@@ -305,6 +305,8 @@ def test_compress() -> None:
 
 
 def test_protect() -> None:
+    """Test to take out directory from protected archive."""
+
     def individual_test(temporary_root: Path) -> None:
         _create_source(temporary_root)
 
