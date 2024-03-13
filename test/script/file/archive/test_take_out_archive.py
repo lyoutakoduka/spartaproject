@@ -256,6 +256,13 @@ def _get_take_out_protect(working: PathPair) -> Paths:
     return _add_test_tree_simple(working)
 
 
+def _create_archive_protect(working: PathPair) -> ArchiveStatus:
+    taka_paths: Paths = _get_relative_paths(
+        working, _get_take_out_protect(working)
+    )
+    return _create_archive_shared(working, taka_paths, taka_paths)
+
+
 def _replace_path_root(archive_path: Path, archive_root: Path) -> Paths:
     return get_absolute_array(
         _get_relative_archive(archive_path), root_path=archive_root
