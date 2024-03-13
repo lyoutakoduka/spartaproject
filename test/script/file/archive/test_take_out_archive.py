@@ -97,6 +97,10 @@ def _add_test_tree(file_root: Path, name: str) -> Paths:
     return [file_root, create_temporary_file(file_root)]
 
 
+def _add_test_tree_simple(working: PathPair) -> Paths:
+    return _add_test_tree(working["source"], "directory")
+
+
 def _create_archive_compleat(working: PathPair) -> ArchiveStatus:
     return _create_archive_shared(
         working,
@@ -118,7 +122,7 @@ def _create_archive_empty(working: PathPair) -> ArchiveStatus:
 
 
 def _get_take_out_single(working: PathPair) -> Paths:
-    return _add_test_tree(working["source"], "directory")
+    return _add_test_tree_simple(working)
 
 
 def _create_archive_single(working: PathPair) -> ArchiveStatus:
@@ -149,7 +153,7 @@ def _create_archive_multiple(working: PathPair) -> ArchiveStatus:
 
 
 def _get_take_out_mix(working: PathPair) -> Paths:
-    return _add_test_tree(working["source"], "directory")
+    return _add_test_tree_simple(working)
 
 
 def _get_keep_mix(working: PathPair) -> Paths:
