@@ -46,6 +46,10 @@ def test_single() -> None:
     _inside_temporary_directory(individual_test)
 
 
+def _add_directory_root(temporary_root: Path, paths: Paths) -> Paths:
+    return [Path(temporary_root, path) for path in paths]
+
+
 def test_array() -> None:
     """Test to create empty directories which is specified by list."""
     head_paths: Paths = [
@@ -56,10 +60,7 @@ def test_array() -> None:
         return bool_same_array(
             check_exists_array(
                 create_directory_array(
-                    [
-                        Path(temporary_path, head_path)
-                        for head_path in head_paths
-                    ]
+                    _add_directory_root(temporary_path, head_paths)
                 )
             )
         )
