@@ -335,7 +335,7 @@ def _create_directory_specific(temporary_root: Path) -> PathPair:
 
 
 def test_compleat() -> None:
-    """Take out directory from inside of archive.
+    """Test to take out directory from inside of archive.
 
     But, directory doesn't exist in inside of archive.
     """
@@ -349,6 +349,11 @@ def test_compleat() -> None:
 
 
 def test_empty() -> None:
+    """Test to take out directory from inside of archive.
+
+    But, only empty directory is exist in inside of archive.
+    """
+
     def individual_test(temporary_root: Path) -> None:
         _default_test(
             _create_archive_empty(_create_directory_default(temporary_root))
