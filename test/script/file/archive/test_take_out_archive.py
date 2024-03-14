@@ -363,6 +363,11 @@ def test_empty() -> None:
 
 
 def test_single() -> None:
+    """Test to take out directory from inside of archive.
+
+    Archive include single directory with single file.
+    """
+
     def individual_test(temporary_root: Path) -> None:
         _default_test(
             _create_archive_single(_create_directory_default(temporary_root))
@@ -372,6 +377,11 @@ def test_single() -> None:
 
 
 def test_multiple() -> None:
+    """Test to take out directory from inside of archive.
+
+    Archive include single directory with multiple file.
+    """
+
     def individual_test(temporary_root: Path) -> None:
         _default_test(
             _create_archive_multiple(_create_directory_default(temporary_root))
@@ -381,6 +391,11 @@ def test_multiple() -> None:
 
 
 def test_mix() -> None:
+    """Test to take out directory from inside of archive.
+
+    Archive include single file and single directory with single file.
+    """
+
     def individual_test(temporary_root: Path) -> None:
         _default_test(
             _create_archive_mix(_create_directory_default(temporary_root))
@@ -390,6 +405,11 @@ def test_mix() -> None:
 
 
 def test_list() -> None:
+    """Test to take out directory from inside of archive.
+
+    Archive include multiple directories with single file.
+    """
+
     def individual_test(temporary_root: Path) -> None:
         _default_test(
             _create_archive_list(_create_directory_default(temporary_root))
@@ -399,6 +419,11 @@ def test_list() -> None:
 
 
 def test_nest() -> None:
+    """Test to take out directory from inside of archive.
+
+    Archive include nested directories with single file.
+    """
+
     def individual_test(temporary_root: Path) -> None:
         _default_test(
             _create_archive_nest(_create_directory_default(temporary_root))
@@ -408,6 +433,11 @@ def test_nest() -> None:
 
 
 def test_override() -> None:
+    """Test to take out directory from inside of archive.
+
+    Avoid override of path when take out directory in archive.
+    """
+
     def individual_test(temporary_root: Path) -> None:
         _default_test(
             _create_archive_override(_create_directory_default(temporary_root))
@@ -417,6 +447,11 @@ def test_override() -> None:
 
 
 def test_specific() -> None:
+    """Test to take out directory from inside of archive.
+
+    Take out directory in archive to specific root directory.
+    """
+
     def individual_test(temporary_root: Path) -> None:
         working: PathPair = _create_directory_specific(temporary_root)
         _specific_test(working, _create_archive_specific(working))
@@ -425,6 +460,11 @@ def test_specific() -> None:
 
 
 def test_protect() -> None:
+    """Test to take out directory from inside of archive.
+
+    Take out directory in protected archive, but archive isn't updated.
+    """
+
     def individual_test(temporary_root: Path) -> None:
         _create_archive_protect(_create_directory_default(temporary_root))
 
