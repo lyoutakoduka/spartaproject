@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Test module to edit internal of zip archive file."""
+"""Test module to edit internal of archive file."""
 
 from datetime import datetime
 from pathlib import Path
@@ -11,13 +11,16 @@ from typing import Callable
 from pyspartaproj.context.extension.path_context import PathPair, Paths
 from pyspartaproj.context.extension.time_context import TimePair
 from pyspartaproj.interface.pytest import fail
-from pyspartaproj.script.file.archive.compress_zip import CompressZip
-from pyspartaproj.script.file.archive.decompress_zip import DecompressZip
-from pyspartaproj.script.file.archive.edit_zip import EditZip
+from pyspartaproj.script.file.archive.compress_archive import CompressArchive
+from pyspartaproj.script.file.archive.decompress_archive import (
+    DecompressArchive,
+)
+from pyspartaproj.script.file.archive.edit_archive import EditArchive
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.modify.get_relative import get_relative
 from pyspartaproj.script.path.safe.safe_rename import SafeRename
 from pyspartaproj.script.path.safe.safe_trash import SafeTrash
+from pyspartaproj.script.path.status.get_statistic import get_file_size
 from pyspartaproj.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
@@ -31,11 +34,25 @@ from pyspartaproj.script.time.stamp.get_timestamp import (
 )
 
 
-def _add_archive(temporary_root: Path, compress_zip: CompressZip) -> Path:
-    for path in walk_iterator(Path(temporary_root, "before")):
-        compress_zip.compress_archive(path)
+def _get_root_before(temporary_root: Path) -> Path:
+    return Path(temporary_root, "before")
 
-    return compress_zip.close_archived()[0]
+
+def _get_root_after(temporary_root: Path) -> Path:
+    return Path(temporary_root, "after")
+
+
+def _get_root_archive(temporary_root: Path) -> Path:
+    return Path(temporary_root, "archive")
+
+
+def _add_archive(
+    temporary_root: Path, compress_archive: CompressArchive
+) -> Path:
+    for path in walk_iterator(_get_root_before(temporary_root)):
+        compress_archive.compress_archive(path)
+
+    return compress_archive.close_archived()[0]
 
 
 def _get_stamp_key(path_text: str, stamp_root: Path) -> str:
@@ -55,19 +72,23 @@ def _get_archive_stamp(stamp_root: Path) -> TimePair:
 
 
 def _get_archive_stamp_before(temporary_root: Path) -> TimePair:
-    return _get_archive_stamp(Path(temporary_root, "before"))
+    return _get_archive_stamp(_get_root_before(temporary_root))
 
 
 def _get_archive_stamp_after(temporary_root: Path) -> TimePair:
-    return _get_archive_stamp(Path(temporary_root, "after"))
+    return _get_archive_stamp(_get_root_after(temporary_root))
 
 
-def _create_archive(temporary_root: Path) -> None:
-    create_temporary_tree(Path(temporary_root, "before"))
+def _create_source(temporary_root: Path) -> None:
+    create_temporary_tree(_get_root_before(temporary_root))
+
+
+def _create_source_compress(temporary_root: Path) -> None:
+    create_temporary_tree(_get_root_before(temporary_root), tree_weight=3)
 
 
 def _initialize_archive(temporary_root: Path) -> TimePair:
-    _create_archive(temporary_root)
+    _create_source(temporary_root)
     return _get_archive_stamp_before(temporary_root)
 
 
@@ -107,10 +128,10 @@ def _edit_to_archived(archive_root: Path) -> PathPair:
 
 
 def _decompress_archive(after_root: Path, archived: Paths) -> None:
-    decompress_zip = DecompressZip(after_root)
+    decompress_archive = DecompressArchive(after_root)
 
     for archived_path in archived:
-        decompress_zip.decompress_archive(archived_path)
+        decompress_archive.decompress_archive(archived_path)
 
 
 def _remove_stamp_after(path_text: str, stamp_after: TimePair) -> None:
@@ -158,7 +179,7 @@ def _get_stamp_after(
     edit_history: PathPair,
     archived: Paths,
 ) -> TimePair:
-    _decompress_archive(Path(temporary_root, "after"), archived)
+    _decompress_archive(_get_root_after(temporary_root), archived)
 
     stamp_after: TimePair = _get_archive_stamp_after(temporary_root)
     _edit_time_stamp(edit_history, stamp_before, stamp_after)
@@ -166,80 +187,130 @@ def _get_stamp_after(
     return stamp_after
 
 
-def _get_edit_history(edit_zip: EditZip) -> PathPair:
-    return _edit_to_archived(edit_zip.get_decompressed_root())
+def _get_edit_history(edit_archive: EditArchive) -> PathPair:
+    return _edit_to_archived(edit_archive.get_decompressed_root())
 
 
-def _get_archive_size(archive_path: Path) -> int:
-    return archive_path.stat().st_size
-
-
-def _common_test(
-    temporary_root: Path, stamp_before: TimePair, edit_zip: EditZip
-) -> None:
-    edit_history: PathPair = _get_edit_history(edit_zip)
-
-    if archived := edit_zip.close_archive():
-        assert is_same_stamp(
-            stamp_before,
-            _get_stamp_after(
-                temporary_root, stamp_before, edit_history, archived
-            ),
-        )
+def _close_archive(edit_archive: EditArchive) -> Paths:
+    if archived := edit_archive.close_archive():
+        return archived
     else:
         fail()
 
 
+def _common_test(
+    temporary_root: Path, stamp_before: TimePair, edit_archive: EditArchive
+) -> None:
+    edit_history: PathPair = _get_edit_history(edit_archive)
+    archived: Paths = _close_archive(edit_archive)
+
+    assert is_same_stamp(
+        stamp_before,
+        _get_stamp_after(temporary_root, stamp_before, edit_history, archived),
+    )
+
+
+def _compress_test(archive_path: Path, edit_archive: EditArchive) -> None:
+    archive_size_before: int = get_file_size(archive_path)
+    _close_archive(edit_archive)
+
+    assert archive_size_before > get_file_size(archive_path)
+
+
+def _protect_test(edit_archive: EditArchive) -> None:
+    if edit_archive.close_archive() is not None:
+        fail()
+
+
+def _get_compress_archive(temporary_root: Path) -> CompressArchive:
+    return CompressArchive(_get_root_archive(temporary_root))
+
+
+def _get_compress_archive_limit(
+    temporary_root: Path, limit_byte: int
+) -> CompressArchive:
+    return CompressArchive(
+        _get_root_archive(temporary_root), limit_byte=limit_byte
+    )
+
+
+def _get_archive_path(temporary_root: Path) -> Path:
+    return _add_archive(temporary_root, _get_compress_archive(temporary_root))
+
+
+def _get_archive_path_limit(temporary_root: Path, limit_byte: int) -> Path:
+    return _add_archive(
+        temporary_root,
+        _get_compress_archive_limit(temporary_root, limit_byte),
+    )
+
+
+def _get_edit_archive(archive_path: Path) -> EditArchive:
+    return EditArchive(archive_path)
+
+
+def _get_edit_archive_limit(
+    archive_path: Path, limit_byte: int
+) -> EditArchive:
+    return EditArchive(archive_path, limit_byte=limit_byte)
+
+
+def _get_edit_archive_compress(archive_path: Path) -> EditArchive:
+    return EditArchive(archive_path, compress=True)
+
+
 def test_single() -> None:
-    """Test to edit edit internal of single zip archive file."""
+    """Test to edit edit internal of single archive file."""
 
     def individual_test(temporary_root: Path) -> None:
         stamp_before: TimePair = _initialize_archive(temporary_root)
 
-        compress_zip = CompressZip(Path(temporary_root, "archive"))
-        edit_zip = EditZip(_add_archive(temporary_root, compress_zip))
-
-        _common_test(temporary_root, stamp_before, edit_zip)
+        _common_test(
+            temporary_root,
+            stamp_before,
+            _get_edit_archive(_get_archive_path(temporary_root)),
+        )
 
     _inside_temporary_directory(individual_test)
 
 
 def test_multiple() -> None:
-    """Test to edit edit internal of multiple zip archive files."""
+    """Test to edit edit internal of multiple archive files."""
     limit_byte: int = 50
 
     def individual_test(temporary_root: Path) -> None:
         stamp_before: TimePair = _initialize_archive(temporary_root)
 
-        compress_zip = CompressZip(
-            Path(temporary_root, "archive"), limit_byte=limit_byte
+        _common_test(
+            temporary_root,
+            stamp_before,
+            _get_edit_archive_limit(
+                _get_archive_path_limit(temporary_root, limit_byte), limit_byte
+            ),
         )
-        edit_zip = EditZip(
-            _add_archive(temporary_root, compress_zip),
-            limit_byte=limit_byte,
-        )
-
-        _common_test(temporary_root, stamp_before, edit_zip)
 
     _inside_temporary_directory(individual_test)
 
 
 def test_compress() -> None:
-    """Test to compare size fo zip archive files."""
+    """Test to compare size of archive files."""
 
     def individual_test(temporary_root: Path) -> None:
-        create_temporary_tree(Path(temporary_root, "before"), tree_weight=3)
+        _create_source_compress(temporary_root)
 
-        archive_path = _add_archive(
-            temporary_root,
-            CompressZip(Path(temporary_root, "archive")),
-        )
-        archive_size_before = _get_archive_size(archive_path)
+        archive_path: Path = _get_archive_path(temporary_root)
+        _compress_test(archive_path, _get_edit_archive_compress(archive_path))
 
-        if EditZip(archive_path, compress=True).close_archive():
-            assert archive_size_before > _get_archive_size(archive_path)
-        else:
-            fail()
+    _inside_temporary_directory(individual_test)
+
+
+def test_protect() -> None:
+    """Test to take out directory from protected archive."""
+
+    def individual_test(temporary_root: Path) -> None:
+        _create_source(temporary_root)
+
+        _protect_test(_get_edit_archive(_get_archive_path(temporary_root)))
 
     _inside_temporary_directory(individual_test)
 
@@ -253,4 +324,5 @@ def main() -> bool:
     test_single()
     test_multiple()
     test_compress()
+    test_protect()
     return True

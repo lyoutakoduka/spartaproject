@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Test module to decompress archive which is zip format."""
+"""Test module to decompress file or directory by archive format."""
 
 from itertools import chain
 from pathlib import Path
@@ -12,11 +12,15 @@ from typing import Callable
 from pyspartaproj.context.default.integer_context import Ints2
 from pyspartaproj.context.extension.path_context import Paths2
 from pyspartaproj.context.extension.time_context import Times2, datetime
-from pyspartaproj.script.file.archive.compress_zip import CompressZip
-from pyspartaproj.script.file.archive.decompress_zip import DecompressZip
+from pyspartaproj.script.file.archive.archive_format import get_format
+from pyspartaproj.script.file.archive.compress_archive import CompressArchive
+from pyspartaproj.script.file.archive.decompress_archive import (
+    DecompressArchive,
+)
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.modify.get_relative import get_relative_array
 from pyspartaproj.script.path.safe.safe_trash import SafeTrash
+from pyspartaproj.script.path.status.get_statistic import get_file_size_array
 from pyspartaproj.script.path.temporary.create_temporary_tree import (
     create_temporary_tree,
 )
@@ -48,8 +52,7 @@ def _compare_path_name(sorted_paths: Paths2, temporary_root: Path) -> None:
 
 def _compare_file_size(sorted_paths: Paths2) -> None:
     file_size_pair: Ints2 = [
-        [path.stat().st_size for path in paths if path.is_file()]
-        for paths in sorted_paths
+        get_file_size_array(paths) for paths in sorted_paths
     ]
 
     assert file_size_pair[0] == file_size_pair[1]
@@ -75,14 +78,14 @@ def _create_archive(temporary_root: Path, tree_root: Path) -> Path:
     return Path(
         make_archive(
             str(Path(temporary_root, *["archive"] * 2)),
-            format="zip",
+            format=get_format(),
             root_dir=str(tree_root),
         )
     )
 
 
 def _compress_to_decompress(temporary_root: Path, tree_root: Path) -> None:
-    DecompressZip(Path(temporary_root, "extract")).decompress_archive(
+    DecompressArchive(Path(temporary_root, "extract")).decompress_archive(
         _create_archive(temporary_root, tree_root)
     )
 
@@ -138,7 +141,7 @@ def test_status() -> None:
     def individual_test(temporary_root: Path, tree_root: Path) -> None:
         create_temporary_tree(tree_root)
 
-        assert not DecompressZip(temporary_root).is_lzma_archive(
+        assert not DecompressArchive(temporary_root).is_lzma_archive(
             _create_archive(temporary_root, tree_root)
         )
 
@@ -149,21 +152,21 @@ def test_limit() -> None:
     """Test to decompress sequential archives."""
 
     def individual_test(temporary_root: Path, tree_root: Path) -> None:
-        compress_zip = CompressZip(
+        compress_archive = CompressArchive(
             Path(temporary_root, "archive"), limit_byte=200
         )
 
         for path in walk_iterator(
             create_temporary_tree(tree_root, tree_deep=5)
         ):
-            compress_zip.compress_archive(path)
+            compress_archive.compress_archive(path)
 
-        decompress_zip = DecompressZip(Path(temporary_root, "extract"))
+        decompress_archive = DecompressArchive(Path(temporary_root, "extract"))
 
-        for path in decompress_zip.sequential_archives(
-            compress_zip.close_archived()[0]
+        for path in decompress_archive.sequential_archives(
+            compress_archive.close_archived()[0]
         ):
-            decompress_zip.decompress_archive(path)
+            decompress_archive.decompress_archive(path)
 
         _common_test(temporary_root)
 
@@ -177,18 +180,18 @@ def test_timestamp() -> None:
     )
 
     def individual_test(temporary_root: Path, tree_root: Path) -> None:
-        compress_zip = CompressZip(Path(temporary_root, "archive"))
+        compress_archive = CompressArchive(Path(temporary_root, "archive"))
 
         for path in walk_iterator(create_temporary_tree(tree_root)):
             if path.is_file():
                 set_latest(path, expected)
 
-            compress_zip.compress_archive(path)
+            compress_archive.compress_archive(path)
 
-        decompress_zip = DecompressZip(Path(temporary_root, "extract"))
+        decompress_archive = DecompressArchive(Path(temporary_root, "extract"))
 
-        for path in compress_zip.close_archived():
-            decompress_zip.decompress_archive(path)
+        for path in compress_archive.close_archived():
+            decompress_archive.decompress_archive(path)
 
         _compare_timestamp(_common_test(temporary_root), expected)
 

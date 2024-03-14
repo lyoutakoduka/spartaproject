@@ -15,7 +15,11 @@ from pyspartaproj.script.directory.create_directory import (
     create_directory_array,
     create_directory_pair,
 )
-from pyspartaproj.script.path.check_exists import (
+from pyspartaproj.script.path.modify.get_absolute import (
+    get_absolute_array,
+    get_absolute_pair,
+)
+from pyspartaproj.script.path.status.check_exists import (
     check_exists_array,
     check_exists_pair,
 )
@@ -35,32 +39,48 @@ def _inside_temporary_directory(function: Callable[[Path], bool]) -> None:
         assert function(Path(temporary_path))
 
 
+def _get_directory_array(root_path: Path, paths: Paths) -> Paths:
+    return create_directory_array(
+        get_absolute_array(paths, root_path=root_path)
+    )
+
+
+def _get_directory_pair(root_path: Path, paths: PathPair) -> PathPair:
+    return create_directory_pair(
+        create_directory_pair(get_absolute_pair(paths, root_path=root_path))
+    )
+
+
+def _get_relative_array() -> Paths:
+    return [_get_head_path(i) for i, _ in enumerate(_get_element_names())]
+
+
+def _get_relative_pair() -> PathPair:
+    return {
+        name: _get_head_path(i) for i, name in enumerate(_get_element_names())
+    }
+
+
 def test_single() -> None:
     """Test to create empty directory to the path you specified."""
     element_names: Strs = _get_element_names()
 
     def individual_test(temporary_path: Path) -> bool:
-        path: Path = create_directory(Path(temporary_path, element_names[0]))
-        return path.exists()
+        return create_directory(
+            Path(temporary_path, element_names[0])
+        ).exists()
 
     _inside_temporary_directory(individual_test)
 
 
 def test_array() -> None:
     """Test to create empty directories which is specified by list."""
-    head_paths: Paths = [
-        _get_head_path(i) for i, _ in enumerate(_get_element_names())
-    ]
+    relative_paths: Paths = _get_relative_array()
 
     def individual_test(temporary_path: Path) -> bool:
         return bool_same_array(
             check_exists_array(
-                create_directory_array(
-                    [
-                        Path(temporary_path, head_path)
-                        for head_path in head_paths
-                    ]
-                )
+                _get_directory_array(temporary_path, relative_paths)
             )
         )
 
@@ -69,16 +89,14 @@ def test_array() -> None:
 
 def test_pair() -> None:
     """Test to create empty directories which is specified by dictionary."""
-    head_paths: PathPair = {
-        name: _get_head_path(i) for i, name in enumerate(_get_element_names())
-    }
+    relative_paths: PathPair = _get_relative_pair()
 
     def individual_test(temporary_path: Path) -> bool:
-        paths: PathPair = {
-            name: Path(temporary_path, head_path)
-            for name, head_path in head_paths.items()
-        }
-        return bool_same_pair(check_exists_pair(create_directory_pair(paths)))
+        return bool_same_pair(
+            check_exists_pair(
+                _get_directory_pair(temporary_path, relative_paths)
+            )
+        )
 
     _inside_temporary_directory(individual_test)
 

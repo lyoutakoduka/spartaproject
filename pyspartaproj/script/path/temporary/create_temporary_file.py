@@ -11,17 +11,24 @@ from pyspartaproj.script.directory.create_directory_parent import (
 from pyspartaproj.script.file.json.export_json import json_export
 
 
-def create_temporary_file(file_root: Path) -> Path:
+def create_temporary_file(
+    file_root: Path, file_name: str | None = None
+) -> Path:
     """Create empty temporary file as json format.
 
     Args:
         file_root (Path):
             Path of directory which empty temporary file is created.
 
+        file_name (str | None, optional): Defaults to None.
+            Name of created file which is json format.
+
     Returns:
         Path: Path of created empty temporary file.
     """
-    name: str = "temporary"
-    file_path: Path = Path(file_root, name + ".json")
+    if file_name is None:
+        file_name = "temporary"
+
+    file_path: Path = Path(file_root, file_name + ".json")
     create_directory_parent(file_path)
-    return json_export(file_path, name)
+    return json_export(file_path, "empty")

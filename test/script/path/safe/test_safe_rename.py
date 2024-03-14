@@ -15,8 +15,8 @@ from pyspartaproj.script.file.json.convert_from_json import (
     path_pair2_from_json,
 )
 from pyspartaproj.script.file.json.import_json import json_import
-from pyspartaproj.script.path.check_exists import check_exists_pair
 from pyspartaproj.script.path.safe.safe_rename import SafeRename
+from pyspartaproj.script.path.status.check_exists import check_exists_pair
 from pyspartaproj.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
@@ -67,9 +67,10 @@ def test_override() -> None:
         destination_path: Path = safe_rename.rename(
             source_path, source_path, override=True
         )
+        expected: Path = source_path.with_stem(source_path.stem + "_")
 
         _common_test(safe_rename.pop_history())
-        assert destination_path.name.endswith("_")
+        assert expected == destination_path
 
     _inside_temporary_directory(individual_test)
 

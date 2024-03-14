@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Module to compress file or directory by zip format."""
+"""Module to compress file or directory by archive format."""
 
 from datetime import datetime
 from decimal import Decimal
@@ -10,14 +10,17 @@ from zipfile import ZIP_LZMA, ZIP_STORED, ZipFile, ZipInfo
 
 from pyspartaproj.context.default.integer_context import Ints
 from pyspartaproj.context.default.string_context import StrPair, Strs
+from pyspartaproj.context.extension.archive_context import Archives
 from pyspartaproj.context.extension.path_context import Paths
 from pyspartaproj.script.decimal.initialize_decimal import initialize_decimal
 from pyspartaproj.script.directory.create_directory import create_directory
+from pyspartaproj.script.file.archive.archive_format import rename_format
 from pyspartaproj.script.file.json.convert_to_json import multiple_to_json
 from pyspartaproj.script.file.json.export_json import json_dump
 from pyspartaproj.script.file.text.import_file import byte_import
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.modify.get_relative import get_relative
+from pyspartaproj.script.path.status.get_statistic import get_file_size
 from pyspartaproj.script.time.current_datetime import get_current_time
 from pyspartaproj.script.time.stamp.get_timestamp import (
     get_invalid_time,
@@ -27,14 +30,24 @@ from pyspartaproj.script.time.stamp.get_timestamp import (
 initialize_decimal()
 
 
-class CompressZip:
-    """Class to compress file or directory by zip format."""
+class CompressArchive:
+    """Class to compress file or directory by archive format."""
+
+    def _init_variables(self, output_root: Path, compress: bool) -> None:
+        self._output_root: Path = output_root
+        self._compress: bool = compress
+        self._archive_file: ZipFile | None = None
+
+    def _get_archive_file(self) -> ZipFile | None:
+        return self._archive_file
 
     def _init_limit_byte(self, byte: int) -> None:
         if 0 == byte:
             byte = 1
+
             for _ in range(3):
                 byte *= 2**10
+
             byte *= 4  # 4GB
 
         self._limit_byte: Decimal = Decimal(str(byte))
@@ -62,14 +75,14 @@ class CompressZip:
 
         if self._has_archived():
             file_names += [str(self._output_index).zfill(4)]
+
         self._output_index += 1
 
-        archived_path: Path = Path(self._output_root, "#".join(file_names))
-        return archived_path.with_suffix(".zip")
+        return rename_format(Path(self._output_root, "#".join(file_names)))
 
     def _reset_archive_byte(self) -> None:
         self._archived += [self._get_archive_path()]
-        self._file_zip = ZipFile(self._archived[-1], mode="w")
+        self._archive_file = ZipFile(self._archived[-1], mode="w")
 
     def _convert_comment(self, attribute: StrPair) -> bytes:
         comment: str = json_dump(multiple_to_json(attribute), compress=True)
@@ -88,7 +101,7 @@ class CompressZip:
             time.second,
         )
 
-    def _get_zip_timestamp(self, target: Path) -> datetime:
+    def _get_archive_timestamp(self, target: Path) -> datetime:
         latest: datetime = get_latest(target)
 
         if latest != get_invalid_time():
@@ -96,16 +109,39 @@ class CompressZip:
 
         return get_current_time()
 
-    def _get_zip_information(self, target: Path, relative: Path) -> ZipInfo:
+    def _get_archive_information(
+        self, target: Path, relative: Path
+    ) -> ZipInfo:
         information: ZipInfo = ZipInfo(filename=str(relative))
 
         information.compress_type = ZIP_LZMA if self._compress else ZIP_STORED
-        latest: datetime = self._get_zip_timestamp(target)
+        latest: datetime = self._get_archive_timestamp(target)
 
         self._store_timestamp(latest, information)
         information.comment = self._store_timestamp_detail(latest)
 
         return information
+
+    def _make_directory(self, path: Path) -> None:
+        if archive_file := self._get_archive_file():
+            archive_file.mkdir(str(path))
+
+    def _write_string(self, path: Path, target_path: Path) -> None:
+        if archive_file := self._get_archive_file():
+            archive_file.writestr(
+                self._get_archive_information(target_path, path),
+                byte_import(target_path),
+            )
+
+    def _get_information_list(self) -> Archives:
+        if archive_file := self._get_archive_file():
+            return archive_file.infolist()
+
+        return []
+
+    def _close_archive(self) -> None:
+        if archive_file := self._get_archive_file():
+            archive_file.close()
 
     def _add_file_to_archive(
         self, is_dir: bool, reset: bool, target: Path, root: Path
@@ -116,23 +152,23 @@ class CompressZip:
         relative: Path = get_relative(target, root_path=root)
 
         if is_dir:
-            self._file_zip.mkdir(str(relative))
+            self._make_directory(relative)
         else:
-            self._file_zip.writestr(
-                self._get_zip_information(target, relative),
-                byte_import(target),
-            )
+            self._write_string(relative, target)
 
     def _within_allowance(self, target_byte: Decimal) -> bool:
         return self._limit_byte >= target_byte
 
+    def _get_decimal_size(self, path: Path) -> Decimal:
+        return Decimal(str(get_file_size(path)))
+
     def _archive_outside_byte(self) -> Decimal:
-        current_archive: Path = self._archived[-1]
-        return Decimal(str(current_archive.stat().st_size))
+        return self._get_decimal_size(self._archived[-1])
 
     def _get_file_size(self) -> Ints:
         return [
-            information.file_size for information in self._file_zip.infolist()
+            information.file_size
+            for information in self._get_information_list()
         ]
 
     def _archive_inside_byte(self) -> Decimal:
@@ -155,7 +191,7 @@ class CompressZip:
         archive_reset: bool = False
 
         if self._has_archived():
-            source_byte: Decimal = Decimal(str(target.stat().st_size))
+            source_byte: Decimal = self._get_decimal_size(target)
             include_files: bool = self._archive_include_files()
 
             if include_files:
@@ -206,17 +242,17 @@ class CompressZip:
 
             If archives isn't divided, following list is returned.
 
-            [<export directory>/<archive name>.zip]
+            [<export directory>/<archive name>.<archive format>]
 
             If archive is divided by three, following list is returned.
 
             [
-                <export directory>/<archive name>.zip,
-                <export directory>/<archive name>#0001.zip,
-                <export directory>/<archive name>#0002.zip
+                <export directory>/<archive name>.<archive format>,
+                <export directory>/<archive name>#0001.<archive format>,
+                <export directory>/<archive name>#0002.<archive format>
             ]
         """
-        self._file_zip.close()
+        self._close_archive()
         return self._archived
 
     def compress_archive(
@@ -289,8 +325,8 @@ class CompressZip:
                 Archives of first sample are compressed as follow.
 
                 output_root/
-                    |--target.zip (file1.txt + file2.txt)
-                    |--target#0001.zip (file3.txt)
+                    |--target.<archive format> (file1.txt + file2.txt)
+                    |--target#0001.<archive format> (file3.txt)
 
                 e.g., second sample to explain divided archive is follow.
 
@@ -302,8 +338,8 @@ class CompressZip:
                 Archives of first sample are compressed as follow.
 
                 output_root/
-                    |--target.zip (file1.txt)
-                    |--target#0001.zip (file2.txt + file3.txt)
+                    |--target.<archive format> (file1.txt)
+                    |--target#0001.<archive format> (file2.txt + file3.txt)
 
                 e.g., third sample to explain divided archive is follow.
 
@@ -315,18 +351,17 @@ class CompressZip:
                 Archives of first sample are compressed as follow.
 
                 output_root/
-                    |--target.zip (file1.txt)
-                    |--target#0001.zip (file2.txt)
-                    |--target#0002.zip (file3.txt)
+                    |--target.<archive format> (file1.txt)
+                    |--target#0001.<archive format> (file2.txt)
+                    |--target#0002.<archive format> (file3.txt)
 
             compress (bool, optional): Defaults to False.
                 If it's True, you can compress archive by LZMA format.
                 Default is no compressed.
         """
-        self._output_root: Path = output_root
-        self._compress: bool = compress
-
+        self._init_variables(output_root, compress)
         self._init_limit_byte(limit_byte)
         self._init_archive_id(archive_id)
         self._init_walk_history()
         self._init_archive_output()
+        self._reset_archive_byte()

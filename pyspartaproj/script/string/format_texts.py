@@ -7,7 +7,7 @@ from itertools import takewhile
 
 from pyspartaproj.context.default.integer_context import Ints
 from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.context.extension.typed_context import LinePair, LinePairs
+from pyspartaproj.context.typed.builtin_context import LinePair, LinePairs
 
 
 def _strip_line(source_text: str) -> LinePairs:

@@ -1,15 +1,17 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Module to edit internal of zip archive file."""
+"""Module to edit internal of archive file."""
 
 from pathlib import Path
 
 from pyspartaproj.context.extension.path_context import Paths
 from pyspartaproj.context.extension.time_context import TimePair
 from pyspartaproj.script.directory.create_directory_temporary import WorkSpace
-from pyspartaproj.script.file.archive.compress_zip import CompressZip
-from pyspartaproj.script.file.archive.decompress_zip import DecompressZip
+from pyspartaproj.script.file.archive.compress_archive import CompressArchive
+from pyspartaproj.script.file.archive.decompress_archive import (
+    DecompressArchive,
+)
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.safe.safe_trash import SafeTrash
 from pyspartaproj.script.time.stamp.get_timestamp import (
@@ -18,16 +20,21 @@ from pyspartaproj.script.time.stamp.get_timestamp import (
 )
 
 
-class EditZip(WorkSpace):
-    """Class to edit internal of zip archive file."""
+class EditArchive(WorkSpace):
+    """Class to edit internal of archive file."""
 
     def _initialize_variables(
-        self, archive_path: Path, limit_byte: int, compress: bool
+        self,
+        archive_path: Path,
+        limit_byte: int,
+        compress: bool,
+        protected: bool,
     ) -> None:
         self._still_removed: bool = False
         self._archive_path: Path = archive_path
         self._limit_byte: int = limit_byte
         self._is_lzma_after: bool = compress
+        self._protected: bool = protected
 
     def _get_archive_stamp(self) -> TimePair:
         return get_directory_latest(walk_iterator(self.get_root()))
@@ -58,45 +65,57 @@ class EditZip(WorkSpace):
     def _compress_archive(self, archive_stamp: TimePair) -> Paths:
         self._cleanup_before_override()
 
-        compress_zip = CompressZip(
+        compress_archive = CompressArchive(
             self._archive_path.parent,
             limit_byte=self._limit_byte,
             compress=self._is_lzma_after,
         )
 
         for path_text in archive_stamp.keys():
-            compress_zip.compress_archive(
+            compress_archive.compress_archive(
                 Path(path_text), archive_root=self.get_root()
             )
 
-        return compress_zip.close_archived()
+        return compress_archive.close_archived()
 
-    def _decompress_archive(self, decompress_zip: DecompressZip) -> None:
-        self._decompressed: Paths = decompress_zip.sequential_archives(
+    def _decompress_archive(
+        self, decompress_archive: DecompressArchive
+    ) -> None:
+        self._decompressed: Paths = decompress_archive.sequential_archives(
             self._archive_path
         )
 
         for path in self._decompressed:
-            decompress_zip.decompress_archive(path)
+            decompress_archive.decompress_archive(path)
 
-    def _record_compress_type(self, decompress_zip: DecompressZip) -> None:
-        self._is_lzma_before: bool = decompress_zip.is_lzma_archive(
+    def _record_compress_type(
+        self, decompress_archive: DecompressArchive
+    ) -> None:
+        self._is_lzma_before: bool = decompress_archive.is_lzma_archive(
             self._archive_path
         )
 
     def _initialize_archive(self) -> None:
-        decompress_zip = DecompressZip(self.get_root())
+        decompress_archive = DecompressArchive(self.get_root())
 
-        self._decompress_archive(decompress_zip)
-        self._record_compress_type(decompress_zip)
+        self._decompress_archive(decompress_archive)
+        self._record_compress_type(decompress_archive)
 
         self._archive_stamp: TimePair = self._get_archive_stamp()
 
-    def _finalize_archive(self) -> Paths | None:
-        archived: Paths | None = None
+    def _filter_time_stamp(self) -> Paths | None:
+        if self._protected:
+            return None
 
-        if archive_stamp := self._is_difference_archive():
-            archived = self._compress_archive(archive_stamp)
+        archive_stamp: TimePair | None = self._is_difference_archive()
+
+        if archive_stamp is None:  # Can't using: if value := func()
+            return None
+
+        return self._compress_archive(archive_stamp)
+
+    def _finalize_archive(self) -> Paths | None:
+        archived: Paths | None = self._filter_time_stamp()
 
         super().__del__()
 
@@ -113,7 +132,7 @@ class EditZip(WorkSpace):
         return self.get_root()
 
     def close_archive(self) -> Paths | None:
-        """Compress the contents of temporary working directory to zip archive.
+        """Compress the contents of temporary working directory to archive.
 
         Returns:
             Paths | None: Path of compressed archive.
@@ -131,7 +150,11 @@ class EditZip(WorkSpace):
         self.close_archive()
 
     def __init__(
-        self, archive_path: Path, limit_byte: int = 0, compress: bool = False
+        self,
+        archive_path: Path,
+        limit_byte: int = 0,
+        compress: bool = False,
+        protected: bool = False,
     ) -> None:
         """Initialize variables and decompress archive you selected.
 
@@ -140,13 +163,18 @@ class EditZip(WorkSpace):
 
             limit_byte (int, optional): Defaults to 0.
                 If it's not 0, archive are dividedly compressed.
-                It's used for argument "limit_byte" of class "CompressZip".
+                It's used for argument "limit_byte" of class "CompressArchive".
 
             compress (bool, optional): Defaults to False.
                 If it's True, you can compress archive by LZMA format.
-                It's used for argument "compress" of class "CompressZip".
+                It's used for argument "compress" of class "CompressArchive".
+
+            protected (bool, optional): Defaults to False.
+                True if you don't want to update original archive.
         """
         super().__init__()
 
-        self._initialize_variables(archive_path, limit_byte, compress)
+        self._initialize_variables(
+            archive_path, limit_byte, compress, protected
+        )
         self._initialize_archive()

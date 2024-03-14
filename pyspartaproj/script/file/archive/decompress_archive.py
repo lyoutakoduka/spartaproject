@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Module to decompress archive which is zip format."""
+"""Module to decompress file or directory by archive format."""
 
 from datetime import datetime
 from pathlib import Path
@@ -13,6 +13,7 @@ from pyspartaproj.script.directory.create_directory import create_directory
 from pyspartaproj.script.directory.create_directory_parent import (
     create_directory_parent,
 )
+from pyspartaproj.script.file.archive.archive_format import get_format
 from pyspartaproj.script.file.json.convert_from_json import (
     string_pair_from_json,
 )
@@ -22,8 +23,8 @@ from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.time.stamp.set_timestamp import set_latest
 
 
-class DecompressZip:
-    """Class to decompress archive which is zip format."""
+class DecompressArchive:
+    """Class to decompress file or directory by archive format."""
 
     def _initialize_paths(self, output_root: Path) -> None:
         self._output_root: Path = output_root
@@ -41,10 +42,10 @@ class DecompressZip:
         return False
 
     def _decompress_file(
-        self, file_path: Path, relative: Path, zip_file: ZipFile
+        self, file_path: Path, relative: Path, archive_file: ZipFile
     ) -> None:
         create_directory_parent(file_path)
-        byte_export(file_path, zip_file.read(relative.as_posix()))
+        byte_export(file_path, archive_file.read(relative.as_posix()))
 
     def _restore_timestamp(
         self, file_path: Path, information: ZipInfo
@@ -74,23 +75,23 @@ class DecompressZip:
         e.g., sequential archives dividedly to three are represented to follow.
 
         root/
-            |--archive.zip
-            |--archive#0001.zip
-            |--archive#0002.zip
+            |--archive.<archive format>
+            |--archive#0001.<archive format>
+            |--archive#0002.<archive format>
 
-        If you select path "source_archive" is "root/archive.zip",
+        If you select path "source_archive" is "root/archive.<archive format>",
             following list is returned.
 
         [
-            root/archive.zip,
-            root/archive#0001.zip,
-            root/archive#0002.zip
+            root/archive.<archive format>,
+            root/archive#0001.<archive format>,
+            root/archive#0002.<archive format>
         ]
 
         Name format of sequential archives are follow.
 
-        Index 0:    <archive name>.zip
-        Index 1~:   <archive name>#<string index>.zip
+        Index 0:    <archive name>.<archive format>
+        Index 1~:   <archive name>#<string index>.<archive format>
 
         <archive name> of all indices must be same.
         <string index> must filled by zero, and digit is optional.
@@ -98,7 +99,10 @@ class DecompressZip:
         sequential: Paths = [source_archive]
 
         for path in walk_iterator(
-            source_archive.parent, directory=False, depth=1, suffix="zip"
+            source_archive.parent,
+            directory=False,
+            depth=1,
+            suffix=get_format(),
         ):
             if source_archive != path:
                 if self._is_sequential_archive(path):
@@ -107,20 +111,20 @@ class DecompressZip:
         return sequential
 
     def decompress_archive(self, decompress_target: Path) -> None:
-        """Decompress archive which is zip format.
+        """Decompress file or directory by archive format.
 
         Args:
             decompress_target (Path): Path of archive you want to decompress.
         """
-        with ZipFile(decompress_target) as zip_file:
-            for information in zip_file.infolist():
+        with ZipFile(decompress_target) as archive_file:
+            for information in archive_file.infolist():
                 relative: Path = Path(information.filename)
                 file_path: Path = Path(self._output_root, relative)
 
                 if information.is_dir():
                     create_directory(file_path)
                 else:
-                    self._decompress_file(file_path, relative, zip_file)
+                    self._decompress_file(file_path, relative, archive_file)
                     self._restore_timestamp(file_path, information)
 
     def is_lzma_archive(self, decompress_target: Path) -> bool:
@@ -133,8 +137,8 @@ class DecompressZip:
         Returns:
             bool: Return True if archive is compressed by LZMA.
         """
-        with ZipFile(decompress_target) as zip_file:
-            for information in zip_file.infolist():
+        with ZipFile(decompress_target) as archive_file:
+            for information in archive_file.infolist():
                 if ZIP_LZMA == information.compress_type:
                     return True
 
