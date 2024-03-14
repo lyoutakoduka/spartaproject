@@ -64,9 +64,10 @@ def test_override() -> None:
         destination_path: Path = safe_copy.copy(
             source_path, source_path, override=True
         )
+        expected: Path = source_path.with_stem(source_path.stem + "_")
 
         _common_test(safe_copy.pop_history())
-        assert destination_path.name.endswith("_")
+        assert expected == destination_path
 
     _inside_temporary_directory(individual_test)
 
