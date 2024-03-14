@@ -94,8 +94,85 @@ def take_out_archive(
 ) -> Paths:
     """Take out directory from inside of archive.
 
+    Behavior of take out process is generally split into following 3 pattern.
+
+    Pattern 1: Do Nothing if archive is applicable to following 2 pattern.
+
+    root/
+    |--archive.zip
+        |--file
+
+    root/
+    |--archive.zip
+        |--directory/
+
+    Pattern 2: Take out end of directories
+        if the archive is applicable to following 3 types.
+
+    Type 1: Single directory.
+
+    root/ # Before.
+    |--archive.zip
+        |--directory/
+            |--file
+
+    root/ # After.
+    |--directory.zip
+        |--file
+    |--archive.zip
+
+    Type 2: List of directories.
+
+    root/ # Before.
+    |--archive.zip
+        |--directory_A/
+            |--file_A
+        |--directory_B/
+            |--file_B
+
+    Type 3: Nested directories.
+
+    root/ # Before.
+    |--archive.zip
+        |--directory_A/
+            |--file_A
+            |--directory_B/
+                |--file_B
+
+    Result of Type 2 and 3 is same.
+
+    root/
+    |--directory_A.zip
+        |--file_A
+    |--directory_B.zip
+        |--file_B
+    |--archive.zip
+
+    Pattern 3: Avoid override path.
+
+    root/ # Before.
+    |--archive.zip
+        |--directory_A/
+            |--directory_same/
+                |--file_A
+        |--directory_B/
+            |--directory_same/
+                |--file_B
+
+    root/ # After.
+    |--directory_same.zip
+        |--file_A
+    |--directory_same_.zip
+        |--file_B
+    |--archive.zip
+        |--directory_A/
+        |--directory_B/
+
     Args:
         archive_path (Path): Path of archive you want to take out.
+
+        took_out_root (Path | None, optional): Defaults to None.
+            Destination directory that took out directories in archive.
 
         protected (bool, optional): Defaults to False.
             True if you don't want to update original archive.
