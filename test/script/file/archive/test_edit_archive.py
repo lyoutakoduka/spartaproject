@@ -130,8 +130,8 @@ def _edit_to_archived(archive_root: Path) -> PathPair:
 def _decompress_archive(after_root: Path, archive_paths: Paths) -> None:
     decompress_archive = DecompressArchive(after_root)
 
-    for archived_path in archive_paths:
-        decompress_archive.decompress_archive(archived_path)
+    for archive_path in archive_paths:
+        decompress_archive.decompress_archive(archive_path)
 
 
 def _remove_stamp_after(path_text: str, stamp_after: TimePair) -> None:
@@ -192,8 +192,8 @@ def _get_edit_history(edit_archive: EditArchive) -> PathPair:
 
 
 def _close_archive(edit_archive: EditArchive) -> Paths:
-    if archived := edit_archive.close_archive():
-        return archived
+    if archive_paths := edit_archive.close_archive():
+        return archive_paths
     else:
         fail()
 
@@ -202,11 +202,13 @@ def _common_test(
     temporary_root: Path, stamp_before: TimePair, edit_archive: EditArchive
 ) -> None:
     edit_history: PathPair = _get_edit_history(edit_archive)
-    archived: Paths = _close_archive(edit_archive)
+    archive_paths: Paths = _close_archive(edit_archive)
 
     assert is_same_stamp(
         stamp_before,
-        _get_stamp_after(temporary_root, stamp_before, edit_history, archived),
+        _get_stamp_after(
+            temporary_root, stamp_before, edit_history, archive_paths
+        ),
     )
 
 
