@@ -235,7 +235,7 @@ def _get_archive_limit(
 
 
 def _get_archive_path(temporary_root: Path) -> Path:
-    return _add_archive(temporary_root, _get_archive(temporary_root))
+    return _add_archive(temporary_root, _get_archive(temporary_root))[0]
 
 
 def _get_archive_path_limit(temporary_root: Path, limit_byte: int) -> Paths:
@@ -279,13 +279,14 @@ def test_limit() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         stamp_before: TimePair = _initialize_archive(temporary_root)
+        archive_paths: Paths = _get_archive_path_limit(
+            temporary_root, limit_byte
+        )
 
         _common_test(
             temporary_root,
             stamp_before,
-            _get_edit_archive_limit(
-                _get_archive_path_limit(temporary_root, limit_byte), limit_byte
-            ),
+            _get_edit_archive_limit(archive_paths[0], limit_byte),
         )
 
     _inside_temporary_directory(individual_test)
