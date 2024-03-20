@@ -48,11 +48,11 @@ def _get_root_archive(temporary_root: Path) -> Path:
 
 def _add_archive(
     temporary_root: Path, compress_archive: CompressArchive
-) -> Path:
+) -> Paths:
     for path in walk_iterator(_get_root_before(temporary_root)):
         compress_archive.compress_archive(path)
 
-    return compress_archive.close_archived()[0]
+    return compress_archive.close_archived()
 
 
 def _get_stamp_key(path_text: str, stamp_root: Path) -> str:
@@ -238,7 +238,7 @@ def _get_archive_path(temporary_root: Path) -> Path:
     return _add_archive(temporary_root, _get_archive(temporary_root))
 
 
-def _get_archive_path_limit(temporary_root: Path, limit_byte: int) -> Path:
+def _get_archive_path_limit(temporary_root: Path, limit_byte: int) -> Paths:
     return _add_archive(
         temporary_root, _get_archive_limit(temporary_root, limit_byte)
     )
