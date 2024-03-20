@@ -290,7 +290,7 @@ def test_single() -> None:
 
 
 def test_limit() -> None:
-    """Test to edit edit internal of multiple archive files."""
+    """Test to compare archive paths before edit and after."""
     limit_byte: int = 100
 
     def individual_test(temporary_root: Path) -> None:
