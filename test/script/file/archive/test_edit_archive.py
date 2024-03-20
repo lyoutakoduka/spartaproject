@@ -273,7 +273,7 @@ def test_single() -> None:
     _inside_temporary_directory(individual_test)
 
 
-def test_multiple() -> None:
+def test_limit() -> None:
     """Test to edit edit internal of multiple archive files."""
     limit_byte: int = 50
 
@@ -321,7 +321,7 @@ def main() -> bool:
         bool: Success if get to the end of function.
     """
     test_single()
-    test_multiple()
+    test_limit()
     test_compress()
     test_protect()
     return True
