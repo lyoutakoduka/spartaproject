@@ -294,14 +294,12 @@ def test_limit() -> None:
     limit_byte: int = 100
 
     def individual_test(temporary_root: Path) -> None:
-        stamp_before: TimePair = _initialize_archive(temporary_root)
+        _create_source(temporary_root)
         archive_paths: Paths = _get_archive_path_limit(
             temporary_root, limit_byte
         )
-
-        _common_test(
-            temporary_root,
-            stamp_before,
+        _limit_test(
+            archive_paths,
             _get_edit_archive_limit(archive_paths[0], limit_byte),
         )
 
