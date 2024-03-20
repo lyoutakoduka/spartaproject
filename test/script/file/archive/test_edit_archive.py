@@ -202,12 +202,14 @@ def _common_test(
     temporary_root: Path, stamp_before: TimePair, edit_archive: EditArchive
 ) -> None:
     edit_history: PathPair = _get_edit_history(edit_archive)
-    archive_paths: Paths = _close_archive(edit_archive)
 
     assert is_same_stamp(
         stamp_before,
         _get_stamp_after(
-            temporary_root, stamp_before, edit_history, archive_paths
+            temporary_root,
+            stamp_before,
+            edit_history,
+            _close_archive(edit_archive),
         ),
     )
 
