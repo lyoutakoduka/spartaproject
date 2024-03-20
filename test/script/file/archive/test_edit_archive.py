@@ -8,7 +8,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from pyspartaproj.context.extension.path_context import PathPair, Paths
+from pyspartaproj.context.extension.path_context import PathPair, Paths, Paths2
 from pyspartaproj.context.extension.time_context import TimePair
 from pyspartaproj.interface.pytest import fail
 from pyspartaproj.script.file.archive.compress_archive import CompressArchive
@@ -212,6 +212,10 @@ def _common_test(
             _close_archive(edit_archive),
         ),
     )
+
+
+def _get_sorted_paths(before_paths: Paths, after_paths: Paths) -> Paths2:
+    return [sorted(paths) for paths in [before_paths, after_paths]]
 
 
 def _compress_test(archive_path: Path, edit_archive: EditArchive) -> None:
