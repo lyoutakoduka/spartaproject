@@ -218,6 +218,14 @@ def _get_sorted_paths(before_paths: Paths, after_paths: Paths) -> Paths2:
     return [sorted(paths) for paths in [before_paths, after_paths]]
 
 
+def _limit_test(before_paths: Paths, edit_archive: EditArchive) -> None:
+    _get_edit_history(edit_archive)
+    after_paths: Paths = _close_archive(edit_archive)
+
+    before_paths, after_paths = _get_sorted_paths(before_paths, after_paths)
+    assert before_paths == after_paths
+
+
 def _compress_test(archive_path: Path, edit_archive: EditArchive) -> None:
     archive_size_before: int = get_file_size(archive_path)
     _close_archive(edit_archive)
