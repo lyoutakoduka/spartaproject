@@ -127,10 +127,10 @@ def _edit_to_archived(archive_root: Path) -> PathPair:
     }
 
 
-def _decompress_archive(after_root: Path, archived: Paths) -> None:
+def _decompress_archive(after_root: Path, archive_paths: Paths) -> None:
     decompress_archive = DecompressArchive(after_root)
 
-    for archived_path in archived:
+    for archived_path in archive_paths:
         decompress_archive.decompress_archive(archived_path)
 
 
@@ -177,9 +177,9 @@ def _get_stamp_after(
     temporary_root: Path,
     stamp_before: TimePair,
     edit_history: PathPair,
-    archived: Paths,
+    archive_paths: Paths,
 ) -> TimePair:
-    _decompress_archive(_get_root_after(temporary_root), archived)
+    _decompress_archive(_get_root_after(temporary_root), archive_paths)
 
     stamp_after: TimePair = _get_archive_stamp_after(temporary_root)
     _edit_time_stamp(edit_history, stamp_before, stamp_after)
