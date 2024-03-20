@@ -275,7 +275,7 @@ def test_single() -> None:
 
 def test_limit() -> None:
     """Test to edit edit internal of multiple archive files."""
-    limit_byte: int = 50
+    limit_byte: int = 100
 
     def individual_test(temporary_root: Path) -> None:
         stamp_before: TimePair = _initialize_archive(temporary_root)
