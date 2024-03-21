@@ -31,6 +31,10 @@ def _tree_root(temporary_root: Path) -> Path:
     return Path(temporary_root, "tree")
 
 
+def _extract_root(temporary_root: Path) -> Path:
+    return Path(temporary_root, "extract")
+
+
 def _get_input_paths(walk_paths: Paths, temporary_root: Path) -> Paths:
     inputs: Paths = []
     tree_root: Path = _tree_root(temporary_root)
@@ -51,7 +55,7 @@ def _get_input_paths(walk_paths: Paths, temporary_root: Path) -> Paths:
 
 def _get_output_paths(archived: Paths, temporary_root: Path) -> Paths:
     outputs: Paths = []
-    extract_root: Path = Path(temporary_root, "extract")
+    extract_root: Path = _extract_root(temporary_root)
 
     for archived_path in archived:
         unpack_archive(archived_path, extract_dir=extract_root)
