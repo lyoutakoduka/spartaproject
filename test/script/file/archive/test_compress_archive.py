@@ -61,8 +61,8 @@ def _get_output_paths(archive_paths: Paths, temporary_root: Path) -> Paths:
     outputs: Paths = []
     extract_root: Path = _extract_root(temporary_root)
 
-    for archived_path in archive_paths:
-        unpack_archive(archived_path, extract_dir=extract_root)
+    for archive_path in archive_paths:
+        unpack_archive(archive_path, extract_dir=extract_root)
 
         for path in walk_iterator(extract_root):
             outputs += [path]
@@ -256,8 +256,8 @@ def test_id() -> None:
         ):
             compress_archive.compress_archive(path)
 
-        archived_path = compress_archive.close_archived()[0]
-        assert archive_name == archived_path.stem
+        archive_path = compress_archive.close_archived()[0]
+        assert archive_name == archive_path.stem
 
     _inside_temporary_directory(individual_test)
 
