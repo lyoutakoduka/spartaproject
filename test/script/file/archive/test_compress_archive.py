@@ -161,6 +161,12 @@ def _create_tree_limit(temporary_root: Path) -> Path:
     return create_temporary_tree(_get_tree_root(temporary_root), tree_deep=3)
 
 
+def _create_tree_heavy(temporary_root: Path) -> Path:
+    return create_temporary_tree(
+        _get_tree_root(temporary_root), tree_deep=3, tree_weight=2
+    )
+
+
 def test_empty() -> None:
     """Test to create empty archive."""
 
@@ -315,9 +321,7 @@ def test_heavy() -> None:
     """Test to compress multiple files larger than byte limit dividedly."""
 
     def individual_test(temporary_root: Path) -> None:
-        tree_root: Path = create_temporary_tree(
-            _get_tree_root(temporary_root), tree_deep=3, tree_weight=2
-        )
+        tree_root: Path = _create_tree_heavy(temporary_root)
 
         compress_archive = CompressArchive(
             _get_archive_root(temporary_root), limit_byte=64
