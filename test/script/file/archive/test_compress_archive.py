@@ -27,7 +27,7 @@ from pyspartaproj.script.path.temporary.create_temporary_tree import (
 initialize_decimal()
 
 
-def _tree_root(temporary_root: Path) -> Path:
+def _get_tree_root(temporary_root: Path) -> Path:
     return Path(temporary_root, "tree")
 
 
@@ -41,7 +41,7 @@ def _archive_root(temporary_root: Path) -> Path:
 
 def _get_input_paths(walk_paths: Paths, temporary_root: Path) -> Paths:
     inputs: Paths = []
-    tree_root: Path = _tree_root(temporary_root)
+    tree_root: Path = _get_tree_root(temporary_root)
 
     for walk_path in walk_paths:
         inputs += [walk_path]
@@ -156,7 +156,7 @@ def test_file() -> None:
     """Test to compress multiple files."""
 
     def individual_test(temporary_root: Path) -> None:
-        tree_root: Path = create_temporary_tree(_tree_root(temporary_root))
+        tree_root: Path = create_temporary_tree(_get_tree_root(temporary_root))
 
         compress_archive = CompressArchive(_archive_root(temporary_root))
 
@@ -179,7 +179,7 @@ def test_directory() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         tree_root: Path = create_temporary_tree(
-            _tree_root(temporary_root), tree_deep=2
+            _get_tree_root(temporary_root), tree_deep=2
         )
 
         compress_archive = CompressArchive(_archive_root(temporary_root))
@@ -201,7 +201,7 @@ def test_tree() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         tree_root: Path = create_temporary_tree(
-            _tree_root(temporary_root), tree_deep=3
+            _get_tree_root(temporary_root), tree_deep=3
         )
 
         compress_archive = CompressArchive(_archive_root(temporary_root))
@@ -225,7 +225,7 @@ def test_compress() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         tree_root: Path = create_temporary_tree(
-            _tree_root(temporary_root), tree_weight=4
+            _get_tree_root(temporary_root), tree_weight=4
         )
 
         compress_archive = CompressArchive(
@@ -256,7 +256,7 @@ def test_id() -> None:
     archive_name: str = "test"
 
     def individual_test(temporary_root: Path) -> None:
-        tree_root: Path = create_temporary_tree(_tree_root(temporary_root))
+        tree_root: Path = create_temporary_tree(_get_tree_root(temporary_root))
 
         compress_archive = CompressArchive(
             _archive_root(temporary_root), archive_id=archive_name
@@ -281,7 +281,7 @@ def test_limit() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         tree_root: Path = create_temporary_tree(
-            _tree_root(temporary_root), tree_deep=3
+            _get_tree_root(temporary_root), tree_deep=3
         )
 
         compress_archive = CompressArchive(
@@ -304,7 +304,7 @@ def test_heavy() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         tree_root: Path = create_temporary_tree(
-            _tree_root(temporary_root), tree_deep=3, tree_weight=2
+            _get_tree_root(temporary_root), tree_deep=3, tree_weight=2
         )
 
         compress_archive = CompressArchive(
