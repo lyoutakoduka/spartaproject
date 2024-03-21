@@ -57,11 +57,11 @@ def _get_input_paths(walk_paths: Paths, temporary_root: Path) -> Paths:
     return inputs
 
 
-def _get_output_paths(archived: Paths, temporary_root: Path) -> Paths:
+def _get_output_paths(archive_paths: Paths, temporary_root: Path) -> Paths:
     outputs: Paths = []
     extract_root: Path = _extract_root(temporary_root)
 
-    for archived_path in archived:
+    for archived_path in archive_paths:
         unpack_archive(archived_path, extract_dir=extract_root)
 
         for path in walk_iterator(extract_root):
@@ -87,33 +87,33 @@ def _compare_file_size(sorted_paths: Paths2) -> None:
     assert file_size_pair[0] == file_size_pair[1]
 
 
-def _compare_compress_size(outputs: Paths, archived: Paths) -> None:
+def _compare_compress_size(outputs: Paths, archive_paths: Paths) -> None:
     file_sizes: Decs = [
         Decimal(str(sum(get_file_size_array(paths))))
-        for paths in [outputs, archived]
+        for paths in [outputs, archive_paths]
     ]
 
     assert Decimal("0.05") > (file_sizes[1] / file_sizes[0])
 
 
-def _compare_archived_count(archived: Paths) -> None:
-    assert 1 == len(archived)
+def _compare_archived_count(archive_paths: Paths) -> None:
+    assert 1 == len(archive_paths)
 
 
 def _get_sorted_paths(
-    walk_paths: Paths, archived: Paths, temporary_root: Path
+    walk_paths: Paths, archive_paths: Paths, temporary_root: Path
 ) -> Paths2:
     inputs: Paths = _get_input_paths(walk_paths, temporary_root)
-    outputs: Paths = _get_output_paths(archived, temporary_root)
+    outputs: Paths = _get_output_paths(archive_paths, temporary_root)
 
     return [sorted(list(set(paths))) for paths in [inputs, outputs]]
 
 
 def _common_test(
-    archived: Paths, temporary_root: Path, walk_paths: Paths
+    archive_paths: Paths, temporary_root: Path, walk_paths: Paths
 ) -> Paths2:
     sorted_paths: Paths2 = _get_sorted_paths(
-        walk_paths, archived, temporary_root
+        walk_paths, archive_paths, temporary_root
     )
 
     _compare_path_name(sorted_paths, temporary_root)
