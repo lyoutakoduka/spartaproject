@@ -69,6 +69,7 @@ class EditArchive(WorkSpace):
             self._archive_path.parent,
             limit_byte=self._limit_byte,
             compress=self._is_lzma_after,
+            archive_id=self._archive_path.stem,
         )
 
         for path_text in archive_stamp.keys():
