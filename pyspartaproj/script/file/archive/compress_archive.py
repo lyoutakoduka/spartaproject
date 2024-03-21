@@ -11,7 +11,7 @@ from zipfile import ZIP_LZMA, ZIP_STORED, ZipFile, ZipInfo
 from pyspartaproj.context.default.integer_context import Ints
 from pyspartaproj.context.default.string_context import StrPair, Strs
 from pyspartaproj.context.extension.archive_context import Archives
-from pyspartaproj.context.extension.path_context import PathGene, Paths
+from pyspartaproj.context.extension.path_context import Paths
 from pyspartaproj.script.decimal.initialize_decimal import initialize_decimal
 from pyspartaproj.script.directory.create_directory import create_directory
 from pyspartaproj.script.file.archive.archive_format import rename_format
