@@ -134,6 +134,13 @@ def _confirm_empty_archive(archive_paths: Paths) -> None:
     assert expected == get_file_size(archive_paths[0])
 
 
+def _finalize_archive(
+    tree_root: Path, paths: Paths, compress_archive: CompressArchive
+) -> Paths:
+    compress_archive.compress_from_array(paths, archive_root=tree_root)
+    return compress_archive.close_archived()
+
+
 def test_empty() -> None:
     """Test to create empty archive."""
 
