@@ -27,9 +27,13 @@ from pyspartaproj.script.path.temporary.create_temporary_tree import (
 initialize_decimal()
 
 
+def _tree_root(temporary_root: Path) -> Path:
+    return Path(temporary_root, "tree")
+
+
 def _get_input_paths(walk_paths: Paths, temporary_root: Path) -> Paths:
     inputs: Paths = []
-    tree_root: Path = Path(temporary_root, "tree")
+    tree_root: Path = _tree_root(temporary_root)
 
     for walk_path in walk_paths:
         inputs += [walk_path]
@@ -141,7 +145,7 @@ def test_file() -> None:
         compress_archive = CompressArchive(Path(temporary_root, "archive"))
 
         for path in walk_iterator(
-            create_temporary_tree(Path(temporary_root, "tree")),
+            create_temporary_tree(_tree_root(temporary_root)),
             directory=False,
             depth=1,
         ):
@@ -163,7 +167,7 @@ def test_directory() -> None:
         compress_archive = CompressArchive(Path(temporary_root, "archive"))
 
         for path in walk_iterator(
-            create_temporary_tree(Path(temporary_root, "tree"), tree_deep=2),
+            create_temporary_tree(_tree_root(temporary_root), tree_deep=2),
             file=False,
             depth=1,
         ):
@@ -182,7 +186,7 @@ def test_tree() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         tree_root: Path = create_temporary_tree(
-            Path(temporary_root, "tree"), tree_deep=3
+            _tree_root(temporary_root), tree_deep=3
         )
 
         walk_paths: Paths = []
@@ -209,7 +213,7 @@ def test_compress() -> None:
         )
 
         for path in walk_iterator(
-            create_temporary_tree(Path(temporary_root, "tree"), tree_weight=4),
+            create_temporary_tree(_tree_root(temporary_root), tree_weight=4),
             directory=False,
             suffix="json",
         ):
@@ -238,7 +242,7 @@ def test_id() -> None:
         )
 
         for path in walk_iterator(
-            create_temporary_tree(Path(temporary_root, "tree")),
+            create_temporary_tree(_tree_root(temporary_root)),
             directory=False,
             depth=1,
         ):
@@ -255,7 +259,7 @@ def test_limit() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         tree_root: Path = create_temporary_tree(
-            Path(temporary_root, "tree"), tree_deep=3
+            _tree_root(temporary_root), tree_deep=3
         )
 
         walk_paths: Paths = []
@@ -278,7 +282,7 @@ def test_heavy() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         tree_root: Path = create_temporary_tree(
-            Path(temporary_root, "tree"), tree_deep=3, tree_weight=2
+            _tree_root(temporary_root), tree_deep=3, tree_weight=2
         )
 
         walk_paths: Paths = []
