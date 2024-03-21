@@ -160,9 +160,9 @@ def test_file() -> None:
             compress_archive.compress_archive(path)
             walk_paths += [path]
 
-        archived: Paths = compress_archive.close_archived()
-        _common_test(archived, temporary_root, walk_paths)
-        _compare_archived_count(archived)
+        archive_paths: Paths = compress_archive.close_archived()
+        _common_test(archive_paths, temporary_root, walk_paths)
+        _compare_archived_count(archive_paths)
 
     _inside_temporary_directory(individual_test)
 
@@ -182,9 +182,9 @@ def test_directory() -> None:
             compress_archive.compress_archive(path)
             walk_paths += [path]
 
-        archived: Paths = compress_archive.close_archived()
-        _common_test(archived, temporary_root, walk_paths)
-        _compare_archived_count(archived)
+        archive_paths: Paths = compress_archive.close_archived()
+        _common_test(archive_paths, temporary_root, walk_paths)
+        _compare_archived_count(archive_paths)
 
     _inside_temporary_directory(individual_test)
 
@@ -204,9 +204,9 @@ def test_tree() -> None:
             compress_archive.compress_archive(path, archive_root=tree_root)
             walk_paths += [path]
 
-        archived: Paths = compress_archive.close_archived()
-        _common_test(archived, temporary_root, walk_paths)
-        _compare_archived_count(archived)
+        archive_paths: Paths = compress_archive.close_archived()
+        _common_test(archive_paths, temporary_root, walk_paths)
+        _compare_archived_count(archive_paths)
 
     _inside_temporary_directory(individual_test)
 
@@ -228,14 +228,14 @@ def test_compress() -> None:
             compress_archive.compress_archive(path)
             walk_paths += [path]
 
-        archived: Paths = compress_archive.close_archived()
+        archive_paths: Paths = compress_archive.close_archived()
         sorted_paths: Paths2 = _common_test(
-            archived,
+            archive_paths,
             temporary_root,
             walk_paths,
         )
-        _compare_archived_count(archived)
-        _compare_compress_size(sorted_paths[-1], archived)
+        _compare_archived_count(archive_paths)
+        _compare_compress_size(sorted_paths[-1], archive_paths)
 
     _inside_temporary_directory(individual_test)
 
