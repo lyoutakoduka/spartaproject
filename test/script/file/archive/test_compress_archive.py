@@ -315,11 +315,10 @@ def test_heavy() -> None:
             walk_iterator(tree_root, directory=False, suffix="json")
         )
 
-        compress_archive.compress_from_array(
-            walk_paths, archive_root=tree_root
+        archive_paths: Paths = _finalize_archive(
+            tree_root, walk_paths, compress_archive
         )
 
-        archive_paths: Paths = compress_archive.close_archived()
         _common_test(archive_paths, temporary_root, walk_paths)
 
     _inside_temporary_directory(individual_test)
