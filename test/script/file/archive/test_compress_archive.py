@@ -157,8 +157,9 @@ def test_file() -> None:
             walk_iterator(tree_root, directory=False, depth=1)
         )
 
-        for path in walk_paths:
-            compress_archive.compress_archive(path)
+        compress_archive.compress_from_array(
+            walk_paths, archive_root=tree_root
+        )
 
         archive_paths: Paths = compress_archive.close_archived()
         _common_test(archive_paths, temporary_root, walk_paths)
@@ -179,8 +180,9 @@ def test_directory() -> None:
 
         walk_paths: Paths = list(walk_iterator(tree_root, file=False, depth=1))
 
-        for path in walk_paths:
-            compress_archive.compress_archive(path)
+        compress_archive.compress_from_array(
+            walk_paths, archive_root=tree_root
+        )
 
         archive_paths: Paths = compress_archive.close_archived()
         _common_test(archive_paths, temporary_root, walk_paths)
@@ -203,8 +205,9 @@ def test_tree() -> None:
             walk_iterator(tree_root, directory=False, suffix="txt")
         )
 
-        for path in walk_paths:
-            compress_archive.compress_archive(path, archive_root=tree_root)
+        compress_archive.compress_from_array(
+            walk_paths, archive_root=tree_root
+        )
 
         archive_paths: Paths = compress_archive.close_archived()
         _common_test(archive_paths, temporary_root, walk_paths)
@@ -229,8 +232,9 @@ def test_compress() -> None:
             walk_iterator(tree_root, directory=False, suffix="json")
         )
 
-        for path in walk_paths:
-            compress_archive.compress_archive(path)
+        compress_archive.compress_from_array(
+            walk_paths, archive_root=tree_root
+        )
 
         archive_paths: Paths = compress_archive.close_archived()
         sorted_paths: Paths2 = _common_test(
@@ -259,8 +263,9 @@ def test_id() -> None:
             walk_iterator(tree_root, directory=False, depth=1)
         )
 
-        for path in walk_paths:
-            compress_archive.compress_archive(path)
+        compress_archive.compress_from_array(
+            walk_paths, archive_root=tree_root
+        )
 
         archive_paths: Paths = compress_archive.close_archived()
         archive_path = archive_paths[0]
@@ -283,8 +288,9 @@ def test_limit() -> None:
 
         walk_paths: Paths = list(walk_iterator(tree_root, directory=False))
 
-        for path in walk_paths:
-            compress_archive.compress_archive(path, archive_root=tree_root)
+        compress_archive.compress_from_array(
+            walk_paths, archive_root=tree_root
+        )
 
         archive_paths: Paths = compress_archive.close_archived()
         _common_test(archive_paths, temporary_root, walk_paths)
@@ -308,8 +314,9 @@ def test_heavy() -> None:
             walk_iterator(tree_root, directory=False, suffix="json")
         )
 
-        for path in walk_paths:
-            compress_archive.compress_archive(path, archive_root=tree_root)
+        compress_archive.compress_from_array(
+            walk_paths, archive_root=tree_root
+        )
 
         archive_paths: Paths = compress_archive.close_archived()
         _common_test(archive_paths, temporary_root, walk_paths)
