@@ -28,9 +28,7 @@ def _take_out_archive(
         took_out_root, archive_id=_get_archive_name(took_out_root, archive_id)
     )
 
-    for file_path in file_paths:
-        compress_archive.compress_archive(file_path)
-
+    compress_archive.compress_from_array(file_paths)
     return compress_archive.close_archived()[0]
 
 
