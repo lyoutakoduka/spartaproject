@@ -175,6 +175,14 @@ def _get_archive_compress(temporary_root: Path) -> CompressArchive:
     return CompressArchive(_get_archive_root(temporary_root), compress=True)
 
 
+def _get_archive_name(
+    temporary_root: Path, archive_name: str
+) -> CompressArchive:
+    return CompressArchive(
+        _get_archive_root(temporary_root), archive_id=archive_name
+    )
+
+
 def test_empty() -> None:
     """Test to create empty archive."""
 
@@ -284,9 +292,7 @@ def test_id() -> None:
     def individual_test(temporary_root: Path) -> None:
         tree_root: Path = _create_tree(temporary_root)
 
-        compress_archive = CompressArchive(
-            _get_archive_root(temporary_root), archive_id=archive_name
-        )
+        compress_archive = _get_archive_name(temporary_root, archive_name)
 
         walk_paths: Paths = list(
             walk_iterator(tree_root, directory=False, depth=1)
