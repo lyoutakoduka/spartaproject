@@ -285,7 +285,7 @@ def test_compress() -> None:
     _inside_temporary_directory(individual_test)
 
 
-def test_id() -> None:
+def test_name() -> None:
     """Test to compress multiple files by specific archive name."""
     archive_name: str = "test"
 
@@ -363,7 +363,7 @@ def main() -> bool:
     test_directory()
     test_tree()
     test_compress()
-    test_id()
+    test_name()
     test_limit()
     test_heavy()
     return True
