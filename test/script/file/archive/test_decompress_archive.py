@@ -155,11 +155,9 @@ def test_limit() -> None:
         compress_archive = CompressArchive(
             Path(temporary_root, "archive"), limit_byte=200
         )
-
-        for path in walk_iterator(
-            create_temporary_tree(tree_root, tree_deep=5)
-        ):
-            compress_archive.compress_archive(path)
+        compress_archive.compress_from_array(
+            list(walk_iterator(create_temporary_tree(tree_root, tree_deep=5)))
+        )
 
         decompress_archive = DecompressArchive(Path(temporary_root, "extract"))
 
