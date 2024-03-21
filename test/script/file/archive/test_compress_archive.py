@@ -149,14 +149,12 @@ def test_file() -> None:
     """Test to compress multiple files."""
 
     def individual_test(temporary_root: Path) -> None:
+        tree_root: Path = create_temporary_tree(_tree_root(temporary_root))
+
         compress_archive = CompressArchive(_archive_root(temporary_root))
 
         walk_paths: Paths = list(
-            walk_iterator(
-                create_temporary_tree(_tree_root(temporary_root)),
-                directory=False,
-                depth=1,
-            )
+            walk_iterator(tree_root, directory=False, depth=1)
         )
 
         for path in walk_paths:
@@ -173,15 +171,13 @@ def test_directory() -> None:
     """Test to compress multiple empty directories."""
 
     def individual_test(temporary_root: Path) -> None:
+        tree_root: Path = create_temporary_tree(
+            _tree_root(temporary_root), tree_deep=2
+        )
+
         compress_archive = CompressArchive(_archive_root(temporary_root))
 
-        walk_paths: Paths = list(
-            walk_iterator(
-                create_temporary_tree(_tree_root(temporary_root), tree_deep=2),
-                file=False,
-                depth=1,
-            )
-        )
+        walk_paths: Paths = list(walk_iterator(tree_root, file=False, depth=1))
 
         for path in walk_paths:
             compress_archive.compress_archive(path)
@@ -221,18 +217,16 @@ def test_compress() -> None:
     """Test to compress multiple files by LZMA format."""
 
     def individual_test(temporary_root: Path) -> None:
+        tree_root: Path = create_temporary_tree(
+            _tree_root(temporary_root), tree_weight=4
+        )
+
         compress_archive = CompressArchive(
             _archive_root(temporary_root), compress=True
         )
 
         walk_paths: Paths = list(
-            walk_iterator(
-                create_temporary_tree(
-                    _tree_root(temporary_root), tree_weight=4
-                ),
-                directory=False,
-                suffix="json",
-            )
+            walk_iterator(tree_root, directory=False, suffix="json")
         )
 
         for path in walk_paths:
@@ -255,16 +249,14 @@ def test_id() -> None:
     archive_name: str = "test"
 
     def individual_test(temporary_root: Path) -> None:
+        tree_root: Path = create_temporary_tree(_tree_root(temporary_root))
+
         compress_archive = CompressArchive(
             _archive_root(temporary_root), archive_id=archive_name
         )
 
         walk_paths: Paths = list(
-            walk_iterator(
-                create_temporary_tree(_tree_root(temporary_root)),
-                directory=False,
-                depth=1,
-            )
+            walk_iterator(tree_root, directory=False, depth=1)
         )
 
         for path in walk_paths:
