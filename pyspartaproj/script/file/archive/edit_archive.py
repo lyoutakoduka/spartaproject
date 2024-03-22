@@ -86,8 +86,7 @@ class EditArchive(WorkSpace):
             self._archive_path
         )
 
-        for path in self._decompressed:
-            decompress_archive.decompress_archive(path)
+        decompress_archive.decompress_at_once(self._decompressed)
 
     def _record_compress_type(
         self, decompress_archive: DecompressArchive
