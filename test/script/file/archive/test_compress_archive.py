@@ -129,6 +129,19 @@ def _common_test(
     _compare_archived_count(archive_paths)
 
 
+def _compress_test(
+    archive_paths: Paths, temporary_root: Path, walk_paths: Paths
+) -> None:
+    sorted_paths: Paths2 = _compare_archive(
+        archive_paths,
+        temporary_root,
+        walk_paths,
+    )
+
+    _compare_archived_count(archive_paths)
+    _compare_compress_size(sorted_paths[-1], archive_paths)
+
+
 def _name_test(archive_name: str, archive_paths: Paths) -> None:
     archive_path = archive_paths[0]
     assert archive_name == archive_path.stem
@@ -306,13 +319,7 @@ def test_compress() -> None:
             tree_root, walk_paths, compress_archive
         )
 
-        sorted_paths: Paths2 = _compare_archive(
-            archive_paths,
-            temporary_root,
-            walk_paths,
-        )
-        _compare_archived_count(archive_paths)
-        _compare_compress_size(sorted_paths[-1], archive_paths)
+        _compress_test(archive_paths, temporary_root, walk_paths)
 
     _inside_temporary_directory(individual_test)
 
