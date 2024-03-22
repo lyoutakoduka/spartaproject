@@ -261,16 +261,15 @@ def test_directory() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         tree_root: Path = _create_tree_directory(temporary_root)
-
-        compress_archive: CompressArchive = _get_archive(temporary_root)
-
         walk_paths: Paths = _get_walk_paths_directory(tree_root)
 
-        archive_paths: Paths = _finalize_archive(
-            tree_root, walk_paths, compress_archive
+        _common_test(
+            _finalize_archive(
+                tree_root, walk_paths, _get_archive(temporary_root)
+            ),
+            temporary_root,
+            walk_paths,
         )
-
-        _common_test(archive_paths, temporary_root, walk_paths)
 
     _inside_temporary_directory(individual_test)
 
