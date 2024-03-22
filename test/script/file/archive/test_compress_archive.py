@@ -109,7 +109,7 @@ def _get_sorted_paths(
     return [sorted(list(set(paths))) for paths in [inputs, outputs]]
 
 
-def _common_test(
+def _compare_archive(
     archive_paths: Paths, temporary_root: Path, walk_paths: Paths
 ) -> Paths2:
     sorted_paths: Paths2 = _get_sorted_paths(
@@ -245,7 +245,7 @@ def test_file() -> None:
             tree_root, walk_paths, compress_archive
         )
 
-        _common_test(archive_paths, temporary_root, walk_paths)
+        _compare_archive(archive_paths, temporary_root, walk_paths)
         _compare_archived_count(archive_paths)
 
     _inside_temporary_directory(individual_test)
@@ -265,7 +265,7 @@ def test_directory() -> None:
             tree_root, walk_paths, compress_archive
         )
 
-        _common_test(archive_paths, temporary_root, walk_paths)
+        _compare_archive(archive_paths, temporary_root, walk_paths)
         _compare_archived_count(archive_paths)
 
     _inside_temporary_directory(individual_test)
@@ -285,7 +285,7 @@ def test_tree() -> None:
             tree_root, walk_paths, compress_archive
         )
 
-        _common_test(archive_paths, temporary_root, walk_paths)
+        _compare_archive(archive_paths, temporary_root, walk_paths)
         _compare_archived_count(archive_paths)
 
     _inside_temporary_directory(individual_test)
@@ -305,7 +305,7 @@ def test_compress() -> None:
             tree_root, walk_paths, compress_archive
         )
 
-        sorted_paths: Paths2 = _common_test(
+        sorted_paths: Paths2 = _compare_archive(
             archive_paths,
             temporary_root,
             walk_paths,
@@ -342,7 +342,7 @@ def test_limit() -> None:
         tree_root: Path = _create_tree_limit(temporary_root)
         walk_paths: Paths = _get_walk_paths_limit(tree_root)
 
-        _common_test(
+        _compare_archive(
             _finalize_archive(
                 tree_root, walk_paths, _get_archive_limit(temporary_root)
             ),
@@ -360,7 +360,7 @@ def test_heavy() -> None:
         tree_root: Path = _create_tree_heavy(temporary_root)
         walk_paths: Paths = _get_walk_paths_heavy(tree_root)
 
-        _common_test(
+        _compare_archive(
             _finalize_archive(
                 tree_root, walk_paths, _get_archive_heavy(temporary_root)
             ),
