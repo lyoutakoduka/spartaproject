@@ -341,16 +341,15 @@ def test_limit() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         tree_root: Path = _create_tree_limit(temporary_root)
-
-        compress_archive = _get_archive_limit(temporary_root)
-
         walk_paths: Paths = _get_walk_paths_limit(tree_root)
 
-        archive_paths: Paths = _finalize_archive(
-            tree_root, walk_paths, compress_archive
+        _common_test(
+            _finalize_archive(
+                tree_root, walk_paths, _get_archive_limit(temporary_root)
+            ),
+            temporary_root,
+            walk_paths,
         )
-
-        _common_test(archive_paths, temporary_root, walk_paths)
 
     _inside_temporary_directory(individual_test)
 
