@@ -122,6 +122,11 @@ def _common_test(
     return sorted_paths
 
 
+def _name_test(archive_name: str, archive_paths: Paths) -> None:
+    archive_path = archive_paths[0]
+    assert archive_name == archive_path.stem
+
+
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
@@ -326,8 +331,7 @@ def test_name() -> None:
             tree_root, walk_paths, compress_archive
         )
 
-        archive_path = archive_paths[0]
-        assert archive_name == archive_path.stem
+        _name_test(archive_name, archive_paths)
 
     _inside_temporary_directory(individual_test)
 
