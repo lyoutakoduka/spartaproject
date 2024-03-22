@@ -155,7 +155,7 @@ def test_limit() -> None:
         compress_archive = CompressArchive(
             Path(temporary_root, "archive"), limit_byte=200
         )
-        compress_archive.compress_from_array(
+        compress_archive.compress_at_once(
             list(walk_iterator(create_temporary_tree(tree_root, tree_deep=5)))
         )
 

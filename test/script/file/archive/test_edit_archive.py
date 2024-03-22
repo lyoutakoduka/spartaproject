@@ -49,7 +49,7 @@ def _get_root_archive(temporary_root: Path) -> Path:
 def _add_archive(
     temporary_root: Path, compress_archive: CompressArchive
 ) -> Paths:
-    compress_archive.compress_from_array(
+    compress_archive.compress_at_once(
         list(walk_iterator(_get_root_before(temporary_root)))
     )
 

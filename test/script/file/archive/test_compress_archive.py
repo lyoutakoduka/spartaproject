@@ -162,7 +162,7 @@ def _confirm_empty_archive(archive_paths: Paths) -> None:
 def _finalize_archive(
     tree_root: Path, paths: Paths, compress_archive: CompressArchive
 ) -> Paths:
-    compress_archive.compress_from_array(paths, archive_root=tree_root)
+    compress_archive.compress_at_once(paths, archive_root=tree_root)
     return compress_archive.close_archived()
 
 
