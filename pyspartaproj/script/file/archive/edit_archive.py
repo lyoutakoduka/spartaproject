@@ -72,7 +72,7 @@ class EditArchive(WorkSpace):
             archive_id=self._archive_path.stem,
         )
 
-        compress_archive.compress_from_array(
+        compress_archive.compress_at_once(
             [Path(path_text) for path_text in archive_stamp.keys()],
             archive_root=self.get_root(),
         )
