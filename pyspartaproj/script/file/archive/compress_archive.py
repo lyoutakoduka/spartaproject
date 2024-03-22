@@ -292,7 +292,7 @@ class CompressArchive:
         else:
             self._compress_child(archive_target, parent_root)
 
-    def compress_from_array(
+    def compress_at_once(
         self, paths: Paths, archive_root: Path | None = None
     ) -> None:
         """Compress list of file or directory at once.
