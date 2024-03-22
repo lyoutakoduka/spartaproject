@@ -207,6 +207,10 @@ def _get_walk_paths_compress(tree_root: Path) -> Paths:
     return list(walk_iterator(tree_root, directory=False, suffix="json"))
 
 
+def _get_walk_paths_limit(tree_root: Path) -> Paths:
+    return list(walk_iterator(tree_root, directory=False))
+
+
 def test_empty() -> None:
     """Test to create empty archive."""
 
@@ -332,7 +336,7 @@ def test_limit() -> None:
 
         compress_archive = _get_archive_limit(temporary_root)
 
-        walk_paths: Paths = list(walk_iterator(tree_root, directory=False))
+        walk_paths: Paths = _get_walk_paths_limit(tree_root)
 
         archive_paths: Paths = _finalize_archive(
             tree_root, walk_paths, compress_archive
