@@ -199,6 +199,10 @@ def _get_walk_paths_directory(tree_root: Path) -> Paths:
     return list(walk_iterator(tree_root, file=False, depth=1))
 
 
+def _get_walk_paths_tree(tree_root: Path) -> Paths:
+    return list(walk_iterator(tree_root, directory=False, suffix="txt"))
+
+
 def test_empty() -> None:
     """Test to create empty archive."""
 
@@ -258,9 +262,7 @@ def test_tree() -> None:
 
         compress_archive: CompressArchive = _get_archive(temporary_root)
 
-        walk_paths: Paths = list(
-            walk_iterator(tree_root, directory=False, suffix="txt")
-        )
+        walk_paths: Paths = _get_walk_paths_tree(tree_root)
 
         archive_paths: Paths = _finalize_archive(
             tree_root, walk_paths, compress_archive
