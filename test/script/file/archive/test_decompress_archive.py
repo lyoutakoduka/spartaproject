@@ -161,10 +161,11 @@ def test_limit() -> None:
 
         decompress_archive = DecompressArchive(Path(temporary_root, "extract"))
 
-        for path in decompress_archive.sequential_archives(
-            compress_archive.close_archived()[0]
-        ):
-            decompress_archive.decompress_archive(path)
+        decompress_archive.decompress_at_once(
+            decompress_archive.sequential_archives(
+                compress_archive.close_archived()[0]
+            )
+        )
 
         _common_test(temporary_root)
 
@@ -188,8 +189,9 @@ def test_timestamp() -> None:
 
         decompress_archive = DecompressArchive(Path(temporary_root, "extract"))
 
-        for path in compress_archive.close_archived():
-            decompress_archive.decompress_archive(path)
+        decompress_archive.decompress_at_once(
+            compress_archive.close_archived()
+        )
 
         _compare_timestamp(_common_test(temporary_root), expected)
 
