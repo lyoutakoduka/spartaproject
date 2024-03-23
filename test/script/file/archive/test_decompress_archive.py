@@ -198,13 +198,13 @@ def test_timestamp() -> None:
             walk_iterator(create_temporary_tree(tree_root))
         )
 
-        compress_archive = CompressArchive(Path(temporary_root, "archive"))
-
         for path in add_paths:
             if path.is_file():
                 set_latest(path, expected)
 
-            compress_archive.compress_archive(path)
+        compress_archive = CompressArchive(Path(temporary_root, "archive"))
+
+        compress_archive.compress_at_once(add_paths)
 
         decompress_archive = DecompressArchive(Path(temporary_root, "extract"))
 
