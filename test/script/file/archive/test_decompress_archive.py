@@ -137,7 +137,14 @@ def test_file() -> None:
         for path in remove_paths:
             safe_trash.trash(path)
 
-        _compress_to_decompress(temporary_root, tree_root)
+        decompress_archive = DecompressArchive(
+            _get_extract_root(temporary_root)
+        )
+
+        decompress_archive.decompress_archive(
+            _create_archive(temporary_root, tree_root)
+        )
+
         _common_test(temporary_root)
 
     _inside_temporary_directory(individual_test)
@@ -161,7 +168,14 @@ def test_directory() -> None:
         for path in remove_paths:
             safe_trash.trash(path)
 
-        _compress_to_decompress(temporary_root, tree_root)
+        decompress_archive = DecompressArchive(
+            _get_extract_root(temporary_root)
+        )
+
+        decompress_archive.decompress_archive(
+            _create_archive(temporary_root, tree_root)
+        )
+
         _common_test(temporary_root)
 
     _inside_temporary_directory(individual_test)
