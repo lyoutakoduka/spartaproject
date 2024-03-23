@@ -128,6 +128,11 @@ class DecompressArchive:
                     self._restore_timestamp(file_path, information)
 
     def decompress_at_once(self, paths: Paths) -> None:
+        """Decompress list of file or directory at once.
+
+        Args:
+            paths (Paths): List of path you want to decompress.
+        """
         for path in paths:
             self.decompress_archive(path)
 
