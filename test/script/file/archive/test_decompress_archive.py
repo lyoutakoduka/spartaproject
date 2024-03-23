@@ -28,6 +28,10 @@ from pyspartaproj.script.time.stamp.get_timestamp import get_latest
 from pyspartaproj.script.time.stamp.set_timestamp import set_latest
 
 
+def _get_tree_root(temporary_root: Path) -> Path:
+    return Path(temporary_root, "tree")
+
+
 def _compare_timestamp(sorted_paths: Paths2, expected: datetime) -> None:
     times_pair: Times2 = [
         [get_latest(path) for path in paths if path.is_file()]
@@ -109,7 +113,7 @@ def test_file() -> None:
     """Test to decompress archive including only files."""
 
     def individual_test(temporary_root: Path) -> None:
-        tree_root: Path = Path(temporary_root, "tree")
+        tree_root: Path = _get_tree_root(temporary_root)
 
         remove_paths: Paths = [
             path
@@ -135,7 +139,7 @@ def test_directory() -> None:
     """Test to decompress archive including only directories."""
 
     def individual_test(temporary_root: Path) -> None:
-        tree_root: Path = Path(temporary_root, "tree")
+        tree_root: Path = _get_tree_root(temporary_root)
 
         remove_paths: Paths = list(
             walk_iterator(
@@ -159,7 +163,7 @@ def test_status() -> None:
     """Test to get status of compression format from archive."""
 
     def individual_test(temporary_root: Path) -> None:
-        tree_root: Path = Path(temporary_root, "tree")
+        tree_root: Path = _get_tree_root(temporary_root)
 
         create_temporary_tree(tree_root)
 
@@ -174,7 +178,7 @@ def test_sequential() -> None:
     """Test to decompress sequential archives."""
 
     def individual_test(temporary_root: Path) -> None:
-        tree_root: Path = Path(temporary_root, "tree")
+        tree_root: Path = _get_tree_root(temporary_root)
 
         add_paths: Paths = list(
             walk_iterator(create_temporary_tree(tree_root, tree_deep=5))
@@ -208,7 +212,7 @@ def test_timestamp() -> None:
     )
 
     def individual_test(temporary_root: Path) -> None:
-        tree_root: Path = Path(temporary_root, "tree")
+        tree_root: Path = _get_tree_root(temporary_root)
 
         add_paths: Paths = list(
             walk_iterator(create_temporary_tree(tree_root))
