@@ -41,10 +41,8 @@ def _compare_timestamp(sorted_paths: Paths2, expected: datetime) -> None:
     assert expected == times[0]
 
 
-def _compare_path_pair(expected: Paths, sequential: Paths) -> None:
-    assert 1 == len(
-        set([str(sorted(paths)) for paths in [expected, sequential]])
-    )
+def _compare_path_pair(left: Paths, right: Paths) -> None:
+    assert 1 == len(set([str(sorted(paths)) for paths in [left, right]]))
 
 
 def _compare_path_name(sorted_paths: Paths2, temporary_root: Path) -> None:
