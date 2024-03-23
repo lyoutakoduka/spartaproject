@@ -94,12 +94,9 @@ def _compress_to_decompress(temporary_root: Path, tree_root: Path) -> None:
     )
 
 
-def _inside_temporary_directory(
-    function: Callable[[Path, Path], None]
-) -> None:
+def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as temporary_path:
-        temporary_root: Path = Path(temporary_path)
-        function(temporary_root, Path(temporary_root, "tree"))
+        function(Path(temporary_path))
 
 
 def _set_file_latest(latest: datetime, paths: Paths) -> None:
@@ -111,13 +108,13 @@ def _set_file_latest(latest: datetime, paths: Paths) -> None:
 def test_file() -> None:
     """Test to decompress archive including only files."""
 
-    def individual_test(temporary_root: Path, tree_root: Path) -> None:
+    def individual_test(temporary_root: Path) -> None:
+        tree_root: Path = Path(temporary_root, "tree")
+
         remove_paths: Paths = [
             path
             for path in walk_iterator(
-                create_temporary_tree(
-                    Path(temporary_root, "tree"), tree_deep=2
-                ),
+                create_temporary_tree(tree_root, tree_deep=2),
                 file=False,
             )
             if 0 == len(list(walk_iterator(path, depth=1)))
@@ -137,7 +134,9 @@ def test_file() -> None:
 def test_directory() -> None:
     """Test to decompress archive including only directories."""
 
-    def individual_test(temporary_root: Path, tree_root: Path) -> None:
+    def individual_test(temporary_root: Path) -> None:
+        tree_root: Path = Path(temporary_root, "tree")
+
         remove_paths: Paths = list(
             walk_iterator(
                 create_temporary_tree(tree_root, tree_deep=3),
@@ -159,7 +158,9 @@ def test_directory() -> None:
 def test_status() -> None:
     """Test to get status of compression format from archive."""
 
-    def individual_test(temporary_root: Path, tree_root: Path) -> None:
+    def individual_test(temporary_root: Path) -> None:
+        tree_root: Path = Path(temporary_root, "tree")
+
         create_temporary_tree(tree_root)
 
         assert not DecompressArchive(temporary_root).is_lzma_archive(
@@ -172,7 +173,9 @@ def test_status() -> None:
 def test_sequential() -> None:
     """Test to decompress sequential archives."""
 
-    def individual_test(temporary_root: Path, tree_root: Path) -> None:
+    def individual_test(temporary_root: Path) -> None:
+        tree_root: Path = Path(temporary_root, "tree")
+
         add_paths: Paths = list(
             walk_iterator(create_temporary_tree(tree_root, tree_deep=5))
         )
@@ -204,7 +207,9 @@ def test_timestamp() -> None:
         "2023-04-15T20:09:30.936886+00:00"
     )
 
-    def individual_test(temporary_root: Path, tree_root: Path) -> None:
+    def individual_test(temporary_root: Path) -> None:
+        tree_root: Path = Path(temporary_root, "tree")
+
         add_paths: Paths = list(
             walk_iterator(create_temporary_tree(tree_root))
         )
