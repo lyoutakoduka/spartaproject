@@ -10,7 +10,7 @@ from tempfile import TemporaryDirectory
 from typing import Callable
 
 from pyspartaproj.context.default.integer_context import Ints2
-from pyspartaproj.context.extension.path_context import Paths2
+from pyspartaproj.context.extension.path_context import Paths, Paths2
 from pyspartaproj.context.extension.time_context import Times2, datetime
 from pyspartaproj.script.file.archive.archive_format import get_format
 from pyspartaproj.script.file.archive.compress_archive import CompressArchive
@@ -102,14 +102,21 @@ def test_file() -> None:
     """Test to decompress archive including only files."""
 
     def individual_test(temporary_root: Path, tree_root: Path) -> None:
+        remove_paths: Paths = [
+            path
+            for path in walk_iterator(
+                create_temporary_tree(
+                    Path(temporary_root, "tree"), tree_deep=2
+                ),
+                file=False,
+            )
+            if 0 == len(list(walk_iterator(path, depth=1)))
+        ]
+
         safe_trash = SafeTrash()
 
-        for path in walk_iterator(
-            create_temporary_tree(Path(temporary_root, "tree"), tree_deep=2),
-            file=False,
-        ):
-            if 0 == len(list(walk_iterator(path, depth=1))):
-                safe_trash.trash(path)
+        for path in remove_paths:
+            safe_trash.trash(path)
 
         _compress_to_decompress(temporary_root, tree_root)
         _common_test(temporary_root)
