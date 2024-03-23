@@ -32,6 +32,10 @@ def _get_tree_root(temporary_root: Path) -> Path:
     return Path(temporary_root, "tree")
 
 
+def _get_extract_root(temporary_root: Path) -> Path:
+    return Path(temporary_root, "extract")
+
+
 def _compare_timestamp(sorted_paths: Paths2, expected: datetime) -> None:
     times_pair: Times2 = [
         [get_latest(path) for path in paths if path.is_file()]
@@ -93,7 +97,7 @@ def _create_archive(temporary_root: Path, tree_root: Path) -> Path:
 
 
 def _compress_to_decompress(temporary_root: Path, tree_root: Path) -> None:
-    DecompressArchive(Path(temporary_root, "extract")).decompress_archive(
+    DecompressArchive(_get_extract_root(temporary_root)).decompress_archive(
         _create_archive(temporary_root, tree_root)
     )
 
@@ -190,7 +194,9 @@ def test_sequential() -> None:
 
         compress_archive.compress_at_once(add_paths)
 
-        decompress_archive = DecompressArchive(Path(temporary_root, "extract"))
+        decompress_archive = DecompressArchive(
+            _get_extract_root(temporary_root)
+        )
 
         archive_paths: Paths = compress_archive.close_archived()
         sequential: Paths = decompress_archive.sequential_archives(
@@ -225,7 +231,9 @@ def test_timestamp() -> None:
         compress_archive.compress_at_once(add_paths)
         archive_paths: Paths = compress_archive.close_archived()
 
-        decompress_archive = DecompressArchive(Path(temporary_root, "extract"))
+        decompress_archive = DecompressArchive(
+            _get_extract_root(temporary_root)
+        )
 
         decompress_archive.decompress_at_once(archive_paths)
 
