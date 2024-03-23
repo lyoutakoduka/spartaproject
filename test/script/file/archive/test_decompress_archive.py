@@ -41,6 +41,10 @@ def _compare_timestamp(sorted_paths: Paths2, expected: datetime) -> None:
     assert expected == times[0]
 
 
+def _compare_sequential(expected: Paths, sequential: Paths) -> None:
+    assert sorted(expected) == sorted(sequential)
+
+
 def _compare_path_name(sorted_paths: Paths2, temporary_root: Path) -> None:
     relative_paths: Paths2 = [
         get_relative_array(paths, root_path=Path(temporary_root, directory))
@@ -181,8 +185,7 @@ def test_limit() -> None:
         decompress_archive.decompress_at_once(sequential)
 
         _common_test(temporary_root)
-
-        assert sorted(expected) == sorted(sequential)
+        _compare_sequential(expected, sequential)
 
     _inside_temporary_directory(individual_test)
 
