@@ -100,12 +100,6 @@ def _create_archive(temporary_root: Path, tree_root: Path) -> Path:
     )
 
 
-def _compress_to_decompress(temporary_root: Path, tree_root: Path) -> None:
-    DecompressArchive(_get_extract_root(temporary_root)).decompress_archive(
-        _create_archive(temporary_root, tree_root)
-    )
-
-
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
