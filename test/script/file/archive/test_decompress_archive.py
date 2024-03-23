@@ -206,11 +206,12 @@ def test_sequential() -> None:
 
         compress_archive.compress_at_once(add_paths)
 
+        archive_paths: Paths = compress_archive.close_archived()
+
         decompress_archive = DecompressArchive(
             _get_extract_root(temporary_root)
         )
 
-        archive_paths: Paths = compress_archive.close_archived()
         sequential: Paths = decompress_archive.sequential_archives(
             archive_paths[0]
         )
