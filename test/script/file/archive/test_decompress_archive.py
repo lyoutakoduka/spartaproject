@@ -102,6 +102,12 @@ def _inside_temporary_directory(
         function(temporary_root, Path(temporary_root, "tree"))
 
 
+def _set_file_latest(latest: datetime, paths: Paths) -> None:
+    for path in paths:
+        if path.is_file():
+            set_latest(path, latest)
+
+
 def test_file() -> None:
     """Test to decompress archive including only files."""
 
@@ -203,9 +209,7 @@ def test_timestamp() -> None:
             walk_iterator(create_temporary_tree(tree_root))
         )
 
-        for path in add_paths:
-            if path.is_file():
-                set_latest(path, expected)
+        _set_file_latest(expected, add_paths)
 
         compress_archive = CompressArchive(Path(temporary_root, "archive"))
 
