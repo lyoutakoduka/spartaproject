@@ -163,7 +163,7 @@ def test_status() -> None:
     _inside_temporary_directory(individual_test)
 
 
-def test_limit() -> None:
+def test_sequential() -> None:
     """Test to decompress sequential archives."""
 
     def individual_test(temporary_root: Path, tree_root: Path) -> None:
@@ -230,6 +230,6 @@ def main() -> bool:
     test_file()
     test_directory()
     test_status()
-    test_limit()
+    test_sequential()
     test_timestamp()
     return True
