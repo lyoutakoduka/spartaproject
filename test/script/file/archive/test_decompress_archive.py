@@ -175,13 +175,14 @@ def test_limit() -> None:
 
         decompress_archive = DecompressArchive(Path(temporary_root, "extract"))
 
-        decompress_archive.decompress_at_once(
-            decompress_archive.sequential_archives(
-                compress_archive.close_archived()[0]
-            )
-        )
+        expected: Paths = compress_archive.close_archived()
+        sequential: Paths = decompress_archive.sequential_archives(expected[0])
+
+        decompress_archive.decompress_at_once(sequential)
 
         _common_test(temporary_root)
+
+        assert sorted(expected) == sorted(sequential)
 
     _inside_temporary_directory(individual_test)
 
