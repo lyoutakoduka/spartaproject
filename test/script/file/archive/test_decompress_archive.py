@@ -205,12 +205,11 @@ def test_timestamp() -> None:
         compress_archive = CompressArchive(Path(temporary_root, "archive"))
 
         compress_archive.compress_at_once(add_paths)
+        archive_paths: Paths = compress_archive.close_archived()
 
         decompress_archive = DecompressArchive(Path(temporary_root, "extract"))
 
-        decompress_archive.decompress_at_once(
-            compress_archive.close_archived()
-        )
+        decompress_archive.decompress_at_once(archive_paths)
 
         _compare_timestamp(_common_test(temporary_root), expected)
 
