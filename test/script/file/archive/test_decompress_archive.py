@@ -36,6 +36,10 @@ def _get_extract_root(temporary_root: Path) -> Path:
     return Path(temporary_root, "extract")
 
 
+def _get_archive_root(temporary_root: Path) -> Path:
+    return Path(temporary_root, "archive")
+
+
 def _compare_timestamp(sorted_paths: Paths2, expected: datetime) -> None:
     times_pair: Times2 = [
         [get_latest(path) for path in paths if path.is_file()]
@@ -189,7 +193,7 @@ def test_sequential() -> None:
         )
 
         compress_archive = CompressArchive(
-            Path(temporary_root, "archive"), limit_byte=200
+            _get_archive_root(temporary_root), limit_byte=200
         )
 
         compress_archive.compress_at_once(add_paths)
@@ -226,7 +230,7 @@ def test_timestamp() -> None:
 
         _set_file_latest(expected, add_paths)
 
-        compress_archive = CompressArchive(Path(temporary_root, "archive"))
+        compress_archive = CompressArchive(_get_archive_root(temporary_root))
 
         compress_archive.compress_at_once(add_paths)
         archive_paths: Paths = compress_archive.close_archived()
