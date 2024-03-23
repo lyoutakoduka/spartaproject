@@ -128,12 +128,16 @@ def test_directory() -> None:
     """Test to decompress archive including only directories."""
 
     def individual_test(temporary_root: Path, tree_root: Path) -> None:
+        remove_paths: Paths = list(
+            walk_iterator(
+                create_temporary_tree(tree_root, tree_deep=3),
+                directory=False,
+            )
+        )
+
         safe_trash = SafeTrash()
 
-        for path in walk_iterator(
-            create_temporary_tree(tree_root, tree_deep=3),
-            directory=False,
-        ):
+        for path in remove_paths:
             safe_trash.trash(path)
 
         _compress_to_decompress(temporary_root, tree_root)
