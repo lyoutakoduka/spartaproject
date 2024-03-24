@@ -126,10 +126,7 @@ def test_file() -> None:
             if 0 == len(list(walk_iterator(path, depth=1)))
         ]
 
-        safe_trash = SafeTrash()
-
-        for path in remove_paths:
-            safe_trash.trash(path)
+        SafeTrash().trash_at_once(remove_paths)
 
         decompress_archive = DecompressArchive(
             _get_extract_root(temporary_root)
@@ -157,10 +154,7 @@ def test_directory() -> None:
             )
         )
 
-        safe_trash = SafeTrash()
-
-        for path in remove_paths:
-            safe_trash.trash(path)
+        SafeTrash().trash_at_once(remove_paths)
 
         decompress_archive = DecompressArchive(
             _get_extract_root(temporary_root)
@@ -183,7 +177,11 @@ def test_status() -> None:
 
         create_temporary_tree(tree_root)
 
-        assert not DecompressArchive(temporary_root).is_lzma_archive(
+        decompress_archive = DecompressArchive(
+            _get_extract_root(temporary_root)
+        )
+
+        assert not decompress_archive.is_lzma_archive(
             _create_archive(temporary_root, tree_root)
         )
 
