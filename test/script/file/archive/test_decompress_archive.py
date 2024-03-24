@@ -137,6 +137,10 @@ def _create_tree_sequential(tree_root: Path) -> Path:
     return create_temporary_tree(tree_root, tree_deep=5)
 
 
+def _get_tree_paths(path: Path) -> Paths:
+    return list(walk_iterator(path))
+
+
 def test_file() -> None:
     """Test to decompress archive including only files."""
 
@@ -216,7 +220,7 @@ def test_sequential() -> None:
 
         tree_path: Path = _create_tree_sequential(tree_root)
 
-        add_paths: Paths = list(walk_iterator(tree_path))
+        add_paths: Paths = _get_tree_paths(tree_path)
 
         compress_archive = CompressArchive(
             _get_archive_root(temporary_root), limit_byte=200
@@ -253,7 +257,7 @@ def test_timestamp() -> None:
 
         tree_path: Path = _create_tree(tree_root)
 
-        add_paths: Paths = list(walk_iterator(tree_path))
+        add_paths: Paths = _get_tree_paths(tree_path)
 
         _set_file_latest(expected, add_paths)
 
