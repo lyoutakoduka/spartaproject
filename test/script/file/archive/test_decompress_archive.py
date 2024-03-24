@@ -145,6 +145,10 @@ def _get_tree_paths_file(path: Path) -> Paths:
     return list(walk_iterator(path, file=False))
 
 
+def _get_tree_paths_directory(path: Path) -> Paths:
+    return list(walk_iterator(path, directory=False))
+
+
 def test_file() -> None:
     """Test to decompress archive including only files."""
 
@@ -180,7 +184,7 @@ def test_directory() -> None:
 
         tree_path: Path = _create_tree_directory(tree_root)
 
-        remove_paths: Paths = list(walk_iterator(tree_path, directory=False))
+        remove_paths: Paths = _get_tree_paths_directory(tree_path)
 
         _remove_unused(remove_paths)
 
