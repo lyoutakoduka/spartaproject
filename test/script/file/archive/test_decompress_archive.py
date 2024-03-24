@@ -121,6 +121,10 @@ def _remove_unused(paths: Paths) -> None:
     SafeTrash().trash_at_once(paths)
 
 
+def _create_tree(tree_root: Path) -> Path:
+    return create_temporary_tree(tree_root)
+
+
 def _create_tree_file(tree_root: Path) -> Path:
     return create_temporary_tree(tree_root, tree_deep=2)
 
@@ -191,7 +195,7 @@ def test_status() -> None:
     def individual_test(temporary_root: Path) -> None:
         tree_root: Path = _get_tree_root(temporary_root)
 
-        create_temporary_tree(tree_root)
+        _create_tree(tree_root)
 
         decompress_archive = DecompressArchive(
             _get_extract_root(temporary_root)
@@ -247,7 +251,7 @@ def test_timestamp() -> None:
     def individual_test(temporary_root: Path) -> None:
         tree_root: Path = _get_tree_root(temporary_root)
 
-        tree_path: Path = create_temporary_tree(tree_root)
+        tree_path: Path = _create_tree(tree_root)
 
         add_paths: Paths = list(walk_iterator(tree_path))
 
