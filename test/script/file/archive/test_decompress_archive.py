@@ -163,13 +163,13 @@ def test_file() -> None:
 
         _remove_unused(remove_paths)
 
+        archive_path: Path = _create_archive(temporary_root, tree_root)
+
         decompress_archive = DecompressArchive(
             _get_extract_root(temporary_root)
         )
 
-        decompress_archive.decompress_archive(
-            _create_archive(temporary_root, tree_root)
-        )
+        decompress_archive.decompress_archive(archive_path)
 
         _common_test(temporary_root)
 
@@ -188,13 +188,13 @@ def test_directory() -> None:
 
         _remove_unused(remove_paths)
 
+        archive_path: Path = _create_archive(temporary_root, tree_root)
+
         decompress_archive = DecompressArchive(
             _get_extract_root(temporary_root)
         )
 
-        decompress_archive.decompress_archive(
-            _create_archive(temporary_root, tree_root)
-        )
+        decompress_archive.decompress_archive(archive_path)
 
         _common_test(temporary_root)
 
@@ -209,13 +209,13 @@ def test_status() -> None:
 
         _create_tree(tree_root)
 
+        archive_path: Path = _create_archive(temporary_root, tree_root)
+
         decompress_archive = DecompressArchive(
             _get_extract_root(temporary_root)
         )
 
-        assert not decompress_archive.is_lzma_archive(
-            _create_archive(temporary_root, tree_root)
-        )
+        assert not decompress_archive.is_lzma_archive(archive_path)
 
     _inside_temporary_directory(individual_test)
 
