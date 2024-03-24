@@ -149,6 +149,10 @@ def _get_tree_paths_directory(path: Path) -> Paths:
     return list(walk_iterator(path, directory=False))
 
 
+def _compress_archive(temporary_root: Path) -> CompressArchive:
+    return CompressArchive(_get_archive_root(temporary_root))
+
+
 def test_file() -> None:
     """Test to decompress archive including only files."""
 
