@@ -123,9 +123,11 @@ def test_file() -> None:
 
         tree_path: Path = create_temporary_tree(tree_root, tree_deep=2)
 
+        directory_paths: Paths = list(walk_iterator(tree_path, file=False))
+
         remove_paths: Paths = [
             path
-            for path in walk_iterator(tree_path, file=False)
+            for path in directory_paths
             if 0 == len(list(walk_iterator(path, depth=1)))
         ]
 
