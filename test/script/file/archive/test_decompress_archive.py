@@ -111,6 +111,12 @@ def _set_file_latest(latest: datetime, paths: Paths) -> None:
             set_latest(path, latest)
 
 
+def _find_unused(paths: Paths) -> Paths:
+    return [
+        path for path in paths if 0 == len(list(walk_iterator(path, depth=1)))
+    ]
+
+
 def _remove_unused(paths: Paths) -> None:
     SafeTrash().trash_at_once(paths)
 
@@ -125,11 +131,7 @@ def test_file() -> None:
 
         directory_paths: Paths = list(walk_iterator(tree_path, file=False))
 
-        remove_paths: Paths = [
-            path
-            for path in directory_paths
-            if 0 == len(list(walk_iterator(path, depth=1)))
-        ]
+        remove_paths: Paths = _find_unused(directory_paths)
 
         _remove_unused(remove_paths)
 
