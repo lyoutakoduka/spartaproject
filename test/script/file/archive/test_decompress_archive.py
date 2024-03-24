@@ -121,12 +121,11 @@ def test_file() -> None:
     def individual_test(temporary_root: Path) -> None:
         tree_root: Path = _get_tree_root(temporary_root)
 
+        tree_path: Path = create_temporary_tree(tree_root, tree_deep=2)
+
         remove_paths: Paths = [
             path
-            for path in walk_iterator(
-                create_temporary_tree(tree_root, tree_deep=2),
-                file=False,
-            )
+            for path in walk_iterator(tree_path, file=False)
             if 0 == len(list(walk_iterator(path, depth=1)))
         ]
 
@@ -151,12 +150,9 @@ def test_directory() -> None:
     def individual_test(temporary_root: Path) -> None:
         tree_root: Path = _get_tree_root(temporary_root)
 
-        remove_paths: Paths = list(
-            walk_iterator(
-                create_temporary_tree(tree_root, tree_deep=3),
-                directory=False,
-            )
-        )
+        tree_path: Path = create_temporary_tree(tree_root, tree_deep=3)
+
+        remove_paths: Paths = list(walk_iterator(tree_path, directory=False))
 
         _remove_unused(remove_paths)
 
@@ -198,9 +194,9 @@ def test_sequential() -> None:
     def individual_test(temporary_root: Path) -> None:
         tree_root: Path = _get_tree_root(temporary_root)
 
-        add_paths: Paths = list(
-            walk_iterator(create_temporary_tree(tree_root, tree_deep=5))
-        )
+        tree_path: Path = create_temporary_tree(tree_root, tree_deep=5)
+
+        add_paths: Paths = list(walk_iterator(tree_path))
 
         compress_archive = CompressArchive(
             _get_archive_root(temporary_root), limit_byte=200
@@ -235,9 +231,9 @@ def test_timestamp() -> None:
     def individual_test(temporary_root: Path) -> None:
         tree_root: Path = _get_tree_root(temporary_root)
 
-        add_paths: Paths = list(
-            walk_iterator(create_temporary_tree(tree_root))
-        )
+        tree_path: Path = create_temporary_tree(tree_root)
+
+        add_paths: Paths = list(walk_iterator(tree_path))
 
         _set_file_latest(expected, add_paths)
 
