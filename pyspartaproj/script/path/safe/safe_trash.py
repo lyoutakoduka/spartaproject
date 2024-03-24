@@ -50,6 +50,18 @@ class SafeTrash(SafeRename):
     def trash_at_once(
         self, trash_paths: Paths, trash_root: Path | None = None
     ) -> Paths:
+        """Remove files or directories at once, and log history.
+
+        Args:
+            trash_paths (Paths): Paths you want to remove.
+
+            trash_root (Path | None, optional): Defaults to None.
+                Path of trash box directory.
+                It's used for argument "trash_root" of method "trash".
+
+        Returns:
+            Paths: "trash_paths" is returned.
+        """
         for trash_path in trash_paths:
             self.trash(trash_path, trash_root=trash_root)
 
