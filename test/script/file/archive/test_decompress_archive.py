@@ -111,6 +111,10 @@ def _set_file_latest(latest: datetime, paths: Paths) -> None:
             set_latest(path, latest)
 
 
+def _remove_unused(paths: Paths) -> None:
+    SafeTrash().trash_at_once(paths)
+
+
 def test_file() -> None:
     """Test to decompress archive including only files."""
 
@@ -126,7 +130,7 @@ def test_file() -> None:
             if 0 == len(list(walk_iterator(path, depth=1)))
         ]
 
-        SafeTrash().trash_at_once(remove_paths)
+        _remove_unused(remove_paths)
 
         decompress_archive = DecompressArchive(
             _get_extract_root(temporary_root)
@@ -154,7 +158,7 @@ def test_directory() -> None:
             )
         )
 
-        SafeTrash().trash_at_once(remove_paths)
+        _remove_unused(remove_paths)
 
         decompress_archive = DecompressArchive(
             _get_extract_root(temporary_root)
