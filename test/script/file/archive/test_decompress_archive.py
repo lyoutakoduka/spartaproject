@@ -141,6 +141,10 @@ def _compress_archive(temporary_root: Path) -> CompressArchive:
     return CompressArchive(_get_archive_root(temporary_root))
 
 
+def _compress_archive_sequential(temporary_root: Path) -> CompressArchive:
+    return CompressArchive(_get_archive_root(temporary_root), limit_byte=200)
+
+
 def test_file() -> None:
     """Test to decompress archive including only files."""
 
@@ -246,9 +250,7 @@ def test_sequential() -> None:
 
         add_paths: Paths = _get_tree_paths(tree_path)
 
-        compress_archive = CompressArchive(
-            _get_archive_root(temporary_root), limit_byte=200
-        )
+        compress_archive = _compress_archive_sequential(temporary_root)
 
         compress_archive.compress_at_once(add_paths)
 
