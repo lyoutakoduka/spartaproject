@@ -227,9 +227,17 @@ def test_status() -> None:
     def individual_test(temporary_root: Path) -> None:
         tree_root: Path = _get_tree_root(temporary_root)
 
-        _create_tree(tree_root)
+        tree_path: Path = _create_tree(tree_root)
 
-        archive_path: Path = _create_archive(temporary_root, tree_root)
+        add_paths: Paths = _get_tree_paths(tree_path)
+
+        compress_archive = _compress_archive(temporary_root)
+
+        compress_archive.compress_at_once(add_paths, archive_root=tree_path)
+
+        archive_paths: Paths = compress_archive.close_archived()
+
+        archive_path: Path = archive_paths[0]
 
         decompress_archive = DecompressArchive(
             _get_extract_root(temporary_root)
