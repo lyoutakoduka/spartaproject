@@ -145,6 +145,10 @@ def _compress_archive_sequential(temporary_root: Path) -> CompressArchive:
     return CompressArchive(_get_archive_root(temporary_root), limit_byte=200)
 
 
+def _decompress_archive(temporary_root: Path) -> DecompressArchive:
+    return DecompressArchive(_get_extract_root(temporary_root))
+
+
 def test_file() -> None:
     """Test to decompress archive including only files."""
 
@@ -169,8 +173,8 @@ def test_file() -> None:
 
         archive_path: Path = archive_paths[0]
 
-        decompress_archive = DecompressArchive(
-            _get_extract_root(temporary_root)
+        decompress_archive: DecompressArchive = _decompress_archive(
+            temporary_root
         )
 
         decompress_archive.decompress_archive(archive_path)
@@ -202,8 +206,8 @@ def test_directory() -> None:
 
         archive_path: Path = archive_paths[0]
 
-        decompress_archive = DecompressArchive(
-            _get_extract_root(temporary_root)
+        decompress_archive: DecompressArchive = _decompress_archive(
+            temporary_root
         )
 
         decompress_archive.decompress_archive(archive_path)
@@ -231,8 +235,8 @@ def test_status() -> None:
 
         archive_path: Path = archive_paths[0]
 
-        decompress_archive = DecompressArchive(
-            _get_extract_root(temporary_root)
+        decompress_archive: DecompressArchive = _decompress_archive(
+            temporary_root
         )
 
         assert not decompress_archive.is_lzma_archive(archive_path)
@@ -258,8 +262,8 @@ def test_sequential() -> None:
 
         archive_paths: Paths = compress_archive.close_archived()
 
-        decompress_archive = DecompressArchive(
-            _get_extract_root(temporary_root)
+        decompress_archive: DecompressArchive = _decompress_archive(
+            temporary_root
         )
 
         sequential: Paths = decompress_archive.sequential_archives(
@@ -294,8 +298,8 @@ def test_timestamp() -> None:
         compress_archive.compress_at_once(add_paths)
         archive_paths: Paths = compress_archive.close_archived()
 
-        decompress_archive = DecompressArchive(
-            _get_extract_root(temporary_root)
+        decompress_archive: DecompressArchive = _decompress_archive(
+            temporary_root
         )
 
         decompress_archive.decompress_at_once(archive_paths)
