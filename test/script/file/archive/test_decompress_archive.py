@@ -90,16 +90,6 @@ def _common_test(temporary_root: Path) -> Paths2:
     return sorted_paths
 
 
-def _create_archive(temporary_root: Path, tree_root: Path) -> Path:
-    return Path(
-        make_archive(
-            str(Path(temporary_root, *["archive"] * 2)),
-            format=get_format(),
-            root_dir=str(tree_root),
-        )
-    )
-
-
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
