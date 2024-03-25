@@ -5,14 +5,12 @@
 
 from itertools import chain
 from pathlib import Path
-from shutil import make_archive
 from tempfile import TemporaryDirectory
 from typing import Callable
 
 from pyspartaproj.context.default.integer_context import Ints2
 from pyspartaproj.context.extension.path_context import Paths, Paths2
 from pyspartaproj.context.extension.time_context import Times2, datetime
-from pyspartaproj.script.file.archive.archive_format import get_format
 from pyspartaproj.script.file.archive.compress_archive import CompressArchive
 from pyspartaproj.script.file.archive.decompress_archive import (
     DecompressArchive,
