@@ -200,7 +200,15 @@ def test_directory() -> None:
 
         _remove_unused(remove_paths)
 
-        archive_path: Path = _create_archive(temporary_root, tree_root)
+        add_paths: Paths = _get_tree_paths(tree_path)
+
+        compress_archive = _compress_archive(temporary_root)
+
+        compress_archive.compress_at_once(add_paths, archive_root=tree_path)
+
+        archive_paths: Paths = compress_archive.close_archived()
+
+        archive_path: Path = archive_paths[0]
 
         decompress_archive = DecompressArchive(
             _get_extract_root(temporary_root)
