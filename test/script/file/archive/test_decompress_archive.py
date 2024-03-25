@@ -161,7 +161,7 @@ def test_file() -> None:
 
         add_paths: Paths = _get_tree_paths(tree_path)
 
-        compress_archive = _compress_archive(temporary_root)
+        compress_archive: CompressArchive = _compress_archive(temporary_root)
 
         compress_archive.compress_at_once(add_paths, archive_root=tree_path)
 
@@ -194,7 +194,7 @@ def test_directory() -> None:
 
         add_paths: Paths = _get_tree_paths(tree_path)
 
-        compress_archive = _compress_archive(temporary_root)
+        compress_archive: CompressArchive = _compress_archive(temporary_root)
 
         compress_archive.compress_at_once(add_paths, archive_root=tree_path)
 
@@ -223,7 +223,7 @@ def test_status() -> None:
 
         add_paths: Paths = _get_tree_paths(tree_path)
 
-        compress_archive = _compress_archive(temporary_root)
+        compress_archive: CompressArchive = _compress_archive(temporary_root)
 
         compress_archive.compress_at_once(add_paths, archive_root=tree_path)
 
@@ -250,7 +250,9 @@ def test_sequential() -> None:
 
         add_paths: Paths = _get_tree_paths(tree_path)
 
-        compress_archive = _compress_archive_sequential(temporary_root)
+        compress_archive: CompressArchive = _compress_archive_sequential(
+            temporary_root
+        )
 
         compress_archive.compress_at_once(add_paths)
 
@@ -287,7 +289,7 @@ def test_timestamp() -> None:
 
         _set_file_latest(expected, add_paths)
 
-        compress_archive = _compress_archive(temporary_root)
+        compress_archive: CompressArchive = _compress_archive(temporary_root)
 
         compress_archive.compress_at_once(add_paths)
         archive_paths: Paths = compress_archive.close_archived()
