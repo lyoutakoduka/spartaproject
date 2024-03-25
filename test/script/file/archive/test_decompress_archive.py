@@ -287,7 +287,7 @@ def test_timestamp() -> None:
 
         _set_file_latest(expected, add_paths)
 
-        compress_archive = CompressArchive(_get_archive_root(temporary_root))
+        compress_archive = _compress_archive(temporary_root)
 
         compress_archive.compress_at_once(add_paths)
         archive_paths: Paths = compress_archive.close_archived()
