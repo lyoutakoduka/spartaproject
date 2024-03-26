@@ -68,11 +68,12 @@ def _compare_path_name(sorted_paths: Paths2, temporary_root: Path) -> None:
     assert relative_paths[0] == relative_paths[1]
 
 
-def _compare_file_size(sorted_paths: Paths2) -> None:
-    file_size_pair: Ints2 = [
-        get_file_size_array(paths) for paths in sorted_paths
-    ]
+def _get_file_size_pair(sorted_paths: Paths2) -> Ints2:
+    return [get_file_size_array(paths) for paths in sorted_paths]
 
+
+def _compare_file_size(sorted_paths: Paths2) -> None:
+    file_size_pair: Ints2 = _get_file_size_pair(sorted_paths)
     assert file_size_pair[0] == file_size_pair[1]
 
 
