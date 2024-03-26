@@ -61,11 +61,12 @@ def _get_inside_directory(decompressed_root: Path) -> PathsPair:
     }
 
 
-def _remove_took_out(inside_directory: PathsPair) -> None:
-    safe_trash = SafeTrash()
+def _remove_unused(paths: Paths) -> None:
+    SafeTrash().trash_at_once(paths)
 
-    for directory_text in inside_directory.keys():
-        safe_trash.trash(Path(directory_text))
+
+def _remove_took_out(inside_directory: PathsPair) -> None:
+    _remove_unused([Path(text) for text in inside_directory.keys()])
 
 
 def _took_out_cycle(
