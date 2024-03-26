@@ -72,6 +72,12 @@ def _compare_file_size(sorted_paths: Paths2) -> None:
     assert file_size_pair[0] == file_size_pair[1]
 
 
+def _compare_compress_type(
+    archive_paths: Paths, decompress_archive: DecompressArchive
+) -> None:
+    assert not decompress_archive.is_lzma_archive(archive_paths[0])
+
+
 def _get_sorted_paths(temporary_root: Path) -> Paths2:
     return [
         sorted(list(walk_iterator(Path(temporary_root, directory))))
@@ -254,13 +260,11 @@ def test_status() -> None:
             tree_path, add_paths, compress_archive
         )
 
-        archive_path: Path = archive_paths[0]
-
         decompress_archive: DecompressArchive = _decompress_archive(
             temporary_root
         )
 
-        assert not decompress_archive.is_lzma_archive(archive_path)
+        _compare_compress_type(archive_paths, decompress_archive)
 
     _inside_temporary_directory(individual_test)
 
