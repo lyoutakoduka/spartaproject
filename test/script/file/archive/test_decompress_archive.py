@@ -92,7 +92,8 @@ def _common_test(temporary_root: Path) -> Paths2:
     return sorted_paths
 
 
-def _type_test(same_type: bool) -> None:
+def _type_test(temporary_root: Path, same_type: bool) -> None:
+    _common_test(temporary_root)
     assert not same_type
 
 
@@ -284,9 +285,11 @@ def test_type() -> None:
             temporary_root
         )
 
+        _decompress_single(archive_paths, decompress_archive)
+
         same_type: bool = _decompress_type(archive_paths, decompress_archive)
 
-        _type_test(same_type)
+        _type_test(temporary_root, same_type)
 
     _inside_temporary_directory(individual_test)
 
