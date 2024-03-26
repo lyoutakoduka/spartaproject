@@ -299,10 +299,9 @@ def test_directory() -> None:
         tree_path: Path = _create_tree_directory(temporary_root)
 
         _remove_unused_directory(tree_path)
-
-        add_paths: Paths = _get_tree_paths(tree_path)
-
-        _compress_to_decompress(temporary_root, tree_path, add_paths)
+        _compress_to_decompress(
+            temporary_root, tree_path, _get_tree_paths(tree_path)
+        )
 
         _common_test(temporary_root)
 
