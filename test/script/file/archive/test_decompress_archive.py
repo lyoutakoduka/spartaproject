@@ -199,6 +199,14 @@ def _decompress_sequential(
     return sequential
 
 
+def _to_decompress_single(
+    temporary_root: Path, archive_paths: Paths
+) -> DecompressArchive:
+    decompress_archive: DecompressArchive = _decompress_archive(temporary_root)
+    _decompress_single(archive_paths, decompress_archive)
+    return decompress_archive
+
+
 def _compress_to_decompress(
     temporary_root: Path, tree_path: Path, add_paths: Paths
 ) -> None:
@@ -208,9 +216,7 @@ def _compress_to_decompress(
         tree_path, add_paths, compress_archive
     )
 
-    decompress_archive: DecompressArchive = _decompress_archive(temporary_root)
-
-    _decompress_single(archive_paths, decompress_archive)
+    _to_decompress_single(temporary_root, archive_paths)
 
 
 def test_file() -> None:
@@ -273,11 +279,9 @@ def test_type() -> None:
             tree_path, add_paths, compress_archive
         )
 
-        decompress_archive: DecompressArchive = _decompress_archive(
-            temporary_root
+        decompress_archive: DecompressArchive = _to_decompress_single(
+            temporary_root, archive_paths
         )
-
-        _decompress_single(archive_paths, decompress_archive)
 
         same_type: bool = _decompress_type(archive_paths, decompress_archive)
 
