@@ -254,7 +254,7 @@ def test_directory() -> None:
 
 
 def test_type() -> None:
-    """Test to get status of compression format from archive."""
+    """Test to get type of compression format from archive."""
 
     def individual_test(temporary_root: Path) -> None:
         tree_root: Path = _get_tree_root(temporary_root)
