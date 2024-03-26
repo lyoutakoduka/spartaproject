@@ -147,8 +147,8 @@ def _remove_unused(paths: Paths) -> None:
     SafeTrash().trash_at_once(paths)
 
 
-def _create_tree(tree_root: Path) -> Path:
-    return create_temporary_tree(tree_root)
+def _create_tree(temporary_root: Path) -> Path:
+    return create_temporary_tree(_get_tree_root(temporary_root))
 
 
 def _create_tree_file(temporary_root: Path) -> Path:
@@ -286,9 +286,7 @@ def test_type() -> None:
     """Test to get type of compression format from archive."""
 
     def individual_test(temporary_root: Path) -> None:
-        tree_root: Path = _get_tree_root(temporary_root)
-
-        tree_path: Path = _create_tree(tree_root)
+        tree_path: Path = _create_tree(temporary_root)
 
         add_paths: Paths = _get_tree_paths(tree_path)
 
@@ -341,9 +339,7 @@ def test_timestamp() -> None:
     """Test for timestamp consistency of contents in archive."""
 
     def individual_test(temporary_root: Path) -> None:
-        tree_root: Path = _get_tree_root(temporary_root)
-
-        tree_path: Path = _create_tree(tree_root)
+        tree_path: Path = _create_tree(temporary_root)
 
         add_paths: Paths = _get_tree_paths(tree_path)
 
