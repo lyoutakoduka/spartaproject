@@ -201,6 +201,20 @@ def _decompress_sequential(
     return sequential
 
 
+def _compress_to_decompress(
+    temporary_root: Path, tree_path: Path, add_paths: Paths
+) -> None:
+    compress_archive: CompressArchive = _compress_archive(temporary_root)
+
+    archive_paths: Paths = _finalize_compress_archive(
+        tree_path, add_paths, compress_archive
+    )
+
+    decompress_archive: DecompressArchive = _decompress_archive(temporary_root)
+
+    _decompress_single(archive_paths, decompress_archive)
+
+
 def test_file() -> None:
     """Test to decompress archive including only files."""
 
@@ -217,17 +231,7 @@ def test_file() -> None:
 
         add_paths: Paths = _get_tree_paths(tree_path)
 
-        compress_archive: CompressArchive = _compress_archive(temporary_root)
-
-        archive_paths: Paths = _finalize_compress_archive(
-            tree_path, add_paths, compress_archive
-        )
-
-        decompress_archive: DecompressArchive = _decompress_archive(
-            temporary_root
-        )
-
-        _decompress_single(archive_paths, decompress_archive)
+        _compress_to_decompress(temporary_root, tree_path, add_paths)
 
         _common_test(temporary_root)
 
@@ -248,17 +252,7 @@ def test_directory() -> None:
 
         add_paths: Paths = _get_tree_paths(tree_path)
 
-        compress_archive: CompressArchive = _compress_archive(temporary_root)
-
-        archive_paths: Paths = _finalize_compress_archive(
-            tree_path, add_paths, compress_archive
-        )
-
-        decompress_archive: DecompressArchive = _decompress_archive(
-            temporary_root
-        )
-
-        _decompress_single(archive_paths, decompress_archive)
+        _compress_to_decompress(temporary_root, tree_path, add_paths)
 
         _common_test(temporary_root)
 
@@ -337,17 +331,7 @@ def test_timestamp() -> None:
 
         _set_file_latest(add_paths)
 
-        compress_archive: CompressArchive = _compress_archive(temporary_root)
-
-        archive_paths: Paths = _finalize_compress_archive(
-            tree_path, add_paths, compress_archive
-        )
-
-        decompress_archive: DecompressArchive = _decompress_archive(
-            temporary_root
-        )
-
-        _decompress_single(archive_paths, decompress_archive)
+        _compress_to_decompress(temporary_root, tree_path, add_paths)
 
         _timestamp_test(temporary_root)
 
