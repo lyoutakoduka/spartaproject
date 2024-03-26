@@ -155,8 +155,8 @@ def _create_tree_file(temporary_root: Path) -> Path:
     return create_temporary_tree(_get_tree_root(temporary_root), tree_deep=2)
 
 
-def _create_tree_directory(tree_root: Path) -> Path:
-    return create_temporary_tree(tree_root, tree_deep=3)
+def _create_tree_directory(temporary_root: Path) -> Path:
+    return create_temporary_tree(_get_tree_root(temporary_root), tree_deep=3)
 
 
 def _create_tree_sequential(tree_root: Path) -> Path:
@@ -265,9 +265,7 @@ def test_directory() -> None:
     """Test to decompress archive including only directories."""
 
     def individual_test(temporary_root: Path) -> None:
-        tree_root: Path = _get_tree_root(temporary_root)
-
-        tree_path: Path = _create_tree_directory(tree_root)
+        tree_path: Path = _create_tree_directory(temporary_root)
 
         remove_paths: Paths = _get_tree_paths_directory(tree_path)
 
