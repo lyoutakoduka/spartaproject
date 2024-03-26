@@ -187,7 +187,7 @@ def _decompress_archive(temporary_root: Path) -> DecompressArchive:
     return DecompressArchive(_get_extract_root(temporary_root))
 
 
-def _finalize_compress_archive(
+def _compress_at_once(
     tree_path: Path, paths: Paths, compress_archive: CompressArchive
 ) -> None:
     compress_archive.compress_at_once(paths, archive_root=tree_path)
@@ -197,7 +197,7 @@ def _from_compress_single(
     temporary_root: Path, tree_path: Path, add_paths: Paths
 ) -> CompressArchive:
     compress_archive: CompressArchive = _compress_archive(temporary_root)
-    _finalize_compress_archive(tree_path, add_paths, compress_archive)
+    _compress_at_once(tree_path, add_paths, compress_archive)
     return compress_archive
 
 
@@ -318,7 +318,7 @@ def test_sequential() -> None:
             temporary_root
         )
 
-        _finalize_compress_archive(tree_path, add_paths, compress_archive)
+        _compress_at_once(tree_path, add_paths, compress_archive)
 
         archive_paths: Paths = compress_archive.close_archived()
 
