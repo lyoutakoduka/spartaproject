@@ -306,11 +306,13 @@ def test_timestamp() -> None:
             tree_path, add_paths, compress_archive
         )
 
+        archive_path: Path = archive_paths[0]
+
         decompress_archive: DecompressArchive = _decompress_archive(
             temporary_root
         )
 
-        decompress_archive.decompress_at_once(archive_paths)
+        decompress_archive.decompress_archive(archive_path)
 
         _compare_timestamp(_common_test(temporary_root), expected)
 
