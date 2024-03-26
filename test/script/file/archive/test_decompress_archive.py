@@ -9,6 +9,7 @@ from tempfile import TemporaryDirectory
 from typing import Callable
 
 from pyspartaproj.context.default.integer_context import Ints2
+from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.extension.path_context import Paths, Paths2
 from pyspartaproj.context.extension.time_context import Times, Times2, datetime
 from pyspartaproj.script.file.archive.compress_archive import CompressArchive
@@ -24,6 +25,10 @@ from pyspartaproj.script.path.temporary.create_temporary_tree import (
 )
 from pyspartaproj.script.time.stamp.get_timestamp import get_latest
 from pyspartaproj.script.time.stamp.set_timestamp import set_latest
+
+
+def _get_types() -> Strs:
+    return ["tree", "extract"]
 
 
 def _get_tree_root(temporary_root: Path) -> Path:
@@ -70,7 +75,7 @@ def _compare_path_pair(left: Paths, right: Paths) -> None:
 def _get_relative_paths(sorted_paths: Paths2, temporary_root: Path) -> Paths2:
     return [
         get_relative_array(paths, root_path=Path(temporary_root, directory))
-        for directory, paths in zip(["tree", "extract"], sorted_paths)
+        for directory, paths in zip(_get_types(), sorted_paths)
     ]
 
 
@@ -91,7 +96,7 @@ def _compare_file_size(sorted_paths: Paths2) -> None:
 def _get_sorted_paths(temporary_root: Path) -> Paths2:
     return [
         sorted(list(walk_iterator(Path(temporary_root, directory))))
-        for directory in ["tree", "extract"]
+        for directory in _get_types()
     ]
 
 
