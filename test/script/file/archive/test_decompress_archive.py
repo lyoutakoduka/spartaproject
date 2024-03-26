@@ -314,17 +314,12 @@ def test_type() -> None:
     def individual_test(temporary_root: Path) -> None:
         tree_path: Path = _create_tree(temporary_root)
 
-        add_paths: Paths = _get_tree_paths(tree_path)
-
         archive_paths: Paths = _finalize_compress_single(
-            temporary_root, tree_path, add_paths
+            temporary_root, tree_path, _get_tree_paths(tree_path)
         )
-
-        decompress_archive: DecompressArchive = _to_decompress_single(
-            temporary_root, archive_paths
+        same_type: bool = _decompress_type(
+            archive_paths, _to_decompress_single(temporary_root, archive_paths)
         )
-
-        same_type: bool = _decompress_type(archive_paths, decompress_archive)
 
         _type_test(temporary_root, same_type)
 
