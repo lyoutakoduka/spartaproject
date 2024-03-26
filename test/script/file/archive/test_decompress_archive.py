@@ -244,6 +244,10 @@ def _remove_unused_file(tree_path: Path) -> None:
     _remove_unused(_find_unused(_get_tree_paths_file(tree_path)))
 
 
+def _remove_unused_directory(tree_path: Path) -> None:
+    _remove_unused(_get_tree_paths_directory(tree_path))
+
+
 def test_file() -> None:
     """Test to decompress archive including only files."""
 
@@ -267,9 +271,7 @@ def test_directory() -> None:
     def individual_test(temporary_root: Path) -> None:
         tree_path: Path = _create_tree_directory(temporary_root)
 
-        remove_paths: Paths = _get_tree_paths_directory(tree_path)
-
-        _remove_unused(remove_paths)
+        _remove_unused_directory(tree_path)
 
         add_paths: Paths = _get_tree_paths(tree_path)
 
