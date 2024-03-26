@@ -312,9 +312,6 @@ def test_sequential() -> None:
 
 def test_timestamp() -> None:
     """Test for timestamp consistency of contents in archive."""
-    expected: datetime = datetime.fromisoformat(
-        "2023-04-15T20:09:30.936886+00:00"
-    )
 
     def individual_test(temporary_root: Path) -> None:
         tree_root: Path = _get_tree_root(temporary_root)
