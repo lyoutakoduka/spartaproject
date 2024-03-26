@@ -201,6 +201,16 @@ def _from_compress_single(
     return compress_archive
 
 
+def _from_compress_sequential(
+    temporary_root: Path, tree_path: Path, add_paths: Paths
+) -> CompressArchive:
+    compress_archive: CompressArchive = _compress_archive_sequential(
+        temporary_root
+    )
+    _compress_at_once(tree_path, add_paths, compress_archive)
+    return compress_archive
+
+
 def _decompress_single(
     archive_paths: Paths, decompress_archive: DecompressArchive
 ) -> None:
@@ -314,11 +324,9 @@ def test_sequential() -> None:
 
         add_paths: Paths = _get_tree_paths(tree_path)
 
-        compress_archive: CompressArchive = _compress_archive_sequential(
-            temporary_root
+        compress_archive: CompressArchive = _from_compress_sequential(
+            temporary_root, tree_path, add_paths
         )
-
-        _compress_at_once(tree_path, add_paths, compress_archive)
 
         archive_paths: Paths = compress_archive.close_archived()
 
