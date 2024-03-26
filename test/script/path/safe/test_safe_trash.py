@@ -77,12 +77,13 @@ def test_tree() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         create_temporary_tree(temporary_root, tree_deep=3)
+        remove_paths: Paths = list(walk_iterator(temporary_root, depth=1))
 
         safe_trash = SafeTrash()
-        paths: Paths = list(walk_iterator(temporary_root, depth=1))
-        safe_trash.trash_at_once(paths, trash_root=temporary_root)
+        safe_trash.trash_at_once(remove_paths, trash_root=temporary_root)
+        history_path: Path = safe_trash.pop_history()
 
-        _common_test(len(paths), safe_trash.pop_history())
+        _common_test(len(remove_paths), history_path)
 
     _inside_temporary_directory(individual_test)
 
