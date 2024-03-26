@@ -92,10 +92,7 @@ def test_select() -> None:
             paths: Paths = list(
                 walk_iterator(create_temporary_tree(temporary_root), depth=1)
             )
-
-            for path in paths:
-                safe_trash.trash(path)
-
+            safe_trash.trash_at_once(paths)
             _common_test(len(paths), safe_trash.pop_history())
 
         _inside_temporary_directory(individual_test)
