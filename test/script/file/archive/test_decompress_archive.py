@@ -172,9 +172,16 @@ def _decompress_archive(temporary_root: Path) -> DecompressArchive:
 
 def _finalize_compress_archive(
     tree_path: Path, paths: Paths, compress_archive: CompressArchive
-) -> Paths:
+) -> None:
     compress_archive.compress_at_once(paths, archive_root=tree_path)
-    return compress_archive.close_archived()
+
+
+def _from_compress_single(
+    temporary_root: Path, tree_path: Path, add_paths: Paths
+) -> CompressArchive:
+    compress_archive: CompressArchive = _compress_archive(temporary_root)
+    _finalize_compress_archive(tree_path, add_paths, compress_archive)
+    return compress_archive
 
 
 def _decompress_single(
@@ -210,11 +217,11 @@ def _to_decompress_single(
 def _compress_to_decompress(
     temporary_root: Path, tree_path: Path, add_paths: Paths
 ) -> None:
-    compress_archive: CompressArchive = _compress_archive(temporary_root)
-
-    archive_paths: Paths = _finalize_compress_archive(
-        tree_path, add_paths, compress_archive
+    compress_archive: CompressArchive = _from_compress_single(
+        temporary_root, tree_path, add_paths
     )
+
+    archive_paths: Paths = compress_archive.close_archived()
 
     _to_decompress_single(temporary_root, archive_paths)
 
@@ -273,11 +280,10 @@ def test_type() -> None:
 
         add_paths: Paths = _get_tree_paths(tree_path)
 
-        compress_archive: CompressArchive = _compress_archive(temporary_root)
-
-        archive_paths: Paths = _finalize_compress_archive(
-            tree_path, add_paths, compress_archive
+        compress_archive: CompressArchive = _from_compress_single(
+            temporary_root, tree_path, add_paths
         )
+        archive_paths: Paths = compress_archive.close_archived()
 
         decompress_archive: DecompressArchive = _to_decompress_single(
             temporary_root, archive_paths
@@ -304,9 +310,9 @@ def test_sequential() -> None:
             temporary_root
         )
 
-        archive_paths: Paths = _finalize_compress_archive(
-            tree_path, add_paths, compress_archive
-        )
+        _finalize_compress_archive(tree_path, add_paths, compress_archive)
+
+        archive_paths: Paths = compress_archive.close_archived()
 
         decompress_archive: DecompressArchive = _decompress_archive(
             temporary_root
