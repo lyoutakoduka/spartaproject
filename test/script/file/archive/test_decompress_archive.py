@@ -351,9 +351,7 @@ def test_timestamp() -> None:
         tree_path: Path = _create_tree(temporary_root)
 
         add_paths: Paths = _get_tree_paths(tree_path)
-
         _set_file_latest(add_paths)
-
         _compress_to_decompress(temporary_root, tree_path, add_paths)
 
         _timestamp_test(temporary_root)
