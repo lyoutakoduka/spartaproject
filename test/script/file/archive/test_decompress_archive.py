@@ -156,6 +156,12 @@ def _finalize_compress_archive(
     return compress_archive.close_archived()
 
 
+def _decompress_single(
+    archive_paths: Paths, decompress_archive: DecompressArchive
+) -> None:
+    decompress_archive.decompress_archive(archive_paths[0])
+
+
 def test_file() -> None:
     """Test to decompress archive including only files."""
 
@@ -178,13 +184,11 @@ def test_file() -> None:
             tree_path, add_paths, compress_archive
         )
 
-        archive_path: Path = archive_paths[0]
-
         decompress_archive: DecompressArchive = _decompress_archive(
             temporary_root
         )
 
-        decompress_archive.decompress_archive(archive_path)
+        _decompress_single(archive_paths, decompress_archive)
 
         _common_test(temporary_root)
 
@@ -211,13 +215,11 @@ def test_directory() -> None:
             tree_path, add_paths, compress_archive
         )
 
-        archive_path: Path = archive_paths[0]
-
         decompress_archive: DecompressArchive = _decompress_archive(
             temporary_root
         )
 
-        decompress_archive.decompress_archive(archive_path)
+        _decompress_single(archive_paths, decompress_archive)
 
         _common_test(temporary_root)
 
@@ -306,13 +308,11 @@ def test_timestamp() -> None:
             tree_path, add_paths, compress_archive
         )
 
-        archive_path: Path = archive_paths[0]
-
         decompress_archive: DecompressArchive = _decompress_archive(
             temporary_root
         )
 
-        decompress_archive.decompress_archive(archive_path)
+        _decompress_single(archive_paths, decompress_archive)
 
         _compare_timestamp(_common_test(temporary_root), expected)
 
