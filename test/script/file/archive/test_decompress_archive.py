@@ -59,12 +59,15 @@ def _compare_path_pair(left: Paths, right: Paths) -> None:
     assert 1 == len(set([str(sorted(paths)) for paths in [left, right]]))
 
 
-def _compare_path_name(sorted_paths: Paths2, temporary_root: Path) -> None:
-    relative_paths: Paths2 = [
+def _get_relative_paths(sorted_paths: Paths2, temporary_root: Path) -> Paths2:
+    return [
         get_relative_array(paths, root_path=Path(temporary_root, directory))
         for directory, paths in zip(["tree", "extract"], sorted_paths)
     ]
 
+
+def _compare_path_name(sorted_paths: Paths2, temporary_root: Path) -> None:
+    relative_paths: Paths2 = _get_relative_paths(sorted_paths, temporary_root)
     assert relative_paths[0] == relative_paths[1]
 
 
