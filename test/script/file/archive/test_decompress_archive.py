@@ -94,6 +94,10 @@ def _common_test(temporary_root: Path) -> Paths2:
     return sorted_paths
 
 
+def _timestamp_test(temporary_root: Path, expected: datetime) -> None:
+    _compare_timestamp(_common_test(temporary_root), expected)
+
+
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
@@ -328,7 +332,7 @@ def test_timestamp() -> None:
 
         _decompress_single(archive_paths, decompress_archive)
 
-        _compare_timestamp(_common_test(temporary_root), expected)
+        _timestamp_test(temporary_root, expected)
 
     _inside_temporary_directory(individual_test)
 
