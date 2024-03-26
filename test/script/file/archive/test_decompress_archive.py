@@ -38,6 +38,10 @@ def _get_archive_root(temporary_root: Path) -> Path:
     return Path(temporary_root, "archive")
 
 
+def _get_expected_stamp() -> datetime:
+    return datetime.fromisoformat("2023-04-15T20:09:30.936886+00:00")
+
+
 def _compare_timestamp(sorted_paths: Paths2, expected: datetime) -> None:
     times_pair: Times2 = [
         [get_latest(path) for path in paths if path.is_file()]
@@ -103,7 +107,8 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
         function(Path(temporary_path))
 
 
-def _set_file_latest(latest: datetime, paths: Paths) -> None:
+def _set_file_latest(paths: Paths) -> None:
+    latest: datetime = _get_expected_stamp()
     for path in paths:
         if path.is_file():
             set_latest(path, latest)
@@ -318,7 +323,7 @@ def test_timestamp() -> None:
 
         add_paths: Paths = _get_tree_paths(tree_path)
 
-        _set_file_latest(expected, add_paths)
+        _set_file_latest(add_paths)
 
         compress_archive: CompressArchive = _compress_archive(temporary_root)
 
