@@ -158,8 +158,10 @@ def _finalize_compress_archive(
 
 def _decompress_single(
     archive_paths: Paths, decompress_archive: DecompressArchive
-) -> None:
-    decompress_archive.decompress_archive(archive_paths[0])
+) -> Path:
+    single: Path = archive_paths[0]
+    decompress_archive.decompress_archive(single)
+    return single
 
 
 def test_file() -> None:
