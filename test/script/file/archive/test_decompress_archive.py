@@ -220,10 +220,7 @@ def _compress_to_decompress(
     compress_archive: CompressArchive = _from_compress_single(
         temporary_root, tree_path, add_paths
     )
-
-    archive_paths: Paths = compress_archive.close_archived()
-
-    _to_decompress_single(temporary_root, archive_paths)
+    _to_decompress_single(temporary_root, compress_archive.close_archived())
 
 
 def test_file() -> None:
