@@ -250,6 +250,15 @@ def _finalize_compress_single(
     return compress_archive.close_archived()
 
 
+def _finalize_compress_sequential(
+    temporary_root: Path, tree_path: Path, add_paths: Paths
+) -> Paths:
+    compress_archive: CompressArchive = _from_compress_sequential(
+        temporary_root, tree_path, add_paths
+    )
+    return compress_archive.close_archived()
+
+
 def _compress_to_decompress(
     temporary_root: Path, tree_path: Path, add_paths: Paths
 ) -> None:
@@ -332,11 +341,9 @@ def test_sequential() -> None:
 
         add_paths: Paths = _get_tree_paths(tree_path)
 
-        compress_archive: CompressArchive = _from_compress_sequential(
+        archive_paths: Paths = _finalize_compress_sequential(
             temporary_root, tree_path, add_paths
         )
-
-        archive_paths: Paths = compress_archive.close_archived()
 
         decompress_archive: DecompressArchive = _decompress_archive(
             temporary_root
