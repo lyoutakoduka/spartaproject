@@ -164,6 +164,16 @@ def _decompress_single(
     return single
 
 
+def _decompress_sequential(
+    archive_paths: Paths, decompress_archive: DecompressArchive
+) -> Paths:
+    sequential: Paths = decompress_archive.sequential_archives(
+        archive_paths[0]
+    )
+    decompress_archive.decompress_at_once(sequential)
+    return sequential
+
+
 def test_file() -> None:
     """Test to decompress archive including only files."""
 
@@ -277,11 +287,9 @@ def test_sequential() -> None:
             temporary_root
         )
 
-        sequential: Paths = decompress_archive.sequential_archives(
-            archive_paths[0]
+        sequential: Paths = _decompress_sequential(
+            archive_paths, decompress_archive
         )
-
-        decompress_archive.decompress_at_once(sequential)
 
         _common_test(temporary_root)
         _compare_path_pair(archive_paths, sequential)
