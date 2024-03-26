@@ -42,11 +42,15 @@ def _get_expected_stamp() -> datetime:
     return datetime.fromisoformat("2023-04-15T20:09:30.936886+00:00")
 
 
-def _compare_timestamp(sorted_paths: Paths2, expected: datetime) -> None:
-    times_pair: Times2 = [
+def _get_times_pair(sorted_paths: Paths2) -> Times2:
+    return [
         [get_latest(path) for path in paths if path.is_file()]
         for paths in sorted_paths
     ]
+
+
+def _compare_timestamp(sorted_paths: Paths2, expected: datetime) -> None:
+    times_pair: Times2 = _get_times_pair(sorted_paths)
     assert times_pair[0] == times_pair[1]
 
     times = list(set(chain(*times_pair)))
