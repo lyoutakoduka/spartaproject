@@ -76,7 +76,7 @@ def _compare_file_size(sorted_paths: Paths2) -> None:
     assert file_size_pair[0] == file_size_pair[1]
 
 
-def _compare_compress_type(
+def _type_test(
     archive_paths: Paths, decompress_archive: DecompressArchive
 ) -> None:
     assert not decompress_archive.is_lzma_archive(archive_paths[0])
@@ -273,7 +273,7 @@ def test_type() -> None:
             temporary_root
         )
 
-        _compare_compress_type(archive_paths, decompress_archive)
+        _type_test(archive_paths, decompress_archive)
 
     _inside_temporary_directory(individual_test)
 
