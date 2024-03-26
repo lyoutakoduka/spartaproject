@@ -10,7 +10,7 @@ from typing import Callable
 
 from pyspartaproj.context.default.integer_context import Ints2
 from pyspartaproj.context.extension.path_context import Paths, Paths2
-from pyspartaproj.context.extension.time_context import Times2, datetime
+from pyspartaproj.context.extension.time_context import Times, Times2, datetime
 from pyspartaproj.script.file.archive.compress_archive import CompressArchive
 from pyspartaproj.script.file.archive.decompress_archive import (
     DecompressArchive,
@@ -49,11 +49,15 @@ def _get_times_pair(sorted_paths: Paths2) -> Times2:
     ]
 
 
+def _get_times(times_pair: Times2) -> Times:
+    return list(set(chain(*times_pair)))
+
+
 def _compare_timestamp(sorted_paths: Paths2, expected: datetime) -> None:
     times_pair: Times2 = _get_times_pair(sorted_paths)
     assert times_pair[0] == times_pair[1]
 
-    times = list(set(chain(*times_pair)))
+    times = _get_times(times_pair)
     assert 1 == len(times)
 
     assert expected == times[0]
