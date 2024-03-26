@@ -92,10 +92,8 @@ def _common_test(temporary_root: Path) -> Paths2:
     return sorted_paths
 
 
-def _type_test(
-    archive_paths: Paths, decompress_archive: DecompressArchive
-) -> None:
-    assert not decompress_archive.is_lzma_archive(archive_paths[0])
+def _type_test(same_type: bool) -> None:
+    assert not same_type
 
 
 def _sequential_test(
@@ -184,6 +182,12 @@ def _decompress_single(
     single: Path = archive_paths[0]
     decompress_archive.decompress_archive(single)
     return single
+
+
+def _decompress_type(
+    archive_paths: Paths, decompress_archive: DecompressArchive
+) -> bool:
+    return decompress_archive.is_lzma_archive(archive_paths[0])
 
 
 def _decompress_sequential(
@@ -280,7 +284,9 @@ def test_type() -> None:
             temporary_root
         )
 
-        _type_test(archive_paths, decompress_archive)
+        same_type: bool = _decompress_type(archive_paths, decompress_archive)
+
+        _type_test(same_type)
 
     _inside_temporary_directory(individual_test)
 
