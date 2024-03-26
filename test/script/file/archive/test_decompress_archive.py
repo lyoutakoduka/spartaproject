@@ -332,18 +332,11 @@ def test_sequential() -> None:
     def individual_test(temporary_root: Path) -> None:
         tree_path: Path = _create_tree_sequential(temporary_root)
 
-        add_paths: Paths = _get_tree_paths(tree_path)
-
         archive_paths: Paths = _finalize_compress_sequential(
-            temporary_root, tree_path, add_paths
+            temporary_root, tree_path, _get_tree_paths(tree_path)
         )
-
-        decompress_archive: DecompressArchive = _decompress_archive(
-            temporary_root
-        )
-
         sequential: Paths = _decompress_sequential(
-            archive_paths, decompress_archive
+            archive_paths, _decompress_archive(temporary_root)
         )
 
         _sequential_test(temporary_root, archive_paths, sequential)
