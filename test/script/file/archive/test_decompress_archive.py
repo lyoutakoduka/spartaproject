@@ -98,6 +98,13 @@ def _type_test(
     assert not decompress_archive.is_lzma_archive(archive_paths[0])
 
 
+def _sequential_test(
+    temporary_root: Path, archive_paths: Paths, sequential: Paths
+) -> None:
+    _common_test(temporary_root)
+    _compare_path_pair(archive_paths, sequential)
+
+
 def _timestamp_test(temporary_root: Path) -> None:
     _compare_timestamp(_common_test(temporary_root), _get_expected_stamp())
 
@@ -304,8 +311,7 @@ def test_sequential() -> None:
             archive_paths, decompress_archive
         )
 
-        _common_test(temporary_root)
-        _compare_path_pair(archive_paths, sequential)
+        _sequential_test(temporary_root, archive_paths, sequential)
 
     _inside_temporary_directory(individual_test)
 
