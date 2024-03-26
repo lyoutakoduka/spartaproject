@@ -240,17 +240,17 @@ def _compress_to_decompress(
     _to_decompress_single(temporary_root, compress_archive.close_archived())
 
 
+def _remove_unused_file(tree_path: Path) -> None:
+    _remove_unused(_find_unused(_get_tree_paths_file(tree_path)))
+
+
 def test_file() -> None:
     """Test to decompress archive including only files."""
 
     def individual_test(temporary_root: Path) -> None:
         tree_path: Path = _create_tree_file(temporary_root)
 
-        directory_paths: Paths = _get_tree_paths_file(tree_path)
-
-        remove_paths: Paths = _find_unused(directory_paths)
-
-        _remove_unused(remove_paths)
+        _remove_unused_file(tree_path)
 
         add_paths: Paths = _get_tree_paths(tree_path)
 
