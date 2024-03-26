@@ -62,9 +62,7 @@ def test_exists() -> None:
     def individual_test(temporary_root: Path) -> None:
         source_root: Path = create_temporary_file(temporary_root)
         safe_trash = SafeTrash()
-
-        for _ in range(2):
-            safe_trash.trash(source_root)
+        safe_trash.trash_at_once([source_root] * 2)
         _common_test(1, safe_trash.pop_history())
 
     _inside_temporary_directory(individual_test)
