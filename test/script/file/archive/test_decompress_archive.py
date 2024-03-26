@@ -241,13 +241,22 @@ def _to_decompress_single(
     return decompress_archive
 
 
-def _compress_to_decompress(
+def _finalize_compress_single(
     temporary_root: Path, tree_path: Path, add_paths: Paths
-) -> None:
+) -> Paths:
     compress_archive: CompressArchive = _from_compress_single(
         temporary_root, tree_path, add_paths
     )
-    _to_decompress_single(temporary_root, compress_archive.close_archived())
+    return compress_archive.close_archived()
+
+
+def _compress_to_decompress(
+    temporary_root: Path, tree_path: Path, add_paths: Paths
+) -> None:
+    _to_decompress_single(
+        temporary_root,
+        _finalize_compress_single(temporary_root, tree_path, add_paths),
+    )
 
 
 def _remove_unused_file(tree_path: Path) -> None:
@@ -300,10 +309,9 @@ def test_type() -> None:
 
         add_paths: Paths = _get_tree_paths(tree_path)
 
-        compress_archive: CompressArchive = _from_compress_single(
+        archive_paths: Paths = _finalize_compress_single(
             temporary_root, tree_path, add_paths
         )
-        archive_paths: Paths = compress_archive.close_archived()
 
         decompress_archive: DecompressArchive = _to_decompress_single(
             temporary_root, archive_paths
