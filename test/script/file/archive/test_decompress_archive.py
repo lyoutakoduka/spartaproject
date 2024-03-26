@@ -253,7 +253,7 @@ def test_directory() -> None:
     _inside_temporary_directory(individual_test)
 
 
-def test_status() -> None:
+def test_type() -> None:
     """Test to get status of compression format from archive."""
 
     def individual_test(temporary_root: Path) -> None:
@@ -347,7 +347,7 @@ def main() -> bool:
     """
     test_file()
     test_directory()
-    test_status()
+    test_type()
     test_sequential()
     test_timestamp()
     return True
