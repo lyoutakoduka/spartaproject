@@ -109,13 +109,14 @@ def test_select() -> None:
     with TemporaryDirectory() as temporary_path:
 
         def individual_test(temporary_root: Path) -> None:
-            source_root: Path = create_temporary_tree(temporary_root)
-            remove_paths: Paths = list(walk_iterator(source_root, depth=1))
+            create_temporary_tree(temporary_root)
+            remove_paths: Paths = list(walk_iterator(temporary_root, depth=1))
+
             safe_trash = SafeTrash(history_path=Path(temporary_path))
-            history_path: Path = _finalize_remove_array(
-                remove_paths, safe_trash
+            _common_test(
+                len(remove_paths),
+                _finalize_remove_array(remove_paths, safe_trash),
             )
-            _common_test(len(remove_paths), history_path)
 
         _inside_temporary_directory(individual_test)
 
