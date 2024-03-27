@@ -41,8 +41,8 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
         function(Path(temporary_path))
 
 
-def _finalize_remove(remove_path: Path, safe_trash: SafeTrash) -> Path:
-    safe_trash.trash(remove_path)
+def _finalize_remove(path: Path, safe_trash: SafeTrash) -> Path:
+    safe_trash.trash(path)
     return safe_trash.pop_history()
 
 
