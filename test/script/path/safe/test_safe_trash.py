@@ -51,6 +51,13 @@ def _finalize_remove_array(paths: Paths, safe_trash: SafeTrash) -> Path:
     return safe_trash.pop_history()
 
 
+def _finalize_remove_tree(
+    paths: Paths, temporary_root: Path, safe_trash: SafeTrash
+) -> Path:
+    safe_trash.trash_at_once(paths, trash_root=temporary_root)
+    return safe_trash.pop_history()
+
+
 def test_file() -> None:
     """Test to remove file, and log history."""
 
@@ -82,11 +89,10 @@ def test_tree() -> None:
     def individual_test(temporary_root: Path) -> None:
         create_temporary_tree(temporary_root, tree_deep=3)
         remove_paths: Paths = list(walk_iterator(temporary_root, depth=1))
-
         safe_trash = SafeTrash()
-        safe_trash.trash_at_once(remove_paths, trash_root=temporary_root)
-        history_path: Path = safe_trash.pop_history()
-
+        history_path: Path = _finalize_remove_tree(
+            remove_paths, temporary_root, safe_trash
+        )
         _common_test(len(remove_paths), history_path)
 
     _inside_temporary_directory(individual_test)
