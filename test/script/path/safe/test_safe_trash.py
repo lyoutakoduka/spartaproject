@@ -46,6 +46,11 @@ def _finalize_remove_file(remove_path: Path, safe_trash: SafeTrash) -> Path:
     return safe_trash.pop_history()
 
 
+def _finalize_remove_exists(paths: Paths, safe_trash: SafeTrash) -> Path:
+    safe_trash.trash_at_once(paths)
+    return safe_trash.pop_history()
+
+
 def test_file() -> None:
     """Test to remove file, and log history."""
 
@@ -64,11 +69,8 @@ def test_exists() -> None:
     def individual_test(temporary_root: Path) -> None:
         source_root: Path = create_temporary_file(temporary_root)
         remove_paths: Paths = [source_root] * 2
-
         safe_trash = SafeTrash()
-        safe_trash.trash_at_once(remove_paths)
-        history_path: Path = safe_trash.pop_history()
-
+        history_path: Path = _finalize_remove_exists(remove_paths, safe_trash)
         _common_test(1, history_path)
 
     _inside_temporary_directory(individual_test)
