@@ -62,10 +62,13 @@ def test_file() -> None:
     """Test to remove file, and log history."""
 
     def individual_test(temporary_root: Path) -> None:
-        remove_path: Path = create_temporary_file(temporary_root)
         safe_trash = SafeTrash()
-        history_path: Path = _finalize_remove(remove_path, safe_trash)
-        _common_test(1, history_path)
+        _common_test(
+            1,
+            _finalize_remove(
+                create_temporary_file(temporary_root), safe_trash
+            ),
+        )
 
     _inside_temporary_directory(individual_test)
 
