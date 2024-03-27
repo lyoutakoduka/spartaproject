@@ -41,7 +41,7 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
         function(Path(temporary_path))
 
 
-def _finalize_remove_file(remove_path: Path, safe_trash: SafeTrash) -> Path:
+def _finalize_remove(remove_path: Path, safe_trash: SafeTrash) -> Path:
     safe_trash.trash(remove_path)
     return safe_trash.pop_history()
 
@@ -57,7 +57,7 @@ def test_file() -> None:
     def individual_test(temporary_root: Path) -> None:
         remove_path: Path = create_temporary_file(temporary_root)
         safe_trash = SafeTrash()
-        history_path: Path = _finalize_remove_file(remove_path, safe_trash)
+        history_path: Path = _finalize_remove(remove_path, safe_trash)
         _common_test(1, history_path)
 
     _inside_temporary_directory(individual_test)
