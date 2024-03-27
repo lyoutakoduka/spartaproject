@@ -46,7 +46,7 @@ def _finalize_remove(remove_path: Path, safe_trash: SafeTrash) -> Path:
     return safe_trash.pop_history()
 
 
-def _finalize_remove_exists(paths: Paths, safe_trash: SafeTrash) -> Path:
+def _finalize_remove_array(paths: Paths, safe_trash: SafeTrash) -> Path:
     safe_trash.trash_at_once(paths)
     return safe_trash.pop_history()
 
@@ -70,7 +70,7 @@ def test_exists() -> None:
         source_root: Path = create_temporary_file(temporary_root)
         remove_paths: Paths = [source_root] * 2
         safe_trash = SafeTrash()
-        history_path: Path = _finalize_remove_exists(remove_paths, safe_trash)
+        history_path: Path = _finalize_remove_array(remove_paths, safe_trash)
         _common_test(1, history_path)
 
     _inside_temporary_directory(individual_test)
@@ -99,11 +99,10 @@ def test_select() -> None:
         def individual_test(temporary_root: Path) -> None:
             source_root: Path = create_temporary_tree(temporary_root)
             remove_paths: Paths = list(walk_iterator(source_root, depth=1))
-
             safe_trash = SafeTrash(history_path=Path(temporary_path))
-            safe_trash.trash_at_once(remove_paths)
-            history_path: Path = safe_trash.pop_history()
-
+            history_path: Path = _finalize_remove_array(
+                remove_paths, safe_trash
+            )
             _common_test(len(remove_paths), history_path)
 
         _inside_temporary_directory(individual_test)
