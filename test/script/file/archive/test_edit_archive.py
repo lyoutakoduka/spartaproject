@@ -222,9 +222,8 @@ def _get_sorted_paths(before_paths: Paths, after_paths: Paths) -> Paths2:
 
 def _name_test(before_path: Path, edit_archive: EditArchive) -> None:
     _get_edit_history(edit_archive)
-    after_paths: Paths = _close_archive(edit_archive)
 
-    assert before_path == after_paths[0]
+    assert before_path == _close_archive(edit_archive)[0]
     assert before_path.stem == _get_name()
 
 
@@ -312,8 +311,8 @@ def test_single() -> None:
 def test_name() -> None:
     def individual_test(temporary_root: Path) -> None:
         _create_source(temporary_root)
-        archive_paths: Paths = _get_archive_path_name(temporary_root)
-        archive_path: Path = archive_paths[0]
+
+        archive_path: Path = _get_archive_path_name(temporary_root)[0]
         _name_test(archive_path, _get_edit_archive(archive_path))
 
     _inside_temporary_directory(individual_test)
