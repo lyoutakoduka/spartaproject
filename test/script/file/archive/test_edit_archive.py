@@ -34,7 +34,7 @@ from pyspartaproj.script.time.stamp.get_timestamp import (
 )
 
 
-def _get_archive_name() -> str:
+def _get_name() -> str:
     return "temporary"
 
 
@@ -225,7 +225,7 @@ def _name_test(before_path: Path, edit_archive: EditArchive) -> None:
     after_paths: Paths = _close_archive(edit_archive)
 
     assert before_path == after_paths[0]
-    assert before_path.stem == _get_archive_name()
+    assert before_path.stem == _get_name()
 
 
 def _limit_test(before_paths: Paths, edit_archive: EditArchive) -> None:
