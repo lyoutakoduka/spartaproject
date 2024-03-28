@@ -41,13 +41,34 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
         function(Path(temporary_path))
 
 
+def _finalize_remove(path: Path, safe_trash: SafeTrash) -> Path:
+    safe_trash.trash(path)
+    return safe_trash.pop_history()
+
+
+def _finalize_remove_array(paths: Paths, safe_trash: SafeTrash) -> Path:
+    safe_trash.trash_at_once(paths)
+    return safe_trash.pop_history()
+
+
+def _finalize_remove_tree(
+    paths: Paths, temporary_root: Path, safe_trash: SafeTrash
+) -> Path:
+    safe_trash.trash_at_once(paths, trash_root=temporary_root)
+    return safe_trash.pop_history()
+
+
 def test_file() -> None:
     """Test to remove file, and log history."""
 
     def individual_test(temporary_root: Path) -> None:
         safe_trash = SafeTrash()
-        safe_trash.trash(create_temporary_file(temporary_root))
-        _common_test(1, safe_trash.pop_history())
+        _common_test(
+            1,
+            _finalize_remove(
+                create_temporary_file(temporary_root), safe_trash
+            ),
+        )
 
     _inside_temporary_directory(individual_test)
 
@@ -56,12 +77,13 @@ def test_exists() -> None:
     """Test to remove same files at twice."""
 
     def individual_test(temporary_root: Path) -> None:
-        source_root: Path = create_temporary_file(temporary_root)
         safe_trash = SafeTrash()
-
-        for _ in range(2):
-            safe_trash.trash(source_root)
-        _common_test(1, safe_trash.pop_history())
+        _common_test(
+            1,
+            _finalize_remove_array(
+                [create_temporary_file(temporary_root)] * 2, safe_trash
+            ),
+        )
 
     _inside_temporary_directory(individual_test)
 
@@ -71,14 +93,13 @@ def test_tree() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         create_temporary_tree(temporary_root, tree_deep=3)
+        remove_paths: Paths = list(walk_iterator(temporary_root, depth=1))
 
         safe_trash = SafeTrash()
-        paths: Paths = list(walk_iterator(temporary_root, depth=1))
-
-        for path in paths:
-            safe_trash.trash(path, trash_root=temporary_root)
-
-        _common_test(len(paths), safe_trash.pop_history())
+        _common_test(
+            len(remove_paths),
+            _finalize_remove_tree(remove_paths, temporary_root, safe_trash),
+        )
 
     _inside_temporary_directory(individual_test)
 
@@ -88,15 +109,14 @@ def test_select() -> None:
     with TemporaryDirectory() as temporary_path:
 
         def individual_test(temporary_root: Path) -> None:
+            create_temporary_tree(temporary_root)
+            remove_paths: Paths = list(walk_iterator(temporary_root, depth=1))
+
             safe_trash = SafeTrash(history_path=Path(temporary_path))
-            paths: Paths = list(
-                walk_iterator(create_temporary_tree(temporary_root), depth=1)
+            _common_test(
+                len(remove_paths),
+                _finalize_remove_array(remove_paths, safe_trash),
             )
-
-            for path in paths:
-                safe_trash.trash(path)
-
-            _common_test(len(paths), safe_trash.pop_history())
 
         _inside_temporary_directory(individual_test)
 

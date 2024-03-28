@@ -50,9 +50,9 @@ def _compress_test_archive(working: PathPair) -> Path:
         working["archive"], archive_id="archive"
     )
 
-    for target_path in walk_iterator(working["source"], depth=1):
-        compress_archive.compress_archive(target_path)
-
+    compress_archive.compress_at_once(
+        list(walk_iterator(working["source"], depth=1))
+    )
     return compress_archive.close_archived()[0]
 
 

@@ -8,7 +8,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from pyspartaproj.context.extension.path_context import PathPair, Paths
+from pyspartaproj.context.extension.path_context import PathPair, Paths, Paths2
 from pyspartaproj.context.extension.time_context import TimePair
 from pyspartaproj.interface.pytest import fail
 from pyspartaproj.script.file.archive.compress_archive import CompressArchive
@@ -34,6 +34,10 @@ from pyspartaproj.script.time.stamp.get_timestamp import (
 )
 
 
+def _get_name() -> str:
+    return "temporary"
+
+
 def _get_root_before(temporary_root: Path) -> Path:
     return Path(temporary_root, "before")
 
@@ -48,11 +52,12 @@ def _get_root_archive(temporary_root: Path) -> Path:
 
 def _add_archive(
     temporary_root: Path, compress_archive: CompressArchive
-) -> Path:
-    for path in walk_iterator(_get_root_before(temporary_root)):
-        compress_archive.compress_archive(path)
+) -> Paths:
+    compress_archive.compress_at_once(
+        list(walk_iterator(_get_root_before(temporary_root)))
+    )
 
-    return compress_archive.close_archived()[0]
+    return compress_archive.close_archived()
 
 
 def _get_stamp_key(path_text: str, stamp_root: Path) -> str:
@@ -127,11 +132,8 @@ def _edit_to_archived(archive_root: Path) -> PathPair:
     }
 
 
-def _decompress_archive(after_root: Path, archived: Paths) -> None:
-    decompress_archive = DecompressArchive(after_root)
-
-    for archived_path in archived:
-        decompress_archive.decompress_archive(archived_path)
+def _decompress_archive(after_root: Path, archive_paths: Paths) -> None:
+    DecompressArchive(after_root).decompress_at_once(archive_paths)
 
 
 def _remove_stamp_after(path_text: str, stamp_after: TimePair) -> None:
@@ -177,9 +179,9 @@ def _get_stamp_after(
     temporary_root: Path,
     stamp_before: TimePair,
     edit_history: PathPair,
-    archived: Paths,
+    archive_paths: Paths,
 ) -> TimePair:
-    _decompress_archive(_get_root_after(temporary_root), archived)
+    _decompress_archive(_get_root_after(temporary_root), archive_paths)
 
     stamp_after: TimePair = _get_archive_stamp_after(temporary_root)
     _edit_time_stamp(edit_history, stamp_before, stamp_after)
@@ -192,8 +194,8 @@ def _get_edit_history(edit_archive: EditArchive) -> PathPair:
 
 
 def _close_archive(edit_archive: EditArchive) -> Paths:
-    if archived := edit_archive.close_archive():
-        return archived
+    if archive_paths := edit_archive.close_archive():
+        return archive_paths
     else:
         fail()
 
@@ -202,12 +204,35 @@ def _common_test(
     temporary_root: Path, stamp_before: TimePair, edit_archive: EditArchive
 ) -> None:
     edit_history: PathPair = _get_edit_history(edit_archive)
-    archived: Paths = _close_archive(edit_archive)
 
     assert is_same_stamp(
         stamp_before,
-        _get_stamp_after(temporary_root, stamp_before, edit_history, archived),
+        _get_stamp_after(
+            temporary_root,
+            stamp_before,
+            edit_history,
+            _close_archive(edit_archive),
+        ),
     )
+
+
+def _get_sorted_paths(before_paths: Paths, after_paths: Paths) -> Paths2:
+    return [sorted(paths) for paths in [before_paths, after_paths]]
+
+
+def _name_test(before_path: Path, edit_archive: EditArchive) -> None:
+    _get_edit_history(edit_archive)
+
+    assert before_path == _close_archive(edit_archive)[0]
+    assert before_path.stem == _get_name()
+
+
+def _limit_test(before_paths: Paths, edit_archive: EditArchive) -> None:
+    _get_edit_history(edit_archive)
+    after_paths: Paths = _close_archive(edit_archive)
+
+    before_paths, after_paths = _get_sorted_paths(before_paths, after_paths)
+    assert before_paths == after_paths
 
 
 def _compress_test(archive_path: Path, edit_archive: EditArchive) -> None:
@@ -222,11 +247,17 @@ def _protect_test(edit_archive: EditArchive) -> None:
         fail()
 
 
-def _get_compress_archive(temporary_root: Path) -> CompressArchive:
+def _get_archive(temporary_root: Path) -> CompressArchive:
     return CompressArchive(_get_root_archive(temporary_root))
 
 
-def _get_compress_archive_limit(
+def _get_archive_name(temporary_root: Path) -> CompressArchive:
+    return CompressArchive(
+        _get_root_archive(temporary_root), archive_id=_get_name()
+    )
+
+
+def _get_archive_limit(
     temporary_root: Path, limit_byte: int
 ) -> CompressArchive:
     return CompressArchive(
@@ -235,13 +266,16 @@ def _get_compress_archive_limit(
 
 
 def _get_archive_path(temporary_root: Path) -> Path:
-    return _add_archive(temporary_root, _get_compress_archive(temporary_root))
+    return _add_archive(temporary_root, _get_archive(temporary_root))[0]
 
 
-def _get_archive_path_limit(temporary_root: Path, limit_byte: int) -> Path:
+def _get_archive_path_name(temporary_root: Path) -> Paths:
+    return _add_archive(temporary_root, _get_archive_name(temporary_root))
+
+
+def _get_archive_path_limit(temporary_root: Path, limit_byte: int) -> Paths:
     return _add_archive(
-        temporary_root,
-        _get_compress_archive_limit(temporary_root, limit_byte),
+        temporary_root, _get_archive_limit(temporary_root, limit_byte)
     )
 
 
@@ -260,7 +294,7 @@ def _get_edit_archive_compress(archive_path: Path) -> EditArchive:
 
 
 def test_single() -> None:
-    """Test to edit edit internal of single archive file."""
+    """Test to compare internal of single archive file."""
 
     def individual_test(temporary_root: Path) -> None:
         stamp_before: TimePair = _initialize_archive(temporary_root)
@@ -274,19 +308,31 @@ def test_single() -> None:
     _inside_temporary_directory(individual_test)
 
 
-def test_multiple() -> None:
-    """Test to edit edit internal of multiple archive files."""
-    limit_byte: int = 50
+def test_name() -> None:
+    """Test to compare name of archive before edit and after."""
 
     def individual_test(temporary_root: Path) -> None:
-        stamp_before: TimePair = _initialize_archive(temporary_root)
+        _create_source(temporary_root)
 
-        _common_test(
-            temporary_root,
-            stamp_before,
-            _get_edit_archive_limit(
-                _get_archive_path_limit(temporary_root, limit_byte), limit_byte
-            ),
+        archive_path: Path = _get_archive_path_name(temporary_root)[0]
+        _name_test(archive_path, _get_edit_archive(archive_path))
+
+    _inside_temporary_directory(individual_test)
+
+
+def test_limit() -> None:
+    """Test to compare archive paths before edit and after."""
+    limit_byte: int = 100
+
+    def individual_test(temporary_root: Path) -> None:
+        _create_source(temporary_root)
+
+        archive_paths: Paths = _get_archive_path_limit(
+            temporary_root, limit_byte
+        )
+        _limit_test(
+            archive_paths,
+            _get_edit_archive_limit(archive_paths[0], limit_byte),
         )
 
     _inside_temporary_directory(individual_test)
@@ -322,7 +368,8 @@ def main() -> bool:
         bool: Success if get to the end of function.
     """
     test_single()
-    test_multiple()
+    test_name()
+    test_limit()
     test_compress()
     test_protect()
     return True

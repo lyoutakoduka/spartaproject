@@ -97,11 +97,11 @@ def _sorted_match(expected: Paths, source: Paths) -> bool:
 
 
 def _common_test(
-    expected: Strs2, path_gene: PathGene, root_path: Path
+    expected: Strs2, walk_generator: PathGene, root_path: Path
 ) -> None:
     assert _sorted_match(
         [Path(*path_names) for path_names in expected],
-        get_relative_array(list(path_gene), root_path=root_path),
+        get_relative_array(list(walk_generator), root_path=root_path),
     )
 
 

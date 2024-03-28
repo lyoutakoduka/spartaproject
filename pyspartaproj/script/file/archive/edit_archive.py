@@ -56,11 +56,11 @@ class EditArchive(WorkSpace):
 
         return None
 
-    def _cleanup_before_override(self) -> None:
-        safe_trash = SafeTrash()
+    def _remove_unused(self, paths: Paths) -> None:
+        SafeTrash().trash_at_once(paths)
 
-        for path in self._decompressed:
-            safe_trash.trash(path)
+    def _cleanup_before_override(self) -> None:
+        self._remove_unused(self._decompressed)
 
     def _compress_archive(self, archive_stamp: TimePair) -> Paths:
         self._cleanup_before_override()
@@ -69,12 +69,13 @@ class EditArchive(WorkSpace):
             self._archive_path.parent,
             limit_byte=self._limit_byte,
             compress=self._is_lzma_after,
+            archive_id=self._archive_path.stem,
         )
 
-        for path_text in archive_stamp.keys():
-            compress_archive.compress_archive(
-                Path(path_text), archive_root=self.get_root()
-            )
+        compress_archive.compress_at_once(
+            [Path(path_text) for path_text in archive_stamp.keys()],
+            archive_root=self.get_root(),
+        )
 
         return compress_archive.close_archived()
 
@@ -84,9 +85,7 @@ class EditArchive(WorkSpace):
         self._decompressed: Paths = decompress_archive.sequential_archives(
             self._archive_path
         )
-
-        for path in self._decompressed:
-            decompress_archive.decompress_archive(path)
+        decompress_archive.decompress_at_once(self._decompressed)
 
     def _record_compress_type(
         self, decompress_archive: DecompressArchive

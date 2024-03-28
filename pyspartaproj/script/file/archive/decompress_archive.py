@@ -127,6 +127,15 @@ class DecompressArchive:
                     self._decompress_file(file_path, relative, archive_file)
                     self._restore_timestamp(file_path, information)
 
+    def decompress_at_once(self, paths: Paths) -> None:
+        """Decompress list of file or directory at once.
+
+        Args:
+            paths (Paths): List of path you want to decompress.
+        """
+        for path in paths:
+            self.decompress_archive(path)
+
     def is_lzma_archive(self, decompress_target: Path) -> bool:
         """Method to get status of compression format.
 

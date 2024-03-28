@@ -264,8 +264,8 @@ class CompressArchive:
             archive_target (Path): Path of compress target.
 
             archive_root (Path | None, optional): Defaults to None.
-                Root directory of compress target
-                    which is use to record relative path.
+                Root directory which is used for generating relative path
+                    in the inner of archive.
 
             e.g., if contents of archive target is follow,
                 and archive_root is "root/group/".
@@ -291,6 +291,23 @@ class CompressArchive:
             self._compress_child(archive_target, archive_root)
         else:
             self._compress_child(archive_target, parent_root)
+
+    def compress_at_once(
+        self, paths: Paths, archive_root: Path | None = None
+    ) -> None:
+        """Compress list of file or directory at once.
+
+        Args:
+            archive_targets (Paths): List of path of compress target.
+
+            archive_root (Path | None, optional): Defaults to None.
+                Root directory which is used for generating relative path
+                    in the inner of archive.
+                It's used for argument "archive_root"
+                    of method "compress_archive".
+        """
+        for path in paths:
+            self.compress_archive(path, archive_root=archive_root)
 
     def __init__(
         self,
