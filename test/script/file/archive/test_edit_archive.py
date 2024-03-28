@@ -270,6 +270,10 @@ def _get_archive_path(temporary_root: Path) -> Path:
     return _add_archive(temporary_root, _get_archive(temporary_root))[0]
 
 
+def _get_archive_path_name(temporary_root: Path) -> Paths:
+    return _add_archive(temporary_root, _get_archive_name(temporary_root))
+
+
 def _get_archive_path_limit(temporary_root: Path, limit_byte: int) -> Paths:
     return _add_archive(
         temporary_root, _get_archive_limit(temporary_root, limit_byte)
