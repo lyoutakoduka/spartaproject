@@ -252,6 +252,12 @@ def _get_archive(temporary_root: Path) -> CompressArchive:
     return CompressArchive(_get_root_archive(temporary_root))
 
 
+def _get_archive_name(temporary_root: Path) -> CompressArchive:
+    return CompressArchive(
+        _get_root_archive(temporary_root), archive_id=_get_name()
+    )
+
+
 def _get_archive_limit(
     temporary_root: Path, limit_byte: int
 ) -> CompressArchive:
