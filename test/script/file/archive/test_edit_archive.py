@@ -34,6 +34,10 @@ from pyspartaproj.script.time.stamp.get_timestamp import (
 )
 
 
+def _get_archive_name() -> str:
+    return "temporary"
+
+
 def _get_root_before(temporary_root: Path) -> Path:
     return Path(temporary_root, "before")
 
