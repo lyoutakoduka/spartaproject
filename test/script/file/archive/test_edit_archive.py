@@ -220,6 +220,14 @@ def _get_sorted_paths(before_paths: Paths, after_paths: Paths) -> Paths2:
     return [sorted(paths) for paths in [before_paths, after_paths]]
 
 
+def _name_test(before_path: Path, edit_archive: EditArchive) -> None:
+    _get_edit_history(edit_archive)
+    after_paths: Paths = _close_archive(edit_archive)
+
+    assert before_path == after_paths[0]
+    assert before_path.stem == _get_archive_name()
+
+
 def _limit_test(before_paths: Paths, edit_archive: EditArchive) -> None:
     _get_edit_history(edit_archive)
     after_paths: Paths = _close_archive(edit_archive)
