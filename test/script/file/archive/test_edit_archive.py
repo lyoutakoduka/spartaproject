@@ -294,7 +294,7 @@ def _get_edit_archive_compress(archive_path: Path) -> EditArchive:
 
 
 def test_single() -> None:
-    """Test to edit edit internal of single archive file."""
+    """Test to compare internal of single archive file."""
 
     def individual_test(temporary_root: Path) -> None:
         stamp_before: TimePair = _initialize_archive(temporary_root)
@@ -309,6 +309,8 @@ def test_single() -> None:
 
 
 def test_name() -> None:
+    """Test to compare name of archive before edit and after."""
+
     def individual_test(temporary_root: Path) -> None:
         _create_source(temporary_root)
 
