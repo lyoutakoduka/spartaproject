@@ -3,7 +3,7 @@
   "configurations": [
     {
       "name": "python_test_launcher",
-      "type": "python",
+      "type": "debugpy",
       "request": "launch",
       "program": "${workspaceFolder}/pyspartaproj/script/execute/debug_launcher.py",
       "cwd": "${workspaceFolder}",
@@ -16,7 +16,7 @@
     },
     {
       "name": "python_launcher",
-      "type": "python",
+      "type": "debugpy",
       "request": "launch",
       "program": "${file}",
       "cwd": "${workspaceFolder}",

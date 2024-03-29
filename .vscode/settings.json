@@ -1,7 +1,7 @@
 {
   "autoDocstring.docstringFormat": "google",
-  "black-formatter.importStrategy": "fromEnvironment",
   "black-formatter.args": ["--line-length", "79"],
+  "black-formatter.importStrategy": "fromEnvironment",
   "cSpell.diagnosticLevel": "Warning",
   "cSpell.words": [
     "chardet",
@@ -66,7 +66,7 @@
     "poetry/windows/.venv/": true
   },
   "git.autoRepositoryDetection": "openEditors",
-  "git.inputValidation": "always",
+  "git.inputValidation": true,
   "isort.args": ["--settings=pyproject.toml"],
   "liveServer.settings.NoBrowser": true,
   "liveServer.settings.root": "/docs",
