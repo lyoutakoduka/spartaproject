@@ -18,10 +18,4 @@ def _convert_strip(text: str) -> str:
 
 
 def standardize_text(text: str) -> str:
-    text = _convert_lower(text)
-
-    text = _convert_under(text)
-
-    text = _convert_strip(text)
-
-    return text
+    return _convert_strip(_convert_under(_convert_lower(text)))
