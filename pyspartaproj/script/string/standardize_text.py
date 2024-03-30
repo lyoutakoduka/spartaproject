@@ -6,11 +6,17 @@ def _convert_lower(text: str) -> str:
     return text.lower()
 
 
+def _convert_under(text: str) -> str:
+    for identifier in [" ", "."]:
+        text = text.replace(identifier, "_")
+
+    return text
+
+
 def standardize_text(text: str) -> str:
     text = _convert_lower(text)
 
-    for identifier in [" ", "."]:
-        text = text.replace(identifier, "_")
+    text = _convert_under(text)
 
     text = text.strip("_")
 
