@@ -9,7 +9,7 @@ def _convert_lower(text: str) -> str:
 
 
 def _convert_under(text: str) -> str:
-    for identifier in [" ", "."]:
+    for identifier in [" ", ".", "-"]:
         text = text.replace(identifier, "_")
 
     return text
