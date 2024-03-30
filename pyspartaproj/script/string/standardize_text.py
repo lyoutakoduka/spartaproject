@@ -3,4 +3,9 @@
 
 
 def standardize_text(text: str) -> str:
-    return text.lower()
+    text = text.lower()
+
+    for identifier in [" ", "."]:
+        text = text.replace(identifier, "_")
+
+    return text

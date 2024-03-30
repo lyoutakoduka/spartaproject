@@ -8,6 +8,14 @@ def test_lower() -> None:
     assert "test" == standardize_text("TEST")
 
 
+def test_under() -> None:
+    for identifier in [" ", "."]:
+        assert "test_name" == standardize_text(
+            identifier.join(["test", "name"])
+        )
+
+
 def main() -> bool:
     test_lower()
+    test_under()
     return True
