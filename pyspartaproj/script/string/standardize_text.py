@@ -8,4 +8,6 @@ def standardize_text(text: str) -> str:
     for identifier in [" ", "."]:
         text = text.replace(identifier, "_")
 
+    text = text.strip("_")
+
     return text

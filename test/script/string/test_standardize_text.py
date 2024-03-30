@@ -15,7 +15,12 @@ def test_under() -> None:
         )
 
 
+def test_strip() -> None:
+    assert "test" == standardize_text("__test__")
+
+
 def main() -> bool:
     test_lower()
     test_under()
+    test_strip()
     return True
