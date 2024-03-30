@@ -2,8 +2,12 @@
 # -*- coding: utf-8 -*-
 
 
+def _convert_lower(text: str) -> str:
+    return text.lower()
+
+
 def standardize_text(text: str) -> str:
-    text = text.lower()
+    text = _convert_lower(text)
 
     for identifier in [" ", "."]:
         text = text.replace(identifier, "_")
