@@ -18,3 +18,9 @@ class ArchiveStatus(TypedDict):
     archive: Path
     take: Paths
     keep: Paths
+
+
+class BaseName(TypedDict):
+    name: str
+    index: int
+    suffix: str
