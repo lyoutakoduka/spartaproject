@@ -28,4 +28,3 @@ class BaseName(TypedDict):
 
     name: str
     index: int
-    suffix: str
