@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to take out name and index from base name of file."""
+
 from pyspartaproj.context.typed.user_context import BaseName
 from pyspartaproj.script.string.base_name_elements import BaseNameElements
 
@@ -11,6 +13,7 @@ def _compare_elements(name: str, index: int, name_elements: BaseName) -> None:
 
 
 def test_single() -> None:
+    """Test for base name of file including only single split identifier."""
     identifier: str = "_"
     name: str = "file"
     index: int = 1
@@ -22,5 +25,10 @@ def test_single() -> None:
 
 
 def main() -> bool:
+    """Run all tests.
+
+    Returns:
+        bool: Success if get to the end of function.
+    """
     test_single()
     return True
