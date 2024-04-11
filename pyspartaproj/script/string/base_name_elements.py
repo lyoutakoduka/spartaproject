@@ -20,9 +20,6 @@ class BaseNameElements:
             "index": index,
         }
 
-    def _get_index(self, index_text: str) -> int:
-        return int(index_text)
-
     def _has_index(self, base_name: str) -> int | None:
         return convert_integer(base_name.split(self._split_identifier)[-1])
 
