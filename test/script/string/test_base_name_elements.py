@@ -21,13 +21,17 @@ def _get_name(names: Strs) -> str:
     return _get_identifier().join(names)
 
 
+def _get_base_name(name: str, index: int) -> str:
+    return name + _get_identifier() + str(index).zfill(4)
+
+
 def test_single() -> None:
     """Test for base name of file including only single split identifier."""
-    name: str = "file"
+    name: str = _get_name(["file"])
     index: int = 1
 
     name_elements: BaseName = BaseNameElements().split_name(
-        _get_name([name, str(index).zfill(4)])
+        _get_base_name(name, index)
     )
     _compare_elements(name, index, name_elements)
 
