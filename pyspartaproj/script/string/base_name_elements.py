@@ -5,7 +5,6 @@
 
 from re import sub
 
-from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.typed.user_context import BaseName
 from pyspartaproj.script.string.convert_type import convert_integer
 
