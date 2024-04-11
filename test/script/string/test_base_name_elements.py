@@ -3,6 +3,7 @@
 
 """Test module to take out name and index from base name of file."""
 
+from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.typed.user_context import BaseName
 from pyspartaproj.script.string.base_name_elements import BaseNameElements
 
@@ -16,14 +17,17 @@ def _get_identifier() -> str:
     return "_"
 
 
+def _get_name(names: Strs) -> str:
+    return _get_identifier().join(names)
+
+
 def test_single() -> None:
     """Test for base name of file including only single split identifier."""
-    identifier: str = _get_identifier()
     name: str = "file"
     index: int = 1
 
     name_elements: BaseName = BaseNameElements().split_name(
-        identifier.join([name, str(index).zfill(4)])
+        _get_name([name, str(index).zfill(4)])
     )
     _compare_elements(name, index, name_elements)
 
