@@ -42,6 +42,10 @@ def _get_base_name(name: str, index: int) -> str:
     return _merge_base_name(name, _get_index(index))
 
 
+def _get_base_name_option(name: str, index: int) -> str:
+    return _merge_base_name(name, "v" + _get_index(index) + "a")
+
+
 def test_single() -> None:
     """Test for base name of file including only single split identifier."""
     name: str = _get_name(["file"])
