@@ -12,9 +12,13 @@ def _compare_elements(name: str, index: int, name_elements: BaseName) -> None:
     assert index == name_elements["index"]
 
 
+def _get_identifier() -> str:
+    return "_"
+
+
 def test_single() -> None:
     """Test for base name of file including only single split identifier."""
-    identifier: str = "_"
+    identifier: str = _get_identifier()
     name: str = "file"
     index: int = 1
 
