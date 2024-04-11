@@ -8,9 +8,17 @@ from pyspartaproj.context.typed.user_context import BaseName
 from pyspartaproj.script.string.base_name_elements import BaseNameElements
 
 
-def _compare_elements(name: str, index: int, name_elements: BaseName) -> None:
+def _compare_name(name: str, name_elements: BaseName) -> None:
     assert name == name_elements["name"]
+
+
+def _compare_index(index: int, name_elements: BaseName) -> None:
     assert index == name_elements["index"]
+
+
+def _compare_elements(name: str, index: int, name_elements: BaseName) -> None:
+    _compare_name(name, name_elements)
+    _compare_index(index, name_elements)
 
 
 def _get_identifier() -> str:
