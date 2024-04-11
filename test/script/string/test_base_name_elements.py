@@ -5,6 +5,7 @@
 
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.typed.user_context import BaseName
+from pyspartaproj.interface.pytest import fail
 from pyspartaproj.script.string.base_name_elements import BaseNameElements
 
 
@@ -38,10 +39,12 @@ def test_single() -> None:
     name: str = _get_name(["file"])
     index: int = 1
 
-    name_elements: BaseName = BaseNameElements().split_name(
+    if name_elements := BaseNameElements().split_name(
         _get_base_name(name, index)
-    )
-    _compare_elements(name, index, name_elements)
+    ):
+        _compare_elements(name, index, name_elements)
+    else:
+        fail()
 
 
 def test_multiple() -> None:
@@ -49,10 +52,12 @@ def test_multiple() -> None:
     name: str = _get_name(["group", "type"])
     index: int = 1
 
-    name_elements: BaseName = BaseNameElements().split_name(
+    if name_elements := BaseNameElements().split_name(
         _get_base_name(name, index)
-    )
-    _compare_elements(name, index, name_elements)
+    ):
+        _compare_elements(name, index, name_elements)
+    else:
+        fail()
 
 
 def main() -> bool:
