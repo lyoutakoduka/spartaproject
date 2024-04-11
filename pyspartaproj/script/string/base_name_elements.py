@@ -36,18 +36,18 @@ class BaseNameElements:
 
         Define of words.
 
-        File Name: "name_v001a.txt"
-        Base Name: "name_v001a"
+        File Name: "group_type_v0001a.txt"
+        Base Name: "group_type_v0001a"
         Split Identifier: "_"
-        Name: "name"
-        Index: "v001a"
+        Name: "group_type"
+        Index: "v0001a"
         Index Number: 1
 
         e.g., return following data structure
-            if you set string "name_v001a" to argument "base_name".
+            if you set string "File Name" above to argument "base_name".
 
         {
-            name: "name"
+            name: "group_type"
             index: 1
         }
 
