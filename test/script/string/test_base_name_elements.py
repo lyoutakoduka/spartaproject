@@ -60,6 +60,13 @@ def test_multiple() -> None:
         fail()
 
 
+def test_index() -> None:
+    """Test for base name, but it doesn't include index string."""
+    name: str = _get_name(["group", "type"])
+
+    assert BaseNameElements().split_name(name) is None
+
+
 def main() -> bool:
     """Run all tests.
 
@@ -68,4 +75,5 @@ def main() -> bool:
     """
     test_single()
     test_multiple()
+    test_index()
     return True
