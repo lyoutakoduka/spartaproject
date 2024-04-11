@@ -30,8 +30,12 @@ def _get_name(names: Strs) -> str:
     return _get_identifier().join(names)
 
 
+def _get_index(index: int) -> str:
+    return str(index).zfill(4)
+
+
 def _get_base_name(name: str, index: int) -> str:
-    return name + _get_identifier() + str(index).zfill(4)
+    return name + _get_identifier() + _get_index(index)
 
 
 def test_single() -> None:
