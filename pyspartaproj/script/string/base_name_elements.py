@@ -51,7 +51,9 @@ class BaseNameElements:
         identifier: str = self._split_identifier
         names: Strs = base_name.split(identifier)
 
-        return self._get_name_elements(names[0], self._get_index(names[-1]))
+        return self._get_name_elements(
+            identifier.join(names[:-1]), self._get_index(names[-1])
+        )
 
     def __init__(self) -> None:
         """Initialize variable of class."""
