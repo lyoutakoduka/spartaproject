@@ -36,6 +36,17 @@ def test_single() -> None:
     _compare_elements(name, index, name_elements)
 
 
+def test_multiple() -> None:
+    """Test for base name of file including several same split identifier."""
+    name: str = _get_name(["group", "type"])
+    index: int = 1
+
+    name_elements: BaseName = BaseNameElements().split_name(
+        _get_base_name(name, index)
+    )
+    _compare_elements(name, index, name_elements)
+
+
 def main() -> bool:
     """Run all tests.
 
@@ -43,4 +54,5 @@ def main() -> bool:
         bool: Success if get to the end of function.
     """
     test_single()
+    test_multiple()
     return True
