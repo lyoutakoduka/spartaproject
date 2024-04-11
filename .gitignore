@@ -1,5 +1,9 @@
-# Permanent
+# Python
 __pycache__/
+
+# React
+dist
+node_modules
 
 # In development
 .temp/

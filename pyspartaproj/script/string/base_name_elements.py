@@ -3,6 +3,8 @@
 
 """Module to take out name and index from base name of file."""
 
+from re import sub
+
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.typed.user_context import BaseName
 from pyspartaproj.script.string.convert_type import convert_integer
@@ -21,7 +23,9 @@ class BaseNameElements:
         }
 
     def _has_index(self, base_name: str) -> int | None:
-        return convert_integer(base_name.split(self._split_identifier)[-1])
+        return convert_integer(
+            sub("[a-z]", "", base_name.split(self._split_identifier)[-1])
+        )
 
     def _get_name(self, base_name: str) -> str:
         identifier: str = self._split_identifier
