@@ -26,8 +26,8 @@ def _get_identifier() -> str:
     return "_"
 
 
-def _get_name(names: Strs) -> str:
-    return _get_identifier().join(names)
+def _get_name(names: Strs, identifier: str) -> str:
+    return identifier.join(names)
 
 
 def _get_index(index: int, digit: int) -> str:
@@ -71,7 +71,8 @@ def test_single() -> None:
 
 def test_multiple() -> None:
     """Test for base name of file including several same split identifier."""
-    name: str = _get_name(["group", "type"])
+    identifier: str = _get_identifier()
+    name: str = _get_name(["group", "type"], identifier)
     index: int = 1
 
     _compare_base_name(
