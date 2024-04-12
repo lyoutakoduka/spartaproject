@@ -98,6 +98,17 @@ def test_option() -> None:
     )
 
 
+def test_digit() -> None:
+    name: str = _get_name(["file"])
+    index: int = 1
+
+    _compare_base_name(
+        name,
+        index,
+        BaseNameElements().split_name(_get_base_name_digit(name, index)),
+    )
+
+
 def main() -> bool:
     """Run all tests.
 
@@ -108,4 +119,5 @@ def main() -> bool:
     test_multiple()
     test_index()
     test_option()
+    test_digit()
     return True
