@@ -18,3 +18,13 @@ class ArchiveStatus(TypedDict):
     archive: Path
     take: Paths
     keep: Paths
+
+
+class BaseName(TypedDict):
+    """Class to represent elements for base name of file.
+
+    It's used for the base name including index string.
+    """
+
+    name: str
+    index: int
