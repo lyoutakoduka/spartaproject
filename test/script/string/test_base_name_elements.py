@@ -59,17 +59,21 @@ def _compare_base_name(
         _compare_elements(name, index, elements)
 
 
+def _common_test(name: str, index: int, identifier: str) -> None:
+    _compare_base_name(
+        name,
+        index,
+        BaseNameElements().split_name(_get_base_name(name, index, identifier)),
+    )
+
+
 def test_single() -> None:
     """Test for base name of file including only single split identifier."""
     identifier: str = _get_identifier()
     name: str = "file"
     index: int = 1
 
-    _compare_base_name(
-        name,
-        index,
-        BaseNameElements().split_name(_get_base_name(name, index, identifier)),
-    )
+    _common_test(name, index, identifier)
 
 
 def test_multiple() -> None:
@@ -78,11 +82,7 @@ def test_multiple() -> None:
     name: str = _get_name(["group", "type"], identifier)
     index: int = 1
 
-    _compare_base_name(
-        name,
-        index,
-        BaseNameElements().split_name(_get_base_name(name, index, identifier)),
-    )
+    _common_test(name, index, identifier)
 
 
 def test_index() -> None:
