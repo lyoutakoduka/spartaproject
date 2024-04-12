@@ -61,7 +61,7 @@ def _compare_base_name(
 
 def test_single() -> None:
     """Test for base name of file including only single split identifier."""
-    name: str = _get_name(["file"])
+    name: str = "file"
     index: int = 1
 
     _compare_base_name(
@@ -81,14 +81,14 @@ def test_multiple() -> None:
 
 def test_index() -> None:
     """Test for base name of file, but it doesn't include index string."""
-    name: str = _get_name(["file"])
+    name: str = "file"
 
     assert BaseNameElements().split_name(name) is None
 
 
 def test_option() -> None:
     """Test for index string including option characters."""
-    name: str = _get_name(["file"])
+    name: str = "file"
     index: int = 1
 
     _compare_base_name(
@@ -100,7 +100,7 @@ def test_option() -> None:
 
 def test_digit() -> None:
     """Test for base name of file including 4 digit index text."""
-    name: str = _get_name(["file"])
+    name: str = "file"
     index: int = 1
 
     _compare_base_name(
