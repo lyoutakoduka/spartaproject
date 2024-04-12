@@ -30,8 +30,8 @@ def _get_name(names: Strs) -> str:
     return _get_identifier().join(names)
 
 
-def _get_index(index: int) -> str:
-    return str(index).zfill(4)
+def _get_index(index: int, digit: int) -> str:
+    return str(index).zfill(digit)
 
 
 def _merge_base_name(name: str, index_text: str) -> str:
@@ -39,11 +39,11 @@ def _merge_base_name(name: str, index_text: str) -> str:
 
 
 def _get_base_name(name: str, index: int) -> str:
-    return _merge_base_name(name, _get_index(index))
+    return _merge_base_name(name, _get_index(index, 1))
 
 
 def _get_base_name_option(name: str, index: int) -> str:
-    return _merge_base_name(name, "v" + _get_index(index) + "a")
+    return _merge_base_name(name, "v" + _get_index(index, 1) + "a")
 
 
 def _compare_base_name(
