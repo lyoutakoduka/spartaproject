@@ -12,8 +12,11 @@ from pyspartaproj.script.string.convert_type import convert_integer
 class BaseNameElements:
     """Class to take out name and index from base name of file."""
 
-    def _initialize_variables(self) -> None:
-        self._split_identifier = "_"
+    def _initialize_variables(self, identifier: str | None) -> None:
+        if identifier is None:
+            identifier = "_"
+
+        self._split_identifier: str = identifier
 
     def _get_name_elements(self, name: str, index: int) -> BaseName:
         return {
@@ -62,6 +65,6 @@ class BaseNameElements:
 
         return None
 
-    def __init__(self) -> None:
+    def __init__(self, identifier: str | None = None) -> None:
         """Initialize variable of class."""
-        self._initialize_variables()
+        self._initialize_variables(identifier)
