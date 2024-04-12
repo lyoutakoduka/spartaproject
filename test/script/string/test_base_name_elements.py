@@ -83,6 +83,7 @@ def test_index() -> None:
 
 
 def test_option() -> None:
+    """Test for index string including option characters."""
     name: str = _get_name(["file"])
     index: int = 1
 
