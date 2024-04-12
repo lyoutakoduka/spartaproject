@@ -79,6 +79,18 @@ def test_index() -> None:
     assert BaseNameElements().split_name(name) is None
 
 
+def test_option() -> None:
+    name: str = _get_name(["file"])
+    index: int = 1
+
+    if name_elements := BaseNameElements().split_name(
+        _get_base_name_option(name, index)
+    ):
+        _compare_elements(name, index, name_elements)
+    else:
+        fail()
+
+
 def main() -> bool:
     """Run all tests.
 
@@ -88,4 +100,5 @@ def main() -> bool:
     test_single()
     test_multiple()
     test_index()
+    test_option()
     return True
