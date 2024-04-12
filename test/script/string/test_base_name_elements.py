@@ -80,7 +80,7 @@ def test_multiple() -> None:
 
 
 def test_index() -> None:
-    """Test for base name, but it doesn't include index string."""
+    """Test for base name of file, but it doesn't include index string."""
     name: str = _get_name(["file"])
 
     assert BaseNameElements().split_name(name) is None
@@ -99,6 +99,7 @@ def test_option() -> None:
 
 
 def test_digit() -> None:
+    """Test for base name of file including 4 digit index text."""
     name: str = _get_name(["file"])
     index: int = 1
 
