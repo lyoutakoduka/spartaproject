@@ -60,12 +60,9 @@ def test_single() -> None:
     name: str = _get_name(["file"])
     index: int = 1
 
-    if name_elements := BaseNameElements().split_name(
-        _get_base_name(name, index)
-    ):
-        _compare_elements(name, index, name_elements)
-    else:
-        fail()
+    _compare_base_name(
+        name, index, BaseNameElements().split_name(_get_base_name(name, index))
+    )
 
 
 def test_multiple() -> None:
@@ -73,12 +70,9 @@ def test_multiple() -> None:
     name: str = _get_name(["group", "type"])
     index: int = 1
 
-    if name_elements := BaseNameElements().split_name(
-        _get_base_name(name, index)
-    ):
-        _compare_elements(name, index, name_elements)
-    else:
-        fail()
+    _compare_base_name(
+        name, index, BaseNameElements().split_name(_get_base_name(name, index))
+    )
 
 
 def test_index() -> None:
@@ -92,12 +86,11 @@ def test_option() -> None:
     name: str = _get_name(["file"])
     index: int = 1
 
-    if name_elements := BaseNameElements().split_name(
-        _get_base_name_option(name, index)
-    ):
-        _compare_elements(name, index, name_elements)
-    else:
-        fail()
+    _compare_base_name(
+        name,
+        index,
+        BaseNameElements().split_name(_get_base_name_option(name, index)),
+    )
 
 
 def main() -> bool:
