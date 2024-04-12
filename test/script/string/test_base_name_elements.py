@@ -77,7 +77,7 @@ def test_multiple() -> None:
 
 def test_index() -> None:
     """Test for base name, but it doesn't include index string."""
-    name: str = _get_name(["group", "type"])
+    name: str = _get_name(["file"])
 
     assert BaseNameElements().split_name(name) is None
 
