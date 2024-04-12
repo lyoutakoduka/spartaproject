@@ -122,6 +122,21 @@ def test_digit() -> None:
     )
 
 
+def test_identifier() -> None:
+    """Test for base name including specific split identifier."""
+    identifier: str = "-"
+    name: str = _get_name(["group", "type"], identifier)
+    index: int = 1
+
+    _compare_base_name(
+        name,
+        index,
+        BaseNameElements(identifier=identifier).split_name(
+            _get_base_name(name, index, identifier)
+        ),
+    )
+
+
 def main() -> bool:
     """Run all tests.
 
@@ -133,4 +148,5 @@ def main() -> bool:
     test_index()
     test_option()
     test_digit()
+    test_identifier()
     return True
