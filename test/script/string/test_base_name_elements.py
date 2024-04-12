@@ -34,20 +34,20 @@ def _get_index(index: int, digit: int) -> str:
     return str(index).zfill(digit)
 
 
-def _merge_base_name(name: str, index_text: str) -> str:
-    return name + _get_identifier() + index_text
+def _merge_base_name(name: str, index_text: str, identifier: str) -> str:
+    return name + identifier + index_text
 
 
-def _get_base_name(name: str, index: int) -> str:
-    return _merge_base_name(name, _get_index(index, 1))
+def _get_base_name(name: str, index: int, identifier: str) -> str:
+    return _merge_base_name(name, _get_index(index, 1), identifier)
 
 
-def _get_base_name_option(name: str, index: int) -> str:
-    return _merge_base_name(name, "v" + _get_index(index, 1) + "a")
+def _get_base_name_option(name: str, index: int, identifier: str) -> str:
+    return _merge_base_name(name, "v" + _get_index(index, 1) + "a", identifier)
 
 
-def _get_base_name_digit(name: str, index: int) -> str:
-    return _merge_base_name(name, _get_index(index, 4))
+def _get_base_name_digit(name: str, index: int, identifier: str) -> str:
+    return _merge_base_name(name, _get_index(index, 4), identifier)
 
 
 def _compare_base_name(
@@ -61,11 +61,14 @@ def _compare_base_name(
 
 def test_single() -> None:
     """Test for base name of file including only single split identifier."""
+    identifier: str = _get_identifier()
     name: str = "file"
     index: int = 1
 
     _compare_base_name(
-        name, index, BaseNameElements().split_name(_get_base_name(name, index))
+        name,
+        index,
+        BaseNameElements().split_name(_get_base_name(name, index, identifier)),
     )
 
 
@@ -76,7 +79,9 @@ def test_multiple() -> None:
     index: int = 1
 
     _compare_base_name(
-        name, index, BaseNameElements().split_name(_get_base_name(name, index))
+        name,
+        index,
+        BaseNameElements().split_name(_get_base_name(name, index, identifier)),
     )
 
 
@@ -89,25 +94,31 @@ def test_index() -> None:
 
 def test_option() -> None:
     """Test for index string including option characters."""
+    identifier: str = _get_identifier()
     name: str = "file"
     index: int = 1
 
     _compare_base_name(
         name,
         index,
-        BaseNameElements().split_name(_get_base_name_option(name, index)),
+        BaseNameElements().split_name(
+            _get_base_name_option(name, index, identifier)
+        ),
     )
 
 
 def test_digit() -> None:
     """Test for base name of file including 4 digit index text."""
+    identifier: str = _get_identifier()
     name: str = "file"
     index: int = 1
 
     _compare_base_name(
         name,
         index,
-        BaseNameElements().split_name(_get_base_name_digit(name, index)),
+        BaseNameElements().split_name(
+            _get_base_name_digit(name, index, identifier)
+        ),
     )
 
 
