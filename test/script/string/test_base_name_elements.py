@@ -46,6 +46,10 @@ def _get_base_name_option(name: str, index: int) -> str:
     return _merge_base_name(name, "v" + _get_index(index, 1) + "a")
 
 
+def _get_base_name_digit(name: str, index: int) -> str:
+    return _merge_base_name(name, _get_index(index, 4))
+
+
 def _compare_base_name(
     name: str, index: int, elements: BaseName | None
 ) -> None:
