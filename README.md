@@ -1,4 +1,4 @@
-# Cleanup point cloud intuitively
+# Sync browser file system to local, and run Python on browser.
 
 ## Version
 
