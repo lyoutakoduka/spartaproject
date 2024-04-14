@@ -3,11 +3,10 @@ line_length = 79
 profile = "black"
 quiet = true
 skip = [
-  "./.git",
   "./.temp",
-  "./.vscode",
-  "./external",
+  "./docs",
   "./poetry",
+  "./yarn",
 ]
 
 [tool.black]
