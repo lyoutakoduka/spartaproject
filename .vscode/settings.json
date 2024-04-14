@@ -10,6 +10,7 @@
     "docstrings",
     "getcontext",
     "gettz",
+    "esbuild",
     "isort",
     "levelname",
     "mypy",
