@@ -21,9 +21,9 @@ line-length = 79
 [tool.flake8]
 extend-exclude = [
   "./.temp",
-  "./.vscode",
-  "./external",
+  "./docs",
   "./poetry",
+  "./yarn",
 ]
 ignore = [
   "PT013",
