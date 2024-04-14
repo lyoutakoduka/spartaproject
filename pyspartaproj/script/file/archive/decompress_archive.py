@@ -20,6 +20,7 @@ from pyspartaproj.script.file.json.convert_from_json import (
 from pyspartaproj.script.file.json.import_json import json_load
 from pyspartaproj.script.file.text.export_file import byte_export
 from pyspartaproj.script.path.iterate_directory import walk_iterator
+from pyspartaproj.script.string.convert_type import convert_integer
 from pyspartaproj.script.time.stamp.set_timestamp import set_latest
 
 
@@ -33,11 +34,10 @@ class DecompressArchive:
         names: Strs = path.stem.split("#")
 
         if 1 < len(names):
-            try:
-                int(names[-1])
+            index: int | None = convert_integer(names[-1])
+
+            if index is not None:  # Can't use Walrus Operator.
                 return True
-            except BaseException:
-                pass
 
         return False
 
