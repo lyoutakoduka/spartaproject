@@ -68,5 +68,10 @@ class BaseNameElements:
         return self._get_name_elements(self._get_name(base_name), index)
 
     def __init__(self, identifier: str | None = None) -> None:
-        """Initialize variable of class."""
+        """Initialize variable of class.
+
+        Args:
+            identifier (str | None, optional): Defaults to None.
+                Split identifier you selected.
+        """
         self._initialize_variables(identifier)
