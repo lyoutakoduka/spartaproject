@@ -3,29 +3,27 @@ line_length = 79
 profile = "black"
 quiet = true
 skip = [
-  "./.git",
   "./.temp",
-  "./.vscode",
-  "./external",
+  "./docs",
   "./poetry",
+  "./yarn",
 ]
 
 [tool.black]
 exclude = """(
-  .git/ |
   .temp/ |
-  .vscode/ |
-  external/ |
-  poetry/
+  docs/ |
+  poetry/ |
+  yarn/
 )"""
 line-length = 79
 
 [tool.flake8]
 extend-exclude = [
   "./.temp",
-  "./.vscode",
-  "./external",
+  "./docs",
   "./poetry",
+  "./yarn",
 ]
 ignore = [
   "PT013",
@@ -51,7 +49,8 @@ addopts = """
   --quiet
   --capture=no
   --new-first
+  --ignore ./docs
   --ignore ./poetry
-  --ignore ./external
+  --ignore ./yarn
 """
 cache_dir = "./.temp/.pytest_cache"

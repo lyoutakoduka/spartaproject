@@ -10,6 +10,7 @@
     "docstrings",
     "getcontext",
     "gettz",
+    "esbuild",
     "isort",
     "levelname",
     "mypy",
@@ -38,6 +39,7 @@
   "editor.codeActionsOnSave": {
     "source.organizeImports": "explicit"
   },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.fontFamily": "UDEV Gothic JPDOC",
   "editor.fontSize": 15,
   "editor.formatOnSave": true,
@@ -68,6 +70,10 @@
   "git.autoRepositoryDetection": "openEditors",
   "git.inputValidation": true,
   "isort.args": ["--settings=pyproject.toml"],
+  "javascript.inlayHints.propertyDeclarationTypes.enabled": true,
+  "javascript.inlayHints.functionLikeReturnTypes.enabled": true,
+  "javascript.inlayHints.parameterTypes.enabled": true,
+  "javascript.inlayHints.enumMemberValues.enabled": true,
   "liveServer.settings.NoBrowser": true,
   "liveServer.settings.root": "/docs",
   "mypy-type-checker.args": ["--config-file=pyproject.toml"],
@@ -78,31 +84,21 @@
     "reportMissingTypeStubs": "information"
   },
   "python.analysis.extraPaths": ["docs", ".temp/typings"],
+  "python.analysis.inlayHints.functionReturnTypes": true,
+  "python.analysis.inlayHints.pytestParameters": true,
+  "python.analysis.inlayHints.variableTypes": true,
   "python.analysis.stubPath": ".temp/typings",
   "python.analysis.typeCheckingMode": "strict",
   "python.languageServer": "Pylance",
   "terminal.integrated.fontSize": 14,
   "testing.gutterEnabled": false,
+  "typescript.inlayHints.propertyDeclarationTypes.enabled": true,
+  "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
+  "typescript.inlayHints.enumMemberValues.enabled": true,
+  "typescript.inlayHints.variableTypes.enabled": false,
+  "typescript.inlayHints.parameterTypes.enabled": true,
   "workbench.colorTheme": "Dracula Soft",
   "workbench.startupEditor": "none",
-  "[css]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[markdown]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter"
   }
