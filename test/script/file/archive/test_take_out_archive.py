@@ -111,7 +111,7 @@ def _create_archive_compleat(working: PathPair) -> ArchiveStatus:
     return _create_archive_shared(
         working,
         _get_empty(),
-        _get_relative_paths(
+        _get_relative_source(
             working, [create_temporary_file(working["source"])]
         ),
     )
@@ -121,7 +121,7 @@ def _create_archive_empty(working: PathPair) -> ArchiveStatus:
     return _create_archive_shared(
         working,
         _get_empty(),
-        _get_relative_paths(
+        _get_relative_source(
             working, [create_directory(Path(working["source"], "directory"))]
         ),
     )
@@ -134,7 +134,7 @@ def _get_take_out_single(working: PathPair) -> Paths:
 def _create_archive_single(working: PathPair) -> ArchiveStatus:
     return _create_archive_shared(
         working,
-        _get_relative_paths(working, _get_take_out_single(working)),
+        _get_relative_source(working, _get_take_out_single(working)),
         _get_empty(),
     )
 
@@ -153,7 +153,7 @@ def _get_take_out_multiple(working: PathPair) -> Paths:
 def _create_archive_multiple(working: PathPair) -> ArchiveStatus:
     return _create_archive_shared(
         working,
-        _get_relative_paths(working, _get_take_out_multiple(working)),
+        _get_relative_source(working, _get_take_out_multiple(working)),
         _get_empty(),
     )
 
@@ -169,8 +169,8 @@ def _get_keep_mix(working: PathPair) -> Paths:
 def _create_archive_mix(working: PathPair) -> ArchiveStatus:
     return _create_archive_shared(
         working,
-        _get_relative_paths(working, _get_take_out_mix(working)),
-        _get_relative_paths(working, _get_keep_mix(working)),
+        _get_relative_source(working, _get_take_out_mix(working)),
+        _get_relative_source(working, _get_keep_mix(working)),
     )
 
 
@@ -186,7 +186,7 @@ def _get_take_out_list(working: PathPair) -> Paths:
 def _create_archive_list(working: PathPair) -> ArchiveStatus:
     return _create_archive_shared(
         working,
-        _get_relative_paths(working, _get_take_out_list(working)),
+        _get_relative_source(working, _get_take_out_list(working)),
         _get_empty(),
     )
 
@@ -253,7 +253,7 @@ def _get_take_out_specific(working: PathPair) -> Paths:
 def _create_archive_specific(working: PathPair) -> ArchiveStatus:
     return _create_archive_shared(
         working,
-        _get_relative_paths(working, _get_take_out_specific(working)),
+        _get_relative_source(working, _get_take_out_specific(working)),
         _get_empty(),
     )
 
@@ -263,7 +263,7 @@ def _get_take_out_protect(working: PathPair) -> Paths:
 
 
 def _create_archive_protect(working: PathPair) -> ArchiveStatus:
-    taka_paths: Paths = _get_relative_paths(
+    taka_paths: Paths = _get_relative_source(
         working, _get_take_out_protect(working)
     )
     return _create_archive_shared(working, taka_paths, taka_paths)
