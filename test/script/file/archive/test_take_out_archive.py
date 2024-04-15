@@ -66,6 +66,10 @@ def _get_relative_source(working: PathPair, target_paths: Paths) -> Paths:
     return _get_relative_paths(working, target_paths, "source")
 
 
+def _get_relative_remove(working: PathPair, target_paths: Paths) -> Paths:
+    return _get_relative_paths(working, target_paths, "remove")
+
+
 def _get_relative_archive(archive_path: Path) -> Paths:
     edit_archive = EditArchive(archive_path)
     root_path: Path = edit_archive.get_decompressed_root()
