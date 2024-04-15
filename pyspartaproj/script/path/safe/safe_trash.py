@@ -66,3 +66,12 @@ class SafeTrash(SafeRename):
             self.trash(trash_path, trash_root=trash_root)
 
         return trash_paths
+
+    def __init__(self, remove_root: Path | None = None) -> None:
+        """Initialize variables and super class.
+
+        Args:
+            remove_root (Path | None, optional): Defaults to None.
+                Directory you want to places removed file or directory.
+        """
+        super().__init__(history_path=remove_root)
