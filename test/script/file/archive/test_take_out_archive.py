@@ -56,8 +56,14 @@ def _compress_test_archive(working: PathPair) -> Path:
     return compress_archive.close_archived()[0]
 
 
-def _get_relative_paths(working: PathPair, target_paths: Paths) -> Paths:
-    return get_relative_array(target_paths, root_path=working["source"])
+def _get_relative_paths(
+    working: PathPair, target_paths: Paths, group: str
+) -> Paths:
+    return get_relative_array(target_paths, root_path=working[group])
+
+
+def _get_relative_source(working: PathPair, target_paths: Paths) -> Paths:
+    return _get_relative_paths(working, target_paths, "source")
 
 
 def _get_relative_archive(archive_path: Path) -> Paths:
