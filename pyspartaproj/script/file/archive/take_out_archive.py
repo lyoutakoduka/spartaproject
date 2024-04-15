@@ -187,6 +187,9 @@ def take_out_archive(
         took_out_root (Path | None, optional): Defaults to None.
             Destination directory that took out directories in archive.
 
+        remove_root (Path | None, optional): Defaults to None.
+            Directory which will placed file or directory you removed.
+
         protected (bool, optional): Defaults to False.
             True if you don't want to update original archive.
             It's used for argument "protected" of class "EditArchive".
