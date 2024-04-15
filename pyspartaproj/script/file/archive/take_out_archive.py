@@ -61,34 +61,48 @@ def _get_inside_directory(decompressed_root: Path) -> PathsPair:
     }
 
 
-def _remove_unused(paths: Paths) -> None:
-    SafeTrash().trash_at_once(paths)
+def _remove_unused(remove_root: Path | None, paths: Paths) -> None:
+    SafeTrash(remove_root=remove_root).trash_at_once(paths)
 
 
-def _remove_took_out(inside_directory: PathsPair) -> None:
-    _remove_unused([Path(text) for text in inside_directory.keys()])
+def _remove_took_out(
+    remove_root: Path | None, inside_directory: PathsPair
+) -> None:
+    _remove_unused(
+        remove_root, [Path(text) for text in inside_directory.keys()]
+    )
 
 
 def _took_out_cycle(
-    took_out_root: Path, decompressed_root: Path, archive_paths: Paths
+    took_out_root: Path,
+    remove_root: Path | None,
+    decompressed_root: Path,
+    archive_paths: Paths,
 ) -> None:
     inside_directory: PathsPair = _get_inside_directory(decompressed_root)
 
     if 0 < len(inside_directory):
         archive_paths += _take_out_archives(took_out_root, inside_directory)
-        _remove_took_out(inside_directory)
-        _took_out_cycle(took_out_root, decompressed_root, archive_paths)
+        _remove_took_out(remove_root, inside_directory)
+        _took_out_cycle(
+            took_out_root, remove_root, decompressed_root, archive_paths
+        )
 
 
-def _get_took_out(took_out_root: Path, decompressed_root: Path) -> Paths:
+def _get_took_out(
+    took_out_root: Path, remove_root: Path | None, decompressed_root: Path
+) -> Paths:
     archive_paths: Paths = []
-    _took_out_cycle(took_out_root, decompressed_root, archive_paths)
+    _took_out_cycle(
+        took_out_root, remove_root, decompressed_root, archive_paths
+    )
     return archive_paths
 
 
 def take_out_archive(
     archive_path: Path,
     took_out_root: Path | None = None,
+    remove_root: Path | None = None,
     protected: bool = False,
 ) -> Paths:
     """Take out directory from inside of archive.
@@ -184,4 +198,6 @@ def take_out_archive(
         took_out_root = archive_path.parent
 
     edit_archive = EditArchive(archive_path, protected=protected)
-    return _get_took_out(took_out_root, edit_archive.get_decompressed_root())
+    return _get_took_out(
+        took_out_root, remove_root, edit_archive.get_decompressed_root()
+    )
