@@ -15,7 +15,7 @@ from pyspartaproj.script.path.safe.safe_trash import SafeTrash
 
 
 class TakeOutArchive(EditArchive):
-    def _get_archive_name(took_out_root: Path, archive_id: str) -> str:
+    def _get_archive_name(self, took_out_root: Path, archive_id: str) -> str:
         archive_path = get_avoid_path(
             rename_format(Path(took_out_root, archive_id))
         )
@@ -26,7 +26,7 @@ class TakeOutArchive(EditArchive):
     ) -> Path:
         compress_archive = CompressArchive(
             took_out_root,
-            archive_id=_get_archive_name(took_out_root, archive_id),
+            archive_id=self._get_archive_name(took_out_root, archive_id),
         )
 
         compress_archive.compress_at_once(file_paths)
