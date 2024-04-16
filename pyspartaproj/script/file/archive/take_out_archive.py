@@ -22,7 +22,7 @@ class TakeOutArchive(EditArchive):
         return archive_path.stem
 
     def _take_out_archive(
-        took_out_root: Path, file_paths: Paths, archive_id: str
+        self, took_out_root: Path, file_paths: Paths, archive_id: str
     ) -> Path:
         compress_archive = CompressArchive(
             took_out_root,
@@ -36,7 +36,7 @@ class TakeOutArchive(EditArchive):
         took_out_root: Path, inside_directory: PathsPair
     ) -> Paths:
         return [
-            _take_out_archive(
+            self._take_out_archive(
                 took_out_root, file_paths, Path(directory_text).name
             )
             for directory_text, file_paths in inside_directory.items()
