@@ -33,7 +33,7 @@ class TakeOutArchive(EditArchive):
         return compress_archive.close_archived()[0]
 
     def _take_out_archives(
-        took_out_root: Path, inside_directory: PathsPair
+        self, took_out_root: Path, inside_directory: PathsPair
     ) -> Paths:
         return [
             self._take_out_archive(
@@ -79,7 +79,7 @@ class TakeOutArchive(EditArchive):
         inside_directory: PathsPair = _get_inside_directory(decompressed_root)
 
         if 0 < len(inside_directory):
-            archive_paths += _take_out_archives(
+            archive_paths += self._take_out_archives(
                 took_out_root, inside_directory
             )
             _remove_took_out(remove_root, inside_directory)
