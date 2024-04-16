@@ -16,7 +16,7 @@ from pyspartaproj.script.path.safe.safe_trash import SafeTrash
 
 class TakeOutArchive(EditArchive):
     def _get_archive_name(self, took_out_root: Path, archive_id: str) -> str:
-        archive_path = get_avoid_path(
+        archive_path: Path = get_avoid_path(
             rename_format(Path(took_out_root, archive_id))
         )
         return archive_path.stem
