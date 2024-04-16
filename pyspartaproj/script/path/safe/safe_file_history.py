@@ -29,6 +29,10 @@ class FileHistory(WorkSpace):
 
         return create_working_space(path, jst=True)
 
+    def _initialize_variables(self, history_path: Path | None) -> None:
+        self._history: PathPair2 = {}
+        self.history_path: Path = self._init_history_path(history_path)
+
     def _export_history(self, history: Json) -> Path:
         return json_export(Path(self.history_path, "rename.json"), history)
 
@@ -85,5 +89,4 @@ class FileHistory(WorkSpace):
         """
         super().__init__()
 
-        self._history: PathPair2 = {}
-        self.history_path: Path = self._init_history_path(history_path)
+        self._initialize_variables(history_path)
