@@ -42,7 +42,7 @@ class TakeOutArchive(EditArchive):
             for directory_text, file_paths in inside_directory.items()
         ]
 
-    def _get_take_out(directory_root: Path) -> Paths | None:
+    def _get_take_out(self, directory_root: Path) -> Paths | None:
         file_paths: Paths = []
 
         for path in walk_iterator(directory_root):
@@ -57,7 +57,7 @@ class TakeOutArchive(EditArchive):
         return {
             str(directory_root): file_paths
             for directory_root in walk_iterator(decompressed_root, file=False)
-            if (file_paths := _get_take_out(directory_root))
+            if (file_paths := self._get_take_out(directory_root))
         }
 
     def _remove_unused(remove_root: Path | None, paths: Paths) -> None:
