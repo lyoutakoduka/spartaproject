@@ -34,7 +34,9 @@ class FileHistory(WorkSpace):
         self.history_path: Path = self._init_history_path(history_path)
 
     def _export_history(self, history: Json) -> Path:
-        return json_export(Path(self.history_path, "rename.json"), history)
+        return json_export(
+            Path(self.history_path, self._get_history_name()), history
+        )
 
     def _get_key_time(self) -> str:
         time: str = get_current_time(jst=True).isoformat()
@@ -46,6 +48,9 @@ class FileHistory(WorkSpace):
                 return time_index
 
         return ""
+
+    def _get_history_name(self) -> str:
+        return "rename.json"
 
     def pop_history(self) -> Path:
         """Export paths you record to temporary working space.
