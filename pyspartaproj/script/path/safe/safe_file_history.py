@@ -23,24 +23,6 @@ class FileHistory(WorkSpace):
     The module is used for e.g., custom copy or rename operation.
     """
 
-    def __init__(self, history_path: Path | None = None) -> None:
-        """Initialize variables about path you want to record.
-
-        Args:
-            history_path (Path | None, optional): Defaults to None.
-                Export directory of Json file witch paths is recorded.
-        """
-        super().__init__()
-
-        self._history: PathPair2 = {}
-        self.history_path: Path = self._init_history_path(history_path)
-
-    def __del__(self) -> None:
-        """Export paths to temporary working space, and cleanup it."""
-        self.pop_history()
-
-        super().__del__()
-
     def _init_history_path(self, path: Path | None) -> Path:
         if path is None:
             path = Path(self.get_root(), "trash")
@@ -49,6 +31,17 @@ class FileHistory(WorkSpace):
 
     def _export_history(self, history: Json) -> Path:
         return json_export(Path(self.history_path, "rename.json"), history)
+
+    def _get_key_time(self) -> str:
+        time: str = get_current_time(jst=True).isoformat()
+
+        for i in count():
+            time_index: str = time + "_" + str(i).zfill(4)
+
+            if time_index not in self._history:
+                return time_index
+
+        return ""
 
     def pop_history(self) -> Path:
         """Export paths you record to temporary working space.
@@ -63,17 +56,6 @@ class FileHistory(WorkSpace):
         self._history.clear()
         return self._export_history(history)
 
-    def _get_key_time(self) -> str:
-        time: str = get_current_time(jst=True).isoformat()
-
-        for i in count():
-            time_index: str = time + "_" + str(i).zfill(4)
-
-            if time_index not in self._history:
-                return time_index
-
-        return ""
-
     def add_history(self, source_path: Path, destination_path: Path) -> None:
         """Record paths which is source and destination pair.
 
@@ -87,3 +69,21 @@ class FileHistory(WorkSpace):
             "source.path": source_path,
             "destination.path": destination_path,
         }
+
+    def __del__(self) -> None:
+        """Export paths to temporary working space, and cleanup it."""
+        self.pop_history()
+
+        super().__del__()
+
+    def __init__(self, history_path: Path | None = None) -> None:
+        """Initialize variables about path you want to record.
+
+        Args:
+            history_path (Path | None, optional): Defaults to None.
+                Export directory of Json file witch paths is recorded.
+        """
+        super().__init__()
+
+        self._history: PathPair2 = {}
+        self.history_path: Path = self._init_history_path(history_path)
