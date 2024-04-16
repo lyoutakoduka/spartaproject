@@ -35,7 +35,7 @@ class FileHistory(WorkSpace):
 
     def _export_history(self, history: Json) -> Path:
         return json_export(
-            Path(self.history_path, self._get_history_name()), history
+            Path(self.history_path, self.get_history_name()), history
         )
 
     def _get_key_time(self) -> str:
@@ -49,7 +49,7 @@ class FileHistory(WorkSpace):
 
         return ""
 
-    def _get_history_name(self) -> str:
+    def get_history_name(self) -> str:
         return "rename.json"
 
     def pop_history(self) -> Path:
