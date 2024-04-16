@@ -53,7 +53,7 @@ class TakeOutArchive(EditArchive):
 
         return None if 0 == len(file_paths) else file_paths
 
-    def _get_inside_directory(decompressed_root: Path) -> PathsPair:
+    def _get_inside_directory(self, decompressed_root: Path) -> PathsPair:
         return {
             str(directory_root): file_paths
             for directory_root in walk_iterator(decompressed_root, file=False)
@@ -76,7 +76,9 @@ class TakeOutArchive(EditArchive):
         decompressed_root: Path,
         archive_paths: Paths,
     ) -> None:
-        inside_directory: PathsPair = _get_inside_directory(decompressed_root)
+        inside_directory: PathsPair = self._get_inside_directory(
+            decompressed_root
+        )
 
         if 0 < len(inside_directory):
             archive_paths += self._take_out_archives(
