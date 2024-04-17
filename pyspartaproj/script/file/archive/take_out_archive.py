@@ -64,7 +64,7 @@ class TakeOutArchive(EditArchive):
         SafeTrash(remove_root=remove_root).trash_at_once(paths)
 
     def _remove_took_out(
-        remove_root: Path | None, inside_directory: PathsPair
+        self, remove_root: Path | None, inside_directory: PathsPair
     ) -> None:
         self._remove_unused(
             remove_root, [Path(text) for text in inside_directory.keys()]
@@ -84,7 +84,7 @@ class TakeOutArchive(EditArchive):
             archive_paths += self._take_out_archives(
                 took_out_root, inside_directory
             )
-            _remove_took_out(remove_root, inside_directory)
+            self._remove_took_out(remove_root, inside_directory)
             _took_out_cycle(
                 took_out_root, remove_root, decompressed_root, archive_paths
             )
