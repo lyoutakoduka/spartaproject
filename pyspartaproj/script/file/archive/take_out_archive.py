@@ -103,6 +103,7 @@ class TakeOutArchive(EditArchive):
         return archive_paths
 
     def take_out_archive(
+        self,
         archive_path: Path,
         took_out_root: Path | None = None,
         remove_root: Path | None = None,
