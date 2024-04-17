@@ -71,6 +71,7 @@ class TakeOutArchive(EditArchive):
         )
 
     def _took_out_cycle(
+        self,
         took_out_root: Path,
         remove_root: Path | None,
         decompressed_root: Path,
@@ -85,7 +86,7 @@ class TakeOutArchive(EditArchive):
                 took_out_root, inside_directory
             )
             self._remove_took_out(remove_root, inside_directory)
-            _took_out_cycle(
+            self._took_out_cycle(
                 took_out_root, remove_root, decompressed_root, archive_paths
             )
 
@@ -93,7 +94,7 @@ class TakeOutArchive(EditArchive):
         took_out_root: Path, remove_root: Path | None, decompressed_root: Path
     ) -> Paths:
         archive_paths: Paths = []
-        _took_out_cycle(
+        self._took_out_cycle(
             took_out_root, remove_root, decompressed_root, archive_paths
         )
         return archive_paths
