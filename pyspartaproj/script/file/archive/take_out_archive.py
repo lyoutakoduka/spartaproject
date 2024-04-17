@@ -60,13 +60,13 @@ class TakeOutArchive(EditArchive):
             if (file_paths := self._get_take_out(directory_root))
         }
 
-    def _remove_unused(remove_root: Path | None, paths: Paths) -> None:
+    def _remove_unused(self, remove_root: Path | None, paths: Paths) -> None:
         SafeTrash(remove_root=remove_root).trash_at_once(paths)
 
     def _remove_took_out(
         remove_root: Path | None, inside_directory: PathsPair
     ) -> None:
-        _remove_unused(
+        self._remove_unused(
             remove_root, [Path(text) for text in inside_directory.keys()]
         )
 
