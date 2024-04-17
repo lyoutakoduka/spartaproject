@@ -59,7 +59,7 @@ class EditArchive(WorkSpace):
         return None
 
     def _remove_unused(self, paths: Paths) -> None:
-        SafeTrash().trash_at_once(paths)
+        SafeTrash(remove_root=self._remove_root).trash_at_once(paths)
 
     def _cleanup_before_override(self) -> None:
         self._remove_unused(self._decompressed)
