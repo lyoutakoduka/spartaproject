@@ -29,12 +29,14 @@ class EditArchive(WorkSpace):
         limit_byte: int,
         compress: bool,
         protected: bool,
+        remove_root: Path | None,
     ) -> None:
         self._still_removed: bool = False
         self._archive_path: Path = archive_path
         self._limit_byte: int = limit_byte
         self._is_lzma_after: bool = compress
         self._protected: bool = protected
+        self._remove_root: Path | None = remove_root
 
     def _get_archive_stamp(self) -> TimePair:
         return get_directory_latest(walk_iterator(self.get_root()))
@@ -154,6 +156,7 @@ class EditArchive(WorkSpace):
         limit_byte: int = 0,
         compress: bool = False,
         protected: bool = False,
+        remove_root: Path | None = None,
     ) -> None:
         """Initialize variables and decompress archive you selected.
 
@@ -174,6 +177,6 @@ class EditArchive(WorkSpace):
         super().__init__()
 
         self._initialize_variables(
-            archive_path, limit_byte, compress, protected
+            archive_path, limit_byte, compress, protected, remove_root
         )
         self._initialize_archive()
