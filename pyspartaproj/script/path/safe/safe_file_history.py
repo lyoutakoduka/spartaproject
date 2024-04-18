@@ -92,9 +92,17 @@ class FileHistory(WorkSpace):
             "destination.path": destination_path,
         }
 
+    def close_history(self) -> Path | None:
+        if self._still_removed:
+            return None
+
+        self._still_removed = True
+
+        return self._finalize_history()
+
     def __del__(self) -> None:
         """Export paths to temporary working space, and cleanup it."""
-        self._finalize_history()
+        self.close_history()
 
     def __init__(self, history_path: Path | None = None) -> None:
         """Initialize variables about path you want to record.
