@@ -59,11 +59,6 @@ class FileHistory(WorkSpace):
         return "rename.json"
 
     def _pop_history(self) -> Path:
-        """Export paths you record to temporary working space.
-
-        Returns:
-            Path: Path of exported Json file.
-        """
         if 0 == len(self._history):
             return self.history_path
 
