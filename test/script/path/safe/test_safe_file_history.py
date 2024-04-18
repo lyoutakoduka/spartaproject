@@ -34,8 +34,8 @@ def _compare_path_name(source: Paths2, destination: PathPair2) -> bool:
     return bool_same_array(same_paths)
 
 
-def _common_test(source: Paths2, rename_path: Path) -> None:
-    destination: PathPair2 = path_pair2_from_json(json_import(rename_path))
+def _common_test(source: Paths2, history_path: Path) -> None:
+    destination: PathPair2 = path_pair2_from_json(json_import(history_path))
 
     assert _compare_path_count(source, destination)
     assert _compare_path_name(source, destination)
