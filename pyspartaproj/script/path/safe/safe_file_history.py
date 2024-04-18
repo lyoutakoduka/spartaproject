@@ -71,6 +71,13 @@ class FileHistory(WorkSpace):
         self._history.clear()
         return self._export_history(history)
 
+    def _finalize_history(self) -> Path | None:
+        history_path: Path = self._pop_history()
+
+        super().__del__()
+
+        return history_path
+
     def add_history(self, source_path: Path, destination_path: Path) -> None:
         """Record paths which is source and destination pair.
 
@@ -87,9 +94,7 @@ class FileHistory(WorkSpace):
 
     def __del__(self) -> None:
         """Export paths to temporary working space, and cleanup it."""
-        self._pop_history()
-
-        super().__del__()
+        self._finalize_history()
 
     def __init__(self, history_path: Path | None = None) -> None:
         """Initialize variables about path you want to record.
