@@ -8,6 +8,7 @@ from tempfile import TemporaryDirectory
 
 from pyspartaproj.context.default.bool_context import Bools
 from pyspartaproj.context.extension.path_context import PathPair2, Paths2
+from pyspartaproj.interface.pytest import fail
 from pyspartaproj.script.bool.same_value import bool_same_array
 from pyspartaproj.script.file.json.convert_from_json import (
     path_pair2_from_json,
@@ -39,6 +40,13 @@ def _common_test(source: Paths2, history_path: Path) -> None:
 
     assert _compare_path_count(source, destination)
     assert _compare_path_name(source, destination)
+
+
+def _compare_history(source: Paths2, history_path: Path | None) -> None:
+    if history_path is None:
+        fail()
+    else:
+        _common_test(source, history_path)
 
 
 def _add_single_history(
