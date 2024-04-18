@@ -62,7 +62,7 @@ def test_single() -> None:
     source_history: Paths2 = []
 
     _add_single_history(file_history, source_history, "destination")
-    _common_test(source_history, file_history.pop_history())
+    _common_test(source_history, file_history.close_history())
 
 
 def test_array() -> None:
@@ -72,7 +72,7 @@ def test_array() -> None:
     for i in range(10):
         _add_single_history(file_history, source_history, str(i).zfill(4))
 
-    _common_test(source_history, file_history.pop_history())
+    _common_test(source_history, file_history.close_history())
 
 
 def test_history() -> None:
@@ -83,7 +83,7 @@ def test_history() -> None:
         source_history: Paths2 = []
         _add_single_history(file_history, source_history, "destination")
 
-        history_path: Path = file_history.pop_history()
+        history_path: Path = file_history.close_history()
         _common_test(source_history, history_path)
         assert history_path.is_relative_to(temporary_root)
 
