@@ -88,6 +88,11 @@ class FileHistory(WorkSpace):
         }
 
     def close_history(self) -> Path | None:
+        """Closing process is executed just once.
+
+        Returns:
+            Path | None: Path of file including history of file operation.
+        """
         if self._still_removed:
             return None
 
