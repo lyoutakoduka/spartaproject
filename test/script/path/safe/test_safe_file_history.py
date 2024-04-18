@@ -83,7 +83,7 @@ def test_history() -> None:
         source_history: Paths2 = []
         _add_single_history(file_history, source_history, "destination")
 
-        history_path: Path = file_history.close_history()
+        history_path: Path | None = file_history.close_history()
         _common_test(source_history, history_path)
         assert history_path.is_relative_to(temporary_root)
 
