@@ -50,14 +50,6 @@ class FileHistory(WorkSpace):
 
         return ""
 
-    def get_history_name(self) -> str:
-        """Get name of file which contain the history of file operation.
-
-        Returns:
-            str: File name.
-        """
-        return "rename.json"
-
     def _pop_history(self) -> Path:
         if 0 == len(self._history):
             return self.history_path
@@ -72,6 +64,14 @@ class FileHistory(WorkSpace):
         super().__del__()
 
         return history_path
+
+    def get_history_name(self) -> str:
+        """Get name of file which contain the history of file operation.
+
+        Returns:
+            str: File name.
+        """
+        return "rename.json"
 
     def add_history(self, source_path: Path, destination_path: Path) -> None:
         """Record paths which is source and destination pair.
