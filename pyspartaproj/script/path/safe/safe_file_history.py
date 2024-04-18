@@ -30,6 +30,7 @@ class FileHistory(WorkSpace):
         return create_working_space(path, jst=True)
 
     def _initialize_variables(self, history_path: Path | None) -> None:
+        self._still_removed: bool = False
         self._history: PathPair2 = {}
         self.history_path: Path = self._init_history_path(history_path)
 
