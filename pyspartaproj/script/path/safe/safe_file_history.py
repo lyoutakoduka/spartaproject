@@ -58,7 +58,7 @@ class FileHistory(WorkSpace):
         """
         return "rename.json"
 
-    def pop_history(self) -> Path:
+    def _pop_history(self) -> Path:
         """Export paths you record to temporary working space.
 
         Returns:
@@ -87,7 +87,7 @@ class FileHistory(WorkSpace):
 
     def __del__(self) -> None:
         """Export paths to temporary working space, and cleanup it."""
-        self.pop_history()
+        self._pop_history()
 
         super().__del__()
 
