@@ -3,6 +3,7 @@
 
 """Module to record paths which is source and destination pair."""
 
+from copy import deepcopy
 from itertools import count
 from pathlib import Path
 
@@ -49,6 +50,15 @@ class FileHistory(WorkSpace):
                 return time_index
 
         return ""
+
+    def _clear_history(self) -> PathPair2 | None:
+        if 0 == len(self._history):
+            return None
+
+        history: PathPair2 = deepcopy(self._history)
+        self._history.clear()
+
+        return history
 
     def _pop_history(self) -> Path:
         if 0 == len(self._history):
