@@ -75,12 +75,12 @@ class FileHistory(WorkSpace):
         self._history.clear()
         return self._export_history(history)
 
-    def _finalize_history(self) -> Path | None:
-        history_path: Path = self._pop_history()
+    def _finalize_history(self) -> PathPair2 | None:
+        history: PathPair2 | None = self._convert_history()
 
         super().__del__()
 
-        return history_path
+        return history
 
     def get_history_name(self) -> str:
         """Get name of file which contain the history of file operation.
