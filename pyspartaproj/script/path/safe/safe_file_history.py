@@ -104,7 +104,7 @@ class FileHistory(WorkSpace):
             "destination.path": destination_path,
         }
 
-    def close_history(self) -> Path | None:
+    def close_history(self) -> PathPair2 | None:
         """Closing process is executed just once.
 
         Returns:
