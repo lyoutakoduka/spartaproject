@@ -67,14 +67,6 @@ class FileHistory(WorkSpace):
 
         return None
 
-    def _pop_history(self) -> Path:
-        if 0 == len(self._history):
-            return self.history_path
-
-        history: Json = multiple2_to_json(self._history)
-        self._history.clear()
-        return self._export_history(history)
-
     def _finalize_history(self) -> PathPair2 | None:
         history: PathPair2 | None = self._convert_history()
 
