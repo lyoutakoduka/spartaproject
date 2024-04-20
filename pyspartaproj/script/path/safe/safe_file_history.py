@@ -37,7 +37,7 @@ class FileHistory(WorkSpace):
 
     def _export_history(self, history: Json) -> Path:
         return json_export(
-            Path(self.history_path, self.get_history_name()), history
+            Path(self.history_path, self.get_history_path()), history
         )
 
     def _get_key_time(self) -> str:
@@ -74,7 +74,7 @@ class FileHistory(WorkSpace):
 
         return history
 
-    def get_history_name(self) -> str:
+    def get_history_path(self) -> Path:
         """Get name of file which contain the history of file operation.
 
         Returns:
