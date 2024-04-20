@@ -36,9 +36,7 @@ class FileHistory(WorkSpace):
         self.history_path: Path = self._init_history_path(history_path)
 
     def _export_history(self, history: Json) -> Path:
-        return json_export(
-            Path(self.history_path, self.get_history_path()), history
-        )
+        return json_export(self.get_history_path(), history)
 
     def _get_key_time(self) -> str:
         time: str = get_current_time(jst=True).isoformat()
@@ -80,7 +78,7 @@ class FileHistory(WorkSpace):
         Returns:
             str: File name.
         """
-        return "rename.json"
+        return Path(self.history_path, "rename.json")
 
     def add_history(self, source_path: Path, destination_path: Path) -> None:
         """Record paths which is source and destination pair.
