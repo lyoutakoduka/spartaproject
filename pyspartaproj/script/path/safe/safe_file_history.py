@@ -73,10 +73,10 @@ class FileHistory(WorkSpace):
         return history
 
     def get_history_path(self) -> Path:
-        """Get name of file which contain the history of file operation.
+        """Get path of file which contain the history of file operation.
 
         Returns:
-            str: File name.
+            Path: Path of file operation history.
         """
         return Path(self.history_path, "rename.json")
 
