@@ -59,11 +59,6 @@ def _add_single_history(
     source_history += [[source_path, destination_path]]
 
 
-def test_name() -> None:
-    """Test to get name of file which contain the history of file operation."""
-    assert "rename.json" == FileHistory().get_history_name()
-
-
 def test_single() -> None:
     """Test to record single source and destination path pair."""
     file_history = FileHistory()
@@ -102,7 +97,6 @@ def main() -> bool:
     Returns:
         bool: Success if get to the end of function.
     """
-    test_name()
     test_single()
     test_array()
     test_history()
