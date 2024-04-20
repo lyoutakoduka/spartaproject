@@ -10,10 +10,6 @@ from pyspartaproj.context.default.bool_context import Bools
 from pyspartaproj.context.extension.path_context import PathPair2, Paths2
 from pyspartaproj.interface.pytest import fail
 from pyspartaproj.script.bool.same_value import bool_same_array
-from pyspartaproj.script.file.json.convert_from_json import (
-    path_pair2_from_json,
-)
-from pyspartaproj.script.file.json.import_json import json_import
 from pyspartaproj.script.path.safe.safe_file_history import FileHistory
 from pyspartaproj.script.stack_frame import current_frame
 
