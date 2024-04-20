@@ -24,6 +24,7 @@ def _compare_path_count(source: Paths2, destination: PathPair2) -> bool:
 
 def _compare_path_name(source: Paths2, destination: PathPair2) -> bool:
     same_paths: Bools = []
+
     for lefts, (_, rights) in zip(source, sorted(destination.items())):
         for i, path in enumerate(["source.path", "destination.path"]):
             same_paths += [lefts[i] == rights[path]]
@@ -66,6 +67,7 @@ def test_array() -> None:
     """Test to record multiple source and destination path pair."""
     file_history = FileHistory()
     source_history: Paths2 = []
+
     for i in range(10):
         _add_single_history(file_history, source_history, str(i).zfill(4))
 
@@ -77,10 +79,12 @@ def test_history() -> None:
     with TemporaryDirectory() as temporary_path:
         temporary_root = Path(temporary_path)
         file_history = FileHistory(history_path=temporary_root)
+
         source_history: Paths2 = []
         _add_single_history(file_history, source_history, "destination")
 
         history_path: Path | None = file_history.close_history()
+
         _compare_history(source_history, history_path)
         assert history_path.is_relative_to(temporary_root)
 
