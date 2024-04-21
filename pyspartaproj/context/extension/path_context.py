@@ -13,3 +13,5 @@ Paths = List[Path]
 PathPair2 = Dict[str, PathPair]
 Paths2 = List[Paths]
 PathsPair = Dict[str, Paths]
+
+Paths3 = List[Paths2]
