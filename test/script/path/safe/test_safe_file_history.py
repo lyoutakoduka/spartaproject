@@ -18,30 +18,30 @@ def _get_current_file() -> Path:
     return current_frame()["file"]
 
 
-def _compare_path_count(expected: PathPair2, destination: PathPair2) -> bool:
-    return 1 == len(set([len(history) for history in [expected, destination]]))
+def _compare_path_count(expected: PathPair2, result: PathPair2) -> bool:
+    return 1 == len(set([len(history) for history in [expected, result]]))
 
 
-def _compare_path_name(expected: PathPair2, destination: PathPair2) -> bool:
+def _compare_path_name(expected: PathPair2, result: PathPair2) -> bool:
     same_paths: Bools = []
 
-    for lefts, (_, rights) in zip(expected, sorted(destination.items())):
+    for lefts, (_, rights) in zip(expected, sorted(result.items())):
         for i, path in enumerate(["source.path", "destination.path"]):
             same_paths += [lefts[i] == rights[path]]
 
     return bool_same_array(same_paths)
 
 
-def _common_test(expected: PathPair2, history: PathPair2) -> None:
-    assert _compare_path_count(expected, history)
-    assert _compare_path_name(expected, history)
+def _common_test(expected: PathPair2, result: PathPair2) -> None:
+    assert _compare_path_count(expected, result)
+    assert _compare_path_name(expected, result)
 
 
-def _compare_history(expected: PathPair2, history: PathPair2 | None) -> None:
-    if history is None:
+def _compare_history(expected: PathPair2, result: PathPair2 | None) -> None:
+    if result is None:
         fail()
     else:
-        _common_test(expected, history)
+        _common_test(expected, result)
 
 
 def _add_single_history(
@@ -87,9 +87,9 @@ def test_history() -> None:
         expected: PathPair2 = {}
         _add_single_history(file_history, expected, "single")
 
-        history_path: Path | None = file_history.close_history()
+        result: Path | None = file_history.close_history()
 
-        _compare_history(expected, history_path)
+        _compare_history(expected, result)
         assert history_path.is_relative_to(temporary_root)
 
 
