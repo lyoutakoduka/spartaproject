@@ -63,7 +63,7 @@ def test_single() -> None:
     file_history = FileHistory()
     source_history: PathPair2 = {}
 
-    _add_single_history(file_history, source_history, "destination")
+    _add_single_history(file_history, source_history, "single")
     _compare_history(source_history, file_history.close_history())
 
 
@@ -85,7 +85,7 @@ def test_history() -> None:
         file_history = FileHistory(history_path=temporary_root)
 
         source_history: PathPair2 = {}
-        _add_single_history(file_history, source_history, "destination")
+        _add_single_history(file_history, source_history, "single")
 
         history_path: Path | None = file_history.close_history()
 
