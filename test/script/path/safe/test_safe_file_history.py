@@ -18,11 +18,11 @@ def _get_current_file() -> Path:
     return current_frame()["file"]
 
 
-def _compare_path_count(source: Paths2, destination: PathPair2) -> bool:
+def _compare_path_count(source: PathPair2, destination: PathPair2) -> bool:
     return 1 == len(set([len(history) for history in [source, destination]]))
 
 
-def _compare_path_name(source: Paths2, destination: PathPair2) -> bool:
+def _compare_path_name(source: PathPair2, destination: PathPair2) -> bool:
     same_paths: Bools = []
 
     for lefts, (_, rights) in zip(source, sorted(destination.items())):
@@ -32,12 +32,12 @@ def _compare_path_name(source: Paths2, destination: PathPair2) -> bool:
     return bool_same_array(same_paths)
 
 
-def _common_test(source: Paths2, history: PathPair2) -> None:
+def _common_test(source: PathPair2, history: PathPair2) -> None:
     assert _compare_path_count(source, history)
     assert _compare_path_name(source, history)
 
 
-def _compare_history(source: Paths2, history: PathPair2 | None) -> None:
+def _compare_history(source: PathPair2, history: PathPair2 | None) -> None:
     if history is None:
         fail()
     else:
@@ -45,19 +45,23 @@ def _compare_history(source: Paths2, history: PathPair2 | None) -> None:
 
 
 def _add_single_history(
-    file_history: FileHistory, source_history: Paths2, name: str
+    file_history: FileHistory, source_history: PathPair2, name: str
 ) -> None:
     source_path: Path = _get_current_file().parent.with_name("source.json")
     destination_path: Path = source_path.with_stem(name)
 
     file_history.add_history(source_path, destination_path)
-    source_history += [[source_path, destination_path]]
+
+    source_history[name] = {
+        "source.path": source_path,
+        "destination.path": destination_path,
+    }
 
 
 def test_single() -> None:
     """Test to record single source and destination path pair."""
     file_history = FileHistory()
-    source_history: Paths2 = []
+    source_history: PathPair2 = {}
 
     _add_single_history(file_history, source_history, "destination")
     _compare_history(source_history, file_history.close_history())
@@ -66,7 +70,7 @@ def test_single() -> None:
 def test_array() -> None:
     """Test to record multiple source and destination path pair."""
     file_history = FileHistory()
-    source_history: Paths2 = []
+    source_history: PathPair2 = {}
 
     for i in range(10):
         _add_single_history(file_history, source_history, str(i).zfill(4))
@@ -80,7 +84,7 @@ def test_history() -> None:
         temporary_root = Path(temporary_path)
         file_history = FileHistory(history_path=temporary_root)
 
-        source_history: Paths2 = []
+        source_history: PathPair2 = {}
         _add_single_history(file_history, source_history, "destination")
 
         history_path: Path | None = file_history.close_history()
