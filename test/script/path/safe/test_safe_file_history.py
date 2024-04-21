@@ -18,23 +18,23 @@ def _get_current_file() -> Path:
     return current_frame()["file"]
 
 
-def _compare_path_count(expected: PathPair2, result: PathPair2) -> bool:
-    return 1 == len(set([len(history) for history in [expected, result]]))
+def _compare_path_count(expected: PathPair2, result: PathPair2) -> None:
+    assert 1 == len(set([len(history) for history in [expected, result]]))
 
 
-def _compare_path_name(expected: PathPair2, result: PathPair2) -> bool:
+def _compare_path_name(expected: PathPair2, result: PathPair2) -> None:
     same_paths: Bools = []
 
     for lefts, (_, rights) in zip(expected, sorted(result.items())):
         for i, path in enumerate(["source.path", "destination.path"]):
             same_paths += [lefts[i] == rights[path]]
 
-    return bool_same_array(same_paths)
+    assert bool_same_array(same_paths)
 
 
 def _common_test(expected: PathPair2, result: PathPair2) -> None:
-    assert _compare_path_count(expected, result)
-    assert _compare_path_name(expected, result)
+    _compare_path_count(expected, result)
+    _compare_path_name(expected, result)
 
 
 def _compare_history(expected: PathPair2, result: PathPair2 | None) -> None:
