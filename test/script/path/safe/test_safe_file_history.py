@@ -7,11 +7,16 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from pyspartaproj.context.default.bool_context import Bools
+from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.extension.path_context import PathPair2, Paths2
 from pyspartaproj.interface.pytest import fail
 from pyspartaproj.script.bool.same_value import bool_same_array
 from pyspartaproj.script.path.safe.safe_file_history import FileHistory
 from pyspartaproj.script.stack_frame import current_frame
+
+
+def _get_group() -> Strs:
+    return [group + ".path" for group in ["source", "destination"]]
 
 
 def _get_current_file() -> Path:
@@ -26,7 +31,7 @@ def _compare_path_name(expected: PathPair2, result: PathPair2) -> None:
     same_paths: Bools = []
 
     for lefts, (_, rights) in zip(expected, sorted(result.items())):
-        for i, path in enumerate(["source.path", "destination.path"]):
+        for i, path in enumerate(_get_group()):
             same_paths += [lefts[i] == rights[path]]
 
     assert bool_same_array(same_paths)
@@ -51,10 +56,9 @@ def _add_single_history(
     destination_path: Path = source_path.with_stem(name)
 
     file_history.add_history(source_path, destination_path)
-
     expected[name] = {
-        "source.path": source_path,
-        "destination.path": destination_path,
+        group: path
+        for group, path in zip(_get_group(), [source_path, destination_path])
     }
 
 
