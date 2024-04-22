@@ -77,9 +77,9 @@ def main() -> bool:
     Returns:
         bool: Success if get to the end of function.
     """
+    test_unmatch()
     test_single()
     test_root()
     test_array()
     test_pair()
-    test_unmatch()
     return True
