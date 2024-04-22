@@ -17,6 +17,17 @@ def _get_relative_root(root_path: Path | None = None) -> Path:
 
 
 def is_relative(absolute_path: Path, root_path: Path | None = None) -> bool:
+    """Check that path is type relative.
+
+    Args:
+        absolute_path (Path): Absolute path you want to check.
+
+        root_path (Path | None, optional): Defaults to None.
+            Root of absolute path used for checking path.
+
+    Returns:
+        bool: True if path is type relative.
+    """
     return absolute_path.is_relative_to(_get_relative_root(root_path))
 
 
