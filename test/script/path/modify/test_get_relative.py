@@ -37,6 +37,7 @@ def _to_pair(path_types: Strs, paths: Paths) -> PathPair:
 
 
 def test_check() -> None:
+    """Test to check path which is type relative."""
     current: Path = _get_current_file()
     expected: Bools = [True, False]
 
