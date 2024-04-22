@@ -8,7 +8,11 @@ from tempfile import TemporaryDirectory
 
 from pyspartaproj.context.default.bool_context import Bools
 from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.context.extension.path_context import PathPair2, Paths2
+from pyspartaproj.context.extension.path_context import (
+    PathPair2,
+    Paths2,
+    Paths3,
+)
 from pyspartaproj.interface.pytest import fail
 from pyspartaproj.script.bool.same_value import bool_same_array
 from pyspartaproj.script.path.safe.safe_file_history import FileHistory
@@ -31,6 +35,10 @@ def _take_out_path(history: PathPair2) -> Paths2:
     return [
         [value[group] for group in _get_group()] for value in history.values()
     ]
+
+
+def _take_out_path_pair(expected: PathPair2, result: PathPair2) -> Paths3:
+    return [_take_out_path(history) for history in [expected, result]]
 
 
 def _compare_path_name(expected: PathPair2, result: PathPair2) -> None:
