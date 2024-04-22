@@ -9,6 +9,13 @@ from pyspartaproj.context.extension.path_context import PathPair, Paths
 from pyspartaproj.script.path.modify.get_current import get_current
 
 
+def _get_relative_root(root_path: Path | None = None) -> Path:
+    if root_path is None:
+        root_path = get_current()
+
+    return root_path
+
+
 def get_relative(absolute_path: Path, root_path: Path | None = None) -> Path:
     """Function to convert absolute path to relative.
 
@@ -25,8 +32,7 @@ def get_relative(absolute_path: Path, root_path: Path | None = None) -> Path:
     Returns:
         Path: Converted relative path.
     """
-    if root_path is None:
-        root_path = get_current()
+    root_path = _get_relative_root(root_path)
 
     if not absolute_path.is_relative_to(root_path):
         raise ValueError
