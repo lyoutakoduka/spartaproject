@@ -10,7 +10,10 @@ from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.extension.path_context import Paths
 from pyspartaproj.interface.paramiko import SFTPAttributes
 from pyspartaproj.script.path.iterate_directory import walk_iterator
-from pyspartaproj.script.path.modify.get_relative import get_relative
+from pyspartaproj.script.path.modify.get_relative import (
+    get_relative,
+    is_relative,
+)
 from pyspartaproj.script.server.local.connect_server import ConnectServer
 
 
@@ -29,7 +32,7 @@ class UploadServer(ConnectServer):
         tree: Paths = []
 
         for parent in path.parents:
-            if not parent.is_relative_to(remote):
+            if not is_relative(parent, root_path=remote):
                 continue
 
             if "." != str(get_relative(parent, root_path=remote)):
