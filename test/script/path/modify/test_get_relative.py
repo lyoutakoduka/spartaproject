@@ -21,6 +21,10 @@ from pyspartaproj.script.path.modify.get_relative import (
 )
 
 
+def _get_error() -> Path:
+    return Path("error")
+
+
 def _get_current_file() -> Path:
     return Path(__file__)
 
@@ -32,7 +36,7 @@ def _to_pair(path_types: Strs, paths: Paths) -> PathPair:
 def test_unmatch() -> None:
     """Test to convert absolute path, but using invalid path."""
     with raises(ValueError):
-        get_relative(Path("error"))
+        get_relative(_get_error())
 
 
 def test_single() -> None:
