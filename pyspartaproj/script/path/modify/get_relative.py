@@ -16,6 +16,10 @@ def _get_relative_root(root_path: Path | None = None) -> Path:
     return root_path
 
 
+def is_relative(absolute_path: Path, root_path: Path | None = None) -> bool:
+    return absolute_path.is_relative_to(_get_relative_root(root_path))
+
+
 def get_relative(absolute_path: Path, root_path: Path | None = None) -> Path:
     """Function to convert absolute path to relative.
 
@@ -34,7 +38,7 @@ def get_relative(absolute_path: Path, root_path: Path | None = None) -> Path:
     """
     root_path = _get_relative_root(root_path)
 
-    if not absolute_path.is_relative_to(root_path):
+    if not is_relative(absolute_path, root_path=root_path):
         raise ValueError
 
     return absolute_path.relative_to(root_path)
