@@ -32,7 +32,7 @@ def _to_pair(path_types: Strs, paths: Paths) -> PathPair:
 def test_unmatch() -> None:
     """Test to convert absolute path, but using invalid path."""
     with raises(ValueError):
-        get_relative(Path("empty"))
+        get_relative(Path("error"))
 
 
 def test_single() -> None:
