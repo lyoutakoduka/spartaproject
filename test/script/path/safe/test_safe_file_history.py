@@ -27,6 +27,12 @@ def _compare_path_count(expected: PathPair2, result: PathPair2) -> None:
     assert 1 == len(set([len(history) for history in [expected, result]]))
 
 
+def _take_out_path(history: PathPair2) -> Paths2:
+    return [
+        [value[group] for group in _get_group()] for value in history.values()
+    ]
+
+
 def _compare_path_name(expected: PathPair2, result: PathPair2) -> None:
     same_paths: Bools = []
 
