@@ -42,13 +42,8 @@ def _take_out_path_pair(expected: PathPair2, result: PathPair2) -> Paths3:
 
 
 def _compare_path_name(expected: PathPair2, result: PathPair2) -> None:
-    same_paths: Bools = []
-
-    for lefts, (_, rights) in zip(expected, sorted(result.items())):
-        for i, path in enumerate(_get_group()):
-            same_paths += [lefts[i] == rights[path]]
-
-    assert bool_same_array(same_paths)
+    history_path_pair: Paths3 = _take_out_path_pair(expected, result)
+    assert history_path_pair[0] == history_path_pair[1]
 
 
 def _common_test(expected: PathPair2, result: PathPair2) -> None:
