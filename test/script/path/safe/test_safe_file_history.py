@@ -6,7 +6,6 @@
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from pyspartaproj.context.default.bool_context import Bools
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.extension.path_context import (
     PathPair2,
@@ -14,7 +13,6 @@ from pyspartaproj.context.extension.path_context import (
     Paths3,
 )
 from pyspartaproj.interface.pytest import fail
-from pyspartaproj.script.bool.same_value import bool_same_array
 from pyspartaproj.script.path.safe.safe_file_history import FileHistory
 from pyspartaproj.script.stack_frame import current_frame
 
