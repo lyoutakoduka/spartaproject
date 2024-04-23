@@ -48,14 +48,14 @@ def _to_pair(path_types: Strs, paths: Paths) -> PathPair:
 def test_check() -> None:
     """Test to check path which is type relative."""
     current: Path = _get_current_file()
-    expected: Bools = _get_expected()
 
-    result: Bools = [
-        is_relative(path, root_path=current.parent)
-        for path in _get_paths(current)
-    ]
-
-    assert bool_compare_array(expected, result)
+    assert bool_compare_array(
+        _get_expected(),
+        [
+            is_relative(path, root_path=current.parent)
+            for path in _get_paths(current)
+        ],
+    )
 
 
 def test_check_array() -> None:
