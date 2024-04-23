@@ -59,6 +59,7 @@ def test_check() -> None:
 
 
 def test_check_array() -> None:
+    """Test to check that list of paths are type relative at once."""
     current: Path = _get_current_file()
 
     assert bool_compare_array(
