@@ -35,8 +35,14 @@ class FileHistory(WorkSpace):
         self._history: PathPair2 = {}
         self.history_path: Path = self._init_history_path(history_path)
 
-    def _export_history(self, history: Json) -> Path:
-        return json_export(self.get_history_path(), history)
+    def _export_history(self, history: Json) -> bool:
+        export_path: Path = self.get_history_path()
+
+        if export_path.parent.exists():
+            json_export(export_path, history)
+            return True
+
+        return False
 
     def _get_key_time(self) -> str:
         time: str = get_current_time(jst=True).isoformat()
@@ -60,8 +66,8 @@ class FileHistory(WorkSpace):
 
     def _convert_history(self) -> PathPair2 | None:
         if history := self._clear_history():
-            self._export_history(multiple2_to_json(history))
-            return history
+            if self._export_history(multiple2_to_json(history)):
+                return history
 
         return None
 
