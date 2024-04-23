@@ -5,6 +5,7 @@
 
 from pathlib import Path
 
+from pyspartaproj.context.default.bool_context import Bools
 from pyspartaproj.context.extension.path_context import PathPair, Paths
 from pyspartaproj.script.path.modify.get_current import get_current
 
@@ -29,6 +30,15 @@ def is_relative(absolute_path: Path, root_path: Path | None = None) -> bool:
         bool: True if path is type relative.
     """
     return absolute_path.is_relative_to(_get_relative_root(root_path))
+
+
+def is_relative_array(
+    absolute_paths: Paths, root_path: Path | None = None
+) -> Bools:
+    return [
+        is_relative(absolute_path, root_path=root_path)
+        for absolute_path in absolute_paths
+    ]
 
 
 def get_relative(absolute_path: Path, root_path: Path | None = None) -> Path:
