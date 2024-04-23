@@ -35,6 +35,17 @@ def is_relative(absolute_path: Path, root_path: Path | None = None) -> bool:
 def is_relative_array(
     absolute_paths: Paths, root_path: Path | None = None
 ) -> Bools:
+    """Check that list of paths are type relative at once.
+
+    Args:
+        absolute_paths (Paths): Absolute paths you want to check.
+
+        root_path (Path | None, optional): Defaults to None.
+            Root of absolute path used for checking paths.
+
+    Returns:
+        Bools: List of True if all paths are type relative.
+    """
     return [
         is_relative(absolute_path, root_path=root_path)
         for absolute_path in absolute_paths
