@@ -64,19 +64,19 @@ class FileHistory(WorkSpace):
 
         return history
 
-    def convert_history(self) -> PathPair2 | None:
-        if history := self._clear_history():
-            if self._export_history(multiple2_to_json(history)):
-                return history
-
-        return None
-
     def _finalize_history(self) -> PathPair2 | None:
         history: PathPair2 | None = self.convert_history()
 
         super().__del__()
 
         return history
+
+    def convert_history(self) -> PathPair2 | None:
+        if history := self._clear_history():
+            if self._export_history(multiple2_to_json(history)):
+                return history
+
+        return None
 
     def get_history_path(self) -> Path:
         """Get path of file which contain the history of file operation.
