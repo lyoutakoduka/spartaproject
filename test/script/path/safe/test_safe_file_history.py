@@ -5,6 +5,7 @@
 
 from pathlib import Path
 from tempfile import TemporaryDirectory
+from typing import Callable
 
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.extension.path_context import (
@@ -74,6 +75,11 @@ def _add_single_history(
         group: path
         for group, path in zip(_get_group(), [source_path, destination_path])
     }
+
+
+def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
+    with TemporaryDirectory() as temporary_path:
+        function(Path(temporary_path))
 
 
 def test_single() -> None:
