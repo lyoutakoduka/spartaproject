@@ -104,17 +104,13 @@ def test_array() -> None:
 
 def test_history() -> None:
     """Test for specific directory for exporting paths you recorded."""
-    with TemporaryDirectory() as temporary_path:
-        temporary_root = Path(temporary_path)
-        file_history = FileHistory(history_path=temporary_root)
 
-        expected: PathPair2 = {}
-        _add_single_history(file_history, expected, "single")
+    def individual_test(temporary_root: Path) -> None:
+        _compare_relative(
+            temporary_root, FileHistory(history_path=temporary_root)
+        )
 
-        result: Path | None = file_history.close_history()
-
-        _compare_history(expected, result)
-        assert history_path.is_relative_to(temporary_root)
+    _inside_temporary_directory(individual_test)
 
 
 def main() -> bool:
