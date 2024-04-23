@@ -9,6 +9,7 @@ from typing import Callable
 
 from pyspartaproj.context.default.bool_context import BoolPair
 from pyspartaproj.context.extension.path_context import PathPair2, Paths
+from pyspartaproj.interface.pytest import fail
 from pyspartaproj.script.bool.same_value import bool_same_array
 from pyspartaproj.script.file.json.convert_from_json import (
     path_pair2_from_json,
@@ -25,8 +26,10 @@ from pyspartaproj.script.path.temporary.create_temporary_tree import (
 )
 
 
-def _common_test(history_size: int, history_path: Path) -> None:
-    history: PathPair2 = path_pair2_from_json(json_import(history_path))
+def _common_test(history_size: int, history: PathPair2 | None) -> None:
+    if history is None:
+        fail()
+
     assert history_size == len(history)
 
     for _, path_pair in history.items():
@@ -41,21 +44,23 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
         function(Path(temporary_path))
 
 
-def _finalize_remove(path: Path, safe_trash: SafeTrash) -> Path:
+def _finalize_remove(path: Path, safe_trash: SafeTrash) -> PathPair2 | None:
     safe_trash.trash(path)
-    return safe_trash.pop_history()
+    return safe_trash.close_history()
 
 
-def _finalize_remove_array(paths: Paths, safe_trash: SafeTrash) -> Path:
+def _finalize_remove_array(
+    paths: Paths, safe_trash: SafeTrash
+) -> PathPair2 | None:
     safe_trash.trash_at_once(paths)
-    return safe_trash.pop_history()
+    return safe_trash.close_history()
 
 
 def _finalize_remove_tree(
     paths: Paths, temporary_root: Path, safe_trash: SafeTrash
-) -> Path:
+) -> PathPair2 | None:
     safe_trash.trash_at_once(paths, trash_root=temporary_root)
-    return safe_trash.pop_history()
+    return safe_trash.close_history()
 
 
 def test_file() -> None:
