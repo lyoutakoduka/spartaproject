@@ -32,6 +32,10 @@ def _get_current_file() -> Path:
     return Path(__file__)
 
 
+def _get_paths(current: Path) -> Paths:
+    return [current, _get_error()]
+
+
 def _to_pair(path_types: Strs, paths: Paths) -> PathPair:
     return {path_type: path for path_type, path in zip(path_types, paths)}
 
@@ -43,7 +47,7 @@ def test_check() -> None:
 
     result: Bools = [
         is_relative(path, root_path=current.parent)
-        for path in [current, _get_error()]
+        for path in _get_paths(current)
     ]
 
     assert bool_compare_array(expected, result)
