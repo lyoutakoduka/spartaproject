@@ -13,6 +13,7 @@ from pyspartaproj.context.extension.path_context import (
     Paths3,
 )
 from pyspartaproj.interface.pytest import fail
+from pyspartaproj.script.path.modify.get_relative import is_relative
 from pyspartaproj.script.path.safe.safe_file_history import FileHistory
 from pyspartaproj.script.stack_frame import current_frame
 
@@ -54,6 +55,12 @@ def _compare_history(expected: PathPair2, result: PathPair2 | None) -> None:
         fail()
     else:
         _common_test(expected, result)
+
+
+def _compare_relative(temporary_root: Path, file_history: FileHistory) -> None:
+    assert is_relative(
+        file_history.get_history_path(), root_path=temporary_root
+    )
 
 
 def _add_single_history(
