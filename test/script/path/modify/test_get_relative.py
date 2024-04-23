@@ -21,6 +21,7 @@ from pyspartaproj.script.path.modify.get_relative import (
     get_relative_array,
     get_relative_pair,
     is_relative,
+    is_relative_array,
 )
 
 
@@ -55,6 +56,15 @@ def test_check() -> None:
     ]
 
     assert bool_compare_array(expected, result)
+
+
+def test_check_array() -> None:
+    current: Path = _get_current_file()
+
+    assert bool_compare_array(
+        _get_expected(),
+        is_relative_array(_get_paths(current), root_path=current.parent),
+    )
 
 
 def test_unmatch() -> None:
@@ -106,6 +116,7 @@ def main() -> bool:
         bool: Success if get to the end of function.
     """
     test_check()
+    test_check_array()
     test_unmatch()
     test_single()
     test_root()
