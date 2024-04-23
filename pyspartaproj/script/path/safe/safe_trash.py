@@ -9,7 +9,10 @@ from pyspartaproj.context.extension.path_context import Paths
 from pyspartaproj.script.directory.create_directory_parent import (
     create_directory_parent,
 )
-from pyspartaproj.script.path.modify.get_relative import get_relative
+from pyspartaproj.script.path.modify.get_relative import (
+    get_relative,
+    is_relative,
+)
 from pyspartaproj.script.path.safe.safe_rename import SafeRename
 
 
@@ -40,7 +43,8 @@ class SafeTrash(SafeRename):
 
         if trash_root is None:
             self._move_file(trash_path, parent_root)
-        elif trash_path.is_relative_to(trash_root):
+
+        elif is_relative(trash_path, root_path=trash_root):
             self._move_file(trash_path, trash_root)
         else:
             self._move_file(trash_path, parent_root)
