@@ -32,6 +32,10 @@ def _get_current_file() -> Path:
     return Path(__file__)
 
 
+def _get_expected() -> Bools:
+    return [True, False]
+
+
 def _get_paths(current: Path) -> Paths:
     return [current, _get_error()]
 
@@ -43,7 +47,7 @@ def _to_pair(path_types: Strs, paths: Paths) -> PathPair:
 def test_check() -> None:
     """Test to check path which is type relative."""
     current: Path = _get_current_file()
-    expected: Bools = [True, False]
+    expected: Bools = _get_expected()
 
     result: Bools = [
         is_relative(path, root_path=current.parent)
