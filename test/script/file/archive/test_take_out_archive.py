@@ -16,7 +16,10 @@ from pyspartaproj.script.file.archive.edit_archive import EditArchive
 from pyspartaproj.script.file.archive.take_out_archive import take_out_archive
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.modify.get_absolute import get_absolute_array
-from pyspartaproj.script.path.modify.get_relative import get_relative_array
+from pyspartaproj.script.path.modify.get_relative import (
+    get_relative_array,
+    is_relative_array,
+)
 from pyspartaproj.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
@@ -320,8 +323,9 @@ def _default_test(archive_status: ArchiveStatus) -> None:
 
 
 def _compare_relative(working: PathPair, archive_paths: Paths) -> None:
-    for archive_path in archive_paths:
-        assert archive_path.is_relative_to(working["specific"])
+    assert False not in is_relative_array(
+        archive_paths, root_path=working["specific"]
+    )
 
 
 def _specific_test(working: PathPair, archive_status: ArchiveStatus) -> None:
