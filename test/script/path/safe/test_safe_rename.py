@@ -12,10 +12,6 @@ from pyspartaproj.context.extension.path_context import PathPair2
 from pyspartaproj.interface.pytest import fail
 from pyspartaproj.script.bool.same_value import bool_same_array
 from pyspartaproj.script.directory.create_directory import create_directory
-from pyspartaproj.script.file.json.convert_from_json import (
-    path_pair2_from_json,
-)
-from pyspartaproj.script.file.json.import_json import json_import
 from pyspartaproj.script.path.safe.safe_rename import SafeRename
 from pyspartaproj.script.path.status.check_exists import check_exists_pair
 from pyspartaproj.script.path.temporary.create_temporary_file import (
