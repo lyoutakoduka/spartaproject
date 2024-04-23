@@ -21,13 +21,17 @@ from pyspartaproj.script.path.temporary.create_temporary_tree import (
 )
 
 
-def _common_test(history: PathPair2 | None) -> None:
+def _compare_empty(history: PathPair2 | None) -> PathPair2:
     if history is None:
         fail()
 
     assert 1 == len(history)
 
-    for _, path_pair in history.items():
+    return history
+
+
+def _common_test(history: PathPair2 | None) -> None:
+    for _, path_pair in _compare_empty(history).items():
         assert bool_same_pair(check_exists_pair(path_pair))
 
 
