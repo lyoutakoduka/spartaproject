@@ -64,7 +64,7 @@ class FileHistory(WorkSpace):
 
         return history
 
-    def _convert_history(self) -> PathPair2 | None:
+    def convert_history(self) -> PathPair2 | None:
         if history := self._clear_history():
             if self._export_history(multiple2_to_json(history)):
                 return history
@@ -72,7 +72,7 @@ class FileHistory(WorkSpace):
         return None
 
     def _finalize_history(self) -> PathPair2 | None:
-        history: PathPair2 | None = self._convert_history()
+        history: PathPair2 | None = self.convert_history()
 
         super().__del__()
 
