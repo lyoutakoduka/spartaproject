@@ -64,7 +64,7 @@ def _compare_relative(temporary_root: Path, file_history: FileHistory) -> None:
     )
 
 
-def _add_single_history(
+def _add_history(
     file_history: FileHistory, expected: PathPair2, name: str
 ) -> None:
     source_path: Path = _get_current_file().parent.with_name("source.json")
@@ -87,7 +87,7 @@ def test_single() -> None:
     file_history = FileHistory()
     expected: PathPair2 = {}
 
-    _add_single_history(file_history, expected, "single")
+    _add_history(file_history, expected, "single")
     _compare_history(expected, file_history.close_history())
 
 
@@ -97,7 +97,7 @@ def test_array() -> None:
     expected: PathPair2 = {}
 
     for i in range(10):
-        _add_single_history(file_history, expected, str(i).zfill(4))
+        _add_history(file_history, expected, str(i).zfill(4))
 
     _compare_history(expected, file_history.close_history())
 
