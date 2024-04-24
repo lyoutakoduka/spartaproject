@@ -173,6 +173,11 @@ class EditArchive(WorkSpace):
 
             protected (bool, optional): Defaults to False.
                 True if you don't want to update original archive.
+
+            remove_root (Path | None, optional): Defaults to None.
+                Path of directory used as trash box.
+                It's used for argument "remove_root" of class "SafeTrash".
+
         """
         super().__init__()
 
