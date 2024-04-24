@@ -64,6 +64,10 @@ def _compare_relative(temporary_root: Path, file_history: FileHistory) -> None:
     )
 
 
+def _compare_history(file_history: FileHistory) -> None:
+    assert file_history.get_history() is None
+
+
 def _add_history(
     file_history: FileHistory, expected: PathPair2, name: str
 ) -> None:
