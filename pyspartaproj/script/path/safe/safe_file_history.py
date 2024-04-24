@@ -25,7 +25,7 @@ class FileHistory(WorkSpace):
     The module is used for e.g., custom copy or rename operation.
     """
 
-    def _init_history_path(self, path: Path | None) -> Path:
+    def _get_working_root(self, path: Path | None) -> Path:
         if path is None:
             path = self.get_root()
 
@@ -42,7 +42,7 @@ class FileHistory(WorkSpace):
         self._still_removed: bool = False
         self._history: PathPair2 = {}
 
-        self._initialize_paths(self._init_history_path(history_path))
+        self._initialize_paths(self._get_working_root(history_path))
 
     def _export_history(self, history: Json) -> bool:
         export_path: Path = self.get_history_path()
