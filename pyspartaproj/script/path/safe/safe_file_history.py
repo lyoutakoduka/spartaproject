@@ -26,7 +26,7 @@ class FileHistory(WorkSpace):
 
     def _init_history_path(self, path: Path | None) -> Path:
         if path is None:
-            path = Path(self.get_root(), "trash")
+            path = self.get_root()
 
         return create_working_space(path, jst=True)
 
