@@ -98,7 +98,7 @@ class FileHistory(WorkSpace):
         Returns:
             Path: Path of file operation history.
         """
-        return Path(self._history_root, "rename.json")
+        return Path(self._history_root, "history.json")
 
     def add_history(self, source_path: Path, destination_path: Path) -> None:
         """Record paths which is source and destination pair.
