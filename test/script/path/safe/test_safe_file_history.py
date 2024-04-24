@@ -77,6 +77,14 @@ def _add_history(
     }
 
 
+def _add_history_single(file_history: FileHistory) -> PathPair2:
+    expected: PathPair2 = {}
+
+    _add_history(file_history, expected, "single")
+
+    return expected
+
+
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
@@ -85,9 +93,8 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 def test_single() -> None:
     """Test to record single source and destination path pair."""
     file_history = FileHistory()
-    expected: PathPair2 = {}
 
-    _add_history(file_history, expected, "single")
+    expected: PathPair2 = _add_history_single(file_history)
     _compare_history(expected, file_history.close_history())
 
 
