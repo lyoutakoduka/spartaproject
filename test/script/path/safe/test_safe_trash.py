@@ -7,7 +7,8 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from pyspartaproj.context.default.bool_context import BoolPair
+from pyspartaproj.context.default.bool_context import BoolPair, Bools
+from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.extension.path_context import PathPair2, Paths
 from pyspartaproj.interface.pytest import fail
 from pyspartaproj.script.bool.same_value import bool_same_array
@@ -22,17 +23,21 @@ from pyspartaproj.script.path.temporary.create_temporary_tree import (
 )
 
 
+def _get_group() -> Strs:
+    return [group + ".path" for group in ["source", "destination"]]
+
+
 def _common_test(history_size: int, history: PathPair2 | None) -> None:
     if history is None:
         fail()
 
     assert history_size == len(history)
 
-    for _, path_pair in history.items():
+    for path_pair in history.values():
         exists_pair: BoolPair = check_exists_pair(path_pair)
-        assert bool_same_array(
-            [not exists_pair["source.path"], exists_pair["destination.path"]]
-        )
+        exists_array: Bools = [exists_pair[group] for group in _get_group()]
+
+        assert bool_same_array([not exists_array[0], exists_array[1]])
 
 
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
