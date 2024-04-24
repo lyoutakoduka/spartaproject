@@ -33,7 +33,7 @@ class FileHistory(WorkSpace):
     def _initialize_variables(self, history_path: Path | None) -> None:
         self._still_removed: bool = False
         self._history: PathPair2 = {}
-        self.history_path: Path = self._init_history_path(history_path)
+        self._working_root: Path = self._init_history_path(history_path)
 
     def _export_history(self, history: Json) -> bool:
         export_path: Path = self.get_history_path()
