@@ -85,6 +85,15 @@ def _add_history_single(file_history: FileHistory) -> PathPair2:
     return expected
 
 
+def _add_history_array(file_history: FileHistory) -> PathPair2:
+    expected: PathPair2 = {}
+
+    for i in range(10):
+        _add_history(file_history, expected, str(i).zfill(4))
+
+    return expected
+
+
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
@@ -101,11 +110,8 @@ def test_single() -> None:
 def test_array() -> None:
     """Test to record multiple source and destination path pair."""
     file_history = FileHistory()
-    expected: PathPair2 = {}
 
-    for i in range(10):
-        _add_history(file_history, expected, str(i).zfill(4))
-
+    expected: PathPair2 = _add_history_array(file_history)
     _compare_history(expected, file_history.close_history())
 
 
