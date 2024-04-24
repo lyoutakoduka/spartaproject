@@ -137,7 +137,7 @@ def test_path() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         _compare_relative(
-            temporary_root, FileHistory(history_path=temporary_root)
+            temporary_root, FileHistory(working_root=temporary_root)
         )
 
     _inside_temporary_directory(individual_test)
