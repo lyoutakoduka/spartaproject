@@ -34,7 +34,7 @@ class SafeTrash(SafeRename):
             trash_path (Path): Path you want to remove.
 
             trash_root (Path | None, optional): Defaults to None.
-                Path of trash box directory.
+                Path of directory used as trash box.
 
         Returns:
             Path: "trash_path" is returned.
@@ -60,7 +60,7 @@ class SafeTrash(SafeRename):
             trash_paths (Paths): Paths you want to remove.
 
             trash_root (Path | None, optional): Defaults to None.
-                Path of trash box directory.
+                Path of directory used as trash box.
                 It's used for argument "trash_root" of method "trash".
 
         Returns:
