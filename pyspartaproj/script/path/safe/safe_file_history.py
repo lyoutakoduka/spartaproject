@@ -72,6 +72,11 @@ class FileHistory(WorkSpace):
         return history
 
     def get_history(self) -> PathPair2 | None:
+        """Get and initialize the history of file operation.
+
+        Returns:
+            PathPair2 | None: The history of file operation until current.
+        """
         if history := self._clear_history():
             if self._export_history(multiple2_to_json(history)):
                 return history
