@@ -112,6 +112,16 @@ def test_single() -> None:
     )
 
 
+def test_history() -> None:
+    file_history = FileHistory()
+
+    _compare_empty(
+        _add_history_single(file_history), file_history.get_history()
+    )
+
+    _compare_history(file_history)
+
+
 def test_array() -> None:
     """Test to record multiple source and destination path pair."""
     file_history = FileHistory()
@@ -139,6 +149,7 @@ def main() -> bool:
         bool: Success if get to the end of function.
     """
     test_single()
+    test_history()
     test_array()
     test_path()
     return True
