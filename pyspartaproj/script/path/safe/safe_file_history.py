@@ -11,9 +11,6 @@ from pyspartaproj.context.extension.path_context import PathPair2
 from pyspartaproj.context.file.json_context import Json
 from pyspartaproj.script.directory.create_directory import create_directory
 from pyspartaproj.script.directory.create_directory_temporary import WorkSpace
-from pyspartaproj.script.directory.create_directory_working import (
-    create_working_space,
-)
 from pyspartaproj.script.file.json.convert_to_json import multiple2_to_json
 from pyspartaproj.script.file.json.export_json import json_export
 from pyspartaproj.script.time.current_datetime import get_current_time
@@ -29,7 +26,7 @@ class FileHistory(WorkSpace):
         if working_root is None:
             working_root = self.get_root()
 
-        return create_working_space(working_root, jst=True)
+        return working_root
 
     def _initialize_paths(self, working_root: Path) -> None:
         self._working_root: Path = working_root
