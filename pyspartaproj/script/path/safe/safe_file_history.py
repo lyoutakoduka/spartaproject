@@ -25,21 +25,21 @@ class FileHistory(WorkSpace):
     The module is used for e.g., custom copy or rename operation.
     """
 
-    def _get_working_root(self, path: Path | None) -> Path:
-        if path is None:
-            path = self.get_root()
+    def _get_working_root(self, working_root: Path | None) -> Path:
+        if working_root is None:
+            working_root = self.get_root()
 
-        return create_working_space(path, jst=True)
+        return create_working_space(working_root, jst=True)
 
     def _initialize_paths(self, working_root: Path) -> None:
         self._working_root: Path = working_root
         self._history_root: Path = self.create_sub_directory("history")
 
-    def _initialize_variables(self, history_path: Path | None) -> None:
+    def _initialize_variables(self, working_root: Path | None) -> None:
         self._still_removed: bool = False
         self._history: PathPair2 = {}
 
-        self._initialize_paths(self._get_working_root(history_path))
+        self._initialize_paths(self._get_working_root(working_root))
 
     def _export_history(self, history: Json) -> bool:
         export_path: Path = self.get_history_path()
@@ -139,13 +139,13 @@ class FileHistory(WorkSpace):
         """Export paths to temporary working space, and cleanup it."""
         self.close_history()
 
-    def __init__(self, history_path: Path | None = None) -> None:
+    def __init__(self, working_root: Path | None = None) -> None:
         """Initialize variables about path you want to record.
 
         Args:
-            history_path (Path | None, optional): Defaults to None.
+            working_root (Path | None, optional): Defaults to None.
                 Export directory of Json file witch paths is recorded.
         """
         super().__init__()
 
-        self._initialize_variables(history_path)
+        self._initialize_variables(working_root)
