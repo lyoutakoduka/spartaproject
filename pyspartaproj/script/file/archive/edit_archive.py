@@ -20,7 +20,7 @@ from pyspartaproj.script.time.stamp.get_timestamp import (
 )
 
 
-class EditArchive(WorkSpace):
+class EditArchive(SafeTrash):
     """Class to edit internal of archive file."""
 
     def _initialize_variables(
@@ -29,14 +29,12 @@ class EditArchive(WorkSpace):
         limit_byte: int,
         compress: bool,
         protected: bool,
-        remove_root: Path | None,
     ) -> None:
         self._still_removed: bool = False
         self._archive_path: Path = archive_path
         self._limit_byte: int = limit_byte
         self._is_lzma_after: bool = compress
         self._protected: bool = protected
-        self._remove_root: Path | None = remove_root
 
     def _get_archive_stamp(self) -> TimePair:
         return get_directory_latest(walk_iterator(self.get_root()))
@@ -59,7 +57,7 @@ class EditArchive(WorkSpace):
         return None
 
     def _remove_unused(self, paths: Paths) -> None:
-        SafeTrash(remove_root=self._remove_root).trash_at_once(paths)
+        self.trash_at_once(paths)
 
     def _cleanup_before_override(self) -> None:
         self._remove_unused(self._decompressed)
@@ -179,9 +177,9 @@ class EditArchive(WorkSpace):
                 It's used for argument "remove_root" of class "SafeTrash".
 
         """
-        super().__init__()
+        super().__init__(remove_root=remove_root)
 
         self._initialize_variables(
-            archive_path, limit_byte, compress, protected, remove_root
+            archive_path, limit_byte, compress, protected
         )
         self._initialize_archive()
