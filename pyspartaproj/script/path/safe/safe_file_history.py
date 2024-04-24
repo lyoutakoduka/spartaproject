@@ -31,9 +31,6 @@ class FileHistory(WorkSpace):
 
         return create_working_space(path, jst=True)
 
-    def create_sub_directory(self, group: str) -> Path:
-        return create_directory(Path(self._working_root, group))
-
     def _initialize_paths(self, working_root: Path) -> None:
         self._working_root: Path = working_root
         self._history_root: Path = self.create_sub_directory("history")
@@ -79,6 +76,9 @@ class FileHistory(WorkSpace):
         super().__del__()
 
         return history
+
+    def create_sub_directory(self, group: str) -> Path:
+        return create_directory(Path(self._working_root, group))
 
     def get_history(self) -> PathPair2 | None:
         """Get and initialize the history of file operation.
