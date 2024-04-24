@@ -103,16 +103,18 @@ def test_single() -> None:
     """Test to record single source and destination path pair."""
     file_history = FileHistory()
 
-    expected: PathPair2 = _add_history_single(file_history)
-    _compare_history(expected, file_history.close_history())
+    _compare_history(
+        _add_history_single(file_history), file_history.close_history()
+    )
 
 
 def test_array() -> None:
     """Test to record multiple source and destination path pair."""
     file_history = FileHistory()
 
-    expected: PathPair2 = _add_history_array(file_history)
-    _compare_history(expected, file_history.close_history())
+    _compare_history(
+        _add_history_array(file_history), file_history.close_history()
+    )
 
 
 def test_path() -> None:
