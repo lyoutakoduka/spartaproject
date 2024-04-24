@@ -23,7 +23,7 @@ from pyspartaproj.script.time.stamp.get_timestamp import (
 class EditArchive(SafeTrash):
     """Class to edit internal of archive file."""
 
-    def _initialize_variables(
+    def _initialize_trash_variables(
         self,
         archive_path: Path,
         limit_byte: int,
@@ -179,7 +179,7 @@ class EditArchive(SafeTrash):
         """
         super().__init__(remove_root=remove_root)
 
-        self._initialize_variables(
+        self._initialize_trash_variables(
             archive_path, limit_byte, compress, protected
         )
         self._initialize_archive()
