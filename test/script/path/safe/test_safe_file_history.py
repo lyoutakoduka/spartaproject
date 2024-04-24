@@ -113,6 +113,7 @@ def test_single() -> None:
 
 
 def test_history() -> None:
+    """Test to get current file operation history."""
     file_history = FileHistory()
 
     _compare_empty(
