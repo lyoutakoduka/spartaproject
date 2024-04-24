@@ -31,12 +31,12 @@ class FileHistory(WorkSpace):
 
         return create_working_space(path, jst=True)
 
-    def _get_history_root(self, path: Path) -> Path:
-        return create_directory(Path(path, "history"))
+    def _get_history_root(self, group: str) -> Path:
+        return create_directory(Path(self._working_root, group))
 
     def _initialize_paths(self, working_root: Path) -> None:
         self._working_root: Path = working_root
-        self._history_root: Path = self._get_history_root(working_root)
+        self._history_root: Path = self._get_history_root("history")
 
     def _initialize_variables(self, history_path: Path | None) -> None:
         self._still_removed: bool = False
