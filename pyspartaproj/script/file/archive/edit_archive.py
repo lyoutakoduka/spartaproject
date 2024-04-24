@@ -7,7 +7,6 @@ from pathlib import Path
 
 from pyspartaproj.context.extension.path_context import Paths
 from pyspartaproj.context.extension.time_context import TimePair
-from pyspartaproj.script.directory.create_directory_temporary import WorkSpace
 from pyspartaproj.script.file.archive.compress_archive import CompressArchive
 from pyspartaproj.script.file.archive.decompress_archive import (
     DecompressArchive,
