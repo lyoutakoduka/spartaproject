@@ -78,6 +78,14 @@ class FileHistory(WorkSpace):
         return history
 
     def create_sub_directory(self, group: str) -> Path:
+        """Create sub directory in temporary working space.
+
+        Args:
+            group (str): Name of directory you want to create.
+
+        Returns:
+            Path: Path of created sub directory.
+        """
         return create_directory(Path(self._working_root, group))
 
     def get_history(self) -> PathPair2 | None:
