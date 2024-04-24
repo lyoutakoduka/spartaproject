@@ -42,21 +42,21 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 
 def _finalize_remove(path: Path, safe_trash: SafeTrash) -> PathPair2 | None:
     safe_trash.trash(path)
-    return safe_trash.close_history()
+    return safe_trash.get_history()
 
 
 def _finalize_remove_array(
     paths: Paths, safe_trash: SafeTrash
 ) -> PathPair2 | None:
     safe_trash.trash_at_once(paths)
-    return safe_trash.close_history()
+    return safe_trash.get_history()
 
 
 def _finalize_remove_tree(
     paths: Paths, temporary_root: Path, safe_trash: SafeTrash
 ) -> PathPair2 | None:
     safe_trash.trash_at_once(paths, trash_root=temporary_root)
-    return safe_trash.close_history()
+    return safe_trash.get_history()
 
 
 def test_file() -> None:
