@@ -34,10 +34,15 @@ class FileHistory(WorkSpace):
     def _get_history_root(self, path: Path) -> Path:
         return create_directory(Path(path, "history"))
 
+    def _initialize_paths(self, working_root: Path) -> None:
+        self._working_root: Path = working_root
+        self._history_root: Path = self._get_history_root(working_root)
+
     def _initialize_variables(self, history_path: Path | None) -> None:
         self._still_removed: bool = False
         self._history: PathPair2 = {}
-        self._working_root: Path = self._init_history_path(history_path)
+
+        self._initialize_paths(self._init_history_path(history_path))
 
     def _export_history(self, history: Json) -> bool:
         export_path: Path = self.get_history_path()
@@ -93,7 +98,7 @@ class FileHistory(WorkSpace):
         Returns:
             Path: Path of file operation history.
         """
-        return Path(self.history_path, "rename.json")
+        return Path(self._history_root, "rename.json")
 
     def add_history(self, source_path: Path, destination_path: Path) -> None:
         """Record paths which is source and destination pair.
