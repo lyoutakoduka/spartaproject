@@ -9,6 +9,7 @@ from pathlib import Path
 
 from pyspartaproj.context.extension.path_context import PathPair2
 from pyspartaproj.context.file.json_context import Json
+from pyspartaproj.script.directory.create_directory import create_directory
 from pyspartaproj.script.directory.create_directory_temporary import WorkSpace
 from pyspartaproj.script.directory.create_directory_working import (
     create_working_space,
@@ -29,6 +30,9 @@ class FileHistory(WorkSpace):
             path = self.get_root()
 
         return create_working_space(path, jst=True)
+
+    def _get_history_root(self, path: Path) -> Path:
+        return create_directory(Path(path, "history"))
 
     def _initialize_variables(self, history_path: Path | None) -> None:
         self._still_removed: bool = False
