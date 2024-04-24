@@ -105,6 +105,14 @@ class FileHistory(WorkSpace):
         """
         return Path(self._history_root, "history.json")
 
+    def get_working_root(self) -> Path:
+        """Get path of temporary working space shared at class.
+
+        Returns:
+            Path: Path of temporary working space.
+        """
+        return self._working_root
+
     def add_history(self, source_path: Path, destination_path: Path) -> None:
         """Record paths which is source and destination pair.
 
