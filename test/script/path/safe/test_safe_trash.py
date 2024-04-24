@@ -27,13 +27,17 @@ def _get_group() -> Strs:
     return [group + ".path" for group in ["source", "destination"]]
 
 
-def _common_test(history_size: int, history: PathPair2 | None) -> None:
+def _compare_size(history_size: int, history: PathPair2 | None) -> PathPair2:
     if history is None:
         fail()
 
     assert history_size == len(history)
 
-    for path_pair in history.values():
+    return history
+
+
+def _common_test(history_size: int, history: PathPair2 | None) -> None:
+    for path_pair in _compare_size(history_size, history).values():
         exists_pair: BoolPair = check_exists_pair(path_pair)
         exists_array: Bools = [exists_pair[group] for group in _get_group()]
 
