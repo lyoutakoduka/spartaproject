@@ -102,7 +102,7 @@ def test_array() -> None:
     _compare_history(expected, file_history.close_history())
 
 
-def test_history() -> None:
+def test_path() -> None:
     """Test for specific directory for exporting paths you recorded."""
 
     def individual_test(temporary_root: Path) -> None:
@@ -121,5 +121,5 @@ def main() -> bool:
     """
     test_single()
     test_array()
-    test_history()
+    test_path()
     return True
