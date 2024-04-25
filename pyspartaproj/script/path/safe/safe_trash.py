@@ -84,7 +84,8 @@ class SafeTrash(SafeRename):
 
         Args:
             remove_root (Path | None, optional): Defaults to None.
-                Directory you want to places removed file or directory.
+                Path of directory used as trash box.
+                It's used for argument "working_root" of class "FileHistory".
         """
         super().__init__(working_root=remove_root)
 
