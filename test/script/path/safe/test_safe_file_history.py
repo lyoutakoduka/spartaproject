@@ -151,6 +151,8 @@ def test_path() -> None:
 
 
 def test_directory() -> None:
+    """Test for path of temporary working space you specified."""
+
     def individual_test(temporary_root: Path) -> None:
         _compare_directory(FileHistory(working_root=temporary_root))
 
