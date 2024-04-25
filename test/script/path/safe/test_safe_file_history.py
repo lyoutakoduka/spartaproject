@@ -150,6 +150,13 @@ def test_path() -> None:
     _inside_temporary_directory(individual_test)
 
 
+def test_directory() -> None:
+    def individual_test(temporary_root: Path) -> None:
+        _compare_directory(FileHistory(working_root=temporary_root))
+
+    _inside_temporary_directory(individual_test)
+
+
 def main() -> bool:
     """Run all tests.
 
@@ -160,4 +167,5 @@ def main() -> bool:
     test_history()
     test_array()
     test_path()
+    test_directory()
     return True
