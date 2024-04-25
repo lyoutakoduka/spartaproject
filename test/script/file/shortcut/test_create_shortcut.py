@@ -19,7 +19,7 @@ def _get_shortcut_path(shortcut_target: Path, shortcut_root: Path) -> Path:
 
 
 def _common_test(shortcut_target: Path, shortcut_root: Path) -> None:
-    shortcut_path: Path = _get_shortcut_path(shortcut_root, shortcut_target)
+    shortcut_path: Path = _get_shortcut_path(shortcut_target, shortcut_root)
     create_shortcut(shortcut_target, shortcut_path)
 
     assert shortcut_path.exists()
