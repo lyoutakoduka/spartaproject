@@ -9,6 +9,9 @@ from pyspartaproj.context.extension.path_context import Paths
 from pyspartaproj.script.directory.create_directory_parent import (
     create_directory_parent,
 )
+from pyspartaproj.script.directory.create_directory_working import (
+    create_working_space,
+)
 from pyspartaproj.script.path.modify.get_relative import (
     get_relative,
     is_relative,
@@ -18,6 +21,11 @@ from pyspartaproj.script.path.safe.safe_rename import SafeRename
 
 class SafeTrash(SafeRename):
     """Class to remove file or directory and log history."""
+
+    def _initialize_variables_trash(self) -> None:
+        self._trash_root: Path = create_working_space(
+            Path(self.get_working_root(), "trash"), jst=True
+        )
 
     def _move_file(self, target: Path, root: Path) -> None:
         if target.exists():
@@ -79,3 +87,5 @@ class SafeTrash(SafeRename):
                 Directory you want to places removed file or directory.
         """
         super().__init__(working_root=remove_root)
+
+        self._initialize_variables_trash()
