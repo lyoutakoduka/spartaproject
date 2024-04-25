@@ -49,12 +49,14 @@ def _check_shortcut_exists(shortcut_target: Path) -> None:
         raise FileNotFoundError()
 
 
-def _cleanup_shortcut(shortcut_path: Path) -> None:
+def _cleanup_shortcut(shortcut_path: Path, remove_root: Path | None) -> None:
     if shortcut_path.exists():
-        SafeTrash().trash(shortcut_path)
+        SafeTrash(remove_root=remove_root).trash(shortcut_path)
 
 
-def create_shortcut(shortcut_target: Path, shortcut_path: Path) -> bool:
+def create_shortcut(
+    shortcut_target: Path, shortcut_path: Path, remove_root: Path | None = None
+) -> bool:
     """Create Windows shortcut from PowerShell.
 
     Args:
@@ -67,6 +69,6 @@ def create_shortcut(shortcut_target: Path, shortcut_path: Path) -> bool:
         bool: True if creating shortcut is success.
     """
     _check_shortcut_exists(shortcut_target)
-    _cleanup_shortcut(shortcut_path)
+    _cleanup_shortcut(shortcut_path, remove_root)
     _execute_script(shortcut_target, shortcut_path)
     return True
