@@ -78,4 +78,4 @@ class SafeTrash(SafeRename):
             remove_root (Path | None, optional): Defaults to None.
                 Directory you want to places removed file or directory.
         """
-        super().__init__(history_path=remove_root)
+        super().__init__(working_root=remove_root)
