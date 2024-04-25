@@ -64,6 +64,13 @@ def _compare_relative(temporary_root: Path, file_history: FileHistory) -> None:
     )
 
 
+def _compare_directory(file_history: FileHistory) -> None:
+    sub_root: Path = file_history.create_sub_directory("test")
+
+    assert sub_root.exists()
+    assert is_relative(sub_root, root_path=file_history.get_working_root())
+
+
 def _compare_history(file_history: FileHistory) -> None:
     assert file_history.get_history() is None
 
