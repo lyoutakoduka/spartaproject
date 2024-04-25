@@ -103,7 +103,7 @@ class FileHistory(WorkSpace):
         Returns:
             Path: Path of file operation history.
         """
-        return Path(self._history_root, "history.json")
+        return Path(self._history_root, self._get_key_time() + ".json")
 
     def get_working_root(self) -> Path:
         """Get path of temporary working space shared at class.
