@@ -68,7 +68,6 @@ def test_exist() -> None:
 
         with raises(FileNotFoundError):
             create_shortcut(shortcut_target, shortcut_path)
-            _common_test(shortcut_target, shortcut_path)
 
     _inside_temporary_directory(individual_test)
 
