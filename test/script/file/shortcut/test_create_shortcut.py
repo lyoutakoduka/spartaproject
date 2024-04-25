@@ -7,8 +7,10 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
+from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.interface.pytest import raises
 from pyspartaproj.script.file.shortcut.create_shortcut import create_shortcut
+from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
@@ -21,6 +23,15 @@ def _get_shortcut_path(shortcut_target: Path, shortcut_root: Path) -> Path:
 def _common_test(shortcut_target: Path, shortcut_path: Path) -> None:
     assert shortcut_path.exists()
     assert shortcut_target.name == shortcut_path.stem
+
+
+def _get_shortcut_pair(temporary_root: Path) -> Strs:
+    return [
+        path.name
+        for path in walk_iterator(
+            temporary_root, directory=False, suffix="lnk"
+        )
+    ]
 
 
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
