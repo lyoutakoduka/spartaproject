@@ -9,6 +9,7 @@ from typing import Callable
 
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.extension.path_context import (
+    PathPair,
     PathPair2,
     Paths2,
     Paths3,
@@ -75,6 +76,13 @@ def _compare_history(file_history: FileHistory) -> None:
     assert file_history.get_history() is None
 
 
+def _get_expected(source_path: Path, destination_path: Path) -> PathPair:
+    return {
+        group: path
+        for group, path in zip(_get_group(), [source_path, destination_path])
+    }
+
+
 def _add_history(
     file_history: FileHistory, expected: PathPair2, name: str
 ) -> None:
@@ -82,10 +90,7 @@ def _add_history(
     destination_path: Path = source_path.with_stem(name)
 
     file_history.add_history(source_path, destination_path)
-    expected[name] = {
-        group: path
-        for group, path in zip(_get_group(), [source_path, destination_path])
-    }
+    expected[name] = _get_expected(source_path, destination_path)
 
 
 def _add_history_single(file_history: FileHistory) -> PathPair2:
