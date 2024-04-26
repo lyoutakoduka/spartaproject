@@ -5,7 +5,7 @@
 
 from pathlib import Path
 
-from pyspartaproj.script.directory.create_directory_temporary import WorkSpace
+from pyspartaproj.script.directory.work_space import WorkSpace
 
 
 def test_create() -> None:
