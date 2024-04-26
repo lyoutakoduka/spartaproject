@@ -5,9 +5,7 @@
 
 from pathlib import Path
 
-from pyspartaproj.script.directory.create_directory_parent import (
-    create_directory_parent,
-)
+from pyspartaproj.script.directory.create_parent import create_directory_parent
 from pyspartaproj.script.file.json.export_json import json_export
 
 
