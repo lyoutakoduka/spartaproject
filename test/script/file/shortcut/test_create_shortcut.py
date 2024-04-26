@@ -34,6 +34,10 @@ def _get_shortcut_pair(temporary_root: Path) -> Strs:
     ]
 
 
+def _compare_shortcut(temporary_root: Path) -> None:
+    assert 1 == len(set(_get_shortcut_pair(temporary_root)))
+
+
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
