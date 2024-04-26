@@ -33,7 +33,7 @@ class WorkSpace:
         """
         return create_directory(Path(self._working_root, group))
 
-    def get_root(self) -> Path:
+    def get_working_root(self) -> Path:
         """Get root path of temporary working directory."""
         return self._working_root
 

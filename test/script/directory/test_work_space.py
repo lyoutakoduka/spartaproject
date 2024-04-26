@@ -11,7 +11,7 @@ from pyspartaproj.script.directory.work_space import WorkSpace
 def test_root() -> None:
     """Test to check existing of temporary working directory."""
     work_space = WorkSpace()
-    work_space_root: Path = work_space.get_root()
+    work_space_root: Path = work_space.get_working_root()
     assert work_space_root.exists()
 
 
