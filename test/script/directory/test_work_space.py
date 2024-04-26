@@ -6,6 +6,14 @@
 from pathlib import Path
 
 from pyspartaproj.script.directory.work_space import WorkSpace
+from pyspartaproj.script.path.modify.get_relative import is_relative
+
+
+def _compare_directory(work_space: WorkSpace) -> None:
+    sub_root: Path = work_space.create_sub_directory("test")
+
+    assert sub_root.exists()
+    assert is_relative(sub_root, root_path=work_space.get_working_root())
 
 
 def test_root() -> None:
