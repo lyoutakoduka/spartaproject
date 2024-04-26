@@ -7,6 +7,8 @@ from pathlib import Path
 from shutil import rmtree
 from tempfile import mkdtemp
 
+from pyspartaproj.script.directory.create_directory import create_directory
+
 
 class WorkSpace:
     """Class to create temporary working directory shared in class."""
@@ -19,6 +21,17 @@ class WorkSpace:
             working_root = Path(mkdtemp())
 
         self._working_root: Path = working_root
+
+    def create_sub_directory(self, group: str) -> Path:
+        """Create sub directory in temporary working space.
+
+        Args:
+            group (str): Name of directory you want to create.
+
+        Returns:
+            Path: Path of created sub directory.
+        """
+        return create_directory(Path(self._working_root, group))
 
     def get_root(self) -> Path:
         """Get root path of temporary working directory."""
