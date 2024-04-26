@@ -87,6 +87,24 @@ def test_exist() -> None:
     _inside_temporary_directory(individual_test)
 
 
+def test_remove() -> None:
+    def individual_test(temporary_root: Path) -> None:
+        shortcut_path: Path = _get_shortcut_path(
+            temporary_root, temporary_root
+        )
+
+        create_shortcut(temporary_root, shortcut_path)
+        create_shortcut(
+            temporary_root,
+            shortcut_path,
+            remove_root=Path(temporary_root, "result"),
+        )
+
+        _compare_shortcut(temporary_root)
+
+    _inside_temporary_directory(individual_test)
+
+
 def main() -> bool:
     """Run all tests.
 
@@ -96,4 +114,5 @@ def main() -> bool:
     test_file()
     test_directory()
     test_exist()
+    test_remove()
     return True
