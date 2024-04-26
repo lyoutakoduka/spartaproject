@@ -11,6 +11,12 @@ from tempfile import mkdtemp
 class WorkSpace:
     """Class to create temporary working directory shared in class."""
 
+    def _initialize_variables(self, working_root: Path | None) -> None:
+        if working_root is None:
+            working_root = Path(mkdtemp())
+
+        self._work_space_root: Path = working_root
+
     def get_root(self) -> Path:
         """Get root path of temporary working directory."""
         return self._work_space_root
@@ -21,7 +27,4 @@ class WorkSpace:
 
     def __init__(self, working_root: Path | None = None) -> None:
         """Create temporary working directory."""
-        if working_root is None:
-            working_root = Path(mkdtemp())
-
-        self._work_space_root: Path = working_root
+        self._initialize_variables(working_root)
