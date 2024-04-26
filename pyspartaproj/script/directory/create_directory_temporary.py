@@ -19,6 +19,9 @@ class WorkSpace:
         """Remove temporary working directory."""
         rmtree(str(self._work_space_root))
 
-    def __init__(self) -> None:
+    def __init__(self, working_root: Path | None = None) -> None:
         """Create temporary working directory."""
-        self._work_space_root = Path(mkdtemp())
+        if working_root is None:
+            working_root = Path(mkdtemp())
+
+        self._work_space_root: Path = working_root
