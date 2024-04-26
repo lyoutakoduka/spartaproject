@@ -8,7 +8,7 @@ from pathlib import Path
 from pyspartaproj.script.directory.work_space import WorkSpace
 
 
-def test_create() -> None:
+def test_root() -> None:
     """Test to check existing of temporary working directory."""
     work_space = WorkSpace()
     work_space_root: Path = work_space.get_root()
@@ -21,5 +21,5 @@ def main() -> bool:
     Returns:
         bool: Success if get to the end of function.
     """
-    test_create()
+    test_root()
     return True
