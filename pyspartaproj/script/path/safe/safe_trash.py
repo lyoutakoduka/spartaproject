@@ -6,7 +6,7 @@
 from pathlib import Path
 
 from pyspartaproj.context.extension.path_context import Paths
-from pyspartaproj.script.directory.create_parent import create_directory_parent
+from pyspartaproj.script.directory.create_parent import create_parent
 from pyspartaproj.script.directory.date_time_space import create_working_space
 from pyspartaproj.script.path.modify.get_relative import (
     get_relative,
@@ -28,7 +28,7 @@ class SafeTrash(SafeRename):
             trash_path: Path = Path(
                 self._trash_root, get_relative(target, root_path=root)
             )
-            create_directory_parent(trash_path)
+            create_parent(trash_path)
             self.rename(target, trash_path, override=True)
 
     def trash(self, trash_path: Path, trash_root: Path | None = None) -> Path:

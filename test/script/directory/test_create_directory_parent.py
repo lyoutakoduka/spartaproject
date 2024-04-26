@@ -7,7 +7,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from pyspartaproj.script.directory.create_parent import create_directory_parent
+from pyspartaproj.script.directory.create_parent import create_parent
 
 
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
@@ -20,9 +20,7 @@ def test_directory() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         expected: Path = Path(temporary_root, "parent")
-        parent_path: Path = create_directory_parent(
-            Path(expected, "temporary.json")
-        )
+        parent_path: Path = create_parent(Path(expected, "temporary.json"))
 
         assert expected == parent_path
         assert parent_path.exists()

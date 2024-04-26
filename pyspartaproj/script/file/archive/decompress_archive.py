@@ -10,7 +10,7 @@ from zipfile import ZIP_LZMA, ZipFile, ZipInfo
 from pyspartaproj.context.default.string_context import StrPair, Strs
 from pyspartaproj.context.extension.path_context import Paths
 from pyspartaproj.script.directory.create_directory import create_directory
-from pyspartaproj.script.directory.create_parent import create_directory_parent
+from pyspartaproj.script.directory.create_parent import create_parent
 from pyspartaproj.script.file.archive.archive_format import get_format
 from pyspartaproj.script.file.json.convert_from_json import (
     string_pair_from_json,
@@ -42,7 +42,7 @@ class DecompressArchive:
     def _decompress_file(
         self, file_path: Path, relative: Path, archive_file: ZipFile
     ) -> None:
-        create_directory_parent(file_path)
+        create_parent(file_path)
         byte_export(file_path, archive_file.read(relative.as_posix()))
 
     def _restore_timestamp(
