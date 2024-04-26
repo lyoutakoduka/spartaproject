@@ -12,7 +12,10 @@ class WorkSpace:
     """Class to create temporary working directory shared in class."""
 
     def _initialize_variables(self, working_root: Path | None) -> None:
+        self._root_specified: bool = False
+
         if working_root is None:
+            self._root_specified = True
             working_root = Path(mkdtemp())
 
         self._work_space_root: Path = working_root
@@ -23,7 +26,8 @@ class WorkSpace:
 
     def __del__(self) -> None:
         """Remove temporary working directory."""
-        rmtree(str(self._work_space_root))
+        if self._root_specified:
+            rmtree(str(self._work_space_root))
 
     def __init__(self, working_root: Path | None = None) -> None:
         """Create temporary working directory."""
