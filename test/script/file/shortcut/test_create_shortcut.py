@@ -88,6 +88,8 @@ def test_exist() -> None:
 
 
 def test_remove() -> None:
+    """Test to remove shortcut file when overriding existing shortcut."""
+
     def individual_test(temporary_root: Path) -> None:
         shortcut_path: Path = _get_shortcut_path(
             temporary_root, temporary_root
