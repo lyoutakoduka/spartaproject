@@ -18,16 +18,16 @@ class WorkSpace:
             self._root_specified = True
             working_root = Path(mkdtemp())
 
-        self._work_space_root: Path = working_root
+        self._working_root: Path = working_root
 
     def get_root(self) -> Path:
         """Get root path of temporary working directory."""
-        return self._work_space_root
+        return self._working_root
 
     def __del__(self) -> None:
         """Remove temporary working directory."""
         if self._root_specified:
-            rmtree(str(self._work_space_root))
+            rmtree(str(self._working_root))
 
     def __init__(self, working_root: Path | None = None) -> None:
         """Create temporary working directory."""
