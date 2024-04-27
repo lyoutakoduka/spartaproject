@@ -22,7 +22,7 @@ class FileHistory(WorkSpace):
     The module is used for e.g., custom copy or rename operation.
     """
 
-    def _initialize_variables(self) -> None:
+    def _initialize_variables_history(self) -> None:
         self._still_removed: bool = False
         self._history: PathPair2 = {}
         self._history_root: Path = self.create_sub_directory("history")
@@ -123,4 +123,4 @@ class FileHistory(WorkSpace):
         """
         super().__init__(working_root=working_root)
 
-        self._initialize_variables()
+        self._initialize_variables_history()
