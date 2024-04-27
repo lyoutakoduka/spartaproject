@@ -22,16 +22,6 @@ class FileHistory(WorkSpace):
     The module is used for e.g., custom copy or rename operation.
     """
 
-    def _get_working_root(self, working_root: Path | None) -> Path:
-        if working_root is None:
-            working_root = self.get_root()
-
-        return working_root
-
-    def _initialize_paths(self, working_root: Path) -> None:
-        self._working_root: Path = working_root
-        self._history_root: Path = self.create_sub_directory("history")
-
     def _initialize_variables(self) -> None:
         self._still_removed: bool = False
         self._history: PathPair2 = {}
@@ -73,17 +63,6 @@ class FileHistory(WorkSpace):
 
         return history
 
-    def create_sub_directory(self, group: str) -> Path:
-        """Create sub directory in temporary working space.
-
-        Args:
-            group (str): Name of directory you want to create.
-
-        Returns:
-            Path: Path of created sub directory.
-        """
-        return create_directory(Path(self._working_root, group))
-
     def get_history(self) -> PathPair2 | None:
         """Get and initialize the history of file operation.
 
@@ -103,14 +82,6 @@ class FileHistory(WorkSpace):
             Path: Path of file operation history.
         """
         return Path(self._history_root, self._get_key_time() + ".json")
-
-    def get_working_root(self) -> Path:
-        """Get path of temporary working space shared at class.
-
-        Returns:
-            Path: Path of temporary working space.
-        """
-        return self._working_root
 
     def add_history(self, source_path: Path, destination_path: Path) -> None:
         """Record paths which is source and destination pair.
