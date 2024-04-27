@@ -25,9 +25,7 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 
 def test_root() -> None:
     """Test to check existing of temporary working space."""
-    work_space = WorkSpace()
-    work_space_root: Path = work_space.get_working_root()
-    assert work_space_root.exists()
+    assert WorkSpace().get_working_root().exists()
 
 
 def test_directory() -> None:
