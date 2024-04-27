@@ -36,6 +36,8 @@ def test_root() -> None:
 
 
 def test_path() -> None:
+    """Test to check path of temporary working space you specified."""
+
     def individual_test(temporary_root: Path) -> None:
         _compare_relative(
             temporary_root, WorkSpace(working_root=temporary_root)
@@ -45,7 +47,7 @@ def test_path() -> None:
 
 
 def test_directory() -> None:
-    """Test for path of temporary working space you specified."""
+    """Test to check path of sub directory in temporary working space."""
 
     def individual_test(temporary_root: Path) -> None:
         _compare_directory(WorkSpace(working_root=temporary_root))
