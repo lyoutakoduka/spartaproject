@@ -35,6 +35,15 @@ def test_root() -> None:
     assert WorkSpace().get_working_root().exists()
 
 
+def test_path() -> None:
+    def individual_test(temporary_root: Path) -> None:
+        _compare_relative(
+            temporary_root, WorkSpace(working_root=temporary_root)
+        )
+
+    _inside_temporary_directory(individual_test)
+
+
 def test_directory() -> None:
     """Test for path of temporary working space you specified."""
 
@@ -51,5 +60,6 @@ def main() -> bool:
         bool: Success if get to the end of function.
     """
     test_root()
+    test_path()
     test_directory()
     return True
