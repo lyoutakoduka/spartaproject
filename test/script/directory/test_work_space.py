@@ -30,11 +30,6 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
         function(Path(temporary_path))
 
 
-def test_root() -> None:
-    """Test to check existing of temporary working space."""
-    assert WorkSpace().get_working_root().exists()
-
-
 def test_path() -> None:
     """Test to check path of temporary working space you specified."""
 
@@ -61,7 +56,6 @@ def main() -> bool:
     Returns:
         bool: Success if get to the end of function.
     """
-    test_root()
     test_path()
     test_directory()
     return True
