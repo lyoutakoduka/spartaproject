@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Test module to create temporary working directory shared in class."""
+"""Test module to create temporary working space shared in class."""
 
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -24,7 +24,7 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 
 
 def test_root() -> None:
-    """Test to check existing of temporary working directory."""
+    """Test to check existing of temporary working space."""
     work_space = WorkSpace()
     work_space_root: Path = work_space.get_working_root()
     assert work_space_root.exists()
