@@ -4,6 +4,8 @@
 """Test module to create temporary working directory shared in class."""
 
 from pathlib import Path
+from tempfile import TemporaryDirectory
+from typing import Callable
 
 from pyspartaproj.script.directory.work_space import WorkSpace
 from pyspartaproj.script.path.modify.get_relative import is_relative
@@ -14,6 +16,11 @@ def _compare_directory(work_space: WorkSpace) -> None:
 
     assert sub_root.exists()
     assert is_relative(sub_root, root_path=work_space.get_working_root())
+
+
+def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
+    with TemporaryDirectory() as temporary_path:
+        function(Path(temporary_path))
 
 
 def test_root() -> None:
