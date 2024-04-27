@@ -32,11 +32,10 @@ class FileHistory(WorkSpace):
         self._working_root: Path = working_root
         self._history_root: Path = self.create_sub_directory("history")
 
-    def _initialize_variables(self, working_root: Path | None) -> None:
+    def _initialize_variables(self) -> None:
         self._still_removed: bool = False
         self._history: PathPair2 = {}
-
-        self._initialize_paths(self._get_working_root(working_root))
+        self._history_root: Path = self.create_sub_directory("history")
 
     def _export_history(self, history: Json) -> bool:
         export_path: Path = self.get_history_path()
@@ -151,6 +150,6 @@ class FileHistory(WorkSpace):
             working_root (Path | None, optional): Defaults to None.
                 Export directory of Json file witch paths is recorded.
         """
-        super().__init__()
+        super().__init__(working_root=working_root)
 
-        self._initialize_variables(working_root)
+        self._initialize_variables()
