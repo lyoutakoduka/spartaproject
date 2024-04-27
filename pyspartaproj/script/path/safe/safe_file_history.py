@@ -24,13 +24,18 @@ class FileHistory(WorkSpace):
     def _initialize_variables_history(self) -> None:
         self._still_removed: bool = False
         self._history: PathPair2 = {}
+        self._history_path: Path | None = None
         self._history_root: Path = self.create_sub_directory("history")
 
     def _export_history(self, history: Json) -> bool:
-        export_path: Path = self.get_history_path()
+        export_path: Path = Path(
+            self._history_root, self._get_key_time() + ".json"
+        )
 
         if export_path.parent.exists():
             json_export(export_path, history)
+            self._history_path = export_path
+
             return True
 
         return False
@@ -74,13 +79,13 @@ class FileHistory(WorkSpace):
 
         return None
 
-    def get_history_path(self) -> Path:
+    def get_history_path(self) -> Path | None:
         """Get path of file which contain the history of file operation.
 
         Returns:
             Path: Path of file operation history.
         """
-        return Path(self._history_root, self._get_key_time() + ".json")
+        return self._history_path
 
     def add_history(self, source_path: Path, destination_path: Path) -> None:
         """Record paths which is source and destination pair.
