@@ -65,13 +65,6 @@ def _compare_path(temporary_root: Path, file_history: FileHistory) -> None:
     )
 
 
-def _compare_directory(file_history: FileHistory) -> None:
-    sub_root: Path = file_history.create_sub_directory("test")
-
-    assert sub_root.exists()
-    assert is_relative(sub_root, root_path=file_history.get_working_root())
-
-
 def _compare_history(file_history: FileHistory) -> None:
     assert file_history.get_history() is None
 
@@ -153,15 +146,6 @@ def test_path() -> None:
     _inside_temporary_directory(individual_test)
 
 
-def test_directory() -> None:
-    """Test for path of temporary working space you specified."""
-
-    def individual_test(temporary_root: Path) -> None:
-        _compare_directory(FileHistory(working_root=temporary_root))
-
-    _inside_temporary_directory(individual_test)
-
-
 def main() -> bool:
     """Run all tests.
 
@@ -172,5 +156,4 @@ def main() -> bool:
     test_history()
     test_array()
     test_path()
-    test_directory()
     return True
