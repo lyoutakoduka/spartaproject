@@ -192,7 +192,8 @@ class TakeOutArchive(EditArchive):
                 Destination directory that took out directories in archive.
 
             remove_root (Path | None, optional): Defaults to None.
-                Directory which will placed file or directory you removed.
+                Path of directory used as trash box.
+                It's used for argument "remove_root" of class "SafeTrash".
 
             protected (bool, optional): Defaults to False.
                 True if you don't want to update original archive.
