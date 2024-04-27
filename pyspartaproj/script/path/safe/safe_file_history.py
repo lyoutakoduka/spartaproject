@@ -33,7 +33,8 @@ class FileHistory(WorkSpace):
         )
 
     def _export_history(self, history: PathPair2) -> None:
-        json_export(self._history_path, multiple2_to_json(history))
+        if history_path := self._history_path:
+            json_export(history_path, multiple2_to_json(history))
 
     def _get_key_time(self) -> str:
         time: str = get_current_time(jst=True).isoformat()
