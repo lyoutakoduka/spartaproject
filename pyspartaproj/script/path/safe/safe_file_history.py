@@ -27,12 +27,12 @@ class FileHistory(WorkSpace):
         self._history_path: Path | None = None
         self._history_root: Path = self.create_sub_directory("history")
 
-    def _export_history(self, history: Json) -> None:
+    def _export_history(self, history: PathPair2) -> None:
         history_path: Path = Path(
             self._history_root, self._get_key_time() + ".json"
         )
 
-        json_export(history_path, history)
+        json_export(history_path, multiple2_to_json(history))
         self._history_path = history_path
 
     def _get_key_time(self) -> str:
@@ -69,7 +69,7 @@ class FileHistory(WorkSpace):
             PathPair2 | None: The history of file operation until current.
         """
         if history := self._clear_history():
-            self._export_history(multiple2_to_json(history))
+            self._export_history(history)
             return history
 
         return None
