@@ -51,6 +51,6 @@ class WorkSpace:
 
         Args:
             working_root (Path | None, optional): Defaults to None.
-                Path for user defined temporary working space.
+                Path of temporary working space you specified.
         """
         self._initialize_variables(working_root)
