@@ -59,7 +59,7 @@ def _compare_empty(expected: PathPair2, result: PathPair2 | None) -> None:
         _common_test(expected, result)
 
 
-def _compare_relative(temporary_root: Path, file_history: FileHistory) -> None:
+def _compare_path(temporary_root: Path, file_history: FileHistory) -> None:
     assert is_relative(
         file_history.get_history_path(), root_path=temporary_root
     )
@@ -148,9 +148,7 @@ def test_path() -> None:
     """Test for specific directory for exporting paths you recorded."""
 
     def individual_test(temporary_root: Path) -> None:
-        _compare_relative(
-            temporary_root, FileHistory(working_root=temporary_root)
-        )
+        _compare_path(temporary_root, FileHistory(working_root=temporary_root))
 
     _inside_temporary_directory(individual_test)
 
