@@ -9,7 +9,6 @@ from pathlib import Path
 
 from pyspartaproj.context.extension.path_context import PathPair2
 from pyspartaproj.context.file.json_context import Json
-from pyspartaproj.script.directory.create_directory import create_directory
 from pyspartaproj.script.directory.work_space import WorkSpace
 from pyspartaproj.script.file.json.convert_to_json import multiple2_to_json
 from pyspartaproj.script.file.json.export_json import json_export
