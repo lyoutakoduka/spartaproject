@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Module to create temporary working directory shared in class."""
+"""Module to create temporary working space shared in class."""
 
 from pathlib import Path
 from shutil import rmtree
@@ -11,7 +11,7 @@ from pyspartaproj.script.directory.create_directory import create_directory
 
 
 class WorkSpace:
-    """Class to create temporary working directory shared in class."""
+    """Class to create temporary working space shared in class."""
 
     def _initialize_variables(self, working_root: Path | None) -> None:
         self._root_specified: bool = False
@@ -34,14 +34,23 @@ class WorkSpace:
         return create_directory(Path(self._working_root, group))
 
     def get_working_root(self) -> Path:
-        """Get root path of temporary working directory."""
+        """Get path of temporary working space.
+
+        Returns:
+            Path: Path of temporary working space.
+        """
         return self._working_root
 
     def __del__(self) -> None:
-        """Remove temporary working directory."""
+        """Remove temporary working space."""
         if self._root_specified:
             rmtree(str(self._working_root))
 
     def __init__(self, working_root: Path | None = None) -> None:
-        """Create temporary working directory."""
+        """Create temporary working space.
+
+        Args:
+            working_root (Path | None, optional): Defaults to None.
+                Path for user defined temporary working space.
+        """
         self._initialize_variables(working_root)
