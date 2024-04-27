@@ -28,13 +28,13 @@ class FileHistory(WorkSpace):
         self._history_root: Path = self.create_sub_directory("history")
 
     def _export_history(self, history: Json) -> bool:
-        export_path: Path = Path(
+        history_path: Path = Path(
             self._history_root, self._get_key_time() + ".json"
         )
 
-        if export_path.parent.exists():
-            json_export(export_path, history)
-            self._history_path = export_path
+        if history_path.parent.exists():
+            json_export(history_path, history)
+            self._history_path = history_path
 
             return True
 
