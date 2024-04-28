@@ -64,6 +64,10 @@ def _relative_test(path: Path, root: Path) -> None:
     assert is_relative(path, root_path=root)
 
 
+def _compare_path_before(file_history: FileHistory) -> None:
+    assert file_history.get_history_path() is None
+
+
 def _compare_path(temporary_root: Path, file_history: FileHistory) -> None:
     assert is_relative(
         file_history.get_history_path(), root_path=temporary_root
