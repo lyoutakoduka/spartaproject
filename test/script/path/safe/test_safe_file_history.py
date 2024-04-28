@@ -68,6 +68,15 @@ def _compare_path_before(file_history: FileHistory) -> None:
     assert file_history.get_history_path() is None
 
 
+def _compare_path_after(
+    temporary_root: Path, file_history: FileHistory
+) -> None:
+    if history_path := file_history.get_history_path():
+        _relative_test(history_path, temporary_root)
+    else:
+        fail()
+
+
 def _compare_path(temporary_root: Path, file_history: FileHistory) -> None:
     assert is_relative(
         file_history.get_history_path(), root_path=temporary_root
