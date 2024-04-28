@@ -159,7 +159,10 @@ def test_path() -> None:
     """Test for specific directory for exporting paths you recorded."""
 
     def individual_test(temporary_root: Path) -> None:
-        _compare_path(temporary_root, FileHistory(working_root=temporary_root))
+        file_history = FileHistory(working_root=temporary_root)
+
+        _add_history_array(file_history)
+        _compare_path(temporary_root, file_history)
 
     _inside_temporary_directory(individual_test)
 
