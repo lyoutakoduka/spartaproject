@@ -120,6 +120,7 @@ class FileHistory(WorkSpace):
         Args:
             working_root (Path | None, optional): Defaults to None.
                 Export directory of Json file witch paths is recorded.
+                It's used for argument "working_root" of class "WorkSpace".
         """
         super().__init__(working_root=working_root)
 
