@@ -54,6 +54,9 @@ class PathServer(WorkSpace):
         self._build_path_private()
         self._build_path_develop()
 
+    def _initialize_variables_local(self) -> None:
+        self._build_path_table()
+
     def get_path_table(self) -> Strs:
         """Get keys of predefined all paths about server.
 
@@ -140,4 +143,4 @@ class PathServer(WorkSpace):
         """Generate string path pair about server directory."""
         super().__init__(working_root=local_root)
 
-        self._build_path_table()
+        self._initialize_variables_local()
