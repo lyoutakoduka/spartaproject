@@ -59,6 +59,11 @@ def _compare_empty(expected: PathPair2, result: PathPair2 | None) -> None:
         _common_test(expected, result)
 
 
+def _relative_test(path: Path, root: Path) -> None:
+    assert path.exists()
+    assert is_relative(path, root_path=root)
+
+
 def _compare_path(temporary_root: Path, file_history: FileHistory) -> None:
     assert is_relative(
         file_history.get_history_path(), root_path=temporary_root
