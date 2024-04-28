@@ -136,8 +136,8 @@ class PathServer(WorkSpace):
             jst=jst,
         )
 
-    def __init__(self) -> None:
+    def __init__(self, local_root: Path | None = None) -> None:
         """Generate string path pair about server directory."""
-        super().__init__()
+        super().__init__(working_root=local_root)
 
         self._build_path_table()
