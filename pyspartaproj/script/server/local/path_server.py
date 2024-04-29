@@ -142,7 +142,13 @@ class PathServer(WorkSpace):
         )
 
     def __init__(self, local_root: Path | None = None) -> None:
-        """Generate string path pair about server directory."""
+        """Generate string path pair about server directory.
+
+        Args:
+            local_root (Path | None, optional): Defaults to None.
+                User defined path of local temporary working space used.
+                It's used for argument "working_root" of class "WorkSpace".
+        """
         super().__init__(working_root=local_root)
 
         self._initialize_variables_local()
