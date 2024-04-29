@@ -55,6 +55,8 @@ class PathServer(WorkSpace):
         self._build_path_develop()
 
     def _initialize_variables_local(self) -> None:
+        self._local_root: Path = self.create_sub_directory("local")
+
         self._build_path_table()
 
     def get_path_table(self) -> Strs:
@@ -88,7 +90,7 @@ class PathServer(WorkSpace):
         Returns:
             Path: Returned relative path.
         """
-        return get_relative(local_full, root_path=self.get_root())
+        return get_relative(local_full, root_path=self._local_root)
 
     def to_full_path(self, local_relative: Path) -> Path:
         """Convert relative path to full path.
@@ -103,7 +105,7 @@ class PathServer(WorkSpace):
         Returns:
             Path: Returned full path.
         """
-        return Path(self.get_root(), local_relative)
+        return Path(self._local_root, local_relative)
 
     def create_local_working_space(
         self, override: bool = False, jst: bool = False
@@ -134,7 +136,7 @@ class PathServer(WorkSpace):
             Path: Path of temporary working space.
         """
         return create_working_space(
-            Path(self.get_root(), self.get_path("work_root")),
+            Path(self._local_root, self.get_path("work_root")),
             override=override,
             jst=jst,
         )
