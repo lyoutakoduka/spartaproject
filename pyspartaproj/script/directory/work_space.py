@@ -8,6 +8,7 @@ from shutil import rmtree
 from tempfile import mkdtemp
 
 from pyspartaproj.script.directory.create_directory import create_directory
+from pyspartaproj.script.directory.date_time_space import create_working_space
 
 
 class WorkSpace:
@@ -21,6 +22,11 @@ class WorkSpace:
             working_root = Path(mkdtemp())
 
         self._working_root: Path = working_root
+
+    def create_date_time_space(self, group: str) -> Path:
+        return create_working_space(
+            Path(self.get_working_root(), group), jst=True
+        )
 
     def create_sub_directory(self, group: str) -> Path:
         """Create sub directory in temporary working space.
