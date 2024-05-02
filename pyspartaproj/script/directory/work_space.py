@@ -24,6 +24,15 @@ class WorkSpace:
         self._working_root: Path = working_root
 
     def create_date_time_space(self, group: str) -> Path:
+        """Create temporary working space that path include date time string.
+
+        Args:
+            group (str): Name of sub directory
+                that temporary working space will placed.
+
+        Returns:
+            Path: Path of created temporary working space.
+        """
         return create_working_space(
             Path(self.get_working_root(), group), jst=True
         )
