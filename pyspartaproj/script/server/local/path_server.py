@@ -97,7 +97,7 @@ class PathServer(WorkSpace):
 
         e.g., the relative path is "example/",
             and returned full path is
-            "<Python default temporary directory>>/example/".
+            "<Python default temporary directory>/example/".
 
         Args:
             local (Path): Relative path.
