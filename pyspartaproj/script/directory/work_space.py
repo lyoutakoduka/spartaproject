@@ -32,6 +32,16 @@ class WorkSpace:
             group (str): Name of sub directory
                 that temporary working space will placed.
 
+            override (bool, optional): Defaults to False.
+                Override initial time count to "2023/4/1:12:00:00-00 (AM)".
+                It's used for argument "override" of
+                    function "create_working_space".
+
+            jst (bool, optional): Defaults to False.
+                If True, you can get datetime object as JST time zone.
+                It's used for argument "jst" of
+                    function "create_working_space".
+
         Returns:
             Path: Path of created temporary working space.
         """
