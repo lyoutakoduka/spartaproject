@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Module to create temporary working space including date time string."""
+
 from datetime import datetime
 from pathlib import Path
 
