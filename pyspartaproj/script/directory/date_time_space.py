@@ -22,6 +22,33 @@ def _get_time_data(time: datetime) -> Ints2:
 
 
 def get_working_space(override: bool = False, jst: bool = False) -> Path:
+    """Get path including string of current date time.
+
+    Format of string including date time is follow.
+
+    "<year>/<month>/<day>/<hour>/<second>/<millisecond>"
+
+    And digit for each number follow the rules below.
+
+    Year:           4 digit
+    Millisecond:    6 digit
+    Other:          2 digit
+
+    Return directory path including string like "2023/04/01/00/00/00/000000",
+        if you execute this function at 2024/1/1:12:00:00-00 (AM).
+
+    Args:
+        override (bool, optional): Defaults to False.
+            Override initial time count to "2023/4/1:12:00:00-00 (AM)".
+            It's used for argument "override" of function "get_current_time".
+
+        jst (bool, optional): Defaults to False.
+            If True, you can get datetime object as JST time zone.
+            It's used for argument "jst" of function "get_current_time".
+
+    Returns:
+        Path: Path including string of current date time.
+    """
     return Path(
         *[
             str(time_count).zfill(order)
@@ -35,6 +62,22 @@ def get_working_space(override: bool = False, jst: bool = False) -> Path:
 def create_working_space(
     root: Path, override: bool = False, jst: bool = False
 ) -> Path:
+    """Create temporary working space that path include date time string.
+
+    Args:
+        root (Path): Directory path which temporary working space is created.
+
+        override (bool, optional): Defaults to False.
+            Override initial time count to "2023/4/1:12:00:00-00 (AM)".
+            It's used for argument "override" of function "get_working_space".
+
+        jst (bool, optional): Defaults to False.
+            If True, you can get datetime object as JST time zone.
+            It's used for argument "jst" of function "get_working_space".
+
+    Returns:
+        Path: End of directory path of created temporary working space.
+    """
     return create_directory(
         Path(root, get_working_space(override=override, jst=jst))
     )
