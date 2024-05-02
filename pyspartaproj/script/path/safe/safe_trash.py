@@ -19,9 +19,7 @@ class SafeTrash(SafeRename):
     """Class to remove file or directory and log history."""
 
     def _initialize_variables_trash(self) -> None:
-        self._trash_root: Path = create_working_space(
-            Path(self.get_working_root(), "trash"), jst=True
-        )
+        self._trash_root: Path = self.create_date_time_space("trash")
 
     def _move_file(self, target: Path, root: Path) -> None:
         if target.exists():
