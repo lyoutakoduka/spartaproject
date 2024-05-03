@@ -57,6 +57,10 @@ def test_directory() -> None:
 
 
 def test_working() -> None:
+    """Test to compare path of temporary working space in sub directory.
+
+    Path include date time string in UTC time zone.
+    """
     expected: Path = Path(
         "test", "2023", "04", "01", "00", "00", "00", "000000"
     )
@@ -70,6 +74,10 @@ def test_working() -> None:
 
 
 def test_jst() -> None:
+    """Test to compare path of temporary working space in sub directory.
+
+    Path include date time string in JST time zone.
+    """
     expected: Path = Path(
         "test", "2023", "04", "01", "09", "00", "00", "000000"
     )
