@@ -69,6 +69,19 @@ def test_working() -> None:
     _compare_working(temporary_path, expected, work_space)
 
 
+def test_jst() -> None:
+    expected: Path = Path(
+        "test", "2023", "04", "01", "09", "00", "00", "000000"
+    )
+
+    work_space = WorkSpace()
+    temporary_path: Path = work_space.create_date_time_space(
+        "test", override=True, jst=True
+    )
+
+    _compare_working(temporary_path, expected, work_space)
+
+
 def main() -> bool:
     """Run all tests.
 
@@ -78,4 +91,5 @@ def main() -> bool:
     test_path()
     test_directory()
     test_working()
+    test_jst()
     return True
