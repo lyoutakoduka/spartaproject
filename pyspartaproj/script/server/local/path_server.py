@@ -107,40 +107,6 @@ class PathServer(WorkSpace):
         """
         return Path(self._local_root, local_relative)
 
-    def create_local_working_space(
-        self, override: bool = False, jst: bool = False
-    ) -> Path:
-        """Create temporary working space on local environment.
-
-        The path is used when uploading file or directory to server.
-
-        Basic path of temporary working space is follow.
-        A date time element in path is current date time by default.
-
-        "<Python default temporary directory>/
-            private/work/<year>/<month>/<day>/<hour>/<second>/<millisecond>/"
-
-        Args:
-            override (bool, optional): Defaults to False.
-                If True, the date time element in path become follow,
-                    it's commonly used for test.
-
-                "<Python default temporary directory>/
-                    private/work/2023/04/01/00/00/000000/"
-
-            jst (bool, optional): Defaults to False.
-                If True, the date time element is represented by
-                    time zone of Asia/Tokyo.
-
-        Returns:
-            Path: Path of temporary working space.
-        """
-        return create_working_space(
-            Path(self._local_root, self.get_path("work_root")),
-            override=override,
-            jst=jst,
-        )
-
     def __init__(self, local_root: Path | None = None) -> None:
         """Generate string path pair about server directory.
 
