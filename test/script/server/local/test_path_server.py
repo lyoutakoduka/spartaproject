@@ -25,13 +25,11 @@ def test_table() -> None:
 
 def test_path() -> None:
     """Test to get all paths about server."""
+    server = PathServer()
 
-    def individual_test(server: PathServer) -> None:
-        for path in server.get_path_table():
-            server.get_path(path)
-            assert True
-
-    _common_test(individual_test)
+    for path in server.get_path_table():
+        server.get_path(path)
+        assert True
 
 
 def test_relative() -> None:
@@ -40,13 +38,11 @@ def test_relative() -> None:
     The full path is based on Python default temporary directory.
     """
     expected: Path = Path("temp")
+    server = PathServer()
 
-    def individual_test(server: PathServer) -> None:
-        assert expected == server.to_relative_path(
-            Path(server.get_root(), expected)
-        )
-
-    _common_test(individual_test)
+    assert expected == server.to_relative_path(
+        Path(server.get_root(), expected)
+    )
 
 
 def test_full() -> None:
@@ -55,13 +51,9 @@ def test_full() -> None:
     The full path is based on Python default temporary directory.
     """
     expected: Path = Path("temp")
+    server = PathServer()
 
-    def individual_test(server: PathServer) -> None:
-        assert expected == server.to_relative_path(
-            server.to_full_path(expected)
-        )
-
-    _common_test(individual_test)
+    assert expected == server.to_relative_path(server.to_full_path(expected))
 
 
 def main() -> bool:
