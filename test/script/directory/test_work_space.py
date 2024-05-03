@@ -26,6 +26,13 @@ def _compare_directory(work_space: WorkSpace) -> None:
     )
 
 
+def _compare_working(
+    result: Path, expected: Path, work_space: WorkSpace
+) -> None:
+    assert result.exists()
+    assert result == Path(work_space.get_working_root(), expected)
+
+
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
@@ -59,8 +66,7 @@ def test_working() -> None:
         "test", override=True
     )
 
-    assert temporary_path.exists()
-    assert temporary_path == Path(work_space.get_working_root(), expected)
+    _compare_working(temporary_path, expected, work_space)
 
 
 def main() -> bool:
