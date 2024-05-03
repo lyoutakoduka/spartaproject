@@ -78,6 +78,11 @@ class PathServer(WorkSpace):
         return self._path_table[path_type]
 
     def get_working_local(self) -> Path:
+        """Get temporary working space used when connecting server.
+
+        Returns:
+            Path: Path of temporary working space.
+        """
         return self._local_root
 
     def to_relative_path(self, local_full: Path) -> Path:
