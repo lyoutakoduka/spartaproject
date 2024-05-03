@@ -49,6 +49,23 @@ def test_directory() -> None:
     _inside_temporary_directory(individual_test)
 
 
+def test_working() -> None:
+    expected: Path = Path(
+        "test", "2023", "04", "01", "00", "00", "00", "000000"
+    )
+
+    def individual_test(temporary_root: Path) -> None:
+        work_space = WorkSpace()
+        temporary_path: Path = work_space.create_date_time_space(
+            "test", override=True
+        )
+
+        assert temporary_path.exists()
+        assert temporary_path == Path(work_space.get_working_root(), expected)
+
+    _inside_temporary_directory(individual_test)
+
+
 def main() -> bool:
     """Run all tests.
 
@@ -57,4 +74,5 @@ def main() -> bool:
     """
     test_path()
     test_directory()
+    test_working()
     return True
