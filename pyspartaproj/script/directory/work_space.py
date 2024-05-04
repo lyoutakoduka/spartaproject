@@ -29,7 +29,7 @@ class WorkSpace:
         """Create temporary working space that path include date time string.
 
         Args:
-            group (str): Name of sub directory
+            sub_root (str): Path of directory
                 that temporary working space will placed.
 
             override (bool, optional): Defaults to False.
@@ -53,7 +53,7 @@ class WorkSpace:
         """Create sub directory in temporary working space.
 
         Args:
-            group (str): Name of directory you want to create.
+            sub_root (str): Path of directory you want to create.
 
         Returns:
             Path: Path of created sub directory.
