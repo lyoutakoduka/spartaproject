@@ -43,7 +43,7 @@ def test_local() -> None:
 def test_relative() -> None:
     """Test to convert full path to relative path.
 
-    The full path is based on Python default temporary directory.
+    The full path of directory is based on local temporary working space.
     """
     expected: Path = Path("temp")
     server = PathServer()
@@ -56,7 +56,7 @@ def test_relative() -> None:
 def test_full() -> None:
     """Test to convert relative path to full path.
 
-    The full path is based on Python default temporary directory.
+    The full path of directory is based on local temporary working space.
     """
     expected: Path = Path("temp")
     server = PathServer()
