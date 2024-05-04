@@ -9,10 +9,6 @@ from typing import Callable
 from pyspartaproj.script.server.local.path_server import PathServer
 
 
-def _common_test(function: Callable[[PathServer], None]) -> None:
-    function(PathServer())
-
-
 def _compare_working(temporary_root: Path, result: Path) -> None:
     assert result.exists()
     assert result == Path(temporary_root, "local")
