@@ -49,7 +49,7 @@ def test_relative() -> None:
     server = PathServer()
 
     assert expected == server.to_relative_path(
-        Path(server.get_root(), expected)
+        Path(server.get_working_local(), expected)
     )
 
 
