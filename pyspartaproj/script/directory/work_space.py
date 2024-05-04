@@ -24,7 +24,7 @@ class WorkSpace:
         self._working_root: Path = working_root
 
     def create_date_time_space(
-        self, group: str, override: bool = False, jst: bool = False
+        self, group: Path, override: bool = False, jst: bool = False
     ) -> Path:
         """Create temporary working space that path include date time string.
 
@@ -49,7 +49,7 @@ class WorkSpace:
             Path(self.get_working_root(), group), override=override, jst=jst
         )
 
-    def create_sub_directory(self, group: str) -> Path:
+    def create_sub_directory(self, group: Path) -> Path:
         """Create sub directory in temporary working space.
 
         Args:
