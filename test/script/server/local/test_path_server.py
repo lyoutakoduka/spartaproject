@@ -4,6 +4,7 @@
 """Test module to handle paths about file and directory on server."""
 
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
 from pyspartaproj.script.server.local.path_server import PathServer
 
@@ -28,6 +29,15 @@ def test_path() -> None:
     for path in server.get_path_table():
         server.get_path(path)
         assert True
+
+
+def test_local() -> None:
+    """Test to get temporary working space used when connecting server."""
+    with TemporaryDirectory() as temporary_path:
+        temporary_root = Path(temporary_path)
+        server = PathServer(local_root=temporary_root)
+
+        _compare_working(temporary_root, server.get_working_local())
 
 
 def test_relative() -> None:
@@ -62,6 +72,7 @@ def main() -> bool:
     """
     test_table()
     test_path()
+    test_local()
     test_relative()
     test_full()
     return True
