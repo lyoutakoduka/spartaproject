@@ -13,6 +13,11 @@ def _common_test(function: Callable[[PathServer], None]) -> None:
     function(PathServer())
 
 
+def _compare_working(temporary_root: Path, result: Path) -> None:
+    assert result.exists()
+    assert result == Path(temporary_root, "local")
+
+
 def test_table() -> None:
     """Test to get keys of predefined all paths about server."""
     expected: int = 6
