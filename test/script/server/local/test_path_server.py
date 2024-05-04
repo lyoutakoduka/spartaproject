@@ -21,11 +21,9 @@ def _compare_working(temporary_root: Path, result: Path) -> None:
 def test_table() -> None:
     """Test to get keys of predefined all paths about server."""
     expected: int = 6
+    server = PathServer()
 
-    def individual_test(server: PathServer) -> None:
-        assert expected == len([path for path in server.get_path_table()])
-
-    _common_test(individual_test)
+    assert expected == len([path for path in server.get_path_table()])
 
 
 def test_path() -> None:
