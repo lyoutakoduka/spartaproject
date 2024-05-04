@@ -4,7 +4,6 @@
 """Test module to handle paths about file and directory on server."""
 
 from pathlib import Path
-from typing import Callable
 
 from pyspartaproj.script.server.local.path_server import PathServer
 
