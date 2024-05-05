@@ -22,7 +22,8 @@ def _compare_path(temporary_root: Path, work_space: WorkSpace) -> None:
 
 def _compare_directory(work_space: WorkSpace) -> None:
     _relative_test(
-        work_space.create_sub_directory("test"), work_space.get_working_root()
+        work_space.create_sub_directory(Path("main", "sub")),
+        work_space.get_working_root(),
     )
 
 
@@ -62,12 +63,12 @@ def test_working() -> None:
     Path include date time string in UTC time zone.
     """
     expected: Path = Path(
-        "test", "2023", "04", "01", "00", "00", "00", "000000"
+        Path("main", "sub"), "2023", "04", "01", "00", "00", "00", "000000"
     )
 
     work_space = WorkSpace()
     temporary_path: Path = work_space.create_date_time_space(
-        "test", override=True
+        Path("main", "sub"), override=True
     )
 
     _compare_working(temporary_path, expected, work_space)
@@ -79,12 +80,12 @@ def test_jst() -> None:
     Path include date time string in JST time zone.
     """
     expected: Path = Path(
-        "test", "2023", "04", "01", "09", "00", "00", "000000"
+        Path("main", "sub"), "2023", "04", "01", "09", "00", "00", "000000"
     )
 
     work_space = WorkSpace()
     temporary_path: Path = work_space.create_date_time_space(
-        "test", override=True, jst=True
+        Path("main", "sub"), override=True, jst=True
     )
 
     _compare_working(temporary_path, expected, work_space)
