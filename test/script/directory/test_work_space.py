@@ -11,9 +11,9 @@ from pyspartaproj.script.directory.work_space import WorkSpace
 from pyspartaproj.script.path.modify.get_relative import is_relative
 
 
-def _relative_test(path: Path, root: Path) -> None:
-    assert path.exists()
-    assert is_relative(path, root_path=root)
+def _relative_test(result: Path, root: Path) -> None:
+    assert result.exists()
+    assert is_relative(result, root_path=root)
 
 
 def _compare_path(temporary_root: Path, work_space: WorkSpace) -> None:
