@@ -65,9 +65,9 @@ class PathServer(WorkSpace):
             jst=jst,
         )
 
-    def _initialize_variables_local(self) -> None:
+    def _initialize_variables_local(self, override: bool, jst: bool) -> None:
         self._build_path_table()
-        self._initialize_paths()
+        self._initialize_paths(override, jst)
 
     def get_path_table(self) -> Strs:
         """Get keys of predefined all paths about server.
@@ -118,7 +118,12 @@ class PathServer(WorkSpace):
         """
         return Path(self._local_root, local_relative)
 
-    def __init__(self, local_root: Path | None = None) -> None:
+    def __init__(
+        self,
+        local_root: Path | None = None,
+        override: bool = False,
+        jst: bool = False,
+    ) -> None:
         """Generate string path pair about server directory.
 
         Args:
@@ -128,4 +133,4 @@ class PathServer(WorkSpace):
         """
         super().__init__(working_root=local_root)
 
-        self._initialize_variables_local()
+        self._initialize_variables_local(override, jst)
