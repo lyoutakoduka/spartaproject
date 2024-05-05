@@ -66,9 +66,8 @@ class PathServer(WorkSpace):
         )
 
     def _initialize_variables_local(self) -> None:
-        self._local_root: Path = self.create_sub_directory("local")
-
         self._build_path_table()
+        self._initialize_paths()
 
     def get_path_table(self) -> Strs:
         """Get keys of predefined all paths about server.
