@@ -98,7 +98,7 @@ class PathServer(WorkSpace):
         """Convert full path on local temporary working space to relative.
 
         Args:
-            local (Path): Full path you want to convert.
+            local_full (Path): Full path you want to convert.
 
         Returns:
             Path: Converted relative path.
@@ -109,7 +109,7 @@ class PathServer(WorkSpace):
         """Convert to full path on local temporary working space from relative.
 
         Args:
-            local (Path): Relative path you want to convert.
+            local_full (Path): Relative path you want to convert.
 
         Returns:
             Path: Converted full path.
@@ -128,6 +128,16 @@ class PathServer(WorkSpace):
             local_root (Path | None, optional): Defaults to None.
                 User defined path of local temporary working space used.
                 It's used for argument "working_root" of class "WorkSpace".
+
+            override (bool, optional): Defaults to False.
+                Override initial time count to "2023/4/1:12:00:00-00 (AM)".
+                It's used for argument "override" of
+                    function "create_date_time_space".
+
+            jst (bool, optional): Defaults to False.
+                If True, you can get datetime object as JST time zone.
+                It's used for argument "jst" of
+                    function "create_date_time_space".
         """
         super().__init__(working_root=local_root)
 
