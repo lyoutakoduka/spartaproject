@@ -53,9 +53,7 @@ class PathServer(WorkSpace):
         self._build_path_private()
         self._build_path_develop()
 
-    def _initialize_paths(
-        self, override: bool = False, jst: bool = False
-    ) -> None:
+    def _initialize_paths(self, override: bool, jst: bool) -> None:
         local_root: Path = Path("local")
 
         self._local_root: Path = self.create_sub_directory(local_root)
