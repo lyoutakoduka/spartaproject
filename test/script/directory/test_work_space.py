@@ -35,7 +35,9 @@ def _compare_working(
     result: Path, expected: Path, work_space: WorkSpace
 ) -> None:
     assert result.exists()
-    assert result == Path(work_space.get_working_root(), expected)
+    assert result == Path(
+        work_space.get_working_root(), Path(_get_directory(), expected)
+    )
 
 
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
@@ -66,9 +68,7 @@ def test_working() -> None:
 
     Path include date time string in UTC time zone.
     """
-    expected: Path = Path(
-        _get_directory(), "2023", "04", "01", "00", "00", "00", "000000"
-    )
+    expected: Path = Path("2023", "04", "01", "00", "00", "00", "000000")
 
     work_space = WorkSpace()
     temporary_path: Path = work_space.create_date_time_space(
@@ -83,9 +83,7 @@ def test_jst() -> None:
 
     Path include date time string in JST time zone.
     """
-    expected: Path = Path(
-        _get_directory(), "2023", "04", "01", "09", "00", "00", "000000"
-    )
+    expected: Path = Path("2023", "04", "01", "09", "00", "00", "000000")
 
     work_space = WorkSpace()
     temporary_path: Path = work_space.create_date_time_space(
