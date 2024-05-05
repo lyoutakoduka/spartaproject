@@ -94,6 +94,9 @@ class PathServer(WorkSpace):
         """
         return self._local_root
 
+    def get_working_root(self) -> Path:
+        return self._working_root
+
     def to_relative_path(self, local_full: Path) -> Path:
         """Convert full path on local temporary working space to relative.
 
