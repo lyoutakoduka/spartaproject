@@ -37,7 +37,7 @@ def test_local() -> None:
         temporary_root = Path(temporary_path)
         server = PathServer(local_root=temporary_root)
 
-        _compare_working(temporary_root, server.get_working_local())
+        _compare_working(temporary_root, server.get_local_root())
 
 
 def test_relative() -> None:
@@ -49,7 +49,7 @@ def test_relative() -> None:
     server = PathServer()
 
     assert expected == server.to_relative_path(
-        Path(server.get_working_local(), expected)
+        Path(server.get_local_root(), expected)
     )
 
 
