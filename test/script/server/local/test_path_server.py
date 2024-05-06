@@ -10,9 +10,13 @@ from typing import Callable
 from pyspartaproj.script.server.local.path_server import PathServer
 
 
-def _compare_local(temporary_root: Path, result: Path) -> None:
+def _compare_path(result: Path, expected: Path) -> None:
     assert result.exists()
-    assert result == Path(temporary_root, "local")
+    assert result == expected
+
+
+def _compare_local(temporary_root: Path, result: Path) -> None:
+    _compare_path(result, Path(temporary_root, "local"))
 
 
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
