@@ -5,6 +5,7 @@
 
 from pathlib import Path
 from tempfile import TemporaryDirectory
+from typing import Callable
 
 from pyspartaproj.script.server.local.path_server import PathServer
 
@@ -12,6 +13,11 @@ from pyspartaproj.script.server.local.path_server import PathServer
 def _compare_local(temporary_root: Path, result: Path) -> None:
     assert result.exists()
     assert result == Path(temporary_root, "local")
+
+
+def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
+    with TemporaryDirectory() as temporary_path:
+        function(Path(temporary_path))
 
 
 def test_table() -> None:
@@ -33,11 +39,12 @@ def test_path() -> None:
 
 def test_local() -> None:
     """Test to get temporary working space used when connecting server."""
-    with TemporaryDirectory() as temporary_path:
-        temporary_root = Path(temporary_path)
-        server = PathServer(local_root=temporary_root)
 
+    def individual_test(temporary_root: Path) -> None:
+        server = PathServer(local_root=temporary_root)
         _compare_local(temporary_root, server.get_local_root())
+
+    _inside_temporary_directory(individual_test)
 
 
 def test_relative() -> None:
