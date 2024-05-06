@@ -9,7 +9,7 @@ from tempfile import TemporaryDirectory
 from pyspartaproj.script.server.local.path_server import PathServer
 
 
-def _compare_working(temporary_root: Path, result: Path) -> None:
+def _compare_local(temporary_root: Path, result: Path) -> None:
     assert result.exists()
     assert result == Path(temporary_root, "local")
 
@@ -37,7 +37,7 @@ def test_local() -> None:
         temporary_root = Path(temporary_path)
         server = PathServer(local_root=temporary_root)
 
-        _compare_working(temporary_root, server.get_local_root())
+        _compare_local(temporary_root, server.get_local_root())
 
 
 def test_relative() -> None:
