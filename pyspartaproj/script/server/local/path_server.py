@@ -87,18 +87,25 @@ class PathServer(WorkSpace):
         return self._path_table[path_type]
 
     def get_local_root(self) -> Path:
-        """Get temporary working space used when connecting server.
+        """Get path of local working space used when connecting server.
 
         Returns:
-            Path: Path of temporary working space.
+            Path: Path of local working space.
         """
         return self._local_root
 
     def get_working_root(self) -> Path:
+        """Get path of local temporary working space.
+
+        Path include string of current date time.
+
+        Returns:
+            Path: Path of local temporary working space.
+        """
         return self._working_root
 
     def to_relative_path(self, local_full: Path) -> Path:
-        """Convert full path on local temporary working space to relative.
+        """Convert full path on local working space to relative.
 
         Args:
             local_full (Path): Full path you want to convert.
@@ -109,7 +116,7 @@ class PathServer(WorkSpace):
         return get_relative(local_full, root_path=self._local_root)
 
     def to_full_path(self, local_relative: Path) -> Path:
-        """Convert to full path on local temporary working space from relative.
+        """Convert to full path on local working space from relative.
 
         Args:
             local_full (Path): Relative path you want to convert.
@@ -129,7 +136,7 @@ class PathServer(WorkSpace):
 
         Args:
             local_root (Path | None, optional): Defaults to None.
-                User defined path of local temporary working space used.
+                User defined path of local working space used.
                 It's used for argument "working_root" of class "WorkSpace".
 
             override (bool, optional): Defaults to False.
