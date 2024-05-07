@@ -10,6 +10,12 @@ from typing import Callable
 from pyspartaproj.script.server.local.path_server import PathServer
 
 
+def _compare_relative(
+    expected: Path, result: Path, server: PathServer
+) -> None:
+    assert expected == server.to_relative_path(result)
+
+
 def _compare_path(result: Path, expected: Path) -> None:
     assert result.exists()
     assert result == expected
@@ -59,8 +65,8 @@ def test_relative() -> None:
     expected: Path = Path("temp")
     server = PathServer()
 
-    assert expected == server.to_relative_path(
-        Path(server.get_local_root(), expected)
+    _compare_relative(
+        expected, Path(server.get_local_root(), expected), server
     )
 
 
@@ -72,7 +78,7 @@ def test_full() -> None:
     expected: Path = Path("temp")
     server = PathServer()
 
-    assert expected == server.to_relative_path(server.to_full_path(expected))
+    _compare_relative(expected, server.to_full_path(expected), server)
 
 
 def main() -> bool:
