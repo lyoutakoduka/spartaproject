@@ -21,10 +21,6 @@ def _compare_path(result: Path, expected: Path) -> None:
     assert result == expected
 
 
-def _compare_local(temporary_root: Path, result: Path) -> None:
-    _compare_path(result, Path(temporary_root, "local"))
-
-
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
@@ -52,7 +48,7 @@ def test_local() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         server = PathServer(local_root=temporary_root)
-        _compare_local(temporary_root, server.get_local_root())
+        _compare_path(server.get_local_root(), Path(temporary_root, "local"))
 
     _inside_temporary_directory(individual_test)
 
