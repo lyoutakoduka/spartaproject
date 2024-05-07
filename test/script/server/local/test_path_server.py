@@ -44,7 +44,7 @@ def test_path() -> None:
 
 
 def test_local() -> None:
-    """Test to get temporary working space used when connecting server."""
+    """Test to get temporary working space for connecting server."""
 
     def individual_test(temporary_root: Path) -> None:
         server = PathServer(local_root=temporary_root)
@@ -54,6 +54,7 @@ def test_local() -> None:
 
 
 def test_temporary() -> None:
+    """Test to get local temporary working space for connecting server."""
     date_time: Path = Path("2023", "04", "01", "00", "00", "00", "000000")
 
     def individual_test(temporary_root: Path) -> None:
