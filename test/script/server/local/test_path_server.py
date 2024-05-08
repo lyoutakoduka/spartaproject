@@ -78,6 +78,16 @@ def test_temporary() -> None:
     _inside_temporary_directory(individual_test)
 
 
+def test_jst() -> None:
+    date_time: Path = Path("2023", "04", "01", "09", "00", "00", "000000")
+
+    def individual_test(temporary_root: Path) -> None:
+        server = PathServer(local_root=temporary_root, override=True, jst=True)
+        _compare_working(temporary_root, date_time, server)
+
+    _inside_temporary_directory(individual_test)
+
+
 def test_relative() -> None:
     """Test to convert full path to relative path.
 
@@ -112,6 +122,7 @@ def main() -> bool:
     test_path()
     test_local()
     test_temporary()
+    test_jst()
     test_relative()
     test_full()
     return True
