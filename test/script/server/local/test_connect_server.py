@@ -3,7 +3,7 @@
 
 """Test module to use SSH and SFTP functionality."""
 
-from pyspartaproj.interface.paramiko import Channel, SSHClient
+from pyspartaproj.interface.paramiko import Channel, SFTPClient, SSHClient
 from pyspartaproj.interface.pytest import fail
 from pyspartaproj.script.server.local.connect_server import ConnectServer
 
@@ -32,6 +32,11 @@ def test_channel() -> None:
         assert isinstance(server.get_channel(), Channel)
 
 
+def test_ftp() -> None:
+    if server := _is_connect():
+        assert isinstance(server.get_sftp(), SFTPClient)
+
+
 def main() -> bool:
     """Run all tests.
 
@@ -41,4 +46,5 @@ def main() -> bool:
     test_connect()
     test_ssh()
     test_channel()
+    test_ftp()
     return True
