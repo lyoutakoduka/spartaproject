@@ -23,16 +23,19 @@ def test_connect() -> None:
 
 
 def test_ssh() -> None:
+    """Test to get network object about SSH."""
     if server := _is_connect():
         assert isinstance(server.get_ssh(), SSHClient)
 
 
 def test_channel() -> None:
+    """Test to get network object about shell of SSH."""
     if server := _is_connect():
         assert isinstance(server.get_channel(), Channel)
 
 
 def test_ftp() -> None:
+    """Test to get network object about SFTP."""
     if server := _is_connect():
         assert isinstance(server.get_sftp(), SFTPClient)
 
