@@ -3,12 +3,22 @@
 
 """Test module to use SSH and SFTP functionality."""
 
+from pyspartaproj.interface.pytest import fail
 from pyspartaproj.script.server.local.connect_server import ConnectServer
+
+
+def _is_connect() -> ConnectServer:
+    server = ConnectServer()
+
+    if server.connect():
+        return server
+
+    fail()
 
 
 def test_connect() -> None:
     """Test to connect server by using SSH and SFTP functionality."""
-    assert ConnectServer().connect()
+    _is_connect()
 
 
 def main() -> bool:
