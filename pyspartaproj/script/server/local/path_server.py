@@ -136,7 +136,7 @@ class PathServer(WorkSpace):
 
         Args:
             local_root (Path | None, optional): Defaults to None.
-                User defined path of local working space used.
+                User defined path of local working space which is used.
                 It's used for argument "working_root" of class "WorkSpace".
 
             override (bool, optional): Defaults to False.
