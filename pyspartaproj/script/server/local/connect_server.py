@@ -4,6 +4,7 @@
 """Module to use SSH and SFTP functionality."""
 
 from decimal import Decimal
+from pathlib import Path
 from time import sleep
 
 from pyspartaproj.context.default.string_context import StrPair, Strs
@@ -28,8 +29,15 @@ class ConnectServer(PathServer, ProjectContext):
         self._channel: Channel | None = None
         self._sftp: SFTPClient | None = None
 
-    def _initialize_super_class(self) -> None:
-        PathServer.__init__(self)
+    def _initialize_super_class(
+        self,
+        local_root: Path | None,
+        override: bool,
+        jst: bool,
+    ) -> None:
+        PathServer.__init__(
+            self, local_root=local_root, override=override, jst=jst
+        )
         ProjectContext.__init__(self)
 
     def _finalize_network_objects(self) -> None:
@@ -242,7 +250,12 @@ class ConnectServer(PathServer, ProjectContext):
         self._finalize_network_objects()
         self._initialize_connect()
 
-    def __init__(self) -> None:
+    def __init__(
+        self,
+        local_root: Path | None = None,
+        override: bool = False,
+        jst: bool = False,
+    ) -> None:
         """Initialize super class and network objects."""
-        self._initialize_super_class()
+        self._initialize_super_class(local_root, override, jst)
         self._initialize_connect()
