@@ -69,8 +69,7 @@ def test_tree() -> None:
 
 def test_place() -> None:
     """Test to upload single file from selected local root to server."""
-    server: UploadServer = UploadServer()
-    assert server.connect()
+    server: UploadServer = _is_connect()
 
     with TemporaryDirectory() as temporary_path:
         working_path: Path = Path(
