@@ -28,11 +28,9 @@ def _is_connect() -> UploadServer:
     return server
 
 
-def _inside_temporary_directory(
-    function: Callable[[UploadServer, Path], None]
-) -> None:
-    server: UploadServer = _is_connect()
-    function(server, server.get_working_root())
+def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
+    with TemporaryDirectory() as temporary_path:
+        function(Path(temporary_path))
 
 
 def test_file() -> None:
