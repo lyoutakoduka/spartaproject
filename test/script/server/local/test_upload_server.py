@@ -36,27 +36,25 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 def test_file() -> None:
     """Test to upload single file to server."""
     server: UploadServer = _is_connect()
-    temporary_path: Path = server.get_working_root()
-
-    _common_test(server, create_temporary_file(temporary_path))
+    _common_test(server, create_temporary_file(server.get_working_root()))
 
 
 def test_directory() -> None:
     """Test to upload single directory to server."""
     server: UploadServer = _is_connect()
-    temporary_path: Path = server.get_working_root()
-
-    _common_test(server, create_directory(Path(temporary_path, "directory")))
+    _common_test(
+        server, create_directory(Path(server.get_working_root(), "directory"))
+    )
 
 
 def test_tree() -> None:
     """Test to upload multiple files and directories to server."""
     server: UploadServer = _is_connect()
-    temporary_path: Path = server.get_working_root()
-
     _common_test(
         server,
-        create_temporary_tree(Path(temporary_path, "tree"), tree_deep=2),
+        create_temporary_tree(
+            Path(server.get_working_root(), "tree"), tree_deep=2
+        ),
     )
 
 
