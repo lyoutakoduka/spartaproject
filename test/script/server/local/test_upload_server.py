@@ -22,13 +22,17 @@ def _common_test(server: UploadServer, source_path: Path) -> None:
     assert server.upload(source_path)
 
 
+def _is_connect() -> UploadServer:
+    server: UploadServer = UploadServer(jst=True)
+    assert server.connect()
+    return server
+
+
 def _inside_temporary_directory(
     function: Callable[[UploadServer, Path], None]
 ) -> None:
-    server: UploadServer = UploadServer()
-    assert server.connect()
-
-    function(server, server.create_local_working_space(jst=True))
+    server: UploadServer = _is_connect()
+    function(server, server.get_working_root())
 
 
 def test_file() -> None:
