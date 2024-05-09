@@ -64,7 +64,7 @@ def test_place() -> None:
     """Test to upload single file from selected local root to server."""
     server: UploadServer = _is_connect()
 
-    with TemporaryDirectory() as temporary_path:
+    def individual_test(temporary_path: Path) -> None:
         working_path: Path = Path(
             server.get_path("work_root"), get_working_space(jst=True)
         )
@@ -75,6 +75,8 @@ def test_place() -> None:
         assert server.upload(
             source_path, destination=Path(working_path, source_path.name)
         )
+
+    _inside_temporary_directory(individual_test)
 
 
 def main() -> bool:
