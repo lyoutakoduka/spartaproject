@@ -24,8 +24,7 @@ def _copy_resource(name: str, destination_path: Path) -> None:
 def _execute_python(name: str, server: ExecuteServer) -> Strs | None:
     _is_connect(server)
 
-    destination_path: Path = Path(server.create_local_working_space(), name)
-
+    destination_path: Path = Path(server.get_working_root(), name)
     _copy_resource(name, destination_path)
 
     return server.execute(destination_path)
