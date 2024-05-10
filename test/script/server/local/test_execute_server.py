@@ -74,7 +74,7 @@ def test_directory() -> None:
     _common_test(name, server)
 
 
-def test_path() -> None:
+def test_version() -> None:
     """Test to execute selected version of Python interpreter."""
     name: str = "version.py"
     expected: str = "3.10.11"
@@ -101,5 +101,5 @@ def main() -> bool:
     """
     test_file()
     test_directory()
-    test_path()
+    test_version()
     return True
