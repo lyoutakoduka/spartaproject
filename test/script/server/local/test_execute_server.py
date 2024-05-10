@@ -54,6 +54,10 @@ def _get_server() -> ExecuteServer:
     return ExecuteServer(jst=True)
 
 
+def _get_server_version(version: str) -> ExecuteServer:
+    return ExecuteServer(jst=True, version=version)
+
+
 def test_file() -> None:
     """Test to execute Python module that is single file."""
     name: str = "file.py"
@@ -74,7 +78,7 @@ def test_path() -> None:
     """Test to execute selected version of Python interpreter."""
     name: str = "version.py"
     expected: str = "3.10.11"
-    server: ExecuteServer = ExecuteServer(version=expected)
+    server: ExecuteServer = _get_server_version(expected)
 
     if in_development():
         _version_test(name, server, expected)
