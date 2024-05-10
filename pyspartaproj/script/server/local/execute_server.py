@@ -74,6 +74,18 @@ class ExecuteServer(UploadServer):
         Args:
             version (str | None, optional): Defaults to None.
                 Version information of Python you want to execute.
+
+            local_root (Path | None, optional): Defaults to None.
+                User defined path of local working space which is used.
+                It's used for argument "local_root" of class "UploadServer".
+
+            override (bool, optional): Defaults to False.
+                Override initial time count to "2023/4/1:12:00:00-00 (AM)".
+                It's used for argument "override" of class "UploadServer".
+
+            jst (bool, optional): Defaults to False.
+                If True, you can get datetime object as JST time zone.
+                It's used for argument "jst" of class "UploadServer".
         """
         super().__init__(local_root=local_root, override=override, jst=jst)
 
