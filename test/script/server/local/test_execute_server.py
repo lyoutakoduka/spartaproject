@@ -29,18 +29,21 @@ def _expected_result(name: str) -> Strs:
     return [identifier + str(i) for i in range(3)]
 
 
-def _common_test(name: str, server: ExecuteServer) -> None:
-    if result := _execute_python(name, server):
-        assert _expected_result(name) == result
-    else:
+def _filter_execute_error(name: str, server: ExecuteServer) -> Strs:
+    result: Strs | None = _execute_python(name, server)
+
+    if result is None:
         fail()
+
+    return result
+
+
+def _common_test(name: str, server: ExecuteServer) -> None:
+    assert _expected_result(name) == _filter_execute_error(name, server)
 
 
 def _version_test(name: str, server: ExecuteServer, expected: str) -> None:
-    if result := _execute_python(name, server):
-        assert expected == _get_version_number(result)
-    else:
-        fail()
+    assert expected == _get_version_number(_filter_execute_error(name, server))
 
 
 def _get_version_number(result: Strs) -> str:
