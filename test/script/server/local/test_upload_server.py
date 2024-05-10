@@ -22,6 +22,12 @@ def _upload_path(server: UploadServer, source_path: Path) -> None:
     assert server.upload(source_path)
 
 
+def _upload_path_local(
+    server: UploadServer, source_path: Path, destination_path: Path
+) -> None:
+    assert server.upload(source_path, destination=destination_path)
+
+
 def _is_connect(server: UploadServer) -> None:
     assert server.connect()
 
@@ -82,8 +88,8 @@ def test_place() -> None:
             Path(temporary_root, working_path)
         )
 
-        assert server.upload(
-            source_path, destination=Path(working_path, source_path.name)
+        _upload_path_local(
+            server, source_path, Path(working_path, source_path.name)
         )
 
     _inside_temporary_directory(individual_test)
