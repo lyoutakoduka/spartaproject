@@ -20,9 +20,9 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 def test_file() -> None:
     """Test to create empty temporary file as json format."""
 
-    def individual_test(temporary_path: Path) -> None:
-        expected: Path = Path(temporary_path, "temporary.json")
-        file_path: Path = create_temporary_file(temporary_path)
+    def individual_test(temporary_root: Path) -> None:
+        expected: Path = Path(temporary_root, "temporary.json")
+        file_path: Path = create_temporary_file(temporary_root)
 
         assert expected == file_path
         assert file_path.exists()
