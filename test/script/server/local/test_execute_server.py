@@ -17,13 +17,16 @@ def _is_connect(server: ExecuteServer) -> None:
     assert server.connect()
 
 
+def _copy_resource(name: str, destination_path: Path) -> None:
+    SafeCopy().copy(get_resource(local_path=Path(name)), destination_path)
+
+
 def _execute_python(name: str, server: ExecuteServer) -> Strs | None:
     _is_connect(server)
 
     destination_path: Path = Path(server.create_local_working_space(), name)
 
-    safe_copy = SafeCopy()
-    safe_copy.copy(get_resource(local_path=Path(name)), destination_path)
+    _copy_resource(name, destination_path)
 
     return server.execute(destination_path)
 
