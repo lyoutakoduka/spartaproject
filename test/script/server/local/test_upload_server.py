@@ -30,6 +30,10 @@ def _get_server() -> UploadServer:
     return UploadServer(jst=True)
 
 
+def _get_server_local(local_root: Path) -> UploadServer:
+    return UploadServer(jst=True, local_root=local_root)
+
+
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
