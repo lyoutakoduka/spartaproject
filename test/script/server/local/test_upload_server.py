@@ -83,13 +83,10 @@ def test_place() -> None:
         server: UploadServer = _get_server_local(temporary_root)
         _is_connect(server)
 
-        working_path: Path = server.get_working_root()
-        source_path: Path = create_temporary_file(
-            Path(temporary_root, working_path)
-        )
+        source_path: Path = create_temporary_file(server.get_working_root())
 
         _upload_path_local(
-            server, source_path, Path(working_path, source_path.name)
+            server, source_path, server.to_relative_path(source_path)
         )
 
     _inside_temporary_directory(individual_test)
