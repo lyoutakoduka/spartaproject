@@ -26,6 +26,10 @@ def _is_connect(server: UploadServer) -> None:
     assert server.connect()
 
 
+def _get_server() -> UploadServer:
+    return UploadServer(jst=True)
+
+
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
@@ -33,7 +37,7 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 
 def test_file() -> None:
     """Test to upload single file to server."""
-    server = UploadServer(jst=True)
+    server: UploadServer = _get_server()
     _is_connect(server)
 
     _common_test(server, create_temporary_file(server.get_working_root()))
@@ -41,7 +45,7 @@ def test_file() -> None:
 
 def test_directory() -> None:
     """Test to upload single directory to server."""
-    server = UploadServer(jst=True)
+    server: UploadServer = _get_server()
     _is_connect(server)
 
     _common_test(
@@ -51,7 +55,7 @@ def test_directory() -> None:
 
 def test_tree() -> None:
     """Test to upload multiple files and directories to server."""
-    server = UploadServer(jst=True)
+    server: UploadServer = _get_server()
     _is_connect(server)
 
     _common_test(
