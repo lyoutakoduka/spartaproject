@@ -72,13 +72,12 @@ def test_tree() -> None:
 
 def test_place() -> None:
     """Test to upload single file from selected local root to server."""
-    server = UploadServer(jst=True)
-    _is_connect(server)
 
     def individual_test(temporary_root: Path) -> None:
-        working_path: Path = Path(
-            server.get_path("work_root"), get_working_space(jst=True)
-        )
+        server: UploadServer = _get_server_local(temporary_root)
+        _is_connect(server)
+
+        working_path: Path = server.get_working_root()
         source_path: Path = create_temporary_file(
             Path(temporary_root, working_path)
         )
