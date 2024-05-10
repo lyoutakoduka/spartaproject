@@ -62,13 +62,19 @@ class ExecuteServer(UploadServer):
 
         return result
 
-    def __init__(self, version: str | None = None) -> None:
+    def __init__(
+        self,
+        version: str | None = None,
+        local_root: Path | None = None,
+        override: bool = False,
+        jst: bool = False,
+    ) -> None:
         """Select version of Python, then ready using ssh and sftp connection.
 
         Args:
             version (str | None, optional): Defaults to None.
                 Version information of Python you want to execute.
         """
-        super().__init__()
+        super().__init__(local_root=local_root, override=override, jst=jst)
 
         self._set_version_path(self._set_version(version))
