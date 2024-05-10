@@ -13,8 +13,12 @@ from pyspartaproj.script.path.safe.safe_copy import SafeCopy
 from pyspartaproj.script.server.local.execute_server import ExecuteServer
 
 
-def _execute_python(name: str, server: ExecuteServer) -> Strs | None:
+def _is_connect(server: ExecuteServer) -> None:
     assert server.connect()
+
+
+def _execute_python(name: str, server: ExecuteServer) -> Strs | None:
+    _is_connect(server)
 
     destination_path: Path = Path(server.create_local_working_space(), name)
 
