@@ -86,8 +86,7 @@ def test_version() -> None:
     expected: str = "3.10.11"
     server: ExecuteServer = _get_server_version(expected)
 
-    if in_development():
-        _version_test(name, server, expected)
+    _version_test(name, server, expected)
 
 
 def test_error() -> None:
