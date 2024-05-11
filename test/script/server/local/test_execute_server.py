@@ -7,7 +7,6 @@ from pathlib import Path
 
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.interface.pytest import fail, raises
-from pyspartaproj.script.feature_flags import in_development
 from pyspartaproj.script.path.modify.get_resource import get_resource
 from pyspartaproj.script.path.safe.safe_copy import SafeCopy
 from pyspartaproj.script.server.local.execute_server import ExecuteServer
