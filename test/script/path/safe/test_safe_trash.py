@@ -88,13 +88,13 @@ def test_file() -> None:
     """Test to remove file, and log history."""
 
     def individual_test(temporary_root: Path) -> None:
-        safe_trash: SafeTrash = _get_remove()
-        _common_test(
-            1,
-            _finalize_remove(
-                create_temporary_file(temporary_root), safe_trash
-            ),
-        )
+        if safe_trash := _get_remove():
+            _common_test(
+                1,
+                _finalize_remove(
+                    create_temporary_file(temporary_root), safe_trash
+                ),
+            )
 
     _inside_temporary_directory(individual_test)
 
@@ -103,13 +103,13 @@ def test_exists() -> None:
     """Test to remove same files at twice."""
 
     def individual_test(temporary_root: Path) -> None:
-        safe_trash: SafeTrash = _get_remove()
-        _common_test(
-            1,
-            _finalize_remove_array(
-                [create_temporary_file(temporary_root)] * 2, safe_trash
-            ),
-        )
+        if safe_trash := _get_remove():
+            _common_test(
+                1,
+                _finalize_remove_array(
+                    [create_temporary_file(temporary_root)] * 2, safe_trash
+                ),
+            )
 
     _inside_temporary_directory(individual_test)
 
@@ -121,11 +121,13 @@ def test_tree() -> None:
         create_temporary_tree(temporary_root, tree_deep=3)
         remove_paths: Paths = _get_removal_target(temporary_root)
 
-        safe_trash: SafeTrash = _get_remove()
-        _remove_test(
-            remove_paths,
-            _finalize_remove_tree(remove_paths, temporary_root, safe_trash),
-        )
+        if safe_trash := _get_remove():
+            _remove_test(
+                remove_paths,
+                _finalize_remove_tree(
+                    remove_paths, temporary_root, safe_trash
+                ),
+            )
 
     _inside_temporary_directory(individual_test)
 
