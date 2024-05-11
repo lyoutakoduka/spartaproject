@@ -27,8 +27,11 @@ class ExecuteServer(UploadServer):
     def _get_filter_head(self) -> str:
         return "traceback".capitalize()
 
+    def _get_filter_inside(self) -> str:
+        return " ".join(["most", "recent", "call", "last"])
+
     def _get_error_identifier(self) -> str:
-        body: str = " ".join(["most", "recent", "call", "last"])
+        body: str = self._get_filter_inside()
         return self._get_filter_head() + " " + "(" + body + ")" + ":"
 
     def _get_command(self, source_root: Path) -> Strs:
