@@ -120,17 +120,17 @@ class EditArchive(SafeTrash):
         return archived
 
     def get_decompressed_root(self) -> Path:
-        """Get path of temporary working directory.
+        """Get path of temporary working space.
 
         The directory is used for placing decompressed contents of archive.
 
         Returns:
-            Path: Path of temporary working directory.
+            Path: Path of temporary working space.
         """
         return self.get_root()
 
     def close_archive(self) -> Paths | None:
-        """Compress the contents of temporary working directory to archive.
+        """Compress the contents of temporary working space to archive.
 
         Returns:
             Paths | None: Path of compressed archive.
@@ -177,6 +177,13 @@ class EditArchive(SafeTrash):
                 Path of directory used as trash box.
                 It's used for argument "remove_root" of class "SafeTrash".
 
+            override (bool, optional): Defaults to False.
+                Override initial time count to "2023/4/1:12:00:00-00 (AM)".
+                It's used for argument "override" of class "SafeTrash".
+
+            jst (bool, optional): Defaults to False.
+                If True, you can get datetime object as JST time zone.
+                It's used for argument "jst" of class "SafeTrash".
         """
         super().__init__(remove_root=remove_root, override=override, jst=jst)
 
