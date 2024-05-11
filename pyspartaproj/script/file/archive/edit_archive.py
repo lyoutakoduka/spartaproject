@@ -154,6 +154,8 @@ class EditArchive(SafeTrash):
         compress: bool = False,
         protected: bool = False,
         remove_root: Path | None = None,
+        override: bool = False,
+        jst: bool = False,
     ) -> None:
         """Initialize variables and decompress archive you selected.
 
@@ -176,7 +178,7 @@ class EditArchive(SafeTrash):
                 It's used for argument "remove_root" of class "SafeTrash".
 
         """
-        super().__init__(remove_root=remove_root)
+        super().__init__(remove_root=remove_root, override=override, jst=jst)
 
         self._initialize_variables_archive(
             archive_path, limit_byte, compress, protected
