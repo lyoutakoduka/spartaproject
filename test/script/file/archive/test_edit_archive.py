@@ -203,31 +203,15 @@ def _close_archive(edit_archive: EditArchive) -> Paths:
 def _common_test(
     temporary_root: Path, stamp_before: TimePair, edit_archive: EditArchive
 ) -> None:
-    print("root", temporary_root)
-    print("history", edit_archive.get_history_path())
-
-    edit_history: PathPair = _get_edit_history(edit_archive)
-    for i, j in stamp_before.items():
-        print("B", i, j)
-
-    stamp_after: TimePair = _get_stamp_after(
-        temporary_root,
+    assert is_same_stamp(
         stamp_before,
-        edit_history,
-        _close_archive(edit_archive),
+        _get_stamp_after(
+            temporary_root,
+            stamp_before,
+            _get_edit_history(edit_archive),
+            _close_archive(edit_archive),
+        ),
     )
-    for i, j in stamp_after.items():
-        print("A", i, j)
-
-    # assert is_same_stamp(
-    #     stamp_before,
-    #     _get_stamp_after(
-    #         temporary_root,
-    #         stamp_before,
-    #         edit_history,
-    #         _close_archive(edit_archive),
-    #     ),
-    # )
 
 
 def _get_sorted_paths(before_paths: Paths, after_paths: Paths) -> Paths2:
