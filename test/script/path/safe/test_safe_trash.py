@@ -106,10 +106,10 @@ def test_tree() -> None:
         remove_paths: Paths = list(walk_iterator(temporary_root, depth=1))
 
         safe_trash = SafeTrash()
-        _common_test(
-            len(remove_paths),
-            _finalize_remove_tree(remove_paths, temporary_root, safe_trash),
+        history: PathPair2 | None = _finalize_remove_tree(
+            remove_paths, temporary_root, safe_trash
         )
+        _common_test(len(remove_paths), history)
 
     _inside_temporary_directory(individual_test)
 
@@ -122,12 +122,10 @@ def test_select() -> None:
             create_temporary_tree(temporary_root)
             remove_paths: Paths = list(walk_iterator(temporary_root, depth=1))
 
-            _common_test(
-                len(remove_paths),
-                _finalize_remove_array(
-                    remove_paths, SafeTrash(remove_root=outside_root)
-                ),
+            history: PathPair2 | None = _finalize_remove_array(
+                remove_paths, SafeTrash(remove_root=outside_root)
             )
+            _common_test(len(remove_paths), history)
 
         _inside_temporary_directory(individual_test)
 
