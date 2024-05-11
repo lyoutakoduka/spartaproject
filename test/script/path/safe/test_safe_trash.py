@@ -77,11 +77,11 @@ def _get_removal_target(temporary_root: Path) -> Paths:
 
 
 def _get_remove() -> SafeTrash:
-    return SafeTrash()
+    return SafeTrash(jst=True)
 
 
 def _get_remove_local(outside_root: Path) -> SafeTrash:
-    return SafeTrash(remove_root=outside_root)
+    return SafeTrash(jst=True, remove_root=outside_root)
 
 
 def test_file() -> None:
