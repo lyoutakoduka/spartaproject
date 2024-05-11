@@ -44,6 +44,10 @@ def _common_test(history_size: int, history: PathPair2 | None) -> None:
         assert bool_same_array([not exists_array[0], exists_array[1]])
 
 
+def _remove_test(remove_paths: Paths, history: PathPair2 | None) -> None:
+    _common_test(len(remove_paths), history)
+
+
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
@@ -109,7 +113,7 @@ def test_tree() -> None:
         history: PathPair2 | None = _finalize_remove_tree(
             remove_paths, temporary_root, safe_trash
         )
-        _common_test(len(remove_paths), history)
+        _remove_test(remove_paths, history)
 
     _inside_temporary_directory(individual_test)
 
@@ -125,7 +129,7 @@ def test_select() -> None:
             history: PathPair2 | None = _finalize_remove_array(
                 remove_paths, SafeTrash(remove_root=outside_root)
             )
-            _common_test(len(remove_paths), history)
+            _remove_test(remove_paths, history)
 
         _inside_temporary_directory(individual_test)
 
