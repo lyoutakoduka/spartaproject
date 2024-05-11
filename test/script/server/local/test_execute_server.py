@@ -17,11 +17,11 @@ def _is_connect(server: ExecuteServer) -> None:
     assert server.connect()
 
 
-def _copy_resource(name: str, destination_path: Path) -> None:
-    SafeCopy().copy(get_resource(local_path=Path(name)), destination_path)
+def _copy_resource(name: Path, destination_path: Path) -> None:
+    SafeCopy().copy(get_resource(local_path=name), destination_path)
 
 
-def _execute_python(name: str, server: ExecuteServer) -> Strs | None:
+def _execute_python(name: Path, server: ExecuteServer) -> Strs | None:
     _is_connect(server)
 
     destination_path: Path = Path(server.get_working_root(), name)
@@ -30,12 +30,12 @@ def _execute_python(name: str, server: ExecuteServer) -> Strs | None:
     return server.execute(destination_path)
 
 
-def _expected_result(name: str) -> Strs:
-    identifier: str = Path(name).stem
+def _expected_result(name: Path) -> Strs:
+    identifier: str = name.stem
     return [identifier + str(i) for i in range(3)]
 
 
-def _filter_execute_error(name: str, server: ExecuteServer) -> Strs:
+def _filter_execute_error(name: Path, server: ExecuteServer) -> Strs:
     result: Strs | None = _execute_python(name, server)
 
     if result is None:
@@ -44,11 +44,11 @@ def _filter_execute_error(name: str, server: ExecuteServer) -> Strs:
     return result
 
 
-def _common_test(name: str, server: ExecuteServer) -> None:
+def _common_test(name: Path, server: ExecuteServer) -> None:
     assert _expected_result(name) == _filter_execute_error(name, server)
 
 
-def _version_test(name: str, server: ExecuteServer, expected: str) -> None:
+def _version_test(name: Path, server: ExecuteServer, expected: str) -> None:
     assert expected == _get_version_number(_filter_execute_error(name, server))
 
 
@@ -66,7 +66,7 @@ def _get_server_version(version: str) -> ExecuteServer:
 
 def test_file() -> None:
     """Test to execute Python module that is single file."""
-    name: str = "file.py"
+    name: Path = Path("file.py")
     server: ExecuteServer = _get_server()
 
     _common_test(name, server)
@@ -74,7 +74,7 @@ def test_file() -> None:
 
 def test_directory() -> None:
     """Test to execute Python module including directory."""
-    name: str = "directory"
+    name: Path = Path("directory")
     server: ExecuteServer = _get_server()
 
     _common_test(name, server)
@@ -82,7 +82,7 @@ def test_directory() -> None:
 
 def test_version() -> None:
     """Test to execute selected version of Python interpreter."""
-    name: str = "version.py"
+    name: Path = Path("version.py")
     expected: str = "3.10.11"
     server: ExecuteServer = _get_server_version(expected)
 
@@ -92,7 +92,7 @@ def test_version() -> None:
 
 def test_error() -> None:
     """Test to catch and print error of Python code on server."""
-    name: str = "error.py"
+    name: Path = Path("error.py")
     server: ExecuteServer = ExecuteServer()
 
     with raises(ValueError):
