@@ -65,6 +65,10 @@ def create_shortcut(
         shortcut_path (Path): Path of shortcut you want to create.
             Extension of shortcut should be ".lnk".
 
+        remove_root (Path | None, optional): Defaults to None.
+            Path of directory used as trash box.
+            It's used for argument "remove_root" of class "SafeTrash".
+
     Returns:
         bool: True if creating shortcut is success.
     """
