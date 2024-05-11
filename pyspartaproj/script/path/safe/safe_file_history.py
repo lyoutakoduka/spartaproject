@@ -24,7 +24,7 @@ class FileHistory(WorkSpace):
         self._still_removed: bool = False
         self._history: PathPair2 = {}
         self._history_path: Path | None = None
-        self._history_root: Path = self.create_sub_directory("history")
+        self._history_root: Path = self.create_sub_directory(Path("history"))
 
     def _update_history_root(self) -> None:
         self._history_path = Path(
