@@ -30,9 +30,11 @@ class ExecuteServer(UploadServer):
     def _get_filter_inside(self) -> str:
         return " ".join(["most", "recent", "call", "last"])
 
+    def _get_filter_body(self) -> str:
+        return "(" + self._get_filter_inside() + ")"
+
     def _get_error_identifier(self) -> str:
-        body: str = self._get_filter_inside()
-        return self._get_filter_head() + " " + "(" + body + ")" + ":"
+        return self._get_filter_head() + " " + self._get_filter_body() + ":"
 
     def _get_command(self, source_root: Path) -> Strs:
         return [
