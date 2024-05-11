@@ -88,6 +88,16 @@ class SafeTrash(SafeRename):
             remove_root (Path | None, optional): Defaults to None.
                 Path of directory used as trash box.
                 It's used for argument "working_root" of class "FileHistory".
+
+            override (bool, optional): Defaults to False.
+                Override initial time count to "2023/4/1:12:00:00-00 (AM)".
+                It's used for argument "override" of
+                    function "create_date_time_space".
+
+            jst (bool, optional): Defaults to False.
+                If True, you can get datetime object as JST time zone.
+                It's used for argument "jst" of
+                    function "create_date_time_space".
         """
         super().__init__(working_root=remove_root)
 
