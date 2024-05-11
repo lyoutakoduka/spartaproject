@@ -30,13 +30,18 @@ class EditArchive(SafeTrash):
         protected: bool,
     ) -> None:
         self._still_removed: bool = False
+        self._decompressed_root: Path = self.create_sub_directory(
+            Path("decompressed")
+        )
         self._archive_path: Path = archive_path
         self._limit_byte: int = limit_byte
         self._is_lzma_after: bool = compress
         self._protected: bool = protected
 
     def _get_archive_stamp(self) -> TimePair:
-        return get_directory_latest(walk_iterator(self.get_root()))
+        return get_directory_latest(
+            walk_iterator(self.get_decompressed_root())
+        )
 
     def _is_difference_archive_stamp(self, archive_stamp: TimePair) -> bool:
         return not is_same_stamp(self._archive_stamp, archive_stamp)
@@ -73,7 +78,7 @@ class EditArchive(SafeTrash):
 
         compress_archive.compress_at_once(
             [Path(path_text) for path_text in archive_stamp.keys()],
-            archive_root=self.get_root(),
+            archive_root=self.get_decompressed_root(),
         )
 
         return compress_archive.close_archived()
@@ -94,7 +99,7 @@ class EditArchive(SafeTrash):
         )
 
     def _initialize_archive(self) -> None:
-        decompress_archive = DecompressArchive(self.get_root())
+        decompress_archive = DecompressArchive(self.get_decompressed_root())
 
         self._decompress_archive(decompress_archive)
         self._record_compress_type(decompress_archive)
@@ -127,7 +132,7 @@ class EditArchive(SafeTrash):
         Returns:
             Path: Path of temporary working space.
         """
-        return self.get_root()
+        return self._decompressed_root
 
     def close_archive(self) -> Paths | None:
         """Compress the contents of temporary working space to archive.
