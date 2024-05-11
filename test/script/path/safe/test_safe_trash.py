@@ -116,8 +116,8 @@ def test_tree() -> None:
 
 def test_select() -> None:
     """Test to remove file, and using specific trash box path."""
-    with TemporaryDirectory() as temporary_path:
 
+    def outside_test(outside_root: Path) -> None:
         def individual_test(temporary_root: Path) -> None:
             create_temporary_tree(temporary_root)
             remove_paths: Paths = list(walk_iterator(temporary_root, depth=1))
@@ -125,11 +125,13 @@ def test_select() -> None:
             _common_test(
                 len(remove_paths),
                 _finalize_remove_array(
-                    remove_paths, SafeTrash(remove_root=Path(temporary_path))
+                    remove_paths, SafeTrash(remove_root=outside_root)
                 ),
             )
 
         _inside_temporary_directory(individual_test)
+
+    _inside_temporary_directory(outside_test)
 
 
 def main() -> bool:
