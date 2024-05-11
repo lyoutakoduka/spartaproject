@@ -76,11 +76,15 @@ def _get_removal_target(temporary_root: Path) -> Paths:
     return list(walk_iterator(temporary_root, depth=1))
 
 
+def _get_remove() -> SafeTrash:
+    return SafeTrash()
+
+
 def test_file() -> None:
     """Test to remove file, and log history."""
 
     def individual_test(temporary_root: Path) -> None:
-        safe_trash = SafeTrash()
+        safe_trash: SafeTrash = _get_remove()
         _common_test(
             1,
             _finalize_remove(
@@ -95,7 +99,7 @@ def test_exists() -> None:
     """Test to remove same files at twice."""
 
     def individual_test(temporary_root: Path) -> None:
-        safe_trash = SafeTrash()
+        safe_trash: SafeTrash = _get_remove()
         _common_test(
             1,
             _finalize_remove_array(
@@ -113,7 +117,7 @@ def test_tree() -> None:
         create_temporary_tree(temporary_root, tree_deep=3)
         remove_paths: Paths = _get_removal_target(temporary_root)
 
-        safe_trash = SafeTrash()
+        safe_trash: SafeTrash = _get_remove()
         _remove_test(
             remove_paths,
             _finalize_remove_tree(remove_paths, temporary_root, safe_trash),
@@ -133,7 +137,8 @@ def test_select() -> None:
             _remove_test(
                 remove_paths,
                 _finalize_remove_array(
-                    remove_paths, SafeTrash(remove_root=outside_root)
+                    remove_paths,
+                    SafeTrash(remove_root=outside_root),
                 ),
             )
 
