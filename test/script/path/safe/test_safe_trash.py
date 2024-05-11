@@ -80,6 +80,10 @@ def _get_remove() -> SafeTrash:
     return SafeTrash()
 
 
+def _get_remove_local(outside_root: Path) -> SafeTrash:
+    return SafeTrash(remove_root=outside_root)
+
+
 def test_file() -> None:
     """Test to remove file, and log history."""
 
@@ -137,8 +141,7 @@ def test_select() -> None:
             _remove_test(
                 remove_paths,
                 _finalize_remove_array(
-                    remove_paths,
-                    SafeTrash(remove_root=outside_root),
+                    remove_paths, _get_remove_local(outside_root)
                 ),
             )
 
