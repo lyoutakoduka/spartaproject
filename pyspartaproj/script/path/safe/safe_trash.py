@@ -27,7 +27,7 @@ class SafeTrash(SafeRename):
     def _move_file(self, target: Path, root: Path) -> None:
         if target.exists():
             trash_path: Path = Path(
-                self._trash_root, get_relative(target, root_path=root)
+                self.get_trash_root(), get_relative(target, root_path=root)
             )
             create_parent(trash_path)
             self.rename(target, trash_path, override=True)
