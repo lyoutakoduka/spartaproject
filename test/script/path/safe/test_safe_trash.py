@@ -44,6 +44,10 @@ def _common_test(history_size: int, history: PathPair2 | None) -> None:
         assert bool_same_array([not exists_array[0], exists_array[1]])
 
 
+def _single_test(history: PathPair2 | None) -> None:
+    _common_test(1, history)
+
+
 def _remove_test(remove_paths: Paths, history: PathPair2 | None) -> None:
     _common_test(len(remove_paths), history)
 
@@ -87,10 +91,10 @@ def test_file() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         if safe_trash := _get_remove():
-            _common_test(
-                1,
+            _single_test(
                 _finalize_single(
-                    create_temporary_file(temporary_root), safe_trash
+                    create_temporary_file(temporary_root),
+                    safe_trash,
                 ),
             )
 
@@ -102,8 +106,7 @@ def test_exists() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         if safe_trash := _get_remove():
-            _common_test(
-                1,
+            _single_test(
                 _finalize_array(
                     [create_temporary_file(temporary_root)] * 2, safe_trash
                 ),
