@@ -33,6 +33,11 @@ class SafeTrash(SafeRename):
             self.rename(target, trash_path, override=True)
 
     def get_trash_root(self) -> Path:
+        """Get path of internal trash box at current date time.
+
+        Returns:
+            Path: Path of internal trash box.
+        """
         return self._trash_root
 
     def trash(self, trash_path: Path, trash_root: Path | None = None) -> Path:
