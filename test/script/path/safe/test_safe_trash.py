@@ -63,7 +63,7 @@ def _finalize_array(paths: Paths, safe_trash: SafeTrash) -> PathPair2 | None:
     return safe_trash.get_history()
 
 
-def _finalize_remove_tree(
+def _finalize_array_relative(
     paths: Paths, temporary_root: Path, safe_trash: SafeTrash
 ) -> PathPair2 | None:
     safe_trash.trash_at_once(paths, relative_root=temporary_root)
@@ -122,7 +122,7 @@ def test_tree() -> None:
         if safe_trash := _get_remove():
             _remove_test(
                 remove_paths,
-                _finalize_remove_tree(
+                _finalize_array_relative(
                     remove_paths, temporary_root, safe_trash
                 ),
             )
