@@ -40,7 +40,9 @@ class SafeTrash(SafeRename):
         """
         return self._trash_root
 
-    def trash(self, trash_path: Path, trash_root: Path | None = None) -> Path:
+    def trash(
+        self, trash_path: Path, relative_root: Path | None = None
+    ) -> Path:
         """Remove file or directory and log history.
 
         Args:
@@ -54,18 +56,18 @@ class SafeTrash(SafeRename):
         """
         parent_root: Path = trash_path.parent
 
-        if trash_root is None:
+        if relative_root is None:
             self._move_file(trash_path, parent_root)
 
-        elif is_relative(trash_path, root_path=trash_root):
-            self._move_file(trash_path, trash_root)
+        elif is_relative(trash_path, root_path=relative_root):
+            self._move_file(trash_path, relative_root)
         else:
             self._move_file(trash_path, parent_root)
 
         return trash_path
 
     def trash_at_once(
-        self, trash_paths: Paths, trash_root: Path | None = None
+        self, trash_paths: Paths, relative_root: Path | None = None
     ) -> Paths:
         """Remove files or directories at once, and log history.
 
@@ -80,7 +82,7 @@ class SafeTrash(SafeRename):
             Paths: "trash_paths" is returned.
         """
         for trash_path in trash_paths:
-            self.trash(trash_path, trash_root=trash_root)
+            self.trash(trash_path, relative_root=relative_root)
 
         return trash_paths
 
