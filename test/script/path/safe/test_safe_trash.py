@@ -9,7 +9,11 @@ from typing import Callable
 
 from pyspartaproj.context.default.bool_context import BoolPair, Bools
 from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.context.extension.path_context import PathPair2, Paths
+from pyspartaproj.context.extension.path_context import (
+    PathPair,
+    PathPair2,
+    Paths,
+)
 from pyspartaproj.interface.pytest import fail
 from pyspartaproj.script.bool.same_value import bool_same_array
 from pyspartaproj.script.path.iterate_directory import walk_iterator
@@ -25,6 +29,12 @@ from pyspartaproj.script.path.temporary.create_temporary_tree import (
 
 def _get_group() -> Strs:
     return [group + ".path" for group in ["source", "destination"]]
+
+
+def _get_path_pair(source: Path, destination: Path) -> PathPair:
+    return {
+        group: path for group, path in zip(_get_group(), [source, destination])
+    }
 
 
 def _compare_size(history_size: int, history: PathPair2 | None) -> PathPair2:
