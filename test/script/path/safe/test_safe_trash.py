@@ -53,7 +53,7 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
         function(Path(temporary_path))
 
 
-def _finalize_remove(path: Path, safe_trash: SafeTrash) -> PathPair2 | None:
+def _finalize_single(path: Path, safe_trash: SafeTrash) -> PathPair2 | None:
     safe_trash.trash(path)
     return safe_trash.get_history()
 
@@ -91,7 +91,7 @@ def test_file() -> None:
         if safe_trash := _get_remove():
             _common_test(
                 1,
-                _finalize_remove(
+                _finalize_single(
                     create_temporary_file(temporary_root), safe_trash
                 ),
             )
