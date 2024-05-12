@@ -68,7 +68,7 @@ def _finalize_remove_array(
 def _finalize_remove_tree(
     paths: Paths, temporary_root: Path, safe_trash: SafeTrash
 ) -> PathPair2 | None:
-    safe_trash.trash_at_once(paths, trash_root=temporary_root)
+    safe_trash.trash_at_once(paths, relative_root=temporary_root)
     return safe_trash.get_history()
 
 
