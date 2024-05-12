@@ -58,9 +58,7 @@ def _finalize_single(path: Path, safe_trash: SafeTrash) -> PathPair2 | None:
     return safe_trash.get_history()
 
 
-def _finalize_remove_array(
-    paths: Paths, safe_trash: SafeTrash
-) -> PathPair2 | None:
+def _finalize_array(paths: Paths, safe_trash: SafeTrash) -> PathPair2 | None:
     safe_trash.trash_at_once(paths)
     return safe_trash.get_history()
 
@@ -106,7 +104,7 @@ def test_exists() -> None:
         if safe_trash := _get_remove():
             _common_test(
                 1,
-                _finalize_remove_array(
+                _finalize_array(
                     [create_temporary_file(temporary_root)] * 2, safe_trash
                 ),
             )
@@ -142,9 +140,7 @@ def test_select() -> None:
 
             _remove_test(
                 remove_paths,
-                _finalize_remove_array(
-                    remove_paths, _get_remove_local(outside_root)
-                ),
+                _finalize_array(remove_paths, _get_remove_local(outside_root)),
             )
 
         _inside_temporary_directory(individual_test)
