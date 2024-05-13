@@ -16,6 +16,7 @@ from pyspartaproj.context.extension.path_context import (
 )
 from pyspartaproj.interface.pytest import fail
 from pyspartaproj.script.bool.same_value import bool_same_array
+from pyspartaproj.script.directory.create_directory import create_directory
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.modify.get_relative import get_relative
 from pyspartaproj.script.path.safe.safe_trash import SafeTrash
@@ -148,6 +149,23 @@ def test_file() -> None:
     _inside_temporary_directory(individual_test)
 
 
+def test_relative() -> None:
+    def individual_test(temporary_root: Path) -> None:
+        if safe_trash := _get_remove():
+            _single_test(
+                _finalize_single_relative(
+                    create_temporary_file(
+                        create_directory(Path(temporary_root, "test"))
+                    ),
+                    temporary_root,
+                    safe_trash,
+                ),
+                _convert_path_pair(temporary_root, safe_trash),
+            )
+
+    _inside_temporary_directory(individual_test)
+
+
 def test_exists() -> None:
     """Test to remove same files at twice."""
 
@@ -209,6 +227,7 @@ def main() -> bool:
         bool: Success if get to the end of function.
     """
     test_file()
+    test_relative()
     test_exists()
     test_tree()
     test_select()
