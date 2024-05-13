@@ -121,7 +121,7 @@ def _finalize_array_relative(
     return _get_history(safe_trash)
 
 
-def _get_removal_target(path: Path) -> Paths:
+def _get_removal_array(path: Path) -> Paths:
     return list(walk_iterator(path, depth=1))
 
 
@@ -186,7 +186,7 @@ def test_tree() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         create_temporary_tree(temporary_root, tree_deep=3)
-        remove_paths: Paths = _get_removal_target(temporary_root)
+        remove_paths: Paths = _get_removal_array(temporary_root)
 
         if safe_trash := _get_remove():
             _remove_test(
@@ -206,7 +206,7 @@ def test_select() -> None:
     def outside_test(outside_root: Path) -> None:
         def individual_test(temporary_root: Path) -> None:
             create_temporary_tree(temporary_root)
-            remove_paths: Paths = _get_removal_target(temporary_root)
+            remove_paths: Paths = _get_removal_array(temporary_root)
             safe_trash: SafeTrash = _get_remove_local(outside_root)
 
             _remove_test(
