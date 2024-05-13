@@ -38,10 +38,8 @@ def _get_path_pair(source: Path, destination: Path) -> PathPair:
     }
 
 
-def _convert_path_pair(
-    temporary_root: Path, safe_trash: SafeTrash
-) -> PathPair:
-    return _get_path_pair(temporary_root, safe_trash.get_trash_root())
+def _convert_path_pair(source: Path, safe_trash: SafeTrash) -> PathPair:
+    return _get_path_pair(source, safe_trash.get_trash_root())
 
 
 def _compare_size(history_size: int, history: PathPair2 | None) -> PathPair2:
@@ -105,14 +103,14 @@ def _finalize_array(paths: Paths, safe_trash: SafeTrash) -> PathPair2 | None:
 
 
 def _finalize_array_relative(
-    paths: Paths, temporary_root: Path, safe_trash: SafeTrash
+    paths: Paths, relative_root: Path, safe_trash: SafeTrash
 ) -> PathPair2 | None:
-    safe_trash.trash_at_once(paths, relative_root=temporary_root)
+    safe_trash.trash_at_once(paths, relative_root=relative_root)
     return safe_trash.get_history()
 
 
-def _get_removal_target(temporary_root: Path) -> Paths:
-    return list(walk_iterator(temporary_root, depth=1))
+def _get_removal_target(path: Path) -> Paths:
+    return list(walk_iterator(path, depth=1))
 
 
 def _get_remove() -> SafeTrash:
