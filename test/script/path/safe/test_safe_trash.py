@@ -52,12 +52,16 @@ def _compare_size(history_size: int, history: PathPair2 | None) -> PathPair2:
     return history
 
 
+def _check_path_exists(path_pair: PathPair) -> None:
+    exists_pair: BoolPair = check_exists_pair(path_pair)
+    exists_array: Bools = [exists_pair[group] for group in _get_group()]
+
+    assert bool_same_array([not exists_array[0], exists_array[1]])
+
+
 def _common_test(history_size: int, history: PathPair2 | None) -> None:
     for path_pair in _compare_size(history_size, history).values():
-        exists_pair: BoolPair = check_exists_pair(path_pair)
-        exists_array: Bools = [exists_pair[group] for group in _get_group()]
-
-        assert bool_same_array([not exists_array[0], exists_array[1]])
+        _check_path_exists(path_pair)
 
 
 def _single_test(history: PathPair2 | None) -> None:
