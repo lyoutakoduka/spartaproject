@@ -92,28 +92,32 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
         function(Path(temporary_path))
 
 
+def _get_history(safe_trash: SafeTrash) -> PathPair2 | None:
+    return safe_trash.get_history()
+
+
 def _finalize_single(path: Path, safe_trash: SafeTrash) -> PathPair2 | None:
     safe_trash.trash(path)
-    return safe_trash.get_history()
+    return _get_history(safe_trash)
 
 
 def _finalize_single_relative(
     path: Path, relative_root: Path, safe_trash: SafeTrash
 ) -> PathPair2 | None:
     safe_trash.trash(path, relative_root=relative_root)
-    return safe_trash.get_history()
+    return _get_history(safe_trash)
 
 
 def _finalize_array(paths: Paths, safe_trash: SafeTrash) -> PathPair2 | None:
     safe_trash.trash_at_once(paths)
-    return safe_trash.get_history()
+    return _get_history(safe_trash)
 
 
 def _finalize_array_relative(
     paths: Paths, relative_root: Path, safe_trash: SafeTrash
 ) -> PathPair2 | None:
     safe_trash.trash_at_once(paths, relative_root=relative_root)
-    return safe_trash.get_history()
+    return _get_history(safe_trash)
 
 
 def _get_removal_target(path: Path) -> Paths:
