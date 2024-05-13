@@ -71,17 +71,21 @@ def _check_path_relative(path_pair: PathPair, expected: PathPair) -> None:
     assert 1 == len(set(_get_relative_pair(path_pair, expected)))
 
 
-def _common_test(history_size: int, history: PathPair2 | None) -> None:
+def _common_test(
+    history_size: int, history: PathPair2 | None, root_pair: PathPair
+) -> None:
     for path_pair in _compare_size(history_size, history).values():
         _check_path_exists(path_pair)
 
 
-def _single_test(history: PathPair2 | None) -> None:
-    _common_test(1, history)
+def _single_test(history: PathPair2 | None, root_pair: PathPair) -> None:
+    _common_test(1, history, root_pair)
 
 
-def _remove_test(remove_paths: Paths, history: PathPair2 | None) -> None:
-    _common_test(len(remove_paths), history)
+def _remove_test(
+    remove_paths: Paths, history: PathPair2 | None, root_pair: PathPair
+) -> None:
+    _common_test(len(remove_paths), history, root_pair)
 
 
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
@@ -128,6 +132,7 @@ def test_file() -> None:
                     create_temporary_file(temporary_root),
                     safe_trash,
                 ),
+                _convert_path_pair(temporary_root, safe_trash),
             )
 
     _inside_temporary_directory(individual_test)
@@ -142,6 +147,7 @@ def test_exists() -> None:
                 _finalize_array(
                     [create_temporary_file(temporary_root)] * 2, safe_trash
                 ),
+                _convert_path_pair(temporary_root, safe_trash),
             )
 
     _inside_temporary_directory(individual_test)
@@ -160,6 +166,7 @@ def test_tree() -> None:
                 _finalize_array_relative(
                     remove_paths, temporary_root, safe_trash
                 ),
+                _convert_path_pair(temporary_root, safe_trash),
             )
 
     _inside_temporary_directory(individual_test)
@@ -172,10 +179,12 @@ def test_select() -> None:
         def individual_test(temporary_root: Path) -> None:
             create_temporary_tree(temporary_root)
             remove_paths: Paths = _get_removal_target(temporary_root)
+            safe_trash: SafeTrash = _get_remove_local(outside_root)
 
             _remove_test(
                 remove_paths,
-                _finalize_array(remove_paths, _get_remove_local(outside_root)),
+                _finalize_array(remove_paths, safe_trash),
+                _convert_path_pair(temporary_root, safe_trash),
             )
 
         _inside_temporary_directory(individual_test)
