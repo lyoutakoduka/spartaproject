@@ -67,6 +67,10 @@ def _get_relative_pair(path_pair: PathPair, expected: PathPair) -> Paths:
     ]
 
 
+def _check_path_relative(path_pair: PathPair, expected: PathPair) -> None:
+    assert 1 == len(set(_get_relative_pair(path_pair, expected)))
+
+
 def _common_test(history_size: int, history: PathPair2 | None) -> None:
     for path_pair in _compare_size(history_size, history).values():
         _check_path_exists(path_pair)
