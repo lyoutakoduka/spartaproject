@@ -97,6 +97,13 @@ def _finalize_single(path: Path, safe_trash: SafeTrash) -> PathPair2 | None:
     return safe_trash.get_history()
 
 
+def _finalize_single_relative(
+    path: Path, relative_root: Path, safe_trash: SafeTrash
+) -> PathPair2 | None:
+    safe_trash.trash(path, relative_root=relative_root)
+    return safe_trash.get_history()
+
+
 def _finalize_array(paths: Paths, safe_trash: SafeTrash) -> PathPair2 | None:
     safe_trash.trash_at_once(paths)
     return safe_trash.get_history()
