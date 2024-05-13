@@ -76,6 +76,7 @@ def _common_test(
 ) -> None:
     for path_pair in _compare_size(history_size, history).values():
         _check_path_exists(path_pair)
+        _check_path_relative(path_pair, root_pair)
 
 
 def _single_test(history: PathPair2 | None, root_pair: PathPair) -> None:
