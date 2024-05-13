@@ -17,6 +17,7 @@ from pyspartaproj.context.extension.path_context import (
 from pyspartaproj.interface.pytest import fail
 from pyspartaproj.script.bool.same_value import bool_same_array
 from pyspartaproj.script.path.iterate_directory import walk_iterator
+from pyspartaproj.script.path.modify.get_relative import get_relative
 from pyspartaproj.script.path.safe.safe_trash import SafeTrash
 from pyspartaproj.script.path.status.check_exists import check_exists_pair
 from pyspartaproj.script.path.temporary.create_temporary_file import (
@@ -57,6 +58,13 @@ def _check_path_exists(path_pair: PathPair) -> None:
     exists_array: Bools = [exists_pair[group] for group in _get_group()]
 
     assert bool_same_array([not exists_array[0], exists_array[1]])
+
+
+def _get_relative_pair(path_pair: PathPair, expected: PathPair) -> Paths:
+    return [
+        get_relative(path_pair[group], root_path=expected[group])
+        for group in _get_group()
+    ]
 
 
 def _common_test(history_size: int, history: PathPair2 | None) -> None:
