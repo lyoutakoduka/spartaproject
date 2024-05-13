@@ -60,15 +60,15 @@ def _check_path_exists(path_pair: PathPair) -> None:
     assert bool_same_array([not exists_array[0], exists_array[1]])
 
 
-def _get_relative_pair(path_pair: PathPair, expected: PathPair) -> Paths:
+def _get_relative_pair(path_pair: PathPair, root_pair: PathPair) -> Paths:
     return [
-        get_relative(path_pair[group], root_path=expected[group])
+        get_relative(path_pair[group], root_path=root_pair[group])
         for group in _get_group()
     ]
 
 
-def _check_path_relative(path_pair: PathPair, expected: PathPair) -> None:
-    assert 1 == len(set(_get_relative_pair(path_pair, expected)))
+def _check_path_relative(path_pair: PathPair, root_pair: PathPair) -> None:
+    assert 1 == len(set(_get_relative_pair(path_pair, root_pair)))
 
 
 def _common_test(
