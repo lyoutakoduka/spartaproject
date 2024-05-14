@@ -190,7 +190,7 @@ def _get_stamp_after(
 
 
 def _get_edit_history(edit_archive: EditArchive) -> PathPair:
-    return _edit_to_archived(edit_archive.get_decompressed_root())
+    return _edit_to_archived(edit_archive.get_decompress_root())
 
 
 def _close_archive(edit_archive: EditArchive) -> Paths:
