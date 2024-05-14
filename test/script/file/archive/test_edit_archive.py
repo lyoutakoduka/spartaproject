@@ -295,6 +295,12 @@ def _get_edit_archive_compress(archive_path: Path) -> EditArchive:
     return EditArchive(archive_path, compress=True)
 
 
+def _get_edit_archive_remove(
+    archive_path: Path, remove_root: Path
+) -> EditArchive:
+    return EditArchive(archive_path, remove_root=remove_root)
+
+
 def test_single() -> None:
     """Test to compare internal of single archive file."""
 
