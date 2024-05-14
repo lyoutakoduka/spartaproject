@@ -137,6 +137,16 @@ def _get_remove_local(outside_root: Path) -> SafeTrash:
     return SafeTrash(jst=True, remove_root=outside_root)
 
 
+def test_path() -> None:
+    date_time: Path = Path("2023", "04", "01", "00", "00", "00", "000000")
+
+    def individual_test(temporary_root: Path) -> None:
+        expected: Path = Path(temporary_root, "trash", date_time)
+        assert expected == _get_remove_path(temporary_root).get_trash_root()
+
+    _inside_temporary_directory(individual_test)
+
+
 def test_file() -> None:
     """Test to remove file, and log history."""
 
@@ -230,6 +240,7 @@ def main() -> bool:
     Returns:
         bool: Success if get to the end of function.
     """
+    test_path()
     test_file()
     test_relative()
     test_exists()
