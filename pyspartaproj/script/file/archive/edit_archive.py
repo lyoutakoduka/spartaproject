@@ -39,9 +39,7 @@ class EditArchive(SafeTrash):
         self._protected: bool = protected
 
     def _get_archive_stamp(self) -> TimePair:
-        return get_directory_latest(
-            walk_iterator(self.get_decompressed_root())
-        )
+        return get_directory_latest(walk_iterator(self.get_decompress_root()))
 
     def _is_difference_archive_stamp(self, archive_stamp: TimePair) -> bool:
         return not is_same_stamp(self._archive_stamp, archive_stamp)
@@ -78,7 +76,7 @@ class EditArchive(SafeTrash):
 
         compress_archive.compress_at_once(
             [Path(path_text) for path_text in archive_stamp.keys()],
-            archive_root=self.get_decompressed_root(),
+            archive_root=self.get_decompress_root(),
         )
 
         return compress_archive.close_archived()
@@ -99,7 +97,7 @@ class EditArchive(SafeTrash):
         )
 
     def _initialize_archive(self) -> None:
-        decompress_archive = DecompressArchive(self.get_decompressed_root())
+        decompress_archive = DecompressArchive(self.get_decompress_root())
 
         self._decompress_archive(decompress_archive)
         self._record_compress_type(decompress_archive)
@@ -124,7 +122,7 @@ class EditArchive(SafeTrash):
 
         return archived
 
-    def get_decompressed_root(self) -> Path:
+    def get_decompress_root(self) -> Path:
         """Get path of temporary working space.
 
         The directory is used for placing decompressed contents of archive.
