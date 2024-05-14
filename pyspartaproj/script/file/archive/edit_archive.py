@@ -31,7 +31,7 @@ class EditArchive(SafeTrash):
     ) -> None:
         self._still_removed: bool = False
         self._decompressed_root: Path = self.create_sub_directory(
-            Path("decompressed")
+            Path("decompress")
         )
         self._archive_path: Path = archive_path
         self._limit_byte: int = limit_byte
