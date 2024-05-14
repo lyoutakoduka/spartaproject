@@ -30,7 +30,7 @@ class EditArchive(SafeTrash):
         protected: bool,
     ) -> None:
         self._still_removed: bool = False
-        self._decompressed_root: Path = self.create_sub_directory(
+        self._decompress_root: Path = self.create_sub_directory(
             Path("decompress")
         )
         self._archive_path: Path = archive_path
@@ -132,7 +132,7 @@ class EditArchive(SafeTrash):
         Returns:
             Path: Path of temporary working space.
         """
-        return self._decompressed_root
+        return self._decompress_root
 
     def close_archive(self) -> Paths | None:
         """Compress the contents of temporary working space to archive.
