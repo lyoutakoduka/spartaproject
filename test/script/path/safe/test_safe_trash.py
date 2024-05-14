@@ -138,6 +138,7 @@ def _get_remove_local(outside_root: Path) -> SafeTrash:
 
 
 def test_path() -> None:
+    """Test to get path used by directory of trash box."""
     date_time: Path = Path("2023", "04", "01", "00", "00", "00", "000000")
 
     def individual_test(temporary_root: Path) -> None:
@@ -164,6 +165,8 @@ def test_file() -> None:
 
 
 def test_relative() -> None:
+    """Test to remove file which is based on specific root directory."""
+
     def individual_test(temporary_root: Path) -> None:
         if safe_trash := _get_remove():
             _single_test(
