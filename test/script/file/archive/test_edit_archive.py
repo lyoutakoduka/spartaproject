@@ -50,6 +50,10 @@ def _get_root_archive(temporary_root: Path) -> Path:
     return Path(temporary_root, "archive")
 
 
+def _get_root_edit(temporary_root: Path) -> Path:
+    return Path(temporary_root, "edit")
+
+
 def _add_archive(
     temporary_root: Path, compress_archive: CompressArchive
 ) -> Paths:
