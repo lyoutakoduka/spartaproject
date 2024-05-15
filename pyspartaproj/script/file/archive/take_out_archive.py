@@ -207,5 +207,5 @@ class TakeOutArchive(EditArchive):
 
         edit_archive = EditArchive(archive_path, protected=protected)
         return self._get_took_out(
-            took_out_root, remove_root, edit_archive.get_decompressed_root()
+            took_out_root, remove_root, edit_archive.get_decompress_root()
         )
