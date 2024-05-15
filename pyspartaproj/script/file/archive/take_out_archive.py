@@ -25,7 +25,7 @@ class TakeOutArchive(EditArchive):
 
     def _get_archive_name(self, took_out_root: Path, archive_id: str) -> str:
         archive_path: Path = get_avoid_path(
-            rename_format(Path(took_out_root, archive_id))
+            rename_format(Path(self.get_took_out_root(), archive_id))
         )
         return archive_path.stem
 
@@ -33,7 +33,7 @@ class TakeOutArchive(EditArchive):
         self, took_out_root: Path, file_paths: Paths, archive_id: str
     ) -> Path:
         compress_archive = CompressArchive(
-            took_out_root,
+            self.get_took_out_root(),
             archive_id=self._get_archive_name(took_out_root, archive_id),
         )
 
