@@ -204,10 +204,14 @@ def _close_archive(edit_archive: EditArchive) -> Paths:
         fail()
 
 
+def _stamp_test(stamp_before: TimePair, stamp_after: TimePair) -> None:
+    assert is_same_stamp(stamp_before, stamp_after)
+
+
 def _common_test(
     temporary_root: Path, stamp_before: TimePair, edit_archive: EditArchive
 ) -> None:
-    assert is_same_stamp(
+    _stamp_test(
         stamp_before,
         _get_stamp_after(
             temporary_root,
