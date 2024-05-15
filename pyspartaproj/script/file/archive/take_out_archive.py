@@ -11,7 +11,6 @@ from pyspartaproj.script.file.archive.compress_archive import CompressArchive
 from pyspartaproj.script.file.archive.edit_archive import EditArchive
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.modify.avoid_duplication import get_avoid_path
-from pyspartaproj.script.path.safe.safe_trash import SafeTrash
 
 
 class TakeOutArchive(EditArchive):
