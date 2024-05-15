@@ -189,3 +189,26 @@ class TakeOutArchive(EditArchive):
 
         edit_archive = EditArchive(archive_path, protected=protected)
         return self._get_took_out(edit_archive.get_decompress_root())
+
+    def __init__(
+        self,
+        archive_path: Path,
+        took_out_root: Path | None = None,
+        limit_byte: int = 0,
+        compress: bool = False,
+        protected: bool = False,
+        remove_root: Path | None = None,
+        override: bool = False,
+        jst: bool = False,
+    ) -> None:
+        super().__init__(
+            archive_path,
+            limit_byte=limit_byte,
+            compress=compress,
+            protected=protected,
+            remove_root=remove_root,
+            override=override,
+            jst=jst,
+        )
+
+        self._initialize_variables_take(archive_path, took_out_root)
