@@ -235,6 +235,20 @@ def _common_test(
     )
 
 
+def _remove_test(
+    temporary_root: Path,
+    stamp_before: TimePair,
+    edit_archive: EditArchive,
+) -> None:
+    _get_edit_history(edit_archive)
+    _close_archive(edit_archive)
+
+    _stamp_test(
+        stamp_before,
+        _get_stamp_remove(temporary_root, edit_archive.get_trash_root()),
+    )
+
+
 def _get_sorted_paths(before_paths: Paths, after_paths: Paths) -> Paths2:
     return [sorted(paths) for paths in [before_paths, after_paths]]
 
