@@ -182,10 +182,6 @@ class TakeOutArchive(EditArchive):
         Returns:
             Paths: List of directory path which is took out.
         """
-        if took_out_root is None:
-            took_out_root = archive_path.parent
-
-        edit_archive = EditArchive(archive_path, protected=protected)
         return self._get_took_out()
 
     def __init__(
