@@ -23,30 +23,24 @@ class TakeOutArchive(EditArchive):
 
         self._took_out_root: Path = took_out_root
 
-    def _get_archive_name(self, took_out_root: Path, archive_id: str) -> str:
+    def _get_archive_name(self, archive_id: str) -> str:
         archive_path: Path = get_avoid_path(
             rename_format(Path(self.get_took_out_root(), archive_id))
         )
         return archive_path.stem
 
-    def _take_out_archive(
-        self, took_out_root: Path, file_paths: Paths, archive_id: str
-    ) -> Path:
+    def _take_out_archive(self, file_paths: Paths, archive_id: str) -> Path:
         compress_archive = CompressArchive(
             self.get_took_out_root(),
-            archive_id=self._get_archive_name(took_out_root, archive_id),
+            archive_id=self._get_archive_name(archive_id),
         )
 
         compress_archive.compress_at_once(file_paths)
         return compress_archive.close_archived()[0]
 
-    def _take_out_archives(
-        self, took_out_root: Path, inside_directory: PathsPair
-    ) -> Paths:
+    def _take_out_archives(self, inside_directory: PathsPair) -> Paths:
         return [
-            self._take_out_archive(
-                took_out_root, file_paths, Path(directory_text).name
-            )
+            self._take_out_archive(file_paths, Path(directory_text).name)
             for directory_text, file_paths in inside_directory.items()
         ]
 
@@ -80,7 +74,6 @@ class TakeOutArchive(EditArchive):
 
     def _took_out_cycle(
         self,
-        took_out_root: Path,
         remove_root: Path | None,
         decompressed_root: Path,
         archive_paths: Paths,
@@ -90,24 +83,15 @@ class TakeOutArchive(EditArchive):
         )
 
         if 0 < len(inside_directory):
-            archive_paths += self._take_out_archives(
-                took_out_root, inside_directory
-            )
+            archive_paths += self._take_out_archives(inside_directory)
             self._remove_took_out(remove_root, inside_directory)
-            self._took_out_cycle(
-                took_out_root, remove_root, decompressed_root, archive_paths
-            )
+            self._took_out_cycle(remove_root, decompressed_root, archive_paths)
 
     def _get_took_out(
-        self,
-        took_out_root: Path,
-        remove_root: Path | None,
-        decompressed_root: Path,
+        self, remove_root: Path | None, decompressed_root: Path
     ) -> Paths:
         archive_paths: Paths = []
-        self._took_out_cycle(
-            took_out_root, remove_root, decompressed_root, archive_paths
-        )
+        self._took_out_cycle(remove_root, decompressed_root, archive_paths)
         return archive_paths
 
     def get_took_out_root(self) -> Path:
@@ -218,5 +202,5 @@ class TakeOutArchive(EditArchive):
 
         edit_archive = EditArchive(archive_path, protected=protected)
         return self._get_took_out(
-            took_out_root, remove_root, edit_archive.get_decompress_root()
+            remove_root, edit_archive.get_decompress_root()
         )
