@@ -402,6 +402,8 @@ def test_protect() -> None:
 
 
 def test_remove() -> None:
+    """Test of directory used for removing process when archive is edited."""
+
     def individual_test(temporary_root: Path) -> None:
         stamp_before: TimePair = _initialize_archive(temporary_root)
         remove_root: Path = create_directory(_get_root_edit(temporary_root))
