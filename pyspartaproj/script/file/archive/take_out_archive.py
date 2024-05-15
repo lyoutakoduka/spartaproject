@@ -110,6 +110,9 @@ class TakeOutArchive(EditArchive):
         )
         return archive_paths
 
+    def get_took_out_root(self) -> Path:
+        return self._took_out_root
+
     def take_out(
         self,
         archive_path: Path,
