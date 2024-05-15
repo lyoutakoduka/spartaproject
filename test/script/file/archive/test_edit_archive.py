@@ -200,6 +200,12 @@ def _get_stamp_after(
     return stamp_after
 
 
+def _get_stamp_remove(temporary_root: Path, remove_root: Path) -> TimePair:
+    return _get_decompress_stamp(
+        temporary_root, list(walk_iterator(remove_root, directory=False))
+    )
+
+
 def _get_edit_history(edit_archive: EditArchive) -> PathPair:
     return _edit_to_archived(edit_archive.get_decompress_root())
 
