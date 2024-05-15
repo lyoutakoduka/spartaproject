@@ -11,6 +11,7 @@ from typing import Callable
 from pyspartaproj.context.extension.path_context import PathPair, Paths, Paths2
 from pyspartaproj.context.extension.time_context import TimePair
 from pyspartaproj.interface.pytest import fail
+from pyspartaproj.script.directory.create_directory import create_directory
 from pyspartaproj.script.file.archive.compress_archive import CompressArchive
 from pyspartaproj.script.file.archive.decompress_archive import (
     DecompressArchive,
@@ -400,6 +401,22 @@ def test_protect() -> None:
     _inside_temporary_directory(individual_test)
 
 
+def test_remove() -> None:
+    def individual_test(temporary_root: Path) -> None:
+        stamp_before: TimePair = _initialize_archive(temporary_root)
+        remove_root: Path = create_directory(_get_root_edit(temporary_root))
+
+        _remove_test(
+            temporary_root,
+            stamp_before,
+            _get_edit_archive_remove(
+                _get_archive_path(temporary_root), remove_root
+            ),
+        )
+
+    _inside_temporary_directory(individual_test)
+
+
 def main() -> bool:
     """All test of feature flags module.
 
@@ -411,4 +428,5 @@ def main() -> bool:
     test_limit()
     test_compress()
     test_protect()
+    test_remove()
     return True
