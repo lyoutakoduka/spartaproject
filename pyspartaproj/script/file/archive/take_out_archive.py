@@ -82,13 +82,7 @@ class TakeOutArchive(EditArchive):
     def get_took_out_root(self) -> Path:
         return self._took_out_root
 
-    def take_out(
-        self,
-        archive_path: Path,
-        took_out_root: Path | None = None,
-        remove_root: Path | None = None,
-        protected: bool = False,
-    ) -> Paths:
+    def take_out(self) -> Paths:
         """Take out directory from inside of archive.
 
         Behavior of take out process is generally split into following 3 pattern.
