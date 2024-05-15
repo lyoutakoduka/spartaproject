@@ -14,6 +14,8 @@ from pyspartaproj.script.path.modify.avoid_duplication import get_avoid_path
 
 
 class TakeOutArchive(EditArchive):
+    """Class to take out directory from inside of archive."""
+
     def _initialize_variables_take(
         self, archive_path: Path, took_out_root: Path | None
     ) -> None:
@@ -80,12 +82,17 @@ class TakeOutArchive(EditArchive):
         return archive_paths
 
     def get_took_out_root(self) -> Path:
+        """Get path of directory that archives you took out will placed.
+
+        Returns:
+            Path: Path of directory that archives will placed.
+        """
         return self._took_out_root
 
     def take_out(self) -> Paths:
         """Take out directory from inside of archive.
 
-        Behavior of take out process is generally split into following 3 pattern.
+        Behavior of take out process is split into following 3 pattern.
 
         Pattern 1: Do Nothing if archive is applicable to following 2 pattern.
 
@@ -159,20 +166,6 @@ class TakeOutArchive(EditArchive):
             |--directory_A/
             |--directory_B/
 
-        Args:
-            archive_path (Path): Path of archive you want to take out.
-
-            took_out_root (Path | None, optional): Defaults to None.
-                Destination directory that took out directories in archive.
-
-            remove_root (Path | None, optional): Defaults to None.
-                Path of directory used as trash box.
-                It's used for argument "remove_root" of class "SafeTrash".
-
-            protected (bool, optional): Defaults to False.
-                True if you don't want to update original archive.
-                It's used for argument "protected" of class "EditArchive".
-
         Returns:
             Paths: List of directory path which is took out.
         """
@@ -189,6 +182,38 @@ class TakeOutArchive(EditArchive):
         override: bool = False,
         jst: bool = False,
     ) -> None:
+        """Initialize variables and decompress archive you selected.
+
+        Args:
+            archive_path (Path): Path of archive you want to take out.
+
+            took_out_root (Path | None, optional): Defaults to None.
+                Destination directory that took out directories in archive.
+
+            limit_byte (int, optional): Defaults to 0.
+                If it's not 0, archive are dividedly compressed.
+                It's used for argument "limit_byte" of class "EditArchive".
+
+            compress (bool, optional): Defaults to False.
+                If it's True, you can compress archive by LZMA format.
+                It's used for argument "compress" of class "EditArchive".
+
+            protected (bool, optional): Defaults to False.
+                True if you don't want to update original archive.
+                It's used for argument "protected" of class "EditArchive".
+
+            remove_root (Path | None, optional): Defaults to None.
+                Path of directory used as trash box.
+                It's used for argument "remove_root" of class "EditArchive".
+
+            override (bool, optional): Defaults to False.
+                Override initial time count to "2023/4/1:12:00:00-00 (AM)".
+                It's used for argument "override" of class "EditArchive".
+
+            jst (bool, optional): Defaults to False.
+                If True, you can get datetime object as JST time zone.
+                It's used for argument "jst" of class "EditArchive".
+        """
         super().__init__(
             archive_path,
             limit_byte=limit_byte,
