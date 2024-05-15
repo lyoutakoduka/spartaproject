@@ -179,15 +179,22 @@ def _edit_time_stamp(
     _update_time_stamp(edit_history, stamp_before, stamp_after)
 
 
+def _get_decompress_stamp(
+    temporary_root: Path, archive_paths: Paths
+) -> TimePair:
+    _decompress_archive(_get_root_after(temporary_root), archive_paths)
+    return _get_archive_stamp_after(temporary_root)
+
+
 def _get_stamp_after(
     temporary_root: Path,
     stamp_before: TimePair,
     edit_history: PathPair,
     archive_paths: Paths,
 ) -> TimePair:
-    _decompress_archive(_get_root_after(temporary_root), archive_paths)
-
-    stamp_after: TimePair = _get_archive_stamp_after(temporary_root)
+    stamp_after: TimePair = _get_decompress_stamp(
+        temporary_root, archive_paths
+    )
     _edit_time_stamp(edit_history, stamp_before, stamp_after)
 
     return stamp_after
