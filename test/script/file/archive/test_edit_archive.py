@@ -201,7 +201,7 @@ def _get_stamp_after(
     return stamp_after
 
 
-def _get_stamp_remove(temporary_root: Path, remove_root: Path) -> TimePair:
+def _find_decompress_root(temporary_root: Path, remove_root: Path) -> TimePair:
     return _get_decompress_stamp(
         temporary_root, list(walk_iterator(remove_root, directory=False))
     )
@@ -246,7 +246,7 @@ def _remove_test(
 
     _stamp_test(
         stamp_before,
-        _get_stamp_remove(temporary_root, edit_archive.get_trash_root()),
+        _find_decompress_root(temporary_root, edit_archive.get_trash_root()),
     )
 
 
