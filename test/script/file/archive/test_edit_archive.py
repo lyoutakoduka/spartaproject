@@ -240,6 +240,20 @@ def _common_test(
     )
 
 
+def _protect_test(
+    temporary_root: Path, stamp_before: TimePair, edit_archive: EditArchive
+) -> None:
+    _get_edit_history(edit_archive)
+    _close_archive_fail(edit_archive)
+
+    _stamp_test(
+        stamp_before,
+        _find_decompress_root(
+            temporary_root, _get_root_archive(temporary_root)
+        ),
+    )
+
+
 def _remove_test(
     temporary_root: Path,
     stamp_before: TimePair,
