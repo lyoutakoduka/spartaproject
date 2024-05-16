@@ -218,6 +218,10 @@ def _close_archive(edit_archive: EditArchive) -> Paths:
         fail()
 
 
+def _close_archive_fail(edit_archive: EditArchive) -> None:
+    assert edit_archive.close_archive() is None
+
+
 def _stamp_test(stamp_before: TimePair, stamp_after: TimePair) -> None:
     assert is_same_stamp(stamp_before, stamp_after)
 
