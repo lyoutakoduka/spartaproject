@@ -343,7 +343,7 @@ def _specific_test(working: PathPair, archive_status: ArchiveStatus) -> None:
     _compare_relative(working, archive_paths)
 
 
-def _protect_test(working: PathPair, archive_status: ArchiveStatus) -> None:
+def _protect_test(archive_status: ArchiveStatus) -> None:
     _took_out_and_keep(
         TakeOutArchive(archive_status["archive"], protected=True).take_out(),
         archive_status,
@@ -492,7 +492,9 @@ def test_protect() -> None:
     """
 
     def individual_test(temporary_root: Path) -> None:
-        _create_archive_protect(_create_directory_default(temporary_root))
+        _protect_test(
+            _create_archive_protect(_create_directory_default(temporary_root))
+        )
 
     _inside_temporary_directory(individual_test)
 
