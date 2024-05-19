@@ -360,6 +360,12 @@ def _create_directory_specific(temporary_root: Path) -> PathPair:
     )
 
 
+def _create_directory_remove(temporary_root: Path) -> PathPair:
+    return _create_working_directory(
+        temporary_root, _get_directory_names() + ["remove"]
+    )
+
+
 def test_compleat() -> None:
     """Test to take out directory from inside of archive.
 
