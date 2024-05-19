@@ -343,6 +343,13 @@ def _specific_test(working: PathPair, archive_status: ArchiveStatus) -> None:
     _compare_relative(working, archive_paths)
 
 
+def _protect_test(working: PathPair, archive_status: ArchiveStatus) -> None:
+    _took_out_and_keep(
+        TakeOutArchive(archive_status["archive"], protected=True).take_out(),
+        archive_status,
+    )
+
+
 def _create_directory_default(temporary_root: Path) -> PathPair:
     return _create_working_directory(temporary_root, _get_directory_names())
 
