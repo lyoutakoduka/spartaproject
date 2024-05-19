@@ -322,15 +322,15 @@ def _took_out_and_keep(
     _compare_keep(archive_status)
 
 
-def _default_test(archive_status: ArchiveStatus) -> None:
-    _took_out_and_keep(
-        TakeOutArchive(archive_status["archive"]).take_out(), archive_status
-    )
-
-
 def _compare_relative(working: PathPair, archive_paths: Paths) -> None:
     assert False not in is_relative_array(
         archive_paths, root_path=working["specific"]
+    )
+
+
+def _default_test(archive_status: ArchiveStatus) -> None:
+    _took_out_and_keep(
+        TakeOutArchive(archive_status["archive"]).take_out(), archive_status
     )
 
 
