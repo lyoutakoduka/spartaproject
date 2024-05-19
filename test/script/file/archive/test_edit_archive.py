@@ -312,10 +312,6 @@ def _get_archive_limit(
     )
 
 
-def _get_edit_archive_protect(archive_path: Path) -> EditArchive:
-    return EditArchive(archive_path, protected=True)
-
-
 def _get_archive_path(temporary_root: Path) -> Path:
     return _add_archive(temporary_root, _get_archive(temporary_root))[0]
 
@@ -342,6 +338,10 @@ def _get_edit_archive_limit(
 
 def _get_edit_archive_compress(archive_path: Path) -> EditArchive:
     return EditArchive(archive_path, compress=True)
+
+
+def _get_edit_archive_protect(archive_path: Path) -> EditArchive:
+    return EditArchive(archive_path, protected=True)
 
 
 def _get_edit_archive_remove(
