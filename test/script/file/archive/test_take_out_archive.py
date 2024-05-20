@@ -350,6 +350,13 @@ def _protect_test(archive_status: ArchiveStatus) -> None:
     )
 
 
+def _remove_test(working: PathPair, archive_status: ArchiveStatus) -> None:
+    take_out_archive = TakeOutArchive(
+        archive_status["archive"], remove_root=working["remove"]
+    )
+    _took_out_and_keep(take_out_archive.take_out(), archive_status)
+
+
 def _create_directory_default(temporary_root: Path) -> PathPair:
     return _create_working_directory(temporary_root, _get_directory_names())
 
