@@ -21,11 +21,10 @@ def test_file() -> None:
     """Test to create empty temporary file as json format."""
 
     def individual_test(temporary_root: Path) -> None:
-        expected: Path = Path(temporary_root, "temporary.json")
         file_path: Path = create_temporary_file(temporary_root)
 
-        assert expected == file_path
         assert file_path.exists()
+        assert file_path == Path(temporary_root, "temporary.json")
 
     _inside_temporary_directory(individual_test)
 
