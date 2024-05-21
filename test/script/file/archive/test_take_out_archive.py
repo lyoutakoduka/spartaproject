@@ -517,6 +517,14 @@ def test_protect() -> None:
     _inside_temporary_directory(individual_test)
 
 
+def test_remove() -> None:
+    def individual_test(temporary_root: Path) -> None:
+        working: PathPair = _create_directory_remove(temporary_root)
+        _remove_test(working, _create_archive_single(working))
+
+    _inside_temporary_directory(individual_test)
+
+
 def main() -> bool:
     """Run all tests.
 
@@ -533,4 +541,5 @@ def main() -> bool:
     test_override()
     test_specific()
     test_protect()
+    test_remove()
     return True
