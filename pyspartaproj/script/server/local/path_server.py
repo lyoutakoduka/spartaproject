@@ -119,7 +119,7 @@ class PathServer(WorkSpace):
         """Convert to full path on local working space from relative.
 
         Args:
-            local_full (Path): Relative path you want to convert.
+            local_relative (Path): Relative path you want to convert.
 
         Returns:
             Path: Converted full path.
