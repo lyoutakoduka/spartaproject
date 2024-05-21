@@ -347,6 +347,10 @@ def _protect_test(archive_status: ArchiveStatus) -> None:
     )
 
 
+def _get_remove_expected(archive_status: ArchiveStatus) -> Paths:
+    return archive_status["take"] + [Path(archive_status["archive"].name)]
+
+
 def _remove_test(working: PathPair, archive_status: ArchiveStatus) -> None:
     take_out_archive = TakeOutArchive(
         archive_status["archive"], remove_root=working["remove"]
