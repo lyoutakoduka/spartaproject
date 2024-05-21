@@ -489,7 +489,7 @@ def test_override() -> None:
 def test_specific() -> None:
     """Test to take out directory from inside of archive.
 
-    Take out directory in archive to specific root directory.
+    Take out directory from archive to specific root directory.
     """
 
     def individual_test(temporary_root: Path) -> None:
@@ -502,7 +502,7 @@ def test_specific() -> None:
 def test_protect() -> None:
     """Test to take out directory from inside of archive.
 
-    Take out directory in protected archive, but archive isn't updated.
+    Take out directory from protected archive, but archive isn't updated.
     """
 
     def individual_test(temporary_root: Path) -> None:
@@ -514,6 +514,11 @@ def test_protect() -> None:
 
 
 def test_remove() -> None:
+    """Test to take out directory from inside of archive.
+
+    File or directory is removed to specific trash box in test.
+    """
+
     def individual_test(temporary_root: Path) -> None:
         working: PathPair = _create_directory_remove(temporary_root)
         _remove_test(working, _create_archive_single(working))
