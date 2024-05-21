@@ -69,10 +69,6 @@ def _get_relative_source(working: PathPair, target_paths: Paths) -> Paths:
     return _get_relative_paths(working, target_paths, "source")
 
 
-def _get_relative_remove(working: PathPair, target_paths: Paths) -> Paths:
-    return _get_relative_paths(working, target_paths, "remove")
-
-
 def _find_relative_paths(path: Path) -> Paths:
     return get_relative_array(list(walk_iterator(path)), root_path=path)
 
