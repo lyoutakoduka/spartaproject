@@ -73,13 +73,15 @@ def _get_relative_remove(working: PathPair, target_paths: Paths) -> Paths:
     return _get_relative_paths(working, target_paths, "remove")
 
 
+def _find_relative_paths(path: Path) -> Paths:
+    return get_relative_array(list(walk_iterator(path)), root_path=path)
+
+
 def _get_relative_archive(archive_path: Path) -> Paths:
     edit_archive = EditArchive(archive_path)
     root_path: Path = edit_archive.get_decompress_root()
 
-    return get_relative_array(
-        list(walk_iterator(root_path)), root_path=root_path
-    )
+    return _find_relative_paths(root_path)
 
 
 def _add_temporary_files(directory_root: Path, file_names: Strs) -> Paths:
