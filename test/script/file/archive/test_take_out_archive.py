@@ -355,7 +355,11 @@ def _remove_test(working: PathPair, archive_status: ArchiveStatus) -> None:
     take_out_archive = TakeOutArchive(
         archive_status["archive"], remove_root=working["remove"]
     )
-    _took_out_and_keep(take_out_archive.take_out(), archive_status)
+
+    archive_paths: Paths = take_out_archive.take_out()
+    take_out_archive.close_archive()
+
+    _took_out_and_keep(archive_paths, archive_status)
 
 
 def _create_directory_default(temporary_root: Path) -> PathPair:
