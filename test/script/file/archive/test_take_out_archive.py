@@ -131,14 +131,10 @@ def _create_archive_empty(working: PathPair) -> ArchiveStatus:
     )
 
 
-def _get_take_out_single(working: PathPair) -> Paths:
-    return _add_test_tree_simple(working)
-
-
 def _create_archive_single(working: PathPair) -> ArchiveStatus:
     return _create_archive_shared(
         working,
-        _get_relative_source(working, _get_take_out_single(working)),
+        _get_relative_source(working, _add_test_tree_simple(working)),
         _get_empty(),
     )
 
@@ -162,10 +158,6 @@ def _create_archive_multiple(working: PathPair) -> ArchiveStatus:
     )
 
 
-def _get_take_out_mix(working: PathPair) -> Paths:
-    return _add_test_tree_simple(working)
-
-
 def _get_keep_mix(working: PathPair) -> Paths:
     return [create_temporary_file(working["source"])]
 
@@ -173,7 +165,7 @@ def _get_keep_mix(working: PathPair) -> Paths:
 def _create_archive_mix(working: PathPair) -> ArchiveStatus:
     return _create_archive_shared(
         working,
-        _get_relative_source(working, _get_take_out_mix(working)),
+        _get_relative_source(working, _add_test_tree_simple(working)),
         _get_relative_source(working, _get_keep_mix(working)),
     )
 
@@ -262,13 +254,9 @@ def _create_archive_specific(working: PathPair) -> ArchiveStatus:
     )
 
 
-def _get_take_out_protect(working: PathPair) -> Paths:
-    return _add_test_tree_simple(working)
-
-
 def _create_archive_protect(working: PathPair) -> ArchiveStatus:
     taka_paths: Paths = _get_relative_source(
-        working, _get_take_out_protect(working)
+        working, _add_test_tree_simple(working)
     )
     return _create_archive_shared(working, taka_paths, taka_paths)
 
