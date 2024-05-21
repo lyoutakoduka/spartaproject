@@ -351,15 +351,23 @@ def _get_remove_expected(archive_status: ArchiveStatus) -> Paths:
     return archive_status["take"] + [Path(archive_status["archive"].name)]
 
 
+def _compare_remove(trash_root: Path, archive_status: ArchiveStatus) -> None:
+    _compare_path_test(
+        _find_relative_paths(trash_root), _get_remove_expected(archive_status)
+    )
+
+
 def _remove_test(working: PathPair, archive_status: ArchiveStatus) -> None:
     take_out_archive = TakeOutArchive(
         archive_status["archive"], remove_root=working["remove"]
     )
 
     archive_paths: Paths = take_out_archive.take_out()
+    trash_root: Path = take_out_archive.get_trash_root()
     take_out_archive.close_archive()
 
     _took_out_and_keep(archive_paths, archive_status)
+    _compare_remove(trash_root, archive_status)
 
 
 def _create_directory_default(temporary_root: Path) -> PathPair:
