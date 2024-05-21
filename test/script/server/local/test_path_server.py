@@ -79,6 +79,7 @@ def test_temporary() -> None:
 
 
 def test_jst() -> None:
+    """Test to get local temporary working space including JST time zone."""
     date_time: Path = Path("2023", "04", "01", "09", "00", "00", "000000")
 
     def individual_test(temporary_root: Path) -> None:
