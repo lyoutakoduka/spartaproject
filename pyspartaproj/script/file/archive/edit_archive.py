@@ -58,11 +58,8 @@ class EditArchive(SafeTrash):
 
         return None
 
-    def _remove_unused(self, paths: Paths) -> None:
-        self.trash_at_once(paths)
-
     def _cleanup_before_override(self) -> None:
-        self._remove_unused(self._decompressed)
+        self.trash_at_once(self._decompressed)
 
     def _compress_archive(self, archive_stamp: TimePair) -> Paths:
         self._cleanup_before_override()
