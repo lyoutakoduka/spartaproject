@@ -14,7 +14,7 @@ from pyspartaproj.script.directory.date_time_space import create_working_space
 class WorkSpace:
     """Class to create temporary working space shared in class."""
 
-    def _initialize_variables(self, working_root: Path | None) -> None:
+    def _initialize_variables(self) -> None:
         self._working_root: Path = Path(mkdtemp())
 
     def create_date_time_space(
@@ -66,11 +66,11 @@ class WorkSpace:
         """Remove temporary working space."""
         rmtree(str(self._working_root))
 
-    def __init__(self, working_root: Path | None = None) -> None:
+    def __init__(self) -> None:
         """Create temporary working space.
 
         Args:
             working_root (Path | None, optional): Defaults to None.
                 Path of temporary working space you specified.
         """
-        self._initialize_variables(working_root)
+        self._initialize_variables()
