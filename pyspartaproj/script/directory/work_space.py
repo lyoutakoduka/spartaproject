@@ -17,6 +17,9 @@ class WorkSpace:
     def _initialize_variables(self) -> None:
         self._working_root: Path = Path(mkdtemp())
 
+    def _get_selected_root(self, sub_root: Path | None) -> Path:
+        return self.get_working_root() if sub_root is None else sub_root
+
     def create_date_time_space(
         self, sub_root: Path, override: bool = False, jst: bool = False
     ) -> Path:
