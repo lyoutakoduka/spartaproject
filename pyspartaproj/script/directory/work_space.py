@@ -17,11 +17,13 @@ class WorkSpace:
     def _initialize_variables(self) -> None:
         self._working_root: Path = Path(mkdtemp())
 
-    def _get_selected_root(self, sub_root: Path | None) -> Path:
-        return self.get_working_root() if sub_root is None else sub_root
+    def _get_selected_root(self, selected_root: Path | None) -> Path:
+        return (
+            self.get_working_root() if selected_root is None else selected_root
+        )
 
     def create_date_time_space(
-        self, sub_root: Path, override: bool = False, jst: bool = False
+        self, selected_root: Path, override: bool = False, jst: bool = False
     ) -> Path:
         """Create temporary working space that path include date time string.
 
@@ -43,10 +45,10 @@ class WorkSpace:
             Path: Path of created temporary working space.
         """
         return create_working_space(
-            self._get_selected_root(sub_root), override=override, jst=jst
+            self._get_selected_root(selected_root), override=override, jst=jst
         )
 
-    def create_sub_directory(self, sub_root: Path) -> Path:
+    def create_sub_directory(self, selected_root: Path) -> Path:
         """Create sub directory in temporary working space.
 
         Args:
@@ -55,7 +57,7 @@ class WorkSpace:
         Returns:
             Path: Path of created sub directory.
         """
-        return create_directory(self._get_selected_root(sub_root))
+        return create_directory(self._get_selected_root(selected_root))
 
     def get_working_root(self) -> Path:
         """Get path of temporary working space.
