@@ -43,7 +43,7 @@ class WorkSpace:
             Path: Path of created temporary working space.
         """
         return create_working_space(
-            Path(self.get_working_root(), sub_root), override=override, jst=jst
+            self._get_selected_root(sub_root), override=override, jst=jst
         )
 
     def create_sub_directory(self, sub_root: Path) -> Path:
@@ -55,7 +55,7 @@ class WorkSpace:
         Returns:
             Path: Path of created sub directory.
         """
-        return create_directory(Path(self._working_root, sub_root))
+        return create_directory(self._get_selected_root(sub_root))
 
     def get_working_root(self) -> Path:
         """Get path of temporary working space.
