@@ -28,8 +28,8 @@ class WorkSpace:
         """Create temporary working space that path include date time string.
 
         Args:
-            sub_root (str): Path of directory
-                that temporary working space will placed.
+            selected_root (Path | None, optional): Defaults to None.
+                Path of directory that temporary working space will placed.
 
             override (bool, optional): Defaults to False.
                 Override initial time count to "2023/4/1:12:00:00-00 (AM)".
@@ -49,10 +49,11 @@ class WorkSpace:
         )
 
     def create_sub_directory(self, selected_root: Path) -> Path:
-        """Create sub directory in temporary working space.
+        """Create sub directory in selected temporary working space.
 
         Args:
-            sub_root (str): Path of directory you want to create.
+            selected_root (Path | None, optional): Defaults to None.
+                Path of directory you want to create.
 
         Returns:
             Path: Path of created sub directory.
@@ -72,10 +73,5 @@ class WorkSpace:
         rmtree(str(self._working_root))
 
     def __init__(self) -> None:
-        """Create temporary working space.
-
-        Args:
-            working_root (Path | None, optional): Defaults to None.
-                Path of temporary working space you specified.
-        """
+        """Create default temporary working space."""
         self._initialize_variables()
