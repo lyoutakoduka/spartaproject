@@ -51,9 +51,13 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
         function(Path(temporary_path))
 
 
+def _get_work_space() -> WorkSpace:
+    return WorkSpace()
+
+
 def test_path() -> None:
     """Test to check path of temporary working space you specified."""
-    work_space = WorkSpace()
+    work_space: WorkSpace = _get_work_space()
     working_root: Path = work_space.get_working_root()
 
     _check_exists(working_root)
@@ -85,7 +89,7 @@ def test_working() -> None:
     """
     expected: Path = Path("2023", "04", "01", "00", "00", "00", "000000")
 
-    work_space = WorkSpace()
+    work_space: WorkSpace = _get_work_space()
     temporary_path: Path = work_space.create_date_time_space(
         _get_directory(), override=True
     )
@@ -100,7 +104,7 @@ def test_jst() -> None:
     """
     expected: Path = Path("2023", "04", "01", "09", "00", "00", "000000")
 
-    work_space = WorkSpace()
+    work_space: WorkSpace = _get_work_space()
     temporary_path: Path = work_space.create_date_time_space(
         _get_directory(), override=True, jst=True
     )
