@@ -80,6 +80,10 @@ def _get_work_space_root(working_root: Path) -> WorkSpace:
     return WorkSpace(working_root=working_root)
 
 
+def _get_default_work_space(directory_pair: PathPair) -> WorkSpace:
+    return _get_work_space_root(directory_pair["work"])
+
+
 def test_path() -> None:
     """Test to check path of temporary working space you specified."""
     work_space: WorkSpace = _get_work_space()
@@ -105,7 +109,7 @@ def test_work() -> None:
         directory_pair: PathPair = _create_sub_directory(
             temporary_root, [group]
         )
-        work_space: WorkSpace = _get_work_space_root(directory_pair["work"])
+        work_space: WorkSpace = _get_default_work_space(directory_pair)
 
         _compare_sub(
             temporary_root,
@@ -123,7 +127,7 @@ def test_select() -> None:
         directory_pair: PathPair = _create_sub_directory(
             temporary_root, ["work", group]
         )
-        work_space: WorkSpace = _get_work_space_root(directory_pair["work"])
+        work_space: WorkSpace = _get_default_work_space(directory_pair)
 
         _compare_sub(
             temporary_root,
