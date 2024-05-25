@@ -26,6 +26,10 @@ def _create_sub_directory(temporary_root: Path, groups: Strs) -> PathPair:
     )
 
 
+def _get_expected(group: str) -> Path:
+    return Path(group, _get_directory())
+
+
 def _check_exists(result: Path) -> None:
     assert result.exists()
 
