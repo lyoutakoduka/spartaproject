@@ -47,11 +47,12 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 
 def test_path() -> None:
     """Test to check path of temporary working space you specified."""
+    work_space = WorkSpace()
+    working_root: Path = work_space.get_working_root()
 
-    def individual_test(temporary_root: Path) -> None:
-        _compare_path(temporary_root, WorkSpace(working_root=temporary_root))
-
-    _inside_temporary_directory(individual_test)
+    assert working_root.exists()
+    del work_space
+    assert not working_root.exists()
 
 
 def test_directory() -> None:
