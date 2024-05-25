@@ -55,6 +55,13 @@ def test_path() -> None:
     assert not working_root.exists()
 
 
+def test_root() -> None:
+    def individual_test(temporary_root: Path) -> None:
+        _compare_root(temporary_root, WorkSpace(working_root=temporary_root))
+
+    _inside_temporary_directory(individual_test)
+
+
 def test_directory() -> None:
     """Test to check path of sub directory in temporary working space."""
 
@@ -101,6 +108,7 @@ def main() -> bool:
         bool: Success if get to the end of function.
     """
     test_path()
+    test_root()
     test_directory()
     test_working()
     test_jst()
