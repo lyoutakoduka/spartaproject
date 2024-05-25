@@ -20,10 +20,6 @@ def _relative_test(result: Path, root: Path) -> None:
     assert is_relative(result, root_path=root)
 
 
-def _compare_path(temporary_root: Path, work_space: WorkSpace) -> None:
-    _relative_test(work_space.get_working_root(), temporary_root)
-
-
 def _compare_directory(work_space: WorkSpace) -> None:
     _relative_test(
         work_space.create_sub_directory(_get_directory()),
