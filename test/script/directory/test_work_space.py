@@ -105,7 +105,7 @@ def test_work() -> None:
         directory_pair: PathPair = _create_sub_directory(
             temporary_root, [group]
         )
-        work_space: WorkSpace = _get_work_space_root(directory_pair[group])
+        work_space: WorkSpace = _get_work_space_root(directory_pair["work"])
 
         _compare_sub(
             temporary_root,
