@@ -55,6 +55,10 @@ def _get_work_space() -> WorkSpace:
     return WorkSpace()
 
 
+def _get_work_space_root(working_root: Path) -> WorkSpace:
+    return WorkSpace(working_root=working_root)
+
+
 def test_path() -> None:
     """Test to check path of temporary working space you specified."""
     work_space: WorkSpace = _get_work_space()
@@ -68,7 +72,7 @@ def test_path() -> None:
 
 def test_root() -> None:
     def individual_test(temporary_root: Path) -> None:
-        _compare_root(temporary_root, WorkSpace(working_root=temporary_root))
+        _compare_root(temporary_root, _get_work_space_root(temporary_root))
 
     _inside_temporary_directory(individual_test)
 
@@ -77,7 +81,7 @@ def test_directory() -> None:
     """Test to check path of sub directory in temporary working space."""
 
     def individual_test(temporary_root: Path) -> None:
-        _compare_directory(WorkSpace(working_root=temporary_root))
+        _compare_directory(_get_work_space_root(temporary_root))
 
     _inside_temporary_directory(individual_test)
 
