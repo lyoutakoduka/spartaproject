@@ -15,8 +15,13 @@ def _get_directory() -> Path:
     return Path("main", "sub")
 
 
-def _relative_test(result: Path, root: Path) -> None:
+def _check_exists(result: Path) -> None:
     assert result.exists()
+
+
+def _relative_test(result: Path, root: Path) -> None:
+    _check_exists(result)
+
     assert is_relative(result, root_path=root)
 
 
@@ -34,7 +39,8 @@ def _compare_directory(work_space: WorkSpace) -> None:
 def _compare_working(
     result: Path, expected: Path, work_space: WorkSpace
 ) -> None:
-    assert result.exists()
+    _check_exists(result)
+
     assert result == Path(
         work_space.get_working_root(), Path(_get_directory(), expected)
     )
@@ -50,7 +56,8 @@ def test_path() -> None:
     work_space = WorkSpace()
     working_root: Path = work_space.get_working_root()
 
-    assert working_root.exists()
+    _check_exists(working_root)
+
     del work_space
     assert not working_root.exists()
 
