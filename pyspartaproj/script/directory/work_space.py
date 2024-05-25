@@ -79,7 +79,8 @@ class WorkSpace:
 
     def __del__(self) -> None:
         """Remove temporary working space."""
-        rmtree(str(self._working_root))
+        if self._root_specified:
+            rmtree(str(self._working_root))
 
     def __init__(self, working_root: Path | None = None) -> None:
         """Create default temporary working space."""
