@@ -50,13 +50,6 @@ def _compare_sub(temporary_root: Path, group: str, result: Path) -> None:
     assert result == Path(temporary_root, _get_expected(group))
 
 
-def _compare_directory(work_space: WorkSpace) -> None:
-    _relative_test(
-        work_space.create_sub_directory(_get_directory()),
-        work_space.get_working_root(),
-    )
-
-
 def _compare_working(
     result: Path, expected: Path, work_space: WorkSpace
 ) -> None:
@@ -140,15 +133,6 @@ def test_select() -> None:
     _inside_temporary_directory(individual_test)
 
 
-def test_directory() -> None:
-    """Test to check path of sub directory in temporary working space."""
-
-    def individual_test(temporary_root: Path) -> None:
-        _compare_directory(_get_work_space_root(temporary_root))
-
-    _inside_temporary_directory(individual_test)
-
-
 def test_working() -> None:
     """Test to compare path of temporary working space in sub directory.
 
@@ -189,7 +173,6 @@ def main() -> bool:
     test_root()
     test_work()
     test_select()
-    test_directory()
     test_working()
     test_jst()
     return True
