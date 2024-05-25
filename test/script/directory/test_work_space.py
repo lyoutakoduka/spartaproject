@@ -98,6 +98,24 @@ def test_root() -> None:
     _inside_temporary_directory(individual_test)
 
 
+def test_work() -> None:
+    group: str = "work"
+
+    def individual_test(temporary_root: Path) -> None:
+        directory_pair: PathPair = _create_sub_directory(
+            temporary_root, [group]
+        )
+        work_space: WorkSpace = _get_work_space_root(directory_pair[group])
+
+        _compare_sub(
+            temporary_root,
+            group,
+            work_space.create_sub_directory(_get_directory()),
+        )
+
+    _inside_temporary_directory(individual_test)
+
+
 def test_directory() -> None:
     """Test to check path of sub directory in temporary working space."""
 
@@ -145,6 +163,7 @@ def main() -> bool:
     """
     test_path()
     test_root()
+    test_work()
     test_directory()
     test_working()
     test_jst()
