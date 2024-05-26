@@ -20,6 +20,13 @@ def _get_directory() -> Path:
     return Path("main", "sub")
 
 
+def _get_date_time_root(jst: bool = False) -> Path:
+    time_utc: Path = Path("2023", "04", "01", "00", "00", "00", "000000")
+    time_jst: Path = Path("2023", "04", "01", "09", "00", "00", "000000")
+
+    return time_jst if jst else time_utc
+
+
 def _create_sub_directory(temporary_root: Path, groups: Strs) -> PathPair:
     return create_directory_pair(
         {group: Path(temporary_root, group) for group in groups}
@@ -138,7 +145,7 @@ def test_working() -> None:
 
     Path include date time string in UTC time zone.
     """
-    expected: Path = Path("2023", "04", "01", "00", "00", "00", "000000")
+    expected: Path = _get_date_time_root()
 
     work_space: WorkSpace = _get_work_space()
     temporary_path: Path = work_space.create_date_time_space(
@@ -153,7 +160,7 @@ def test_jst() -> None:
 
     Path include date time string in JST time zone.
     """
-    expected: Path = Path("2023", "04", "01", "09", "00", "00", "000000")
+    expected: Path = _get_date_time_root(jst=True)
 
     work_space: WorkSpace = _get_work_space()
     temporary_path: Path = work_space.create_date_time_space(
