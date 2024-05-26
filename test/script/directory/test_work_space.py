@@ -103,17 +103,15 @@ def test_root() -> None:
 
 
 def test_work() -> None:
-    group: str = "work"
-
     def individual_test(temporary_root: Path) -> None:
         directory_pair: PathPair = _create_sub_directory(
-            temporary_root, [group]
+            temporary_root, ["work"]
         )
         work_space: WorkSpace = _get_default_work_space(directory_pair)
 
         _compare_sub(
             temporary_root,
-            group,
+            "work",
             work_space.create_sub_directory(_get_directory()),
         )
 
@@ -121,19 +119,17 @@ def test_work() -> None:
 
 
 def test_select() -> None:
-    group: str = "select"
-
     def individual_test(temporary_root: Path) -> None:
         directory_pair: PathPair = _create_sub_directory(
-            temporary_root, ["work", group]
+            temporary_root, ["work", "select"]
         )
         work_space: WorkSpace = _get_default_work_space(directory_pair)
 
         _compare_sub(
             temporary_root,
-            group,
+            "select",
             work_space.create_sub_directory(
-                _get_directory(), selected_root=directory_pair[group]
+                _get_directory(), selected_root=directory_pair["select"]
             ),
         )
 
