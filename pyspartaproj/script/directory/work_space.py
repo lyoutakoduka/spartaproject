@@ -57,7 +57,7 @@ class WorkSpace:
         selected_root: Path = self._get_selected_root(body_root)
 
         if head_root is not None:
-            selected_root = Path(head_root, selected_root)
+            selected_root = Path(selected_root, head_root)
 
         return create_working_space(selected_root, override=override, jst=jst)
 
