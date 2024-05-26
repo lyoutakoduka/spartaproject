@@ -30,7 +30,7 @@ class WorkSpace:
 
     def create_date_time_space(
         self,
-        selected_root: Path | None = None,
+        body_root: Path | None = None,
         override: bool = False,
         jst: bool = False,
     ) -> Path:
@@ -54,7 +54,7 @@ class WorkSpace:
             Path: Path of created temporary working space.
         """
         return create_working_space(
-            self._get_selected_root(selected_root), override=override, jst=jst
+            self._get_selected_root(body_root), override=override, jst=jst
         )
 
     def create_sub_directory(
