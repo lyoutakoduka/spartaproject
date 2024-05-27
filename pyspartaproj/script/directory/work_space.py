@@ -32,6 +32,7 @@ class WorkSpace:
         self,
         head_root: Path | None = None,
         body_root: Path | None = None,
+        foot_root: Path | None = None,
         override: bool = False,
         jst: bool = False,
     ) -> Path:
@@ -59,7 +60,14 @@ class WorkSpace:
         if head_root is not None:
             selected_root = Path(selected_root, head_root)
 
-        return create_working_space(selected_root, override=override, jst=jst)
+        working_root: Path = create_working_space(
+            selected_root, override=override, jst=jst
+        )
+
+        if foot_root is None:
+            return working_root
+
+        return self.create_sub_directory(foot_root, selected_root=working_root)
 
     def create_sub_directory(
         self, sub_root: Path, selected_root: Path | None = None
