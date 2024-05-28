@@ -74,16 +74,6 @@ def _compare_date(
     _compare_common(result, Path(temporary_root, group, expected))
 
 
-def _compare_working(
-    result: Path, expected: Path, work_space: WorkSpace
-) -> None:
-    _check_exists(result)
-    _compare_common(
-        result,
-        Path(work_space.get_working_root(), Path(_get_directory(), expected)),
-    )
-
-
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
