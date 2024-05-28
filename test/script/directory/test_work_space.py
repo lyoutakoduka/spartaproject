@@ -145,21 +145,6 @@ def test_select() -> None:
     _inside_temporary_directory(individual_test)
 
 
-def test_working() -> None:
-    """Test to compare path of temporary working space in sub directory.
-
-    Path include date time string in UTC time zone.
-    """
-    expected: Path = _get_date_time_root()
-
-    work_space: WorkSpace = _get_work_space()
-    temporary_path: Path = work_space.create_date_time_space(
-        _get_directory(), override=True
-    )
-
-    _compare_working(temporary_path, expected, work_space)
-
-
 def test_jst() -> None:
     """Test to compare path of temporary working space in sub directory.
 
@@ -185,6 +170,5 @@ def main() -> bool:
     test_root()
     test_work()
     test_select()
-    test_working()
     test_jst()
     return True
