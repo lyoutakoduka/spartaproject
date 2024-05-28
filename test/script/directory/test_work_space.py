@@ -57,6 +57,12 @@ def _compare_sub(temporary_root: Path, group: str, result: Path) -> None:
     assert result == Path(temporary_root, _get_expected(group))
 
 
+def _compare_date(
+    temporary_root: Path, group: str, result: Path, expected: Path
+) -> None:
+    assert result == Path(temporary_root, group, expected)
+
+
 def _compare_working(
     result: Path, expected: Path, work_space: WorkSpace
 ) -> None:
