@@ -150,14 +150,21 @@ def test_jst() -> None:
 
     Path include date time string in JST time zone.
     """
-    expected: Path = _get_date_time_root(jst=True)
+    date_time_root: Path = _get_date_time_root(jst=True)
 
-    work_space: WorkSpace = _get_work_space()
-    temporary_path: Path = work_space.create_date_time_space(
-        _get_directory(), override=True, jst=True
-    )
+    def individual_test(temporary_root: Path) -> None:
+        work_space: WorkSpace = _get_default_work_space(
+            _create_sub_directory(temporary_root, ["work"])
+        )
 
-    _compare_working(temporary_path, expected, work_space)
+        _compare_date(
+            temporary_root,
+            "work",
+            work_space.create_date_time_space(override=True, jst=True),
+            date_time_root,
+        )
+
+    _inside_temporary_directory(individual_test)
 
 
 def main() -> bool:
