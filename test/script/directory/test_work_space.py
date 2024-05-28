@@ -51,25 +51,28 @@ def _compare_root(temporary_root: Path, work_space: WorkSpace) -> None:
     _relative_test(work_space.get_working_root(), temporary_root)
 
 
+def _compare_common(result: Path, expected: Path) -> None:
+    assert result == expected
+
+
 def _compare_sub(temporary_root: Path, group: str, result: Path) -> None:
     _check_exists(result)
-
-    assert result == Path(temporary_root, _get_expected(group))
+    _compare_common(result, Path(temporary_root, _get_expected(group)))
 
 
 def _compare_date(
     temporary_root: Path, group: str, result: Path, expected: Path
 ) -> None:
-    assert result == Path(temporary_root, group, expected)
+    _compare_common(result, Path(temporary_root, group, expected))
 
 
 def _compare_working(
     result: Path, expected: Path, work_space: WorkSpace
 ) -> None:
     _check_exists(result)
-
-    assert result == Path(
-        work_space.get_working_root(), Path(_get_directory(), expected)
+    _compare_common(
+        result,
+        Path(work_space.get_working_root(), Path(_get_directory(), expected)),
     )
 
 
