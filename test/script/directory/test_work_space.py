@@ -33,6 +33,10 @@ def _create_sub_directory(temporary_root: Path, groups: Strs) -> PathPair:
     )
 
 
+def _create_sub_work(temporary_root: Path) -> PathPair:
+    return _create_sub_directory(temporary_root, ["work"])
+
+
 def _get_expected(group: str) -> Path:
     return Path(group, _get_directory())
 
@@ -113,9 +117,7 @@ def test_root() -> None:
 
 def test_work() -> None:
     def individual_test(temporary_root: Path) -> None:
-        directory_pair: PathPair = _create_sub_directory(
-            temporary_root, ["work"]
-        )
+        directory_pair: PathPair = _create_sub_work(temporary_root)
         work_space: WorkSpace = _get_default_work_space(directory_pair)
 
         _compare_sub(
@@ -150,7 +152,7 @@ def test_date() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         work_space: WorkSpace = _get_default_work_space(
-            _create_sub_directory(temporary_root, ["work"])
+            _create_sub_work(temporary_root)
         )
 
         _compare_date(
@@ -189,7 +191,7 @@ def test_head() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         work_space: WorkSpace = _get_default_work_space(
-            _create_sub_directory(temporary_root, ["work"])
+            _create_sub_work(temporary_root)
         )
 
         _compare_date(
@@ -209,7 +211,7 @@ def test_foot() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         work_space: WorkSpace = _get_default_work_space(
-            _create_sub_directory(temporary_root, ["work"])
+            _create_sub_work(temporary_root)
         )
 
         _compare_date(
@@ -233,7 +235,7 @@ def test_jst() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         work_space: WorkSpace = _get_default_work_space(
-            _create_sub_directory(temporary_root, ["work"])
+            _create_sub_work(temporary_root)
         )
 
         _compare_date(
