@@ -37,6 +37,10 @@ def _create_sub_work(temporary_root: Path) -> PathPair:
     return _create_sub_directory(temporary_root, ["work"])
 
 
+def _create_sub_select(temporary_root: Path) -> PathPair:
+    return _create_sub_directory(temporary_root, ["work", "select"])
+
+
 def _get_expected(group: str) -> Path:
     return Path(group, _get_directory())
 
@@ -131,9 +135,7 @@ def test_work() -> None:
 
 def test_select() -> None:
     def individual_test(temporary_root: Path) -> None:
-        directory_pair: PathPair = _create_sub_directory(
-            temporary_root, ["work", "select"]
-        )
+        directory_pair: PathPair = _create_sub_select(temporary_root)
         work_space: WorkSpace = _get_default_work_space(directory_pair)
 
         _compare_sub(
@@ -169,9 +171,7 @@ def test_body() -> None:
     date_time_root: Path = _get_date_time_root()
 
     def individual_test(temporary_root: Path) -> None:
-        directory_pair: PathPair = _create_sub_directory(
-            temporary_root, ["work", "select"]
-        )
+        directory_pair: PathPair = _create_sub_select(temporary_root)
         work_space: WorkSpace = _get_default_work_space(directory_pair)
 
         _compare_date(
