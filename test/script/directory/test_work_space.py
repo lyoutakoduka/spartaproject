@@ -204,6 +204,26 @@ def test_head() -> None:
     _inside_temporary_directory(individual_test)
 
 
+def test_foot() -> None:
+    date_time_root: Path = _get_date_time_root()
+
+    def individual_test(temporary_root: Path) -> None:
+        work_space: WorkSpace = _get_default_work_space(
+            _create_sub_directory(temporary_root, ["work"])
+        )
+
+        _compare_date(
+            temporary_root,
+            "work",
+            work_space.create_date_time_space(
+                foot_root=_get_directory(), override=True
+            ),
+            Path(date_time_root, _get_directory()),
+        )
+
+    _inside_temporary_directory(individual_test)
+
+
 def test_jst() -> None:
     """Test to compare path of temporary working space in sub directory.
 
@@ -239,5 +259,6 @@ def main() -> bool:
     test_date()
     test_body()
     test_head()
+    test_foot()
     test_jst()
     return True
