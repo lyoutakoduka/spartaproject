@@ -111,8 +111,9 @@ def test_root() -> None:
 
 def test_work() -> None:
     def individual_test(temporary_root: Path) -> None:
-        directory_pair: PathPair = _create_sub_work(temporary_root)
-        work_space: WorkSpace = _get_default_work_space(directory_pair)
+        work_space: WorkSpace = _get_default_work_space(
+            _create_sub_work(temporary_root)
+        )
 
         _compare_sub(
             temporary_root,
