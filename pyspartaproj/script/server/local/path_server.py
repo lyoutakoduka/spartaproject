@@ -53,7 +53,9 @@ class PathServer(WorkSpace):
         self._build_path_private()
         self._build_path_develop()
 
-    def _initialize_paths(self, override: bool, jst: bool) -> None:
+    def _initialize_paths(
+        self, local_root: Path | None, override: bool, jst: bool
+    ) -> None:
         local_root: Path = Path("local")
 
         self._local_root: Path = self.create_sub_directory(local_root)
@@ -63,9 +65,11 @@ class PathServer(WorkSpace):
             jst=jst,
         )
 
-    def _initialize_variables_local(self, override: bool, jst: bool) -> None:
+    def _initialize_variables_local(
+        self, local_root: Path | None, override: bool, jst: bool
+    ) -> None:
         self._build_path_table()
-        self._initialize_paths(override, jst)
+        self._initialize_paths(local_root, override, jst)
 
     def get_path_table(self) -> Strs:
         """Get keys of predefined all paths about server.
@@ -152,4 +156,4 @@ class PathServer(WorkSpace):
         """
         super().__init__(working_root=working_root)
 
-        self._initialize_variables_local(override, jst)
+        self._initialize_variables_local(local_root, override, jst)
