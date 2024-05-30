@@ -92,7 +92,7 @@ def _get_default_work_space(directory_pair: PathPair) -> WorkSpace:
 
 
 def test_path() -> None:
-    """Test to check path of temporary working space you specified."""
+    """Test for path which is use Python default temporary working space."""
     work_space: WorkSpace = _get_work_space()
     working_root: Path = work_space.get_working_root()
 
@@ -103,6 +103,8 @@ def test_path() -> None:
 
 
 def test_root() -> None:
+    """Test for path of temporary working space you specified."""
+
     def individual_test(temporary_root: Path) -> None:
         _compare_root(temporary_root, _get_work_space_root(temporary_root))
 
@@ -110,6 +112,11 @@ def test_root() -> None:
 
 
 def test_work() -> None:
+    """Test for path of sub directory tree.
+
+    It's placed to Python default temporary working space.
+    """
+
     def individual_test(temporary_root: Path) -> None:
         work_space: WorkSpace = _get_default_work_space(
             _create_sub_work(temporary_root)
@@ -125,6 +132,11 @@ def test_work() -> None:
 
 
 def test_select() -> None:
+    """Test for path of sub directory tree.
+
+    It's placed to temporary working space you specified.
+    """
+
     def individual_test(temporary_root: Path) -> None:
         directory_pair: PathPair = _create_sub_select(temporary_root)
         work_space: WorkSpace = _get_default_work_space(directory_pair)
@@ -141,6 +153,10 @@ def test_select() -> None:
 
 
 def test_date() -> None:
+    """Test for path of temporary working space including date time string.
+
+    It's placed to Python default temporary working space.
+    """
     date_time_root: Path = _get_date_time_root()
 
     def individual_test(temporary_root: Path) -> None:
@@ -159,6 +175,10 @@ def test_date() -> None:
 
 
 def test_body() -> None:
+    """Test for path of temporary working space including date time string.
+
+    It's placed to temporary working space you specified.
+    """
     date_time_root: Path = _get_date_time_root()
 
     def individual_test(temporary_root: Path) -> None:
@@ -178,6 +198,10 @@ def test_body() -> None:
 
 
 def test_head() -> None:
+    """Test for path of sub directory tree.
+
+    Temporary working space including date time string is placed to here.
+    """
     date_time_root: Path = _get_date_time_root()
 
     def individual_test(temporary_root: Path) -> None:
@@ -198,6 +222,10 @@ def test_head() -> None:
 
 
 def test_foot() -> None:
+    """Test for path of sub directory tree.
+
+    It's placed to temporary working space including date time string.
+    """
     date_time_root: Path = _get_date_time_root()
 
     def individual_test(temporary_root: Path) -> None:
@@ -218,9 +246,9 @@ def test_foot() -> None:
 
 
 def test_jst() -> None:
-    """Test to compare path of temporary working space in sub directory.
+    """Test for path of temporary working space you specified.
 
-    Path include date time string in JST time zone.
+    It's including date time string in JST time zone.
     """
     date_time_root: Path = _get_date_time_root(jst=True)
 
