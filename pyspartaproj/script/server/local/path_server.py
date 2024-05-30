@@ -128,6 +128,7 @@ class PathServer(WorkSpace):
 
     def __init__(
         self,
+        working_root: Path | None = None,
         local_root: Path | None = None,
         override: bool = False,
         jst: bool = False,
@@ -149,6 +150,6 @@ class PathServer(WorkSpace):
                 It's used for argument "jst" of
                     function "create_date_time_space".
         """
-        super().__init__(working_root=local_root)
+        super().__init__(working_root=working_root)
 
         self._initialize_variables_local(override, jst)
