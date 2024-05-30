@@ -24,6 +24,20 @@ class WorkSpace:
         self._working_root: Path = working_root
 
     def get_selected_root(self, selected_root: Path | None) -> Path:
+        """Get temporary working space.
+
+        Return Python default temporary working space
+            if argument "selected_root" is None.
+
+        Or user defined temporary working space is returned if Not None.
+
+        Args:
+            selected_root (Path | None):
+                Path of temporary working space you want to specified.
+
+        Returns:
+            Path: Path of selected temporary working space.
+        """
         return (
             self.get_working_root() if selected_root is None else selected_root
         )
