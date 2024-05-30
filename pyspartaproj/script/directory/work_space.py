@@ -23,7 +23,7 @@ class WorkSpace:
 
         self._working_root: Path = working_root
 
-    def _get_selected_root(self, selected_root: Path | None) -> Path:
+    def get_selected_root(self, selected_root: Path | None) -> Path:
         return (
             self.get_working_root() if selected_root is None else selected_root
         )
@@ -89,7 +89,7 @@ class WorkSpace:
         Returns:
             Path: Path of created temporary working space.
         """
-        selected_root: Path = self._get_selected_root(body_root)
+        selected_root: Path = self.get_selected_root(body_root)
 
         if head_root is not None:
             selected_root = Path(selected_root, head_root)
@@ -124,7 +124,7 @@ class WorkSpace:
             Path: Path of created sub directory.
         """
         return create_directory(
-            Path(self._get_selected_root(selected_root), sub_root)
+            Path(self.get_selected_root(selected_root), sub_root)
         )
 
     def get_working_root(self) -> Path:
