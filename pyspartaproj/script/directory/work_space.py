@@ -38,9 +38,43 @@ class WorkSpace:
     ) -> Path:
         """Create temporary working space that path include date time string.
 
+        Define of words.
+
+        Working Root: Python temporary working space in default.
+            You can specify other directory by argument "body_root".
+
+        Date Time Root: Directory tree that path include date time string.
+            It's created on Working Root.
+
+            e.g., following directory tree is created
+                if you use this function at "2023/4/1:00:00:00-00".
+
+            "<Working Root>/2023/04/01/00/00/00/000000"
+
+        Head Root: Directory tree which is placed to Working Root.
+            In addition, Date Time Root is placed to Head Root.
+
+            e.g., following directory tree is created
+                if argument "head_root" is "main/sub".
+
+            "<Working Root>/main/sub/<Date Time Root>"
+
+        Foot Root: Directory tree which is placed to Date Time Root.
+
+            e.g., following directory tree is created
+                if argument "foot_root" is "main/sub".
+
+            "<Working Root>/<Date Time Root>/main/sub"
+
         Args:
-            selected_root (Path | None, optional): Defaults to None.
-                Path of directory that temporary working space will placed.
+            head_root (Path | None, optional): Defaults to None.
+                You can specify Head Root here.
+
+            body_root (Path | None, optional): Defaults to None.
+                You can specify unique Working Root here.
+
+            foot_root (Path | None, optional): Defaults to None.
+                You can specify Foot Root here.
 
             override (bool, optional): Defaults to False.
                 Override initial time count to "2023/4/1:12:00:00-00 (AM)".
@@ -74,9 +108,17 @@ class WorkSpace:
     ) -> Path:
         """Create sub directory in selected temporary working space.
 
+        In default, directory is created to Python temporary working space.
+
+        If argument "sub_root" is "main/sub",
+            and "selected_root" is "root/directory",
+            path "root/directory/main/sub" is crated and returned.
+
         Args:
+            sub_root (Path): Relative path of sub directory.
+
             selected_root (Path | None, optional): Defaults to None.
-                Path of directory you want to create.
+                Path of directory you want to create sub directory.
 
         Returns:
             Path: Path of created sub directory.
@@ -86,18 +128,24 @@ class WorkSpace:
         )
 
     def get_working_root(self) -> Path:
-        """Get path of temporary working space.
+        """Get path of default temporary working space.
 
         Returns:
-            Path: Path of temporary working space.
+            Path: Path of default temporary working space.
         """
         return self._working_root
 
     def __del__(self) -> None:
-        """Remove temporary working space."""
+        """Remove default temporary working space."""
         if self._root_specified:
             rmtree(str(self._working_root))
 
     def __init__(self, working_root: Path | None = None) -> None:
-        """Create default temporary working space."""
+        """Create default temporary working space.
+
+        Args:
+            working_root (Path | None, optional): Defaults to None.
+                User defined temporary working space.
+                It's mainly used for test.
+        """
         self._initialize_variables(working_root)
