@@ -23,7 +23,7 @@ class WorkSpace:
 
         self._working_root: Path = working_root
 
-    def get_selected_root(self, selected_root: Path | None) -> Path:
+    def get_selected_root(self, selected_root: Path | None = None) -> Path:
         """Get temporary working space.
 
         Return Python default temporary working space
