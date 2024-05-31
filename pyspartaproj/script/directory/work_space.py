@@ -32,7 +32,7 @@ class WorkSpace:
         Or user defined temporary working space is returned if Not None.
 
         Args:
-            selected_root (Path | None):
+            selected_root (Path | None, optional): Defaults to None.
                 Path of temporary working space you want to specified.
 
         Returns:
