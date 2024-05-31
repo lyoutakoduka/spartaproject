@@ -117,6 +117,8 @@ def test_root() -> None:
 
 
 def test_base() -> None:
+    """Test to get path of temporary working space."""
+
     def individual_test(temporary_root: Path) -> None:
         work_space: WorkSpace = _get_default_work_space(
             _create_sub_work(temporary_root)
