@@ -56,11 +56,10 @@ class PathServer(WorkSpace):
     def _initialize_paths(
         self, local_root: Path | None, override: bool, jst: bool
     ) -> None:
-        local_root: Path = Path("local")
-
-        self._local_root: Path = self.create_sub_directory(local_root)
+        self._local_root: Path = self.get_selected_root(local_root)
         self._working_root: Path = self.create_date_time_space(
-            Path(local_root, self.get_path("work_root")),
+            body_root=local_root,
+            head_root=self.get_path("work_root"),
             override=override,
             jst=jst,
         )
