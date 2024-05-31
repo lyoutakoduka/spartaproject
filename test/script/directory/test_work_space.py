@@ -116,6 +116,17 @@ def test_root() -> None:
     _inside_temporary_directory(individual_test)
 
 
+def test_base() -> None:
+    def individual_test(temporary_root: Path) -> None:
+        work_space: WorkSpace = _get_default_work_space(
+            _create_sub_work(temporary_root)
+        )
+
+        _compare_base(temporary_root, work_space.get_selected_root())
+
+    _inside_temporary_directory(individual_test)
+
+
 def test_work() -> None:
     """Test for path of sub directory tree.
 
@@ -280,6 +291,7 @@ def main() -> bool:
     """
     test_path()
     test_root()
+    test_base()
     test_work()
     test_select()
     test_date()
