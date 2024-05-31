@@ -63,6 +63,11 @@ def _compare_common(result: Path, expected: Path) -> None:
     assert result == expected
 
 
+def _compare_base(temporary_root: Path, result: Path) -> None:
+    _check_exists(result)
+    _compare_common(result, Path(temporary_root, "work"))
+
+
 def _compare_sub(temporary_root: Path, group: str, result: Path) -> None:
     _check_exists(result)
     _compare_common(result, Path(temporary_root, _get_expected(group)))
