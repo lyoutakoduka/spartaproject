@@ -10,6 +10,13 @@ from typing import Callable
 from pyspartaproj.script.server.local.path_server import PathServer
 
 
+def _get_date_time_root(jst: bool = False) -> Path:
+    time_utc: Path = Path("2023", "04", "01", "00", "00", "00", "000000")
+    time_jst: Path = Path("2023", "04", "01", "09", "00", "00", "000000")
+
+    return time_jst if jst else time_utc
+
+
 def _compare_relative(
     expected: Path, result: Path, server: PathServer
 ) -> None:
@@ -69,7 +76,7 @@ def test_local() -> None:
 
 def test_temporary() -> None:
     """Test to get local temporary working space for connecting server."""
-    date_time: Path = Path("2023", "04", "01", "00", "00", "00", "000000")
+    date_time: Path = _get_date_time_root()
 
     def individual_test(temporary_root: Path) -> None:
         server = PathServer(local_root=temporary_root, override=True)
@@ -80,7 +87,7 @@ def test_temporary() -> None:
 
 def test_jst() -> None:
     """Test to get local temporary working space including JST time zone."""
-    date_time: Path = Path("2023", "04", "01", "09", "00", "00", "000000")
+    date_time: Path = _get_date_time_root(jst=True)
 
     def individual_test(temporary_root: Path) -> None:
         server = PathServer(local_root=temporary_root, override=True, jst=True)
