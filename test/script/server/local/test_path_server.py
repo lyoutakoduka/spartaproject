@@ -68,6 +68,16 @@ def test_path() -> None:
         assert True
 
 
+def test_base() -> None:
+    server = PathServer()
+    result: Path = server.get_local_root()
+
+    _check_exists(result)
+
+    del server
+    assert not result.exists()
+
+
 def test_local() -> None:
     """Test to get temporary working space for connecting server."""
 
@@ -132,6 +142,7 @@ def main() -> bool:
     """
     test_table()
     test_path()
+    test_base()
     test_local()
     test_temporary()
     test_jst()
