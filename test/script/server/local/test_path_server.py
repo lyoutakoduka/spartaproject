@@ -35,7 +35,6 @@ def _compare_working(
         server.get_working_root(),
         Path(
             temporary_root,
-            "local",
             server.get_path("work_root"),
             date_time,
         ),
@@ -69,7 +68,7 @@ def test_local() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         server = PathServer(local_root=temporary_root)
-        _compare_path(server.get_local_root(), Path(temporary_root, "local"))
+        _compare_path(server.get_local_root(), temporary_root)
 
     _inside_temporary_directory(individual_test)
 
