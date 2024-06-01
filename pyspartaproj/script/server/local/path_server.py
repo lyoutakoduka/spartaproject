@@ -97,7 +97,7 @@ class PathServer(WorkSpace):
         """
         return self._local_root
 
-    def get_working_root(self) -> Path:
+    def get_date_time_root(self) -> Path:
         """Get path of local temporary working space.
 
         Path include string of current date time.
