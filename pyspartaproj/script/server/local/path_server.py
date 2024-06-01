@@ -57,7 +57,7 @@ class PathServer(WorkSpace):
         self, local_root: Path | None, override: bool, jst: bool
     ) -> None:
         self._local_root: Path = self.get_selected_root(local_root)
-        self._working_root: Path = self.create_date_time_space(
+        self._date_time_root: Path = self.create_date_time_space(
             body_root=local_root,
             head_root=self.get_path("work_root"),
             override=override,
@@ -105,7 +105,7 @@ class PathServer(WorkSpace):
         Returns:
             Path: Path of local temporary working space.
         """
-        return self._working_root
+        return self._date_time_root
 
     def to_relative_path(self, local_full: Path) -> Path:
         """Convert full path on local working space to relative.
