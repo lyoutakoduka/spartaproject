@@ -139,9 +139,14 @@ class PathServer(WorkSpace):
         """Generate string path pair about server directory.
 
         Args:
-            local_root (Path | None, optional): Defaults to None.
-                User defined path of local working space which is used.
+            working_root (Path | None, optional): Defaults to None.
+                User defined temporary working space.
+                It's mainly used for test.
                 It's used for argument "working_root" of class "WorkSpace".
+
+            local_root (Path | None, optional): Defaults to None.
+                User defined path of local directory
+                    which is synchronized with directory tree on server.
 
             override (bool, optional): Defaults to False.
                 Override initial time count to "2023/4/1:12:00:00-00 (AM)".
