@@ -17,6 +17,10 @@ def _get_date_time_root(jst: bool = False) -> Path:
     return time_jst if jst else time_utc
 
 
+def _check_exists(result: Path) -> None:
+    assert result.exists()
+
+
 def _compare_relative(
     expected: Path, result: Path, server: PathServer
 ) -> None:
@@ -24,7 +28,8 @@ def _compare_relative(
 
 
 def _compare_path(result: Path, expected: Path) -> None:
-    assert result.exists()
+    _check_exists(result)
+
     assert result == expected
 
 
