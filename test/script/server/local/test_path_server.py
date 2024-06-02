@@ -120,8 +120,14 @@ def test_jst() -> None:
     date_time: Path = _get_date_time_root(jst=True)
 
     def individual_test(temporary_root: Path) -> None:
-        server = PathServer(local_root=temporary_root, override=True, jst=True)
-        _compare_working(temporary_root, date_time, server)
+        local_root: Path = _get_local_root(temporary_root)
+        server = PathServer(
+            working_root=temporary_root,
+            local_root=local_root,
+            override=True,
+            jst=True,
+        )
+        _compare_working(local_root, date_time, server)
 
     _inside_temporary_directory(individual_test)
 
