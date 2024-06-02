@@ -90,8 +90,9 @@ def test_local() -> None:
     """Test to get temporary working space for connecting server."""
 
     def individual_test(temporary_root: Path) -> None:
-        server = PathServer(local_root=temporary_root)
-        _compare_path(server.get_local_root(), temporary_root)
+        local_root: Path = Path("local", temporary_root)
+        server = PathServer(working_root=temporary_root, local_root=local_root)
+        _compare_path(server.get_local_root(), local_root)
 
     _inside_temporary_directory(individual_test)
 
