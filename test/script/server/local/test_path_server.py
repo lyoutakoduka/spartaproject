@@ -17,6 +17,10 @@ def _get_date_time_root(jst: bool = False) -> Path:
     return time_jst if jst else time_utc
 
 
+def _get_local_root(temporary_root: Path) -> Path:
+    return Path(temporary_root, "local")
+
+
 def _check_exists(result: Path) -> None:
     assert result.exists()
 
@@ -90,7 +94,7 @@ def test_local() -> None:
     """Test to get temporary working space for connecting server."""
 
     def individual_test(temporary_root: Path) -> None:
-        local_root: Path = Path(temporary_root, "local")
+        local_root: Path = _get_local_root(temporary_root)
         server = PathServer(working_root=temporary_root, local_root=local_root)
         _compare_path(server.get_local_root(), local_root)
 
