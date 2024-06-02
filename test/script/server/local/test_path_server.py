@@ -41,7 +41,7 @@ def _compare_working(
     temporary_root: Path, date_time: Path, server: PathServer
 ) -> None:
     _compare_path(
-        server.get_working_root(),
+        server.get_date_time_root(),
         Path(
             temporary_root,
             server.get_path("work_root"),
@@ -106,8 +106,11 @@ def test_temporary() -> None:
     date_time: Path = _get_date_time_root()
 
     def individual_test(temporary_root: Path) -> None:
-        server = PathServer(local_root=temporary_root, override=True)
-        _compare_working(temporary_root, date_time, server)
+        local_root: Path = _get_local_root(temporary_root)
+        server = PathServer(
+            working_root=temporary_root, local_root=local_root, override=True
+        )
+        _compare_working(local_root, date_time, server)
 
     _inside_temporary_directory(individual_test)
 
