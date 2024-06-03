@@ -73,6 +73,7 @@ def test_path() -> None:
 
 
 def test_base() -> None:
+    """Test for default temporary working space to connect server."""
     server = PathServer()
     result: Path = server.get_local_root()
 
@@ -83,6 +84,8 @@ def test_base() -> None:
 
 
 def test_work() -> None:
+    """Test for user defined temporary working space to connect server."""
+
     def individual_test(temporary_root: Path) -> None:
         server = PathServer(working_root=temporary_root)
         _compare_path(server.get_local_root(), temporary_root)
@@ -91,7 +94,7 @@ def test_work() -> None:
 
 
 def test_local() -> None:
-    """Test to get temporary working space for connecting server."""
+    """Test for user defined local directory to connect server."""
 
     def individual_test(temporary_root: Path) -> None:
         local_root: Path = _get_local_root(temporary_root)
@@ -102,7 +105,7 @@ def test_local() -> None:
 
 
 def test_temporary() -> None:
-    """Test to get local temporary working space for connecting server."""
+    """Test for temporary working space including date time string."""
     date_time: Path = _get_date_time_root()
 
     def individual_test(temporary_root: Path) -> None:
@@ -116,7 +119,10 @@ def test_temporary() -> None:
 
 
 def test_jst() -> None:
-    """Test to get local temporary working space including JST time zone."""
+    """Test for temporary working space including date time string.
+
+    The date time string is represented by JST time zone.
+    """
     date_time: Path = _get_date_time_root(jst=True)
 
     def individual_test(temporary_root: Path) -> None:
