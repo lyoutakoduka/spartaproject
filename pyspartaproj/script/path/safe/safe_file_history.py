@@ -25,7 +25,7 @@ class FileHistory(WorkSpace):
         self._history: PathPair2 = {}
         self._history_path: Path | None = None
         self._history_root: Path = self.create_date_time_space(
-            body_root=history_root, head_root=Path("history")
+            body_root=history_root
         )
 
     def _update_history_path(self) -> None:
