@@ -27,6 +27,10 @@ def _get_date_time_root(jst: bool = False) -> Path:
     return time_jst if jst else time_utc
 
 
+def _get_history_root(temporary_root: Path) -> Path:
+    return Path(temporary_root, "history")
+
+
 def _get_group() -> Strs:
     return [group + ".path" for group in ["source", "destination"]]
 
@@ -155,6 +159,22 @@ def test_work() -> None:
     _inside_temporary_directory(individual_test)
 
 
+def test_root() -> None:
+    def individual_test(temporary_root: Path) -> None:
+        history_root: Path = _get_history_root(temporary_root)
+        server = FileHistory(
+            working_root=temporary_root,
+            history_root=history_root,
+            override=True,
+        )
+        _compare_path_pair(
+            server.get_history_root(),
+            Path(history_root, _get_date_time_root()),
+        )
+
+    _inside_temporary_directory(individual_test)
+
+
 def test_single() -> None:
     """Test to record single source and destination path pair."""
     file_history = FileHistory()
@@ -203,6 +223,7 @@ def main() -> bool:
         bool: Success if get to the end of function.
     """
     test_work()
+    test_root()
     test_single()
     test_history()
     test_array()
