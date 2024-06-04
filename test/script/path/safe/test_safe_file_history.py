@@ -28,6 +28,10 @@ def _get_current_file() -> Path:
     return current_frame()["file"]
 
 
+def _check_exists(result: Path) -> None:
+    assert result.exists()
+
+
 def _compare_path_count(expected: PathPair2, result: PathPair2) -> None:
     assert 1 == len(set([len(history) for history in [expected, result]]))
 
@@ -60,7 +64,8 @@ def _compare_empty(expected: PathPair2, result: PathPair2 | None) -> None:
 
 
 def _relative_test(path: Path, root: Path) -> None:
-    assert path.exists()
+    _check_exists(path)
+
     assert is_relative(path, root_path=root)
 
 
