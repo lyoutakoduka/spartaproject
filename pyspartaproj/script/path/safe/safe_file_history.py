@@ -20,11 +20,13 @@ class FileHistory(WorkSpace):
     The module is used for e.g., custom copy or rename operation.
     """
 
-    def _initialize_variables_history(self) -> None:
+    def _initialize_variables_history(self, history_root: Path | None) -> None:
         self._still_removed: bool = False
         self._history: PathPair2 = {}
         self._history_path: Path | None = None
-        self._history_root: Path = self.create_sub_directory(Path("history"))
+        self._history_root: Path = self.create_date_time_space(
+            body_root=history_root, head_root=Path("history")
+        )
 
     def _update_history_root(self) -> None:
         self._history_path = Path(
@@ -114,7 +116,11 @@ class FileHistory(WorkSpace):
         """Export paths to temporary working space, and cleanup it."""
         self.close_history()
 
-    def __init__(self, working_root: Path | None = None) -> None:
+    def __init__(
+        self,
+        working_root: Path | None = None,
+        history_root: Path | None = None,
+    ) -> None:
         """Initialize variables about path you want to record.
 
         Args:
@@ -124,4 +130,4 @@ class FileHistory(WorkSpace):
         """
         super().__init__(working_root=working_root)
 
-        self._initialize_variables_history()
+        self._initialize_variables_history(history_root)
