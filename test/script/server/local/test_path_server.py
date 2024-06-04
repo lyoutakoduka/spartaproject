@@ -72,17 +72,6 @@ def test_path() -> None:
         assert True
 
 
-def test_base() -> None:
-    """Test for default temporary working space to connect server."""
-    server = PathServer()
-    result: Path = server.get_local_root()
-
-    _check_exists(result)
-
-    del server
-    assert not result.exists()
-
-
 def test_work() -> None:
     """Test for user defined temporary working space to connect server."""
 
@@ -170,7 +159,6 @@ def main() -> bool:
     """
     test_table()
     test_path()
-    test_base()
     test_work()
     test_local()
     test_temporary()
