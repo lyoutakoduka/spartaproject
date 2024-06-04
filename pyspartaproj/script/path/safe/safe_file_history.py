@@ -77,6 +77,9 @@ class FileHistory(WorkSpace):
 
         return None
 
+    def get_history_root(self) -> Path:
+        return self._history_root
+
     def get_history_path(self) -> Path | None:
         """Get path of file which contain the history of file operation.
 
