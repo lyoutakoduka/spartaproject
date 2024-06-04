@@ -32,6 +32,12 @@ def _check_exists(result: Path) -> None:
     assert result.exists()
 
 
+def _compare_path(result: Path, expected: Path) -> None:
+    _check_exists(result)
+
+    assert result == expected
+
+
 def _compare_path_count(expected: PathPair2, result: PathPair2) -> None:
     assert 1 == len(set([len(history) for history in [expected, result]]))
 
