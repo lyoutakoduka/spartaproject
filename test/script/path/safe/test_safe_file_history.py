@@ -39,7 +39,7 @@ def _check_exists(result: Path) -> None:
     assert result.exists()
 
 
-def _compare_path(result: Path, expected: Path) -> None:
+def _compare_path_pair(result: Path, expected: Path) -> None:
     _check_exists(result)
 
     assert result == expected
