@@ -28,7 +28,7 @@ class FileHistory(WorkSpace):
             body_root=history_root, head_root=Path("history")
         )
 
-    def _update_history_root(self) -> None:
+    def _update_history_path(self) -> None:
         self._history_path = Path(
             self._history_root, self._get_key_time() + ".json"
         )
@@ -71,7 +71,7 @@ class FileHistory(WorkSpace):
             PathPair2 | None: The history of file operation until current.
         """
         if history := self._clear_history():
-            self._update_history_root()
+            self._update_history_path()
             self._export_history(history)
             return history
 
