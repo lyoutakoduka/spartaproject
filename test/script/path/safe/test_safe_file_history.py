@@ -144,6 +144,17 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
         function(Path(temporary_path))
 
 
+def test_work() -> None:
+    def individual_test(temporary_root: Path) -> None:
+        file_history = FileHistory(working_root=temporary_root, override=True)
+        _compare_path_pair(
+            file_history.get_history_root(),
+            Path(temporary_root, _get_date_time_root()),
+        )
+
+    _inside_temporary_directory(individual_test)
+
+
 def test_single() -> None:
     """Test to record single source and destination path pair."""
     file_history = FileHistory()
@@ -191,6 +202,7 @@ def main() -> bool:
     Returns:
         bool: Success if get to the end of function.
     """
+    test_work()
     test_single()
     test_history()
     test_array()
