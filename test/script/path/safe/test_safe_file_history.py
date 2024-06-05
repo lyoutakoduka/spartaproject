@@ -81,6 +81,14 @@ def _compare_added(expected: PathPair2, result: PathPair2 | None) -> None:
         _common_test(expected, result)
 
 
+def _compare_root(
+    temporary_root: Path, date_time_root: Path, file_history: FileHistory
+) -> None:
+    _compare_path_pair(
+        file_history.get_history_root(), Path(temporary_root, date_time_root)
+    )
+
+
 def _relative_test(path: Path, root: Path) -> None:
     _check_exists(path)
 
@@ -152,10 +160,8 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 def test_work() -> None:
     def individual_test(temporary_root: Path) -> None:
         file_history = FileHistory(working_root=temporary_root, override=True)
-        _compare_path_pair(
-            file_history.get_history_root(),
-            Path(temporary_root, _get_date_time_root()),
-        )
+
+        _compare_root(temporary_root, _get_date_time_root(), file_history)
 
     _inside_temporary_directory(individual_test)
 
@@ -168,10 +174,8 @@ def test_history() -> None:
             history_root=history_root,
             override=True,
         )
-        _compare_path_pair(
-            file_history.get_history_root(),
-            Path(history_root, _get_date_time_root()),
-        )
+
+        _compare_root(history_root, _get_date_time_root(), file_history)
 
     _inside_temporary_directory(individual_test)
 
