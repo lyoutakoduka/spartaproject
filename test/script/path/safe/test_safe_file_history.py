@@ -160,7 +160,7 @@ def test_work() -> None:
     _inside_temporary_directory(individual_test)
 
 
-def test_root() -> None:
+def test_history() -> None:
     def individual_test(temporary_root: Path) -> None:
         history_root: Path = _get_history_root(temporary_root)
         file_history = FileHistory(
@@ -224,7 +224,7 @@ def main() -> bool:
         bool: Success if get to the end of function.
     """
     test_work()
-    test_root()
+    test_history()
     test_get()
     test_single()
     test_array()
