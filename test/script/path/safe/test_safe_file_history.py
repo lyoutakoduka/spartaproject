@@ -180,6 +180,23 @@ def test_history() -> None:
     _inside_temporary_directory(individual_test)
 
 
+def test_jst() -> None:
+    def individual_test(temporary_root: Path) -> None:
+        history_root: Path = _get_history_root(temporary_root)
+        file_history = FileHistory(
+            working_root=temporary_root,
+            history_root=history_root,
+            override=True,
+            jst=True,
+        )
+
+        _compare_root(
+            history_root, _get_date_time_root(jst=True), file_history
+        )
+
+    _inside_temporary_directory(individual_test)
+
+
 def test_get() -> None:
     """Test to get current file operation history."""
     file_history = FileHistory()
@@ -229,6 +246,7 @@ def main() -> bool:
     """
     test_work()
     test_history()
+    test_jst()
     test_get()
     test_single()
     test_array()
