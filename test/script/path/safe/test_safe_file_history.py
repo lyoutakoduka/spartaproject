@@ -162,13 +162,13 @@ def test_work() -> None:
 def test_root() -> None:
     def individual_test(temporary_root: Path) -> None:
         history_root: Path = _get_history_root(temporary_root)
-        server = FileHistory(
+        file_history = FileHistory(
             working_root=temporary_root,
             history_root=history_root,
             override=True,
         )
         _compare_path_pair(
-            server.get_history_root(),
+            file_history.get_history_root(),
             Path(history_root, _get_date_time_root()),
         )
 
