@@ -175,15 +175,6 @@ def test_root() -> None:
     _inside_temporary_directory(individual_test)
 
 
-def test_single() -> None:
-    """Test to record single source and destination path pair."""
-    file_history = FileHistory()
-
-    _compare_empty(
-        _add_history_single(file_history), file_history.close_history()
-    )
-
-
 def test_history() -> None:
     """Test to get current file operation history."""
     file_history = FileHistory()
@@ -193,6 +184,15 @@ def test_history() -> None:
     )
 
     _compare_history(file_history)
+
+
+def test_single() -> None:
+    """Test to record single source and destination path pair."""
+    file_history = FileHistory()
+
+    _compare_empty(
+        _add_history_single(file_history), file_history.close_history()
+    )
 
 
 def test_array() -> None:
@@ -224,8 +224,8 @@ def main() -> bool:
     """
     test_work()
     test_root()
-    test_single()
     test_history()
+    test_single()
     test_array()
     test_path()
     return True
