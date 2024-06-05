@@ -67,6 +67,11 @@ class FileHistory(WorkSpace):
         return history
 
     def get_history_root(self) -> Path:
+        """Get path of temporary working space including date time string.
+
+        Returns:
+            Path: Path of temporary working space.
+        """
         return self._history_root
 
     def get_history_path(self) -> Path | None:
@@ -132,8 +137,23 @@ class FileHistory(WorkSpace):
 
         Args:
             working_root (Path | None, optional): Defaults to None.
-                Export directory of Json file witch paths is recorded.
+                User defined temporary working space.
+                It's mainly used for test.
                 It's used for argument "working_root" of class "WorkSpace".
+
+            local_root (Path | None, optional): Defaults to None.
+                User defined path of temporary working space
+                    including date time string.
+
+            override (bool, optional): Defaults to False.
+                Override initial time count to "2023/4/1:12:00:00-00 (AM)".
+                It's used for argument "override" of
+                    function "create_date_time_space".
+
+            jst (bool, optional): Defaults to False.
+                If True, you can get datetime object as JST time zone.
+                It's used for argument "jst" of
+                    function "create_date_time_space".
         """
         super().__init__(working_root=working_root)
 
