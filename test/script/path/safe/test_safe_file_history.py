@@ -176,7 +176,7 @@ def test_root() -> None:
     _inside_temporary_directory(individual_test)
 
 
-def test_history() -> None:
+def test_get() -> None:
     """Test to get current file operation history."""
     file_history = FileHistory()
 
@@ -225,7 +225,7 @@ def main() -> bool:
     """
     test_work()
     test_root()
-    test_history()
+    test_get()
     test_single()
     test_array()
     test_path()
