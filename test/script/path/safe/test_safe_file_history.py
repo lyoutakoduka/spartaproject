@@ -73,7 +73,7 @@ def _common_test(expected: PathPair2, result: PathPair2) -> None:
     _compare_path_name(expected, result)
 
 
-def _compare_empty(expected: PathPair2, result: PathPair2 | None) -> None:
+def _compare_added(expected: PathPair2, result: PathPair2 | None) -> None:
     if result is None:
         fail()
     else:
@@ -179,7 +179,7 @@ def test_history() -> None:
     """Test to get current file operation history."""
     file_history = FileHistory()
 
-    _compare_empty(
+    _compare_added(
         _add_history_single(file_history), file_history.get_history()
     )
 
@@ -190,7 +190,7 @@ def test_single() -> None:
     """Test to record single source and destination path pair."""
     file_history = FileHistory()
 
-    _compare_empty(
+    _compare_added(
         _add_history_single(file_history), file_history.close_history()
     )
 
@@ -199,7 +199,7 @@ def test_array() -> None:
     """Test to record multiple source and destination path pair."""
     file_history = FileHistory()
 
-    _compare_empty(
+    _compare_added(
         _add_history_array(file_history), file_history.close_history()
     )
 
