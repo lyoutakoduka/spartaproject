@@ -66,6 +66,17 @@ class FileHistory(WorkSpace):
 
         return history
 
+    def get_history_root(self) -> Path:
+        return self._history_root
+
+    def get_history_path(self) -> Path | None:
+        """Get path of file which contain the history of file operation.
+
+        Returns:
+            Path: Path of file operation history.
+        """
+        return self._history_path
+
     def get_history(self) -> PathPair2 | None:
         """Get and initialize the history of file operation.
 
@@ -78,17 +89,6 @@ class FileHistory(WorkSpace):
             return history
 
         return None
-
-    def get_history_root(self) -> Path:
-        return self._history_root
-
-    def get_history_path(self) -> Path | None:
-        """Get path of file which contain the history of file operation.
-
-        Returns:
-            Path: Path of file operation history.
-        """
-        return self._history_path
 
     def add_history(self, source_path: Path, destination_path: Path) -> None:
         """Record paths which is source and destination pair.
