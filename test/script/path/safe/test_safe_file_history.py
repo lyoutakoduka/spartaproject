@@ -65,6 +65,7 @@ def _take_out_path_pair(expected: PathPair2, result: PathPair2) -> Paths3:
 
 def _compare_path_name(expected: PathPair2, result: PathPair2) -> None:
     history_path_pair: Paths3 = _take_out_path_pair(expected, result)
+
     assert history_path_pair[0] == history_path_pair[1]
 
 
