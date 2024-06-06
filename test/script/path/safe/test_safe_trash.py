@@ -36,6 +36,10 @@ def _get_date_time_root(jst: bool = False) -> Path:
     return time_jst if jst else time_utc
 
 
+def _get_trash_root(temporary_root: Path) -> Path:
+    return Path(temporary_root, "trash")
+
+
 def _get_group() -> Strs:
     return [group + ".path" for group in ["source", "destination"]]
 
@@ -149,7 +153,7 @@ def test_path() -> None:
     date_time: Path = _get_date_time_root()
 
     def individual_test(temporary_root: Path) -> None:
-        expected: Path = Path(temporary_root, "trash", date_time)
+        expected: Path = Path(_get_trash_root(temporary_root), date_time)
         assert expected == _get_remove_path(temporary_root).get_trash_root()
 
     _inside_temporary_directory(individual_test)
@@ -179,7 +183,7 @@ def test_relative() -> None:
             _single_test(
                 _finalize_single_relative(
                     create_temporary_file(
-                        create_directory(Path(temporary_root, "test"))
+                        create_directory(_get_trash_root(temporary_root))
                     ),
                     temporary_root,
                     safe_trash,
