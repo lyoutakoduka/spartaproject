@@ -158,6 +158,8 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 
 
 def test_work() -> None:
+    """Test to compare user defined temporary working space."""
+
     def individual_test(temporary_root: Path) -> None:
         file_history = FileHistory(working_root=temporary_root, override=True)
 
@@ -167,6 +169,11 @@ def test_work() -> None:
 
 
 def test_history() -> None:
+    """Test to compare user defined temporary working space.
+
+    The path of working space include date time string.
+    """
+
     def individual_test(temporary_root: Path) -> None:
         history_root: Path = _get_history_root(temporary_root)
         file_history = FileHistory(
@@ -181,6 +188,12 @@ def test_history() -> None:
 
 
 def test_jst() -> None:
+    """Test to compare user defined temporary working space.
+
+    The path of working space include date time string,
+        and it's represented as JST time zone.
+    """
+
     def individual_test(temporary_root: Path) -> None:
         history_root: Path = _get_history_root(temporary_root)
         file_history = FileHistory(
