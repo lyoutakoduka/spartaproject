@@ -29,6 +29,13 @@ from pyspartaproj.script.path.temporary.create_temporary_tree import (
 )
 
 
+def _get_date_time_root(jst: bool = False) -> Path:
+    time_utc: Path = Path("2023", "04", "01", "00", "00", "00", "000000")
+    time_jst: Path = Path("2023", "04", "01", "09", "00", "00", "000000")
+
+    return time_jst if jst else time_utc
+
+
 def _get_group() -> Strs:
     return [group + ".path" for group in ["source", "destination"]]
 
@@ -139,7 +146,7 @@ def _get_remove_local(outside_root: Path) -> SafeTrash:
 
 def test_path() -> None:
     """Test to get path used by directory of trash box."""
-    date_time: Path = Path("2023", "04", "01", "00", "00", "00", "000000")
+    date_time: Path = _get_date_time_root()
 
     def individual_test(temporary_root: Path) -> None:
         expected: Path = Path(temporary_root, "trash", date_time)
