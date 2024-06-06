@@ -58,6 +58,12 @@ def _convert_path_pair(source: Path, safe_trash: SafeTrash) -> PathPair:
     return _get_path_pair(source, safe_trash.get_trash_root())
 
 
+def _compare_path(result: Path, expected: Path) -> None:
+    _check_exists(result)
+
+    assert result == expected
+
+
 def _compare_size(history_size: int, history: PathPair2 | None) -> PathPair2:
     if history is None:
         fail()
