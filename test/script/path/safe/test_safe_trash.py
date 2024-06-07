@@ -125,6 +125,11 @@ def _get_trash_roots(safe_trash: SafeTrash) -> Paths:
     ]
 
 
+def _get_relative_roots(trash_roots: Paths) -> Paths:
+    count: int = len(_get_date_time_root().parts)
+    return [Path(*path.parts[:-count]) for path in trash_roots]
+
+
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
