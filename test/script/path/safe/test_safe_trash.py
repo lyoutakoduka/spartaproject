@@ -185,10 +185,6 @@ def _get_remove_trash(trash_root: Path) -> SafeTrash:
     return SafeTrash(trash_root=trash_root, override=True)
 
 
-def _get_remove_local(trash_root: Path) -> SafeTrash:
-    return SafeTrash(trash_root=trash_root)
-
-
 def test_work() -> None:
     def individual_test(temporary_root: Path) -> None:
         _compare_root(temporary_root, _get_remove_work(temporary_root))
