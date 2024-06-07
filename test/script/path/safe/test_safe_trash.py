@@ -118,6 +118,13 @@ def _remove_test(
     _common_test(len(remove_paths), history, root_pair)
 
 
+def _get_trash_roots(safe_trash: SafeTrash) -> Paths:
+    return [
+        safe_trash.get_trash_root(),
+        safe_trash.get_history_root(),
+    ]
+
+
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
