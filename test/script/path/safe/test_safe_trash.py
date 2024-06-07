@@ -82,6 +82,12 @@ def _compare_size(history_size: int, history: PathPair2 | None) -> PathPair2:
     return history
 
 
+def _compare_root(trash_root: Path, safe_trash: SafeTrash) -> None:
+    _compare_path(
+        safe_trash.get_trash_root(), Path(trash_root, _get_date_time_root())
+    )
+
+
 def _check_path_exists(path_pair: PathPair) -> None:
     exists_pair: BoolPair = check_exists_pair(path_pair)
     exists_array: Bools = [exists_pair[group] for group in _get_group()]
@@ -184,13 +190,8 @@ def _get_remove_local(trash_root: Path) -> SafeTrash:
 
 
 def test_work() -> None:
-    date_time_root: Path = _get_date_time_root()
-
     def individual_test(temporary_root: Path) -> None:
-        _compare_path(
-            _get_remove_work(temporary_root).get_trash_root(),
-            Path(temporary_root, date_time_root),
-        )
+        _compare_root(temporary_root, _get_remove_work(temporary_root))
 
     _inside_temporary_directory(individual_test)
 
@@ -207,15 +208,10 @@ def test_different() -> None:
 
 def test_remove() -> None:
     """Test to get path used by directory of trash box."""
-    date_time_root: Path = _get_date_time_root()
 
     def individual_test(temporary_root: Path) -> None:
         trash_root: Path = _get_trash_root(temporary_root)
-
-        _compare_path(
-            _get_remove_trash(trash_root).get_trash_root(),
-            Path(trash_root, date_time_root),
-        )
+        _compare_root(trash_root, _get_remove_trash(trash_root))
 
     _inside_temporary_directory(individual_test)
 
