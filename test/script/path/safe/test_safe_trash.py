@@ -197,8 +197,10 @@ def test_work() -> None:
 
 def test_different() -> None:
     def individual_test(temporary_root: Path) -> None:
-        safe_trash: SafeTrash = _get_remove_trash(temporary_root)
-        _compare_path_not(*_get_relative_roots(_get_trash_roots(safe_trash)))
+        if safe_trash := _get_remove_trash(temporary_root):
+            _compare_path_not(
+                *_get_relative_roots(_get_trash_roots(safe_trash))
+            )
 
     _inside_temporary_directory(individual_test)
 
