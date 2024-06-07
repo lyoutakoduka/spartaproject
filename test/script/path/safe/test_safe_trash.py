@@ -175,7 +175,7 @@ def _get_remove_work(working_root: Path) -> SafeTrash:
     return SafeTrash(working_root=working_root, override=True)
 
 
-def _get_remove_path(outside_root: Path) -> SafeTrash:
+def _get_remove_trash(outside_root: Path) -> SafeTrash:
     return SafeTrash(override=True, trash_root=outside_root)
 
 
@@ -209,7 +209,7 @@ def test_remove() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         trash_root: Path = _get_trash_root(temporary_root)
-        safe_trash: SafeTrash = _get_remove_path(trash_root)
+        safe_trash: SafeTrash = _get_remove_trash(trash_root)
 
         _compare_path(
             safe_trash.get_trash_root(), Path(trash_root, date_time_root)
