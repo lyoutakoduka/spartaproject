@@ -171,6 +171,10 @@ def _get_remove() -> SafeTrash:
     return SafeTrash(jst=True)
 
 
+def _get_remove_work(working_root: Path) -> SafeTrash:
+    return SafeTrash(working_root=working_root, override=True)
+
+
 def _get_remove_path(outside_root: Path) -> SafeTrash:
     return SafeTrash(override=True, remove_root=outside_root)
 
@@ -181,7 +185,7 @@ def _get_remove_local(outside_root: Path) -> SafeTrash:
 
 def test_work() -> None:
     def individual_test(temporary_root: Path) -> None:
-        safe_trash = SafeTrash(working_root=temporary_root, override=True)
+        safe_trash: SafeTrash = _get_remove_work(temporary_root)
         _compare_path(
             safe_trash.get_trash_root(),
             Path(temporary_root, _get_date_time_root()),
@@ -192,7 +196,7 @@ def test_work() -> None:
 
 def test_different() -> None:
     def individual_test(temporary_root: Path) -> None:
-        safe_trash = SafeTrash(history_root=temporary_root, override=True)
+        safe_trash = SafeTrash(remove_root=temporary_root, override=True)
         _compare_path_not(*_get_relative_roots(_get_trash_roots(safe_trash)))
 
     _inside_temporary_directory(individual_test)
