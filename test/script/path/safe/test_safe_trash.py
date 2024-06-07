@@ -205,10 +205,10 @@ def test_different() -> None:
 
 def test_remove() -> None:
     """Test to get path used by directory of trash box."""
-    date_time: Path = _get_date_time_root()
+    date_time_root: Path = _get_date_time_root()
 
     def individual_test(temporary_root: Path) -> None:
-        expected: Path = Path(_get_trash_root(temporary_root), date_time)
+        expected: Path = Path(_get_trash_root(temporary_root), date_time_root)
         assert expected == _get_remove_path(temporary_root).get_trash_root()
 
     _inside_temporary_directory(individual_test)
