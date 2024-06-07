@@ -20,7 +20,10 @@ from pyspartaproj.script.directory.create_directory import create_directory
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.modify.get_relative import get_relative
 from pyspartaproj.script.path.safe.safe_trash import SafeTrash
-from pyspartaproj.script.path.status.check_exists import check_exists_pair
+from pyspartaproj.script.path.status.check_exists import (
+    check_exists_array,
+    check_exists_pair,
+)
 from pyspartaproj.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
@@ -62,6 +65,12 @@ def _compare_path(result: Path, expected: Path) -> None:
     _check_exists(result)
 
     assert result == expected
+
+
+def _compare_path_not(result: Path, expected: Path) -> None:
+    bool_same_array(check_exists_array([result, expected]))
+
+    assert result != expected
 
 
 def _compare_size(history_size: int, history: PathPair2 | None) -> PathPair2:
