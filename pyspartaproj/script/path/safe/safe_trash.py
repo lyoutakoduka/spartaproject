@@ -18,10 +18,10 @@ class SafeTrash(SafeRename):
     """Class to remove file or directory and log history."""
 
     def _initialize_variables_trash(
-        self, remove_root: Path | None, override: bool, jst: bool
+        self, trash_root: Path | None, override: bool, jst: bool
     ) -> None:
         self._trash_root: Path = self.create_date_time_space(
-            body_root=remove_root, override=override, jst=jst
+            body_root=trash_root, override=override, jst=jst
         )
 
     def _move_file(self, target: Path, root: Path) -> None:
@@ -90,7 +90,7 @@ class SafeTrash(SafeRename):
         self,
         working_root: Path | None = None,
         history_root: Path | None = None,
-        remove_root: Path | None = None,
+        trash_root: Path | None = None,
         override: bool = False,
         jst: bool = False,
     ) -> None:
@@ -118,4 +118,4 @@ class SafeTrash(SafeRename):
             jst=jst,
         )
 
-        self._initialize_variables_trash(remove_root, override, jst)
+        self._initialize_variables_trash(trash_root, override, jst)
