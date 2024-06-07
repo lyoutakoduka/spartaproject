@@ -185,7 +185,7 @@ class EditArchive(SafeTrash):
                 If True, you can get datetime object as JST time zone.
                 It's used for argument "jst" of class "SafeTrash".
         """
-        super().__init__(remove_root=remove_root, override=override, jst=jst)
+        super().__init__(trash_root=remove_root, override=override, jst=jst)
 
         self._initialize_variables_edit(
             archive_path, limit_byte, compress, protected

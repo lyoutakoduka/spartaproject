@@ -51,7 +51,7 @@ def _check_shortcut_exists(shortcut_target: Path) -> None:
 
 def _cleanup_shortcut(shortcut_path: Path, remove_root: Path | None) -> None:
     if shortcut_path.exists():
-        SafeTrash(remove_root=remove_root).trash(shortcut_path)
+        SafeTrash(trash_root=remove_root).trash(shortcut_path)
 
 
 def create_shortcut(
