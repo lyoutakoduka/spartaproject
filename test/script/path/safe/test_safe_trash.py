@@ -187,9 +187,9 @@ def test_work() -> None:
     date_time_root: Path = _get_date_time_root()
 
     def individual_test(temporary_root: Path) -> None:
-        safe_trash: SafeTrash = _get_remove_work(temporary_root)
         _compare_path(
-            safe_trash.get_trash_root(), Path(temporary_root, date_time_root)
+            _get_remove_work(temporary_root).get_trash_root(),
+            Path(temporary_root, date_time_root),
         )
 
     _inside_temporary_directory(individual_test)
@@ -209,10 +209,10 @@ def test_remove() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         trash_root: Path = _get_trash_root(temporary_root)
-        safe_trash: SafeTrash = _get_remove_trash(trash_root)
 
         _compare_path(
-            safe_trash.get_trash_root(), Path(trash_root, date_time_root)
+            _get_remove_trash(trash_root).get_trash_root(),
+            Path(trash_root, date_time_root),
         )
 
     _inside_temporary_directory(individual_test)
