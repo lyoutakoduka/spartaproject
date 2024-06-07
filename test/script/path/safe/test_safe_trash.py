@@ -168,7 +168,7 @@ def _get_removal_array(path: Path) -> Paths:
 
 
 def _get_remove() -> SafeTrash:
-    return SafeTrash(jst=True)
+    return SafeTrash()
 
 
 def _get_remove_work(working_root: Path) -> SafeTrash:
@@ -180,7 +180,7 @@ def _get_remove_trash(trash_root: Path) -> SafeTrash:
 
 
 def _get_remove_local(trash_root: Path) -> SafeTrash:
-    return SafeTrash(trash_root=trash_root, jst=True)
+    return SafeTrash(trash_root=trash_root)
 
 
 def test_work() -> None:
