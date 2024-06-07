@@ -202,7 +202,7 @@ def test_different() -> None:
     _inside_temporary_directory(individual_test)
 
 
-def test_path() -> None:
+def test_remove() -> None:
     """Test to get path used by directory of trash box."""
     date_time: Path = _get_date_time_root()
 
@@ -310,7 +310,7 @@ def main() -> bool:
     """
     test_work()
     test_different()
-    test_path()
+    test_remove()
     test_file()
     test_relative()
     test_exists()
