@@ -208,8 +208,12 @@ def test_remove() -> None:
     date_time_root: Path = _get_date_time_root()
 
     def individual_test(temporary_root: Path) -> None:
-        expected: Path = Path(_get_trash_root(temporary_root), date_time_root)
-        assert expected == _get_remove_path(temporary_root).get_trash_root()
+        trash_root: Path = _get_trash_root(temporary_root)
+        safe_trash: SafeTrash = _get_remove_path(trash_root)
+
+        _compare_path(
+            safe_trash.get_trash_root(), Path(trash_root, date_time_root)
+        )
 
     _inside_temporary_directory(individual_test)
 
