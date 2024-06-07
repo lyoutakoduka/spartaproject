@@ -112,7 +112,7 @@ def _single_test(history: PathPair2 | None, root_pair: PathPair) -> None:
     _common_test(1, history, root_pair)
 
 
-def _remove_test(
+def _multiple_test(
     remove_paths: Paths, history: PathPair2 | None, root_pair: PathPair
 ) -> None:
     _common_test(len(remove_paths), history, root_pair)
@@ -278,7 +278,7 @@ def test_tree() -> None:
         remove_paths: Paths = _get_removal_array(temporary_root)
 
         if safe_trash := _get_remove():
-            _remove_test(
+            _multiple_test(
                 remove_paths,
                 _finalize_array_relative(
                     remove_paths, temporary_root, safe_trash
@@ -298,7 +298,7 @@ def test_select() -> None:
             remove_paths: Paths = _get_removal_array(temporary_root)
             safe_trash: SafeTrash = _get_remove_local(outside_root)
 
-            _remove_test(
+            _multiple_test(
                 remove_paths,
                 _finalize_array(remove_paths, safe_trash),
                 _convert_path_pair(temporary_root, safe_trash),
