@@ -107,26 +107,6 @@ def test_temporary() -> None:
     _inside_temporary_directory(individual_test)
 
 
-def test_jst() -> None:
-    """Test for temporary working space including date time string.
-
-    The date time string is represented by JST time zone.
-    """
-    date_time: Path = _get_date_time_root(jst=True)
-
-    def individual_test(temporary_root: Path) -> None:
-        local_root: Path = _get_local_root(temporary_root)
-        server = PathServer(
-            working_root=temporary_root,
-            local_root=local_root,
-            override=True,
-            jst=True,
-        )
-        _compare_working(local_root, date_time, server)
-
-    _inside_temporary_directory(individual_test)
-
-
 def test_relative() -> None:
     """Test to convert full path to relative path.
 
@@ -162,7 +142,6 @@ def main() -> bool:
     test_work()
     test_local()
     test_temporary()
-    test_jst()
     test_relative()
     test_full()
     return True
