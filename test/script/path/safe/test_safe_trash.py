@@ -184,11 +184,12 @@ def _get_remove_local(outside_root: Path) -> SafeTrash:
 
 
 def test_work() -> None:
+    date_time_root: Path = _get_date_time_root()
+
     def individual_test(temporary_root: Path) -> None:
         safe_trash: SafeTrash = _get_remove_work(temporary_root)
         _compare_path(
-            safe_trash.get_trash_root(),
-            Path(temporary_root, _get_date_time_root()),
+            safe_trash.get_trash_root(), Path(temporary_root, date_time_root)
         )
 
     _inside_temporary_directory(individual_test)
