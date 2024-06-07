@@ -158,6 +158,17 @@ def _get_remove_local(outside_root: Path) -> SafeTrash:
     return SafeTrash(jst=True, remove_root=outside_root)
 
 
+def test_work() -> None:
+    def individual_test(temporary_root: Path) -> None:
+        safe_trash = SafeTrash(working_root=temporary_root, override=True)
+        _compare_path(
+            safe_trash.get_trash_root(),
+            Path(temporary_root, _get_date_time_root()),
+        )
+
+    _inside_temporary_directory(individual_test)
+
+
 def test_path() -> None:
     """Test to get path used by directory of trash box."""
     date_time: Path = _get_date_time_root()
@@ -264,6 +275,7 @@ def main() -> bool:
     Returns:
         bool: Success if get to the end of function.
     """
+    test_work()
     test_path()
     test_file()
     test_relative()
