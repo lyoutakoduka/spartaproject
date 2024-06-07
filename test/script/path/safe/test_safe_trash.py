@@ -190,6 +190,14 @@ def test_work() -> None:
     _inside_temporary_directory(individual_test)
 
 
+def test_different() -> None:
+    def individual_test(temporary_root: Path) -> None:
+        safe_trash = SafeTrash(history_root=temporary_root, override=True)
+        _compare_path_not(*_get_relative_roots(_get_trash_roots(safe_trash)))
+
+    _inside_temporary_directory(individual_test)
+
+
 def test_path() -> None:
     """Test to get path used by directory of trash box."""
     date_time: Path = _get_date_time_root()
@@ -297,6 +305,7 @@ def main() -> bool:
         bool: Success if get to the end of function.
     """
     test_work()
+    test_different()
     test_path()
     test_file()
     test_relative()
