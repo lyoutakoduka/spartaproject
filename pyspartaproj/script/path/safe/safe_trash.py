@@ -97,9 +97,20 @@ class SafeTrash(SafeRename):
         """Initialize variables and super class.
 
         Args:
-            remove_root (Path | None, optional): Defaults to None.
-                Path of directory used as trash box.
+            working_root (Path | None, optional): Defaults to None.
+                User defined temporary working space.
+                It's mainly used for test.
                 It's used for argument "working_root" of class "FileHistory".
+
+            history_root (Path | None, optional): Defaults to None.
+                User defined path of temporary working space
+                    including date time string.
+                It's used for argument "history_root" of class "FileHistory".
+
+            trash_root (Path | None, optional): Defaults to None.
+                Path of directory used as trash box.
+                It's used for argument "body_root" of
+                    function "create_date_time_space".
 
             override (bool, optional): Defaults to False.
                 Override initial time count to "2023/4/1:12:00:00-00 (AM)".
