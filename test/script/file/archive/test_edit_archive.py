@@ -55,6 +55,13 @@ def _get_root_edit(temporary_root: Path) -> Path:
     return Path(temporary_root, "edit")
 
 
+def _get_date_time_root(jst: bool = False) -> Path:
+    time_utc: Path = Path("2023", "04", "01", "00", "00", "00", "000000")
+    time_jst: Path = Path("2023", "04", "01", "09", "00", "00", "000000")
+
+    return time_jst if jst else time_utc
+
+
 def _add_archive(
     temporary_root: Path, compress_archive: CompressArchive
 ) -> Paths:
