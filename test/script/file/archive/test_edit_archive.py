@@ -347,7 +347,7 @@ def _get_edit_archive_protect(archive_path: Path) -> EditArchive:
 def _get_edit_archive_remove(
     archive_path: Path, remove_root: Path
 ) -> EditArchive:
-    return EditArchive(archive_path, remove_root=remove_root)
+    return EditArchive(archive_path, trash_root=remove_root)
 
 
 def test_single() -> None:
