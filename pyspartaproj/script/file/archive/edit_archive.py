@@ -33,7 +33,7 @@ class EditArchive(SafeTrash):
         protected: bool,
     ) -> None:
         self._still_removed: bool = False
-        self._decompress_root: Path = self.create_date_time_space(
+        self._edit_root: Path = self.create_date_time_space(
             body_root=edit_root, override=override, jst=jst
         )
         self._archive_path: Path = archive_path
@@ -130,7 +130,7 @@ class EditArchive(SafeTrash):
         Returns:
             Path: Path of temporary working space.
         """
-        return self._decompress_root
+        return self._edit_root
 
     def close_archive(self) -> Paths | None:
         """Compress the contents of temporary working space to archive.
