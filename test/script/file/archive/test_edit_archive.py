@@ -225,6 +225,11 @@ def _close_archive(edit_archive: EditArchive) -> Paths:
         fail()
 
 
+def _compare_path(result: Path, expected: Path) -> None:
+    assert result.exists()
+    assert result == expected
+
+
 def _close_archive_fail(edit_archive: EditArchive) -> None:
     assert edit_archive.close_archive() is None
 
