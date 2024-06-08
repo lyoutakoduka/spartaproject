@@ -155,7 +155,7 @@ class EditArchive(SafeTrash):
         archive_path: Path,
         working_root: Path | None = None,
         history_root: Path | None = None,
-        remove_root: Path | None = None,
+        trash_root: Path | None = None,
         override: bool = False,
         jst: bool = False,
         edit_root: Path | None = None,
@@ -194,7 +194,7 @@ class EditArchive(SafeTrash):
         super().__init__(
             working_root=working_root,
             history_root=history_root,
-            trash_root=remove_root,
+            trash_root=trash_root,
             override=override,
             jst=jst,
         )
