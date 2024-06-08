@@ -25,13 +25,16 @@ class EditArchive(SafeTrash):
     def _initialize_variables_edit(
         self,
         archive_path: Path,
+        edit_root: Path | None,
+        override: bool,
+        jst: bool,
         limit_byte: int,
         compress: bool,
         protected: bool,
     ) -> None:
         self._still_removed: bool = False
-        self._decompress_root: Path = self.create_sub_directory(
-            Path("decompress")
+        self._decompress_root: Path = self.create_date_time_space(
+            body_root=edit_root, override=override, jst=jst
         )
         self._archive_path: Path = archive_path
         self._limit_byte: int = limit_byte
@@ -152,6 +155,7 @@ class EditArchive(SafeTrash):
         archive_path: Path,
         working_root: Path | None = None,
         history_root: Path | None = None,
+        edit_root: Path | None = None,
         limit_byte: int = 0,
         compress: bool = False,
         protected: bool = False,
@@ -196,6 +200,12 @@ class EditArchive(SafeTrash):
         )
 
         self._initialize_variables_edit(
-            archive_path, limit_byte, compress, protected
+            archive_path,
+            edit_root,
+            limit_byte,
+            compress,
+            protected,
+            override,
+            jst,
         )
         self._initialize_archive()
