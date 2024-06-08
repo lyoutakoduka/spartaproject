@@ -45,7 +45,7 @@ class EditArchive(SafeTrash):
         self._is_lzma_after: bool = compress
         self._protected: bool = protected
 
-    def _get_archive_path(self) -> Path:
+    def get_archive_path(self) -> Path:
         if archive_path := self._archive_path:
             return archive_path
 
