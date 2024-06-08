@@ -208,7 +208,7 @@ def _find_decompress_root(temporary_root: Path, remove_root: Path) -> TimePair:
 
 
 def _get_edit_history(edit_archive: EditArchive) -> PathPair:
-    return _edit_to_archived(edit_archive.get_decompress_root())
+    return _edit_to_archived(edit_archive.get_edit_root())
 
 
 def _close_archive(edit_archive: EditArchive) -> Paths:
