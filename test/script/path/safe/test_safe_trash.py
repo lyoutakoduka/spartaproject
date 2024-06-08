@@ -186,6 +186,8 @@ def _get_remove_trash(trash_root: Path) -> SafeTrash:
 
 
 def test_work() -> None:
+    """Test to compare user defined temporary working space."""
+
     def individual_test(temporary_root: Path) -> None:
         _compare_root(temporary_root, _get_remove_work(temporary_root))
 
@@ -193,6 +195,8 @@ def test_work() -> None:
 
 
 def test_different() -> None:
+    """Test to compare 2 type of temporary working spaces."""
+
     def individual_test(temporary_root: Path) -> None:
         if safe_trash := _get_remove_trash(temporary_root):
             _compare_path_not(
