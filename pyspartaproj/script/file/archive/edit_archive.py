@@ -103,6 +103,9 @@ class EditArchive(SafeTrash):
         )
 
     def _initialize_archive(self) -> None:
+        if self._is_disable_archive():
+            return None
+
         decompress_archive = DecompressArchive(self.get_edit_root())
 
         self._decompress_archive(decompress_archive)
