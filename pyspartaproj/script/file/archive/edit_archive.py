@@ -24,10 +24,10 @@ class EditArchive(SafeTrash):
 
     def _initialize_variables_edit(
         self,
-        archive_path: Path,
         edit_root: Path | None,
         override: bool,
         jst: bool,
+        archive_path: Path,
         limit_byte: int,
         compress: bool,
         protected: bool,
@@ -155,13 +155,13 @@ class EditArchive(SafeTrash):
         archive_path: Path,
         working_root: Path | None = None,
         history_root: Path | None = None,
+        remove_root: Path | None = None,
+        override: bool = False,
+        jst: bool = False,
         edit_root: Path | None = None,
         limit_byte: int = 0,
         compress: bool = False,
         protected: bool = False,
-        remove_root: Path | None = None,
-        override: bool = False,
-        jst: bool = False,
     ) -> None:
         """Initialize variables and decompress archive you selected.
 
@@ -200,12 +200,12 @@ class EditArchive(SafeTrash):
         )
 
         self._initialize_variables_edit(
-            archive_path,
             edit_root,
+            override,
+            jst,
+            archive_path,
             limit_byte,
             compress,
             protected,
-            override,
-            jst,
         )
         self._initialize_archive()
