@@ -71,11 +71,13 @@ class EditArchive(SafeTrash):
     def _compress_archive(self, archive_stamp: TimePair) -> Paths:
         self._cleanup_before_override()
 
+        archive_path: Path = self.get_archive_path()
+
         compress_archive = CompressArchive(
-            self._archive_path.parent,
+            archive_path.parent,
             limit_byte=self._limit_byte,
             compress=self._is_lzma_after,
-            archive_id=self._archive_path.stem,
+            archive_id=archive_path.stem,
         )
 
         compress_archive.compress_at_once(
@@ -89,7 +91,7 @@ class EditArchive(SafeTrash):
         self, decompress_archive: DecompressArchive
     ) -> None:
         self._decompressed: Paths = decompress_archive.sequential_archives(
-            self._archive_path
+            self.get_archive_path()
         )
         decompress_archive.decompress_at_once(self._decompressed)
 
@@ -97,7 +99,7 @@ class EditArchive(SafeTrash):
         self, decompress_archive: DecompressArchive
     ) -> None:
         self._is_lzma_before: bool = decompress_archive.is_lzma_archive(
-            self._archive_path
+            self.get_archive_path()
         )
 
     def _initialize_archive(self) -> None:
