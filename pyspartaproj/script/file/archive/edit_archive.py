@@ -35,12 +35,12 @@ class EditArchive(SafeTrash):
 
     def _initialize_archive_element(
         self,
-        archive_path: Path,
+        archive_path: Path | None,
         limit_byte: int,
         compress: bool,
         protected: bool,
     ) -> None:
-        self._archive_path: Path = archive_path
+        self._archive_path: Path | None = archive_path
         self._limit_byte: int = limit_byte
         self._is_lzma_after: bool = compress
         self._protected: bool = protected
@@ -156,7 +156,7 @@ class EditArchive(SafeTrash):
 
     def __init__(
         self,
-        archive_path: Path,
+        archive_path: Path | None = None,
         working_root: Path | None = None,
         history_root: Path | None = None,
         trash_root: Path | None = None,
