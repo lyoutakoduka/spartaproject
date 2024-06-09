@@ -23,10 +23,7 @@ from pyspartaproj.script.path.modify.get_relative import (
     is_relative,
 )
 from pyspartaproj.script.path.safe.safe_trash import SafeTrash
-from pyspartaproj.script.path.status.check_exists import (
-    check_exists_array,
-    check_exists_pair,
-)
+from pyspartaproj.script.path.status.check_exists import check_exists_pair
 from pyspartaproj.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
