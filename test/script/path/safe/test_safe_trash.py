@@ -18,7 +18,10 @@ from pyspartaproj.interface.pytest import fail
 from pyspartaproj.script.bool.same_value import bool_same_array
 from pyspartaproj.script.directory.create_directory import create_directory
 from pyspartaproj.script.path.iterate_directory import walk_iterator
-from pyspartaproj.script.path.modify.get_relative import get_relative
+from pyspartaproj.script.path.modify.get_relative import (
+    get_relative,
+    is_relative,
+)
 from pyspartaproj.script.path.safe.safe_trash import SafeTrash
 from pyspartaproj.script.path.status.check_exists import (
     check_exists_array,
@@ -80,6 +83,10 @@ def _compare_size(history_size: int, history: PathPair2 | None) -> PathPair2:
     assert history_size == len(history)
 
     return history
+
+
+def _compare_not_relative(full_path: Path, root_path: Path) -> None:
+    assert not is_relative(full_path, root_path=root_path)
 
 
 def _compare_root(trash_root: Path, safe_trash: SafeTrash) -> None:
