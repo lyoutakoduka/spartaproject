@@ -70,12 +70,6 @@ def _compare_path(result: Path, expected: Path) -> None:
     assert result == expected
 
 
-def _compare_path_not(result: Path, expected: Path) -> None:
-    bool_same_array(check_exists_array([result, expected]))
-
-    assert result != expected
-
-
 def _compare_size(history_size: int, history: PathPair2 | None) -> PathPair2:
     if history is None:
         fail()
@@ -129,18 +123,6 @@ def _multiple_test(
     remove_paths: Paths, history: PathPair2 | None, root_pair: PathPair
 ) -> None:
     _common_test(len(remove_paths), history, root_pair)
-
-
-def _get_trash_roots(safe_trash: SafeTrash) -> Paths:
-    return [
-        safe_trash.get_trash_root(),
-        safe_trash.get_history_root(),
-    ]
-
-
-def _get_relative_roots(trash_roots: Paths) -> Paths:
-    count: int = len(_get_date_time_root().parts)
-    return [Path(*path.parts[:-count]) for path in trash_roots]
 
 
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
