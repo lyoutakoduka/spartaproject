@@ -18,7 +18,10 @@ from pyspartaproj.script.file.archive.decompress_archive import (
 )
 from pyspartaproj.script.file.archive.edit_archive import EditArchive
 from pyspartaproj.script.path.iterate_directory import walk_iterator
-from pyspartaproj.script.path.modify.get_relative import get_relative
+from pyspartaproj.script.path.modify.get_relative import (
+    get_relative,
+    is_relative,
+)
 from pyspartaproj.script.path.safe.safe_rename import SafeRename
 from pyspartaproj.script.path.safe.safe_trash import SafeTrash
 from pyspartaproj.script.path.status.get_statistic import get_file_size
@@ -236,6 +239,10 @@ def _close_archive_fail(edit_archive: EditArchive) -> None:
 
 def _stamp_test(stamp_before: TimePair, stamp_after: TimePair) -> None:
     assert is_same_stamp(stamp_before, stamp_after)
+
+
+def _compare_not_relative(full_path: Path, root_path: Path) -> None:
+    assert not is_relative(full_path, root_path=root_path)
 
 
 def _common_test(
