@@ -366,6 +366,18 @@ def _get_edit_archive_remove(
     return EditArchive(archive_path, trash_root=remove_root)
 
 
+def test_work() -> None:
+    def individual_test(temporary_root: Path) -> None:
+        edit_archive: EditArchive = _get_edit_archive_work(temporary_root)
+
+        _compare_path(
+            edit_archive.get_edit_root(),
+            Path(temporary_root, _get_date_time_root()),
+        )
+
+    _inside_temporary_directory(individual_test)
+
+
 def test_single() -> None:
     """Test to compare internal of single archive file."""
 
@@ -462,6 +474,7 @@ def main() -> bool:
     Returns:
         bool: Success if get to the end of function.
     """
+    test_work()
     test_single()
     test_name()
     test_limit()
