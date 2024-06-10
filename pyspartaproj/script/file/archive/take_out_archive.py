@@ -219,7 +219,7 @@ class TakeOutArchive(EditArchive):
             limit_byte=limit_byte,
             compress=compress,
             protected=protected,
-            remove_root=remove_root,
+            trash_root=remove_root,
             override=override,
             jst=jst,
         )
