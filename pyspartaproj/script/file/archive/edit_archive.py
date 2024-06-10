@@ -173,13 +173,13 @@ class EditArchive(SafeTrash):
 
     def __init__(
         self,
-        archive_path: Path | None = None,
         working_root: Path | None = None,
         history_root: Path | None = None,
         trash_root: Path | None = None,
         override: bool = False,
         jst: bool = False,
         edit_root: Path | None = None,
+        archive_path: Path | None = None,
         limit_byte: int = 0,
         compress: bool = False,
         protected: bool = False,
