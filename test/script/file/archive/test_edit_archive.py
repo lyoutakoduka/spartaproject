@@ -451,6 +451,16 @@ def test_name() -> None:
     _inside_temporary_directory(individual_test)
 
 
+def test_path() -> None:
+    def individual_test(temporary_root: Path) -> None:
+        _create_source(temporary_root)
+
+        archive_path: Path = _get_archive_path(temporary_root)
+        _path_test(archive_path, _get_edit_archive(archive_path))
+
+    _inside_temporary_directory(individual_test)
+
+
 def test_limit() -> None:
     """Test to compare archive paths before edit and after."""
     limit_byte: int = 100
@@ -526,6 +536,7 @@ def main() -> bool:
     test_edit()
     test_single()
     test_name()
+    test_path()
     test_limit()
     test_compress()
     test_protect()
