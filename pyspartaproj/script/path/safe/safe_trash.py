@@ -90,9 +90,9 @@ class SafeTrash(SafeRename):
         self,
         working_root: Path | None = None,
         history_root: Path | None = None,
-        trash_root: Path | None = None,
         override: bool = False,
         jst: bool = False,
+        trash_root: Path | None = None,
     ) -> None:
         """Initialize variables and super class.
 
