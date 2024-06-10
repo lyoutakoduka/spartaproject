@@ -218,16 +218,16 @@ class TakeOutArchive(EditArchive):
                 It's used for argument "jst" of class "EditArchive".
         """
         super().__init__(
-            archive_path=archive_path,
             working_root=working_root,
             history_root=history_root,
-            edit_root=edit_root,
-            limit_byte=limit_byte,
-            compress=compress,
-            protected=protected,
             trash_root=trash_root,
             override=override,
             jst=jst,
+            edit_root=edit_root,
+            archive_path=archive_path,
+            limit_byte=limit_byte,
+            compress=compress,
+            protected=protected,
         )
 
         self._initialize_variables_take(archive_path, took_out_root)
