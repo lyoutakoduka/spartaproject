@@ -392,6 +392,7 @@ def _get_edit_archive_remove(
 
 
 def test_error() -> None:
+    """Test to confirm archive path which is undefined."""
     edit_archive: EditArchive = _get_edit_archive_error()
 
     with raises(ValueError):
@@ -399,6 +400,8 @@ def test_error() -> None:
 
 
 def test_work() -> None:
+    """Test to compare user defined temporary working space."""
+
     def individual_test(temporary_root: Path) -> None:
         _compare_root(temporary_root, _get_edit_archive_work(temporary_root))
 
@@ -406,6 +409,8 @@ def test_work() -> None:
 
 
 def test_different() -> None:
+    """Test to compare 2 type of temporary working spaces."""
+
     def individual_test(temporary_root: Path) -> None:
         edit_archive: EditArchive = _get_edit_archive_edit(temporary_root)
 
@@ -417,6 +422,8 @@ def test_different() -> None:
 
 
 def test_edit() -> None:
+    """Test to get temporary working spaces to edit archive."""
+
     def individual_test(temporary_root: Path) -> None:
         edit_root: Path = _get_root_edit(temporary_root)
         _compare_root(edit_root, _get_edit_archive_edit(edit_root))
@@ -452,6 +459,8 @@ def test_name() -> None:
 
 
 def test_path() -> None:
+    """Test to compare path of archive."""
+
     def individual_test(temporary_root: Path) -> None:
         _create_source(temporary_root)
 
