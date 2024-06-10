@@ -345,7 +345,7 @@ def _compare_remove(trash_root: Path, archive_status: ArchiveStatus) -> None:
 
 def _remove_test(working: PathPair, archive_status: ArchiveStatus) -> None:
     take_out_archive = TakeOutArchive(
-        archive_status["archive"], remove_root=working["remove"]
+        archive_status["archive"], trash_root=working["remove"]
     )
 
     archive_paths: Paths = take_out_archive.take_out()
