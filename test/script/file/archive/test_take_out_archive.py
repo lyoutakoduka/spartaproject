@@ -74,9 +74,7 @@ def _find_relative_paths(path: Path) -> Paths:
 
 
 def _get_relative_archive(archive_path: Path) -> Paths:
-    return _find_relative_paths(
-        EditArchive(archive_path).get_decompress_root()
-    )
+    return _find_relative_paths(EditArchive(archive_path).get_edit_root())
 
 
 def _add_temporary_files(directory_root: Path, file_names: Strs) -> Paths:

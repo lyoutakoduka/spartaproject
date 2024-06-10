@@ -60,7 +60,7 @@ class TakeOutArchive(EditArchive):
         return {
             str(directory_root): file_paths
             for directory_root in walk_iterator(
-                self.get_decompress_root(), file=False
+                self.get_edit_root(), file=False
             )
             if (file_paths := self._get_take_out(directory_root))
         }
