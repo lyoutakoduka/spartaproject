@@ -351,12 +351,12 @@ def _get_archive_path_limit(temporary_root: Path, limit_byte: int) -> Paths:
     )
 
 
-def _get_edit_archive(archive_path: Path) -> EditArchive:
-    return EditArchive(archive_path)
-
-
 def _get_edit_archive_error() -> EditArchive:
     return EditArchive()
+
+
+def _get_edit_archive(archive_path: Path) -> EditArchive:
+    return EditArchive(archive_path)
 
 
 def _get_edit_archive_work(working_root: Path) -> EditArchive:
