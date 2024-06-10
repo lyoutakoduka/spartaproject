@@ -304,6 +304,10 @@ def _name_test(before_path: Path, edit_archive: EditArchive) -> None:
     assert before_path.stem == _get_name()
 
 
+def _path_test(archive_path: Path, edit_archive: EditArchive) -> None:
+    assert archive_path == edit_archive.get_archive_path()
+
+
 def _limit_test(before_paths: Paths, edit_archive: EditArchive) -> None:
     _get_edit_history(edit_archive)
     after_paths: Paths = _close_archive(edit_archive)
