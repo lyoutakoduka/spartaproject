@@ -108,7 +108,7 @@ class SafeTrash(SafeRename):
                 It's used for argument "history_root" of class "FileHistory".
 
             trash_root (Path | None, optional): Defaults to None.
-                Path of directory used as trash box.
+                User defined path of trash box including date time string.
                 It's used for argument "body_root" of
                     function "create_date_time_space".
 
