@@ -135,6 +135,14 @@ class EditArchive(SafeTrash):
         return self._archive_path is None
 
     def get_archive_path(self) -> Path:
+        """Get path of archive you will edit.
+
+        Raises:
+            ValueError: Raise error if you don't' set path information.
+
+        Returns:
+            Path: Path of archive.
+        """
         if archive_path := self._archive_path:
             return archive_path
 
@@ -187,7 +195,38 @@ class EditArchive(SafeTrash):
         """Initialize variables and decompress archive you selected.
 
         Args:
-            archive_path (Path): Path of archive you want to edit.
+            working_root (Path | None, optional): Defaults to None.
+                User defined temporary working space.
+                It's mainly used for test.
+                It's used for argument "working_root" of class "SafeTrash".
+
+            history_root (Path | None, optional): Defaults to None.
+                User defined path of temporary working space
+                    including date time string.
+                It's used for argument "history_root" of class "SafeTrash".
+
+            trash_root (Path | None, optional): Defaults to None.
+                User defined path of trash box including date time string.
+                It's used for argument "trash_root" of class "SafeTrash".
+
+            override (bool, optional): Defaults to False.
+                Override initial time count to "2023/4/1:12:00:00-00 (AM)".
+                It's used for argument "override" of class "SafeTrash"
+                    and function "create_date_time_space".
+
+            jst (bool, optional): Defaults to False.
+                If True, you can get datetime object as JST time zone.
+                It's used for argument "jst" of class "SafeTrash"
+                    and function "create_date_time_space".
+
+            edit_root (Path | None, optional): Defaults to None.
+                User defined path of temporary working space
+                    including date time string to edit archive.
+                It's used for argument "body_root" of
+                    function "create_date_time_space".
+
+            archive_path (Path | None, optional): Defaults to None.
+                Path of archive you want to edit.
 
             limit_byte (int, optional): Defaults to 0.
                 If it's not 0, archive are dividedly compressed.
@@ -199,18 +238,6 @@ class EditArchive(SafeTrash):
 
             protected (bool, optional): Defaults to False.
                 True if you don't want to update original archive.
-
-            remove_root (Path | None, optional): Defaults to None.
-                Path of directory used as trash box.
-                It's used for argument "remove_root" of class "SafeTrash".
-
-            override (bool, optional): Defaults to False.
-                Override initial time count to "2023/4/1:12:00:00-00 (AM)".
-                It's used for argument "override" of class "SafeTrash".
-
-            jst (bool, optional): Defaults to False.
-                If True, you can get datetime object as JST time zone.
-                It's used for argument "jst" of class "SafeTrash".
         """
         super().__init__(
             working_root=working_root,
