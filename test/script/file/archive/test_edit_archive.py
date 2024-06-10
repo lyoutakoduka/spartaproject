@@ -10,7 +10,7 @@ from typing import Callable
 
 from pyspartaproj.context.extension.path_context import PathPair, Paths, Paths2
 from pyspartaproj.context.extension.time_context import TimePair
-from pyspartaproj.interface.pytest import fail
+from pyspartaproj.interface.pytest import fail, raises
 from pyspartaproj.script.directory.create_directory import create_directory
 from pyspartaproj.script.file.archive.compress_archive import CompressArchive
 from pyspartaproj.script.file.archive.decompress_archive import (
@@ -387,6 +387,13 @@ def _get_edit_archive_remove(
     return EditArchive(archive_path, trash_root=remove_root)
 
 
+def test_error() -> None:
+    edit_archive: EditArchive = _get_edit_archive_error()
+
+    with raises(ValueError):
+        edit_archive.get_archive_path()
+
+
 def test_work() -> None:
     def individual_test(temporary_root: Path) -> None:
         _compare_root(temporary_root, _get_edit_archive_work(temporary_root))
@@ -509,6 +516,7 @@ def main() -> bool:
     Returns:
         bool: Success if get to the end of function.
     """
+    test_error()
     test_work()
     test_different()
     test_edit()
