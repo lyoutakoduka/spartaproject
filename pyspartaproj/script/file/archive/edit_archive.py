@@ -103,7 +103,7 @@ class EditArchive(SafeTrash):
         )
 
     def _initialize_archive(self) -> None:
-        if self._is_disable_archive():
+        if self.is_disable_archive():
             return None
 
         decompress_archive = DecompressArchive(self.get_edit_root())
@@ -131,7 +131,7 @@ class EditArchive(SafeTrash):
 
         return archived
 
-    def _is_disable_archive(self) -> bool:
+    def is_disable_archive(self) -> bool:
         return self._archive_path is None
 
     def get_archive_path(self) -> Path:
@@ -165,7 +165,7 @@ class EditArchive(SafeTrash):
             Paths | None: Path of compressed archive.
                 Return "None" if the archive you want to edit isn't changed.
         """
-        if self._is_disable_archive():
+        if self.is_disable_archive():
             return None
 
         if self._still_removed:
