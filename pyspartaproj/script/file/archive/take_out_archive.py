@@ -178,7 +178,7 @@ class TakeOutArchive(EditArchive):
         limit_byte: int = 0,
         compress: bool = False,
         protected: bool = False,
-        remove_root: Path | None = None,
+        trash_root: Path | None = None,
         override: bool = False,
         jst: bool = False,
     ) -> None:
@@ -219,7 +219,7 @@ class TakeOutArchive(EditArchive):
             limit_byte=limit_byte,
             compress=compress,
             protected=protected,
-            trash_root=remove_root,
+            trash_root=trash_root,
             override=override,
             jst=jst,
         )
