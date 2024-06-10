@@ -355,6 +355,10 @@ def _get_edit_archive(archive_path: Path) -> EditArchive:
     return EditArchive(archive_path)
 
 
+def _get_edit_archive_error() -> EditArchive:
+    return EditArchive()
+
+
 def _get_edit_archive_work(working_root: Path) -> EditArchive:
     return EditArchive(working_root=working_root, override=True)
 
