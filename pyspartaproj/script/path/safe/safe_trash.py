@@ -107,19 +107,19 @@ class SafeTrash(SafeRename):
                     including date time string.
                 It's used for argument "history_root" of class "FileHistory".
 
-            trash_root (Path | None, optional): Defaults to None.
-                User defined path of trash box including date time string.
-                It's used for argument "body_root" of
-                    function "create_date_time_space".
-
             override (bool, optional): Defaults to False.
                 Override initial time count to "2023/4/1:12:00:00-00 (AM)".
-                It's used for argument "override" of
-                    function "create_date_time_space".
+                It's used for argument "override" of class "FileHistory"
+                    and function "create_date_time_space".
 
             jst (bool, optional): Defaults to False.
                 If True, you can get datetime object as JST time zone.
-                It's used for argument "jst" of
+                It's used for argument "jst" of class "FileHistory"
+                    and function "create_date_time_space".
+
+            trash_root (Path | None, optional): Defaults to None.
+                User defined path of trash box including date time string.
+                It's used for argument "body_root" of
                     function "create_date_time_space".
         """
         super().__init__(
