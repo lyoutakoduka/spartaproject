@@ -174,6 +174,9 @@ class TakeOutArchive(EditArchive):
     def __init__(
         self,
         archive_path: Path,
+        working_root: Path | None = None,
+        history_root: Path | None = None,
+        edit_root: Path | None = None,
         took_out_root: Path | None = None,
         limit_byte: int = 0,
         compress: bool = False,
@@ -215,7 +218,10 @@ class TakeOutArchive(EditArchive):
                 It's used for argument "jst" of class "EditArchive".
         """
         super().__init__(
-            archive_path,
+            archive_path=archive_path,
+            working_root=working_root,
+            history_root=history_root,
+            edit_root=edit_root,
             limit_byte=limit_byte,
             compress=compress,
             protected=protected,
