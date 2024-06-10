@@ -173,17 +173,17 @@ class TakeOutArchive(EditArchive):
 
     def __init__(
         self,
-        archive_path: Path,
         working_root: Path | None = None,
         history_root: Path | None = None,
-        edit_root: Path | None = None,
-        took_out_root: Path | None = None,
-        limit_byte: int = 0,
-        compress: bool = False,
-        protected: bool = False,
         trash_root: Path | None = None,
         override: bool = False,
         jst: bool = False,
+        edit_root: Path | None = None,
+        archive_path: Path | None = None,
+        limit_byte: int = 0,
+        compress: bool = False,
+        protected: bool = False,
+        took_out_root: Path | None = None,
     ) -> None:
         """Initialize variables and decompress archive you selected.
 
