@@ -193,7 +193,7 @@ def test_different() -> None:
 
 
 def test_remove() -> None:
-    """Test to get path used by directory of trash box."""
+    """Test to get temporary working spaces used by trash box."""
 
     def individual_test(temporary_root: Path) -> None:
         trash_root: Path = _get_trash_root(temporary_root)
