@@ -399,6 +399,11 @@ def test_error() -> None:
         edit_archive.get_archive_path()
 
 
+def test_disable() -> None:
+    """Test to confirm path of archive is undefined."""
+    assert _get_edit_archive_error().is_disable_archive()
+
+
 def test_work() -> None:
     """Test to compare user defined temporary working space."""
 
@@ -540,6 +545,7 @@ def main() -> bool:
         bool: Success if get to the end of function.
     """
     test_error()
+    test_disable()
     test_work()
     test_different()
     test_edit()
