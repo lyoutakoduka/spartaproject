@@ -233,6 +233,12 @@ def _compare_path(result: Path, expected: Path) -> None:
     assert result == expected
 
 
+def _compare_root(trash_root: Path, edit_archive: EditArchive) -> None:
+    _compare_path(
+        edit_archive.get_edit_root(), Path(trash_root, _get_date_time_root())
+    )
+
+
 def _close_archive_fail(edit_archive: EditArchive) -> None:
     assert edit_archive.close_archive() is None
 
@@ -379,12 +385,7 @@ def _get_edit_archive_remove(
 
 def test_work() -> None:
     def individual_test(temporary_root: Path) -> None:
-        edit_archive: EditArchive = _get_edit_archive_work(temporary_root)
-
-        _compare_path(
-            edit_archive.get_edit_root(),
-            Path(temporary_root, _get_date_time_root()),
-        )
+        _compare_root(temporary_root, _get_edit_archive_work(temporary_root))
 
     _inside_temporary_directory(individual_test)
 
