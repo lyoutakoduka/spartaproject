@@ -401,6 +401,14 @@ def test_different() -> None:
     _inside_temporary_directory(individual_test)
 
 
+def test_edit() -> None:
+    def individual_test(temporary_root: Path) -> None:
+        edit_root: Path = _get_root_edit(temporary_root)
+        _compare_root(edit_root, _get_edit_archive_edit(edit_root))
+
+    _inside_temporary_directory(individual_test)
+
+
 def test_single() -> None:
     """Test to compare internal of single archive file."""
 
@@ -499,6 +507,7 @@ def main() -> bool:
     """
     test_work()
     test_different()
+    test_edit()
     test_single()
     test_name()
     test_limit()
