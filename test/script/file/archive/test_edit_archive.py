@@ -368,7 +368,9 @@ def _get_edit_edit(working_root: Path) -> EditArchive:
 
 
 def _get_edit_path(archive_path: Path) -> EditArchive:
-    return EditArchive(archive_path)
+    edit_archive = EditArchive()
+    edit_archive.open_archive(archive_path=archive_path)
+    return edit_archive
 
 
 def _get_edit_limit(archive_path: Path, limit_byte: int) -> EditArchive:
@@ -446,9 +448,8 @@ def test_single() -> None:
     def individual_test(temporary_root: Path) -> None:
         stamp_before: TimePair = _initialize_archive(temporary_root)
 
-        edit_archive: EditArchive = _get_edit()
-        edit_archive.open_archive(
-            archive_path=_get_archive_path(temporary_root)
+        edit_archive: EditArchive = _get_edit_path(
+            _get_archive_path(temporary_root)
         )
 
         _common_test(temporary_root, stamp_before, edit_archive)
@@ -464,8 +465,7 @@ def test_name() -> None:
 
         archive_path: Path = _get_archive_path_name(temporary_root)[0]
 
-        edit_archive: EditArchive = _get_edit()
-        edit_archive.open_archive(archive_path=archive_path)
+        edit_archive: EditArchive = _get_edit_path(archive_path)
 
         _name_test(archive_path, edit_archive)
 
@@ -480,8 +480,7 @@ def test_path() -> None:
 
         archive_path: Path = _get_archive_path(temporary_root)
 
-        edit_archive: EditArchive = _get_edit()
-        edit_archive.open_archive(archive_path=archive_path)
+        edit_archive: EditArchive = _get_edit_path(archive_path)
 
         _path_test(archive_path, edit_archive)
 
