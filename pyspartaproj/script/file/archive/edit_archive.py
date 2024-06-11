@@ -200,6 +200,9 @@ class EditArchive(SafeTrash):
 
             protected (bool, optional): Defaults to False.
                 True if you don't want to update original archive.
+
+        Returns:
+            Path | None: Return archive path which is argument "archive_path".
         """
         self._initialize_archive_element(
             archive_path, limit_byte, compress, protected
