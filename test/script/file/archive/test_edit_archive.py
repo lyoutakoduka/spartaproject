@@ -355,11 +355,11 @@ def _get_archive_path_limit(temporary_root: Path, limit_byte: int) -> Paths:
     )
 
 
-def _get_edit_archive_error() -> EditArchive:
+def _get_edit() -> EditArchive:
     return EditArchive()
 
 
-def _get_edit_archive(archive_path: Path) -> EditArchive:
+def _get_edit_path(archive_path: Path) -> EditArchive:
     return EditArchive(archive_path)
 
 
@@ -393,7 +393,7 @@ def _get_edit_archive_remove(
 
 def test_error() -> None:
     """Test to confirm archive path which is undefined."""
-    edit_archive: EditArchive = _get_edit_archive_error()
+    edit_archive: EditArchive = _get_edit()
 
     with raises(ValueError):
         edit_archive.get_archive_path()
@@ -401,7 +401,7 @@ def test_error() -> None:
 
 def test_disable() -> None:
     """Test to confirm path of archive is undefined."""
-    assert _get_edit_archive_error().is_disable_archive()
+    assert _get_edit().is_disable_archive()
 
 
 def test_work() -> None:
@@ -445,7 +445,7 @@ def test_single() -> None:
         _common_test(
             temporary_root,
             stamp_before,
-            _get_edit_archive(_get_archive_path(temporary_root)),
+            _get_edit_path(_get_archive_path(temporary_root)),
         )
 
     _inside_temporary_directory(individual_test)
@@ -458,7 +458,7 @@ def test_name() -> None:
         _create_source(temporary_root)
 
         archive_path: Path = _get_archive_path_name(temporary_root)[0]
-        _name_test(archive_path, _get_edit_archive(archive_path))
+        _name_test(archive_path, _get_edit_path(archive_path))
 
     _inside_temporary_directory(individual_test)
 
@@ -470,7 +470,7 @@ def test_path() -> None:
         _create_source(temporary_root)
 
         archive_path: Path = _get_archive_path(temporary_root)
-        _path_test(archive_path, _get_edit_archive(archive_path))
+        _path_test(archive_path, _get_edit_path(archive_path))
 
     _inside_temporary_directory(individual_test)
 
