@@ -525,11 +525,12 @@ def test_protect() -> None:
     def individual_test(temporary_root: Path) -> None:
         stamp_before: TimePair = _initialize_archive(temporary_root)
 
-        _protect_test(
-            temporary_root,
-            stamp_before,
-            _get_edit_protect(_get_archive_path(temporary_root)),
-        )
+        archive_path: Path = _get_archive_path(temporary_root)
+
+        edit_archive: EditArchive = _get_edit()
+        edit_archive.open_archive(archive_path=archive_path, protected=True)
+
+        _protect_test(temporary_root, stamp_before, edit_archive)
 
     _inside_temporary_directory(individual_test)
 
