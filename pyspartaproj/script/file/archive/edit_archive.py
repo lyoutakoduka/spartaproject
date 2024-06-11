@@ -180,6 +180,18 @@ class EditArchive(SafeTrash):
 
         return self._finalize_archive()
 
+    def open_archive(
+        self,
+        archive_path: Path | None = None,
+        limit_byte: int = 0,
+        compress: bool = False,
+        protected: bool = False,
+    ) -> None:
+        self._initialize_archive_element(
+            archive_path, limit_byte, compress, protected
+        )
+        self._initialize_archive()
+
     def __del__(self) -> None:
         """Close and recompress archive you want to edit automatically."""
         self.close_archive()
@@ -192,10 +204,6 @@ class EditArchive(SafeTrash):
         override: bool = False,
         jst: bool = False,
         edit_root: Path | None = None,
-        archive_path: Path | None = None,
-        limit_byte: int = 0,
-        compress: bool = False,
-        protected: bool = False,
     ) -> None:
         """Initialize variables and decompress archive you selected.
 
@@ -253,7 +261,3 @@ class EditArchive(SafeTrash):
         )
 
         self._initialize_variables_edit(edit_root, override, jst)
-        self._initialize_archive_element(
-            archive_path, limit_byte, compress, protected
-        )
-        self._initialize_archive()
