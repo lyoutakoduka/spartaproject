@@ -367,7 +367,7 @@ def _get_edit_work(working_root: Path) -> EditArchive:
     return EditArchive(working_root=working_root, override=True)
 
 
-def _get_edit_archive_edit(working_root: Path) -> EditArchive:
+def _get_edit_edit(working_root: Path) -> EditArchive:
     return EditArchive(edit_root=working_root, override=True)
 
 
@@ -417,7 +417,7 @@ def test_different() -> None:
     """Test to compare 2 type of temporary working spaces."""
 
     def individual_test(temporary_root: Path) -> None:
-        edit_archive: EditArchive = _get_edit_archive_edit(temporary_root)
+        edit_archive: EditArchive = _get_edit_edit(temporary_root)
 
         _compare_not_relative(
             edit_archive.get_edit_root(), edit_archive.get_working_root()
@@ -431,7 +431,7 @@ def test_edit() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         edit_root: Path = _get_root_edit(temporary_root)
-        _compare_root(edit_root, _get_edit_archive_edit(edit_root))
+        _compare_root(edit_root, _get_edit_edit(edit_root))
 
     _inside_temporary_directory(individual_test)
 
