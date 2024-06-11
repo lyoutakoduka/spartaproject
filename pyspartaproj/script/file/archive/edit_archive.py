@@ -187,6 +187,23 @@ class EditArchive(SafeTrash):
         compress: bool = False,
         protected: bool = False,
     ) -> None:
+        """Initialize variables about archive and decompress it.
+
+        Args:
+            archive_path (Path | None, optional): Defaults to None.
+                Path of archive you want to edit.
+
+            limit_byte (int, optional): Defaults to 0.
+                If it's not 0, archive are dividedly compressed.
+                It's used for argument "limit_byte" of class "CompressArchive".
+
+            compress (bool, optional): Defaults to False.
+                If it's True, you can compress archive by LZMA format.
+                It's used for argument "compress" of class "CompressArchive".
+
+            protected (bool, optional): Defaults to False.
+                True if you don't want to update original archive.
+        """
         self._initialize_archive_element(
             archive_path, limit_byte, compress, protected
         )
@@ -205,7 +222,7 @@ class EditArchive(SafeTrash):
         jst: bool = False,
         edit_root: Path | None = None,
     ) -> None:
-        """Initialize variables and decompress archive you selected.
+        """Initialize super class and variables about work space.
 
         Args:
             working_root (Path | None, optional): Defaults to None.
@@ -237,20 +254,6 @@ class EditArchive(SafeTrash):
                     including date time string to edit archive.
                 It's used for argument "body_root" of
                     function "create_date_time_space".
-
-            archive_path (Path | None, optional): Defaults to None.
-                Path of archive you want to edit.
-
-            limit_byte (int, optional): Defaults to 0.
-                If it's not 0, archive are dividedly compressed.
-                It's used for argument "limit_byte" of class "CompressArchive".
-
-            compress (bool, optional): Defaults to False.
-                If it's True, you can compress archive by LZMA format.
-                It's used for argument "compress" of class "CompressArchive".
-
-            protected (bool, optional): Defaults to False.
-                True if you don't want to update original archive.
         """
         super().__init__(
             working_root=working_root,
