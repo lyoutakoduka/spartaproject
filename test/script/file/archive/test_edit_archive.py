@@ -391,9 +391,7 @@ def _get_edit_protect(archive_path: Path) -> EditArchive:
     return edit_archive
 
 
-def _get_edit_archive_remove(
-    archive_path: Path, remove_root: Path
-) -> EditArchive:
+def _get_edit_remove(archive_path: Path, remove_root: Path) -> EditArchive:
     edit_archive = EditArchive(trash_root=remove_root)
     edit_archive.open_archive(archive_path=archive_path)
     return edit_archive
@@ -549,9 +547,7 @@ def test_remove() -> None:
         _remove_test(
             temporary_root,
             stamp_before,
-            _get_edit_archive_remove(
-                _get_archive_path(temporary_root), remove_root
-            ),
+            _get_edit_remove(_get_archive_path(temporary_root), remove_root),
         )
 
     _inside_temporary_directory(individual_test)
