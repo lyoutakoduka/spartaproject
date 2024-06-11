@@ -183,7 +183,7 @@ class EditArchive(SafeTrash):
         limit_byte: int = 0,
         compress: bool = False,
         protected: bool = False,
-    ) -> None:
+    ) -> Path | None:
         """Initialize variables about archive and decompress it.
 
         Args:
@@ -209,6 +209,8 @@ class EditArchive(SafeTrash):
             return None
 
         self._get_decompress_stamp()
+
+        return archive_path
 
     def __del__(self) -> None:
         """Close and recompress archive you want to edit automatically."""
