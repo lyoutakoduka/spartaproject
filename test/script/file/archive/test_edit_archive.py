@@ -526,13 +526,11 @@ def test_protect() -> None:
     """Test to take out directory from protected archive."""
 
     def individual_test(temporary_root: Path) -> None:
-        stamp_before: TimePair = _initialize_archive(temporary_root)
-
-        archive_path: Path = _get_archive_path(temporary_root)
-
-        edit_archive: EditArchive = _get_edit_protect(archive_path)
-
-        _protect_test(temporary_root, stamp_before, edit_archive)
+        _protect_test(
+            temporary_root,
+            _initialize_archive(temporary_root),
+            _get_edit_protect(_get_archive_path(temporary_root)),
+        )
 
     _inside_temporary_directory(individual_test)
 
