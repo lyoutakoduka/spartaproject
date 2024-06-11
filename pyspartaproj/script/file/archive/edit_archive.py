@@ -102,7 +102,7 @@ class EditArchive(SafeTrash):
             self.get_archive_path()
         )
 
-    def _initialize_archive(self) -> None:
+    def _get_decompress_stamp(self) -> None:
         decompress_archive = DecompressArchive(self.get_edit_root())
 
         self._decompress_archive(decompress_archive)
@@ -208,7 +208,7 @@ class EditArchive(SafeTrash):
         if self.is_disable_archive():
             return None
 
-        self._initialize_archive()
+        self._get_decompress_stamp()
 
     def __del__(self) -> None:
         """Close and recompress archive you want to edit automatically."""
