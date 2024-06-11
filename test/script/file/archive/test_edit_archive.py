@@ -477,12 +477,9 @@ def test_path() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         _create_source(temporary_root)
-
         archive_path: Path = _get_archive_path(temporary_root)
 
-        edit_archive: EditArchive = _get_edit_path(archive_path)
-
-        _path_test(archive_path, edit_archive)
+        _path_test(archive_path, _get_edit_path(archive_path))
 
     _inside_temporary_directory(individual_test)
 
