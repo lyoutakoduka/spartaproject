@@ -372,7 +372,9 @@ def _get_edit_path(archive_path: Path) -> EditArchive:
 
 
 def _get_edit_limit(archive_path: Path, limit_byte: int) -> EditArchive:
-    return EditArchive(archive_path, limit_byte=limit_byte)
+    edit_archive = EditArchive()
+    edit_archive.open_archive(archive_path=archive_path, limit_byte=limit_byte)
+    return edit_archive
 
 
 def _get_edit_compress(archive_path: Path) -> EditArchive:
@@ -497,9 +499,8 @@ def test_limit() -> None:
             temporary_root, limit_byte
         )
 
-        edit_archive: EditArchive = _get_edit()
-        edit_archive.open_archive(
-            archive_path=archive_paths[0], limit_byte=limit_byte
+        edit_archive: EditArchive = _get_edit_limit(
+            archive_paths[0], limit_byte
         )
 
         _limit_test(archive_paths, edit_archive)
