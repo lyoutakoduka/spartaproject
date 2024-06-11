@@ -371,9 +371,7 @@ def _get_edit_path(archive_path: Path) -> EditArchive:
     return EditArchive(archive_path)
 
 
-def _get_edit_archive_limit(
-    archive_path: Path, limit_byte: int
-) -> EditArchive:
+def _get_edit_limit(archive_path: Path, limit_byte: int) -> EditArchive:
     return EditArchive(archive_path, limit_byte=limit_byte)
 
 
@@ -487,7 +485,7 @@ def test_limit() -> None:
         )
         _limit_test(
             archive_paths,
-            _get_edit_archive_limit(archive_paths[0], limit_byte),
+            _get_edit_limit(archive_paths[0], limit_byte),
         )
 
     _inside_temporary_directory(individual_test)
