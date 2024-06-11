@@ -380,7 +380,9 @@ def _get_edit_compress(archive_path: Path) -> EditArchive:
 
 
 def _get_edit_protect(archive_path: Path) -> EditArchive:
-    return EditArchive(archive_path, protected=True)
+    edit_archive = EditArchive()
+    edit_archive.open_archive(archive_path=archive_path, protected=True)
+    return edit_archive
 
 
 def _get_edit_archive_remove(
@@ -527,8 +529,7 @@ def test_protect() -> None:
 
         archive_path: Path = _get_archive_path(temporary_root)
 
-        edit_archive: EditArchive = _get_edit()
-        edit_archive.open_archive(archive_path=archive_path, protected=True)
+        edit_archive: EditArchive = _get_edit_protect(archive_path)
 
         _protect_test(temporary_root, stamp_before, edit_archive)
 
