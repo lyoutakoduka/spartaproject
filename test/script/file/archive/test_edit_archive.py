@@ -377,7 +377,7 @@ def _get_edit_archive_limit(
     return EditArchive(archive_path, limit_byte=limit_byte)
 
 
-def _get_edit_archive_compress(archive_path: Path) -> EditArchive:
+def _get_edit_compress(archive_path: Path) -> EditArchive:
     return EditArchive(archive_path, compress=True)
 
 
@@ -500,7 +500,7 @@ def test_compress() -> None:
         _create_source_compress(temporary_root)
 
         archive_path: Path = _get_archive_path(temporary_root)
-        _compress_test(archive_path, _get_edit_archive_compress(archive_path))
+        _compress_test(archive_path, _get_edit_compress(archive_path))
 
     _inside_temporary_directory(individual_test)
 
