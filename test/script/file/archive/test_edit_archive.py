@@ -541,13 +541,13 @@ def test_remove() -> None:
     """Test of directory used for removing process when archive is edited."""
 
     def individual_test(temporary_root: Path) -> None:
-        stamp_before: TimePair = _initialize_archive(temporary_root)
-        remove_root: Path = create_directory(_get_root_edit(temporary_root))
-
         _remove_test(
             temporary_root,
-            stamp_before,
-            _get_edit_remove(_get_archive_path(temporary_root), remove_root),
+            _initialize_archive(temporary_root),
+            _get_edit_remove(
+                _get_archive_path(temporary_root),
+                create_directory(_get_root_edit(temporary_root)),
+            ),
         )
 
     _inside_temporary_directory(individual_test)
