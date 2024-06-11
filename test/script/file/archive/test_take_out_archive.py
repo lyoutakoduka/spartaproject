@@ -313,7 +313,8 @@ def _compare_relative(working: PathPair, archive_paths: Paths) -> None:
 
 def _default_test(archive_status: ArchiveStatus) -> None:
     _took_out_and_keep(
-        TakeOutArchive(archive_status["archive"]).take_out(), archive_status
+        TakeOutArchive(archive_path=archive_status["archive"]).take_out(),
+        archive_status,
     )
 
 
@@ -328,7 +329,9 @@ def _specific_test(working: PathPair, archive_status: ArchiveStatus) -> None:
 
 def _protect_test(archive_status: ArchiveStatus) -> None:
     _took_out_and_keep(
-        TakeOutArchive(archive_status["archive"], protected=True).take_out(),
+        TakeOutArchive(
+            archive_path=archive_status["archive"], protected=True
+        ).take_out(),
         archive_status,
     )
 
@@ -345,7 +348,7 @@ def _compare_remove(trash_root: Path, archive_status: ArchiveStatus) -> None:
 
 def _remove_test(working: PathPair, archive_status: ArchiveStatus) -> None:
     take_out_archive = TakeOutArchive(
-        archive_status["archive"], trash_root=working["remove"]
+        archive_path=archive_status["archive"], trash_root=working["remove"]
     )
 
     archive_paths: Paths = take_out_archive.take_out()
