@@ -359,16 +359,16 @@ def _get_edit() -> EditArchive:
     return EditArchive()
 
 
-def _get_edit_path(archive_path: Path) -> EditArchive:
-    return EditArchive(archive_path)
-
-
 def _get_edit_work(working_root: Path) -> EditArchive:
     return EditArchive(working_root=working_root, override=True)
 
 
 def _get_edit_edit(working_root: Path) -> EditArchive:
     return EditArchive(edit_root=working_root, override=True)
+
+
+def _get_edit_path(archive_path: Path) -> EditArchive:
+    return EditArchive(archive_path)
 
 
 def _get_edit_archive_limit(
