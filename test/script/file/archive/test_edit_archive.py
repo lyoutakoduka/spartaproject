@@ -363,7 +363,7 @@ def _get_edit_path(archive_path: Path) -> EditArchive:
     return EditArchive(archive_path)
 
 
-def _get_edit_archive_work(working_root: Path) -> EditArchive:
+def _get_edit_work(working_root: Path) -> EditArchive:
     return EditArchive(working_root=working_root, override=True)
 
 
@@ -408,7 +408,7 @@ def test_work() -> None:
     """Test to compare user defined temporary working space."""
 
     def individual_test(temporary_root: Path) -> None:
-        _compare_root(temporary_root, _get_edit_archive_work(temporary_root))
+        _compare_root(temporary_root, _get_edit_work(temporary_root))
 
     _inside_temporary_directory(individual_test)
 
