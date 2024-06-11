@@ -376,7 +376,9 @@ def _get_edit_limit(archive_path: Path, limit_byte: int) -> EditArchive:
 
 
 def _get_edit_compress(archive_path: Path) -> EditArchive:
-    return EditArchive(archive_path, compress=True)
+    edit_archive = EditArchive()
+    edit_archive.open_archive(archive_path=archive_path, compress=True)
+    return edit_archive
 
 
 def _get_edit_protect(archive_path: Path) -> EditArchive:
@@ -513,8 +515,7 @@ def test_compress() -> None:
 
         archive_path: Path = _get_archive_path(temporary_root)
 
-        edit_archive: EditArchive = _get_edit()
-        edit_archive.open_archive(archive_path=archive_path, compress=True)
+        edit_archive: EditArchive = _get_edit_compress(archive_path)
 
         _compress_test(archive_path, edit_archive)
 
