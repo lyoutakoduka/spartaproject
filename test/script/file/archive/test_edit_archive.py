@@ -493,16 +493,13 @@ def test_limit() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         _create_source(temporary_root)
-
         archive_paths: Paths = _get_archive_path_limit(
             temporary_root, limit_byte
         )
 
-        edit_archive: EditArchive = _get_edit_limit(
-            archive_paths[0], limit_byte
+        _limit_test(
+            archive_paths, _get_edit_limit(archive_paths[0], limit_byte)
         )
-
-        _limit_test(archive_paths, edit_archive)
 
     _inside_temporary_directory(individual_test)
 
