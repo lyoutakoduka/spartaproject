@@ -381,7 +381,7 @@ def _get_edit_compress(archive_path: Path) -> EditArchive:
     return EditArchive(archive_path, compress=True)
 
 
-def _get_edit_archive_protect(archive_path: Path) -> EditArchive:
+def _get_edit_protect(archive_path: Path) -> EditArchive:
     return EditArchive(archive_path, protected=True)
 
 
@@ -514,7 +514,7 @@ def test_protect() -> None:
         _protect_test(
             temporary_root,
             stamp_before,
-            _get_edit_archive_protect(_get_archive_path(temporary_root)),
+            _get_edit_protect(_get_archive_path(temporary_root)),
         )
 
     _inside_temporary_directory(individual_test)
