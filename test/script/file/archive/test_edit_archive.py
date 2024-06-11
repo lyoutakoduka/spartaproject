@@ -440,11 +440,12 @@ def test_single() -> None:
     def individual_test(temporary_root: Path) -> None:
         stamp_before: TimePair = _initialize_archive(temporary_root)
 
-        _common_test(
-            temporary_root,
-            stamp_before,
-            _get_edit_path(_get_archive_path(temporary_root)),
+        edit_archive: EditArchive = _get_edit()
+        edit_archive.open_archive(
+            archive_path=_get_archive_path(temporary_root)
         )
+
+        _common_test(temporary_root, stamp_before, edit_archive)
 
     _inside_temporary_directory(individual_test)
 
