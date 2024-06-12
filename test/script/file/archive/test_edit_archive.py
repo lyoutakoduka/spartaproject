@@ -419,10 +419,12 @@ def test_disable() -> None:
 
 
 def test_none() -> None:
+    """Test to open archive with out archive path."""
     _none_test(_get_edit().open_archive())
 
 
 def test_close() -> None:
+    """Test to close archive with out archive path."""
     _none_test(_get_edit().close_archive())
 
 
@@ -472,6 +474,8 @@ def test_single() -> None:
 
 
 def test_open() -> None:
+    """Test to open archive with archive path successfully."""
+
     def individual_test(temporary_root: Path) -> None:
         _create_source(temporary_root)
 
