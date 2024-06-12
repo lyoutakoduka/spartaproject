@@ -28,6 +28,7 @@ class EditArchive(SafeTrash):
         override: bool,
         jst: bool,
     ) -> None:
+        self._archive_path: Path | None = None
         self._still_removed: bool = False
         self._edit_root: Path = self.create_date_time_space(
             body_root=edit_root, override=override, jst=jst
@@ -40,7 +41,7 @@ class EditArchive(SafeTrash):
         compress: bool,
         protected: bool,
     ) -> None:
-        self._archive_path: Path | None = archive_path
+        self._archive_path = archive_path
         self._limit_byte: int = limit_byte
         self._is_lzma_after: bool = compress
         self._protected: bool = protected
