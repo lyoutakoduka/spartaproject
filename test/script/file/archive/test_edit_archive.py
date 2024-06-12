@@ -418,6 +418,10 @@ def test_none() -> None:
     _none_test(_get_edit().open_archive())
 
 
+def test_close() -> None:
+    _none_test(_get_edit().close_archive())
+
+
 def test_work() -> None:
     """Test to compare user defined temporary working space."""
 
@@ -554,6 +558,7 @@ def main() -> bool:
     test_error()
     test_disable()
     test_none()
+    test_close()
     test_work()
     test_different()
     test_edit()
