@@ -471,6 +471,15 @@ def test_single() -> None:
     _inside_temporary_directory(individual_test)
 
 
+def test_open() -> None:
+    def individual_test(temporary_root: Path) -> None:
+        _create_source(temporary_root)
+
+        _open_test(_get_archive_path(temporary_root), _get_edit())
+
+    _inside_temporary_directory(individual_test)
+
+
 def test_name() -> None:
     """Test to compare name of archive before edit and after."""
 
@@ -567,6 +576,7 @@ def main() -> bool:
     test_different()
     test_edit()
     test_single()
+    test_open()
     test_name()
     test_path()
     test_limit()
