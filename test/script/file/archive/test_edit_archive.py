@@ -297,6 +297,10 @@ def _get_sorted_paths(before_paths: Paths, after_paths: Paths) -> Paths2:
     return [sorted(paths) for paths in [before_paths, after_paths]]
 
 
+def _none_test(path: Path | Paths | None) -> None:
+    assert path is None
+
+
 def _name_test(before_path: Path, edit_archive: EditArchive) -> None:
     _get_edit_history(edit_archive)
 
