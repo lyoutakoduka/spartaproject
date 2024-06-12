@@ -229,7 +229,7 @@ class EditArchive(SafeTrash):
         jst: bool = False,
         edit_root: Path | None = None,
     ) -> None:
-        """Initialize super class and variables about work space.
+        """Initialize super class and variables about temporary work space.
 
         Args:
             working_root (Path | None, optional): Defaults to None.
