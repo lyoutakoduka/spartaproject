@@ -166,8 +166,13 @@ class TakeOutArchive(EditArchive):
             |--directory_A/
             |--directory_B/
 
+        Args:
+            took_out_root (Path | None, optional): Defaults to None.
+                Destination directory that took out directories in archive.
+
         Returns:
-            Paths: List of directory path which is took out.
+            Paths | None: Retune list of directory path which is took out
+                if archive is successfully open.
         """
         if self.is_disable_archive():
             return None
@@ -185,29 +190,22 @@ class TakeOutArchive(EditArchive):
         jst: bool = False,
         edit_root: Path | None = None,
     ) -> None:
-        """Initialize variables and decompress archive you selected.
+        """Initialize super class about temporary work space.
 
         Args:
-            archive_path (Path): Path of archive you want to take out.
+            working_root (Path | None, optional): Defaults to None.
+                User defined temporary working space.
+                It's mainly used for test.
+                It's used for argument "working_root" of class "EditArchive".
 
-            took_out_root (Path | None, optional): Defaults to None.
-                Destination directory that took out directories in archive.
+            history_root (Path | None, optional): Defaults to None.
+                User defined path of temporary working space
+                    including date time string.
+                It's used for argument "history_root" of class "EditArchive".
 
-            limit_byte (int, optional): Defaults to 0.
-                If it's not 0, archive are dividedly compressed.
-                It's used for argument "limit_byte" of class "EditArchive".
-
-            compress (bool, optional): Defaults to False.
-                If it's True, you can compress archive by LZMA format.
-                It's used for argument "compress" of class "EditArchive".
-
-            protected (bool, optional): Defaults to False.
-                True if you don't want to update original archive.
-                It's used for argument "protected" of class "EditArchive".
-
-            remove_root (Path | None, optional): Defaults to None.
-                Path of directory used as trash box.
-                It's used for argument "remove_root" of class "EditArchive".
+            trash_root (Path | None, optional): Defaults to None.
+                User defined path of trash box including date time string.
+                It's used for argument "trash_root" of class "EditArchive".
 
             override (bool, optional): Defaults to False.
                 Override initial time count to "2023/4/1:12:00:00-00 (AM)".
@@ -216,6 +214,11 @@ class TakeOutArchive(EditArchive):
             jst (bool, optional): Defaults to False.
                 If True, you can get datetime object as JST time zone.
                 It's used for argument "jst" of class "EditArchive".
+
+            edit_root (Path | None, optional): Defaults to None.
+                User defined path of temporary working space
+                    including date time string to edit archive.
+                It's used for argument "edit_root" of class "EditArchive".
         """
         super().__init__(
             working_root=working_root,
