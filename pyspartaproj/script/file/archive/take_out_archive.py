@@ -17,9 +17,6 @@ class TakeOutArchive(EditArchive):
     """Class to take out directory from inside of archive."""
 
     def _initialize_variables_take(self, took_out_root: Path | None) -> None:
-        if self.is_disable_archive():
-            return None
-
         archive_path: Path = self.get_archive_path()
 
         if took_out_root is None:
@@ -92,7 +89,7 @@ class TakeOutArchive(EditArchive):
         """
         return self._took_out_root
 
-    def take_out(self, took_out_root: Path | None = None) -> Paths:
+    def take_out(self, took_out_root: Path | None = None) -> Paths | None:
         """Take out directory from inside of archive.
 
         Behavior of take out process is split into following 3 pattern.
@@ -172,6 +169,9 @@ class TakeOutArchive(EditArchive):
         Returns:
             Paths: List of directory path which is took out.
         """
+        if self.is_disable_archive():
+            return None
+
         self._initialize_variables_take(took_out_root)
 
         return self._get_took_out()
