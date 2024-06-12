@@ -182,10 +182,6 @@ class TakeOutArchive(EditArchive):
         override: bool = False,
         jst: bool = False,
         edit_root: Path | None = None,
-        archive_path: Path | None = None,
-        limit_byte: int = 0,
-        compress: bool = False,
-        protected: bool = False,
         took_out_root: Path | None = None,
     ) -> None:
         """Initialize variables and decompress archive you selected.
@@ -227,10 +223,6 @@ class TakeOutArchive(EditArchive):
             override=override,
             jst=jst,
             edit_root=edit_root,
-            archive_path=archive_path,
-            limit_byte=limit_byte,
-            compress=compress,
-            protected=protected,
         )
 
         self._initialize_variables_take(took_out_root)
