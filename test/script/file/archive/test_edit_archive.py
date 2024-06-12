@@ -251,6 +251,10 @@ def _compare_not_relative(full_path: Path, root_path: Path) -> None:
     assert not is_relative(full_path, root_path=root_path)
 
 
+def _open_test(archive_path: Path, edit_archive: EditArchive) -> None:
+    assert archive_path == edit_archive.open_archive(archive_path=archive_path)
+
+
 def _common_test(
     temporary_root: Path, stamp_before: TimePair, edit_archive: EditArchive
 ) -> None:
