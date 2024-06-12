@@ -368,25 +368,25 @@ def _get_edit_edit(working_root: Path) -> EditArchive:
 
 
 def _get_edit_path(archive_path: Path) -> EditArchive:
-    edit_archive = EditArchive()
+    edit_archive: EditArchive = _get_edit()
     edit_archive.open_archive(archive_path=archive_path)
     return edit_archive
 
 
 def _get_edit_limit(archive_path: Path, limit_byte: int) -> EditArchive:
-    edit_archive = EditArchive()
+    edit_archive: EditArchive = _get_edit()
     edit_archive.open_archive(archive_path=archive_path, limit_byte=limit_byte)
     return edit_archive
 
 
 def _get_edit_compress(archive_path: Path) -> EditArchive:
-    edit_archive = EditArchive()
+    edit_archive: EditArchive = _get_edit()
     edit_archive.open_archive(archive_path=archive_path, compress=True)
     return edit_archive
 
 
 def _get_edit_protect(archive_path: Path) -> EditArchive:
-    edit_archive = EditArchive()
+    edit_archive: EditArchive = _get_edit()
     edit_archive.open_archive(archive_path=archive_path, protected=True)
     return edit_archive
 
