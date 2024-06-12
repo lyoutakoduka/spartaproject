@@ -92,7 +92,7 @@ class TakeOutArchive(EditArchive):
         """
         return self._took_out_root
 
-    def take_out(self) -> Paths:
+    def take_out(self, took_out_root: Path | None = None) -> Paths:
         """Take out directory from inside of archive.
 
         Behavior of take out process is split into following 3 pattern.
@@ -172,6 +172,8 @@ class TakeOutArchive(EditArchive):
         Returns:
             Paths: List of directory path which is took out.
         """
+        self._initialize_variables_take(took_out_root)
+
         return self._get_took_out()
 
     def __init__(
@@ -182,7 +184,6 @@ class TakeOutArchive(EditArchive):
         override: bool = False,
         jst: bool = False,
         edit_root: Path | None = None,
-        took_out_root: Path | None = None,
     ) -> None:
         """Initialize variables and decompress archive you selected.
 
@@ -224,5 +225,3 @@ class TakeOutArchive(EditArchive):
             jst=jst,
             edit_root=edit_root,
         )
-
-        self._initialize_variables_take(took_out_root)
