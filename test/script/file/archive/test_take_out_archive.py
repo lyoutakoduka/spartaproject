@@ -332,9 +332,15 @@ def _filter_paths(paths: Paths | None) -> Paths:
     return paths
 
 
+def _open_archive(
+    archive_status: ArchiveStatus, take_out_archive: TakeOutArchive
+) -> None:
+    take_out_archive.open_archive(archive_path=archive_status["archive"])
+
+
 def _get_take_out(archive_status: ArchiveStatus) -> TakeOutArchive:
     take_out_archive = TakeOutArchive()
-    take_out_archive.open_archive(archive_path=archive_status["archive"])
+    _open_archive(archive_status, take_out_archive)
     return take_out_archive
 
 
@@ -350,7 +356,7 @@ def _get_take_out_remove(
     working: PathPair, archive_status: ArchiveStatus
 ) -> TakeOutArchive:
     take_out_archive = TakeOutArchive(trash_root=working["remove"])
-    take_out_archive.open_archive(archive_path=archive_status["archive"])
+    _open_archive(archive_status, take_out_archive)
     return take_out_archive
 
 
