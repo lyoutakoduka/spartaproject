@@ -311,6 +311,16 @@ def _compare_relative(working: PathPair, archive_paths: Paths) -> None:
     )
 
 
+def _get_remove_expected(archive_status: ArchiveStatus) -> Paths:
+    return archive_status["take"] + [Path(archive_status["archive"].name)]
+
+
+def _compare_remove(trash_root: Path, archive_status: ArchiveStatus) -> None:
+    _compare_path_test(
+        _find_relative_paths(trash_root), _get_remove_expected(archive_status)
+    )
+
+
 def _default_test(archive_status: ArchiveStatus) -> None:
     _took_out_and_keep(
         TakeOutArchive(archive_path=archive_status["archive"]).take_out(),
@@ -333,16 +343,6 @@ def _protect_test(archive_status: ArchiveStatus) -> None:
             archive_path=archive_status["archive"], protected=True
         ).take_out(),
         archive_status,
-    )
-
-
-def _get_remove_expected(archive_status: ArchiveStatus) -> Paths:
-    return archive_status["take"] + [Path(archive_status["archive"].name)]
-
-
-def _compare_remove(trash_root: Path, archive_status: ArchiveStatus) -> None:
-    _compare_path_test(
-        _find_relative_paths(trash_root), _get_remove_expected(archive_status)
     )
 
 
