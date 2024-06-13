@@ -10,6 +10,7 @@ from typing import Callable
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.extension.path_context import PathPair, Paths
 from pyspartaproj.context.typed.user_context import ArchiveStatus
+from pyspartaproj.interface.pytest import fail
 from pyspartaproj.script.directory.create_directory import create_directory
 from pyspartaproj.script.file.archive.compress_archive import CompressArchive
 from pyspartaproj.script.file.archive.edit_archive import EditArchive
@@ -322,6 +323,13 @@ def _compare_remove(trash_root: Path, archive_status: ArchiveStatus) -> None:
     _compare_path_test(
         _find_relative_paths(trash_root), _get_remove_expected(archive_status)
     )
+
+
+def _filter_paths(paths: Paths | None) -> Paths:
+    if paths is None:
+        fail()
+
+    return paths
 
 
 def _default_test(archive_status: ArchiveStatus) -> None:
