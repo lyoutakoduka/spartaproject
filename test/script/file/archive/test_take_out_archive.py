@@ -338,6 +338,14 @@ def _get_take_out(archive_status: ArchiveStatus) -> TakeOutArchive:
     return take_out_archive
 
 
+def _get_take_out_protect(archive_status: ArchiveStatus) -> TakeOutArchive:
+    take_out_archive = TakeOutArchive()
+    take_out_archive.open_archive(
+        archive_path=archive_status["archive"], protected=True
+    )
+    return take_out_archive
+
+
 def _default_test(archive_status: ArchiveStatus) -> None:
     _took_out_and_keep(
         TakeOutArchive(archive_path=archive_status["archive"]).take_out(),
