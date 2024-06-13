@@ -360,6 +360,14 @@ def _get_take_out_remove(
     return take_out_archive
 
 
+def _close_archive(
+    took_out_paths: Paths | None, take_out_archive: TakeOutArchive
+) -> Paths:
+    archive_paths: Paths = _filter_paths(took_out_paths)
+    take_out_archive.close_archive()
+    return archive_paths
+
+
 def _default_test(archive_status: ArchiveStatus) -> None:
     _took_out_and_keep(
         TakeOutArchive(archive_path=archive_status["archive"]).take_out(),
