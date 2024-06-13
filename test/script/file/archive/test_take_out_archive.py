@@ -346,6 +346,14 @@ def _get_take_out_protect(archive_status: ArchiveStatus) -> TakeOutArchive:
     return take_out_archive
 
 
+def _get_take_out_remove(
+    working: PathPair, archive_status: ArchiveStatus
+) -> TakeOutArchive:
+    take_out_archive = TakeOutArchive(trash_root=working["remove"])
+    take_out_archive.open_archive(archive_path=archive_status["archive"])
+    return take_out_archive
+
+
 def _default_test(archive_status: ArchiveStatus) -> None:
     _took_out_and_keep(
         TakeOutArchive(archive_path=archive_status["archive"]).take_out(),
