@@ -372,6 +372,15 @@ def _take_out_close(take_out_archive: TakeOutArchive) -> Paths:
     return _close_archive(take_out_archive.take_out(), take_out_archive)
 
 
+def _take_out_close_specific(
+    working: PathPair, take_out_archive: TakeOutArchive
+) -> Paths:
+    return _close_archive(
+        take_out_archive.take_out(took_out_root=working["specific"]),
+        take_out_archive,
+    )
+
+
 def _default_test(archive_status: ArchiveStatus) -> None:
     _took_out_and_keep(
         TakeOutArchive(archive_path=archive_status["archive"]).take_out(),
