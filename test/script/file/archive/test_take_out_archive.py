@@ -388,9 +388,9 @@ def _default_test(archive_status: ArchiveStatus) -> None:
 
 
 def _specific_test(working: PathPair, archive_status: ArchiveStatus) -> None:
-    archive_paths: Paths = TakeOutArchive(
-        archive_status["archive"], took_out_root=working["specific"]
-    ).take_out()
+    archive_paths: Paths = _take_out_close_specific(
+        working, _get_take_out(archive_status)
+    )
 
     _took_out_and_keep(archive_paths, archive_status)
     _compare_relative(working, archive_paths)
