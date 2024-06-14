@@ -398,10 +398,7 @@ def _specific_test(working: PathPair, archive_status: ArchiveStatus) -> None:
 
 def _protect_test(archive_status: ArchiveStatus) -> None:
     _took_out_and_keep(
-        TakeOutArchive(
-            archive_path=archive_status["archive"], protected=True
-        ).take_out(),
-        archive_status,
+        _take_out_close(_get_take_out_protect(archive_status)), archive_status
     )
 
 
