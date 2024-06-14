@@ -383,8 +383,7 @@ def _take_out_close_specific(
 
 def _default_test(archive_status: ArchiveStatus) -> None:
     _took_out_and_keep(
-        TakeOutArchive(archive_path=archive_status["archive"]).take_out(),
-        archive_status,
+        _take_out_close(_get_take_out(archive_status)), archive_status
     )
 
 
