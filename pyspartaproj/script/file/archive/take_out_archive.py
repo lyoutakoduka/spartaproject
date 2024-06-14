@@ -16,13 +16,16 @@ from pyspartaproj.script.path.modify.avoid_duplication import get_avoid_path
 class TakeOutArchive(EditArchive):
     """Class to take out directory from inside of archive."""
 
+    def _initialize_variables_take(self) -> None:
+        self._took_out_root: Path | None = None
+
     def _set_took_out_root(self, took_out_root: Path | None) -> None:
         archive_path: Path = self.get_archive_path()
 
         if took_out_root is None:
             took_out_root = archive_path.parent
 
-        self._took_out_root: Path = took_out_root
+        self._took_out_root = took_out_root
 
     def _get_archive_name(self, archive_id: str) -> str:
         archive_path: Path = get_avoid_path(
@@ -228,3 +231,5 @@ class TakeOutArchive(EditArchive):
             jst=jst,
             edit_root=edit_root,
         )
+
+        self._initialize_variables_take()
