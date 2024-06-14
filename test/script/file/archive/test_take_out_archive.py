@@ -403,16 +403,12 @@ def _protect_test(archive_status: ArchiveStatus) -> None:
 
 
 def _remove_test(working: PathPair, archive_status: ArchiveStatus) -> None:
-    take_out_archive = TakeOutArchive(
-        archive_path=archive_status["archive"], trash_root=working["remove"]
+    take_out_archive: TakeOutArchive = _get_take_out_remove(
+        working, archive_status
     )
 
-    archive_paths: Paths = take_out_archive.take_out()
-    trash_root: Path = take_out_archive.get_trash_root()
-    take_out_archive.close_archive()
-
-    _took_out_and_keep(archive_paths, archive_status)
-    _compare_remove(trash_root, archive_status)
+    _took_out_and_keep(_take_out_close(take_out_archive), archive_status)
+    _compare_remove(take_out_archive.get_trash_root(), archive_status)
 
 
 def _create_directory_default(temporary_root: Path) -> PathPair:
