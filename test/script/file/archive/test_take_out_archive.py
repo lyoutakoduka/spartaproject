@@ -309,6 +309,10 @@ def _took_out_and_keep(
     _compare_keep(archive_status)
 
 
+def _none_test(path: Path | None) -> None:
+    assert path is None
+
+
 def _compare_relative(working: PathPair, archive_paths: Paths) -> None:
     assert False not in is_relative_array(
         archive_paths, root_path=working["specific"]
