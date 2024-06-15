@@ -440,6 +440,7 @@ def _create_directory_remove(temporary_root: Path) -> PathPair:
 
 
 def test_error() -> None:
+    """Test to confirm that path used for take out archives is undefined."""
     take_out_archive = TakeOutArchive()
 
     with raises(ValueError):
@@ -559,6 +560,8 @@ def test_override() -> None:
 
 
 def test_path() -> None:
+    """Test to get path of directory used for take out archives."""
+
     def individual_test(temporary_root: Path) -> None:
         working: PathPair = _create_directory_specific(temporary_root)
         _take_test(working, _create_archive_single(working))
