@@ -436,6 +436,10 @@ def _create_directory_remove(temporary_root: Path) -> PathPair:
     )
 
 
+def test_none() -> None:
+    _none_test(TakeOutArchive().get_took_out_root())
+
+
 def test_compleat() -> None:
     """Test to take out directory from inside of archive.
 
@@ -594,6 +598,7 @@ def main() -> bool:
     Returns:
         bool: Success if get to the end of function.
     """
+    test_none()
     test_compleat()
     test_empty()
     test_single()
