@@ -141,7 +141,7 @@ class EditArchive(SafeTrash):
         """Get path of archive you will edit.
 
         Raises:
-            ValueError: Raise error if you don't' set path information.
+            ValueError: Raise error if you don't set path information.
 
         Returns:
             Path: Path of archive.
