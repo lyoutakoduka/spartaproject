@@ -313,6 +313,11 @@ def _none_test(path: Path | None) -> None:
     assert path is None
 
 
+def _compare_path(result: Path, expected: Path) -> None:
+    assert result.exists()
+    assert result == expected
+
+
 def _compare_relative(working: PathPair, archive_paths: Paths) -> None:
     assert False not in is_relative_array(
         archive_paths, root_path=working["specific"]
