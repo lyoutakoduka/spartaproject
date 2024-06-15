@@ -309,10 +309,6 @@ def _took_out_and_keep(
     _compare_keep(archive_status)
 
 
-def _none_test(path: Path | None) -> None:
-    assert path is None
-
-
 def _compare_path(result: Path, expected: Path) -> None:
     assert result.exists()
     assert result == expected
