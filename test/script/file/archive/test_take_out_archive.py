@@ -443,7 +443,7 @@ def _create_directory_remove(temporary_root: Path) -> PathPair:
     )
 
 
-def test_none() -> None:
+def test_error() -> None:
     take_out_archive = TakeOutArchive()
 
     with raises(ValueError):
@@ -616,7 +616,7 @@ def main() -> bool:
     Returns:
         bool: Success if get to the end of function.
     """
-    test_none()
+    test_error()
     test_compleat()
     test_empty()
     test_single()
