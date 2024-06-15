@@ -10,7 +10,7 @@ from typing import Callable
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.extension.path_context import PathPair, Paths
 from pyspartaproj.context.typed.user_context import ArchiveStatus
-from pyspartaproj.interface.pytest import fail
+from pyspartaproj.interface.pytest import fail, raises
 from pyspartaproj.script.directory.create_directory import create_directory
 from pyspartaproj.script.file.archive.compress_archive import CompressArchive
 from pyspartaproj.script.file.archive.edit_archive import EditArchive
@@ -444,7 +444,10 @@ def _create_directory_remove(temporary_root: Path) -> PathPair:
 
 
 def test_none() -> None:
-    _none_test(TakeOutArchive().get_took_out_root())
+    take_out_archive = TakeOutArchive()
+
+    with raises(ValueError):
+        take_out_archive.get_took_out_root()
 
 
 def test_compleat() -> None:
