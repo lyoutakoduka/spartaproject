@@ -396,6 +396,13 @@ def _default_test(archive_status: ArchiveStatus) -> None:
     )
 
 
+def _take_test(working: PathPair, archive_status: ArchiveStatus) -> None:
+    take_out_archive: TakeOutArchive = _get_take_out(archive_status)
+    _take_out_close_specific(working, take_out_archive)
+
+    _compare_path(take_out_archive.get_took_out_root(), working["specific"])
+
+
 def _specific_test(working: PathPair, archive_status: ArchiveStatus) -> None:
     archive_paths: Paths = _take_out_close_specific(
         working, _get_take_out(archive_status)
