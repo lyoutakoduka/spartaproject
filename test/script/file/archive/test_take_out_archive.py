@@ -559,6 +559,14 @@ def test_override() -> None:
     _inside_temporary_directory(individual_test)
 
 
+def test_path() -> None:
+    def individual_test(temporary_root: Path) -> None:
+        working: PathPair = _create_directory_specific(temporary_root)
+        _take_test(working, _create_archive_single(working))
+
+    _inside_temporary_directory(individual_test)
+
+
 def test_specific() -> None:
     """Test to take out directory from inside of archive.
 
@@ -614,6 +622,7 @@ def main() -> bool:
     test_list()
     test_nest()
     test_override()
+    test_path()
     test_specific()
     test_protect()
     test_remove()
