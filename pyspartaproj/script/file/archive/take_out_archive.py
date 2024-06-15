@@ -87,6 +87,9 @@ class TakeOutArchive(EditArchive):
     def get_took_out_root(self) -> Path:
         """Get path of directory that archives you took out will placed.
 
+        Raises:
+            ValueError: Raise error if you don't set path information.
+
         Returns:
             Path: Path of directory that archives will placed.
         """
