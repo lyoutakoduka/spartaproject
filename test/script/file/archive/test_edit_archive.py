@@ -406,7 +406,7 @@ def _get_edit_remove(archive_path: Path, remove_root: Path) -> EditArchive:
 
 
 def test_error() -> None:
-    """Test to confirm archive path which is undefined."""
+    """Test to confirm that path of archive is undefined."""
     edit_archive: EditArchive = _get_edit()
 
     with raises(ValueError):
