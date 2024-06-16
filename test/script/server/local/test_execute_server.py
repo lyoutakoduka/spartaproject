@@ -23,7 +23,7 @@ def _copy_resource(name: Path, destination_path: Path) -> None:
 def _execute_python(name: Path, server: ExecuteServer) -> Strs | None:
     _is_connect(server)
 
-    destination_path: Path = Path(server.get_working_root(), name)
+    destination_path: Path = Path(server.get_date_time_root(), name)
     _copy_resource(name, destination_path)
 
     return server.execute(destination_path)
