@@ -93,7 +93,7 @@ def test_local() -> None:
     _inside_temporary_directory(individual_test)
 
 
-def test_temporary() -> None:
+def test_date() -> None:
     """Test for temporary working space including date time string."""
     date_time: Path = _get_date_time_root()
 
@@ -141,7 +141,7 @@ def main() -> bool:
     test_path()
     test_work()
     test_local()
-    test_temporary()
+    test_date()
     test_relative()
     test_full()
     return True
