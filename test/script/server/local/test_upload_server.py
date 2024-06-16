@@ -49,7 +49,7 @@ def test_file() -> None:
     server: UploadServer = _get_server()
     _is_connect(server)
 
-    _upload_path(server, create_temporary_file(server.get_working_root()))
+    _upload_path(server, create_temporary_file(server.get_date_time_root()))
 
 
 def test_directory() -> None:
@@ -58,7 +58,8 @@ def test_directory() -> None:
     _is_connect(server)
 
     _upload_path(
-        server, create_directory(Path(server.get_working_root(), "directory"))
+        server,
+        create_directory(Path(server.get_date_time_root(), "directory")),
     )
 
 
@@ -70,7 +71,7 @@ def test_tree() -> None:
     _upload_path(
         server,
         create_temporary_tree(
-            Path(server.get_working_root(), "tree"), tree_deep=2
+            Path(server.get_date_time_root(), "tree"), tree_deep=2
         ),
     )
 
@@ -82,7 +83,7 @@ def test_place() -> None:
         server: UploadServer = _get_server_local(temporary_root)
         _is_connect(server)
 
-        source_path: Path = create_temporary_file(server.get_working_root())
+        source_path: Path = create_temporary_file(server.get_date_time_root())
 
         _upload_path_local(
             server, source_path, server.to_relative_path(source_path)
