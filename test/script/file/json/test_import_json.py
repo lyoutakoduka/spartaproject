@@ -49,13 +49,3 @@ def test_export() -> None:
         assert expected == json_import(
             json_export(Path(temporary_path, "temporary.ini"), expected)
         )
-
-
-def main() -> bool:
-    test_none()
-    test_bool()
-    test_integer()
-    test_float()
-    test_string()
-    test_export()
-    return True

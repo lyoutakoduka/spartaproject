@@ -92,16 +92,3 @@ def test_export() -> None:
         assert format_indent(expected) == text_import(
             json_export(Path(temporary_path, "temporary.json"), keys)
         )
-
-
-def main() -> bool:
-    """Run all tests.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_type()
-    test_tree()
-    test_compress()
-    test_export()
-    return True
