@@ -50,15 +50,3 @@ def test_interval() -> None:
         [expected * micro_scale for expected in _get_time_array()],
         TimerSelect(override=True, interval=micro_scale),
     )
-
-
-def main() -> bool:
-    """Run all tests.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_builtin()
-    test_integer()
-    test_interval()
-    return True

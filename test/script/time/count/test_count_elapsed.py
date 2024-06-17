@@ -162,16 +162,3 @@ def test_force() -> None:
         return result
 
     _stdout_check(expected, increase_count, restart_timer, show_timer)
-
-
-def main() -> bool:
-    """Run all tests.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_count()
-    test_interval()
-    test_digit()
-    test_force()
-    return True
