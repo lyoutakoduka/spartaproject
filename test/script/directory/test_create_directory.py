@@ -99,15 +99,3 @@ def test_pair() -> None:
         )
 
     _inside_temporary_directory(individual_test)
-
-
-def main() -> bool:
-    """Run all tests.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_single()
-    test_array()
-    test_pair()
-    return True
