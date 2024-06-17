@@ -226,18 +226,3 @@ def test_path() -> None:
         _compare_path(temporary_root, file_history)
 
     _inside_temporary_directory(individual_test)
-
-
-def main() -> bool:
-    """Run all tests.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_work()
-    test_history()
-    test_get()
-    test_single()
-    test_array()
-    test_path()
-    return True
