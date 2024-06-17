@@ -2,19 +2,6 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "python_test_launcher",
-      "type": "debugpy",
-      "request": "launch",
-      "program": "${workspaceFolder}/pyspartaproj/script/execute/debug_launcher.py",
-      "cwd": "${workspaceFolder}",
-      "env": {
-        "PYTHONPATH": "${workspaceFolder}${pathSeparator}${env:PYTHONPATH}"
-      },
-      "console": "internalConsole",
-      "internalConsoleOptions": "neverOpen",
-      "args": ["${file}"]
-    },
-    {
       "name": "python_launcher",
       "type": "debugpy",
       "request": "launch",
