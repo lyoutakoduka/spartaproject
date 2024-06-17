@@ -98,16 +98,3 @@ def test_digit() -> None:
             for expected, source in test_case.items()
         }
     )
-
-
-def main() -> bool:
-    """Run all tests.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_datetime()
-    test_day()
-    test_second()
-    test_digit()
-    return True
