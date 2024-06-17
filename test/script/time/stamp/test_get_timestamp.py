@@ -162,18 +162,3 @@ def test_same() -> None:
         )
 
     _inside_temporary_directory(individual_test)
-
-
-def main() -> bool:
-    """Run all tests.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_invalid()
-    test_file()
-    test_directory()
-    test_jst()
-    test_tree()
-    test_same()
-    return True

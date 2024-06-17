@@ -20,9 +20,3 @@ def test_timezone() -> None:
 def test_lost() -> None:
     source_lost: str = "2023-04-15T20:09:30.936886"
     _common_text(source_lost)
-
-
-def main() -> bool:
-    test_timezone()
-    test_lost()
-    return True

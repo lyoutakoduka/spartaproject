@@ -60,15 +60,3 @@ def test_empty() -> None:
             assert get_file_epoch(file_path, access=status) is None
 
     _inside_temporary_directory(individual_test)
-
-
-def main() -> bool:
-    """Run all tests.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_file()
-    test_directory()
-    test_empty()
-    return True
