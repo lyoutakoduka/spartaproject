@@ -68,17 +68,3 @@ def test_pair() -> None:
     )
 
     assert bool_same_array([expected[key] == result[key] for key in keys])
-
-
-def main() -> bool:
-    """Run all tests.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_ignore()
-    test_single()
-    test_root()
-    test_array()
-    test_pair()
-    return True

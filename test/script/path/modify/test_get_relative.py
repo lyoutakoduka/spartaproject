@@ -108,19 +108,3 @@ def test_pair() -> None:
     result: PathPair = get_absolute_pair(get_relative_pair(expected))
 
     assert bool_same_array([expected[key] == result[key] for key in keys])
-
-
-def main() -> bool:
-    """Run all tests.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_check()
-    test_check_array()
-    test_unmatch()
-    test_single()
-    test_root()
-    test_array()
-    test_pair()
-    return True

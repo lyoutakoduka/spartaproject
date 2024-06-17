@@ -40,14 +40,3 @@ def test_empty() -> None:
         _common_test(get_avoid_path(source_path), source_path)
 
     _inside_temporary_directory(individual_test)
-
-
-def main() -> bool:
-    """Run all tests.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_exists()
-    test_empty()
-    return True
