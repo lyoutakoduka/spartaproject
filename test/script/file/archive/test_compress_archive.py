@@ -376,20 +376,3 @@ def test_heavy() -> None:
         )
 
     _inside_temporary_directory(individual_test)
-
-
-def main() -> bool:
-    """Run all tests.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_empty()
-    test_file()
-    test_directory()
-    test_tree()
-    test_compress()
-    test_name()
-    test_limit()
-    test_heavy()
-    return True

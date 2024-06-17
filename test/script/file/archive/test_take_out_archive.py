@@ -607,25 +607,3 @@ def test_remove() -> None:
         _remove_test(working, _create_archive_single(working))
 
     _inside_temporary_directory(individual_test)
-
-
-def main() -> bool:
-    """Run all tests.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_error()
-    test_compleat()
-    test_empty()
-    test_single()
-    test_multiple()
-    test_mix()
-    test_list()
-    test_nest()
-    test_override()
-    test_path()
-    test_specific()
-    test_protect()
-    test_remove()
-    return True
