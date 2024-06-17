@@ -24,9 +24,17 @@ class ExecuteServer(UploadServer):
             self.get_path("python_root"), version, "bin", "python3"
         )
 
+    def _get_filter_head(self) -> str:
+        return "traceback".capitalize()
+
+    def _get_filter_inside(self) -> str:
+        return " ".join(["most", "recent", "call", "last"])
+
+    def _get_filter_body(self) -> str:
+        return "(" + self._get_filter_inside() + ")"
+
     def _get_error_identifier(self) -> str:
-        body: str = " ".join(["most", "recent", "call", "last"])
-        return "traceback".capitalize() + " " + "(" + body + ")" + ":"
+        return self._get_filter_head() + " " + self._get_filter_body() + ":"
 
     def _get_command(self, source_root: Path) -> Strs:
         return [
@@ -62,13 +70,31 @@ class ExecuteServer(UploadServer):
 
         return result
 
-    def __init__(self, version: str | None = None) -> None:
+    def __init__(
+        self,
+        version: str | None = None,
+        local_root: Path | None = None,
+        override: bool = False,
+        jst: bool = False,
+    ) -> None:
         """Select version of Python, then ready using ssh and sftp connection.
 
         Args:
             version (str | None, optional): Defaults to None.
                 Version information of Python you want to execute.
+
+            local_root (Path | None, optional): Defaults to None.
+                User defined path of local working space which is used.
+                It's used for argument "local_root" of class "UploadServer".
+
+            override (bool, optional): Defaults to False.
+                Override initial time count to "2023/4/1:12:00:00-00 (AM)".
+                It's used for argument "override" of class "UploadServer".
+
+            jst (bool, optional): Defaults to False.
+                If True, you can get datetime object as JST time zone.
+                It's used for argument "jst" of class "UploadServer".
         """
-        super().__init__()
+        super().__init__(local_root=local_root, override=override, jst=jst)
 
         self._set_version_path(self._set_version(version))

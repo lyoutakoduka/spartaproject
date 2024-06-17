@@ -10,13 +10,17 @@ from typing import Callable
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.extension.path_context import PathPair, Paths
 from pyspartaproj.context.typed.user_context import ArchiveStatus
+from pyspartaproj.interface.pytest import fail, raises
 from pyspartaproj.script.directory.create_directory import create_directory
 from pyspartaproj.script.file.archive.compress_archive import CompressArchive
 from pyspartaproj.script.file.archive.edit_archive import EditArchive
-from pyspartaproj.script.file.archive.take_out_archive import take_out_archive
+from pyspartaproj.script.file.archive.take_out_archive import TakeOutArchive
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.modify.get_absolute import get_absolute_array
-from pyspartaproj.script.path.modify.get_relative import get_relative_array
+from pyspartaproj.script.path.modify.get_relative import (
+    get_relative_array,
+    is_relative_array,
+)
 from pyspartaproj.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
@@ -56,17 +60,25 @@ def _compress_test_archive(working: PathPair) -> Path:
     return compress_archive.close_archived()[0]
 
 
-def _get_relative_paths(working: PathPair, target_paths: Paths) -> Paths:
-    return get_relative_array(target_paths, root_path=working["source"])
+def _get_relative_paths(
+    working: PathPair, target_paths: Paths, group: str
+) -> Paths:
+    return get_relative_array(target_paths, root_path=working[group])
+
+
+def _get_relative_source(working: PathPair, target_paths: Paths) -> Paths:
+    return _get_relative_paths(working, target_paths, "source")
+
+
+def _find_relative_paths(path: Path) -> Paths:
+    return get_relative_array(list(walk_iterator(path)), root_path=path)
 
 
 def _get_relative_archive(archive_path: Path) -> Paths:
-    edit_archive = EditArchive(archive_path)
-    root_path: Path = edit_archive.get_decompressed_root()
+    edit_archive = EditArchive()
+    edit_archive.open_archive(archive_path=archive_path)
 
-    return get_relative_array(
-        list(walk_iterator(root_path)), root_path=root_path
-    )
+    return _find_relative_paths(edit_archive.get_edit_root())
 
 
 def _add_temporary_files(directory_root: Path, file_names: Strs) -> Paths:
@@ -105,7 +117,7 @@ def _create_archive_compleat(working: PathPair) -> ArchiveStatus:
     return _create_archive_shared(
         working,
         _get_empty(),
-        _get_relative_paths(
+        _get_relative_source(
             working, [create_temporary_file(working["source"])]
         ),
     )
@@ -115,20 +127,16 @@ def _create_archive_empty(working: PathPair) -> ArchiveStatus:
     return _create_archive_shared(
         working,
         _get_empty(),
-        _get_relative_paths(
+        _get_relative_source(
             working, [create_directory(Path(working["source"], "directory"))]
         ),
     )
 
 
-def _get_take_out_single(working: PathPair) -> Paths:
-    return _add_test_tree_simple(working)
-
-
 def _create_archive_single(working: PathPair) -> ArchiveStatus:
     return _create_archive_shared(
         working,
-        _get_relative_paths(working, _get_take_out_single(working)),
+        _get_relative_source(working, _add_test_tree_simple(working)),
         _get_empty(),
     )
 
@@ -147,13 +155,9 @@ def _get_take_out_multiple(working: PathPair) -> Paths:
 def _create_archive_multiple(working: PathPair) -> ArchiveStatus:
     return _create_archive_shared(
         working,
-        _get_relative_paths(working, _get_take_out_multiple(working)),
+        _get_relative_source(working, _get_take_out_multiple(working)),
         _get_empty(),
     )
-
-
-def _get_take_out_mix(working: PathPair) -> Paths:
-    return _add_test_tree_simple(working)
 
 
 def _get_keep_mix(working: PathPair) -> Paths:
@@ -163,8 +167,8 @@ def _get_keep_mix(working: PathPair) -> Paths:
 def _create_archive_mix(working: PathPair) -> ArchiveStatus:
     return _create_archive_shared(
         working,
-        _get_relative_paths(working, _get_take_out_mix(working)),
-        _get_relative_paths(working, _get_keep_mix(working)),
+        _get_relative_source(working, _add_test_tree_simple(working)),
+        _get_relative_source(working, _get_keep_mix(working)),
     )
 
 
@@ -180,7 +184,7 @@ def _get_take_out_list(working: PathPair) -> Paths:
 def _create_archive_list(working: PathPair) -> ArchiveStatus:
     return _create_archive_shared(
         working,
-        _get_relative_paths(working, _get_take_out_list(working)),
+        _get_relative_source(working, _get_take_out_list(working)),
         _get_empty(),
     )
 
@@ -247,18 +251,14 @@ def _get_take_out_specific(working: PathPair) -> Paths:
 def _create_archive_specific(working: PathPair) -> ArchiveStatus:
     return _create_archive_shared(
         working,
-        _get_relative_paths(working, _get_take_out_specific(working)),
+        _get_relative_source(working, _get_take_out_specific(working)),
         _get_empty(),
     )
 
 
-def _get_take_out_protect(working: PathPair) -> Paths:
-    return _add_test_tree_simple(working)
-
-
 def _create_archive_protect(working: PathPair) -> ArchiveStatus:
-    taka_paths: Paths = _get_relative_paths(
-        working, _get_take_out_protect(working)
+    taka_paths: Paths = _get_relative_source(
+        working, _add_test_tree_simple(working)
     )
     return _create_archive_shared(working, taka_paths, taka_paths)
 
@@ -302,26 +302,125 @@ def _compare_keep(archive_status: ArchiveStatus) -> None:
     )
 
 
-def _default_test(archive_status: ArchiveStatus) -> None:
-    _compare_took_out(
-        archive_status, take_out_archive(archive_status["archive"])
-    )
+def _took_out_and_keep(
+    archive_paths: Paths, archive_status: ArchiveStatus
+) -> None:
+    _compare_took_out(archive_status, archive_paths)
     _compare_keep(archive_status)
+
+
+def _compare_path(result: Path, expected: Path) -> None:
+    assert result.exists()
+    assert result == expected
 
 
 def _compare_relative(working: PathPair, archive_paths: Paths) -> None:
-    for archive_path in archive_paths:
-        assert archive_path.is_relative_to(working["specific"])
+    assert False not in is_relative_array(
+        archive_paths, root_path=working["specific"]
+    )
+
+
+def _get_remove_expected(archive_status: ArchiveStatus) -> Paths:
+    return archive_status["take"] + [Path(archive_status["archive"].name)]
+
+
+def _compare_remove(trash_root: Path, archive_status: ArchiveStatus) -> None:
+    _compare_path_test(
+        _find_relative_paths(trash_root), _get_remove_expected(archive_status)
+    )
+
+
+def _filter_paths(paths: Paths | None) -> Paths:
+    if paths is None:
+        fail()
+
+    return paths
+
+
+def _open_archive(
+    archive_status: ArchiveStatus, take_out_archive: TakeOutArchive
+) -> None:
+    take_out_archive.open_archive(archive_path=archive_status["archive"])
+
+
+def _get_take_out(archive_status: ArchiveStatus) -> TakeOutArchive:
+    take_out_archive = TakeOutArchive()
+    _open_archive(archive_status, take_out_archive)
+    return take_out_archive
+
+
+def _get_take_out_protect(archive_status: ArchiveStatus) -> TakeOutArchive:
+    take_out_archive = TakeOutArchive()
+    take_out_archive.open_archive(
+        archive_path=archive_status["archive"], protected=True
+    )
+    return take_out_archive
+
+
+def _get_take_out_remove(
+    working: PathPair, archive_status: ArchiveStatus
+) -> TakeOutArchive:
+    take_out_archive = TakeOutArchive(trash_root=working["remove"])
+    _open_archive(archive_status, take_out_archive)
+    return take_out_archive
+
+
+def _close_archive(
+    took_out_paths: Paths | None, take_out_archive: TakeOutArchive
+) -> Paths:
+    archive_paths: Paths = _filter_paths(took_out_paths)
+    take_out_archive.close_archive()
+    return archive_paths
+
+
+def _take_out_close(take_out_archive: TakeOutArchive) -> Paths:
+    return _close_archive(take_out_archive.take_out(), take_out_archive)
+
+
+def _take_out_close_specific(
+    working: PathPair, take_out_archive: TakeOutArchive
+) -> Paths:
+    return _close_archive(
+        take_out_archive.take_out(took_out_root=working["specific"]),
+        take_out_archive,
+    )
+
+
+def _default_test(archive_status: ArchiveStatus) -> None:
+    _took_out_and_keep(
+        _take_out_close(_get_take_out(archive_status)), archive_status
+    )
+
+
+def _take_test(working: PathPair, archive_status: ArchiveStatus) -> None:
+    take_out_archive: TakeOutArchive = _get_take_out(archive_status)
+    _take_out_close_specific(working, take_out_archive)
+
+    _compare_path(take_out_archive.get_took_out_root(), working["specific"])
 
 
 def _specific_test(working: PathPair, archive_status: ArchiveStatus) -> None:
-    archive_paths: Paths = take_out_archive(
-        archive_status["archive"], took_out_root=working["specific"]
+    archive_paths: Paths = _take_out_close_specific(
+        working, _get_take_out(archive_status)
     )
 
-    _compare_took_out(archive_status, archive_paths)
-    _compare_keep(archive_status)
+    _took_out_and_keep(archive_paths, archive_status)
     _compare_relative(working, archive_paths)
+
+
+def _protect_test(archive_status: ArchiveStatus) -> None:
+    _took_out_and_keep(
+        _take_out_close(_get_take_out_protect(archive_status)), archive_status
+    )
+
+
+def _remove_test(working: PathPair, archive_status: ArchiveStatus) -> None:
+    take_out_archive: TakeOutArchive = _get_take_out_remove(
+        working, archive_status
+    )
+
+    _took_out_and_keep(_take_out_close(take_out_archive), archive_status)
+    _compare_remove(take_out_archive.get_trash_root(), archive_status)
 
 
 def _create_directory_default(temporary_root: Path) -> PathPair:
@@ -332,6 +431,20 @@ def _create_directory_specific(temporary_root: Path) -> PathPair:
     return _create_working_directory(
         temporary_root, _get_directory_names() + ["specific"]
     )
+
+
+def _create_directory_remove(temporary_root: Path) -> PathPair:
+    return _create_working_directory(
+        temporary_root, _get_directory_names() + ["remove"]
+    )
+
+
+def test_error() -> None:
+    """Test to confirm that path used for take out archives is undefined."""
+    take_out_archive = TakeOutArchive()
+
+    with raises(ValueError):
+        take_out_archive.get_took_out_root()
 
 
 def test_compleat() -> None:
@@ -446,10 +559,20 @@ def test_override() -> None:
     _inside_temporary_directory(individual_test)
 
 
+def test_path() -> None:
+    """Test to get path of directory used for take out archives."""
+
+    def individual_test(temporary_root: Path) -> None:
+        working: PathPair = _create_directory_specific(temporary_root)
+        _take_test(working, _create_archive_single(working))
+
+    _inside_temporary_directory(individual_test)
+
+
 def test_specific() -> None:
     """Test to take out directory from inside of archive.
 
-    Take out directory in archive to specific root directory.
+    Take out directory from archive to specific root directory.
     """
 
     def individual_test(temporary_root: Path) -> None:
@@ -462,11 +585,26 @@ def test_specific() -> None:
 def test_protect() -> None:
     """Test to take out directory from inside of archive.
 
-    Take out directory in protected archive, but archive isn't updated.
+    Take out directory from protected archive, but archive isn't updated.
     """
 
     def individual_test(temporary_root: Path) -> None:
-        _create_archive_protect(_create_directory_default(temporary_root))
+        _protect_test(
+            _create_archive_protect(_create_directory_default(temporary_root))
+        )
+
+    _inside_temporary_directory(individual_test)
+
+
+def test_remove() -> None:
+    """Test to take out directory from inside of archive.
+
+    File or directory is removed to specific trash box in test.
+    """
+
+    def individual_test(temporary_root: Path) -> None:
+        working: PathPair = _create_directory_remove(temporary_root)
+        _remove_test(working, _create_archive_single(working))
 
     _inside_temporary_directory(individual_test)
 
@@ -477,6 +615,7 @@ def main() -> bool:
     Returns:
         bool: Success if get to the end of function.
     """
+    test_error()
     test_compleat()
     test_empty()
     test_single()
@@ -485,6 +624,8 @@ def main() -> bool:
     test_list()
     test_nest()
     test_override()
+    test_path()
     test_specific()
     test_protect()
+    test_remove()
     return True

@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to create temporary working space including date time string."""
+
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from pyspartaproj.script.directory.create_directory_working import (
+from pyspartaproj.script.directory.date_time_space import (
     create_working_space,
     get_working_space,
 )
@@ -12,12 +14,14 @@ from pyspartaproj.script.path.modify.get_relative import get_relative
 
 
 def test_name() -> None:
+    """Test to get path including string of current date time."""
     expected: Path = Path("2023", "04", "01", "00", "00", "00", "000000")
 
     assert expected == get_working_space(override=True)
 
 
 def test_create() -> None:
+    """Test to create temporary working space including date time string."""
     expected: Path = Path("2023", "04", "01", "00", "00", "00", "000000")
 
     with TemporaryDirectory() as temporary_directory:
@@ -29,6 +33,11 @@ def test_create() -> None:
 
 
 def main() -> bool:
+    """Run all tests.
+
+    Returns:
+        bool: Success if get to the end of function.
+    """
     test_name()
     test_create()
     return True

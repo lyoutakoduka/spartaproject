@@ -7,7 +7,6 @@ from pathlib import Path
 
 from pyspartaproj.context.extension.path_context import Paths
 from pyspartaproj.context.extension.time_context import TimePair
-from pyspartaproj.script.directory.create_directory_temporary import WorkSpace
 from pyspartaproj.script.file.archive.compress_archive import CompressArchive
 from pyspartaproj.script.file.archive.decompress_archive import (
     DecompressArchive,
@@ -20,24 +19,35 @@ from pyspartaproj.script.time.stamp.get_timestamp import (
 )
 
 
-class EditArchive(WorkSpace):
+class EditArchive(SafeTrash):
     """Class to edit internal of archive file."""
 
-    def _initialize_variables(
+    def _initialize_variables_edit(
         self,
-        archive_path: Path,
+        edit_root: Path | None,
+        override: bool,
+        jst: bool,
+    ) -> None:
+        self._archive_path: Path | None = None
+        self._still_removed: bool = False
+        self._edit_root: Path = self.create_date_time_space(
+            body_root=edit_root, override=override, jst=jst
+        )
+
+    def _initialize_archive_element(
+        self,
+        archive_path: Path | None,
         limit_byte: int,
         compress: bool,
         protected: bool,
     ) -> None:
-        self._still_removed: bool = False
-        self._archive_path: Path = archive_path
+        self._archive_path = archive_path
         self._limit_byte: int = limit_byte
         self._is_lzma_after: bool = compress
         self._protected: bool = protected
 
     def _get_archive_stamp(self) -> TimePair:
-        return get_directory_latest(walk_iterator(self.get_root()))
+        return get_directory_latest(walk_iterator(self.get_edit_root()))
 
     def _is_difference_archive_stamp(self, archive_stamp: TimePair) -> bool:
         return not is_same_stamp(self._archive_stamp, archive_stamp)
@@ -56,25 +66,24 @@ class EditArchive(WorkSpace):
 
         return None
 
-    def _remove_unused(self, paths: Paths) -> None:
-        SafeTrash().trash_at_once(paths)
-
     def _cleanup_before_override(self) -> None:
-        self._remove_unused(self._decompressed)
+        self.trash_at_once(self._decompressed)
 
     def _compress_archive(self, archive_stamp: TimePair) -> Paths:
         self._cleanup_before_override()
 
+        archive_path: Path = self.get_archive_path()
+
         compress_archive = CompressArchive(
-            self._archive_path.parent,
+            archive_path.parent,
             limit_byte=self._limit_byte,
             compress=self._is_lzma_after,
-            archive_id=self._archive_path.stem,
+            archive_id=archive_path.stem,
         )
 
         compress_archive.compress_at_once(
             [Path(path_text) for path_text in archive_stamp.keys()],
-            archive_root=self.get_root(),
+            archive_root=self.get_edit_root(),
         )
 
         return compress_archive.close_archived()
@@ -83,7 +92,7 @@ class EditArchive(WorkSpace):
         self, decompress_archive: DecompressArchive
     ) -> None:
         self._decompressed: Paths = decompress_archive.sequential_archives(
-            self._archive_path
+            self.get_archive_path()
         )
         decompress_archive.decompress_at_once(self._decompressed)
 
@@ -91,11 +100,11 @@ class EditArchive(WorkSpace):
         self, decompress_archive: DecompressArchive
     ) -> None:
         self._is_lzma_before: bool = decompress_archive.is_lzma_archive(
-            self._archive_path
+            self.get_archive_path()
         )
 
-    def _initialize_archive(self) -> None:
-        decompress_archive = DecompressArchive(self.get_root())
+    def _get_decompress_stamp(self) -> None:
+        decompress_archive = DecompressArchive(self.get_edit_root())
 
         self._decompress_archive(decompress_archive)
         self._record_compress_type(decompress_archive)
@@ -120,23 +129,48 @@ class EditArchive(WorkSpace):
 
         return archived
 
-    def get_decompressed_root(self) -> Path:
-        """Get path of temporary working directory.
+    def is_disable_archive(self) -> bool:
+        """Confirm path of archive is undefined.
+
+        Returns:
+            bool: True if archive is undefined.
+        """
+        return self._archive_path is None
+
+    def get_archive_path(self) -> Path:
+        """Get path of archive you will edit.
+
+        Raises:
+            ValueError: Raise error if you don't set path information.
+
+        Returns:
+            Path: Path of archive.
+        """
+        if archive_path := self._archive_path:
+            return archive_path
+
+        raise ValueError
+
+    def get_edit_root(self) -> Path:
+        """Get path of temporary working space.
 
         The directory is used for placing decompressed contents of archive.
 
         Returns:
-            Path: Path of temporary working directory.
+            Path: Path of temporary working space.
         """
-        return self.get_root()
+        return self._edit_root
 
     def close_archive(self) -> Paths | None:
-        """Compress the contents of temporary working directory to archive.
+        """Compress the contents of temporary working space to archive.
 
         Returns:
             Paths | None: Path of compressed archive.
                 Return "None" if the archive you want to edit isn't changed.
         """
+        if self.is_disable_archive():
+            return None
+
         if self._still_removed:
             return None
 
@@ -144,21 +178,18 @@ class EditArchive(WorkSpace):
 
         return self._finalize_archive()
 
-    def __del__(self) -> None:
-        """Close and recompress archive you want to edit automatically."""
-        self.close_archive()
-
-    def __init__(
+    def open_archive(
         self,
-        archive_path: Path,
+        archive_path: Path | None = None,
         limit_byte: int = 0,
         compress: bool = False,
         protected: bool = False,
-    ) -> None:
-        """Initialize variables and decompress archive you selected.
+    ) -> Path | None:
+        """Initialize variables about archive and decompress it.
 
         Args:
-            archive_path (Path): Path of archive you want to edit.
+            archive_path (Path | None, optional): Defaults to None.
+                Path of archive you want to edit.
 
             limit_byte (int, optional): Defaults to 0.
                 If it's not 0, archive are dividedly compressed.
@@ -170,10 +201,73 @@ class EditArchive(WorkSpace):
 
             protected (bool, optional): Defaults to False.
                 True if you don't want to update original archive.
-        """
-        super().__init__()
 
-        self._initialize_variables(
+        Returns:
+            Path | None: Return archive path which is argument "archive_path".
+        """
+        self._initialize_archive_element(
             archive_path, limit_byte, compress, protected
         )
-        self._initialize_archive()
+
+        if self.is_disable_archive():
+            return None
+
+        self._get_decompress_stamp()
+
+        return archive_path
+
+    def __del__(self) -> None:
+        """Close and recompress archive you want to edit automatically."""
+        self.close_archive()
+
+    def __init__(
+        self,
+        working_root: Path | None = None,
+        history_root: Path | None = None,
+        trash_root: Path | None = None,
+        override: bool = False,
+        jst: bool = False,
+        edit_root: Path | None = None,
+    ) -> None:
+        """Initialize super class and variables about temporary work space.
+
+        Args:
+            working_root (Path | None, optional): Defaults to None.
+                User defined temporary working space.
+                It's mainly used for test.
+                It's used for argument "working_root" of class "SafeTrash".
+
+            history_root (Path | None, optional): Defaults to None.
+                User defined path of temporary working space
+                    including date time string.
+                It's used for argument "history_root" of class "SafeTrash".
+
+            trash_root (Path | None, optional): Defaults to None.
+                User defined path of trash box including date time string.
+                It's used for argument "trash_root" of class "SafeTrash".
+
+            override (bool, optional): Defaults to False.
+                Override initial time count to "2023/4/1:12:00:00-00 (AM)".
+                It's used for argument "override" of class "SafeTrash"
+                    and function "create_date_time_space".
+
+            jst (bool, optional): Defaults to False.
+                If True, you can get datetime object as JST time zone.
+                It's used for argument "jst" of class "SafeTrash"
+                    and function "create_date_time_space".
+
+            edit_root (Path | None, optional): Defaults to None.
+                User defined path of temporary working space
+                    including date time string to edit archive.
+                It's used for argument "body_root" of
+                    function "create_date_time_space".
+        """
+        super().__init__(
+            working_root=working_root,
+            history_root=history_root,
+            trash_root=trash_root,
+            override=override,
+            jst=jst,
+        )
+
+        self._initialize_variables_edit(edit_root, override, jst)

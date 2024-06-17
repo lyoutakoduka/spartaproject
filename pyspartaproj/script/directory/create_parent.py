@@ -8,7 +8,7 @@ from pathlib import Path
 from pyspartaproj.script.directory.create_directory import create_directory
 
 
-def create_directory_parent(child_path: Path) -> Path:
+def create_parent(child_path: Path) -> Path:
     """Create all parent directories of the path you select if not exists.
 
     Args:

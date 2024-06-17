@@ -5,8 +5,51 @@
 
 from pathlib import Path
 
+from pyspartaproj.context.default.bool_context import Bools
 from pyspartaproj.context.extension.path_context import PathPair, Paths
 from pyspartaproj.script.path.modify.get_current import get_current
+
+
+def _get_relative_root(root_path: Path | None = None) -> Path:
+    if root_path is None:
+        root_path = get_current()
+
+    return root_path
+
+
+def is_relative(absolute_path: Path, root_path: Path | None = None) -> bool:
+    """Check that path is type relative.
+
+    Args:
+        absolute_path (Path): Absolute path you want to check.
+
+        root_path (Path | None, optional): Defaults to None.
+            Root of absolute path used for checking path.
+
+    Returns:
+        bool: True if path is type relative.
+    """
+    return absolute_path.is_relative_to(_get_relative_root(root_path))
+
+
+def is_relative_array(
+    absolute_paths: Paths, root_path: Path | None = None
+) -> Bools:
+    """Check that list of paths are type relative at once.
+
+    Args:
+        absolute_paths (Paths): Absolute paths you want to check.
+
+        root_path (Path | None, optional): Defaults to None.
+            Root of absolute path used for checking paths.
+
+    Returns:
+        Bools: List of True if all paths are type relative.
+    """
+    return [
+        is_relative(absolute_path, root_path=root_path)
+        for absolute_path in absolute_paths
+    ]
 
 
 def get_relative(absolute_path: Path, root_path: Path | None = None) -> Path:
@@ -25,10 +68,9 @@ def get_relative(absolute_path: Path, root_path: Path | None = None) -> Path:
     Returns:
         Path: Converted relative path.
     """
-    if root_path is None:
-        root_path = get_current()
+    root_path = _get_relative_root(root_path)
 
-    if not absolute_path.is_relative_to(root_path):
+    if not is_relative(absolute_path, root_path=root_path):
         raise ValueError
 
     return absolute_path.relative_to(root_path)

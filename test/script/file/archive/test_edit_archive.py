@@ -10,14 +10,18 @@ from typing import Callable
 
 from pyspartaproj.context.extension.path_context import PathPair, Paths, Paths2
 from pyspartaproj.context.extension.time_context import TimePair
-from pyspartaproj.interface.pytest import fail
+from pyspartaproj.interface.pytest import fail, raises
+from pyspartaproj.script.directory.create_directory import create_directory
 from pyspartaproj.script.file.archive.compress_archive import CompressArchive
 from pyspartaproj.script.file.archive.decompress_archive import (
     DecompressArchive,
 )
 from pyspartaproj.script.file.archive.edit_archive import EditArchive
 from pyspartaproj.script.path.iterate_directory import walk_iterator
-from pyspartaproj.script.path.modify.get_relative import get_relative
+from pyspartaproj.script.path.modify.get_relative import (
+    get_relative,
+    is_relative,
+)
 from pyspartaproj.script.path.safe.safe_rename import SafeRename
 from pyspartaproj.script.path.safe.safe_trash import SafeTrash
 from pyspartaproj.script.path.status.get_statistic import get_file_size
@@ -48,6 +52,17 @@ def _get_root_after(temporary_root: Path) -> Path:
 
 def _get_root_archive(temporary_root: Path) -> Path:
     return Path(temporary_root, "archive")
+
+
+def _get_root_edit(temporary_root: Path) -> Path:
+    return Path(temporary_root, "edit")
+
+
+def _get_date_time_root(jst: bool = False) -> Path:
+    time_utc: Path = Path("2023", "04", "01", "00", "00", "00", "000000")
+    time_jst: Path = Path("2023", "04", "01", "09", "00", "00", "000000")
+
+    return time_jst if jst else time_utc
 
 
 def _add_archive(
@@ -175,22 +190,35 @@ def _edit_time_stamp(
     _update_time_stamp(edit_history, stamp_before, stamp_after)
 
 
+def _get_decompress_stamp(
+    temporary_root: Path, archive_paths: Paths
+) -> TimePair:
+    _decompress_archive(_get_root_after(temporary_root), archive_paths)
+    return _get_archive_stamp_after(temporary_root)
+
+
 def _get_stamp_after(
     temporary_root: Path,
     stamp_before: TimePair,
     edit_history: PathPair,
     archive_paths: Paths,
 ) -> TimePair:
-    _decompress_archive(_get_root_after(temporary_root), archive_paths)
-
-    stamp_after: TimePair = _get_archive_stamp_after(temporary_root)
+    stamp_after: TimePair = _get_decompress_stamp(
+        temporary_root, archive_paths
+    )
     _edit_time_stamp(edit_history, stamp_before, stamp_after)
 
     return stamp_after
 
 
+def _find_decompress_root(temporary_root: Path, remove_root: Path) -> TimePair:
+    return _get_decompress_stamp(
+        temporary_root, list(walk_iterator(remove_root, directory=False))
+    )
+
+
 def _get_edit_history(edit_archive: EditArchive) -> PathPair:
-    return _edit_to_archived(edit_archive.get_decompressed_root())
+    return _edit_to_archived(edit_archive.get_edit_root())
 
 
 def _close_archive(edit_archive: EditArchive) -> Paths:
@@ -200,19 +228,72 @@ def _close_archive(edit_archive: EditArchive) -> Paths:
         fail()
 
 
+def _compare_path(result: Path, expected: Path) -> None:
+    assert result.exists()
+    assert result == expected
+
+
+def _compare_root(trash_root: Path, edit_archive: EditArchive) -> None:
+    _compare_path(
+        edit_archive.get_edit_root(), Path(trash_root, _get_date_time_root())
+    )
+
+
+def _close_archive_fail(edit_archive: EditArchive) -> None:
+    assert edit_archive.close_archive() is None
+
+
+def _stamp_test(stamp_before: TimePair, stamp_after: TimePair) -> None:
+    assert is_same_stamp(stamp_before, stamp_after)
+
+
+def _compare_not_relative(full_path: Path, root_path: Path) -> None:
+    assert not is_relative(full_path, root_path=root_path)
+
+
+def _open_test(archive_path: Path, edit_archive: EditArchive) -> None:
+    assert archive_path == edit_archive.open_archive(archive_path=archive_path)
+
+
 def _common_test(
     temporary_root: Path, stamp_before: TimePair, edit_archive: EditArchive
 ) -> None:
-    edit_history: PathPair = _get_edit_history(edit_archive)
-
-    assert is_same_stamp(
+    _stamp_test(
         stamp_before,
         _get_stamp_after(
             temporary_root,
             stamp_before,
-            edit_history,
+            _get_edit_history(edit_archive),
             _close_archive(edit_archive),
         ),
+    )
+
+
+def _protect_test(
+    temporary_root: Path, stamp_before: TimePair, edit_archive: EditArchive
+) -> None:
+    _get_edit_history(edit_archive)
+    _close_archive_fail(edit_archive)
+
+    _stamp_test(
+        stamp_before,
+        _find_decompress_root(
+            temporary_root, _get_root_archive(temporary_root)
+        ),
+    )
+
+
+def _remove_test(
+    temporary_root: Path,
+    stamp_before: TimePair,
+    edit_archive: EditArchive,
+) -> None:
+    _get_edit_history(edit_archive)
+    _close_archive(edit_archive)
+
+    _stamp_test(
+        stamp_before,
+        _find_decompress_root(temporary_root, edit_archive.get_trash_root()),
     )
 
 
@@ -220,11 +301,19 @@ def _get_sorted_paths(before_paths: Paths, after_paths: Paths) -> Paths2:
     return [sorted(paths) for paths in [before_paths, after_paths]]
 
 
+def _none_test(path: Path | Paths | None) -> None:
+    assert path is None
+
+
 def _name_test(before_path: Path, edit_archive: EditArchive) -> None:
     _get_edit_history(edit_archive)
 
     assert before_path == _close_archive(edit_archive)[0]
     assert before_path.stem == _get_name()
+
+
+def _path_test(archive_path: Path, edit_archive: EditArchive) -> None:
+    assert archive_path == edit_archive.get_archive_path()
 
 
 def _limit_test(before_paths: Paths, edit_archive: EditArchive) -> None:
@@ -240,11 +329,6 @@ def _compress_test(archive_path: Path, edit_archive: EditArchive) -> None:
     _close_archive(edit_archive)
 
     assert archive_size_before > get_file_size(archive_path)
-
-
-def _protect_test(edit_archive: EditArchive) -> None:
-    if edit_archive.close_archive() is not None:
-        fail()
 
 
 def _get_archive(temporary_root: Path) -> CompressArchive:
@@ -279,31 +363,123 @@ def _get_archive_path_limit(temporary_root: Path, limit_byte: int) -> Paths:
     )
 
 
-def _get_edit_archive(archive_path: Path) -> EditArchive:
-    return EditArchive(archive_path)
+def _get_edit() -> EditArchive:
+    return EditArchive()
 
 
-def _get_edit_archive_limit(
-    archive_path: Path, limit_byte: int
-) -> EditArchive:
-    return EditArchive(archive_path, limit_byte=limit_byte)
+def _get_edit_work(working_root: Path) -> EditArchive:
+    return EditArchive(working_root=working_root, override=True)
 
 
-def _get_edit_archive_compress(archive_path: Path) -> EditArchive:
-    return EditArchive(archive_path, compress=True)
+def _get_edit_edit(working_root: Path) -> EditArchive:
+    return EditArchive(edit_root=working_root, override=True)
+
+
+def _get_edit_path(archive_path: Path) -> EditArchive:
+    edit_archive: EditArchive = _get_edit()
+    edit_archive.open_archive(archive_path=archive_path)
+    return edit_archive
+
+
+def _get_edit_limit(archive_path: Path, limit_byte: int) -> EditArchive:
+    edit_archive: EditArchive = _get_edit()
+    edit_archive.open_archive(archive_path=archive_path, limit_byte=limit_byte)
+    return edit_archive
+
+
+def _get_edit_compress(archive_path: Path) -> EditArchive:
+    edit_archive: EditArchive = _get_edit()
+    edit_archive.open_archive(archive_path=archive_path, compress=True)
+    return edit_archive
+
+
+def _get_edit_protect(archive_path: Path) -> EditArchive:
+    edit_archive: EditArchive = _get_edit()
+    edit_archive.open_archive(archive_path=archive_path, protected=True)
+    return edit_archive
+
+
+def _get_edit_remove(archive_path: Path, remove_root: Path) -> EditArchive:
+    edit_archive = EditArchive(trash_root=remove_root)
+    edit_archive.open_archive(archive_path=archive_path)
+    return edit_archive
+
+
+def test_error() -> None:
+    """Test to confirm that path of archive is undefined."""
+    edit_archive: EditArchive = _get_edit()
+
+    with raises(ValueError):
+        edit_archive.get_archive_path()
+
+
+def test_disable() -> None:
+    """Test to confirm path of archive is undefined."""
+    assert _get_edit().is_disable_archive()
+
+
+def test_none() -> None:
+    """Test to open archive with out archive path."""
+    _none_test(_get_edit().open_archive())
+
+
+def test_close() -> None:
+    """Test to close archive with out archive path."""
+    _none_test(_get_edit().close_archive())
+
+
+def test_work() -> None:
+    """Test to compare user defined temporary working space."""
+
+    def individual_test(temporary_root: Path) -> None:
+        _compare_root(temporary_root, _get_edit_work(temporary_root))
+
+    _inside_temporary_directory(individual_test)
+
+
+def test_different() -> None:
+    """Test to compare 2 type of temporary working spaces."""
+
+    def individual_test(temporary_root: Path) -> None:
+        edit_archive: EditArchive = _get_edit_edit(temporary_root)
+
+        _compare_not_relative(
+            edit_archive.get_edit_root(), edit_archive.get_working_root()
+        )
+
+    _inside_temporary_directory(individual_test)
+
+
+def test_edit() -> None:
+    """Test to get temporary working spaces to edit archive."""
+
+    def individual_test(temporary_root: Path) -> None:
+        edit_root: Path = _get_root_edit(temporary_root)
+        _compare_root(edit_root, _get_edit_edit(edit_root))
+
+    _inside_temporary_directory(individual_test)
 
 
 def test_single() -> None:
     """Test to compare internal of single archive file."""
 
     def individual_test(temporary_root: Path) -> None:
-        stamp_before: TimePair = _initialize_archive(temporary_root)
-
         _common_test(
             temporary_root,
-            stamp_before,
-            _get_edit_archive(_get_archive_path(temporary_root)),
+            _initialize_archive(temporary_root),
+            _get_edit_path(_get_archive_path(temporary_root)),
         )
+
+    _inside_temporary_directory(individual_test)
+
+
+def test_open() -> None:
+    """Test to open archive with archive path successfully."""
+
+    def individual_test(temporary_root: Path) -> None:
+        _create_source(temporary_root)
+
+        _open_test(_get_archive_path(temporary_root), _get_edit())
 
     _inside_temporary_directory(individual_test)
 
@@ -313,9 +489,21 @@ def test_name() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         _create_source(temporary_root)
-
         archive_path: Path = _get_archive_path_name(temporary_root)[0]
-        _name_test(archive_path, _get_edit_archive(archive_path))
+
+        _name_test(archive_path, _get_edit_path(archive_path))
+
+    _inside_temporary_directory(individual_test)
+
+
+def test_path() -> None:
+    """Test to compare path of archive."""
+
+    def individual_test(temporary_root: Path) -> None:
+        _create_source(temporary_root)
+        archive_path: Path = _get_archive_path(temporary_root)
+
+        _path_test(archive_path, _get_edit_path(archive_path))
 
     _inside_temporary_directory(individual_test)
 
@@ -326,13 +514,12 @@ def test_limit() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         _create_source(temporary_root)
-
         archive_paths: Paths = _get_archive_path_limit(
             temporary_root, limit_byte
         )
+
         _limit_test(
-            archive_paths,
-            _get_edit_archive_limit(archive_paths[0], limit_byte),
+            archive_paths, _get_edit_limit(archive_paths[0], limit_byte)
         )
 
     _inside_temporary_directory(individual_test)
@@ -343,9 +530,9 @@ def test_compress() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         _create_source_compress(temporary_root)
-
         archive_path: Path = _get_archive_path(temporary_root)
-        _compress_test(archive_path, _get_edit_archive_compress(archive_path))
+
+        _compress_test(archive_path, _get_edit_compress(archive_path))
 
     _inside_temporary_directory(individual_test)
 
@@ -354,9 +541,27 @@ def test_protect() -> None:
     """Test to take out directory from protected archive."""
 
     def individual_test(temporary_root: Path) -> None:
-        _create_source(temporary_root)
+        _protect_test(
+            temporary_root,
+            _initialize_archive(temporary_root),
+            _get_edit_protect(_get_archive_path(temporary_root)),
+        )
 
-        _protect_test(_get_edit_archive(_get_archive_path(temporary_root)))
+    _inside_temporary_directory(individual_test)
+
+
+def test_remove() -> None:
+    """Test of directory used for removing process when archive is edited."""
+
+    def individual_test(temporary_root: Path) -> None:
+        _remove_test(
+            temporary_root,
+            _initialize_archive(temporary_root),
+            _get_edit_remove(
+                _get_archive_path(temporary_root),
+                create_directory(_get_root_edit(temporary_root)),
+            ),
+        )
 
     _inside_temporary_directory(individual_test)
 
@@ -367,9 +572,19 @@ def main() -> bool:
     Returns:
         bool: Success if get to the end of function.
     """
+    test_error()
+    test_disable()
+    test_none()
+    test_close()
+    test_work()
+    test_different()
+    test_edit()
     test_single()
+    test_open()
     test_name()
+    test_path()
     test_limit()
     test_compress()
     test_protect()
+    test_remove()
     return True

@@ -7,10 +7,7 @@ from pathlib import Path
 
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.extension.path_context import PathPair
-from pyspartaproj.script.directory.create_directory_temporary import WorkSpace
-from pyspartaproj.script.directory.create_directory_working import (
-    create_working_space,
-)
+from pyspartaproj.script.directory.work_space import WorkSpace
 from pyspartaproj.script.path.modify.get_relative import get_relative
 
 
@@ -56,6 +53,23 @@ class PathServer(WorkSpace):
         self._build_path_private()
         self._build_path_develop()
 
+    def _initialize_paths(
+        self, local_root: Path | None, override: bool, jst: bool
+    ) -> None:
+        self._local_root: Path = self.get_selected_root(local_root)
+        self._date_time_root: Path = self.create_date_time_space(
+            body_root=local_root,
+            head_root=self.get_path("work_root"),
+            override=override,
+            jst=jst,
+        )
+
+    def _initialize_variables_local(
+        self, local_root: Path | None, override: bool, jst: bool
+    ) -> None:
+        self._build_path_table()
+        self._initialize_paths(local_root, override, jst)
+
     def get_path_table(self) -> Strs:
         """Get keys of predefined all paths about server.
 
@@ -75,71 +89,75 @@ class PathServer(WorkSpace):
         """
         return self._path_table[path_type]
 
-    def to_relative_path(self, local_full: Path) -> Path:
-        """Convert full path to relative path.
-
-        e.g., the full path is "<Python default temporary directory>/example/",
-            and returned relative path is "example/".
-
-        Args:
-            local (Path): Full path.
+    def get_local_root(self) -> Path:
+        """Get path of local working space used when connecting server.
 
         Returns:
-            Path: Returned relative path.
+            Path: Path of local working space.
         """
-        return get_relative(local_full, root_path=self.get_root())
+        return self._local_root
+
+    def get_date_time_root(self) -> Path:
+        """Get path of local temporary working space.
+
+        Path include string of current date time.
+
+        Returns:
+            Path: Path of local temporary working space.
+        """
+        return self._date_time_root
+
+    def to_relative_path(self, local_full: Path) -> Path:
+        """Convert full path on local working space to relative.
+
+        Args:
+            local_full (Path): Full path you want to convert.
+
+        Returns:
+            Path: Converted relative path.
+        """
+        return get_relative(local_full, root_path=self._local_root)
 
     def to_full_path(self, local_relative: Path) -> Path:
-        """Convert relative path to full path.
-
-        e.g., the relative path is "example/",
-            and returned full path is
-            "<Python default temporary directory>>/example/".
+        """Convert to full path on local working space from relative.
 
         Args:
-            local (Path): Relative path.
+            local_relative (Path): Relative path you want to convert.
 
         Returns:
-            Path: Returned full path.
+            Path: Converted full path.
         """
-        return Path(self.get_root(), local_relative)
+        return Path(self._local_root, local_relative)
 
-    def create_local_working_space(
-        self, override: bool = False, jst: bool = False
-    ) -> Path:
-        """Create temporary working space on local environment.
-
-        The path is used when uploading file or directory to server.
-
-        Basic path of temporary working space is follow.
-        A date time element in path is current date time by default.
-
-        "<Python default temporary directory>/
-            private/work/<year>/<month>/<day>/<hour>/<second>/<millisecond>/"
+    def __init__(
+        self,
+        working_root: Path | None = None,
+        local_root: Path | None = None,
+        override: bool = False,
+        jst: bool = False,
+    ) -> None:
+        """Generate string path pair about server directory.
 
         Args:
-            override (bool, optional): Defaults to False.
-                If True, the date time element in path become follow,
-                    it's commonly used for test.
+            working_root (Path | None, optional): Defaults to None.
+                User defined temporary working space.
+                It's mainly used for test.
+                It's used for argument "working_root" of class "WorkSpace".
 
-                "<Python default temporary directory>/
-                    private/work/2023/04/01/00/00/000000/"
+            local_root (Path | None, optional): Defaults to None.
+                User defined path of local directory
+                    which is synchronized with directory tree on server.
+
+            override (bool, optional): Defaults to False.
+                Override initial time count to "2023/4/1:12:00:00-00 (AM)".
+                It's used for argument "override" of
+                    function "create_date_time_space".
 
             jst (bool, optional): Defaults to False.
-                If True, the date time element is represented by
-                    time zone of Asia/Tokyo.
-
-        Returns:
-            Path: Path of temporary working space.
+                If True, you can get datetime object as JST time zone.
+                It's used for argument "jst" of
+                    function "create_date_time_space".
         """
-        return create_working_space(
-            Path(self.get_root(), self.get_path("work_root")),
-            override=override,
-            jst=jst,
-        )
+        super().__init__(working_root=working_root)
 
-    def __init__(self) -> None:
-        """Generate string path pair about server directory."""
-        super().__init__()
-
-        self._build_path_table()
+        self._initialize_variables_local(local_root, override, jst)

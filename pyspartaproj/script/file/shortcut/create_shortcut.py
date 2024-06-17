@@ -49,12 +49,14 @@ def _check_shortcut_exists(shortcut_target: Path) -> None:
         raise FileNotFoundError()
 
 
-def _cleanup_shortcut(shortcut_path: Path) -> None:
+def _cleanup_shortcut(shortcut_path: Path, remove_root: Path | None) -> None:
     if shortcut_path.exists():
-        SafeTrash().trash(shortcut_path)
+        SafeTrash(trash_root=remove_root).trash(shortcut_path)
 
 
-def create_shortcut(shortcut_target: Path, shortcut_path: Path) -> bool:
+def create_shortcut(
+    shortcut_target: Path, shortcut_path: Path, remove_root: Path | None = None
+) -> bool:
     """Create Windows shortcut from PowerShell.
 
     Args:
@@ -63,10 +65,14 @@ def create_shortcut(shortcut_target: Path, shortcut_path: Path) -> bool:
         shortcut_path (Path): Path of shortcut you want to create.
             Extension of shortcut should be ".lnk".
 
+        remove_root (Path | None, optional): Defaults to None.
+            Path of directory used as trash box.
+            It's used for argument "remove_root" of class "SafeTrash".
+
     Returns:
         bool: True if creating shortcut is success.
     """
     _check_shortcut_exists(shortcut_target)
-    _cleanup_shortcut(shortcut_path)
+    _cleanup_shortcut(shortcut_path, remove_root)
     _execute_script(shortcut_target, shortcut_path)
     return True

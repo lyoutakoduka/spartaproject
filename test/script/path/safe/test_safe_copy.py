@@ -8,12 +8,9 @@ from tempfile import TemporaryDirectory
 from typing import Callable
 
 from pyspartaproj.context.extension.path_context import PathPair2
+from pyspartaproj.interface.pytest import fail
 from pyspartaproj.script.bool.same_value import bool_same_pair
 from pyspartaproj.script.directory.create_directory import create_directory
-from pyspartaproj.script.file.json.convert_from_json import (
-    path_pair2_from_json,
-)
-from pyspartaproj.script.file.json.import_json import json_import
 from pyspartaproj.script.path.safe.safe_copy import SafeCopy
 from pyspartaproj.script.path.status.check_exists import check_exists_pair
 from pyspartaproj.script.path.temporary.create_temporary_file import (
@@ -24,11 +21,17 @@ from pyspartaproj.script.path.temporary.create_temporary_tree import (
 )
 
 
-def _common_test(rename_path: Path) -> None:
-    history: PathPair2 = path_pair2_from_json(json_import(rename_path))
+def _compare_empty(history: PathPair2 | None) -> PathPair2:
+    if history is None:
+        fail()
+
     assert 1 == len(history)
 
-    for _, path_pair in history.items():
+    return history
+
+
+def _common_test(history: PathPair2 | None) -> None:
+    for _, path_pair in _compare_empty(history).items():
         assert bool_same_pair(check_exists_pair(path_pair))
 
 
@@ -39,9 +42,9 @@ def _inside_temporary_directory(
         function(SafeCopy(), Path(temporary_path))
 
 
-def _copy(safe_copy: SafeCopy, path: Path) -> Path:
+def _copy(safe_copy: SafeCopy, path: Path) -> PathPair2 | None:
     safe_copy.copy(path, path.with_stem("destination"))
-    return safe_copy.pop_history()
+    return safe_copy.close_history()
 
 
 def test_file() -> None:
@@ -51,7 +54,7 @@ def test_file() -> None:
         source_path: Path = create_temporary_file(temporary_path)
         safe_copy.copy(source_path, source_path.with_stem("destination"))
 
-        _common_test(safe_copy.pop_history())
+        _common_test(safe_copy.close_history())
 
     _inside_temporary_directory(individual_test)
 
@@ -66,7 +69,7 @@ def test_override() -> None:
         )
         expected: Path = source_path.with_stem(source_path.stem + "_")
 
-        _common_test(safe_copy.pop_history())
+        _common_test(safe_copy.close_history())
         assert expected == destination_path
 
     _inside_temporary_directory(individual_test)

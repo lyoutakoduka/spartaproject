@@ -19,7 +19,10 @@ from pyspartaproj.script.file.json.convert_to_json import multiple_to_json
 from pyspartaproj.script.file.json.export_json import json_dump
 from pyspartaproj.script.file.text.import_file import byte_import
 from pyspartaproj.script.path.iterate_directory import walk_iterator
-from pyspartaproj.script.path.modify.get_relative import get_relative
+from pyspartaproj.script.path.modify.get_relative import (
+    get_relative,
+    is_relative,
+)
 from pyspartaproj.script.path.status.get_statistic import get_file_size
 from pyspartaproj.script.time.current_datetime import get_current_time
 from pyspartaproj.script.time.stamp.get_timestamp import (
@@ -287,7 +290,7 @@ class CompressArchive:
 
         if archive_root is None:
             self._compress_child(archive_target, parent_root)
-        elif archive_target.is_relative_to(archive_root):
+        elif is_relative(archive_target, root_path=archive_root):
             self._compress_child(archive_target, archive_root)
         else:
             self._compress_child(archive_target, parent_root)

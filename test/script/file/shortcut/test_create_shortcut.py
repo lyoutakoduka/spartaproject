@@ -7,19 +7,35 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
+from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.interface.pytest import raises
 from pyspartaproj.script.file.shortcut.create_shortcut import create_shortcut
+from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
 
 
-def _common_test(shortcut_target: Path, shortcut_root: Path) -> None:
-    shortcut_path: Path = Path(shortcut_root, shortcut_target.name + ".lnk")
-    create_shortcut(shortcut_target, shortcut_path)
+def _get_shortcut_path(shortcut_target: Path, shortcut_root: Path) -> Path:
+    return Path(shortcut_root, shortcut_target.name + ".lnk")
 
+
+def _common_test(shortcut_target: Path, shortcut_path: Path) -> None:
     assert shortcut_path.exists()
     assert shortcut_target.name == shortcut_path.stem
+
+
+def _get_shortcut_pair(temporary_root: Path) -> Strs:
+    return [
+        path.name
+        for path in walk_iterator(
+            temporary_root, directory=False, suffix="lnk"
+        )
+    ]
+
+
+def _compare_shortcut(temporary_root: Path) -> None:
+    assert 1 == len(set(_get_shortcut_pair(temporary_root)))
 
 
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
@@ -31,8 +47,13 @@ def test_file() -> None:
     """Test to create file type shortcut of Windows from PowerShell."""
 
     def individual_test(temporary_root: Path) -> None:
-        source_path: Path = create_temporary_file(temporary_root)
-        _common_test(source_path, temporary_root)
+        shortcut_target: Path = create_temporary_file(temporary_root)
+        shortcut_path: Path = _get_shortcut_path(
+            shortcut_target, temporary_root
+        )
+
+        create_shortcut(shortcut_target, shortcut_path)
+        _common_test(shortcut_target, shortcut_path)
 
     _inside_temporary_directory(individual_test)
 
@@ -41,7 +62,12 @@ def test_directory() -> None:
     """Test to create directory type shortcut of Windows from PowerShell."""
 
     def individual_test(temporary_root: Path) -> None:
-        _common_test(temporary_root, temporary_root)
+        shortcut_path: Path = _get_shortcut_path(
+            temporary_root, temporary_root
+        )
+
+        create_shortcut(temporary_root, shortcut_path)
+        _common_test(temporary_root, shortcut_path)
 
     _inside_temporary_directory(individual_test)
 
@@ -50,8 +76,33 @@ def test_exist() -> None:
     """Test to exists shortcut file before create it."""
 
     def individual_test(temporary_root: Path) -> None:
+        shortcut_target: Path = Path("empty")
+        shortcut_path: Path = _get_shortcut_path(
+            shortcut_target, temporary_root
+        )
+
         with raises(FileNotFoundError):
-            _common_test(Path("empty"), temporary_root)
+            create_shortcut(shortcut_target, shortcut_path)
+
+    _inside_temporary_directory(individual_test)
+
+
+def test_remove() -> None:
+    """Test to remove shortcut file when overriding existing shortcut."""
+
+    def individual_test(temporary_root: Path) -> None:
+        shortcut_path: Path = _get_shortcut_path(
+            temporary_root, temporary_root
+        )
+
+        create_shortcut(temporary_root, shortcut_path)
+        create_shortcut(
+            temporary_root,
+            shortcut_path,
+            remove_root=Path(temporary_root, "result"),
+        )
+
+        _compare_shortcut(temporary_root)
 
     _inside_temporary_directory(individual_test)
 
@@ -65,4 +116,5 @@ def main() -> bool:
     test_file()
     test_directory()
     test_exist()
+    test_remove()
     return True
