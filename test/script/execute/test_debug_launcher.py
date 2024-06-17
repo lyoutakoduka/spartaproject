@@ -11,13 +11,3 @@ def test_callable() -> None:
     """Used for test for function call."""
     if in_development():
         assert debug_launcher()
-
-
-def main() -> bool:
-    """Test all public functions.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_callable()
-    return True
