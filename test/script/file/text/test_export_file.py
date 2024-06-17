@@ -39,14 +39,3 @@ def test_text() -> None:
         _common_test(text_export(text_path, source_text), len(source_text))
 
     _inside_temporary_directory(individual_test)
-
-
-def main() -> bool:
-    """Run all tests.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_byte()
-    test_text()
-    return True
