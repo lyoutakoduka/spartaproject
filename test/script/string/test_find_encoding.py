@@ -18,10 +18,3 @@ def test_sjis() -> None:
 
 def test_other() -> None:
     assert "shift-jis" != find_encoding(chr(12354).encode("euc-jp"))
-
-
-def main() -> bool:
-    test_utf()
-    test_sjis()
-    test_other()
-    return True

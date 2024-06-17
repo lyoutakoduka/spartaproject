@@ -135,18 +135,3 @@ def test_identifier() -> None:
             _get_base_name(name, index, identifier)
         ),
     )
-
-
-def main() -> bool:
-    """Run all tests.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_single()
-    test_multiple()
-    test_index()
-    test_option()
-    test_digit()
-    test_identifier()
-    return True

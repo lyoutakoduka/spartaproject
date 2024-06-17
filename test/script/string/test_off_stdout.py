@@ -25,13 +25,3 @@ def test_messages() -> None:
     _messages()
 
     assert format_indent(expected, stdout=True) == stdout_text.show()
-
-
-def main() -> bool:
-    """Run all tests.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_messages()
-    return True
