@@ -34,16 +34,3 @@ def test_ftp() -> None:
     """Test to get network object about SFTP."""
     if server := _is_connect():
         assert isinstance(server.get_sftp(), SFTPClient)
-
-
-def main() -> bool:
-    """Run all tests.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_connect()
-    test_ssh()
-    test_channel()
-    test_ftp()
-    return True

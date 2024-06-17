@@ -90,16 +90,3 @@ def test_place() -> None:
         )
 
     _inside_temporary_directory(individual_test)
-
-
-def main() -> bool:
-    """Run all tests.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_file()
-    test_directory()
-    test_tree()
-    test_place()
-    return True
