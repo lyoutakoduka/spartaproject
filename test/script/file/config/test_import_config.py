@@ -83,13 +83,3 @@ def test_import() -> None:
             )
         )
         assert expected == config["section"]["option"]
-
-
-def main() -> bool:
-    test_bool()
-    test_integer()
-    test_decimal()
-    test_string()
-    test_path()
-    test_import()
-    return True
