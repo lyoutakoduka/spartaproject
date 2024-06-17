@@ -15,13 +15,3 @@ def test_array() -> None:
     assert expected == convert_float_array(
         [Decimal(str(value)) for value in expected]
     )
-
-
-def main() -> bool:
-    """Run all tests.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_array()
-    return True

@@ -30,14 +30,3 @@ def test_accuracy() -> None:
     after: Strs = get_changed()
 
     assert before != after
-
-
-def main() -> bool:
-    """Run all tests.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_accuracy()
-    test_float()
-    return True
