@@ -105,16 +105,3 @@ def test_remove() -> None:
         _compare_shortcut(temporary_root)
 
     _inside_temporary_directory(individual_test)
-
-
-def main() -> bool:
-    """Run all tests.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_file()
-    test_directory()
-    test_exist()
-    test_remove()
-    return True

@@ -56,15 +56,3 @@ def test_exist() -> None:
     """Test to exists shortcut file before read inside it."""
     with raises(FileNotFoundError):
         read_shortcut(Path("empty.lnk"))
-
-
-def main() -> bool:
-    """Run all tests.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_file()
-    test_directory()
-    test_exist()
-    return True
