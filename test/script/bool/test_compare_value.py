@@ -34,12 +34,3 @@ def test_pair() -> None:
     assert bool_compare_pair(
         {"R": True, "G": False, "B": True}, {"R": True, "G": False, "B": True}
     )
-
-
-def main() -> bool:
-    test_array()
-    test_pair()
-    test_size()
-    test_empty()
-    test_key()
-    return True

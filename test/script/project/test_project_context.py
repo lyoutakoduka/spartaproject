@@ -134,19 +134,3 @@ def test_file() -> None:
     assert expected == _import_context().merge_platform_path(
         "project", path_roots, file_type=file_type
     )
-
-
-def main() -> bool:
-    """Run all tests.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_integer()
-    test_string()
-    test_path()
-    test_key()
-    test_platform()
-    test_directory()
-    test_file()
-    return True

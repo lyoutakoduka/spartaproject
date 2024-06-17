@@ -49,14 +49,3 @@ def test_multiple() -> None:
             fail()
 
         assert expected == Path(result[0])
-
-
-def main() -> bool:
-    """Run all tests.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_single()
-    test_multiple()
-    return True

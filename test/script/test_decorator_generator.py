@@ -67,10 +67,3 @@ def test_text() -> None:
 
     expected_text: str = "Hello!Hello!"
     assert expected_text == test_instance.show()
-
-
-def main() -> bool:
-    test_name()
-    test_doc()
-    test_text()
-    return True

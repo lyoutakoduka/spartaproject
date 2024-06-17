@@ -129,19 +129,3 @@ def test_full() -> None:
     server = PathServer()
 
     _compare_relative(expected, server.to_full_path(expected), server)
-
-
-def main() -> bool:
-    """Run all tests.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_table()
-    test_path()
-    test_work()
-    test_local()
-    test_date()
-    test_relative()
-    test_full()
-    return True

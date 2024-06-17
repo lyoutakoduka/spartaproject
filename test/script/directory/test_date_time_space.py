@@ -30,14 +30,3 @@ def test_create() -> None:
 
         assert time_path.exists()
         assert expected == get_relative(time_path, root_path=temporary_path)
-
-
-def main() -> bool:
-    """Run all tests.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_name()
-    test_create()
-    return True

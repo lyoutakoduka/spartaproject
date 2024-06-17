@@ -214,25 +214,3 @@ def test_tree() -> None:
     }
     expected: str = """{"A":{"B":{"C":[null,-1.0,"root"]}}}"""
     assert expected == json_dump(to_safe_json(source_pairs), compress=True)
-
-
-def main() -> bool:
-    """Run all tests.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_bool_array()
-    test_bool_pair()
-    test_integer_array()
-    test_integer_pair()
-    test_float_array()
-    test_float_pair()
-    test_string_array()
-    test_string_pair()
-    test_decimal_array()
-    test_decimal_pair()
-    test_path_array()
-    test_path_pair()
-    test_tree()
-    return True

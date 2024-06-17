@@ -255,24 +255,3 @@ def test_export() -> None:
         assert format_indent(expected, stdout=True) == text_import(
             config_export(Path(temporary_path, "temporary.ini"), source_pairs)
         )
-
-
-def main() -> bool:
-    """Run all tests.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_bool()
-    test_integer()
-    test_float()
-    test_string()
-    test_decimal()
-    test_path()
-    test_mix_option()
-    test_mix_section()
-    test_compress()
-    test_lower()
-    test_key()
-    test_export()
-    return True

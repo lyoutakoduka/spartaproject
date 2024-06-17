@@ -14,14 +14,3 @@ def test_number() -> None:
 def test_error() -> None:
     """Test to convert text, but it's not number."""
     assert convert_integer("error") is None
-
-
-def main() -> bool:
-    """Run all tests.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_number()
-    test_error()
-    return True

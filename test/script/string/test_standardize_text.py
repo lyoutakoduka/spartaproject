@@ -22,15 +22,3 @@ def test_under() -> None:
 def test_strip() -> None:
     """Test to remove under bar of the both ends."""
     assert "test" == standardize_text("__test__")
-
-
-def main() -> bool:
-    """Run all tests.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_lower()
-    test_under()
-    test_strip()
-    return True

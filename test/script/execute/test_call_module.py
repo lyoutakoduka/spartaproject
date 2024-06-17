@@ -33,14 +33,3 @@ def test_unknown_function() -> None:
     if in_development():
         with raises(ModuleNotFoundError):
             call_function(other_path, current_file, function="unknown")
-
-
-def main() -> bool:
-    """Test all public functions.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_unknown_module()
-    test_unknown_function()
-    return True

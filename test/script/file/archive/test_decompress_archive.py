@@ -357,17 +357,3 @@ def test_timestamp() -> None:
         _timestamp_test(temporary_root)
 
     _inside_temporary_directory(individual_test)
-
-
-def main() -> bool:
-    """Run all tests.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_file()
-    test_directory()
-    test_type()
-    test_sequential()
-    test_timestamp()
-    return True

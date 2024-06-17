@@ -26,13 +26,3 @@ def test_directory() -> None:
         assert parent_path.exists()
 
     _inside_temporary_directory(individual_test)
-
-
-def main() -> bool:
-    """All test of feature flags module.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_directory()
-    return True

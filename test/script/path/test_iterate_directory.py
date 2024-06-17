@@ -205,18 +205,3 @@ def test_filter() -> None:
         )
 
     _inside_temporary_directory(individual_test)
-
-
-def main() -> bool:
-    """All test of feature flags module.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_all()
-    test_depth()
-    test_file()
-    test_directory()
-    test_suffix()
-    test_filter()
-    return True

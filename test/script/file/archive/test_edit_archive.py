@@ -564,27 +564,3 @@ def test_remove() -> None:
         )
 
     _inside_temporary_directory(individual_test)
-
-
-def main() -> bool:
-    """All test of feature flags module.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_error()
-    test_disable()
-    test_none()
-    test_close()
-    test_work()
-    test_different()
-    test_edit()
-    test_single()
-    test_open()
-    test_name()
-    test_path()
-    test_limit()
-    test_compress()
-    test_protect()
-    test_remove()
-    return True

@@ -46,14 +46,3 @@ def test_pair() -> None:
     expected: BoolPair = {"R": True, "G": False, "B": True}
 
     assert bool_compare_pair(expected, check_exists_pair(paths))
-
-
-def main() -> bool:
-    """Run all tests.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_array()
-    test_pair()
-    return True

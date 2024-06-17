@@ -35,14 +35,3 @@ def test_rename() -> None:
         assert expected == rename_format(temporary_root)
 
     _inside_temporary_directory(individual_test)
-
-
-def main() -> bool:
-    """Run all tests.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_format()
-    test_rename()
-    return True

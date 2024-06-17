@@ -21,14 +21,3 @@ def test_name() -> None:
 def test_version() -> None:
     """Test function to compare version information of specific interpreter."""
     assert python_version() == get_interpreter_version(Path(executable))
-
-
-def main() -> bool:
-    """Run all tests.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_name()
-    test_version()
-    return True

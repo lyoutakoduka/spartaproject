@@ -283,22 +283,3 @@ def test_jst() -> None:
         )
 
     _inside_temporary_directory(individual_test)
-
-
-def main() -> bool:
-    """Run all tests.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_path()
-    test_root()
-    test_base()
-    test_work()
-    test_select()
-    test_date()
-    test_body()
-    test_head()
-    test_foot()
-    test_jst()
-    return True

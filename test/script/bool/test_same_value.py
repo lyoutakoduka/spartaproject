@@ -30,13 +30,3 @@ def test_invert() -> None:
 
 def test_pair() -> None:
     assert bool_same_pair({"R": True, "G": True, "B": True})
-
-
-def main() -> bool:
-    test_array()
-    test_invert()
-    test_pair()
-    test_empty()
-    test_mixed()
-    test_false()
-    return True

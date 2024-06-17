@@ -21,14 +21,3 @@ def test_develop() -> None:
 def test_production() -> None:
     """Test when production environment."""
     assert not in_development()
-
-
-def main() -> bool:
-    """All test of feature flags module.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_develop()
-    test_production()
-    return True

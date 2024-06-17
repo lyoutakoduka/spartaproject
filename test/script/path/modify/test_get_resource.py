@@ -28,14 +28,3 @@ def test_directory() -> None:
     """Test to get path in local resource directory and file."""
     expected: str = "directory"
     _common_test(expected, [expected, "file.json"])
-
-
-def main() -> bool:
-    """All test of feature flags module.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_file()
-    test_directory()
-    return True
