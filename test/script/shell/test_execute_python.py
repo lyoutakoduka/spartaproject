@@ -98,17 +98,3 @@ def test_system() -> None:
     expected: Paths = [first_root, Path(first_root, "directory_second")]
 
     _compare_system_paths(expected, _get_system_paths(expected, first_root))
-
-
-def main() -> bool:
-    """Run all tests.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_path()
-    test_interpreter()
-    test_command()
-    test_platform()
-    test_system()
-    return True

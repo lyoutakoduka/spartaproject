@@ -88,19 +88,3 @@ def test_mount() -> None:
 
     for path in [Path("/", "mnt", "c", *path_elements), expected]:
         assert expected == convert_mount_path(path)
-
-
-def main() -> bool:
-    """Run all tests.
-
-    Returns:
-        bool: Success if get to the end of function.
-    """
-    test_script()
-    test_path()
-    test_argument()
-    test_all()
-    test_write()
-    test_command()
-    test_mount()
-    return True
