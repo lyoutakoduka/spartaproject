@@ -50,9 +50,7 @@ def _get_base_name_digit(name: str, index: int, identifier: str) -> str:
     return _merge_base_name(name, _get_index(index, 4), identifier)
 
 
-def _compare_base_name(
-    name: str, index: int, elements: BaseName | None
-) -> None:
+def _split_test(name: str, index: int, elements: BaseName | None) -> None:
     if elements is None:
         fail()
     else:
@@ -60,7 +58,7 @@ def _compare_base_name(
 
 
 def _common_test(name: str, index: int, identifier: str) -> None:
-    _compare_base_name(
+    _split_test(
         name,
         index,
         BaseNameElements().split_name(_get_base_name(name, index, identifier)),
@@ -98,7 +96,7 @@ def test_option() -> None:
     name: str = "file"
     index: int = 1
 
-    _compare_base_name(
+    _split_test(
         name,
         index,
         BaseNameElements().split_name(
@@ -113,7 +111,7 @@ def test_digit() -> None:
     name: str = "file"
     index: int = 1
 
-    _compare_base_name(
+    _split_test(
         name,
         index,
         BaseNameElements().split_name(
@@ -128,7 +126,7 @@ def test_identifier() -> None:
     name: str = _get_name(["group", "type"], identifier)
     index: int = 1
 
-    _compare_base_name(
+    _split_test(
         name,
         index,
         BaseNameElements(identifier=identifier).split_name(
