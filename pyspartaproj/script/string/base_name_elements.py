@@ -67,6 +67,11 @@ class BaseNameElements:
 
         return self._get_name_elements(self._get_name(base_name), index)
 
+    def join_name(self, base_name: BaseName, digit: int = 4) -> str:
+        return self._split_identifier.join(
+            [base_name["name"], str(base_name["index"]).zfill(digit)]
+        )
+
     def __init__(self, identifier: str | None = None) -> None:
         """Initialize variable of class.
 
