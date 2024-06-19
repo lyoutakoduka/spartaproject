@@ -140,3 +140,13 @@ def test_identifier() -> None:
             _get_base_name(name, index, identifier)
         ),
     )
+
+
+def test_join() -> None:
+    identifier: str = _get_identifier()
+    name: str = "file"
+    index: int = 1
+
+    _join_test(
+        _get_base_name_digit(name, index, identifier), BaseNameElements()
+    )
