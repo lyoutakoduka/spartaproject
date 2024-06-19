@@ -50,11 +50,11 @@ def _get_base_name_digit(name: str, index: int, identifier: str) -> str:
     return _merge_base_name(name, _get_index(index, 4), identifier)
 
 
-def _split_test(name: str, index: int, elements: BaseName | None) -> None:
-    if elements is None:
+def _split_test(name: str, index: int, base_name: BaseName | None) -> None:
+    if base_name is None:
         fail()
     else:
-        _compare_elements(name, index, elements)
+        _compare_elements(name, index, base_name)
 
 
 def _common_test(name: str, index: int, identifier: str) -> None:
