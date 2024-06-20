@@ -9,17 +9,17 @@ from pyspartaproj.interface.pytest import fail
 from pyspartaproj.script.string.base_name_elements import BaseNameElements
 
 
-def _compare_name(name: str, name_elements: BaseName) -> None:
-    assert name == name_elements["name"]
+def _compare_name(name: str, base_name: BaseName) -> None:
+    assert name == base_name["name"]
 
 
-def _compare_index(index: int, name_elements: BaseName) -> None:
-    assert index == name_elements["index"]
+def _compare_index(index: int, base_name: BaseName) -> None:
+    assert index == base_name["index"]
 
 
-def _compare_elements(name: str, index: int, name_elements: BaseName) -> None:
-    _compare_name(name, name_elements)
-    _compare_index(index, name_elements)
+def _compare_elements(name: str, index: int, base_name: BaseName) -> None:
+    _compare_name(name, base_name)
+    _compare_index(index, base_name)
 
 
 def _get_identifier() -> str:
@@ -50,17 +50,22 @@ def _get_base_name_digit(name: str, index: int, identifier: str) -> str:
     return _merge_base_name(name, _get_index(index, 4), identifier)
 
 
-def _compare_base_name(
-    name: str, index: int, elements: BaseName | None
-) -> None:
-    if elements is None:
+def _split_test(name: str, index: int, base_name: BaseName | None) -> None:
+    if base_name is None:
         fail()
     else:
-        _compare_elements(name, index, elements)
+        _compare_elements(name, index, base_name)
+
+
+def _join_test(expected: str, elements: BaseNameElements) -> None:
+    if base_name := elements.split_name(expected):
+        assert expected == elements.join_name(base_name)
+    else:
+        fail()
 
 
 def _common_test(name: str, index: int, identifier: str) -> None:
-    _compare_base_name(
+    _split_test(
         name,
         index,
         BaseNameElements().split_name(_get_base_name(name, index, identifier)),
@@ -98,7 +103,7 @@ def test_option() -> None:
     name: str = "file"
     index: int = 1
 
-    _compare_base_name(
+    _split_test(
         name,
         index,
         BaseNameElements().split_name(
@@ -113,7 +118,7 @@ def test_digit() -> None:
     name: str = "file"
     index: int = 1
 
-    _compare_base_name(
+    _split_test(
         name,
         index,
         BaseNameElements().split_name(
@@ -128,10 +133,21 @@ def test_identifier() -> None:
     name: str = _get_name(["group", "type"], identifier)
     index: int = 1
 
-    _compare_base_name(
+    _split_test(
         name,
         index,
         BaseNameElements(identifier=identifier).split_name(
             _get_base_name(name, index, identifier)
         ),
+    )
+
+
+def test_join() -> None:
+    """Test to Convert elements about file name to base name of file."""
+    identifier: str = _get_identifier()
+    name: str = "file"
+    index: int = 1
+
+    _join_test(
+        _get_base_name_digit(name, index, identifier), BaseNameElements()
     )
