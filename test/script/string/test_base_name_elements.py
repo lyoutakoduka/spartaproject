@@ -143,6 +143,7 @@ def test_identifier() -> None:
 
 
 def test_join() -> None:
+    """Test to Convert elements about file name to base name of file."""
     identifier: str = _get_identifier()
     name: str = "file"
     index: int = 1
