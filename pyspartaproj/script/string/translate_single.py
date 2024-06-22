@@ -3,6 +3,7 @@
 
 
 from pyspartaproj.context.default.integer_context import Ints, Ints3
+from pyspartaproj.context.default.string_context import Strs
 
 
 def _fill_character(characters: Ints) -> Ints:
@@ -22,3 +23,7 @@ def _fill_hex_tables(hex_tables: Ints3) -> Ints3:
         [_fill_character(hex_span) for hex_span in hex_table]
         for hex_table in hex_tables
     ]
+
+
+def _to_characters(numbers: Ints) -> Strs:
+    return [chr(number) for number in numbers]
