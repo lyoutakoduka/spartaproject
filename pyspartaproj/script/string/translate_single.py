@@ -3,7 +3,7 @@
 
 
 from pyspartaproj.context.default.integer_context import Ints, Ints3
-from pyspartaproj.context.default.string_context import Strs
+from pyspartaproj.context.default.string_context import StrPair, Strs
 
 
 def _fill_character(characters: Ints) -> Ints:
@@ -27,3 +27,13 @@ def _fill_hex_tables(hex_tables: Ints3) -> Ints3:
 
 def _to_characters(numbers: Ints) -> Strs:
     return [chr(number) for number in numbers]
+
+
+def _get_translate_table(filled_tables: Ints3) -> StrPair:
+    return dict(
+        [
+            _to_characters(list(numbers))
+            for filled_table in filled_tables
+            for numbers in zip(filled_table[0], filled_table[1])
+        ]
+    )
