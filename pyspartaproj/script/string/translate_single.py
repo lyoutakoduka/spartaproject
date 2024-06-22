@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Module to convert multiple byte characters to single byte characters."""
 
 from pyspartaproj.context.default.integer_context import Ints, Ints3
 from pyspartaproj.context.default.string_context import StrPair, Strs, Trans
@@ -40,6 +41,14 @@ def _get_translate_table(filled_tables: Ints3) -> StrPair:
 
 
 def translate_single(text: str) -> str:
+    """Convert multiple byte characters to single byte characters.
+
+    Args:
+        text (str): String which might include multiple byte characters.
+
+    Returns:
+        str: Converted single byte characters.
+    """
     translated: Trans = str.maketrans(  # Type Trans is necessary.
         _get_translate_table(_fill_hex_tables(_get_hex_tables()))
     )
