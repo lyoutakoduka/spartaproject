@@ -6,6 +6,7 @@
 from pathlib import Path
 from typing import TypedDict
 
+from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.extension.path_context import Paths
 
 
@@ -28,3 +29,9 @@ class BaseName(TypedDict):
 
     name: str
     index: int
+
+
+class Alphabets(TypedDict):
+    big: Strs
+    small: Strs
+    number: Strs
