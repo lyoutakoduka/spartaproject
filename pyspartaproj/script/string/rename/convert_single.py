@@ -8,6 +8,8 @@ from pyspartaproj.context.default.string_context import StrPair, Strs, Trans
 
 
 class ConvertSingle:
+    """Class to convert multiple byte characters to single byte."""
+
     def _fill_character(self, characters: Ints) -> Ints:
         return list(range(characters[0], characters[1] + 1))
 
