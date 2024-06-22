@@ -21,3 +21,10 @@ def test_single() -> None:
     expected: str = "A"
 
     _common_test(expected, text)
+
+
+def test_array() -> None:
+    text: str = "\uff34\uff25\uff33\uff34"
+    expected: str = "TEST"
+
+    _common_test(expected, text)
