@@ -3,7 +3,7 @@
 
 
 from pyspartaproj.context.default.integer_context import Ints, Ints3
-from pyspartaproj.context.default.string_context import StrPair, Strs
+from pyspartaproj.context.default.string_context import StrPair, Strs, Trans
 
 
 def _fill_character(characters: Ints) -> Ints:
@@ -37,3 +37,10 @@ def _get_translate_table(filled_tables: Ints3) -> StrPair:
             for numbers in zip(filled_table[0], filled_table[1])
         ]
     )
+
+
+def translate_single(text: str) -> str:
+    translated: Trans = str.maketrans(  # Type Trans is necessary.
+        _get_translate_table(_fill_hex_tables(_get_hex_tables()))
+    )
+    return text.translate(translated)
