@@ -14,3 +14,10 @@ def test_error() -> None:
     expected: str = text
 
     _common_test(expected, text)
+
+
+def test_single() -> None:
+    text: str = "\uff21"
+    expected: str = "A"
+
+    _common_test(expected, text)
