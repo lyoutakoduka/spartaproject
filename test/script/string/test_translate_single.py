@@ -35,3 +35,10 @@ def test_small() -> None:
     expected: str = "a"
 
     _common_test(expected, text)
+
+
+def test_number() -> None:
+    text: str = "\uff10"
+    expected: str = "0"
+
+    _common_test(expected, text)
