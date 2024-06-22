@@ -36,7 +36,7 @@ class ConvertSingle:
             ]
         )
 
-    def translate_single(self, text: str) -> str:
+    def convert(self, text: str) -> str:
         """Convert multiple byte characters to single byte characters.
 
         Args:
