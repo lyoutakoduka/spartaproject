@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to convert multiple byte characters to single byte."""
 
 from pyspartaproj.script.string.translate_single import translate_single
 
@@ -10,6 +11,7 @@ def _common_test(expected: str, text: str) -> None:
 
 
 def test_error() -> None:
+    """Test to convert unsupported character."""
     text: str = "\u3042"
     expected: str = text
 
@@ -17,6 +19,7 @@ def test_error() -> None:
 
 
 def test_single() -> None:
+    """Test to convert multiple byte character to single byte character."""
     text: str = "\uff21"
     expected: str = "A"
 
@@ -24,6 +27,7 @@ def test_single() -> None:
 
 
 def test_array() -> None:
+    """Test to convert multiple byte characters to single byte characters."""
     text: str = "\uff34\uff25\uff33\uff34"
     expected: str = "TEST"
 
@@ -31,6 +35,7 @@ def test_array() -> None:
 
 
 def test_small() -> None:
+    """Test to convert small letter."""
     text: str = "\uff41"
     expected: str = "a"
 
@@ -38,6 +43,7 @@ def test_small() -> None:
 
 
 def test_number() -> None:
+    """Test to convert number character."""
     text: str = "\uff10"
     expected: str = "0"
 
