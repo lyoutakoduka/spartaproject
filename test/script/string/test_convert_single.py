@@ -3,7 +3,7 @@
 
 """Test module to convert multiple byte characters to single byte."""
 
-from pyspartaproj.script.string.translate_single import translate_single
+from pyspartaproj.script.string.convert_single import translate_single
 
 
 def _common_test(expected: str, text: str) -> None:
