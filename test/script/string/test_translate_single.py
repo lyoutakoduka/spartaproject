@@ -28,3 +28,10 @@ def test_array() -> None:
     expected: str = "TEST"
 
     _common_test(expected, text)
+
+
+def test_small() -> None:
+    text: str = "\uff41"
+    expected: str = "a"
+
+    _common_test(expected, text)
