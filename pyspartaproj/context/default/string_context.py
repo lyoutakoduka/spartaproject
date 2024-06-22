@@ -10,6 +10,7 @@ StrTuple = Tuple[str, str]
 Strs = List[str]
 Trans = Dict[int, str]
 
+StrsPair = Dict[str, Strs]
 StrPair2 = Dict[str, StrPair]
 Strs2 = List[Strs]
 
