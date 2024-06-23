@@ -4,6 +4,7 @@
 
 from pyspartaproj.context.default.integer_context import Ints, Ints2
 from pyspartaproj.context.default.string_context import Strs, Strs2
+from pyspartaproj.context.typed.user_context import Alphabets
 
 
 def _to_characters(numbers: Ints) -> Strs:
@@ -31,3 +32,7 @@ def _get_alphabet_table(filled_table: Ints2) -> Strs2:
 
 def _get_table(multiple: bool) -> Strs2:
     return _get_alphabet_table(_fill_hex_tables(_get_hex_tables(multiple)))
+
+
+def _struct_alphabet(big: Strs, small: Strs, number: Strs) -> Alphabets:
+    return {"big": big, "small": small, "number": number}
