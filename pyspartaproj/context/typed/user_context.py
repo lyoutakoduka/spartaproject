@@ -40,3 +40,4 @@ class Alphabets(TypedDict):
     big: Strs
     small: Strs
     number: Strs
+    other: Strs
