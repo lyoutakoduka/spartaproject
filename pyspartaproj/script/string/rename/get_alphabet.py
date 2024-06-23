@@ -27,3 +27,7 @@ def _fill_hex_tables(hex_table: Ints2) -> Ints2:
 
 def _get_alphabet_table(filled_table: Ints2) -> Strs2:
     return [_to_characters(numbers) for numbers in filled_table]
+
+
+def _get_table(multiple: bool) -> Strs2:
+    return _get_alphabet_table(_fill_hex_tables(_get_hex_tables(multiple)))
