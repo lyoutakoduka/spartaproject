@@ -55,5 +55,14 @@ def _get_indices_begin(indices_span: Ints) -> Ints:
     return indices_begin
 
 
+def _get_string_tables(index_base: int) -> Strs2:
+    indices_span: Ints = [16, 10, 7, 26, 6, 26, 4]
+
+    return [
+        _get_string_table(begin + index_base, span)
+        for begin, span in zip(_get_indices_begin(indices_span), indices_span)
+    ]
+
+
 def get_alphabet(multiple: bool = False) -> Alphabets:
     return _struct_alphabet(*_get_table(multiple))
