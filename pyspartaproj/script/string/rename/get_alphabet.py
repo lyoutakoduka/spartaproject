@@ -34,8 +34,10 @@ def _get_table(multiple: bool) -> Strs2:
     return _get_alphabet_table(_fill_hex_tables(_get_hex_tables(multiple)))
 
 
-def _struct_alphabet(big: Strs, small: Strs, number: Strs) -> Alphabets:
-    return {"big": big, "small": small, "number": number}
+def _struct_alphabet(
+    big: Strs, small: Strs, number: Strs, other: Strs
+) -> Alphabets:
+    return {"big": big, "small": small, "number": number, "other": other}
 
 
 def get_alphabet(multiple: bool = False) -> Alphabets:
