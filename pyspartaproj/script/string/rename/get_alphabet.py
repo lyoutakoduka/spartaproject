@@ -3,6 +3,11 @@
 
 
 from pyspartaproj.context.default.integer_context import Ints, Ints2
+from pyspartaproj.context.default.string_context import Strs
+
+
+def _to_characters(numbers: Ints) -> Strs:
+    return [chr(number) for number in numbers]
 
 
 def _fill_character(characters: Ints) -> Ints:
