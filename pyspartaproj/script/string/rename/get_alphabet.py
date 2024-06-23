@@ -44,5 +44,16 @@ def _get_string_table(index: int, span: int) -> Strs:
     return [chr(index + i) for i in range(span)]
 
 
+def _get_indices_begin(indices_span: Ints) -> Ints:
+    indices_begin: Ints = []
+    index_begin: int = 0
+
+    for i in range(len(indices_span)):
+        index_begin += 0 if 0 == i else indices_span[i - 1]
+        indices_begin += [index_begin]
+
+    return indices_begin
+
+
 def get_alphabet(multiple: bool = False) -> Alphabets:
     return _struct_alphabet(*_get_table(multiple))
