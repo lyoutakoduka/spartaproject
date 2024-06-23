@@ -64,5 +64,14 @@ def _get_string_tables(index_base: int) -> Strs2:
     ]
 
 
+def _get_index_base(multiple: bool) -> int:
+    index_base: int = 32
+
+    if multiple:
+        index_base += 65248
+
+    return index_base
+
+
 def get_alphabet(multiple: bool = False) -> Alphabets:
     return _struct_alphabet(*_get_table(multiple))
