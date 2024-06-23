@@ -14,3 +14,7 @@ def _get_hex_tables(multiple: bool) -> Ints2:
         return [[0xFF21, 0xFF3A], [0xFF41, 0xFF5A], [0xFF10, 0xFF19]]
     else:
         return [[0x41, 0x5A], [0x61, 0x7A], [0x30, 0x39]]
+
+
+def _fill_hex_tables(hex_table: Ints2) -> Ints2:
+    return [_fill_character(hex_span) for hex_span in hex_table]
