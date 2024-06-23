@@ -40,5 +40,9 @@ def _struct_alphabet(
     return {"big": big, "small": small, "number": number, "other": other}
 
 
+def _get_string_table(index: int, span: int) -> Strs:
+    return [chr(index + i) for i in range(span)]
+
+
 def get_alphabet(multiple: bool = False) -> Alphabets:
     return _struct_alphabet(*_get_table(multiple))
