@@ -36,3 +36,7 @@ def _get_table(multiple: bool) -> Strs2:
 
 def _struct_alphabet(big: Strs, small: Strs, number: Strs) -> Alphabets:
     return {"big": big, "small": small, "number": number}
+
+
+def get_alphabet(multiple: bool = False) -> Alphabets:
+    return _struct_alphabet(*_get_table(multiple))
