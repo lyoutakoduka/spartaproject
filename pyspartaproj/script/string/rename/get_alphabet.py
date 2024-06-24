@@ -92,4 +92,4 @@ def _restructure_tables(alphabet_tables: Strs2) -> Alphabets:
 
 
 def get_alphabet(multiple: bool = False) -> Alphabets:
-    return _struct_alphabet(*_get_table(multiple))
+    return _restructure_tables(_get_string_tables(_get_index_base(multiple)))
