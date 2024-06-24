@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 
-from pyspartaproj.context.default.integer_context import Ints, Ints2
+from pyspartaproj.context.default.integer_context import Ints
 from pyspartaproj.context.default.string_context import Strs, Strs2
 from pyspartaproj.context.typed.user_context import Alphabets
 
