@@ -82,5 +82,14 @@ def _merge_string_tables(indices: Ints, alphabet_tables: Strs2) -> Strs:
     return merged_table
 
 
+def _restructure_tables(alphabet_tables: Strs2) -> Alphabets:
+    return _struct_alphabet(
+        alphabet_tables[3],
+        alphabet_tables[5],
+        alphabet_tables[1],
+        _merge_string_tables([0, 2, 4, 6], alphabet_tables),
+    )
+
+
 def get_alphabet(multiple: bool = False) -> Alphabets:
     return _struct_alphabet(*_get_table(multiple))
