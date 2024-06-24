@@ -73,5 +73,14 @@ def _get_index_base(multiple: bool) -> int:
     return index_base
 
 
+def _merge_string_tables(indices: Ints, alphabet_tables: Strs2) -> Strs:
+    merged_table: Strs = []
+
+    for index in indices:
+        merged_table += alphabet_tables[index]
+
+    return merged_table
+
+
 def get_alphabet(multiple: bool = False) -> Alphabets:
     return _struct_alphabet(*_get_table(multiple))
