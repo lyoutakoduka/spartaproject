@@ -55,6 +55,10 @@ def _merge_string_tables(indices: Ints, alphabet_tables: Strs2) -> Strs:
     return merged_table
 
 
+def _get_special_tables(multiple: bool) -> Strs:
+    return ["\u3000" if multiple else " "]
+
+
 def _restructure_tables(alphabet_tables: Strs2) -> Alphabets:
     return _struct_alphabet(
         alphabet_tables[3],
