@@ -29,7 +29,7 @@ def _get_indices_begin(indices_span: Ints) -> Ints:
 
 
 def _get_string_tables(index_base: int) -> Strs2:
-    indices_span: Ints = [16, 10, 7, 26, 6, 26, 4]
+    indices_span: Ints = [15, 10, 7, 26, 6, 26, 4]
 
     return [
         _get_string_table(begin + index_base, span)
@@ -38,7 +38,7 @@ def _get_string_tables(index_base: int) -> Strs2:
 
 
 def _get_index_base(multiple: bool) -> int:
-    index_base: int = 32
+    index_base: int = 33
 
     if multiple:
         index_base += 65248
