@@ -59,12 +59,16 @@ def _get_special_tables(multiple: bool) -> Strs:
     return ["\u3000" if multiple else " "]
 
 
+def _get_other_table(alphabet_tables: Strs2) -> Strs:
+    return _merge_string_tables([0, 2, 4, 6], alphabet_tables)
+
+
 def _restructure_tables(alphabet_tables: Strs2) -> Alphabets:
     return _struct_alphabet(
         alphabet_tables[3],
         alphabet_tables[5],
         alphabet_tables[1],
-        _merge_string_tables([0, 2, 4, 6], alphabet_tables),
+        _get_other_table(alphabet_tables),
     )
 
 
