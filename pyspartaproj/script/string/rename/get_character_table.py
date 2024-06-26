@@ -8,6 +8,17 @@ from pyspartaproj.context.typed.user_context import CharacterTable
 
 
 class GroupedCharacters:
+    def _get_index_base(self, multiple: bool) -> int:
+        index_base: int = 33
+
+        if multiple:
+            index_base += 65248
+
+        return index_base
+
+    def _get_special_tables(self, multiple: bool) -> Strs:
+        return ["\u3000" if multiple else " "]
+
     def _initialize_variables(self, multiple: bool) -> None:
         self._index_base: int = self._get_index_base(multiple)
         self._special_tables: Strs = self._get_special_tables(multiple)
@@ -40,14 +51,6 @@ class GroupedCharacters:
             )
         ]
 
-    def _get_index_base(self, multiple: bool) -> int:
-        index_base: int = 33
-
-        if multiple:
-            index_base += 65248
-
-        return index_base
-
     def _merge_string_tables(
         self, indices: Ints, character_tables: Strs2
     ) -> Strs:
@@ -57,9 +60,6 @@ class GroupedCharacters:
             merged_table += character_tables[index]
 
         return merged_table
-
-    def _get_special_tables(self, multiple: bool) -> Strs:
-        return ["\u3000" if multiple else " "]
 
     def _get_other_table(self, character_tables: Strs2) -> Strs:
         return self._merge_string_tables([0, 2, 4, 6], character_tables)
