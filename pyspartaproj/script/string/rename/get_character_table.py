@@ -30,9 +30,9 @@ class GroupedCharacters:
         indices_span: Ints = [15, 10, 7, 26, 6, 26, 4]
 
         return [
-            _create_character_table(begin + index_base, span)
+            self._create_character_table(begin + index_base, span)
             for begin, span in zip(
-                _get_indices_begin(indices_span), indices_span
+                self._get_indices_begin(indices_span), indices_span
             )
         ]
 
@@ -58,20 +58,20 @@ class GroupedCharacters:
         return ["\u3000" if multiple else " "]
 
     def _get_other_table(self, character_tables: Strs2) -> Strs:
-        return _merge_string_tables([0, 2, 4, 6], character_tables)
+        return self._merge_string_tables([0, 2, 4, 6], character_tables)
 
     def _restructure_tables(
         self, special_tables: Strs, character_tables: Strs2
     ) -> CharacterTable:
-        return _struct_character_table(
+        return self._struct_character_table(
             character_tables[3],
             character_tables[5],
             character_tables[1],
-            special_tables + _get_other_table(character_tables),
+            special_tables + self._get_other_table(character_tables),
         )
 
     def get_character_table(self, multiple: bool = False) -> CharacterTable:
-        return _restructure_tables(
-            _get_special_tables(multiple),
-            _create_character_tables(_get_index_base(multiple)),
+        return self._restructure_tables(
+            self._get_special_tables(multiple),
+            self._create_character_tables(self._get_index_base(multiple)),
         )
