@@ -74,3 +74,6 @@ class GroupedCharacters:
 
     def get_table(self) -> CharacterTable:
         return self._restructure_tables(self._create_character_tables())
+
+    def __init__(self, multiple: bool = False) -> None:
+        self._initialize_variables(multiple)
