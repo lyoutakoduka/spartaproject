@@ -13,7 +13,7 @@ def _struct_character_table(
     return {"big": big, "small": small, "number": number, "other": other}
 
 
-def _get_string_table(index: int, span: int) -> Strs:
+def _create_character_table(index: int, span: int) -> Strs:
     return [chr(index + i) for i in range(span)]
 
 
@@ -32,7 +32,7 @@ def _get_string_tables(index_base: int) -> Strs2:
     indices_span: Ints = [15, 10, 7, 26, 6, 26, 4]
 
     return [
-        _get_string_table(begin + index_base, span)
+        _create_character_table(begin + index_base, span)
         for begin, span in zip(_get_indices_begin(indices_span), indices_span)
     ]
 
