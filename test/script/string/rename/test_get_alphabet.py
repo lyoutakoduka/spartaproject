@@ -35,3 +35,15 @@ def test_single() -> None:
     _common_test(
         [["A", "Z"], ["a", "z"], ["0", "9"], [" ", "~"]], get_alphabet()
     )
+
+
+def test_multiple() -> None:
+    _common_test(
+        [
+            ["\uff21", "\uff3a"],
+            ["\uff41", "\uff5a"],
+            ["\uff10", "\uff19"],
+            ["\u3000", "\uff5e"],
+        ],
+        get_alphabet(multiple=True),
+    )
