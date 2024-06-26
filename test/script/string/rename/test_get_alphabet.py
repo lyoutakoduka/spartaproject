@@ -3,7 +3,7 @@
 
 from pyspartaproj.context.default.string_context import Strs2
 from pyspartaproj.context.typed.user_context import CharacterTable
-from pyspartaproj.script.string.rename.get_alphabet import get_alphabet
+from pyspartaproj.script.string.rename.get_character_table import get_alphabet
 
 
 def _compare_counts(tables: Strs2) -> None:
