@@ -32,7 +32,7 @@ class BaseName(TypedDict):
 
 
 class Alphabets(TypedDict):
-    """Class to represent 3 types list about alphabet.
+    """Class to represent 3 types list about alphabets and numbers, and others.
 
     It's used for renaming file or e-mail addresses.
     """
