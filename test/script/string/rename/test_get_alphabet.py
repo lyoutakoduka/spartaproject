@@ -19,3 +19,12 @@ def _compare_size(result: Alphabets) -> None:
 
 def _get_tables(result: Alphabets) -> Strs2:
     return [result["big"], result["small"], result["number"], result["other"]]
+
+
+def _common_test(expected: Strs2, result: Alphabets) -> None:
+    _compare_size(result)
+
+    tables: Strs2 = _get_tables(result)
+
+    _compare_counts(tables)
+    _compare_filtered(expected, tables)
