@@ -4,12 +4,12 @@
 
 from pyspartaproj.context.default.integer_context import Ints
 from pyspartaproj.context.default.string_context import Strs, Strs2
-from pyspartaproj.context.typed.user_context import Alphabets
+from pyspartaproj.context.typed.user_context import CharacterTable
 
 
 def _struct_alphabet(
     big: Strs, small: Strs, number: Strs, other: Strs
-) -> Alphabets:
+) -> CharacterTable:
     return {"big": big, "small": small, "number": number, "other": other}
 
 
@@ -65,7 +65,7 @@ def _get_other_table(alphabet_tables: Strs2) -> Strs:
 
 def _restructure_tables(
     special_tables: Strs, alphabet_tables: Strs2
-) -> Alphabets:
+) -> CharacterTable:
     return _struct_alphabet(
         alphabet_tables[3],
         alphabet_tables[5],
@@ -74,7 +74,7 @@ def _restructure_tables(
     )
 
 
-def get_alphabet(multiple: bool = False) -> Alphabets:
+def get_alphabet(multiple: bool = False) -> CharacterTable:
     return _restructure_tables(
         _get_special_tables(multiple),
         _get_string_tables(_get_index_base(multiple)),

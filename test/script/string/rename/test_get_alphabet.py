@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from pyspartaproj.context.default.string_context import Strs2
-from pyspartaproj.context.typed.user_context import Alphabets
+from pyspartaproj.context.typed.user_context import CharacterTable
 from pyspartaproj.script.string.rename.get_alphabet import get_alphabet
 
 
@@ -14,15 +14,15 @@ def _compare_filtered(expected: Strs2, tables: Strs2) -> None:
     assert expected == [[table[-i] for i in range(2)] for table in tables]
 
 
-def _compare_size(result: Alphabets) -> None:
+def _compare_size(result: CharacterTable) -> None:
     assert 4 == len(result)
 
 
-def _get_tables(result: Alphabets) -> Strs2:
+def _get_tables(result: CharacterTable) -> Strs2:
     return [result["big"], result["small"], result["number"], result["other"]]
 
 
-def _common_test(expected: Strs2, result: Alphabets) -> None:
+def _common_test(expected: Strs2, result: CharacterTable) -> None:
     _compare_size(result)
 
     tables: Strs2 = _get_tables(result)
