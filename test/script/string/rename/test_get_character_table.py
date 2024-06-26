@@ -3,7 +3,9 @@
 
 from pyspartaproj.context.default.string_context import Strs2
 from pyspartaproj.context.typed.user_context import CharacterTable
-from pyspartaproj.script.string.rename.get_character_table import get_alphabet
+from pyspartaproj.script.string.rename.get_character_table import (
+    get_character_table,
+)
 
 
 def _compare_counts(tables: Strs2) -> None:
@@ -33,7 +35,7 @@ def _common_test(expected: Strs2, result: CharacterTable) -> None:
 
 def test_single() -> None:
     _common_test(
-        [["A", "Z"], ["a", "z"], ["0", "9"], [" ", "~"]], get_alphabet()
+        [["A", "Z"], ["a", "z"], ["0", "9"], [" ", "~"]], get_character_table()
     )
 
 
@@ -45,5 +47,5 @@ def test_multiple() -> None:
             ["\uff10", "\uff19"],
             ["\u3000", "\uff5e"],
         ],
-        get_alphabet(multiple=True),
+        get_character_table(multiple=True),
     )
