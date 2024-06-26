@@ -41,11 +41,11 @@ class GroupedCharacters:
 
         return indices_begin
 
-    def _create_character_tables(self, index_base: int) -> Strs2:
+    def _create_character_tables(self) -> Strs2:
         indices_span: Ints = [15, 10, 7, 26, 6, 26, 4]
 
         return [
-            self._create_character_table(begin + index_base, span)
+            self._create_character_table(begin + self._index_base, span)
             for begin, span in zip(
                 self._get_indices_begin(indices_span), indices_span
             )
@@ -73,6 +73,4 @@ class GroupedCharacters:
         )
 
     def get_character_table(self, multiple: bool = False) -> CharacterTable:
-        return self._restructure_tables(
-            self._create_character_tables(self._get_index_base(multiple))
-        )
+        return self._restructure_tables(self._create_character_tables())
