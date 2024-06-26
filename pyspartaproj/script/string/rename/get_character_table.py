@@ -72,5 +72,5 @@ class GroupedCharacters:
             self._special_tables + self._get_other_table(character_tables),
         )
 
-    def get_character_table(self) -> CharacterTable:
+    def get_table(self) -> CharacterTable:
         return self._restructure_tables(self._create_character_tables())
