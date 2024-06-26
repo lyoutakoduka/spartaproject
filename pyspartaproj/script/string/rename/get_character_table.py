@@ -8,6 +8,10 @@ from pyspartaproj.context.typed.user_context import CharacterTable
 
 
 class GroupedCharacters:
+    def _initialize_variables(self, multiple: bool) -> None:
+        self._index_base: int = self._get_index_base(multiple)
+        self._special_tables: Strs = self._get_special_tables(multiple)
+
     def _struct_character_table(
         self, big: Strs, small: Strs, number: Strs, other: Strs
     ) -> CharacterTable:
