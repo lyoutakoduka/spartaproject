@@ -3,6 +3,7 @@
 
 from pyspartaproj.context.default.string_context import Strs2
 from pyspartaproj.context.typed.user_context import Alphabets
+from pyspartaproj.script.string.rename.get_alphabet import get_alphabet
 
 
 def _compare_counts(tables: Strs2) -> None:
@@ -28,3 +29,9 @@ def _common_test(expected: Strs2, result: Alphabets) -> None:
 
     _compare_counts(tables)
     _compare_filtered(expected, tables)
+
+
+def test_single() -> None:
+    _common_test(
+        [["A", "Z"], ["a", "z"], ["0", "9"], [" ", "~"]], get_alphabet()
+    )
