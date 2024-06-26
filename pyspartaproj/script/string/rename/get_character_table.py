@@ -46,11 +46,11 @@ def _get_index_base(multiple: bool) -> int:
     return index_base
 
 
-def _merge_string_tables(indices: Ints, alphabet_tables: Strs2) -> Strs:
+def _merge_string_tables(indices: Ints, character_tables: Strs2) -> Strs:
     merged_table: Strs = []
 
     for index in indices:
-        merged_table += alphabet_tables[index]
+        merged_table += character_tables[index]
 
     return merged_table
 
@@ -59,18 +59,18 @@ def _get_special_tables(multiple: bool) -> Strs:
     return ["\u3000" if multiple else " "]
 
 
-def _get_other_table(alphabet_tables: Strs2) -> Strs:
-    return _merge_string_tables([0, 2, 4, 6], alphabet_tables)
+def _get_other_table(character_tables: Strs2) -> Strs:
+    return _merge_string_tables([0, 2, 4, 6], character_tables)
 
 
 def _restructure_tables(
-    special_tables: Strs, alphabet_tables: Strs2
+    special_tables: Strs, character_tables: Strs2
 ) -> CharacterTable:
     return _struct_character_table(
-        alphabet_tables[3],
-        alphabet_tables[5],
-        alphabet_tables[1],
-        special_tables + _get_other_table(alphabet_tables),
+        character_tables[3],
+        character_tables[5],
+        character_tables[1],
+        special_tables + _get_other_table(character_tables),
     )
 
 
