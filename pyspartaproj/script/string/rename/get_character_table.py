@@ -28,7 +28,7 @@ def _get_indices_begin(indices_span: Ints) -> Ints:
     return indices_begin
 
 
-def _get_string_tables(index_base: int) -> Strs2:
+def _create_character_tables(index_base: int) -> Strs2:
     indices_span: Ints = [15, 10, 7, 26, 6, 26, 4]
 
     return [
@@ -77,5 +77,5 @@ def _restructure_tables(
 def get_character_table(multiple: bool = False) -> CharacterTable:
     return _restructure_tables(
         _get_special_tables(multiple),
-        _get_string_tables(_get_index_base(multiple)),
+        _create_character_tables(_get_index_base(multiple)),
     )
