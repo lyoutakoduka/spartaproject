@@ -74,7 +74,7 @@ def _restructure_tables(
     )
 
 
-def get_alphabet(multiple: bool = False) -> CharacterTable:
+def get_character_table(multiple: bool = False) -> CharacterTable:
     return _restructure_tables(
         _get_special_tables(multiple),
         _get_string_tables(_get_index_base(multiple)),
