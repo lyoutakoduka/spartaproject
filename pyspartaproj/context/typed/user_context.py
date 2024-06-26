@@ -31,7 +31,7 @@ class BaseName(TypedDict):
     index: int
 
 
-class Alphabets(TypedDict):
+class CharacterTable(TypedDict):
     """Class to represent 3 types list about alphabets and numbers, and others.
 
     It's used for renaming file or e-mail addresses.
