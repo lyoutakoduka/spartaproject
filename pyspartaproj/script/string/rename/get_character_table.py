@@ -9,14 +9,14 @@ from pyspartaproj.context.typed.user_context import CharacterTable
 
 class GroupedCharacters:
     def _struct_character_table(
-        big: Strs, small: Strs, number: Strs, other: Strs
+        self, big: Strs, small: Strs, number: Strs, other: Strs
     ) -> CharacterTable:
         return {"big": big, "small": small, "number": number, "other": other}
 
-    def _create_character_table(index: int, span: int) -> Strs:
+    def _create_character_table(self, index: int, span: int) -> Strs:
         return [chr(index + i) for i in range(span)]
 
-    def _get_indices_begin(indices_span: Ints) -> Ints:
+    def _get_indices_begin(self, indices_span: Ints) -> Ints:
         indices_begin: Ints = []
         index_begin: int = 0
 
@@ -26,7 +26,7 @@ class GroupedCharacters:
 
         return indices_begin
 
-    def _create_character_tables(index_base: int) -> Strs2:
+    def _create_character_tables(self, index_base: int) -> Strs2:
         indices_span: Ints = [15, 10, 7, 26, 6, 26, 4]
 
         return [
@@ -36,7 +36,7 @@ class GroupedCharacters:
             )
         ]
 
-    def _get_index_base(multiple: bool) -> int:
+    def _get_index_base(self, multiple: bool) -> int:
         index_base: int = 33
 
         if multiple:
@@ -44,7 +44,9 @@ class GroupedCharacters:
 
         return index_base
 
-    def _merge_string_tables(indices: Ints, character_tables: Strs2) -> Strs:
+    def _merge_string_tables(
+        self, indices: Ints, character_tables: Strs2
+    ) -> Strs:
         merged_table: Strs = []
 
         for index in indices:
@@ -52,14 +54,14 @@ class GroupedCharacters:
 
         return merged_table
 
-    def _get_special_tables(multiple: bool) -> Strs:
+    def _get_special_tables(self, multiple: bool) -> Strs:
         return ["\u3000" if multiple else " "]
 
-    def _get_other_table(character_tables: Strs2) -> Strs:
+    def _get_other_table(self, character_tables: Strs2) -> Strs:
         return _merge_string_tables([0, 2, 4, 6], character_tables)
 
     def _restructure_tables(
-        special_tables: Strs, character_tables: Strs2
+        self, special_tables: Strs, character_tables: Strs2
     ) -> CharacterTable:
         return _struct_character_table(
             character_tables[3],
@@ -68,7 +70,7 @@ class GroupedCharacters:
             special_tables + _get_other_table(character_tables),
         )
 
-    def get_character_table(multiple: bool = False) -> CharacterTable:
+    def get_character_table(self, multiple: bool = False) -> CharacterTable:
         return _restructure_tables(
             _get_special_tables(multiple),
             _create_character_tables(_get_index_base(multiple)),
