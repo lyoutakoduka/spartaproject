@@ -64,18 +64,15 @@ class GroupedCharacters:
     def _get_other_table(self, character_tables: Strs2) -> Strs:
         return self._merge_string_tables([0, 2, 4, 6], character_tables)
 
-    def _restructure_tables(
-        self, special_tables: Strs, character_tables: Strs2
-    ) -> CharacterTable:
+    def _restructure_tables(self, character_tables: Strs2) -> CharacterTable:
         return self._struct_character_table(
             character_tables[3],
             character_tables[5],
             character_tables[1],
-            special_tables + self._get_other_table(character_tables),
+            self._special_tables + self._get_other_table(character_tables),
         )
 
     def get_character_table(self, multiple: bool = False) -> CharacterTable:
         return self._restructure_tables(
-            self._get_special_tables(multiple),
-            self._create_character_tables(self._get_index_base(multiple)),
+            self._create_character_tables(self._get_index_base(multiple))
         )
