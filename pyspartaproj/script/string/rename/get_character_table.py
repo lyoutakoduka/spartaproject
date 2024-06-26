@@ -7,75 +7,69 @@ from pyspartaproj.context.default.string_context import Strs, Strs2
 from pyspartaproj.context.typed.user_context import CharacterTable
 
 
-def _struct_character_table(
-    big: Strs, small: Strs, number: Strs, other: Strs
-) -> CharacterTable:
-    return {"big": big, "small": small, "number": number, "other": other}
+class GroupedCharacters:
+    def _struct_character_table(
+        big: Strs, small: Strs, number: Strs, other: Strs
+    ) -> CharacterTable:
+        return {"big": big, "small": small, "number": number, "other": other}
 
+    def _create_character_table(index: int, span: int) -> Strs:
+        return [chr(index + i) for i in range(span)]
 
-def _create_character_table(index: int, span: int) -> Strs:
-    return [chr(index + i) for i in range(span)]
+    def _get_indices_begin(indices_span: Ints) -> Ints:
+        indices_begin: Ints = []
+        index_begin: int = 0
 
+        for i in range(len(indices_span)):
+            index_begin += 0 if 0 == i else indices_span[i - 1]
+            indices_begin += [index_begin]
 
-def _get_indices_begin(indices_span: Ints) -> Ints:
-    indices_begin: Ints = []
-    index_begin: int = 0
+        return indices_begin
 
-    for i in range(len(indices_span)):
-        index_begin += 0 if 0 == i else indices_span[i - 1]
-        indices_begin += [index_begin]
+    def _create_character_tables(index_base: int) -> Strs2:
+        indices_span: Ints = [15, 10, 7, 26, 6, 26, 4]
 
-    return indices_begin
+        return [
+            _create_character_table(begin + index_base, span)
+            for begin, span in zip(
+                _get_indices_begin(indices_span), indices_span
+            )
+        ]
 
+    def _get_index_base(multiple: bool) -> int:
+        index_base: int = 33
 
-def _create_character_tables(index_base: int) -> Strs2:
-    indices_span: Ints = [15, 10, 7, 26, 6, 26, 4]
+        if multiple:
+            index_base += 65248
 
-    return [
-        _create_character_table(begin + index_base, span)
-        for begin, span in zip(_get_indices_begin(indices_span), indices_span)
-    ]
+        return index_base
 
+    def _merge_string_tables(indices: Ints, character_tables: Strs2) -> Strs:
+        merged_table: Strs = []
 
-def _get_index_base(multiple: bool) -> int:
-    index_base: int = 33
+        for index in indices:
+            merged_table += character_tables[index]
 
-    if multiple:
-        index_base += 65248
+        return merged_table
 
-    return index_base
+    def _get_special_tables(multiple: bool) -> Strs:
+        return ["\u3000" if multiple else " "]
 
+    def _get_other_table(character_tables: Strs2) -> Strs:
+        return _merge_string_tables([0, 2, 4, 6], character_tables)
 
-def _merge_string_tables(indices: Ints, character_tables: Strs2) -> Strs:
-    merged_table: Strs = []
+    def _restructure_tables(
+        special_tables: Strs, character_tables: Strs2
+    ) -> CharacterTable:
+        return _struct_character_table(
+            character_tables[3],
+            character_tables[5],
+            character_tables[1],
+            special_tables + _get_other_table(character_tables),
+        )
 
-    for index in indices:
-        merged_table += character_tables[index]
-
-    return merged_table
-
-
-def _get_special_tables(multiple: bool) -> Strs:
-    return ["\u3000" if multiple else " "]
-
-
-def _get_other_table(character_tables: Strs2) -> Strs:
-    return _merge_string_tables([0, 2, 4, 6], character_tables)
-
-
-def _restructure_tables(
-    special_tables: Strs, character_tables: Strs2
-) -> CharacterTable:
-    return _struct_character_table(
-        character_tables[3],
-        character_tables[5],
-        character_tables[1],
-        special_tables + _get_other_table(character_tables),
-    )
-
-
-def get_character_table(multiple: bool = False) -> CharacterTable:
-    return _restructure_tables(
-        _get_special_tables(multiple),
-        _create_character_tables(_get_index_base(multiple)),
-    )
+    def get_character_table(multiple: bool = False) -> CharacterTable:
+        return _restructure_tables(
+            _get_special_tables(multiple),
+            _create_character_tables(_get_index_base(multiple)),
+        )
