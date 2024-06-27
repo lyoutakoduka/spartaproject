@@ -20,8 +20,8 @@ def _compare_size(result: CharacterTable) -> None:
     assert 4 == len(result)
 
 
-def _get_tables(result: CharacterTable) -> Strs2:
-    return [result["big"], result["small"], result["number"], result["other"]]
+def _get_tables(table: CharacterTable) -> Strs2:
+    return [table["big"], table["small"], table["number"], table["other"]]
 
 
 def _common_test(expected: Strs2, result: CharacterTable) -> None:
