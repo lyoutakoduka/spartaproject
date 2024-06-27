@@ -3,7 +3,7 @@
 
 from pyspartaproj.context.default.string_context import Strs2
 from pyspartaproj.context.typed.user_context import CharacterTable
-from pyspartaproj.script.string.rename.get_character_table import (
+from pyspartaproj.script.string.rename.grouped_characters import (
     GroupedCharacters,
 )
 
