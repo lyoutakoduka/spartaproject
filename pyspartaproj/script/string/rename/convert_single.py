@@ -3,10 +3,8 @@
 
 """Module to convert multiple byte characters to single byte characters."""
 
-from pyspartaproj.context.default.integer_context import Ints, Ints3
 from pyspartaproj.context.default.string_context import (
     StrPair,
-    Strs,
     Strs2,
     Strs3,
     Trans,
