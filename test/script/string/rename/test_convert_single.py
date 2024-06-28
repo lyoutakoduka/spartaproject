@@ -51,6 +51,7 @@ def test_number() -> None:
 
 
 def test_other() -> None:
+    """Test to convert character other than alphabet and number."""
     text: str = "\uff5e"
     expected: str = "~"
 
