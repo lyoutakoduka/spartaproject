@@ -8,9 +8,13 @@ from pyspartaproj.context.default.string_context import (
     StrPair,
     Strs,
     Strs2,
+    Strs3,
     Trans,
 )
 from pyspartaproj.context.typed.user_context import CharacterTable
+from pyspartaproj.script.string.rename.grouped_characters import (
+    GroupedCharacters,
+)
 
 
 class ConvertSingle:
@@ -46,6 +50,14 @@ class ConvertSingle:
 
     def _get_merged_tables(self, table: CharacterTable) -> Strs2:
         return [table["big"], table["small"], table["number"], table["other"]]
+
+    def _get_tables_pair(self) -> Strs3:
+        return [
+            self._get_merged_tables(
+                GroupedCharacters(multiple=(0 == i)).get_table()
+            )
+            for i in range(2)
+        ]
 
     def convert(self, text: str) -> str:
         """Convert multiple byte characters to single byte characters.
