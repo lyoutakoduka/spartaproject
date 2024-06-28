@@ -75,9 +75,8 @@ class ConvertSingle:
         Returns:
             str: Converted single byte characters.
         """
-        translated: Trans = str.maketrans(  # Type Trans is necessary.
-            self._get_translate_table(
-                self._fill_hex_tables(self._get_hex_tables())
-            )
+        # Type Trans is necessary.
+        translated: Trans = str.maketrans(
+            self._get_link_table(self._get_tables_pair())
         )
         return text.translate(translated)
