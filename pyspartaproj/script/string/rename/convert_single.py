@@ -4,7 +4,13 @@
 """Module to convert multiple byte characters to single byte characters."""
 
 from pyspartaproj.context.default.integer_context import Ints, Ints3
-from pyspartaproj.context.default.string_context import StrPair, Strs, Trans
+from pyspartaproj.context.default.string_context import (
+    StrPair,
+    Strs,
+    Strs2,
+    Trans,
+)
+from pyspartaproj.context.typed.user_context import CharacterTable
 
 
 class ConvertSingle:
@@ -37,6 +43,9 @@ class ConvertSingle:
                 for numbers in zip(filled_table[0], filled_table[1])
             ]
         )
+
+    def _get_merged_tables(self, table: CharacterTable) -> Strs2:
+        return [table["big"], table["small"], table["number"], table["other"]]
 
     def convert(self, text: str) -> str:
         """Convert multiple byte characters to single byte characters.
