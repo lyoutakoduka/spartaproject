@@ -48,3 +48,10 @@ def test_number() -> None:
     expected: str = "0"
 
     _common_test(expected, text)
+
+
+def test_other() -> None:
+    text: str = "\uff5e"
+    expected: str = "~"
+
+    _common_test(expected, text)
