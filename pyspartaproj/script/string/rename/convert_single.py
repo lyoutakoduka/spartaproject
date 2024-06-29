@@ -36,9 +36,11 @@ class ConvertSingle:
 
     def _get_link_table(self, tables_pair: Strs3) -> StrPair:
         return {
-            big: small
-            for big_table, small_table in zip(tables_pair[0], tables_pair[1])
-            for big, small in zip(big_table, small_table)
+            multiple: small
+            for multiple_table, small_table in zip(
+                tables_pair[0], tables_pair[1]
+            )
+            for multiple, small in zip(multiple_table, small_table)
         }
 
     def convert(self, text: str) -> str:
