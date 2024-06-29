@@ -1,7 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Module to convert multiple byte characters to single byte characters."""
+"""Module to convert multiple byte characters.
+
+There are converted to single byte same characters in Ascii table.
+"""
 
 from pyspartaproj.context.default.string_context import (
     StrPair,
@@ -16,7 +19,10 @@ from pyspartaproj.script.string.rename.grouped_characters import (
 
 
 class ConvertSingle:
-    """Class to convert multiple byte characters to single byte."""
+    """Class to convert multiple byte characters.
+
+    There are converted to single byte same characters in Ascii table.
+    """
 
     def _get_merged_tables(self, table: CharacterTable) -> Strs2:
         return [
@@ -44,7 +50,7 @@ class ConvertSingle:
         }
 
     def convert(self, text: str) -> str:
-        """Convert multiple byte characters to single byte characters.
+        """Convert multiple byte characters to same single byte characters.
 
         Args:
             text (str): String which might include multiple byte characters.
