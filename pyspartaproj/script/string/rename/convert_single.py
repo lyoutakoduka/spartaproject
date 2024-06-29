@@ -19,7 +19,12 @@ class ConvertSingle:
     """Class to convert multiple byte characters to single byte."""
 
     def _get_merged_tables(self, table: CharacterTable) -> Strs2:
-        return [table["big"], table["small"], table["number"], table["other"]]
+        return [
+            table["upper"],
+            table["lower"],
+            table["number"],
+            table["other"],
+        ]
 
     def _get_tables_pair(self) -> Strs3:
         return [
