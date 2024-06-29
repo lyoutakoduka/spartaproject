@@ -21,7 +21,7 @@ def _compare_size(result: CharacterTable) -> None:
 
 
 def _get_tables(table: CharacterTable) -> Strs2:
-    return [table["big"], table["small"], table["number"], table["other"]]
+    return [table["upper"], table["lower"], table["number"], table["other"]]
 
 
 def _common_test(expected: Strs2, result: CharacterTable) -> None:
