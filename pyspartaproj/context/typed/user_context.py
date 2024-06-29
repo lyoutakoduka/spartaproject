@@ -37,7 +37,7 @@ class CharacterTable(TypedDict):
     It's used for renaming file or e-mail addresses.
     """
 
-    big: Strs
-    small: Strs
+    upper: Strs
+    lower: Strs
     number: Strs
     other: Strs
