@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test Module to get characters constructed by multiple or single byte."""
+
 from pyspartaproj.context.default.string_context import Strs2
 from pyspartaproj.context.typed.user_context import CharacterTable
 from pyspartaproj.script.string.rename.grouped_characters import (
@@ -34,6 +36,7 @@ def _common_test(expected: Strs2, result: CharacterTable) -> None:
 
 
 def test_single() -> None:
+    """Test to get characters constructed by single byte."""
     _common_test(
         [["A", "Z"], ["a", "z"], ["0", "9"], [" ", "~"]],
         GroupedCharacters().get_table(),
@@ -41,6 +44,7 @@ def test_single() -> None:
 
 
 def test_multiple() -> None:
+    """Test to get characters constructed by multiple byte."""
     _common_test(
         [
             ["\uff21", "\uff3a"],
