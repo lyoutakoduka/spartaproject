@@ -6,6 +6,7 @@
 from pathlib import Path
 from typing import TypedDict
 
+from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.extension.path_context import Paths
 
 
@@ -28,3 +29,15 @@ class BaseName(TypedDict):
 
     name: str
     index: int
+
+
+class CharacterTable(TypedDict):
+    """Class to represent 3 types list about alphabets and numbers, and others.
+
+    It's used for renaming file or e-mail addresses.
+    """
+
+    upper: Strs
+    lower: Strs
+    number: Strs
+    other: Strs

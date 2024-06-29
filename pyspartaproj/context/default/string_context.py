@@ -15,3 +15,4 @@ StrPair2 = Dict[str, StrPair]
 Strs2 = List[Strs]
 
 StrGene = Generator[str, None, None]
+Strs3 = List[Strs2]
