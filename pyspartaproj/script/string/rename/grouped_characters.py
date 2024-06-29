@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Module to get character tables constructed by multiple or single byte."""
 
 from pyspartaproj.context.default.integer_context import Ints
 from pyspartaproj.context.default.string_context import Strs, Strs2
@@ -8,6 +9,8 @@ from pyspartaproj.context.typed.user_context import CharacterTable
 
 
 class GroupedCharacters:
+    """Class to get character tables constructed by multiple or single byte."""
+
     def _get_index_base(self, multiple: bool) -> int:
         index_base: int = 33
 
@@ -73,7 +76,34 @@ class GroupedCharacters:
         )
 
     def get_table(self) -> CharacterTable:
+        """Get character tables constructed by multiple or single byte.
+
+        The character tables include following 4 types characters.
+
+        1. Upper case letters: "A" - "Z"
+
+        2. Lower case letters: "a" - "z"
+
+        3. Numbers: "0" - "9"
+
+        4. Other characters: e.g., " ", "!", and "~".
+            Characters other than upper and lower case letters
+                and numbers in Ascii table.
+
+        If tables including multiple byte character is returned,
+            there are selected from Unicode table corresponds to Ascii table.
+
+        Returns:
+            CharacterTable: Character tables.
+        """
         return self._restructure_tables(self._create_character_tables())
 
     def __init__(self, multiple: bool = False) -> None:
+        """Initialize variables in class.
+
+        Args:
+            multiple (bool, optional): Defaults to False.
+                Set True if character tables you want to get are
+                    constructed by multiple byte.
+        """
         self._initialize_variables(multiple)
