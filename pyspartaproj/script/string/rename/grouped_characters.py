@@ -29,7 +29,7 @@ class GroupedCharacters:
     def _struct_character_table(
         self, big: Strs, small: Strs, number: Strs, other: Strs
     ) -> CharacterTable:
-        return {"big": big, "small": small, "number": number, "other": other}
+        return {"upper": big, "lower": small, "number": number, "other": other}
 
     def _create_character_table(self, index: int, span: int) -> Strs:
         return [chr(index + i) for i in range(span)]
