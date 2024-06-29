@@ -22,7 +22,7 @@ def test_error() -> None:
 
 
 def test_single() -> None:
-    """Test to convert multiple byte character."""
+    """Test to convert upper case letter."""
     text: str = "\uff21"
     expected: str = "A"
 
@@ -38,7 +38,7 @@ def test_array() -> None:
 
 
 def test_small() -> None:
-    """Test to convert small letter."""
+    """Test to convert lower case letter."""
     text: str = "\uff41"
     expected: str = "a"
 
