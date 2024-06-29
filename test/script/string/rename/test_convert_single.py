@@ -1,7 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Test module to convert multiple byte characters to single byte."""
+"""Test module to convert multiple byte characters.
+
+There are converted to single byte same characters in Ascii table.
+"""
 
 from pyspartaproj.script.string.rename.convert_single import ConvertSingle
 
@@ -19,7 +22,7 @@ def test_error() -> None:
 
 
 def test_single() -> None:
-    """Test to convert multiple byte character to single byte character."""
+    """Test to convert multiple byte character."""
     text: str = "\uff21"
     expected: str = "A"
 
@@ -27,7 +30,7 @@ def test_single() -> None:
 
 
 def test_array() -> None:
-    """Test to convert multiple byte characters to single byte characters."""
+    """Test to convert list of multiple byte character."""
     text: str = "\uff34\uff25\uff33\uff34"
     expected: str = "TEST"
 
