@@ -17,3 +17,9 @@ def test_path() -> None:
 def test_specific() -> None:
     identifier: str = "-"
     _compare_identifier(identifier, SplitIdentifier(identifier=identifier))
+
+
+def test_strip() -> None:
+    """Test to remove under bar of the both ends."""
+    expected: str = "test"
+    assert expected == SplitIdentifier().convert_strip("__" + expected + "__")
