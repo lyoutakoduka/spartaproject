@@ -12,5 +12,8 @@ class SplitIdentifier:
     def get_identifier(self) -> str:
         return self._identifier
 
+    def convert_strip(self, text: str) -> str:
+        return text.strip(self.get_identifier())
+
     def __init__(self, identifier: str | None = None) -> None:
         self._initialize_variables(identifier)
