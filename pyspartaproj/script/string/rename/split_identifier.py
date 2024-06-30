@@ -20,6 +20,9 @@ class SplitIdentifier:
 
         self._other_table: Strs = GroupedCharacters().get_table()["other"]
 
+    def _replace_other(self, single: str) -> str:
+        return self.get_identifier() if single in self._other_table else single
+
     def get_identifier(self) -> str:
         return self._identifier
 
