@@ -2,6 +2,12 @@
 # -*- coding: utf-8 -*-
 
 
+from pyspartaproj.context.default.string_context import Strs
+from pyspartaproj.script.string.rename.grouped_characters import (
+    GroupedCharacters,
+)
+
+
 class SplitIdentifier:
     def _initialize_identifier(self, identifier: str | None) -> None:
         if identifier is None:
@@ -11,6 +17,8 @@ class SplitIdentifier:
 
     def _initialize_variables(self, identifier: str | None) -> None:
         self._initialize_identifier(identifier)
+
+        self._other_table: Strs = GroupedCharacters().get_table()["other"]
 
     def get_identifier(self) -> str:
         return self._identifier
