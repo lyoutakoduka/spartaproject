@@ -29,5 +29,8 @@ class SplitIdentifier:
     def convert_strip(self, text: str) -> str:
         return text.strip(self.get_identifier())
 
+    def convert_under(self, text: str) -> str:
+        return "".join([self._replace_other(single) for single in text])
+
     def __init__(self, identifier: str | None = None) -> None:
         self._initialize_variables(identifier)
