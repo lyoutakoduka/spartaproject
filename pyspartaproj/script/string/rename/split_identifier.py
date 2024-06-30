@@ -3,11 +3,14 @@
 
 
 class SplitIdentifier:
-    def _initialize_variables(self, identifier: str | None) -> None:
+    def _initialize_identifier(self, identifier: str | None) -> None:
         if identifier is None:
             identifier = "_"
 
         self._identifier: str = identifier
+
+    def _initialize_variables(self, identifier: str | None) -> None:
+        self._initialize_identifier(identifier)
 
     def get_identifier(self) -> str:
         return self._identifier
