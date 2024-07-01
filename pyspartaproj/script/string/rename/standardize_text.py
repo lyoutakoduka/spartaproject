@@ -3,8 +3,10 @@
 
 """Module to standardize string for key of dictionary."""
 
+from pyspartaproj.script.string.rename.split_identifier import SplitIdentifier
 
-class StandardizeText:
+
+class StandardizeText(SplitIdentifier):
     def _convert_lower(self, text: str) -> str:
         return text.lower()
 
