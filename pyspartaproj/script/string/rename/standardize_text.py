@@ -27,3 +27,14 @@ class StandardizeText(SplitIdentifier):
             str: Standardize text.
         """
         return self.convert_strip(self.convert_under(_convert_lower(text)))
+
+    def __init__(
+        self,
+        identifier: str | None = None,
+        strip: bool = False,
+        under: bool = False,
+        lower: bool = False,
+    ) -> None:
+        super().__init__(identifier=identifier)
+
+        self._initialize_variables_standardize(strip, under, lower)
