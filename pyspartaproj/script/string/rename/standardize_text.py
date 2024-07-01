@@ -28,4 +28,4 @@ class StandardizeText(SplitIdentifier):
         Returns:
             str: Standardize text.
         """
-        return _convert_strip(_convert_under(_convert_lower(text)))
+        return self.convert_strip(self.convert_under(_convert_lower(text)))
