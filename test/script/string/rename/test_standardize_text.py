@@ -21,4 +21,4 @@ def test_under() -> None:
 
 def test_strip() -> None:
     """Test to remove under bar of the both ends."""
-    assert "test" == standardize_text("__test__")
+    assert "test" == StandardizeText(strip=True).standardize("__test__")
