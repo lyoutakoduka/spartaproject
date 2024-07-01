@@ -3,12 +3,12 @@
 
 """Test module to standardize string for key of dictionary."""
 
-from pyspartaproj.script.string.rename.standardize_text import standardize_text
+from pyspartaproj.script.string.rename.standardize_text import StandardizeText
 
 
 def test_lower() -> None:
     """Test to convert upper case string to lower case."""
-    assert "test" == standardize_text("TEST")
+    assert "test" == StandardizeText(lower=True).standardize("TEST")
 
 
 def test_under() -> None:
