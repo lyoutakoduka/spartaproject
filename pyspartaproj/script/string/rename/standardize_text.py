@@ -17,7 +17,7 @@ class StandardizeText(SplitIdentifier):
     def _convert_lower(self, text: str) -> str:
         return text.lower()
 
-    def standardize_text(self, text: str) -> str:
+    def standardize(self, text: str) -> str:
         """Function to standardize string for key of dictionary.
 
         Args:
