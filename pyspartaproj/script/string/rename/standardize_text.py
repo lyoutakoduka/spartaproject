@@ -26,7 +26,16 @@ class StandardizeText(SplitIdentifier):
         Returns:
             str: Standardize text.
         """
-        return self.convert_strip(self.convert_under(_convert_lower(text)))
+        if self._lower:
+            text = self._convert_lower(text)
+
+        if self._under:
+            text = self.convert_under(text)
+
+        if self._strip:
+            text = self.convert_strip(text)
+
+        return text
 
     def __init__(
         self,
