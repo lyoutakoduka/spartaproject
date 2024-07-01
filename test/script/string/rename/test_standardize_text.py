@@ -14,7 +14,7 @@ def test_lower() -> None:
 def test_under() -> None:
     """Test to convert some characters to under bar."""
     for identifier in [" ", ".", "-"]:
-        assert "test_name" == standardize_text(
+        assert "test_name" == StandardizeText(under=True).standardize(
             identifier.join(["test", "name"])
         )
 
