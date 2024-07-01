@@ -7,6 +7,13 @@ from pyspartaproj.script.string.rename.split_identifier import SplitIdentifier
 
 
 class StandardizeText(SplitIdentifier):
+    def _initialize_variables_standardize(
+        self, strip: bool, under: bool, lower: bool
+    ) -> None:
+        self._strip: bool = strip
+        self._under: bool = under
+        self._lower: bool = lower
+
     def _convert_lower(self, text: str) -> str:
         return text.lower()
 
