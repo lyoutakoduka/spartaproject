@@ -30,3 +30,11 @@ def test_under() -> None:
 def test_strip() -> None:
     """Test to remove under bar of the both ends."""
     _compare_text("test", "__test__", StandardizeText(strip=True))
+
+
+def test_all() -> None:
+    _compare_text(
+        "name_domain_com",
+        " name@domain.com ",
+        StandardizeText(lower=True, under=True, strip=True),
+    )
