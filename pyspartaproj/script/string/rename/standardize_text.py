@@ -7,6 +7,8 @@ from pyspartaproj.script.string.rename.split_identifier import SplitIdentifier
 
 
 class StandardizeText(SplitIdentifier):
+    """Class to standardize string for key of dictionary."""
+
     def _initialize_variables_standardize(
         self, strip: bool, under: bool, lower: bool
     ) -> None:
@@ -44,6 +46,25 @@ class StandardizeText(SplitIdentifier):
         under: bool = False,
         lower: bool = False,
     ) -> None:
+        """Initialize variables and super class.
+
+        Args:
+            identifier (str | None, optional): Defaults to None.
+                You can specify the split identifier by argument "identifier".
+                It's used for argument "identifier" of class "SplitIdentifier".
+
+            strip (bool, optional): Defaults to False.
+                Remove the split identifier of the both ends of string.
+                It's executed from class "SplitIdentifier".
+
+            under (bool, optional): Defaults to False.
+                Convert characters to the split identifier,
+                    candidates are characters other than alphabets and numbers.
+                It's executed from class "SplitIdentifier".
+
+            lower (bool, optional): Defaults to False.
+                Convert upper case letter to lower case letter.
+        """
         super().__init__(identifier=identifier)
 
         self._initialize_variables_standardize(strip, under, lower)
