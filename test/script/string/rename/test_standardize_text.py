@@ -18,6 +18,7 @@ def test_lower() -> None:
 
 
 def test_all() -> None:
+    """Test to convert string by using all conditions at once."""
     _compare_text(
         "name_domain_com",
         " name@domain.com ",
