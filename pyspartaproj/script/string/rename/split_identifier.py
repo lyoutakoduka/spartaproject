@@ -69,7 +69,7 @@ class SplitIdentifier:
 
         Args:
             identifier (str | None, optional): Defaults to None.
-            You can specify the split identifier by argument "identifier",
-                and default split identifier is character "_".
+                You can specify the split identifier by argument "identifier",
+                    and default split identifier is character "_".
         """
         self._initialize_variables(identifier)
