@@ -17,21 +17,6 @@ def test_lower() -> None:
     _compare_text("test", "TEST", StandardizeText(lower=True))
 
 
-def test_under() -> None:
-    """Test to convert some characters to under bar."""
-    for identifier in [" ", ".", "-"]:
-        _compare_text(
-            "test_name",
-            identifier.join(["test", "name"]),
-            StandardizeText(under=True),
-        )
-
-
-def test_strip() -> None:
-    """Test to remove under bar of the both ends."""
-    _compare_text("test", "__test__", StandardizeText(strip=True))
-
-
 def test_all() -> None:
     _compare_text(
         "name_domain_com",
