@@ -6,7 +6,9 @@
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.typed.user_context import BaseName
 from pyspartaproj.interface.pytest import fail
-from pyspartaproj.script.string.base_name_elements import BaseNameElements
+from pyspartaproj.script.string.rename.base_name_elements import (
+    BaseNameElements,
+)
 
 
 def _compare_name(name: str, base_name: BaseName) -> None:
