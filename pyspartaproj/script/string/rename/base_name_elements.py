@@ -9,7 +9,7 @@ from pyspartaproj.context.typed.user_context import BaseName
 from pyspartaproj.script.string.convert_type import convert_integer
 
 
-class BaseNameElements:
+class NameElements:
     """Class to take out name and index from base name of file."""
 
     def _initialize_variables(self, identifier: str | None) -> None:
