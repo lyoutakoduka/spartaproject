@@ -7,16 +7,11 @@ from re import sub
 
 from pyspartaproj.context.typed.user_context import BaseName
 from pyspartaproj.script.string.convert_type import convert_integer
+from pyspartaproj.script.string.rename.split_identifier import SplitIdentifier
 
 
-class BaseNameElements:
+class NameElements(SplitIdentifier):
     """Class to take out name and index from base name of file."""
-
-    def _initialize_variables(self, identifier: str | None) -> None:
-        if identifier is None:
-            identifier = "_"
-
-        self._split_identifier: str = identifier
 
     def _get_name_elements(self, name: str, index: int) -> BaseName:
         return {
@@ -26,11 +21,11 @@ class BaseNameElements:
 
     def _has_index(self, base_name: str) -> int | None:
         return convert_integer(
-            sub("[a-z]", "", base_name.split(self._split_identifier)[-1])
+            sub("[a-z]", "", base_name.split(self.get_identifier())[-1])
         )
 
     def _get_name(self, base_name: str) -> str:
-        identifier: str = self._split_identifier
+        identifier: str = self.get_identifier()
         return identifier.join(base_name.split(identifier)[:-1])
 
     def split_name(self, base_name: str) -> BaseName | None:
@@ -91,7 +86,7 @@ class BaseNameElements:
         Returns:
             str: Base Name constructed from Name and Index Number.
         """
-        return self._split_identifier.join(
+        return self.get_identifier().join(
             [base_name["name"], str(base_name["index"]).zfill(digit)]
         )
 
@@ -102,4 +97,4 @@ class BaseNameElements:
             identifier (str | None, optional): Defaults to None.
                 Split identifier you selected.
         """
-        self._initialize_variables(identifier)
+        super().__init__(identifier=identifier)

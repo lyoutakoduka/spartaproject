@@ -6,7 +6,7 @@
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.typed.user_context import BaseName
 from pyspartaproj.interface.pytest import fail
-from pyspartaproj.script.string.base_name_elements import BaseNameElements
+from pyspartaproj.script.string.rename.name_elements import NameElements
 
 
 def _compare_name(name: str, base_name: BaseName) -> None:
@@ -57,9 +57,9 @@ def _split_test(name: str, index: int, base_name: BaseName | None) -> None:
         _compare_elements(name, index, base_name)
 
 
-def _join_test(expected: str, elements: BaseNameElements) -> None:
-    if base_name := elements.split_name(expected):
-        assert expected == elements.join_name(base_name)
+def _join_test(expected: str, name_elements: NameElements) -> None:
+    if base_name := name_elements.split_name(expected):
+        assert expected == name_elements.join_name(base_name)
     else:
         fail()
 
@@ -68,7 +68,7 @@ def _common_test(name: str, index: int, identifier: str) -> None:
     _split_test(
         name,
         index,
-        BaseNameElements().split_name(_get_base_name(name, index, identifier)),
+        NameElements().split_name(_get_base_name(name, index, identifier)),
     )
 
 
@@ -94,7 +94,7 @@ def test_index() -> None:
     """Test for base name of file, but it doesn't include index string."""
     name: str = "file"
 
-    assert BaseNameElements().split_name(name) is None
+    assert NameElements().split_name(name) is None
 
 
 def test_option() -> None:
@@ -106,7 +106,7 @@ def test_option() -> None:
     _split_test(
         name,
         index,
-        BaseNameElements().split_name(
+        NameElements().split_name(
             _get_base_name_option(name, index, identifier)
         ),
     )
@@ -121,7 +121,7 @@ def test_digit() -> None:
     _split_test(
         name,
         index,
-        BaseNameElements().split_name(
+        NameElements().split_name(
             _get_base_name_digit(name, index, identifier)
         ),
     )
@@ -136,7 +136,7 @@ def test_identifier() -> None:
     _split_test(
         name,
         index,
-        BaseNameElements(identifier=identifier).split_name(
+        NameElements(identifier=identifier).split_name(
             _get_base_name(name, index, identifier)
         ),
     )
@@ -148,6 +148,4 @@ def test_join() -> None:
     name: str = "file"
     index: int = 1
 
-    _join_test(
-        _get_base_name_digit(name, index, identifier), BaseNameElements()
-    )
+    _join_test(_get_base_name_digit(name, index, identifier), NameElements())
