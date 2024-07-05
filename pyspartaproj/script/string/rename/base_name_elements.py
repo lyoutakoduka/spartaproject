@@ -7,9 +7,10 @@ from re import sub
 
 from pyspartaproj.context.typed.user_context import BaseName
 from pyspartaproj.script.string.convert_type import convert_integer
+from pyspartaproj.script.string.rename.split_identifier import SplitIdentifier
 
 
-class NameElements:
+class NameElements(SplitIdentifier):
     """Class to take out name and index from base name of file."""
 
     def _initialize_variables(self, identifier: str | None) -> None:
@@ -102,4 +103,6 @@ class NameElements:
             identifier (str | None, optional): Defaults to None.
                 Split identifier you selected.
         """
+        super().__init__(identifier=identifier)
+
         self._initialize_variables(identifier)
