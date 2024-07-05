@@ -57,9 +57,9 @@ def _split_test(name: str, index: int, base_name: BaseName | None) -> None:
         _compare_elements(name, index, base_name)
 
 
-def _join_test(expected: str, elements: NameElements) -> None:
-    if base_name := elements.split_name(expected):
-        assert expected == elements.join_name(base_name)
+def _join_test(expected: str, name_elements: NameElements) -> None:
+    if base_name := name_elements.split_name(expected):
+        assert expected == name_elements.join_name(base_name)
     else:
         fail()
 
