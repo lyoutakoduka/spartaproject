@@ -35,6 +35,10 @@ def _compare_table(expected: Strs2, result: CharacterTable) -> None:
     _compare_filtered(expected, tables)
 
 
+def _compare_merged(table: CharacterTable, merged: Strs2) -> None:
+    assert _get_tables(table) == merged
+
+
 def test_single() -> None:
     """Test to get characters constructed by single byte."""
     _compare_table(
