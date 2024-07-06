@@ -34,6 +34,9 @@ class FilterTable(GroupedCharacters):
 
         Each character should be included in user defined character tables.
 
+        e.g., return False if argument "text" is "ābc",
+            because character "ā" is not included in character tables.
+
         Args:
             text (str): String you want to confirm.
 
@@ -48,6 +51,8 @@ class FilterTable(GroupedCharacters):
 
     def __init__(self, multiple: bool = False) -> None:
         """Initialize super class and variables.
+
+        Character tables used for confirming are defined in super class.
 
         Args:
             multiple (bool, optional): Defaults to False.
