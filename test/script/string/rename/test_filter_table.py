@@ -20,3 +20,7 @@ def _disable_text(texts: Strs, filter_table: FilterTable) -> None:
 
 def _get_zero(multiple: bool = False) -> str:
     return "\uff10" if multiple else "0"
+
+
+def test_ascii() -> None:
+    _enable_text(["A", "a", _get_zero()], FilterTable())
