@@ -103,6 +103,15 @@ class GroupedCharacters:
         """
         return self._restructure_tables(self._create_character_tables())
 
+    def get_merged_tables(self) -> Strs2:
+        table: CharacterTable = self.get_table()
+        return [
+            table["upper"],
+            table["lower"],
+            table["number"],
+            table["other"],
+        ]
+
     def __init__(self, multiple: bool = False) -> None:
         """Initialize variables in class.
 
