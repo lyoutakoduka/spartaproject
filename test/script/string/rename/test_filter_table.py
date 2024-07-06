@@ -24,3 +24,7 @@ def _get_zero(multiple: bool = False) -> str:
 
 def test_ascii() -> None:
     _enable_text(["A", "a", _get_zero()], FilterTable())
+
+
+def test_other() -> None:
+    _disable_text(["À", "à", _get_zero()], FilterTable())
