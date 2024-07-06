@@ -124,7 +124,7 @@ class GroupedCharacters:
 
         Args:
             multiple (bool, optional): Defaults to False.
-                Set True if character tables you want to get are
-                    constructed by multiple byte.
+                True if you want to select character tables
+                    which is constructed by multiple byte.
         """
         self._initialize_variables(multiple)
