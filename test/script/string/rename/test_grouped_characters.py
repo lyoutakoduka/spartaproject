@@ -26,7 +26,7 @@ def _get_tables(table: CharacterTable) -> Strs2:
     return [table["upper"], table["lower"], table["number"], table["other"]]
 
 
-def _common_test(expected: Strs2, result: CharacterTable) -> None:
+def _compare_table(expected: Strs2, result: CharacterTable) -> None:
     _compare_size(result)
 
     tables: Strs2 = _get_tables(result)
@@ -37,7 +37,7 @@ def _common_test(expected: Strs2, result: CharacterTable) -> None:
 
 def test_single() -> None:
     """Test to get characters constructed by single byte."""
-    _common_test(
+    _compare_table(
         [["A", "Z"], ["a", "z"], ["0", "9"], [" ", "~"]],
         GroupedCharacters().get_table(),
     )
@@ -45,7 +45,7 @@ def test_single() -> None:
 
 def test_multiple() -> None:
     """Test to get characters constructed by multiple byte."""
-    _common_test(
+    _compare_table(
         [
             ["\uff21", "\uff3a"],
             ["\uff41", "\uff5a"],
