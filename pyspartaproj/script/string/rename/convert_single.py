@@ -24,14 +24,6 @@ class ConvertSingle:
     There are converted to single byte same characters in Ascii table.
     """
 
-    def _get_merged_tables(self, table: CharacterTable) -> Strs2:
-        return [
-            table["upper"],
-            table["lower"],
-            table["number"],
-            table["other"],
-        ]
-
     def _get_tables_pair(self) -> Strs3:
         return [
             GroupedCharacters(multiple=(0 == i)).get_merged_tables()
