@@ -104,6 +104,13 @@ class GroupedCharacters:
         return self._restructure_tables(self._create_character_tables())
 
     def get_merged_tables(self) -> Strs2:
+        """Get merged character tables.
+
+        It's include all attributes in the class about character table.
+
+        Returns:
+            Strs2: Character tables listed by default order.
+        """
         table: CharacterTable = self.get_table()
         return [
             table["upper"],
