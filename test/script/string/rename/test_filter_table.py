@@ -28,3 +28,10 @@ def test_ascii() -> None:
 
 def test_other() -> None:
     _disable_text(["À", "à", _get_zero()], FilterTable())
+
+
+def test_multiple() -> None:
+    _enable_text(
+        ["\uff21", "\uff41", _get_zero(multiple=True)],
+        FilterTable(multiple=True),
+    )
