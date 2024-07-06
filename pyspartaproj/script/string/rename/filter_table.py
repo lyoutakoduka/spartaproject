@@ -20,6 +20,13 @@ class FilterTable(GroupedCharacters):
     def _initialize_variables_filter(self) -> None:
         self._serialized: Strs = self._serialize_tables()
 
+    def contain(self, text: str) -> bool:
+        for single in text:
+            if single not in self._serialized:
+                return False
+
+        return True
+
     def __init__(self, multiple: bool = False) -> None:
         super().__init__(multiple=multiple)
 
