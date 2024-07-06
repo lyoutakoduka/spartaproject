@@ -35,3 +35,10 @@ def test_multiple() -> None:
         ["\uff21", "\uff41", _get_zero(multiple=True)],
         FilterTable(multiple=True),
     )
+
+
+def test_jp() -> None:
+    _disable_text(
+        ["\u3042", "\u3044", _get_zero(multiple=True)],
+        FilterTable(multiple=True),
+    )
