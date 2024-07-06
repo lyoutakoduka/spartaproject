@@ -61,6 +61,7 @@ def test_multiple() -> None:
 
 
 def test_merge() -> None:
+    """Test to compare merged character tables and originals."""
     grouped_characters = GroupedCharacters()
 
     _compare_merged(
