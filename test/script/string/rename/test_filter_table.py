@@ -16,3 +16,7 @@ def _enable_text(texts: Strs, filter_table: FilterTable) -> None:
 
 def _disable_text(texts: Strs, filter_table: FilterTable) -> None:
     assert not _filter_text(texts, filter_table)
+
+
+def _get_zero(multiple: bool = False) -> str:
+    return "\uff10" if multiple else "0"
