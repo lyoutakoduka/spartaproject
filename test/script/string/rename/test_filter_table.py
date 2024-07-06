@@ -12,3 +12,7 @@ def _filter_text(texts: Strs, filter_table: FilterTable) -> bool:
 
 def _enable_text(texts: Strs, filter_table: FilterTable) -> None:
     assert _filter_text(texts, filter_table)
+
+
+def _disable_text(texts: Strs, filter_table: FilterTable) -> None:
+    assert not _filter_text(texts, filter_table)
