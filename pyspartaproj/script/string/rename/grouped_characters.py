@@ -103,12 +103,28 @@ class GroupedCharacters:
         """
         return self._restructure_tables(self._create_character_tables())
 
+    def get_merged_tables(self) -> Strs2:
+        """Get merged character tables.
+
+        It's include all attributes in the class about character table.
+
+        Returns:
+            Strs2: Character tables listed by default order.
+        """
+        table: CharacterTable = self.get_table()
+        return [
+            table["upper"],
+            table["lower"],
+            table["number"],
+            table["other"],
+        ]
+
     def __init__(self, multiple: bool = False) -> None:
         """Initialize variables in class.
 
         Args:
             multiple (bool, optional): Defaults to False.
-                Set True if character tables you want to get are
-                    constructed by multiple byte.
+                True if you want to select character tables
+                    which is constructed by multiple byte.
         """
         self._initialize_variables(multiple)

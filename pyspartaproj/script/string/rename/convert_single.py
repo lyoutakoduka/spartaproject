@@ -6,13 +6,7 @@
 There are converted to single byte same characters in Ascii table.
 """
 
-from pyspartaproj.context.default.string_context import (
-    StrPair,
-    Strs2,
-    Strs3,
-    Trans,
-)
-from pyspartaproj.context.typed.user_context import CharacterTable
+from pyspartaproj.context.default.string_context import StrPair, Strs3, Trans
 from pyspartaproj.script.string.rename.grouped_characters import (
     GroupedCharacters,
 )
@@ -24,19 +18,9 @@ class ConvertSingle:
     There are converted to single byte same characters in Ascii table.
     """
 
-    def _get_merged_tables(self, table: CharacterTable) -> Strs2:
-        return [
-            table["upper"],
-            table["lower"],
-            table["number"],
-            table["other"],
-        ]
-
     def _get_tables_pair(self) -> Strs3:
         return [
-            self._get_merged_tables(
-                GroupedCharacters(multiple=(0 == i)).get_table()
-            )
+            GroupedCharacters(multiple=(0 == i)).get_merged_tables()
             for i in range(2)
         ]
 
