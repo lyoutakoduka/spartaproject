@@ -9,7 +9,7 @@ from typing import Callable
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.script.decimal.initialize_decimal import initialize_decimal
 from pyspartaproj.script.string.format_texts import format_indent
-from pyspartaproj.script.time.count.count_elapsed import LogTimer
+from pyspartaproj.script.time.count.log_timer import LogTimer
 
 initialize_decimal()
 
