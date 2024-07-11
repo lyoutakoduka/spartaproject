@@ -34,11 +34,13 @@ class ConnectServer(PathServer, ProjectContext):
         local_root: Path | None,
         override: bool,
         jst: bool,
+        forward: Path | None,
+        platform: str | None,
     ) -> None:
         PathServer.__init__(
             self, local_root=local_root, override=override, jst=jst
         )
-        ProjectContext.__init__(self)
+        ProjectContext.__init__(self, forward=forward, platform=platform)
 
     def _finalize_network_objects(self) -> None:
         if ssh := self.get_ssh():
@@ -255,6 +257,8 @@ class ConnectServer(PathServer, ProjectContext):
         local_root: Path | None = None,
         override: bool = False,
         jst: bool = False,
+        forward: Path | None = None,
+        platform: str | None = None,
     ) -> None:
         """Initialize super class and network objects.
 
@@ -271,5 +275,7 @@ class ConnectServer(PathServer, ProjectContext):
                 If True, you can get datetime object as JST time zone.
                 It's used for argument "jst" of class "PathServer".
         """
-        self._initialize_super_class(local_root, override, jst)
+        self._initialize_super_class(
+            local_root, override, jst, forward, platform
+        )
         self._initialize_connect()
