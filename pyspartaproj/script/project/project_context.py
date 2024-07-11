@@ -6,7 +6,7 @@
 from pathlib import Path
 from platform import uname
 
-from pyspartaproj.context.default.bool_context import BoolPair2
+from pyspartaproj.context.default.bool_context import BoolPair, BoolPair2
 from pyspartaproj.context.default.integer_context import IntPair, IntPair2
 from pyspartaproj.context.default.string_context import StrPair, StrPair2, Strs
 from pyspartaproj.context.extension.path_context import PathPair, PathPair2
@@ -77,6 +77,9 @@ class ProjectContext:
             platform_root,
             self.get_string_context(group)[context_types[file_type]],
         )
+
+    def get_bool_context(self, group: str) -> BoolPair:
+        return self._bool_context[group]
 
     def get_integer_context(self, group: str) -> IntPair:
         """Filter and get project context by integer type.
