@@ -1,5 +1,5 @@
 {
-  "default": {
-    "project_context": true
+  "test": {
+    "boolean": true
   }
 }
