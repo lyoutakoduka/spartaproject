@@ -6,11 +6,13 @@
 from pathlib import Path
 from platform import uname
 
+from pyspartaproj.context.default.bool_context import BoolPair2
 from pyspartaproj.context.default.integer_context import IntPair, IntPair2
 from pyspartaproj.context.default.string_context import StrPair, StrPair2, Strs
 from pyspartaproj.context.extension.path_context import PathPair, PathPair2
 from pyspartaproj.context.file.json_context import Json
 from pyspartaproj.script.file.json.convert_from_json import (
+    bool_pair2_from_json,
     integer_pair2_from_json,
     path_pair2_from_json,
     path_pair_from_json,
@@ -35,6 +37,7 @@ class ProjectContext:
         )
 
     def _serialize_path(self, base_context: Json) -> None:
+        self._bool_context: BoolPair2 = bool_pair2_from_json(base_context)
         self._integer_context: IntPair2 = integer_pair2_from_json(base_context)
         self._string_context: StrPair2 = string_pair2_from_json(base_context)
         self._path_context: PathPair2 = path_pair2_from_json(base_context)
