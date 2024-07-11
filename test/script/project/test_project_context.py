@@ -48,6 +48,7 @@ def _get_expected_path(path_roots: Strs, path_heads: Strs) -> Path:
 
 
 def test_bool() -> None:
+    """Test to filter and get project context by boolean type."""
     assert ProjectContext().get_bool_context("default")["project_context"]
 
 
