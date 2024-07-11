@@ -205,12 +205,12 @@ class ProjectContext:
 
         Args:
             forward (Path | None, optional): Defaults to None.
-                Alternative path of the path forwarding file,
-                and mainly used at test of this module.
+                Path of setting file in order to place
+                    project context file to any place.
 
             platform (str | None, optional): Defaults to None.
                 Platform information should be "linux" or "windows",
-                and it's used in the project context file like follow.
+                    and it's used in the project context file like follow.
 
                 e.g., path type "key_linux.path", string type "key_windows".
         """
