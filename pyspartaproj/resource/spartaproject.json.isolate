@@ -1,4 +1,7 @@
 {
+  "default": {
+    "project_context": false
+  },
   "server": {
     "port": 0,
     "timeout": 0,
