@@ -47,6 +47,10 @@ def _get_expected_path(path_roots: Strs, path_heads: Strs) -> Path:
     )
 
 
+def test_bool() -> None:
+    assert ProjectContext().get_bool_context("default")["project_context"]
+
+
 def test_integer() -> None:
     """Test to filter and get project context by integer type."""
     expected: IntPair = {"index": 0, "count": 1}
