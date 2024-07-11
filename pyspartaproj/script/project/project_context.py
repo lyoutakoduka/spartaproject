@@ -6,9 +6,9 @@
 from pathlib import Path
 from platform import uname
 
-from pyspartaproj.context.default.integer_context import IntPair
-from pyspartaproj.context.default.string_context import StrPair, Strs
-from pyspartaproj.context.extension.path_context import PathPair
+from pyspartaproj.context.default.integer_context import IntPair, IntPair2
+from pyspartaproj.context.default.string_context import StrPair, StrPair2, Strs
+from pyspartaproj.context.extension.path_context import PathPair, PathPair2
 from pyspartaproj.context.file.json_context import Json
 from pyspartaproj.script.file.json.convert_from_json import (
     integer_pair2_from_json,
@@ -35,9 +35,9 @@ class ProjectContext:
         )
 
     def _serialize_path(self, base_context: Json) -> None:
-        self._integer_context = integer_pair2_from_json(base_context)
-        self._string_context = string_pair2_from_json(base_context)
-        self._path_context = path_pair2_from_json(base_context)
+        self._integer_context: IntPair2 = integer_pair2_from_json(base_context)
+        self._string_context: StrPair2 = string_pair2_from_json(base_context)
+        self._path_context: PathPair2 = path_pair2_from_json(base_context)
 
     def _override_platform(self, platform: str | None) -> None:
         if platform is None:
