@@ -79,6 +79,14 @@ class ProjectContext:
         )
 
     def get_bool_context(self, group: str) -> BoolPair:
+        """Filter and get project context by boolean type.
+
+        Args:
+            group (str): Select group of project context.
+
+        Returns:
+            BoolPair: Project context of boolean type.
+        """
         return self._bool_context[group]
 
     def get_integer_context(self, group: str) -> IntPair:
