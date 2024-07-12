@@ -274,6 +274,16 @@ class ConnectServer(PathServer, ProjectContext):
             jst (bool, optional): Defaults to False.
                 If True, you can get datetime object as JST time zone.
                 It's used for argument "jst" of class "PathServer".
+
+            forward (Path | None, optional): Defaults to None.
+                Path of setting file in order to place
+                    project context file to any place.
+                It's used for argument "forward" of class "ProjectContext".
+
+            platform (str | None, optional): Defaults to None.
+                Platform information should be "linux" or "windows",
+                    and it's used in the project context file like follow.
+                It's used for argument "platform" of class "ProjectContext".
         """
         self._initialize_super_class(
             local_root, override, jst, forward, platform
