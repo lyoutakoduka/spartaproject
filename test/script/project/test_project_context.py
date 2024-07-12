@@ -18,7 +18,7 @@ def _common_test(keys_pair: Strs2) -> None:
 
 
 def _get_config_file() -> Path:
-    return get_resource(local_path=Path("forward.json"))
+    return get_resource(local_path=Path("project_context", "forward.json"))
 
 
 def _import_context() -> ProjectContext:
