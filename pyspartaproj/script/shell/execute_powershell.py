@@ -11,14 +11,14 @@ from pyspartaproj.script.project.project_context import ProjectContext
 from pyspartaproj.script.shell.execute_command import execute_single
 
 
-def _get_powershell_path() -> str:
-    project = ProjectContext()
+def _get_powershell_path(forward: Path | None) -> str:
+    project = ProjectContext(forward=forward)
     return project.get_path_context("runtime")[
         project.get_platform_key(["powershell"]) + ".path"
     ].as_posix()
 
 
-def execute_powershell(commands: Strs) -> StrGene:
+def execute_powershell(commands: Strs, forward: Path | None = None) -> StrGene:
     """Function to execute specific command in PowerShell.
 
     Args:
@@ -30,7 +30,7 @@ def execute_powershell(commands: Strs) -> StrGene:
         StrGene: Generator for getting stdout of command  you want execute.
     """
     shell_commands: Strs = [
-        _get_powershell_path(),
+        _get_powershell_path(forward),
         "-ExecutionPolicy",
         "Bypass",
     ] + commands
