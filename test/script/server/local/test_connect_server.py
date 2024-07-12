@@ -15,7 +15,7 @@ def _get_config_file() -> Path:
 
 
 def _is_connect() -> ConnectServer:
-    server = ConnectServer()
+    server = ConnectServer(forward=_get_config_file())
     assert server.connect()
     return server
 
