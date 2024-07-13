@@ -68,7 +68,9 @@ def _get_python_system_path(python_paths: Paths) -> Strs:
 
 
 def _get_python_command(commands: Strs, platform: str | None) -> Strs:
-    return [get_script_string(get_interpreter_path(platform))] + commands
+    return [
+        get_script_string(get_interpreter_path(platform=platform))
+    ] + commands
 
 
 def execute_python(
