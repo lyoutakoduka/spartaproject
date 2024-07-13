@@ -77,15 +77,13 @@ def test_command() -> None:
     """
     expected: Path = get_resource(local_path=Path("command.ps1"))
 
-    assert [get_path_string(expected)] == list(
-        execute_powershell(
-            [
-                get_script_string(expected),
-                get_double_quoted_command(
-                    [get_quoted_path(get_path_string(expected))] * 2
-                ),
-            ]
-        )
+    assert [get_path_string(expected)] == _execute_powershell(
+        [
+            get_script_string(expected),
+            get_double_quoted_command(
+                [get_quoted_path(get_path_string(expected))] * 2
+            ),
+        ]
     )
 
 
