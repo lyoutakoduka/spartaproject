@@ -30,6 +30,11 @@ def execute_powershell(commands: Strs, forward: Path | None = None) -> StrGene:
             e.g., if command is "Write-Output Test",
             you can input ["Write-Output", "Test"] or ["Write-Output Test"].
 
+        forward (Path | None, optional): Defaults to None.
+            Path of setting file in order to place
+                project context file to any place.
+            It's used for argument "forward" of class "ProjectContext".
+
     Returns:
         StrGene: Generator for getting stdout of command  you want execute.
     """
