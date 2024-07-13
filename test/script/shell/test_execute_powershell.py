@@ -64,8 +64,8 @@ def test_write() -> None:
     expected: Strs = temporary_text(3, 3)
     commands: Strs = ["; ".join(["Write-Output " + text for text in expected])]
 
-    assert expected == list(
-        execute_powershell([get_double_quoted_command(commands)])
+    assert expected == _execute_powershell(
+        [get_double_quoted_command(commands)]
     )
 
 
