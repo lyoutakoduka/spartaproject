@@ -21,6 +21,11 @@ def get_interpreter_path(
             You can select an execution platform from "linux" or "windows".
             Current execution platform is selected if argument is None.
 
+        forward (Path | None, optional): Defaults to None.
+            Path of setting file in order to place
+                project context file to any place.
+            It's used for argument "forward" of class "ProjectContext".
+
     Raises:
         FileNotFoundError:
             Throw an exception if interpreter path you selected isn't exists.
@@ -94,6 +99,11 @@ def execute_python(
         platform (str | None, optional): Defaults to None.
             You can select an execution platform from "linux" or "windows".
             Current execution platform is selected if argument is None.
+
+        forward (Path | None, optional): Defaults to None.
+            Path of setting file in order to place
+                project context file to any place.
+            It's used for argument "forward" of class "ProjectContext".
 
     Returns:
         StrGene: Generator for getting stdout of the script you want execute.
