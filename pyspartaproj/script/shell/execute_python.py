@@ -11,7 +11,9 @@ from pyspartaproj.script.project.project_context import ProjectContext
 from pyspartaproj.script.shell.execute_command import execute_multiple
 
 
-def get_interpreter_path(platform: str | None = None) -> Path:
+def get_interpreter_path(
+    platform: str | None = None, forward: Path | None = None
+) -> Path:
     """Function to get interpreter path of Python corresponding to platform.
 
     Args:
@@ -26,7 +28,7 @@ def get_interpreter_path(platform: str | None = None) -> Path:
     Returns:
         Path: Relative path of Python interpreter.
     """
-    project = ProjectContext(platform=platform)
+    project = ProjectContext(platform=platform, forward=forward)
     interpreter_path: Path = project.merge_platform_path(
         "project", ["working", "platform"], file_type="interpreter"
     )
