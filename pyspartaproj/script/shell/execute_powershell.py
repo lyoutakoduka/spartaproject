@@ -11,10 +11,14 @@ from pyspartaproj.script.project.project_context import ProjectContext
 from pyspartaproj.script.shell.execute_command import execute_single
 
 
+def _get_platform_key(project: ProjectContext) -> str:
+    return project.get_platform_key(["powershell"]) + ".path"
+
+
 def _get_powershell_path(forward: Path | None) -> str:
     project = ProjectContext(forward=forward)
     return project.get_path_context("runtime")[
-        project.get_platform_key(["powershell"]) + ".path"
+        _get_platform_key(project)
     ].as_posix()
 
 
