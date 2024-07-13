@@ -67,9 +67,13 @@ def _get_python_system_path(python_paths: Paths) -> Strs:
     ]
 
 
-def _get_python_command(commands: Strs, platform: str | None) -> Strs:
+def _get_python_command(
+    commands: Strs, platform: str | None, forward: Path | None
+) -> Strs:
     return [
-        get_script_string(get_interpreter_path(platform=platform))
+        get_script_string(
+            get_interpreter_path(platform=platform, forward=forward)
+        )
     ] + commands
 
 
@@ -77,6 +81,7 @@ def execute_python(
     commands: Strs,
     python_paths: Paths | None = None,
     platform: str | None = None,
+    forward: Path | None = None,
 ) -> StrGene:
     """Execute Python corresponding to platform.
 
@@ -98,6 +103,6 @@ def execute_python(
     if python_paths is not None and 0 < len(python_paths):
         command_multiple += [_get_python_system_path(python_paths)]
 
-    command_multiple += [_get_python_command(commands, platform)]
+    command_multiple += [_get_python_command(commands, platform, forward)]
 
     return execute_multiple(command_multiple)
