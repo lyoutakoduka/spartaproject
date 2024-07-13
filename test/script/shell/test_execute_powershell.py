@@ -22,6 +22,10 @@ def _get_formatted_path(path_elements: Strs) -> str:
     return "\\".join(path_elements)
 
 
+def _get_config_file() -> Path:
+    return get_resource(local_path=Path("execute_powershell", "forward.json"))
+
+
 def test_script() -> None:
     """Test to convert script part of command string on PowerShell."""
     path_elements: Strs = ["A", "B", "C"]
