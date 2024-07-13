@@ -26,6 +26,10 @@ def _get_config_file() -> Path:
     return get_resource(local_path=Path("execute_powershell", "forward.json"))
 
 
+def _execute_powershell(commands: Strs) -> Strs:
+    return list(execute_powershell(commands, forward=_get_config_file()))
+
+
 def test_script() -> None:
     """Test to convert script part of command string on PowerShell."""
     path_elements: Strs = ["A", "B", "C"]
