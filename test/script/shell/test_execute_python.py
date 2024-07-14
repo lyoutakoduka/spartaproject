@@ -38,6 +38,12 @@ def _execute_python_path(commands: Strs, python_paths: Paths) -> Strs:
     )
 
 
+def _execute_python_platform(commands: Strs, platform: str) -> Strs:
+    return list(
+        execute_python(commands, platform=platform, forward=_get_config_file())
+    )
+
+
 def _get_script_text(script_text: str) -> str:
     return get_script_string(get_resource(local_path=Path(script_text)))
 
