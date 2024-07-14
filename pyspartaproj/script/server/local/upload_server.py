@@ -144,6 +144,16 @@ class UploadServer(ConnectServer):
             jst (bool, optional): Defaults to False.
                 If True, you can get datetime object as JST time zone.
                 It's used for argument "jst" of class "ConnectServer".
+
+            forward (Path | None, optional): Defaults to None.
+                Path of setting file in order to place
+                    project context file to any place.
+                It's used for argument "forward" of class "ConnectServer".
+
+            platform (str | None, optional): Defaults to None.
+                Platform information should be "linux" or "windows",
+                    and it's used in the project context file like follow.
+                It's used for argument "platform" of class "ConnectServer".
         """
         super().__init__(
             local_root=local_root,
