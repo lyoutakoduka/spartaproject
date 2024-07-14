@@ -12,6 +12,10 @@ from pyspartaproj.script.path.safe.safe_copy import SafeCopy
 from pyspartaproj.script.server.local.execute_server import ExecuteServer
 
 
+def _get_config_file() -> Path:
+    return get_resource(local_path=Path("connect_server", "forward.json"))
+
+
 def _is_connect(server: ExecuteServer) -> None:
     assert server.connect()
 
