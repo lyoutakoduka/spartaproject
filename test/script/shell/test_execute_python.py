@@ -51,8 +51,8 @@ def _get_script_text(script_text: str) -> str:
 def _get_system_paths(expected: Paths, first_root: Path) -> Paths:
     system_paths: Paths = []
 
-    for result in execute_python(
-        [_get_script_text("local_import.py")], python_paths=expected
+    for result in _execute_python_path(
+        [_get_script_text("local_import.py")], expected
     ):
         path: Path = Path(result)
 
