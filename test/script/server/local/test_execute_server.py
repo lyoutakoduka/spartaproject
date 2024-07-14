@@ -59,7 +59,7 @@ def _get_version_number(result: Strs) -> str:
     return result[0].split(" ")[0]
 
 
-def _get_server() -> ExecuteServer:
+def _get_server_jst() -> ExecuteServer:
     return ExecuteServer(jst=True)
 
 
@@ -70,7 +70,7 @@ def _get_server_version(version: str) -> ExecuteServer:
 def test_file() -> None:
     """Test to execute Python module that is single file."""
     name: Path = Path("file.py")
-    server: ExecuteServer = _get_server()
+    server: ExecuteServer = _get_server_jst()
 
     _common_test(name, server)
 
@@ -78,7 +78,7 @@ def test_file() -> None:
 def test_directory() -> None:
     """Test to execute Python module including directory."""
     name: Path = Path("directory")
-    server: ExecuteServer = _get_server()
+    server: ExecuteServer = _get_server_jst()
 
     _common_test(name, server)
 
