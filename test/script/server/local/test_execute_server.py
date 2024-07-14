@@ -59,6 +59,10 @@ def _get_version_number(result: Strs) -> str:
     return result[0].split(" ")[0]
 
 
+def _get_server() -> ExecuteServer:
+    return ExecuteServer(forward=_get_config_file())
+
+
 def _get_server_jst() -> ExecuteServer:
     return ExecuteServer(jst=True)
 
@@ -95,7 +99,7 @@ def test_version() -> None:
 def test_error() -> None:
     """Test to catch and print error of Python code on server."""
     name: Path = Path("error.py")
-    server: ExecuteServer = ExecuteServer()
+    server: ExecuteServer = _get_server()
 
     with raises(ValueError):
         _execute_python(name, server)
