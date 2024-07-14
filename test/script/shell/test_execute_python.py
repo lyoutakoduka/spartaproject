@@ -86,7 +86,9 @@ def test_interpreter() -> None:
     }
 
     for platform in platforms:
-        interpreter_path: Path = get_interpreter_path(platform=platform)
+        interpreter_path: Path = get_interpreter_path(
+            platform=platform, forward=_get_config_file()
+        )
         expected: Path = Path(
             "poetry", platform, ".venv", interpreter_paths[platform]
         )
