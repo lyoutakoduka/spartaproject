@@ -26,6 +26,10 @@ def _get_config_file() -> Path:
     return get_resource(local_path=Path("execute_python", "forward.json"))
 
 
+def _execute_python(commands: Strs) -> Strs:
+    return list(execute_python(commands, forward=_get_config_file()))
+
+
 def _get_script_text(script_text: str) -> str:
     return get_script_string(get_resource(local_path=Path(script_text)))
 
