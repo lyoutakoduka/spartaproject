@@ -109,9 +109,9 @@ def test_platform() -> None:
     assert expected == [
         result.lower()
         for platform in expected
-        for result in execute_python(
+        for result in _execute_python_platform(
             [_get_script_text("execute_platform.py")],
-            platform=platform,
+            platform,
         )
     ]
 
