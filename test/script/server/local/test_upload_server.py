@@ -37,7 +37,7 @@ def _is_connect(server: UploadServer) -> None:
 
 
 def _get_server() -> UploadServer:
-    return UploadServer(jst=True)
+    return UploadServer(jst=True, forward=_get_config_file())
 
 
 def _get_server_local(local_root: Path) -> UploadServer:
