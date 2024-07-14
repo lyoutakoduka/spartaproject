@@ -98,7 +98,7 @@ def test_interpreter() -> None:
 def test_command() -> None:
     """Test to execute simple Python script."""
     assert temporary_text(3, 3) == list(
-        execute_python([_get_script_text("indices.py")])
+        _execute_python([_get_script_text("indices.py")])
     )
 
 
