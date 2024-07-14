@@ -41,7 +41,9 @@ def _get_server() -> UploadServer:
 
 
 def _get_server_local(local_root: Path) -> UploadServer:
-    return UploadServer(jst=True, local_root=local_root)
+    return UploadServer(
+        jst=True, local_root=local_root, forward=_get_config_file()
+    )
 
 
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
