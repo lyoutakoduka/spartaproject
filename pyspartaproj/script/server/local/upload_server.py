@@ -127,6 +127,8 @@ class UploadServer(ConnectServer):
         local_root: Path | None = None,
         override: bool = False,
         jst: bool = False,
+        forward: Path | None = None,
+        platform: str | None = None,
     ) -> None:
         """Initialize super class.
 
@@ -143,4 +145,10 @@ class UploadServer(ConnectServer):
                 If True, you can get datetime object as JST time zone.
                 It's used for argument "jst" of class "ConnectServer".
         """
-        super().__init__(local_root=local_root, override=override, jst=jst)
+        super().__init__(
+            local_root=local_root,
+            override=override,
+            jst=jst,
+            forward=forward,
+            platform=platform,
+        )
