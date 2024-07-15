@@ -32,6 +32,11 @@ def execute_powershell(
             e.g., if command is "Write-Output Test",
             you can input ["Write-Output", "Test"] or ["Write-Output Test"].
 
+        platform (str | None, optional): Defaults to None.
+            You can select an execution platform from "linux" or "windows".
+            Current execution platform is selected if argument is None.
+            It's used for argument "platform" of class "ProjectContext".
+
         forward (Path | None, optional): Defaults to None.
             Path of setting file in order to place
                 project context file to any place.
