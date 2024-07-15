@@ -36,10 +36,17 @@ def _get_shortcut_command(shortcut_target: Path, shortcut_path: Path) -> str:
     )
 
 
-def _execute_script(shortcut_target: Path, shortcut_path: Path) -> None:
+def _execute_script(
+    shortcut_target: Path,
+    shortcut_path: Path,
+    platform: str | None,
+    forward: Path | None,
+) -> None:
     list(
         execute_powershell(
-            [_get_shortcut_command(shortcut_target, shortcut_path)]
+            [_get_shortcut_command(shortcut_target, shortcut_path)],
+            platform=platform,
+            forward=forward,
         )
     )
 
@@ -55,7 +62,11 @@ def _cleanup_shortcut(shortcut_path: Path, remove_root: Path | None) -> None:
 
 
 def create_shortcut(
-    shortcut_target: Path, shortcut_path: Path, remove_root: Path | None = None
+    shortcut_target: Path,
+    shortcut_path: Path,
+    remove_root: Path | None = None,
+    platform: str | None = None,
+    forward: Path | None = None,
 ) -> bool:
     """Create Windows shortcut from PowerShell.
 
@@ -74,5 +85,5 @@ def create_shortcut(
     """
     _check_shortcut_exists(shortcut_target)
     _cleanup_shortcut(shortcut_path, remove_root)
-    _execute_script(shortcut_target, shortcut_path)
+    _execute_script(shortcut_target, shortcut_path, platform, forward)
     return True
