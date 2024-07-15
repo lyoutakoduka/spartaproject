@@ -27,6 +27,17 @@ def _create_shortcut(shortcut_target: Path, shortcut_path: Path) -> bool:
     )
 
 
+def _create_shortcut_remove(
+    shortcut_target: Path, shortcut_path: Path, remove_root: Path
+) -> bool:
+    return create_shortcut(
+        shortcut_target,
+        shortcut_path,
+        remove_root=remove_root,
+        forward=_get_config_file(),
+    )
+
+
 def _get_shortcut_path(shortcut_target: Path, shortcut_root: Path) -> Path:
     return Path(shortcut_root, shortcut_target.name + ".lnk")
 
