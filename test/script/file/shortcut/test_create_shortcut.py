@@ -8,7 +8,7 @@ from tempfile import TemporaryDirectory
 from typing import Callable
 
 from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.interface.pytest import raises
+from pyspartaproj.interface.pytest import fail, raises
 from pyspartaproj.script.file.shortcut.create_shortcut import create_shortcut
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.modify.get_resource import get_resource
@@ -36,6 +36,11 @@ def _create_shortcut_remove(
         remove_root=remove_root,
         forward=_get_config_file(),
     )
+
+
+def _filter_created(is_success: bool) -> None:
+    if not is_success:
+        fail()
 
 
 def _get_shortcut_path(shortcut_target: Path, shortcut_root: Path) -> Path:
