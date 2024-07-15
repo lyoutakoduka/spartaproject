@@ -11,9 +11,14 @@ from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.interface.pytest import raises
 from pyspartaproj.script.file.shortcut.create_shortcut import create_shortcut
 from pyspartaproj.script.path.iterate_directory import walk_iterator
+from pyspartaproj.script.path.modify.get_resource import get_resource
 from pyspartaproj.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
+
+
+def _get_config_file() -> Path:
+    return get_resource(local_path=Path("execute_powershell", "forward.json"))
 
 
 def _get_shortcut_path(shortcut_target: Path, shortcut_root: Path) -> Path:
