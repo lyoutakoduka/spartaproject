@@ -43,6 +43,10 @@ def _filter_created(is_success: bool) -> None:
         fail()
 
 
+def _success_created(shortcut_target: Path, shortcut_path: Path) -> None:
+    _filter_created(_create_shortcut(shortcut_target, shortcut_path))
+
+
 def _get_shortcut_path(shortcut_target: Path, shortcut_root: Path) -> Path:
     return Path(shortcut_root, shortcut_target.name + ".lnk")
 
