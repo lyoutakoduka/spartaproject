@@ -99,6 +99,7 @@ def execute_python(
         platform (str | None, optional): Defaults to None.
             You can select an execution platform from "linux" or "windows".
             Current execution platform is selected if argument is None.
+            It's used for argument "platform" of class "ProjectContext".
 
         forward (Path | None, optional): Defaults to None.
             Path of setting file in order to place
