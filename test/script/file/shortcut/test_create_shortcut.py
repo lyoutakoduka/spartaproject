@@ -97,7 +97,7 @@ def test_directory() -> None:
             temporary_root, temporary_root
         )
 
-        create_shortcut(temporary_root, shortcut_path)
+        _success_created(temporary_root, shortcut_path)
         _common_test(temporary_root, shortcut_path)
 
     _inside_temporary_directory(individual_test)
