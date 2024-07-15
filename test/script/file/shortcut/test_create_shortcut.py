@@ -83,7 +83,7 @@ def test_file() -> None:
             shortcut_target, temporary_root
         )
 
-        create_shortcut(shortcut_target, shortcut_path)
+        _success_created(shortcut_target, shortcut_path)
         _common_test(shortcut_target, shortcut_path)
 
     _inside_temporary_directory(individual_test)
