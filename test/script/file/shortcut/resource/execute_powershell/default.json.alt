@@ -1,0 +1,6 @@
+{
+  "runtime": {
+    "powershell_linux.path": "***",
+    "powershell_windows.path": "***"
+  }
+}
