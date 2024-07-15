@@ -64,7 +64,7 @@ def _get_server() -> ExecuteServer:
 
 
 def _get_server_jst() -> ExecuteServer:
-    return ExecuteServer(jst=True)
+    return ExecuteServer(jst=True, forward=_get_config_file())
 
 
 def _get_server_version(version: str) -> ExecuteServer:
