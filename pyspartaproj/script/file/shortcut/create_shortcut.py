@@ -80,6 +80,16 @@ def create_shortcut(
             Path of directory used as trash box.
             It's used for argument "remove_root" of class "SafeTrash".
 
+        platform (str | None, optional): Defaults to None.
+            You can select an execution platform from "linux" or "windows".
+            Current execution platform is selected if argument is None.
+            It's used for argument "platform" of function "execute_powershell".
+
+        forward (Path | None, optional): Defaults to None.
+            Path of setting file in order to place
+                project context file to any place.
+            It's used for argument "forward" of function "execute_powershell".
+
     Returns:
         bool: True if creating shortcut is success.
     """
