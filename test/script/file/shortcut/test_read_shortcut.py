@@ -20,6 +20,15 @@ def _get_config_file() -> Path:
     return get_resource(local_path=Path("execute_powershell", "forward.json"))
 
 
+def _read_shortcut(shortcut_path: Path) -> Path:
+    if shortcut_target := read_shortcut(
+        shortcut_path, forward=_get_config_file()
+    ):
+        return shortcut_target
+    else:
+        fail()
+
+
 def _get_shortcut_path(shortcut_target: Path, shortcut_root: Path) -> Path:
     return Path(shortcut_root, shortcut_target.name + ".lnk")
 
