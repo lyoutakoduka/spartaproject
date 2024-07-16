@@ -204,15 +204,15 @@ class ProjectContext:
         Default platform is automatically selected from current environment.
 
         Args:
-            forward (Path | None, optional): Defaults to None.
-                Path of setting file in order to place
-                    project context file to any place.
-
             platform (str | None, optional): Defaults to None.
                 Platform information should be "linux" or "windows",
                     and it's used in the project context file like follow.
 
                 e.g., path type "key_linux.path", string type "key_windows".
+
+            forward (Path | None, optional): Defaults to None.
+                Path of setting file in order to place
+                    project context file to any place.
         """
         self._serialize_path(
             self._load_context(self._get_context_path(forward))
