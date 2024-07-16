@@ -35,12 +35,9 @@ def _get_shortcut_path(shortcut_target: Path, shortcut_root: Path) -> Path:
 
 def _common_test(shortcut_target: Path, shortcut_root: Path) -> None:
     shortcut_path: Path = _get_shortcut_path(shortcut_target, shortcut_root)
-    create_shortcut(shortcut_target, shortcut_path)
+    create_shortcut(shortcut_target, shortcut_path, forward=_get_config_file())
 
-    if returned_target := read_shortcut(shortcut_path):
-        assert shortcut_target == returned_target
-    else:
-        fail()
+    assert shortcut_target == _read_shortcut(shortcut_path)
 
 
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
