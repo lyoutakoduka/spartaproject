@@ -64,6 +64,16 @@ def read_shortcut(
     Args:
         shortcut_path (Path): Path of shortcut you want to read inside.
 
+        platform (str | None, optional): Defaults to None.
+            You can select an execution platform from "linux" or "windows".
+            Current execution platform is selected if argument is None.
+            It's used for argument "platform" of function "execute_powershell".
+
+        forward (Path | None, optional): Defaults to None.
+            Path of setting file in order to place
+                project context file to any place.
+            It's used for argument "forward" of function "execute_powershell".
+
     Returns:
         Path | None: Path which is a link destination of shortcut.
     """
