@@ -187,7 +187,7 @@ class ProjectContext:
         return self._merged_string_context(group, file_type, platform_root)
 
     def __init__(
-        self, forward: Path | None = None, platform: str | None = None
+        self, platform: str | None = None, forward: Path | None = None
     ) -> None:
         """Import a project context file.
 
