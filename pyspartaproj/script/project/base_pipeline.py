@@ -14,6 +14,9 @@ class BasePipeline(ProjectContext, LogTimer):
         ProjectContext.__init__(self, platform=platform, forward=forward)
         LogTimer.__init__(self)
 
+    def _show_message(self, message: str) -> None:
+        print(message)
+
     def __init__(
         self, platform: str | None = None, forward: Path | None = None
     ) -> None:
