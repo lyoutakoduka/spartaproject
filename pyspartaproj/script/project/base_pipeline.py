@@ -3,6 +3,7 @@
 
 from pathlib import Path
 
+from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.script.project.project_context import ProjectContext
 from pyspartaproj.script.time.count.log_timer import LogTimer
 
@@ -20,6 +21,9 @@ class BasePipeline(ProjectContext, LogTimer):
     def _log_with_timer(self, message: str) -> None:
         if message_timer := self.get_readable_time(force=True):
             self._show_message(message_timer + ": " + message)
+
+    def show_log(self, messages: Strs) -> None:
+        self._log_with_timer(" ".join(messages))
 
     def __init__(
         self, platform: str | None = None, forward: Path | None = None
