@@ -12,6 +12,10 @@ from pyspartaproj.script.path.safe.safe_copy import SafeCopy
 from pyspartaproj.script.server.local.execute_server import ExecuteServer
 
 
+def _get_config_file() -> Path:
+    return get_resource(local_path=Path("connect_server", "forward.json"))
+
+
 def _is_connect(server: ExecuteServer) -> None:
     assert server.connect()
 
@@ -56,17 +60,21 @@ def _get_version_number(result: Strs) -> str:
 
 
 def _get_server() -> ExecuteServer:
-    return ExecuteServer(jst=True)
+    return ExecuteServer(forward=_get_config_file())
+
+
+def _get_server_jst() -> ExecuteServer:
+    return ExecuteServer(jst=True, forward=_get_config_file())
 
 
 def _get_server_version(version: str) -> ExecuteServer:
-    return ExecuteServer(jst=True, version=version)
+    return ExecuteServer(jst=True, version=version, forward=_get_config_file())
 
 
 def test_file() -> None:
     """Test to execute Python module that is single file."""
     name: Path = Path("file.py")
-    server: ExecuteServer = _get_server()
+    server: ExecuteServer = _get_server_jst()
 
     _common_test(name, server)
 
@@ -74,7 +82,7 @@ def test_file() -> None:
 def test_directory() -> None:
     """Test to execute Python module including directory."""
     name: Path = Path("directory")
-    server: ExecuteServer = _get_server()
+    server: ExecuteServer = _get_server_jst()
 
     _common_test(name, server)
 
@@ -91,7 +99,7 @@ def test_version() -> None:
 def test_error() -> None:
     """Test to catch and print error of Python code on server."""
     name: Path = Path("error.py")
-    server: ExecuteServer = ExecuteServer()
+    server: ExecuteServer = _get_server()
 
     with raises(ValueError):
         _execute_python(name, server)

@@ -24,7 +24,7 @@ initialize_decimal()
 class ConnectServer(PathServer, ProjectContext):
     """Class to use SSH and SFTP functionality."""
 
-    def _initialize_connect(self) -> None:
+    def _initialize_variables_connect(self) -> None:
         self._ssh: SSHClient | None = None
         self._channel: Channel | None = None
         self._sftp: SFTPClient | None = None
@@ -34,11 +34,13 @@ class ConnectServer(PathServer, ProjectContext):
         local_root: Path | None,
         override: bool,
         jst: bool,
+        forward: Path | None,
+        platform: str | None,
     ) -> None:
         PathServer.__init__(
             self, local_root=local_root, override=override, jst=jst
         )
-        ProjectContext.__init__(self)
+        ProjectContext.__init__(self, forward=forward, platform=platform)
 
     def _finalize_network_objects(self) -> None:
         if ssh := self.get_ssh():
@@ -248,13 +250,15 @@ class ConnectServer(PathServer, ProjectContext):
     def __del__(self) -> None:
         """Close network objects."""
         self._finalize_network_objects()
-        self._initialize_connect()
+        self._initialize_variables_connect()
 
     def __init__(
         self,
         local_root: Path | None = None,
         override: bool = False,
         jst: bool = False,
+        forward: Path | None = None,
+        platform: str | None = None,
     ) -> None:
         """Initialize super class and network objects.
 
@@ -270,6 +274,18 @@ class ConnectServer(PathServer, ProjectContext):
             jst (bool, optional): Defaults to False.
                 If True, you can get datetime object as JST time zone.
                 It's used for argument "jst" of class "PathServer".
+
+            forward (Path | None, optional): Defaults to None.
+                Path of setting file in order to place
+                    project context file to any place.
+                It's used for argument "forward" of class "ProjectContext".
+
+            platform (str | None, optional): Defaults to None.
+                Platform information should be "linux" or "windows",
+                    and it's used in the project context file like follow.
+                It's used for argument "platform" of class "ProjectContext".
         """
-        self._initialize_super_class(local_root, override, jst)
-        self._initialize_connect()
+        self._initialize_super_class(
+            local_root, override, jst, forward, platform
+        )
+        self._initialize_variables_connect()

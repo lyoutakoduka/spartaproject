@@ -10,9 +10,23 @@ from typing import Callable
 from pyspartaproj.interface.pytest import fail, raises
 from pyspartaproj.script.file.shortcut.create_shortcut import create_shortcut
 from pyspartaproj.script.file.shortcut.read_shortcut import read_shortcut
+from pyspartaproj.script.path.modify.get_resource import get_resource
 from pyspartaproj.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
+
+
+def _get_config_file() -> Path:
+    return get_resource(local_path=Path("execute_powershell", "forward.json"))
+
+
+def _read_shortcut(shortcut_path: Path) -> Path:
+    if shortcut_target := read_shortcut(
+        shortcut_path, forward=_get_config_file()
+    ):
+        return shortcut_target
+    else:
+        fail()
 
 
 def _get_shortcut_path(shortcut_target: Path, shortcut_root: Path) -> Path:
@@ -21,12 +35,9 @@ def _get_shortcut_path(shortcut_target: Path, shortcut_root: Path) -> Path:
 
 def _common_test(shortcut_target: Path, shortcut_root: Path) -> None:
     shortcut_path: Path = _get_shortcut_path(shortcut_target, shortcut_root)
-    create_shortcut(shortcut_target, shortcut_path)
+    create_shortcut(shortcut_target, shortcut_path, forward=_get_config_file())
 
-    if returned_target := read_shortcut(shortcut_path):
-        assert shortcut_target == returned_target
-    else:
-        fail()
+    assert shortcut_target == _read_shortcut(shortcut_path)
 
 
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:

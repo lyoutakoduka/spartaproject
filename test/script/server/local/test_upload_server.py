@@ -8,6 +8,7 @@ from tempfile import TemporaryDirectory
 from typing import Callable
 
 from pyspartaproj.script.directory.create_directory import create_directory
+from pyspartaproj.script.path.modify.get_resource import get_resource
 from pyspartaproj.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
@@ -15,6 +16,10 @@ from pyspartaproj.script.path.temporary.create_temporary_tree import (
     create_temporary_tree,
 )
 from pyspartaproj.script.server.local.upload_server import UploadServer
+
+
+def _get_config_file() -> Path:
+    return get_resource(local_path=Path("connect_server", "forward.json"))
 
 
 def _upload_path(server: UploadServer, source_path: Path) -> None:
@@ -32,11 +37,13 @@ def _is_connect(server: UploadServer) -> None:
 
 
 def _get_server() -> UploadServer:
-    return UploadServer(jst=True)
+    return UploadServer(jst=True, forward=_get_config_file())
 
 
 def _get_server_local(local_root: Path) -> UploadServer:
-    return UploadServer(jst=True, local_root=local_root)
+    return UploadServer(
+        jst=True, local_root=local_root, forward=_get_config_file()
+    )
 
 
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:

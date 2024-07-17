@@ -6,11 +6,13 @@
 from pathlib import Path
 from platform import uname
 
-from pyspartaproj.context.default.integer_context import IntPair
-from pyspartaproj.context.default.string_context import StrPair, Strs
-from pyspartaproj.context.extension.path_context import PathPair
+from pyspartaproj.context.default.bool_context import BoolPair, BoolPair2
+from pyspartaproj.context.default.integer_context import IntPair, IntPair2
+from pyspartaproj.context.default.string_context import StrPair, StrPair2, Strs
+from pyspartaproj.context.extension.path_context import PathPair, PathPair2
 from pyspartaproj.context.file.json_context import Json
 from pyspartaproj.script.file.json.convert_from_json import (
+    bool_pair2_from_json,
     integer_pair2_from_json,
     path_pair2_from_json,
     path_pair_from_json,
@@ -25,7 +27,9 @@ class ProjectContext:
 
     def _get_context_path(self, forward: Path | None) -> Path:
         if forward is None:
-            return get_resource(local_path=Path("project_context.json"))
+            return get_resource(
+                local_path=Path("project_context", "forward.json")
+            )
 
         return forward
 
@@ -35,9 +39,10 @@ class ProjectContext:
         )
 
     def _serialize_path(self, base_context: Json) -> None:
-        self._integer_context = integer_pair2_from_json(base_context)
-        self._string_context = string_pair2_from_json(base_context)
-        self._path_context = path_pair2_from_json(base_context)
+        self._bool_context: BoolPair2 = bool_pair2_from_json(base_context)
+        self._integer_context: IntPair2 = integer_pair2_from_json(base_context)
+        self._string_context: StrPair2 = string_pair2_from_json(base_context)
+        self._path_context: PathPair2 = path_pair2_from_json(base_context)
 
     def _override_platform(self, platform: str | None) -> None:
         if platform is None:
@@ -74,6 +79,17 @@ class ProjectContext:
             platform_root,
             self.get_string_context(group)[context_types[file_type]],
         )
+
+    def get_bool_context(self, group: str) -> BoolPair:
+        """Filter and get project context by boolean type.
+
+        Args:
+            group (str): Select group of project context.
+
+        Returns:
+            BoolPair: Project context of boolean type.
+        """
+        return self._bool_context[group]
 
     def get_integer_context(self, group: str) -> IntPair:
         """Filter and get project context by integer type.
@@ -171,7 +187,7 @@ class ProjectContext:
         return self._merged_string_context(group, file_type, platform_root)
 
     def __init__(
-        self, forward: Path | None = None, platform: str | None = None
+        self, platform: str | None = None, forward: Path | None = None
     ) -> None:
         """Import a project context file.
 
@@ -188,15 +204,15 @@ class ProjectContext:
         Default platform is automatically selected from current environment.
 
         Args:
-            forward (Path | None, optional): Defaults to None.
-                Alternative path of the path forwarding file,
-                and mainly used at test of this module.
-
             platform (str | None, optional): Defaults to None.
                 Platform information should be "linux" or "windows",
-                and it's used in the project context file like follow.
+                    and it's used in the project context file like follow.
 
                 e.g., path type "key_linux.path", string type "key_windows".
+
+            forward (Path | None, optional): Defaults to None.
+                Path of setting file in order to place
+                    project context file to any place.
         """
         self._serialize_path(
             self._load_context(self._get_context_path(forward))

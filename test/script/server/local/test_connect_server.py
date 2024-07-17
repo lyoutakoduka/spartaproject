@@ -3,12 +3,19 @@
 
 """Test module to use SSH and SFTP functionality."""
 
+from pathlib import Path
+
 from pyspartaproj.interface.paramiko import Channel, SFTPClient, SSHClient
+from pyspartaproj.script.path.modify.get_resource import get_resource
 from pyspartaproj.script.server.local.connect_server import ConnectServer
 
 
+def _get_config_file() -> Path:
+    return get_resource(local_path=Path("connect_server", "forward.json"))
+
+
 def _is_connect() -> ConnectServer:
-    server = ConnectServer()
+    server = ConnectServer(forward=_get_config_file())
     assert server.connect()
     return server
 

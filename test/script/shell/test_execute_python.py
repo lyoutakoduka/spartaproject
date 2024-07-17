@@ -22,6 +22,28 @@ from pyspartaproj.script.shell.execute_python import (
 from pyspartaproj.script.string.temporary_text import temporary_text
 
 
+def _get_config_file() -> Path:
+    return get_resource(local_path=Path("execute_python", "forward.json"))
+
+
+def _execute_python(commands: Strs) -> Strs:
+    return list(execute_python(commands, forward=_get_config_file()))
+
+
+def _execute_python_path(commands: Strs, python_paths: Paths) -> Strs:
+    return list(
+        execute_python(
+            commands, python_paths=python_paths, forward=_get_config_file()
+        )
+    )
+
+
+def _execute_python_platform(commands: Strs, platform: str) -> Strs:
+    return list(
+        execute_python(commands, platform=platform, forward=_get_config_file())
+    )
+
+
 def _get_script_text(script_text: str) -> str:
     return get_script_string(get_resource(local_path=Path(script_text)))
 
@@ -29,8 +51,8 @@ def _get_script_text(script_text: str) -> str:
 def _get_system_paths(expected: Paths, first_root: Path) -> Paths:
     system_paths: Paths = []
 
-    for result in execute_python(
-        [_get_script_text("local_import.py")], python_paths=expected
+    for result in _execute_python_path(
+        [_get_script_text("local_import.py")], expected
     ):
         path: Path = Path(result)
 
@@ -64,7 +86,9 @@ def test_interpreter() -> None:
     }
 
     for platform in platforms:
-        interpreter_path: Path = get_interpreter_path(platform=platform)
+        interpreter_path: Path = get_interpreter_path(
+            platform=platform, forward=_get_config_file()
+        )
         expected: Path = Path(
             "poetry", platform, ".venv", interpreter_paths[platform]
         )
@@ -74,7 +98,7 @@ def test_interpreter() -> None:
 def test_command() -> None:
     """Test to execute simple Python script."""
     assert temporary_text(3, 3) == list(
-        execute_python([_get_script_text("indices.py")])
+        _execute_python([_get_script_text("indices.py")])
     )
 
 
@@ -85,9 +109,9 @@ def test_platform() -> None:
     assert expected == [
         result.lower()
         for platform in expected
-        for result in execute_python(
+        for result in _execute_python_platform(
             [_get_script_text("execute_platform.py")],
-            platform=platform,
+            platform,
         )
     ]
 

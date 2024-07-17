@@ -11,4 +11,7 @@ node_modules/
 # Isolate
 .vscode/sftp.json
 external/ubuntu-base-23.10-beta-base-amd64.tar.gz
-pyspartaproj/resource/spartaproject.json
+test/script/file/shortcut/resource/execute_powershell/default.json
+test/script/server/local/resource/connect_server/default.json
+test/script/shell/resource/execute_powershell/default.json
+test/script/shell/resource/execute_python/default.json

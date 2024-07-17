@@ -18,7 +18,7 @@ def _common_test(keys_pair: Strs2) -> None:
 
 
 def _get_config_file() -> Path:
-    return get_resource(local_path=Path("forward.json"))
+    return get_resource(local_path=Path("project_context", "forward.json"))
 
 
 def _import_context() -> ProjectContext:
@@ -45,6 +45,11 @@ def _get_expected_path(path_roots: Strs, path_heads: Strs) -> Path:
             for root, head in zip(path_roots, path_heads)
         ]
     )
+
+
+def test_bool() -> None:
+    """Test to filter and get project context by boolean type."""
+    assert ProjectContext().get_bool_context("test")["boolean"]
 
 
 def test_integer() -> None:

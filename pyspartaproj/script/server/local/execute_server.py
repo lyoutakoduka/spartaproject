@@ -76,6 +76,8 @@ class ExecuteServer(UploadServer):
         local_root: Path | None = None,
         override: bool = False,
         jst: bool = False,
+        forward: Path | None = None,
+        platform: str | None = None,
     ) -> None:
         """Select version of Python, then ready using ssh and sftp connection.
 
@@ -94,7 +96,23 @@ class ExecuteServer(UploadServer):
             jst (bool, optional): Defaults to False.
                 If True, you can get datetime object as JST time zone.
                 It's used for argument "jst" of class "UploadServer".
+
+            forward (Path | None, optional): Defaults to None.
+                Path of setting file in order to place
+                    project context file to any place.
+                It's used for argument "forward" of class "UploadServer".
+
+            platform (str | None, optional): Defaults to None.
+                Platform information should be "linux" or "windows",
+                    and it's used in the project context file like follow.
+                It's used for argument "platform" of class "UploadServer".
         """
-        super().__init__(local_root=local_root, override=override, jst=jst)
+        super().__init__(
+            local_root=local_root,
+            override=override,
+            jst=jst,
+            forward=forward,
+            platform=platform,
+        )
 
         self._set_version_path(self._set_version(version))

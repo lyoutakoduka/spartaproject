@@ -11,13 +11,20 @@ from pyspartaproj.script.project.project_context import ProjectContext
 from pyspartaproj.script.shell.execute_command import execute_multiple
 
 
-def get_interpreter_path(platform: str | None = None) -> Path:
+def get_interpreter_path(
+    platform: str | None = None, forward: Path | None = None
+) -> Path:
     """Function to get interpreter path of Python corresponding to platform.
 
     Args:
         platform (str | None, optional): Defaults to None.
             You can select an execution platform from "linux" or "windows".
             Current execution platform is selected if argument is None.
+
+        forward (Path | None, optional): Defaults to None.
+            Path of setting file in order to place
+                project context file to any place.
+            It's used for argument "forward" of class "ProjectContext".
 
     Raises:
         FileNotFoundError:
@@ -26,7 +33,7 @@ def get_interpreter_path(platform: str | None = None) -> Path:
     Returns:
         Path: Relative path of Python interpreter.
     """
-    project = ProjectContext(platform=platform)
+    project = ProjectContext(platform=platform, forward=forward)
     interpreter_path: Path = project.merge_platform_path(
         "project", ["working", "platform"], file_type="interpreter"
     )
@@ -65,14 +72,21 @@ def _get_python_system_path(python_paths: Paths) -> Strs:
     ]
 
 
-def _get_python_command(commands: Strs, platform: str | None) -> Strs:
-    return [get_script_string(get_interpreter_path(platform))] + commands
+def _get_python_command(
+    commands: Strs, platform: str | None, forward: Path | None
+) -> Strs:
+    return [
+        get_script_string(
+            get_interpreter_path(platform=platform, forward=forward)
+        )
+    ] + commands
 
 
 def execute_python(
     commands: Strs,
     python_paths: Paths | None = None,
     platform: str | None = None,
+    forward: Path | None = None,
 ) -> StrGene:
     """Execute Python corresponding to platform.
 
@@ -85,6 +99,12 @@ def execute_python(
         platform (str | None, optional): Defaults to None.
             You can select an execution platform from "linux" or "windows".
             Current execution platform is selected if argument is None.
+            It's used for argument "platform" of class "ProjectContext".
+
+        forward (Path | None, optional): Defaults to None.
+            Path of setting file in order to place
+                project context file to any place.
+            It's used for argument "forward" of class "ProjectContext".
 
     Returns:
         StrGene: Generator for getting stdout of the script you want execute.
@@ -94,6 +114,6 @@ def execute_python(
     if python_paths is not None and 0 < len(python_paths):
         command_multiple += [_get_python_system_path(python_paths)]
 
-    command_multiple += [_get_python_command(commands, platform)]
+    command_multiple += [_get_python_command(commands, platform, forward)]
 
     return execute_multiple(command_multiple)

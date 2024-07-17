@@ -36,10 +36,17 @@ def _get_shortcut_command(shortcut_target: Path, shortcut_path: Path) -> str:
     )
 
 
-def _execute_script(shortcut_target: Path, shortcut_path: Path) -> None:
+def _execute_script(
+    shortcut_target: Path,
+    shortcut_path: Path,
+    platform: str | None,
+    forward: Path | None,
+) -> None:
     list(
         execute_powershell(
-            [_get_shortcut_command(shortcut_target, shortcut_path)]
+            [_get_shortcut_command(shortcut_target, shortcut_path)],
+            platform=platform,
+            forward=forward,
         )
     )
 
@@ -55,7 +62,11 @@ def _cleanup_shortcut(shortcut_path: Path, remove_root: Path | None) -> None:
 
 
 def create_shortcut(
-    shortcut_target: Path, shortcut_path: Path, remove_root: Path | None = None
+    shortcut_target: Path,
+    shortcut_path: Path,
+    remove_root: Path | None = None,
+    platform: str | None = None,
+    forward: Path | None = None,
 ) -> bool:
     """Create Windows shortcut from PowerShell.
 
@@ -69,10 +80,20 @@ def create_shortcut(
             Path of directory used as trash box.
             It's used for argument "remove_root" of class "SafeTrash".
 
+        platform (str | None, optional): Defaults to None.
+            You can select an execution platform from "linux" or "windows".
+            Current execution platform is selected if argument is None.
+            It's used for argument "platform" of function "execute_powershell".
+
+        forward (Path | None, optional): Defaults to None.
+            Path of setting file in order to place
+                project context file to any place.
+            It's used for argument "forward" of function "execute_powershell".
+
     Returns:
         bool: True if creating shortcut is success.
     """
     _check_shortcut_exists(shortcut_target)
     _cleanup_shortcut(shortcut_path, remove_root)
-    _execute_script(shortcut_target, shortcut_path)
+    _execute_script(shortcut_target, shortcut_path, platform, forward)
     return True

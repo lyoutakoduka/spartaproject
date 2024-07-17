@@ -8,12 +8,43 @@ from tempfile import TemporaryDirectory
 from typing import Callable
 
 from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.interface.pytest import raises
+from pyspartaproj.interface.pytest import fail, raises
 from pyspartaproj.script.file.shortcut.create_shortcut import create_shortcut
 from pyspartaproj.script.path.iterate_directory import walk_iterator
+from pyspartaproj.script.path.modify.get_resource import get_resource
 from pyspartaproj.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
+
+
+def _get_config_file() -> Path:
+    return get_resource(local_path=Path("execute_powershell", "forward.json"))
+
+
+def _create_shortcut(shortcut_target: Path, shortcut_path: Path) -> bool:
+    return create_shortcut(
+        shortcut_target, shortcut_path, forward=_get_config_file()
+    )
+
+
+def _create_shortcut_remove(
+    shortcut_target: Path, shortcut_path: Path, remove_root: Path
+) -> bool:
+    return create_shortcut(
+        shortcut_target,
+        shortcut_path,
+        remove_root=remove_root,
+        forward=_get_config_file(),
+    )
+
+
+def _filter_created(is_success: bool) -> None:
+    if not is_success:
+        fail()
+
+
+def _success_created(shortcut_target: Path, shortcut_path: Path) -> None:
+    _filter_created(_create_shortcut(shortcut_target, shortcut_path))
 
 
 def _get_shortcut_path(shortcut_target: Path, shortcut_root: Path) -> Path:
@@ -52,7 +83,7 @@ def test_file() -> None:
             shortcut_target, temporary_root
         )
 
-        create_shortcut(shortcut_target, shortcut_path)
+        _success_created(shortcut_target, shortcut_path)
         _common_test(shortcut_target, shortcut_path)
 
     _inside_temporary_directory(individual_test)
@@ -66,7 +97,7 @@ def test_directory() -> None:
             temporary_root, temporary_root
         )
 
-        create_shortcut(temporary_root, shortcut_path)
+        _success_created(temporary_root, shortcut_path)
         _common_test(temporary_root, shortcut_path)
 
     _inside_temporary_directory(individual_test)
@@ -95,11 +126,13 @@ def test_remove() -> None:
             temporary_root, temporary_root
         )
 
-        create_shortcut(temporary_root, shortcut_path)
-        create_shortcut(
-            temporary_root,
-            shortcut_path,
-            remove_root=Path(temporary_root, "result"),
+        _filter_created(_create_shortcut(temporary_root, shortcut_path))
+        _filter_created(
+            _create_shortcut_remove(
+                temporary_root,
+                shortcut_path,
+                remove_root=Path(temporary_root, "result"),
+            )
         )
 
         _compare_shortcut(temporary_root)

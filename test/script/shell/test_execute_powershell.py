@@ -22,6 +22,14 @@ def _get_formatted_path(path_elements: Strs) -> str:
     return "\\".join(path_elements)
 
 
+def _get_config_file() -> Path:
+    return get_resource(local_path=Path("execute_powershell", "forward.json"))
+
+
+def _execute_powershell(commands: Strs) -> Strs:
+    return list(execute_powershell(commands, forward=_get_config_file()))
+
+
 def test_script() -> None:
     """Test to convert script part of command string on PowerShell."""
     path_elements: Strs = ["A", "B", "C"]
@@ -56,8 +64,8 @@ def test_write() -> None:
     expected: Strs = temporary_text(3, 3)
     commands: Strs = ["; ".join(["Write-Output " + text for text in expected])]
 
-    assert expected == list(
-        execute_powershell([get_double_quoted_command(commands)])
+    assert expected == _execute_powershell(
+        [get_double_quoted_command(commands)]
     )
 
 
@@ -69,15 +77,13 @@ def test_command() -> None:
     """
     expected: Path = get_resource(local_path=Path("command.ps1"))
 
-    assert [get_path_string(expected)] == list(
-        execute_powershell(
-            [
-                get_script_string(expected),
-                get_double_quoted_command(
-                    [get_quoted_path(get_path_string(expected))] * 2
-                ),
-            ]
-        )
+    assert [get_path_string(expected)] == _execute_powershell(
+        [
+            get_script_string(expected),
+            get_double_quoted_command(
+                [get_quoted_path(get_path_string(expected))] * 2
+            ),
+        ]
     )
 
 
