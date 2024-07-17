@@ -17,6 +17,10 @@ class BasePipeline(ProjectContext, LogTimer):
     def _show_message(self, message: str) -> None:
         print(message)
 
+    def _log_with_timer(self, message: str) -> None:
+        if message_timer := self.get_readable_time(force=True):
+            self._show_message(message_timer + ": " + message)
+
     def __init__(
         self, platform: str | None = None, forward: Path | None = None
     ) -> None:
