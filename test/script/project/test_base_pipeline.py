@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to handling I/O functionality of any script called pipeline."""
+
 from decimal import Decimal
 from pathlib import Path
 
@@ -42,6 +44,7 @@ def _create_pipeline(interval: str) -> BasePipeline:
 
 
 def test_print() -> None:
+    """Test ot show message as log to stdout."""
     interval: str = "0.3"
     expected: str = (
         interval + "s" + ": " + " ".join(["root", "body", "head"]) + "\n"
