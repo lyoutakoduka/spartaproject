@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from decimal import Decimal
 from pathlib import Path
 
 from pyspartaproj.context.default.string_context import Strs
@@ -29,3 +30,12 @@ def _convert_print(messages: Strs, pipeline: BasePipeline) -> str:
 def _read_path(pipeline: BasePipeline) -> Strs:
     path_context: PathPair = pipeline.get_path_context("test")
     return list(Path(path_context["print.path"]).parts)
+
+
+def _create_pipeline(interval: str) -> BasePipeline:
+    pipeline = BasePipeline(forward=_get_config_file())
+
+    pipeline.restart(override=True, timer_interval=Decimal(interval))
+    pipeline.increase_timer()
+
+    return pipeline
