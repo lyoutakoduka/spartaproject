@@ -39,3 +39,13 @@ def _create_pipeline(interval: str) -> BasePipeline:
     pipeline.increase_timer()
 
     return pipeline
+
+
+def test_print() -> None:
+    interval: str = "0.3"
+    expected: str = (
+        interval + "s" + ": " + " ".join(["root", "body", "head"]) + "\n"
+    )
+    pipeline: BasePipeline = _create_pipeline(interval)
+
+    assert expected == _convert_print(_read_path(pipeline), pipeline)
