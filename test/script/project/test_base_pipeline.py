@@ -4,6 +4,7 @@
 from pathlib import Path
 
 from pyspartaproj.context.default.string_context import Strs
+from pyspartaproj.context.extension.path_context import PathPair
 from pyspartaproj.script.path.modify.get_resource import get_resource
 from pyspartaproj.script.project.base_pipeline import BasePipeline
 from pyspartaproj.script.string.off_stdout import StdoutText
@@ -23,3 +24,8 @@ def _convert_print(messages: Strs, pipeline: BasePipeline) -> str:
     _messages()
 
     return stdout_text.show()
+
+
+def _read_path(pipeline: BasePipeline) -> Strs:
+    path_context: PathPair = pipeline.get_path_context("test")
+    return list(Path(path_context["print.path"]).parts)
