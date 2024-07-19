@@ -22,17 +22,17 @@ class BasePipeline(ProjectContext, LogTimer):
     def _show_message(self, message: str) -> None:
         print(message)
 
-    def _log_with_timer(self, message: str) -> None:
-        if message_timer := self.get_readable_time(force=True):
+    def _log_with_timer(self, message: str, force: bool) -> None:
+        if message_timer := self.get_readable_time(force=force):
             self._show_message(message_timer + ": " + message)
 
-    def show_log(self, messages: Strs) -> None:
+    def show_log(self, messages: Strs, force: bool = False) -> None:
         """Show message as log to stdout.
 
         Args:
             messages (Strs): Message list which will merged by space character.
         """
-        self._log_with_timer(" ".join(messages))
+        self._log_with_timer(" ".join(messages), force)
 
     def __init__(
         self, platform: str | None = None, forward: Path | None = None
