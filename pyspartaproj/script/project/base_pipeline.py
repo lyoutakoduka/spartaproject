@@ -31,6 +31,11 @@ class BasePipeline(ProjectContext, LogTimer):
 
         Args:
             messages (Strs): Message list which will merged by space character.
+
+            force (bool, optional): Defaults to False.
+                Timer count is forcibly returned if it's True.
+                It's used for argument "force" of
+                    method "get_readable_time" in class "LogTimer".
         """
         self._log_with_timer(" ".join(messages), force)
 
