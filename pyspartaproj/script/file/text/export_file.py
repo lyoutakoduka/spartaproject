@@ -23,7 +23,9 @@ def byte_export(export_path: Path, source: bytes) -> Path:
     return export_path
 
 
-def text_export(export_path: Path, source: str) -> Path:
+def text_export(
+    export_path: Path, source: str, encoding: str | None = None
+) -> Path:
     """Function to export text file.
 
     Args:
@@ -34,5 +36,8 @@ def text_export(export_path: Path, source: str) -> Path:
     Returns:
         Path: Path of data which is finally exported.
     """
+    if encoding is None:
+        encoding = "utf-8"
+
     replaced = source.replace("\r\n", "\n")
-    return byte_export(export_path, replaced.encode("utf-8"))
+    return byte_export(export_path, replaced.encode(encoding))
