@@ -33,6 +33,10 @@ def text_export(
 
         source (str): Text data you want to export.
 
+        encoding (str | None, optional): Defaults to None.
+            Character encoding you want to override forcibly.
+            Default character encoding is "utf-8".
+
     Returns:
         Path: Path of data which is finally exported.
     """
