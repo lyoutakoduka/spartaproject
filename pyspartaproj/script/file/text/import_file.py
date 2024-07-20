@@ -27,6 +27,9 @@ def text_import(import_path: Path, encoding: str | None = None) -> str:
     Args:
         import_path (Path): Path of text file you want to import.
 
+        encoding (str | None, optional): Defaults to None.
+            Character encoding you want to override forcibly.
+
     Returns:
         str: Imported string from text file.
     """
