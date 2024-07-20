@@ -21,7 +21,7 @@ def byte_import(import_path: Path) -> bytes:
         return file.read()
 
 
-def text_import(import_path: Path) -> str:
+def text_import(import_path: Path, encoding: str | None = None) -> str:
     """Function to import text file.
 
     Args:
@@ -31,5 +31,9 @@ def text_import(import_path: Path) -> str:
         str: Imported string from text file.
     """
     byte: bytes = byte_import(import_path)
-    content: str = byte.decode(find_encoding(byte))
+
+    if encoding is None:
+        encoding = find_encoding(byte)
+
+    content: str = byte.decode(encoding)
     return content.replace("\r\n", "\n")
