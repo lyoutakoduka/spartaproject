@@ -5,7 +5,7 @@
 
 from pathlib import Path
 
-from pyspartaproj.script.string.find_encoding import find_encoding
+from pyspartaproj.script.string.encoding.find_encoding import find_encoding
 
 
 def byte_import(import_path: Path) -> bytes:

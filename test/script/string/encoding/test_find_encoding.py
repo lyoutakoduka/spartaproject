@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from pyspartaproj.script.string.find_encoding import find_encoding
+from pyspartaproj.script.string.encoding.find_encoding import find_encoding
 
 
 def _common_test(encoding: str) -> None:
