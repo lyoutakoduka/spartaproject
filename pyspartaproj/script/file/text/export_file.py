@@ -43,5 +43,6 @@ def text_export(
     if encoding is None:
         encoding = "utf-8"
 
-    replaced = source.replace("\r\n", "\n")
-    return byte_export(export_path, replaced.encode(encoding))
+    return byte_export(
+        export_path, source.replace("\r\n", "\n").encode(encoding)
+    )
