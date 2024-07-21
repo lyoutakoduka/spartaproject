@@ -15,6 +15,13 @@ def _analysis(byte: bytes) -> str | None:
     return detector.result["encoding"]
 
 
+def _find_sjis(candidate: str) -> str:
+    if candidate in ["Windows-1254", "Windows-1252"]:
+        return "shift-jis"
+
+    return candidate
+
+
 def find_encoding(byte: bytes) -> str:
     """Find character encoding from string automatically.
 
@@ -27,13 +34,6 @@ def find_encoding(byte: bytes) -> str:
     encoding: str = "utf-8"
 
     if candidate := _analysis(byte):
-        if "Windows-1254" == candidate:
-            encoding = "shift-jis"
-
-        elif "Windows-1252" == candidate:
-            encoding = "shift-jis"
-
-        else:
-            encoding = candidate
+        encoding = _find_sjis(candidate)
 
     return encoding
