@@ -24,6 +24,18 @@ def byte_export(export_path: Path, source: bytes) -> Path:
 
 
 def set_encoding(source: str, encoding: str | None = None) -> bytes:
+    """Encode string by specific character encoding.
+
+    Args:
+        source (str): String data you want to encode.
+
+        encoding (str | None, optional): Defaults to None.
+            Character encoding you want to override forcibly.
+            Default character encoding is "utf-8".
+
+    Returns:
+        bytes: Converted Byte date.
+    """
     if encoding is None:
         encoding = "utf-8"
 
@@ -38,11 +50,11 @@ def text_export(
     Args:
         export_path (Path): Path which is used for exporting data.
 
-        source (str): Text data you want to export.
+        source (str): String data you want to export.
 
         encoding (str | None, optional): Defaults to None.
             Character encoding you want to override forcibly.
-            Default character encoding is "utf-8".
+            It's used for argument "encoding" of function "set_encoding".
 
     Returns:
         Path: Path of data which is finally exported.
