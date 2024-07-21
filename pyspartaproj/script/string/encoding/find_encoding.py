@@ -6,6 +6,15 @@
 from chardet.universaldetector import UniversalDetector
 
 
+def _analysis(byte: bytes) -> str | None:
+    detector = UniversalDetector()
+
+    detector.feed(byte)
+    detector.close()
+
+    return detector.result["encoding"]
+
+
 def find_encoding(byte: bytes) -> str:
     """Find character encoding from string automatically.
 
@@ -17,11 +26,7 @@ def find_encoding(byte: bytes) -> str:
     """
     encoding: str = "utf-8"
 
-    detector = UniversalDetector()
-    detector.feed(byte)
-    detector.close()
-
-    if candidate := detector.result["encoding"]:
+    if candidate := _analysis(byte):
         if "Windows-1254" == candidate:
             encoding = "shift-jis"
 
