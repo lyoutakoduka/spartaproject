@@ -5,6 +5,8 @@
 
 from pathlib import Path
 
+from pyspartaproj.script.string.encoding.set_encoding import set_encoding
+
 
 def byte_export(export_path: Path, source: bytes) -> Path:
     """Function to export binary file.
@@ -21,25 +23,6 @@ def byte_export(export_path: Path, source: bytes) -> Path:
         file.write(source)
 
     return export_path
-
-
-def set_encoding(source: str, encoding: str | None = None) -> bytes:
-    """Encode string by specific character encoding.
-
-    Args:
-        source (str): String data you want to encode.
-
-        encoding (str | None, optional): Defaults to None.
-            Character encoding you want to override forcibly.
-            Default character encoding is "utf-8".
-
-    Returns:
-        bytes: Converted Byte date.
-    """
-    if encoding is None:
-        encoding = "utf-8"
-
-    return source.encode(encoding)
 
 
 def text_export(
