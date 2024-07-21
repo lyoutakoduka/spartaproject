@@ -23,6 +23,13 @@ def byte_export(export_path: Path, source: bytes) -> Path:
     return export_path
 
 
+def set_encoding(source: str, encoding: str | None = None) -> bytes:
+    if encoding is None:
+        encoding = "utf-8"
+
+    return source.encode(encoding)
+
+
 def text_export(
     export_path: Path, source: str, encoding: str | None = None
 ) -> Path:
@@ -44,5 +51,6 @@ def text_export(
         encoding = "utf-8"
 
     return byte_export(
-        export_path, source.replace("\r\n", "\n").encode(encoding)
+        export_path,
+        set_encoding(source.replace("\r\n", "\n"), encoding=encoding),
     )
