@@ -14,3 +14,12 @@ def test_utf() -> None:
     expected: bytes = b"\xe3\x81\x82"
 
     _compare_encoding(expected, set_encoding(source_text))
+
+
+def test_sjis() -> None:
+    source_text: str = "\u3042"
+    expected: bytes = b"\x82\xa0"
+
+    _compare_encoding(
+        expected, set_encoding(source_text, encoding="shift_jis")
+    )
