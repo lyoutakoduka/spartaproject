@@ -24,8 +24,7 @@ def test_byte() -> None:
     """Test to import binary file."""
 
     def individual_test(text_path: Path) -> None:
-        result: bytes = byte_import(text_path)
-        _common_test(result.decode())
+        _common_test(byte_import(text_path).decode())
 
     _inside_temporary_directory(individual_test)
 
