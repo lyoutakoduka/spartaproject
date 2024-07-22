@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Module to encode string by specific character encoding."""
+
 
 def set_encoding(source: str, encoding: str | None = None) -> bytes:
     """Encode string by specific character encoding.
