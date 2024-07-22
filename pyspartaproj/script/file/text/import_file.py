@@ -5,7 +5,7 @@
 
 from pathlib import Path
 
-from pyspartaproj.script.string.encoding.find_encoding import find_encoding
+from pyspartaproj.script.string.encoding.set_decoding import set_decoding
 
 
 def byte_import(import_path: Path) -> bytes:
@@ -34,9 +34,5 @@ def text_import(import_path: Path, encoding: str | None = None) -> str:
         str: Imported string from text file.
     """
     byte: bytes = byte_import(import_path)
-
-    if encoding is None:
-        encoding = find_encoding(byte)
-
-    content: str = byte.decode(encoding)
+    content: str = set_decoding(byte, encoding=encoding)
     return content.replace("\r\n", "\n")
