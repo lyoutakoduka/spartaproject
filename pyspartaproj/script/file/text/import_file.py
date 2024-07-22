@@ -33,6 +33,6 @@ def text_import(import_path: Path, encoding: str | None = None) -> str:
     Returns:
         str: Imported string from text file.
     """
-    byte: bytes = byte_import(import_path)
-    content: str = set_decoding(byte, encoding=encoding)
-    return content.replace("\r\n", "\n")
+    return set_decoding(byte_import(import_path), encoding=encoding).replace(
+        "\r\n", "\n"
+    )
