@@ -7,7 +7,7 @@ from pyspartaproj.script.string.encoding.find_encoding import find_encoding
 from pyspartaproj.script.string.encoding.set_encoding import set_encoding
 
 
-def _common_test(encoding: str) -> None:
+def _compare_encoding(encoding: str) -> None:
     assert encoding == find_encoding(
         set_encoding(chr(12354), encoding=encoding)
     )
@@ -15,12 +15,12 @@ def _common_test(encoding: str) -> None:
 
 def test_utf() -> None:
     """Test to find character encoding which is UTF-8."""
-    _common_test("utf-8")
+    _compare_encoding("utf-8")
 
 
 def test_sjis() -> None:
     """Test to find character encoding which is Shift JIS."""
-    _common_test("shift-jis")
+    _compare_encoding("shift-jis")
 
 
 def test_other() -> None:
