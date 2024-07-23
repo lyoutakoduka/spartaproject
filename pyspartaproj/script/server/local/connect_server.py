@@ -17,6 +17,7 @@ from pyspartaproj.interface.paramiko import (
 from pyspartaproj.script.decimal.initialize_decimal import initialize_decimal
 from pyspartaproj.script.project.project_context import ProjectContext
 from pyspartaproj.script.server.local.path_server import PathServer
+from pyspartaproj.script.string.encoding.set_encoding import set_encoding
 
 initialize_decimal()
 
@@ -139,7 +140,7 @@ class ConnectServer(PathServer, ProjectContext):
         command: str = " ".join(commands) + "\n"
 
         if channel := self.get_channel():
-            channel.send(command.encode("utf-8"))
+            channel.send(set_encoding(command))
             self._sleep()
 
     def _correct_path(self, result: Strs) -> bool:
