@@ -13,3 +13,9 @@ def test_utf() -> None:
     source: bytes = b"\xe3\x81\x82"
 
     _compare_decoding(set_decoding(source))
+
+
+def test_sjis() -> None:
+    source: bytes = b"\x82\xa0"
+
+    _compare_decoding(set_decoding(source, encoding="shift_jis"))
