@@ -4,10 +4,13 @@
 """Test module to find character encoding from string automatically."""
 
 from pyspartaproj.script.string.encoding.find_encoding import find_encoding
+from pyspartaproj.script.string.encoding.set_encoding import set_encoding
 
 
 def _common_test(encoding: str) -> None:
-    assert encoding == find_encoding(chr(12354).encode(encoding))
+    assert encoding == find_encoding(
+        set_encoding(chr(12354), encoding=encoding)
+    )
 
 
 def test_utf() -> None:
@@ -22,4 +25,7 @@ def test_sjis() -> None:
 
 def test_other() -> None:
     """Test to find character encoding which is others."""
-    assert "shift-jis" != find_encoding(chr(12354).encode("euc-jp"))
+
+    assert "shift-jis" != find_encoding(
+        set_encoding(chr(12354), encoding="euc-jp")
+    )
