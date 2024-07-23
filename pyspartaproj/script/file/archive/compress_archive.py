@@ -24,6 +24,7 @@ from pyspartaproj.script.path.modify.get_relative import (
     is_relative,
 )
 from pyspartaproj.script.path.status.get_statistic import get_file_size
+from pyspartaproj.script.string.encoding.set_encoding import set_encoding
 from pyspartaproj.script.time.current_datetime import get_current_time
 from pyspartaproj.script.time.stamp.get_timestamp import (
     get_invalid_time,
@@ -89,7 +90,7 @@ class CompressArchive:
 
     def _convert_comment(self, attribute: StrPair) -> bytes:
         comment: str = json_dump(multiple_to_json(attribute), compress=True)
-        return comment.encode("utf-8")
+        return set_encoding(comment)
 
     def _store_timestamp_detail(self, time: datetime) -> bytes:
         return self._convert_comment({"latest": time.isoformat()})
