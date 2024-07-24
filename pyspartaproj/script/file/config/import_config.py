@@ -34,18 +34,22 @@ def _get_key_groups(config: ConfigParser) -> StrsPair:
     return {section: config.options(section) for section in config.sections()}
 
 
+def _get_configuration(key_groups: StrsPair, config: ConfigParser) -> Config:
+    return {
+        key_section: {
+            key: _load_each_type(config, key_section, key) for key in key_group
+        }
+        for key_section, key_group in key_groups.items()
+    }
+
+
 def config_load(source: str) -> Config:
     config = ConfigParser()
     config.read_string(source)
 
     key_groups: StrsPair = _get_key_groups(config)
 
-    result_config: Config = {
-        key_section: {
-            key: _load_each_type(config, key_section, key) for key in key_group
-        }
-        for key_section, key_group in key_groups.items()
-    }
+    result_config: Config = _get_configuration(key_groups, config)
 
     return result_config
 
