@@ -19,10 +19,6 @@ def _not_same_encoding(expected: str, result: bytes) -> None:
     assert expected != find_encoding(result)
 
 
-def _compare_encoding(encoding: str) -> None:
-    _same_encoding(encoding, set_encoding(_get_input(), encoding=encoding))
-
-
 def test_utf() -> None:
     """Test to find character encoding which is UTF-8."""
     _same_encoding("utf-8", set_encoding(_get_input()))
