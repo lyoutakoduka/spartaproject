@@ -30,13 +30,15 @@ def _load_each_type(config: ConfigParser, section: str, option: str) -> Basic:
     return _find_other(config, section, option)
 
 
+def _get_key_groups(config: ConfigParser) -> StrsPair:
+    return {section: config.options(section) for section in config.sections()}
+
+
 def config_load(source: str) -> Config:
     config = ConfigParser()
     config.read_string(source)
 
-    key_groups: StrsPair = {
-        section: config.options(section) for section in config.sections()
-    }
+    key_groups: StrsPair = _get_key_groups(config)
 
     result_config: Config = {
         key_section: {
