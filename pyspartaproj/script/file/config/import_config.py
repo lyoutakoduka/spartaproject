@@ -5,6 +5,7 @@ from configparser import ConfigParser
 from decimal import Decimal
 from pathlib import Path
 
+from pyspartaproj.context.default.string_context import StrsPair
 from pyspartaproj.context.file.config_context import Basic, Config
 from pyspartaproj.script.file.text.import_file import text_import
 
@@ -29,7 +30,7 @@ def config_load(source: str) -> Config:
     config = ConfigParser()
     config.read_string(source)
 
-    key_groups = {
+    key_groups: StrsPair = {
         section: config.options(section) for section in config.sections()
     }
 
