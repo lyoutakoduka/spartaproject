@@ -10,6 +10,11 @@ from pyspartaproj.context.file.config_context import Basic, Config
 from pyspartaproj.script.file.text.import_file import text_import
 
 
+def _find_other(config: ConfigParser, section: str, option: str) -> Basic:
+    text: str = config.get(section, option)
+    return Path(text) if "path" in option else text
+
+
 def _load_each_type(config: ConfigParser, section: str, option: str) -> Basic:
     for i in range(3):
         try:
@@ -22,8 +27,7 @@ def _load_each_type(config: ConfigParser, section: str, option: str) -> Basic:
         except BaseException:
             pass
 
-    text: str = config.get(section, option)
-    return Path(text) if "path" in option else text
+    return _find_other(config, section, option)
 
 
 def config_load(source: str) -> Config:
