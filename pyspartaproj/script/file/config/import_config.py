@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Import configuration file or load configuration data."""
+
 from configparser import ConfigParser
 from decimal import Decimal
 from pathlib import Path
@@ -44,6 +46,22 @@ def _get_configuration(key_groups: StrsPair, config: ConfigParser) -> Config:
 
 
 def config_load(source: str) -> Config:
+    """Load configuration data from imported file.
+
+    Supported data types of configuration file are follow.
+
+    1: Boolean
+    2: Integer
+    3: Decimal (Type float is always loaded as type Decimal)
+    4-1: String
+    4-2: Path (If key of configuration data ends with string ".path")
+
+    Args:
+        source (str): Configuration data as string format.
+
+    Returns:
+        Config: Configuration data converted to user defined type.
+    """
     config = ConfigParser()
     config.read_string(source)
 
@@ -51,4 +69,16 @@ def config_load(source: str) -> Config:
 
 
 def config_import(import_path: Path, encoding: str | None = None) -> Config:
+    """Import configuration file as format "ini".
+
+    Args:
+        import_path (Path): Path of configuration file you want to import.
+
+        encoding (str | None, optional): Defaults to None.
+            Character encoding you want to override forcibly.
+            It's used for argument "encoding" of function "text_import".
+
+    Returns:
+        Config: Configuration data converted to user defined type.
+    """
     return config_load(text_import(import_path, encoding=encoding))
