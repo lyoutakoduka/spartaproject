@@ -47,11 +47,7 @@ def config_load(source: str) -> Config:
     config = ConfigParser()
     config.read_string(source)
 
-    key_groups: StrsPair = _get_key_groups(config)
-
-    result_config: Config = _get_configuration(key_groups, config)
-
-    return result_config
+    return _get_configuration(_get_key_groups(config), config)
 
 
 def config_import(import_path: Path, encoding: str | None = None) -> Config:
