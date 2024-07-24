@@ -7,10 +7,12 @@ from pyspartaproj.script.string.encoding.find_encoding import find_encoding
 from pyspartaproj.script.string.encoding.set_encoding import set_encoding
 
 
+def _same_encoding(expected: str, result: bytes) -> None:
+    assert expected == find_encoding(result)
+
+
 def _compare_encoding(encoding: str) -> None:
-    assert encoding == find_encoding(
-        set_encoding(chr(12354), encoding=encoding)
-    )
+    _same_encoding(encoding, set_encoding(chr(12354), encoding=encoding))
 
 
 def test_utf() -> None:
