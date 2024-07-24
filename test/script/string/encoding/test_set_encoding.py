@@ -10,7 +10,7 @@ def _compare_encoding(expected: bytes, result: bytes) -> None:
     assert expected == result
 
 
-def _test_character() -> str:
+def _get_input() -> str:
     return "\u3042"
 
 
@@ -18,7 +18,7 @@ def test_utf() -> None:
     """Test to encode string by default character encoding."""
     expected: bytes = b"\xe3\x81\x82"
 
-    _compare_encoding(expected, set_encoding(_test_character()))
+    _compare_encoding(expected, set_encoding(_get_input()))
 
 
 def test_sjis() -> None:
@@ -26,5 +26,5 @@ def test_sjis() -> None:
     expected: bytes = b"\x82\xa0"
 
     _compare_encoding(
-        expected, set_encoding(_test_character(), encoding="shift_jis")
+        expected, set_encoding(_get_input(), encoding="shift_jis")
     )
