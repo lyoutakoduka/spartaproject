@@ -25,7 +25,7 @@ def _compare_encoding(encoding: str) -> None:
 
 def test_utf() -> None:
     """Test to find character encoding which is UTF-8."""
-    _compare_encoding("utf-8")
+    _same_encoding("utf-8", set_encoding(_get_input()))
 
 
 def test_sjis() -> None:
