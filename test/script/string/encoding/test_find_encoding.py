@@ -11,6 +11,10 @@ def _same_encoding(expected: str, result: bytes) -> None:
     assert expected == find_encoding(result)
 
 
+def _not_same_encoding(expected: str, result: bytes) -> None:
+    assert expected != find_encoding(result)
+
+
 def _compare_encoding(encoding: str) -> None:
     _same_encoding(encoding, set_encoding(chr(12354), encoding=encoding))
 
@@ -27,7 +31,6 @@ def test_sjis() -> None:
 
 def test_other() -> None:
     """Test to find character encoding which is others."""
-
-    assert "shift-jis" != find_encoding(
-        set_encoding(chr(12354), encoding="euc-jp")
+    _not_same_encoding(
+        "shift-jis", set_encoding(chr(12354), encoding="euc-jp")
     )
