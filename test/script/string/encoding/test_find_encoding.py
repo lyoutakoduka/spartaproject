@@ -30,7 +30,8 @@ def test_utf() -> None:
 
 def test_sjis() -> None:
     """Test to find character encoding which is Shift JIS."""
-    _compare_encoding("shift-jis")
+    encoding: str = "shift-jis"
+    _same_encoding(encoding, set_encoding(_get_input(), encoding=encoding))
 
 
 def test_other() -> None:
