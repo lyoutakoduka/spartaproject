@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Import configuration file or load configuration data."""
+"""Module to import configuration file or load configuration data."""
 
 from configparser import ConfigParser
 from decimal import Decimal
@@ -52,7 +52,7 @@ def config_load(source: str) -> Config:
 
     1: Boolean
     2: Integer
-    3: Decimal (Type float is always loaded as type Decimal)
+    3: Decimal (Type float is always loaded as type decimal)
     4-1: String
     4-2: Path (If key of configuration data ends with string ".path")
 
