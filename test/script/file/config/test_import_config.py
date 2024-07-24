@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to import configuration file or load configuration data."""
+
 from decimal import Decimal
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -20,6 +22,7 @@ def _get_section(formatted: str) -> Basic:
 
 
 def test_bool() -> None:
+    """Test to load configuration data as type boolean."""
     source: str = """
         [section]
         option=True
@@ -29,6 +32,7 @@ def test_bool() -> None:
 
 
 def test_integer() -> None:
+    """Test to load configuration data as type integer."""
     source: str = """
         [section]
         option=1
@@ -39,6 +43,7 @@ def test_integer() -> None:
 
 
 def test_decimal() -> None:
+    """Test to load configuration data as type decimal."""
     source: str = """
         [section]
         option=1.0
@@ -49,6 +54,7 @@ def test_decimal() -> None:
 
 
 def test_string() -> None:
+    """Test to load configuration data as type string."""
     source: str = """
         [section]
         option=text
@@ -59,6 +65,7 @@ def test_string() -> None:
 
 
 def test_path() -> None:
+    """Test to load configuration data as type path."""
     source: str = """
         [section]
         path=text
@@ -70,6 +77,7 @@ def test_path() -> None:
 
 
 def test_import() -> None:
+    """Test to import configuration file as format "ini"."""
     source: str = """
         [section]
         option=text
