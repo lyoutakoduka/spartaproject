@@ -43,5 +43,5 @@ def config_load(source: str) -> Config:
     return result_config
 
 
-def config_import(import_path: Path) -> Config:
-    return config_load(text_import(import_path))
+def config_import(import_path: Path, encoding: str | None = None) -> Config:
+    return config_load(text_import(import_path, encoding=encoding))
