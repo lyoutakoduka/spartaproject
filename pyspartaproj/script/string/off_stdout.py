@@ -64,7 +64,7 @@ class StdoutText(TransferFunction):
                 with redirect_stdout(file):
                     result: CR = _execute_function()
 
-            self.stdout = text_import(temporary_path)
+            self.stdout: str = text_import(temporary_path)
 
         return result
 

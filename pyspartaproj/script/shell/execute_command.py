@@ -6,6 +6,7 @@
 from subprocess import PIPE, Popen
 
 from pyspartaproj.context.default.string_context import StrGene, Strs, Strs2
+from pyspartaproj.script.string.encoding.set_decoding import set_decoding
 
 
 def _cleanup_new_lines(text: str) -> str:
@@ -25,7 +26,7 @@ def _execute(command: str) -> StrGene:
         line: bytes = subprocess.stdout.readline()
 
         if line:
-            yield _cleanup_new_lines(line.decode())
+            yield _cleanup_new_lines(set_decoding(line))
         else:
             if subprocess.poll() is not None:
                 break
