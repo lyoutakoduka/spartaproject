@@ -13,5 +13,5 @@ def json_load(source: str) -> Json:
     return result
 
 
-def json_import(import_path: Path) -> Json:
-    return json_load(text_import(import_path))
+def json_import(import_path: Path, encoding: str | None = None) -> Json:
+    return json_load(text_import(import_path, encoding=encoding))
