@@ -19,34 +19,38 @@ def _common_test(expected: Single, source: str) -> None:
     assert expected == result["group"]
 
 
+def _specify_pair(expected: Single, source: str) -> None:
+    _common_test(expected, source)
+
+
 def test_none() -> None:
     """Test to load Json data as None data."""
     expected: None = None
-    _common_test(expected, "null")
+    _specify_pair(expected, "null")
 
 
 def test_bool() -> None:
     """Test to load Json data as type boolean."""
     expected: bool = True
-    _common_test(expected, "true")
+    _specify_pair(expected, "true")
 
 
 def test_integer() -> None:
     """Test to load Json data as type integer."""
     expected: int = 1
-    _common_test(expected, str(expected))
+    _specify_pair(expected, str(expected))
 
 
 def test_decimal() -> None:
     """Test to load Json data as type decimal."""
     expected: float = 0.1
-    _common_test(expected, str(expected))
+    _specify_pair(expected, str(expected))
 
 
 def test_string() -> None:
     """Test to load Json data as type string."""
     expected: str = "test"
-    _common_test(expected, '"%s"' % expected)
+    _specify_pair(expected, '"%s"' % expected)
 
 
 def test_export() -> None:
