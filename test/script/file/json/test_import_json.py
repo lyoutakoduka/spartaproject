@@ -12,15 +12,15 @@ from pyspartaproj.script.file.json.export_json import json_export
 from pyspartaproj.script.file.json.import_json import json_import, json_load
 
 
-def _common_test(expected: Single, source: str) -> None:
-    result: Json = json_load('{"group": %s}' % source)
+def _common_test(expected: Single, key: str, value: str) -> None:
+    result: Json = json_load('{"%s": %s}' % (key, value))
 
     assert isinstance(result, Dict)
-    assert expected == result["group"]
+    assert expected == result[key]
 
 
 def _specify_pair(expected: Single, source: str) -> None:
-    _common_test(expected, source)
+    _common_test(expected, "group", source)
 
 
 def test_none() -> None:
