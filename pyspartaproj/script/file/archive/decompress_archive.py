@@ -19,6 +19,7 @@ from pyspartaproj.script.file.json.import_json import json_load
 from pyspartaproj.script.file.text.export_file import byte_export
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.string.convert_type import convert_integer
+from pyspartaproj.script.string.encoding.set_decoding import set_decoding
 from pyspartaproj.script.time.stamp.set_timestamp import set_latest
 
 
@@ -53,7 +54,7 @@ class DecompressArchive:
 
         if 0 < len(comment):
             content: StrPair = string_pair_from_json(
-                json_load(comment.decode())
+                json_load(set_decoding(comment))
             )
 
             if "latest" in content:

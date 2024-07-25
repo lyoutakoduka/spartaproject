@@ -17,6 +17,7 @@ from pyspartaproj.interface.paramiko import (
 from pyspartaproj.script.decimal.initialize_decimal import initialize_decimal
 from pyspartaproj.script.project.project_context import ProjectContext
 from pyspartaproj.script.server.local.path_server import PathServer
+from pyspartaproj.script.string.encoding.set_decoding import set_decoding
 from pyspartaproj.script.string.encoding.set_encoding import set_encoding
 
 initialize_decimal()
@@ -105,7 +106,7 @@ class ConnectServer(PathServer, ProjectContext):
 
                 self._sleep()
 
-            return text_byte.decode()
+            return set_decoding(text_byte)
 
         return None
 

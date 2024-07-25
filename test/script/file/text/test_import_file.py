@@ -9,6 +9,7 @@ from typing import Callable
 
 from pyspartaproj.script.file.text.export_file import text_export
 from pyspartaproj.script.file.text.import_file import byte_import, text_import
+from pyspartaproj.script.string.encoding.set_decoding import set_decoding
 
 
 def _common_test(result: str) -> None:
@@ -24,7 +25,7 @@ def test_byte() -> None:
     """Test to import binary file."""
 
     def individual_test(text_path: Path) -> None:
-        _common_test(byte_import(text_path).decode())
+        _common_test(set_decoding(byte_import(text_path)))
 
     _inside_temporary_directory(individual_test)
 
