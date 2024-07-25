@@ -28,7 +28,7 @@ def json_load(source: str) -> Json:
     Returns:
         Json: Json data converted to user defined type.
     """
-    result: Json = loads(source)
+    result: Json = loads(source)  # Should cast to type Json.
     return result
 
 
