@@ -37,7 +37,7 @@ def test_integer() -> None:
     _common_test(expected, str(expected))
 
 
-def test_float() -> None:
+def test_decimal() -> None:
     """Test to load Json data as type decimal."""
     expected: float = 0.1
     _common_test(expected, str(expected))
