@@ -11,7 +11,7 @@ from pyspartaproj.script.string.rename.grouped_characters import (
 
 
 def _compare_counts(tables: Strs2) -> None:
-    assert [26, 26, 10, 33] == [len(table) for table in tables]
+    assert [26, 26, 10, 47] == [len(table) for table in tables]
 
 
 def _compare_filtered(expected: Strs2, tables: Strs2) -> None:
