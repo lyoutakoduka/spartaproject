@@ -32,7 +32,7 @@ class GroupedCharacters:
 
     def _get_special_tables(self, multiple: bool) -> Strs:
         return [
-            key if multiple else value
+            value if multiple else key
             for key, values in self._get_special_pair().items()
             for value in values
         ]
