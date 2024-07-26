@@ -31,7 +31,11 @@ class GroupedCharacters:
         }
 
     def _get_special_tables(self, multiple: bool) -> Strs:
-        return ["\u3000" if multiple else " "]
+        return [
+            key if multiple else value
+            for key, values in self._get_special_pair().items()
+            for value in values
+        ]
 
     def _initialize_variables(self, multiple: bool) -> None:
         self._index_base: int = self._get_index_base(multiple)
