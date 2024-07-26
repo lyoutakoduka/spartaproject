@@ -4,7 +4,7 @@
 """Module to get character tables constructed by multiple or single byte."""
 
 from pyspartaproj.context.default.integer_context import Ints
-from pyspartaproj.context.default.string_context import Strs, Strs2
+from pyspartaproj.context.default.string_context import Strs, Strs2, StrsPair
 from pyspartaproj.context.typed.user_context import CharacterTable
 
 
@@ -19,8 +19,23 @@ class GroupedCharacters:
 
         return index_base
 
+    def _get_special_pair(self) -> StrsPair:
+        return {
+            " ": ["\u3000"],
+            ".": ["\u30fb", "\u3002", "\u2026"],
+            ",": ["\u3001"],
+            "[": ["\u300c", "\u3010", "\u300e"],
+            "]": ["\u300d", "\u3011", "\u300f"],
+            '"': ["\u201d", "\u201c"],
+            "'": ["\u2019", "\u2018"],
+        }
+
     def _get_special_tables(self, multiple: bool) -> Strs:
-        return ["\u3000" if multiple else " "]
+        return [
+            value if multiple else key
+            for key, values in sorted(self._get_special_pair().items())
+            for value in values
+        ]
 
     def _initialize_variables(self, multiple: bool) -> None:
         self._index_base: int = self._get_index_base(multiple)
