@@ -9,13 +9,6 @@ from pyspartaproj.script.string.rename.split_identifier import SplitIdentifier
 class StandardizeText(SplitIdentifier):
     """Class to standardize string for key of dictionary."""
 
-    def _initialize_variables_standardize(
-        self, strip: bool, under: bool, lower: bool
-    ) -> None:
-        self._strip: bool = strip
-        self._under: bool = under
-        self._lower: bool = lower
-
     def _convert_lower(self, text: str) -> str:
         return text.lower()
 
@@ -72,5 +65,3 @@ class StandardizeText(SplitIdentifier):
                 Convert upper case letter to lower case letter.
         """
         super().__init__(identifier=identifier)
-
-        self._initialize_variables_standardize(strip, under, lower)
