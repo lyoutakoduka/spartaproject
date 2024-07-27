@@ -43,10 +43,11 @@ def test_identifier() -> None:
 
     Candidates are characters other than alphabets and numbers.
     """
-    base_identifier: str = _get_identifier()
     names: Strs = ["first", "second", "third"]
+    expected: str = _get_identifier().join(names)
+    split_identifier = SplitIdentifier()
 
     for identifier in [" ", ".", "-", "~"]:
-        assert base_identifier.join(names) == SplitIdentifier().convert_under(
+        assert expected == split_identifier.convert_under(
             identifier.join(names)
         )
