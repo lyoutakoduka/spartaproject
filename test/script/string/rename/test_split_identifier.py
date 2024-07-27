@@ -13,9 +13,13 @@ def _compare_identifier(
     assert identifier == split_identifier.get_identifier()
 
 
+def _get_identifier() -> str:
+    return "_"
+
+
 def test_path() -> None:
     """Test to get default split identifier."""
-    _compare_identifier("_", SplitIdentifier())
+    _compare_identifier(_get_identifier(), SplitIdentifier())
 
 
 def test_specific() -> None:
@@ -27,7 +31,11 @@ def test_specific() -> None:
 def test_strip() -> None:
     """Test to remove the split identifier of the both ends."""
     expected: str = "test"
-    assert expected == SplitIdentifier().convert_strip("__" + expected + "__")
+    identifier: str = _get_identifier() * 2
+
+    assert expected == SplitIdentifier().convert_strip(
+        identifier + expected + identifier
+    )
 
 
 def test_identifier() -> None:
@@ -35,9 +43,10 @@ def test_identifier() -> None:
 
     Candidates are characters other than alphabets and numbers.
     """
+    base_identifier: str = _get_identifier()
     names: Strs = ["first", "second", "third"]
 
     for identifier in [" ", ".", "-", "~"]:
-        assert "_".join(names) == SplitIdentifier().convert_under(
+        assert base_identifier.join(names) == SplitIdentifier().convert_under(
             identifier.join(names)
         )
