@@ -18,6 +18,7 @@ class StandardizeText(SplitIdentifier):
         lower: bool = False,
         under: bool = False,
         strip: bool = False,
+        replace: bool = False,
     ) -> str:
         """Function to standardize string for key of dictionary.
 
@@ -47,6 +48,9 @@ class StandardizeText(SplitIdentifier):
 
         if strip:
             text = self.convert_strip(text)
+
+        if replace:
+            text = self.replace_identifier(text)
 
         return text
 
