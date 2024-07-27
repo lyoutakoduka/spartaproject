@@ -20,6 +20,10 @@ def test_all() -> None:
     _compare_text(
         "name_domain_com",
         StandardizeText().standardize(
-            " name@domain.com ", lower=True, under=True, strip=True
+            " name@(domain).com ",
+            lower=True,
+            under=True,
+            strip=True,
+            replace=True,
         ),
     )
