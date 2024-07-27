@@ -19,6 +19,7 @@ def test_all() -> None:
     """Test to convert string by using all conditions at once."""
     _compare_text(
         "name_domain_com",
-        " name@domain.com ",
-        StandardizeText(lower=True, under=True, strip=True),
+        StandardizeText().standardize(
+            " name@domain.com ", lower=True, under=True, strip=True
+        ),
     )
