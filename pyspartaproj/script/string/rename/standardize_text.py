@@ -41,9 +41,6 @@ class StandardizeText(SplitIdentifier):
     def __init__(
         self,
         identifier: str | None = None,
-        strip: bool = False,
-        under: bool = False,
-        lower: bool = False,
     ) -> None:
         """Initialize variables and super class.
 
