@@ -7,10 +7,14 @@ from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.script.string.rename.split_identifier import SplitIdentifier
 
 
+def _compare_text(expected: str, result: str) -> None:
+    assert expected == result
+
+
 def _compare_identifier(
     identifier: str, split_identifier: SplitIdentifier
 ) -> None:
-    assert identifier == split_identifier.get_identifier()
+    _compare_text(identifier, split_identifier.get_identifier())
 
 
 def _get_identifier() -> str:
@@ -48,6 +52,6 @@ def test_identifier() -> None:
     split_identifier = SplitIdentifier()
 
     for identifier in [" ", ".", "-", "~"]:
-        assert expected == split_identifier.convert_under(
-            identifier.join(names)
+        _compare_text(
+            expected, split_identifier.convert_under(identifier.join(names))
         )
