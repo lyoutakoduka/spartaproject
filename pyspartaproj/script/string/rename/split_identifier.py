@@ -64,6 +64,12 @@ class SplitIdentifier:
         """
         return "".join([self._replace_other(single) for single in text])
 
+    def replace_identifier(self, text: str) -> str:
+        identifier: str = self.get_identifier()
+        return identifier.join(
+            [line for line in text.split(identifier) if 0 < len(line)]
+        )
+
     def __init__(self, identifier: str | None = None) -> None:
         """Initialize variables and the split identifier.
 
