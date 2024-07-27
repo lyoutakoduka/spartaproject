@@ -55,3 +55,17 @@ def test_identifier() -> None:
         _compare_text(
             expected, split_identifier.convert_under(identifier.join(names))
         )
+
+
+def test_replace() -> None:
+    base_identifier: str = _get_identifier()
+    names: Strs = ["first", "second"]
+    expected: str = base_identifier.join(names)
+    split_identifier = SplitIdentifier()
+
+    for i in range(3):
+        identifier: str = base_identifier * (i + 1)
+        _compare_text(
+            expected,
+            split_identifier.replace_identifier(identifier.join(names)),
+        )
