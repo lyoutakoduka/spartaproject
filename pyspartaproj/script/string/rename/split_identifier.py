@@ -65,6 +65,14 @@ class SplitIdentifier:
         return "".join([self._replace_other(single) for single in text])
 
     def replace_identifier(self, text: str) -> str:
+        """Replace one or more consecutive split identifier.
+
+        Args:
+            text (str): String you want to replace the split identifier.
+
+        Returns:
+            str: Replaced string.
+        """
         identifier: str = self.get_identifier()
         return identifier.join(
             [line for line in text.split(identifier) if 0 < len(line)]
