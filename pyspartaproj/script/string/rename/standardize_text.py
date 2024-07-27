@@ -19,7 +19,13 @@ class StandardizeText(SplitIdentifier):
     def _convert_lower(self, text: str) -> str:
         return text.lower()
 
-    def standardize(self, text: str) -> str:
+    def standardize(
+        self,
+        text: str,
+        lower: bool = False,
+        under: bool = False,
+        strip: bool = False,
+    ) -> str:
         """Function to standardize string for key of dictionary.
 
         Args:
@@ -28,13 +34,13 @@ class StandardizeText(SplitIdentifier):
         Returns:
             str: Standardize text.
         """
-        if self._lower:
+        if lower:
             text = self._convert_lower(text)
 
-        if self._under:
+        if under:
             text = self.convert_under(text)
 
-        if self._strip:
+        if strip:
             text = self.convert_strip(text)
 
         return text
