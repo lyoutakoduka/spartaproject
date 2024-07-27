@@ -58,6 +58,7 @@ def test_identifier() -> None:
 
 
 def test_replace() -> None:
+    """Test to replace one or more consecutive split identifier."""
     base_identifier: str = _get_identifier()
     names: Strs = ["first", "second"]
     expected: str = base_identifier.join(names)
