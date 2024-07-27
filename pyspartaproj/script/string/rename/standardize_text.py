@@ -31,11 +31,15 @@ class StandardizeText(SplitIdentifier):
             under (bool, optional): Defaults to False.
                 Convert characters to the split identifier,
                     candidates are characters other than alphabets and numbers.
-                It's executed from class "SplitIdentifier".
+                It's executed from super class "SplitIdentifier".
 
             strip (bool, optional): Defaults to False.
                 Remove the split identifier of the both ends of string.
-                It's executed from class "SplitIdentifier".
+                It's executed from super class "SplitIdentifier".
+
+            replace (bool, optional): Defaults to False.
+                Replace one or more consecutive split identifier.
+                It's executed from super class "SplitIdentifier".
 
         Returns:
             str: Standardize text.
