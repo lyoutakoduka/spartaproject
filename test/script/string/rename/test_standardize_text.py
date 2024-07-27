@@ -6,10 +6,8 @@
 from pyspartaproj.script.string.rename.standardize_text import StandardizeText
 
 
-def _compare_text(
-    expected: str, source: str, standardize: StandardizeText
-) -> None:
-    assert expected == standardize.standardize(source)
+def _compare_text(expected: str, result: str) -> None:
+    assert expected == result
 
 
 def test_lower() -> None:
