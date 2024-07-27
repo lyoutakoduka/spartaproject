@@ -24,6 +24,18 @@ class StandardizeText(SplitIdentifier):
         Args:
             text (str): Text you want to standardize.
 
+            lower (bool, optional): Defaults to False.
+                Convert upper case letter to lower case letter.
+
+            under (bool, optional): Defaults to False.
+                Convert characters to the split identifier,
+                    candidates are characters other than alphabets and numbers.
+                It's executed from class "SplitIdentifier".
+
+            strip (bool, optional): Defaults to False.
+                Remove the split identifier of the both ends of string.
+                It's executed from class "SplitIdentifier".
+
         Returns:
             str: Standardize text.
         """
@@ -48,17 +60,5 @@ class StandardizeText(SplitIdentifier):
             identifier (str | None, optional): Defaults to None.
                 You can specify the split identifier by argument "identifier".
                 It's used for argument "identifier" of class "SplitIdentifier".
-
-            strip (bool, optional): Defaults to False.
-                Remove the split identifier of the both ends of string.
-                It's executed from class "SplitIdentifier".
-
-            under (bool, optional): Defaults to False.
-                Convert characters to the split identifier,
-                    candidates are characters other than alphabets and numbers.
-                It's executed from class "SplitIdentifier".
-
-            lower (bool, optional): Defaults to False.
-                Convert upper case letter to lower case letter.
         """
         super().__init__(identifier=identifier)
