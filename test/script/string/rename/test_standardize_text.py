@@ -12,7 +12,7 @@ def _compare_text(expected: str, result: str) -> None:
 
 def test_lower() -> None:
     """Test to convert upper case string to lower case."""
-    _compare_text("test", "TEST", StandardizeText(lower=True))
+    _compare_text("test", StandardizeText().standardize("TEST", lower=True))
 
 
 def test_all() -> None:
