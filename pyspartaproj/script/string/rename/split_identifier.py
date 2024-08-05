@@ -78,6 +78,9 @@ class SplitIdentifier:
             [line for line in text.split(identifier) if 0 < len(line)]
         )
 
+    def switch_identifier(self, text: str, identifier: str) -> str:
+        return text.replace(self.get_identifier(), identifier)
+
     def __init__(self, identifier: str | None = None) -> None:
         """Initialize variables and the split identifier.
 
