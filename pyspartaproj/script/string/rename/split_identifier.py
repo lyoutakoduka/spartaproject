@@ -79,6 +79,18 @@ class SplitIdentifier:
         )
 
     def switch_identifier(self, text: str, identifier: str) -> str:
+        """Switch the split identifier to specific character.
+
+        Args:
+            text (str): String you want to switch the split identifier.
+
+
+            identifier (str):
+                Character which is used instead of the split identifier.
+
+        Returns:
+            str: String that the split identifier is switched.
+        """
         return text.replace(self.get_identifier(), identifier)
 
     def __init__(self, identifier: str | None = None) -> None:
