@@ -9,42 +9,58 @@ from pyspartaproj.script.string.rename.split_identifier import SplitIdentifier
 class StandardizeText(SplitIdentifier):
     """Class to standardize string for key of dictionary."""
 
-    def _initialize_variables_standardize(
-        self, strip: bool, under: bool, lower: bool
-    ) -> None:
-        self._strip: bool = strip
-        self._under: bool = under
-        self._lower: bool = lower
-
     def _convert_lower(self, text: str) -> str:
         return text.lower()
 
-    def standardize(self, text: str) -> str:
+    def standardize(
+        self,
+        text: str,
+        lower: bool = False,
+        under: bool = False,
+        strip: bool = False,
+        replace: bool = False,
+    ) -> str:
         """Function to standardize string for key of dictionary.
 
         Args:
             text (str): Text you want to standardize.
 
+            lower (bool, optional): Defaults to False.
+                Convert upper case letter to lower case letter.
+
+            under (bool, optional): Defaults to False.
+                Convert characters to the split identifier,
+                    candidates are characters other than alphabets and numbers.
+                It's executed from super class "SplitIdentifier".
+
+            strip (bool, optional): Defaults to False.
+                Remove the split identifier of the both ends of string.
+                It's executed from super class "SplitIdentifier".
+
+            replace (bool, optional): Defaults to False.
+                Replace one or more consecutive split identifier.
+                It's executed from super class "SplitIdentifier".
+
         Returns:
             str: Standardize text.
         """
-        if self._lower:
+        if lower:
             text = self._convert_lower(text)
 
-        if self._under:
+        if under:
             text = self.convert_under(text)
 
-        if self._strip:
+        if strip:
             text = self.convert_strip(text)
+
+        if replace:
+            text = self.replace_identifier(text)
 
         return text
 
     def __init__(
         self,
         identifier: str | None = None,
-        strip: bool = False,
-        under: bool = False,
-        lower: bool = False,
     ) -> None:
         """Initialize variables and super class.
 
@@ -52,19 +68,5 @@ class StandardizeText(SplitIdentifier):
             identifier (str | None, optional): Defaults to None.
                 You can specify the split identifier by argument "identifier".
                 It's used for argument "identifier" of class "SplitIdentifier".
-
-            strip (bool, optional): Defaults to False.
-                Remove the split identifier of the both ends of string.
-                It's executed from class "SplitIdentifier".
-
-            under (bool, optional): Defaults to False.
-                Convert characters to the split identifier,
-                    candidates are characters other than alphabets and numbers.
-                It's executed from class "SplitIdentifier".
-
-            lower (bool, optional): Defaults to False.
-                Convert upper case letter to lower case letter.
         """
         super().__init__(identifier=identifier)
-
-        self._initialize_variables_standardize(strip, under, lower)

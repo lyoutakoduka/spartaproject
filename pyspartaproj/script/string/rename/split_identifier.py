@@ -64,6 +64,35 @@ class SplitIdentifier:
         """
         return "".join([self._replace_other(single) for single in text])
 
+    def replace_identifier(self, text: str) -> str:
+        """Replace one or more consecutive split identifier.
+
+        Args:
+            text (str): String you want to replace the split identifier.
+
+        Returns:
+            str: Replaced string.
+        """
+        identifier: str = self.get_identifier()
+        return identifier.join(
+            [line for line in text.split(identifier) if 0 < len(line)]
+        )
+
+    def switch_identifier(self, text: str, identifier: str) -> str:
+        """Switch the split identifier to specific character.
+
+        Args:
+            text (str): String you want to switch the split identifier.
+
+
+            identifier (str):
+                Character which is used instead of the split identifier.
+
+        Returns:
+            str: String that the split identifier is switched.
+        """
+        return text.replace(self.get_identifier(), identifier)
+
     def __init__(self, identifier: str | None = None) -> None:
         """Initialize variables and the split identifier.
 
