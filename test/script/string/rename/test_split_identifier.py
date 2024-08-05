@@ -73,6 +73,7 @@ def test_replace() -> None:
 
 
 def test_switch() -> None:
+    """Test to switch the split identifier to specific character."""
     base_identifier: str = " "
     expected: str = base_identifier.join(["first", "second"])
     split_identifier = SplitIdentifier()
