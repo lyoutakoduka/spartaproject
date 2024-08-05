@@ -70,3 +70,16 @@ def test_replace() -> None:
             expected,
             split_identifier.replace_identifier(identifier.join(names)),
         )
+
+
+def test_switch() -> None:
+    base_identifier: str = " "
+    expected: str = base_identifier.join(["first", "second"])
+    split_identifier = SplitIdentifier()
+
+    _compare_text(
+        expected,
+        split_identifier.switch_identifier(
+            split_identifier.convert_under(expected), base_identifier
+        ),
+    )
