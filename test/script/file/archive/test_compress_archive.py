@@ -159,6 +159,10 @@ def _compare_archive_text(config_path: Path, expected: StrPair) -> None:
     assert expected == _import_multiple(config_path)
 
 
+def _find_config_path(sorted_paths: Paths2) -> Path:
+    return sorted_paths[-1][-1]
+
+
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
