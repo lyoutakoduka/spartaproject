@@ -430,6 +430,8 @@ def test_heavy() -> None:
 
 
 def test_multiple() -> None:
+    """Test to compress archive including multiple byte character."""
+
     def individual_test(temporary_root: Path) -> None:
         tree_root: Path = _get_tree_root(temporary_root)
         config_path: Path = _get_multiple_path(tree_root)
