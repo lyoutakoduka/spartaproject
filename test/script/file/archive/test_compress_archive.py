@@ -10,10 +10,15 @@ from tempfile import TemporaryDirectory
 from typing import Callable
 
 from pyspartaproj.context.default.integer_context import Ints2
+from pyspartaproj.context.default.string_context import StrPair
 from pyspartaproj.context.extension.decimal_context import Decs
 from pyspartaproj.context.extension.path_context import Paths, Paths2
 from pyspartaproj.script.decimal.initialize_decimal import initialize_decimal
 from pyspartaproj.script.file.archive.compress_archive import CompressArchive
+from pyspartaproj.script.file.json.convert_from_json import (
+    string_pair_from_json,
+)
+from pyspartaproj.script.file.json.import_json import json_import
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.modify.get_relative import get_relative_array
 from pyspartaproj.script.path.status.get_statistic import (
@@ -144,6 +149,10 @@ def _compress_test(
 
 def _name_test(archive_name: str, archive_paths: Paths) -> None:
     assert archive_name == archive_paths[0].stem
+
+
+def _import_multiple(config_path: Path) -> StrPair:
+    return string_pair_from_json(json_import(config_path))
 
 
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
