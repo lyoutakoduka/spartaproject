@@ -143,8 +143,7 @@ def _compress_test(
 
 
 def _name_test(archive_name: str, archive_paths: Paths) -> None:
-    archive_path = archive_paths[0]
-    assert archive_name == archive_path.stem
+    assert archive_name == archive_paths[0].stem
 
 
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
