@@ -36,6 +36,11 @@ def _get_multiple() -> str:
     return "\u3042"
 
 
+def _get_multiple_path(tree_root: Path) -> Path:
+    multiple: str = _get_multiple()
+    return Path(tree_root, multiple, multiple).with_suffix(".json")
+
+
 def _get_tree_root(temporary_root: Path) -> Path:
     return Path(temporary_root, "tree")
 
