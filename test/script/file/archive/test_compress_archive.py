@@ -32,6 +32,10 @@ from pyspartaproj.script.path.temporary.create_temporary_tree import (
 initialize_decimal()
 
 
+def _get_multiple() -> str:
+    return "\u3042"
+
+
 def _get_tree_root(temporary_root: Path) -> Path:
     return Path(temporary_root, "tree")
 
