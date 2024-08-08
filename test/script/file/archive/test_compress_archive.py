@@ -41,6 +41,10 @@ def _get_multiple_path(tree_root: Path) -> Path:
     return Path(tree_root, multiple, multiple).with_suffix(".json")
 
 
+def _get_multiple_data() -> StrPair:
+    return {"multiple": _get_multiple()}
+
+
 def _get_tree_root(temporary_root: Path) -> Path:
     return Path(temporary_root, "tree")
 
