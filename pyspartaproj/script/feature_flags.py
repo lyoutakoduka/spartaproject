@@ -24,7 +24,7 @@ def in_development(file: str | None = None) -> bool:
             File path is required if in development.
 
     Returns:
-        bool: Return True if in development.
+        bool: True if in development.
     """
     if file is None:
         return False
