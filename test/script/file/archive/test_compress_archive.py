@@ -427,3 +427,24 @@ def test_heavy() -> None:
         )
 
     _inside_temporary_directory(individual_test)
+
+
+def test_multiple() -> None:
+    def individual_test(temporary_root: Path) -> None:
+        tree_root: Path = _get_tree_root(temporary_root)
+        config_path: Path = _get_multiple_path(tree_root)
+        config_data: StrPair = _get_multiple_data()
+        walk_paths: Paths = [config_path]
+
+        _export_multiple(config_path, config_data)
+
+        _multiple_test(
+            _finalize_archive(
+                tree_root, walk_paths, _get_archive(temporary_root)
+            ),
+            temporary_root,
+            walk_paths,
+            config_data,
+        )
+
+    _inside_temporary_directory(individual_test)
