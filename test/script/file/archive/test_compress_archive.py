@@ -163,6 +163,20 @@ def _find_config_path(sorted_paths: Paths2) -> Path:
     return sorted_paths[-1][-1]
 
 
+def _multiple_test(
+    archive_paths: Paths,
+    temporary_root: Path,
+    walk_paths: Paths,
+    expected: StrPair,
+) -> None:
+    _compare_archive_text(
+        _find_config_path(
+            _compare_archive(archive_paths, temporary_root, walk_paths)
+        ),
+        expected,
+    )
+
+
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
