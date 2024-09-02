@@ -6,18 +6,15 @@ from pyspartaproj.script.bool.same_value import bool_same_array, bool_same_pair
 
 
 def test_empty() -> None:
-    with raises(ValueError, match="empty"):
-        bool_same_array([])
+    assert not bool_same_array([])
 
 
 def test_mixed() -> None:
-    with raises(ValueError, match="true_false"):
-        bool_same_array([False, True, False])
+    assert not bool_same_array([False, True, False])
 
 
 def test_false() -> None:
-    with raises(ValueError, match="false"):
-        bool_same_array([False, False, False])
+    assert not bool_same_array([False, False, False])
 
 
 def test_array() -> None:
