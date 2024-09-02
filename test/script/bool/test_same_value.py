@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from pyspartaproj.interface.pytest import raises
 from pyspartaproj.script.bool.same_value import bool_same_array, bool_same_pair
 
 
