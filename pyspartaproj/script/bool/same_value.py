@@ -6,15 +6,15 @@ from pyspartaproj.context.default.bool_context import BoolPair, Bools
 
 def bool_same_array(flags: Bools, invert: bool = False) -> bool:
     if 0 == len(flags):
-        raise ValueError("empty")
+        return False
 
     flags = list(set(flags))
 
     if 1 != len(flags):
-        raise ValueError("true_false")
+        return False
 
     if not invert ^ flags[0]:
-        raise ValueError("false")
+        return False
 
     return True
 
