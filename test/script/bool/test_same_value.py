@@ -34,3 +34,7 @@ def test_invert() -> None:
 
 def test_pair() -> None:
     confirm(bool_same_pair({"R": True, "G": True, "B": True}))
+
+
+def test_pair_invert() -> None:
+    confirm(bool_same_pair({"R": False, "G": False, "B": False}, invert=True))
