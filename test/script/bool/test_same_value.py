@@ -5,6 +5,10 @@ from pyspartaproj.interface.pytest import raises
 from pyspartaproj.script.bool.same_value import bool_same_array, bool_same_pair
 
 
+def confirm(status: bool) -> None:
+    assert status
+
+
 def confirm_error(status: bool) -> None:
     assert not status
 
@@ -22,12 +26,12 @@ def test_false() -> None:
 
 
 def test_array() -> None:
-    assert bool_same_array([True, True, True])
+    confirm(bool_same_array([True, True, True]))
 
 
 def test_invert() -> None:
-    assert bool_same_array([False, False, False], invert=True)
+    confirm(bool_same_array([False, False, False], invert=True))
 
 
 def test_pair() -> None:
-    assert bool_same_pair({"R": True, "G": True, "B": True})
+    confirm(bool_same_pair({"R": True, "G": True, "B": True}))
