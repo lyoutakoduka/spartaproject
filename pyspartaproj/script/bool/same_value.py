@@ -19,5 +19,7 @@ def bool_same_array(flags: Bools, invert: bool = False) -> bool:
     return True
 
 
-def bool_same_pair(flag_pair: BoolPair) -> bool:
-    return bool_same_array([value for value in flag_pair.values()])
+def bool_same_pair(flag_pair: BoolPair, invert: bool = False) -> bool:
+    return bool_same_array(
+        [value for value in flag_pair.values()], invert=invert
+    )
