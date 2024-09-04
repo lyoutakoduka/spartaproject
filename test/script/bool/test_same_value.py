@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from pyspartaproj.context.default.bool_context import Bools
+from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.script.bool.same_value import bool_same_array, bool_same_pair
 
 
@@ -15,6 +16,10 @@ def _confirm_error(status: bool) -> None:
 
 def _expected_list(status: bool) -> Bools:
     return [status] * 3
+
+
+def _expected_keys() -> Strs:
+    return ["R", "G", "B"]
 
 
 def test_empty() -> None:
