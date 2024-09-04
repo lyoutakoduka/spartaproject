@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from pyspartaproj.context.default.bool_context import Bools
+from pyspartaproj.context.default.bool_context import BoolPair, Bools
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.script.bool.same_value import bool_same_array, bool_same_pair
 
@@ -20,6 +20,13 @@ def _expected_list(status: bool) -> Bools:
 
 def _expected_keys() -> Strs:
     return ["R", "G", "B"]
+
+
+def _expected_pair(status: bool) -> BoolPair:
+    return {
+        key: value
+        for key, value in zip(_expected_keys(), _expected_list(status))
+    }
 
 
 def test_empty() -> None:
@@ -43,8 +50,8 @@ def test_invert() -> None:
 
 
 def test_pair() -> None:
-    _confirm(bool_same_pair({"R": True, "G": True, "B": True}))
+    _confirm(bool_same_pair(_expected_pair(True)))
 
 
 def test_pair_invert() -> None:
-    _confirm(bool_same_pair({"R": False, "G": False, "B": False}, invert=True))
+    _confirm(bool_same_pair(_expected_pair(False), invert=True))
