@@ -4,7 +4,7 @@
 from pyspartaproj.script.bool.same_value import bool_same_array, bool_same_pair
 
 
-def confirm(status: bool) -> None:
+def _confirm(status: bool) -> None:
     assert status
 
 
@@ -25,16 +25,16 @@ def test_false() -> None:
 
 
 def test_array() -> None:
-    confirm(bool_same_array([True, True, True]))
+    _confirm(bool_same_array([True, True, True]))
 
 
 def test_invert() -> None:
-    confirm(bool_same_array([False, False, False], invert=True))
+    _confirm(bool_same_array([False, False, False], invert=True))
 
 
 def test_pair() -> None:
-    confirm(bool_same_pair({"R": True, "G": True, "B": True}))
+    _confirm(bool_same_pair({"R": True, "G": True, "B": True}))
 
 
 def test_pair_invert() -> None:
-    confirm(bool_same_pair({"R": False, "G": False, "B": False}, invert=True))
+    _confirm(bool_same_pair({"R": False, "G": False, "B": False}, invert=True))
