@@ -8,20 +8,20 @@ def _confirm(status: bool) -> None:
     assert status
 
 
-def confirm_error(status: bool) -> None:
+def _confirm_error(status: bool) -> None:
     assert not status
 
 
 def test_empty() -> None:
-    confirm_error(bool_same_array([]))
+    _confirm_error(bool_same_array([]))
 
 
 def test_mixed() -> None:
-    confirm_error(bool_same_array([False, True, False]))
+    _confirm_error(bool_same_array([False, True, False]))
 
 
 def test_false() -> None:
-    confirm_error(bool_same_array([False, False, False]))
+    _confirm_error(bool_same_array([False, False, False]))
 
 
 def test_array() -> None:
