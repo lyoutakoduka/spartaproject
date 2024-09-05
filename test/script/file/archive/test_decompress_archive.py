@@ -62,7 +62,7 @@ def _compare_timestamp(sorted_paths: Paths2, expected: datetime) -> None:
     times_pair: Times2 = _get_times_pair(sorted_paths)
     assert times_pair[0] == times_pair[1]
 
-    times = _get_times(times_pair)
+    times: Times = _get_times(times_pair)
     assert 1 == len(times)
 
     assert expected == times[0]
