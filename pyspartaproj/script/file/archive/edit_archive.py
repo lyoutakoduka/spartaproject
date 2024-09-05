@@ -28,6 +28,7 @@ class EditArchive(SafeTrash):
         override: bool,
         jst: bool,
     ) -> None:
+        self._is_lzma_before: bool = False
         self._archive_path: Path | None = None
         self._still_removed: bool = False
         self._edit_root: Path = self.create_date_time_space(
@@ -99,7 +100,7 @@ class EditArchive(SafeTrash):
     def _record_compress_type(
         self, decompress_archive: DecompressArchive
     ) -> None:
-        self._is_lzma_before: bool = decompress_archive.is_lzma_archive(
+        self._is_lzma_before = decompress_archive.is_lzma_archive(
             self.get_archive_path()
         )
 
