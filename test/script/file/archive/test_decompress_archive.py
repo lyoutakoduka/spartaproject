@@ -47,6 +47,11 @@ def _get_archive_root(temporary_root: Path) -> Path:
     return Path(temporary_root, "archive")
 
 
+def _get_multiple_path(tree_root: Path) -> Path:
+    multiple: str = _get_multiple()
+    return Path(tree_root, multiple, multiple).with_suffix(".json")
+
+
 def _get_expected_stamp() -> datetime:
     return datetime.fromisoformat("2023-04-15T20:09:30.936886+00:00")
 
