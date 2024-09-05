@@ -85,7 +85,10 @@ class DecompressArchive:
         return converted.replace(sep, separator)
 
     def _get_file_path(self, information: ZipInfo) -> Path:
-        return Path(self._output_root, information.filename)
+        return Path(
+            self._output_root,
+            Path(self._support_multiple_byte(information.orig_filename)),
+        )
 
     def sequential_archives(self, source_archive: Path) -> Paths:
         """Get list of archives which is compressed dividedly.
