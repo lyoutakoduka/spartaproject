@@ -42,10 +42,10 @@ class DecompressArchive:
         return False
 
     def _decompress_file(
-        self, file_path: Path, relative: Path, archive_file: ZipFile
+        self, file_path: Path, information: ZipInfo, archive_file: ZipFile
     ) -> None:
         create_parent(file_path)
-        byte_export(file_path, archive_file.read(relative.as_posix()))
+        byte_export(file_path, archive_file.read(information.filename))
 
     def _restore_timestamp(
         self, file_path: Path, information: ZipInfo
@@ -145,7 +145,7 @@ class DecompressArchive:
                 if information.is_dir():
                     create_directory(file_path)
                 else:
-                    self._decompress_file(file_path, relative, archive_file)
+                    self._decompress_file(file_path, information, archive_file)
                     self._restore_timestamp(file_path, information)
 
     def decompress_at_once(self, paths: Paths) -> None:
