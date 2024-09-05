@@ -68,6 +68,9 @@ class DecompressArchive:
     def _decode_multiple(self, byte: bytes) -> str:
         return byte.decode("cp932")
 
+    def _get_separator(self) -> str:
+        return "/"
+
     def sequential_archives(self, source_archive: Path) -> Paths:
         """Get list of archives which is compressed dividedly.
 
