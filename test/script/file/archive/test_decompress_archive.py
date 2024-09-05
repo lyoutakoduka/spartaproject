@@ -9,7 +9,7 @@ from tempfile import TemporaryDirectory
 from typing import Callable
 
 from pyspartaproj.context.default.integer_context import Ints2
-from pyspartaproj.context.default.string_context import Strs
+from pyspartaproj.context.default.string_context import StrPair, Strs
 from pyspartaproj.context.extension.path_context import Paths, Paths2
 from pyspartaproj.context.extension.time_context import Times, Times2, datetime
 from pyspartaproj.script.file.archive.compress_archive import CompressArchive
@@ -45,6 +45,10 @@ def _get_extract_root(temporary_root: Path) -> Path:
 
 def _get_archive_root(temporary_root: Path) -> Path:
     return Path(temporary_root, "archive")
+
+
+def _get_multiple_data() -> StrPair:
+    return {"multiple": _get_multiple()}
 
 
 def _get_multiple_path(tree_root: Path) -> Path:
