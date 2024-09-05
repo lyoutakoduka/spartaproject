@@ -4,6 +4,7 @@
 """Module to decompress file or directory by archive format."""
 
 from datetime import datetime
+from os import sep
 from pathlib import Path
 from zipfile import ZIP_LZMA, ZipFile, ZipInfo
 
@@ -70,6 +71,18 @@ class DecompressArchive:
 
     def _get_separator(self) -> str:
         return "/"
+
+    def _support_multiple_byte(self, text: str) -> str:
+        converted: str = self._decode_multiple(self._encode_multiple(text))
+        separator: str = self._get_separator()
+
+        if separator == sep:
+            return converted
+
+        if sep not in converted:
+            return converted
+
+        return converted.replace(sep, separator)
 
     def sequential_archives(self, source_archive: Path) -> Paths:
         """Get list of archives which is compressed dividedly.
