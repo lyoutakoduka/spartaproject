@@ -7,10 +7,10 @@ from pyspartaproj.context.default.bool_context import BoolPair, Bools
 
 
 def bool_same_array(flags: Bools, invert: bool = False) -> bool:
-    """Confirm that list of bool values are same and True.
+    """Confirm that list of bool value are same and True.
 
     Args:
-        flags (Bools): List of bool values you want to check.
+        flags (Bools): List of bool value you want to check.
 
         invert (bool, optional): Defaults to False.
             False: Return True if all Values are True.
@@ -34,10 +34,10 @@ def bool_same_array(flags: Bools, invert: bool = False) -> bool:
 
 
 def bool_same_pair(flag_pair: BoolPair, invert: bool = False) -> bool:
-    """Confirm that pair of bool values are same and True.
+    """Confirm that pair of bool value are same and True.
 
     Args:
-        flag_pair (BoolPair): Pair of bool values you want to check.
+        flag_pair (BoolPair): Pair of bool value you want to check.
 
         invert (bool, optional): Defaults to False.
             False: Return True if all Values are True.
