@@ -27,6 +27,10 @@ from pyspartaproj.script.time.stamp.get_timestamp import get_latest
 from pyspartaproj.script.time.stamp.set_timestamp import set_latest
 
 
+def _get_multiple() -> str:
+    return "\u3042"
+
+
 def _get_types() -> Strs:
     return ["tree", "extract"]
 
