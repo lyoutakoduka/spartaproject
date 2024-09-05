@@ -84,6 +84,9 @@ class DecompressArchive:
 
         return converted.replace(sep, separator)
 
+    def _get_file_path(self, information: ZipInfo) -> Path:
+        return Path(self._output_root, information.filename)
+
     def sequential_archives(self, source_archive: Path) -> Paths:
         """Get list of archives which is compressed dividedly.
 
@@ -139,8 +142,7 @@ class DecompressArchive:
         """
         with ZipFile(decompress_target) as archive_file:
             for information in archive_file.infolist():
-                relative: Path = Path(information.filename)
-                file_path: Path = Path(self._output_root, relative)
+                file_path: Path = self._get_file_path(information)
 
                 if information.is_dir():
                     create_directory(file_path)
