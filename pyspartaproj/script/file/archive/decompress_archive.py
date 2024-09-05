@@ -62,6 +62,9 @@ class DecompressArchive:
 
         set_latest(file_path, latest)
 
+    def _encode_multiple(self, text: str) -> bytes:
+        return text.encode("cp437")
+
     def sequential_archives(self, source_archive: Path) -> Paths:
         """Get list of archives which is compressed dividedly.
 
