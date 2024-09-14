@@ -64,7 +64,7 @@ class DecompressArchive:
         set_latest(file_path, latest)
 
     def _encode_multiple(self, text: str) -> bytes:
-        return text.encode("cp437")
+        return text.encode("cp437", errors="ignore")
 
     def _decode_multiple(self, byte: bytes) -> str:
         return byte.decode("cp932")
