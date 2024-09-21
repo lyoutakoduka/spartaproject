@@ -72,6 +72,14 @@ class DecompressArchive:
     def _get_separator(self) -> str:
         return "/"
 
+    def _convert_multiple(self, text: str) -> str | None:
+        byte: bytes = self._encode_multiple(text)
+
+        if len(text) != len(byte):
+            return None
+
+        return self._decode_multiple(byte)
+
     def _support_multiple_byte(self, text: str) -> str:
         converted: str = self._decode_multiple(self._encode_multiple(text))
         separator: str = self._get_separator()
