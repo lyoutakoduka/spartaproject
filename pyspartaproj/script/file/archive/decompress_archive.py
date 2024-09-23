@@ -81,16 +81,18 @@ class DecompressArchive:
         return self._decode_multiple(byte)
 
     def _support_multiple_byte(self, text: str) -> str:
-        converted: str = self._decode_multiple(self._encode_multiple(text))
-        separator: str = self._get_separator()
+        if converted := self._convert_multiple(text):
+            separator: str = self._get_separator()
 
-        if separator == sep:
-            return converted
+            if separator == sep:
+                return converted
 
-        if sep not in converted:
-            return converted
+            if sep not in converted:
+                return converted
 
-        return converted.replace(sep, separator)
+            return converted.replace(sep, separator)
+
+        return text
 
     def _get_file_path(self, information: ZipInfo) -> Path:
         return Path(
