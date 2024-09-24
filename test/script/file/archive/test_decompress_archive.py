@@ -303,6 +303,18 @@ def _remove_unused_directory(tree_path: Path) -> None:
     _remove_unused(_get_tree_paths_directory(tree_path))
 
 
+def _get_archive_string() -> str:
+    return """
+        UEsDBBQAAAAAAA0XKlkAAAAAAAAAAAAAAAALAAAAYXJjaGl2ZS
+        +CoC9QSwMEFAAAAAAA/RYqWa89DlEVAAAAFQAAABIAAABhcmNo
+        aXZlL4KgL4KgLmpzb257DQogICAgImtleSI6IuOBgiINCn1QSw
+        ECFAAUAAAAAAANFypZAAAAAAAAAAAAAAAACwAAAAAAAAAAABAA
+        AAAAAAAAYXJjaGl2ZS+CoC9QSwECFAAUAAAAAAD9FipZrz0OUR
+        UAAAAVAAAAEgAAAAAAAAABACAAAAApAAAAYXJjaGl2ZS+CoC+C
+        oC5qc29uUEsFBgAAAAACAAIAeQAAAG4AAAAAAA==
+    """
+
+
 def test_file() -> None:
     """Test to decompress archive including only files."""
 
