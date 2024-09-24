@@ -416,4 +416,6 @@ def test_multiple() -> None:
             temporary_root, tree_root, _get_tree_paths(tree_root)
         )
 
+        _common_test(temporary_root)
+
     _inside_temporary_directory(individual_test)
