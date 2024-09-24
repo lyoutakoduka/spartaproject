@@ -19,6 +19,7 @@ from pyspartaproj.script.file.archive.decompress_archive import (
 )
 from pyspartaproj.script.file.json.convert_to_json import multiple_to_json
 from pyspartaproj.script.file.json.export_json import json_export
+from pyspartaproj.script.file.text.export_file import byte_export
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.modify.get_relative import get_relative_array
 from pyspartaproj.script.path.safe.safe_trash import SafeTrash
@@ -62,6 +63,11 @@ def _get_multiple_path(tree_root: Path) -> Path:
 def _export_multiple(config_path: Path, config_data: StrPair) -> None:
     create_parent(config_path)
     json_export(config_path, multiple_to_json(config_data))
+
+
+def _export_byte(file_path: Path, byte: bytes) -> Path:
+    create_parent(file_path)
+    return byte_export(file_path, byte)
 
 
 def _get_expected_stamp() -> datetime:
