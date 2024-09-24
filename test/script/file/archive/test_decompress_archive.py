@@ -383,10 +383,7 @@ def test_timestamp() -> None:
 def test_multiple() -> None:
     def individual_test(temporary_root: Path) -> None:
         tree_root: Path = _get_tree_root(temporary_root)
-        config_path: Path = _get_multiple_path(tree_root)
-        config_data: StrPair = _get_multiple_data()
-
-        _export_multiple(config_path, config_data)
+        _export_multiple(_get_multiple_path(tree_root), _get_multiple_data())
 
         _compress_to_decompress(
             temporary_root, tree_root, _get_tree_paths(tree_root)
