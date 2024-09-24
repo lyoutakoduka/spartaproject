@@ -3,6 +3,8 @@
 
 """Test module to decompress file or directory by archive format."""
 
+
+from base64 import b64decode
 from itertools import chain
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -27,6 +29,7 @@ from pyspartaproj.script.path.status.get_statistic import get_file_size_array
 from pyspartaproj.script.path.temporary.create_temporary_tree import (
     create_temporary_tree,
 )
+from pyspartaproj.script.string.format_texts import format_indent
 from pyspartaproj.script.time.stamp.get_timestamp import get_latest
 from pyspartaproj.script.time.stamp.set_timestamp import set_latest
 
@@ -313,6 +316,12 @@ def _get_archive_string() -> str:
         UAAAAVAAAAEgAAAAAAAAABACAAAAApAAAAYXJjaGl2ZS+CoC+C
         oC5qc29uUEsFBgAAAAACAAIAeQAAAG4AAAAAAA==
     """
+
+
+def _get_archive_byte() -> bytes:
+    return b64decode(
+        "".join(format_indent(_get_archive_string()).splitlines())
+    )
 
 
 def test_file() -> None:
