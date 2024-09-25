@@ -89,6 +89,10 @@ def _equal_datetime(left: datetime, right: datetime) -> None:
     assert left == right
 
 
+def _equal_count(left: int, right: int) -> None:
+    assert left == right
+
+
 def _get_times_pair(sorted_paths: Paths2) -> Times2:
     return [
         [get_latest(path) for path in paths if path.is_file()]
@@ -105,13 +109,13 @@ def _compare_timestamp(sorted_paths: Paths2, expected: datetime) -> None:
     _equal_stamp(*times_pair)
 
     times: Times = _get_times(times_pair)
-    assert 1 == len(times)
+    _equal_count(1, len(times))
 
     _equal_datetime(expected, times[0])
 
 
 def _compare_path_pair(left: Paths, right: Paths) -> None:
-    assert 1 == len(set([str(sorted(paths)) for paths in [left, right]]))
+    _equal_count(1, len(set([str(sorted(paths)) for paths in [left, right]])))
 
 
 def _get_relative_paths(sorted_paths: Paths2, temporary_root: Path) -> Paths2:
