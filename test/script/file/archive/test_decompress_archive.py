@@ -58,9 +58,13 @@ def _get_multiple_data() -> StrPair:
     return {"multiple": _get_multiple()}
 
 
-def _get_multiple_path(tree_root: Path) -> Path:
+def _get_multiple_element() -> Strs:
     multiple: str = _get_multiple()
-    return Path(tree_root, multiple, multiple).with_suffix(".json")
+    return [multiple, multiple + ".json"]
+
+
+def _get_multiple_path(tree_root: Path) -> Path:
+    return Path(tree_root, *_get_multiple_element())
 
 
 def _export_multiple(config_path: Path, config_data: StrPair) -> None:
