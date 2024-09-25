@@ -350,6 +350,14 @@ def _get_archive_byte() -> bytes:
     )
 
 
+def _get_result_archive(temporary_root: Path) -> Paths:
+    extract_root: Path = _get_extract_root(temporary_root)
+
+    return get_relative_array(
+        _get_sorted_path(extract_root), root_path=extract_root
+    )
+
+
 def test_file() -> None:
     """Test to decompress archive including only files."""
 
