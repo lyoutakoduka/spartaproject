@@ -365,6 +365,10 @@ def _get_expected_paths(path_names: Strs) -> Paths:
     ]
 
 
+def _get_expected_archive() -> Paths:
+    return _get_expected_paths(["archive"] + _get_multiple_element())
+
+
 def test_file() -> None:
     """Test to decompress archive including only files."""
 
