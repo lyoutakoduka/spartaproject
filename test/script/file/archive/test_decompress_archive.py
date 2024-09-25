@@ -93,6 +93,10 @@ def _equal_count(left: int, right: int) -> None:
     assert left == right
 
 
+def _equal_path(left: Paths, right: Paths) -> None:
+    assert left == right
+
+
 def _get_times_pair(sorted_paths: Paths2) -> Times2:
     return [
         [get_latest(path) for path in paths if path.is_file()]
@@ -126,8 +130,7 @@ def _get_relative_paths(sorted_paths: Paths2, temporary_root: Path) -> Paths2:
 
 
 def _compare_path_name(sorted_paths: Paths2, temporary_root: Path) -> None:
-    relative_paths: Paths2 = _get_relative_paths(sorted_paths, temporary_root)
-    assert relative_paths[0] == relative_paths[1]
+    _equal_path(*_get_relative_paths(sorted_paths, temporary_root))
 
 
 def _get_file_size_pair(sorted_paths: Paths2) -> Ints2:
