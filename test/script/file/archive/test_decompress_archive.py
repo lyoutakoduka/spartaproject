@@ -145,9 +145,13 @@ def _compare_file_size(sorted_paths: Paths2) -> None:
     _equal_size(*_get_file_size_pair(sorted_paths))
 
 
+def _get_sorted_path(walk_root: Path) -> Paths:
+    return sorted(list(walk_iterator(walk_root)))
+
+
 def _get_sorted_paths(temporary_root: Path) -> Paths2:
     return [
-        sorted(list(walk_iterator(Path(temporary_root, directory))))
+        _get_sorted_path(Path(temporary_root, directory))
         for directory in _get_types()
     ]
 
