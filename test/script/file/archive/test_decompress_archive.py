@@ -358,6 +358,13 @@ def _get_result_archive(temporary_root: Path) -> Paths:
     )
 
 
+def _get_expected_paths(path_names: Strs) -> Paths:
+    return [
+        Path(*[path_names[j] for j in range(i + 1)])
+        for i in range(len(path_names))
+    ]
+
+
 def test_file() -> None:
     """Test to decompress archive including only files."""
 
