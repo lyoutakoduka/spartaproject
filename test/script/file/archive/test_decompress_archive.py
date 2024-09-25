@@ -10,7 +10,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from pyspartaproj.context.default.integer_context import Ints2
+from pyspartaproj.context.default.integer_context import Ints, Ints2
 from pyspartaproj.context.default.string_context import StrPair, Strs
 from pyspartaproj.context.extension.path_context import Paths, Paths2
 from pyspartaproj.context.extension.time_context import Times, Times2, datetime
@@ -97,6 +97,10 @@ def _equal_path(left: Paths, right: Paths) -> None:
     assert left == right
 
 
+def _equal_size(left: Ints, right: Ints) -> None:
+    assert left == right
+
+
 def _get_times_pair(sorted_paths: Paths2) -> Times2:
     return [
         [get_latest(path) for path in paths if path.is_file()]
@@ -138,8 +142,7 @@ def _get_file_size_pair(sorted_paths: Paths2) -> Ints2:
 
 
 def _compare_file_size(sorted_paths: Paths2) -> None:
-    file_size_pair: Ints2 = _get_file_size_pair(sorted_paths)
-    assert file_size_pair[0] == file_size_pair[1]
+    _equal_size(*_get_file_size_pair(sorted_paths))
 
 
 def _get_sorted_paths(temporary_root: Path) -> Paths2:
