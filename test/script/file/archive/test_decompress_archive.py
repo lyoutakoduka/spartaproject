@@ -369,6 +369,10 @@ def _get_expected_archive() -> Paths:
     return _get_expected_paths(["archive"] + _get_multiple_element())
 
 
+def _archive_test(temporary_root: Path) -> None:
+    _equal_path(_get_result_archive(temporary_root), _get_expected_archive())
+
+
 def test_file() -> None:
     """Test to decompress archive including only files."""
 
