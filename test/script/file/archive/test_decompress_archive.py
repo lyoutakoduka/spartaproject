@@ -475,3 +475,14 @@ def test_multiple() -> None:
         _common_test(temporary_root)
 
     _inside_temporary_directory(individual_test)
+
+
+def test_archive() -> None:
+    def individual_test(temporary_root: Path) -> None:
+        _to_decompress_single(
+            temporary_root, [_export_byte_archive(temporary_root)]
+        )
+
+        _archive_test(temporary_root)
+
+    _inside_temporary_directory(individual_test)
