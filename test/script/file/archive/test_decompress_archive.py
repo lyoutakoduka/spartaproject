@@ -464,6 +464,8 @@ def test_timestamp() -> None:
 
 
 def test_multiple() -> None:
+    """Test to decompress archive including multiple byte character."""
+
     def individual_test(temporary_root: Path) -> None:
         tree_root: Path = _get_tree_root(temporary_root)
         _export_multiple(_get_multiple_path(tree_root), _get_multiple_data())
@@ -478,6 +480,8 @@ def test_multiple() -> None:
 
 
 def test_archive() -> None:
+    """Test to decompress archive encoded by shift-jis group."""
+
     def individual_test(temporary_root: Path) -> None:
         _to_decompress_single(
             temporary_root, [_export_byte_archive(temporary_root)]
