@@ -373,6 +373,13 @@ def _archive_test(temporary_root: Path) -> None:
     _equal_path(_get_result_archive(temporary_root), _get_expected_archive())
 
 
+def _export_byte_archive(temporary_root: Path) -> Path:
+    return _export_byte(
+        Path(_get_archive_root(temporary_root), "archive.zip"),
+        _get_archive_byte(),
+    )
+
+
 def test_file() -> None:
     """Test to decompress archive including only files."""
 
