@@ -3,19 +3,25 @@
 
 """Test module to decompress file or directory by archive format."""
 
+
+from base64 import b64decode
 from itertools import chain
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from pyspartaproj.context.default.integer_context import Ints2
-from pyspartaproj.context.default.string_context import Strs
+from pyspartaproj.context.default.integer_context import Ints, Ints2
+from pyspartaproj.context.default.string_context import StrPair, Strs
 from pyspartaproj.context.extension.path_context import Paths, Paths2
 from pyspartaproj.context.extension.time_context import Times, Times2, datetime
+from pyspartaproj.script.directory.create_parent import create_parent
 from pyspartaproj.script.file.archive.compress_archive import CompressArchive
 from pyspartaproj.script.file.archive.decompress_archive import (
     DecompressArchive,
 )
+from pyspartaproj.script.file.json.convert_to_json import multiple_to_json
+from pyspartaproj.script.file.json.export_json import json_export
+from pyspartaproj.script.file.text.export_file import byte_export
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.modify.get_relative import get_relative_array
 from pyspartaproj.script.path.safe.safe_trash import SafeTrash
@@ -23,8 +29,13 @@ from pyspartaproj.script.path.status.get_statistic import get_file_size_array
 from pyspartaproj.script.path.temporary.create_temporary_tree import (
     create_temporary_tree,
 )
+from pyspartaproj.script.string.format_texts import format_indent
 from pyspartaproj.script.time.stamp.get_timestamp import get_latest
 from pyspartaproj.script.time.stamp.set_timestamp import set_latest
+
+
+def _get_multiple() -> str:
+    return "\u3042"
 
 
 def _get_types() -> Strs:
@@ -43,8 +54,51 @@ def _get_archive_root(temporary_root: Path) -> Path:
     return Path(temporary_root, "archive")
 
 
+def _get_multiple_data() -> StrPair:
+    return {"multiple": _get_multiple()}
+
+
+def _get_multiple_element() -> Strs:
+    multiple: str = _get_multiple()
+    return [multiple, multiple + ".json"]
+
+
+def _get_multiple_path(tree_root: Path) -> Path:
+    return Path(tree_root, *_get_multiple_element())
+
+
+def _export_multiple(config_path: Path, config_data: StrPair) -> None:
+    create_parent(config_path)
+    json_export(config_path, multiple_to_json(config_data))
+
+
+def _export_byte(file_path: Path, byte: bytes) -> Path:
+    create_parent(file_path)
+    return byte_export(file_path, byte)
+
+
 def _get_expected_stamp() -> datetime:
     return datetime.fromisoformat("2023-04-15T20:09:30.936886+00:00")
+
+
+def _equal_stamp(left: Times, right: Times) -> None:
+    assert left == right
+
+
+def _equal_datetime(left: datetime, right: datetime) -> None:
+    assert left == right
+
+
+def _equal_count(left: int, right: int) -> None:
+    assert left == right
+
+
+def _equal_path(left: Paths, right: Paths) -> None:
+    assert left == right
+
+
+def _equal_size(left: Ints, right: Ints) -> None:
+    assert left == right
 
 
 def _get_times_pair(sorted_paths: Paths2) -> Times2:
@@ -60,16 +114,16 @@ def _get_times(times_pair: Times2) -> Times:
 
 def _compare_timestamp(sorted_paths: Paths2, expected: datetime) -> None:
     times_pair: Times2 = _get_times_pair(sorted_paths)
-    assert times_pair[0] == times_pair[1]
+    _equal_stamp(*times_pair)
 
-    times = _get_times(times_pair)
-    assert 1 == len(times)
+    times: Times = _get_times(times_pair)
+    _equal_count(1, len(times))
 
-    assert expected == times[0]
+    _equal_datetime(expected, times[0])
 
 
 def _compare_path_pair(left: Paths, right: Paths) -> None:
-    assert 1 == len(set([str(sorted(paths)) for paths in [left, right]]))
+    _equal_count(1, len(set([str(sorted(paths)) for paths in [left, right]])))
 
 
 def _get_relative_paths(sorted_paths: Paths2, temporary_root: Path) -> Paths2:
@@ -80,8 +134,7 @@ def _get_relative_paths(sorted_paths: Paths2, temporary_root: Path) -> Paths2:
 
 
 def _compare_path_name(sorted_paths: Paths2, temporary_root: Path) -> None:
-    relative_paths: Paths2 = _get_relative_paths(sorted_paths, temporary_root)
-    assert relative_paths[0] == relative_paths[1]
+    _equal_path(*_get_relative_paths(sorted_paths, temporary_root))
 
 
 def _get_file_size_pair(sorted_paths: Paths2) -> Ints2:
@@ -89,13 +142,16 @@ def _get_file_size_pair(sorted_paths: Paths2) -> Ints2:
 
 
 def _compare_file_size(sorted_paths: Paths2) -> None:
-    file_size_pair: Ints2 = _get_file_size_pair(sorted_paths)
-    assert file_size_pair[0] == file_size_pair[1]
+    _equal_size(*_get_file_size_pair(sorted_paths))
+
+
+def _get_sorted_path(walk_root: Path) -> Paths:
+    return sorted(list(walk_iterator(walk_root)))
 
 
 def _get_sorted_paths(temporary_root: Path) -> Paths2:
     return [
-        sorted(list(walk_iterator(Path(temporary_root, directory))))
+        _get_sorted_path(Path(temporary_root, directory))
         for directory in _get_types()
     ]
 
@@ -276,6 +332,54 @@ def _remove_unused_directory(tree_path: Path) -> None:
     _remove_unused(_get_tree_paths_directory(tree_path))
 
 
+def _get_archive_string() -> str:
+    return """
+        UEsDBBQAAAAAAA0XKlkAAAAAAAAAAAAAAAALAAAAYXJjaGl2ZS
+        +CoC9QSwMEFAAAAAAA/RYqWa89DlEVAAAAFQAAABIAAABhcmNo
+        aXZlL4KgL4KgLmpzb257DQogICAgImtleSI6IuOBgiINCn1QSw
+        ECFAAUAAAAAAANFypZAAAAAAAAAAAAAAAACwAAAAAAAAAAABAA
+        AAAAAAAAYXJjaGl2ZS+CoC9QSwECFAAUAAAAAAD9FipZrz0OUR
+        UAAAAVAAAAEgAAAAAAAAABACAAAAApAAAAYXJjaGl2ZS+CoC+C
+        oC5qc29uUEsFBgAAAAACAAIAeQAAAG4AAAAAAA==
+    """
+
+
+def _get_archive_byte() -> bytes:
+    return b64decode(
+        "".join(format_indent(_get_archive_string()).splitlines())
+    )
+
+
+def _get_result_archive(temporary_root: Path) -> Paths:
+    extract_root: Path = _get_extract_root(temporary_root)
+
+    return get_relative_array(
+        _get_sorted_path(extract_root), root_path=extract_root
+    )
+
+
+def _get_expected_paths(path_names: Strs) -> Paths:
+    return [
+        Path(*[path_names[j] for j in range(i + 1)])
+        for i in range(len(path_names))
+    ]
+
+
+def _get_expected_archive() -> Paths:
+    return _get_expected_paths(["archive"] + _get_multiple_element())
+
+
+def _archive_test(temporary_root: Path) -> None:
+    _equal_path(_get_result_archive(temporary_root), _get_expected_archive())
+
+
+def _export_byte_archive(temporary_root: Path) -> Path:
+    return _export_byte(
+        Path(_get_archive_root(temporary_root), "archive.zip"),
+        _get_archive_byte(),
+    )
+
+
 def test_file() -> None:
     """Test to decompress archive including only files."""
 
@@ -355,5 +459,34 @@ def test_timestamp() -> None:
         _compress_to_decompress(temporary_root, tree_path, add_paths)
 
         _timestamp_test(temporary_root)
+
+    _inside_temporary_directory(individual_test)
+
+
+def test_multiple() -> None:
+    """Test to decompress archive including multiple byte character."""
+
+    def individual_test(temporary_root: Path) -> None:
+        tree_root: Path = _get_tree_root(temporary_root)
+        _export_multiple(_get_multiple_path(tree_root), _get_multiple_data())
+
+        _compress_to_decompress(
+            temporary_root, tree_root, _get_tree_paths(tree_root)
+        )
+
+        _common_test(temporary_root)
+
+    _inside_temporary_directory(individual_test)
+
+
+def test_archive() -> None:
+    """Test to decompress archive encoded by shift-jis group."""
+
+    def individual_test(temporary_root: Path) -> None:
+        _to_decompress_single(
+            temporary_root, [_export_byte_archive(temporary_root)]
+        )
+
+        _archive_test(temporary_root)
 
     _inside_temporary_directory(individual_test)

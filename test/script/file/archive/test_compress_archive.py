@@ -10,10 +10,18 @@ from tempfile import TemporaryDirectory
 from typing import Callable
 
 from pyspartaproj.context.default.integer_context import Ints2
+from pyspartaproj.context.default.string_context import StrPair
 from pyspartaproj.context.extension.decimal_context import Decs
 from pyspartaproj.context.extension.path_context import Paths, Paths2
 from pyspartaproj.script.decimal.initialize_decimal import initialize_decimal
+from pyspartaproj.script.directory.create_parent import create_parent
 from pyspartaproj.script.file.archive.compress_archive import CompressArchive
+from pyspartaproj.script.file.json.convert_from_json import (
+    string_pair_from_json,
+)
+from pyspartaproj.script.file.json.convert_to_json import multiple_to_json
+from pyspartaproj.script.file.json.export_json import json_export
+from pyspartaproj.script.file.json.import_json import json_import
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.modify.get_relative import get_relative_array
 from pyspartaproj.script.path.status.get_statistic import (
@@ -25,6 +33,19 @@ from pyspartaproj.script.path.temporary.create_temporary_tree import (
 )
 
 initialize_decimal()
+
+
+def _get_multiple() -> str:
+    return "\u3042"
+
+
+def _get_multiple_path(tree_root: Path) -> Path:
+    multiple: str = _get_multiple()
+    return Path(tree_root, multiple, multiple).with_suffix(".json")
+
+
+def _get_multiple_data() -> StrPair:
+    return {"multiple": _get_multiple()}
 
 
 def _get_tree_root(temporary_root: Path) -> Path:
@@ -143,8 +164,33 @@ def _compress_test(
 
 
 def _name_test(archive_name: str, archive_paths: Paths) -> None:
-    archive_path = archive_paths[0]
-    assert archive_name == archive_path.stem
+    assert archive_name == archive_paths[0].stem
+
+
+def _import_multiple(config_path: Path) -> StrPair:
+    return string_pair_from_json(json_import(config_path))
+
+
+def _compare_archive_text(config_path: Path, expected: StrPair) -> None:
+    assert expected == _import_multiple(config_path)
+
+
+def _find_config_path(sorted_paths: Paths2) -> Path:
+    return sorted_paths[-1][-1]
+
+
+def _multiple_test(
+    archive_paths: Paths,
+    temporary_root: Path,
+    walk_paths: Paths,
+    expected: StrPair,
+) -> None:
+    _compare_archive_text(
+        _find_config_path(
+            _compare_archive(archive_paths, temporary_root, walk_paths)
+        ),
+        expected,
+    )
 
 
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
@@ -238,6 +284,11 @@ def _get_walk_paths_limit(tree_root: Path) -> Paths:
 
 def _get_walk_paths_heavy(tree_root: Path) -> Paths:
     return list(walk_iterator(tree_root, directory=False, suffix="json"))
+
+
+def _export_multiple(config_path: Path, config_data: StrPair) -> None:
+    create_parent(config_path)
+    json_export(config_path, multiple_to_json(config_data))
 
 
 def test_empty() -> None:
@@ -373,6 +424,29 @@ def test_heavy() -> None:
             ),
             temporary_root,
             walk_paths,
+        )
+
+    _inside_temporary_directory(individual_test)
+
+
+def test_multiple() -> None:
+    """Test to compress archive including multiple byte character."""
+
+    def individual_test(temporary_root: Path) -> None:
+        tree_root: Path = _get_tree_root(temporary_root)
+        config_path: Path = _get_multiple_path(tree_root)
+        config_data: StrPair = _get_multiple_data()
+        walk_paths: Paths = [config_path]
+
+        _export_multiple(config_path, config_data)
+
+        _multiple_test(
+            _finalize_archive(
+                tree_root, walk_paths, _get_archive(temporary_root)
+            ),
+            temporary_root,
+            walk_paths,
+            config_data,
         )
 
     _inside_temporary_directory(individual_test)

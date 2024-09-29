@@ -90,7 +90,7 @@ def is_same_stamp(left: TimePair, right: TimePair) -> bool:
         right (TimePair): Time stamp of the path you want to compare.
 
     Returns:
-        bool: Return True if 2 dictionaries are same value.
+        bool: True if 2 dictionaries are same value.
     """
     return is_same_json(*[_get_stamp_json(times) for times in [left, right]])
 

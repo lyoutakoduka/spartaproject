@@ -4,6 +4,7 @@
 """Module to decompress file or directory by archive format."""
 
 from datetime import datetime
+from os import sep
 from pathlib import Path
 from zipfile import ZIP_LZMA, ZipFile, ZipInfo
 
@@ -41,10 +42,10 @@ class DecompressArchive:
         return False
 
     def _decompress_file(
-        self, file_path: Path, relative: Path, archive_file: ZipFile
+        self, file_path: Path, information: ZipInfo, archive_file: ZipFile
     ) -> None:
         create_parent(file_path)
-        byte_export(file_path, archive_file.read(relative.as_posix()))
+        byte_export(file_path, archive_file.read(information.filename))
 
     def _restore_timestamp(
         self, file_path: Path, information: ZipInfo
@@ -61,6 +62,43 @@ class DecompressArchive:
                 latest = datetime.fromisoformat(content["latest"])
 
         set_latest(file_path, latest)
+
+    def _encode_multiple(self, text: str) -> bytes:
+        return text.encode("cp437", errors="ignore")
+
+    def _decode_multiple(self, byte: bytes) -> str:
+        return byte.decode("cp932")
+
+    def _get_separator(self) -> str:
+        return "/"
+
+    def _convert_multiple(self, text: str) -> str | None:
+        byte: bytes = self._encode_multiple(text)
+
+        if len(text) != len(byte):
+            return None
+
+        return self._decode_multiple(byte)
+
+    def _support_multiple_byte(self, text: str) -> str:
+        if converted := self._convert_multiple(text):
+            separator: str = self._get_separator()
+
+            if separator == sep:
+                return converted
+
+            if sep not in converted:
+                return converted
+
+            return converted.replace(sep, separator)
+
+        return text
+
+    def _get_file_path(self, information: ZipInfo) -> Path:
+        return Path(
+            self._output_root,
+            Path(self._support_multiple_byte(information.orig_filename)),
+        )
 
     def sequential_archives(self, source_archive: Path) -> Paths:
         """Get list of archives which is compressed dividedly.
@@ -117,13 +155,12 @@ class DecompressArchive:
         """
         with ZipFile(decompress_target) as archive_file:
             for information in archive_file.infolist():
-                relative: Path = Path(information.filename)
-                file_path: Path = Path(self._output_root, relative)
+                file_path: Path = self._get_file_path(information)
 
                 if information.is_dir():
                     create_directory(file_path)
                 else:
-                    self._decompress_file(file_path, relative, archive_file)
+                    self._decompress_file(file_path, information, archive_file)
                     self._restore_timestamp(file_path, information)
 
     def decompress_at_once(self, paths: Paths) -> None:
@@ -143,7 +180,7 @@ class DecompressArchive:
                 which you want to get status of compression format.
 
         Returns:
-            bool: Return True if archive is compressed by LZMA.
+            bool: True if archive is compressed by LZMA.
         """
         with ZipFile(decompress_target) as archive_file:
             for information in archive_file.infolist():

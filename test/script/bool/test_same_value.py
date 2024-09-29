@@ -1,32 +1,66 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from pyspartaproj.interface.pytest import raises
+"""Test module to confirm that type bool values are same and True."""
+
+from pyspartaproj.context.default.bool_context import BoolPair, Bools
+from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.script.bool.same_value import bool_same_array, bool_same_pair
 
 
+def _confirm(status: bool) -> None:
+    assert status
+
+
+def _confirm_error(status: bool) -> None:
+    assert not status
+
+
+def _expected_list(status: bool) -> Bools:
+    return [status] * 3
+
+
+def _expected_keys() -> Strs:
+    return ["R", "G", "B"]
+
+
+def _expected_pair(status: bool) -> BoolPair:
+    return {
+        key: value
+        for key, value in zip(_expected_keys(), _expected_list(status))
+    }
+
+
 def test_empty() -> None:
-    with raises(ValueError, match="empty"):
-        bool_same_array([])
+    """Test for list of bool value as empty."""
+    _confirm_error(bool_same_array([]))
 
 
 def test_mixed() -> None:
-    with raises(ValueError, match="true_false"):
-        bool_same_array([False, True, False])
+    """Test for list of bool value which is mix of True and False."""
+    _confirm_error(bool_same_array([False, True, False]))
 
 
 def test_false() -> None:
-    with raises(ValueError, match="false"):
-        bool_same_array([False, False, False])
+    """Test for list of bool value which is all False."""
+    _confirm_error(bool_same_array(_expected_list(False)))
 
 
 def test_array() -> None:
-    assert bool_same_array([True, True, True])
+    """Test for list of bool value which is all True."""
+    _confirm(bool_same_array(_expected_list(True)))
 
 
 def test_invert() -> None:
-    assert bool_same_array([False, False, False], invert=True)
+    """Test for list of bool value with invert option."""
+    _confirm(bool_same_array(_expected_list(False), invert=True))
 
 
 def test_pair() -> None:
-    assert bool_same_pair({"R": True, "G": True, "B": True})
+    """Test for pair of bool value which is all True."""
+    _confirm(bool_same_pair(_expected_pair(True)))
+
+
+def test_pair_invert() -> None:
+    """Test for pair of bool value with invert option."""
+    _confirm(bool_same_pair(_expected_pair(False), invert=True))
