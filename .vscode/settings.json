@@ -97,7 +97,7 @@
   "typescript.inlayHints.enumMemberValues.enabled": true,
   "typescript.inlayHints.variableTypes.enabled": false,
   "typescript.inlayHints.parameterTypes.enabled": true,
-  "workbench.colorTheme": "Dracula Soft",
+  "workbench.colorTheme": "Dracula Theme",
   "workbench.startupEditor": "none",
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter"
