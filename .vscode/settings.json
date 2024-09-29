@@ -91,7 +91,7 @@
   "python.analysis.typeCheckingMode": "strict",
   "python.languageServer": "Pylance",
   "terminal.integrated.fontSize": 14,
-  "testing.gutterEnabled": false,
+  "testing.gutterEnabled": true,
   "typescript.inlayHints.propertyDeclarationTypes.enabled": true,
   "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
   "typescript.inlayHints.enumMemberValues.enabled": true,
