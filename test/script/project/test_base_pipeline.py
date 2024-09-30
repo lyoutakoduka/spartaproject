@@ -30,8 +30,7 @@ def _convert_print(messages: Strs, pipeline: BasePipeline) -> str:
 
 
 def _read_path(pipeline: BasePipeline) -> Strs:
-    path_context: PathPair = pipeline.get_path_context("test")
-    return list(Path(path_context["print.path"]).parts)
+    return list(Path(pipeline.get_path_context("test")["print.path"]).parts)
 
 
 def _create_pipeline(interval: str) -> BasePipeline:
