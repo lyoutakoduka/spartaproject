@@ -40,6 +40,10 @@ def _read_path(pipeline: BasePipeline) -> Strs:
     return list(Path(pipeline.get_path_context("test")["print.path"]).parts)
 
 
+def _get_result(pipeline: BasePipeline) -> str:
+    return _convert_print(_read_path(pipeline), pipeline)
+
+
 def _create_pipeline(interval: str) -> BasePipeline:
     pipeline = BasePipeline(forward=_get_config_file())
 
@@ -55,4 +59,4 @@ def test_print() -> None:
     expected: str = _get_expected(interval)
     pipeline: BasePipeline = _create_pipeline(interval)
 
-    assert expected == _convert_print(_read_path(pipeline), pipeline)
+    assert expected == _get_result(pipeline)
