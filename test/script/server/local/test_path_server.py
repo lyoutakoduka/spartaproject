@@ -8,13 +8,9 @@ from tempfile import TemporaryDirectory
 from typing import Callable
 
 from pyspartaproj.script.server.local.path_server import PathServer
-
-
-def _get_date_time_root(jst: bool = False) -> Path:
-    time_utc: Path = Path("2023", "04", "01", "00", "00", "00", "000000")
-    time_jst: Path = Path("2023", "04", "01", "09", "00", "00", "000000")
-
-    return time_jst if jst else time_utc
+from pyspartaproj.script.time.stamp.initial_date_time import (
+    get_initial_date_time,
+)
 
 
 def _get_local_root(temporary_root: Path) -> Path:
@@ -95,7 +91,7 @@ def test_local() -> None:
 
 def test_date() -> None:
     """Test for temporary working space including date time string."""
-    date_time: Path = _get_date_time_root()
+    date_time: Path = get_initial_date_time()
 
     def individual_test(temporary_root: Path) -> None:
         local_root: Path = _get_local_root(temporary_root)
