@@ -7,6 +7,7 @@ from datetime import datetime, timezone
 from decimal import Decimal
 
 from pyspartaproj.script.decimal.initialize_decimal import initialize_decimal
+from pyspartaproj.script.time.stamp.initial_date_time import get_initial_epoch
 
 initialize_decimal()
 
@@ -25,8 +26,7 @@ class TimerSelect:
         self._count: Decimal = Decimal("0")
 
         if self._override:
-            self.april_1_2023_epoch: Decimal = Decimal("1680307200")
-            self._count = self.april_1_2023_epoch
+            self._count = get_initial_epoch()
         else:
             self._count = self._get_current()
 
