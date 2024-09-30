@@ -16,9 +16,13 @@ from pyspartaproj.script.time.stamp.initial_date_time import (
 )
 
 
+def _compare_time_path(result: Path) -> None:
+    assert get_initial_date_time() == result
+
+
 def test_name() -> None:
     """Test to get path including string of current date time."""
-    assert get_initial_date_time() == get_working_space(override=True)
+    _compare_time_path(get_working_space(override=True))
 
 
 def test_create() -> None:
@@ -28,6 +32,5 @@ def test_create() -> None:
         time_path: Path = create_working_space(temporary_path, override=True)
 
         assert time_path.exists()
-        assert get_initial_date_time() == get_relative(
-            time_path, root_path=temporary_path
-        )
+
+        _compare_time_path(get_relative(time_path, root_path=temporary_path))
