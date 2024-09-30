@@ -9,6 +9,7 @@ from time import sleep
 from pyspartaproj.context.extension.decimal_context import Decs
 from pyspartaproj.script.decimal.initialize_decimal import initialize_decimal
 from pyspartaproj.script.time.count.builtin_timer import TimerSelect
+from pyspartaproj.script.time.stamp.initial_date_time import get_initial_epoch
 
 initialize_decimal()
 
@@ -24,7 +25,7 @@ def _check_counter_result(expected: Decs, timer: TimerSelect) -> None:
         results += [timer()]
         timer.increase_timer()
 
-    assert results == [count + timer.april_1_2023_epoch for count in expected]
+    assert results == [count + get_initial_epoch() for count in expected]
 
 
 def test_builtin() -> None:

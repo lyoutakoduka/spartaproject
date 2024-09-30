@@ -11,22 +11,26 @@ from pyspartaproj.script.directory.date_time_space import (
     get_working_space,
 )
 from pyspartaproj.script.path.modify.get_relative import get_relative
+from pyspartaproj.script.time.stamp.initial_date_time import (
+    get_initial_date_time,
+)
+
+
+def _compare_time_path(result: Path) -> None:
+    assert get_initial_date_time() == result
 
 
 def test_name() -> None:
     """Test to get path including string of current date time."""
-    expected: Path = Path("2023", "04", "01", "00", "00", "00", "000000")
-
-    assert expected == get_working_space(override=True)
+    _compare_time_path(get_working_space(override=True))
 
 
 def test_create() -> None:
     """Test to create temporary working space including date time string."""
-    expected: Path = Path("2023", "04", "01", "00", "00", "00", "000000")
-
     with TemporaryDirectory() as temporary_directory:
         temporary_path: Path = Path(temporary_directory)
         time_path: Path = create_working_space(temporary_path, override=True)
 
         assert time_path.exists()
-        assert expected == get_relative(time_path, root_path=temporary_path)
+
+        _compare_time_path(get_relative(time_path, root_path=temporary_path))
