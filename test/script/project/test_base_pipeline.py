@@ -56,7 +56,4 @@ def _create_pipeline(interval: str) -> BasePipeline:
 def test_print() -> None:
     """Test ot show message as log to stdout."""
     interval: str = "0.3"
-    expected: str = _get_expected(interval)
-    pipeline: BasePipeline = _create_pipeline(interval)
-
-    assert expected == _get_result(pipeline)
+    assert _get_expected(interval) == _get_result(_create_pipeline(interval))
