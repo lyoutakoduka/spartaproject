@@ -22,7 +22,7 @@ def _convert_print(messages: Strs, pipeline: BasePipeline) -> str:
 
     @stdout_text.decorator
     def _messages() -> None:
-        pipeline.show_log(messages)
+        pipeline.show_log(messages, force=True)
 
     _messages()
 
