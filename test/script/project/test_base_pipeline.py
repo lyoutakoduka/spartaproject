@@ -16,6 +16,10 @@ def _get_path() -> Strs:
     return ["root", "body", "head"]
 
 
+def _get_expected(interval: str) -> str:
+    return interval + "s" + ": " + " ".join(_get_path()) + "\n"
+
+
 def _get_config_file() -> Path:
     return get_resource(local_path=Path("base_pipeline", "forward.json"))
 
@@ -48,7 +52,7 @@ def _create_pipeline(interval: str) -> BasePipeline:
 def test_print() -> None:
     """Test ot show message as log to stdout."""
     interval: str = "0.3"
-    expected: str = interval + "s" + ": " + " ".join(_get_path()) + "\n"
+    expected: str = _get_expected(interval)
     pipeline: BasePipeline = _create_pipeline(interval)
 
     assert expected == _convert_print(_read_path(pipeline), pipeline)
