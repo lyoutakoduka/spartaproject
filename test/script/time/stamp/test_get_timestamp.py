@@ -10,7 +10,11 @@ from tempfile import TemporaryDirectory
 from typing import Callable
 
 from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.context.extension.time_context import TimePair, Times
+from pyspartaproj.context.extension.time_context import (
+    TimePair,
+    TimePair2,
+    Times,
+)
 from pyspartaproj.script.directory.create_directory import create_directory
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.modify.get_relative import get_relative
@@ -76,6 +80,13 @@ def _get_relative_latest(path: Path, access: bool = False) -> TimePair:
 
 def _is_access(group: str) -> bool:
     return "access" == group
+
+
+def _get_stamp_pair(stamp_root: Path) -> TimePair2:
+    return {
+        group: _get_relative_latest(stamp_root, access=_is_access(group))
+        for group in ["update", "access"]
+    }
 
 
 def _compare_invalid_times(times: TimePair) -> None:
