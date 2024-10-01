@@ -10,3 +10,5 @@ Times = List[datetime]
 TimePair = Dict[str, datetime]
 
 Times2 = List[Times]
+
+TimePair2 = Dict[str, TimePair]

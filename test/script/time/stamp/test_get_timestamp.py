@@ -10,7 +10,11 @@ from tempfile import TemporaryDirectory
 from typing import Callable
 
 from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.context.extension.time_context import TimePair, Times
+from pyspartaproj.context.extension.time_context import (
+    TimePair,
+    TimePair2,
+    Times,
+)
 from pyspartaproj.script.directory.create_directory import create_directory
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.modify.get_relative import get_relative
@@ -59,18 +63,29 @@ def _set_invalid_directory(invalid_root: Path) -> None:
         _set_invalid_datetime(path)
 
 
-def _get_directory_latest(path: Path) -> TimePair:
-    return get_directory_latest(walk_iterator(path))
+def _get_directory_latest(path: Path, access: bool) -> TimePair:
+    return get_directory_latest(walk_iterator(path), access=access)
 
 
 def _get_relative_text(path_text: str, root_path: Path) -> str:
     return str(get_relative(Path(path_text), root_path=root_path))
 
 
-def _get_relative_latest(path: Path) -> TimePair:
+def _get_relative_latest(path: Path, access: bool = False) -> TimePair:
     return {
         _get_relative_text(path_text, path): time
-        for path_text, time in _get_directory_latest(path).items()
+        for path_text, time in _get_directory_latest(path, access).items()
+    }
+
+
+def _is_access(group: str) -> bool:
+    return "access" == group
+
+
+def _get_stamp_pair(stamp_root: Path) -> TimePair2:
+    return {
+        group: _get_relative_latest(stamp_root, access=_is_access(group))
+        for group in ["update", "access"]
     }
 
 
@@ -152,13 +167,10 @@ def test_same() -> None:
     """Test to compare 2 dictionaries about latest date time you got."""
 
     def individual_test(temporary_root: Path) -> None:
-        file_path: Path = create_temporary_tree(Path(temporary_root, "tree"))
-
-        assert is_same_stamp(
-            *[
-                get_directory_latest(walk_iterator(file_path), access=status)
-                for status in [False, True]
-            ]
+        stamp_pair: TimePair2 = _get_stamp_pair(
+            create_temporary_tree(Path(temporary_root, "tree"))
         )
+
+        assert is_same_stamp(stamp_pair["update"], stamp_pair["access"])
 
     _inside_temporary_directory(individual_test)
