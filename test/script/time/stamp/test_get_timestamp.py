@@ -59,8 +59,8 @@ def _set_invalid_directory(invalid_root: Path) -> None:
         _set_invalid_datetime(path)
 
 
-def _get_directory_latest(path: Path) -> TimePair:
-    return get_directory_latest(walk_iterator(path))
+def _get_directory_latest(path: Path, access: bool) -> TimePair:
+    return get_directory_latest(walk_iterator(path), access=access)
 
 
 def _get_relative_text(path_text: str, root_path: Path) -> str:
@@ -70,7 +70,7 @@ def _get_relative_text(path_text: str, root_path: Path) -> str:
 def _get_relative_latest(path: Path) -> TimePair:
     return {
         _get_relative_text(path_text, path): time
-        for path_text, time in _get_directory_latest(path).items()
+        for path_text, time in _get_directory_latest(path, True).items()
     }
 
 
