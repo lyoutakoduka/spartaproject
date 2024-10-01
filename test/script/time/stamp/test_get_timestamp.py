@@ -74,6 +74,10 @@ def _get_relative_latest(path: Path, access: bool = False) -> TimePair:
     }
 
 
+def _is_access(group: str) -> bool:
+    return "access" == group
+
+
 def _compare_invalid_times(times: TimePair) -> None:
     invalid_time: datetime = get_invalid_time()
 
