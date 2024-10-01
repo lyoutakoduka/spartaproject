@@ -167,13 +167,10 @@ def test_same() -> None:
     """Test to compare 2 dictionaries about latest date time you got."""
 
     def individual_test(temporary_root: Path) -> None:
-        file_path: Path = create_temporary_tree(Path(temporary_root, "tree"))
-
-        assert is_same_stamp(
-            *[
-                get_directory_latest(walk_iterator(file_path), access=status)
-                for status in [False, True]
-            ]
+        stamp_pair: TimePair2 = _get_stamp_pair(
+            create_temporary_tree(Path(temporary_root, "tree"))
         )
+
+        assert is_same_stamp(stamp_pair["update"], stamp_pair["access"])
 
     _inside_temporary_directory(individual_test)
