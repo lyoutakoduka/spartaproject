@@ -11,7 +11,7 @@ from pyspartaproj.context.extension.path_context import PathPair2
 from pyspartaproj.script.directory.work_space import WorkSpace
 from pyspartaproj.script.file.json.convert_to_json import multiple2_to_json
 from pyspartaproj.script.file.json.export_json import json_export
-from pyspartaproj.script.time.current_datetime import get_current_time
+from pyspartaproj.script.time.stamp.current_datetime import get_current_time
 
 
 class FileHistory(WorkSpace):
