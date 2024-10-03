@@ -6,8 +6,8 @@
 from decimal import Decimal
 
 from pyspartaproj.script.decimal.initialize_decimal import initialize_decimal
-from pyspartaproj.script.time.convert_readable import readable_time
 from pyspartaproj.script.time.count.builtin_timer import TimerSelect
+from pyspartaproj.script.time.count.convert_readable import readable_time
 
 initialize_decimal()
 
