@@ -25,11 +25,11 @@ from pyspartaproj.script.path.modify.get_relative import (
 )
 from pyspartaproj.script.path.status.get_statistic import get_file_size
 from pyspartaproj.script.string.encoding.set_encoding import set_encoding
-from pyspartaproj.script.time.current_datetime import get_current_time
 from pyspartaproj.script.time.path.get_timestamp import (
     get_invalid_time,
     get_latest,
 )
+from pyspartaproj.script.time.stamp.current_datetime import get_current_time
 
 initialize_decimal()
 
