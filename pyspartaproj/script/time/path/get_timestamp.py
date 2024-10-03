@@ -12,8 +12,8 @@ from pyspartaproj.context.extension.time_context import TimePair
 from pyspartaproj.context.file.json_context import Json
 from pyspartaproj.script.bool.compare_json import is_same_json
 from pyspartaproj.script.file.json.convert_to_json import multiple_to_json
+from pyspartaproj.script.time.path.get_file_epoch import get_file_epoch
 from pyspartaproj.script.time.stamp.from_timestamp import time_from_timestamp
-from pyspartaproj.script.time.stamp.get_file_epoch import get_file_epoch
 
 
 def _convert_timestamp(time: float, jst: bool) -> datetime:
