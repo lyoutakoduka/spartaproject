@@ -24,7 +24,7 @@ from pyspartaproj.script.path.temporary.create_temporary_file import (
 from pyspartaproj.script.path.temporary.create_temporary_tree import (
     create_temporary_tree,
 )
-from pyspartaproj.script.time.stamp.get_timestamp import (
+from pyspartaproj.script.time.path.get_timestamp import (
     get_directory_latest,
     get_invalid_time,
     get_latest,
