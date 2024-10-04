@@ -21,7 +21,7 @@ from pyspartaproj.script.file.text.export_file import byte_export
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.string.convert_type import convert_integer
 from pyspartaproj.script.string.encoding.set_decoding import set_decoding
-from pyspartaproj.script.time.stamp.set_timestamp import set_latest
+from pyspartaproj.script.time.path.set_timestamp import set_latest
 
 
 class DecompressArchive:

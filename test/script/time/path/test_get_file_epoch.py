@@ -12,7 +12,7 @@ from pyspartaproj.script.directory.create_directory import create_directory
 from pyspartaproj.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
-from pyspartaproj.script.time.stamp.get_file_epoch import get_file_epoch
+from pyspartaproj.script.time.path.get_file_epoch import get_file_epoch
 
 
 def _set_invalid_datetime(file_path: Path) -> Path:

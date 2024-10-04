@@ -3,16 +3,10 @@
 
 """Module to get constant value including time information."""
 
-from decimal import Decimal
 from pathlib import Path
 
 
-def get_initial_epoch() -> Decimal:
-    """Get UNIX epoch represent April 1, 2023."""
-    return Decimal("1680307200")
-
-
-def get_initial_date_time(jst: bool = False) -> Path:
+def get_initial_time_path(jst: bool = False) -> Path:
     """Get path represent April 1, 2023.
 
     You can select time zone from UTC or JST.

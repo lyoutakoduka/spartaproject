@@ -14,9 +14,7 @@ from pyspartaproj.script.directory.create_directory import (
 )
 from pyspartaproj.script.directory.work_space import WorkSpace
 from pyspartaproj.script.path.modify.get_relative import is_relative
-from pyspartaproj.script.time.stamp.initial_date_time import (
-    get_initial_date_time,
-)
+from pyspartaproj.script.time.path.get_time_path import get_initial_time_path
 
 
 def _get_directory() -> Path:
@@ -171,7 +169,7 @@ def test_date() -> None:
 
     It's placed to Python default temporary working space.
     """
-    date_time_root: Path = get_initial_date_time()
+    date_time_root: Path = get_initial_time_path()
 
     def individual_test(temporary_root: Path) -> None:
         work_space: WorkSpace = _get_default_work_space(
@@ -193,7 +191,7 @@ def test_body() -> None:
 
     It's placed to temporary working space you specified.
     """
-    date_time_root: Path = get_initial_date_time()
+    date_time_root: Path = get_initial_time_path()
 
     def individual_test(temporary_root: Path) -> None:
         directory_pair: PathPair = _create_sub_select(temporary_root)
@@ -216,7 +214,7 @@ def test_head() -> None:
 
     Temporary working space including date time string is placed to here.
     """
-    date_time_root: Path = get_initial_date_time()
+    date_time_root: Path = get_initial_time_path()
 
     def individual_test(temporary_root: Path) -> None:
         work_space: WorkSpace = _get_default_work_space(
@@ -240,7 +238,7 @@ def test_foot() -> None:
 
     It's placed to temporary working space including date time string.
     """
-    date_time_root: Path = get_initial_date_time()
+    date_time_root: Path = get_initial_time_path()
 
     def individual_test(temporary_root: Path) -> None:
         work_space: WorkSpace = _get_default_work_space(
@@ -264,7 +262,7 @@ def test_jst() -> None:
 
     It's including date time string in JST time zone.
     """
-    date_time_root: Path = get_initial_date_time(jst=True)
+    date_time_root: Path = get_initial_time_path(jst=True)
 
     def individual_test(temporary_root: Path) -> None:
         work_space: WorkSpace = _get_default_work_space(

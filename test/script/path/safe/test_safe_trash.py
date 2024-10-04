@@ -30,9 +30,7 @@ from pyspartaproj.script.path.temporary.create_temporary_file import (
 from pyspartaproj.script.path.temporary.create_temporary_tree import (
     create_temporary_tree,
 )
-from pyspartaproj.script.time.stamp.initial_date_time import (
-    get_initial_date_time,
-)
+from pyspartaproj.script.time.path.get_time_path import get_initial_time_path
 
 
 def _get_trash_root(temporary_root: Path) -> Path:
@@ -78,7 +76,7 @@ def _compare_not_relative(full_path: Path, root_path: Path) -> None:
 
 def _compare_root(trash_root: Path, safe_trash: SafeTrash) -> None:
     _compare_path(
-        safe_trash.get_trash_root(), Path(trash_root, get_initial_date_time())
+        safe_trash.get_trash_root(), Path(trash_root, get_initial_time_path())
     )
 
 

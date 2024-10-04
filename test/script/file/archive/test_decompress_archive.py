@@ -30,8 +30,8 @@ from pyspartaproj.script.path.temporary.create_temporary_tree import (
     create_temporary_tree,
 )
 from pyspartaproj.script.string.format_texts import format_indent
-from pyspartaproj.script.time.stamp.get_timestamp import get_latest
-from pyspartaproj.script.time.stamp.set_timestamp import set_latest
+from pyspartaproj.script.time.path.get_timestamp import get_latest
+from pyspartaproj.script.time.path.set_timestamp import set_latest
 
 
 def _get_multiple() -> str:

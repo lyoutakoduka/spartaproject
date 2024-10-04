@@ -14,8 +14,8 @@ from pyspartaproj.script.directory.create_directory import create_directory
 from pyspartaproj.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
-from pyspartaproj.script.time.stamp.get_timestamp import get_latest
-from pyspartaproj.script.time.stamp.set_timestamp import set_latest
+from pyspartaproj.script.time.path.get_timestamp import get_latest
+from pyspartaproj.script.time.path.set_timestamp import set_latest
 
 
 def _get_time_text(jst: bool = False) -> Strs:
