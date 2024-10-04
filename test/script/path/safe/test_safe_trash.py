@@ -30,9 +30,7 @@ from pyspartaproj.script.path.temporary.create_temporary_file import (
 from pyspartaproj.script.path.temporary.create_temporary_tree import (
     create_temporary_tree,
 )
-from pyspartaproj.script.time.stamp.initial_date_time import (
-    get_initial_date_time,
-)
+from pyspartaproj.script.time.path.get_time_path import get_initial_date_time
 
 
 def _get_trash_root(temporary_root: Path) -> Path:

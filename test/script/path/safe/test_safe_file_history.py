@@ -18,9 +18,7 @@ from pyspartaproj.interface.pytest import fail
 from pyspartaproj.script.path.modify.get_relative import is_relative
 from pyspartaproj.script.path.safe.safe_file_history import FileHistory
 from pyspartaproj.script.stack_frame import current_frame
-from pyspartaproj.script.time.stamp.initial_date_time import (
-    get_initial_date_time,
-)
+from pyspartaproj.script.time.path.get_time_path import get_initial_date_time
 
 
 def _get_history_root(temporary_root: Path) -> Path:
