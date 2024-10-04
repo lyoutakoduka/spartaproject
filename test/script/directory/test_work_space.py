@@ -14,9 +14,7 @@ from pyspartaproj.script.directory.create_directory import (
 )
 from pyspartaproj.script.directory.work_space import WorkSpace
 from pyspartaproj.script.path.modify.get_relative import is_relative
-from pyspartaproj.script.time.stamp.initial_date_time import (
-    get_initial_date_time,
-)
+from pyspartaproj.script.time.path.get_time_path import get_initial_date_time
 
 
 def _get_directory() -> Path:
