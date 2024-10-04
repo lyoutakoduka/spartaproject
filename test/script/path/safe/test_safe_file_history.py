@@ -18,7 +18,7 @@ from pyspartaproj.interface.pytest import fail
 from pyspartaproj.script.path.modify.get_relative import is_relative
 from pyspartaproj.script.path.safe.safe_file_history import FileHistory
 from pyspartaproj.script.stack_frame import current_frame
-from pyspartaproj.script.time.path.get_time_path import get_initial_date_time
+from pyspartaproj.script.time.path.get_time_path import get_initial_time_path
 
 
 def _get_history_root(temporary_root: Path) -> Path:
@@ -157,7 +157,7 @@ def test_work() -> None:
     def individual_test(temporary_root: Path) -> None:
         file_history = FileHistory(working_root=temporary_root, override=True)
 
-        _compare_root(temporary_root, get_initial_date_time(), file_history)
+        _compare_root(temporary_root, get_initial_time_path(), file_history)
 
     _inside_temporary_directory(individual_test)
 
@@ -176,7 +176,7 @@ def test_history() -> None:
             override=True,
         )
 
-        _compare_root(history_root, get_initial_date_time(), file_history)
+        _compare_root(history_root, get_initial_time_path(), file_history)
 
     _inside_temporary_directory(individual_test)
 
