@@ -31,7 +31,7 @@ from pyspartaproj.script.path.temporary.create_temporary_file import (
 from pyspartaproj.script.path.temporary.create_temporary_tree import (
     create_temporary_tree,
 )
-from pyspartaproj.script.time.path.get_time_path import get_initial_date_time
+from pyspartaproj.script.time.path.get_time_path import get_initial_time_path
 from pyspartaproj.script.time.path.get_timestamp import (
     get_directory_latest,
     get_invalid_time,
@@ -229,7 +229,7 @@ def _compare_path(result: Path, expected: Path) -> None:
 
 def _compare_root(trash_root: Path, edit_archive: EditArchive) -> None:
     _compare_path(
-        edit_archive.get_edit_root(), Path(trash_root, get_initial_date_time())
+        edit_archive.get_edit_root(), Path(trash_root, get_initial_time_path())
     )
 
 
