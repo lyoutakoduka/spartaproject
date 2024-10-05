@@ -53,3 +53,5 @@ Single = None | bool | int | float | str | Decimal | Path
 Json = Single | Dict[str, "Json"] | List["Json"]
 Multi = Array | Pair
 Multi2 = Array2 | Pair2
+
+Jsons = List[Json]
