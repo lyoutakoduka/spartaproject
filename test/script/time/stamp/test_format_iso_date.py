@@ -1,7 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from pyspartaproj.context.default.integer_context import IntPair, IntPair2
+
+from pyspartaproj.context.default.integer_context import (
+    IntPair,
+    IntPair2,
+    Ints,
+)
+from pyspartaproj.context.default.string_context import StrPair, Strs
 
 
 def _get_source_year() -> IntPair:
@@ -26,3 +32,10 @@ def _get_source_all() -> IntPair2:
 
 def _format_digit(number: int, digit: int) -> str:
     return str(number).zfill(digit)
+
+
+def _format_digit_type(source: IntPair, groups: Strs, digits: Ints) -> StrPair:
+    return {
+        group: _format_digit(source[group], digit)
+        for group, digit in zip(groups, digits)
+    }
