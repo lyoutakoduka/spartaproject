@@ -45,3 +45,11 @@ def _get_expected_year() -> StrPair:
     return _format_digit_type(
         _get_source_year(), ["year", "month", "day"], [4] + [2] * 2
     )
+
+
+def _get_expected_hour() -> StrPair:
+    return _format_digit_type(
+        _get_source_hour(),
+        ["hour", "minute", "second", "millisecond"],
+        [2] * 3 + [6],
+    )
