@@ -7,7 +7,7 @@ from pyspartaproj.context.default.integer_context import (
     IntPair2,
     Ints,
 )
-from pyspartaproj.context.default.string_context import StrPair, Strs
+from pyspartaproj.context.default.string_context import StrPair, StrPair2, Strs
 
 
 def _get_source_year() -> IntPair:
@@ -57,3 +57,11 @@ def _get_expected_hour() -> StrPair:
 
 def _get_expected_zone() -> StrPair:
     return _format_digit_type(_get_source_zone(), ["hour", "minute"], [2] * 2)
+
+
+def _get_expected_all() -> StrPair2:
+    return {
+        "year": _get_expected_year(),
+        "hour": _get_expected_hour(),
+        "zone": _get_expected_zone(),
+    }
