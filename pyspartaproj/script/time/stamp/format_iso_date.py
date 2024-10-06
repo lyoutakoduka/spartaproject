@@ -5,9 +5,13 @@ from pyspartaproj.context.default.integer_context import IntPair, IntPair2
 from pyspartaproj.context.default.string_context import StrPair, StrPair2
 
 
+def _get_digit_year() -> IntPair:
+    return {"year": 4, "month": 2, "day": 2}
+
+
 def _get_iso_digit() -> IntPair2:
     return {
-        "year": {"year": 4, "month": 2, "day": 2},
+        "year": _get_digit_year(),
         "hour": {
             "hour": 2,
             "minute": 2,
