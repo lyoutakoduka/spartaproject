@@ -8,6 +8,8 @@ from pyspartaproj.context.default.integer_context import (
     Ints,
 )
 from pyspartaproj.context.default.string_context import StrPair, StrPair2, Strs
+from pyspartaproj.context.file.json_context import Jsons
+from pyspartaproj.script.file.json.convert_to_json import multiple2_to_json
 
 
 def _get_source_year() -> IntPair:
@@ -65,3 +67,7 @@ def _get_expected_all() -> StrPair2:
         "hour": _get_expected_hour(),
         "zone": _get_expected_zone(),
     }
+
+
+def _convert_to_json(left: StrPair2, right: StrPair2) -> Jsons:
+    return [multiple2_to_json(date) for date in [left, right]]
