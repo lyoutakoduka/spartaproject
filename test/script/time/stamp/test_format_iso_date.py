@@ -9,7 +9,9 @@ from pyspartaproj.context.default.integer_context import (
 )
 from pyspartaproj.context.default.string_context import StrPair, StrPair2, Strs
 from pyspartaproj.context.file.json_context import Jsons
+from pyspartaproj.script.bool.compare_json import is_same_json
 from pyspartaproj.script.file.json.convert_to_json import multiple2_to_json
+from pyspartaproj.script.time.stamp.format_iso_date import format_iso_date
 
 
 def _get_source_year() -> IntPair:
@@ -71,3 +73,11 @@ def _get_expected_all() -> StrPair2:
 
 def _convert_to_json(left: StrPair2, right: StrPair2) -> Jsons:
     return [multiple2_to_json(date) for date in [left, right]]
+
+
+def test_all() -> None:
+    assert is_same_json(
+        *_convert_to_json(
+            format_iso_date(_get_source_all()), _get_expected_all()
+        )
+    )
