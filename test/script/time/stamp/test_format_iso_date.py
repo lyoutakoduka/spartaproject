@@ -22,3 +22,7 @@ def _get_source_all() -> IntPair2:
         "hour": _get_source_hour(),
         "zone": _get_source_zone(),
     }
+
+
+def _format_digit(number: int, digit: int) -> str:
+    return str(number).zfill(digit)
