@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from pyspartaproj.context.default.integer_context import IntPair2
+from pyspartaproj.context.default.integer_context import IntPair, IntPair2
+from pyspartaproj.context.default.string_context import StrPair
 
 
 def _get_iso_digit() -> IntPair2:
@@ -39,3 +40,14 @@ def _format_digit_type(
     return _format_digit(
         number, _find_digit(number_group, number_type, iso_digit)
     )
+
+
+def _format_digit_group(
+    number_group: str, number_pair: IntPair, iso_digit: IntPair2
+) -> StrPair:
+    return {
+        number_type: _format_digit_type(
+            number_group, number_type, number, iso_digit
+        )
+        for number_type, number in number_pair.items()
+    }
