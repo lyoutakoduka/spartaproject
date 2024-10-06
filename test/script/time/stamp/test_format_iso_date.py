@@ -26,6 +26,10 @@ def _get_source_hour() -> IntPair:
     return {"hour": 4, "minute": 51, "second": 30, "millisecond": 123}
 
 
+def _get_source_error_error() -> IntPair:
+    return {"hour": 4, "error": 456}
+
+
 def _get_source_zone() -> IntPair:
     return {"hour": 9, "minute": 15}
 
