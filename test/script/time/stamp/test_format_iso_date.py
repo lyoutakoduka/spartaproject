@@ -10,3 +10,7 @@ def _get_source_year() -> IntPair:
 
 def _get_source_hour() -> IntPair:
     return {"hour": 4, "minute": 51, "second": 30, "millisecond": 123}
+
+
+def _get_source_zone() -> IntPair:
+    return {"hour": 9, "minute": 15}
