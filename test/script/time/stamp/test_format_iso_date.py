@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from pyspartaproj.context.default.integer_context import IntPair
+from pyspartaproj.context.default.integer_context import IntPair, IntPair2
 
 
 def _get_source_year() -> IntPair:
@@ -14,3 +14,11 @@ def _get_source_hour() -> IntPair:
 
 def _get_source_zone() -> IntPair:
     return {"hour": 9, "minute": 15}
+
+
+def _get_source_all() -> IntPair2:
+    return {
+        "year": _get_source_year(),
+        "hour": _get_source_hour(),
+        "zone": _get_source_zone(),
+    }
