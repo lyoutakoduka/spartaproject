@@ -15,3 +15,15 @@ def _get_iso_digit() -> IntPair2:
         },
         "zone": {"hour": 2, "minute": 2},
     }
+
+
+def _find_digit(
+    number_group: str, number_type: str, iso_digit: IntPair2
+) -> int:
+    if number_group in iso_digit:
+        digit_group = iso_digit[number_group]
+
+        if number_type in digit_group:
+            return digit_group[number_type]
+
+    return 0
