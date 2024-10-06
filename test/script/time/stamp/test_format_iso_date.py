@@ -53,3 +53,7 @@ def _get_expected_hour() -> StrPair:
         ["hour", "minute", "second", "millisecond"],
         [2] * 3 + [6],
     )
+
+
+def _get_expected_zone() -> StrPair:
+    return _format_digit_type(_get_source_zone(), ["hour", "minute"], [2] * 2)
