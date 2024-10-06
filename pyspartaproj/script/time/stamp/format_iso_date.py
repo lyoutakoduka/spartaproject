@@ -13,11 +13,15 @@ def _get_digit_hour() -> IntPair:
     return {"hour": 2, "minute": 2, "second": 2, "millisecond": 6}
 
 
+def _get_digit_zone() -> IntPair:
+    return {"hour": 2, "minute": 2}
+
+
 def _get_iso_digit() -> IntPair2:
     return {
         "year": _get_digit_year(),
         "hour": _get_digit_hour(),
-        "zone": {"hour": 2, "minute": 2},
+        "zone": _get_digit_zone(),
     }
 
 
