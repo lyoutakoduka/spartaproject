@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from pyspartaproj.context.default.integer_context import IntPair, IntPair2
-from pyspartaproj.context.default.string_context import StrPair
+from pyspartaproj.context.default.string_context import StrPair, StrPair2
 
 
 def _get_iso_digit() -> IntPair2:
@@ -50,4 +50,13 @@ def _format_digit_group(
             number_group, number_type, number, iso_digit
         )
         for number_type, number in number_pair.items()
+    }
+
+
+def format_iso_date(iso_date_pair: IntPair2) -> StrPair2:
+    iso_digit: IntPair2 = _get_iso_digit()
+
+    return {
+        number_group: _format_digit_group(number_group, number_pair, iso_digit)
+        for number_group, number_pair in iso_date_pair.items()
     }
