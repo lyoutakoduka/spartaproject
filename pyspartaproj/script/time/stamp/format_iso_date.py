@@ -27,3 +27,7 @@ def _find_digit(
             return digit_group[number_type]
 
     return 0
+
+
+def _format_digit(number: int, digit: int) -> str:
+    return str(number).zfill(digit)
