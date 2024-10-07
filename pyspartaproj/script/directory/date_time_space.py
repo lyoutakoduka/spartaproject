@@ -6,7 +6,11 @@
 from datetime import datetime
 from pathlib import Path
 
-from pyspartaproj.context.default.integer_context import IntPair, Ints2
+from pyspartaproj.context.default.integer_context import (
+    IntPair,
+    IntPair2,
+    Ints2,
+)
 from pyspartaproj.script.directory.create_directory import create_directory
 from pyspartaproj.script.time.stamp.current_datetime import get_current_time
 
@@ -22,6 +26,10 @@ def _get_source_hour(time: datetime) -> IntPair:
         "second": time.second,
         "millisecond": time.microsecond,
     }
+
+
+def _get_source_all(time: datetime) -> IntPair2:
+    return {"year": _get_source_year(time), "hour": _get_source_hour(time)}
 
 
 def _get_time_data(time: datetime) -> Ints2:
