@@ -80,6 +80,12 @@ def _get_expected_hour() -> StrPair:
     )
 
 
+def _get_expected_error_error() -> StrPair:
+    return _format_digit_type(
+        _get_source_error_error(), ["hour", "error"], [1, 3]
+    )
+
+
 def _get_expected_zone() -> StrPair:
     return _format_digit_type(_get_source_zone(), ["hour", "minute"], [2] * 2)
 
