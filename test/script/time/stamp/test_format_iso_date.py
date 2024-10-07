@@ -42,6 +42,13 @@ def _get_source_all() -> IntPair2:
     }
 
 
+def _get_source_error() -> IntPair2:
+    return {
+        "year": _get_source_error_year(),
+        "error": _get_source_error_error(),
+    }
+
+
 def _format_digit(number: int, digit: int) -> str:
     return str(number).zfill(digit)
 
