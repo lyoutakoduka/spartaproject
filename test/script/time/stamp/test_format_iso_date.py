@@ -98,6 +98,13 @@ def _get_expected_all() -> StrPair2:
     }
 
 
+def _get_expected_error() -> StrPair2:
+    return {
+        "year": _get_expected_error_year(),
+        "error": _get_expected_error_error(),
+    }
+
+
 def _convert_to_json(left: StrPair2, right: StrPair2) -> Jsons:
     return [multiple2_to_json(date) for date in [left, right]]
 
