@@ -115,3 +115,11 @@ def test_all() -> None:
             format_iso_date(_get_source_all()), _get_expected_all()
         )
     )
+
+
+def test_error() -> None:
+    assert is_same_json(
+        *_convert_to_json(
+            format_iso_date(_get_source_error()), _get_expected_error()
+        )
+    )
