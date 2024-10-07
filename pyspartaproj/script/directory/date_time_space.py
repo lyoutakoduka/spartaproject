@@ -15,6 +15,15 @@ def _get_source_year(time: datetime) -> IntPair:
     return {"year": time.year, "month": time.month, "day": time.day}
 
 
+def _get_source_hour(time: datetime) -> IntPair:
+    return {
+        "hour": time.hour,
+        "minute": time.minute,
+        "second": time.second,
+        "millisecond": time.microsecond,
+    }
+
+
 def _get_time_data(time: datetime) -> Ints2:
     return [
         [4, time.year],
