@@ -66,6 +66,12 @@ def _get_expected_year() -> StrPair:
     )
 
 
+def _get_expected_error_year() -> StrPair:
+    return _format_digit_type(
+        _get_source_error_year(), ["year", "error"], [4, 3]
+    )
+
+
 def _get_expected_hour() -> StrPair:
     return _format_digit_type(
         _get_source_hour(),
