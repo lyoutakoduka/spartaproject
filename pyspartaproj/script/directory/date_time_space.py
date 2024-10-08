@@ -6,11 +6,7 @@
 from datetime import datetime
 from pathlib import Path
 
-from pyspartaproj.context.default.integer_context import (
-    IntPair,
-    IntPair2,
-    Ints2,
-)
+from pyspartaproj.context.default.integer_context import IntPair, IntPair2
 from pyspartaproj.context.default.string_context import (
     StrPair,
     StrPair2,
