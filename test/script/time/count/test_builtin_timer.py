@@ -9,7 +9,7 @@ from time import sleep
 from pyspartaproj.context.extension.decimal_context import Decs
 from pyspartaproj.script.decimal.initialize_decimal import initialize_decimal
 from pyspartaproj.script.time.count.builtin_timer import TimerSelect
-from pyspartaproj.script.time.stamp.get_time_stamp import get_initial_epoch
+from pyspartaproj.script.time.epoch.get_time_stamp import get_initial_epoch
 
 initialize_decimal()
 
