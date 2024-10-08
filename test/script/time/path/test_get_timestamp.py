@@ -10,11 +10,7 @@ from tempfile import TemporaryDirectory
 from typing import Callable
 
 from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.context.extension.time_context import (
-    TimePair,
-    TimePair2,
-    Times,
-)
+from pyspartaproj.context.extension.time_context import TimePair, Times
 from pyspartaproj.script.directory.create_directory import create_directory
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.modify.get_relative import get_relative
@@ -28,7 +24,6 @@ from pyspartaproj.script.time.path.get_timestamp import (
     get_directory_latest,
     get_invalid_time,
     get_latest,
-    is_same_stamp,
 )
 
 
@@ -75,17 +70,6 @@ def _get_relative_latest(path: Path, access: bool = False) -> TimePair:
     return {
         _get_relative_text(path_text, path): time
         for path_text, time in _get_directory_latest(path, access).items()
-    }
-
-
-def _is_access(group: str) -> bool:
-    return "access" == group
-
-
-def _get_stamp_pair(stamp_root: Path) -> TimePair2:
-    return {
-        group: _get_relative_latest(stamp_root, access=_is_access(group))
-        for group in ["update", "access"]
     }
 
 
@@ -159,18 +143,5 @@ def test_tree() -> None:
 
         _compare_invalid_times(times)
         _compare_invalid_files(times)
-
-    _inside_temporary_directory(individual_test)
-
-
-def test_same() -> None:
-    """Test to compare 2 dictionaries about latest date time you got."""
-
-    def individual_test(temporary_root: Path) -> None:
-        stamp_pair: TimePair2 = _get_stamp_pair(
-            create_temporary_tree(Path(temporary_root, "tree"))
-        )
-
-        assert is_same_stamp(stamp_pair["update"], stamp_pair["access"])
 
     _inside_temporary_directory(individual_test)
