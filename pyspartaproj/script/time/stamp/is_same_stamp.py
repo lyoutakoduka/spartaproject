@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Module to get latest date time of file or directory as time object."""
+"""Module to compare two dictionaries which store path and time stamp."""
 
 from pyspartaproj.context.extension.time_context import TimePair
 from pyspartaproj.context.file.json_context import Json
@@ -16,7 +16,7 @@ def _get_stamp_json(times: TimePair) -> Json:
 
 
 def is_same_stamp(left: TimePair, right: TimePair) -> bool:
-    """Compare 2 dictionaries which store path and time stamp of the path.
+    """Compare two dictionaries which store path and time stamp of the path.
 
     Args:
         left (TimePair): Time stamp of the path you want to compare.
@@ -24,6 +24,6 @@ def is_same_stamp(left: TimePair, right: TimePair) -> bool:
         right (TimePair): Time stamp of the path you want to compare.
 
     Returns:
-        bool: True if 2 dictionaries are same value.
+        bool: True if two dictionaries are same value.
     """
     return is_same_json(*[_get_stamp_json(times) for times in [left, right]])
