@@ -6,7 +6,9 @@
 from pathlib import Path
 
 from pyspartaproj.script.directory.create_directory import create_directory
-from pyspartaproj.script.time.path.get_current_path import get_working_path
+from pyspartaproj.script.time.directory.get_current_path import (
+    get_working_path,
+)
 
 
 def create_working_space(
