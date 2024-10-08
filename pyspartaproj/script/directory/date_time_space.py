@@ -116,14 +116,7 @@ def get_working_space(override: bool = False, jst: bool = False) -> Path:
     Returns:
         Path: Path including string of current date time.
     """
-    return Path(
-        *[
-            str(time_count).zfill(order)
-            for order, time_count in _get_time_data(
-                get_current_time(override=override, jst=jst)
-            )
-        ]
-    )
+    return Path(*_sort_formatted(_get_formatted(override, jst)))
 
 
 def create_working_space(
