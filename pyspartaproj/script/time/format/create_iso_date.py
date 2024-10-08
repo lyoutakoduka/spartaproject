@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from pyspartaproj.context.default.string_context import Strs
+from pyspartaproj.context.default.string_context import Strs, Strs2
 
 
 def _get_groups() -> Strs:
@@ -18,3 +18,7 @@ def _get_types_hour() -> Strs:
 
 def _get_types_zone() -> Strs:
     return ["hour", "minute"]
+
+
+def _get_types() -> Strs2:
+    return [_get_types_year(), _get_types_hour(), _get_types_zone()]
