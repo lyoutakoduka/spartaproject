@@ -9,8 +9,8 @@ from pathlib import Path
 
 from pyspartaproj.context.extension.path_context import PathGene
 from pyspartaproj.context.extension.time_context import TimePair
+from pyspartaproj.script.time.epoch.from_timestamp import time_from_timestamp
 from pyspartaproj.script.time.path.get_file_epoch import get_file_epoch
-from pyspartaproj.script.time.stamp.from_timestamp import time_from_timestamp
 
 
 def _convert_timestamp(time: float, jst: bool) -> datetime:
