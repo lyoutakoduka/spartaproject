@@ -13,10 +13,8 @@ from pyspartaproj.script.file.archive.decompress_archive import (
 )
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.safe.safe_trash import SafeTrash
-from pyspartaproj.script.time.path.get_timestamp import (
-    get_directory_latest,
-    is_same_stamp,
-)
+from pyspartaproj.script.time.path.get_timestamp import get_directory_latest
+from pyspartaproj.script.time.stamp.is_same_stamp import is_same_stamp
 
 
 class EditArchive(SafeTrash):

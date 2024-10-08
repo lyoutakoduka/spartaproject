@@ -35,8 +35,8 @@ from pyspartaproj.script.time.path.get_time_path import get_initial_time_path
 from pyspartaproj.script.time.path.get_timestamp import (
     get_directory_latest,
     get_invalid_time,
-    is_same_stamp,
 )
+from pyspartaproj.script.time.stamp.is_same_stamp import is_same_stamp
 
 
 def _get_name() -> str:
