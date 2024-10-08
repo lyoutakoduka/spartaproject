@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-
 from pyspartaproj.context.default.integer_context import (
     IntPair,
     IntPair2,
