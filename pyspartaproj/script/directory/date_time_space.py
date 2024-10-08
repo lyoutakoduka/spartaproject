@@ -11,7 +11,12 @@ from pyspartaproj.context.default.integer_context import (
     IntPair2,
     Ints2,
 )
-from pyspartaproj.context.default.string_context import StrPair, Strs, Strs2
+from pyspartaproj.context.default.string_context import (
+    StrPair,
+    StrPair2,
+    Strs,
+    Strs2,
+)
 from pyspartaproj.script.directory.create_directory import create_directory
 from pyspartaproj.script.time.stamp.current_datetime import get_current_time
 
@@ -51,6 +56,17 @@ def _get_result_types() -> Strs2:
 
 def _sort_result(result: StrPair, result_types: Strs) -> Strs:
     return [result[result_type] for result_type in result_types]
+
+
+def _sort_formatted(result_all: StrPair2) -> Strs:
+    sorted_times: Strs = []
+
+    for result_group, result_types in zip(
+        _get_result_groups(), _get_result_types()
+    ):
+        sorted_times += _sort_result(result_all[result_group], result_types)
+
+    return sorted_times
 
 
 def _get_time_data(time: datetime) -> Ints2:
