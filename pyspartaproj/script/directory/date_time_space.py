@@ -19,6 +19,7 @@ from pyspartaproj.context.default.string_context import (
 )
 from pyspartaproj.script.directory.create_directory import create_directory
 from pyspartaproj.script.time.stamp.current_datetime import get_current_time
+from pyspartaproj.script.time.stamp.format_iso_date import format_iso_date
 
 
 def _get_source_year(time: datetime) -> IntPair:
@@ -67,6 +68,12 @@ def _sort_formatted(result_all: StrPair2) -> Strs:
         sorted_times += _sort_result(result_all[result_group], result_types)
 
     return sorted_times
+
+
+def _get_formatted(override: bool, jst: bool) -> StrPair2:
+    return format_iso_date(
+        _get_source_all(get_current_time(override=override, jst=jst))
+    )
 
 
 def _get_time_data(time: datetime) -> Ints2:
