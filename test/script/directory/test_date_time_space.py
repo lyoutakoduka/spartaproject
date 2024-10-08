@@ -8,7 +8,9 @@ from tempfile import TemporaryDirectory
 
 from pyspartaproj.script.directory.date_time_space import create_working_space
 from pyspartaproj.script.path.modify.get_relative import get_relative
-from pyspartaproj.script.time.path.get_time_path import get_initial_time_path
+from pyspartaproj.script.time.directory.get_time_path import (
+    get_initial_time_path,
+)
 
 
 def _compare_time_path(result: Path) -> None:
