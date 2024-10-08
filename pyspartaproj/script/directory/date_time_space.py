@@ -37,6 +37,10 @@ def _get_result_groups() -> Strs:
     return ["year", "hour"]
 
 
+def _get_result_year() -> Strs:
+    return ["year", "month", "day"]
+
+
 def _get_time_data(time: datetime) -> Ints2:
     return [
         [4, time.year],
