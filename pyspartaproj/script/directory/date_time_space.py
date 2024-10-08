@@ -6,7 +6,7 @@
 from pathlib import Path
 
 from pyspartaproj.script.directory.create_directory import create_directory
-from pyspartaproj.script.time.path.get_current_path import get_working_space
+from pyspartaproj.script.time.path.get_current_path import get_working_path
 
 
 def create_working_space(
@@ -29,5 +29,5 @@ def create_working_space(
         Path: End of directory path of created temporary working space.
     """
     return create_directory(
-        Path(root, get_working_space(override=override, jst=jst))
+        Path(root, get_working_path(override=override, jst=jst))
     )
