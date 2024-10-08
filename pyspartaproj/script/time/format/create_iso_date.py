@@ -14,3 +14,7 @@ def _get_types_year() -> Strs:
 
 def _get_types_hour() -> Strs:
     return ["hour", "minute", "second"]
+
+
+def _get_types_zone() -> Strs:
+    return ["hour", "minute"]
