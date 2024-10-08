@@ -22,3 +22,7 @@ def _get_types_zone() -> Strs:
 
 def _get_types() -> Strs2:
     return [_get_types_year(), _get_types_hour(), _get_types_zone()]
+
+
+def _get_identifiers() -> Strs:
+    return ["-"] + [":"] * 2
