@@ -11,6 +11,7 @@ from pyspartaproj.context.default.integer_context import (
     IntPair2,
     Ints2,
 )
+from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.script.directory.create_directory import create_directory
 from pyspartaproj.script.time.stamp.current_datetime import get_current_time
 
@@ -30,6 +31,10 @@ def _get_source_hour(time: datetime) -> IntPair:
 
 def _get_source_all(time: datetime) -> IntPair2:
     return {"year": _get_source_year(time), "hour": _get_source_hour(time)}
+
+
+def _get_result_groups() -> Strs:
+    return ["year", "hour"]
 
 
 def _get_time_data(time: datetime) -> Ints2:
