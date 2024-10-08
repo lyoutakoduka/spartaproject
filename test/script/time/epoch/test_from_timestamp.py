@@ -6,7 +6,7 @@
 from datetime import datetime
 from decimal import Decimal
 
-from pyspartaproj.script.time.stamp.from_timestamp import time_from_timestamp
+from pyspartaproj.script.time.epoch.from_timestamp import time_from_timestamp
 
 
 def _get_input_time() -> datetime:
