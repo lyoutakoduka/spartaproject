@@ -76,18 +76,6 @@ def _get_formatted(override: bool, jst: bool) -> StrPair2:
     )
 
 
-def _get_time_data(time: datetime) -> Ints2:
-    return [
-        [4, time.year],
-        [2, time.month],
-        [2, time.day],
-        [2, time.hour],
-        [2, time.minute],
-        [2, time.second],
-        [6, time.microsecond],
-    ]
-
-
 def get_working_space(override: bool = False, jst: bool = False) -> Path:
     """Get path including string of current date time.
 
