@@ -10,3 +10,7 @@ def _get_groups() -> Strs:
 
 def _get_types_year() -> Strs:
     return ["year", "month", "day"]
+
+
+def _get_types_hour() -> Strs:
+    return ["hour", "minute", "second"]
