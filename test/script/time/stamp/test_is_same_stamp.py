@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Test module to get latest date time of file or directory as time object."""
+"""Test module to compare two dictionaries which store path and time stamp."""
 
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -49,7 +49,7 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 
 
 def test_same() -> None:
-    """Test to compare 2 dictionaries about latest date time you got."""
+    """Test to compare two dictionaries about latest date time you got."""
 
     def individual_test(temporary_root: Path) -> None:
         stamp_pair: TimePair2 = _get_stamp_pair(
