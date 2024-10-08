@@ -41,6 +41,10 @@ def _get_result_year() -> Strs:
     return ["year", "month", "day"]
 
 
+def _get_result_hour() -> Strs:
+    return ["hour", "minute", "second", "millisecond"]
+
+
 def _get_time_data(time: datetime) -> Ints2:
     return [
         [4, time.year],
