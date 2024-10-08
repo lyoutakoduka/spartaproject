@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Test module to create temporary working space including date time string."""
+"""Test module to get path including string of current date time."""
 
 from pathlib import Path
 
