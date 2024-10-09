@@ -46,3 +46,7 @@ def _get_group_strings(iso_date: StrPair2) -> StrPair:
             _get_groups(), _get_types(), _get_identifiers()
         )
     }
+
+
+def _get_millisecond(iso_date: StrPair2) -> str:
+    return iso_date["hour"]["millisecond"]
