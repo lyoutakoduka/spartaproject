@@ -54,3 +54,7 @@ def _get_millisecond(iso_date: StrPair2) -> str:
 
 def _merge_hour_elements(millisecond: str, group_strings: StrPair) -> str:
     return group_strings["hour"] + "." + millisecond
+
+
+def _merge_elements(hour: str, group_strings: StrPair) -> str:
+    return group_strings["year"] + "T" + hour + "+" + group_strings["zone"]
