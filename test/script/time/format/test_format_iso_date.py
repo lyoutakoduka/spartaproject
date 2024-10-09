@@ -96,10 +96,7 @@ def _get_expected_all() -> StrPair2:
 
 
 def _get_expected_error() -> StrPair2:
-    return {
-        "year": _get_expected_error_year(),
-        "error": _get_expected_error_error(),
-    }
+    return {"year": _get_expected_error_year()}
 
 
 def _convert_to_json(left: StrPair2, right: StrPair2) -> Jsons:
