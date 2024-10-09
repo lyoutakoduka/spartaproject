@@ -1,7 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from pyspartaproj.context.default.string_context import StrPair, Strs, Strs2
+from pyspartaproj.context.default.string_context import (
+    StrPair,
+    StrPair2,
+    Strs,
+    Strs2,
+)
 
 
 def _get_groups() -> Strs:
@@ -32,3 +37,12 @@ def _get_group_string(
     identifier: str, key_types: Strs, iso_group: StrPair
 ) -> str:
     return identifier.join([iso_group[key_type] for key_type in key_types])
+
+
+def _get_group_strings(iso_date: StrPair2) -> StrPair:
+    return {
+        group: _get_group_string(identifier, key_types, iso_date[group])
+        for group, key_types, identifier in zip(
+            _get_groups(), _get_types(), _get_identifiers()
+        )
+    }
