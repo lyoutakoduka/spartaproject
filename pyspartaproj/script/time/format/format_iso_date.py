@@ -60,6 +60,16 @@ def _format_digit_group(
     }
 
 
+def _get_formatted_types(
+    digit_group: IntPair, number_pair: IntPair
+) -> StrPair:
+    return {
+        number_type: _format_digit(number, digit_group[number_type])
+        for number_type, number in number_pair.items()
+        if number_type in digit_group
+    }
+
+
 def format_iso_date(iso_date_pair: IntPair2) -> StrPair2:
     iso_digit: IntPair2 = _get_iso_digit()
 
