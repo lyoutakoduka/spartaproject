@@ -1,12 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from pyspartaproj.context.default.integer_context import IntPair2
 from pyspartaproj.context.default.string_context import (
     StrPair,
     StrPair2,
     Strs,
     Strs2,
 )
+from pyspartaproj.script.time.format.format_iso_date import format_iso_date
 
 
 def _get_groups() -> Strs:
@@ -65,3 +67,8 @@ def _create_string(iso_date: StrPair2, group_strings: StrPair) -> str:
         _merge_hour_elements(_get_millisecond(iso_date), group_strings),
         group_strings,
     )
+
+
+def create_iso_date(iso_date_pair: IntPair2) -> str:
+    iso_date: StrPair2 = format_iso_date(iso_date_pair)
+    return _create_string(iso_date, _get_group_strings(iso_date))
