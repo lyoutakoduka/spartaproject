@@ -83,9 +83,4 @@ def _get_formatted_groups(
 
 
 def format_iso_date(iso_date_pair: IntPair2) -> StrPair2:
-    iso_digit: IntPair2 = _get_iso_digit()
-
-    return {
-        number_group: _format_digit_group(number_group, number_pair, iso_digit)
-        for number_group, number_pair in iso_date_pair.items()
-    }
+    return _get_formatted_groups(iso_date_pair, _get_iso_digit())
