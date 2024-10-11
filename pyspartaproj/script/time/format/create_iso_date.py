@@ -85,6 +85,16 @@ def _create_string(iso_date: StrPair2, group_strings: StrPair) -> str:
     )
 
 
+def _merge_strings(group_strings: StrPair) -> Strs:
+    iso_strings: Strs = []
+
+    for group, identifier in zip(_get_groups(), _get_group_identifiers()):
+        if group not in group_strings:
+            iso_strings += [group_strings[group], identifier]
+
+    return iso_strings[:-1]
+
+
 def create_iso_date(iso_date_pair: IntPair2) -> str:
     iso_date: StrPair2 = format_iso_date(iso_date_pair)
     return _create_string(iso_date, _get_group_strings(iso_date))
