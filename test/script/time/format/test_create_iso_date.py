@@ -14,3 +14,7 @@ def _get_hours() -> IntPair:
 
 def _get_second() -> IntPair:
     return {"hour": 4, "minute": 51, "second": 30}
+
+
+def _get_zones() -> IntPair:
+    return {"hour": 9, "minute": 15}
