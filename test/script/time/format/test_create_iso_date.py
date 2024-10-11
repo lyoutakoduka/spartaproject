@@ -10,3 +10,7 @@ def _get_years() -> IntPair:
 
 def _get_hours() -> IntPair:
     return {"hour": 4, "minute": 51, "second": 30, "millisecond": 123}
+
+
+def _get_second() -> IntPair:
+    return {"hour": 4, "minute": 51, "second": 30}
