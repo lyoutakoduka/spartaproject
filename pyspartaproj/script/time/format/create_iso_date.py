@@ -31,7 +31,7 @@ def _get_types() -> Strs2:
     return [_get_types_year(), _get_types_hour(), _get_types_zone()]
 
 
-def _get_identifiers() -> Strs:
+def _get_type_identifiers() -> Strs:
     return ["-"] + [":"] * 2
 
 
@@ -45,7 +45,7 @@ def _get_group_strings(iso_date: StrPair2) -> StrPair:
     return {
         group: _get_group_string(identifier, key_types, iso_date[group])
         for group, key_types, identifier in zip(
-            _get_groups(), _get_types(), _get_identifiers()
+            _get_groups(), _get_types(), _get_type_identifiers()
         )
     }
 
