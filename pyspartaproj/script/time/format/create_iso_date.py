@@ -55,8 +55,14 @@ def _get_group_strings(iso_date: StrPair2) -> StrPair:
     }
 
 
-def _get_millisecond(iso_date: StrPair2) -> str:
-    return iso_date["hour"]["millisecond"]
+def _get_millisecond(iso_date: StrPair2) -> str | None:
+    if "hour" in iso_date:
+        hour_date = iso_date["hour"]
+
+        if "millisecond" in hour_date:
+            return hour_date["millisecond"]
+
+    return None
 
 
 def _merge_hour_elements(millisecond: str, group_strings: StrPair) -> str:
