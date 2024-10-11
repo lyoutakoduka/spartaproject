@@ -70,7 +70,7 @@ def _add_millisecond(iso_date: StrPair2, group_strings: StrPair) -> None:
         group_strings["hour"] += "." + millisecond
 
 
-def _merge_strings(group_strings: StrPair) -> Strs:
+def _get_datetime_elements(group_strings: StrPair) -> Strs:
     iso_strings: Strs = []
 
     for group, identifier in zip(_get_groups(), _get_group_identifiers()):
@@ -85,4 +85,4 @@ def create_iso_date(iso_date_pair: IntPair2) -> str:
     group_strings: StrPair = _get_group_strings(iso_date)
     _add_millisecond(iso_date, group_strings)
 
-    return "".join(_merge_strings(group_strings))
+    return "".join(_get_datetime_elements(group_strings))
