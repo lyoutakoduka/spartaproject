@@ -70,21 +70,6 @@ def _add_millisecond(iso_date: StrPair2, group_strings: StrPair) -> None:
         group_strings["hour"] += "." + millisecond
 
 
-def _merge_hour_elements(millisecond: str, group_strings: StrPair) -> str:
-    return group_strings["hour"] + "." + millisecond
-
-
-def _merge_elements(hour: str, group_strings: StrPair) -> str:
-    return group_strings["year"] + "T" + hour + "+" + group_strings["zone"]
-
-
-def _create_string(iso_date: StrPair2, group_strings: StrPair) -> str:
-    return _merge_elements(
-        _merge_hour_elements(_get_millisecond(iso_date), group_strings),
-        group_strings,
-    )
-
-
 def _merge_strings(group_strings: StrPair) -> Strs:
     iso_strings: Strs = []
 
