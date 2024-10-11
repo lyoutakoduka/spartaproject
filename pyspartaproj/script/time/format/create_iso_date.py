@@ -97,4 +97,7 @@ def _merge_strings(group_strings: StrPair) -> Strs:
 
 def create_iso_date(iso_date_pair: IntPair2) -> str:
     iso_date: StrPair2 = format_iso_date(iso_date_pair)
-    return _create_string(iso_date, _get_group_strings(iso_date))
+    group_strings: StrPair = _get_group_strings(iso_date)
+    _add_millisecond(iso_date, group_strings)
+
+    return "".join(_merge_strings(group_strings))
