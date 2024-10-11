@@ -51,6 +51,7 @@ def _get_group_strings(iso_date: StrPair2) -> StrPair:
         for group, key_types, identifier in zip(
             _get_groups(), _get_types(), _get_type_identifiers()
         )
+        if group in iso_date
     }
 
 
