@@ -89,7 +89,7 @@ def _merge_strings(group_strings: StrPair) -> Strs:
     iso_strings: Strs = []
 
     for group, identifier in zip(_get_groups(), _get_group_identifiers()):
-        if group not in group_strings:
+        if group in group_strings:
             iso_strings += [group_strings[group], identifier]
 
     return iso_strings[:-1]
