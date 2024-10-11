@@ -35,6 +35,10 @@ def _get_type_identifiers() -> Strs:
     return ["-"] + [":"] * 2
 
 
+def _get_group_identifiers() -> Strs:
+    return ["T", "+", ""]
+
+
 def _get_group_string(
     identifier: str, key_types: Strs, iso_group: StrPair
 ) -> str:
