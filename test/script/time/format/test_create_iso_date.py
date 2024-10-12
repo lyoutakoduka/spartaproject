@@ -51,3 +51,7 @@ def _compare_string(expected: IntPair2, result: str) -> None:
 
 def test_all() -> None:
     _compare_string(_get_source_all(), _get_expected_all())
+
+
+def test_millisecond() -> None:
+    _compare_string(_get_source_millisecond(), _get_expected_millisecond())
