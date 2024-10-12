@@ -45,8 +45,8 @@ def _get_expected_zone() -> str:
     return "2023-04-01T04:51:30.000123"
 
 
-def _compare_string(expected: IntPair2, result: str) -> None:
-    assert create_iso_date(expected) == result
+def _compare_string(source: IntPair2, expected: str) -> None:
+    assert create_iso_date(source) == expected
 
 
 def test_all() -> None:
