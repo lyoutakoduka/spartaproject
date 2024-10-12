@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from pyspartaproj.context.default.integer_context import IntPair, IntPair2
+from pyspartaproj.script.time.format.create_iso_date import create_iso_date
 
 
 def _get_years() -> IntPair:
@@ -42,3 +43,7 @@ def _get_expected_millisecond() -> str:
 
 def _get_expected_zone() -> str:
     return "2023-04-01T04:51:30.000123"
+
+
+def _compare_string(expected: IntPair2, result: str) -> None:
+    assert create_iso_date(expected) == result
