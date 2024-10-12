@@ -9,6 +9,7 @@ from os import stat_result
 from pathlib import Path
 
 from pyspartaproj.context.default.integer_context import IntPair2
+from pyspartaproj.script.time.format.create_iso_date import create_iso_date
 
 
 def _get_source() -> IntPair2:
@@ -20,7 +21,7 @@ def _get_source() -> IntPair2:
 
 
 def _get_date_time() -> datetime:
-    return datetime.fromisoformat("1980-01-01T00:00:00.000000+00:00")
+    return datetime.fromisoformat(create_iso_date(_get_source()))
 
 
 def _get_broken_time() -> Decimal:
