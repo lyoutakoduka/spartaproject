@@ -47,3 +47,7 @@ def _get_expected_zone() -> str:
 
 def _compare_string(expected: IntPair2, result: str) -> None:
     assert create_iso_date(expected) == result
+
+
+def test_all() -> None:
+    _compare_string(_get_source_all(), _get_expected_all())
