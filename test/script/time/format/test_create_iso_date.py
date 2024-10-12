@@ -22,3 +22,7 @@ def _get_zones() -> IntPair:
 
 def _get_source_all() -> IntPair2:
     return {"year": _get_years(), "hour": _get_hours(), "zone": _get_zones()}
+
+
+def _get_source_millisecond() -> IntPair2:
+    return {"year": _get_years(), "hour": _get_second(), "zone": _get_zones()}
