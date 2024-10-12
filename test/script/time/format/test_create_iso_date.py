@@ -55,3 +55,7 @@ def test_all() -> None:
 
 def test_millisecond() -> None:
     _compare_string(_get_source_millisecond(), _get_expected_millisecond())
+
+
+def test_zone() -> None:
+    _compare_string(_get_source_zone(), _get_expected_zone())
