@@ -38,3 +38,7 @@ def _get_expected_all() -> str:
 
 def _get_expected_millisecond() -> str:
     return "2023-04-01T04:51:30+09:15"
+
+
+def _get_expected_zone() -> str:
+    return "2023-04-01T04:51:30.000123"
