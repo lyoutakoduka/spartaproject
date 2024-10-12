@@ -34,3 +34,7 @@ def _get_source_zone() -> IntPair2:
 
 def _get_expected_all() -> str:
     return "2023-04-01T04:51:30.000123+09:15"
+
+
+def _get_expected_millisecond() -> str:
+    return "2023-04-01T04:51:30+09:15"
