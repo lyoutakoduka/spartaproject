@@ -28,6 +28,11 @@ def _get_broken_time() -> Decimal:
     return Decimal(str(_get_date_time().timestamp()))
 
 
+def _get_epoch_source(path: Path, access: bool) -> Decimal:
+    status: stat_result = path.stat()
+    return Decimal(str(status.st_atime if access else status.st_mtime))
+
+
 def get_file_epoch(path: Path, access: bool = False) -> Decimal | None:
     """Get date time about selected file or directory as epoch format.
 
@@ -41,10 +46,7 @@ def get_file_epoch(path: Path, access: bool = False) -> Decimal | None:
         Decimal | None: Latest date time according to condition you select.
             Return "None" if date time is broke.
     """
-    status: stat_result = path.stat()
-    time_epoch: Decimal = Decimal(
-        str(status.st_atime if access else status.st_mtime)
-    )
+    time_epoch: Decimal = _get_epoch_source(path, access)
 
     if _get_broken_time() >= time_epoch:
         return None
