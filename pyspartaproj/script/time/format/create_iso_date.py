@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from datetime import datetime
+
 from pyspartaproj.context.default.integer_context import IntPair2
 from pyspartaproj.context.default.string_context import (
     StrPair,
@@ -90,3 +92,7 @@ def get_iso_string(iso_date_pair: IntPair2) -> str:
     _add_millisecond(iso_date, group_strings)
 
     return _merge_datetime_elements(group_strings)
+
+
+def get_iso_time(iso_date: IntPair2) -> datetime:
+    return datetime.fromisoformat(get_iso_string(iso_date))
