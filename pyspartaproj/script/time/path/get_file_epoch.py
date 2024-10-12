@@ -19,11 +19,12 @@ def _get_source() -> IntPair2:
     }
 
 
+def _get_date_time() -> datetime:
+    return datetime.fromisoformat("1980-01-01T00:00:00.000000+00:00")
+
+
 def _get_broken_time() -> Decimal:
-    broken_time: datetime = datetime.fromisoformat(
-        "1980-01-01T00:00:00.000000+00:00"
-    )
-    return Decimal(str(broken_time.timestamp()))
+    return Decimal(str(_get_date_time().timestamp()))
 
 
 def get_file_epoch(path: Path, access: bool = False) -> Decimal | None:
