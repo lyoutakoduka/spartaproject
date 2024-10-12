@@ -8,6 +8,16 @@ from decimal import Decimal
 from os import stat_result
 from pathlib import Path
 
+from pyspartaproj.context.default.integer_context import IntPair2
+
+
+def _get_source() -> IntPair2:
+    return {
+        "year": {"year": 1980, "month": 1, "day": 1},
+        "hour": {"hour": 0, "minute": 0, "second": 0, "millisecond": 0},
+        "zone": {"hour": 0, "minute": 0},
+    }
+
 
 def _get_broken_time() -> Decimal:
     broken_time: datetime = datetime.fromisoformat(
