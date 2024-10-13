@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from datetime import datetime
+from zoneinfo import ZoneInfo
+
 from pyspartaproj.context.default.integer_context import IntPair, IntPair2
 from pyspartaproj.script.time.format.create_iso_date import get_iso_string
 
@@ -27,6 +30,21 @@ def _get_source_all() -> IntPair2:
 
 def _get_source_micro() -> IntPair2:
     return {"year": _get_years(), "hour": _get_second(), "zone": _get_zones()}
+
+
+def _set_expected_time(
+    year: IntPair, hour: IntPair, tzinfo: ZoneInfo
+) -> datetime:
+    return datetime(
+        year["year"],
+        year["month"],
+        year["day"],
+        hour["hour"],
+        hour["minute"],
+        hour["second"],
+        hour["micro"],
+        tzinfo=tzinfo,
+    )
 
 
 def _get_source_zone() -> IntPair2:
