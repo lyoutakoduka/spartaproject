@@ -47,6 +47,12 @@ def _set_expected_time(
     )
 
 
+def _get_expected_time(source: IntPair2) -> datetime:
+    return _set_expected_time(
+        source["year"], source["hour"], ZoneInfo("Asia/Tokyo")
+    )
+
+
 def _get_source_zone() -> IntPair2:
     return {"year": _get_years(), "hour": _get_hours()}
 
