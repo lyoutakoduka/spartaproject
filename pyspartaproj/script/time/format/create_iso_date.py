@@ -71,8 +71,8 @@ def _get_microsecond(iso_date: StrPair2) -> str | None:
 def _add_microsecond(
     string_elements: StrPair2, group_strings: StrPair
 ) -> None:
-    if millisecond := _get_microsecond(string_elements):
-        group_strings["hour"] += "." + millisecond
+    if microsecond := _get_microsecond(string_elements):
+        group_strings["hour"] += "." + microsecond
 
 
 def _get_datetime_elements(group_strings: StrPair) -> Strs:
