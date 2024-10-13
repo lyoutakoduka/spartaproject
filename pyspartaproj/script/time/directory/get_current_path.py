@@ -76,12 +76,12 @@ def get_working_path(override: bool = False, jst: bool = False) -> Path:
 
     Format of string including date time is follow.
 
-    "<year>/<month>/<day>/<hour>/<second>/<millisecond>"
+    "<year>/<month>/<day>/<hour>/<second>/<microsecond>"
 
     And digit for each number follow the rules below.
 
     Year:           4 digit
-    Millisecond:    6 digit
+    Microsecond:    6 digit
     Other:          2 digit
 
     Return directory path including string like "2023/04/01/00/00/00/000000",
