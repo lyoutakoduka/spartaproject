@@ -25,7 +25,7 @@ def _get_source_all() -> IntPair2:
     return {"year": _get_years(), "hour": _get_hours(), "zone": _get_zones()}
 
 
-def _get_source_microsecond() -> IntPair2:
+def _get_source_micro() -> IntPair2:
     return {"year": _get_years(), "hour": _get_second(), "zone": _get_zones()}
 
 
@@ -37,7 +37,7 @@ def _get_expected_all() -> str:
     return "2023-04-01T04:51:30.000123+09:15"
 
 
-def _get_expected_microsecond() -> str:
+def _get_expected_micro() -> str:
     return "2023-04-01T04:51:30+09:15"
 
 
@@ -53,7 +53,7 @@ def test_all() -> None:
     _compare_string(_get_source_all(), _get_expected_all())
 
 
-def test_microsecond() -> None:
+def test_micro() -> None:
     _compare_string(_get_source_millisecond(), _get_expected_millisecond())
 
 
