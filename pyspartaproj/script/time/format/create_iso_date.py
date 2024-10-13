@@ -58,7 +58,7 @@ def _get_group_strings(string_elements: StrPair2) -> StrPair:
     }
 
 
-def _get_microsecond(iso_date: StrPair2) -> str | None:
+def _get_micro(iso_date: StrPair2) -> str | None:
     if "hour" in iso_date:
         hour_date = iso_date["hour"]
 
@@ -68,10 +68,8 @@ def _get_microsecond(iso_date: StrPair2) -> str | None:
     return None
 
 
-def _add_microsecond(
-    string_elements: StrPair2, group_strings: StrPair
-) -> None:
-    if microsecond := _get_microsecond(string_elements):
+def _add_micro(string_elements: StrPair2, group_strings: StrPair) -> None:
+    if microsecond := _get_micro(string_elements):
         group_strings["hour"] += "." + microsecond
 
 
@@ -92,7 +90,7 @@ def _merge_datetime_elements(group_strings: StrPair) -> str:
 def get_iso_string(iso_date: IntPair2) -> str:
     string_elements: StrPair2 = format_iso_date(iso_date)
     group_strings: StrPair = _get_group_strings(string_elements)
-    _add_microsecond(string_elements, group_strings)
+    _add_micro(string_elements, group_strings)
 
     return _merge_datetime_elements(group_strings)
 
