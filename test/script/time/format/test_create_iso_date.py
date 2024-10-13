@@ -54,7 +54,7 @@ def test_all() -> None:
 
 
 def test_micro() -> None:
-    _compare_string(_get_source_millisecond(), _get_expected_millisecond())
+    _compare_string(_get_source_micro(), _get_expected_micro())
 
 
 def test_zone() -> None:
