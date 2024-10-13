@@ -10,7 +10,7 @@ def _get_digit_year() -> IntPair:
 
 
 def _get_digit_hour() -> IntPair:
-    return {"hour": 2, "minute": 2, "second": 2, "millisecond": 6}
+    return {"hour": 2, "minute": 2, "second": 2, "micro": 6}
 
 
 def _get_digit_zone() -> IntPair:

@@ -22,7 +22,7 @@ def _get_source_error_year() -> IntPair:
 
 
 def _get_source_hour() -> IntPair:
-    return {"hour": 4, "minute": 51, "second": 30, "millisecond": 123}
+    return {"hour": 4, "minute": 51, "second": 30, "micro": 123}
 
 
 def _get_source_error_error() -> IntPair:
@@ -72,7 +72,7 @@ def _get_expected_error_year() -> StrPair:
 def _get_expected_hour() -> StrPair:
     return _format_digit_type(
         _get_source_hour(),
-        ["hour", "minute", "second", "millisecond"],
+        ["hour", "minute", "second", "micro"],
         [2] * 3 + [6],
     )
 
