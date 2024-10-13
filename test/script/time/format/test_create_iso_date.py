@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from pyspartaproj.context.default.integer_context import IntPair, IntPair2
-from pyspartaproj.script.time.format.create_iso_date import create_iso_date
+from pyspartaproj.script.time.format.create_iso_date import get_iso_string
 
 
 def _get_years() -> IntPair:
@@ -46,7 +46,7 @@ def _get_expected_zone() -> str:
 
 
 def _compare_string(source: IntPair2, expected: str) -> None:
-    assert create_iso_date(source) == expected
+    assert get_iso_string(source) == expected
 
 
 def test_all() -> None:
