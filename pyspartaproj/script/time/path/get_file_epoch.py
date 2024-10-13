@@ -9,19 +9,19 @@ from os import stat_result
 from pathlib import Path
 
 from pyspartaproj.context.default.integer_context import IntPair2
-from pyspartaproj.script.time.format.create_iso_date import create_iso_date
+from pyspartaproj.script.time.format.create_iso_date import get_iso_string
 
 
 def _get_source() -> IntPair2:
     return {
         "year": {"year": 1980, "month": 1, "day": 1},
-        "hour": {"hour": 0, "minute": 0, "second": 0, "millisecond": 0},
+        "hour": {"hour": 0, "minute": 0, "second": 0, "micro": 0},
         "zone": {"hour": 0, "minute": 0},
     }
 
 
 def _get_date_time() -> datetime:
-    return datetime.fromisoformat(create_iso_date(_get_source()))
+    return datetime.fromisoformat(get_iso_string(_get_source()))
 
 
 def _get_broken_time() -> Decimal:
