@@ -90,3 +90,8 @@ def test_micro() -> None:
 
 def test_zone() -> None:
     _compare_string(_get_source_zone(), _get_expected_zone())
+
+
+def test_time() -> None:
+    source: IntPair2 = _get_source_all()
+    _compare_time(source, _get_expected_time(source))
