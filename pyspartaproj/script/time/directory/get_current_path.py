@@ -26,7 +26,7 @@ def _get_source_hour(time: datetime) -> IntPair:
         "hour": time.hour,
         "minute": time.minute,
         "second": time.second,
-        "millisecond": time.microsecond,
+        "micro": time.microsecond,
     }
 
 
@@ -43,7 +43,7 @@ def _get_result_year() -> Strs:
 
 
 def _get_result_hour() -> Strs:
-    return ["hour", "minute", "second", "millisecond"]
+    return ["hour", "minute", "second", "micro"]
 
 
 def _get_result_types() -> Strs2:
