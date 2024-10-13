@@ -47,13 +47,13 @@ def _get_group_string(
     return identifier.join([iso_group[key_type] for key_type in key_types])
 
 
-def _get_group_strings(iso_date: StrPair2) -> StrPair:
+def _get_group_strings(string_elements: StrPair2) -> StrPair:
     return {
-        group: _get_group_string(identifier, key_types, iso_date[group])
+        group: _get_group_string(identifier, key_types, string_elements[group])
         for group, key_types, identifier in zip(
             _get_groups(), _get_types(), _get_type_identifiers()
         )
-        if group in iso_date
+        if group in string_elements
     }
 
 
@@ -67,8 +67,10 @@ def _get_millisecond(iso_date: StrPair2) -> str | None:
     return None
 
 
-def _add_millisecond(iso_date: StrPair2, group_strings: StrPair) -> None:
-    if millisecond := _get_millisecond(iso_date):
+def _add_millisecond(
+    string_elements: StrPair2, group_strings: StrPair
+) -> None:
+    if millisecond := _get_millisecond(string_elements):
         group_strings["hour"] += "." + millisecond
 
 
@@ -87,9 +89,9 @@ def _merge_datetime_elements(group_strings: StrPair) -> str:
 
 
 def get_iso_string(iso_date_pair: IntPair2) -> str:
-    iso_date: StrPair2 = format_iso_date(iso_date_pair)
-    group_strings: StrPair = _get_group_strings(iso_date)
-    _add_millisecond(iso_date, group_strings)
+    string_elements: StrPair2 = format_iso_date(iso_date_pair)
+    group_strings: StrPair = _get_group_strings(string_elements)
+    _add_millisecond(string_elements, group_strings)
 
     return _merge_datetime_elements(group_strings)
 
