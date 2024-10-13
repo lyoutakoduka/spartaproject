@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from datetime import datetime
+from decimal import Decimal
 
 from pyspartaproj.context.default.integer_context import IntPair2
 from pyspartaproj.context.default.string_context import (
@@ -98,3 +99,7 @@ def get_iso_string(iso_date: IntPair2) -> str:
 
 def get_iso_time(iso_date: IntPair2) -> datetime:
     return datetime.fromisoformat(get_iso_string(iso_date))
+
+
+def get_iso_epoch(iso_date: IntPair2) -> Decimal:
+    return Decimal(str(get_iso_time(iso_date).timestamp()))
