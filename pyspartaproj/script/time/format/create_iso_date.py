@@ -88,8 +88,8 @@ def _merge_datetime_elements(group_strings: StrPair) -> str:
     return "".join(_get_datetime_elements(group_strings))
 
 
-def get_iso_string(iso_date_pair: IntPair2) -> str:
-    string_elements: StrPair2 = format_iso_date(iso_date_pair)
+def get_iso_string(iso_date: IntPair2) -> str:
+    string_elements: StrPair2 = format_iso_date(iso_date)
     group_strings: StrPair = _get_group_strings(string_elements)
     _add_millisecond(string_elements, group_strings)
 
