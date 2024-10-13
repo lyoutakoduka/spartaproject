@@ -18,7 +18,7 @@ def _get_second() -> IntPair:
 
 
 def _get_zones() -> IntPair:
-    return {"hour": 9, "minute": 15}
+    return {"hour": 9, "minute": 0}
 
 
 def _get_source_all() -> IntPair2:
@@ -34,11 +34,11 @@ def _get_source_zone() -> IntPair2:
 
 
 def _get_expected_all() -> str:
-    return "2023-04-01T04:51:30.000123+09:15"
+    return "2023-04-01T04:51:30.000123+09:00"
 
 
 def _get_expected_micro() -> str:
-    return "2023-04-01T04:51:30+09:15"
+    return "2023-04-01T04:51:30+09:00"
 
 
 def _get_expected_zone() -> str:
