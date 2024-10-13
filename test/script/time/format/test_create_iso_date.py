@@ -5,7 +5,10 @@ from datetime import datetime
 from zoneinfo import ZoneInfo
 
 from pyspartaproj.context.default.integer_context import IntPair, IntPair2
-from pyspartaproj.script.time.format.create_iso_date import get_iso_string
+from pyspartaproj.script.time.format.create_iso_date import (
+    get_iso_string,
+    get_iso_time,
+)
 
 
 def _get_years() -> IntPair:
@@ -71,6 +74,10 @@ def _get_expected_zone() -> str:
 
 def _compare_string(source: IntPair2, expected: str) -> None:
     assert get_iso_string(source) == expected
+
+
+def _compare_time(source: IntPair2, expected: datetime) -> None:
+    assert get_iso_time(source) == expected
 
 
 def test_all() -> None:
