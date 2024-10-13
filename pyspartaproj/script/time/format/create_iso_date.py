@@ -62,8 +62,8 @@ def _get_millisecond(iso_date: StrPair2) -> str | None:
     if "hour" in iso_date:
         hour_date = iso_date["hour"]
 
-        if "millisecond" in hour_date:
-            return hour_date["millisecond"]
+        if "micro" in hour_date:
+            return hour_date["micro"]
 
     return None
 
