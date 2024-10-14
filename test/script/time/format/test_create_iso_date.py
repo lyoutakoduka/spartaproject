@@ -7,6 +7,7 @@ from zoneinfo import ZoneInfo
 
 from pyspartaproj.context.default.integer_context import IntPair, IntPair2
 from pyspartaproj.script.time.format.create_iso_date import (
+    get_iso_epoch,
     get_iso_string,
     get_iso_time,
 )
@@ -83,6 +84,10 @@ def _compare_string(source: IntPair2, expected: str) -> None:
 
 def _compare_time(source: IntPair2, expected: datetime) -> None:
     assert get_iso_time(source) == expected
+
+
+def _compare_epoch(source: IntPair2, expected: Decimal) -> None:
+    assert get_iso_epoch(source) == expected
 
 
 def test_all() -> None:
