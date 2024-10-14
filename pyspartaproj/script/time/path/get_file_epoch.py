@@ -9,7 +9,10 @@ from os import stat_result
 from pathlib import Path
 
 from pyspartaproj.context.default.integer_context import IntPair2
-from pyspartaproj.script.time.format.create_iso_date import get_iso_string
+from pyspartaproj.script.time.format.create_iso_date import (
+    get_iso_epoch,
+    get_iso_string,
+)
 
 
 def _get_source() -> IntPair2:
@@ -48,7 +51,7 @@ def get_file_epoch(path: Path, access: bool = False) -> Decimal | None:
     """
     time_epoch: Decimal = _get_epoch_source(path, access)
 
-    if _get_broken_time() >= time_epoch:
+    if get_iso_epoch(_get_source()) >= time_epoch:
         return None
 
     return time_epoch
