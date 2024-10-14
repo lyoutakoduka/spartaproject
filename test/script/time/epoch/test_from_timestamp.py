@@ -8,6 +8,7 @@ from decimal import Decimal
 
 from pyspartaproj.context.default.integer_context import IntPair2
 from pyspartaproj.script.time.epoch.from_timestamp import time_from_timestamp
+from pyspartaproj.script.time.format.create_iso_date import get_iso_time
 
 
 def _get_source() -> IntPair2:
@@ -27,7 +28,7 @@ def _get_source_jst() -> IntPair2:
 
 
 def _get_input_time() -> datetime:
-    return datetime.fromisoformat("2023-04-15T20:09:30.936886+00:00")
+    return get_iso_time(_get_source())
 
 
 def _get_timestamp() -> Decimal:
