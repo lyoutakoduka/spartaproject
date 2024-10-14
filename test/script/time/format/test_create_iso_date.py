@@ -105,3 +105,7 @@ def test_zone() -> None:
 def test_time() -> None:
     source: IntPair2 = _get_source_all()
     _compare_time(source, _get_expected_time(source))
+
+
+def test_epoch() -> None:
+    _compare_epoch(_get_source_all(), _get_expected_epoch())
