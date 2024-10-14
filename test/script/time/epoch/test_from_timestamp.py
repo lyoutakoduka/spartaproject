@@ -34,6 +34,10 @@ def _get_input_time() -> datetime:
     return get_iso_time(_get_source())
 
 
+def _get_iso_time_jst() -> datetime:
+    return get_iso_time(_get_source_jst())
+
+
 def _get_timestamp() -> Decimal:
     return get_iso_epoch(_get_source())
 
