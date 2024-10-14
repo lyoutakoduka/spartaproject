@@ -6,7 +6,16 @@
 from datetime import datetime
 from decimal import Decimal
 
+from pyspartaproj.context.default.integer_context import IntPair2
 from pyspartaproj.script.time.epoch.from_timestamp import time_from_timestamp
+
+
+def _get_source() -> IntPair2:
+    return {
+        "year": {"year": 2023, "month": 4, "day": 15},
+        "hour": {"hour": 20, "minute": 9, "second": 30, "micro": 936886},
+        "zone": {"hour": 0, "minute": 0},
+    }
 
 
 def _get_input_time() -> datetime:
