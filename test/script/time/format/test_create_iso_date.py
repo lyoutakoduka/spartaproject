@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from datetime import datetime
+from decimal import Decimal
 from zoneinfo import ZoneInfo
 
 from pyspartaproj.context.default.integer_context import IntPair, IntPair2
@@ -54,6 +55,10 @@ def _get_expected_time(source: IntPair2) -> datetime:
     return _set_expected_time(
         source["year"], source["hour"], ZoneInfo("Asia/Tokyo")
     )
+
+
+def _get_expected_epoch() -> Decimal:
+    return Decimal("1680292290.000123")
 
 
 def _get_source_zone() -> IntPair2:
