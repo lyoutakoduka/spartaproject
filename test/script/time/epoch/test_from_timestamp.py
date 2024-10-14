@@ -30,7 +30,7 @@ def _get_source_jst() -> IntPair2:
     }
 
 
-def _get_input_time() -> datetime:
+def _get_iso_time() -> datetime:
     return get_iso_time(_get_source())
 
 
@@ -38,7 +38,7 @@ def _get_iso_time_jst() -> datetime:
     return get_iso_time(_get_source_jst())
 
 
-def _get_timestamp() -> Decimal:
+def _get_iso_epoch() -> Decimal:
     return get_iso_epoch(_get_source())
 
 
@@ -48,12 +48,12 @@ def _compare_time(expected: datetime, result: datetime) -> None:
 
 def test_utc() -> None:
     """Test to convert time data from epoch format to datetime object."""
-    assert _get_input_time() == time_from_timestamp(_get_timestamp())
+    assert _get_iso_time() == time_from_timestamp(_get_iso_epoch())
 
 
 def test_jst() -> None:
     """Test to convert time data to datetime object as JST time zone."""
     expected: str = "2023-04-16T05:09:30.936886+09:00"
     assert datetime.fromisoformat(expected) == time_from_timestamp(
-        _get_timestamp(), jst=True
+        _get_iso_epoch(), jst=True
     )
