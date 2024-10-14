@@ -48,7 +48,7 @@ def _compare_time(expected: datetime, result: datetime) -> None:
 
 def test_utc() -> None:
     """Test to convert time data from epoch format to datetime object."""
-    assert _get_iso_time() == time_from_timestamp(_get_iso_epoch())
+    _compare_time(_get_iso_time(), time_from_timestamp(_get_iso_epoch()))
 
 
 def test_jst() -> None:
