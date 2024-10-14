@@ -8,7 +8,10 @@ from decimal import Decimal
 
 from pyspartaproj.context.default.integer_context import IntPair2
 from pyspartaproj.script.time.epoch.from_timestamp import time_from_timestamp
-from pyspartaproj.script.time.format.create_iso_date import get_iso_time
+from pyspartaproj.script.time.format.create_iso_date import (
+    get_iso_epoch,
+    get_iso_time,
+)
 
 
 def _get_source() -> IntPair2:
@@ -32,7 +35,7 @@ def _get_input_time() -> datetime:
 
 
 def _get_timestamp() -> Decimal:
-    return Decimal(str(_get_input_time().timestamp()))
+    return get_iso_epoch(_get_source())
 
 
 def test_utc() -> None:
