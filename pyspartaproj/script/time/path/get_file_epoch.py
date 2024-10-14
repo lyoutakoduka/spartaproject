@@ -23,14 +23,6 @@ def _get_source() -> IntPair2:
     }
 
 
-def _get_date_time() -> datetime:
-    return datetime.fromisoformat(get_iso_string(_get_source()))
-
-
-def _get_broken_time() -> Decimal:
-    return Decimal(str(_get_date_time().timestamp()))
-
-
 def _get_epoch_source(path: Path, access: bool) -> Decimal:
     status: stat_result = path.stat()
     return Decimal(str(status.st_atime if access else status.st_mtime))
