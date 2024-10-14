@@ -53,7 +53,6 @@ def test_utc() -> None:
 
 def test_jst() -> None:
     """Test to convert time data to datetime object as JST time zone."""
-    expected: str = "2023-04-16T05:09:30.936886+09:00"
-    assert datetime.fromisoformat(expected) == time_from_timestamp(
-        _get_iso_epoch(), jst=True
+    _compare_time(
+        _get_iso_time_jst(), time_from_timestamp(_get_iso_epoch(), jst=True)
     )
