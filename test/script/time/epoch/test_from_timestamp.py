@@ -18,6 +18,14 @@ def _get_source() -> IntPair2:
     }
 
 
+def _get_source_jst() -> IntPair2:
+    return {
+        "year": {"year": 2023, "month": 4, "day": 16},
+        "hour": {"hour": 5, "minute": 9, "second": 30, "micro": 936886},
+        "zone": {"hour": 9, "minute": 0},
+    }
+
+
 def _get_input_time() -> datetime:
     return datetime.fromisoformat("2023-04-15T20:09:30.936886+00:00")
 
