@@ -3,16 +3,12 @@
 
 """Module to get date time about selected file or directory as epoch format."""
 
-from datetime import datetime
 from decimal import Decimal
 from os import stat_result
 from pathlib import Path
 
 from pyspartaproj.context.default.integer_context import IntPair2
-from pyspartaproj.script.time.format.create_iso_date import (
-    get_iso_epoch,
-    get_iso_string,
-)
+from pyspartaproj.script.time.format.create_iso_date import get_iso_epoch
 
 
 def _get_source() -> IntPair2:
