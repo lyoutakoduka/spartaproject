@@ -3,7 +3,6 @@
 
 """Test module to decompress file or directory by archive format."""
 
-
 from base64 import b64decode
 from datetime import datetime
 from itertools import chain
