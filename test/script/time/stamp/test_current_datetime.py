@@ -3,14 +3,18 @@
 
 from datetime import datetime
 
-from pyspartaproj.context.default.integer_context import IntPair2
+from pyspartaproj.context.default.integer_context import IntPair, IntPair2
 from pyspartaproj.script.time.format.create_iso_date import get_iso_time
 from pyspartaproj.script.time.stamp.current_datetime import get_current_time
 
 
+def _get_year() -> IntPair:
+    return {"year": 2023, "month": 4, "day": 1}
+
+
 def _get_source() -> IntPair2:
     return {
-        "year": {"year": 2023, "month": 4, "day": 1},
+        "year": _get_year(),
         "hour": {"hour": 0, "minute": 0, "second": 0},
         "zone": {"hour": 0, "minute": 0},
     }
@@ -18,7 +22,7 @@ def _get_source() -> IntPair2:
 
 def _get_source_jst() -> IntPair2:
     return {
-        "year": {"year": 2023, "month": 4, "day": 1},
+        "year": _get_year(),
         "hour": {"hour": 9, "minute": 0, "second": 0},
         "zone": {"hour": 9, "minute": 0},
     }
