@@ -15,6 +15,14 @@ def _get_source() -> IntPair2:
     }
 
 
+def _get_source_jst() -> IntPair2:
+    return {
+        "year": {"year": 2023, "month": 4, "day": 1},
+        "hour": {"hour": 9, "minute": 0, "second": 0},
+        "zone": {"hour": 9, "minute": 0},
+    }
+
+
 def _common_test(time: datetime, expected: str) -> None:
     assert expected == time.isoformat()
 
