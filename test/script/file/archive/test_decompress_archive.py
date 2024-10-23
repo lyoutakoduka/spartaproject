@@ -30,6 +30,7 @@ from pyspartaproj.script.path.temporary.create_temporary_tree import (
     create_temporary_tree,
 )
 from pyspartaproj.script.string.format_texts import format_indent
+from pyspartaproj.script.time.format.create_iso_date import get_iso_time
 from pyspartaproj.script.time.path.get_timestamp import get_latest
 from pyspartaproj.script.time.path.set_timestamp import set_latest
 
@@ -86,7 +87,7 @@ def _export_byte(file_path: Path, byte: bytes) -> Path:
 
 
 def _get_expected_stamp() -> datetime:
-    return datetime.fromisoformat("2023-04-15T20:09:30.936886+00:00")
+    return get_iso_time(_get_source())
 
 
 def _equal_stamp(left: Times, right: Times) -> None:
