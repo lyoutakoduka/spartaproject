@@ -14,7 +14,12 @@ def _add_zone(time: datetime) -> datetime:
 
 
 def offset_time(time: datetime) -> datetime:
-    if offset := time.utcoffset():
-        return _offset(time, offset)
+    offset: timedelta | None = time.utcoffset()
 
-    return _add_zone(time)
+    if offset is None:
+        return _add_zone(time)
+
+    if timedelta(0) == offset:
+        return time
+
+    return _offset(time, offset)
