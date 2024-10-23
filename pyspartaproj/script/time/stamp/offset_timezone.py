@@ -9,8 +9,12 @@ def _offset(time: datetime, offset: timedelta) -> datetime:
     return time_offset.replace(tzinfo=timezone.utc)
 
 
+def _add_zone(time: datetime) -> datetime:
+    return datetime.fromisoformat(time.isoformat() + "+00:00")
+
+
 def offset_time(time: datetime) -> datetime:
     if offset := time.utcoffset():
         return _offset(time, offset)
 
-    return datetime.fromisoformat(time.isoformat() + "+00:00")
+    return _add_zone(time)
