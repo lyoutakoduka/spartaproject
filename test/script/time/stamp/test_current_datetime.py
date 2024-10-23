@@ -37,5 +37,4 @@ def test_utc() -> None:
 
 
 def test_jst() -> None:
-    expected: str = "2023-04-01T09:00:00+09:00"
-    _common_test(get_current_time(override=True, jst=True), expected)
+    _compare_time(get_current_time(override=True, jst=True), _get_source_jst())
