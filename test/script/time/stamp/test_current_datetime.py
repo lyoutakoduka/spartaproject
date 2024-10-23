@@ -33,8 +33,7 @@ def _compare_time(time: datetime, expected: IntPair2) -> None:
 
 
 def test_utc() -> None:
-    expected: str = "2023-04-01T00:00:00+00:00"
-    _common_test(get_current_time(override=True), expected)
+    _compare_time(get_current_time(override=True), _get_source())
 
 
 def test_jst() -> None:
