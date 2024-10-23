@@ -10,7 +10,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from pyspartaproj.context.default.integer_context import Ints, Ints2
+from pyspartaproj.context.default.integer_context import IntPair2, Ints, Ints2
 from pyspartaproj.context.default.string_context import StrPair, Strs
 from pyspartaproj.context.extension.path_context import Paths, Paths2
 from pyspartaproj.context.extension.time_context import Times, Times2
@@ -40,6 +40,14 @@ def _get_multiple() -> str:
 
 def _get_types() -> Strs:
     return ["tree", "extract"]
+
+
+def _get_source() -> IntPair2:
+    return {
+        "year": {"year": 2023, "month": 4, "day": 15},
+        "hour": {"hour": 20, "minute": 9, "second": 30, "micro": 936886},
+        "zone": {"hour": 0, "minute": 0},
+    }
 
 
 def _get_tree_root(temporary_root: Path) -> Path:
