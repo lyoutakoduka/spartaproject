@@ -4,6 +4,7 @@
 from datetime import datetime
 
 from pyspartaproj.context.default.integer_context import IntPair2
+from pyspartaproj.script.time.format.create_iso_date import get_iso_time
 from pyspartaproj.script.time.stamp.current_datetime import get_current_time
 
 
@@ -25,6 +26,10 @@ def _get_source_jst() -> IntPair2:
 
 def _common_test(time: datetime, expected: str) -> None:
     assert expected == time.isoformat()
+
+
+def _compare_time(time: datetime, expected: IntPair2) -> None:
+    assert get_iso_time(expected) == time
 
 
 def test_utc() -> None:
