@@ -59,6 +59,14 @@ def _get_source_jst() -> IntPair2:
     }
 
 
+def _get_source_jst_access() -> IntPair2:
+    return {
+        "year": {"year": 2023, "month": 4, "day": 16},
+        "hour": {"hour": 5, "minute": 9, "second": 30, "micro": 936886},
+        "zone": _get_jst(),
+    }
+
+
 def _get_time_text(jst: bool = False) -> Strs:
     times: Strs = [
         "2023-04-01T00:00:00.000001+00:00",
