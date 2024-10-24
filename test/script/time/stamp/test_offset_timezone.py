@@ -3,7 +3,8 @@
 
 
 from pyspartaproj.context.default.integer_context import IntPair, IntPair2
-from pyspartaproj.context.extension.time_context import datetime
+from pyspartaproj.context.extension.time_context import Times, datetime
+from pyspartaproj.script.time.format.create_iso_date import get_iso_time
 from pyspartaproj.script.time.stamp.offset_timezone import offset_time
 
 
@@ -36,6 +37,12 @@ def _get_source_missing() -> IntPair2:
         "year": _get_year(),
         "hour": _get_hour(),
     }
+
+
+def _convert_datetime(time_pairs: IntPair2) -> Times:
+    return [
+        get_iso_time(time_pair) for time_pair in [_get_source(), time_pairs]
+    ]
 
 
 def _common_text(source_time: str) -> None:
