@@ -179,8 +179,8 @@ def test_jst() -> None:
     """Test to set latest date time of file by JST time zone."""
 
     def individual_test(temporary_root: Path) -> None:
-        _common_test(
-            create_temporary_file(temporary_root), _get_time_text(jst=True)
+        _compare_datetime(
+            create_temporary_file(temporary_root), _select_zone(jst=True)
         )
 
     _inside_temporary_directory(individual_test)
