@@ -8,6 +8,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
+from pyspartaproj.context.default.integer_context import IntPair
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.extension.time_context import Times
 from pyspartaproj.script.directory.create_directory import create_directory
@@ -20,6 +21,10 @@ from pyspartaproj.script.time.path.set_timestamp import set_latest
 
 def _is_access(group: str) -> bool:
     return group == "access"
+
+
+def _get_year() -> IntPair:
+    return {"year": 2023, "month": 4, "day": 1}
 
 
 def _get_time_text(jst: bool = False) -> Strs:
