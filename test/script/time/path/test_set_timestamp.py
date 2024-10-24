@@ -79,6 +79,10 @@ def _time_jst() -> IntPair3:
     return {"update": _get_source_jst(), "access": _get_source_jst_access()}
 
 
+def _select_zone(jst: bool = False) -> IntPair3:
+    return _time_jst() if jst else _time_utc()
+
+
 def _get_time_text(jst: bool = False) -> Strs:
     times: Strs = [
         "2023-04-01T00:00:00.000001+00:00",
