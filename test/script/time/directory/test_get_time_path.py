@@ -10,6 +10,10 @@ from pyspartaproj.script.time.directory.get_time_path import (
 )
 
 
+def _get_hour(jst: bool) -> str:
+    return str(9 if jst else 0).zfill(2)
+
+
 def test_utc() -> None:
     """Test to get path represent April 1, 2023 as UTC time zone."""
     assert get_initial_time_path() == Path(
