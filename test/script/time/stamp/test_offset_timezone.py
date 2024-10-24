@@ -66,6 +66,10 @@ def test_timezone() -> None:
     _common_text(source_jst)
 
 
+def test_missing() -> None:
+    _compare_datetime(_get_source_missing())
+
+
 def test_lost() -> None:
     source_lost: str = "2023-04-15T20:09:30.936886"
     _common_text(source_lost)
