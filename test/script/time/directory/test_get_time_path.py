@@ -14,7 +14,7 @@ def _get_hour(jst: bool) -> str:
     return str(9 if jst else 0).zfill(2)
 
 
-def _get_time_path(jst: bool = True) -> Path:
+def _get_time_path(jst: bool = False) -> Path:
     return Path("2023", "04", "01", _get_hour(jst), "00", "00", "000000")
 
 
