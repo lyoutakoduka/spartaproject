@@ -130,6 +130,14 @@ def _get_expected_datetime() -> Times:
     return _convert_input_time(_get_time_text())
 
 
+def _compare_datetime(path: Path, times: IntPair3) -> None:
+    _set_latest_pair(path, times)
+
+    for group, expected in _get_input_time(times).items():
+        results: TimePair = _get_latest_pair(path)
+        assert expected == results[group]
+
+
 def _common_test(path: Path, time_texts: Strs) -> None:
     _set_latest_datetime(path, time_texts)
 
