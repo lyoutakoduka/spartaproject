@@ -8,7 +8,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from pyspartaproj.context.default.integer_context import IntPair
+from pyspartaproj.context.default.integer_context import IntPair, IntPair2
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.extension.time_context import Times
 from pyspartaproj.script.directory.create_directory import create_directory
@@ -33,6 +33,14 @@ def _get_utc() -> IntPair:
 
 def _get_jst() -> IntPair:
     return {"hour": 9, "minute": 0}
+
+
+def _get_source() -> IntPair2:
+    return {
+        "year": _get_year(),
+        "hour": {"hour": 0, "minute": 0, "second": 0, "micro": 1},
+        "zone": _get_utc(),
+    }
 
 
 def _get_time_text(jst: bool = False) -> Strs:
