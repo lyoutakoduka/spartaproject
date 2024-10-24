@@ -167,9 +167,9 @@ def test_directory() -> None:
     """Test to set latest date time of directory."""
 
     def individual_test(temporary_root: Path) -> None:
-        _common_test(
+        _compare_datetime(
             create_directory(Path(temporary_root, "temporary")),
-            _get_time_text(),
+            _select_zone(),
         )
 
     _inside_temporary_directory(individual_test)
