@@ -115,6 +115,13 @@ def _set_latest_datetime(path: Path, time_texts: Strs) -> None:
         set_latest(path, time, access=status)
 
 
+def _get_latest_pair(path: Path) -> TimePair:
+    return {
+        group: get_latest(path, access=_is_access(group))
+        for group in ["update", "access"]
+    }
+
+
 def _get_latest_datetime(path: Path) -> Times:
     return [get_latest(path, access=status) for status in [False, True]]
 
