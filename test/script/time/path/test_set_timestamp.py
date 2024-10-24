@@ -3,7 +3,6 @@
 
 """test module to set latest date time of file or directory by time object."""
 
-from datetime import datetime
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
@@ -13,8 +12,7 @@ from pyspartaproj.context.default.integer_context import (
     IntPair2,
     IntPair3,
 )
-from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.context.extension.time_context import TimePair, Times
+from pyspartaproj.context.extension.time_context import TimePair
 from pyspartaproj.script.directory.create_directory import create_directory
 from pyspartaproj.script.path.temporary.create_temporary_file import (
     create_temporary_file,
