@@ -1,8 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from pyspartaproj.context.default.integer_context import IntPair
 from pyspartaproj.context.extension.time_context import datetime
 from pyspartaproj.script.time.stamp.offset_timezone import offset_time
+
+
+def _get_year() -> IntPair:
+    return {"year": 2023, "month": 4, "day": 15}
 
 
 def _common_text(source_time: str) -> None:
