@@ -49,26 +49,9 @@ def _compare_datetime(time_pairs: IntPair2) -> None:
     assert times[0] == offset_time(times[1])
 
 
-def _common_text(source_time: str) -> None:
-    expected_utc: str = "2023-04-15T20:09:30.936886+00:00"
-    expected: datetime = datetime.fromisoformat(expected_utc)
-
-    assert expected == offset_time(datetime.fromisoformat(source_time))
-
-
 def test_jst() -> None:
     _compare_datetime(_get_source_jst())
 
 
-def test_timezone() -> None:
-    source_jst: str = "2023-04-16T05:09:30.936886+09:00"
-    _common_text(source_jst)
-
-
 def test_missing() -> None:
     _compare_datetime(_get_source_missing())
-
-
-def test_lost() -> None:
-    source_lost: str = "2023-04-15T20:09:30.936886"
-    _common_text(source_lost)
