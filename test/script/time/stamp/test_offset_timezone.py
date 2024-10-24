@@ -31,6 +31,13 @@ def _get_source_jst() -> IntPair2:
     }
 
 
+def _get_source_missing() -> IntPair2:
+    return {
+        "year": _get_year(),
+        "hour": _get_hour(),
+    }
+
+
 def _common_text(source_time: str) -> None:
     expected_utc: str = "2023-04-15T20:09:30.936886+00:00"
     expected: datetime = datetime.fromisoformat(expected_utc)
