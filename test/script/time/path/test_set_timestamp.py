@@ -156,7 +156,9 @@ def test_file() -> None:
     """Test to set latest date time of file."""
 
     def individual_test(temporary_root: Path) -> None:
-        _common_test(create_temporary_file(temporary_root), _get_time_text())
+        _compare_datetime(
+            create_temporary_file(temporary_root), _select_zone()
+        )
 
     _inside_temporary_directory(individual_test)
 
