@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from pyspartaproj.context.default.integer_context import IntPair, IntPair2
-from pyspartaproj.context.extension.time_context import Times, datetime
+from pyspartaproj.context.extension.time_context import Times
 from pyspartaproj.script.time.format.create_iso_date import get_iso_time
 from pyspartaproj.script.time.stamp.offset_timezone import offset_time
 
