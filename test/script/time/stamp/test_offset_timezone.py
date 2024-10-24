@@ -57,6 +57,10 @@ def _common_text(source_time: str) -> None:
     assert expected == offset_time(datetime.fromisoformat(source_time))
 
 
+def test_jst() -> None:
+    _compare_datetime(_get_source_jst())
+
+
 def test_timezone() -> None:
     source_jst: str = "2023-04-16T05:09:30.936886+09:00"
     _common_text(source_jst)
