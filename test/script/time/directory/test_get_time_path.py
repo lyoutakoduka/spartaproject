@@ -14,6 +14,10 @@ def _get_hour(jst: bool) -> str:
     return str(9 if jst else 0).zfill(2)
 
 
+def _get_time_path(jst: bool = True) -> Path:
+    return Path("2023", "04", "01", _get_hour(jst), "00", "00", "000000")
+
+
 def test_utc() -> None:
     """Test to get path represent April 1, 2023 as UTC time zone."""
     assert get_initial_time_path() == Path(
