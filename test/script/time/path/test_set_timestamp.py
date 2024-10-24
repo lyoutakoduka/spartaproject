@@ -14,11 +14,12 @@ from pyspartaproj.context.default.integer_context import (
     IntPair3,
 )
 from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.context.extension.time_context import Times
+from pyspartaproj.context.extension.time_context import TimePair, Times
 from pyspartaproj.script.directory.create_directory import create_directory
 from pyspartaproj.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
+from pyspartaproj.script.time.format.create_iso_date import get_iso_time
 from pyspartaproj.script.time.path.get_timestamp import get_latest
 from pyspartaproj.script.time.path.set_timestamp import set_latest
 
@@ -94,6 +95,10 @@ def _get_time_text(jst: bool = False) -> Strs:
     ]
 
     return times_jst if jst else times
+
+
+def _get_input_time(times: IntPair3) -> TimePair:
+    return {group: get_iso_time(time) for group, time in times.items()}
 
 
 def _convert_input_time(times: Strs) -> Times:
