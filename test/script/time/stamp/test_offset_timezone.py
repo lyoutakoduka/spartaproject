@@ -45,6 +45,11 @@ def _convert_datetime(time_pairs: IntPair2) -> Times:
     ]
 
 
+def _compare_datetime(time_pairs: IntPair2) -> None:
+    times: Times = _convert_datetime(time_pairs)
+    assert times[0] == offset_time(times[1])
+
+
 def _common_text(source_time: str) -> None:
     expected_utc: str = "2023-04-15T20:09:30.936886+00:00"
     expected: datetime = datetime.fromisoformat(expected_utc)
