@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module get information about current date time."""
+
 from datetime import datetime
 
 from pyspartaproj.context.default.integer_context import IntPair, IntPair2
@@ -33,8 +35,10 @@ def _compare_time(time: datetime, expected: IntPair2) -> None:
 
 
 def test_utc() -> None:
+    """Test to compare current date time."""
     _compare_time(get_current_time(override=True), _get_source())
 
 
 def test_jst() -> None:
+    """Test to compare current date time in JST time zone."""
     _compare_time(get_current_time(override=True, jst=True), _get_source_jst())
