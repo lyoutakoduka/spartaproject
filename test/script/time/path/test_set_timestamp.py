@@ -18,6 +18,10 @@ from pyspartaproj.script.time.path.get_timestamp import get_latest
 from pyspartaproj.script.time.path.set_timestamp import set_latest
 
 
+def _is_access(group: str) -> bool:
+    return group == "access"
+
+
 def _get_time_text(jst: bool = False) -> Strs:
     times: Strs = [
         "2023-04-01T00:00:00.000001+00:00",
