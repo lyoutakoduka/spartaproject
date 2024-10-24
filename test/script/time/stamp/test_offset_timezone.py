@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from pyspartaproj.context.default.integer_context import IntPair
+
+from pyspartaproj.context.default.integer_context import IntPair, IntPair2
 from pyspartaproj.context.extension.time_context import datetime
 from pyspartaproj.script.time.stamp.offset_timezone import offset_time
 
@@ -12,6 +13,14 @@ def _get_year() -> IntPair:
 
 def _get_hour() -> IntPair:
     return {"hour": 20, "minute": 9, "second": 30, "micro": 936886}
+
+
+def _get_source() -> IntPair2:
+    return {
+        "year": _get_year(),
+        "hour": _get_hour(),
+        "zone": {"hour": 0, "minute": 0},
+    }
 
 
 def _common_text(source_time: str) -> None:
