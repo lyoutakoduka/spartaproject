@@ -105,6 +105,11 @@ def _convert_input_time(times: Strs) -> Times:
     return [datetime.fromisoformat(time) for time in times]
 
 
+def _set_latest_pair(path: Path, times: IntPair3) -> None:
+    for group, time in _get_input_time(times).items():
+        set_latest(path, time, access=_is_access(group))
+
+
 def _set_latest_datetime(path: Path, time_texts: Strs) -> None:
     for status, time in zip([False, True], _convert_input_time(time_texts)):
         set_latest(path, time, access=status)
