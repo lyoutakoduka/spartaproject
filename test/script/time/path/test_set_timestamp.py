@@ -27,6 +27,10 @@ def _get_year() -> IntPair:
     return {"year": 2023, "month": 4, "day": 1}
 
 
+def _get_utc() -> IntPair:
+    return {"hour": 0, "minute": 0}
+
+
 def _get_time_text(jst: bool = False) -> Strs:
     times: Strs = [
         "2023-04-01T00:00:00.000001+00:00",
