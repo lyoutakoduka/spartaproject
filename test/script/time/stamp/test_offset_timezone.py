@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-
 from pyspartaproj.context.default.integer_context import IntPair, IntPair2
 from pyspartaproj.context.extension.time_context import Times, datetime
 from pyspartaproj.script.time.format.create_iso_date import get_iso_time
