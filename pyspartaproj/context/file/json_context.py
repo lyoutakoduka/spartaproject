@@ -54,4 +54,5 @@ Json = Single | Dict[str, "Json"] | List["Json"]
 Multi = Array | Pair
 Multi2 = Array2 | Pair2
 
+Singles = List[Single]
 Jsons = List[Json]
