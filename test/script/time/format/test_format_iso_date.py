@@ -97,17 +97,13 @@ def _convert_to_json(left: StrPair2, right: StrPair2) -> Jsons:
     return [multiple2_to_json(date) for date in [left, right]]
 
 
+def _compare_datetime(source: IntPair2, expected: StrPair2) -> None:
+    assert is_same_json(*_convert_to_json(format_iso_date(source), expected))
+
+
 def test_all() -> None:
-    assert is_same_json(
-        *_convert_to_json(
-            format_iso_date(_get_source_all()), _get_expected_all()
-        )
-    )
+    _compare_datetime(_get_source_all(), _get_expected_all())
 
 
 def test_error() -> None:
-    assert is_same_json(
-        *_convert_to_json(
-            format_iso_date(_get_source_error()), _get_expected_error()
-        )
-    )
+    _compare_datetime(_get_source_error(), _get_expected_error())
