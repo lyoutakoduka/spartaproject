@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Module to convert date time element from type number to string."""
+
 from pyspartaproj.context.default.integer_context import IntPair, IntPair2
 from pyspartaproj.context.default.string_context import StrPair, StrPair2
 
@@ -50,4 +52,48 @@ def _get_formatted_groups(iso_date: IntPair2, iso_digit: IntPair2) -> StrPair2:
 
 
 def format_iso_date(iso_date: IntPair2) -> StrPair2:
+    """Convert date time element from type number to string.
+
+    e.g., the argument "iso_date" must be following structure.
+
+    {
+        "year": {"year": 2023, "month": 4, "day": 1},
+        "hour": {"hour": 4, "minute": 51, "second": 30, "micro": 123},
+        "zone": {"hour": 9, "minute": 0},
+    }
+
+    On this case,
+        following date time element structured by type string is returned.
+
+    {
+        "year": {"year": "2023", "month": "04", "day": "01"},
+        "hour": {
+            "hour": "04",
+            "minute": "51",
+            "second": "30",
+            "micro": "000123",
+        },
+        "zone": {"hour": "09", "minute": "00"},
+    }
+
+    Digits of each numbers in the element are determined by following rule.
+
+    iso_date["year"]["year"]: 4
+    iso_date["hour"]["year"]: 2
+    iso_date["day"]["year"]: 2
+
+    iso_date["hour"]["hour"]: 2
+    iso_date["minute"]["hour"]: 2
+    iso_date["second"]["hour"]: 2
+    iso_date["micro"]["hour"]: 6
+
+    iso_date["hour"]["zone"]: 2
+    iso_date["minute"]["zone"]: 2
+
+    Args:
+        iso_date_pair (IntPair2): Date time element you want to convert.
+
+    Returns:
+        StrPair2: Get converted date time element structured by type string.
+    """
     return _get_formatted_groups(iso_date, _get_iso_digit())
