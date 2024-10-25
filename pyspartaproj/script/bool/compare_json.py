@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Module to check that two Json objects are same."""
+
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.file.json_context import Json
 from pyspartaproj.script.file.json.export_json import json_dump
@@ -11,4 +13,14 @@ def _convert_string(left: Json, right: Json) -> Strs:
 
 
 def is_same_json(left: Json, right: Json) -> bool:
+    """Check that two Json objects are same.
+
+    Args:
+        left (Json): Json object used for comparing.
+
+        right (Json): Json object used for comparing.
+
+    Returns:
+        bool: True if two Json objects are same.
+    """
     return 1 == len(list(set(_convert_string(left, right))))
