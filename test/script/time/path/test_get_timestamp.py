@@ -27,6 +27,10 @@ from pyspartaproj.script.time.path.get_timestamp import (
 )
 
 
+def _compare_datetime(left: datetime, right: datetime) -> None:
+    assert left == right
+
+
 def _common_test(times: Times) -> None:
     assert times[0] == times[1]
 
