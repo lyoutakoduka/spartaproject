@@ -9,6 +9,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
+from pyspartaproj.context.default.integer_context import IntPair2
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.extension.time_context import TimePair, Times
 from pyspartaproj.script.directory.create_directory import create_directory
@@ -25,6 +26,13 @@ from pyspartaproj.script.time.path.get_timestamp import (
     get_invalid_time,
     get_latest,
 )
+
+
+def _get_source() -> IntPair2:
+    return {
+        "year": {"year": 1, "month": 1, "day": 1},
+        "hour": {"hour": 0, "minute": 0, "second": 0},
+    }
 
 
 def _compare_datetime(left: datetime, right: datetime) -> None:
