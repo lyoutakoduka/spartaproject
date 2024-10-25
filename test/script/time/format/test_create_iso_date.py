@@ -23,10 +23,6 @@ def _get_hours() -> IntPair:
     return {"hour": 4, "minute": 51, "second": 30, "micro": 123}
 
 
-def _get_second() -> IntPair:
-    return {"hour": 4, "minute": 51, "second": 30}
-
-
 def _get_zones() -> IntPair:
     return {"hour": 9, "minute": 0}
 
@@ -36,7 +32,11 @@ def _get_source_all() -> IntPair2:
 
 
 def _get_source_micro() -> IntPair2:
-    return {"year": _get_years(), "hour": _get_second(), "zone": _get_zones()}
+    return {
+        "year": _get_years(),
+        "hour": {"hour": 4, "minute": 51, "second": 30},
+        "zone": _get_zones(),
+    }
 
 
 def _set_expected_time(

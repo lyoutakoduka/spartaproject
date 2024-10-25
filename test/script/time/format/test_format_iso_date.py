@@ -27,10 +27,6 @@ def _get_source_hour() -> IntPair:
     return {"hour": 4, "minute": 51, "second": 30, "micro": 123}
 
 
-def _get_source_error_error() -> IntPair:
-    return {"hour": 4, "error": 456}
-
-
 def _get_source_zone() -> IntPair:
     return {"hour": 9, "minute": 15}
 
@@ -46,7 +42,7 @@ def _get_source_all() -> IntPair2:
 def _get_source_error() -> IntPair2:
     return {
         "year": _get_source_error_year(),
-        "error": _get_source_error_error(),
+        "error": {"hour": 4, "error": 456},
     }
 
 
