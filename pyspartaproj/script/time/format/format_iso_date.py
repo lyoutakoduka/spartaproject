@@ -78,17 +78,17 @@ def format_iso_date(iso_date: IntPair2) -> StrPair2:
 
     Digits of each numbers in the element are determined by following rule.
 
-    iso_date["year"]["year"]: 4
-    iso_date["hour"]["year"]: 2
-    iso_date["day"]["year"]: 2
+    1. year - year: 4
+    2. hour - year: 2
+    3. day - year: 2
 
-    iso_date["hour"]["hour"]: 2
-    iso_date["minute"]["hour"]: 2
-    iso_date["second"]["hour"]: 2
-    iso_date["micro"]["hour"]: 6
+    4. hour - hour: 2
+    5. minute - hour: 2
+    6. second - hour: 2
+    7. micro - hour: 6
 
-    iso_date["hour"]["zone"]: 2
-    iso_date["minute"]["zone"]: 2
+    8. hour - zone: 2
+    9. minute - zone: 2
 
     Args:
         iso_date_pair (IntPair2): Date time element you want to convert.
