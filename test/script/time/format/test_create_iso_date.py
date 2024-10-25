@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Test module to convert date time elements to several types."""
+"""Test module to convert date time element to several types."""
 
 from datetime import datetime
 from decimal import Decimal
