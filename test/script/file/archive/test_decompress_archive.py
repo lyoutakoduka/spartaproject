@@ -3,17 +3,17 @@
 
 """Test module to decompress file or directory by archive format."""
 
-
 from base64 import b64decode
+from datetime import datetime
 from itertools import chain
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from pyspartaproj.context.default.integer_context import Ints, Ints2
+from pyspartaproj.context.default.integer_context import IntPair2, Ints, Ints2
 from pyspartaproj.context.default.string_context import StrPair, Strs
 from pyspartaproj.context.extension.path_context import Paths, Paths2
-from pyspartaproj.context.extension.time_context import Times, Times2, datetime
+from pyspartaproj.context.extension.time_context import Times, Times2
 from pyspartaproj.script.directory.create_parent import create_parent
 from pyspartaproj.script.file.archive.compress_archive import CompressArchive
 from pyspartaproj.script.file.archive.decompress_archive import (
@@ -30,6 +30,7 @@ from pyspartaproj.script.path.temporary.create_temporary_tree import (
     create_temporary_tree,
 )
 from pyspartaproj.script.string.format_texts import format_indent
+from pyspartaproj.script.time.format.create_iso_date import get_iso_time
 from pyspartaproj.script.time.path.get_timestamp import get_latest
 from pyspartaproj.script.time.path.set_timestamp import set_latest
 
@@ -40,6 +41,14 @@ def _get_multiple() -> str:
 
 def _get_types() -> Strs:
     return ["tree", "extract"]
+
+
+def _get_source() -> IntPair2:
+    return {
+        "year": {"year": 2023, "month": 4, "day": 15},
+        "hour": {"hour": 20, "minute": 9, "second": 30, "micro": 936886},
+        "zone": {"hour": 0, "minute": 0},
+    }
 
 
 def _get_tree_root(temporary_root: Path) -> Path:
@@ -78,7 +87,7 @@ def _export_byte(file_path: Path, byte: bytes) -> Path:
 
 
 def _get_expected_stamp() -> datetime:
-    return datetime.fromisoformat("2023-04-15T20:09:30.936886+00:00")
+    return get_iso_time(_get_source())
 
 
 def _equal_stamp(left: Times, right: Times) -> None:

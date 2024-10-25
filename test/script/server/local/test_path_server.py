@@ -8,7 +8,9 @@ from tempfile import TemporaryDirectory
 from typing import Callable
 
 from pyspartaproj.script.server.local.path_server import PathServer
-from pyspartaproj.script.time.path.get_time_path import get_initial_time_path
+from pyspartaproj.script.time.directory.get_time_path import (
+    get_initial_time_path,
+)
 
 
 def _get_local_root(temporary_root: Path) -> Path:

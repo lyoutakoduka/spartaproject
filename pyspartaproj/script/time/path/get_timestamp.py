@@ -9,11 +9,8 @@ from pathlib import Path
 
 from pyspartaproj.context.extension.path_context import PathGene
 from pyspartaproj.context.extension.time_context import TimePair
-from pyspartaproj.context.file.json_context import Json
-from pyspartaproj.script.bool.compare_json import is_same_json
-from pyspartaproj.script.file.json.convert_to_json import multiple_to_json
+from pyspartaproj.script.time.epoch.from_timestamp import time_from_timestamp
 from pyspartaproj.script.time.path.get_file_epoch import get_file_epoch
-from pyspartaproj.script.time.stamp.from_timestamp import time_from_timestamp
 
 
 def _convert_timestamp(time: float, jst: bool) -> datetime:
@@ -38,12 +35,6 @@ def _get_latest_times(
             _add_latest_times(path, get_invalid_time(), latest_times)
 
     return latest_times
-
-
-def _get_stamp_json(times: TimePair) -> Json:
-    return multiple_to_json(
-        {path_text: time.isoformat() for path_text, time in times.items()}
-    )
 
 
 def get_invalid_time() -> datetime:
@@ -79,20 +70,6 @@ def get_latest(
         return _convert_timestamp(float(time), jst=jst)
 
     return get_invalid_time()
-
-
-def is_same_stamp(left: TimePair, right: TimePair) -> bool:
-    """Compare 2 dictionaries which store path and time stamp of the path.
-
-    Args:
-        left (TimePair): Time stamp of the path you want to compare.
-
-        right (TimePair): Time stamp of the path you want to compare.
-
-    Returns:
-        bool: True if 2 dictionaries are same value.
-    """
-    return is_same_json(*[_get_stamp_json(times) for times in [left, right]])
 
 
 def get_directory_latest(

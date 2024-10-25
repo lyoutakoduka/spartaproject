@@ -9,12 +9,9 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
+from pyspartaproj.context.default.integer_context import IntPair2
 from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.context.extension.time_context import (
-    TimePair,
-    TimePair2,
-    Times,
-)
+from pyspartaproj.context.extension.time_context import TimePair, Times
 from pyspartaproj.script.directory.create_directory import create_directory
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.modify.get_relative import get_relative
@@ -24,16 +21,27 @@ from pyspartaproj.script.path.temporary.create_temporary_file import (
 from pyspartaproj.script.path.temporary.create_temporary_tree import (
     create_temporary_tree,
 )
+from pyspartaproj.script.time.format.create_iso_date import get_iso_time
 from pyspartaproj.script.time.path.get_timestamp import (
     get_directory_latest,
     get_invalid_time,
     get_latest,
-    is_same_stamp,
 )
 
 
+def _get_source() -> IntPair2:
+    return {
+        "year": {"year": 1, "month": 1, "day": 1},
+        "hour": {"hour": 0, "minute": 0, "second": 0},
+    }
+
+
+def _compare_datetime(left: datetime, right: datetime) -> None:
+    assert left == right
+
+
 def _common_test(times: Times) -> None:
-    assert times[0] == times[1]
+    _compare_datetime(*times)
 
 
 def _get_latest_pair(path: Path, jst: bool) -> Times:
@@ -78,22 +86,11 @@ def _get_relative_latest(path: Path, access: bool = False) -> TimePair:
     }
 
 
-def _is_access(group: str) -> bool:
-    return "access" == group
-
-
-def _get_stamp_pair(stamp_root: Path) -> TimePair2:
-    return {
-        group: _get_relative_latest(stamp_root, access=_is_access(group))
-        for group in ["update", "access"]
-    }
-
-
 def _compare_invalid_times(times: TimePair) -> None:
     invalid_time: datetime = get_invalid_time()
 
     for time in times.values():
-        assert invalid_time == time
+        _compare_datetime(invalid_time, time)
 
 
 def _compare_invalid_files(times: TimePair) -> None:
@@ -110,7 +107,7 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 
 def test_invalid() -> None:
     """Test to compare the date time used for invalid data check."""
-    assert "0001-01-01T00:00:00" == get_invalid_time().isoformat()
+    _compare_datetime(get_iso_time(_get_source()), get_invalid_time())
 
 
 def test_file() -> None:
@@ -159,18 +156,5 @@ def test_tree() -> None:
 
         _compare_invalid_times(times)
         _compare_invalid_files(times)
-
-    _inside_temporary_directory(individual_test)
-
-
-def test_same() -> None:
-    """Test to compare 2 dictionaries about latest date time you got."""
-
-    def individual_test(temporary_root: Path) -> None:
-        stamp_pair: TimePair2 = _get_stamp_pair(
-            create_temporary_tree(Path(temporary_root, "tree"))
-        )
-
-        assert is_same_stamp(stamp_pair["update"], stamp_pair["access"])
 
     _inside_temporary_directory(individual_test)
