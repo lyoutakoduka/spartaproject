@@ -21,6 +21,7 @@ from pyspartaproj.script.path.temporary.create_temporary_file import (
 from pyspartaproj.script.path.temporary.create_temporary_tree import (
     create_temporary_tree,
 )
+from pyspartaproj.script.time.format.create_iso_date import get_iso_time
 from pyspartaproj.script.time.path.get_timestamp import (
     get_directory_latest,
     get_invalid_time,
@@ -106,7 +107,7 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 
 def test_invalid() -> None:
     """Test to compare the date time used for invalid data check."""
-    assert "0001-01-01T00:00:00" == get_invalid_time().isoformat()
+    _compare_datetime(get_iso_time(_get_source()), get_invalid_time())
 
 
 def test_file() -> None:
