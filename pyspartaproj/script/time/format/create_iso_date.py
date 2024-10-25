@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Module to convert date time elements to several types."""
+"""Module to convert date time element to several types."""
 
 from datetime import datetime
 from decimal import Decimal
@@ -90,7 +90,7 @@ def _merge_datetime_elements(group_strings: StrPair) -> str:
 
 
 def get_iso_string(iso_date: IntPair2) -> str:
-    """Convert date time elements to type string.
+    """Convert date time element to type string.
 
     e.g., the argument "iso_date" must be following structure.
 
@@ -129,7 +129,7 @@ def get_iso_string(iso_date: IntPair2) -> str:
     }
 
     Args:
-        iso_date (IntPair2): Date time elements you want to convert.
+        iso_date (IntPair2): Date time element you want to convert.
 
     Returns:
         str: Get converted date time string.
@@ -142,7 +142,7 @@ def get_iso_string(iso_date: IntPair2) -> str:
 
 
 def get_iso_time(iso_date: IntPair2) -> datetime:
-    """Convert date time elements to date time object.
+    """Convert date time element to date time object.
 
     e.g., the argument "iso_date" must be following structure.
 
@@ -162,7 +162,7 @@ def get_iso_time(iso_date: IntPair2) -> datetime:
         as is the case with function "get_iso_string" in current module.
 
     Args:
-        iso_date (IntPair2): Date time elements you want to convert.
+        iso_date (IntPair2): Date time element you want to convert.
 
     Returns:
         datetime: Get converted date time object.
@@ -171,7 +171,7 @@ def get_iso_time(iso_date: IntPair2) -> datetime:
 
 
 def get_iso_epoch(iso_date: IntPair2) -> Decimal:
-    """Convert date time elements to UNIX epoch.
+    """Convert date time element to UNIX epoch.
 
     e.g., the argument "iso_date" must be following structure.
 
@@ -189,7 +189,7 @@ def get_iso_epoch(iso_date: IntPair2) -> Decimal:
         as is the case with function "get_iso_string" in current module.
 
     Args:
-        iso_date (IntPair2): Date time elements you want to convert.
+        iso_date (IntPair2): Date time element you want to convert.
 
     Returns:
         Decimal: Get converted date time as UNIX epoch.
