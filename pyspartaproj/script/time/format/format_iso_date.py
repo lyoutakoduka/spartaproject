@@ -39,17 +39,15 @@ def _get_formatted_types(
     }
 
 
-def _get_formatted_groups(
-    iso_date_pair: IntPair2, iso_digit: IntPair2
-) -> StrPair2:
+def _get_formatted_groups(iso_date: IntPair2, iso_digit: IntPair2) -> StrPair2:
     return {
         number_group: _get_formatted_types(
             iso_digit[number_group], number_pair
         )
-        for number_group, number_pair in iso_date_pair.items()
+        for number_group, number_pair in iso_date.items()
         if number_group in iso_digit
     }
 
 
-def format_iso_date(iso_date_pair: IntPair2) -> StrPair2:
-    return _get_formatted_groups(iso_date_pair, _get_iso_digit())
+def format_iso_date(iso_date: IntPair2) -> StrPair2:
+    return _get_formatted_groups(iso_date, _get_iso_digit())
