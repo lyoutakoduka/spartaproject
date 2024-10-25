@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from pyspartaproj.context.file.json_context import Singles
 from pyspartaproj.script.bool.compare_json import is_same_json
 
 
@@ -21,5 +22,7 @@ def test_array() -> None:
 
 
 def test_type() -> None:
-    for source in [None, True, 0, 0.1, "test"]:
+    sources: Singles = [None, True, 0, 0.1, "test"]
+
+    for source in sources:
         assert is_same_json(source, source)
