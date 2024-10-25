@@ -17,21 +17,16 @@ from pyspartaproj.script.time.format.format_iso_date import format_iso_date
 from pyspartaproj.script.time.stamp.current_datetime import get_current_time
 
 
-def _get_source_year(time: datetime) -> IntPair:
-    return {"year": time.year, "month": time.month, "day": time.day}
-
-
-def _get_source_hour(time: datetime) -> IntPair:
-    return {
-        "hour": time.hour,
-        "minute": time.minute,
-        "second": time.second,
-        "micro": time.microsecond,
-    }
-
-
 def _get_source_all(time: datetime) -> IntPair2:
-    return {"year": _get_source_year(time), "hour": _get_source_hour(time)}
+    return {
+        "year": {"year": time.year, "month": time.month, "day": time.day},
+        "hour": {
+            "hour": time.hour,
+            "minute": time.minute,
+            "second": time.second,
+            "micro": time.microsecond,
+        },
+    }
 
 
 def _get_result_groups() -> Strs:
