@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Module to convert date time elements to several types."""
+
 from datetime import datetime
 from decimal import Decimal
 
@@ -88,6 +90,50 @@ def _merge_datetime_elements(group_strings: StrPair) -> str:
 
 
 def get_iso_string(iso_date: IntPair2) -> str:
+    """Convert date time elements to type string.
+
+    The argument "iso_date" must be following structure.
+
+    {
+        "year": {"year": 2023, "month": 4, "day": 1},
+        "hour": {"hour": 4, "minute": 51, "second": 30, "micro": 123},
+        "zone": {"hour": 9, "minute": 0},
+    }
+
+    On this case, following date time string in ISO date format is returned.
+
+    "2023-04-01T04:51:30.000123+09:00"
+
+    In addition, following structures are allowed.
+
+    1. No time zone: "2023-04-01T04:51:30.000123" is returned.
+
+    {
+        "year": {"year": 2023, "month": 4, "day": 1},
+        "hour": {"hour": 4, "minute": 51, "second": 30, "micro": 123},
+    }
+
+    2. No microsecond value: "2023-04-01T04:51:30+09:00" is returned.
+
+    {
+        "year": {"year": 2023, "month": 4, "day": 1},
+        "hour": {"hour": 4, "minute": 51, "second": 30},
+        "zone": {"hour": 9, "minute": 0},
+    }
+
+    3. No time zone and microsecond value: "2023-04-01T04:51:30" is returned.
+
+    {
+        "year": {"year": 2023, "month": 4, "day": 1},
+        "hour": {"hour": 4, "minute": 51, "second": 30},
+    }
+
+    Args:
+        iso_date (IntPair2): Date time elements you want to convert.
+
+    Returns:
+        str: Get converted date time string.
+    """
     string_elements: StrPair2 = format_iso_date(iso_date)
     group_strings: StrPair = _get_group_strings(string_elements)
     _add_micro(string_elements, group_strings)
@@ -96,8 +142,56 @@ def get_iso_string(iso_date: IntPair2) -> str:
 
 
 def get_iso_time(iso_date: IntPair2) -> datetime:
+    """Convert date time elements to date time object.
+
+    The argument "iso_date" must be following structure.
+
+    {
+        "year": {"year": 2023, "month": 4, "day": 1},
+        "hour": {"hour": 4, "minute": 51, "second": 30, "micro": 123},
+        "zone": {"hour": 9, "minute": 0},
+    }
+
+    On this case, following class "datetime" object is returned.
+
+    datetime(
+        2023, 4, 1, 4, 51, 30, 123, tzinfo=timezone(timedelta(seconds=32400))
+    )
+
+    Acceptable patterns of input values are same
+        as is the case with function "get_iso_string" in current module.
+
+    Args:
+        iso_date (IntPair2): Date time elements you want to convert.
+
+    Returns:
+        datetime: Get converted date time object.
+    """
     return datetime.fromisoformat(get_iso_string(iso_date))
 
 
 def get_iso_epoch(iso_date: IntPair2) -> Decimal:
+    """Convert date time elements to UNIX epoch.
+
+    The argument "iso_date" must be following structure.
+
+    {
+        "year": {"year": 2023, "month": 4, "day": 1},
+        "hour": {"hour": 4, "minute": 51, "second": 30, "micro": 123},
+        "zone": {"hour": 9, "minute": 0},
+    }
+
+    On this case, following UNIX epoch as class "Decimal" object is returned.
+
+    Decimal('1680292290.000123')
+
+    Acceptable patterns of input values are same
+        as is the case with function "get_iso_string" in current module.
+
+    Args:
+        iso_date (IntPair2): Date time elements you want to convert.
+
+    Returns:
+        Decimal: Get converted date time as UNIX epoch.
+    """
     return Decimal(str(get_iso_time(iso_date).timestamp()))
