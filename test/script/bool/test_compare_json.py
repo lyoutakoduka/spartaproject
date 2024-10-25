@@ -10,23 +10,23 @@ def _compare_json(left: Json, right: Json) -> None:
 
 
 def test_single() -> None:
-    assert is_same_json({"A": True}, {"A": True})
+    _compare_json({"A": True}, {"A": True})
 
 
 def test_nest() -> None:
-    assert is_same_json({"A": {"B": True}}, {"A": {"B": True}})
+    _compare_json({"A": {"B": True}}, {"A": {"B": True}})
 
 
 def test_multiple() -> None:
-    assert is_same_json({"A": True, "B": False}, {"B": False, "A": True})
+    _compare_json({"A": True, "B": False}, {"B": False, "A": True})
 
 
 def test_array() -> None:
-    assert is_same_json({"A": ["B", "C"]}, {"A": ["B", "C"]})
+    _compare_json({"A": ["B", "C"]}, {"A": ["B", "C"]})
 
 
 def test_type() -> None:
     sources: Singles = [None, True, 0, 0.1, "test"]
 
     for source in sources:
-        assert is_same_json(source, source)
+        _compare_json(source, source)
