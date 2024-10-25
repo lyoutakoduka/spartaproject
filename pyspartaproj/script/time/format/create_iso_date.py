@@ -92,7 +92,7 @@ def _merge_datetime_elements(group_strings: StrPair) -> str:
 def get_iso_string(iso_date: IntPair2) -> str:
     """Convert date time elements to type string.
 
-    The argument "iso_date" must be following structure.
+    e.g., the argument "iso_date" must be following structure.
 
     {
         "year": {"year": 2023, "month": 4, "day": 1},
@@ -144,7 +144,7 @@ def get_iso_string(iso_date: IntPair2) -> str:
 def get_iso_time(iso_date: IntPair2) -> datetime:
     """Convert date time elements to date time object.
 
-    The argument "iso_date" must be following structure.
+    e.g., the argument "iso_date" must be following structure.
 
     {
         "year": {"year": 2023, "month": 4, "day": 1},
@@ -158,7 +158,7 @@ def get_iso_time(iso_date: IntPair2) -> datetime:
         2023, 4, 1, 4, 51, 30, 123, tzinfo=timezone(timedelta(seconds=32400))
     )
 
-    Acceptable patterns of input values are same
+    Acceptable patterns of input value are same
         as is the case with function "get_iso_string" in current module.
 
     Args:
@@ -173,7 +173,7 @@ def get_iso_time(iso_date: IntPair2) -> datetime:
 def get_iso_epoch(iso_date: IntPair2) -> Decimal:
     """Convert date time elements to UNIX epoch.
 
-    The argument "iso_date" must be following structure.
+    e.g., the argument "iso_date" must be following structure.
 
     {
         "year": {"year": 2023, "month": 4, "day": 1},
@@ -185,7 +185,7 @@ def get_iso_epoch(iso_date: IntPair2) -> Decimal:
 
     Decimal('1680292290.000123')
 
-    Acceptable patterns of input values are same
+    Acceptable patterns of input value are same
         as is the case with function "get_iso_string" in current module.
 
     Args:
