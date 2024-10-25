@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to convert date time elements to several types."""
+
 from datetime import datetime
 from decimal import Decimal
 from zoneinfo import ZoneInfo
@@ -91,21 +93,26 @@ def _compare_epoch(source: IntPair2, expected: Decimal) -> None:
 
 
 def test_all() -> None:
+    """Test to compare date time strings of ISO date format."""
     _compare_string(_get_source_all(), _get_expected_all())
 
 
 def test_micro() -> None:
+    """Test to compare date time strings without microsecond value."""
     _compare_string(_get_source_micro(), _get_expected_micro())
 
 
 def test_zone() -> None:
+    """Test to compare date time strings without time zone value."""
     _compare_string(_get_source_zone(), _get_expected_zone())
 
 
 def test_time() -> None:
+    """Test to compare date time objects."""
     source: IntPair2 = _get_source_all()
     _compare_time(source, _get_expected_time(source))
 
 
 def test_epoch() -> None:
+    """Test to compare date time value of UNIX epoch."""
     _compare_epoch(_get_source_all(), _get_expected_epoch())
