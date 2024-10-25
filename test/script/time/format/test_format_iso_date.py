@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to convert date time element to several types."""
+
 from pyspartaproj.context.default.integer_context import (
     IntPair,
     IntPair2,
@@ -102,8 +104,10 @@ def _compare_datetime(source: IntPair2, expected: StrPair2) -> None:
 
 
 def test_all() -> None:
+    """Compare date time element structured by type string."""
     _compare_datetime(_get_source_all(), _get_expected_all())
 
 
 def test_error() -> None:
+    """Compare date time element which is error data."""
     _compare_datetime(_get_source_error(), _get_expected_error())
