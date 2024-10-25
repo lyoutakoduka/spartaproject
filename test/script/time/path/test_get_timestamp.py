@@ -32,7 +32,7 @@ def _compare_datetime(left: datetime, right: datetime) -> None:
 
 
 def _common_test(times: Times) -> None:
-    assert times[0] == times[1]
+    _compare_datetime(*times)
 
 
 def _get_latest_pair(path: Path, jst: bool) -> Times:
@@ -81,7 +81,7 @@ def _compare_invalid_times(times: TimePair) -> None:
     invalid_time: datetime = get_invalid_time()
 
     for time in times.values():
-        assert invalid_time == time
+        _compare_datetime(invalid_time, time)
 
 
 def _compare_invalid_files(times: TimePair) -> None:
