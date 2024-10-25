@@ -1,8 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from pyspartaproj.context.file.json_context import Singles
+from pyspartaproj.context.file.json_context import Json, Singles
 from pyspartaproj.script.bool.compare_json import is_same_json
+
+
+def _compare_json(left: Json, right: Json) -> None:
+    assert is_same_json(left, right)
 
 
 def test_single() -> None:
