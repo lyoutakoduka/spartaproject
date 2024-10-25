@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to offset date time by current time zone to UTC time."""
+
 from pyspartaproj.context.default.integer_context import IntPair, IntPair2
 from pyspartaproj.context.extension.time_context import Times
 from pyspartaproj.script.time.format.create_iso_date import get_iso_time
@@ -50,8 +52,10 @@ def _compare_datetime(time_pairs: IntPair2) -> None:
 
 
 def test_jst() -> None:
+    """Test to compare date time in JST time zone."""
     _compare_datetime(_get_source_jst())
 
 
 def test_missing() -> None:
+    """Test to compare date time that some value is missing."""
     _compare_datetime(_get_source_missing())
