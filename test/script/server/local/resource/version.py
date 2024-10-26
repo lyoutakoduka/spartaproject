@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Script to execute Python module to get Python version on server."""
+
+
 from sys import version
 
 
