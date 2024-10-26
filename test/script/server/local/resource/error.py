@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 
 
-def main() -> None:
+def _main() -> None:
     raise
 
 
 if __name__ == "__main__":
-    main()
+    _main()

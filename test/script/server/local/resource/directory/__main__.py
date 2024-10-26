@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 
 
-def main() -> None:
+def _main() -> None:
     for i in range(3):
         print("directory" + str(i))
 
 
 if __name__ == "__main__":
-    main()
+    _main()

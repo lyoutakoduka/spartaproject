@@ -4,9 +4,9 @@
 from sys import version
 
 
-def main() -> None:
+def _main() -> None:
     print(version)
 
 
 if __name__ == "__main__":
-    main()
+    _main()
