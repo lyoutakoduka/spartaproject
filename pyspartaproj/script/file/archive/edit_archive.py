@@ -30,6 +30,9 @@ class EditArchive(SafeTrash):
             body_root=edit_root, override=override, jst=jst
         )
 
+    def _initialize_archive_open(self) -> None:
+        self._disable_archive = False
+
     def _initialize_archive_element(
         self,
         archive_path: Path | None,
@@ -42,7 +45,7 @@ class EditArchive(SafeTrash):
         self._is_lzma_after: bool = compress
         self._protected: bool = protected
 
-        self._disable_archive = False
+        self._initialize_archive_open()
 
     def _get_archive_stamp(self) -> TimePair:
         return get_directory_latest(walk_iterator(self.get_edit_root()))
