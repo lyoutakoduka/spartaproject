@@ -23,13 +23,12 @@ class EditArchive(SafeTrash):
     def _initialize_variables_edit(
         self, edit_root: Path | None, override: bool, jst: bool
     ) -> None:
+        self._disable_archive: bool = True
         self._is_lzma_before: bool = False
         self._archive_path: Path | None = None
         self._edit_root: Path = self.create_date_time_space(
             body_root=edit_root, override=override, jst=jst
         )
-
-        self._disable_archive: bool = True
 
     def _initialize_archive_element(
         self,
