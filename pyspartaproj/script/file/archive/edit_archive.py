@@ -31,7 +31,6 @@ class EditArchive(SafeTrash):
     ) -> None:
         self._is_lzma_before: bool = False
         self._archive_path: Path | None = None
-        self._still_removed: bool = False
         self._edit_root: Path = self.create_date_time_space(
             body_root=edit_root, override=override, jst=jst
         )
