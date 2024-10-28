@@ -175,10 +175,6 @@ class EditArchive(SafeTrash):
         if self.is_disable_archive():
             return None
 
-        if self._still_removed:
-            return None
-
-        self._still_removed = True
         self._set_disable_archive(True)
 
         return self._finalize_archive()
