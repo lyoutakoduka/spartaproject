@@ -45,8 +45,6 @@ class EditArchive(SafeTrash):
         self._is_lzma_after: bool = compress
         self._protected: bool = protected
 
-        self._initialize_archive_open()
-
     def _get_archive_stamp(self) -> TimePair:
         return get_directory_latest(walk_iterator(self.get_edit_root()))
 
@@ -203,6 +201,7 @@ class EditArchive(SafeTrash):
         Returns:
             Path | None: Return archive path which is argument "archive_path".
         """
+        self._initialize_archive_open()
         self._initialize_archive_element(
             archive_path, limit_byte, compress, protected
         )
