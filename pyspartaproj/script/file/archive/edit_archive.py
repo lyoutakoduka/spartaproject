@@ -139,7 +139,7 @@ class EditArchive(SafeTrash):
         Returns:
             bool: True if archive is undefined.
         """
-        return self._archive_path is None
+        return self._disable_archive
 
     def get_archive_path(self) -> Path:
         """Get path of archive you will edit.
