@@ -24,6 +24,7 @@ class EditArchive(SafeTrash):
         self, edit_root: Path | None, override: bool, jst: bool
     ) -> None:
         self._disable_archive: bool = True
+        self._archive_opened: bool = False
         self._is_lzma_before: bool = False
         self._archive_path: Path | None = None
         self._edit_root: Path = self.create_date_time_space(
@@ -32,6 +33,7 @@ class EditArchive(SafeTrash):
 
     def _initialize_archive_open(self) -> None:
         self._disable_archive = False
+        self._archive_opened = True
 
     def _initialize_archive_element(
         self,
