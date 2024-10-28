@@ -24,10 +24,7 @@ class EditArchive(SafeTrash):
         self._disable_archive: bool = status
 
     def _initialize_variables_edit(
-        self,
-        edit_root: Path | None,
-        override: bool,
-        jst: bool,
+        self, edit_root: Path | None, override: bool, jst: bool
     ) -> None:
         self._is_lzma_before: bool = False
         self._archive_path: Path | None = None
