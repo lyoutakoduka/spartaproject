@@ -36,6 +36,8 @@ class EditArchive(SafeTrash):
             body_root=edit_root, override=override, jst=jst
         )
 
+        self._set_disable_archive(False)
+
     def _initialize_archive_element(
         self,
         archive_path: Path | None,
@@ -177,6 +179,7 @@ class EditArchive(SafeTrash):
             return None
 
         self._still_removed = True
+        self._set_disable_archive(True)
 
         return self._finalize_archive()
 
