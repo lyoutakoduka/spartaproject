@@ -20,9 +20,6 @@ from pyspartaproj.script.time.stamp.is_same_stamp import is_same_stamp
 class EditArchive(SafeTrash):
     """Class to edit internal of archive file."""
 
-    def _set_disable_archive(self, status: bool) -> None:
-        self._disable_archive: bool = status
-
     def _initialize_variables_edit(
         self, edit_root: Path | None, override: bool, jst: bool
     ) -> None:
@@ -32,7 +29,7 @@ class EditArchive(SafeTrash):
             body_root=edit_root, override=override, jst=jst
         )
 
-        self._set_disable_archive(True)
+        self._disable_archive: bool = True
 
     def _initialize_archive_element(
         self,
@@ -46,7 +43,7 @@ class EditArchive(SafeTrash):
         self._is_lzma_after: bool = compress
         self._protected: bool = protected
 
-        self._set_disable_archive(False)
+        self._disable_archive = False
 
     def _get_archive_stamp(self) -> TimePair:
         return get_directory_latest(walk_iterator(self.get_edit_root()))
@@ -173,7 +170,7 @@ class EditArchive(SafeTrash):
         if self.is_disable_archive():
             return None
 
-        self._set_disable_archive(True)
+        self._disable_archive = True
 
         return self._finalize_archive()
 
