@@ -209,9 +209,6 @@ class EditArchive(SafeTrash):
             archive_path, limit_byte, compress, protected
         )
 
-        if self.is_disable_archive():
-            return None
-
         self._get_decompress_stamp()
 
         return archive_path
