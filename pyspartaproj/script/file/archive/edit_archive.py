@@ -201,6 +201,9 @@ class EditArchive(SafeTrash):
         Returns:
             Path | None: Return archive path which is argument "archive_path".
         """
+        if self._archive_path is None:
+            return None
+
         self._initialize_archive_open()
         self._initialize_archive_element(
             archive_path, limit_byte, compress, protected
