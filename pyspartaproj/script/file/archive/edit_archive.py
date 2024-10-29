@@ -21,17 +21,17 @@ class EditArchive(SafeTrash):
     """Class to edit internal of archive file."""
 
     def _initialize_variables_edit(
-        self,
-        edit_root: Path | None,
-        override: bool,
-        jst: bool,
+        self, edit_root: Path | None, override: bool, jst: bool
     ) -> None:
+        self._disable_archive: bool = True
         self._is_lzma_before: bool = False
         self._archive_path: Path | None = None
-        self._still_removed: bool = False
         self._edit_root: Path = self.create_date_time_space(
             body_root=edit_root, override=override, jst=jst
         )
+
+    def _initialize_archive_open(self) -> None:
+        self._disable_archive = False
 
     def _initialize_archive_element(
         self,
@@ -129,12 +129,12 @@ class EditArchive(SafeTrash):
         return archived
 
     def is_disable_archive(self) -> bool:
-        """Confirm path of archive is undefined.
+        """Confirm statue of archive.
 
         Returns:
-            bool: True if archive is undefined.
+            bool: True if the archive is opened.
         """
-        return self._archive_path is None
+        return self._disable_archive
 
     def get_archive_path(self) -> Path:
         """Get path of archive you will edit.
@@ -170,10 +170,7 @@ class EditArchive(SafeTrash):
         if self.is_disable_archive():
             return None
 
-        if self._still_removed:
-            return None
-
-        self._still_removed = True
+        self._disable_archive = True
 
         return self._finalize_archive()
 
@@ -204,12 +201,13 @@ class EditArchive(SafeTrash):
         Returns:
             Path | None: Return archive path which is argument "archive_path".
         """
+        if archive_path is None:
+            return None
+
+        self._initialize_archive_open()
         self._initialize_archive_element(
             archive_path, limit_byte, compress, protected
         )
-
-        if self.is_disable_archive():
-            return None
 
         self._get_decompress_stamp()
 

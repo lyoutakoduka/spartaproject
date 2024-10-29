@@ -81,7 +81,10 @@ class TakeOutArchive(EditArchive):
 
     def _get_took_out(self) -> Paths:
         archive_paths: Paths = []
+
         self._took_out_cycle(archive_paths)
+        self.close_archive()
+
         return archive_paths
 
     def get_took_out_root(self) -> Path:
