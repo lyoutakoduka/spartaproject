@@ -15,7 +15,8 @@ def _compare_count(expected: int, table: Strs) -> None:
 
 
 def _compare_counts(tables: Strs2) -> None:
-    assert [26, 26, 10, 47] == [len(table) for table in tables]
+    for count, table in zip([26, 26, 10, 47], tables):
+        _compare_count(count, table)
 
 
 def _compare_filtered(expected: Strs2, tables: Strs2) -> None:
