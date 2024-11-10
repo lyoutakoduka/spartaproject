@@ -80,6 +80,7 @@ def test_merge() -> None:
 
 
 def test_error() -> None:
+    """Test to compare characters tables about Windows file system."""
     error_table: Strs = GroupedCharacters().get_error_table()
 
     _compare_count(9, error_table)
