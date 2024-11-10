@@ -3,11 +3,15 @@
 
 """Test Module to get characters constructed by multiple or single byte."""
 
-from pyspartaproj.context.default.string_context import Strs2
+from pyspartaproj.context.default.string_context import Strs, Strs2
 from pyspartaproj.context.typed.user_context import CharacterTable
 from pyspartaproj.script.string.rename.grouped_characters import (
     GroupedCharacters,
 )
+
+
+def _compare_count(expected: int, table: Strs) -> None:
+    assert expected == len(table)
 
 
 def _compare_counts(tables: Strs2) -> None:
