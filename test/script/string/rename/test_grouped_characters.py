@@ -77,3 +77,10 @@ def test_merge() -> None:
     _compare_merged(
         grouped_characters.get_table(), grouped_characters.get_merged_tables()
     )
+
+
+def test_error() -> None:
+    error_table: Strs = GroupedCharacters().get_error_table()
+
+    _compare_count(9, error_table)
+    _compare_both_ends(["\\", "|"], error_table)
