@@ -134,6 +134,9 @@ class GroupedCharacters:
             table["other"],
         ]
 
+    def get_error_table(self) -> Strs:
+        return ["\\", "/", ":", "*", "?", '"', "<", ">", "|"]
+
     def __init__(self, multiple: bool = False) -> None:
         """Initialize variables in class.
 
