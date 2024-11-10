@@ -19,6 +19,10 @@ def _compare_counts(tables: Strs2) -> None:
         _compare_count(count, table)
 
 
+def _compare_both_ends(both_ends: Strs, table: Strs) -> None:
+    assert both_ends == [table[-i] for i in range(2)]
+
+
 def _compare_filtered(expected: Strs2, tables: Strs2) -> None:
     assert expected == [[table[-i] for i in range(2)] for table in tables]
 
