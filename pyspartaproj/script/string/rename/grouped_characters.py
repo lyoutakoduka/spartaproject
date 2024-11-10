@@ -135,6 +135,11 @@ class GroupedCharacters:
         ]
 
     def get_error_table(self) -> Strs:
+        """Get characters group that aren't allowed on Windows file system.
+
+        Returns:
+            Strs: Characters group.
+        """
         return ["\\", "/", ":", "*", "?", '"', "<", ">", "|"]
 
     def __init__(self, multiple: bool = False) -> None:
