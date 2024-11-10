@@ -24,7 +24,8 @@ def _compare_both_ends(both_ends: Strs, table: Strs) -> None:
 
 
 def _compare_filtered(expected: Strs2, tables: Strs2) -> None:
-    assert expected == [[table[-i] for i in range(2)] for table in tables]
+    for both_ends, table in zip(expected, tables):
+        _compare_both_ends(both_ends, table)
 
 
 def _compare_size(result: CharacterTable) -> None:
