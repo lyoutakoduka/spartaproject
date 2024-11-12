@@ -10,8 +10,8 @@ from pyspartaproj.script.file.shortcut.get_shortcut import get_shortcut
 
 def test_file() -> None:
     """Test to get path of a shortcut file on Windows environment."""
-    target_root: Path = Path("root", "create", "target")
+    target_path: Path = Path("root", "create", "target")
     shortcut_root: Path = Path("root", "created")
     expected: Path = Path("root", "created", "target.lnk")
 
-    assert expected == get_shortcut(target_root, shortcut_root)
+    assert expected == get_shortcut(target_path, shortcut_root)
