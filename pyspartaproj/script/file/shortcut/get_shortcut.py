@@ -9,6 +9,16 @@ from pathlib import Path
 def get_shortcut(target_path: Path, shortcut_root: Path) -> Path:
     """Get path of a shortcut file on Windows environment.
 
+    Module support both file and directory.
+
+    1. File:
+        Name of the shortcut file is "target.extension.lnk"
+            if the name of file is "target.extension".
+
+    2. Directory:
+        Name of the shortcut file is "target.lnk"
+            if the name of directory is "target".
+
     Args:
         target_path (Path): Path you want to create the shortcut file.
 
