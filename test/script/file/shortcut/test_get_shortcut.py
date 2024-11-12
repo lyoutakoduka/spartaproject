@@ -9,7 +9,7 @@ from pyspartaproj.script.file.shortcut.get_shortcut import get_shortcut
 
 
 def test_directory() -> None:
-    """Test to get path of a shortcut file on Windows environment."""
+    """Test to get path of a shortcut file that target is directory."""
     target_path: Path = Path("root", "create", "target")
     shortcut_root: Path = Path("root", "created")
     expected: Path = Path("root", "created", "target.lnk")
