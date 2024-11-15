@@ -11,17 +11,17 @@ from pyspartaproj.context.extension.path_context import PathPair, Paths
 from pyspartaproj.interface.pytest import raises
 from pyspartaproj.script.bool.compare_value import bool_compare_array
 from pyspartaproj.script.bool.same_value import bool_same_array
+from pyspartaproj.script.path.modify.current.get_absolute import (
+    get_absolute,
+    get_absolute_array,
+    get_absolute_pair,
+)
 from pyspartaproj.script.path.modify.current.get_relative import (
     get_relative,
     get_relative_array,
     get_relative_pair,
     is_relative,
     is_relative_array,
-)
-from pyspartaproj.script.path.modify.get_absolute import (
-    get_absolute,
-    get_absolute_array,
-    get_absolute_pair,
 )
 
 
