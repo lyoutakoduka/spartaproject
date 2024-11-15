@@ -16,10 +16,14 @@ def _get_shortcut_root() -> Path:
     return Path("root", "created")
 
 
+def _get_expected(target_name: str) -> Path:
+    return Path(_get_shortcut_root(), target_name + ".lnk")
+
+
 def test_directory() -> None:
     """Test to get path of a shortcut file that target is directory."""
     target_path: Path = Path(_get_target_root(), "target")
     shortcut_root: Path = _get_shortcut_root()
-    expected: Path = Path("root", "created", "target.lnk")
+    expected: Path = _get_expected("target")
 
     assert expected == get_shortcut(target_path, shortcut_root)
