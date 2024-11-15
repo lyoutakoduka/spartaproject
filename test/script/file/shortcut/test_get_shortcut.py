@@ -33,6 +33,7 @@ def _compare_shortcut(target_name: str) -> None:
 
 
 def test_file() -> None:
+    """Test to get path of a shortcut file that target is file."""
     _compare_shortcut("target.extension")
 
 
