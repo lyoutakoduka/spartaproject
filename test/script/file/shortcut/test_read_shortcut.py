@@ -30,10 +30,6 @@ def _read_shortcut(shortcut_path: Path) -> Path:
         fail()
 
 
-def _get_shortcut_path(shortcut_target: Path, shortcut_root: Path) -> Path:
-    return Path(shortcut_root, shortcut_target.name + ".lnk")
-
-
 def _common_test(shortcut_target: Path, shortcut_root: Path) -> None:
     shortcut_path: Path = get_shortcut(shortcut_target, shortcut_root)
     create_shortcut(shortcut_target, shortcut_path, forward=_get_config_file())
