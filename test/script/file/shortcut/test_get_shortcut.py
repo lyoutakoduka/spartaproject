@@ -28,8 +28,10 @@ def _get_result(target_name: str) -> Path:
     return get_shortcut(_get_target(target_name), _get_shortcut_root())
 
 
+def _compare_shortcut(target_name: str) -> None:
+    assert _get_expected(target_name) == _get_result(target_name)
+
+
 def test_directory() -> None:
     """Test to get path of a shortcut file that target is directory."""
-    expected: Path = _get_expected("target")
-
-    assert expected == _get_result("target")
+    _compare_shortcut("target")
