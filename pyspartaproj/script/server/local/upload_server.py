@@ -10,7 +10,7 @@ from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.extension.path_context import Paths
 from pyspartaproj.interface.paramiko import SFTPAttributes
 from pyspartaproj.script.path.iterate_directory import walk_iterator
-from pyspartaproj.script.path.modify.get_relative import (
+from pyspartaproj.script.path.modify.current.get_relative import (
     get_relative,
     is_relative,
 )
