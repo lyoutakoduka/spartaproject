@@ -19,7 +19,7 @@ from pyspartaproj.script.file.json.convert_to_json import multiple_to_json
 from pyspartaproj.script.file.json.export_json import json_dump
 from pyspartaproj.script.file.text.import_file import byte_import
 from pyspartaproj.script.path.iterate_directory import walk_iterator
-from pyspartaproj.script.path.modify.get_relative import (
+from pyspartaproj.script.path.modify.current.get_relative import (
     get_relative,
     is_relative,
 )

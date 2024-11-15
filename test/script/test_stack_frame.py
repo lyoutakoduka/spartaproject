@@ -5,7 +5,7 @@
 
 from pathlib import Path
 
-from pyspartaproj.script.path.modify.get_relative import get_relative
+from pyspartaproj.script.path.modify.current.get_relative import get_relative
 from pyspartaproj.script.stack_frame import StackFrame, current_frame
 
 

@@ -10,7 +10,9 @@ from typing import Callable
 from pyspartaproj.context.default.string_context import Strs, Strs2
 from pyspartaproj.context.extension.path_context import PathGene, Paths
 from pyspartaproj.script.path.iterate_directory import walk_iterator
-from pyspartaproj.script.path.modify.get_relative import get_relative_array
+from pyspartaproj.script.path.modify.current.get_relative import (
+    get_relative_array,
+)
 from pyspartaproj.script.path.temporary.create_temporary_tree import (
     create_temporary_tree,
 )

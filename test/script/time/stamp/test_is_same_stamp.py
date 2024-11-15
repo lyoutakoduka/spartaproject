@@ -9,7 +9,7 @@ from typing import Callable
 
 from pyspartaproj.context.extension.time_context import TimePair, TimePair2
 from pyspartaproj.script.path.iterate_directory import walk_iterator
-from pyspartaproj.script.path.modify.get_relative import get_relative
+from pyspartaproj.script.path.modify.current.get_relative import get_relative
 from pyspartaproj.script.path.temporary.create_temporary_tree import (
     create_temporary_tree,
 )

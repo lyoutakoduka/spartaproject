@@ -16,8 +16,10 @@ from pyspartaproj.script.file.archive.compress_archive import CompressArchive
 from pyspartaproj.script.file.archive.edit_archive import EditArchive
 from pyspartaproj.script.file.archive.take_out_archive import TakeOutArchive
 from pyspartaproj.script.path.iterate_directory import walk_iterator
-from pyspartaproj.script.path.modify.get_absolute import get_absolute_array
-from pyspartaproj.script.path.modify.get_relative import (
+from pyspartaproj.script.path.modify.current.get_absolute import (
+    get_absolute_array,
+)
+from pyspartaproj.script.path.modify.current.get_relative import (
     get_relative_array,
     is_relative_array,
 )

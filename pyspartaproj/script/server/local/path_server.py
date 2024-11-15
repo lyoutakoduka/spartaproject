@@ -8,7 +8,7 @@ from pathlib import Path
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.extension.path_context import PathPair
 from pyspartaproj.script.directory.work_space import WorkSpace
-from pyspartaproj.script.path.modify.get_relative import get_relative
+from pyspartaproj.script.path.modify.current.get_relative import get_relative
 
 
 class PathServer(WorkSpace):

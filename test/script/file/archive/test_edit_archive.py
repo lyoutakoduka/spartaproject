@@ -18,7 +18,7 @@ from pyspartaproj.script.file.archive.decompress_archive import (
 )
 from pyspartaproj.script.file.archive.edit_archive import EditArchive
 from pyspartaproj.script.path.iterate_directory import walk_iterator
-from pyspartaproj.script.path.modify.get_relative import (
+from pyspartaproj.script.path.modify.current.get_relative import (
     get_relative,
     is_relative,
 )

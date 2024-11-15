@@ -23,7 +23,9 @@ from pyspartaproj.script.file.json.convert_to_json import multiple_to_json
 from pyspartaproj.script.file.json.export_json import json_export
 from pyspartaproj.script.file.text.export_file import byte_export
 from pyspartaproj.script.path.iterate_directory import walk_iterator
-from pyspartaproj.script.path.modify.get_relative import get_relative_array
+from pyspartaproj.script.path.modify.current.get_relative import (
+    get_relative_array,
+)
 from pyspartaproj.script.path.safe.safe_trash import SafeTrash
 from pyspartaproj.script.path.status.get_statistic import get_file_size_array
 from pyspartaproj.script.path.temporary.create_temporary_tree import (

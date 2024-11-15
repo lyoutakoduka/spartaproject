@@ -7,7 +7,7 @@ from pathlib import Path
 
 from pyspartaproj.context.extension.path_context import Paths
 from pyspartaproj.script.directory.create_parent import create_parent
-from pyspartaproj.script.path.modify.get_relative import (
+from pyspartaproj.script.path.modify.current.get_relative import (
     get_relative,
     is_relative,
 )

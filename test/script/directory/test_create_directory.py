@@ -15,7 +15,7 @@ from pyspartaproj.script.directory.create_directory import (
     create_directory_array,
     create_directory_pair,
 )
-from pyspartaproj.script.path.modify.get_absolute import (
+from pyspartaproj.script.path.modify.current.get_absolute import (
     get_absolute_array,
     get_absolute_pair,
 )

@@ -14,7 +14,7 @@ from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.extension.time_context import TimePair, Times
 from pyspartaproj.script.directory.create_directory import create_directory
 from pyspartaproj.script.path.iterate_directory import walk_iterator
-from pyspartaproj.script.path.modify.get_relative import get_relative
+from pyspartaproj.script.path.modify.current.get_relative import get_relative
 from pyspartaproj.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
