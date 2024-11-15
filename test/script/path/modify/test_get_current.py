@@ -3,7 +3,7 @@
 
 """Test module to get current working directory."""
 
-from pyspartaproj.script.path.modify.get_current import get_current
+from pyspartaproj.script.path.modify.current.get_current import get_current
 
 
 def test_current() -> None:

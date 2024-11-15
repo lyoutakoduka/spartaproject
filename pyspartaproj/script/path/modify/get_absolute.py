@@ -6,7 +6,7 @@
 from pathlib import Path
 
 from pyspartaproj.context.extension.path_context import PathPair, Paths
-from pyspartaproj.script.path.modify.get_current import get_current
+from pyspartaproj.script.path.modify.current.get_current import get_current
 
 
 def get_absolute(relative_path: Path, root_path: Path | None = None) -> Path:
