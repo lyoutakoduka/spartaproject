@@ -9,6 +9,7 @@ from typing import Callable
 
 from pyspartaproj.interface.pytest import fail, raises
 from pyspartaproj.script.file.shortcut.create_shortcut import create_shortcut
+from pyspartaproj.script.file.shortcut.get_shortcut import get_shortcut
 from pyspartaproj.script.file.shortcut.read_shortcut import read_shortcut
 from pyspartaproj.script.path.modify.get_resource import get_resource
 from pyspartaproj.script.path.temporary.create_temporary_file import (
@@ -34,7 +35,7 @@ def _get_shortcut_path(shortcut_target: Path, shortcut_root: Path) -> Path:
 
 
 def _common_test(shortcut_target: Path, shortcut_root: Path) -> None:
-    shortcut_path: Path = _get_shortcut_path(shortcut_target, shortcut_root)
+    shortcut_path: Path = get_shortcut(shortcut_target, shortcut_root)
     create_shortcut(shortcut_target, shortcut_path, forward=_get_config_file())
 
     assert shortcut_target == _read_shortcut(shortcut_path)
