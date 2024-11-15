@@ -32,6 +32,10 @@ def _compare_shortcut(target_name: str) -> None:
     assert _get_expected(target_name) == _get_result(target_name)
 
 
+def test_file() -> None:
+    _compare_shortcut("target.extension")
+
+
 def test_directory() -> None:
     """Test to get path of a shortcut file that target is directory."""
     _compare_shortcut("target")
