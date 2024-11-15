@@ -15,7 +15,7 @@ from pyspartaproj.context.extension.path_context import (
     Paths3,
 )
 from pyspartaproj.interface.pytest import fail
-from pyspartaproj.script.path.modify.get_relative import is_relative
+from pyspartaproj.script.path.modify.current.get_relative import is_relative
 from pyspartaproj.script.path.safe.safe_file_history import FileHistory
 from pyspartaproj.script.stack_frame import current_frame
 from pyspartaproj.script.time.directory.get_time_path import (
