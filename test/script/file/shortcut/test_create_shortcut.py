@@ -10,6 +10,7 @@ from typing import Callable
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.interface.pytest import fail, raises
 from pyspartaproj.script.file.shortcut.create_shortcut import create_shortcut
+from pyspartaproj.script.file.shortcut.get_shortcut import get_shortcut
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.modify.get_resource import get_resource
 from pyspartaproj.script.path.temporary.create_temporary_file import (
@@ -79,9 +80,7 @@ def test_file() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         shortcut_target: Path = create_temporary_file(temporary_root)
-        shortcut_path: Path = _get_shortcut_path(
-            shortcut_target, temporary_root
-        )
+        shortcut_path: Path = get_shortcut(shortcut_target, temporary_root)
 
         _success_created(shortcut_target, shortcut_path)
         _common_test(shortcut_target, shortcut_path)
@@ -93,9 +92,7 @@ def test_directory() -> None:
     """Test to create directory type shortcut of Windows from PowerShell."""
 
     def individual_test(temporary_root: Path) -> None:
-        shortcut_path: Path = _get_shortcut_path(
-            temporary_root, temporary_root
-        )
+        shortcut_path: Path = get_shortcut(temporary_root, temporary_root)
 
         _success_created(temporary_root, shortcut_path)
         _common_test(temporary_root, shortcut_path)
@@ -108,9 +105,7 @@ def test_exist() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         shortcut_target: Path = Path("empty")
-        shortcut_path: Path = _get_shortcut_path(
-            shortcut_target, temporary_root
-        )
+        shortcut_path: Path = get_shortcut(shortcut_target, temporary_root)
 
         with raises(FileNotFoundError):
             create_shortcut(shortcut_target, shortcut_path)
@@ -122,9 +117,7 @@ def test_remove() -> None:
     """Test to remove shortcut file when overriding existing shortcut."""
 
     def individual_test(temporary_root: Path) -> None:
-        shortcut_path: Path = _get_shortcut_path(
-            temporary_root, temporary_root
-        )
+        shortcut_path: Path = get_shortcut(temporary_root, temporary_root)
 
         _filter_created(_create_shortcut(temporary_root, shortcut_path))
         _filter_created(
