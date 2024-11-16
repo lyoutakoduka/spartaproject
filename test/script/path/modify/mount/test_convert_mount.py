@@ -9,6 +9,10 @@ from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.script.path.modify.mount.convert_mount import convert_mount
 
 
+def _get_mount_root() -> Path:
+    return Path("/", "mnt")
+
+
 def test_mount() -> None:
     """Test to convert shared path between Linux and Windows."""
     path_elements: Strs = ["A", "B", "C"]
