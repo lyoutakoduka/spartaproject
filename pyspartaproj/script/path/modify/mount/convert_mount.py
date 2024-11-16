@@ -19,13 +19,17 @@ def _is_linux_root(path: Path) -> bool:
     return not is_relative(path, root_path=_get_mount_root())
 
 
+def _get_relative(path: Path) -> Path:
+    return get_relative(path, root_path=_get_mount_root())
+
+
 def _get_drive_identifier(path: Path) -> str:
-    relative_path: Path = get_relative(path, root_path=_get_mount_root())
+    relative_path: Path = _get_relative(path)
     return relative_path.parts[0].capitalize()
 
 
 def _get_relative_root(path: Path) -> Path:
-    relative_path: Path = get_relative(path, root_path=_get_mount_root())
+    relative_path: Path = _get_relative(path)
     return Path(*relative_path.parts[1:])
 
 
