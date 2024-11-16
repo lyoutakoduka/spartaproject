@@ -17,14 +17,6 @@ def _get_mount_root() -> Path:
     return Path("/", "mnt")
 
 
-def _convert_windows(identifier: str) -> Path:
-    return Path(identifier.capitalize() + ":")
-
-
-def _get_windows_path(identifier: str, relative_root: Path) -> Path:
-    return Path(_convert_windows(identifier), relative_root)
-
-
 def _get_relative(path: Path) -> Path:
     return get_relative(path, root_path=_get_mount_root())
 
