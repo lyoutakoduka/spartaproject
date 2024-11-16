@@ -24,26 +24,6 @@ def _get_relative_root() -> Path:
     return Path("root", "body", "head")
 
 
-def _get_mount_root() -> Path:
-    return Path("/", "mnt")
-
-
-def _convert_linux(identifier: str) -> Path:
-    return Path(_get_mount_root(), identifier.lower())
-
-
-def _convert_windows(identifier: str) -> Path:
-    return Path(identifier.capitalize() + ":")
-
-
-def _get_linux_path(identifier: str, relative_root: Path) -> Path:
-    return Path(_convert_linux(identifier), relative_root)
-
-
-def _get_windows_path(identifier: str, relative_root: Path) -> Path:
-    return Path(_convert_windows(identifier), relative_root)
-
-
 def _get_target_path() -> Path:
     return build_linux_path(_get_drive_letter(), _get_relative_root())
 
