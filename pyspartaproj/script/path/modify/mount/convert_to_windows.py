@@ -25,10 +25,6 @@ def _get_windows_path(identifier: str, relative_root: Path) -> Path:
     return Path(_convert_windows(identifier), relative_root)
 
 
-def _has_linux_head(path: Path) -> bool:
-    return is_relative(path, root_path=_get_mount_root())
-
-
 def _get_relative(path: Path) -> Path:
     return get_relative(path, root_path=_get_mount_root())
 
