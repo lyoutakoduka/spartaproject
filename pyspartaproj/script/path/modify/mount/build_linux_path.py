@@ -6,10 +6,6 @@ from pathlib import Path
 from pyspartaproj.script.path.modify.mount.get_linux_head import get_linux_head
 
 
-def _get_mount_root() -> Path:
-    return Path("/", "mnt")
-
-
 def _convert_linux(identifier: str) -> Path:
     return Path(get_linux_head(), identifier.lower())
 

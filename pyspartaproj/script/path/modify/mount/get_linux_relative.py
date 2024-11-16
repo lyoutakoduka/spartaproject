@@ -7,9 +7,5 @@ from pyspartaproj.script.path.modify.current.get_relative import get_relative
 from pyspartaproj.script.path.modify.mount.get_linux_head import get_linux_head
 
 
-def _get_mount_root() -> Path:
-    return Path("/", "mnt")
-
-
 def get_linux_relative(path: Path) -> Path:
     return get_relative(path, root_path=get_linux_head())
