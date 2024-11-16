@@ -5,7 +5,6 @@
 
 from pathlib import Path
 
-from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.script.path.modify.mount.convert_mount import convert_mount
 
 
