@@ -24,17 +24,17 @@ def _get_relative_root() -> Path:
     return Path("root", "body", "head")
 
 
-def _get_target_path() -> Path:
-    return build_linux_path(_get_drive_letter(), _get_relative_root())
-
-
-def _get_expected_path() -> Path:
+def _get_windows_path() -> Path:
     return build_windows_path(_get_drive_letter(), _get_relative_root())
+
+
+def _get_linux_path() -> Path:
+    return build_linux_path(_get_drive_letter(), _get_relative_root())
 
 
 def test_mount() -> None:
     """Test to convert shared path from for Linux to for Windows."""
-    expected: Path = _get_expected_path()
+    expected: Path = _get_windows_path()
 
-    for path in [_get_target_path(), expected]:
+    for path in [_get_linux_path(), expected]:
         assert expected == convert_to_windows(path)
