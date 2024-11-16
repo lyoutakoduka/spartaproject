@@ -6,7 +6,6 @@
 from pathlib import Path
 
 from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.script.path.modify.current.get_relative import get_relative
 from pyspartaproj.script.path.modify.mount.build_windows_path import (
     build_windows_path,
 )
