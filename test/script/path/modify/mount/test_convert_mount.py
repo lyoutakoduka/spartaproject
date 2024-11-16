@@ -6,9 +6,7 @@
 from pathlib import Path
 
 from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.script.path.modify.mount.convert_mount import (
-    convert_mount_path,
-)
+from pyspartaproj.script.path.modify.mount.convert_mount import convert_mount
 
 
 def test_mount() -> None:
@@ -17,4 +15,4 @@ def test_mount() -> None:
     expected: Path = Path("C:/", *path_elements)
 
     for path in [Path("/", "mnt", "c", *path_elements), expected]:
-        assert expected == convert_mount_path(path)
+        assert expected == convert_mount(path)

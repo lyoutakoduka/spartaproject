@@ -7,9 +7,7 @@ from pathlib import Path
 
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.script.path.modify.get_resource import get_resource
-from pyspartaproj.script.path.modify.mount.convert_mount import (
-    convert_mount_path,
-)
+from pyspartaproj.script.path.modify.mount.convert_mount import convert_mount
 from pyspartaproj.script.path.safe.safe_trash import SafeTrash
 from pyspartaproj.script.shell.execute_powershell import (
     execute_powershell,
@@ -22,7 +20,7 @@ from pyspartaproj.script.shell.execute_powershell import (
 
 def _get_quoted_command(shortcut_target: Path, shortcut_path: Path) -> Strs:
     return [
-        get_quoted_path(get_path_string(convert_mount_path(path)))
+        get_quoted_path(get_path_string(convert_mount(path)))
         for path in [shortcut_target, shortcut_path]
     ]
 
