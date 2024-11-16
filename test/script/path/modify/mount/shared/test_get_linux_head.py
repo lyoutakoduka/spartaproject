@@ -6,5 +6,5 @@ from pyspartaproj.script.path.modify.mount.shared.get_linux_head import (
 )
 
 
-def test_head() -> None:
+def test_mount() -> None:
     assert "/mnt" == str(get_linux_head())
