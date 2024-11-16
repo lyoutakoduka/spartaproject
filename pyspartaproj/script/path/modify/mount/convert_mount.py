@@ -5,11 +5,21 @@
 
 from pathlib import Path
 
-from pyspartaproj.script.path.modify.current.get_relative import is_relative
+from pyspartaproj.script.path.modify.current.get_relative import (
+    get_relative,
+    is_relative,
+)
 
 
 def _get_mount_root() -> Path:
     return Path("/", "mnt")
+
+
+def _get_drive_identifier(path: Path) -> str:
+    relative_path: Path = get_relative(path, root_path=_get_mount_root())
+    path_string: str = relative_path.as_posix()
+    drive_name: str = path_string[0]
+    return drive_name.capitalize()
 
 
 def convert_mount(path: Path) -> Path:
@@ -29,9 +39,11 @@ def convert_mount(path: Path) -> Path:
     if not is_relative(path, root_path=mount_root):
         return path
 
+    drive_identifier: str = _get_drive_identifier(path)
+
     path_text: str = path.as_posix()
     mount: str = "/mnt/"
     index: int = len(mount)
     index_right: int = index + 1
 
-    return Path(path_text[index].capitalize() + ":" + path_text[index_right:])
+    return Path(drive_identifier + ":" + path_text[index_right:])
