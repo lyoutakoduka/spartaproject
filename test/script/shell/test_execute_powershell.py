@@ -8,7 +8,6 @@ from pathlib import Path
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.script.path.modify.get_resource import get_resource
 from pyspartaproj.script.shell.execute_powershell import (
-    convert_mount_path,
     execute_powershell,
     get_double_quoted_command,
     get_path_string,
@@ -85,12 +84,3 @@ def test_command() -> None:
             ),
         ]
     )
-
-
-def test_mount() -> None:
-    """Test to convert shared path between Linux and Windows."""
-    path_elements: Strs = ["A", "B", "C"]
-    expected: Path = Path("C:/", *path_elements)
-
-    for path in [Path("/", "mnt", "c", *path_elements), expected]:
-        assert expected == convert_mount_path(path)
