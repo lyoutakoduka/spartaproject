@@ -5,6 +5,7 @@
 
 from pathlib import Path
 
+from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.script.path.modify.current.get_relative import (
     get_relative,
     is_relative,
@@ -23,12 +24,16 @@ def _get_relative(path: Path) -> Path:
     return get_relative(path, root_path=_get_mount_root())
 
 
+def _get_relative_strings(path: Path) -> Strs:
+    return list(_get_relative(path).parts)
+
+
 def _get_drive_identifier(path: Path) -> str:
-    return _get_relative(path).parts[0].capitalize()
+    return _get_relative_strings(path)[0].capitalize()
 
 
 def _get_relative_root(path: Path) -> Path:
-    return Path(*_get_relative(path).parts[1:])
+    return Path(*_get_relative_strings(path)[1:])
 
 
 def convert_mount(path: Path) -> Path:
