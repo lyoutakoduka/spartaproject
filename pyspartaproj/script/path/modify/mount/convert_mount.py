@@ -17,9 +17,7 @@ def _get_mount_root() -> Path:
 
 def _get_drive_identifier(path: Path) -> str:
     relative_path: Path = get_relative(path, root_path=_get_mount_root())
-    path_string: str = relative_path.as_posix()
-    drive_name: str = path_string[0]
-    return drive_name.capitalize()
+    return relative_path.parts[0].capitalize()
 
 
 def convert_mount(path: Path) -> Path:
