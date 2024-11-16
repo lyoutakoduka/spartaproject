@@ -20,6 +20,11 @@ def _get_drive_identifier(path: Path) -> str:
     return relative_path.parts[0].capitalize()
 
 
+def _get_relative_root(path: Path) -> Path:
+    relative_path: Path = get_relative(path, root_path=_get_mount_root())
+    return Path(*relative_path.parts[1:])
+
+
 def convert_mount(path: Path) -> Path:
     """Convert shared path between Linux and Windows.
 
@@ -38,10 +43,6 @@ def convert_mount(path: Path) -> Path:
         return path
 
     drive_identifier: str = _get_drive_identifier(path)
+    relative_root: Path = _get_relative_root(path)
 
-    path_text: str = path.as_posix()
-    mount: str = "/mnt/"
-    index: int = len(mount)
-    index_right: int = index + 1
-
-    return Path(drive_identifier + ":" + path_text[index_right:])
+    return Path(drive_identifier + ":", relative_root)
