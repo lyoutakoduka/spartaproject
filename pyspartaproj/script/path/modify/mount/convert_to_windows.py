@@ -24,7 +24,7 @@ def _get_windows_path(identifier: str, relative_root: Path) -> Path:
     return Path(_convert_windows(identifier), relative_root)
 
 
-def _has_linux_root(path: Path) -> bool:
+def _no_linux_root(path: Path) -> bool:
     return not is_relative(path, root_path=_get_mount_root())
 
 
@@ -56,7 +56,7 @@ def convert_to_windows(path: Path) -> Path:
     Returns:
         Path: Converted Windows path which is starts from drive letter.
     """
-    if _has_linux_root(path):
+    if _no_linux_root(path):
         return path
 
     return _get_windows_path(_get_drive_letter(path), _get_relative_root(path))
