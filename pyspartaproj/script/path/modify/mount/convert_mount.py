@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Module to convert shared path between Linux and Windows."""
+
 from pathlib import Path
 
 

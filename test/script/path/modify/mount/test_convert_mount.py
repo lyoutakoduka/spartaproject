@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to convert shared path between Linux and Windows."""
+
 from pathlib import Path
 
 from pyspartaproj.context.default.string_context import Strs
