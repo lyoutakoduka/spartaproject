@@ -6,7 +6,7 @@
 from pathlib import Path
 
 
-def convert_mount_path(path: Path) -> Path:
+def convert_mount(path: Path) -> Path:
     """Convert shared path between Linux and Windows.
 
     e.g., if you select argument (path) like "/mnt/c/Users/user",
