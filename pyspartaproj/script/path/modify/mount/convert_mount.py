@@ -5,6 +5,8 @@
 
 from pathlib import Path
 
+from pyspartaproj.script.path.modify.current.get_relative import is_relative
+
 
 def convert_mount(path: Path) -> Path:
     """Convert shared path between Linux and Windows.
@@ -18,12 +20,13 @@ def convert_mount(path: Path) -> Path:
     Returns:
         Path: Converted Windows path which is starts from drive letter.
     """
-    path_text: str = path.as_posix()
-    mount: str = "/mnt/"
+    mount_root: Path = Path("/", "mnt")
 
-    if not path_text.startswith(mount):
+    if not is_relative(path, root_path=mount_root):
         return path
 
+    path_text: str = path.as_posix()
+    mount: str = "/mnt/"
     index: int = len(mount)
     index_right: int = index + 1
 
