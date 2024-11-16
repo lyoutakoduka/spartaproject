@@ -4,6 +4,7 @@
 from pathlib import Path
 
 from pyspartaproj.script.path.modify.current.get_relative import get_relative
+from pyspartaproj.script.path.modify.mount.get_linux_head import get_linux_head
 
 
 def _get_mount_root() -> Path:
@@ -11,4 +12,4 @@ def _get_mount_root() -> Path:
 
 
 def get_linux_relative(path: Path) -> Path:
-    return get_relative(path, root_path=_get_mount_root())
+    return get_relative(path, root_path=get_linux_head())
