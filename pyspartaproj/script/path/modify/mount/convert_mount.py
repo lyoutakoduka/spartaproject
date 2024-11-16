@@ -44,7 +44,4 @@ def convert_mount(path: Path) -> Path:
     if _is_linux_root(path):
         return path
 
-    drive_identifier: str = _get_drive_identifier(path)
-    relative_root: Path = _get_relative_root(path)
-
-    return Path(drive_identifier + ":", relative_root)
+    return Path(_get_drive_identifier(path) + ":", _get_relative_root(path))
