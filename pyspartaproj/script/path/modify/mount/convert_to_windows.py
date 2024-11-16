@@ -44,7 +44,7 @@ def _get_relative_root(path: Path) -> Path:
     return Path(*_get_relative_strings(path)[1:])
 
 
-def convert_mount(path: Path) -> Path:
+def convert_to_windows(path: Path) -> Path:
     """Convert shared path between Linux and Windows.
 
     e.g., if you select argument (path) like "/mnt/c/Users/user",
