@@ -5,7 +5,9 @@
 
 from pathlib import Path
 
-from pyspartaproj.script.path.modify.mount.convert_mount import convert_mount
+from pyspartaproj.script.path.modify.mount.convert_to_windows import (
+    convert_to_windows,
+)
 
 
 def _get_drive_letter() -> str:
@@ -49,4 +51,4 @@ def test_mount() -> None:
     expected: Path = _get_expected_path()
 
     for path in [_get_target_path(), expected]:
-        assert expected == convert_mount(path)
+        assert expected == convert_to_windows(path)
