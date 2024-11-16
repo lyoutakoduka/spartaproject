@@ -13,6 +13,10 @@ def _get_mount_root() -> Path:
     return Path("/", "mnt")
 
 
+def _get_relative_root() -> Path:
+    return Path("root", "body", "head")
+
+
 def _get_target_path(drive_identifier: str, relative_root: Path) -> Path:
     return Path(_get_mount_root(), drive_identifier, relative_root)
 
@@ -23,7 +27,7 @@ def _get_expected_path(drive_identifier: str, relative_root: Path) -> Path:
 
 def test_mount() -> None:
     """Test to convert shared path between Linux and Windows."""
-    relative_root: Path = Path("root", "body", "head")
+    relative_root: Path = _get_relative_root()
     expected: Path = _get_expected_path("C", relative_root)
 
     for path in [_get_target_path("c", relative_root), expected]:
