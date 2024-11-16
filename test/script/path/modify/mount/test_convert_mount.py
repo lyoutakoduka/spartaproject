@@ -16,6 +16,10 @@ def _get_drive_letter() -> str:
     return "c"
 
 
+def _convert_linux(identifier: str) -> Path:
+    return Path(_get_mount_root(), identifier.lower())
+
+
 def _convert_windows(identifier: str) -> Path:
     return Path(identifier.capitalize() + ":")
 
@@ -25,7 +29,7 @@ def _get_relative_root() -> Path:
 
 
 def _get_target_path(drive_identifier: str) -> Path:
-    return Path(_get_mount_root(), drive_identifier, _get_relative_root())
+    return Path(_convert_linux(drive_identifier), _get_relative_root())
 
 
 def _get_expected_path(identifier: str) -> Path:
