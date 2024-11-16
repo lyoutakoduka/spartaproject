@@ -6,10 +6,7 @@
 from pathlib import Path
 
 from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.script.path.modify.current.get_relative import (
-    get_relative,
-    is_relative,
-)
+from pyspartaproj.script.path.modify.current.get_relative import get_relative
 from pyspartaproj.script.path.modify.mount.has_linux_head import has_linux_head
 
 
