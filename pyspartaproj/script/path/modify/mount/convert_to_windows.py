@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Module to convert shared path between Linux and Windows."""
+"""Module to convert shared path from for Linux to for Windows."""
 
 from pathlib import Path
 
@@ -45,7 +45,7 @@ def _get_relative_root(path: Path) -> Path:
 
 
 def convert_to_windows(path: Path) -> Path:
-    """Convert shared path between Linux and Windows.
+    """Convert shared path from for Linux to for Windows.
 
     e.g., if you select argument (path) like "/mnt/c/Users/user",
         "C:/Users/user" is returned.
