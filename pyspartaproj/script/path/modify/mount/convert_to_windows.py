@@ -9,10 +9,12 @@ from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.script.path.modify.mount.build_windows_path import (
     build_windows_path,
 )
-from pyspartaproj.script.path.modify.mount.get_linux_relative import (
+from pyspartaproj.script.path.modify.mount.shared.get_linux_relative import (
     get_linux_relative,
 )
-from pyspartaproj.script.path.modify.mount.has_linux_head import has_linux_head
+from pyspartaproj.script.path.modify.mount.shared.has_linux_head import (
+    has_linux_head,
+)
 
 
 def _get_relative_strings(path: Path) -> Strs:
