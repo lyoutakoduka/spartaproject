@@ -10,6 +10,9 @@ from pyspartaproj.script.path.modify.current.get_relative import get_relative
 from pyspartaproj.script.path.modify.mount.build_windows_path import (
     build_windows_path,
 )
+from pyspartaproj.script.path.modify.mount.get_linux_relative import (
+    get_linux_relative,
+)
 from pyspartaproj.script.path.modify.mount.has_linux_head import has_linux_head
 
 
@@ -22,7 +25,7 @@ def _get_relative(path: Path) -> Path:
 
 
 def _get_relative_strings(path: Path) -> Strs:
-    return list(_get_relative(path).parts)
+    return list(get_linux_relative(path).parts)
 
 
 def _get_drive_letter(path: Path) -> str:
