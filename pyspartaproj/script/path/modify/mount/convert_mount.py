@@ -24,13 +24,11 @@ def _get_relative(path: Path) -> Path:
 
 
 def _get_drive_identifier(path: Path) -> str:
-    relative_path: Path = _get_relative(path)
-    return relative_path.parts[0].capitalize()
+    return _get_relative(path).parts[0].capitalize()
 
 
 def _get_relative_root(path: Path) -> Path:
-    relative_path: Path = _get_relative(path)
-    return Path(*relative_path.parts[1:])
+    return Path(*_get_relative(path).parts[1:])
 
 
 def convert_mount(path: Path) -> Path:
