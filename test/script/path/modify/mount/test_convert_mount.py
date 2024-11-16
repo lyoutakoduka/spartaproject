@@ -28,8 +28,12 @@ def _convert_windows(identifier: str) -> Path:
     return Path(identifier.capitalize() + ":")
 
 
-def _get_target_path(identifier: str) -> Path:
-    return Path(_convert_linux(identifier), _get_relative_root())
+def _get_linux_path(identifier: str, relative_root: Path) -> Path:
+    return Path(_convert_linux(identifier), relative_root)
+
+
+def _get_target_path() -> Path:
+    return _get_linux_path(_get_drive_letter(), _get_relative_root())
 
 
 def _get_expected_path(identifier: str) -> Path:
@@ -41,5 +45,5 @@ def test_mount() -> None:
     identifier: str = _get_drive_letter()
     expected: Path = _get_expected_path(identifier)
 
-    for path in [_get_target_path(identifier), expected]:
+    for path in [_get_target_path(), expected]:
         assert expected == convert_mount(path)
