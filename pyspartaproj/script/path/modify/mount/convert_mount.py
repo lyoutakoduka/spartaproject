@@ -28,7 +28,7 @@ def _get_relative_strings(path: Path) -> Strs:
     return list(_get_relative(path).parts)
 
 
-def _get_drive_identifier(path: Path) -> str:
+def _get_drive_letter(path: Path) -> str:
     return _get_relative_strings(path)[0].capitalize()
 
 
@@ -51,4 +51,4 @@ def convert_mount(path: Path) -> Path:
     if _is_linux_root(path):
         return path
 
-    return Path(_get_drive_identifier(path) + ":", _get_relative_root(path))
+    return Path(_get_drive_letter(path) + ":", _get_relative_root(path))
