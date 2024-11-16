@@ -15,6 +15,10 @@ def _get_mount_root() -> Path:
     return Path("/", "mnt")
 
 
+def _is_linux_root(path: Path) -> bool:
+    return not is_relative(path, root_path=_get_mount_root())
+
+
 def _get_drive_identifier(path: Path) -> str:
     relative_path: Path = get_relative(path, root_path=_get_mount_root())
     return relative_path.parts[0].capitalize()
@@ -37,9 +41,7 @@ def convert_mount(path: Path) -> Path:
     Returns:
         Path: Converted Windows path which is starts from drive letter.
     """
-    mount_root: Path = _get_mount_root()
-
-    if not is_relative(path, root_path=mount_root):
+    if _is_linux_root(path):
         return path
 
     drive_identifier: str = _get_drive_identifier(path)
