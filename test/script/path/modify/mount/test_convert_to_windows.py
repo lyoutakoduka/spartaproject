@@ -5,6 +5,9 @@
 
 from pathlib import Path
 
+from pyspartaproj.script.path.modify.mount.build_linux_path import (
+    build_linux_path,
+)
 from pyspartaproj.script.path.modify.mount.convert_to_windows import (
     convert_to_windows,
 )
@@ -39,7 +42,7 @@ def _get_windows_path(identifier: str, relative_root: Path) -> Path:
 
 
 def _get_target_path() -> Path:
-    return _get_linux_path(_get_drive_letter(), _get_relative_root())
+    return build_linux_path(_get_drive_letter(), _get_relative_root())
 
 
 def _get_expected_path() -> Path:
