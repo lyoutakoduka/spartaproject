@@ -16,14 +16,6 @@ from pyspartaproj.script.path.modify.mount.get_linux_relative import (
 from pyspartaproj.script.path.modify.mount.has_linux_head import has_linux_head
 
 
-def _get_mount_root() -> Path:
-    return Path("/", "mnt")
-
-
-def _get_relative(path: Path) -> Path:
-    return get_relative(path, root_path=_get_mount_root())
-
-
 def _get_relative_strings(path: Path) -> Strs:
     return list(get_linux_relative(path).parts)
 
