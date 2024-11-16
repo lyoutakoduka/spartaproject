@@ -16,6 +16,10 @@ def _get_drive_letter() -> str:
     return "c"
 
 
+def _convert_windows(identifier: str) -> Path:
+    return Path(identifier.capitalize() + ":")
+
+
 def _get_relative_root() -> Path:
     return Path("root", "body", "head")
 
@@ -25,13 +29,13 @@ def _get_target_path(drive_identifier: str) -> Path:
 
 
 def _get_expected_path(identifier: str) -> Path:
-    return Path(identifier + ":", _get_relative_root())
+    return Path(_convert_windows(identifier), _get_relative_root())
 
 
 def test_mount() -> None:
     """Test to convert shared path between Linux and Windows."""
     identifier: str = _get_drive_letter()
-    expected: Path = _get_expected_path(identifier.capitalize())
+    expected: Path = _get_expected_path(identifier)
 
     for path in [_get_target_path(identifier), expected]:
         assert expected == convert_mount(path)
