@@ -20,6 +20,10 @@ def _convert_windows(identifier: str) -> Path:
     return Path(identifier.capitalize() + ":")
 
 
+def _get_windows_path(identifier: str, relative_root: Path) -> Path:
+    return Path(_convert_windows(identifier), relative_root)
+
+
 def _is_linux_root(path: Path) -> bool:
     return not is_relative(path, root_path=_get_mount_root())
 
@@ -55,6 +59,4 @@ def convert_mount(path: Path) -> Path:
     if _is_linux_root(path):
         return path
 
-    return Path(
-        _convert_windows(_get_drive_letter(path)), _get_relative_root(path)
-    )
+    return _get_windows_path(_get_drive_letter(path), _get_relative_root(path))
