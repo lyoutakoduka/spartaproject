@@ -24,8 +24,8 @@ def _get_target_path(drive_identifier: str) -> Path:
     return Path(_get_mount_root(), drive_identifier, _get_relative_root())
 
 
-def _get_expected_path(drive_identifier: str) -> Path:
-    return Path(drive_identifier + ":", _get_relative_root())
+def _get_expected_path(identifier: str) -> Path:
+    return Path(identifier + ":", _get_relative_root())
 
 
 def test_mount() -> None:
