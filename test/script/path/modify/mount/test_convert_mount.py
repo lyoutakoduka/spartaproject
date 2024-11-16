@@ -46,7 +46,6 @@ def _get_expected_path() -> Path:
 
 def test_mount() -> None:
     """Test to convert shared path between Linux and Windows."""
-    identifier: str = _get_drive_letter()
     expected: Path = _get_expected_path()
 
     for path in [_get_target_path(), expected]:
