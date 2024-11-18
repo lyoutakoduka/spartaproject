@@ -10,3 +10,7 @@ def _get_drive_letter() -> str:
 
 def _get_relative_root() -> Path:
     return Path("root", "body", "head")
+
+
+def _get_expected_path() -> Path:
+    return Path(_get_drive_letter(), _get_relative_root())
