@@ -11,6 +11,9 @@ from pyspartaproj.script.path.modify.mount.build_linux_path import (
 from pyspartaproj.script.path.modify.mount.build_windows_path import (
     build_windows_path,
 )
+from pyspartaproj.script.path.modify.mount.shared.has_linux_head import (
+    has_linux_head,
+)
 
 
 def _get_drive_letter() -> str:
@@ -35,3 +38,8 @@ def _get_expected() -> Bools:
 
 def _get_paths() -> Paths:
     return [_get_linux_path(), _get_windows_path()]
+
+
+def test_mount() -> None:
+    for expected, path in zip(_get_expected(), _get_paths()):
+        assert expected == has_linux_head(path)
