@@ -9,6 +9,9 @@ from pyspartaproj.script.path.modify.mount.build_linux_path import (
 from pyspartaproj.script.path.modify.mount.build_windows_path import (
     build_windows_path,
 )
+from pyspartaproj.script.path.modify.mount.convert_to_linux import (
+    convert_to_linux,
+)
 
 
 def _get_drive_letter() -> str:
@@ -25,3 +28,10 @@ def _get_windows_path() -> Path:
 
 def _get_linux_path() -> Path:
     return build_linux_path(_get_drive_letter(), _get_relative_root())
+
+
+def test_mount() -> None:
+    expected: Path = _get_linux_path()
+
+    for path in [_get_windows_path(), expected]:
+        assert expected == convert_to_linux(path)
