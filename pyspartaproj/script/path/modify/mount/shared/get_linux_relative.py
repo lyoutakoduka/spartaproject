@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Module to get relative path seen from a mount point in Linux."""
+"""Module to get relative path seen from a mount point of Linux."""
 
 from pathlib import Path
 
@@ -12,7 +12,7 @@ from pyspartaproj.script.path.modify.mount.shared.get_linux_head import (
 
 
 def get_linux_relative(path: Path) -> Path:
-    """Get relative path seen from a mount point in Linux.
+    """Get relative path seen from a mount point of Linux.
 
     Args:
         path (Path): Full path including the mount point.
