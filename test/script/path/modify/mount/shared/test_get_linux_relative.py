@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to get relative path seen from a mount point in Linux."""
+
 from pathlib import Path
 
 from pyspartaproj.script.path.modify.mount.build_linux_path import (
@@ -28,4 +30,5 @@ def _get_linux_path() -> Path:
 
 
 def test_mount() -> None:
+    """Test to get relative path seen from a mount point in Linux."""
     assert _get_expected_path() == get_linux_relative(_get_linux_path())
