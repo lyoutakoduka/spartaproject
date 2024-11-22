@@ -7,7 +7,7 @@ from pathlib import Path
 
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.script.path.modify.mount.build_windows_path import (
-    build_windows_path,
+    get_windows_path,
 )
 from pyspartaproj.script.path.modify.mount.shared.get_linux_relative import (
     get_linux_relative,
@@ -44,6 +44,4 @@ def convert_to_windows(path: Path) -> Path:
     if not has_linux_head(path):
         return path
 
-    return build_windows_path(
-        _get_drive_letter(path), _get_relative_root(path)
-    )
+    return get_windows_path(_get_drive_letter(path), _get_relative_root(path))
