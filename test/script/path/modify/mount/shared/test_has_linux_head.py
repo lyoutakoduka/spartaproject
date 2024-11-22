@@ -8,7 +8,7 @@ from pathlib import Path
 from pyspartaproj.context.default.bool_context import Bools
 from pyspartaproj.context.extension.path_context import Paths
 from pyspartaproj.script.path.modify.mount.build_linux_path import (
-    build_linux_path,
+    get_linux_path,
 )
 from pyspartaproj.script.path.modify.mount.build_windows_path import (
     build_windows_path,
@@ -31,7 +31,7 @@ def _get_windows_path() -> Path:
 
 
 def _get_linux_path() -> Path:
-    return build_linux_path(_get_drive_letter(), _get_relative_root())
+    return get_linux_path(_get_drive_letter(), _get_relative_root())
 
 
 def _get_expected() -> Bools:
