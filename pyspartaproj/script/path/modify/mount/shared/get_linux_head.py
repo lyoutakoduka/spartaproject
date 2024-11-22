@@ -6,7 +6,7 @@
 from pathlib import Path
 
 
-def get_linux_head() -> Path:
+def get_mount_point() -> Path:
     """Get the path of a mount point of Linux.
 
     Returns:
