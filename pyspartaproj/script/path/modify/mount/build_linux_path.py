@@ -3,10 +3,6 @@
 
 from pathlib import Path
 
-from pyspartaproj.script.path.modify.mount.shared.get_linux_head import (
-    get_mount_point,
-)
-
 
 def get_mount_point() -> Path:
     """Get the path of a mount point of Linux.
