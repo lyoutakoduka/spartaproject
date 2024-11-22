@@ -5,7 +5,7 @@ from pathlib import Path
 
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.script.path.modify.mount.build_linux_path import (
-    build_linux_path,
+    get_linux_path,
 )
 from pyspartaproj.script.path.modify.mount.shared.has_linux_head import (
     has_linux_head,
@@ -28,4 +28,4 @@ def convert_to_linux(path: Path) -> Path:
     if has_linux_head(path):
         return path
 
-    return build_linux_path(_get_drive_letter(path), _get_relative_root(path))
+    return get_linux_path(_get_drive_letter(path), _get_relative_root(path))
