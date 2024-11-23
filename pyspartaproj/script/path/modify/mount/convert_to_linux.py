@@ -29,6 +29,9 @@ def _get_relative_root(path: Path) -> Path:
 def convert_to_linux(path: Path) -> Path:
     """Convert path from format Windows to format Linux.
 
+    e.g., if you select argument (path) like "C:/Users/user",
+        "/mnt/c/Users/user" is returned.
+
     Args:
         path (Path): Windows format path you want to convert.
 
