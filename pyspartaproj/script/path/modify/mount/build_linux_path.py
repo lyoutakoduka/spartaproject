@@ -28,7 +28,7 @@ def get_linux_head(identifier: str) -> Path:
 
 
 def get_linux_path(identifier: str, relative_root: Path) -> Path:
-    """Build path about Windows mounted on Linux from elements.
+    """Generate path about Windows mounted on Linux from elements.
 
     Args:
         identifier (str): Drive letter you want to specify.
@@ -37,6 +37,6 @@ def get_linux_path(identifier: str, relative_root: Path) -> Path:
             Relative path used for combining with the drive letter.
 
     Returns:
-        Path: Path about Windows built from elements.
+        Path: Generated path about Windows mounted on Linux.
     """
     return Path(get_linux_head(identifier), relative_root)

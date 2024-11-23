@@ -55,5 +55,5 @@ def test_head() -> None:
 
 
 def test_path() -> None:
-    """Test to build path about Windows mounted on Linux from elements."""
+    """Test to generate path about Windows mounted on Linux from elements."""
     _compare_path(_get_expected_path(), _get_linux_path())
