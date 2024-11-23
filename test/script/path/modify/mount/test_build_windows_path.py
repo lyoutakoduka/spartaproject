@@ -35,3 +35,7 @@ def _get_expected_path() -> Path:
 
 def _compare_path(expected: Path, result: Path) -> None:
     assert expected == result
+
+
+def test_head() -> None:
+    _compare_path(_get_expected_head(), _get_windows_head())
