@@ -44,3 +44,7 @@ def _compare_path(expected: Path, result: Path) -> None:
 
 def test_mount() -> None:
     _compare_path(_get_expected_mount(), get_mount_point())
+
+
+def test_head() -> None:
+    _compare_path(_get_expected_head(), _get_linux_head())
