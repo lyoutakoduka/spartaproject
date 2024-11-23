@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test to module to convert path from format Windows to format Linux."""
+
 from pathlib import Path
 
 from pyspartaproj.script.path.modify.mount.build_linux_path import (
@@ -31,6 +33,7 @@ def _get_linux_path() -> Path:
 
 
 def test_mount() -> None:
+    """Test to convert path from format Windows to format Linux."""
     expected: Path = _get_linux_path()
 
     for path in [_get_windows_path(), expected]:

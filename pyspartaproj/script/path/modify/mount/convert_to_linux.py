@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Module to convert path from format Windows to format Linux."""
+
 from pathlib import Path
 
 from pyspartaproj.context.default.string_context import Strs
@@ -25,6 +27,14 @@ def _get_relative_root(path: Path) -> Path:
 
 
 def convert_to_linux(path: Path) -> Path:
+    """Convert path from format Windows to format Linux.
+
+    Args:
+        path (Path): Windows format path you want to convert.
+
+    Returns:
+        Path: Converted Linux format path.
+    """
     if has_linux_head(path):
         return path
 
