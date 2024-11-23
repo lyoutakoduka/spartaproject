@@ -23,3 +23,7 @@ def _get_linux_head() -> Path:
 
 def _get_linux_path() -> Path:
     return get_linux_path(_get_drive_letter(), _get_relative_root())
+
+
+def _get_expected_mount() -> Path:
+    return Path("/", "mnt")
