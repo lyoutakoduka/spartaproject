@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Module to convert shared path from for Linux to for Windows."""
+"""Module to convert path from format Linux to format Windows."""
 
 from pathlib import Path
 
@@ -30,16 +30,16 @@ def _get_relative_root(path: Path) -> Path:
 
 
 def convert_to_windows(path: Path) -> Path:
-    """Convert shared path from for Linux to for Windows.
+    """Convert path from format Linux to format Windows.
 
     e.g., if you select argument (path) like "/mnt/c/Users/user",
         "C:/Users/user" is returned.
 
     Args:
-        path (Path): Linux path which is starts from mount string.
+        path (Path): Linux format path you want to convert.
 
     Returns:
-        Path: Converted Windows path which is starts from drive letter.
+        Path: Converted Windows format path.
     """
     if not has_linux_head(path):
         return path

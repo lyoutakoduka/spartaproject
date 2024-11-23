@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Test module to convert shared path from for Linux to for Windows."""
+"""Test module to convert path from format Linux to format Windows."""
 
 from pathlib import Path
 
@@ -33,7 +33,7 @@ def _get_linux_path() -> Path:
 
 
 def test_mount() -> None:
-    """Test to convert shared path from for Linux to for Windows."""
+    """Test to convert path from format Linux to format Windows."""
     expected: Path = _get_windows_path()
 
     for path in [_get_linux_path(), expected]:
