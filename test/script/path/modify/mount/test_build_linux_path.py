@@ -32,3 +32,7 @@ def _get_expected_mount() -> Path:
 
 def _get_expected_head() -> Path:
     return Path(get_mount_point(), _get_drive_letter())
+
+
+def _get_expected_path() -> Path:
+    return Path(_get_expected_head(), _get_relative_root())
