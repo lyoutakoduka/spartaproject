@@ -27,3 +27,7 @@ def _get_windows_path() -> Path:
 
 def _get_expected_head() -> Path:
     return Path("C:")
+
+
+def _get_expected_path() -> Path:
+    return Path(_get_expected_head(), _get_relative_root())
