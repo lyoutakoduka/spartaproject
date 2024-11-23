@@ -36,3 +36,7 @@ def _get_expected_head() -> Path:
 
 def _get_expected_path() -> Path:
     return Path(_get_expected_head(), _get_relative_root())
+
+
+def _compare_path(expected: Path, result: Path) -> None:
+    assert expected == result
