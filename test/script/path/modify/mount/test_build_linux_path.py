@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to get path about Windows mounted on Linux."""
+
 from pathlib import Path
 
 from pyspartaproj.script.path.modify.mount.build_linux_path import (
@@ -43,12 +45,15 @@ def _compare_path(expected: Path, result: Path) -> None:
 
 
 def test_mount() -> None:
+    """Test to get the path of a mount point of Linux."""
     _compare_path(_get_expected_mount(), get_mount_point())
 
 
 def test_head() -> None:
+    """Test to get path of a drive letter about Windows mounted on Linux."""
     _compare_path(_get_expected_head(), _get_linux_head())
 
 
 def test_path() -> None:
+    """Test to build path about Windows mounted on Linux from elements."""
     _compare_path(_get_expected_path(), _get_linux_path())

@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Module to get path about Windows mounted on Linux."""
+
 from pathlib import Path
 
 
@@ -14,8 +16,27 @@ def get_mount_point() -> Path:
 
 
 def get_linux_head(identifier: str) -> Path:
+    """Get path of a drive letter about Windows mounted on Linux.
+
+    Args:
+        identifier (str): Drive letter you want to specify.
+
+    Returns:
+        Path: Path including the drive letter.
+    """
     return Path(get_mount_point(), identifier.lower())
 
 
 def get_linux_path(identifier: str, relative_root: Path) -> Path:
+    """Build path about Windows mounted on Linux from elements.
+
+    Args:
+        identifier (str): Drive letter you want to specify.
+
+        relative_root (Path):
+            Relative path used for combining with the drive letter.
+
+    Returns:
+        Path: Path about Windows built from elements.
+    """
     return Path(get_linux_head(identifier), relative_root)
