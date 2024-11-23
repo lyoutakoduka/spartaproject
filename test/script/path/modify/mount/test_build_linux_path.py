@@ -40,3 +40,7 @@ def _get_expected_path() -> Path:
 
 def _compare_path(expected: Path, result: Path) -> None:
     assert expected == result
+
+
+def test_mount() -> None:
+    _compare_path(_get_expected_mount(), get_mount_point())
