@@ -48,3 +48,7 @@ def test_mount() -> None:
 
 def test_head() -> None:
     _compare_path(_get_expected_head(), _get_linux_head())
+
+
+def test_path() -> None:
+    _compare_path(_get_expected_path(), _get_linux_path())
