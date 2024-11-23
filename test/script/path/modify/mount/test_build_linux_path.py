@@ -6,6 +6,7 @@ from pathlib import Path
 from pyspartaproj.script.path.modify.mount.build_linux_path import (
     get_linux_head,
     get_linux_path,
+    get_mount_point,
 )
 
 
@@ -27,3 +28,7 @@ def _get_linux_path() -> Path:
 
 def _get_expected_mount() -> Path:
     return Path("/", "mnt")
+
+
+def _get_expected_head() -> Path:
+    return Path(get_mount_point(), _get_drive_letter())
