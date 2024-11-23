@@ -23,3 +23,7 @@ def _get_windows_head() -> Path:
 
 def _get_windows_path() -> Path:
     return get_windows_path(_get_drive_letter(), _get_relative_root())
+
+
+def _get_expected_head() -> Path:
+    return Path("C:")
