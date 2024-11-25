@@ -39,10 +39,8 @@ def _add_execute_option(shell_commands: Strs) -> None:
     shell_commands += ["-ExecutionPolicy", "Bypass"]
 
 
-def _build_commands(
-    commands: Strs, platform: str | None, forward: Path | None
-) -> Strs:
-    shell_commands: Strs = [_get_powershell_path(platform, forward).as_posix()]
+def _build_commands(powershell_path: str, commands: Strs) -> Strs:
+    shell_commands: Strs = [powershell_path]
 
     _add_execute_option(shell_commands)
 
@@ -72,7 +70,11 @@ def execute_powershell(
     Returns:
         StrGene: Generator for getting stdout of command  you want execute.
     """
-    return execute_single(_build_commands(commands, platform, forward))
+    return execute_single(
+        _build_commands(
+            _get_powershell_path(platform, forward).as_posix(), commands
+        )
+    )
 
 
 def get_script_string(path: Path) -> str:
