@@ -15,8 +15,14 @@ def _get_platform_key(project: ProjectContext) -> str:
     return project.get_platform_key(["powershell"]) + ".path"
 
 
+def _get_project_context(
+    platform: str | None, forward: Path | None
+) -> ProjectContext:
+    return ProjectContext(platform=platform, forward=forward)
+
+
 def _get_powershell_path(platform: str | None, forward: Path | None) -> Path:
-    project = ProjectContext(platform=platform, forward=forward)
+    project: ProjectContext = _get_project_context(platform, forward)
     return project.get_path_context("runtime")[_get_platform_key(project)]
 
 
