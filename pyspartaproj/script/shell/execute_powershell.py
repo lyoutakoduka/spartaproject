@@ -6,7 +6,7 @@
 from pathlib import Path
 
 from pyspartaproj.context.default.string_context import StrGene, Strs
-from pyspartaproj.script.platform.get_platform import is_platform_linux
+from pyspartaproj.script.platform.platform_status import is_platform_linux
 from pyspartaproj.script.project.project_context import ProjectContext
 from pyspartaproj.script.shell.execute_command import execute_single
 

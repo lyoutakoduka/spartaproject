@@ -13,7 +13,7 @@ from pyspartaproj.script.path.modify.current.get_relative import (
     is_relative,
 )
 from pyspartaproj.script.path.modify.get_resource import get_resource
-from pyspartaproj.script.platform.get_platform import is_platform_linux
+from pyspartaproj.script.platform.platform_status import is_platform_linux
 from pyspartaproj.script.shell.execute_python import (
     execute_python,
     get_interpreter_path,
