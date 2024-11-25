@@ -19,7 +19,7 @@ from pyspartaproj.script.file.json.convert_from_json import (
 )
 from pyspartaproj.script.file.json.import_json import json_import
 from pyspartaproj.script.path.modify.get_resource import get_resource
-from pyspartaproj.script.platform.get_platform import get_platform
+from pyspartaproj.script.platform.platform_status import get_platform
 
 
 class ProjectContext:

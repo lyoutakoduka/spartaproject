@@ -9,7 +9,7 @@ from pyspartaproj.context.default.integer_context import IntPair
 from pyspartaproj.context.default.string_context import StrPair, Strs, Strs2
 from pyspartaproj.context.extension.path_context import PathPair
 from pyspartaproj.script.path.modify.get_resource import get_resource
-from pyspartaproj.script.platform.get_platform import get_platform
+from pyspartaproj.script.platform.platform_status import get_platform
 from pyspartaproj.script.project.project_context import ProjectContext
 
 
