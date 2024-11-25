@@ -26,9 +26,13 @@ def _get_runtime_context(project: ProjectContext) -> PathPair:
     return project.get_path_context("runtime")
 
 
+def _get_context_path(context: PathPair, project: ProjectContext) -> Path:
+    return context[_get_platform_key(project)]
+
+
 def _get_powershell_path(platform: str | None, forward: Path | None) -> Path:
     project: ProjectContext = _get_project_context(platform, forward)
-    return _get_runtime_context(project)[_get_platform_key(project)]
+    return _get_context_path(_get_runtime_context(project), project)
 
 
 def execute_powershell(
