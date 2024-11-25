@@ -6,6 +6,7 @@
 from pathlib import Path
 
 from pyspartaproj.context.default.string_context import StrGene, Strs
+from pyspartaproj.context.extension.path_context import PathPair
 from pyspartaproj.script.platform.platform_status import is_platform_linux
 from pyspartaproj.script.project.project_context import ProjectContext
 from pyspartaproj.script.shell.execute_command import execute_single
@@ -21,9 +22,13 @@ def _get_project_context(
     return ProjectContext(platform=platform, forward=forward)
 
 
+def _get_runtime_context(project: ProjectContext) -> PathPair:
+    return project.get_path_context("runtime")
+
+
 def _get_powershell_path(platform: str | None, forward: Path | None) -> Path:
     project: ProjectContext = _get_project_context(platform, forward)
-    return project.get_path_context("runtime")[_get_platform_key(project)]
+    return _get_runtime_context(project)[_get_platform_key(project)]
 
 
 def execute_powershell(
