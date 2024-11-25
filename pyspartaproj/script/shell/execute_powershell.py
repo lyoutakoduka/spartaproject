@@ -46,9 +46,7 @@ def _build_commands(
 
     _add_execute_option(shell_commands)
 
-    shell_commands += commands
-
-    return shell_commands
+    return shell_commands + commands
 
 
 def execute_powershell(
