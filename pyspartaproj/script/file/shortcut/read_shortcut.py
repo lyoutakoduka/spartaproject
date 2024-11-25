@@ -7,7 +7,7 @@ from pathlib import Path
 
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.script.path.modify.get_resource import get_resource
-from pyspartaproj.script.platform.get_platform import is_platform_linux
+from pyspartaproj.script.platform.platform_status import is_platform_linux
 from pyspartaproj.script.shell.execute_powershell import (
     execute_powershell,
     get_double_quoted_command,
