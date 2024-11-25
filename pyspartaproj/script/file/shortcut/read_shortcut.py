@@ -4,7 +4,6 @@
 """Module to read Windows shortcut information from PowerShell."""
 
 from pathlib import Path
-from platform import uname
 
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.script.path.modify.get_resource import get_resource
