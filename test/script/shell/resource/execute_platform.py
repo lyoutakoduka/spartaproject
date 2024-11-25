@@ -3,8 +3,6 @@
 
 """Module for test to execute Python on all platform."""
 
-from platform import uname
-
 from pyspartaproj.script.platform.get_platform import get_platform
 
 
