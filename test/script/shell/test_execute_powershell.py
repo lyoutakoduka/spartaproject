@@ -21,6 +21,10 @@ def _print_command() -> str:
     return "Write-Output"
 
 
+def _get_path_elements() -> Strs:
+    return ["A", "B", "C"]
+
+
 def _get_formatted_path(path_elements: Strs) -> str:
     return "\\".join(path_elements)
 
@@ -35,13 +39,13 @@ def _execute_powershell(commands: Strs) -> Strs:
 
 def test_script() -> None:
     """Test to convert script part of command string on PowerShell."""
-    path_elements: Strs = ["A", "B", "C"]
+    path_elements: Strs = _get_path_elements()
     assert "/".join(path_elements) == get_script_string(Path(*path_elements))
 
 
 def test_path() -> None:
     """Test to convert argument part of command string on PowerShell."""
-    path_elements: Strs = ["A", "B", "C"]
+    path_elements: Strs = _get_path_elements()
     assert _get_formatted_path(path_elements) == get_path_string(
         Path(*path_elements)
     )
@@ -49,7 +53,7 @@ def test_path() -> None:
 
 def test_argument() -> None:
     """Test to get path surrounded by quotation for executing on PowerShell."""
-    path_elements: Strs = ["A", "B", "C"]
+    path_elements: Strs = _get_path_elements()
     expected: str = _get_formatted_path(path_elements).join(["'"] * 2)
     assert expected == get_quoted_path(get_path_string(Path(*path_elements)))
 
