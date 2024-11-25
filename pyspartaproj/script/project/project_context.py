@@ -20,6 +20,7 @@ from pyspartaproj.script.file.json.convert_from_json import (
 )
 from pyspartaproj.script.file.json.import_json import json_import
 from pyspartaproj.script.path.modify.get_resource import get_resource
+from pyspartaproj.script.platform.get_platform import get_platform
 
 
 class ProjectContext:
@@ -46,7 +47,7 @@ class ProjectContext:
 
     def _override_platform(self, platform: str | None) -> None:
         if platform is None:
-            platform = uname().system.lower()
+            platform = get_platform()
 
         self.platform: str = platform
 
