@@ -14,6 +14,7 @@ from pyspartaproj.script.path.modify.current.get_relative import (
     is_relative,
 )
 from pyspartaproj.script.path.modify.get_resource import get_resource
+from pyspartaproj.script.platform.get_platform import is_platform_linux
 from pyspartaproj.script.shell.execute_python import (
     execute_python,
     get_interpreter_path,
@@ -69,7 +70,7 @@ def _compare_system_paths(expected: Paths, results: Paths) -> None:
 def test_path() -> None:
     """Test to convert path to the format for executing script in Python."""
     path_elements: Strs = ["A", "B", "C"]
-    identifier: str = "/" if "Linux" == uname().system else "\\"
+    identifier: str = "/" if is_platform_linux() else "\\"
 
     assert identifier.join(path_elements) == get_script_string(
         Path(*path_elements)

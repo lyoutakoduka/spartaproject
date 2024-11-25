@@ -7,6 +7,7 @@ from pathlib import Path
 from platform import uname
 
 from pyspartaproj.context.default.string_context import StrGene, Strs
+from pyspartaproj.script.platform.get_platform import is_platform_linux
 from pyspartaproj.script.project.project_context import ProjectContext
 from pyspartaproj.script.shell.execute_command import execute_single
 
@@ -93,7 +94,7 @@ def get_path_string(path: Path) -> str:
     """
     path_text: str = str(path)
 
-    if "Linux" == uname().system:
+    if is_platform_linux():
         return path_text.replace("/", "\\")
 
     return path_text
