@@ -4,7 +4,6 @@
 """Test to execute Python corresponding to platform."""
 
 from pathlib import Path
-from platform import uname
 
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.extension.path_context import PathPair, Paths

@@ -4,7 +4,6 @@
 """Module to execute specific commands in PowerShell."""
 
 from pathlib import Path
-from platform import uname
 
 from pyspartaproj.context.default.string_context import StrGene, Strs
 from pyspartaproj.script.platform.get_platform import is_platform_linux
