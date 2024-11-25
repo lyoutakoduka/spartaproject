@@ -15,11 +15,9 @@ def _get_platform_key(project: ProjectContext) -> str:
     return project.get_platform_key(["powershell"]) + ".path"
 
 
-def _get_powershell_path(platform: str | None, forward: Path | None) -> str:
+def _get_powershell_path(platform: str | None, forward: Path | None) -> Path:
     project = ProjectContext(platform=platform, forward=forward)
-    return project.get_path_context("runtime")[
-        _get_platform_key(project)
-    ].as_posix()
+    return project.get_path_context("runtime")[_get_platform_key(project)]
 
 
 def execute_powershell(
@@ -46,7 +44,7 @@ def execute_powershell(
         StrGene: Generator for getting stdout of command  you want execute.
     """
     shell_commands: Strs = [
-        _get_powershell_path(platform, forward),
+        _get_powershell_path(platform, forward).as_posix(),
         "-ExecutionPolicy",
         "Bypass",
     ] + commands
