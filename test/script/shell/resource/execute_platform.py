@@ -5,9 +5,11 @@
 
 from platform import uname
 
+from pyspartaproj.script.platform.get_platform import get_platform
+
 
 def _main() -> None:
-    print(uname().system)
+    print(get_platform())
 
 
 if __name__ == "__main__":
