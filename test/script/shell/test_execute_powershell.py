@@ -17,6 +17,10 @@ from pyspartaproj.script.shell.execute_powershell import (
 from pyspartaproj.script.string.temporary_text import temporary_text
 
 
+def _print_command() -> str:
+    return "Write-Output"
+
+
 def _get_formatted_path(path_elements: Strs) -> str:
     return "\\".join(path_elements)
 
@@ -52,7 +56,7 @@ def test_argument() -> None:
 
 def test_all() -> None:
     """Test to convert command part of command string on PowerShell."""
-    expected: Strs = ["Write-Output", "Test"]
+    expected: Strs = [_print_command(), "Test"]
     assert expected == get_double_quoted_command(expected).replace(
         '"', ""
     ).split(" ")
@@ -61,7 +65,9 @@ def test_all() -> None:
 def test_write() -> None:
     """Test for executing simple command on PowerShell."""
     expected: Strs = temporary_text(3, 3)
-    commands: Strs = ["; ".join(["Write-Output " + text for text in expected])]
+    commands: Strs = [
+        "; ".join([_print_command() + " " + text for text in expected])
+    ]
 
     assert expected == _execute_powershell(
         [get_double_quoted_command(commands)]
