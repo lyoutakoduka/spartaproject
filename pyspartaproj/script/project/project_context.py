@@ -48,7 +48,7 @@ class ProjectContext:
         if platform is None:
             platform = uname().system.lower()
 
-        self.platform = platform
+        self.platform: str = platform
 
     def _get_context_types(self, context_keys: Strs) -> StrPair:
         return {
