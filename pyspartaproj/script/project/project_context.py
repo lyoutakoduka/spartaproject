@@ -4,7 +4,6 @@
 """Module to import a context of whole project from outside Json."""
 
 from pathlib import Path
-from platform import uname
 
 from pyspartaproj.context.default.bool_context import BoolPair, BoolPair2
 from pyspartaproj.context.default.integer_context import IntPair, IntPair2
