@@ -1,15 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Module to get current executed platform."""
+"""Module to get the platform of current executing script."""
 
 from platform import uname
 
 
 def get_platform() -> str:
-    """Get current executed platform.
+    """Get the platform of current executing script.
 
     Returns:
-        str: Executed platform.
+        str: Platform information.
     """
     return uname().system.lower()
