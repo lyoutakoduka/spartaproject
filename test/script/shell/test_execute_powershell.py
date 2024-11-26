@@ -17,6 +17,14 @@ from pyspartaproj.script.shell.execute_powershell import (
 from pyspartaproj.script.string.temporary_text import temporary_text
 
 
+def _print_command() -> str:
+    return "Write-Output"
+
+
+def _get_path_elements() -> Strs:
+    return ["A", "B", "C"]
+
+
 def _get_formatted_path(path_elements: Strs) -> str:
     return "\\".join(path_elements)
 
@@ -31,13 +39,15 @@ def _execute_powershell(commands: Strs) -> Strs:
 
 def test_script() -> None:
     """Test to convert script part of command string on PowerShell."""
-    path_elements: Strs = ["A", "B", "C"]
+    path_elements: Strs = _get_path_elements()
+
     assert "/".join(path_elements) == get_script_string(Path(*path_elements))
 
 
 def test_path() -> None:
     """Test to convert argument part of command string on PowerShell."""
-    path_elements: Strs = ["A", "B", "C"]
+    path_elements: Strs = _get_path_elements()
+
     assert _get_formatted_path(path_elements) == get_path_string(
         Path(*path_elements)
     )
@@ -45,14 +55,16 @@ def test_path() -> None:
 
 def test_argument() -> None:
     """Test to get path surrounded by quotation for executing on PowerShell."""
-    path_elements: Strs = ["A", "B", "C"]
+    path_elements: Strs = _get_path_elements()
     expected: str = _get_formatted_path(path_elements).join(["'"] * 2)
+
     assert expected == get_quoted_path(get_path_string(Path(*path_elements)))
 
 
 def test_all() -> None:
     """Test to convert command part of command string on PowerShell."""
-    expected: Strs = ["Write-Output", "Test"]
+    expected: Strs = [_print_command(), "Test"]
+
     assert expected == get_double_quoted_command(expected).replace(
         '"', ""
     ).split(" ")
@@ -61,7 +73,9 @@ def test_all() -> None:
 def test_write() -> None:
     """Test for executing simple command on PowerShell."""
     expected: Strs = temporary_text(3, 3)
-    commands: Strs = ["; ".join(["Write-Output " + text for text in expected])]
+    commands: Strs = [
+        "; ".join([_print_command() + " " + text for text in expected])
+    ]
 
     assert expected == _execute_powershell(
         [get_double_quoted_command(commands)]

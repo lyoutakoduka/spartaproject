@@ -4,12 +4,12 @@
 """Test module to import a context of whole project from outside Json."""
 
 from pathlib import Path
-from platform import uname
 
 from pyspartaproj.context.default.integer_context import IntPair
 from pyspartaproj.context.default.string_context import StrPair, Strs, Strs2
 from pyspartaproj.context.extension.path_context import PathPair
 from pyspartaproj.script.path.modify.get_resource import get_resource
+from pyspartaproj.script.platform.platform_status import get_platform
 from pyspartaproj.script.project.project_context import ProjectContext
 
 
@@ -35,7 +35,7 @@ def _platform_key_test(platform: str, project: ProjectContext) -> None:
 
 
 def _add_platform(file: str) -> str:
-    return file + "_" + uname().system.lower()
+    return file + "_" + get_platform()
 
 
 def _get_expected_path(path_roots: Strs, path_heads: Strs) -> Path:
@@ -97,7 +97,7 @@ def test_path() -> None:
 def test_key() -> None:
     """Test to get key of project context file corresponding to platform."""
     _platform_key_test(
-        uname().system.lower(), ProjectContext(forward=_get_config_file())
+        get_platform(), ProjectContext(forward=_get_config_file())
     )
 
 

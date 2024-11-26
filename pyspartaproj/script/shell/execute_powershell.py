@@ -4,9 +4,10 @@
 """Module to execute specific commands in PowerShell."""
 
 from pathlib import Path
-from platform import uname
 
 from pyspartaproj.context.default.string_context import StrGene, Strs
+from pyspartaproj.context.extension.path_context import PathPair
+from pyspartaproj.script.platform.platform_status import is_platform_linux
 from pyspartaproj.script.project.project_context import ProjectContext
 from pyspartaproj.script.shell.execute_command import execute_single
 
@@ -15,11 +16,35 @@ def _get_platform_key(project: ProjectContext) -> str:
     return project.get_platform_key(["powershell"]) + ".path"
 
 
-def _get_powershell_path(platform: str | None, forward: Path | None) -> str:
-    project = ProjectContext(platform=platform, forward=forward)
-    return project.get_path_context("runtime")[
-        _get_platform_key(project)
-    ].as_posix()
+def _get_project_context(
+    platform: str | None, forward: Path | None
+) -> ProjectContext:
+    return ProjectContext(platform=platform, forward=forward)
+
+
+def _get_runtime_context(project: ProjectContext) -> PathPair:
+    return project.get_path_context("runtime")
+
+
+def _get_context_path(context: PathPair, project: ProjectContext) -> Path:
+    return context[_get_platform_key(project)]
+
+
+def _get_powershell_path(platform: str | None, forward: Path | None) -> Path:
+    project: ProjectContext = _get_project_context(platform, forward)
+    return _get_context_path(_get_runtime_context(project), project)
+
+
+def _add_execute_option(shell_commands: Strs) -> None:
+    shell_commands += ["-ExecutionPolicy", "Bypass"]
+
+
+def _build_commands(powershell_path: str, commands: Strs) -> Strs:
+    shell_commands: Strs = [powershell_path]
+
+    _add_execute_option(shell_commands)
+
+    return shell_commands + commands
 
 
 def execute_powershell(
@@ -45,13 +70,11 @@ def execute_powershell(
     Returns:
         StrGene: Generator for getting stdout of command  you want execute.
     """
-    shell_commands: Strs = [
-        _get_powershell_path(platform, forward),
-        "-ExecutionPolicy",
-        "Bypass",
-    ] + commands
-
-    return execute_single(shell_commands)
+    return execute_single(
+        _build_commands(
+            _get_powershell_path(platform, forward).as_posix(), commands
+        )
+    )
 
 
 def get_script_string(path: Path) -> str:
@@ -93,7 +116,7 @@ def get_path_string(path: Path) -> str:
     """
     path_text: str = str(path)
 
-    if "Linux" == uname().system:
+    if is_platform_linux():
         return path_text.replace("/", "\\")
 
     return path_text

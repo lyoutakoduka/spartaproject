@@ -4,10 +4,10 @@
 """Module to read Windows shortcut information from PowerShell."""
 
 from pathlib import Path
-from platform import uname
 
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.script.path.modify.get_resource import get_resource
+from pyspartaproj.script.platform.platform_status import is_platform_linux
 from pyspartaproj.script.shell.execute_powershell import (
     execute_powershell,
     get_double_quoted_command,
@@ -44,7 +44,7 @@ def _check_shortcut_exists(shortcut_path: Path) -> None:
 
 
 def _remove_drive_head(path_text: str) -> Path:
-    if "Linux" == uname().system:
+    if is_platform_linux():
         if "C:" == path_text[:2]:
             path: Path = Path(path_text[2:].replace("\\", "/"))
 

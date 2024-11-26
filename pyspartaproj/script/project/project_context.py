@@ -4,12 +4,15 @@
 """Module to import a context of whole project from outside Json."""
 
 from pathlib import Path
-from platform import uname
 
 from pyspartaproj.context.default.bool_context import BoolPair, BoolPair2
 from pyspartaproj.context.default.integer_context import IntPair, IntPair2
 from pyspartaproj.context.default.string_context import StrPair, StrPair2, Strs
-from pyspartaproj.context.extension.path_context import PathPair, PathPair2
+from pyspartaproj.context.extension.path_context import (
+    PathPair,
+    PathPair2,
+    Paths,
+)
 from pyspartaproj.context.file.json_context import Json
 from pyspartaproj.script.file.json.convert_from_json import (
     bool_pair2_from_json,
@@ -20,6 +23,7 @@ from pyspartaproj.script.file.json.convert_from_json import (
 )
 from pyspartaproj.script.file.json.import_json import json_import
 from pyspartaproj.script.path.modify.get_resource import get_resource
+from pyspartaproj.script.platform.platform_status import get_platform
 
 
 class ProjectContext:
@@ -46,9 +50,9 @@ class ProjectContext:
 
     def _override_platform(self, platform: str | None) -> None:
         if platform is None:
-            platform = uname().system.lower()
+            platform = get_platform()
 
-        self.platform = platform
+        self.platform: str = platform
 
     def _get_context_types(self, context_keys: Strs) -> StrPair:
         return {
@@ -56,15 +60,21 @@ class ProjectContext:
             for context_key in context_keys
         }
 
-    def _merged_path_context(self, group: str, path_types: Strs) -> Path:
-        context_types: StrPair = self._get_context_types(path_types)
-        path_context: PathPair = self.get_path_context(group)
+    def _get_path_elements(
+        self, context_types: StrPair, path_context: PathPair, path_types: Strs
+    ) -> Paths:
+        return [
+            path_context[context_types[path_type] + ".path"]
+            for path_type in path_types
+        ]
 
+    def _merged_path_context(self, group: str, path_types: Strs) -> Path:
         return Path(
-            *[
-                path_context[context_types[path_type] + ".path"]
-                for path_type in path_types
-            ]
+            *self._get_path_elements(
+                self._get_context_types(path_types),
+                self.get_path_context(group),
+                path_types,
+            )
         )
 
     def _merged_string_context(
