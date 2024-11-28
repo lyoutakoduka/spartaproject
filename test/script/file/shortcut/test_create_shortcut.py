@@ -101,15 +101,12 @@ def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
 
 def test_file() -> None:
     """Test to create file type shortcut of Windows from PowerShell."""
+    working_space: Path = _create_working_space()
+    shortcut_target: Path = create_temporary_file(working_space)
+    shortcut_path: Path = get_shortcut(shortcut_target, working_space)
 
-    def individual_test(temporary_root: Path) -> None:
-        shortcut_target: Path = create_temporary_file(temporary_root)
-        shortcut_path: Path = get_shortcut(shortcut_target, temporary_root)
-
-        _success_created(shortcut_target, shortcut_path)
-        _common_test(shortcut_target, shortcut_path)
-
-    _inside_temporary_directory(individual_test)
+    _success_created(shortcut_target, shortcut_path)
+    _common_test(shortcut_target, shortcut_path)
 
 
 def test_directory() -> None:
