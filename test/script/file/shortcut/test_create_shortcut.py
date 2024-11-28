@@ -10,6 +10,7 @@ from typing import Callable
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.extension.path_context import PathPair
 from pyspartaproj.interface.pytest import fail, raises
+from pyspartaproj.script.directory.date_time_space import create_working_space
 from pyspartaproj.script.file.shortcut.create_shortcut import create_shortcut
 from pyspartaproj.script.file.shortcut.get_shortcut import get_shortcut
 from pyspartaproj.script.path.iterate_directory import walk_iterator
@@ -35,6 +36,10 @@ def _get_shared_paths() -> PathPair:
 
 def _get_temporary_windows() -> Path:
     return _get_shared_paths()["temporary_windows.path"]
+
+
+def _create_working_space() -> Path:
+    return create_working_space(_get_temporary_windows(), jst=True)
 
 
 def _create_shortcut(shortcut_target: Path, shortcut_path: Path) -> bool:
