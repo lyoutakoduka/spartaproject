@@ -49,8 +49,12 @@ def _success_created(shortcut_target: Path, shortcut_path: Path) -> None:
     _filter_created(_create_shortcut(shortcut_target, shortcut_path))
 
 
-def _common_test(shortcut_target: Path, shortcut_path: Path) -> None:
+def _confirm_exists(shortcut_target: Path, shortcut_path: Path) -> None:
     assert check_exists_array([shortcut_target, shortcut_path])
+
+
+def _common_test(shortcut_target: Path, shortcut_path: Path) -> None:
+    _confirm_exists(shortcut_target, shortcut_path)
     assert shortcut_target.name == shortcut_path.stem
 
 
