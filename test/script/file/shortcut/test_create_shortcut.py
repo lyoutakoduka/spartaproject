@@ -111,14 +111,11 @@ def test_file() -> None:
 
 def test_directory() -> None:
     """Test to create directory type shortcut of Windows from PowerShell."""
+    shortcut_target: Path = _create_working_space()
+    shortcut_path: Path = get_shortcut(shortcut_target, shortcut_target)
 
-    def individual_test(temporary_root: Path) -> None:
-        shortcut_path: Path = get_shortcut(temporary_root, temporary_root)
-
-        _success_created(temporary_root, shortcut_path)
-        _common_test(temporary_root, shortcut_path)
-
-    _inside_temporary_directory(individual_test)
+    _success_created(shortcut_target, shortcut_path)
+    _common_test(shortcut_target, shortcut_path)
 
 
 def test_exist() -> None:
