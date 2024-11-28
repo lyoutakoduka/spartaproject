@@ -53,9 +53,13 @@ def _confirm_exists(shortcut_target: Path, shortcut_path: Path) -> None:
     assert check_exists_array([shortcut_target, shortcut_path])
 
 
+def _compare_name(shortcut_target: Path, shortcut_path: Path) -> None:
+    assert shortcut_target.name == shortcut_path.stem
+
+
 def _common_test(shortcut_target: Path, shortcut_path: Path) -> None:
     _confirm_exists(shortcut_target, shortcut_path)
-    assert shortcut_target.name == shortcut_path.stem
+    _compare_name(shortcut_target, shortcut_path)
 
 
 def _get_shortcut_pair(temporary_root: Path) -> Strs:
