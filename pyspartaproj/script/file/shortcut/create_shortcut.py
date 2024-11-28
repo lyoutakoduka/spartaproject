@@ -11,6 +11,7 @@ from pyspartaproj.script.path.modify.mount.convert_to_windows import (
     convert_to_windows,
 )
 from pyspartaproj.script.path.safe.safe_trash import SafeTrash
+from pyspartaproj.script.platform.platform_status import is_platform_linux
 from pyspartaproj.script.shell.execute_powershell import (
     execute_powershell,
     get_double_quoted_command,
@@ -61,6 +62,13 @@ def _check_shortcut_exists(shortcut_target: Path) -> None:
 def _cleanup_shortcut(shortcut_path: Path, remove_root: Path | None) -> None:
     if shortcut_path.exists():
         SafeTrash(trash_root=remove_root).trash(shortcut_path)
+
+
+def _convert_to_windows(path: Path) -> Path:
+    if is_platform_linux():
+        return convert_to_windows(path)
+
+    return path
 
 
 def create_shortcut(
