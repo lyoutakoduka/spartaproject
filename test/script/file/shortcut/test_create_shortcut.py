@@ -13,6 +13,7 @@ from pyspartaproj.script.file.shortcut.create_shortcut import create_shortcut
 from pyspartaproj.script.file.shortcut.get_shortcut import get_shortcut
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.modify.get_resource import get_resource
+from pyspartaproj.script.path.status.check_exists import check_exists_array
 from pyspartaproj.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
@@ -49,7 +50,7 @@ def _success_created(shortcut_target: Path, shortcut_path: Path) -> None:
 
 
 def _common_test(shortcut_target: Path, shortcut_path: Path) -> None:
-    assert shortcut_path.exists()
+    assert check_exists_array([shortcut_target, shortcut_path])
     assert shortcut_target.name == shortcut_path.stem
 
 
