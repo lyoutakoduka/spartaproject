@@ -5,7 +5,7 @@
 
 from pathlib import Path
 
-from pyspartaproj.context.default.string_context import Strs
+from pyspartaproj.context.default.string_context import StrGene, Strs
 from pyspartaproj.script.path.modify.get_resource import get_resource
 from pyspartaproj.script.path.modify.mount.convert_to_windows import (
     convert_to_windows,
@@ -51,13 +51,11 @@ def _execute_script(
     shortcut_path: Path,
     platform: str | None,
     forward: Path | None,
-) -> None:
-    list(
-        execute_powershell(
-            [_get_shortcut_command(shortcut_target, shortcut_path)],
-            platform=platform,
-            forward=forward,
-        )
+) -> StrGene:
+    return execute_powershell(
+        [_get_shortcut_command(shortcut_target, shortcut_path)],
+        platform=platform,
+        forward=forward,
     )
 
 
@@ -105,6 +103,7 @@ def create_shortcut(
     """
     _check_shortcut_exists(shortcut_target)
     _cleanup_shortcut(shortcut_path, remove_root)
-    _execute_script(shortcut_target, shortcut_path, platform, forward)
+
+    list(_execute_script(shortcut_target, shortcut_path, platform, forward))
 
     return True
