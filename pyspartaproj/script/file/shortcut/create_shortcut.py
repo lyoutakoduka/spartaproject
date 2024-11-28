@@ -21,6 +21,13 @@ from pyspartaproj.script.shell.execute_powershell import (
 )
 
 
+def _convert_to_windows(path: Path) -> Path:
+    if is_platform_linux():
+        return convert_to_windows(path)
+
+    return path
+
+
 def _get_quoted_command(shortcut_target: Path, shortcut_path: Path) -> Strs:
     return [
         get_quoted_path(get_path_string(_convert_to_windows(path)))
@@ -62,13 +69,6 @@ def _check_shortcut_exists(shortcut_target: Path) -> None:
 def _cleanup_shortcut(shortcut_path: Path, remove_root: Path | None) -> None:
     if shortcut_path.exists():
         SafeTrash(trash_root=remove_root).trash(shortcut_path)
-
-
-def _convert_to_windows(path: Path) -> Path:
-    if is_platform_linux():
-        return convert_to_windows(path)
-
-    return path
 
 
 def create_shortcut(
