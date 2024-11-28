@@ -23,7 +23,7 @@ from pyspartaproj.script.shell.execute_powershell import (
 
 def _get_quoted_command(shortcut_target: Path, shortcut_path: Path) -> Strs:
     return [
-        get_quoted_path(get_path_string(path))
+        get_quoted_path(get_path_string(_convert_to_windows(path)))
         for path in [shortcut_target, shortcut_path]
     ]
 
@@ -105,9 +105,6 @@ def create_shortcut(
     """
     _check_shortcut_exists(shortcut_target)
     _cleanup_shortcut(shortcut_path, remove_root)
-
-    _execute_script(
-        _convert_to_windows(shortcut_target), shortcut_path, platform, forward
-    )
+    _execute_script(shortcut_target, shortcut_path, platform, forward)
 
     return True
