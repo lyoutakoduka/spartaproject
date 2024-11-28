@@ -1,4 +1,7 @@
 {
+  "share": {
+    "temporary_windows.path": "***"
+  },
   "runtime": {
     "powershell_linux.path": "***",
     "powershell_windows.path": "***"
