@@ -120,15 +120,10 @@ def test_directory() -> None:
 
 def test_exist() -> None:
     """Test to exists shortcut file before create it."""
+    empty_path: Path = Path("empty")
 
-    def individual_test(temporary_root: Path) -> None:
-        shortcut_target: Path = Path("empty")
-        shortcut_path: Path = get_shortcut(shortcut_target, temporary_root)
-
-        with raises(FileNotFoundError):
-            create_shortcut(shortcut_target, shortcut_path)
-
-    _inside_temporary_directory(individual_test)
+    with raises(FileNotFoundError):
+        create_shortcut(empty_path, empty_path)
 
 
 def test_remove() -> None:
