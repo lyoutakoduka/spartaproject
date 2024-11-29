@@ -31,6 +31,10 @@ def _get_shared_paths() -> PathPair:
     return _get_project_context().get_path_context("share")
 
 
+def _get_temporary_windows() -> Path:
+    return _get_shared_paths()["temporary_windows.path"]
+
+
 def _read_shortcut(shortcut_path: Path) -> Path:
     if shortcut_target := read_shortcut(
         shortcut_path, forward=_get_config_file()
