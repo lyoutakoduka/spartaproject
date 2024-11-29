@@ -68,6 +68,13 @@ def _remove_drive_head(path_text: str) -> Path:
     return Path(path_text)
 
 
+def _cleanup_result(result: Strs) -> Path | None:
+    if 1 == len(result):
+        return _convert_to_linux(_convert_to_path(result[0]))
+
+    return None
+
+
 def read_shortcut(
     shortcut_path: Path,
     platform: str | None = None,
