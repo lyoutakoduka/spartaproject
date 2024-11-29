@@ -31,10 +31,14 @@ def _convert_to_path(path_text: str) -> Path:
     return Path(path_text.replace("\\", "/"))
 
 
+def _get_script_string() -> str:
+    return get_script_string(get_resource(local_path=Path("read.ps1")))
+
+
 def _get_shortcut_command(shortcut_path: Path) -> str:
     return get_double_quoted_command(
         [
-            get_script_string(get_resource(local_path=Path("read.ps1"))),
+            _get_script_string(),
             get_quoted_path(get_path_string(shortcut_path)),
         ]
     )
