@@ -68,6 +68,14 @@ def _success_created(shortcut_target: Path, shortcut_path: Path) -> None:
     _filter_created(_create_shortcut(shortcut_target, shortcut_path))
 
 
+def _success_created_remove(
+    shortcut_target: Path, shortcut_path: Path, remove_root: Path
+) -> None:
+    _filter_created(
+        _create_shortcut_remove(shortcut_target, shortcut_path, remove_root)
+    )
+
+
 def _confirm_exists(shortcut_target: Path, shortcut_path: Path) -> None:
     assert check_exists_array([shortcut_target, shortcut_path])
 
