@@ -7,6 +7,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
+from pyspartaproj.context.extension.path_context import PathPair
 from pyspartaproj.interface.pytest import fail, raises
 from pyspartaproj.script.file.shortcut.create_shortcut import create_shortcut
 from pyspartaproj.script.file.shortcut.get_shortcut import get_shortcut
@@ -24,6 +25,10 @@ def _get_config_file() -> Path:
 
 def _get_project_context() -> ProjectContext:
     return ProjectContext(forward=_get_config_file())
+
+
+def _get_shared_paths() -> PathPair:
+    return _get_project_context().get_path_context("share")
 
 
 def _read_shortcut(shortcut_path: Path) -> Path:
