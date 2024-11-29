@@ -148,14 +148,16 @@ def test_exist() -> None:
 
 def test_remove() -> None:
     """Test to remove shortcut file when overriding existing shortcut."""
+    working_space: Path = _create_working_space()
+    shortcut_target: Path = create_temporary_file(working_space)
+    shortcut_path: Path = get_shortcut(shortcut_target, working_space)
+
+    _success_created(shortcut_target, shortcut_path)
 
     def individual_test(temporary_root: Path) -> None:
-        shortcut_path: Path = get_shortcut(temporary_root, temporary_root)
-
-        _filter_created(_create_shortcut(temporary_root, shortcut_path))
         _filter_created(
             _create_shortcut_remove(
-                temporary_root, shortcut_path, Path(temporary_root, "result")
+                shortcut_target, shortcut_path, Path(temporary_root, "result")
             )
         )
 
