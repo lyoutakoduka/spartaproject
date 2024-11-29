@@ -7,6 +7,9 @@ from pathlib import Path
 
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.script.path.modify.get_resource import get_resource
+from pyspartaproj.script.path.modify.mount.convert_to_linux import (
+    convert_to_linux,
+)
 from pyspartaproj.script.platform.platform_status import is_platform_linux
 from pyspartaproj.script.shell.execute_powershell import (
     execute_powershell,
@@ -15,6 +18,13 @@ from pyspartaproj.script.shell.execute_powershell import (
     get_quoted_path,
     get_script_string,
 )
+
+
+def _convert_to_linux(path: Path) -> Path:
+    if is_platform_linux():
+        return convert_to_linux(path)
+
+    return path
 
 
 def _get_shortcut_command(shortcut_path: Path) -> str:
