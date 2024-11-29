@@ -40,6 +40,12 @@ def _create_working_space() -> Path:
     return create_working_space(_get_temporary_windows(), jst=True)
 
 
+def _create_shortcut(shortcut_target: Path, shortcut_path: Path) -> bool:
+    return create_shortcut(
+        shortcut_target, shortcut_path, forward=_get_config_file()
+    )
+
+
 def _read_shortcut(shortcut_path: Path) -> Path:
     if shortcut_target := read_shortcut(
         shortcut_path, forward=_get_config_file()
