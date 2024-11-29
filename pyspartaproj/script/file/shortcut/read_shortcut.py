@@ -100,9 +100,4 @@ def read_shortcut(
     """
     _check_shortcut_exists(shortcut_path)
 
-    result: Strs = _execute_script(shortcut_path, platform, forward)
-
-    if 1 == len(result):
-        return _remove_drive_head(result[0])
-
-    return None
+    return _cleanup_result(_execute_script(shortcut_path, platform, forward))
