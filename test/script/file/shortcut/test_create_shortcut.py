@@ -156,6 +156,6 @@ def test_remove() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         _success_created_remove(shortcut_target, shortcut_path, temporary_root)
-        _compare_shortcut(temporary_root)
+        _compare_shortcut_names(working_space, temporary_root)
 
     _inside_temporary_directory(individual_test)
