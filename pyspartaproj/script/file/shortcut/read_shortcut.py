@@ -46,7 +46,7 @@ def _get_script_string() -> str:
 
 
 def _get_quoted_path(path: Path) -> str:
-    return get_quoted_path(get_path_string(path))
+    return get_quoted_path(get_path_string(_convert_to_windows(path)))
 
 
 def _get_shortcut_command(shortcut_path: Path) -> str:
