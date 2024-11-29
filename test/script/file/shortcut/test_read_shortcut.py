@@ -15,10 +15,15 @@ from pyspartaproj.script.path.modify.get_resource import get_resource
 from pyspartaproj.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
+from pyspartaproj.script.project.project_context import ProjectContext
 
 
 def _get_config_file() -> Path:
     return get_resource(local_path=Path("execute_powershell", "forward.json"))
+
+
+def _get_project_context() -> ProjectContext:
+    return ProjectContext(forward=_get_config_file())
 
 
 def _read_shortcut(shortcut_path: Path) -> Path:
