@@ -9,6 +9,7 @@ from typing import Callable
 
 from pyspartaproj.context.extension.path_context import PathPair
 from pyspartaproj.interface.pytest import fail, raises
+from pyspartaproj.script.directory.date_time_space import create_working_space
 from pyspartaproj.script.file.shortcut.create_shortcut import create_shortcut
 from pyspartaproj.script.file.shortcut.get_shortcut import get_shortcut
 from pyspartaproj.script.file.shortcut.read_shortcut import read_shortcut
@@ -33,6 +34,10 @@ def _get_shared_paths() -> PathPair:
 
 def _get_temporary_windows() -> Path:
     return _get_shared_paths()["temporary_windows.path"]
+
+
+def _create_working_space() -> Path:
+    return create_working_space(_get_temporary_windows(), jst=True)
 
 
 def _read_shortcut(shortcut_path: Path) -> Path:
