@@ -4,8 +4,6 @@
 """Test module to read Windows shortcut information from PowerShell."""
 
 from pathlib import Path
-from tempfile import TemporaryDirectory
-from typing import Callable
 
 from pyspartaproj.context.extension.path_context import PathPair
 from pyspartaproj.interface.pytest import fail, raises
