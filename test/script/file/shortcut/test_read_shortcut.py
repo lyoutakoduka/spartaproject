@@ -83,11 +83,11 @@ def test_file() -> None:
 
 def test_directory() -> None:
     """Test to read directory type shortcut of Windows from PowerShell."""
+    shortcut_target: Path = _create_working_space()
+    shortcut_path: Path = get_shortcut(shortcut_target, shortcut_target)
 
-    def individual_test(temporary_root: Path) -> None:
-        _common_test(temporary_root, temporary_root)
-
-    _inside_temporary_directory(individual_test)
+    _create_shortcut(shortcut_target, shortcut_path)
+    _compare_target(shortcut_target, shortcut_path)
 
 
 def test_exist() -> None:
