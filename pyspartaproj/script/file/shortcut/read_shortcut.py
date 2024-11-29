@@ -35,12 +35,13 @@ def _get_script_string() -> str:
     return get_script_string(get_resource(local_path=Path("read.ps1")))
 
 
+def _get_quoted_path(path: Path) -> str:
+    return get_quoted_path(get_path_string(path))
+
+
 def _get_shortcut_command(shortcut_path: Path) -> str:
     return get_double_quoted_command(
-        [
-            _get_script_string(),
-            get_quoted_path(get_path_string(shortcut_path)),
-        ]
+        [_get_script_string(), _get_quoted_path(shortcut_path)]
     )
 
 
