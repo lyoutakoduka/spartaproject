@@ -57,17 +57,6 @@ def _check_shortcut_exists(shortcut_path: Path) -> None:
         raise FileNotFoundError()
 
 
-def _remove_drive_head(path_text: str) -> Path:
-    if is_platform_linux():
-        if "C:" == path_text[:2]:
-            path: Path = _convert_to_path(path_text[2:])
-
-            if path.exists():
-                return path
-
-    return Path(path_text)
-
-
 def _cleanup_result(result: Strs) -> Path | None:
     if 1 == len(result):
         return _convert_to_linux(_convert_to_path(result[0]))
