@@ -10,6 +10,9 @@ from pyspartaproj.script.path.modify.get_resource import get_resource
 from pyspartaproj.script.path.modify.mount.convert_to_linux import (
     convert_to_linux,
 )
+from pyspartaproj.script.path.modify.mount.convert_to_windows import (
+    convert_to_windows,
+)
 from pyspartaproj.script.platform.platform_status import is_platform_linux
 from pyspartaproj.script.shell.execute_powershell import (
     execute_powershell,
@@ -23,6 +26,13 @@ from pyspartaproj.script.shell.execute_powershell import (
 def _convert_to_linux(path: Path) -> Path:
     if is_platform_linux():
         return convert_to_linux(path)
+
+    return path
+
+
+def _convert_to_windows(path: Path) -> Path:
+    if is_platform_linux():
+        return convert_to_windows(path)
 
     return path
 
