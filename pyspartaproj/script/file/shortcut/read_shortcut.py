@@ -27,6 +27,10 @@ def _convert_to_linux(path: Path) -> Path:
     return path
 
 
+def _convert_to_path(path_text: str) -> Path:
+    return Path(path_text.replace("\\", "/"))
+
+
 def _get_shortcut_command(shortcut_path: Path) -> str:
     return get_double_quoted_command(
         [
@@ -56,7 +60,7 @@ def _check_shortcut_exists(shortcut_path: Path) -> None:
 def _remove_drive_head(path_text: str) -> Path:
     if is_platform_linux():
         if "C:" == path_text[:2]:
-            path: Path = Path(path_text[2:].replace("\\", "/"))
+            path: Path = _convert_to_path(path_text[2:])
 
             if path.exists():
                 return path
