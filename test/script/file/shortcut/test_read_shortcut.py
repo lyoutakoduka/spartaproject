@@ -62,6 +62,10 @@ def _common_test(shortcut_target: Path, shortcut_root: Path) -> None:
     assert shortcut_target == _read_shortcut(shortcut_path)
 
 
+def _compare_target(expected: Path, shortcut_path: Path) -> None:
+    assert expected == _read_shortcut(shortcut_path)
+
+
 def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
