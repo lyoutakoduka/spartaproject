@@ -89,25 +89,12 @@ def _common_test(shortcut_target: Path, shortcut_path: Path) -> None:
     _compare_name(shortcut_target, shortcut_path)
 
 
-def _get_shortcut_pair(temporary_root: Path) -> Strs:
-    return [
-        path.name
-        for path in walk_iterator(
-            temporary_root, directory=False, suffix="lnk"
-        )
-    ]
-
-
 def _get_shortcut_names(roots: Paths) -> Strs:
     return [
         path.name
         for root in roots
         for path in walk_iterator(root, directory=False, suffix="lnk", depth=1)
     ]
-
-
-def _compare_shortcut(temporary_root: Path) -> None:
-    assert 1 == len(set(_get_shortcut_pair(temporary_root)))
 
 
 def _compare_shortcut_names(shortcut_root: Path, remove_root: Path) -> None:
