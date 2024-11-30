@@ -66,17 +66,17 @@ def test_file() -> None:
     """Test to read file type shortcut of Windows from PowerShell."""
     working_space: Path = _create_working_space()
     shortcut_target: Path = create_temporary_file(working_space)
-    shortcut_path: Path = get_shortcut(shortcut_target, working_space)
 
-    _common_test(shortcut_target, shortcut_path)
+    _common_test(shortcut_target, get_shortcut(shortcut_target, working_space))
 
 
 def test_directory() -> None:
     """Test to read directory type shortcut of Windows from PowerShell."""
     shortcut_target: Path = _create_working_space()
-    shortcut_path: Path = get_shortcut(shortcut_target, shortcut_target)
 
-    _common_test(shortcut_target, shortcut_path)
+    _common_test(
+        shortcut_target, get_shortcut(shortcut_target, shortcut_target)
+    )
 
 
 def test_exist() -> None:
