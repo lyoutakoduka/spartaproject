@@ -57,14 +57,18 @@ def _compare_target(expected: Path, shortcut_path: Path) -> None:
     assert expected == _read_shortcut(shortcut_path)
 
 
+def _common_test(shortcut_target: Path, shortcut_path: Path) -> None:
+    _create_shortcut(shortcut_target, shortcut_path)
+    _compare_target(shortcut_target, shortcut_path)
+
+
 def test_file() -> None:
     """Test to read file type shortcut of Windows from PowerShell."""
     working_space: Path = _create_working_space()
     shortcut_target: Path = create_temporary_file(working_space)
     shortcut_path: Path = get_shortcut(shortcut_target, working_space)
 
-    _create_shortcut(shortcut_target, shortcut_path)
-    _compare_target(shortcut_target, shortcut_path)
+    _common_test(shortcut_target, shortcut_path)
 
 
 def test_directory() -> None:
@@ -72,8 +76,7 @@ def test_directory() -> None:
     shortcut_target: Path = _create_working_space()
     shortcut_path: Path = get_shortcut(shortcut_target, shortcut_target)
 
-    _create_shortcut(shortcut_target, shortcut_path)
-    _compare_target(shortcut_target, shortcut_path)
+    _common_test(shortcut_target, shortcut_path)
 
 
 def test_exist() -> None:
