@@ -10,3 +10,7 @@ def _get_interval() -> Decimal:
 
 def _get_message() -> str:
     return "test"
+
+
+def _get_timer_log(interval: str, messages: str) -> str:
+    return interval + "s" + ": " + messages + "\n"
