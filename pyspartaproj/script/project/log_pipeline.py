@@ -11,5 +11,9 @@ class LogPipeline(LogTimer):
     def _show_message(self, message: str) -> None:
         print(message)
 
+    def _log_with_timer(self, message: str, force: bool) -> None:
+        if message_timer := self.get_readable_time(force=force):
+            self._show_message(message_timer + ": " + message)
+
     def __init__(self) -> None:
         self.__initialize_super_class()
