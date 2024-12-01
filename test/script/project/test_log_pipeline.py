@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test module to handle I/O functionalities of any script called pipeline."""
+
 from decimal import Decimal
 
 from pyspartaproj.context.default.string_context import Strs
@@ -54,4 +56,5 @@ def _compare_text(expected: str, result: str) -> None:
 
 
 def test_print() -> None:
+    """Test to show message as log to stdout."""
     _compare_text(_get_expected(), _get_result(_create_pipeline()))
