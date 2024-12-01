@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Test module to handling I/O functionality of any script called pipeline."""
+"""Test module to handle I/O functionality of any script called pipeline."""
 
 from decimal import Decimal
 from pathlib import Path
