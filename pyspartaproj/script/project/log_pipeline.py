@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Module to handling I/O functionality of any script called pipeline."""
+"""Module to handling I/O functionalities of any script called pipeline."""
 
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.script.time.count.log_timer import LogTimer
 
 
 class LogPipeline(LogTimer):
-    """Class to handling I/O functionality of any script called pipeline."""
+    """Class to handling I/O functionalities of any script called pipeline."""
 
     def __initialize_super_class(self) -> None:
         super().__init__()
