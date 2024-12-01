@@ -8,5 +8,8 @@ class LogPipeline(LogTimer):
     def __initialize_super_class(self) -> None:
         super().__init__()
 
+    def _show_message(self, message: str) -> None:
+        print(message)
+
     def __init__(self) -> None:
         self.__initialize_super_class()
