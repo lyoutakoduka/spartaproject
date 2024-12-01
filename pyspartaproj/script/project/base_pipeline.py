@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Module to handling I/O functionality of any script called pipeline."""
+"""Module to handling all functionalities of any script called pipeline."""
 
 from pathlib import Path
 
@@ -10,7 +10,7 @@ from pyspartaproj.script.project.project_context import ProjectContext
 
 
 class BasePipeline(ProjectContext, LogPipeline):
-    """Class to handling I/O functionality of any script called pipeline."""
+    """Class to handling all functionalities of any script called pipeline."""
 
     def __initialize_super_class(
         self, platform: str | None, forward: Path | None
