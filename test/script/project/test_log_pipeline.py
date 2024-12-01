@@ -14,3 +14,7 @@ def _get_message() -> str:
 
 def _get_timer_log(interval: str, messages: str) -> str:
     return interval + "s" + ": " + messages + "\n"
+
+
+def _get_expected() -> str:
+    return _get_timer_log(str(_get_interval()), _get_message())
