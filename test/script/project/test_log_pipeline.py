@@ -51,3 +51,7 @@ def _create_pipeline() -> LogPipeline:
 
 def _compare_text(expected: str, result: str) -> None:
     assert expected == result
+
+
+def test_print() -> None:
+    _compare_text(_get_expected(), _get_result(_create_pipeline()))
