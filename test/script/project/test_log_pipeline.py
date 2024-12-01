@@ -38,3 +38,12 @@ def _convert_log(messages: Strs, pipeline: LogPipeline) -> str:
 
 def _get_result(pipeline: LogPipeline) -> str:
     return _convert_log([_get_message()], pipeline)
+
+
+def _create_pipeline() -> LogPipeline:
+    pipeline = LogPipeline()
+
+    pipeline.restart(override=True, timer_interval=_get_interval())
+    pipeline.increase_timer()
+
+    return pipeline
