@@ -47,3 +47,7 @@ def _create_pipeline() -> LogPipeline:
     pipeline.increase_timer()
 
     return pipeline
+
+
+def _compare_text(expected: str, result: str) -> None:
+    assert expected == result
