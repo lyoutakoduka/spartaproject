@@ -13,7 +13,7 @@ from pyspartaproj.script.time.count.log_timer import LogTimer
 class BasePipeline(ProjectContext, LogTimer):
     """Class to handling I/O functionality of any script called pipeline."""
 
-    def _initialize_super_class(
+    def __initialize_super_class(
         self, platform: str | None, forward: Path | None
     ) -> None:
         ProjectContext.__init__(self, platform=platform, forward=forward)
@@ -55,4 +55,4 @@ class BasePipeline(ProjectContext, LogTimer):
                     project context file to any place.
                 It's used for argument "forward" of class "ProjectContext".
         """
-        self._initialize_super_class(platform, forward)
+        self.__initialize_super_class(platform, forward)
