@@ -23,8 +23,12 @@ def _get_path_context(pipeline: BasePipeline) -> PathPair:
     return pipeline.get_path_context("test")
 
 
+def _get_path(pipeline: BasePipeline) -> Path:
+    return _get_path_context(pipeline)["print.path"]
+
+
 def _read_path(pipeline: BasePipeline) -> Strs:
-    return list(Path(_get_path_context(pipeline)["print.path"]).parts)
+    return list(Path(_get_path(pipeline)).parts)
 
 
 def _create_pipeline() -> BasePipeline:
