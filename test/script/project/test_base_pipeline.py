@@ -45,12 +45,7 @@ def _get_result(pipeline: BasePipeline) -> str:
 
 
 def _create_pipeline(interval: str) -> BasePipeline:
-    pipeline = BasePipeline(forward=_get_config_file())
-
-    pipeline.restart(override=True, timer_interval=Decimal(interval))
-    pipeline.increase_timer()
-
-    return pipeline
+    return BasePipeline(forward=_get_config_file())
 
 
 def test_print() -> None:
