@@ -13,6 +13,10 @@ class LogPipeline(LogTimer):
     def __initialize_super_class(self) -> None:
         super().__init__()
 
+    def __initialize_variables(self, disable_shown: bool) -> None:
+        self._disable_shown: bool = disable_shown
+        self._log: Strs = []
+
     def _show_message(self, message: str) -> None:
         print(message)
 
