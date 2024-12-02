@@ -50,5 +50,4 @@ def _create_pipeline() -> BasePipeline:
 
 def test_print() -> None:
     """Test ot show message as log to stdout."""
-    interval: str = "0.3"
     assert _get_path() == _read_path(_create_pipeline())
