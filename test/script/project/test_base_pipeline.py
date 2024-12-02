@@ -44,11 +44,11 @@ def _get_result(pipeline: BasePipeline) -> str:
     return _convert_print(_read_path(pipeline), pipeline)
 
 
-def _create_pipeline(interval: str) -> BasePipeline:
+def _create_pipeline() -> BasePipeline:
     return BasePipeline(forward=_get_config_file())
 
 
 def test_print() -> None:
     """Test ot show message as log to stdout."""
     interval: str = "0.3"
-    assert _get_expected(interval) == _get_result(_create_pipeline(interval))
+    assert _get_expected(interval) == _get_result(_create_pipeline())
