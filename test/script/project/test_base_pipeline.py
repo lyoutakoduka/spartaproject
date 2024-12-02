@@ -10,7 +10,7 @@ from pyspartaproj.script.path.modify.get_resource import get_resource
 from pyspartaproj.script.project.base_pipeline import BasePipeline
 
 
-def _get_path() -> Strs:
+def _get_expected() -> Strs:
     return ["root", "body", "head"]
 
 
@@ -28,4 +28,4 @@ def _create_pipeline() -> BasePipeline:
 
 def test_print() -> None:
     """Test ot show message as log to stdout."""
-    assert _get_path() == _read_path(_create_pipeline())
+    assert _get_expected() == _read_path(_create_pipeline())
