@@ -5,10 +5,13 @@
 
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from typing import Callable
 
 from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.context.extension.path_context import PathPair, Paths
+from pyspartaproj.context.extension.path_context import (
+    PathBoolFunc,
+    PathPair,
+    Paths,
+)
 from pyspartaproj.script.bool.same_value import bool_same_array, bool_same_pair
 from pyspartaproj.script.directory.create_directory import (
     create_directory,
@@ -34,7 +37,7 @@ def _get_head_path(index: int) -> Path:
     return Path(*[element_names[i] for i in range(index + 1)])
 
 
-def _inside_temporary_directory(function: Callable[[Path], bool]) -> None:
+def _inside_temporary_directory(function: PathBoolFunc) -> None:
     with TemporaryDirectory() as temporary_path:
         assert function(Path(temporary_path))
 
