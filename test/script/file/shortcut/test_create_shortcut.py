@@ -5,10 +5,13 @@
 
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from typing import Callable
 
 from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.context.extension.path_context import PathPair, Paths
+from pyspartaproj.context.extension.path_context import (
+    PathFunc,
+    PathPair,
+    Paths,
+)
 from pyspartaproj.interface.pytest import fail, raises
 from pyspartaproj.script.directory.date_time_space import create_working_space
 from pyspartaproj.script.file.shortcut.create_shortcut import create_shortcut
@@ -101,7 +104,7 @@ def _compare_shortcut_names(shortcut_root: Path, remove_root: Path) -> None:
     assert 1 == len(set(_get_shortcut_names([shortcut_root, remove_root])))
 
 
-def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
+def _inside_temporary_directory(function: PathFunc) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
 
