@@ -18,7 +18,10 @@ class LogPipeline(LogTimer):
         self._log: Strs = []
 
     def _show_message(self, message: str) -> None:
-        print(message)
+        if self._disable_shown:
+            self._log += [message]
+        else:
+            print(message)
 
     def _log_with_timer(self, message: str, force: bool) -> None:
         if message_timer := self.get_readable_time(force=force):
