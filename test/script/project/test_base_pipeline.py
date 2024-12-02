@@ -27,7 +27,7 @@ def _get_path(pipeline: BasePipeline) -> Path:
     return _get_path_context(pipeline)["print.path"]
 
 
-def _read_path(pipeline: BasePipeline) -> Strs:
+def _get_result(pipeline: BasePipeline) -> Strs:
     return list(Path(_get_path(pipeline)).parts)
 
 
@@ -37,4 +37,4 @@ def _create_pipeline() -> BasePipeline:
 
 def test_print() -> None:
     """Test ot show message as log to stdout."""
-    assert _get_expected() == _read_path(_create_pipeline())
+    assert _get_expected() == _get_result(_create_pipeline())
