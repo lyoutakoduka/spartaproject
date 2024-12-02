@@ -5,8 +5,8 @@
 
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from typing import Callable
 
+from pyspartaproj.context.extension.path_context import PathFunc
 from pyspartaproj.script.server.local.path_server import PathServer
 from pyspartaproj.script.time.directory.get_time_path import (
     get_initial_time_path,
@@ -46,7 +46,7 @@ def _compare_working(
     )
 
 
-def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
+def _inside_temporary_directory(function: PathFunc) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
 
