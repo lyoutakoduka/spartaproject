@@ -5,8 +5,8 @@
 
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from typing import Callable
 
+from pyspartaproj.context.extension.path_context import PathFunc
 from pyspartaproj.script.file.text.export_file import text_export
 from pyspartaproj.script.file.text.import_file import byte_import, text_import
 from pyspartaproj.script.string.encoding.set_decoding import set_decoding
@@ -16,7 +16,7 @@ def _common_test(result: str) -> None:
     assert "test" == result
 
 
-def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
+def _inside_temporary_directory(function: PathFunc) -> None:
     with TemporaryDirectory() as temporary_path:
         function(text_export(Path(temporary_path, "temporary.txt"), "test"))
 
