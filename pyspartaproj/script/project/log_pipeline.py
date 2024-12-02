@@ -23,9 +23,12 @@ class LogPipeline(LogTimer):
         else:
             print(message)
 
-    def _log_with_timer(self, message: str, force: bool) -> None:
+    def _build_log(self, message_timer: str, messages: Strs) -> str:
+        return message_timer + ": " + " ".join(messages)
+
+    def _log_with_timer(self, messages: Strs, force: bool) -> None:
         if message_timer := self.get_readable_time(force=force):
-            self._show_message(message_timer + ": " + message)
+            self._show_message(self._build_log(message_timer, messages))
 
     def get_log(self) -> Strs | None:
         if 0 == len(self._log):
@@ -47,7 +50,7 @@ class LogPipeline(LogTimer):
                 It's used for argument "force" of
                     method "get_readable_time" in class "LogTimer".
         """
-        self._log_with_timer(" ".join(messages), force)
+        self._log_with_timer(messages, force)
 
     def __init__(self, disable_shown: bool = False) -> None:
         """Initialize super class and variables."""
