@@ -5,8 +5,8 @@
 
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from typing import Callable
 
+from pyspartaproj.context.custom.rename_context import RenamePathFunc
 from pyspartaproj.context.default.bool_context import BoolPair
 from pyspartaproj.context.extension.path_context import PathPair2
 from pyspartaproj.interface.pytest import fail
@@ -39,9 +39,7 @@ def _common_test(history: PathPair2 | None) -> None:
         )
 
 
-def _inside_temporary_directory(
-    function: Callable[[SafeRename, Path], None]
-) -> None:
+def _inside_temporary_directory(function: RenamePathFunc) -> None:
     with TemporaryDirectory() as temporary_path:
         function(SafeRename(), Path(temporary_path))
 

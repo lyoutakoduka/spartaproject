@@ -5,8 +5,8 @@
 
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from typing import Callable
 
+from pyspartaproj.context.custom.copy_context import CopyPathFunc
 from pyspartaproj.context.extension.path_context import PathPair2
 from pyspartaproj.interface.pytest import fail
 from pyspartaproj.script.bool.same_value import bool_same_pair
@@ -35,9 +35,7 @@ def _common_test(history: PathPair2 | None) -> None:
         assert bool_same_pair(check_exists_pair(path_pair))
 
 
-def _inside_temporary_directory(
-    function: Callable[[SafeCopy, Path], None]
-) -> None:
+def _inside_temporary_directory(function: CopyPathFunc) -> None:
     with TemporaryDirectory() as temporary_path:
         function(SafeCopy(), Path(temporary_path))
 
