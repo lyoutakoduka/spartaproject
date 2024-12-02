@@ -35,6 +35,10 @@ def _create_pipeline() -> BasePipeline:
     return BasePipeline(forward=_get_config_file())
 
 
+def _compare_text(expected: Strs, result: Strs) -> None:
+    assert expected == result
+
+
 def test_print() -> None:
     """Test ot show message as log to stdout."""
-    assert _get_expected() == _get_result(_create_pipeline())
+    _compare_text(_get_expected(), _get_result(_create_pipeline()))
