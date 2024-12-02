@@ -27,6 +27,15 @@ class LogPipeline(LogTimer):
         if message_timer := self.get_readable_time(force=force):
             self._show_message(message_timer + ": " + message)
 
+    def get_log(self) -> Strs | None:
+        if 0 == len(self._log):
+            return None
+
+        log: Strs = self._log[:]
+        self._log.clear()
+
+        return log
+
     def show_log(self, messages: Strs, force: bool = False) -> None:
         """Show message as log to stdout.
 
