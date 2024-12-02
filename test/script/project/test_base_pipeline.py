@@ -3,13 +3,11 @@
 
 """Test module to handle I/O functionality of any script called pipeline."""
 
-from decimal import Decimal
 from pathlib import Path
 
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.script.path.modify.get_resource import get_resource
 from pyspartaproj.script.project.base_pipeline import BasePipeline
-from pyspartaproj.script.string.off_stdout import StdoutText
 
 
 def _get_path() -> Strs:
