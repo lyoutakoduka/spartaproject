@@ -16,32 +16,12 @@ def _get_path() -> Strs:
     return ["root", "body", "head"]
 
 
-def _get_expected(interval: str) -> str:
-    return interval + "s" + ": " + " ".join(_get_path()) + "\n"
-
-
 def _get_config_file() -> Path:
     return get_resource(local_path=Path("base_pipeline", "forward.json"))
 
 
-def _convert_print(messages: Strs, pipeline: BasePipeline) -> str:
-    stdout_text = StdoutText()
-
-    @stdout_text.decorator
-    def _messages() -> None:
-        pipeline.show_log(messages, force=True)
-
-    _messages()
-
-    return stdout_text.show()
-
-
 def _read_path(pipeline: BasePipeline) -> Strs:
     return list(Path(pipeline.get_path_context("test")["print.path"]).parts)
-
-
-def _get_result(pipeline: BasePipeline) -> str:
-    return _convert_print(_read_path(pipeline), pipeline)
 
 
 def _create_pipeline() -> BasePipeline:
