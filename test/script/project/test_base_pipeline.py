@@ -6,6 +6,7 @@
 from pathlib import Path
 
 from pyspartaproj.context.default.string_context import Strs
+from pyspartaproj.context.extension.path_context import PathPair
 from pyspartaproj.script.path.modify.get_resource import get_resource
 from pyspartaproj.script.project.base_pipeline import BasePipeline
 
@@ -18,8 +19,12 @@ def _get_config_file() -> Path:
     return get_resource(local_path=Path("base_pipeline", "forward.json"))
 
 
+def _get_path_context(pipeline: BasePipeline) -> PathPair:
+    return pipeline.get_path_context("test")
+
+
 def _read_path(pipeline: BasePipeline) -> Strs:
-    return list(Path(pipeline.get_path_context("test")["print.path"]).parts)
+    return list(Path(_get_path_context(pipeline)["print.path"]).parts)
 
 
 def _create_pipeline() -> BasePipeline:
