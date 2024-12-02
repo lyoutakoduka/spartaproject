@@ -5,8 +5,8 @@
 
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from typing import Callable
 
+from pyspartaproj.context.extension.path_context import PathFunc
 from pyspartaproj.script.file.text.export_file import byte_export, text_export
 from pyspartaproj.script.path.status.get_statistic import get_file_size
 
@@ -15,7 +15,7 @@ def _common_test(text_path: Path, count: int) -> None:
     assert get_file_size(text_path) == count
 
 
-def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
+def _inside_temporary_directory(function: PathFunc) -> None:
     with TemporaryDirectory() as temporary_path:
         text_path: Path = Path(temporary_path, "temporary.txt")
         function(text_path)

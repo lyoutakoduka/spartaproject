@@ -5,10 +5,10 @@
 
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from typing import Callable
 
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.context.extension.path_context import (
+    PathFunc,
     PathPair,
     PathPair2,
     Paths2,
@@ -148,7 +148,7 @@ def _add_history_array(file_history: FileHistory) -> PathPair2:
     return expected
 
 
-def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
+def _inside_temporary_directory(function: PathFunc) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
 

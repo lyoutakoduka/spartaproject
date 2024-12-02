@@ -5,11 +5,10 @@
 
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from typing import Callable
 
 from pyspartaproj.context.default.integer_context import Ints
 from pyspartaproj.context.default.string_context import Strs, Strs2
-from pyspartaproj.context.extension.path_context import Paths
+from pyspartaproj.context.extension.path_context import PathFunc, Paths
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.modify.current.get_relative import (
     get_relative_array,
@@ -35,7 +34,7 @@ def _common_test(temporary_root: Path) -> None:
     assert 0 == len(_get_tree_contents(temporary_root))
 
 
-def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
+def _inside_temporary_directory(function: PathFunc) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
 

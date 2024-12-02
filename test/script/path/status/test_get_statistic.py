@@ -5,10 +5,10 @@
 
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from typing import Callable
 
 from pyspartaproj.context.default.integer_context import Ints
 from pyspartaproj.context.default.string_context import Strs
+from pyspartaproj.context.extension.path_context import PathFunc
 from pyspartaproj.script.file.text.export_file import text_export
 from pyspartaproj.script.path.status.get_statistic import (
     get_file_size,
@@ -16,7 +16,7 @@ from pyspartaproj.script.path.status.get_statistic import (
 )
 
 
-def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
+def _inside_temporary_directory(function: PathFunc) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
 

@@ -7,12 +7,11 @@ from decimal import Decimal
 from pathlib import Path
 from shutil import unpack_archive
 from tempfile import TemporaryDirectory
-from typing import Callable
 
 from pyspartaproj.context.default.integer_context import Ints2
 from pyspartaproj.context.default.string_context import StrPair
 from pyspartaproj.context.extension.decimal_context import Decs
-from pyspartaproj.context.extension.path_context import Paths, Paths2
+from pyspartaproj.context.extension.path_context import PathFunc, Paths, Paths2
 from pyspartaproj.script.decimal.initialize_decimal import initialize_decimal
 from pyspartaproj.script.directory.create_parent import create_parent
 from pyspartaproj.script.file.archive.compress_archive import CompressArchive
@@ -195,7 +194,7 @@ def _multiple_test(
     )
 
 
-def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
+def _inside_temporary_directory(function: PathFunc) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
 

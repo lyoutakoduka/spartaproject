@@ -8,11 +8,10 @@ from datetime import datetime
 from itertools import chain
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from typing import Callable
 
 from pyspartaproj.context.default.integer_context import IntPair2, Ints, Ints2
 from pyspartaproj.context.default.string_context import StrPair, Strs
-from pyspartaproj.context.extension.path_context import Paths, Paths2
+from pyspartaproj.context.extension.path_context import PathFunc, Paths, Paths2
 from pyspartaproj.context.extension.time_context import Times, Times2
 from pyspartaproj.script.directory.create_parent import create_parent
 from pyspartaproj.script.file.archive.compress_archive import CompressArchive
@@ -192,7 +191,7 @@ def _timestamp_test(temporary_root: Path) -> None:
     _compare_timestamp(_common_test(temporary_root), _get_expected_stamp())
 
 
-def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
+def _inside_temporary_directory(function: PathFunc) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
 

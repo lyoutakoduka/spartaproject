@@ -7,10 +7,10 @@ from datetime import datetime
 from os import utime
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from typing import Callable
 
 from pyspartaproj.context.default.integer_context import IntPair2
 from pyspartaproj.context.default.string_context import Strs
+from pyspartaproj.context.extension.path_context import PathFunc
 from pyspartaproj.context.extension.time_context import TimePair, Times
 from pyspartaproj.script.directory.create_directory import create_directory
 from pyspartaproj.script.path.iterate_directory import walk_iterator
@@ -100,7 +100,7 @@ def _compare_invalid_files(times: TimePair) -> None:
     )
 
 
-def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
+def _inside_temporary_directory(function: PathFunc) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
 

@@ -4,8 +4,11 @@
 """Test module to count timer and get timer count by readable format."""
 
 from decimal import Decimal
-from typing import Callable
 
+from pyspartaproj.context.custom.timer_context import (
+    TimerFunc,
+    TimerIntStrFunc,
+)
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.script.decimal.initialize_decimal import initialize_decimal
 from pyspartaproj.script.string.format_texts import format_indent
@@ -15,10 +18,7 @@ initialize_decimal()
 
 
 def _stdout_check(
-    expected: str,
-    count: int,
-    restart: Callable[[LogTimer], None],
-    show: Callable[[LogTimer, int], str | None],
+    expected: str, count: int, restart: TimerFunc, show: TimerIntStrFunc
 ) -> None:
     timer = LogTimer()
     restart(timer)

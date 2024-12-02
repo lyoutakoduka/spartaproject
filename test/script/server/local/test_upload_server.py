@@ -5,8 +5,8 @@
 
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from typing import Callable
 
+from pyspartaproj.context.extension.path_context import PathFunc
 from pyspartaproj.script.directory.create_directory import create_directory
 from pyspartaproj.script.path.modify.get_resource import get_resource
 from pyspartaproj.script.path.temporary.create_temporary_file import (
@@ -46,7 +46,7 @@ def _get_server_local(local_root: Path) -> UploadServer:
     )
 
 
-def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
+def _inside_temporary_directory(function: PathFunc) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
 
