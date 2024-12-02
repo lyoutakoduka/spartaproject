@@ -5,8 +5,8 @@
 
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from typing import Callable
 
+from pyspartaproj.context.extension.path_context import PathFunc
 from pyspartaproj.context.extension.time_context import TimePair, TimePair2
 from pyspartaproj.script.path.iterate_directory import walk_iterator
 from pyspartaproj.script.path.modify.current.get_relative import get_relative
@@ -43,7 +43,7 @@ def _get_stamp_pair(stamp_root: Path) -> TimePair2:
     }
 
 
-def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
+def _inside_temporary_directory(function: PathFunc) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
 
