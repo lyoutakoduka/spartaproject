@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Test module to handle I/O functionality of any script called pipeline."""
+"""Test module to handle all functionalities of any script called pipeline."""
 
 from pathlib import Path
 
@@ -40,5 +40,5 @@ def _compare_text(expected: Strs, result: Strs) -> None:
 
 
 def test_print() -> None:
-    """Test ot show message as log to stdout."""
+    """Test to import strings from module outside."""
     _compare_text(_get_expected(), _get_result(_create_pipeline()))
