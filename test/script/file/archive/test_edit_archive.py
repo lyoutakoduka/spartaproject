@@ -6,9 +6,13 @@
 from datetime import datetime
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from typing import Callable
 
-from pyspartaproj.context.extension.path_context import PathPair, Paths, Paths2
+from pyspartaproj.context.extension.path_context import (
+    PathFunc,
+    PathPair,
+    Paths,
+    Paths2,
+)
 from pyspartaproj.context.extension.time_context import TimePair
 from pyspartaproj.interface.pytest import fail, raises
 from pyspartaproj.script.directory.create_directory import create_directory
@@ -108,7 +112,7 @@ def _initialize_archive(temporary_root: Path) -> TimePair:
     return _get_archive_stamp_before(temporary_root)
 
 
-def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
+def _inside_temporary_directory(function: PathFunc) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
 

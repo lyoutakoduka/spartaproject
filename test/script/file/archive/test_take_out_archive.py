@@ -5,10 +5,13 @@
 
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from typing import Callable
 
 from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.context.extension.path_context import PathPair, Paths
+from pyspartaproj.context.extension.path_context import (
+    PathFunc,
+    PathPair,
+    Paths,
+)
 from pyspartaproj.context.typed.user_context import ArchiveStatus
 from pyspartaproj.interface.pytest import fail, raises
 from pyspartaproj.script.directory.create_directory import create_directory
@@ -46,7 +49,7 @@ def _create_working_directory(temporary_root: Path, names: Strs) -> PathPair:
     }
 
 
-def _inside_temporary_directory(function: Callable[[Path], None]) -> None:
+def _inside_temporary_directory(function: PathFunc) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
 
