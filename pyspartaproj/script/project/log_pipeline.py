@@ -49,6 +49,7 @@ class LogPipeline(LogTimer):
         """
         self._log_with_timer(" ".join(messages), force)
 
-    def __init__(self) -> None:
+    def __init__(self, disable_shown: bool = False) -> None:
         """Initialize super class and variables."""
         self.__initialize_super_class()
+        self.__initialize_variables(disable_shown)
