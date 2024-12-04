@@ -30,12 +30,16 @@ def _get_expected_print() -> str:
     return _get_expected() + "\n"
 
 
+def _show_log(messages: Strs, pipeline: LogPipeline) -> None:
+    pipeline.show_log(messages, force=True)
+
+
 def _convert_log(messages: Strs, pipeline: LogPipeline) -> str:
     stdout_text = StdoutText()
 
     @stdout_text.decorator
     def _messages() -> None:
-        pipeline.show_log(messages, force=True)
+        _show_log(messages, pipeline)
 
     _messages()
 
