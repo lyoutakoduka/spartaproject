@@ -69,3 +69,5 @@ class LogPipeline(LogTimer):
         """Initialize super class and variables."""
         self.__initialize_super_class()
         self.__initialize_variables(disable_shown)
+
+        self._force_log("begin")
