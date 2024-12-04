@@ -31,6 +31,16 @@ class LogPipeline(LogTimer):
             self._show_message(self._build_log(message_timer, messages))
 
     def get_log(self) -> Strs | None:
+        """Get recorded log message.
+
+        The log is recorded to instance inside
+            if you set option to disable showing log.
+
+        You can get the recorded log messages all together from this method.
+
+        Returns:
+            Strs | None: Recorded log message.
+        """
         if 0 == len(self._log):
             return None
 
@@ -40,7 +50,7 @@ class LogPipeline(LogTimer):
         return log
 
     def show_log(self, messages: Strs, force: bool = False) -> None:
-        """Show message as log to stdout.
+        """Show log message to stdout.
 
         Args:
             messages (Strs): Message list which will merged by space character.
