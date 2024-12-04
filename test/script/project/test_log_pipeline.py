@@ -51,8 +51,10 @@ def _get_result(pipeline: LogPipeline) -> str:
 
 
 def _create_pipeline() -> LogPipeline:
-    pipeline = LogPipeline()
+    return LogPipeline()
 
+
+def _initialize_pipeline(pipeline: LogPipeline) -> LogPipeline:
     pipeline.restart(override=True, timer_interval=_get_interval())
     pipeline.increase_timer()
 
@@ -65,4 +67,7 @@ def _compare_text(expected: str, result: str) -> None:
 
 def test_print() -> None:
     """Test to show message as log to stdout."""
-    _compare_text(_get_expected_print(), _get_result(_create_pipeline()))
+    _compare_text(
+        _get_expected_print(),
+        _get_result(_initialize_pipeline(_create_pipeline())),
+    )
