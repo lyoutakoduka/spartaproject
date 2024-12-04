@@ -47,6 +47,10 @@ def _convert_log(messages: Strs, pipeline: LogPipeline) -> str:
     return stdout_text.show()
 
 
+def _record_log(pipeline: LogPipeline) -> None:
+    _show_log([_get_message()], pipeline)
+
+
 def _get_result(pipeline: LogPipeline) -> str:
     return _convert_log([_get_message()], pipeline)
 
