@@ -6,6 +6,7 @@
 from decimal import Decimal
 
 from pyspartaproj.context.default.string_context import Strs
+from pyspartaproj.interface.pytest import fail
 from pyspartaproj.script.project.log_pipeline import LogPipeline
 from pyspartaproj.script.string.off_stdout import StdoutText
 
@@ -48,6 +49,13 @@ def _convert_log(messages: Strs, pipeline: LogPipeline) -> str:
 
 def _get_result(pipeline: LogPipeline) -> str:
     return _convert_log([_get_message()], pipeline)
+
+
+def _get_result_text(pipeline: LogPipeline) -> str:
+    if logs := pipeline.get_log():
+        return logs[0]
+    else:
+        fail()
 
 
 def _create_pipeline() -> LogPipeline:
