@@ -87,3 +87,9 @@ def test_print() -> None:
         _get_expected_print(),
         _get_result(_initialize_pipeline(_create_pipeline())),
     )
+
+
+def test_text() -> None:
+    pipeline: LogPipeline = _initialize_pipeline(_create_pipeline_text())
+    _record_log(pipeline)
+    _compare_text(_get_expected(), _get_result_text(pipeline))
