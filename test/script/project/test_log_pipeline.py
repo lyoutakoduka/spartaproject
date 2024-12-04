@@ -19,11 +19,15 @@ def _get_message() -> str:
 
 
 def _get_timer_log(interval: str, messages: str) -> str:
-    return interval + "s" + ": " + messages + "\n"
+    return interval + "s" + ": " + messages
 
 
 def _get_expected() -> str:
     return _get_timer_log(str(_get_interval()), _get_message())
+
+
+def _get_expected_print() -> str:
+    return _get_expected() + "\n"
 
 
 def _convert_log(messages: Strs, pipeline: LogPipeline) -> str:
@@ -57,4 +61,4 @@ def _compare_text(expected: str, result: str) -> None:
 
 def test_print() -> None:
     """Test to show message as log to stdout."""
-    _compare_text(_get_expected(), _get_result(_create_pipeline()))
+    _compare_text(_get_expected_print(), _get_result(_create_pipeline()))
