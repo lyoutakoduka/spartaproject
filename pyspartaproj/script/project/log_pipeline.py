@@ -30,6 +30,9 @@ class LogPipeline(LogTimer):
         if message_timer := self.get_readable_time(force=force):
             self._show_message(self._build_log(message_timer, messages))
 
+    def _force_log(self, message: str) -> None:
+        self.show_log([message], force=True)
+
     def get_log(self) -> Strs | None:
         """Get recorded log message.
 
