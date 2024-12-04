@@ -54,6 +54,10 @@ def _create_pipeline() -> LogPipeline:
     return LogPipeline()
 
 
+def _create_pipeline_text() -> LogPipeline:
+    return LogPipeline(disable_shown=True)
+
+
 def _initialize_pipeline(pipeline: LogPipeline) -> LogPipeline:
     pipeline.restart(override=True, timer_interval=_get_interval())
     pipeline.increase_timer()
