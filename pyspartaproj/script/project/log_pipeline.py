@@ -37,6 +37,9 @@ class LogPipeline(LogTimer):
     def _initialize_message(self) -> None:
         self._force_log("begin")
 
+    def _finalize_message(self) -> None:
+        self._force_log("end")
+
     def _confirm_removed(self) -> bool:
         if self._still_removed:
             return True
@@ -78,7 +81,7 @@ class LogPipeline(LogTimer):
         self._log_with_timer(messages, force)
 
     def __del__(self) -> None:
-        self._force_log("end")
+        self._finalize_message()
 
     def __init__(self, disable_shown: bool = False) -> None:
         """Initialize super class and variables."""
