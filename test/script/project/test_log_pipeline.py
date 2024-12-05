@@ -31,8 +31,9 @@ def _get_expected_print() -> str:
     return _get_expected() + "\n"
 
 
-def _show_log(messages: Strs, pipeline: LogPipeline) -> None:
+def _show_log(messages: Strs, pipeline: LogPipeline) -> LogPipeline:
     pipeline.show_log(messages, force=True)
+    return pipeline
 
 
 def _convert_log(messages: Strs, pipeline: LogPipeline) -> str:
@@ -47,8 +48,8 @@ def _convert_log(messages: Strs, pipeline: LogPipeline) -> str:
     return stdout_text.show()
 
 
-def _record_log(pipeline: LogPipeline) -> None:
-    _show_log([_get_message()], pipeline)
+def _record_log(pipeline: LogPipeline) -> LogPipeline:
+    return _show_log([_get_message()], pipeline)
 
 
 def _get_result(pipeline: LogPipeline) -> str:
