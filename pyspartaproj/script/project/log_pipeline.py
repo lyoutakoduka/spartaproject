@@ -80,8 +80,16 @@ class LogPipeline(LogTimer):
         """
         self._log_with_timer(messages, force)
 
-    def __del__(self) -> None:
+    def close_log(self) -> Strs | None:
+        if self._confirm_removed():
+            return None
+
         self._finalize_message()
+
+        return self.get_log()
+
+    def __del__(self) -> None:
+        self.close_log()
 
     def __init__(self, disable_shown: bool = False) -> None:
         """Initialize super class and variables."""
