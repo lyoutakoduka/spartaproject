@@ -15,6 +15,7 @@ class LogPipeline(LogTimer):
 
     def __initialize_variables(self, disable_shown: bool) -> None:
         self._disable_shown: bool = disable_shown
+        self._still_removed: bool = False
         self._log: Strs = []
 
     def _show_message(self, message: str) -> None:
@@ -32,6 +33,14 @@ class LogPipeline(LogTimer):
 
     def _force_log(self, message: str) -> None:
         self.show_log([message], force=True)
+
+    def _confirm_removed(self) -> bool:
+        if self._still_removed:
+            return True
+
+        self._still_removed = True
+
+        return False
 
     def get_log(self) -> Strs | None:
         """Get recorded log message.
