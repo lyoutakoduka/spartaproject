@@ -65,6 +65,10 @@ def _record_log(pipeline: LogPipeline) -> LogPipeline:
     return _show_log([_get_message()], pipeline)
 
 
+def _wrapper_print(pipeline: LogPipeline) -> LogFunc:
+    return lambda: _record_log(pipeline)
+
+
 def _get_result(pipeline: LogPipeline) -> str:
     return _convert_log([_get_message()], pipeline)
 
