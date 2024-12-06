@@ -32,6 +32,15 @@ def _get_timer_log(interval: str, messages: str) -> str:
     return interval + "s" + ": " + messages
 
 
+def _get_expected_log() -> Strs:
+    return [
+        _get_timer_log(interval, message)
+        for interval, message in zip(
+            _get_interval_texts(), _get_message_texts()
+        )
+    ]
+
+
 def _get_expected() -> str:
     return _get_timer_log(str(_get_interval()), _get_message())
 
