@@ -5,6 +5,7 @@
 
 from decimal import Decimal
 
+from pyspartaproj.context.custom.log_context import LogFunc
 from pyspartaproj.context.default.string_context import Strs
 from pyspartaproj.interface.pytest import fail
 from pyspartaproj.script.project.log_pipeline import LogPipeline
@@ -42,6 +43,18 @@ def _convert_log(messages: Strs, pipeline: LogPipeline) -> str:
     @stdout_text.decorator
     def _messages() -> None:
         _show_log(messages, pipeline)
+
+    _messages()
+
+    return stdout_text.show()
+
+
+def _execute_log_function(function: LogFunc) -> str:
+    stdout_text = StdoutText()
+
+    @stdout_text.decorator
+    def _messages() -> None:
+        function()
 
     _messages()
 
