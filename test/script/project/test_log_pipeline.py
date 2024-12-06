@@ -16,6 +16,10 @@ def _get_interval() -> Decimal:
     return Decimal("0.3")
 
 
+def _get_interval_texts() -> Strs:
+    return ["0.0"] + [str(_get_interval())] * 2
+
+
 def _get_message() -> str:
     return "test"
 
