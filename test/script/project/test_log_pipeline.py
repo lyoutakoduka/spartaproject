@@ -73,6 +73,10 @@ def _get_result(pipeline: LogPipeline) -> str:
     return _convert_log([_get_message()], pipeline)
 
 
+def _get_result_print(pipeline: LogPipeline) -> str:
+    return _execute_log_function(_wrapper_print(pipeline))
+
+
 def _get_result_text(pipeline: LogPipeline) -> str:
     if logs := pipeline.get_log():
         return logs[0]
