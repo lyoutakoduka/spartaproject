@@ -24,6 +24,10 @@ def _get_message() -> str:
     return "test"
 
 
+def _get_message_texts() -> Strs:
+    return ["begin", _get_message(), "end"]
+
+
 def _get_timer_log(interval: str, messages: str) -> str:
     return interval + "s" + ": " + messages
 
