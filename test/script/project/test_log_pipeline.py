@@ -78,15 +78,15 @@ def _initialize_pipeline(pipeline: LogPipeline) -> LogPipeline:
     return pipeline
 
 
-def _compare_text(expected: str, result: str) -> None:
+def _compare_text(expected: Strs, result: Strs) -> None:
     assert expected == result
 
 
 def test_print() -> None:
     """Test to show log message to stdout."""
     _compare_text(
-        _get_expected_print(),
-        _get_result(_initialize_pipeline(_create_pipeline())),
+        [_get_expected_print()],
+        [_get_result(_initialize_pipeline(_create_pipeline()))],
     )
 
 
@@ -94,4 +94,4 @@ def test_text() -> None:
     """Test to get recorded log messages at all Together."""
     pipeline: LogPipeline = _initialize_pipeline(_create_pipeline_text())
     _record_log(pipeline)
-    _compare_text(_get_expected(), _get_result_text(pipeline))
+    _compare_text([_get_expected()], [_get_result_text(pipeline)])
