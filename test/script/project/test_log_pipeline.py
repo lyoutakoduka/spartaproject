@@ -106,6 +106,11 @@ def _get_result_print(function: LogFunc) -> Strs:
     return _execute_log_function(_wrapper_print(function)).splitlines()
 
 
+def _reset_stored_log(pipeline: LogPipeline) -> LogPipeline:
+    _get_log(pipeline)
+    return pipeline
+
+
 def _get_result_single(pipeline: LogPipeline) -> Strs:
     return _get_log(_show_log(_get_messages(), pipeline))
 
@@ -151,6 +156,9 @@ def test_print() -> None:
 
 def test_single() -> None:
     """Test to get recorded log messages at all Together."""
-    pipeline: LogPipeline = _initialize_pipeline(_create_pipeline_text())
-    _get_log(pipeline)
-    _compare_text(_get_expected_single(), _get_result_single(pipeline))
+    _compare_text(
+        _get_expected_single(),
+        _get_result_single(
+            _reset_stored_log(_initialize_pipeline(_create_pipeline_text()))
+        ),
+    )
