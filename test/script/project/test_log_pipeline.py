@@ -24,6 +24,10 @@ def _get_message() -> str:
     return "test"
 
 
+def _get_messages() -> Strs:
+    return [_get_message()]
+
+
 def _get_message_texts() -> Strs:
     return ["begin", _get_message(), "end"]
 
@@ -79,7 +83,7 @@ def _execute_log_function(function: LogFunc) -> str:
 
 
 def _record_log(function: LogFunc) -> LogPipeline:
-    return _show_log([_get_message()], _initialize_pipeline(function()))
+    return _show_log(_get_messages(), _initialize_pipeline(function()))
 
 
 def _wrapper_print(function: LogFunc) -> LogFunc:
@@ -87,7 +91,7 @@ def _wrapper_print(function: LogFunc) -> LogFunc:
 
 
 def _get_result(pipeline: LogPipeline) -> str:
-    return _convert_log([_get_message()], pipeline)
+    return _convert_log(_get_messages(), pipeline)
 
 
 def _get_result_print(function: LogFunc) -> str:
