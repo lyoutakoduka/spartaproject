@@ -101,8 +101,8 @@ def _find_log_error(logs: Strs | None) -> Strs:
     return logs
 
 
-def _get_log(pipeline: LogPipeline) -> str:
-    return _find_log_error(pipeline.get_log())[0]
+def _get_log(pipeline: LogPipeline) -> Strs:
+    return _find_log_error(pipeline.get_log())
 
 
 def _close_log(pipeline: LogPipeline) -> Strs:
@@ -140,4 +140,4 @@ def test_text() -> None:
     """Test to get recorded log messages at all Together."""
     pipeline: LogPipeline = _initialize_pipeline(_create_pipeline_text())
     _record_log(pipeline)
-    _compare_text([_get_expected()], [_get_log(pipeline)])
+    _compare_text([_get_expected()], _get_log(pipeline))
