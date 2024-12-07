@@ -102,8 +102,8 @@ def _get_result(pipeline: LogPipeline) -> str:
     return _convert_log(_get_messages(), pipeline)
 
 
-def _get_result_print(function: LogFunc) -> str:
-    return _execute_log_function(_wrapper_print(function))
+def _get_result_print(function: LogFunc) -> Strs:
+    return _execute_log_function(_wrapper_print(function)).splitlines()
 
 
 def _get_result_single(pipeline: LogPipeline) -> Strs:
@@ -146,10 +146,7 @@ def _compare_text(expected: Strs, result: Strs) -> None:
 
 def test_print() -> None:
     """Test to show log message to stdout."""
-    _compare_text(
-        _get_expected_log(),
-        _get_result_print(_create_pipeline).splitlines(),
-    )
+    _compare_text(_get_expected_log(), _get_result_print(_create_pipeline))
 
 
 def test_single() -> None:
