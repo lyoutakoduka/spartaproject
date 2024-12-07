@@ -94,6 +94,13 @@ def _get_result_print(function: LogFunc) -> str:
     return _execute_log_function(_wrapper_print(function))
 
 
+def _find_log_error(logs: Strs | None) -> Strs:
+    if logs is None:
+        fail()
+
+    return logs
+
+
 def _get_log(pipeline: LogPipeline) -> str:
     if logs := pipeline.get_log():
         return logs[0]
