@@ -49,6 +49,10 @@ def _get_expected() -> str:
     return _get_timer_log(str(_get_interval()), _get_message())
 
 
+def _get_expected_text() -> Strs:
+    return [_get_expected()]
+
+
 def _get_expected_print() -> str:
     return _get_expected() + "\n"
 
@@ -144,4 +148,4 @@ def test_text() -> None:
     """Test to get recorded log messages at all Together."""
     pipeline: LogPipeline = _initialize_pipeline(_create_pipeline_text())
     _record_log(pipeline)
-    _compare_text([_get_expected()], _get_log(pipeline))
+    _compare_text(_get_expected_text(), _get_log(pipeline))
