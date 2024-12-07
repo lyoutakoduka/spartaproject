@@ -74,16 +74,20 @@ def _convert_log(messages: Strs, pipeline: LogPipeline) -> str:
     return stdout_text.show()
 
 
-def _execute_log_function(function: LogFunc) -> str:
-    stdout_text = StdoutText()
-
+def _decorate_function(
+    function: LogFunc, stdout_text: StdoutText
+) -> StdoutText:
     @stdout_text.decorator
     def _messages() -> None:
         function()
 
     _messages()
 
-    return stdout_text.show()
+    return stdout_text
+
+
+def _execute_log_function(function: LogFunc) -> str:
+    return _decorate_function(function, StdoutText()).show()
 
 
 def _record_log(function: LogFunc) -> LogPipeline:
