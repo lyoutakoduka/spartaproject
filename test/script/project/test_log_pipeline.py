@@ -102,6 +102,10 @@ def _get_result_print(function: LogFunc) -> str:
     return _execute_log_function(_wrapper_print(function))
 
 
+def _get_result_text(pipeline: LogPipeline) -> Strs:
+    return _get_log(_show_log(_get_messages(), pipeline))
+
+
 def _find_log_error(logs: Strs | None) -> Strs:
     if logs is None:
         fail()
