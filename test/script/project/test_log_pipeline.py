@@ -123,8 +123,8 @@ def _compare_text(expected: Strs, result: Strs) -> None:
 def test_print() -> None:
     """Test to show log message to stdout."""
     _compare_text(
-        [_get_expected_print()],
-        [_get_result_print(_initialize_pipeline(_create_pipeline()))],
+        _get_expected_log(),
+        _get_result_print(_create_pipeline).splitlines(),
     )
 
 
