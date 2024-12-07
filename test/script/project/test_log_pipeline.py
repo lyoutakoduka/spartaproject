@@ -102,17 +102,11 @@ def _find_log_error(logs: Strs | None) -> Strs:
 
 
 def _get_log(pipeline: LogPipeline) -> str:
-    if logs := pipeline.get_log():
-        return logs[0]
-    else:
-        fail()
+    return _find_log_error(pipeline.get_log())[0]
 
 
 def _close_log(pipeline: LogPipeline) -> Strs:
-    if logs := pipeline.close_log():
-        return logs
-    else:
-        fail()
+    return _find_log_error(pipeline.close_log())
 
 
 def _create_pipeline() -> LogPipeline:
