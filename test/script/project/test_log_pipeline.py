@@ -101,6 +101,13 @@ def _get_result_text(pipeline: LogPipeline) -> str:
         fail()
 
 
+def _close_log(pipeline: LogPipeline) -> Strs:
+    if logs := pipeline.close_log():
+        return logs
+    else:
+        fail()
+
+
 def _create_pipeline() -> LogPipeline:
     return LogPipeline()
 
