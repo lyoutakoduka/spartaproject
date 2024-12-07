@@ -78,8 +78,8 @@ def _execute_log_function(function: LogFunc) -> str:
     return stdout_text.show()
 
 
-def _record_log(pipeline: LogPipeline) -> LogPipeline:
-    return _show_log([_get_message()], pipeline)
+def _record_log(function: LogFunc) -> LogPipeline:
+    return _show_log([_get_message()], _initialize_pipeline(function()))
 
 
 def _wrapper_print(pipeline: LogPipeline) -> LogFunc:
