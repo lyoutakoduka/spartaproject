@@ -151,5 +151,5 @@ def test_print() -> None:
 def test_text() -> None:
     """Test to get recorded log messages at all Together."""
     pipeline: LogPipeline = _initialize_pipeline(_create_pipeline_text())
-    _record_log(pipeline)
-    _compare_text(_get_expected_text(), _get_log(pipeline))
+    _get_log(pipeline)
+    _compare_text(_get_expected_text(), _get_result_text(pipeline))
