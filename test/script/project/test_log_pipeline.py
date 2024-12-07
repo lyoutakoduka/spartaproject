@@ -94,7 +94,7 @@ def _get_result_print(function: LogFunc) -> str:
     return _execute_log_function(_wrapper_print(function))
 
 
-def _get_result_text(pipeline: LogPipeline) -> str:
+def _get_log(pipeline: LogPipeline) -> str:
     if logs := pipeline.get_log():
         return logs[0]
     else:
@@ -139,4 +139,4 @@ def test_text() -> None:
     """Test to get recorded log messages at all Together."""
     pipeline: LogPipeline = _initialize_pipeline(_create_pipeline_text())
     _record_log(pipeline)
-    _compare_text([_get_expected()], [_get_result_text(pipeline)])
+    _compare_text([_get_expected()], [_get_log(pipeline)])
