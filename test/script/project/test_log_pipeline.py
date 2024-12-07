@@ -148,7 +148,7 @@ def test_print() -> None:
     )
 
 
-def test_text() -> None:
+def test_single() -> None:
     """Test to get recorded log messages at all Together."""
     pipeline: LogPipeline = _initialize_pipeline(_create_pipeline_text())
     _get_log(pipeline)
