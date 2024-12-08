@@ -81,8 +81,14 @@ def _initialize_pipeline(pipeline: LogPipeline) -> LogPipeline:
     return pipeline
 
 
+def _start_pipeline(function: LogFunc) -> LogPipeline:
+    pipeline: LogPipeline = function()
+    _initialize_pipeline(pipeline)
+    return pipeline
+
+
 def _record_log(function: LogFunc) -> LogPipeline:
-    return _show_log(_get_messages(), _initialize_pipeline(function()))
+    return _show_log(_get_messages(), _start_pipeline(function))
 
 
 def _wrapper_print(function: LogFunc) -> LogFunc:
@@ -147,6 +153,6 @@ def test_single() -> None:
     _compare_text(
         _get_expected_single(),
         _get_result_single(
-            _reset_stored_log(_initialize_pipeline(_create_pipeline_text()))
+            _reset_stored_log(_start_pipeline(_create_pipeline_text))
         ),
     )
