@@ -15,6 +15,7 @@ class LogPipeline(LogTimer):
 
     def __initialize_variables(self, disable_shown: bool) -> None:
         self._disable_shown: bool = disable_shown
+        self._still_removed: bool = False
         self._log: Strs = []
 
     def _show_message(self, message: str) -> None:
@@ -30,8 +31,25 @@ class LogPipeline(LogTimer):
         if message_timer := self.get_readable_time(force=force):
             self._show_message(self._build_log(message_timer, messages))
 
+    def _force_log(self, message: str) -> None:
+        self.show_log([message], force=True)
+
+    def _initialize_message(self) -> None:
+        self._force_log("begin")
+
+    def _finalize_message(self) -> None:
+        self._force_log("end")
+
+    def _confirm_removed(self) -> bool:
+        if self._still_removed:
+            return True
+
+        self._still_removed = True
+
+        return False
+
     def get_log(self) -> Strs | None:
-        """Get recorded log message.
+        """Get recorded log messages.
 
         The log is recorded to instance inside
             if you set option to disable showing log.
@@ -39,7 +57,7 @@ class LogPipeline(LogTimer):
         You can get the recorded log messages all together from this method.
 
         Returns:
-            Strs | None: Recorded log message.
+            Strs | None: Recorded log messages.
         """
         if 0 == len(self._log):
             return None
@@ -62,7 +80,25 @@ class LogPipeline(LogTimer):
         """
         self._log_with_timer(messages, force)
 
+    def close_log(self) -> Strs | None:
+        """Finalize instance and get logs recorded in instance inside manually.
+
+        Returns:
+            Strs | None: Log messages recorded in instance inside.
+        """
+        if self._confirm_removed():
+            return None
+
+        self._finalize_message()
+
+        return self.get_log()
+
+    def __del__(self) -> None:
+        """Finalize instance and get logs recorded in instance inside."""
+        self.close_log()
+
     def __init__(self, disable_shown: bool = False) -> None:
         """Initialize super class and variables."""
         self.__initialize_super_class()
         self.__initialize_variables(disable_shown)
+        self._initialize_message()
