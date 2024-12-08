@@ -158,6 +158,10 @@ def test_print() -> None:
     _compare_text(_get_expected_log(), _get_result_print(_create_pipeline))
 
 
+def test_all() -> None:
+    _compare_text(_get_expected_log(), _get_result_all(_create_pipeline_text))
+
+
 def test_single() -> None:
     """Test to get recorded log messages at all Together."""
     _compare_text(
