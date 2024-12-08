@@ -74,11 +74,9 @@ def _execute_log_function(function: LogFunc) -> str:
     return _decorate_function(function, StdoutText()).show()
 
 
-def _initialize_pipeline(pipeline: LogPipeline) -> LogPipeline:
+def _initialize_pipeline(pipeline: LogPipeline) -> None:
     pipeline.restart(override=True, timer_interval=_get_interval())
     pipeline.increase_timer()
-
-    return pipeline
 
 
 def _start_pipeline(function: LogFunc) -> LogPipeline:
