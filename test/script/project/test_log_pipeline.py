@@ -111,6 +111,10 @@ def _reset_stored_log(pipeline: LogPipeline) -> LogPipeline:
     return pipeline
 
 
+def _get_result_all(function: LogFunc) -> Strs:
+    return _close_log(_record_log(function))
+
+
 def _get_result_single(pipeline: LogPipeline) -> Strs:
     return _get_log(_show_log(_get_messages(), pipeline))
 
