@@ -74,6 +74,13 @@ def _execute_log_function(function: LogFunc) -> str:
     return _decorate_function(function, StdoutText()).show()
 
 
+def _initialize_pipeline(pipeline: LogPipeline) -> LogPipeline:
+    pipeline.restart(override=True, timer_interval=_get_interval())
+    pipeline.increase_timer()
+
+    return pipeline
+
+
 def _record_log(function: LogFunc) -> LogPipeline:
     return _show_log(_get_messages(), _initialize_pipeline(function()))
 
@@ -84,19 +91,6 @@ def _wrapper_print(function: LogFunc) -> LogFunc:
 
 def _get_result_print(function: LogFunc) -> Strs:
     return _execute_log_function(_wrapper_print(function)).splitlines()
-
-
-def _reset_stored_log(pipeline: LogPipeline) -> LogPipeline:
-    _get_log(pipeline)
-    return pipeline
-
-
-def _get_result_all(function: LogFunc) -> Strs:
-    return _close_log(_record_log(function))
-
-
-def _get_result_single(pipeline: LogPipeline) -> Strs:
-    return _get_log(_show_log(_get_messages(), pipeline))
 
 
 def _find_log_error(logs: Strs | None) -> Strs:
@@ -110,8 +104,21 @@ def _get_log(pipeline: LogPipeline) -> Strs:
     return _find_log_error(pipeline.get_log())
 
 
+def _reset_stored_log(pipeline: LogPipeline) -> LogPipeline:
+    _get_log(pipeline)
+    return pipeline
+
+
 def _close_log(pipeline: LogPipeline) -> Strs:
     return _find_log_error(pipeline.close_log())
+
+
+def _get_result_all(function: LogFunc) -> Strs:
+    return _close_log(_record_log(function))
+
+
+def _get_result_single(pipeline: LogPipeline) -> Strs:
+    return _get_log(_show_log(_get_messages(), pipeline))
 
 
 def _create_pipeline() -> LogPipeline:
@@ -120,13 +127,6 @@ def _create_pipeline() -> LogPipeline:
 
 def _create_pipeline_text() -> LogPipeline:
     return LogPipeline(disable_shown=True)
-
-
-def _initialize_pipeline(pipeline: LogPipeline) -> LogPipeline:
-    pipeline.restart(override=True, timer_interval=_get_interval())
-    pipeline.increase_timer()
-
-    return pipeline
 
 
 def _compare_text(expected: Strs, result: Strs) -> None:
