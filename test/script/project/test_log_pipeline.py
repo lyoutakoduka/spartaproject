@@ -128,8 +128,8 @@ def _get_result_all(function: LogFunc) -> Strs:
     return _close_log(_record_log(function))
 
 
-def _get_result_single(pipeline: LogPipeline) -> Strs:
-    return _get_log(_show_log(_get_messages(), pipeline))
+def _get_result_single(function: LogFunc) -> Strs:
+    return _get_log(_record_log_single(function))
 
 
 def _create_pipeline() -> LogPipeline:
@@ -156,8 +156,5 @@ def test_all() -> None:
 def test_single() -> None:
     """Test to get recorded log messages at all Together."""
     _compare_text(
-        _get_expected_single(),
-        _get_result_single(
-            _reset_stored_log(_start_pipeline(_create_pipeline_text))
-        ),
+        _get_expected_single(), _get_result_single(_create_pipeline_text)
     )
