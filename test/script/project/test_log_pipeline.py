@@ -145,16 +145,17 @@ def _compare_text(expected: Strs, result: Strs) -> None:
 
 
 def test_print() -> None:
-    """Test to show log message to stdout."""
+    """Test to show log messages to stdout."""
     _compare_text(_get_expected_log(), _get_result_print(_create_pipeline))
 
 
 def test_all() -> None:
+    """Test to get log messages recorded in instance inside."""
     _compare_text(_get_expected_log(), _get_result_all(_create_pipeline_text))
 
 
 def test_single() -> None:
-    """Test to get recorded log messages at all Together."""
+    """Test to get log messages except automatically generated stuff."""
     _compare_text(
         _get_expected_single(), _get_result_single(_create_pipeline_text)
     )
