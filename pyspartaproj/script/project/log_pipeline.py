@@ -49,7 +49,7 @@ class LogPipeline(LogTimer):
         return False
 
     def get_log(self) -> Strs | None:
-        """Get recorded log message.
+        """Get recorded log messages.
 
         The log is recorded to instance inside
             if you set option to disable showing log.
@@ -57,7 +57,7 @@ class LogPipeline(LogTimer):
         You can get the recorded log messages all together from this method.
 
         Returns:
-            Strs | None: Recorded log message.
+            Strs | None: Recorded log messages.
         """
         if 0 == len(self._log):
             return None
@@ -81,6 +81,11 @@ class LogPipeline(LogTimer):
         self._log_with_timer(messages, force)
 
     def close_log(self) -> Strs | None:
+        """Finalize instance and get logs recorded in instance inside manually.
+
+        Returns:
+            Strs | None: Log messages recorded in instance inside.
+        """
         if self._confirm_removed():
             return None
 
@@ -89,6 +94,7 @@ class LogPipeline(LogTimer):
         return self.get_log()
 
     def __del__(self) -> None:
+        """Finalize instance and get logs recorded in instance inside."""
         self.close_log()
 
     def __init__(self, disable_shown: bool = False) -> None:
