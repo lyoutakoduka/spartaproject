@@ -89,6 +89,13 @@ def _record_log(function: LogFunc) -> LogPipeline:
     return _show_log(_get_messages(), _start_pipeline(function))
 
 
+def _record_log_single(function: LogFunc) -> LogPipeline:
+    return _show_log(
+        _get_messages(),
+        _reset_stored_log(_start_pipeline(function)),
+    )
+
+
 def _wrapper_print(function: LogFunc) -> LogFunc:
     return lambda: _record_log(function)
 
