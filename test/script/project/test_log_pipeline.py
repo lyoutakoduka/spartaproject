@@ -53,25 +53,9 @@ def _get_expected_single() -> Strs:
     return [_get_expected()]
 
 
-def _get_expected_print() -> str:
-    return _get_expected() + "\n"
-
-
 def _show_log(messages: Strs, pipeline: LogPipeline) -> LogPipeline:
     pipeline.show_log(messages, force=True)
     return pipeline
-
-
-def _convert_log(messages: Strs, pipeline: LogPipeline) -> str:
-    stdout_text = StdoutText()
-
-    @stdout_text.decorator
-    def _messages() -> None:
-        _show_log(messages, pipeline)
-
-    _messages()
-
-    return stdout_text.show()
 
 
 def _decorate_function(
@@ -96,10 +80,6 @@ def _record_log(function: LogFunc) -> LogPipeline:
 
 def _wrapper_print(function: LogFunc) -> LogFunc:
     return lambda: _record_log(function)
-
-
-def _get_result(pipeline: LogPipeline) -> str:
-    return _convert_log(_get_messages(), pipeline)
 
 
 def _get_result_print(function: LogFunc) -> Strs:
