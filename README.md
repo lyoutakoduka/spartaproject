@@ -2,7 +2,7 @@
 
 ## Version
 
-0.0.1
+- [test.pypi](https://test.pypi.org/project/pyspartaproj)
 
 ## Note
 
