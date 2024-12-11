@@ -5,6 +5,10 @@ __pycache__/
 .dist/
 node_modules/
 
+# Poetry
+
+poetry.lock
+
 # In development
 .temp/
 
