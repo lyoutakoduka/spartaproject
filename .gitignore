@@ -14,7 +14,7 @@ poetry.lock
 
 # Isolate
 .vscode/sftp.json
-tools/sync/.pypirc
+tools/sync/home/id/.pypirc
 test/script/file/shortcut/resource/execute_powershell/default.json
 test/script/server/local/resource/connect_server/default.json
 test/script/shell/resource/execute_powershell/default.json
