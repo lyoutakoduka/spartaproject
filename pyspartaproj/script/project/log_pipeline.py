@@ -13,13 +13,13 @@ class LogPipeline(LogTimer):
     def __initialize_super_class(self) -> None:
         super().__init__()
 
-    def __initialize_variables(self, disable_shown: bool) -> None:
-        self._disable_shown: bool = disable_shown
+    def __initialize_variables(self, enable_shown: bool) -> None:
+        self._enable_shown: bool = enable_shown
         self._still_removed: bool = False
         self._log: Strs = []
 
     def _show_message(self, message: str) -> None:
-        if self._disable_shown:
+        if self._enable_shown:
             self._log += [message]
         else:
             print(message)
@@ -97,8 +97,8 @@ class LogPipeline(LogTimer):
         """Finalize instance and get logs recorded in instance inside."""
         self.close_log()
 
-    def __init__(self, disable_shown: bool = False) -> None:
+    def __init__(self, enable_shown: bool = False) -> None:
         """Initialize super class and variables."""
         self.__initialize_super_class()
-        self.__initialize_variables(disable_shown)
+        self.__initialize_variables(enable_shown)
         self._initialize_message()
