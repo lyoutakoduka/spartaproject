@@ -36,16 +36,14 @@ quiet = true
 skip = [
   "./.temp",
   "./docs",
-  "./poetry",
-  "./yarn",
+  "./poetry"
 ]
 
 [tool.black]
 exclude = """(
   .temp/ |
   docs/ |
-  poetry/ |
-  yarn/
+  poetry/
 )"""
 line-length = 79
 
@@ -53,8 +51,7 @@ line-length = 79
 extend-exclude = [
   "./.temp",
   "./docs",
-  "./poetry",
-  "./yarn",
+  "./poetry"
 ]
 ignore = [
   "PT013",
@@ -82,6 +79,5 @@ addopts = """
   --new-first
   --ignore ./docs
   --ignore ./poetry
-  --ignore ./yarn
 """
 cache_dir = "./.temp/.pytest_cache"

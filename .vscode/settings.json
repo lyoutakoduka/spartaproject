@@ -49,6 +49,7 @@
   "editor.fontSize": 15,
   "editor.formatOnSave": true,
   "editor.minimap.enabled": false,
+  "editor.renderWhitespace": "all",
   "editor.rulers": [79],
   "editor.tokenColorCustomizations": {
     "textMateRules": [
@@ -60,6 +61,7 @@
       }
     ]
   },
+  "explorer.confirmDragAndDrop": false,
   "explorer.excludeGitIgnore": false,
   "flake8.importStrategy": "fromEnvironment",
   "flake8.severity": {
@@ -103,6 +105,7 @@
   "typescript.inlayHints.variableTypes.enabled": false,
   "typescript.inlayHints.parameterTypes.enabled": true,
   "workbench.colorTheme": "Dracula Theme",
+  "workbench.editor.enablePreview": false,
   "workbench.startupEditor": "none",
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter"
