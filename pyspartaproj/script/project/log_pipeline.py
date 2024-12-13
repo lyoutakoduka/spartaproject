@@ -20,9 +20,9 @@ class LogPipeline(LogTimer):
 
     def _show_message(self, message: str) -> None:
         if self._enable_shown:
-            self._log += [message]
-        else:
             print(message)
+        else:
+            self._log += [message]
 
     def _build_log(self, message_timer: str, messages: Strs) -> str:
         return message_timer + ": " + " ".join(messages)
