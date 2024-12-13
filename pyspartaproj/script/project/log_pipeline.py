@@ -98,7 +98,12 @@ class LogPipeline(LogTimer):
         self.close_log()
 
     def __init__(self, enable_shown: bool = False) -> None:
-        """Initialize super class and variables."""
+        """Initialize super class and variables.
+
+        Args:
+            enable_shown (bool, optional): Defaults to False.
+                Log messages are shown if True.
+        """
         self.__initialize_super_class()
         self.__initialize_variables(enable_shown)
         self._initialize_message()
