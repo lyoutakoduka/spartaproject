@@ -133,11 +133,11 @@ def _get_result_single(function: LogFunc) -> Strs:
 
 
 def _create_pipeline() -> LogPipeline:
-    return LogPipeline()
+    return LogPipeline(enable_shown=True)
 
 
 def _create_pipeline_text() -> LogPipeline:
-    return LogPipeline(disable_shown=True)
+    return LogPipeline()
 
 
 def _compare_text(expected: Strs, result: Strs) -> None:
