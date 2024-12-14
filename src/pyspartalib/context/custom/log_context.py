@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""User defined types using class "LogPipeline"."""
+"""User defined types using class LogPipeline."""
 
 from typing import Callable
 
