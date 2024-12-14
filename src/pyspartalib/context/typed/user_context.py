@@ -6,8 +6,8 @@
 from pathlib import Path
 from typing import TypedDict
 
-from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.context.extension.path_context import Paths
+from pyspartalib.context.default.string_context import Strs
+from pyspartalib.context.extension.path_context import Paths
 
 
 class ArchiveStatus(TypedDict):
