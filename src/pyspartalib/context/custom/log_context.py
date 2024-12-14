@@ -5,6 +5,6 @@
 
 from typing import Callable
 
-from pyspartaproj.script.project.log_pipeline import LogPipeline
+from pyspartalib.script.project.log_pipeline import LogPipeline
 
 LogFunc = Callable[[], LogPipeline]

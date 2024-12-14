@@ -3,7 +3,7 @@
 
 from typing import Callable
 
-from pyspartaproj.script.time.count.log_timer import LogTimer
+from pyspartalib.script.time.count.log_timer import LogTimer
 
 TimerFunc = Callable[[LogTimer], None]
 TimerIntStrFunc = Callable[[LogTimer, int], str | None]

@@ -4,6 +4,6 @@
 from pathlib import Path
 from typing import Callable
 
-from pyspartaproj.script.path.safe.safe_copy import SafeCopy
+from pyspartalib.script.path.safe.safe_copy import SafeCopy
 
 CopyPathFunc = Callable[[SafeCopy, Path], None]
