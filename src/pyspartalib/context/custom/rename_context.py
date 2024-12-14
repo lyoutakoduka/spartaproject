@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""User defined types using class SafeRename."""
+
 from pathlib import Path
 from typing import Callable
 
