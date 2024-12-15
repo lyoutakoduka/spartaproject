@@ -7,8 +7,8 @@ from datetime import datetime
 from decimal import Decimal
 from zoneinfo import ZoneInfo
 
-from pyspartaproj.context.default.integer_context import IntPair, IntPair2
-from pyspartaproj.script.time.format.create_iso_date import (
+from pyspartalib.context.default.integer_context import IntPair, IntPair2
+from pyspartalib.script.time.format.create_iso_date import (
     get_iso_epoch,
     get_iso_string,
     get_iso_time,

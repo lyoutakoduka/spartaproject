@@ -3,16 +3,16 @@
 
 """Test module to convert date time element to several types."""
 
-from pyspartaproj.context.default.integer_context import (
+from pyspartalib.context.default.integer_context import (
     IntPair,
     IntPair2,
     Ints,
 )
-from pyspartaproj.context.default.string_context import StrPair, StrPair2, Strs
-from pyspartaproj.context.file.json_context import Jsons
-from pyspartaproj.script.bool.compare_json import is_same_json
-from pyspartaproj.script.file.json.convert_to_json import multiple2_to_json
-from pyspartaproj.script.time.format.format_iso_date import format_iso_date
+from pyspartalib.context.default.string_context import StrPair, StrPair2, Strs
+from pyspartalib.context.file.json_context import Jsons
+from pyspartalib.script.bool.compare_json import is_same_json
+from pyspartalib.script.file.json.convert_to_json import multiple2_to_json
+from pyspartalib.script.time.format.format_iso_date import format_iso_date
 
 
 def _get_source_year() -> IntPair:
