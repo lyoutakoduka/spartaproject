@@ -7,9 +7,9 @@ from decimal import Decimal
 
 from pyspartalib.context.custom.log_context import LogFunc
 from pyspartalib.context.default.string_context import Strs
-from pyspartalib.interface.pytest import fail
 from pyspartalib.script.project.log_pipeline import LogPipeline
 from pyspartalib.script.string.off_stdout import StdoutText
+from tests.pyspartalib.interface.pytest import fail
 
 
 def _get_interval() -> Decimal:
