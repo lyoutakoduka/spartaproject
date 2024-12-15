@@ -3,7 +3,7 @@
 
 """Test module to encode string by specific character encoding."""
 
-from pyspartaproj.script.string.encoding.set_encoding import set_encoding
+from pyspartalib.script.string.encoding.set_encoding import set_encoding
 
 
 def _compare_encoding(expected: bytes, result: bytes) -> None:

@@ -3,7 +3,7 @@
 
 """Test module to decode byte data by specific character encoding."""
 
-from pyspartaproj.script.string.encoding.set_decoding import set_decoding
+from pyspartalib.script.string.encoding.set_decoding import set_decoding
 
 
 def _compare_decoding(result: str) -> None:

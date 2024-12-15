@@ -3,8 +3,8 @@
 
 """Test module to find character encoding from string automatically."""
 
-from pyspartaproj.script.string.encoding.find_encoding import find_encoding
-from pyspartaproj.script.string.encoding.set_encoding import set_encoding
+from pyspartalib.script.string.encoding.find_encoding import find_encoding
+from pyspartalib.script.string.encoding.set_encoding import set_encoding
 
 
 def _get_input() -> str:
