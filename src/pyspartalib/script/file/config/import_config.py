@@ -7,9 +7,9 @@ from configparser import ConfigParser
 from decimal import Decimal
 from pathlib import Path
 
-from pyspartaproj.context.default.string_context import StrsPair
-from pyspartaproj.context.file.config_context import Basic, Config
-from pyspartaproj.script.file.text.import_file import text_import
+from pyspartalib.context.default.string_context import StrsPair
+from pyspartalib.context.file.config_context import Basic, Config
+from pyspartalib.script.file.text.import_file import text_import
 
 
 def _find_other(config: ConfigParser, section: str, option: str) -> Basic:
