@@ -91,11 +91,11 @@
     "reportShadowedImports": "information",
     "reportMissingTypeStubs": "information"
   },
-  "python.analysis.extraPaths": ["docs", ".temp/typings"],
+  "python.analysis.extraPaths": ["docs", ".temp/internal/typings"],
   "python.analysis.inlayHints.functionReturnTypes": true,
   "python.analysis.inlayHints.pytestParameters": true,
   "python.analysis.inlayHints.variableTypes": true,
-  "python.analysis.stubPath": ".temp/typings",
+  "python.analysis.stubPath": ".temp/internal/typings",
   "python.analysis.typeCheckingMode": "strict",
   "python.languageServer": "Pylance",
   "terminal.integrated.fontSize": 14,
