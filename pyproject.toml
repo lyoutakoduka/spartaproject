@@ -3,10 +3,10 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build]
-include = ["pyspartaproj/*"]
+include = ["pyspartalib/*"]
 
 [project]
-name = "pyspartaproj"
+name = "pyspartalib"
 version = "0.0.4"
 dependencies = [
 ]
@@ -18,7 +18,7 @@ description = "Sync browser file system to local, and run Python on browser."
 readme = "README.md"
 license = {file = "LICENSE"}
 keywords = [
-    "pyspartaproj"
+    "pyspartalib"
 ]
 classifiers = [
   "License :: OSI Approved :: MIT License",
