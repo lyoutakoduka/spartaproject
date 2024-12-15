@@ -5,11 +5,11 @@
 
 from pathlib import Path
 
-from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.script.path.modify.mount.build_linux_path import (
+from pyspartalib.context.default.string_context import Strs
+from pyspartalib.script.path.modify.mount.build_linux_path import (
     get_linux_path,
 )
-from pyspartaproj.script.path.modify.mount.shared.has_linux_head import (
+from pyspartalib.script.path.modify.mount.shared.has_linux_head import (
     has_linux_head,
 )
 
