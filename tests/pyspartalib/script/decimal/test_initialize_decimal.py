@@ -6,8 +6,8 @@
 from decimal import Context, Decimal, FloatOperation, getcontext, setcontext
 
 from pyspartalib.context.default.string_context import Strs
-from pyspartalib.interface.pytest import raises
 from pyspartalib.script.decimal.initialize_decimal import initialize_decimal
+from tests.pyspartalib.interface.pytest import raises
 
 
 def test_float() -> None:
