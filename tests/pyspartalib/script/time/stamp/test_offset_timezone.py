@@ -3,10 +3,10 @@
 
 """Test module to offset date time by current time zone to UTC time."""
 
-from pyspartaproj.context.default.integer_context import IntPair, IntPair2
-from pyspartaproj.context.extension.time_context import Times
-from pyspartaproj.script.time.format.create_iso_date import get_iso_time
-from pyspartaproj.script.time.stamp.offset_timezone import offset_time
+from pyspartalib.context.default.integer_context import IntPair, IntPair2
+from pyspartalib.context.extension.time_context import Times
+from pyspartalib.script.time.format.create_iso_date import get_iso_time
+from pyspartalib.script.time.stamp.offset_timezone import offset_time
 
 
 def _get_year() -> IntPair:

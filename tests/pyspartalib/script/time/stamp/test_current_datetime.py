@@ -5,9 +5,9 @@
 
 from datetime import datetime
 
-from pyspartaproj.context.default.integer_context import IntPair, IntPair2
-from pyspartaproj.script.time.format.create_iso_date import get_iso_time
-from pyspartaproj.script.time.stamp.current_datetime import get_current_time
+from pyspartalib.context.default.integer_context import IntPair, IntPair2
+from pyspartalib.script.time.format.create_iso_date import get_iso_time
+from pyspartalib.script.time.stamp.current_datetime import get_current_time
 
 
 def _get_year() -> IntPair:

@@ -6,15 +6,15 @@
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from pyspartaproj.context.extension.path_context import PathFunc
-from pyspartaproj.context.extension.time_context import TimePair, TimePair2
-from pyspartaproj.script.path.iterate_directory import walk_iterator
-from pyspartaproj.script.path.modify.current.get_relative import get_relative
-from pyspartaproj.script.path.temporary.create_temporary_tree import (
+from pyspartalib.context.extension.path_context import PathFunc
+from pyspartalib.context.extension.time_context import TimePair, TimePair2
+from pyspartalib.script.path.iterate_directory import walk_iterator
+from pyspartalib.script.path.modify.current.get_relative import get_relative
+from pyspartalib.script.path.temporary.create_temporary_tree import (
     create_temporary_tree,
 )
-from pyspartaproj.script.time.path.get_timestamp import get_directory_latest
-from pyspartaproj.script.time.stamp.is_same_stamp import is_same_stamp
+from pyspartalib.script.time.path.get_timestamp import get_directory_latest
+from pyspartalib.script.time.stamp.is_same_stamp import is_same_stamp
 
 
 def _get_directory_latest(path: Path, access: bool) -> TimePair:
