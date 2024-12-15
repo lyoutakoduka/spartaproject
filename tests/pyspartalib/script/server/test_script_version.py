@@ -7,7 +7,7 @@ from pathlib import Path
 from platform import python_version
 from sys import executable
 
-from pyspartaproj.script.server.script_version import (
+from pyspartalib.script.server.script_version import (
     get_interpreter_version,
     get_version_name,
 )
