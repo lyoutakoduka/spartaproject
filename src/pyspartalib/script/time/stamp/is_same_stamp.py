@@ -3,10 +3,10 @@
 
 """Module to compare two dictionaries which store path and time stamp."""
 
-from pyspartaproj.context.extension.time_context import TimePair
-from pyspartaproj.context.file.json_context import Json
-from pyspartaproj.script.bool.compare_json import is_same_json
-from pyspartaproj.script.file.json.convert_to_json import multiple_to_json
+from pyspartalib.context.extension.time_context import TimePair
+from pyspartalib.context.file.json_context import Json
+from pyspartalib.script.bool.compare_json import is_same_json
+from pyspartalib.script.file.json.convert_to_json import multiple_to_json
 
 
 def _get_stamp_json(times: TimePair) -> Json:
