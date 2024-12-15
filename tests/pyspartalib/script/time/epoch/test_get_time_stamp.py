@@ -5,7 +5,7 @@
 
 from decimal import Decimal
 
-from pyspartaproj.script.time.epoch.get_time_stamp import get_initial_epoch
+from pyspartalib.script.time.epoch.get_time_stamp import get_initial_epoch
 
 
 def test_epoch() -> None:

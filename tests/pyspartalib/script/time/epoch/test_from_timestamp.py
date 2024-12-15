@@ -6,9 +6,9 @@
 from datetime import datetime
 from decimal import Decimal
 
-from pyspartaproj.context.default.integer_context import IntPair2
-from pyspartaproj.script.time.epoch.from_timestamp import time_from_timestamp
-from pyspartaproj.script.time.format.create_iso_date import (
+from pyspartalib.context.default.integer_context import IntPair2
+from pyspartalib.script.time.epoch.from_timestamp import time_from_timestamp
+from pyspartalib.script.time.format.create_iso_date import (
     get_iso_epoch,
     get_iso_time,
 )
