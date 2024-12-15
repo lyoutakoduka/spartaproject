@@ -7,8 +7,8 @@ from decimal import Decimal
 from os import stat_result
 from pathlib import Path
 
-from pyspartaproj.context.default.integer_context import IntPair2
-from pyspartaproj.script.time.format.create_iso_date import get_iso_epoch
+from pyspartalib.context.default.integer_context import IntPair2
+from pyspartalib.script.time.format.create_iso_date import get_iso_epoch
 
 
 def _get_source() -> IntPair2:

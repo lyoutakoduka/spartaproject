@@ -7,10 +7,10 @@ from datetime import datetime
 from decimal import Decimal
 from pathlib import Path
 
-from pyspartaproj.context.extension.path_context import PathGene
-from pyspartaproj.context.extension.time_context import TimePair
-from pyspartaproj.script.time.epoch.from_timestamp import time_from_timestamp
-from pyspartaproj.script.time.path.get_file_epoch import get_file_epoch
+from pyspartalib.context.extension.path_context import PathGene
+from pyspartalib.context.extension.time_context import TimePair
+from pyspartalib.script.time.epoch.from_timestamp import time_from_timestamp
+from pyspartalib.script.time.path.get_file_epoch import get_file_epoch
 
 
 def _convert_timestamp(time: float, jst: bool) -> datetime:

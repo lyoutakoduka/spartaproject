@@ -8,11 +8,11 @@ from decimal import Decimal
 from os import utime
 from pathlib import Path
 
-from pyspartaproj.context.default.float_context import Floats
-from pyspartaproj.context.extension.decimal_context import Decs
-from pyspartaproj.script.decimal.convert_float import convert_float_array
-from pyspartaproj.script.time.path.get_file_epoch import get_file_epoch
-from pyspartaproj.script.time.stamp.offset_timezone import offset_time
+from pyspartalib.context.default.float_context import Floats
+from pyspartalib.context.extension.decimal_context import Decs
+from pyspartalib.script.decimal.convert_float import convert_float_array
+from pyspartalib.script.time.path.get_file_epoch import get_file_epoch
+from pyspartalib.script.time.stamp.offset_timezone import offset_time
 
 
 def _convert_timestamp(time: datetime) -> Decimal:
