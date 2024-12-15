@@ -3,7 +3,7 @@
 
 """Module to decode byte data by specific character encoding."""
 
-from pyspartaproj.script.string.encoding.find_encoding import find_encoding
+from pyspartalib.script.string.encoding.find_encoding import find_encoding
 
 
 def set_decoding(byte: bytes, encoding: str | None = None) -> str:
