@@ -53,7 +53,7 @@ def test_builtin() -> None:
 
     difference: Decimal = _get_elapsed_time(timer, begin)
 
-    assert Decimal("0.015") > difference
+    assert _get_interval() < difference
 
 
 def test_integer() -> None:
