@@ -5,7 +5,7 @@
 
 from pathlib import Path
 
-from pyspartaproj.script.time.directory.get_time_path import (
+from pyspartalib.script.time.directory.get_time_path import (
     get_initial_time_path,
 )
 
