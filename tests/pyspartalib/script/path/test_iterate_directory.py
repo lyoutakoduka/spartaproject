@@ -6,17 +6,17 @@
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from pyspartaproj.context.default.string_context import Strs, Strs2
-from pyspartaproj.context.extension.path_context import (
+from pyspartalib.context.default.string_context import Strs, Strs2
+from pyspartalib.context.extension.path_context import (
     PathFunc,
     PathGene,
     Paths,
 )
-from pyspartaproj.script.path.iterate_directory import walk_iterator
-from pyspartaproj.script.path.modify.current.get_relative import (
+from pyspartalib.script.path.iterate_directory import walk_iterator
+from pyspartalib.script.path.modify.current.get_relative import (
     get_relative_array,
 )
-from pyspartaproj.script.path.temporary.create_temporary_tree import (
+from pyspartalib.script.path.temporary.create_temporary_tree import (
     create_temporary_tree,
 )
 
