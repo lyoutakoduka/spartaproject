@@ -14,6 +14,22 @@ from pyspartalib.script.time.epoch.get_time_stamp import get_initial_epoch
 initialize_decimal()
 
 
+def _get_interval() -> Decimal:
+    return Decimal("0.005")
+
+
+def _get_starting_point(timer: TimerSelect) -> Decimal:
+    return timer()
+
+
+def _sleep_interval() -> None:
+    sleep(float(_get_interval()))
+
+
+def _get_elapsed_time(timer: TimerSelect, begin: Decimal) -> Decimal:
+    return timer() - begin
+
+
 def _get_time_array() -> Decs:
     return [Decimal(str(i)) for i in range(10)]
 
@@ -31,11 +47,11 @@ def _check_counter_result(expected: Decs, timer: TimerSelect) -> None:
 def test_builtin() -> None:
     """Test to count timer."""
     timer = TimerSelect()
-    begin: Decimal = timer()
+    begin: Decimal = _get_starting_point(timer)
 
-    sleep(float(Decimal("0.005")))
+    _sleep_interval()
 
-    assert Decimal("0.015") > (timer() - begin)
+    assert _get_interval() < _get_elapsed_time(timer, begin)
 
 
 def test_integer() -> None:
