@@ -7,23 +7,23 @@ from decimal import Decimal
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from pyspartaproj.context.default.bool_context import BoolPair, BoolPair2
-from pyspartaproj.context.default.float_context import FloatPair, FloatPair2
-from pyspartaproj.context.default.integer_context import IntPair, IntPair2
-from pyspartaproj.context.default.string_context import StrPair, StrPair2, Strs
-from pyspartaproj.context.extension.decimal_context import DecPair, DecPair2
-from pyspartaproj.context.extension.path_context import PathPair, PathPair2
-from pyspartaproj.context.file.config_context import (
+from pyspartalib.context.default.bool_context import BoolPair, BoolPair2
+from pyspartalib.context.default.float_context import FloatPair, FloatPair2
+from pyspartalib.context.default.integer_context import IntPair, IntPair2
+from pyspartalib.context.default.string_context import StrPair, StrPair2, Strs
+from pyspartalib.context.extension.decimal_context import DecPair, DecPair2
+from pyspartalib.context.extension.path_context import PathPair, PathPair2
+from pyspartalib.context.file.config_context import (
     BasicPair2,
     Config,
     SectionPair2,
 )
-from pyspartaproj.script.file.config.export_config import (
+from pyspartalib.script.file.config.export_config import (
     config_dump,
     config_export,
 )
-from pyspartaproj.script.file.text.import_file import text_import
-from pyspartaproj.script.string.format_texts import format_indent
+from pyspartalib.script.file.text.import_file import text_import
+from pyspartalib.script.string.format_texts import format_indent
 
 
 def _common_test(expected: str, source: Config) -> None:
