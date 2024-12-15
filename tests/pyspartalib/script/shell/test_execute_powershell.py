@@ -5,16 +5,16 @@
 
 from pathlib import Path
 
-from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.script.path.modify.get_resource import get_resource
-from pyspartaproj.script.shell.execute_powershell import (
+from pyspartalib.context.default.string_context import Strs
+from pyspartalib.script.path.modify.get_resource import get_resource
+from pyspartalib.script.shell.execute_powershell import (
     execute_powershell,
     get_double_quoted_command,
     get_path_string,
     get_quoted_path,
     get_script_string,
 )
-from pyspartaproj.script.string.temporary_text import temporary_text
+from pyspartalib.script.string.temporary_text import temporary_text
 
 
 def _print_command() -> str:

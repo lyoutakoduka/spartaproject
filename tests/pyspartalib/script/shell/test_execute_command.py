@@ -6,10 +6,10 @@
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.interface.pytest import fail
-from pyspartaproj.script.path.modify.current.get_current import get_current
-from pyspartaproj.script.shell.execute_command import (
+from pyspartalib.context.default.string_context import Strs
+from pyspartalib.interface.pytest import fail
+from pyspartalib.script.path.modify.current.get_current import get_current
+from pyspartalib.script.shell.execute_command import (
     execute_multiple,
     execute_single,
 )

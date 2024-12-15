@@ -5,21 +5,21 @@
 
 from pathlib import Path
 
-from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.context.extension.path_context import PathPair, Paths
-from pyspartaproj.script.path.modify.current.get_absolute import get_absolute
-from pyspartaproj.script.path.modify.current.get_relative import (
+from pyspartalib.context.default.string_context import Strs
+from pyspartalib.context.extension.path_context import PathPair, Paths
+from pyspartalib.script.path.modify.current.get_absolute import get_absolute
+from pyspartalib.script.path.modify.current.get_relative import (
     get_relative,
     is_relative,
 )
-from pyspartaproj.script.path.modify.get_resource import get_resource
-from pyspartaproj.script.platform.platform_status import is_platform_linux
-from pyspartaproj.script.shell.execute_python import (
+from pyspartalib.script.path.modify.get_resource import get_resource
+from pyspartalib.script.platform.platform_status import is_platform_linux
+from pyspartalib.script.shell.execute_python import (
     execute_python,
     get_interpreter_path,
     get_script_string,
 )
-from pyspartaproj.script.string.temporary_text import temporary_text
+from pyspartalib.script.string.temporary_text import temporary_text
 
 
 def _get_config_file() -> Path:
