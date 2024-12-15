@@ -3,7 +3,7 @@
 
 """Module for test to execute specific script in Python."""
 
-from pyspartaproj.script.string.temporary_text import temporary_text
+from pyspartalib.script.string.temporary_text import temporary_text
 
 
 def _main() -> None:

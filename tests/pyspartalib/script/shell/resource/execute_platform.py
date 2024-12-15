@@ -3,7 +3,7 @@
 
 """Module for test to execute Python on all platform."""
 
-from pyspartaproj.script.platform.get_platform import get_platform
+from pyspartalib.script.platform.get_platform import get_platform
 
 
 def _main() -> None:
