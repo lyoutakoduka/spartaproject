@@ -5,8 +5,8 @@
 
 from decimal import Decimal
 
-from pyspartaproj.context.default.float_context import Floats
-from pyspartaproj.script.decimal.convert_float import convert_float_array
+from pyspartalib.context.default.float_context import Floats
+from pyspartalib.script.decimal.convert_float import convert_float_array
 
 
 def test_array() -> None:
