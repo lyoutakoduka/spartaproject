@@ -5,9 +5,9 @@
 
 from pathlib import Path
 
-from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.script.server.local.upload_server import UploadServer
-from pyspartaproj.script.server.script_version import get_version_name
+from pyspartalib.context.default.string_context import Strs
+from pyspartalib.script.server.local.upload_server import UploadServer
+from pyspartalib.script.server.script_version import get_version_name
 
 
 class ExecuteServer(UploadServer):

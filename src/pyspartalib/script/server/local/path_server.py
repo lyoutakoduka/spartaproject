@@ -5,10 +5,10 @@
 
 from pathlib import Path
 
-from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.context.extension.path_context import PathPair
-from pyspartaproj.script.directory.work_space import WorkSpace
-from pyspartaproj.script.path.modify.current.get_relative import get_relative
+from pyspartalib.context.default.string_context import Strs
+from pyspartalib.context.extension.path_context import PathPair
+from pyspartalib.script.directory.work_space import WorkSpace
+from pyspartalib.script.path.modify.current.get_relative import get_relative
 
 
 class PathServer(WorkSpace):

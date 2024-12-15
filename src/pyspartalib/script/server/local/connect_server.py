@@ -7,18 +7,18 @@ from decimal import Decimal
 from pathlib import Path
 from time import sleep
 
-from pyspartaproj.context.default.string_context import StrPair, Strs
-from pyspartaproj.interface.paramiko import (
+from pyspartalib.context.default.string_context import StrPair, Strs
+from pyspartalib.interface.paramiko import (
     AutoAddPolicy,
     Channel,
     SFTPClient,
     SSHClient,
 )
-from pyspartaproj.script.decimal.initialize_decimal import initialize_decimal
-from pyspartaproj.script.project.project_context import ProjectContext
-from pyspartaproj.script.server.local.path_server import PathServer
-from pyspartaproj.script.string.encoding.set_decoding import set_decoding
-from pyspartaproj.script.string.encoding.set_encoding import set_encoding
+from pyspartalib.script.decimal.initialize_decimal import initialize_decimal
+from pyspartalib.script.project.project_context import ProjectContext
+from pyspartalib.script.server.local.path_server import PathServer
+from pyspartalib.script.string.encoding.set_decoding import set_decoding
+from pyspartalib.script.string.encoding.set_encoding import set_encoding
 
 initialize_decimal()
 

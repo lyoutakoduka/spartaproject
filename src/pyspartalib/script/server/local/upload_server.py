@@ -6,15 +6,15 @@
 from os import stat_result
 from pathlib import Path
 
-from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.context.extension.path_context import Paths
-from pyspartaproj.interface.paramiko import SFTPAttributes
-from pyspartaproj.script.path.iterate_directory import walk_iterator
-from pyspartaproj.script.path.modify.current.get_relative import (
+from pyspartalib.context.default.string_context import Strs
+from pyspartalib.context.extension.path_context import Paths
+from pyspartalib.interface.paramiko import SFTPAttributes
+from pyspartalib.script.path.iterate_directory import walk_iterator
+from pyspartalib.script.path.modify.current.get_relative import (
     get_relative,
     is_relative,
 )
-from pyspartaproj.script.server.local.connect_server import ConnectServer
+from pyspartalib.script.server.local.connect_server import ConnectServer
 
 
 class UploadServer(ConnectServer):
