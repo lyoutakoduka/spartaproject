@@ -5,13 +5,13 @@
 
 from pathlib import Path
 
-from pyspartaproj.context.extension.path_context import Paths
-from pyspartaproj.script.directory.create_parent import create_parent
-from pyspartaproj.script.path.modify.current.get_relative import (
+from pyspartalib.context.extension.path_context import Paths
+from pyspartalib.script.directory.create_parent import create_parent
+from pyspartalib.script.path.modify.current.get_relative import (
     get_relative,
     is_relative,
 )
-from pyspartaproj.script.path.safe.safe_rename import SafeRename
+from pyspartalib.script.path.safe.safe_rename import SafeRename
 
 
 class SafeTrash(SafeRename):

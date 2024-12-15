@@ -6,8 +6,8 @@
 from pathlib import Path
 from shutil import copy2, copytree
 
-from pyspartaproj.script.path.modify.avoid_duplication import get_avoid_path
-from pyspartaproj.script.path.safe.safe_file_history import FileHistory
+from pyspartalib.script.path.modify.avoid_duplication import get_avoid_path
+from pyspartalib.script.path.safe.safe_file_history import FileHistory
 
 
 class SafeCopy(FileHistory):
