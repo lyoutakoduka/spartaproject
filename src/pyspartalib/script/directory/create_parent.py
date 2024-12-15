@@ -5,7 +5,7 @@
 
 from pathlib import Path
 
-from pyspartaproj.script.directory.create_directory import create_directory
+from pyspartalib.script.directory.create_directory import create_directory
 
 
 def create_parent(child_path: Path) -> Path:

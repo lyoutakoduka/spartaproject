@@ -5,8 +5,8 @@
 
 from pathlib import Path
 
-from pyspartaproj.script.directory.create_directory import create_directory
-from pyspartaproj.script.time.directory.get_current_path import (
+from pyspartalib.script.directory.create_directory import create_directory
+from pyspartalib.script.time.directory.get_current_path import (
     get_working_path,
 )
 

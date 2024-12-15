@@ -5,7 +5,7 @@
 
 from pathlib import Path
 
-from pyspartaproj.context.extension.path_context import PathPair, Paths
+from pyspartalib.context.extension.path_context import PathPair, Paths
 
 
 def create_directory(path: Path) -> Path:

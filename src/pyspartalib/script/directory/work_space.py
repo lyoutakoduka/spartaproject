@@ -7,8 +7,8 @@ from pathlib import Path
 from shutil import rmtree
 from tempfile import mkdtemp
 
-from pyspartaproj.script.directory.create_directory import create_directory
-from pyspartaproj.script.directory.date_time_space import create_working_space
+from pyspartalib.script.directory.create_directory import create_directory
+from pyspartalib.script.directory.date_time_space import create_working_space
 
 
 class WorkSpace:
