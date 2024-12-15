@@ -5,7 +5,7 @@
 
 from pathlib import Path
 
-from pyspartaproj.script.string.encoding.set_encoding import set_encoding
+from pyspartalib.script.string.encoding.set_encoding import set_encoding
 
 
 def byte_export(export_path: Path, source: bytes) -> Path:
