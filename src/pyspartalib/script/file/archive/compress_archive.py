@@ -8,28 +8,28 @@ from decimal import Decimal
 from pathlib import Path
 from zipfile import ZIP_LZMA, ZIP_STORED, ZipFile, ZipInfo
 
-from pyspartaproj.context.default.integer_context import Ints
-from pyspartaproj.context.default.string_context import StrPair, Strs
-from pyspartaproj.context.extension.archive_context import Archives
-from pyspartaproj.context.extension.path_context import Paths
-from pyspartaproj.script.decimal.initialize_decimal import initialize_decimal
-from pyspartaproj.script.directory.create_directory import create_directory
-from pyspartaproj.script.file.archive.archive_format import rename_format
-from pyspartaproj.script.file.json.convert_to_json import multiple_to_json
-from pyspartaproj.script.file.json.export_json import json_dump
-from pyspartaproj.script.file.text.import_file import byte_import
-from pyspartaproj.script.path.iterate_directory import walk_iterator
-from pyspartaproj.script.path.modify.current.get_relative import (
+from pyspartalib.context.default.integer_context import Ints
+from pyspartalib.context.default.string_context import StrPair, Strs
+from pyspartalib.context.extension.archive_context import Archives
+from pyspartalib.context.extension.path_context import Paths
+from pyspartalib.script.decimal.initialize_decimal import initialize_decimal
+from pyspartalib.script.directory.create_directory import create_directory
+from pyspartalib.script.file.archive.archive_format import rename_format
+from pyspartalib.script.file.json.convert_to_json import multiple_to_json
+from pyspartalib.script.file.json.export_json import json_dump
+from pyspartalib.script.file.text.import_file import byte_import
+from pyspartalib.script.path.iterate_directory import walk_iterator
+from pyspartalib.script.path.modify.current.get_relative import (
     get_relative,
     is_relative,
 )
-from pyspartaproj.script.path.status.get_statistic import get_file_size
-from pyspartaproj.script.string.encoding.set_encoding import set_encoding
-from pyspartaproj.script.time.path.get_timestamp import (
+from pyspartalib.script.path.status.get_statistic import get_file_size
+from pyspartalib.script.string.encoding.set_encoding import set_encoding
+from pyspartalib.script.time.path.get_timestamp import (
     get_invalid_time,
     get_latest,
 )
-from pyspartaproj.script.time.stamp.current_datetime import get_current_time
+from pyspartalib.script.time.stamp.current_datetime import get_current_time
 
 initialize_decimal()
 

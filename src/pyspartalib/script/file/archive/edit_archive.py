@@ -5,16 +5,16 @@
 
 from pathlib import Path
 
-from pyspartaproj.context.extension.path_context import Paths
-from pyspartaproj.context.extension.time_context import TimePair
-from pyspartaproj.script.file.archive.compress_archive import CompressArchive
-from pyspartaproj.script.file.archive.decompress_archive import (
+from pyspartalib.context.extension.path_context import Paths
+from pyspartalib.context.extension.time_context import TimePair
+from pyspartalib.script.file.archive.compress_archive import CompressArchive
+from pyspartalib.script.file.archive.decompress_archive import (
     DecompressArchive,
 )
-from pyspartaproj.script.path.iterate_directory import walk_iterator
-from pyspartaproj.script.path.safe.safe_trash import SafeTrash
-from pyspartaproj.script.time.path.get_timestamp import get_directory_latest
-from pyspartaproj.script.time.stamp.is_same_stamp import is_same_stamp
+from pyspartalib.script.path.iterate_directory import walk_iterator
+from pyspartalib.script.path.safe.safe_trash import SafeTrash
+from pyspartalib.script.time.path.get_timestamp import get_directory_latest
+from pyspartalib.script.time.stamp.is_same_stamp import is_same_stamp
 
 
 class EditArchive(SafeTrash):
