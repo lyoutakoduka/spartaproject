@@ -5,7 +5,7 @@
 
 from platform import uname
 
-from pyspartaproj.script.platform.platform_status import (
+from pyspartalib.script.platform.platform_status import (
     get_platform,
     is_platform_linux,
 )
