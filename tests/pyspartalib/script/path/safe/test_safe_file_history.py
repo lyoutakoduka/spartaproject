@@ -6,19 +6,19 @@
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.context.extension.path_context import (
+from pyspartalib.context.default.string_context import Strs
+from pyspartalib.context.extension.path_context import (
     PathFunc,
     PathPair,
     PathPair2,
     Paths2,
     Paths3,
 )
-from pyspartaproj.interface.pytest import fail
-from pyspartaproj.script.path.modify.current.get_relative import is_relative
-from pyspartaproj.script.path.safe.safe_file_history import FileHistory
-from pyspartaproj.script.stack_frame import current_frame
-from pyspartaproj.script.time.directory.get_time_path import (
+from pyspartalib.interface.pytest import fail
+from pyspartalib.script.path.modify.current.get_relative import is_relative
+from pyspartalib.script.path.safe.safe_file_history import FileHistory
+from pyspartalib.script.stack_frame import current_frame
+from pyspartalib.script.time.directory.get_time_path import (
     get_initial_time_path,
 )
 
