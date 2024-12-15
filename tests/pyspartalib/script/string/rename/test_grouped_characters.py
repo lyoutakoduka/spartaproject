@@ -3,9 +3,9 @@
 
 """Test Module to get characters constructed by multiple or single byte."""
 
-from pyspartaproj.context.default.string_context import Strs, Strs2
-from pyspartaproj.context.typed.user_context import CharacterTable
-from pyspartaproj.script.string.rename.grouped_characters import (
+from pyspartalib.context.default.string_context import Strs, Strs2
+from pyspartalib.context.typed.user_context import CharacterTable
+from pyspartalib.script.string.rename.grouped_characters import (
     GroupedCharacters,
 )
 

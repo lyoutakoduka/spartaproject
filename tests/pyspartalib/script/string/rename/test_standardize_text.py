@@ -3,7 +3,7 @@
 
 """Test module to standardize string for key of dictionary."""
 
-from pyspartaproj.script.string.rename.standardize_text import StandardizeText
+from pyspartalib.script.string.rename.standardize_text import StandardizeText
 
 
 def _compare_text(expected: str, result: str) -> None:

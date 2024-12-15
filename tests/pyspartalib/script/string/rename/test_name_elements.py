@@ -3,10 +3,10 @@
 
 """Test module to take out name and index from base name of file."""
 
-from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.context.typed.user_context import BaseName
-from pyspartaproj.interface.pytest import fail
-from pyspartaproj.script.string.rename.name_elements import NameElements
+from pyspartalib.context.default.string_context import Strs
+from pyspartalib.context.typed.user_context import BaseName
+from pyspartalib.interface.pytest import fail
+from pyspartalib.script.string.rename.name_elements import NameElements
 
 
 def _compare_name(name: str, base_name: BaseName) -> None:

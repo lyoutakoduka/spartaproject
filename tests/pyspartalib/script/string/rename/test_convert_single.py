@@ -6,7 +6,7 @@
 There are converted to single byte same characters in Ascii table.
 """
 
-from pyspartaproj.script.string.rename.convert_single import ConvertSingle
+from pyspartalib.script.string.rename.convert_single import ConvertSingle
 
 
 def _common_test(expected: str, text: str) -> None:

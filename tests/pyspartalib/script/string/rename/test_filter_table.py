@@ -6,8 +6,8 @@
 Each character should be included in user defined character tables.
 """
 
-from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.script.string.rename.filter_table import FilterTable
+from pyspartalib.context.default.string_context import Strs
+from pyspartalib.script.string.rename.filter_table import FilterTable
 
 
 def _filter_text(texts: Strs, filter_table: FilterTable) -> bool:

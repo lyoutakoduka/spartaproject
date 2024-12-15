@@ -3,8 +3,8 @@
 
 """Test module to convert string by using the split identifier."""
 
-from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.script.string.rename.split_identifier import SplitIdentifier
+from pyspartalib.context.default.string_context import Strs
+from pyspartalib.script.string.rename.split_identifier import SplitIdentifier
 
 
 def _compare_text(expected: str, result: str) -> None:
