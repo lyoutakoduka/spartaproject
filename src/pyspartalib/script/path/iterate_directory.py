@@ -5,7 +5,7 @@
 
 from pathlib import Path
 
-from pyspartaproj.context.extension.path_context import PathGene
+from pyspartalib.context.extension.path_context import PathGene
 
 
 def _create_filter(
