@@ -5,7 +5,7 @@
 
 from pathlib import Path
 
-from pyspartaproj.script.shell.execute_command import execute_single
+from pyspartalib.script.shell.execute_command import execute_single
 
 
 def get_version_name(version: str) -> str:
