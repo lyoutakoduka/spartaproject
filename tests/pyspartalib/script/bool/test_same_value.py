@@ -3,9 +3,9 @@
 
 """Test module to confirm that type bool values are same and True."""
 
-from pyspartaproj.context.default.bool_context import BoolPair, Bools
-from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.script.bool.same_value import bool_same_array, bool_same_pair
+from pyspartalib.context.default.bool_context import BoolPair, Bools
+from pyspartalib.context.default.string_context import Strs
+from pyspartalib.script.bool.same_value import bool_same_array, bool_same_pair
 
 
 def _confirm(status: bool) -> None:

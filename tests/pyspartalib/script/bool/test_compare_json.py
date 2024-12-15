@@ -3,8 +3,8 @@
 
 """Test module to check that two Json objects are same."""
 
-from pyspartaproj.context.file.json_context import Json, Singles
-from pyspartaproj.script.bool.compare_json import is_same_json
+from pyspartalib.context.file.json_context import Json, Singles
+from pyspartalib.script.bool.compare_json import is_same_json
 
 
 def _compare_json(left: Json, right: Json) -> None:
