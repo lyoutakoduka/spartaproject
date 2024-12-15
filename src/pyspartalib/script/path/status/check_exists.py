@@ -5,8 +5,8 @@
 
 from pathlib import Path
 
-from pyspartaproj.context.default.bool_context import BoolPair, Bools
-from pyspartaproj.context.extension.path_context import PathPair, Paths
+from pyspartalib.context.default.bool_context import BoolPair, Bools
+from pyspartalib.context.extension.path_context import PathPair, Paths
 
 
 def _check_exists(path: Path) -> bool:
