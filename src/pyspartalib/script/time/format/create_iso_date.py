@@ -6,14 +6,14 @@
 from datetime import datetime
 from decimal import Decimal
 
-from pyspartaproj.context.default.integer_context import IntPair2
-from pyspartaproj.context.default.string_context import (
+from pyspartalib.context.default.integer_context import IntPair2
+from pyspartalib.context.default.string_context import (
     StrPair,
     StrPair2,
     Strs,
     Strs2,
 )
-from pyspartaproj.script.time.format.format_iso_date import format_iso_date
+from pyspartalib.script.time.format.format_iso_date import format_iso_date
 
 
 def _get_groups() -> Strs:

@@ -3,8 +3,8 @@
 
 """Module to convert date time element from type number to string."""
 
-from pyspartaproj.context.default.integer_context import IntPair, IntPair2
-from pyspartaproj.context.default.string_context import StrPair, StrPair2
+from pyspartalib.context.default.integer_context import IntPair, IntPair2
+from pyspartalib.context.default.string_context import StrPair, StrPair2
 
 
 def _get_iso_digit() -> IntPair2:
