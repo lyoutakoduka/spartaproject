@@ -5,13 +5,13 @@
 
 from pathlib import Path
 
-from pyspartaproj.script.path.modify.mount.build_linux_path import (
+from pyspartalib.script.path.modify.mount.build_linux_path import (
     get_linux_path,
 )
-from pyspartaproj.script.path.modify.mount.build_windows_path import (
+from pyspartalib.script.path.modify.mount.build_windows_path import (
     get_windows_path,
 )
-from pyspartaproj.script.path.modify.mount.convert_to_windows import (
+from pyspartalib.script.path.modify.mount.convert_to_windows import (
     convert_to_windows,
 )
 

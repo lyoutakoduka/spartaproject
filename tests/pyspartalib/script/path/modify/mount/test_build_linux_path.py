@@ -5,7 +5,7 @@
 
 from pathlib import Path
 
-from pyspartaproj.script.path.modify.mount.build_linux_path import (
+from pyspartalib.script.path.modify.mount.build_linux_path import (
     get_linux_head,
     get_linux_path,
     get_mount_point,
