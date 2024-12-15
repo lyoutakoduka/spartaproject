@@ -51,9 +51,7 @@ def test_builtin() -> None:
 
     _sleep_interval()
 
-    difference: Decimal = _get_elapsed_time(timer, begin)
-
-    assert _get_interval() < difference
+    assert _get_interval() < _get_elapsed_time(timer, begin)
 
 
 def test_integer() -> None:
