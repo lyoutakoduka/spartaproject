@@ -8,7 +8,6 @@ from pathlib import Path
 from pyspartalib.context.default.bool_context import Bools
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.context.extension.path_context import PathPair, Paths
-from pyspartalib.interface.pytest import raises
 from pyspartalib.script.bool.compare_value import bool_compare_array
 from pyspartalib.script.bool.same_value import bool_same_array
 from pyspartalib.script.path.modify.current.get_absolute import (
@@ -23,6 +22,7 @@ from pyspartalib.script.path.modify.current.get_relative import (
     is_relative,
     is_relative_array,
 )
+from tests.pyspartalib.interface.pytest import raises
 
 
 def _get_error() -> Path:
