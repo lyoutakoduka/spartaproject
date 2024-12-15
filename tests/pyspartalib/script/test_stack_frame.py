@@ -5,8 +5,8 @@
 
 from pathlib import Path
 
-from pyspartaproj.script.path.modify.current.get_relative import get_relative
-from pyspartaproj.script.stack_frame import StackFrame, current_frame
+from pyspartalib.script.path.modify.current.get_relative import get_relative
+from pyspartalib.script.stack_frame import StackFrame, current_frame
 
 
 def _get_file_expected() -> Path:

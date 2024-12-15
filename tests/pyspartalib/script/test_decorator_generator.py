@@ -3,8 +3,8 @@
 
 from typing import Callable
 
-from pyspartaproj.context.callable_context import CP, CR
-from pyspartaproj.script.decorator_generator import TransferFunction
+from pyspartalib.context.callable_context import CP, CR
+from pyspartalib.script.decorator_generator import TransferFunction
 
 
 class TemporaryDecorator(TransferFunction):
@@ -18,7 +18,7 @@ class TemporaryDecorator(TransferFunction):
         self,
         function: Callable[CP, CR],
         *arguments: CP.args,
-        **key_arguments: CP.kwargs
+        **key_arguments: CP.kwargs,
     ) -> CR:
         result: CR = function(*arguments, **key_arguments)
         self.text *= 2

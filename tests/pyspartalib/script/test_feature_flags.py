@@ -5,8 +5,8 @@
 
 from pathlib import Path
 
-from pyspartaproj.script.feature_flags import in_development
-from pyspartaproj.script.stack_frame import current_frame
+from pyspartalib.script.feature_flags import in_development
+from pyspartalib.script.stack_frame import current_frame
 
 
 def _get_current_file() -> Path:
