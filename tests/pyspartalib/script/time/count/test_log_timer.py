@@ -5,14 +5,14 @@
 
 from decimal import Decimal
 
-from pyspartaproj.context.custom.timer_context import (
+from pyspartalib.context.custom.timer_context import (
     TimerFunc,
     TimerIntStrFunc,
 )
-from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.script.decimal.initialize_decimal import initialize_decimal
-from pyspartaproj.script.string.format_texts import format_indent
-from pyspartaproj.script.time.count.log_timer import LogTimer
+from pyspartalib.context.default.string_context import Strs
+from pyspartalib.script.decimal.initialize_decimal import initialize_decimal
+from pyspartalib.script.string.format_texts import format_indent
+from pyspartalib.script.time.count.log_timer import LogTimer
 
 initialize_decimal()
 

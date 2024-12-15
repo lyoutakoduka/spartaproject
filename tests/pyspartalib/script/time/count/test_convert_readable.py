@@ -5,11 +5,11 @@
 
 from decimal import Decimal
 
-from pyspartaproj.context.default.integer_context import IntPair
-from pyspartaproj.context.default.string_context import StrPair
-from pyspartaproj.context.extension.decimal_context import DecPair
-from pyspartaproj.script.decimal.initialize_decimal import initialize_decimal
-from pyspartaproj.script.time.count.convert_readable import readable_time
+from pyspartalib.context.default.integer_context import IntPair
+from pyspartalib.context.default.string_context import StrPair
+from pyspartalib.context.extension.decimal_context import DecPair
+from pyspartalib.script.decimal.initialize_decimal import initialize_decimal
+from pyspartalib.script.time.count.convert_readable import readable_time
 
 initialize_decimal()
 
