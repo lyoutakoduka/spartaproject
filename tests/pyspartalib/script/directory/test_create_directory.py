@@ -6,23 +6,23 @@
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.context.extension.path_context import (
+from pyspartalib.context.default.string_context import Strs
+from pyspartalib.context.extension.path_context import (
     PathBoolFunc,
     PathPair,
     Paths,
 )
-from pyspartaproj.script.bool.same_value import bool_same_array, bool_same_pair
-from pyspartaproj.script.directory.create_directory import (
+from pyspartalib.script.bool.same_value import bool_same_array, bool_same_pair
+from pyspartalib.script.directory.create_directory import (
     create_directory,
     create_directory_array,
     create_directory_pair,
 )
-from pyspartaproj.script.path.modify.current.get_absolute import (
+from pyspartalib.script.path.modify.current.get_absolute import (
     get_absolute_array,
     get_absolute_pair,
 )
-from pyspartaproj.script.path.status.check_exists import (
+from pyspartalib.script.path.status.check_exists import (
     check_exists_array,
     check_exists_pair,
 )

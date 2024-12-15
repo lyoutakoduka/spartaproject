@@ -6,9 +6,9 @@
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from pyspartaproj.script.directory.date_time_space import create_working_space
-from pyspartaproj.script.path.modify.current.get_relative import get_relative
-from pyspartaproj.script.time.directory.get_time_path import (
+from pyspartalib.script.directory.date_time_space import create_working_space
+from pyspartalib.script.path.modify.current.get_relative import get_relative
+from pyspartalib.script.time.directory.get_time_path import (
     get_initial_time_path,
 )
 
