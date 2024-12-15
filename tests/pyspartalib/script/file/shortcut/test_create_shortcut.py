@@ -12,7 +12,6 @@ from pyspartalib.context.extension.path_context import (
     PathPair,
     Paths,
 )
-from pyspartalib.interface.pytest import fail, raises
 from pyspartalib.script.directory.date_time_space import create_working_space
 from pyspartalib.script.file.shortcut.create_shortcut import create_shortcut
 from pyspartalib.script.file.shortcut.get_shortcut import get_shortcut
@@ -23,6 +22,7 @@ from pyspartalib.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
 from pyspartalib.script.project.project_context import ProjectContext
+from tests.pyspartalib.interface.pytest import fail, raises
 
 
 def _get_config_file() -> Path:
