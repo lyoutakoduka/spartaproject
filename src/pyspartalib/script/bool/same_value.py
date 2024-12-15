@@ -3,7 +3,7 @@
 
 """Module to confirm that type bool values are same and True."""
 
-from pyspartaproj.context.default.bool_context import BoolPair, Bools
+from pyspartalib.context.default.bool_context import BoolPair, Bools
 
 
 def bool_same_array(flags: Bools, invert: bool = False) -> bool:
