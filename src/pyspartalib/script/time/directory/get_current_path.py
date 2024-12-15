@@ -6,15 +6,15 @@
 from datetime import datetime
 from pathlib import Path
 
-from pyspartaproj.context.default.integer_context import IntPair2
-from pyspartaproj.context.default.string_context import (
+from pyspartalib.context.default.integer_context import IntPair2
+from pyspartalib.context.default.string_context import (
     StrPair,
     StrPair2,
     Strs,
     Strs2,
 )
-from pyspartaproj.script.time.format.format_iso_date import format_iso_date
-from pyspartaproj.script.time.stamp.current_datetime import get_current_time
+from pyspartalib.script.time.format.format_iso_date import format_iso_date
+from pyspartalib.script.time.stamp.current_datetime import get_current_time
 
 
 def _get_source_all(time: datetime) -> IntPair2:
