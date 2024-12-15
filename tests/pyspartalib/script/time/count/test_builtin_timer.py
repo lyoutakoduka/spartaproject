@@ -26,6 +26,10 @@ def _sleep_interval() -> None:
     sleep(float(_get_interval()))
 
 
+def _get_elapsed_time(timer: TimerSelect, begin: Decimal) -> Decimal:
+    return timer() - begin
+
+
 def _get_time_array() -> Decs:
     return [Decimal(str(i)) for i in range(10)]
 
@@ -47,7 +51,9 @@ def test_builtin() -> None:
 
     _sleep_interval()
 
-    assert Decimal("0.015") > (timer() - begin)
+    difference: Decimal = _get_elapsed_time(timer, begin)
+
+    assert Decimal("0.015") > difference
 
 
 def test_integer() -> None:
