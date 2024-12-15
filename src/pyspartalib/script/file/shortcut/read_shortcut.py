@@ -5,16 +5,16 @@
 
 from pathlib import Path
 
-from pyspartaproj.context.default.string_context import StrGene, Strs
-from pyspartaproj.script.path.modify.get_resource import get_resource
-from pyspartaproj.script.path.modify.mount.convert_to_linux import (
+from pyspartalib.context.default.string_context import StrGene, Strs
+from pyspartalib.script.path.modify.get_resource import get_resource
+from pyspartalib.script.path.modify.mount.convert_to_linux import (
     convert_to_linux,
 )
-from pyspartaproj.script.path.modify.mount.convert_to_windows import (
+from pyspartalib.script.path.modify.mount.convert_to_windows import (
     convert_to_windows,
 )
-from pyspartaproj.script.platform.platform_status import is_platform_linux
-from pyspartaproj.script.shell.execute_powershell import (
+from pyspartalib.script.platform.platform_status import is_platform_linux
+from pyspartalib.script.shell.execute_powershell import (
     execute_powershell,
     get_double_quoted_command,
     get_path_string,
