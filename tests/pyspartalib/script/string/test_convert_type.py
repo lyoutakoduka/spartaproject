@@ -3,7 +3,7 @@
 
 """Test module to convert text to specific type."""
 
-from pyspartaproj.script.string.convert_type import convert_integer
+from pyspartalib.script.string.convert_type import convert_integer
 
 
 def test_number() -> None:

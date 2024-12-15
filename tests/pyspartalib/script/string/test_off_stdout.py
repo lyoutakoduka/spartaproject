@@ -3,8 +3,8 @@
 
 """Test module to redirect stdout to string variable forcibly."""
 
-from pyspartaproj.script.string.format_texts import format_indent
-from pyspartaproj.script.string.off_stdout import StdoutText
+from pyspartalib.script.string.format_texts import format_indent
+from pyspartalib.script.string.off_stdout import StdoutText
 
 
 def test_messages() -> None:

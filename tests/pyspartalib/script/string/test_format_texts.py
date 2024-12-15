@@ -3,8 +3,8 @@
 
 """Test module to remove white space at the beginning of a sentence."""
 
-from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.script.string.format_texts import format_indent
+from pyspartalib.context.default.string_context import Strs
+from pyspartalib.script.string.format_texts import format_indent
 
 
 def _common_test(expected: Strs, source: str, stdout: bool = False) -> None:
