@@ -14,6 +14,10 @@ from pyspartalib.script.time.epoch.get_time_stamp import get_initial_epoch
 initialize_decimal()
 
 
+def _get_interval() -> Decimal:
+    return Decimal("0.005")
+
+
 def _get_time_array() -> Decs:
     return [Decimal(str(i)) for i in range(10)]
 
@@ -33,7 +37,7 @@ def test_builtin() -> None:
     timer = TimerSelect()
     begin: Decimal = timer()
 
-    sleep(float(Decimal("0.005")))
+    sleep(float(_get_interval()))
 
     assert Decimal("0.015") > (timer() - begin)
 
