@@ -5,13 +5,13 @@
 
 from pathlib import Path
 
-from pyspartaproj.context.default.string_context import StrPair2
-from pyspartaproj.script.directory.create_directory import (
+from pyspartalib.context.default.string_context import StrPair2
+from pyspartalib.script.directory.create_directory import (
     create_directory_array,
 )
-from pyspartaproj.script.file.config.export_config import config_export
-from pyspartaproj.script.file.json.export_json import Json, json_export
-from pyspartaproj.script.file.text.export_file import text_export
+from pyspartalib.script.file.config.export_config import config_export
+from pyspartalib.script.file.json.export_json import Json, json_export
+from pyspartalib.script.file.text.export_file import text_export
 
 
 def _sample_text(root: Path, weight: int) -> None:

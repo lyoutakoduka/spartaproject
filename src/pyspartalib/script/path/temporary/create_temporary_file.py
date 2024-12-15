@@ -5,8 +5,8 @@
 
 from pathlib import Path
 
-from pyspartaproj.script.directory.create_parent import create_parent
-from pyspartaproj.script.file.json.export_json import json_export
+from pyspartalib.script.directory.create_parent import create_parent
+from pyspartalib.script.file.json.export_json import json_export
 
 
 def create_temporary_file(
