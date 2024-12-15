@@ -18,6 +18,10 @@ def _get_interval() -> Decimal:
     return Decimal("0.005")
 
 
+def _sleep_interval() -> None:
+    sleep(float(_get_interval()))
+
+
 def _get_time_array() -> Decs:
     return [Decimal(str(i)) for i in range(10)]
 
@@ -37,7 +41,7 @@ def test_builtin() -> None:
     timer = TimerSelect()
     begin: Decimal = timer()
 
-    sleep(float(_get_interval()))
+    _sleep_interval()
 
     assert Decimal("0.015") > (timer() - begin)
 
