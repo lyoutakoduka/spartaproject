@@ -2,7 +2,7 @@
 authors = ["lyouta <lyouta@spartaproject.com>"]
 description = "Cleanup point cloud intuitively :D"
 license = "MIT"
-name = "pyspartaproj"
+name = "pyspartalib"
 readme = "README.md"
 version = "0.0.1"
 

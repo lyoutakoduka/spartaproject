@@ -2,11 +2,11 @@
 
 ## Version
 
-- [test.pypi](https://test.pypi.org/project/pyspartaproj)
+- [test.pypi](https://test.pypi.org/project/pyspartalib)
 
 ## Note
 
-We sometimes call this product "Sparta" simply instead of "spartaproject" or "pyspartaproj".
+We sometimes call this product "Sparta" simply instead of "spartaproject" or "pyspartalib".
 
 ## Language
 
