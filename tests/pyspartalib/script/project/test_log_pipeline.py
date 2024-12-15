@@ -5,11 +5,11 @@
 
 from decimal import Decimal
 
-from pyspartaproj.context.custom.log_context import LogFunc
-from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.interface.pytest import fail
-from pyspartaproj.script.project.log_pipeline import LogPipeline
-from pyspartaproj.script.string.off_stdout import StdoutText
+from pyspartalib.context.custom.log_context import LogFunc
+from pyspartalib.context.default.string_context import Strs
+from pyspartalib.interface.pytest import fail
+from pyspartalib.script.project.log_pipeline import LogPipeline
+from pyspartalib.script.string.off_stdout import StdoutText
 
 
 def _get_interval() -> Decimal:

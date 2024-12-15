@@ -5,12 +5,12 @@
 
 from pathlib import Path
 
-from pyspartaproj.context.default.integer_context import IntPair
-from pyspartaproj.context.default.string_context import StrPair, Strs, Strs2
-from pyspartaproj.context.extension.path_context import PathPair
-from pyspartaproj.script.path.modify.get_resource import get_resource
-from pyspartaproj.script.platform.platform_status import get_platform
-from pyspartaproj.script.project.project_context import ProjectContext
+from pyspartalib.context.default.integer_context import IntPair
+from pyspartalib.context.default.string_context import StrPair, Strs, Strs2
+from pyspartalib.context.extension.path_context import PathPair
+from pyspartalib.script.path.modify.get_resource import get_resource
+from pyspartalib.script.platform.platform_status import get_platform
+from pyspartalib.script.project.project_context import ProjectContext
 
 
 def _common_test(keys_pair: Strs2) -> None:
