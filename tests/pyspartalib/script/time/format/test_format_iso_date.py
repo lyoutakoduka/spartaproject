@@ -3,11 +3,7 @@
 
 """Test module to convert date time element to several types."""
 
-from pyspartalib.context.default.integer_context import (
-    IntPair,
-    IntPair2,
-    Ints,
-)
+from pyspartalib.context.default.integer_context import IntPair, IntPair2, Ints
 from pyspartalib.context.default.string_context import StrPair, StrPair2, Strs
 from pyspartalib.context.file.json_context import Jsons
 from pyspartalib.script.bool.compare_json import is_same_json

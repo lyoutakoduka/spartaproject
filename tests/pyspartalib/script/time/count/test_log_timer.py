@@ -5,10 +5,7 @@
 
 from decimal import Decimal
 
-from pyspartalib.context.custom.timer_context import (
-    TimerFunc,
-    TimerIntStrFunc,
-)
+from pyspartalib.context.custom.timer_context import TimerFunc, TimerIntStrFunc
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.script.decimal.initialize_decimal import initialize_decimal
 from pyspartalib.script.string.format_texts import format_indent
