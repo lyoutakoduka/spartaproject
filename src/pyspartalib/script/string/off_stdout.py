@@ -8,9 +8,9 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
 
-from pyspartaproj.context.callable_context import CP, CR
-from pyspartaproj.script.decorator_generator import TransferFunction
-from pyspartaproj.script.file.text.import_file import text_import
+from pyspartalib.context.callable_context import CP, CR
+from pyspartalib.script.decorator_generator import TransferFunction
+from pyspartalib.script.file.text.import_file import text_import
 
 
 class StdoutText(TransferFunction):
@@ -20,7 +20,7 @@ class StdoutText(TransferFunction):
         self,
         function: Callable[CP, CR],
         *arguments: CP.args,
-        **key_arguments: CP.kwargs
+        **key_arguments: CP.kwargs,
     ) -> CR:
         """Override the method from super class.
 

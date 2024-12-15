@@ -3,7 +3,7 @@
 
 """Module to show simple numbers as string type for module test."""
 
-from pyspartaproj.context.default.string_context import Strs
+from pyspartalib.context.default.string_context import Strs
 
 
 def temporary_text(count: int, digit: int) -> Strs:
