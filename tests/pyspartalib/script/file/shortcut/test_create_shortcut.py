@@ -6,23 +6,23 @@
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.context.extension.path_context import (
+from pyspartalib.context.default.string_context import Strs
+from pyspartalib.context.extension.path_context import (
     PathFunc,
     PathPair,
     Paths,
 )
-from pyspartaproj.interface.pytest import fail, raises
-from pyspartaproj.script.directory.date_time_space import create_working_space
-from pyspartaproj.script.file.shortcut.create_shortcut import create_shortcut
-from pyspartaproj.script.file.shortcut.get_shortcut import get_shortcut
-from pyspartaproj.script.path.iterate_directory import walk_iterator
-from pyspartaproj.script.path.modify.get_resource import get_resource
-from pyspartaproj.script.path.status.check_exists import check_exists_array
-from pyspartaproj.script.path.temporary.create_temporary_file import (
+from pyspartalib.interface.pytest import fail, raises
+from pyspartalib.script.directory.date_time_space import create_working_space
+from pyspartalib.script.file.shortcut.create_shortcut import create_shortcut
+from pyspartalib.script.file.shortcut.get_shortcut import get_shortcut
+from pyspartalib.script.path.iterate_directory import walk_iterator
+from pyspartalib.script.path.modify.get_resource import get_resource
+from pyspartalib.script.path.status.check_exists import check_exists_array
+from pyspartalib.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
-from pyspartaproj.script.project.project_context import ProjectContext
+from pyspartalib.script.project.project_context import ProjectContext
 
 
 def _get_config_file() -> Path:

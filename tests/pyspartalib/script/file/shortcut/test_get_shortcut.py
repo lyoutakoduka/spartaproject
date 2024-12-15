@@ -5,7 +5,7 @@
 
 from pathlib import Path
 
-from pyspartaproj.script.file.shortcut.get_shortcut import get_shortcut
+from pyspartalib.script.file.shortcut.get_shortcut import get_shortcut
 
 
 def _get_target_root() -> Path:
