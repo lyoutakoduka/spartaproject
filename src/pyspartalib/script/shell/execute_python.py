@@ -5,10 +5,10 @@
 
 from pathlib import Path
 
-from pyspartaproj.context.default.string_context import StrGene, Strs, Strs2
-from pyspartaproj.context.extension.path_context import Paths
-from pyspartaproj.script.project.project_context import ProjectContext
-from pyspartaproj.script.shell.execute_command import execute_multiple
+from pyspartalib.context.default.string_context import StrGene, Strs, Strs2
+from pyspartalib.context.extension.path_context import Paths
+from pyspartalib.script.project.project_context import ProjectContext
+from pyspartalib.script.shell.execute_command import execute_multiple
 
 
 def get_interpreter_path(

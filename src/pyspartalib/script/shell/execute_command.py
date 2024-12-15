@@ -5,8 +5,8 @@
 
 from subprocess import PIPE, Popen
 
-from pyspartaproj.context.default.string_context import StrGene, Strs, Strs2
-from pyspartaproj.script.string.encoding.set_decoding import set_decoding
+from pyspartalib.context.default.string_context import StrGene, Strs, Strs2
+from pyspartalib.script.string.encoding.set_decoding import set_decoding
 
 
 def _cleanup_new_lines(text: str) -> str:
