@@ -6,9 +6,9 @@
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from pyspartaproj.context.extension.path_context import PathFunc
-from pyspartaproj.script.file.json.export_json import json_export
-from pyspartaproj.script.path.modify.avoid_duplication import get_avoid_path
+from pyspartalib.context.extension.path_context import PathFunc
+from pyspartalib.script.file.json.export_json import json_export
+from pyspartalib.script.path.modify.avoid_duplication import get_avoid_path
 
 
 def _common_test(source_path: Path, destination_path: Path) -> None:
