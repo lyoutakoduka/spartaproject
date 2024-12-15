@@ -6,8 +6,8 @@
 import inspect
 from pathlib import Path
 
-from pyspartaproj.context.typed.builtin_context import StackFrame, StackFrames
-from pyspartaproj.script.path.modify.current.get_relative import get_relative
+from pyspartalib.context.typed.builtin_context import StackFrame, StackFrames
+from pyspartalib.script.path.modify.current.get_relative import get_relative
 
 
 def _get_stack_frames() -> StackFrames:

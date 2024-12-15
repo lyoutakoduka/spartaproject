@@ -4,7 +4,7 @@
 from functools import wraps
 from typing import Callable
 
-from pyspartaproj.context.callable_context import CP, CR
+from pyspartalib.context.callable_context import CP, CR
 
 
 class TransferFunction:
@@ -12,7 +12,7 @@ class TransferFunction:
         self,
         function: Callable[CP, CR],
         *arguments: CP.args,
-        **key_arguments: CP.kwargs
+        **key_arguments: CP.kwargs,
     ) -> CR:
         return function(*arguments, **key_arguments)
 
