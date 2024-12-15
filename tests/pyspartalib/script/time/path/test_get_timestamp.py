@@ -8,21 +8,21 @@ from os import utime
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from pyspartaproj.context.default.integer_context import IntPair2
-from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.context.extension.path_context import PathFunc
-from pyspartaproj.context.extension.time_context import TimePair, Times
-from pyspartaproj.script.directory.create_directory import create_directory
-from pyspartaproj.script.path.iterate_directory import walk_iterator
-from pyspartaproj.script.path.modify.current.get_relative import get_relative
-from pyspartaproj.script.path.temporary.create_temporary_file import (
+from pyspartalib.context.default.integer_context import IntPair2
+from pyspartalib.context.default.string_context import Strs
+from pyspartalib.context.extension.path_context import PathFunc
+from pyspartalib.context.extension.time_context import TimePair, Times
+from pyspartalib.script.directory.create_directory import create_directory
+from pyspartalib.script.path.iterate_directory import walk_iterator
+from pyspartalib.script.path.modify.current.get_relative import get_relative
+from pyspartalib.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
-from pyspartaproj.script.path.temporary.create_temporary_tree import (
+from pyspartalib.script.path.temporary.create_temporary_tree import (
     create_temporary_tree,
 )
-from pyspartaproj.script.time.format.create_iso_date import get_iso_time
-from pyspartaproj.script.time.path.get_timestamp import (
+from pyspartalib.script.time.format.create_iso_date import get_iso_time
+from pyspartalib.script.time.path.get_timestamp import (
     get_directory_latest,
     get_invalid_time,
     get_latest,

@@ -6,20 +6,20 @@
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from pyspartaproj.context.default.integer_context import (
+from pyspartalib.context.default.integer_context import (
     IntPair,
     IntPair2,
     IntPair3,
 )
-from pyspartaproj.context.extension.path_context import PathFunc
-from pyspartaproj.context.extension.time_context import TimePair
-from pyspartaproj.script.directory.create_directory import create_directory
-from pyspartaproj.script.path.temporary.create_temporary_file import (
+from pyspartalib.context.extension.path_context import PathFunc
+from pyspartalib.context.extension.time_context import TimePair
+from pyspartalib.script.directory.create_directory import create_directory
+from pyspartalib.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
-from pyspartaproj.script.time.format.create_iso_date import get_iso_time
-from pyspartaproj.script.time.path.get_timestamp import get_latest
-from pyspartaproj.script.time.path.set_timestamp import set_latest
+from pyspartalib.script.time.format.create_iso_date import get_iso_time
+from pyspartalib.script.time.path.get_timestamp import get_latest
+from pyspartalib.script.time.path.set_timestamp import set_latest
 
 
 def _is_access(group: str) -> bool:

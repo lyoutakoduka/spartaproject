@@ -7,12 +7,12 @@ from os import utime
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from pyspartaproj.context.extension.path_context import PathFunc
-from pyspartaproj.script.directory.create_directory import create_directory
-from pyspartaproj.script.path.temporary.create_temporary_file import (
+from pyspartalib.context.extension.path_context import PathFunc
+from pyspartalib.script.directory.create_directory import create_directory
+from pyspartalib.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
-from pyspartaproj.script.time.path.get_file_epoch import get_file_epoch
+from pyspartalib.script.time.path.get_file_epoch import get_file_epoch
 
 
 def _set_invalid_datetime(file_path: Path) -> Path:
