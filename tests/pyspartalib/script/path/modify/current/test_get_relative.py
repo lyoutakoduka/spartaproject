@@ -5,18 +5,18 @@
 
 from pathlib import Path
 
-from pyspartaproj.context.default.bool_context import Bools
-from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.context.extension.path_context import PathPair, Paths
-from pyspartaproj.interface.pytest import raises
-from pyspartaproj.script.bool.compare_value import bool_compare_array
-from pyspartaproj.script.bool.same_value import bool_same_array
-from pyspartaproj.script.path.modify.current.get_absolute import (
+from pyspartalib.context.default.bool_context import Bools
+from pyspartalib.context.default.string_context import Strs
+from pyspartalib.context.extension.path_context import PathPair, Paths
+from pyspartalib.interface.pytest import raises
+from pyspartalib.script.bool.compare_value import bool_compare_array
+from pyspartalib.script.bool.same_value import bool_same_array
+from pyspartalib.script.path.modify.current.get_absolute import (
     get_absolute,
     get_absolute_array,
     get_absolute_pair,
 )
-from pyspartaproj.script.path.modify.current.get_relative import (
+from pyspartalib.script.path.modify.current.get_relative import (
     get_relative,
     get_relative_array,
     get_relative_pair,
