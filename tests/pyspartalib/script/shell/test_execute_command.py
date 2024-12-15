@@ -7,12 +7,12 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from pyspartalib.context.default.string_context import Strs
-from pyspartalib.interface.pytest import fail
 from pyspartalib.script.path.modify.current.get_current import get_current
 from pyspartalib.script.shell.execute_command import (
     execute_multiple,
     execute_single,
 )
+from tests.pyspartalib.interface.pytest import fail
 
 
 def test_single() -> None:
