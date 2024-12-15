@@ -81,3 +81,5 @@ addopts = """
   --ignore ./poetry
 """
 cache_dir = "./.temp/.pytest_cache"
+pythonpath = "src"
+testpaths = ["tests"]
