@@ -5,8 +5,8 @@
 
 from pathlib import Path
 
-from pyspartaproj.script.path.modify.current.get_relative import get_relative
-from pyspartaproj.script.path.modify.mount.build_linux_path import (
+from pyspartalib.script.path.modify.current.get_relative import get_relative
+from pyspartalib.script.path.modify.mount.build_linux_path import (
     get_mount_point,
 )
 
