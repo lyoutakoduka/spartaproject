@@ -5,25 +5,25 @@
 
 from pathlib import Path
 
-from pyspartaproj.context.default.bool_context import BoolPair, BoolPair2
-from pyspartaproj.context.default.integer_context import IntPair, IntPair2
-from pyspartaproj.context.default.string_context import StrPair, StrPair2, Strs
-from pyspartaproj.context.extension.path_context import (
+from pyspartalib.context.default.bool_context import BoolPair, BoolPair2
+from pyspartalib.context.default.integer_context import IntPair, IntPair2
+from pyspartalib.context.default.string_context import StrPair, StrPair2, Strs
+from pyspartalib.context.extension.path_context import (
     PathPair,
     PathPair2,
     Paths,
 )
-from pyspartaproj.context.file.json_context import Json
-from pyspartaproj.script.file.json.convert_from_json import (
+from pyspartalib.context.file.json_context import Json
+from pyspartalib.script.file.json.convert_from_json import (
     bool_pair2_from_json,
     integer_pair2_from_json,
     path_pair2_from_json,
     path_pair_from_json,
     string_pair2_from_json,
 )
-from pyspartaproj.script.file.json.import_json import json_import
-from pyspartaproj.script.path.modify.get_resource import get_resource
-from pyspartaproj.script.platform.platform_status import get_platform
+from pyspartalib.script.file.json.import_json import json_import
+from pyspartalib.script.path.modify.get_resource import get_resource
+from pyspartalib.script.platform.platform_status import get_platform
 
 
 class ProjectContext:

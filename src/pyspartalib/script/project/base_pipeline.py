@@ -5,8 +5,8 @@
 
 from pathlib import Path
 
-from pyspartaproj.script.project.log_pipeline import LogPipeline
-from pyspartaproj.script.project.project_context import ProjectContext
+from pyspartalib.script.project.log_pipeline import LogPipeline
+from pyspartalib.script.project.project_context import ProjectContext
 
 
 class BasePipeline(ProjectContext, LogPipeline):

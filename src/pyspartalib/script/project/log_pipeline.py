@@ -3,8 +3,8 @@
 
 """Module to handle I/O functionalities of any script called pipeline."""
 
-from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.script.time.count.log_timer import LogTimer
+from pyspartalib.context.default.string_context import Strs
+from pyspartalib.script.time.count.log_timer import LogTimer
 
 
 class LogPipeline(LogTimer):
