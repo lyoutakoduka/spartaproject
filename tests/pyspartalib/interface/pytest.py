@@ -6,4 +6,4 @@
 pytest: pytest
 """
 
-from pytest import fail, raises  # noqa: F401 # type: ignore
+from pytest import fail, raises  # noqa: F401 PT013 # type: ignore
