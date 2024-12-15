@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from pyspartalib.interface.pytest import raises
 from pyspartalib.script.bool.compare_value import (
     bool_compare_array,
     bool_compare_pair,
 )
+from tests.pyspartalib.interface.pytest import raises
 
 
 def test_size() -> None:
