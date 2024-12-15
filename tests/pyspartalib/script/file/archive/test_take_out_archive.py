@@ -6,27 +6,27 @@
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.context.extension.path_context import (
+from pyspartalib.context.default.string_context import Strs
+from pyspartalib.context.extension.path_context import (
     PathFunc,
     PathPair,
     Paths,
 )
-from pyspartaproj.context.typed.user_context import ArchiveStatus
-from pyspartaproj.interface.pytest import fail, raises
-from pyspartaproj.script.directory.create_directory import create_directory
-from pyspartaproj.script.file.archive.compress_archive import CompressArchive
-from pyspartaproj.script.file.archive.edit_archive import EditArchive
-from pyspartaproj.script.file.archive.take_out_archive import TakeOutArchive
-from pyspartaproj.script.path.iterate_directory import walk_iterator
-from pyspartaproj.script.path.modify.current.get_absolute import (
+from pyspartalib.context.typed.user_context import ArchiveStatus
+from pyspartalib.interface.pytest import fail, raises
+from pyspartalib.script.directory.create_directory import create_directory
+from pyspartalib.script.file.archive.compress_archive import CompressArchive
+from pyspartalib.script.file.archive.edit_archive import EditArchive
+from pyspartalib.script.file.archive.take_out_archive import TakeOutArchive
+from pyspartalib.script.path.iterate_directory import walk_iterator
+from pyspartalib.script.path.modify.current.get_absolute import (
     get_absolute_array,
 )
-from pyspartaproj.script.path.modify.current.get_relative import (
+from pyspartalib.script.path.modify.current.get_relative import (
     get_relative_array,
     is_relative_array,
 )
-from pyspartaproj.script.path.temporary.create_temporary_file import (
+from pyspartalib.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
 

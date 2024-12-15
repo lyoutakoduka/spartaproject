@@ -6,8 +6,8 @@
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from pyspartaproj.context.extension.path_context import PathFunc
-from pyspartaproj.script.file.archive.archive_format import (
+from pyspartalib.context.extension.path_context import PathFunc
+from pyspartalib.script.file.archive.archive_format import (
     get_format,
     rename_format,
 )

@@ -7,42 +7,42 @@ from datetime import datetime
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from pyspartaproj.context.extension.path_context import (
+from pyspartalib.context.extension.path_context import (
     PathFunc,
     PathPair,
     Paths,
     Paths2,
 )
-from pyspartaproj.context.extension.time_context import TimePair
-from pyspartaproj.interface.pytest import fail, raises
-from pyspartaproj.script.directory.create_directory import create_directory
-from pyspartaproj.script.file.archive.compress_archive import CompressArchive
-from pyspartaproj.script.file.archive.decompress_archive import (
+from pyspartalib.context.extension.time_context import TimePair
+from pyspartalib.interface.pytest import fail, raises
+from pyspartalib.script.directory.create_directory import create_directory
+from pyspartalib.script.file.archive.compress_archive import CompressArchive
+from pyspartalib.script.file.archive.decompress_archive import (
     DecompressArchive,
 )
-from pyspartaproj.script.file.archive.edit_archive import EditArchive
-from pyspartaproj.script.path.iterate_directory import walk_iterator
-from pyspartaproj.script.path.modify.current.get_relative import (
+from pyspartalib.script.file.archive.edit_archive import EditArchive
+from pyspartalib.script.path.iterate_directory import walk_iterator
+from pyspartalib.script.path.modify.current.get_relative import (
     get_relative,
     is_relative,
 )
-from pyspartaproj.script.path.safe.safe_rename import SafeRename
-from pyspartaproj.script.path.safe.safe_trash import SafeTrash
-from pyspartaproj.script.path.status.get_statistic import get_file_size
-from pyspartaproj.script.path.temporary.create_temporary_file import (
+from pyspartalib.script.path.safe.safe_rename import SafeRename
+from pyspartalib.script.path.safe.safe_trash import SafeTrash
+from pyspartalib.script.path.status.get_statistic import get_file_size
+from pyspartalib.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
-from pyspartaproj.script.path.temporary.create_temporary_tree import (
+from pyspartalib.script.path.temporary.create_temporary_tree import (
     create_temporary_tree,
 )
-from pyspartaproj.script.time.directory.get_time_path import (
+from pyspartalib.script.time.directory.get_time_path import (
     get_initial_time_path,
 )
-from pyspartaproj.script.time.path.get_timestamp import (
+from pyspartalib.script.time.path.get_timestamp import (
     get_directory_latest,
     get_invalid_time,
 )
-from pyspartaproj.script.time.stamp.is_same_stamp import is_same_stamp
+from pyspartalib.script.time.stamp.is_same_stamp import is_same_stamp
 
 
 def _get_name() -> str:

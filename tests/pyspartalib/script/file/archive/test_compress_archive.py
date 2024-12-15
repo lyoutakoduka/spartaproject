@@ -8,28 +8,28 @@ from pathlib import Path
 from shutil import unpack_archive
 from tempfile import TemporaryDirectory
 
-from pyspartaproj.context.default.integer_context import Ints2
-from pyspartaproj.context.default.string_context import StrPair
-from pyspartaproj.context.extension.decimal_context import Decs
-from pyspartaproj.context.extension.path_context import PathFunc, Paths, Paths2
-from pyspartaproj.script.decimal.initialize_decimal import initialize_decimal
-from pyspartaproj.script.directory.create_parent import create_parent
-from pyspartaproj.script.file.archive.compress_archive import CompressArchive
-from pyspartaproj.script.file.json.convert_from_json import (
+from pyspartalib.context.default.integer_context import Ints2
+from pyspartalib.context.default.string_context import StrPair
+from pyspartalib.context.extension.decimal_context import Decs
+from pyspartalib.context.extension.path_context import PathFunc, Paths, Paths2
+from pyspartalib.script.decimal.initialize_decimal import initialize_decimal
+from pyspartalib.script.directory.create_parent import create_parent
+from pyspartalib.script.file.archive.compress_archive import CompressArchive
+from pyspartalib.script.file.json.convert_from_json import (
     string_pair_from_json,
 )
-from pyspartaproj.script.file.json.convert_to_json import multiple_to_json
-from pyspartaproj.script.file.json.export_json import json_export
-from pyspartaproj.script.file.json.import_json import json_import
-from pyspartaproj.script.path.iterate_directory import walk_iterator
-from pyspartaproj.script.path.modify.current.get_relative import (
+from pyspartalib.script.file.json.convert_to_json import multiple_to_json
+from pyspartalib.script.file.json.export_json import json_export
+from pyspartalib.script.file.json.import_json import json_import
+from pyspartalib.script.path.iterate_directory import walk_iterator
+from pyspartalib.script.path.modify.current.get_relative import (
     get_relative_array,
 )
-from pyspartaproj.script.path.status.get_statistic import (
+from pyspartalib.script.path.status.get_statistic import (
     get_file_size,
     get_file_size_array,
 )
-from pyspartaproj.script.path.temporary.create_temporary_tree import (
+from pyspartalib.script.path.temporary.create_temporary_tree import (
     create_temporary_tree,
 )
 

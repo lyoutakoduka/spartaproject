@@ -9,31 +9,31 @@ from itertools import chain
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from pyspartaproj.context.default.integer_context import IntPair2, Ints, Ints2
-from pyspartaproj.context.default.string_context import StrPair, Strs
-from pyspartaproj.context.extension.path_context import PathFunc, Paths, Paths2
-from pyspartaproj.context.extension.time_context import Times, Times2
-from pyspartaproj.script.directory.create_parent import create_parent
-from pyspartaproj.script.file.archive.compress_archive import CompressArchive
-from pyspartaproj.script.file.archive.decompress_archive import (
+from pyspartalib.context.default.integer_context import IntPair2, Ints, Ints2
+from pyspartalib.context.default.string_context import StrPair, Strs
+from pyspartalib.context.extension.path_context import PathFunc, Paths, Paths2
+from pyspartalib.context.extension.time_context import Times, Times2
+from pyspartalib.script.directory.create_parent import create_parent
+from pyspartalib.script.file.archive.compress_archive import CompressArchive
+from pyspartalib.script.file.archive.decompress_archive import (
     DecompressArchive,
 )
-from pyspartaproj.script.file.json.convert_to_json import multiple_to_json
-from pyspartaproj.script.file.json.export_json import json_export
-from pyspartaproj.script.file.text.export_file import byte_export
-from pyspartaproj.script.path.iterate_directory import walk_iterator
-from pyspartaproj.script.path.modify.current.get_relative import (
+from pyspartalib.script.file.json.convert_to_json import multiple_to_json
+from pyspartalib.script.file.json.export_json import json_export
+from pyspartalib.script.file.text.export_file import byte_export
+from pyspartalib.script.path.iterate_directory import walk_iterator
+from pyspartalib.script.path.modify.current.get_relative import (
     get_relative_array,
 )
-from pyspartaproj.script.path.safe.safe_trash import SafeTrash
-from pyspartaproj.script.path.status.get_statistic import get_file_size_array
-from pyspartaproj.script.path.temporary.create_temporary_tree import (
+from pyspartalib.script.path.safe.safe_trash import SafeTrash
+from pyspartalib.script.path.status.get_statistic import get_file_size_array
+from pyspartalib.script.path.temporary.create_temporary_tree import (
     create_temporary_tree,
 )
-from pyspartaproj.script.string.format_texts import format_indent
-from pyspartaproj.script.time.format.create_iso_date import get_iso_time
-from pyspartaproj.script.time.path.get_timestamp import get_latest
-from pyspartaproj.script.time.path.set_timestamp import set_latest
+from pyspartalib.script.string.format_texts import format_indent
+from pyspartalib.script.time.format.create_iso_date import get_iso_time
+from pyspartalib.script.time.path.get_timestamp import get_latest
+from pyspartalib.script.time.path.set_timestamp import set_latest
 
 
 def _get_multiple() -> str:
