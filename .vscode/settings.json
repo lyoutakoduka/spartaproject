@@ -1,6 +1,5 @@
 {
   "autoDocstring.docstringFormat": "google",
-  "black-formatter.args": ["--line-length", "79"],
   "black-formatter.importStrategy": "fromEnvironment",
   "cSpell.diagnosticLevel": "Warning",
   "cSpell.words": [
