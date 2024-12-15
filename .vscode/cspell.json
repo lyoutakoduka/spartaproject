@@ -41,5 +41,6 @@
     "universaldetector",
     "unmatch",
     "venv"
-  ]
+  ],
+  "ignorePaths": [".temp", "poetry.lock"]
 }
