@@ -6,7 +6,7 @@
 from datetime import datetime
 from decimal import Decimal
 
-from pyspartaproj.interface.dateutil.tz import gettz
+from pyspartalib.interface.dateutil.tz import gettz
 
 
 def time_from_timestamp(timestamp: Decimal, jst: bool = False) -> datetime:
