@@ -5,17 +5,17 @@
 
 from pathlib import Path
 
-from pyspartaproj.context.default.bool_context import BoolPair, Bools
-from pyspartaproj.context.extension.path_context import PathPair, Paths
-from pyspartaproj.script.bool.compare_value import (
+from pyspartalib.context.default.bool_context import BoolPair, Bools
+from pyspartalib.context.extension.path_context import PathPair, Paths
+from pyspartalib.script.bool.compare_value import (
     bool_compare_array,
     bool_compare_pair,
 )
-from pyspartaproj.script.path.status.check_exists import (
+from pyspartalib.script.path.status.check_exists import (
     check_exists_array,
     check_exists_pair,
 )
-from pyspartaproj.script.stack_frame import current_frame
+from pyspartalib.script.stack_frame import current_frame
 
 
 def _get_current_file() -> Path:

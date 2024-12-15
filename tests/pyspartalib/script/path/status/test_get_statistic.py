@@ -6,11 +6,11 @@
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from pyspartaproj.context.default.integer_context import Ints
-from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.context.extension.path_context import PathFunc
-from pyspartaproj.script.file.text.export_file import text_export
-from pyspartaproj.script.path.status.get_statistic import (
+from pyspartalib.context.default.integer_context import Ints
+from pyspartalib.context.default.string_context import Strs
+from pyspartalib.context.extension.path_context import PathFunc
+from pyspartalib.script.file.text.export_file import text_export
+from pyspartalib.script.path.status.get_statistic import (
     get_file_size,
     get_file_size_array,
 )
