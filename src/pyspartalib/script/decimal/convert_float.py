@@ -3,8 +3,8 @@
 
 """Module to convert data from type Decimal to type float."""
 
-from pyspartaproj.context.default.float_context import Floats
-from pyspartaproj.context.extension.decimal_context import Decs
+from pyspartalib.context.default.float_context import Floats
+from pyspartalib.context.extension.decimal_context import Decs
 
 
 def convert_float_array(numbers: Decs) -> Floats:
