@@ -6,10 +6,10 @@
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from pyspartaproj.context.file.json_context import Json
-from pyspartaproj.script.file.json.export_json import json_dump, json_export
-from pyspartaproj.script.file.text.import_file import text_import
-from pyspartaproj.script.string.format_texts import format_indent
+from pyspartalib.context.file.json_context import Json
+from pyspartalib.script.file.json.export_json import json_dump, json_export
+from pyspartalib.script.file.text.import_file import text_import
+from pyspartalib.script.string.format_texts import format_indent
 
 
 def _common_test(expected: str, source: Json) -> None:

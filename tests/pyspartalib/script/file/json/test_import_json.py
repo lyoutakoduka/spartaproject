@@ -7,9 +7,9 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Dict
 
-from pyspartaproj.context.file.json_context import Json, Single
-from pyspartaproj.script.file.json.export_json import json_export
-from pyspartaproj.script.file.json.import_json import json_import, json_load
+from pyspartalib.context.file.json_context import Json, Single
+from pyspartalib.script.file.json.export_json import json_export
+from pyspartalib.script.file.json.import_json import json_import, json_load
 
 
 def _common_test(expected: Single, key: str, value: str) -> None:

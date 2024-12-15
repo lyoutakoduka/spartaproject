@@ -6,49 +6,49 @@
 from decimal import Decimal
 from pathlib import Path
 
-from pyspartaproj.context.default.bool_context import (
+from pyspartalib.context.default.bool_context import (
     BoolPair,
     BoolPair2,
     Bools,
     Bools2,
 )
-from pyspartaproj.context.default.float_context import (
+from pyspartalib.context.default.float_context import (
     FloatPair,
     FloatPair2,
     Floats,
     Floats2,
 )
-from pyspartaproj.context.default.integer_context import (
+from pyspartalib.context.default.integer_context import (
     IntPair,
     IntPair2,
     Ints,
     Ints2,
 )
-from pyspartaproj.context.default.string_context import (
+from pyspartalib.context.default.string_context import (
     StrPair,
     StrPair2,
     Strs,
     Strs2,
 )
-from pyspartaproj.context.extension.decimal_context import (
+from pyspartalib.context.extension.decimal_context import (
     DecPair,
     DecPair2,
     Decs,
     Decs2,
 )
-from pyspartaproj.context.extension.path_context import (
+from pyspartalib.context.extension.path_context import (
     PathPair,
     PathPair2,
     Paths,
     Paths2,
 )
-from pyspartaproj.context.file.json_context import Json, Multi, Multi2
-from pyspartaproj.script.file.json.convert_to_json import (
+from pyspartalib.context.file.json_context import Json, Multi, Multi2
+from pyspartalib.script.file.json.convert_to_json import (
     multiple2_to_json,
     multiple_to_json,
     to_safe_json,
 )
-from pyspartaproj.script.file.json.export_json import json_dump
+from pyspartalib.script.file.json.export_json import json_dump
 
 
 def _common_test(expected: str, source: Json) -> None:

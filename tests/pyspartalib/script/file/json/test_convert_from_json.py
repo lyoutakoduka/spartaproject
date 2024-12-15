@@ -7,9 +7,9 @@ from decimal import Decimal
 from pathlib import Path
 from typing import Dict, List
 
-from pyspartaproj.context.default.string_context import StrPair, StrPair2
-from pyspartaproj.context.extension.path_context import PathPair, PathPair2
-from pyspartaproj.context.file.json_context import (
+from pyspartalib.context.default.string_context import StrPair, StrPair2
+from pyspartalib.context.extension.path_context import PathPair, PathPair2
+from pyspartalib.context.file.json_context import (
     Array,
     Array2,
     Json,
@@ -17,8 +17,8 @@ from pyspartaproj.context.file.json_context import (
     Pair2,
     Single,
 )
-from pyspartaproj.script.bool.same_value import bool_same_array
-from pyspartaproj.script.file.json.convert_from_json import (
+from pyspartalib.script.bool.same_value import bool_same_array
+from pyspartalib.script.file.json.convert_from_json import (
     bool_array2_from_json,
     bool_array_from_json,
     bool_pair2_from_json,
