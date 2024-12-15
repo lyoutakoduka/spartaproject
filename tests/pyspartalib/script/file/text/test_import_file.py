@@ -6,10 +6,10 @@
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from pyspartaproj.context.extension.path_context import PathFunc
-from pyspartaproj.script.file.text.export_file import text_export
-from pyspartaproj.script.file.text.import_file import byte_import, text_import
-from pyspartaproj.script.string.encoding.set_decoding import set_decoding
+from pyspartalib.context.extension.path_context import PathFunc
+from pyspartalib.script.file.text.export_file import text_export
+from pyspartalib.script.file.text.import_file import byte_import, text_import
+from pyspartalib.script.string.encoding.set_decoding import set_decoding
 
 
 def _common_test(result: str) -> None:

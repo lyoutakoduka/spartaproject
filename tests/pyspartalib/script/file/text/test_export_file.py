@@ -6,9 +6,9 @@
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from pyspartaproj.context.extension.path_context import PathFunc
-from pyspartaproj.script.file.text.export_file import byte_export, text_export
-from pyspartaproj.script.path.status.get_statistic import get_file_size
+from pyspartalib.context.extension.path_context import PathFunc
+from pyspartalib.script.file.text.export_file import byte_export, text_export
+from pyspartalib.script.path.status.get_statistic import get_file_size
 
 
 def _common_test(text_path: Path, count: int) -> None:
