@@ -6,10 +6,10 @@
 from pathlib import Path
 
 from pyspartalib.context.default.string_context import Strs
-from pyspartalib.interface.pytest import fail, raises
 from pyspartalib.script.path.modify.get_resource import get_resource
 from pyspartalib.script.path.safe.safe_copy import SafeCopy
 from pyspartalib.script.server.local.execute_server import ExecuteServer
+from tests.pyspartalib.interface.pytest import fail, raises
 
 
 def _get_config_file() -> Path:
