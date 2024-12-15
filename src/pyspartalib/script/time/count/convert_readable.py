@@ -6,9 +6,9 @@
 from datetime import datetime, timedelta
 from decimal import Decimal
 
-from pyspartaproj.context.default.integer_context import IntPair
-from pyspartaproj.context.default.string_context import Strs
-from pyspartaproj.script.decimal.initialize_decimal import initialize_decimal
+from pyspartalib.context.default.integer_context import IntPair
+from pyspartalib.context.default.string_context import Strs
+from pyspartalib.script.decimal.initialize_decimal import initialize_decimal
 
 initialize_decimal()
 
