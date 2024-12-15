@@ -6,9 +6,9 @@
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from pyspartaproj.context.extension.path_context import PathFunc
-from pyspartaproj.script.server.local.path_server import PathServer
-from pyspartaproj.script.time.directory.get_time_path import (
+from pyspartalib.context.extension.path_context import PathFunc
+from pyspartalib.script.server.local.path_server import PathServer
+from pyspartalib.script.time.directory.get_time_path import (
     get_initial_time_path,
 )
 

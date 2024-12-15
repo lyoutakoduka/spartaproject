@@ -5,9 +5,9 @@
 
 from pathlib import Path
 
-from pyspartaproj.interface.paramiko import Channel, SFTPClient, SSHClient
-from pyspartaproj.script.path.modify.get_resource import get_resource
-from pyspartaproj.script.server.local.connect_server import ConnectServer
+from pyspartalib.interface.paramiko import Channel, SFTPClient, SSHClient
+from pyspartalib.script.path.modify.get_resource import get_resource
+from pyspartalib.script.server.local.connect_server import ConnectServer
 
 
 def _get_config_file() -> Path:

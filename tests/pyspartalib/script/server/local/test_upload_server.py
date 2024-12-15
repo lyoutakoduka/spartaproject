@@ -6,16 +6,16 @@
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from pyspartaproj.context.extension.path_context import PathFunc
-from pyspartaproj.script.directory.create_directory import create_directory
-from pyspartaproj.script.path.modify.get_resource import get_resource
-from pyspartaproj.script.path.temporary.create_temporary_file import (
+from pyspartalib.context.extension.path_context import PathFunc
+from pyspartalib.script.directory.create_directory import create_directory
+from pyspartalib.script.path.modify.get_resource import get_resource
+from pyspartalib.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
-from pyspartaproj.script.path.temporary.create_temporary_tree import (
+from pyspartalib.script.path.temporary.create_temporary_tree import (
     create_temporary_tree,
 )
-from pyspartaproj.script.server.local.upload_server import UploadServer
+from pyspartalib.script.server.local.upload_server import UploadServer
 
 
 def _get_config_file() -> Path:
