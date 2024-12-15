@@ -6,8 +6,8 @@
 There are converted to single byte same characters in Ascii table.
 """
 
-from pyspartaproj.context.default.string_context import StrPair, Strs3, Trans
-from pyspartaproj.script.string.rename.grouped_characters import (
+from pyspartalib.context.default.string_context import StrPair, Strs3, Trans
+from pyspartalib.script.string.rename.grouped_characters import (
     GroupedCharacters,
 )
 

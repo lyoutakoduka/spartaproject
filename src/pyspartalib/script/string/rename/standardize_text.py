@@ -3,7 +3,7 @@
 
 """Module to standardize string for key of dictionary."""
 
-from pyspartaproj.script.string.rename.split_identifier import SplitIdentifier
+from pyspartalib.script.string.rename.split_identifier import SplitIdentifier
 
 
 class StandardizeText(SplitIdentifier):

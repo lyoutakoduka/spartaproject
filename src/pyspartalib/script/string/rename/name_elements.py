@@ -5,9 +5,9 @@
 
 from re import sub
 
-from pyspartaproj.context.typed.user_context import BaseName
-from pyspartaproj.script.string.convert_type import convert_integer
-from pyspartaproj.script.string.rename.split_identifier import SplitIdentifier
+from pyspartalib.context.typed.user_context import BaseName
+from pyspartalib.script.string.convert_type import convert_integer
+from pyspartalib.script.string.rename.split_identifier import SplitIdentifier
 
 
 class NameElements(SplitIdentifier):

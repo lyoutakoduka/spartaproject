@@ -3,9 +3,9 @@
 
 """Module to get character tables constructed by multiple or single byte."""
 
-from pyspartaproj.context.default.integer_context import Ints
-from pyspartaproj.context.default.string_context import Strs, Strs2, StrsPair
-from pyspartaproj.context.typed.user_context import CharacterTable
+from pyspartalib.context.default.integer_context import Ints
+from pyspartalib.context.default.string_context import Strs, Strs2, StrsPair
+from pyspartalib.context.typed.user_context import CharacterTable
 
 
 class GroupedCharacters:
