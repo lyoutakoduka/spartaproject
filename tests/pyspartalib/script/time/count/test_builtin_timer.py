@@ -18,6 +18,10 @@ def _get_interval() -> Decimal:
     return Decimal("0.005")
 
 
+def _get_starting_point(timer: TimerSelect) -> Decimal:
+    return timer()
+
+
 def _sleep_interval() -> None:
     sleep(float(_get_interval()))
 
@@ -39,7 +43,7 @@ def _check_counter_result(expected: Decs, timer: TimerSelect) -> None:
 def test_builtin() -> None:
     """Test to count timer."""
     timer = TimerSelect()
-    begin: Decimal = timer()
+    begin: Decimal = _get_starting_point(timer)
 
     _sleep_interval()
 
