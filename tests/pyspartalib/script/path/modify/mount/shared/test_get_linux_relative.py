@@ -5,10 +5,10 @@
 
 from pathlib import Path
 
-from pyspartaproj.script.path.modify.mount.build_linux_path import (
+from pyspartalib.script.path.modify.mount.build_linux_path import (
     get_linux_path,
 )
-from pyspartaproj.script.path.modify.mount.shared.get_linux_relative import (
+from pyspartalib.script.path.modify.mount.shared.get_linux_relative import (
     get_linux_relative,
 )
 

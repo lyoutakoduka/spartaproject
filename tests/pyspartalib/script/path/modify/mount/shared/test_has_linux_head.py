@@ -5,15 +5,15 @@
 
 from pathlib import Path
 
-from pyspartaproj.context.default.bool_context import Bools
-from pyspartaproj.context.extension.path_context import Paths
-from pyspartaproj.script.path.modify.mount.build_linux_path import (
+from pyspartalib.context.default.bool_context import Bools
+from pyspartalib.context.extension.path_context import Paths
+from pyspartalib.script.path.modify.mount.build_linux_path import (
     get_linux_path,
 )
-from pyspartaproj.script.path.modify.mount.build_windows_path import (
+from pyspartalib.script.path.modify.mount.build_windows_path import (
     get_windows_path,
 )
-from pyspartaproj.script.path.modify.mount.shared.has_linux_head import (
+from pyspartalib.script.path.modify.mount.shared.has_linux_head import (
     has_linux_head,
 )
 
