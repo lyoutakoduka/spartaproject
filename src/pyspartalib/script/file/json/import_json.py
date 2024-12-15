@@ -6,8 +6,8 @@
 from json import loads
 from pathlib import Path
 
-from pyspartaproj.context.file.json_context import Json
-from pyspartaproj.script.file.text.import_file import text_import
+from pyspartalib.context.file.json_context import Json
+from pyspartalib.script.file.text.import_file import text_import
 
 
 def json_load(source: str) -> Json:
