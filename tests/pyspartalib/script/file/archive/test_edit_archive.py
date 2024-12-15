@@ -14,7 +14,6 @@ from pyspartalib.context.extension.path_context import (
     Paths2,
 )
 from pyspartalib.context.extension.time_context import TimePair
-from pyspartalib.interface.pytest import fail, raises
 from pyspartalib.script.directory.create_directory import create_directory
 from pyspartalib.script.file.archive.compress_archive import CompressArchive
 from pyspartalib.script.file.archive.decompress_archive import (
@@ -43,6 +42,7 @@ from pyspartalib.script.time.path.get_timestamp import (
     get_invalid_time,
 )
 from pyspartalib.script.time.stamp.is_same_stamp import is_same_stamp
+from tests.pyspartalib.interface.pytest import fail, raises
 
 
 def _get_name() -> str:
