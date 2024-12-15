@@ -5,8 +5,8 @@
 
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.context.typed.user_context import BaseName
-from pyspartalib.interface.pytest import fail
 from pyspartalib.script.string.rename.name_elements import NameElements
+from tests.pyspartalib.interface.pytest import fail
 
 
 def _compare_name(name: str, base_name: BaseName) -> None:
