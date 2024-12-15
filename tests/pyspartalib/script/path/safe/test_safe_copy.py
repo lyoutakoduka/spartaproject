@@ -8,7 +8,6 @@ from tempfile import TemporaryDirectory
 
 from pyspartalib.context.custom.copy_context import CopyPathFunc
 from pyspartalib.context.extension.path_context import PathPair2
-from pyspartalib.interface.pytest import fail
 from pyspartalib.script.bool.same_value import bool_same_pair
 from pyspartalib.script.directory.create_directory import create_directory
 from pyspartalib.script.path.safe.safe_copy import SafeCopy
@@ -19,6 +18,7 @@ from pyspartalib.script.path.temporary.create_temporary_file import (
 from pyspartalib.script.path.temporary.create_temporary_tree import (
     create_temporary_tree,
 )
+from tests.pyspartalib.interface.pytest import fail
 
 
 def _compare_empty(history: PathPair2 | None) -> PathPair2:

@@ -14,7 +14,6 @@ from pyspartalib.context.extension.path_context import (
     PathPair2,
     Paths,
 )
-from pyspartalib.interface.pytest import fail
 from pyspartalib.script.bool.same_value import bool_same_array
 from pyspartalib.script.directory.create_directory import create_directory
 from pyspartalib.script.path.iterate_directory import walk_iterator
@@ -33,6 +32,7 @@ from pyspartalib.script.path.temporary.create_temporary_tree import (
 from pyspartalib.script.time.directory.get_time_path import (
     get_initial_time_path,
 )
+from tests.pyspartalib.interface.pytest import fail
 
 
 def _get_trash_root(temporary_root: Path) -> Path:
