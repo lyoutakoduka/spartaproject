@@ -32,6 +32,9 @@ class ProjectContext:
     def _load_path_directly(self) -> Path:
         return get_resource(local_path=Path("project_context", "default.json"))
 
+    def _get_forward_path(self, forward: Path) -> Path:
+        return path_pair_from_json(json_import(forward))["forward.path"]
+
     def _get_context_path(self, forward: Path | None) -> Path:
         if forward is None:
             return self._load_path_directly()
@@ -39,9 +42,7 @@ class ProjectContext:
         return forward
 
     def _load_context(self, forward: Path) -> Json:
-        return json_import(
-            path_pair_from_json(json_import(forward))["forward.path"]
-        )
+        return json_import(self._get_forward_path(forward))
 
     def _serialize_path(self, base_context: Json) -> None:
         self._bool_context: BoolPair2 = bool_pair2_from_json(base_context)
