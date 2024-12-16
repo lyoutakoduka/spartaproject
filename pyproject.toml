@@ -55,7 +55,6 @@ extend-exclude = [
 ]
 ignore = [
   "PT013",
-  "D401",
 ]
 max-complexity = 10
 max-doc-length = 79
