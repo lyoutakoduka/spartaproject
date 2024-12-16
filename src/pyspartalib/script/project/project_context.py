@@ -29,11 +29,12 @@ from pyspartalib.script.platform.platform_status import get_platform
 class ProjectContext:
     """Class to import a context of whole project."""
 
+    def _load_path_directly(self) -> Path:
+        return get_resource(local_path=Path("project_context", "default.json"))
+
     def _get_context_path(self, forward: Path | None) -> Path:
         if forward is None:
-            return get_resource(
-                local_path=Path("project_context", "forward.json")
-            )
+            return self._load_path_directly()
 
         return forward
 
