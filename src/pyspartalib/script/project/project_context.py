@@ -41,9 +41,6 @@ class ProjectContext:
 
         return self._get_forward_path(forward)
 
-    def _load_context(self, forward: Path) -> Json:
-        return json_import(forward)
-
     def _serialize_path(self, base_context: Json) -> None:
         self._bool_context: BoolPair2 = bool_pair2_from_json(base_context)
         self._integer_context: IntPair2 = integer_pair2_from_json(base_context)
