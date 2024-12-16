@@ -43,7 +43,6 @@
   "liveServer.settings.NoBrowser": true,
   "liveServer.settings.root": "/docs",
   "mypy-type-checker.args": ["--config-file=pyproject.toml"],
-  "mypy-type-checker.path": ["src"],
   "pythonTestExplorer.testFramework": "pytest",
   "python.analysis.diagnosticMode": "workspace",
   "python.analysis.diagnosticSeverityOverrides": {

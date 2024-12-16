@@ -22,6 +22,8 @@ elif [ "black" = $filter_group ]; then
     execute_filter "black" "--check $execute_target"
 elif [ "flake" = $filter_group ]; then
     execute_filter "pflake8" $execute_target
+elif [ "mypy" = $filter_group ]; then
+    execute_filter "mypy" $execute_target
 elif [ "pytest" = $filter_group ]; then
     execute_filter "pytest" $execute_target
 fi

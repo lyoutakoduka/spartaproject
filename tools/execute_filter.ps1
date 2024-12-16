@@ -20,6 +20,9 @@ ElseIf ($Group -eq "black") {
 ElseIf ($Group -eq "flake") {
     ExecuteFilter "pflake8.exe" "."
 }
+ElseIf ($Group -eq "mypy") {
+    ExecuteFilter "mypy.exe" "."
+}
 ElseIf ($Group -eq "pytest") {
     ExecuteFilter "python.exe" "-m pytest"
 }
