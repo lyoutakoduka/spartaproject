@@ -39,10 +39,10 @@ class ProjectContext:
         if forward is None:
             return self._load_path_directly()
 
-        return forward
+        return self._get_forward_path(forward)
 
     def _load_context(self, forward: Path) -> Json:
-        return json_import(self._get_forward_path(forward))
+        return json_import(forward)
 
     def _serialize_path(self, base_context: Json) -> None:
         self._bool_context: BoolPair2 = bool_pair2_from_json(base_context)
@@ -226,7 +226,5 @@ class ProjectContext:
                 Path of setting file in order to place
                     project context file to any place.
         """
-        self._serialize_path(
-            self._load_context(self._get_context_path(forward))
-        )
+        self._serialize_path(json_import(self._get_context_path(forward)))
         self._override_platform(platform)
