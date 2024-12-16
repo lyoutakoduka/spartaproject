@@ -26,9 +26,6 @@
   "explorer.confirmDragAndDrop": false,
   "explorer.excludeGitIgnore": false,
   "flake8.importStrategy": "fromEnvironment",
-  "flake8.severity": {
-    "D": "Warning"
-  },
   "files.exclude": {
     "**/__pycache__/": true,
     ".temp/.mypy_cache/": true,
