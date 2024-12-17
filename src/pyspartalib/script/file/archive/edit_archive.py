@@ -20,7 +20,7 @@ from pyspartalib.script.time.stamp.is_same_stamp import is_same_stamp
 class EditArchive(SafeTrash):
     """Class to edit internal of archive file."""
 
-    def _initialize_variables_edit(
+    def __initialize_variables(
         self, edit_root: Path | None, override: bool, jst: bool
     ) -> None:
         self._disable_archive: bool = True
@@ -267,4 +267,4 @@ class EditArchive(SafeTrash):
             jst=jst,
         )
 
-        self._initialize_variables_edit(edit_root, override, jst)
+        self.__initialize_variables(edit_root, override, jst)
