@@ -20,6 +20,9 @@ class FileHistory(WorkSpace):
     The module is used for e.g., custom copy or rename operation.
     """
 
+    def __initialize_super_class(self, working_root: Path | None) -> None:
+        super().__init__(working_root=working_root)
+
     def __initialize_variables(
         self, history_root: Path | None, override: bool, jst: bool
     ) -> None:
@@ -157,6 +160,5 @@ class FileHistory(WorkSpace):
                 It's used for argument "jst" of
                     function "create_date_time_space".
         """
-        super().__init__(working_root=working_root)
-
+        self.__initialize_super_class(working_root)
         self.__initialize_variables(history_root, override, jst)
