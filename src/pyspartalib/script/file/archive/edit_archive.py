@@ -20,6 +20,22 @@ from pyspartalib.script.time.stamp.is_same_stamp import is_same_stamp
 class EditArchive(SafeTrash):
     """Class to edit internal of archive file."""
 
+    def __initialize_super_class(
+        self,
+        working_root: Path | None,
+        history_root: Path | None,
+        trash_root: Path | None,
+        override: bool,
+        jst: bool,
+    ) -> None:
+        super().__init__(
+            working_root=working_root,
+            history_root=history_root,
+            trash_root=trash_root,
+            override=override,
+            jst=jst,
+        )
+
     def __initialize_variables(
         self, edit_root: Path | None, override: bool, jst: bool
     ) -> None:
@@ -259,12 +275,7 @@ class EditArchive(SafeTrash):
                 It's used for argument "body_root" of
                     function "create_date_time_space".
         """
-        super().__init__(
-            working_root=working_root,
-            history_root=history_root,
-            trash_root=trash_root,
-            override=override,
-            jst=jst,
+        self.__initialize_super_class(
+            working_root, history_root, trash_root, override, jst
         )
-
         self.__initialize_variables(edit_root, override, jst)
