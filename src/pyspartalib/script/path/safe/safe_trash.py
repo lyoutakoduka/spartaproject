@@ -17,7 +17,21 @@ from pyspartalib.script.path.safe.safe_rename import SafeRename
 class SafeTrash(SafeRename):
     """Class to remove file or directory and log history."""
 
-    def _initialize_variables_trash(
+    def __initialize_super_class(
+        self,
+        working_root: Path | None,
+        history_root: Path | None,
+        override: bool,
+        jst: bool,
+    ) -> None:
+        super().__init__(
+            working_root=working_root,
+            history_root=history_root,
+            override=override,
+            jst=jst,
+        )
+
+    def __initialize_variables(
         self, trash_root: Path | None, override: bool, jst: bool
     ) -> None:
         self._trash_root: Path = self.create_date_time_space(
@@ -122,11 +136,7 @@ class SafeTrash(SafeRename):
                 It's used for argument "body_root" of
                     function "create_date_time_space".
         """
-        super().__init__(
-            working_root=working_root,
-            history_root=history_root,
-            override=override,
-            jst=jst,
+        self.__initialize_super_class(
+            working_root, history_root, override, jst
         )
-
-        self._initialize_variables_trash(trash_root, override, jst)
+        self.__initialize_variables(trash_root, override, jst)

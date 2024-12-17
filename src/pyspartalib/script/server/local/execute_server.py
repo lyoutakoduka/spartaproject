@@ -13,6 +13,22 @@ from pyspartalib.script.server.script_version import get_version_name
 class ExecuteServer(UploadServer):
     """Class to execute python code on server."""
 
+    def __initialize_super_class(
+        self,
+        local_root: Path | None,
+        override: bool,
+        jst: bool,
+        forward: Path | None,
+        platform: str | None,
+    ) -> None:
+        super().__init__(
+            local_root=local_root,
+            override=override,
+            jst=jst,
+            forward=forward,
+            platform=platform,
+        )
+
     def _set_version(self, version: str | None) -> str:
         if version is None:
             version = "3.11.5"
@@ -107,12 +123,7 @@ class ExecuteServer(UploadServer):
                     and it's used in the project context file like follow.
                 It's used for argument "platform" of class "UploadServer".
         """
-        super().__init__(
-            local_root=local_root,
-            override=override,
-            jst=jst,
-            forward=forward,
-            platform=platform,
+        self.__initialize_super_class(
+            local_root, override, jst, forward, platform
         )
-
         self._set_version_path(self._set_version(version))

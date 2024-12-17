@@ -13,6 +13,9 @@ from pyspartalib.script.string.rename.split_identifier import SplitIdentifier
 class NameElements(SplitIdentifier):
     """Class to take out name and index from base name of file."""
 
+    def __initialize_super_class(self, identifier: str | None) -> None:
+        super().__init__(identifier=identifier)
+
     def _get_name_elements(self, name: str, index: int) -> BaseName:
         return {
             "name": name,
@@ -97,4 +100,4 @@ class NameElements(SplitIdentifier):
             identifier (str | None, optional): Defaults to None.
                 Split identifier you selected.
         """
-        super().__init__(identifier=identifier)
+        self.__initialize_super_class(identifier)

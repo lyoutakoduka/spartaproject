@@ -18,6 +18,9 @@ class FilterTable(GroupedCharacters):
     Each character should be included in user defined character tables.
     """
 
+    def __initialize_super_class(self, multiple: bool) -> None:
+        super().__init__(multiple=multiple)
+
     def _serialize_tables(self) -> Strs:
         serialized: Strs = []
 
@@ -26,7 +29,7 @@ class FilterTable(GroupedCharacters):
 
         return serialized
 
-    def _initialize_variables_filter(self) -> None:
+    def __initialize_variables(self) -> None:
         self._serialized: Strs = self._serialize_tables()
 
     def contain(self, text: str) -> bool:
@@ -60,6 +63,5 @@ class FilterTable(GroupedCharacters):
                     which is constructed by multiple byte.
                 It's used for argument "multiple" of class "GroupedCharacters".
         """
-        super().__init__(multiple=multiple)
-
-        self._initialize_variables_filter()
+        self.__initialize_super_class(multiple)
+        self.__initialize_variables()

@@ -15,7 +15,9 @@ initialize_decimal()
 class TimerSelect:
     """Class to count time like a timer."""
 
-    def _initialize_variable(self, override: bool, interval: Decimal) -> None:
+    def __initialize_variables(
+        self, override: bool, interval: Decimal
+    ) -> None:
         self._override: bool = override
         self._interval: Decimal = interval
 
@@ -82,5 +84,5 @@ class TimerSelect:
         if interval is None:
             interval = Decimal("1")
 
-        self._initialize_variable(override, interval)
+        self.__initialize_variables(override, interval)
         self._initialize_current()
