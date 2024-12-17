@@ -15,7 +15,7 @@ initialize_decimal()
 class LogTimer:
     """Class to count timer and get timer count by readable format."""
 
-    def _initialize_variables(
+    def __initialize_variables(
         self,
         override: bool,
         timer_interval: Decimal,
@@ -117,7 +117,7 @@ class LogTimer:
         if interval is None:
             interval = Decimal("1")
 
-        self._initialize_variables(override, timer_interval, interval, digit)
+        self.__initialize_variables(override, timer_interval, interval, digit)
 
     def __init__(self) -> None:
         """Initialize instance by method "restart"."""
