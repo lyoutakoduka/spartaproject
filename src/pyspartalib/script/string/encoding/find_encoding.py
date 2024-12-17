@@ -3,7 +3,7 @@
 
 """Module to find character encoding from string automatically."""
 
-from chardet.universaldetector import UniversalDetector
+from pyspartalib.interface.chardet import UniversalDetector
 
 
 def _analysis(byte: bytes) -> str | None:
