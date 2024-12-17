@@ -64,7 +64,7 @@ class PathServer(WorkSpace):
             jst=jst,
         )
 
-    def _initialize_variables_local(
+    def __initialize_variables(
         self, local_root: Path | None, override: bool, jst: bool
     ) -> None:
         self._build_path_table()
@@ -160,4 +160,4 @@ class PathServer(WorkSpace):
         """
         super().__init__(working_root=working_root)
 
-        self._initialize_variables_local(local_root, override, jst)
+        self.__initialize_variables(local_root, override, jst)

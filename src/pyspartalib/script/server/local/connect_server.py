@@ -26,7 +26,7 @@ initialize_decimal()
 class ConnectServer(PathServer, ProjectContext):
     """Class to use SSH and SFTP functionality."""
 
-    def _initialize_variables_connect(self) -> None:
+    def __initialize_variables(self) -> None:
         self._ssh: SSHClient | None = None
         self._channel: Channel | None = None
         self._sftp: SFTPClient | None = None
@@ -252,7 +252,7 @@ class ConnectServer(PathServer, ProjectContext):
     def __del__(self) -> None:
         """Close network objects."""
         self._finalize_network_objects()
-        self._initialize_variables_connect()
+        self.__initialize_variables()
 
     def __init__(
         self,
@@ -290,4 +290,4 @@ class ConnectServer(PathServer, ProjectContext):
         self.__initialize_super_class(
             local_root, override, jst, forward, platform
         )
-        self._initialize_variables_connect()
+        self.__initialize_variables()
