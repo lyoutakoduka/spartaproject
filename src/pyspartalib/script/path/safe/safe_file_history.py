@@ -20,7 +20,7 @@ class FileHistory(WorkSpace):
     The module is used for e.g., custom copy or rename operation.
     """
 
-    def _initialize_variables_history(
+    def __initialize_variables(
         self, history_root: Path | None, override: bool, jst: bool
     ) -> None:
         self._still_removed: bool = False
@@ -159,4 +159,4 @@ class FileHistory(WorkSpace):
         """
         super().__init__(working_root=working_root)
 
-        self._initialize_variables_history(history_root, override, jst)
+        self.__initialize_variables(history_root, override, jst)
