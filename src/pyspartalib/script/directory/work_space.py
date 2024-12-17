@@ -14,7 +14,7 @@ from pyspartalib.script.directory.date_time_space import create_working_space
 class WorkSpace:
     """Class to create temporary working space shared in class."""
 
-    def _initialize_variables(self, working_root: Path | None) -> None:
+    def __initialize_variables(self, working_root: Path | None) -> None:
         self._root_specified: bool = False
 
         if working_root is None:
@@ -162,4 +162,4 @@ class WorkSpace:
                 User defined temporary working space.
                 It's mainly used for test.
         """
-        self._initialize_variables(working_root)
+        self.__initialize_variables(working_root)
