@@ -36,6 +36,9 @@ class EditArchive(SafeTrash):
             jst=jst,
         )
 
+    def __finalize_super_class(self) -> None:
+        super().__del__()
+
     def __initialize_variables(
         self, edit_root: Path | None, override: bool, jst: bool
     ) -> None:
@@ -140,7 +143,7 @@ class EditArchive(SafeTrash):
     def _finalize_archive(self) -> Paths | None:
         archived: Paths | None = self._filter_time_stamp()
 
-        super().__del__()
+        self.__finalize_super_class()
 
         return archived
 
