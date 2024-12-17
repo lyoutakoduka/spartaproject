@@ -37,7 +37,7 @@ class GroupedCharacters:
             for value in values
         ]
 
-    def _initialize_variables(self, multiple: bool) -> None:
+    def __initialize_variables(self, multiple: bool) -> None:
         self._index_base: int = self._get_index_base(multiple)
         self._special_tables: Strs = self._get_special_tables(multiple)
 
@@ -150,4 +150,4 @@ class GroupedCharacters:
                 True if you want to select character tables
                     which is constructed by multiple byte.
         """
-        self._initialize_variables(multiple)
+        self.__initialize_variables(multiple)

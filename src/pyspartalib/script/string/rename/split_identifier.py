@@ -18,7 +18,7 @@ class SplitIdentifier:
 
         self._identifier: str = identifier
 
-    def _initialize_variables(self, identifier: str | None) -> None:
+    def __initialize_variables(self, identifier: str | None) -> None:
         self._initialize_identifier(identifier)
 
         self._other_table: Strs = GroupedCharacters().get_table()["other"]
@@ -101,4 +101,4 @@ class SplitIdentifier:
                 You can specify the split identifier by argument "identifier",
                     and default split identifier is character "_".
         """
-        self._initialize_variables(identifier)
+        self.__initialize_variables(identifier)
