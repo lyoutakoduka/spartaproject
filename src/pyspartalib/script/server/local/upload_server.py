@@ -20,6 +20,22 @@ from pyspartalib.script.server.local.connect_server import ConnectServer
 class UploadServer(ConnectServer):
     """Class to upload file or directory by SFTP functionality."""
 
+    def __initialize_super_class(
+        self,
+        local_root: Path | None,
+        override: bool,
+        jst: bool,
+        forward: Path | None,
+        platform: str | None,
+    ) -> None:
+        super().__init__(
+            local_root=local_root,
+            override=override,
+            jst=jst,
+            forward=forward,
+            platform=platform,
+        )
+
     def _get_remote_root(self) -> Path:
         if sftp := self.get_sftp():
             if root := sftp.getcwd():
@@ -155,10 +171,6 @@ class UploadServer(ConnectServer):
                     and it's used in the project context file like follow.
                 It's used for argument "platform" of class "ConnectServer".
         """
-        super().__init__(
-            local_root=local_root,
-            override=override,
-            jst=jst,
-            forward=forward,
-            platform=platform,
+        self.__initialize_super_class(
+            local_root, override, jst, forward, platform
         )

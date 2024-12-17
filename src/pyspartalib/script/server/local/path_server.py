@@ -14,6 +14,9 @@ from pyspartalib.script.path.modify.current.get_relative import get_relative
 class PathServer(WorkSpace):
     """Class to handle paths about file and directory on server."""
 
+    def __initialize_super_class(self, working_root: Path | None) -> None:
+        super().__init__(working_root=working_root)
+
     def _add_path(self, key: str, child: Path, parent: str | None) -> None:
         if parent is not None:
             child = Path(self.get_path(parent), child)
@@ -158,6 +161,5 @@ class PathServer(WorkSpace):
                 It's used for argument "jst" of
                     function "create_date_time_space".
         """
-        super().__init__(working_root=working_root)
-
+        self.__initialize_super_class(working_root)
         self.__initialize_variables(local_root, override, jst)
