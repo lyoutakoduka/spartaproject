@@ -9,6 +9,9 @@ from pyspartalib.script.string.rename.split_identifier import SplitIdentifier
 class StandardizeText(SplitIdentifier):
     """Class to standardize string for key of dictionary."""
 
+    def __initialize_super_class(self, identifier: str | None) -> None:
+        super().__init__(identifier=identifier)
+
     def _convert_lower(self, text: str) -> str:
         return text.lower()
 
@@ -69,4 +72,4 @@ class StandardizeText(SplitIdentifier):
                 You can specify the split identifier by argument "identifier".
                 It's used for argument "identifier" of class "SplitIdentifier".
         """
-        super().__init__(identifier=identifier)
+        self.__initialize_super_class(identifier)
