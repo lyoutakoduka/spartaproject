@@ -6,33 +6,21 @@
 from pathlib import Path
 
 from pyspartalib.context.default.string_context import StrGene, Strs
-from pyspartalib.context.extension.path_context import PathPair
 from pyspartalib.script.platform.platform_status import is_platform_linux
 from pyspartalib.script.project.project_context import ProjectContext
 from pyspartalib.script.shell.execute_command import execute_single
 
 
-def _get_platform_key(project: ProjectContext) -> str:
-    return project.get_platform_key(["powershell"]) + ".path"
+def _merge_context_path(project: ProjectContext) -> Path:
+    return project.merge_paths("powershell", ["working", "runtime"])
 
 
-def _get_project_context(
-    platform: str | None, forward: Path | None
-) -> ProjectContext:
-    return ProjectContext(platform=platform, forward=forward)
-
-
-def _get_runtime_context(project: ProjectContext) -> PathPair:
-    return project.get_path_context("runtime")
-
-
-def _get_context_path(context: PathPair, project: ProjectContext) -> Path:
-    return context[_get_platform_key(project)]
-
-
-def _get_powershell_path(platform: str | None, forward: Path | None) -> Path:
-    project: ProjectContext = _get_project_context(platform, forward)
-    return _get_context_path(_get_runtime_context(project), project)
+def _get_runtime_path(
+    platform: str | None = None, forward: Path | None = None
+) -> Path:
+    return _merge_context_path(
+        ProjectContext(platform=platform, forward=forward)
+    )
 
 
 def _add_execute_option(shell_commands: Strs) -> None:
@@ -50,7 +38,7 @@ def _build_commands(powershell_path: str, commands: Strs) -> Strs:
 def execute_powershell(
     commands: Strs, platform: str | None = None, forward: Path | None = None
 ) -> StrGene:
-    """Function to execute specific command in PowerShell.
+    """Execute specific command in PowerShell corresponding to platform.
 
     Args:
         commands (Strs): Elements of command which will merged by space.
@@ -72,7 +60,7 @@ def execute_powershell(
     """
     return execute_single(
         _build_commands(
-            _get_powershell_path(platform, forward).as_posix(), commands
+            _get_runtime_path(platform, forward).as_posix(), commands
         )
     )
 

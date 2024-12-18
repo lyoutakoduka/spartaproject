@@ -16,7 +16,7 @@ from pyspartalib.script.path.modify.get_resource import get_resource
 from pyspartalib.script.platform.platform_status import is_platform_linux
 from pyspartalib.script.shell.execute_python import (
     execute_python,
-    get_interpreter_path,
+    get_runtime_path,
     get_script_string,
 )
 from pyspartalib.script.string.temporary_text import temporary_text
@@ -86,7 +86,7 @@ def test_interpreter() -> None:
     }
 
     for platform in platforms:
-        interpreter_path: Path = get_interpreter_path(
+        interpreter_path: Path = get_runtime_path(
             platform=platform, forward=_get_config_file()
         )
         expected: Path = Path(

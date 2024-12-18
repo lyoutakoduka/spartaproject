@@ -27,11 +27,11 @@ def _get_project_context() -> ProjectContext:
 
 
 def _get_shared_paths() -> PathPair:
-    return _get_project_context().get_path_context("share")
+    return _get_project_context().get_path_context("shortcut")
 
 
 def _get_temporary_windows() -> Path:
-    return _get_shared_paths()["temporary_windows.path"]
+    return _get_shared_paths()["temporary.path"]
 
 
 def _create_working_space() -> Path:

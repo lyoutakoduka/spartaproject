@@ -1,18 +1,20 @@
 {
-  "project": {
-    "interpreter_linux": "***",
-    "interpreter_windows": "***",
-    "platform_linux.path": "***",
-    "platform_windows.path": "***",
+  "interpreter": {
+    "runtime_linux.path": "***",
+    "runtime_windows.path": "***",
+    "virtual_linux.path": "***",
+    "virtual_windows.path": "***",
     "working_linux.path": "***",
     "working_windows.path": "***"
   },
-  "runtime": {
-    "powershell_linux.path": "***",
-    "powershell_windows.path": "***"
+  "powershell": {
+    "runtime_linux.path": "***",
+    "runtime_windows.path": "***"
+    "working_linux.path": ""***",
+    "working_windows.path": ""***"
   },
-  "share": {
-    "temporary_windows.path": "***"
+  "shortcut": {
+    "temporary.path": "***"
   },
   "server": {
     "port": 0,
@@ -21,7 +23,6 @@
     "passphrase_linux": "***",
     "passphrase_windows": "***",
     "user_name": "***",
-    "local_root.path": "***",
     "private_key_linux.path": "***",
     "private_key_windows.path": "***",
     "remote_root.path": "***"

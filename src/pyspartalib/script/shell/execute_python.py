@@ -11,49 +11,10 @@ from pyspartalib.script.project.project_context import ProjectContext
 from pyspartalib.script.shell.execute_command import execute_multiple
 
 
-def get_interpreter_path(
-    platform: str | None = None, forward: Path | None = None
-) -> Path:
-    """Function to get interpreter path of Python corresponding to platform.
-
-    Args:
-        platform (str | None, optional): Defaults to None.
-            You can select an execution platform from "linux" or "windows".
-            Current execution platform is selected if argument is None.
-
-        forward (Path | None, optional): Defaults to None.
-            Path of setting file in order to place
-                project context file to any place.
-            It's used for argument "forward" of class "ProjectContext".
-
-    Raises:
-        FileNotFoundError:
-            Throw an exception if interpreter path you selected isn't exists.
-
-    Returns:
-        Path: Relative path of Python interpreter.
-    """
-    project = ProjectContext(platform=platform, forward=forward)
-    interpreter_path: Path = project.merge_platform_path(
-        "project", ["working", "platform"], file_type="interpreter"
+def _merge_context_path(project: ProjectContext) -> Path:
+    return project.merge_paths(
+        "interpreter", ["working", "virtual", "runtime"]
     )
-
-    if not interpreter_path.exists():
-        raise FileNotFoundError()
-
-    return interpreter_path
-
-
-def get_script_string(path: Path) -> str:
-    """Convert to the format which is necessary for executing script in Python.
-
-    Args:
-        path (Path): Path you want to convert.
-
-    Returns:
-        str: Convert path which can executed in Python.
-    """
-    return str(path)  # Not as_posix()
 
 
 def _get_environment() -> str:
@@ -76,10 +37,47 @@ def _get_python_command(
     commands: Strs, platform: str | None, forward: Path | None
 ) -> Strs:
     return [
-        get_script_string(
-            get_interpreter_path(platform=platform, forward=forward)
-        )
+        get_script_string(get_runtime_path(platform=platform, forward=forward))
     ] + commands
+
+
+def get_runtime_path(
+    platform: str | None = None, forward: Path | None = None
+) -> Path:
+    """Get interpreter path of Python corresponding to platform.
+
+    Args:
+        platform (str | None, optional): Defaults to None.
+            You can select an execution platform from "linux" or "windows".
+            Current execution platform is selected if argument is None.
+
+        forward (Path | None, optional): Defaults to None.
+            Path of setting file in order to place
+                project context file to any place.
+            It's used for argument "forward" of class "ProjectContext".
+
+    Raises:
+        FileNotFoundError:
+            Throw an exception if interpreter path you selected isn't exists.
+
+    Returns:
+        Path: Relative path of Python interpreter.
+    """
+    return _merge_context_path(
+        ProjectContext(platform=platform, forward=forward)
+    )
+
+
+def get_script_string(path: Path) -> str:
+    """Convert to the format which is necessary for executing script in Python.
+
+    Args:
+        path (Path): Path you want to convert.
+
+    Returns:
+        str: Convert path which can executed in Python.
+    """
+    return str(path)  # Not as_posix()
 
 
 def execute_python(
