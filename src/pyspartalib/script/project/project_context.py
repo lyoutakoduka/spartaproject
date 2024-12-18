@@ -147,9 +147,7 @@ class ProjectContext:
         """
         return "_".join(keys + [self.platform])
 
-    def merge_platform_path(
-        self, group: str, path_types: Strs, file_type: str | None = None
-    ) -> Path:
+    def merge_platform_path(self, group: str, path_types: Strs) -> Path:
         """Get path merged with multiple directories and single file.
 
         The path is corresponding to platform,
@@ -188,12 +186,7 @@ class ProjectContext:
                 and file_type is "file" in Linux environment,
                 "root/directory_B/file_B" is returned.
         """
-        platform_root: Path = self._merged_path_context(group, path_types)
-
-        if file_type is None:
-            return platform_root
-
-        return self._merged_string_context(group, file_type, platform_root)
+        return self._merged_path_context(group, path_types)
 
     def __init__(
         self, platform: str | None = None, forward: Path | None = None
