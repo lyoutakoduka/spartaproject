@@ -53,7 +53,7 @@ def _get_system_paths(expected: Paths, first_root: Path) -> Paths:
     system_paths: Paths = []
 
     for result in _execute_python_path(
-        [_get_script_text("local_import.py")], expected
+        [_get_script_text("system.py")], expected
     ):
         path: Path = Path(result)
 
