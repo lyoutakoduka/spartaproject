@@ -7,8 +7,7 @@ from pyspartalib.script.string.temporary_text import temporary_text
 
 
 def _main() -> None:
-    for test in temporary_text(3, 3):
-        print(test)
+    print("simple")
 
 
 if __name__ == "__main__":
