@@ -35,7 +35,7 @@ def get_interpreter_path(
     """
     project = ProjectContext(platform=platform, forward=forward)
     interpreter_path: Path = project.merge_platform_path(
-        "project", ["working", "platform"], file_type="interpreter"
+        "project", ["working", "platform"]
     )
 
     if not interpreter_path.exists():
