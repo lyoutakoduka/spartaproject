@@ -11,7 +11,7 @@ from pyspartalib.script.server.local.connect_server import ConnectServer
 
 
 def _get_config_file() -> Path:
-    return get_resource(local_path=Path("connect_server", "forward.json"))
+    return get_resource(local_path=Path("forward.json"))
 
 
 def _is_connect() -> ConnectServer:

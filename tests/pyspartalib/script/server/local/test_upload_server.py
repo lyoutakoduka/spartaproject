@@ -19,7 +19,7 @@ from pyspartalib.script.server.local.upload_server import UploadServer
 
 
 def _get_config_file() -> Path:
-    return get_resource(local_path=Path("connect_server", "forward.json"))
+    return get_resource(local_path=Path("forward.json"))
 
 
 def _upload_path(server: UploadServer, source_path: Path) -> None:

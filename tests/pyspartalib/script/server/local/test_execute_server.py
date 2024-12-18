@@ -13,7 +13,7 @@ from tests.pyspartalib.interface.pytest import fail, raises
 
 
 def _get_config_file() -> Path:
-    return get_resource(local_path=Path("connect_server", "forward.json"))
+    return get_resource(local_path=Path("forward.json"))
 
 
 def _is_connect(server: ExecuteServer) -> None:
