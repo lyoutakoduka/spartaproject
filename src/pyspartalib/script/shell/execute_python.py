@@ -12,7 +12,9 @@ from pyspartalib.script.shell.execute_command import execute_multiple
 
 
 def _merge_context_path(project: ProjectContext) -> Path:
-    return project.merge_paths("interpreter", ["working", "runtime"])
+    return project.merge_paths(
+        "interpreter", ["working", "virtual", "runtime"]
+    )
 
 
 def get_interpreter_path(
