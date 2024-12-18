@@ -37,13 +37,11 @@ def _get_python_command(
     commands: Strs, platform: str | None, forward: Path | None
 ) -> Strs:
     return [
-        get_script_string(
-            get_interpreter_path(platform=platform, forward=forward)
-        )
+        get_script_string(get_runtime_path(platform=platform, forward=forward))
     ] + commands
 
 
-def get_interpreter_path(
+def get_runtime_path(
     platform: str | None = None, forward: Path | None = None
 ) -> Path:
     """Get interpreter path of Python corresponding to platform.
