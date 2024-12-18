@@ -8,6 +8,8 @@
   "powershell": {
     "runtime_linux.path": "***",
     "runtime_windows.path": "***"
+    "working_linux.path": ""***",
+    "working_windows.path": ""***"
   },
   "share": {
     "temporary_windows.path": "***"
