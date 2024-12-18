@@ -11,6 +11,10 @@ from pyspartalib.script.project.project_context import ProjectContext
 from pyspartalib.script.shell.execute_command import execute_multiple
 
 
+def _merge_context_path(project: ProjectContext) -> Path:
+    return project.merge_platform_path("project", ["working", "platform"])
+
+
 def get_interpreter_path(
     platform: str | None = None, forward: Path | None = None
 ) -> Path:
@@ -33,9 +37,8 @@ def get_interpreter_path(
     Returns:
         Path: Relative path of Python interpreter.
     """
-    project = ProjectContext(platform=platform, forward=forward)
-    interpreter_path: Path = project.merge_platform_path(
-        "project", ["working", "platform"]
+    interpreter_path: Path = _merge_context_path(
+        ProjectContext(platform=platform, forward=forward)
     )
 
     if not interpreter_path.exists():
