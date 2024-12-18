@@ -38,7 +38,7 @@ def _build_commands(powershell_path: str, commands: Strs) -> Strs:
 def execute_powershell(
     commands: Strs, platform: str | None = None, forward: Path | None = None
 ) -> StrGene:
-    """Function to execute specific command in PowerShell.
+    """Execute specific command in PowerShell corresponding to platform.
 
     Args:
         commands (Strs): Elements of command which will merged by space.
