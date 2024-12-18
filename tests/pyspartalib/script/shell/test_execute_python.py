@@ -45,7 +45,9 @@ def _execute_python_platform(commands: Strs, platform: str) -> Strs:
 
 
 def _get_script_text(script_text: str) -> str:
-    return get_script_string(get_resource(local_path=Path(script_text)))
+    return get_script_string(
+        get_resource(local_path=Path("tools", script_text))
+    )
 
 
 def _get_system_paths(expected: Paths, first_root: Path) -> Paths:
