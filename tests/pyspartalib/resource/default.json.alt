@@ -13,8 +13,8 @@
     "working_linux.path": ""***",
     "working_windows.path": ""***"
   },
-  "share": {
-    "temporary_windows.path": "***"
+  "shortcut": {
+    "temporary.path": "***"
   },
   "server": {
     "port": 0,
