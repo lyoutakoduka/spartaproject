@@ -76,19 +76,6 @@ class ProjectContext:
             )
         )
 
-    def _merged_string_context(
-        self,
-        group: str,
-        file_type: str,
-        platform_root: Path,
-    ) -> Path:
-        context_types: StrPair = self._get_context_types([file_type])
-
-        return Path(
-            platform_root,
-            self.get_string_context(group)[context_types[file_type]],
-        )
-
     def get_bool_context(self, group: str) -> BoolPair:
         """Filter and get project context by boolean type.
 
