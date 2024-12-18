@@ -3,11 +3,15 @@
 
 """Module for test to execute Python on all platform."""
 
-from pyspartalib.script.platform.get_platform import get_platform
+from platform import uname
+
+
+def _get_platform() -> str:
+    return uname().system.lower()
 
 
 def _main() -> None:
-    print(get_platform())
+    print(_get_platform())
 
 
 if __name__ == "__main__":
