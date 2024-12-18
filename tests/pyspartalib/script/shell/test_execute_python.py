@@ -19,7 +19,6 @@ from pyspartalib.script.shell.execute_python import (
     get_runtime_path,
     get_script_string,
 )
-from pyspartalib.script.string.temporary_text import temporary_text
 
 
 def _get_config_file() -> Path:
