@@ -12,6 +12,10 @@ from pyspartalib.script.project.project_context import ProjectContext
 from pyspartalib.script.shell.execute_command import execute_single
 
 
+def _merge_context_path(project: ProjectContext) -> Path:
+    return project.merge_paths("powershell", ["working", "runtime"])
+
+
 def _get_platform_key(project: ProjectContext) -> str:
     return project.get_platform_key(["runtime"]) + ".path"
 
