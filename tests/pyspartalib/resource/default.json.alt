@@ -1,7 +1,5 @@
 {
   "project": {
-    "interpreter_linux": "***",
-    "interpreter_windows": "***",
     "platform_linux.path": "***",
     "platform_windows.path": "***",
     "working_linux.path": "***",
