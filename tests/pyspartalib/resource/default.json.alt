@@ -2,6 +2,8 @@
   "interpreter": {
     "runtime_linux.path": "***",
     "runtime_windows.path": "***",
+    "virtual_linux.path": "***",
+    "virtual_windows.path": "***",
     "working_linux.path": "***",
     "working_windows.path": "***"
   },
