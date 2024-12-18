@@ -13,7 +13,7 @@ from pyspartalib.script.shell.execute_command import execute_single
 
 
 def _get_platform_key(project: ProjectContext) -> str:
-    return project.get_platform_key(["powershell"]) + ".path"
+    return project.get_platform_key(["runtime"]) + ".path"
 
 
 def _get_project_context(
@@ -23,7 +23,7 @@ def _get_project_context(
 
 
 def _get_runtime_context(project: ProjectContext) -> PathPair:
-    return project.get_path_context("runtime")
+    return project.get_path_context("powershell")
 
 
 def _get_context_path(context: PathPair, project: ProjectContext) -> Path:
