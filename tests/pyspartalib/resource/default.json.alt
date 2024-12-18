@@ -1,7 +1,7 @@
 {
   "interpreter": {
-    "platform_linux.path": "***",
-    "platform_windows.path": "***",
+    "runtime_linux.path": "***",
+    "runtime_windows.path": "***",
     "working_linux.path": "***",
     "working_windows.path": "***"
   },
