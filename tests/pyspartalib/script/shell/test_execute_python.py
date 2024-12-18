@@ -49,12 +49,14 @@ def _get_script_text(script_text: str) -> str:
     )
 
 
+def _get_script_texts(script_name: str) -> Strs:
+    return [_get_script_text(script_name + ".py")]
+
+
 def _get_system_paths(expected: Paths, first_root: Path) -> Paths:
     system_paths: Paths = []
 
-    for result in _execute_python_path(
-        [_get_script_text("system.py")], expected
-    ):
+    for result in _execute_python_path(_get_script_texts("system"), expected):
         path: Path = Path(result)
 
         if is_relative(path, root_path=get_absolute(first_root)):
@@ -98,7 +100,7 @@ def test_interpreter() -> None:
 
 def test_command() -> None:
     """Test to execute simple Python script."""
-    assert ["simple"] == list(_execute_python([_get_script_text("simple.py")]))
+    assert ["simple"] == list(_execute_python(_get_script_texts("simple")))
 
 
 def test_platform() -> None:
@@ -109,7 +111,7 @@ def test_platform() -> None:
         result.lower()
         for platform in expected
         for result in _execute_python_platform(
-            [_get_script_text("platform.py")], platform
+            _get_script_texts("platform"), platform
         )
     ]
 
