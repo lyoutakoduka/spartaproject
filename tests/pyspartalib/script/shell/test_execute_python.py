@@ -109,8 +109,7 @@ def test_platform() -> None:
         result.lower()
         for platform in expected
         for result in _execute_python_platform(
-            [_get_script_text("execute_platform.py")],
-            platform,
+            [_get_script_text("platform.py")], platform
         )
     ]
 
