@@ -179,11 +179,11 @@ class ProjectContext:
 
         e.g., in the following cases.
 
-        The project context file named "config.json"
+        The project context file named "default.json"
         The path forwarding file named "forward.json"
 
         ProjectContext module import "forward.json" first,
-            then find a path of "config.json" in therefore,
+            then find a path of "default.json" in therefore,
             finally import it.
 
         Default platform is automatically selected from current environment.
