@@ -24,29 +24,6 @@ def _get_runtime_path(
     )
 
 
-def _get_platform_key(project: ProjectContext) -> str:
-    return project.get_platform_key(["runtime"]) + ".path"
-
-
-def _get_project_context(
-    platform: str | None, forward: Path | None
-) -> ProjectContext:
-    return ProjectContext(platform=platform, forward=forward)
-
-
-def _get_runtime_context(project: ProjectContext) -> PathPair:
-    return project.get_path_context("powershell")
-
-
-def _get_context_path(context: PathPair, project: ProjectContext) -> Path:
-    return context[_get_platform_key(project)]
-
-
-def _get_powershell_path(platform: str | None, forward: Path | None) -> Path:
-    project: ProjectContext = _get_project_context(platform, forward)
-    return _get_context_path(_get_runtime_context(project), project)
-
-
 def _add_execute_option(shell_commands: Strs) -> None:
     shell_commands += ["-ExecutionPolicy", "Bypass"]
 
