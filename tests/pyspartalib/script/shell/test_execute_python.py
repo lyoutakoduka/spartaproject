@@ -23,7 +23,7 @@ from pyspartalib.script.string.temporary_text import temporary_text
 
 
 def _get_config_file() -> Path:
-    return get_resource(local_path=Path("execute_python", "forward.json"))
+    return get_resource(local_path=Path("forward.json"))
 
 
 def _execute_python(commands: Strs) -> Strs:
