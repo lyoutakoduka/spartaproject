@@ -19,7 +19,6 @@ from pyspartalib.script.shell.execute_python import (
     get_runtime_path,
     get_script_string,
 )
-from pyspartalib.script.string.temporary_text import temporary_text
 
 
 def _get_config_file() -> Path:
@@ -45,15 +44,19 @@ def _execute_python_platform(commands: Strs, platform: str) -> Strs:
 
 
 def _get_script_text(script_text: str) -> str:
-    return get_script_string(get_resource(local_path=Path(script_text)))
+    return get_script_string(
+        get_resource(local_path=Path("tools", script_text))
+    )
+
+
+def _get_script_texts(script_name: str) -> Strs:
+    return [_get_script_text(script_name + ".py")]
 
 
 def _get_system_paths(expected: Paths, first_root: Path) -> Paths:
     system_paths: Paths = []
 
-    for result in _execute_python_path(
-        [_get_script_text("local_import.py")], expected
-    ):
+    for result in _execute_python_path(_get_script_texts("system"), expected):
         path: Path = Path(result)
 
         if is_relative(path, root_path=get_absolute(first_root)):
@@ -97,9 +100,7 @@ def test_interpreter() -> None:
 
 def test_command() -> None:
     """Test to execute simple Python script."""
-    assert temporary_text(3, 3) == list(
-        _execute_python([_get_script_text("indices.py")])
-    )
+    assert ["simple"] == list(_execute_python(_get_script_texts("simple")))
 
 
 def test_platform() -> None:
@@ -110,8 +111,7 @@ def test_platform() -> None:
         result.lower()
         for platform in expected
         for result in _execute_python_platform(
-            [_get_script_text("execute_platform.py")],
-            platform,
+            _get_script_texts("find_platform"), platform
         )
     ]
 

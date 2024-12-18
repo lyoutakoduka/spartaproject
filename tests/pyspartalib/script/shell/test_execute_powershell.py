@@ -88,7 +88,7 @@ def test_command() -> None:
     Execute simple Write-Output script
         that takes the path you want to print as argument.
     """
-    expected: Path = get_resource(local_path=Path("command.ps1"))
+    expected: Path = get_resource(local_path=Path("tools", "command.ps1"))
 
     assert [get_path_string(expected)] == _execute_powershell(
         [

@@ -21,7 +21,9 @@ def _is_connect(server: ExecuteServer) -> None:
 
 
 def _copy_resource(name: Path, destination_path: Path) -> None:
-    SafeCopy().copy(get_resource(local_path=name), destination_path)
+    SafeCopy().copy(
+        get_resource(local_path=Path("tools", name)), destination_path
+    )
 
 
 def _execute_python(name: Path, server: ExecuteServer) -> Strs | None:
