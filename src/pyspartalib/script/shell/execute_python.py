@@ -18,7 +18,7 @@ def _merge_context_path(project: ProjectContext) -> Path:
 def get_interpreter_path(
     platform: str | None = None, forward: Path | None = None
 ) -> Path:
-    """Function to get interpreter path of Python corresponding to platform.
+    """Get interpreter path of Python corresponding to platform.
 
     Args:
         platform (str | None, optional): Defaults to None.
