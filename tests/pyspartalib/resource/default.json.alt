@@ -21,7 +21,6 @@
     "passphrase_linux": "***",
     "passphrase_windows": "***",
     "user_name": "***",
-    "local_root.path": "***",
     "private_key_linux.path": "***",
     "private_key_windows.path": "***",
     "remote_root.path": "***"
