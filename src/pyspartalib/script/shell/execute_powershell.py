@@ -16,6 +16,14 @@ def _merge_context_path(project: ProjectContext) -> Path:
     return project.merge_paths("powershell", ["working", "runtime"])
 
 
+def _get_runtime_path(
+    platform: str | None = None, forward: Path | None = None
+) -> Path:
+    return _merge_context_path(
+        ProjectContext(platform=platform, forward=forward)
+    )
+
+
 def _get_platform_key(project: ProjectContext) -> str:
     return project.get_platform_key(["runtime"]) + ".path"
 
