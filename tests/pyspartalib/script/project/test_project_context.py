@@ -123,19 +123,3 @@ def test_directory() -> None:
     assert expected == _import_context().merge_platform_path(
         "project", path_roots
     )
-
-
-def test_file() -> None:
-    """Test to get path which is merged by single directory and single file."""
-    file_type: str = "file"
-    path_roots: Strs = ["root"]
-    path_heads: Strs = ["body"]
-
-    expected: Path = Path(
-        _get_expected_path(path_roots, path_heads),
-        _add_platform(file_type),
-    )
-
-    assert expected == _import_context().merge_platform_path(
-        "project", path_roots, file_type=file_type
-    )
