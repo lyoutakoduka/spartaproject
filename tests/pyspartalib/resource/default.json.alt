@@ -1,5 +1,5 @@
 {
-  "project": {
+  "interpreter": {
     "platform_linux.path": "***",
     "platform_windows.path": "***",
     "working_linux.path": "***",
