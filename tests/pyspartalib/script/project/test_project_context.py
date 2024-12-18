@@ -120,6 +120,4 @@ def test_directory() -> None:
 
     expected: Path = _get_expected_path(path_roots, path_heads)
 
-    assert expected == _import_context().merge_platform_path(
-        "project", path_roots
-    )
+    assert expected == _import_context().merge_paths("project", path_roots)
