@@ -135,7 +135,7 @@ class ProjectContext:
         return "_".join(keys + [self.platform])
 
     def merge_platform_path(self, group: str, path_types: Strs) -> Path:
-        """Get path merged with multiple directories and single file.
+        """Get path merged with multiple path values.
 
         The path is corresponding to platform,
             and created from project context file.
@@ -144,12 +144,10 @@ class ProjectContext:
 
         {
             "group": {
-                "file_linux": "file_B",
-                "file_windows": "file_C",
-                "group_linux.path": "root/group_B",
-                "group_windows.path": "root/group_C",
-                "directory_linux.path": "root/directory_B",
-                "directory_windows.path": "root/directory_C"
+                "file_linux.path": "group/file_A",
+                "file_windows.path": "group/file_B",
+                "directory_linux.path": "root/directory_A",
+                "directory_windows.path": "root/directory_B"
             }
         }
 
@@ -159,19 +157,16 @@ class ProjectContext:
 
             path_types (Strs):
                 List of identifier of directory you want to merge,
-                select ["group", "directory"] if in the project context above.
-
-            file_type (str | None, optional): Defaults to None.
-                Identifier of file you want to merge,
-                select "file" if in the project context above.
+                select ["directory", "file"] if in the project context above.
 
         Returns:
             Path: Merged path corresponding to platform.
 
-            If you select group is "group",
-                path_types is ["group", "directory"],
-                and file_type is "file" in Linux environment,
-                "root/directory_B/file_B" is returned.
+            If execution environment is Linux
+                and you select group is "group"
+                and path_types is ["directory", "file"].
+
+            Path "root/directory_A/group/file_A" is returned.
         """
         return self._merged_path_context(group, path_types)
 
@@ -183,6 +178,7 @@ class ProjectContext:
         The path of the context file is defined at a path forwarding file.
 
         e.g., in the following cases.
+
         The project context file named "config.json"
         The path forwarding file named "forward.json"
 
