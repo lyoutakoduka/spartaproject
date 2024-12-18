@@ -84,7 +84,7 @@ def execute_powershell(
     """
     return execute_single(
         _build_commands(
-            _get_powershell_path(platform, forward).as_posix(), commands
+            _get_runtime_path(platform, forward).as_posix(), commands
         )
     )
 
