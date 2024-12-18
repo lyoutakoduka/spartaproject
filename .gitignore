@@ -14,10 +14,6 @@ poetry.lock
 
 # Isolate
 .vscode/sftp.json
+tests/pyspartalib/resource/default.json
 tools/sync/home/id/.bash_profile
 tools/sync/home/id/.pypirc
-tests/pyspartalib/script/file/shortcut/resource/execute_powershell/default.json
-tests/pyspartalib/script/server/local/resource/connect_server/default.json
-tests/pyspartalib/script/shell/resource/execute_powershell/default.json
-tests/pyspartalib/script/shell/resource/execute_python/default.json
-

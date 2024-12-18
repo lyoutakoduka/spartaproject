@@ -30,7 +30,7 @@ def _get_formatted_path(path_elements: Strs) -> str:
 
 
 def _get_config_file() -> Path:
-    return get_resource(local_path=Path("execute_powershell", "forward.json"))
+    return get_resource(local_path=Path("forward.json"))
 
 
 def _execute_powershell(commands: Strs) -> Strs:
