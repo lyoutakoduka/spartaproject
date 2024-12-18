@@ -17,6 +17,32 @@ def _merge_context_path(project: ProjectContext) -> Path:
     )
 
 
+def _get_environment() -> str:
+    return "pythonpath".upper()
+
+
+def _get_system_path_value(python_paths: Paths) -> str:
+    path_texts: Strs = [str(python_path) for python_path in python_paths]
+    return ":".join(path_texts + ["$" + _get_environment()])
+
+
+def _get_python_system_path(python_paths: Paths) -> Strs:
+    return [
+        "export",
+        _get_environment() + "=" + _get_system_path_value(python_paths),
+    ]
+
+
+def _get_python_command(
+    commands: Strs, platform: str | None, forward: Path | None
+) -> Strs:
+    return [
+        get_script_string(
+            get_interpreter_path(platform=platform, forward=forward)
+        )
+    ] + commands
+
+
 def get_interpreter_path(
     platform: str | None = None, forward: Path | None = None
 ) -> Path:
@@ -54,32 +80,6 @@ def get_script_string(path: Path) -> str:
         str: Convert path which can executed in Python.
     """
     return str(path)  # Not as_posix()
-
-
-def _get_environment() -> str:
-    return "pythonpath".upper()
-
-
-def _get_system_path_value(python_paths: Paths) -> str:
-    path_texts: Strs = [str(python_path) for python_path in python_paths]
-    return ":".join(path_texts + ["$" + _get_environment()])
-
-
-def _get_python_system_path(python_paths: Paths) -> Strs:
-    return [
-        "export",
-        _get_environment() + "=" + _get_system_path_value(python_paths),
-    ]
-
-
-def _get_python_command(
-    commands: Strs, platform: str | None, forward: Path | None
-) -> Strs:
-    return [
-        get_script_string(
-            get_interpreter_path(platform=platform, forward=forward)
-        )
-    ] + commands
 
 
 def execute_python(
