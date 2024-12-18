@@ -26,7 +26,7 @@ from tests.pyspartalib.interface.pytest import fail, raises
 
 
 def _get_config_file() -> Path:
-    return get_resource(local_path=Path("execute_powershell", "forward.json"))
+    return get_resource(local_path=Path("forward.json"))
 
 
 def _get_project_context() -> ProjectContext:
