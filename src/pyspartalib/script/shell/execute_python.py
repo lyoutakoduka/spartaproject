@@ -39,14 +39,9 @@ def get_interpreter_path(
     Returns:
         Path: Relative path of Python interpreter.
     """
-    interpreter_path: Path = _merge_context_path(
+    return _merge_context_path(
         ProjectContext(platform=platform, forward=forward)
     )
-
-    if not interpreter_path.exists():
-        raise FileNotFoundError()
-
-    return interpreter_path
 
 
 def get_script_string(path: Path) -> str:
