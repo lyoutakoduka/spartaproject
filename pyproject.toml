@@ -40,19 +40,6 @@ dev = [
     "ruff>=0.8.3",
 ]
 
-[tool.flake8]
-extend-exclude = [
-  "./.temp",
-  "./docs",
-  "./poetry"
-]
-ignore = [
-  "PT013",
-]
-max-complexity = 10
-max-doc-length = 79
-max-line-length = 79
-
 [tool.mypy]
 cache_dir = "./.temp/.mypy_cache"
 disallow_any_decorated = true
