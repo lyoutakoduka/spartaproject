@@ -1,10 +1,6 @@
 # Python
 __pycache__/
 
-# Poetry
-
-poetry.lock
-
 # In development
 .temp/
 
