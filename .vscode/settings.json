@@ -32,7 +32,6 @@
   },
   "git.autoRepositoryDetection": "openEditors",
   "git.inputValidation": true,
-  "isort.args": ["--settings=pyproject.toml"],
   "javascript.inlayHints.propertyDeclarationTypes.enabled": true,
   "javascript.inlayHints.functionLikeReturnTypes.enabled": true,
   "javascript.inlayHints.parameterTypes.enabled": true,
