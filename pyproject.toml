@@ -31,6 +31,20 @@ Repository = "https://github.com/lyoutakoduka/spartaproject"
 [dependency-groups]
 dev = ["mypy>=1.13.0", "pre-commit>=4.0.1", "pytest>=8.3.4", "ruff>=0.8.3"]
 
+[tool.ruff]
+cache-dir = "./.temp/.ruff_cache"
+exclude = [".venv", ".vscode", "docs", "tools", "pyproject.toml"]
+line-length = 79
+target-version = "py310"
+src = ["src", "tests"]
+
+[tool.ruff.format]
+docstring-code-format = true
+
+[tool.ruff.lint]
+select = ["ALL"]
+fixable = ["ALL"]
+
 [tool.mypy]
 cache_dir = "./.temp/.mypy_cache"
 disallow_any_decorated = true
