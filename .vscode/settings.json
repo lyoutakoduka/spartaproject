@@ -28,10 +28,8 @@
   "flake8.importStrategy": "fromEnvironment",
   "files.exclude": {
     "**/__pycache__/": true,
-    ".temp/.mypy_cache/": true,
-    ".temp/.pytest_cache/": true,
-    "poetry/linux/.venv/": true,
-    "poetry/windows/.venv/": true
+    "**/.mypy_cache/": true,
+    "**/.pytest_cache/": true
   },
   "git.autoRepositoryDetection": "openEditors",
   "git.inputValidation": true,
