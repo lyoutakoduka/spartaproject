@@ -60,5 +60,8 @@
   "typescript.inlayHints.parameterTypes.enabled": true,
   "workbench.colorTheme": "Dracula Theme",
   "workbench.editor.enablePreview": false,
-  "workbench.startupEditor": "none"
+  "workbench.startupEditor": "none",
+  "[toml]": {
+    "editor.defaultFormatter": "bodil.prettier-toml"
+  }
 }
