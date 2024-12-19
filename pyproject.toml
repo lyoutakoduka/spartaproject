@@ -40,16 +40,6 @@ dev = [
     "ruff>=0.8.3",
 ]
 
-[tool.isort]
-line_length = 79
-profile = "black"
-quiet = true
-skip = [
-  "./.temp",
-  "./docs",
-  "./poetry"
-]
-
 [tool.flake8]
 extend-exclude = [
   "./.temp",
