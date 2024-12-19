@@ -1,10 +1,6 @@
 # Python
 __pycache__/
 
-# React
-.dist/
-node_modules/
-
 # Poetry
 
 poetry.lock
