@@ -14,15 +14,11 @@ dependencies = [
   "python-dateutil>=2.9.0.post0",
 ]
 requires-python = ">=3.10"
-authors = [
-    {name = "lyouta", email = "lyouta@spartaproject.com"}
-]
+authors = [{ name = "lyouta", email = "lyouta@spartaproject.com" }]
 description = "Sync browser file system to local, and run Python on browser."
 readme = "README.md"
-license = {file = "LICENSE"}
-keywords = [
-    "pyspartalib"
-]
+license = { file = "LICENSE" }
+keywords = ["pyspartalib"]
 classifiers = [
   "License :: OSI Approved :: MIT License",
   "Programming Language :: Python :: 3.10"
@@ -33,12 +29,7 @@ Homepage = "http://lyoutakoduka.github.io/spartaproject"
 Repository = "https://github.com/lyoutakoduka/spartaproject"
 
 [dependency-groups]
-dev = [
-    "mypy>=1.13.0",
-    "pre-commit>=4.0.1",
-    "pytest>=8.3.4",
-    "ruff>=0.8.3",
-]
+dev = ["mypy>=1.13.0", "pre-commit>=4.0.1", "pytest>=8.3.4", "ruff>=0.8.3"]
 
 [tool.mypy]
 cache_dir = "./.temp/.mypy_cache"
