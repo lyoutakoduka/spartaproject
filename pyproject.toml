@@ -50,14 +50,6 @@ skip = [
   "./poetry"
 ]
 
-[tool.black]
-exclude = """(
-  .temp/ |
-  docs/ |
-  poetry/
-)"""
-line-length = 79
-
 [tool.flake8]
 extend-exclude = [
   "./.temp",
