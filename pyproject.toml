@@ -9,6 +9,9 @@ include = ["pyspartalib/*"]
 name = "pyspartalib"
 version = "0.0.4"
 dependencies = [
+  "chardet>=5.2.0",
+  "paramiko>=3.5.0",
+  "python-dateutil>=2.9.0.post0",
 ]
 requires-python = ">=3.10"
 authors = [
@@ -28,6 +31,14 @@ classifiers = [
 [project.urls]
 Homepage = "http://lyoutakoduka.github.io/spartaproject"
 Repository = "https://github.com/lyoutakoduka/spartaproject"
+
+[dependency-groups]
+dev = [
+    "mypy>=1.13.0",
+    "pre-commit>=4.0.1",
+    "pytest>=8.3.4",
+    "ruff>=0.8.3",
+]
 
 [tool.isort]
 line_length = 79
