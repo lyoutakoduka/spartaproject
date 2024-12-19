@@ -1,6 +1,5 @@
 {
   "autoDocstring.docstringFormat": "google",
-  "black-formatter.importStrategy": "fromEnvironment",
   "debug.console.fontFamily": "editor",
   "debug.console.fontSize": 13,
   "editor.codeActionsOnSave": {
@@ -63,8 +62,5 @@
   "typescript.inlayHints.parameterTypes.enabled": true,
   "workbench.colorTheme": "Dracula Theme",
   "workbench.editor.enablePreview": false,
-  "workbench.startupEditor": "none",
-  "[python]": {
-    "editor.defaultFormatter": "ms-python.black-formatter"
-  }
+  "workbench.startupEditor": "none"
 }
