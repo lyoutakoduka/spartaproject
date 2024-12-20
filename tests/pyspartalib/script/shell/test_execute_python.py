@@ -65,7 +65,7 @@ def _get_system_paths(expected: Paths, first_root: Path) -> Paths:
 
 
 def _compare_system_paths(expected: Paths, results: Paths) -> None:
-    if 1 != len(set([str(sorted(paths)) for paths in [expected, results]])):
+    if 1 != len({str(sorted(paths)) for paths in [expected, results]}):
         raise ValueError
 
 
