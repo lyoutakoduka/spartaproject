@@ -1,6 +1,9 @@
 # Python
 __pycache__/
 
+# Yarn
+node_modules
+
 # In development
 .temp/
 
