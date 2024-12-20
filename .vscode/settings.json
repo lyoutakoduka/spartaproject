@@ -64,8 +64,5 @@
   "workbench.startupEditor": "none",
   "[python]": {
     "editor.defaultFormatter": "charliermarsh.ruff"
-  },
-  "[toml]": {
-    "editor.defaultFormatter": "bodil.prettier-toml"
   }
 }
