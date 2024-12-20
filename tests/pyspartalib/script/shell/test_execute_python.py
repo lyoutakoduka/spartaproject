@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 """Test to execute Python corresponding to platform."""
 
@@ -66,7 +65,8 @@ def _get_system_paths(expected: Paths, first_root: Path) -> Paths:
 
 
 def _compare_system_paths(expected: Paths, results: Paths) -> None:
-    assert 1 == len(set([str(sorted(paths)) for paths in [expected, results]]))
+    if 1 != len(set([str(sorted(paths)) for paths in [expected, results]])):
+        raise ValueError
 
 
 def test_path() -> None:
@@ -74,9 +74,10 @@ def test_path() -> None:
     path_elements: Strs = ["A", "B", "C"]
     identifier: str = "/" if is_platform_linux() else "\\"
 
-    assert identifier.join(path_elements) == get_script_string(
+    if identifier.join(path_elements) != get_script_string(
         Path(*path_elements)
-    )
+    ):
+        raise ValueError
 
 
 def test_interpreter() -> None:
@@ -95,25 +96,29 @@ def test_interpreter() -> None:
         expected: Path = Path(
             "poetry", platform, ".venv", interpreter_paths[platform]
         )
-        assert expected == Path(*interpreter_path.parts[-5:])
+
+        if expected != Path(*interpreter_path.parts[-5:]):
+            raise ValueError
 
 
 def test_command() -> None:
     """Test to execute simple Python script."""
-    assert ["simple"] == list(_execute_python(_get_script_texts("simple")))
+    if ["simple"] != list(_execute_python(_get_script_texts("simple"))):
+        raise ValueError
 
 
 def test_platform() -> None:
     """Test to execute Python script for all executable platform."""
     expected: Strs = ["linux", "windows"]
 
-    assert expected == [
+    if expected != [
         result.lower()
         for platform in expected
         for result in _execute_python_platform(
             _get_script_texts("find_platform"), platform
         )
-    ]
+    ]:
+        raise ValueError
 
 
 def test_system() -> None:
