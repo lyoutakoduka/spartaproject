@@ -24,6 +24,7 @@
   },
   "explorer.confirmDragAndDrop": false,
   "explorer.excludeGitIgnore": false,
+  "extensions.ignoreRecommendations": false,
   "files.exclude": {
     "**/__pycache__/": true,
     "**/.mypy_cache/": true,
