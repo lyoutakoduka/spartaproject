@@ -1,4 +1,5 @@
 {
+  "useGitignore": false,
   "ignoreWords": [
     "dateutil",
     "dividedly",
