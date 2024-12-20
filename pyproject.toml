@@ -15,7 +15,7 @@ dependencies = [
   "types-paramiko>=3.5.0.20240928",
   "types-python-dateutil>=2.9.0.20241206",
 ]
-requires-python = ">=3.10"
+requires-python = ">=3.13.1"
 authors = [{ name = "lyouta", email = "lyouta@spartaproject.com" }]
 description = "Sync browser file system to local, and run Python on browser."
 readme = "README.md"
@@ -23,7 +23,7 @@ license = { file = "LICENSE" }
 keywords = ["pyspartalib"]
 classifiers = [
   "License :: OSI Approved :: MIT License",
-  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.13",
 ]
 
 [project.urls]
