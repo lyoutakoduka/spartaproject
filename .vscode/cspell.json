@@ -19,5 +19,15 @@
     "unmatch",
     "venv"
   ],
-  "ignorePaths": [".temp", "poetry.lock"]
+  "ignorePaths": [
+    ".temp",
+    "__pycache__",
+    "context.json",
+    "cspell.json",
+    "package.json",
+    "pyproject.toml",
+    "LICENSE",
+    "*.gitignore",
+    "*.lock"
+  ]
 }
