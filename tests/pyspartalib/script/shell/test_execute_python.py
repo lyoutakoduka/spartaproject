@@ -113,7 +113,9 @@ def test_interpreter() -> None:
 
 def test_command() -> None:
     """Test to execute simple Python script."""
-    if list(_execute_python(_get_script_texts("simple"))) != ["simple"]:
+    expected: str = "simple"
+
+    if list(_execute_python(_get_script_texts(expected))) != [expected]:
         raise ValueError
 
 
