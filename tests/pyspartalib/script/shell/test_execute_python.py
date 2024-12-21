@@ -65,7 +65,7 @@ def _get_system_paths(expected: Paths, first_root: Path) -> Paths:
 
 
 def _compare_system_paths(expected: Paths, results: Paths) -> None:
-    if 1 != len({str(sorted(paths)) for paths in [expected, results]}):
+    if len({str(sorted(paths)) for paths in [expected, results]}) != 1:
         raise ValueError
 
 
@@ -103,7 +103,7 @@ def test_interpreter() -> None:
 
 def test_command() -> None:
     """Test to execute simple Python script."""
-    if ["simple"] != list(_execute_python(_get_script_texts("simple"))):
+    if list(_execute_python(_get_script_texts("simple"))) != ["simple"]:
         raise ValueError
 
 
