@@ -79,6 +79,10 @@ def _get_result_platform(expected: Strs) -> Strs:
     ]
 
 
+def _get_result_command(expected: str) -> Strs:
+    return _execute_python(_get_script_texts(expected))
+
+
 def test_path() -> None:
     """Test to convert path to the format for executing script in Python."""
     path_elements: Strs = ["A", "B", "C"]
@@ -115,7 +119,7 @@ def test_command() -> None:
     """Test to execute simple Python script."""
     expected: str = "simple"
 
-    if list(_execute_python(_get_script_texts(expected))) != [expected]:
+    if [expected] != _get_result_command(expected):
         raise ValueError
 
 
