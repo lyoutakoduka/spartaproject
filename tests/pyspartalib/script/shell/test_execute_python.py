@@ -83,6 +83,15 @@ def _get_result_command(expected: str) -> Strs:
     return _execute_python(_get_script_texts(expected))
 
 
+def _get_interpreter_paths() -> PathPair:
+    virtual: str = ".venv"
+
+    return {
+        "linux": Path(virtual, "bin", "python"),
+        "windows": Path(virtual, "Scripts", "python.exe"),
+    }
+
+
 def test_path() -> None:
     """Test to convert path to the format for executing script in Python."""
     path_elements: Strs = ["A", "B", "C"]
@@ -97,21 +106,14 @@ def test_path() -> None:
 def test_interpreter() -> None:
     """Test to get interpreter path of Python corresponding to platform."""
     platforms: Strs = ["linux", "windows"]
-
-    interpreter_paths: PathPair = {
-        "linux": Path("bin", "python"),
-        "windows": Path("Scripts", "python.exe"),
-    }
+    interpreter_paths: PathPair = _get_interpreter_paths()
 
     for platform in platforms:
         interpreter_path: Path = get_runtime_path(
             platform=platform, forward=_get_config_file()
         )
-        expected: Path = Path(
-            "poetry", platform, ".venv", interpreter_paths[platform]
-        )
 
-        if expected != Path(*interpreter_path.parts[-5:]):
+        if interpreter_paths[platform] != Path(*interpreter_path.parts[-5:]):
             raise ValueError
 
 
