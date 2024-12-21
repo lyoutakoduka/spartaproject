@@ -52,6 +52,7 @@ docstring-code-format = true
 [tool.ruff.lint]
 select = ["ALL"]
 fixable = ["ALL"]
+extend-ignore = ["D203", "D213"]
 
 [tool.mypy]
 cache_dir = "./.temp/.mypy_cache"
