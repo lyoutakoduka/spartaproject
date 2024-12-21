@@ -69,6 +69,16 @@ def _compare_system_paths(expected: Paths, results: Paths) -> None:
         raise ValueError
 
 
+def _get_result_platform(expected: Strs) -> Strs:
+    return [
+        result.lower()
+        for platform in expected
+        for result in _execute_python_platform(
+            _get_script_texts("find_platform"), platform
+        )
+    ]
+
+
 def test_path() -> None:
     """Test to convert path to the format for executing script in Python."""
     path_elements: Strs = ["A", "B", "C"]
@@ -111,13 +121,7 @@ def test_platform() -> None:
     """Test to execute Python script for all executable platform."""
     expected: Strs = ["linux", "windows"]
 
-    if expected != [
-        result.lower()
-        for platform in expected
-        for result in _execute_python_platform(
-            _get_script_texts("find_platform"), platform
-        )
-    ]:
+    if expected != _get_result_platform(expected):
         raise ValueError
 
 
