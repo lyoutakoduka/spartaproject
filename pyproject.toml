@@ -44,7 +44,7 @@ cache-dir = "./.temp/.ruff_cache"
 exclude = [".venv", ".vscode", "docs", "tools", "pyproject.toml"]
 line-length = 79
 target-version = "py310"
-src = ["src", "tests"]
+src = ["src"]
 
 [tool.ruff.format]
 docstring-code-format = true
