@@ -34,16 +34,16 @@ def _execute_python(commands: Strs) -> StrGene:
 def _execute_python_path(commands: Strs, python_paths: Paths) -> StrGene:
     return execute_python(
         commands,
-        python_paths=python_paths,
         forward=_get_config_file(),
+        python_paths=python_paths,
     )
 
 
 def _execute_python_platform(commands: Strs, platform: str) -> StrGene:
     return execute_python(
         commands,
-        platform=platform,
         forward=_get_config_file(),
+        platform=platform,
     )
 
 
