@@ -90,7 +90,7 @@ def _get_platform_interpreters() -> PathPair:
 
     return {
         "linux": Path(virtual, "bin", "python"),
-        "windows": Path(virtual, "Scripts", "python.exe"),
+        "windows": Path(".venvs", "windows", virtual, "Scripts", "python.exe"),
     }
 
 
