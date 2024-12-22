@@ -90,7 +90,7 @@ def _get_result_command(expected: str) -> Strs:
     return _execute_python(_get_script_texts(expected))
 
 
-def _get_interpreter_paths() -> PathPair:
+def _get_platform_interpreters() -> PathPair:
     virtual: str = ".venv"
 
     return {
@@ -113,7 +113,7 @@ def test_path() -> None:
 def test_interpreter() -> None:
     """Test to get interpreter path of Python corresponding to platform."""
     platforms: Strs = ["linux", "windows"]
-    interpreter_paths: PathPair = _get_interpreter_paths()
+    interpreter_paths: PathPair = _get_platform_interpreters()
 
     for platform in platforms:
         interpreter_path: Path = get_runtime_path(
