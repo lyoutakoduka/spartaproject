@@ -1,0 +1,5 @@
+trailingComma = "es5"
+tabWidth = 2
+printWidth = 79
+useTabs = false
+plugins = ["prettier-plugin-toml"]
