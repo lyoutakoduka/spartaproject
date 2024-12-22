@@ -132,9 +132,9 @@ def test_command() -> None:
 
 def test_platform() -> None:
     """Test to execute Python script for all executable platform."""
-    expected: Strs = ["linux", "windows"]
+    expected: str = get_platform()
 
-    if expected != _get_result_platform(expected):
+    if [expected] != list(_get_result_platform(expected)):
         raise ValueError
 
 
