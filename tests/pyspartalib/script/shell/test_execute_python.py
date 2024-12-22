@@ -103,6 +103,10 @@ def _get_interpreter_path(platform: str) -> Path:
     return get_runtime_path(platform=platform, forward=_get_config_file())
 
 
+def _get_result_interpreter(platform: str, expected: Path) -> Path:
+    return Path(*_get_interpreter_path(platform).parts[-len(expected.parts) :])
+
+
 def test_path() -> None:
     """Test to convert path to the format for executing script in Python."""
     path_elements: Strs = ["A", "B", "C"]
