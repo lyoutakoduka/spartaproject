@@ -31,23 +31,19 @@ def _execute_python(commands: Strs) -> StrGene:
     return execute_python(commands, forward=_get_config_file())
 
 
-def _execute_python_path(commands: Strs, python_paths: Paths) -> Strs:
-    return list(
-        execute_python(
-            commands,
-            python_paths=python_paths,
-            forward=_get_config_file(),
-        ),
+def _execute_python_path(commands: Strs, python_paths: Paths) -> StrGene:
+    return execute_python(
+        commands,
+        python_paths=python_paths,
+        forward=_get_config_file(),
     )
 
 
-def _execute_python_platform(commands: Strs, platform: str) -> Strs:
-    return list(
-        execute_python(
-            commands,
-            platform=platform,
-            forward=_get_config_file(),
-        ),
+def _execute_python_platform(commands: Strs, platform: str) -> StrGene:
+    return execute_python(
+        commands,
+        platform=platform,
+        forward=_get_config_file(),
     )
 
 
