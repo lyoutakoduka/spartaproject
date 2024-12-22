@@ -4,7 +4,7 @@
 
 from pathlib import Path
 
-from pyspartalib.context.default.string_context import Strs
+from pyspartalib.context.default.string_context import StrGene, Strs
 from pyspartalib.context.extension.path_context import PathPair, Paths
 from pyspartalib.script.path.modify.current.get_absolute import get_absolute
 from pyspartalib.script.path.modify.current.get_relative import (
@@ -27,8 +27,8 @@ def _get_config_file() -> Path:
     return get_resource(local_path=Path("forward.json"))
 
 
-def _execute_python(commands: Strs) -> Strs:
-    return list(execute_python(commands, forward=_get_config_file()))
+def _execute_python(commands: Strs) -> StrGene:
+    return execute_python(commands, forward=_get_config_file())
 
 
 def _execute_python_path(commands: Strs, python_paths: Paths) -> Strs:
@@ -89,7 +89,7 @@ def _get_result_platform(expected: Strs) -> Strs:
     ]
 
 
-def _get_result_command(expected: str) -> Strs:
+def _get_result_command(expected: str) -> StrGene:
     return _execute_python(_get_script_texts(expected))
 
 
@@ -134,7 +134,7 @@ def test_command() -> None:
     """Test to execute simple Python script."""
     expected: str = "simple"
 
-    if [expected] != _get_result_command(expected):
+    if [expected] != list(_get_result_command(expected)):
         raise ValueError
 
 
