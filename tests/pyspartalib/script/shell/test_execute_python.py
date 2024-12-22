@@ -12,7 +12,10 @@ from pyspartalib.script.path.modify.current.get_relative import (
     is_relative,
 )
 from pyspartalib.script.path.modify.get_resource import get_resource
-from pyspartalib.script.platform.platform_status import is_platform_linux
+from pyspartalib.script.platform.platform_status import (
+    get_platform,
+    is_platform_linux,
+)
 from pyspartalib.script.shell.execute_python import (
     execute_python,
     get_runtime_path,
@@ -120,17 +123,11 @@ def test_path() -> None:
 
 def test_interpreter() -> None:
     """Test to get interpreter path of Python corresponding to platform."""
-    platforms: Strs = ["linux", "windows"]
-    interpreter_paths: PathPair = _get_platform_interpreters()
+    platform: str = get_platform()
+    expected: Path = _get_platform_interpreters()[platform]
 
-    for platform in platforms:
-        interpreter_path: Path = get_runtime_path(
-            platform=platform,
-            forward=_get_config_file(),
-        )
-
-        if interpreter_paths[platform] != Path(*interpreter_path.parts[-5:]):
-            raise ValueError
+    if expected != _get_result_interpreter(platform, expected):
+        raise ValueError
 
 
 def test_command() -> None:
