@@ -31,20 +31,26 @@ def _execute_python(commands: Strs) -> Strs:
 def _execute_python_path(commands: Strs, python_paths: Paths) -> Strs:
     return list(
         execute_python(
-            commands, python_paths=python_paths, forward=_get_config_file()
-        )
+            commands,
+            python_paths=python_paths,
+            forward=_get_config_file(),
+        ),
     )
 
 
 def _execute_python_platform(commands: Strs, platform: str) -> Strs:
     return list(
-        execute_python(commands, platform=platform, forward=_get_config_file())
+        execute_python(
+            commands,
+            platform=platform,
+            forward=_get_config_file(),
+        ),
     )
 
 
 def _get_script_text(script_text: str) -> str:
     return get_script_string(
-        get_resource(local_path=Path("tools", script_text))
+        get_resource(local_path=Path("tools", script_text)),
     )
 
 
@@ -74,7 +80,8 @@ def _get_result_platform(expected: Strs) -> Strs:
         result.lower()
         for platform in expected
         for result in _execute_python_platform(
-            _get_script_texts("find_platform"), platform
+            _get_script_texts("find_platform"),
+            platform,
         )
     ]
 
@@ -98,7 +105,7 @@ def test_path() -> None:
     identifier: str = "/" if is_platform_linux() else "\\"
 
     if identifier.join(path_elements) != get_script_string(
-        Path(*path_elements)
+        Path(*path_elements),
     ):
         raise ValueError
 
@@ -110,7 +117,8 @@ def test_interpreter() -> None:
 
     for platform in platforms:
         interpreter_path: Path = get_runtime_path(
-            platform=platform, forward=_get_config_file()
+            platform=platform,
+            forward=_get_config_file(),
         )
 
         if interpreter_paths[platform] != Path(*interpreter_path.parts[-5:]):
