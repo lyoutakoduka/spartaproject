@@ -74,15 +74,11 @@ def _compare_system_paths(expected: Paths, results: Paths) -> None:
         raise ValueError
 
 
-def _get_result_platform(expected: Strs) -> Strs:
-    return [
-        result.lower()
-        for platform in expected
-        for result in _execute_python_platform(
-            _get_script_texts("find_platform"),
-            platform,
-        )
-    ]
+def _get_result_platform(platform: str) -> StrGene:
+    return _execute_python_platform(
+        _get_script_texts("find_platform"),
+        platform,
+    )
 
 
 def _get_result_command(expected: str) -> StrGene:
