@@ -37,7 +37,7 @@ dev = ["mypy>=1.13.0", "pytest-cov>=6.0.0", "pytest>=8.3.4", "ruff>=0.8.3"]
 cache-dir = "./.temp/.ruff_cache"
 exclude = [".venv", ".vscode", "docs", "tools", "pyproject.toml"]
 line-length = 79
-target-version = "py310"
+target-version = "py313"
 src = ["src"]
 
 [tool.ruff.format]
