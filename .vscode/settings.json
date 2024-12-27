@@ -43,6 +43,7 @@
   "python.analysis.diagnosticMode": "workspace",
   "python.analysis.typeCheckingMode": "strict",
   "python.languageServer": "Pylance",
+  "ruff.configuration": "pyproject.toml",
   "terminal.integrated.fontSize": 14,
   "testing.gutterEnabled": true,
   "workbench.colorTheme": "Dracula Theme",
