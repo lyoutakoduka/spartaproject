@@ -11,16 +11,7 @@ Function ExecuteFilter {
         -FilePath $Executable -ArgumentList $Argument -NoNewWindow -Wait
 }
 
-If($Group -eq "isort") {
-    ExecuteFilter "isort.exe" "--check-only ."
-}
-ElseIf ($Group -eq "black") {
-    ExecuteFilter "black.exe" "--check ."
-}
-ElseIf ($Group -eq "flake") {
-    ExecuteFilter "pflake8.exe" "."
-}
-ElseIf ($Group -eq "mypy") {
+If($Group -eq "mypy") {
     ExecuteFilter "mypy.exe" "."
 }
 ElseIf ($Group -eq "pytest") {

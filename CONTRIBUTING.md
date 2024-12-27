@@ -27,15 +27,4 @@ We basically develop on Python.
 
 ### Verified version
 
-- [Python-3.11.5](https://www.python.org/downloads/release/python-3115/): Recommend
-- [Python-3.10.11](https://www.python.org/downloads/release/python-31011/)
-
-### More dependent libraries
-
-## STEP5: Outside development tools
-
-### Run Linux commands on Windows
-
-We use gow for the compatibility layer of Linux from Windows. But if it works, anything is fine.
-
-- [gow](https://github.com/bmatzelle/gow)
+- [Python-3.13.1](https://www.python.org/downloads/release/python-3131/)

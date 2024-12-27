@@ -1,11 +1,8 @@
 {
   "autoDocstring.docstringFormat": "google",
-  "black-formatter.importStrategy": "fromEnvironment",
   "debug.console.fontFamily": "editor",
   "debug.console.fontSize": 13,
-  "editor.codeActionsOnSave": {
-    "source.organizeImports": "explicit"
-  },
+  "editor.codeActionsOnSave": { "source.organizeImports": "explicit" },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.fontFamily": "UDEV Gothic JPDOC",
   "editor.fontSize": 15,
@@ -25,46 +22,32 @@
   },
   "explorer.confirmDragAndDrop": false,
   "explorer.excludeGitIgnore": false,
-  "flake8.importStrategy": "fromEnvironment",
+  "extensions.ignoreRecommendations": false,
   "files.exclude": {
-    "**/__pycache__/": true,
-    "**/.mypy_cache/": true,
-    "**/.pytest_cache/": true
+    "**/__pycache__/**": true,
+    "**/.mypy_cache/**": true,
+    "**/.pytest_cache/**": true,
+    "**/.ruff_cache/**": true
   },
   "git.autoRepositoryDetection": "openEditors",
   "git.inputValidation": true,
-  "isort.args": ["--settings=pyproject.toml"],
-  "javascript.inlayHints.propertyDeclarationTypes.enabled": true,
-  "javascript.inlayHints.functionLikeReturnTypes.enabled": true,
-  "javascript.inlayHints.parameterTypes.enabled": true,
-  "javascript.inlayHints.enumMemberValues.enabled": true,
   "liveServer.settings.NoBrowser": true,
   "liveServer.settings.root": "/docs",
   "mypy-type-checker.args": ["--config-file=pyproject.toml"],
+  "prettier.configPath": ".vscode/.prettierrc.toml",
+  "prettier.ignorePath": ".vscode/.prettierignore",
+  "prettier.requireConfig": true,
   "pythonTestExplorer.testFramework": "pytest",
   "python.analysis.diagnosticMode": "workspace",
-  "python.analysis.diagnosticSeverityOverrides": {
-    "reportShadowedImports": "information",
-    "reportMissingTypeStubs": "information"
-  },
-  "python.analysis.extraPaths": ["docs", ".temp/internal/typings"],
-  "python.analysis.inlayHints.functionReturnTypes": true,
-  "python.analysis.inlayHints.pytestParameters": true,
-  "python.analysis.inlayHints.variableTypes": true,
-  "python.analysis.stubPath": ".temp/internal/typings",
   "python.analysis.typeCheckingMode": "strict",
   "python.languageServer": "Pylance",
+  "ruff.configuration": "pyproject.toml",
+  "search.useIgnoreFiles": false,
+  "search.exclude": { "**/.venv/**": true },
   "terminal.integrated.fontSize": 14,
   "testing.gutterEnabled": true,
-  "typescript.inlayHints.propertyDeclarationTypes.enabled": true,
-  "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
-  "typescript.inlayHints.enumMemberValues.enabled": true,
-  "typescript.inlayHints.variableTypes.enabled": false,
-  "typescript.inlayHints.parameterTypes.enabled": true,
   "workbench.colorTheme": "Dracula Theme",
   "workbench.editor.enablePreview": false,
   "workbench.startupEditor": "none",
-  "[python]": {
-    "editor.defaultFormatter": "ms-python.black-formatter"
-  }
+  "[python]": { "editor.defaultFormatter": "charliermarsh.ruff" }
 }

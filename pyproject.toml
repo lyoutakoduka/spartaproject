@@ -2,63 +2,51 @@
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
-[tool.hatch.build]
-include = ["pyspartalib/*"]
+[tool.hatch.build.targets.sdist]
+include = ["src/*"]
 
 [project]
 name = "pyspartalib"
-version = "0.0.4"
+version = "0.0.12"
 dependencies = [
+  "chardet>=5.2.0",
+  "paramiko>=3.5.0",
+  "python-dateutil>=2.9.0.post0",
+  "types-paramiko>=3.5.0.20240928",
+  "types-python-dateutil>=2.9.0.20241206",
 ]
-requires-python = ">=3.10"
-authors = [
-    {name = "lyouta", email = "lyouta@spartaproject.com"}
-]
+requires-python = ">=3.13.1"
+authors = [{ name = "lyouta", email = "lyouta@spartaproject.com" }]
 description = "Sync browser file system to local, and run Python on browser."
 readme = "README.md"
-license = {file = "LICENSE"}
-keywords = [
-    "pyspartalib"
-]
+license = { file = "LICENSE" }
+keywords = ["pyspartalib"]
 classifiers = [
   "License :: OSI Approved :: MIT License",
-  "Programming Language :: Python :: 3.10"
+  "Programming Language :: Python :: 3.13",
 ]
 
 [project.urls]
 Homepage = "http://lyoutakoduka.github.io/spartaproject"
 Repository = "https://github.com/lyoutakoduka/spartaproject"
 
-[tool.isort]
-line_length = 79
-profile = "black"
-quiet = true
-skip = [
-  "./.temp",
-  "./docs",
-  "./poetry"
-]
+[dependency-groups]
+dev = ["mypy>=1.13.0", "pytest-cov>=6.0.0", "pytest>=8.3.4", "ruff>=0.8.3"]
 
-[tool.black]
-exclude = """(
-  .temp/ |
-  docs/ |
-  poetry/
-)"""
+[tool.ruff]
+cache-dir = "./.temp/.ruff_cache"
+exclude = [".venv", ".vscode", "docs", "tools", "pyproject.toml"]
 line-length = 79
+target-version = "py313"
+src = ["src"]
 
-[tool.flake8]
-extend-exclude = [
-  "./.temp",
-  "./docs",
-  "./poetry"
-]
-ignore = [
-  "PT013",
-]
-max-complexity = 10
-max-doc-length = 79
-max-line-length = 79
+[tool.ruff.format]
+docstring-code-format = true
+
+[tool.ruff.lint]
+select = ["ALL"]
+fixable = ["ALL"]
+extend-ignore = ["D203", "D213"]
 
 [tool.mypy]
 cache_dir = "./.temp/.mypy_cache"
@@ -78,7 +66,6 @@ addopts = """
   --capture=no
   --new-first
   --ignore ./docs
-  --ignore ./poetry
 """
 cache_dir = "./.temp/.pytest_cache"
 pythonpath = "src"

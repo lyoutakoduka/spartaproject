@@ -1,11 +1,10 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 """Test to execute Python corresponding to platform."""
 
 from pathlib import Path
 
-from pyspartalib.context.default.string_context import Strs
+from pyspartalib.context.default.string_context import StrGene, Strs
 from pyspartalib.context.extension.path_context import PathPair, Paths
 from pyspartalib.script.path.modify.current.get_absolute import get_absolute
 from pyspartalib.script.path.modify.current.get_relative import (
@@ -13,7 +12,10 @@ from pyspartalib.script.path.modify.current.get_relative import (
     is_relative,
 )
 from pyspartalib.script.path.modify.get_resource import get_resource
-from pyspartalib.script.platform.platform_status import is_platform_linux
+from pyspartalib.script.platform.platform_status import (
+    get_platform,
+    is_platform_linux,
+)
 from pyspartalib.script.shell.execute_python import (
     execute_python,
     get_runtime_path,
@@ -25,27 +27,29 @@ def _get_config_file() -> Path:
     return get_resource(local_path=Path("forward.json"))
 
 
-def _execute_python(commands: Strs) -> Strs:
-    return list(execute_python(commands, forward=_get_config_file()))
+def _execute_python(commands: Strs) -> StrGene:
+    return execute_python(commands, forward=_get_config_file())
 
 
-def _execute_python_path(commands: Strs, python_paths: Paths) -> Strs:
-    return list(
-        execute_python(
-            commands, python_paths=python_paths, forward=_get_config_file()
-        )
+def _execute_python_path(commands: Strs, python_paths: Paths) -> StrGene:
+    return execute_python(
+        commands,
+        forward=_get_config_file(),
+        python_paths=python_paths,
     )
 
 
-def _execute_python_platform(commands: Strs, platform: str) -> Strs:
-    return list(
-        execute_python(commands, platform=platform, forward=_get_config_file())
+def _execute_python_platform(commands: Strs, platform: str) -> StrGene:
+    return execute_python(
+        commands,
+        forward=_get_config_file(),
+        platform=platform,
     )
 
 
 def _get_script_text(script_text: str) -> str:
     return get_script_string(
-        get_resource(local_path=Path("tools", script_text))
+        get_resource(local_path=Path("tools", script_text)),
     )
 
 
@@ -66,7 +70,36 @@ def _get_system_paths(expected: Paths, first_root: Path) -> Paths:
 
 
 def _compare_system_paths(expected: Paths, results: Paths) -> None:
-    assert 1 == len(set([str(sorted(paths)) for paths in [expected, results]]))
+    if len({str(sorted(paths)) for paths in [expected, results]}) != 1:
+        raise ValueError
+
+
+def _get_result_platform(platform: str) -> StrGene:
+    return _execute_python_platform(
+        _get_script_texts("find_platform"),
+        platform,
+    )
+
+
+def _get_result_command(expected: str) -> StrGene:
+    return _execute_python(_get_script_texts(expected))
+
+
+def _get_platform_interpreters() -> PathPair:
+    virtual: str = ".venv"
+
+    return {
+        "linux": Path(virtual, "bin", "python"),
+        "windows": Path(".venvs", "windows", virtual, "Scripts", "python.exe"),
+    }
+
+
+def _get_interpreter_path(platform: str) -> Path:
+    return get_runtime_path(platform=platform, forward=_get_config_file())
+
+
+def _get_result_interpreter(platform: str, expected: Path) -> Path:
+    return Path(*_get_interpreter_path(platform).parts[-len(expected.parts) :])
 
 
 def test_path() -> None:
@@ -74,46 +107,35 @@ def test_path() -> None:
     path_elements: Strs = ["A", "B", "C"]
     identifier: str = "/" if is_platform_linux() else "\\"
 
-    assert identifier.join(path_elements) == get_script_string(
-        Path(*path_elements)
-    )
+    if identifier.join(path_elements) != get_script_string(
+        Path(*path_elements),
+    ):
+        raise ValueError
 
 
 def test_interpreter() -> None:
     """Test to get interpreter path of Python corresponding to platform."""
-    platforms: Strs = ["linux", "windows"]
+    platform: str = get_platform()
+    expected: Path = _get_platform_interpreters()[platform]
 
-    interpreter_paths: PathPair = {
-        "linux": Path("bin", "python"),
-        "windows": Path("Scripts", "python.exe"),
-    }
-
-    for platform in platforms:
-        interpreter_path: Path = get_runtime_path(
-            platform=platform, forward=_get_config_file()
-        )
-        expected: Path = Path(
-            "poetry", platform, ".venv", interpreter_paths[platform]
-        )
-        assert expected == Path(*interpreter_path.parts[-5:])
+    if expected != _get_result_interpreter(platform, expected):
+        raise ValueError
 
 
 def test_command() -> None:
     """Test to execute simple Python script."""
-    assert ["simple"] == list(_execute_python(_get_script_texts("simple")))
+    expected: str = "simple"
+
+    if [expected] != list(_get_result_command(expected)):
+        raise ValueError
 
 
 def test_platform() -> None:
     """Test to execute Python script for all executable platform."""
-    expected: Strs = ["linux", "windows"]
+    expected: str = get_platform()
 
-    assert expected == [
-        result.lower()
-        for platform in expected
-        for result in _execute_python_platform(
-            _get_script_texts("find_platform"), platform
-        )
-    ]
+    if [expected] != list(_get_result_platform(expected)):
+        raise ValueError
 
 
 def test_system() -> None:
