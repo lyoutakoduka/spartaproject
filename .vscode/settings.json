@@ -44,6 +44,8 @@
   "python.analysis.typeCheckingMode": "strict",
   "python.languageServer": "Pylance",
   "ruff.configuration": "pyproject.toml",
+  "search.useIgnoreFiles": false,
+  "search.exclude": { "**/.venv/**": true },
   "terminal.integrated.fontSize": 14,
   "testing.gutterEnabled": true,
   "workbench.colorTheme": "Dracula Theme",
