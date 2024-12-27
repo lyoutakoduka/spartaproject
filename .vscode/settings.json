@@ -2,9 +2,7 @@
   "autoDocstring.docstringFormat": "google",
   "debug.console.fontFamily": "editor",
   "debug.console.fontSize": 13,
-  "editor.codeActionsOnSave": {
-    "source.organizeImports": "explicit"
-  },
+  "editor.codeActionsOnSave": { "source.organizeImports": "explicit" },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.fontFamily": "UDEV Gothic JPDOC",
   "editor.fontSize": 15,
@@ -51,7 +49,5 @@
   "workbench.colorTheme": "Dracula Theme",
   "workbench.editor.enablePreview": false,
   "workbench.startupEditor": "none",
-  "[python]": {
-    "editor.defaultFormatter": "charliermarsh.ruff"
-  }
+  "[python]": { "editor.defaultFormatter": "charliermarsh.ruff" }
 }
