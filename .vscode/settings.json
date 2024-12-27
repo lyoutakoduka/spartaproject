@@ -26,10 +26,10 @@
   "explorer.excludeGitIgnore": false,
   "extensions.ignoreRecommendations": false,
   "files.exclude": {
-    "**/__pycache__/": true,
-    "**/.mypy_cache/": true,
-    "**/.pytest_cache/": true,
-    "**/.ruff_cache/": true
+    "**/__pycache__/**": true,
+    "**/.mypy_cache/**": true,
+    "**/.pytest_cache/**": true,
+    "**/.ruff_cache/**": true
   },
   "git.autoRepositoryDetection": "openEditors",
   "git.inputValidation": true,
