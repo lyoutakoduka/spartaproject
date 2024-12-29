@@ -15,10 +15,12 @@ def _check_arguments_size(lefts: BoolType, rights: BoolType) -> None:
     count: int = len(flag_counts)
 
     if count != 1:
-        raise ValueError("size")
+        message: str = "size"
+        raise ValueError(message)
 
     if flag_counts[0] == 0:
-        raise ValueError("empty")
+        message: str = "empty"
+        raise ValueError(message)
 
 
 def bool_compare_array(lefts: Bools, rights: Bools) -> bool:
@@ -32,7 +34,8 @@ def bool_compare_pair(lefts: BoolPair, rights: BoolPair) -> bool:
     sorted_keys: Strs2 = [sorted(flags.keys()) for flags in [lefts, rights]]
 
     if sorted_keys[0] != sorted_keys[1]:
-        raise KeyError("unmatch")
+        message: str = "unmatch"
+        raise KeyError(message)
 
     sorted_flags: Bools2 = [
         [flags[key] for key in keys]
