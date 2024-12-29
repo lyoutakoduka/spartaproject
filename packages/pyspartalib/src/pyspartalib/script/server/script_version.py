@@ -30,4 +30,4 @@ def get_interpreter_version(executable: Path) -> str:
         str: Version information formatted like "3.12.0".
 
     """
-    return list(execute_single([str(executable), "-V"]))[0].split(" ")[-1]
+    return next(iter(execute_single([str(executable), "-V"]))).split(" ")[-1]
