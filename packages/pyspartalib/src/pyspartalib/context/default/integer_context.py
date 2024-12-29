@@ -2,8 +2,6 @@
 
 """User defined types about type "int"."""
 
-from typing import Dict, List, Tuple
-
 IntPair = dict[str, int]
 Ints = list[int]
 IntTuple = tuple[int, ...]

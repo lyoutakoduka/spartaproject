@@ -2,7 +2,7 @@
 
 """User defined types about type "str"."""
 
-from typing import Dict, Generator, List, Tuple
+from typing import Generator
 
 StrPair = dict[str, str]
 StrTuple = tuple[str, str]

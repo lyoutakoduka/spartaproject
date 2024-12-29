@@ -2,8 +2,6 @@
 
 """User defined types about type "bool"."""
 
-from typing import Dict, List
-
 Bools = list[bool]
 BoolPair = dict[str, bool]
 

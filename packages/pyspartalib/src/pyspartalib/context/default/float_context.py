@@ -2,8 +2,6 @@
 
 """User defined types about type "float"."""
 
-from typing import Dict, List
-
 FloatPair = dict[str, float]
 Floats = list[float]
 
