@@ -12,7 +12,10 @@ class BasePipeline(ProjectContext, LogPipeline):
     """Class to handle all functionalities of any script called pipeline."""
 
     def __initialize_super_class(
-        self, platform: str | None, forward: Path | None, enable_shown: bool
+        self,
+        platform: str | None,
+        forward: Path | None,
+        enable_shown: bool,
     ) -> None:
         ProjectContext.__init__(self, platform=platform, forward=forward)
         LogPipeline.__init__(self, enable_shown=enable_shown)
