@@ -37,10 +37,6 @@ def _get_system_path(python_paths: Paths) -> Strs:
     return ["export", _get_environment_pair(python_paths)]
 
 
-def _filter_system_path(python_paths: Paths | None) -> bool:
-    return python_paths is not None and len(python_paths) > 0
-
-
 def _get_python_command(
     commands: Strs,
     platform: str | None,
