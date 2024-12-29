@@ -110,7 +110,9 @@ class WorkSpace:
             selected_root = Path(selected_root, head_root)
 
         working_root: Path = create_working_space(
-            selected_root, override=override, jst=jst
+            selected_root,
+            override=override,
+            jst=jst,
         )
 
         if foot_root is None:
@@ -119,7 +121,9 @@ class WorkSpace:
         return self.create_sub_directory(foot_root, selected_root=working_root)
 
     def create_sub_directory(
-        self, sub_root: Path, selected_root: Path | None = None
+        self,
+        sub_root: Path,
+        selected_root: Path | None = None,
     ) -> Path:
         """Create sub directory in selected temporary working space.
 
@@ -140,7 +144,7 @@ class WorkSpace:
 
         """
         return create_directory(
-            Path(self.get_selected_root(selected_root), sub_root)
+            Path(self.get_selected_root(selected_root), sub_root),
         )
 
     def get_working_root(self) -> Path:

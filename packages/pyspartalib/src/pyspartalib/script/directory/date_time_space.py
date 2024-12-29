@@ -9,7 +9,9 @@ from pyspartalib.script.time.directory.get_current_path import get_working_path
 
 
 def create_working_space(
-    root: Path, override: bool = False, jst: bool = False
+    root: Path,
+    override: bool = False,
+    jst: bool = False,
 ) -> Path:
     """Create temporary working space that path include date time string.
 
@@ -29,5 +31,5 @@ def create_working_space(
 
     """
     return create_directory(
-        Path(root, get_working_path(override=override, jst=jst))
+        Path(root, get_working_path(override=override, jst=jst)),
     )
