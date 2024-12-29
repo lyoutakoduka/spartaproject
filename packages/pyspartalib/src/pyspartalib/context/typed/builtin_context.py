@@ -21,5 +21,5 @@ class StackFrame(TypedDict):
     line: int
 
 
-LinePairs = List[LinePair]
-StackFrames = List[StackFrame]
+LinePairs = list[LinePair]
+StackFrames = list[StackFrame]
