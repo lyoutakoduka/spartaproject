@@ -83,6 +83,7 @@ class ProjectContext:
 
         Returns:
             BoolPair: Project context of boolean type.
+
         """
         return self._bool_context[group]
 
@@ -94,6 +95,7 @@ class ProjectContext:
 
         Returns:
             IntPair: Project context of integer type.
+
         """
         return self._integer_context[group]
 
@@ -105,6 +107,7 @@ class ProjectContext:
 
         Returns:
             StrPair: Project context of string type.
+
         """
         return self._string_context[group]
 
@@ -116,6 +119,7 @@ class ProjectContext:
 
         Returns:
             PathPair: Project context of path type.
+
         """
         return self._path_context[group]
 
@@ -130,6 +134,7 @@ class ProjectContext:
 
         Returns:
             str: The key corresponding to platform.
+
         """
         return "_".join(keys + [self.platform])
 
@@ -166,6 +171,7 @@ class ProjectContext:
                 and path_types is ["directory", "file"].
 
             Path "root/directory_A/group/file_A" is returned.
+
         """
         return self._merged_path_context(group, path_types)
 
@@ -197,6 +203,7 @@ class ProjectContext:
             forward (Path | None, optional): Defaults to None.
                 Path of setting file in order to place
                     project context file to any place.
+
         """
         self._serialize_path(json_import(self._get_context_path(forward)))
         self._override_platform(platform)

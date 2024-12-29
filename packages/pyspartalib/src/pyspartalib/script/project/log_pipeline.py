@@ -57,6 +57,7 @@ class LogPipeline(LogTimer):
 
         Returns:
             Strs | None: Recorded log messages.
+
         """
         if 0 == len(self._log):
             return None
@@ -76,6 +77,7 @@ class LogPipeline(LogTimer):
                 Timer count is forcibly returned if it's True.
                 It's used for argument "force" of
                     method "get_readable_time" in class "LogTimer".
+
         """
         self._log_with_timer(messages, force)
 
@@ -84,6 +86,7 @@ class LogPipeline(LogTimer):
 
         Returns:
             Strs | None: Log messages recorded in instance inside.
+
         """
         if self._confirm_removed():
             return None
@@ -102,6 +105,7 @@ class LogPipeline(LogTimer):
         Args:
             enable_shown (bool, optional): Defaults to False.
                 Log messages are shown if True.
+
         """
         self.__initialize_super_class()
         self.__initialize_variables(enable_shown)

@@ -42,5 +42,6 @@ class BasePipeline(ProjectContext, LogPipeline):
             enable_shown (bool, optional): Defaults to False.
                 Log messages are shown if True.
                 It's used for argument "enable_shown" of class "LogPipeline".
+
         """
         self.__initialize_super_class(platform, forward, enable_shown)
