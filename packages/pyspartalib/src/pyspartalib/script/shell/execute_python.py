@@ -61,6 +61,7 @@ def get_runtime_path(
 
     Returns:
         Path: Relative path of Python interpreter.
+
     """
     return _merge_context_path(
         ProjectContext(platform=platform, forward=forward)
@@ -75,6 +76,7 @@ def get_script_string(path: Path) -> str:
 
     Returns:
         str: Convert path which can executed in Python.
+
     """
     return str(path)  # Not as_posix()
 
@@ -105,6 +107,7 @@ def execute_python(
 
     Returns:
         StrGene: Generator for getting stdout of the script you want execute.
+
     """
     command_multiple: Strs2 = []
 

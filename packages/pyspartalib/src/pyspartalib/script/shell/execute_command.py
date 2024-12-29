@@ -32,7 +32,7 @@ def _execute(command: str) -> StrGene:
 
 
 def execute_single(commands: Strs) -> StrGene:
-    """Function to execute CLI script on subprocess.
+    """Execute CLI script on subprocess.
 
     Args:
         commands (Strs): Script you want to execute corresponding to platform.
@@ -45,12 +45,13 @@ def execute_single(commands: Strs) -> StrGene:
 
     Yields:
         Iterator[StrGene]: String generator.
+
     """
     return _execute(" ".join(commands))
 
 
 def execute_multiple(command_multiple: Strs2) -> StrGene:
-    """Function to execute CLI script which is multiple lines on subprocess.
+    """Execute CLI script which is multiple lines on subprocess.
 
     Args:
         command_multiple (Strs2):
@@ -65,6 +66,7 @@ def execute_multiple(command_multiple: Strs2) -> StrGene:
 
     Yields:
         Iterator[StrGene]: String generator.
+
     """
     return _execute(
         "; ".join([" ".join(commands) for commands in command_multiple])

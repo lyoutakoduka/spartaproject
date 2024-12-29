@@ -56,6 +56,7 @@ def execute_powershell(
 
     Returns:
         StrGene: Generator for getting stdout of command  you want execute.
+
     """
     return execute_single(
         _build_commands(
@@ -80,6 +81,7 @@ def get_script_string(path: Path) -> str:
     Returns:
         str: Converted script part which used "slash"
             as directory separator character.
+
     """
     return path.as_posix()  # Not str()
 
@@ -100,6 +102,7 @@ def get_path_string(path: Path) -> str:
     Returns:
         str: Converted argument part which used "back slash"
             as directory separator character.
+
     """
     path_text: str = str(path)
 
@@ -120,6 +123,7 @@ def get_quoted_path(path: str) -> str:
 
     Returns:
         str: Path surrounded by quotation.
+
     """
     return path.join(["'"] * 2)
 
@@ -142,5 +146,6 @@ def get_double_quoted_command(commands: Strs) -> str:
 
     Returns:
         str: Converted command part surrounded by double quotation.
+
     """
     return " ".join(commands).join(['"'] * 2)
