@@ -4,7 +4,6 @@
 
 from decimal import Decimal
 from pathlib import Path
-from typing import Dict, Union
 
 from pyspartalib.context.default.bool_context import BoolPair, BoolPair2
 from pyspartalib.context.default.float_context import FloatPair, FloatPair2
