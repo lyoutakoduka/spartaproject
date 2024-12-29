@@ -31,7 +31,7 @@ def _execute(command: str) -> StrGene:
             break
 
 
-def _join_space(texts: Strs) -> str:
+def _join_text(texts: Strs) -> str:
     return " ".join(texts)
 
 
@@ -55,7 +55,7 @@ def execute_single(commands: Strs) -> StrGene:
         Iterator[StrGene]: String generator.
 
     """
-    return _execute(_join_space(commands))
+    return _execute(_join_text(commands))
 
 
 def execute_multiple(command_multiple: Strs2) -> StrGene:
@@ -77,5 +77,5 @@ def execute_multiple(command_multiple: Strs2) -> StrGene:
 
     """
     return _execute(
-        _join_line([_join_space(commands) for commands in command_multiple]),
+        _join_line([_join_text(commands) for commands in command_multiple]),
     )
