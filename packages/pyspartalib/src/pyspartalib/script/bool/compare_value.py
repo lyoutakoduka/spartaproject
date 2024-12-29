@@ -23,6 +23,13 @@ def _check_arguments_size(lefts: BoolType, rights: BoolType) -> None:
         raise ValueError(message)
 
 
+def _get_sorted_flags(sorted_keys: Strs2, flags_pair: BoolPairs) -> Bools2:
+    return [
+        [flags[key] for key in keys]
+        for keys, flags in zip(sorted_keys, flags_pair, strict=False)
+    ]
+
+
 def bool_compare_array(lefts: Bools, rights: Bools) -> bool:
     _check_arguments_size(lefts, rights)
     return lefts == rights
@@ -38,9 +45,4 @@ def bool_compare_pair(lefts: BoolPair, rights: BoolPair) -> bool:
         message: str = "unmatch"
         raise KeyError(message)
 
-    sorted_flags: Bools2 = [
-        [flags[key] for key in keys]
-        for keys, flags in zip(sorted_keys, flags_pair, strict=False)
-    ]
-
-    return len(set(sorted_flags)) == 1
+    return len(set(_get_sorted_flags(sorted_keys, flags_pair))) == 1
