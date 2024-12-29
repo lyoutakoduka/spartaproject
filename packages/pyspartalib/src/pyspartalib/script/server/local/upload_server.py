@@ -131,6 +131,7 @@ class UploadServer(ConnectServer):
 
         Returns:
             bool: True if uploading succeed.
+
         """
         if destination is None:
             destination = self.to_relative_path(source)
@@ -169,6 +170,7 @@ class UploadServer(ConnectServer):
                 Platform information should be "linux" or "windows",
                     and it's used in the project context file like follow.
                 It's used for argument "platform" of class "ConnectServer".
+
         """
         self.__initialize_super_class(
             local_root, override, jst, forward, platform

@@ -74,6 +74,7 @@ class ExecuteServer(UploadServer):
         Returns:
             Strs | None:
                 Stdout of executed Python code when execution is successful.
+
         """
         if not self.upload(source_root):
             return None
@@ -121,6 +122,7 @@ class ExecuteServer(UploadServer):
                 Platform information should be "linux" or "windows",
                     and it's used in the project context file like follow.
                 It's used for argument "platform" of class "UploadServer".
+
         """
         self.__initialize_super_class(
             local_root, override, jst, forward, platform

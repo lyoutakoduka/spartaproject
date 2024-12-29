@@ -203,6 +203,7 @@ class ConnectServer(PathServer, ProjectContext):
 
         Returns:
             SSHClient | None: Network object if exists.
+
         """
         return self._ssh
 
@@ -211,6 +212,7 @@ class ConnectServer(PathServer, ProjectContext):
 
         Returns:
             Channel | None: Network object if exists.
+
         """
         return self._channel
 
@@ -219,6 +221,7 @@ class ConnectServer(PathServer, ProjectContext):
 
         Returns:
             SFTPClient | None: Network object if exists.
+
         """
         return self._sftp
 
@@ -232,6 +235,7 @@ class ConnectServer(PathServer, ProjectContext):
 
         Returns:
             Strs: Execution result of command.
+
         """
         self._execute_ssh(commands)
         return self._receive_ssh()
@@ -241,6 +245,7 @@ class ConnectServer(PathServer, ProjectContext):
 
         Returns:
             bool: True if connecting process to server is success.
+
         """
         if self._connect_ssh():
             if self._connect_sftp():
@@ -285,6 +290,7 @@ class ConnectServer(PathServer, ProjectContext):
                 Platform information should be "linux" or "windows",
                     and it's used in the project context file like follow.
                 It's used for argument "platform" of class "ProjectContext".
+
         """
         self.__initialize_super_class(
             local_root, override, jst, forward, platform

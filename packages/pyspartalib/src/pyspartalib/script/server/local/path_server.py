@@ -77,6 +77,7 @@ class PathServer(WorkSpace):
 
         Returns:
             Strs: All keys of path.
+
         """
         return list(self._path_table.keys())
 
@@ -88,6 +89,7 @@ class PathServer(WorkSpace):
 
         Returns:
             Path: Path related with specific key.
+
         """
         return self._path_table[path_type]
 
@@ -96,6 +98,7 @@ class PathServer(WorkSpace):
 
         Returns:
             Path: Path of local working space.
+
         """
         return self._local_root
 
@@ -106,6 +109,7 @@ class PathServer(WorkSpace):
 
         Returns:
             Path: Path of local temporary working space.
+
         """
         return self._date_time_root
 
@@ -117,6 +121,7 @@ class PathServer(WorkSpace):
 
         Returns:
             Path: Converted relative path.
+
         """
         return get_relative(local_full, root_path=self._local_root)
 
@@ -128,6 +133,7 @@ class PathServer(WorkSpace):
 
         Returns:
             Path: Converted full path.
+
         """
         return Path(self._local_root, local_relative)
 
@@ -159,6 +165,7 @@ class PathServer(WorkSpace):
                 If True, you can get datetime object as JST time zone.
                 It's used for argument "jst" of
                     function "create_date_time_space".
+
         """
         self.__initialize_super_class(working_root)
         self.__initialize_variables(local_root, override, jst)
