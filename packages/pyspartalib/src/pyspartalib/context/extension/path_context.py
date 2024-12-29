@@ -5,7 +5,7 @@
 from pathlib import Path
 from typing import Callable, Generator
 
-PathGene = Generator[Path, None, None]
+PathGene = Generator[Path]
 PathPair = dict[str, Path]
 Paths = list[Path]
 PathFunc = Callable[[Path], None]
