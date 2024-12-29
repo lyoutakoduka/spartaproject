@@ -27,10 +27,7 @@ def bool_same_array(flags: Bools, invert: bool = False) -> bool:
     if len(flags) != 1:
         return False
 
-    if not invert ^ flags[0]:
-        return False
-
-    return True
+    return invert ^ flags[0]
 
 
 def bool_same_pair(flag_pair: BoolPair, invert: bool = False) -> bool:
@@ -48,6 +45,4 @@ def bool_same_pair(flag_pair: BoolPair, invert: bool = False) -> bool:
         bool: True if values are same.
 
     """
-    return bool_same_array(
-        [value for value in flag_pair.values()], invert=invert
-    )
+    return bool_same_array(list(flag_pair.values()), invert=invert)
