@@ -59,7 +59,10 @@ class ProjectContext:
         }
 
     def _get_path_elements(
-        self, context_types: StrPair, path_context: PathPair, path_types: Strs
+        self,
+        context_types: StrPair,
+        path_context: PathPair,
+        path_types: Strs,
     ) -> Paths:
         return [
             path_context[context_types[path_type] + ".path"]
@@ -72,7 +75,7 @@ class ProjectContext:
                 self._get_context_types(path_types),
                 self.get_path_context(group),
                 path_types,
-            )
+            ),
         )
 
     def get_bool_context(self, group: str) -> BoolPair:
@@ -176,7 +179,9 @@ class ProjectContext:
         return self._merged_path_context(group, path_types)
 
     def __init__(
-        self, platform: str | None = None, forward: Path | None = None
+        self,
+        platform: str | None = None,
+        forward: Path | None = None,
     ) -> None:
         """Import a project context file.
 
