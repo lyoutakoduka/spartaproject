@@ -69,5 +69,5 @@ def execute_multiple(command_multiple: Strs2) -> StrGene:
 
     """
     return _execute(
-        "; ".join([" ".join(commands) for commands in command_multiple])
+        "; ".join([" ".join(commands) for commands in command_multiple]),
     )

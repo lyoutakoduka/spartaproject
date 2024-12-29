@@ -12,7 +12,8 @@ from pyspartalib.script.shell.execute_command import execute_multiple
 
 def _merge_context_path(project: ProjectContext) -> Path:
     return project.merge_paths(
-        "interpreter", ["working", "virtual", "runtime"]
+        "interpreter",
+        ["working", "virtual", "runtime"],
     )
 
 
@@ -33,15 +34,20 @@ def _get_python_system_path(python_paths: Paths) -> Strs:
 
 
 def _get_python_command(
-    commands: Strs, platform: str | None, forward: Path | None
+    commands: Strs,
+    platform: str | None,
+    forward: Path | None,
 ) -> Strs:
     return [
-        get_script_string(get_runtime_path(platform=platform, forward=forward))
+        get_script_string(
+            get_runtime_path(platform=platform, forward=forward),
+        ),
     ] + commands
 
 
 def get_runtime_path(
-    platform: str | None = None, forward: Path | None = None
+    platform: str | None = None,
+    forward: Path | None = None,
 ) -> Path:
     """Get interpreter path of Python corresponding to platform.
 
@@ -64,7 +70,7 @@ def get_runtime_path(
 
     """
     return _merge_context_path(
-        ProjectContext(platform=platform, forward=forward)
+        ProjectContext(platform=platform, forward=forward),
     )
 
 

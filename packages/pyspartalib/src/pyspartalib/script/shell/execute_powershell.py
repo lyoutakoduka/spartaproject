@@ -15,10 +15,11 @@ def _merge_context_path(project: ProjectContext) -> Path:
 
 
 def _get_runtime_path(
-    platform: str | None = None, forward: Path | None = None
+    platform: str | None = None,
+    forward: Path | None = None,
 ) -> Path:
     return _merge_context_path(
-        ProjectContext(platform=platform, forward=forward)
+        ProjectContext(platform=platform, forward=forward),
     )
 
 
@@ -35,7 +36,9 @@ def _build_commands(powershell_path: str, commands: Strs) -> Strs:
 
 
 def execute_powershell(
-    commands: Strs, platform: str | None = None, forward: Path | None = None
+    commands: Strs,
+    platform: str | None = None,
+    forward: Path | None = None,
 ) -> StrGene:
     """Execute specific command in PowerShell corresponding to platform.
 
@@ -60,8 +63,9 @@ def execute_powershell(
     """
     return execute_single(
         _build_commands(
-            _get_runtime_path(platform, forward).as_posix(), commands
-        )
+            _get_runtime_path(platform, forward).as_posix(),
+            commands,
+        ),
     )
 
 
