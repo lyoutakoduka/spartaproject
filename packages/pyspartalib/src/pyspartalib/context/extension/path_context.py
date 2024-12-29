@@ -2,8 +2,8 @@
 
 """User defined types about type "Path"."""
 
+from collections.abc import Callable, Generator
 from pathlib import Path
-from typing import Callable, Generator
 
 PathGene = Generator[Path]
 PathPair = dict[str, Path]
