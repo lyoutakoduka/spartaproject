@@ -5,4 +5,4 @@
 from typing import List
 from zipfile import ZipInfo
 
-Archives = List[ZipInfo]
+Archives = list[ZipInfo]

@@ -5,8 +5,8 @@
 from decimal import Decimal
 from typing import Dict, List
 
-DecPair = Dict[str, Decimal]
-Decs = List[Decimal]
+DecPair = dict[str, Decimal]
+Decs = list[Decimal]
 
-DecPair2 = Dict[str, DecPair]
-Decs2 = List[Decs]
+DecPair2 = dict[str, DecPair]
+Decs2 = list[Decs]

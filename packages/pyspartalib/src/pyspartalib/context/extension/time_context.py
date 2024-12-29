@@ -5,9 +5,9 @@
 from datetime import datetime
 from typing import Dict, List
 
-Times = List[datetime]
-TimePair = Dict[str, datetime]
+Times = list[datetime]
+TimePair = dict[str, datetime]
 
-Times2 = List[Times]
+Times2 = list[Times]
 
-TimePair2 = Dict[str, TimePair]
+TimePair2 = dict[str, TimePair]
