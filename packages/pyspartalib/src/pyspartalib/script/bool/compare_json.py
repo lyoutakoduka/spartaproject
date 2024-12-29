@@ -21,5 +21,6 @@ def is_same_json(left: Json, right: Json) -> bool:
 
     Returns:
         bool: True if two Json objects are same.
+
     """
     return 1 == len(list(set(_convert_string(left, right))))
