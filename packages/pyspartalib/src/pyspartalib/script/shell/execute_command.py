@@ -31,6 +31,10 @@ def _execute(command: str) -> StrGene:
             break
 
 
+def _join_space(texts: Strs) -> str:
+    return " ".join(texts)
+
+
 def execute_single(commands: Strs) -> StrGene:
     """Execute CLI script on subprocess.
 
@@ -47,7 +51,7 @@ def execute_single(commands: Strs) -> StrGene:
         Iterator[StrGene]: String generator.
 
     """
-    return _execute(" ".join(commands))
+    return _execute(_join_space(commands))
 
 
 def execute_multiple(command_multiple: Strs2) -> StrGene:
@@ -69,5 +73,5 @@ def execute_multiple(command_multiple: Strs2) -> StrGene:
 
     """
     return _execute(
-        "; ".join([" ".join(commands) for commands in command_multiple]),
+        "; ".join([_join_space(commands) for commands in command_multiple]),
     )
