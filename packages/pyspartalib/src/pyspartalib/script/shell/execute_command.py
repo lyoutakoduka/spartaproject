@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 """Module to execute CLI (Command Line Interface) script on subprocess."""
 
