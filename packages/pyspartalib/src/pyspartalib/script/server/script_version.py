@@ -4,7 +4,12 @@
 
 from pathlib import Path
 
+from pyspartalib.context.default.string_context import StrGene
 from pyspartalib.script.shell.execute_command import execute_single
+
+
+def _get_command(executable: Path) -> StrGene:
+    return execute_single([str(executable), "-V"])
 
 
 def get_version_name(version: str) -> str:
@@ -30,4 +35,4 @@ def get_interpreter_version(executable: Path) -> str:
         str: Version information formatted like "3.12.0".
 
     """
-    return next(iter(execute_single([str(executable), "-V"]))).split(" ")[-1]
+    return next(iter(_get_command(executable))).split(" ")[-1]
