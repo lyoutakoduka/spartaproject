@@ -112,9 +112,6 @@ class ConnectServer(PathServer, ProjectContext):
 
         return None
 
-    def _get_head_removed(self, text: str, base: str) -> str | None:
-        return self._extract_result(text, -1, base + "l")
-
     def _extract_result(
         self,
         text: str,
@@ -133,6 +130,9 @@ class ConnectServer(PathServer, ProjectContext):
         lines: Strs = text.split("\r\n")
 
         return [lines[0][1:]] + lines[1:-1]
+
+    def _get_head_removed(self, text: str, base: str) -> str | None:
+        return self._extract_result(text, -1, base + "l")
 
     def _receive_ssh(self) -> Strs:
         if text := self._receive_byte():
