@@ -112,6 +112,9 @@ class ConnectServer(PathServer, ProjectContext):
 
         return None
 
+    def _get_head_removed(self, text: str, base: str) -> str | None:
+        return self._extract_result(text, -1, base + "l")
+
     def _extract_result(
         self,
         text: str,
@@ -135,7 +138,7 @@ class ConnectServer(PathServer, ProjectContext):
         if text := self._receive_byte():
             base: str = "\x1b[?2004"
 
-            if head_removed := self._extract_result(text, -1, base + "l"):
+            if head_removed := self._get_head_removed(text, base):
                 if foot_removed := self._extract_result(
                     head_removed,
                     0,
