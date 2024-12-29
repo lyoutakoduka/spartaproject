@@ -2,7 +2,7 @@
 
 """User defined types using class LogTimer."""
 
-from typing import Callable
+from collections.abc import Callable
 
 from pyspartalib.script.time.count.log_timer import LogTimer
 

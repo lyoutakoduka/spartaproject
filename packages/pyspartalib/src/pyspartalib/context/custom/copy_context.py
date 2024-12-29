@@ -2,8 +2,8 @@
 
 """User defined types using class SafeCopy."""
 
+from collections.abc import Callable
 from pathlib import Path
-from typing import Callable
 
 from pyspartalib.script.path.safe.safe_copy import SafeCopy
 
