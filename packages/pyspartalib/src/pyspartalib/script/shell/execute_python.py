@@ -126,8 +126,8 @@ def execute_python(
     """
     command_multiple: Strs2 = []
 
-    if _filter_system_path(python_paths):
-        command_multiple += [_get_system_path(python_paths)]
+    if filtered_paths := python_paths:
+        command_multiple += [_get_system_path(filtered_paths)]
 
     command_multiple += [_get_python_command(commands, platform, forward)]
 
