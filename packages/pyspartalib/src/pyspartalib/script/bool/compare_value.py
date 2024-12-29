@@ -11,8 +11,12 @@ from pyspartalib.context.default.integer_context import Ints
 from pyspartalib.context.default.string_context import Strs2
 
 
+def _get_flag_counts(lefts: BoolType, rights: BoolType) -> Ints:
+    return list({len(flags) for flags in [lefts, rights]})
+
+
 def _check_arguments_size(lefts: BoolType, rights: BoolType) -> None:
-    flag_counts: Ints = list({len(flags) for flags in [lefts, rights]})
+    flag_counts: Ints = _get_flag_counts(lefts, rights)
 
     if len(flag_counts) != 1:
         message: str = "size"
