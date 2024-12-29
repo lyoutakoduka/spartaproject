@@ -49,9 +49,9 @@ Pair = BoolPair | IntPair | FloatPair | StrPair | DecPair | PathPair
 Pair2 = BoolPair2 | IntPair2 | FloatPair2 | StrPair2 | DecPair2 | PathPair2
 Single = None | bool | int | float | str | Decimal | Path
 
-Json = Single | Dict[str, "Json"] | List["Json"]
+Json = Single | dict[str, "Json"] | list["Json"]
 Multi = Array | Pair
 Multi2 = Array2 | Pair2
 
-Singles = List[Single]
-Jsons = List[Json]
+Singles = list[Single]
+Jsons = list[Json]

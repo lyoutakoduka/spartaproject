@@ -15,19 +15,19 @@ from pyspartalib.context.extension.path_context import PathPair, PathPair2
 
 Basic = bool | int | float | str | Decimal | Path
 
-BasicPair = Dict[str, Basic]
-SectionPair = Union[BoolPair, IntPair, FloatPair, DecPair, StrPair, PathPair]
+BasicPair = dict[str, Basic]
+SectionPair = BoolPair | IntPair | FloatPair | DecPair | StrPair | PathPair
 
-BasicPair2 = Dict[str, BasicPair]
-SectionPair2 = Dict[str, SectionPair]
+BasicPair2 = dict[str, BasicPair]
+SectionPair2 = dict[str, SectionPair]
 
-Config = Union[
-    BoolPair2,
-    IntPair2,
-    FloatPair2,
-    DecPair2,
-    StrPair2,
-    PathPair2,
-    BasicPair2,
-    SectionPair2,
-]
+Config = (
+    BoolPair2
+    | IntPair2
+    | FloatPair2
+    | DecPair2
+    | StrPair2
+    | PathPair2
+    | BasicPair2
+    | SectionPair2
+)
