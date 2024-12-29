@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 from pyspartalib.context.default.bool_context import (
     BoolPair,
