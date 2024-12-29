@@ -139,7 +139,7 @@ class ProjectContext:
             str: The key corresponding to platform.
 
         """
-        return "_".join(keys + [self.platform])
+        return "_".join([*keys, self.platform])
 
     def merge_paths(self, group: str, path_types: Strs) -> Path:
         """Get path merged with multiple path values.

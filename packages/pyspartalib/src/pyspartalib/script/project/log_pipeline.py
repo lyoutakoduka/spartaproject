@@ -59,7 +59,7 @@ class LogPipeline(LogTimer):
             Strs | None: Recorded log messages.
 
         """
-        if 0 == len(self._log):
+        if len(self._log) == 0:
             return None
 
         log: Strs = self._log[:]
