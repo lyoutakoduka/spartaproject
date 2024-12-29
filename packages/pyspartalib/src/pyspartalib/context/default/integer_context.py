@@ -4,12 +4,12 @@
 
 from typing import Dict, List, Tuple
 
-IntPair = Dict[str, int]
-Ints = List[int]
+IntPair = dict[str, int]
+Ints = list[int]
 IntTuple = Tuple[int, ...]
 
-IntPair2 = Dict[str, IntPair]
-Ints2 = List[Ints]
+IntPair2 = dict[str, IntPair]
+Ints2 = list[Ints]
 
-Ints3 = List[Ints2]
-IntPair3 = Dict[str, IntPair2]
+Ints3 = list[Ints2]
+IntPair3 = dict[str, IntPair2]

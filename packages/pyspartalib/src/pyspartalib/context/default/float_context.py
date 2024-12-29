@@ -4,8 +4,8 @@
 
 from typing import Dict, List
 
-FloatPair = Dict[str, float]
-Floats = List[float]
+FloatPair = dict[str, float]
+Floats = list[float]
 
-FloatPair2 = Dict[str, FloatPair]
-Floats2 = List[Floats]
+FloatPair2 = dict[str, FloatPair]
+Floats2 = list[Floats]

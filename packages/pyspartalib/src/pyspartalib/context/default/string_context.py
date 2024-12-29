@@ -4,14 +4,14 @@
 
 from typing import Dict, Generator, List, Tuple
 
-StrPair = Dict[str, str]
-StrTuple = Tuple[str, str]
-Strs = List[str]
-Trans = Dict[int, str]
+StrPair = dict[str, str]
+StrTuple = tuple[str, str]
+Strs = list[str]
+Trans = dict[int, str]
 
-StrsPair = Dict[str, Strs]
-StrPair2 = Dict[str, StrPair]
-Strs2 = List[Strs]
+StrsPair = dict[str, Strs]
+StrPair2 = dict[str, StrPair]
+Strs2 = list[Strs]
 
 StrGene = Generator[str, None, None]
-Strs3 = List[Strs2]
+Strs3 = list[Strs2]

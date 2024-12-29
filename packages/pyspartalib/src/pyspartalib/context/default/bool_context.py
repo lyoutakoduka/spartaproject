@@ -4,9 +4,9 @@
 
 from typing import Dict, List
 
-Bools = List[bool]
-BoolPair = Dict[str, bool]
+Bools = list[bool]
+BoolPair = dict[str, bool]
 
-Bools2 = List[Bools]
-BoolPair2 = Dict[str, BoolPair]
+Bools2 = list[Bools]
+BoolPair2 = dict[str, BoolPair]
 BoolType = Bools | BoolPair
