@@ -18,7 +18,8 @@ class TransferFunction:
     def decorator(self, function: Callable[CP, CR]) -> Callable[CP, CR]:
         @wraps(function)
         def register_function(
-            *arguments: CP.args, **key_arguments: CP.kwargs
+            *arguments: CP.args,
+            **key_arguments: CP.kwargs,
         ) -> CR:
             return self.wrapper(function, *arguments, **key_arguments)
 

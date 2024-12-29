@@ -10,7 +10,7 @@ def _config_logger(handler_name: str, handler: Handler) -> Logger:
     logger.addHandler(handler)
 
     handler.setFormatter(
-        Formatter("%(levelname)s (%(asctime)s) [%(name)s] %(message)s")
+        Formatter("%(levelname)s (%(asctime)s) [%(name)s] %(message)s"),
     )
     return logger
 
