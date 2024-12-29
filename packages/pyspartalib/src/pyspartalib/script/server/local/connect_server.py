@@ -138,13 +138,13 @@ class ConnectServer(PathServer, ProjectContext):
     def _get_right_removed(self, text: str) -> str | None:
         return self._extract_result(text, 0, self._split_identifier + "h")
 
-    def _receive_ssh(self) -> Strs:
+    def _receive_ssh(self) -> Strs | None:
         if text := self._receive_byte():
             if left_removed := self._get_left_removed(text):
                 if right_removed := self._get_right_removed(left_removed):
                     return self._split_result(right_removed)
 
-        return []
+        return None
 
     def _execute_ssh(self, commands: Strs) -> None:
         command: str = " ".join(commands) + "\n"
@@ -233,7 +233,7 @@ class ConnectServer(PathServer, ProjectContext):
         """
         return self._sftp
 
-    def execute_ssh(self, commands: Strs) -> Strs:
+    def execute_ssh(self, commands: Strs) -> Strs | None:
         """Execute command by using SSH functionality.
 
         Args:
