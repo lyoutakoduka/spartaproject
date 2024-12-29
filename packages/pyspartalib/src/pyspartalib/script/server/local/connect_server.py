@@ -134,16 +134,18 @@ class ConnectServer(PathServer, ProjectContext):
     def _get_left_removed(self, text: str, base: str) -> str | None:
         return self._extract_result(text, -1, base + "l")
 
-    def _get_right_removed(self, head_removed: str, base: str) -> str | None:
-        return self._extract_result(head_removed, 0, base + "h")
+    def _get_right_removed(self, text: str, base: str) -> str | None:
+        return self._extract_result(text, 0, base + "h")
 
     def _receive_ssh(self) -> Strs:
         if text := self._receive_byte():
             base: str = "\x1b[?2004"
 
-            if head_removed := self._get_left_removed(text, base):
-                if foot_removed := self._get_right_removed(head_removed, base):
-                    return self._split_result(foot_removed)
+            if left_removed := self._get_left_removed(text, base):
+                if right_removed := self._get_right_removed(
+                    left_removed, base
+                ):
+                    return self._split_result(right_removed)
 
         return []
 
