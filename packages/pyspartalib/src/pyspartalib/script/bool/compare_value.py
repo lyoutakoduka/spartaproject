@@ -42,4 +42,4 @@ def bool_compare_pair(lefts: BoolPair, rights: BoolPair) -> bool:
         for keys, flags in zip(sorted_keys, flags_pair, strict=False)
     ]
 
-    return sorted_flags[0] == sorted_flags[1]
+    return len(set(sorted_flags)) == 1
