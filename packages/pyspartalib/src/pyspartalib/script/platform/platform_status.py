@@ -10,6 +10,7 @@ def get_platform() -> str:
 
     Returns:
         str: Platform information.
+
     """
     return uname().system.lower()
 
@@ -19,5 +20,6 @@ def is_platform_linux() -> bool:
 
     Returns:
         bool: True if the platform is Linux.
+
     """
     return "linux" == get_platform()
