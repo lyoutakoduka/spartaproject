@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
+from collections.abc import Callable
 from functools import wraps
-from typing import Callable
 
 from pyspartalib.context.callable_context import CP, CR
 
