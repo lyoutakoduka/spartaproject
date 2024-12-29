@@ -142,13 +142,13 @@ class ConnectServer(PathServer, ProjectContext):
         if (text := self._receive_byte()) is None:
             return None
 
-        if (left_removed := self._get_left_removed(text)) is None:
+        if (text := self._get_left_removed(text)) is None:
             return None
 
-        if (right_removed := self._get_right_removed(left_removed)) is None:
+        if (text := self._get_right_removed(text)) is None:
             return None
 
-        return self._split_result(right_removed)
+        return self._split_result(text)
 
     def _execute_ssh(self, commands: Strs) -> None:
         command: str = " ".join(commands) + "\n"
