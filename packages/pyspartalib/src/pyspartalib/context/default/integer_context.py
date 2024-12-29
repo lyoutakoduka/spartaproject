@@ -6,7 +6,7 @@ from typing import Dict, List, Tuple
 
 IntPair = dict[str, int]
 Ints = list[int]
-IntTuple = Tuple[int, ...]
+IntTuple = tuple[int, ...]
 
 IntPair2 = dict[str, IntPair]
 Ints2 = list[Ints]
