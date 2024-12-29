@@ -119,8 +119,9 @@ class ConnectServer(PathServer, ProjectContext):
         escape: str,
     ) -> str | None:
         lines: Strs = text.split(escape)
+        correct_result: int = 2
 
-        if 2 == len(lines):
+        if len(lines) == correct_result:
             return lines[index]
 
         return None
@@ -157,17 +158,7 @@ class ConnectServer(PathServer, ProjectContext):
             for root in ["private_root", "public_root"]
         ]
 
-        return 1 == len(
-            set(
-                [
-                    str(sorted(name))
-                    for name in [
-                        expected,
-                        result,
-                    ]
-                ],
-            ),
-        )
+        return len({str(sorted(name)) for name in [expected, result]}) == 1
 
     def _ssh_correct_path(self) -> bool:
         return self._correct_path(
@@ -263,11 +254,7 @@ class ConnectServer(PathServer, ProjectContext):
             bool: True if connecting process to server is success.
 
         """
-        if self._connect_ssh():
-            if self._connect_sftp():
-                return True
-
-        return False
+        return self._connect_ssh() and self._connect_sftp()
 
     def __del__(self) -> None:
         """Close network objects."""

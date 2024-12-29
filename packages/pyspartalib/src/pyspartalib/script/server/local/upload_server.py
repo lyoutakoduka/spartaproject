@@ -50,7 +50,7 @@ class UploadServer(ConnectServer):
             if not is_relative(parent, root_path=remote):
                 continue
 
-            if "." != str(get_relative(parent, root_path=remote)):
+            if str(get_relative(parent, root_path=remote)) != ".":
                 tree += [parent]
 
         return tree
