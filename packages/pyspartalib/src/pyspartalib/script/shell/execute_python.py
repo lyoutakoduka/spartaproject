@@ -23,7 +23,7 @@ def _get_environment() -> str:
 
 def _get_system_path_value(python_paths: Paths) -> str:
     path_texts: Strs = [str(python_path) for python_path in python_paths]
-    return ":".join(path_texts + ["$" + _get_environment()])
+    return ":".join([*path_texts, "$" + _get_environment()])
 
 
 def _get_python_system_path(python_paths: Paths) -> Strs:
@@ -42,7 +42,8 @@ def _get_python_command(
         get_script_string(
             get_runtime_path(platform=platform, forward=forward),
         ),
-    ] + commands
+        *commands,
+    ]
 
 
 def get_runtime_path(
@@ -117,7 +118,7 @@ def execute_python(
     """
     command_multiple: Strs2 = []
 
-    if python_paths is not None and 0 < len(python_paths):
+    if python_paths is not None and len(python_paths) > 0:
         command_multiple += [_get_python_system_path(python_paths)]
 
     command_multiple += [_get_python_command(commands, platform, forward)]
