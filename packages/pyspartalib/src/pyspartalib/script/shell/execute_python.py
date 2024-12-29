@@ -29,11 +29,12 @@ def _get_system_path_value(python_paths: Paths) -> str:
     return ":".join([*_get_path_texts(python_paths), "$" + _get_environment()])
 
 
+def _get_environment_pair(python_paths: Paths) -> str:
+    return _get_environment() + "=" + _get_system_path_value(python_paths)
+
+
 def _get_python_system_path(python_paths: Paths) -> Strs:
-    return [
-        "export",
-        _get_environment() + "=" + _get_system_path_value(python_paths),
-    ]
+    return ["export", _get_environment_pair(python_paths)]
 
 
 def _get_python_command(
