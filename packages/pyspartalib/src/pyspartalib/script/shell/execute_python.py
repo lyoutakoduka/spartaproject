@@ -21,9 +21,12 @@ def _get_environment() -> str:
     return "pythonpath".upper()
 
 
+def _get_path_texts(python_paths: Paths) -> Strs:
+    return [str(python_path) for python_path in python_paths]
+
+
 def _get_system_path_value(python_paths: Paths) -> str:
-    path_texts: Strs = [str(python_path) for python_path in python_paths]
-    return ":".join([*path_texts, "$" + _get_environment()])
+    return ":".join([*_get_path_texts(python_paths), "$" + _get_environment()])
 
 
 def _get_python_system_path(python_paths: Paths) -> Strs:
