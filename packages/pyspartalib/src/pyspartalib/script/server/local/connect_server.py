@@ -39,7 +39,10 @@ class ConnectServer(PathServer, ProjectContext):
         platform: str | None,
     ) -> None:
         PathServer.__init__(
-            self, local_root=local_root, override=override, jst=jst
+            self,
+            local_root=local_root,
+            override=override,
+            jst=jst,
         )
         ProjectContext.__init__(self, forward=forward, platform=platform)
 
@@ -110,7 +113,10 @@ class ConnectServer(PathServer, ProjectContext):
         return None
 
     def _extract_result(
-        self, text: str, index: int, escape: str
+        self,
+        text: str,
+        index: int,
+        escape: str,
     ) -> str | None:
         lines: Strs = text.split(escape)
 
@@ -130,7 +136,9 @@ class ConnectServer(PathServer, ProjectContext):
 
             if head_removed := self._extract_result(text, -1, base + "l"):
                 if foot_removed := self._extract_result(
-                    head_removed, 0, base + "h"
+                    head_removed,
+                    0,
+                    base + "h",
                 ):
                     return self._split_result(foot_removed)
 
@@ -150,12 +158,20 @@ class ConnectServer(PathServer, ProjectContext):
         ]
 
         return 1 == len(
-            set([str(sorted(name)) for name in [expected, result]])
+            set(
+                [
+                    str(sorted(name))
+                    for name in [
+                        expected,
+                        result,
+                    ]
+                ],
+            ),
         )
 
     def _ssh_correct_path(self) -> bool:
         return self._correct_path(
-            [name[:-1] for name in self.execute_ssh(["ls", "-1", "-p"])]
+            [name[:-1] for name in self.execute_ssh(["ls", "-1", "-p"])],
         )
 
     def _get_remote_path(self) -> str:
@@ -293,6 +309,10 @@ class ConnectServer(PathServer, ProjectContext):
 
         """
         self.__initialize_super_class(
-            local_root, override, jst, forward, platform
+            local_root,
+            override,
+            jst,
+            forward,
+            platform,
         )
         self.__initialize_variables()

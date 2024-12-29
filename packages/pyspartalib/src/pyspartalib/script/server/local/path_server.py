@@ -23,14 +23,16 @@ class PathServer(WorkSpace):
         self._path_table[key] = child
 
     def _add_directory(
-        self, table: PathPair, parent: str | None = None
+        self,
+        table: PathPair,
+        parent: str | None = None,
     ) -> None:
         for key, name in table.items():
             self._add_path(key, Path(name), parent=parent)
 
     def _build_path_root(self) -> None:
         self._add_directory(
-            {"private_root": Path("private"), "public_root": Path("public")}
+            {"private_root": Path("private"), "public_root": Path("public")},
         )
 
     def _build_path_private(self) -> None:
@@ -56,7 +58,10 @@ class PathServer(WorkSpace):
         self._build_path_develop()
 
     def _initialize_paths(
-        self, local_root: Path | None, override: bool, jst: bool
+        self,
+        local_root: Path | None,
+        override: bool,
+        jst: bool,
     ) -> None:
         self._local_root: Path = self.get_selected_root(local_root)
         self._date_time_root: Path = self.create_date_time_space(
@@ -67,7 +72,10 @@ class PathServer(WorkSpace):
         )
 
     def __initialize_variables(
-        self, local_root: Path | None, override: bool, jst: bool
+        self,
+        local_root: Path | None,
+        override: bool,
+        jst: bool,
     ) -> None:
         self._build_path_table()
         self._initialize_paths(local_root, override, jst)

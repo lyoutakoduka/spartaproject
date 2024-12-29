@@ -93,7 +93,8 @@ class UploadServer(ConnectServer):
 
     def _upload_file(self, source_path: Path, destination_local: Path) -> bool:
         return self._create_file(
-            source_path, self._path_with_tree(destination_local)
+            source_path,
+            self._path_with_tree(destination_local),
         )
 
     def _upload_directory(self, local: Path) -> None:
@@ -173,5 +174,9 @@ class UploadServer(ConnectServer):
 
         """
         self.__initialize_super_class(
-            local_root, override, jst, forward, platform
+            local_root,
+            override,
+            jst,
+            forward,
+            platform,
         )

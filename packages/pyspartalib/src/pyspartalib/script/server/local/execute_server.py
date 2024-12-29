@@ -36,7 +36,10 @@ class ExecuteServer(UploadServer):
 
     def _set_version_path(self, version: str) -> None:
         self._python_path: Path = Path(
-            self.get_path("python_root"), version, "bin", "python3"
+            self.get_path("python_root"),
+            version,
+            "bin",
+            "python3",
         )
 
     def _get_filter_head(self) -> str:
@@ -125,6 +128,10 @@ class ExecuteServer(UploadServer):
 
         """
         self.__initialize_super_class(
-            local_root, override, jst, forward, platform
+            local_root,
+            override,
+            jst,
+            forward,
+            platform,
         )
         self._set_version_path(self._set_version(version))
