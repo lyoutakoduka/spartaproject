@@ -12,6 +12,10 @@ def _get_command(executable: Path) -> StrGene:
     return execute_single([str(executable), "-V"])
 
 
+def _get_result_head(executable: Path) -> str:
+    return next(iter(_get_command(executable)))
+
+
 def get_version_name(version: str) -> str:
     """Convert version string as default directory name.
 
@@ -35,4 +39,4 @@ def get_interpreter_version(executable: Path) -> str:
         str: Version information formatted like "3.12.0".
 
     """
-    return next(iter(_get_command(executable))).split(" ")[-1]
+    return _get_result_head(executable).split(" ")[-1]
