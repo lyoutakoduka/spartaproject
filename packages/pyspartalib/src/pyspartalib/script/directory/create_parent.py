@@ -15,6 +15,7 @@ def create_parent(child_path: Path) -> Path:
 
     Returns:
         Path: Path of created parent directories.
+
     """
     path: Path = child_path.parent
 

@@ -15,6 +15,7 @@ def create_directory(path: Path) -> Path:
 
     Returns:
         Path: Path witch is newly created.
+
     """
     path.mkdir(parents=True, exist_ok=True)
     return path
@@ -28,6 +29,7 @@ def create_directory_array(paths: Paths) -> Paths:
 
     Returns:
         Paths: List of paths witch is newly created.
+
     """
     return [create_directory(path) for path in paths]
 
@@ -40,5 +42,6 @@ def create_directory_pair(path_pair: PathPair) -> PathPair:
 
     Returns:
         PathPair: Dictionary of paths witch is newly created.
+
     """
     return {key: create_directory(path) for key, path in path_pair.items()}

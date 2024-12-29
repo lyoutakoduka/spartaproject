@@ -26,6 +26,7 @@ def create_working_space(
 
     Returns:
         Path: End of directory path of created temporary working space.
+
     """
     return create_directory(
         Path(root, get_working_path(override=override, jst=jst))

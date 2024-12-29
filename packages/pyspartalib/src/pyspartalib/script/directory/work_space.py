@@ -36,6 +36,7 @@ class WorkSpace:
 
         Returns:
             Path: Path of selected temporary working space.
+
         """
         return (
             self.get_working_root() if selected_root is None else selected_root
@@ -101,6 +102,7 @@ class WorkSpace:
 
         Returns:
             Path: Path of created temporary working space.
+
         """
         selected_root: Path = self.get_selected_root(body_root)
 
@@ -135,6 +137,7 @@ class WorkSpace:
 
         Returns:
             Path: Path of created sub directory.
+
         """
         return create_directory(
             Path(self.get_selected_root(selected_root), sub_root)
@@ -145,6 +148,7 @@ class WorkSpace:
 
         Returns:
             Path: Path of default temporary working space.
+
         """
         return self._working_root
 
@@ -160,5 +164,6 @@ class WorkSpace:
             working_root (Path | None, optional): Defaults to None.
                 User defined temporary working space.
                 It's mainly used for test.
+
         """
         self.__initialize_variables(working_root)
