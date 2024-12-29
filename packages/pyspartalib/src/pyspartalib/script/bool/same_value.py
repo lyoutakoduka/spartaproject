@@ -19,12 +19,12 @@ def bool_same_array(flags: Bools, invert: bool = False) -> bool:
         bool: True if values are same.
 
     """
-    if 0 == len(flags):
+    if len(flags) == 0:
         return False
 
     flags = list(set(flags))
 
-    if 1 != len(flags):
+    if len(flags) != 1:
         return False
 
     if not invert ^ flags[0]:

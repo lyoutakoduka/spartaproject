@@ -14,10 +14,10 @@ def _check_arguments_size(lefts: BoolType, rights: BoolType) -> None:
     flag_counts: Ints = list(set([len(flags) for flags in [lefts, rights]]))
     count: int = len(flag_counts)
 
-    if 1 != count:
+    if count != 1:
         raise ValueError("size")
 
-    if 0 == flag_counts[0]:
+    if flag_counts[0] == 0:
         raise ValueError("empty")
 
 
