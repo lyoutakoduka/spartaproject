@@ -6,8 +6,10 @@
 paramiko: paramiko
 """
 
-from paramiko import AutoAddPolicy  # noqa: F401 # type: ignore
-from paramiko import Channel  # noqa: F401 # type: ignore
-from paramiko import SFTPAttributes  # noqa: F401 # type: ignore
-from paramiko import SFTPClient  # noqa: F401 # type: ignore
-from paramiko import SSHClient  # noqa: F401 # type: ignore
+from paramiko import (
+    AutoAddPolicy,  # noqa: F401 # type: ignore
+    Channel,  # noqa: F401 # type: ignore
+    SFTPAttributes,  # noqa: F401 # type: ignore
+    SFTPClient,  # noqa: F401 # type: ignore
+    SSHClient,  # noqa: F401 # type: ignore
+)
