@@ -31,7 +31,8 @@ def bool_compare_array(lefts: Bools, rights: Bools) -> bool:
 def bool_compare_pair(lefts: BoolPair, rights: BoolPair) -> bool:
     _check_arguments_size(lefts, rights)
 
-    sorted_keys: Strs2 = [sorted(flags.keys()) for flags in [lefts, rights]]
+    flags_pair = [lefts, rights]
+    sorted_keys: Strs2 = [sorted(flags.keys()) for flags in flags_pair]
 
     if sorted_keys[0] != sorted_keys[1]:
         message: str = "unmatch"
@@ -39,7 +40,7 @@ def bool_compare_pair(lefts: BoolPair, rights: BoolPair) -> bool:
 
     sorted_flags: Bools2 = [
         [flags[key] for key in keys]
-        for keys, flags in zip(sorted_keys, [lefts, rights])
+        for keys, flags in zip(sorted_keys, flags_pair)
     ]
 
     return sorted_flags[0] == sorted_flags[1]
