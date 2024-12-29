@@ -11,10 +11,9 @@ from pyspartalib.context.default.string_context import Strs2
 
 
 def _check_arguments_size(lefts: BoolType, rights: BoolType) -> None:
-    flag_counts: Ints = list(set([len(flags) for flags in [lefts, rights]]))
-    count: int = len(flag_counts)
+    flag_counts: Ints = list({len(flags) for flags in [lefts, rights]})
 
-    if count != 1:
+    if len(flag_counts) != 1:
         message: str = "size"
         raise ValueError(message)
 
@@ -34,7 +33,7 @@ def bool_compare_pair(lefts: BoolPair, rights: BoolPair) -> bool:
     flags_pair = [lefts, rights]
     sorted_keys: Strs2 = [sorted(flags.keys()) for flags in flags_pair]
 
-    if sorted_keys[0] != sorted_keys[1]:
+    if len(set(sorted_keys)) != 1:
         message: str = "unmatch"
         raise KeyError(message)
 
