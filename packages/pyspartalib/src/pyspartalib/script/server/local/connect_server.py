@@ -26,6 +26,7 @@ class ConnectServer(PathServer, ProjectContext):
     """Class to use SSH and SFTP functionality."""
 
     def __initialize_variables(self) -> None:
+        self._base: str = "\x1b[?2004"
         self._ssh: SSHClient | None = None
         self._channel: Channel | None = None
         self._sftp: SFTPClient | None = None
@@ -131,20 +132,16 @@ class ConnectServer(PathServer, ProjectContext):
 
         return [lines[0][1:]] + lines[1:-1]
 
-    def _get_left_removed(self, text: str, base: str) -> str | None:
-        return self._extract_result(text, -1, base + "l")
+    def _get_left_removed(self, text: str) -> str | None:
+        return self._extract_result(text, -1, self._base + "l")
 
-    def _get_right_removed(self, text: str, base: str) -> str | None:
-        return self._extract_result(text, 0, base + "h")
+    def _get_right_removed(self, text: str) -> str | None:
+        return self._extract_result(text, 0, self._base + "h")
 
     def _receive_ssh(self) -> Strs:
         if text := self._receive_byte():
-            base: str = "\x1b[?2004"
-
-            if left_removed := self._get_left_removed(text, base):
-                if right_removed := self._get_right_removed(
-                    left_removed, base
-                ):
+            if left_removed := self._get_left_removed(text):
+                if right_removed := self._get_right_removed(left_removed):
                     return self._split_result(right_removed)
 
         return []
