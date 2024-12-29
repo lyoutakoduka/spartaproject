@@ -2,6 +2,7 @@
 
 from pyspartalib.context.default.bool_context import (
     BoolPair,
+    BoolPairs,
     Bools,
     Bools2,
     BoolType,
@@ -30,7 +31,7 @@ def bool_compare_array(lefts: Bools, rights: Bools) -> bool:
 def bool_compare_pair(lefts: BoolPair, rights: BoolPair) -> bool:
     _check_arguments_size(lefts, rights)
 
-    flags_pair = [lefts, rights]
+    flags_pair: BoolPairs = [lefts, rights]
     sorted_keys: Strs2 = [sorted(flags.keys()) for flags in flags_pair]
 
     if len(set(sorted_keys)) != 1:
