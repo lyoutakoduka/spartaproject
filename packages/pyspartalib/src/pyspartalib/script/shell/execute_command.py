@@ -35,6 +35,10 @@ def _join_space(texts: Strs) -> str:
     return " ".join(texts)
 
 
+def _join_line(texts: Strs) -> str:
+    return "; ".join(texts)
+
+
 def execute_single(commands: Strs) -> StrGene:
     """Execute CLI script on subprocess.
 
@@ -73,5 +77,5 @@ def execute_multiple(command_multiple: Strs2) -> StrGene:
 
     """
     return _execute(
-        "; ".join([_join_space(commands) for commands in command_multiple]),
+        _join_line([_join_space(commands) for commands in command_multiple]),
     )
