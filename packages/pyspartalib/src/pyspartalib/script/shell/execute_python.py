@@ -33,7 +33,7 @@ def _get_environment_pair(python_paths: Paths) -> str:
     return _get_environment() + "=" + _get_system_path_value(python_paths)
 
 
-def _get_python_system_path(python_paths: Paths) -> Strs:
+def _get_system_path(python_paths: Paths) -> Strs:
     return ["export", _get_environment_pair(python_paths)]
 
 
@@ -127,7 +127,7 @@ def execute_python(
     command_multiple: Strs2 = []
 
     if _filter_system_path(python_paths):
-        command_multiple += [_get_python_system_path(python_paths)]
+        command_multiple += [_get_system_path(python_paths)]
 
     command_multiple += [_get_python_command(commands, platform, forward)]
 
