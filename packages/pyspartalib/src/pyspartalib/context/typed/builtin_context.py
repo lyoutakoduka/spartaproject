@@ -3,7 +3,7 @@
 """User defined types using class "TypedDict"."""
 
 from pathlib import Path
-from typing import List, TypedDict
+from typing import TypedDict
 
 
 class LinePair(TypedDict):
