@@ -3,7 +3,6 @@
 """User defined types about type "Decimal"."""
 
 from decimal import Decimal
-from typing import Dict, List
 
 DecPair = dict[str, Decimal]
 Decs = list[Decimal]

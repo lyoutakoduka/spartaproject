@@ -3,7 +3,6 @@
 """User defined types about type "datetime"."""
 
 from datetime import datetime
-from typing import Dict, List
 
 Times = list[datetime]
 TimePair = dict[str, datetime]

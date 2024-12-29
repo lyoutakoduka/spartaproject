@@ -3,7 +3,7 @@
 """User defined types about type "Path"."""
 
 from pathlib import Path
-from typing import Callable, Dict, Generator, List
+from typing import Callable, Generator
 
 PathGene = Generator[Path, None, None]
 PathPair = dict[str, Path]
