@@ -40,8 +40,11 @@ class ExecuteServer(UploadServer):
     def _get_filter_head(self) -> str:
         return "traceback".capitalize()
 
+    def _error_strings(self) -> Strs:
+        return ["most", "recent", "call", "last"]
+
     def _get_filter_inside(self) -> str:
-        return " ".join(["most", "recent", "call", "last"])
+        return " ".join(self._error_strings())
 
     def _get_filter_body(self) -> str:
         return "(" + self._get_filter_inside() + ")"
