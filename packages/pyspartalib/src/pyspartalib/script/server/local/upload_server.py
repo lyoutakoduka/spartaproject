@@ -96,10 +96,7 @@ class UploadServer(ConnectServer):
         return sftp.put(source, destination).st_size
 
     def _create_file(self, source: Path, destination: Path) -> bool:
-        texts: Strs = self._paths_to_strings(
-            source,
-            destination,
-        )
+        texts: Strs = self._paths_to_strings(source, destination)
 
         if (size_server := self._get_size_server(texts[0], texts[1])) is None:
             return False
