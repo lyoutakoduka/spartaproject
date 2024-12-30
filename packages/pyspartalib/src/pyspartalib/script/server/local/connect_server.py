@@ -155,13 +155,22 @@ class ConnectServer(PathServer, ProjectContext):
             channel.send(set_encoding(command))
             self._sleep()
 
-    def _correct_path(self, result: Strs) -> bool:
-        expected: Strs = [
+    def _get_server_paths(self) -> Strs:
+        return [
             str(self.get_path(root))
             for root in ["private_root", "public_root"]
         ]
 
-        return len({str(sorted(name)) for name in [expected, result]}) == 1
+    def _correct_path(self, result: Strs) -> bool:
+        return (
+            len(
+                {
+                    str(sorted(name))
+                    for name in [self._get_server_paths(), result]
+                }
+            )
+            == 1
+        )
 
     def _ssh_correct_path(self) -> bool:
         if texts := self.execute_ssh(["ls", "-1", "-p"]):
