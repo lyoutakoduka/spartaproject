@@ -29,6 +29,7 @@ def find_encoding(byte: bytes) -> str:
 
     Returns:
         str: Character encoding of the byte data.
+
     """
     encoding: str = "utf-8"
 

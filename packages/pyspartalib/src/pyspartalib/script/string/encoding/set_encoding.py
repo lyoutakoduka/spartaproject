@@ -15,6 +15,7 @@ def set_encoding(source: str, encoding: str | None = None) -> bytes:
 
     Returns:
         bytes: Converted Byte date.
+
     """
     if encoding is None:
         encoding = "utf-8"

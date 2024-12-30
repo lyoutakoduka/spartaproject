@@ -16,6 +16,7 @@ def set_decoding(byte: bytes, encoding: str | None = None) -> str:
 
     Returns:
         str: Decoded string.
+
     """
     if encoding is None:
         encoding = find_encoding(byte)
