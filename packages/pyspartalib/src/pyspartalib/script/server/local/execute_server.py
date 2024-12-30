@@ -42,6 +42,9 @@ class ExecuteServer(UploadServer):
             "python3",
         )
 
+    def __initialize_variables(self, version: str | None) -> None:
+        self._set_version_path(self._set_version(version))
+
     def _get_filter_head(self) -> str:
         return "traceback".capitalize()
 
@@ -134,4 +137,4 @@ class ExecuteServer(UploadServer):
             forward,
             platform,
         )
-        self._set_version_path(self._set_version(version))
+        self.__initialize_variables(version)
