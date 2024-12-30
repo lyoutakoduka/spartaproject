@@ -109,7 +109,8 @@ class UploadServer(ConnectServer):
         return False
 
     def _upload_directory(self, local: Path) -> None:
-        self._create_directory(self._path_with_tree(local))
+        if path := self._path_with_tree(local):
+            self._create_directory(path)
 
     def _upload_tree(self, source_path: Path, destination_local: Path) -> bool:
         self._upload_directory(destination_local)
