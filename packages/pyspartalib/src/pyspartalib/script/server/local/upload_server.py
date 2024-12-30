@@ -83,6 +83,9 @@ class UploadServer(ConnectServer):
 
         return None
 
+    def _paths_to_strings(self, source: Path, destination: Path) -> Strs:
+        return [path.as_posix() for path in [source, destination]]
+
     def _get_size_local(self, source_path: Path) -> int:
         return source_path.stat().st_size
 
@@ -95,9 +98,7 @@ class UploadServer(ConnectServer):
     def _create_file(self, source_path: Path, destination_path: Path) -> bool:
         size_local: int = self._get_size_local(source_path)
 
-        paths: Strs = [
-            path.as_posix() for path in [source_path, destination_path]
-        ]
+        paths: Strs = self._paths_to_strings(source_path, destination_path)
 
         if (size_server := self._get_size_server(paths[0], paths[1])) is None:
             return False
