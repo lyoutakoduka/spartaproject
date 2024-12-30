@@ -4,13 +4,10 @@
 
 from contextlib import redirect_stdout
 from io import StringIO
-from pathlib import Path
-from tempfile import TemporaryDirectory
 from typing import Callable
 
 from pyspartalib.context.callable_context import CP, CR
 from pyspartalib.script.decorator_generator import TransferFunction
-from pyspartalib.script.file.text.import_file import text_import
 
 
 class StdoutText(TransferFunction):
