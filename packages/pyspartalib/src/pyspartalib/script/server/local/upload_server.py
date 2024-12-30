@@ -116,8 +116,8 @@ class UploadServer(ConnectServer):
         return None
 
     def _upload_file(self, source: Path, destination_local: Path) -> bool:
-        if path := self._path_with_tree(destination_local):
-            return self._create_file(source, path)
+        if destination := self._path_with_tree(destination_local):
+            return self._create_file(source, destination)
 
         return False
 
