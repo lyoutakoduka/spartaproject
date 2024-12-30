@@ -42,6 +42,7 @@ class ExecuteServer(UploadServer):
             self.get_path("python_root"),
             self._set_version(version),
         )
+        self._error_identifier = self._get_error_identifier()
 
     def _get_filter_head(self) -> str:
         return "traceback".capitalize()
@@ -85,7 +86,7 @@ class ExecuteServer(UploadServer):
 
         result: Strs = self.execute_ssh(self._get_command(source_root))
 
-        if self._get_error_identifier() in result:
+        if self._error_identifier in result:
             raise ValueError
 
         return result
