@@ -77,8 +77,11 @@ class UploadServer(ConnectServer):
             for path_child in reversed(paths):
                 self._create_directory(path_child)
 
-    def _convert_remote_path(self, local: Path) -> Path:
-        return Path(self._get_remote_root(), local)
+    def _convert_remote_path(self, local: Path) -> Path | None:
+        if remote_root := self._get_remote_root():
+            return Path(remote_root, local)
+
+        return None
 
     def _create_file(self, source_path: Path, destination_path: Path) -> bool:
         status: stat_result = source_path.stat()
