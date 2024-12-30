@@ -164,9 +164,10 @@ class ConnectServer(PathServer, ProjectContext):
         return len({str(sorted(name)) for name in [expected, result]}) == 1
 
     def _ssh_correct_path(self) -> bool:
-        return self._correct_path(
-            [name[:-1] for name in self.execute_ssh(["ls", "-1", "-p"])],
-        )
+        if texts := self.execute_ssh(["ls", "-1", "-p"]):
+            return self._correct_path([name[:-1] for name in texts])
+
+        return False
 
     def _get_remote_path(self) -> str:
         return self.get_path_context("server")["remote_root.path"].as_posix()
