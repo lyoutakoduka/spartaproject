@@ -34,11 +34,11 @@ class ExecuteServer(UploadServer):
 
         return get_version_name(version)
 
-    def _get_version_path(self, runtime_root: Path, version: str) -> Path:
+    def _get_runtime_path(self, runtime_root: Path, version: str) -> Path:
         return Path(runtime_root, version, "bin", "python3")
 
     def __initialize_variables(self, version: str | None) -> None:
-        self._python_path: Path = self._get_version_path(
+        self._python_path: Path = self._get_runtime_path(
             self.get_path("python_root"),
             self._set_version(version),
         )
