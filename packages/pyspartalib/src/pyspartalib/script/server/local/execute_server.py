@@ -68,6 +68,9 @@ class ExecuteServer(UploadServer):
             ]
         ]
 
+    def _execute_command(self, source_root: Path) -> Strs | None:
+        return self.execute_ssh(self._get_command(source_root))
+
     def execute(self, source_root: Path) -> Strs | None:
         """Execute Python code you selected.
 
@@ -87,9 +90,7 @@ class ExecuteServer(UploadServer):
         if not self.upload(source_root):
             return None
 
-        if (
-            result := self.execute_ssh(self._get_command(source_root))
-        ) is None:
+        if (result := self._execute_command(source_root)) is None:
             return None
 
         if self._error_identifier in result:
