@@ -56,9 +56,11 @@ class UploadServer(ConnectServer):
 
         return tree
 
-    def _get_upload_tree(self, path: Path) -> Paths:
-        remote: Path = self._get_remote_root()
-        return self._get_server_tree(path, remote)
+    def _get_upload_tree(self, path: Path) -> Paths | None:
+        if remote := self._get_remote_root():
+            return self._get_server_tree(path, remote)
+
+        return None
 
     def _exists_directory(self, path: Path) -> bool:
         if sftp := self.get_sftp():
