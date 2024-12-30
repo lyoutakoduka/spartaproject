@@ -38,7 +38,7 @@ class ExecuteServer(UploadServer):
         return Path(runtime_root, version, "bin", "python3")
 
     def __initialize_variables(self, version: str | None) -> None:
-        self._python_path: Path = self._get_runtime_path(
+        self._runtime_path: Path = self._get_runtime_path(
             self.get_path("python_root"),
             self._set_version(version),
         )
@@ -59,7 +59,7 @@ class ExecuteServer(UploadServer):
         return [
             path.as_posix()
             for path in [
-                self._python_path,
+                self._runtime_path,
                 self.to_relative_path(source_root),
             ]
         ]
