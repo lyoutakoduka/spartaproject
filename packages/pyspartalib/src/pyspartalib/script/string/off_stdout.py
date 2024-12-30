@@ -3,6 +3,7 @@
 """Module to redirect stdout to string variable forcibly."""
 
 from contextlib import redirect_stdout
+from io import StringIO
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Callable
@@ -55,14 +56,12 @@ class StdoutText(TransferFunction):
         def _execute_function() -> CR:
             return function(*arguments, **key_arguments)
 
-        with TemporaryDirectory() as temporary_directory:
-            temporary_path: Path = Path(temporary_directory, "temporary")
+        file = StringIO()
 
-            with open(temporary_path, "w") as file:
-                with redirect_stdout(file):
-                    result: CR = _execute_function()
+        with redirect_stdout(file):
+            result: CR = _execute_function()
 
-            self.stdout: str = text_import(temporary_path)
+        self.stdout: str = file.getvalue()
 
         return result
 
