@@ -83,7 +83,7 @@ class UploadServer(ConnectServer):
 
         return None
 
-    def _get_file_size_local(self, source_path: Path) -> int:
+    def _get_size_local(self, source_path: Path) -> int:
         return source_path.stat().st_size
 
     def _get_size_server(self, source: str, destination: str) -> int | None:
@@ -93,7 +93,7 @@ class UploadServer(ConnectServer):
         return sftp.put(source, destination).st_size
 
     def _create_file(self, source_path: Path, destination_path: Path) -> bool:
-        size_local: int = self._get_file_size_local(source_path)
+        size_local: int = self._get_size_local(source_path)
 
         paths: Strs = [
             path.as_posix() for path in [source_path, destination_path]
