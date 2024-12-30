@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
-"""Wrapper module to separate pure python code and other.
+"""Interface module of "chardet".
 
-paramiko: chardet
+Separate pure python code and other.
 """
 
 from chardet import UniversalDetector

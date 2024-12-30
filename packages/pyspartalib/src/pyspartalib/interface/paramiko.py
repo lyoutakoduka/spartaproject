@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
-"""Wrapper module to separate pure python code and other.
+"""Interface module of "paramiko".
 
-paramiko: paramiko
+Separate pure python code and other.
 """
 
 from paramiko import (

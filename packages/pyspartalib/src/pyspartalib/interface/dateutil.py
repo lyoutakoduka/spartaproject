@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
-"""Wrapper module to separate pure python code and other.
+"""Interface module of "python-dateutil".
 
-dateutil: python-dateutil
+Separate pure python code and other.
 """
 
 from dateutil.tz import gettz
