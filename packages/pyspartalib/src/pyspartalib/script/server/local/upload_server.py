@@ -2,12 +2,10 @@
 
 """Module to upload file or directory by SFTP functionality."""
 
-from os import stat_result
 from pathlib import Path
 
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.context.extension.path_context import Paths
-from pyspartalib.interface.paramiko import SFTPAttributes
 from pyspartalib.script.path.iterate_directory import walk_iterator
 from pyspartalib.script.path.modify.current.get_relative import (
     get_relative,
