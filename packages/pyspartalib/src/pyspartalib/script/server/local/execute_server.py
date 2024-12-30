@@ -37,13 +37,6 @@ class ExecuteServer(UploadServer):
     def _get_runtime_path(self, runtime_root: Path, version: str) -> Path:
         return Path(runtime_root, version, "bin", "python3")
 
-    def __initialize_variables(self, version: str | None) -> None:
-        self._runtime_path: Path = self._get_runtime_path(
-            self.get_path("python_root"),
-            self._set_version(version),
-        )
-        self._error_identifier = self._get_error_identifier()
-
     def _get_filter_head(self) -> str:
         return "traceback".capitalize()
 
@@ -55,6 +48,13 @@ class ExecuteServer(UploadServer):
 
     def _get_error_identifier(self) -> str:
         return self._get_filter_head() + " " + self._get_filter_body() + ":"
+
+    def __initialize_variables(self, version: str | None) -> None:
+        self._runtime_path: Path = self._get_runtime_path(
+            self.get_path("python_root"),
+            self._set_version(version),
+        )
+        self._error_identifier = self._get_error_identifier()
 
     def _get_command(self, source_root: Path) -> Strs:
         return [
