@@ -87,7 +87,10 @@ class ExecuteServer(UploadServer):
         if not self.upload(source_root):
             return None
 
-        result: Strs = self.execute_ssh(self._get_command(source_root))
+        if (
+            result := self.execute_ssh(self._get_command(source_root))
+        ) is None:
+            return None
 
         if self._error_identifier in result:
             raise ValueError
