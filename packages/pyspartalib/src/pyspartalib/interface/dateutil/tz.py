@@ -5,4 +5,6 @@
 dateutil: python-dateutil
 """
 
-from dateutil.tz import gettz  # noqa: F401 # type: ignore
+from dateutil.tz import gettz
+
+__all__ = ["gettz"]

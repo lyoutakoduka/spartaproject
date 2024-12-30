@@ -6,9 +6,17 @@ paramiko: paramiko
 """
 
 from paramiko import (
-    AutoAddPolicy,  # noqa: F401 # type: ignore
-    Channel,  # noqa: F401 # type: ignore
-    SFTPAttributes,  # noqa: F401 # type: ignore
-    SFTPClient,  # noqa: F401 # type: ignore
-    SSHClient,  # noqa: F401 # type: ignore
+    AutoAddPolicy,
+    Channel,
+    SFTPAttributes,
+    SFTPClient,
+    SSHClient,
 )
+
+__all__ = [
+    "AutoAddPolicy",
+    "Channel",
+    "SFTPAttributes",
+    "SFTPClient",
+    "SSHClient",
+]

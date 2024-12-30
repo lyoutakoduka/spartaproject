@@ -5,4 +5,6 @@
 paramiko: chardet
 """
 
-from chardet import UniversalDetector  # noqa: F401 # type: ignore
+from chardet import UniversalDetector
+
+__all__ = ["UniversalDetector"]
