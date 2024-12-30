@@ -58,7 +58,7 @@ class GroupedCharacters:
         index_begin: int = 0
 
         for i in range(len(indices_span)):
-            index_begin += 0 if 0 == i else indices_span[i - 1]
+            index_begin += 0 if i == 0 else indices_span[i - 1]
             indices_begin += [index_begin]
 
         return indices_begin

@@ -19,7 +19,7 @@ class ConvertSingle:
 
     def _get_tables_pair(self) -> Strs3:
         return [
-            GroupedCharacters(multiple=(0 == i)).get_merged_tables()
+            GroupedCharacters(multiple=(i == 0)).get_merged_tables()
             for i in range(2)
         ]
 
