@@ -118,15 +118,27 @@ class UploadServer(ConnectServer):
         if path := self._path_with_tree(local):
             self._create_directory(path)
 
+    def _get_destination_child(
+        self,
+        source: Path,
+        destination_local: Path,
+        source_child: Path,
+    ) -> Path:
+        return Path(
+            destination_local,
+            get_relative(source_child, root_path=source),
+        )
+
     def _upload_tree(self, source: Path, destination_local: Path) -> bool:
         self._upload_directory(destination_local)
 
         for source_child in walk_iterator(source, depth=1):
             if not self._upload(
                 source_child,
-                Path(
+                self._get_destination_child(
+                    source,
                     destination_local,
-                    get_relative(source_child, root_path=source),
+                    source_child,
                 ),
             ):
                 return False
