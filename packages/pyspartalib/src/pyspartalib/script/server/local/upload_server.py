@@ -69,9 +69,8 @@ class UploadServer(ConnectServer):
         return path.name in sftp.listdir(path.parent.as_posix())
 
     def _create_directory(self, path: Path) -> None:
-        if sftp := self.get_sftp():
-            if not self._exists_directory(path):
-                sftp.mkdir(path.as_posix())
+        if (sftp := self.get_sftp()) and (not self._exists_directory(path)):
+            sftp.mkdir(path.as_posix())
 
     def _create_upload_tree(self, path: Path) -> None:
         for path_child in reversed(self._get_upload_tree(path)):
