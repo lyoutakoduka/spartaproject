@@ -161,16 +161,13 @@ class ConnectServer(PathServer, ProjectContext):
             for root in ["private_root", "public_root"]
         ]
 
+    def _get_sorted_paths(self, result: Strs) -> Strs:
+        return [
+            str(sorted(name)) for name in [self._get_server_paths(), result]
+        ]
+
     def _correct_path(self, result: Strs) -> bool:
-        return (
-            len(
-                {
-                    str(sorted(name))
-                    for name in [self._get_server_paths(), result]
-                }
-            )
-            == 1
-        )
+        return len(set(self._get_sorted_paths(result))) == 1
 
     def _ssh_correct_path(self) -> bool:
         if texts := self.execute_ssh(["ls", "-1", "-p"]):
