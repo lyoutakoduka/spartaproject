@@ -30,6 +30,7 @@ class SplitIdentifier:
 
         Returns:
             str: The split identifier, default is under bar.
+
         """
         return self._identifier
 
@@ -44,6 +45,7 @@ class SplitIdentifier:
 
         Returns:
             str: String with the split identifier removed.
+
         """
         return text.strip(self.get_identifier())
 
@@ -60,6 +62,7 @@ class SplitIdentifier:
 
         Returns:
             str: Converted string.
+
         """
         return "".join([self._replace_other(single) for single in text])
 
@@ -71,6 +74,7 @@ class SplitIdentifier:
 
         Returns:
             str: Replaced string.
+
         """
         identifier: str = self.get_identifier()
         return identifier.join(
@@ -89,6 +93,7 @@ class SplitIdentifier:
 
         Returns:
             str: String that the split identifier is switched.
+
         """
         return text.replace(self.get_identifier(), identifier)
 
@@ -99,5 +104,6 @@ class SplitIdentifier:
             identifier (str | None, optional): Defaults to None.
                 You can specify the split identifier by argument "identifier",
                     and default split identifier is character "_".
+
         """
         self.__initialize_variables(identifier)

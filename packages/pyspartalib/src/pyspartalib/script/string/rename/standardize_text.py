@@ -22,7 +22,7 @@ class StandardizeText(SplitIdentifier):
         strip: bool = False,
         replace: bool = False,
     ) -> str:
-        """Function to standardize string for key of dictionary.
+        """Standardize string for key of dictionary.
 
         Args:
             text (str): Text you want to standardize.
@@ -45,6 +45,7 @@ class StandardizeText(SplitIdentifier):
 
         Returns:
             str: Standardize text.
+
         """
         if lower:
             text = self._convert_lower(text)
@@ -70,5 +71,6 @@ class StandardizeText(SplitIdentifier):
             identifier (str | None, optional): Defaults to None.
                 You can specify the split identifier by argument "identifier".
                 It's used for argument "identifier" of class "SplitIdentifier".
+
         """
         self.__initialize_super_class(identifier)

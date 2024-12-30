@@ -114,6 +114,7 @@ class GroupedCharacters:
 
         Returns:
             CharacterTable: Character tables.
+
         """
         return self._restructure_tables(self._create_character_tables())
 
@@ -124,6 +125,7 @@ class GroupedCharacters:
 
         Returns:
             Strs2: Character tables listed by default order.
+
         """
         table: CharacterTable = self.get_table()
         return [
@@ -138,6 +140,7 @@ class GroupedCharacters:
 
         Returns:
             Strs: Characters group.
+
         """
         return ["\\", "/", ":", "*", "?", '"', "<", ">", "|"]
 
@@ -148,5 +151,6 @@ class GroupedCharacters:
             multiple (bool, optional): Defaults to False.
                 True if you want to select character tables
                     which is constructed by multiple byte.
+
         """
         self.__initialize_variables(multiple)

@@ -40,6 +40,7 @@ class ConvertSingle:
 
         Returns:
             str: Converted single byte characters.
+
         """
         # Type Trans is necessary.
         translated: Trans = str.maketrans(

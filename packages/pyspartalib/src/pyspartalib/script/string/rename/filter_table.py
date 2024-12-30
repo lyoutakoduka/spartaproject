@@ -44,6 +44,7 @@ class FilterTable(GroupedCharacters):
 
         Returns:
             bool: True if all characters are exists in character tables.
+
         """
         for single in text:
             if single not in self._serialized:
@@ -61,6 +62,7 @@ class FilterTable(GroupedCharacters):
                 True if you want to select character tables
                     which is constructed by multiple byte.
                 It's used for argument "multiple" of class "GroupedCharacters".
+
         """
         self.__initialize_super_class(multiple)
         self.__initialize_variables()
