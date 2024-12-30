@@ -139,16 +139,14 @@ class ConnectServer(PathServer, ProjectContext):
         return self._extract_result(text, 0, self._split_identifier + "h")
 
     def _receive_ssh(self) -> Strs | None:
-        if (text := self._receive_byte()) is None:
-            return None
+        if (
+            (text := self._receive_byte())
+            and (text := self._get_left_removed(text))
+            and (text := self._get_right_removed(text))
+        ):
+            return self._split_result(text)
 
-        if (text := self._get_left_removed(text)) is None:
-            return None
-
-        if (text := self._get_right_removed(text)) is None:
-            return None
-
-        return self._split_result(text)
+        return None
 
     def _execute_ssh(self, commands: Strs) -> None:
         command: str = " ".join(commands) + "\n"
