@@ -17,7 +17,7 @@ def _strip_line(source_text: str) -> LinePairs:
         count_right: int = len(striped_right)
         space_size: int = 0
 
-        if 0 < count_right:
+        if count_right > 0:
             striped_left: str = striped_right.lstrip()
             count_left: int = len(striped_left)
             space_size = count_right - count_left
@@ -44,7 +44,7 @@ def _clip_line(empty_size: int, line_attributes: LinePairs) -> Strs:
 
 
 def _strip_lines(lines: Strs) -> Strs:
-    striped_lines: Strs = list(takewhile(lambda line: 0 == len(line), lines))
+    striped_lines: Strs = list(takewhile(lambda line: len(line) == 0, lines))
     index: int = len(striped_lines)
     return lines[index:]
 
@@ -72,7 +72,7 @@ def format_indent(source_text: str, stdout: bool = False) -> str:
 
     counts.remove(0)
 
-    if 0 == len(counts):
+    if len(counts) == 0:
         return ""
 
     empty_size: int = counts[0]
