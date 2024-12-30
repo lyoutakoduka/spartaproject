@@ -2,9 +2,9 @@
 
 """Module to redirect stdout to string variable forcibly."""
 
+from collections.abc import Callable
 from contextlib import redirect_stdout
 from io import StringIO
-from typing import Callable
 
 from pyspartalib.context.callable_context import CP, CR
 from pyspartalib.script.decorator_generator import TransferFunction
