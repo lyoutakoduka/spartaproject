@@ -95,12 +95,12 @@ class UploadServer(ConnectServer):
 
         return sftp.put(source, destination).st_size
 
-    def _create_file(self, source_path: Path, destination_path: Path) -> bool:
-        size_local: int = self._get_size_local(source_path)
+    def _create_file(self, source: Path, destination: Path) -> bool:
+        size_local: int = self._get_size_local(source)
 
         texts: Strs = self._paths_to_strings(
-            source_path,
-            destination_path,
+            source,
+            destination,
         )
 
         if (size_server := self._get_size_server(texts[0], texts[1])) is None:
@@ -115,9 +115,9 @@ class UploadServer(ConnectServer):
 
         return None
 
-    def _upload_file(self, source_path: Path, destination_local: Path) -> bool:
+    def _upload_file(self, source: Path, destination_local: Path) -> bool:
         if path := self._path_with_tree(destination_local):
-            return self._create_file(source_path, path)
+            return self._create_file(source, path)
 
         return False
 
@@ -125,26 +125,26 @@ class UploadServer(ConnectServer):
         if path := self._path_with_tree(local):
             self._create_directory(path)
 
-    def _upload_tree(self, source_path: Path, destination_local: Path) -> bool:
+    def _upload_tree(self, source: Path, destination_local: Path) -> bool:
         self._upload_directory(destination_local)
 
-        for source_child in walk_iterator(source_path, depth=1):
+        for source_child in walk_iterator(source, depth=1):
             if not self._upload(
                 source_child,
                 Path(
                     destination_local,
-                    get_relative(source_child, root_path=source_path),
+                    get_relative(source_child, root_path=source),
                 ),
             ):
                 return False
 
         return True
 
-    def _upload(self, source_path: Path, destination_local: Path) -> bool:
-        if source_path.is_dir():
-            return self._upload_tree(source_path, destination_local)
+    def _upload(self, source: Path, destination_local: Path) -> bool:
+        if source.is_dir():
+            return self._upload_tree(source, destination_local)
 
-        return self._upload_file(source_path, destination_local)
+        return self._upload_file(source, destination_local)
 
     def upload(self, source: Path, destination: Path | None = None) -> bool:
         """Upload file or directory by SFTP functionality.
