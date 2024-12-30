@@ -35,12 +35,14 @@ class UploadServer(ConnectServer):
             platform=platform,
         )
 
-    def _get_remote_root(self) -> Path:
-        if sftp := self.get_sftp():
-            if root := sftp.getcwd():
-                return Path(root)
+    def _get_remote_root(self) -> Path | None:
+        if (sftp := self.get_sftp()) is None:
+            return None
 
-        return Path()
+        if (root := sftp.getcwd()) is None:
+            return None
+
+        return Path(root)
 
     def _get_upload_tree(self, path: Path) -> Paths:
         remote: Path = self._get_remote_root()
