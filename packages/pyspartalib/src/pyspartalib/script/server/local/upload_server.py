@@ -86,6 +86,12 @@ class UploadServer(ConnectServer):
     def _get_file_size_local(self, source_path: Path) -> int:
         return source_path.stat().st_size
 
+    def _get_size_server(self, source: str, destination: str) -> int | None:
+        if (sftp := self.get_sftp()) is None:
+            return False
+
+        return sftp.put(source, destination).st_size
+
     def _create_file(self, source_path: Path, destination_path: Path) -> bool:
         size_local: int = self._get_file_size_local(source_path)
 
@@ -93,11 +99,10 @@ class UploadServer(ConnectServer):
             path.as_posix() for path in [source_path, destination_path]
         ]
 
-        if sftp := self.get_sftp():
-            result: SFTPAttributes = sftp.put(paths[0], paths[1])
-            return size_local == result.st_size
+        if (size_server := self._get_size_server(paths[0], paths[1])) is None:
+            return False
 
-        return False
+        return size_local == size_server
 
     def _path_with_tree(self, local: Path) -> Path | None:
         if path := self._convert_remote_path(local):
