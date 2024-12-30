@@ -34,7 +34,7 @@ class ExecuteServer(UploadServer):
 
         return get_version_name(version)
 
-    def _set_version_path(self, version: str) -> None:
+    def _get_version_path(self, version: str) -> None:
         self._python_path: Path = Path(
             self.get_path("python_root"),
             version,
@@ -43,7 +43,7 @@ class ExecuteServer(UploadServer):
         )
 
     def __initialize_variables(self, version: str | None) -> None:
-        self._set_version_path(self._set_version(version))
+        self._get_version_path(self._set_version(version))
 
     def _get_filter_head(self) -> str:
         return "traceback".capitalize()
