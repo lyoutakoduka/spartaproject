@@ -49,6 +49,10 @@ def _strip_lines(lines: Strs) -> Strs:
     return lines[index:]
 
 
+def _get_line_counts(line_attributes: LinePairs) -> Ints:
+    return [line_attribute["count"] for line_attribute in line_attributes]
+
+
 def format_indent(source_text: str, stdout: bool = False) -> str:
     """Remove white space at the beginning of a sentence.
 
@@ -63,13 +67,7 @@ def format_indent(source_text: str, stdout: bool = False) -> str:
 
     """
     line_attributes: LinePairs = _strip_line(source_text)
-
-    counts: Ints = [
-        line_attribute["count"] for line_attribute in line_attributes
-    ]
-
-    counts = sorted(set(counts))
-
+    counts: Ints = sorted(set(_get_line_counts(line_attributes)))
     counts.remove(0)
 
     if len(counts) == 0:
