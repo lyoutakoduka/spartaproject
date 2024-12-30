@@ -60,6 +60,7 @@ def format_indent(source_text: str, stdout: bool = False) -> str:
 
     Returns:
         str: Text which is removed white space.
+
     """
     line_attributes: LinePairs = _strip_line(source_text)
 

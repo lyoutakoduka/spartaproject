@@ -28,29 +28,28 @@ class StdoutText(TransferFunction):
 
         If you want to redirect stdout of following function "message".
 
-        '''
-        def message() -> None:
-            print("test")
-        '''
+            def message() -> None:
+                print("test")
 
         Use decorator generated from this class as below.
 
-        '''
-        stdout_text = StdoutText()
+            stdout_text = StdoutText()
 
-        @stdout_text.decorator
-        def message() -> None:
-            print("test")
-        '''
+            @stdout_text.decorator
+            def message() -> None:
+                print("test")
 
         Args:
-            function (Callable[CP, CR]):
-                Arguments of the function designated by decorator.
-                Value of argument is automatically assigned when created.
+            function (Callable[CP, CR]): The function to be decorated.
+
+            *arguments (CP.args): Variable size arguments.
+
+            **key_arguments (bool, optional): Variable size keyword arguments.
 
         Returns:
             CR: Return value of the function designated by decorator.
                 Value is automatically stored when executing the function.
+
         """
 
         def _execute_function() -> CR:
@@ -72,5 +71,6 @@ class StdoutText(TransferFunction):
 
         Returns:
             str: String generated from stdout.
+
         """
         return self.stdout

@@ -11,6 +11,7 @@ def convert_integer(index: str) -> int | None:
 
     Returns:
         int | None: Converted index from text.
+
     """
     try:
         return int(index)

@@ -6,7 +6,7 @@ from pyspartalib.context.default.string_context import Strs
 
 
 def temporary_text(count: int, digit: int) -> Strs:
-    """Function to show simple numbers as string.
+    """Show simple numbers as string.
 
     Args:
         count (int): Count of numbers which is start from zero.
