@@ -23,7 +23,7 @@ class NameElements(SplitIdentifier):
 
     def _has_index(self, base_name: str) -> int | None:
         return convert_integer(
-            sub("[a-z]", "", base_name.split(self.get_identifier())[-1])
+            sub("[a-z]", "", base_name.split(self.get_identifier())[-1]),
         )
 
     def _get_name(self, base_name: str) -> str:
@@ -91,7 +91,7 @@ class NameElements(SplitIdentifier):
 
         """
         return self.get_identifier().join(
-            [base_name["name"], str(base_name["index"]).zfill(digit)]
+            [base_name["name"], str(base_name["index"]).zfill(digit)],
         )
 
     def __init__(self, identifier: str | None = None) -> None:

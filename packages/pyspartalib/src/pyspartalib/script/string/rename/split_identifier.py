@@ -78,7 +78,7 @@ class SplitIdentifier:
         """
         identifier: str = self.get_identifier()
         return identifier.join(
-            [line for line in text.split(identifier) if len(line) > 0]
+            [line for line in text.split(identifier) if len(line) > 0],
         )
 
     def switch_identifier(self, text: str, identifier: str) -> str:

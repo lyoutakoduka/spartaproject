@@ -41,7 +41,11 @@ class GroupedCharacters:
         self._special_tables: Strs = self._get_special_tables(multiple)
 
     def _struct_character_table(
-        self, upper: Strs, lower: Strs, number: Strs, other: Strs
+        self,
+        upper: Strs,
+        lower: Strs,
+        number: Strs,
+        other: Strs,
     ) -> CharacterTable:
         return {
             "upper": upper,
@@ -69,12 +73,15 @@ class GroupedCharacters:
         return [
             self._create_character_table(begin + self._index_base, span)
             for begin, span in zip(
-                self._get_indices_begin(indices_span), indices_span
+                self._get_indices_begin(indices_span),
+                indices_span,
             )
         ]
 
     def _merge_string_tables(
-        self, indices: Ints, character_tables: Strs2
+        self,
+        indices: Ints,
+        character_tables: Strs2,
     ) -> Strs:
         merged_table: Strs = []
 

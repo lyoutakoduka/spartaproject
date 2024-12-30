@@ -27,7 +27,8 @@ class ConvertSingle:
         return {
             multiple: single
             for multiple_table, single_table in zip(
-                tables_pair[0], tables_pair[1]
+                tables_pair[0],
+                tables_pair[1],
             )
             for multiple, single in zip(multiple_table, single_table)
         }
@@ -44,6 +45,6 @@ class ConvertSingle:
         """
         # Type Trans is necessary.
         translated: Trans = str.maketrans(
-            self._get_link_table(self._get_tables_pair())
+            self._get_link_table(self._get_tables_pair()),
         )
         return text.translate(translated)
