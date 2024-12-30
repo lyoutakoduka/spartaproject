@@ -83,15 +83,19 @@ class UploadServer(ConnectServer):
 
         return None
 
+    def _get_file_size(self, source_path: Path) -> int:
+        return source_path.stat().st_size
+
     def _create_file(self, source_path: Path, destination_path: Path) -> bool:
-        status: stat_result = source_path.stat()
+        file_size: int = self._get_file_size(source_path)
+
         paths: Strs = [
             path.as_posix() for path in [source_path, destination_path]
         ]
 
         if sftp := self.get_sftp():
             result: SFTPAttributes = sftp.put(paths[0], paths[1])
-            return status.st_size == result.st_size
+            return file_size == result.st_size
 
         return False
 
