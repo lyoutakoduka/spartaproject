@@ -63,11 +63,10 @@ class UploadServer(ConnectServer):
         return None
 
     def _exists_directory(self, path: Path) -> bool:
-        if sftp := self.get_sftp():
-            if path.name in sftp.listdir(path.parent.as_posix()):
-                return True
+        if (sftp := self.get_sftp()) is None:
+            return False
 
-        return False
+        return path.name in sftp.listdir(path.parent.as_posix())
 
     def _create_directory(self, path: Path) -> None:
         if sftp := self.get_sftp():
