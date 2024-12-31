@@ -61,7 +61,7 @@ def _get_decimal_count_texts(
 
     if 0 < digit:
         second_numbers += [
-            _get_micro_second_text(second, counts, digit, digit_limit)
+            _get_micro_second_text(second, counts, digit, digit_limit),
         ]
 
     return ".".join(second_numbers) + "s"
