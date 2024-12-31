@@ -2,7 +2,7 @@
 
 """Module to get latest date time of file or directory as time object."""
 
-from datetime import UTC, datetime, timedelta
+from datetime import UTC, datetime
 from decimal import Decimal
 from pathlib import Path
 
