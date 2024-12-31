@@ -39,12 +39,14 @@ def _get_micro_second_text(
     digit: int,
     digit_limit: int,
 ) -> str:
+    empty: str = "0"
     count_text: str = str(counts["micro"])
 
-    if count_text != "0":
+    if count_text != empty:
         count_text = str(second).split(".")[-1]
 
-    count_text += "0" * digit_limit
+    count_text += empty * digit_limit
+
     return count_text[:digit]
 
 
