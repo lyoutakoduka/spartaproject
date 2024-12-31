@@ -30,7 +30,7 @@ def _check_arguments_size(lefts: BoolType, rights: BoolType) -> None:
 def _get_sorted_flags(sorted_keys: Strs2, flags_pair: BoolPairs) -> Bools2:
     return [
         [flags[key] for key in keys]
-        for keys, flags in zip(sorted_keys, flags_pair, strict=False)
+        for keys, flags in zip(sorted_keys, flags_pair, strict=True)
     ]
 
 
