@@ -17,13 +17,17 @@ def _convert_timestamp(time: float, jst: bool) -> datetime:
 
 
 def _add_latest_times(
-    path: Path, time: datetime, latest_times: TimePair
+    path: Path,
+    time: datetime,
+    latest_times: TimePair,
 ) -> None:
     latest_times[str(path)] = time
 
 
 def _get_latest_times(
-    walk_generator: PathGene, access: bool = False, jst: bool = False
+    walk_generator: PathGene,
+    access: bool = False,
+    jst: bool = False,
 ) -> TimePair:
     latest_times: TimePair = {}
 
@@ -47,7 +51,9 @@ def get_invalid_time() -> datetime:
 
 
 def get_latest(
-    path: Path, access: bool = False, jst: bool = False
+    path: Path,
+    access: bool = False,
+    jst: bool = False,
 ) -> datetime:
     """Get latest date time of file or directory as time object.
 
@@ -74,7 +80,9 @@ def get_latest(
 
 
 def get_directory_latest(
-    walk_generator: PathGene, access: bool = False, jst: bool = False
+    walk_generator: PathGene,
+    access: bool = False,
+    jst: bool = False,
 ) -> TimePair:
     """Get array of latest date time in selected directory as time object.
 
