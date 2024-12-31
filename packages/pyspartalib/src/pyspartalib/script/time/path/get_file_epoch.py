@@ -21,16 +21,16 @@ def _get_update_date(path: Path) -> Decimal:
     return _to_decimal(path.stat().st_atime)
 
 
+def _get_epoch_source(path: Path, access: bool) -> Decimal:
+    return _get_access_date(path) if access else _get_update_date(path)
+
+
 def _get_source() -> IntPair2:
     return {
         "year": {"year": 1980, "month": 1, "day": 1},
         "hour": {"hour": 0, "minute": 0, "second": 0, "micro": 0},
         "zone": {"hour": 0, "minute": 0},
     }
-
-
-def _get_epoch_source(path: Path, access: bool) -> Decimal:
-    return _get_access_date(path) if access else _get_update_date(path)
 
 
 def get_file_epoch(path: Path, access: bool = False) -> Decimal | None:
