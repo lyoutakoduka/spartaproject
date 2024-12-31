@@ -54,6 +54,7 @@ def _sort_formatted(result_all: StrPair2) -> Strs:
     for result_group, result_types in zip(
         _get_result_groups(),
         _get_result_types(),
+        strict=True,
     ):
         sorted_times += _sort_result(result_all[result_group], result_types)
 
