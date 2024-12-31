@@ -22,6 +22,7 @@ def create_temporary_file(
 
     Returns:
         Path: Path of created empty temporary file.
+
     """
     if file_name is None:
         file_name = "temporary"

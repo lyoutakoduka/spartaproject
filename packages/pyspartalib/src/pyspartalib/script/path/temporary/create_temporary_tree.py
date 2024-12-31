@@ -89,6 +89,7 @@ def create_temporary_tree(
 
     Returns:
         Path: "root_path" is returned.
+
     """
     enable_deep: bool = 1 <= tree_deep <= 10
     enable_weight: bool = 1 <= tree_weight <= 10
