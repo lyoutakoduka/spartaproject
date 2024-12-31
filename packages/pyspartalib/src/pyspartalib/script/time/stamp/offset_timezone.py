@@ -2,12 +2,12 @@
 
 """Module to offset date time by current time zone to UTC time."""
 
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta, timezone
 
 
 def _offset(time: datetime, offset: timedelta) -> datetime:
     time_offset: datetime = time - offset
-    return time_offset.replace(tzinfo=timezone.utc)
+    return time_offset.replace(tzinfo=UTC)
 
 
 def _add_zone(time: datetime) -> datetime:
