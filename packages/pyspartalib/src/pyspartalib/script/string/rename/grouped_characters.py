@@ -10,10 +10,10 @@ from pyspartalib.context.typed.user_context import CharacterTable
 class GroupedCharacters:
     """Class to get character tables constructed by multiple or single byte."""
 
-    def _get_index_base(self, multiple: bool) -> int:
+    def _get_index_base(self) -> int:
         index_base: int = 33
 
-        if multiple:
+        if self._multiple:
             index_base += 65248
 
         return index_base
@@ -29,16 +29,17 @@ class GroupedCharacters:
             "'": ["\u2019", "\u2018"],
         }
 
-    def _get_special_tables(self, multiple: bool) -> Strs:
+    def _get_special_tables(self) -> Strs:
         return [
-            value if multiple else key
+            value if self._multiple else key
             for key, values in sorted(self._get_special_pair().items())
             for value in values
         ]
 
     def __initialize_variables(self, multiple: bool) -> None:
-        self._index_base: int = self._get_index_base(multiple)
-        self._special_tables: Strs = self._get_special_tables(multiple)
+        self._multiple: bool = multiple
+        self._index_base: int = self._get_index_base()
+        self._special_tables: Strs = self._get_special_tables()
 
     def _struct_character_table(
         self,
