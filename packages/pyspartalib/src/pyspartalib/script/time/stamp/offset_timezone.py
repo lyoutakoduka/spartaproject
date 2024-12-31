@@ -30,6 +30,7 @@ def offset_time(time: datetime) -> datetime:
 
     Returns:
         datetime: Converted date time to UTC time.
+
     """
     offset: timedelta | None = time.utcoffset()
 

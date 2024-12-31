@@ -24,5 +24,6 @@ def is_same_stamp(left: TimePair, right: TimePair) -> bool:
 
     Returns:
         bool: True if two dictionaries are same value.
+
     """
     return is_same_json(*[_get_stamp_json(times) for times in [left, right]])

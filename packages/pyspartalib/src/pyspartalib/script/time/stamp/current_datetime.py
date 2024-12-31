@@ -21,6 +21,7 @@ def get_current_time(override: bool = False, jst: bool = False) -> datetime:
             It's used for argument "jst" of function "time_from_timestamp".
 
     Returns:
-        datetime: _description_
+        datetime: Current date time.
+
     """
     return time_from_timestamp(TimerSelect(override=override)(), jst=jst)
