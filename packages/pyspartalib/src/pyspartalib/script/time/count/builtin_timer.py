@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 """Module to count time like a timer."""
 
@@ -65,8 +64,8 @@ class TimerSelect:
             if you want to get current date time represented by epoch time.
 
         >>> import time
-        >>> timer = TimerSelect() # Create class instance.
-        >>> timer() # Use __call___ method, and get current date time.
+        >>> timer = TimerSelect()  # Create class instance.
+        >>> timer()  # Use __call___ method, and get current date time.
         1704010500
         >>> time.sleep(1)
         >>> timer()
@@ -77,7 +76,7 @@ class TimerSelect:
         >>> timer = TimerSelect(override=True, interval=Decimal("0.1"))
         >>> timer()
         1680307200
-        >>> timer.increase_timer() # Increase timer count by 0.1.
+        >>> timer.increase_timer()  # Increase timer count by 0.1.
         >>> timer()
         1680307200.1
         """

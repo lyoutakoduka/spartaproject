@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 """Module to count timer and get timer count by readable format."""
 
@@ -93,22 +92,22 @@ class LogTimer:
             if you want to get current date time represented by readable time.
 
         >>> import time
-        >>> timer = LogTimer() # Create class instance.
-        >>> timer.get_readable_time() # Because still in default interval.
+        >>> timer = LogTimer()  # Create class instance.
+        >>> timer.get_readable_time()  # Because still in default interval.
         None
-        >>> time.sleep(1) # Wait 1 second.
-        >>> timer.get_readable_time() # Timer count can shown.
+        >>> time.sleep(1)  # Wait 1 second.
+        >>> timer.get_readable_time()  # Timer count can shown.
         1.0s
 
         If in the test environment.
 
         >>> timer = LogTimer()
         >>> timer.restart(override=True)
-        >>> timer.increase_timer() # Increase timer count by 0.5.
-        >>> timer.get_readable_time() # Because still in default interval.
+        >>> timer.increase_timer()  # Increase timer count by 0.5.
+        >>> timer.get_readable_time()  # Because still in default interval.
         None
-        >>> timer.increase_timer() # Increase timer count by 0.5.
-        >>> timer.get_readable_time() # Timer count can shown.
+        >>> timer.increase_timer()  # Increase timer count by 0.5.
+        >>> timer.get_readable_time()  # Timer count can shown.
         1.0s
         """
         if timer_interval is None:
