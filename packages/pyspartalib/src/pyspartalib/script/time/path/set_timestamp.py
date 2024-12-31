@@ -18,6 +18,10 @@ def _convert_timestamp(time: datetime) -> Decimal:
     return Decimal(str(offset_time(time).timestamp()))
 
 
+def _get_file_date_time(path: Path, time: datetime, access: bool) -> Floats:
+    return convert_float_array(_get_path_times(path, time, access))
+
+
 def _get_path_times(path: Path, time: datetime, access: bool) -> Decs:
     path_times: Decs = [_convert_timestamp(time)]
 
@@ -45,7 +49,7 @@ def set_latest(path: Path, time: datetime, access: bool = False) -> Path:
         Path: Path of file or directory you set latest date time.
 
     """
-    numbers: Floats = convert_float_array(_get_path_times(path, time, access))
+    numbers: Floats = _get_file_date_time(path, time, access)
     utime(path, (numbers[0], numbers[1]))
 
     return path
