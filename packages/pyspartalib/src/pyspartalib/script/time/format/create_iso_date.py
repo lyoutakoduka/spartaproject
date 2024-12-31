@@ -44,7 +44,9 @@ def _get_group_identifiers() -> Strs:
 
 
 def _get_group_string(
-    identifier: str, key_types: Strs, iso_group: StrPair
+    identifier: str,
+    key_types: Strs,
+    iso_group: StrPair,
 ) -> str:
     return identifier.join([iso_group[key_type] for key_type in key_types])
 
@@ -53,7 +55,9 @@ def _get_group_strings(string_elements: StrPair2) -> StrPair:
     return {
         group: _get_group_string(identifier, key_types, string_elements[group])
         for group, key_types, identifier in zip(
-            _get_groups(), _get_types(), _get_type_identifiers()
+            _get_groups(),
+            _get_types(),
+            _get_type_identifiers(),
         )
         if group in string_elements
     }

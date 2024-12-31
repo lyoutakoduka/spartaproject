@@ -19,7 +19,8 @@ def _format_digit(number: int, digit: int) -> str:
 
 
 def _get_formatted_types(
-    digit_group: IntPair, number_pair: IntPair
+    digit_group: IntPair,
+    number_pair: IntPair,
 ) -> StrPair:
     return {
         number_type: _format_digit(number, digit_group[number_type])
@@ -31,7 +32,8 @@ def _get_formatted_types(
 def _get_formatted_groups(iso_date: IntPair2, iso_digit: IntPair2) -> StrPair2:
     return {
         number_group: _get_formatted_types(
-            iso_digit[number_group], number_pair
+            iso_digit[number_group],
+            number_pair,
         )
         for number_group, number_pair in iso_date.items()
         if number_group in iso_digit
