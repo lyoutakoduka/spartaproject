@@ -77,6 +77,10 @@ def _recursive_tree(
         _recursive_tree(directory_name, tree_deep, deep - 1, weight)
 
 
+def _inside_span(tree_deep: int) -> bool:
+    return 1 <= tree_deep <= 10
+
+
 def create_temporary_tree(
     root_path: Path,
     tree_deep: int = 1,
@@ -97,8 +101,8 @@ def create_temporary_tree(
         Path: "root_path" is returned.
 
     """
-    enable_deep: bool = 1 <= tree_deep <= 10
-    enable_weight: bool = 1 <= tree_weight <= 10
+    enable_deep: bool = _inside_span(tree_deep)
+    enable_weight: bool = _inside_span(tree_weight)
 
     if enable_deep and enable_weight:
         _recursive_tree(root_path, tree_deep, tree_deep, tree_weight)
