@@ -75,6 +75,13 @@ def _get_integer_count_texts(counts: IntPair) -> Strs:
     ]
 
 
+def _get_time_elements(second: Decimal, digit: int, counts: IntPair) -> Strs:
+    return [
+        *_get_integer_count_texts(counts),
+        _get_decimal_count_texts(second, counts, digit),
+    ]
+
+
 def readable_time(second: Decimal, digit: int = 0) -> str:
     """Convert time from number to readable string.
 
@@ -92,9 +99,4 @@ def readable_time(second: Decimal, digit: int = 0) -> str:
         datetime.min + timedelta(seconds=float(second)),
     )
 
-    return " ".join(
-        [
-            *_get_integer_count_texts(counts),
-            _get_decimal_count_texts(second, counts, digit),
-        ],
-    )
+    return " ".join(_get_time_elements(second, digit, counts))
