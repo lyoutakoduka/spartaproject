@@ -78,7 +78,8 @@ def _recursive_tree(
 
 
 def _inside_span(tree_deep: int) -> bool:
-    return 1 <= tree_deep <= 10
+    max_deep: int = 10
+    return 1 <= tree_deep <= max_deep
 
 
 def create_temporary_tree(
