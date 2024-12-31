@@ -3,7 +3,6 @@
 """Module to get date time about selected file or directory as epoch format."""
 
 from decimal import Decimal
-from os import stat_result
 from pathlib import Path
 
 from pyspartalib.context.default.integer_context import IntPair2
