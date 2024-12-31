@@ -6,8 +6,7 @@ from datetime import UTC, datetime, timedelta
 
 
 def _offset(time: datetime, offset: timedelta) -> datetime:
-    time_offset: datetime = time - offset
-    return time_offset.replace(tzinfo=UTC)
+    return (time - offset).replace(tzinfo=UTC)
 
 
 def _add_zone(time: datetime) -> datetime:
@@ -32,9 +31,7 @@ def offset_time(time: datetime) -> datetime:
         datetime: Converted date time to UTC time.
 
     """
-    offset: timedelta | None = time.utcoffset()
-
-    if offset is None:
+    if (offset := time.utcoffset()) is None:
         return _add_zone(time)
 
     if timedelta(0) == offset:
