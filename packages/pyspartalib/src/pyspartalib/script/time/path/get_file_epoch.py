@@ -10,6 +10,10 @@ from pyspartalib.context.default.integer_context import IntPair2
 from pyspartalib.script.time.format.create_iso_date import get_iso_epoch
 
 
+def _to_decimal(number: float) -> Decimal:
+    return Decimal(str(number))
+
+
 def _get_source() -> IntPair2:
     return {
         "year": {"year": 1980, "month": 1, "day": 1},
