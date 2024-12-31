@@ -41,7 +41,7 @@ def _get_micro_second_text(
 ) -> str:
     count_text: str = str(counts["micro"])
 
-    if "0" != count_text:
+    if count_text != "0":
         count_text = str(second).split(".")[-1]
 
     count_text += "0" * digit_limit
@@ -59,7 +59,7 @@ def _get_decimal_count_texts(
     if digit_limit < digit:
         digit = digit_limit
 
-    if 0 < digit:
+    if digit > 0:
         second_numbers += [
             _get_micro_second_text(second, counts, digit, digit_limit),
         ]
@@ -71,7 +71,7 @@ def _get_integer_count_texts(counts: IntPair) -> Strs:
     return [
         str(counts[time_type]) + time_type[0]
         for time_type in ["year", "month", "day", "hour", "minute"]
-        if 0 < counts[time_type]
+        if counts[time_type] > 0
     ]
 
 
