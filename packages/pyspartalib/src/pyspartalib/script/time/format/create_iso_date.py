@@ -58,6 +58,7 @@ def _get_group_strings(string_elements: StrPair2) -> StrPair:
             _get_groups(),
             _get_types(),
             _get_type_identifiers(),
+            strict=True,
         )
         if group in string_elements
     }
@@ -81,7 +82,11 @@ def _add_micro(string_elements: StrPair2, group_strings: StrPair) -> None:
 def _get_datetime_elements(group_strings: StrPair) -> Strs:
     iso_strings: Strs = []
 
-    for group, identifier in zip(_get_groups(), _get_group_identifiers()):
+    for group, identifier in zip(
+        _get_groups(),
+        _get_group_identifiers(),
+        strict=True,
+    ):
         if group in group_strings:
             iso_strings += [group_strings[group], identifier]
 
