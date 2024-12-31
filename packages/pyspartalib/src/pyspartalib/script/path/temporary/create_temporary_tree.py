@@ -13,6 +13,10 @@ from pyspartalib.script.file.json.export_json import Json, json_export
 from pyspartalib.script.file.text.export_file import text_export
 
 
+def _get_file_path(file_root: Path, file_suffix: str) -> Path:
+    return Path(file_root, "file").with_suffix("." + file_suffix)
+
+
 def _get_line(index_digit: int) -> str:
     line_width: int = 10
     return "-" * (line_width - index_digit)
@@ -28,7 +32,7 @@ def _sample_text(root: Path, weight: int) -> None:
 
     source: str = "\n".join(_get_text(weight, index_digit, line_text))
 
-    text_export(Path(root, "file.txt"), source)
+    text_export(_get_file_path(root, "txt"), source)
 
 
 def _sample_config(root: Path, weight: int) -> None:
@@ -43,7 +47,7 @@ def _sample_config(root: Path, weight: int) -> None:
         for i in range(weight)
     }
 
-    config_export(Path(root, "file.ini"), source_pairs)
+    config_export(_get_file_path(root, "ini"), source_pairs)
 
 
 def _sample_json(root: Path, weight: int) -> None:
@@ -60,7 +64,7 @@ def _sample_json(root: Path, weight: int) -> None:
 
         return line_text
 
-    json_export(Path(root, "file.json"), function(weight))
+    json_export(_get_file_path(root, "json"), function(weight))
 
 
 def _recursive_tree(
