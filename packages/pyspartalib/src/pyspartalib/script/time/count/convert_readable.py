@@ -92,7 +92,9 @@ def readable_time(second: Decimal, digit: int = 0) -> str:
         datetime.min + timedelta(seconds=float(second)),
     )
 
-    count_texts: Strs = _get_integer_count_texts(counts)
-    count_texts += [_get_decimal_count_texts(second, counts, digit)]
-
-    return " ".join(count_texts)
+    return " ".join(
+        [
+            *_get_integer_count_texts(counts),
+            _get_decimal_count_texts(second, counts, digit),
+        ],
+    )
