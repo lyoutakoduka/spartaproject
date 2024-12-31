@@ -18,6 +18,10 @@ def _get_access_date(path: Path) -> Decimal:
     return _to_decimal(path.stat().st_atime)
 
 
+def _get_update_date(path: Path) -> Decimal:
+    return _to_decimal(path.stat().st_atime)
+
+
 def _get_source() -> IntPair2:
     return {
         "year": {"year": 1980, "month": 1, "day": 1},
