@@ -60,7 +60,7 @@ def walk_iterator(
     suffix: str = "*",
     glob_filter: str | None = None,
 ) -> PathGene:
-    """Function to get list of contents in the directory you search.
+    """Get list of contents in the directory you search.
 
     Args:
         root (Path): Path of directory you  want to get contents.
@@ -89,6 +89,7 @@ def walk_iterator(
 
     Yields:
         Iterator[PathGene]: Path of file or directory found by search.
+
     """
     for path in _iterate_tree(
         root, depth, file, directory, suffix, glob_filter
