@@ -2,7 +2,7 @@
 
 """Module to count time like a timer."""
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime, timezone
 from decimal import Decimal
 
 from pyspartalib.script.decimal.initialize_decimal import initialize_decimal
@@ -23,7 +23,7 @@ class TimerSelect:
         self._interval: Decimal = interval
 
     def _get_current(self) -> Decimal:
-        return Decimal(str(datetime.now(timezone.utc).timestamp()))
+        return Decimal(str(datetime.now(UTC).timestamp()))
 
     def _initialize_current(self) -> None:
         self._count: Decimal = Decimal("0")
