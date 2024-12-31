@@ -11,7 +11,7 @@ from pyspartalib.script.string.rename.grouped_characters import (
 class SplitIdentifier:
     """Class to convert string by using the split identifier."""
 
-    def _initialize_identifier(self, identifier: str | None) -> str:
+    def _get_identifier(self, identifier: str | None) -> str:
         if identifier is None:
             return "_"
 
@@ -21,7 +21,7 @@ class SplitIdentifier:
         return GroupedCharacters().get_table()["other"]
 
     def __initialize_variables(self, identifier: str | None) -> None:
-        self._identifier: str = self._initialize_identifier(identifier)
+        self._identifier: str = self._get_identifier(identifier)
         self._other_table: Strs = self._get_other_table()
 
     def _replace_other(self, single: str) -> str:
