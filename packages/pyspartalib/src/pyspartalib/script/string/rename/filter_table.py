@@ -46,11 +46,7 @@ class FilterTable(GroupedCharacters):
             bool: True if all characters are exists in character tables.
 
         """
-        for single in text:
-            if single not in self._serialized:
-                return False
-
-        return True
+        return all(single in self._serialized for single in text)
 
     def __init__(self, multiple: bool = False) -> None:
         """Initialize super class and variables.
