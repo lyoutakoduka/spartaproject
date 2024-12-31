@@ -55,9 +55,7 @@ def _get_decimal_count_texts(
 ) -> str:
     second_numbers: Strs = [str(counts["second"])]
     digit_limit: int = 6
-
-    if digit_limit < digit:
-        digit = digit_limit
+    digit = min(digit_limit, digit)
 
     if digit > 0:
         second_numbers += [
