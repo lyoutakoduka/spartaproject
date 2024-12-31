@@ -85,9 +85,6 @@ class UploadServer(ConnectServer):
     def _paths_to_strings(self, source: Path, destination: Path) -> Strs:
         return [path.as_posix() for path in [source, destination]]
 
-    def _get_size_local(self, path: Path) -> int:
-        return path.stat().st_size
-
     def _get_size_server(self, source: str, destination: str) -> int | None:
         if (sftp := self.get_sftp()) is None:
             return False
