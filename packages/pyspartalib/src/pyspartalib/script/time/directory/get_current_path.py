@@ -92,5 +92,6 @@ def get_working_path(override: bool = False, jst: bool = False) -> Path:
 
     Returns:
         Path: Path including string of current date time.
+
     """
     return Path(*_sort_formatted(_get_formatted(override, jst)))

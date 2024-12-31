@@ -12,6 +12,12 @@ def _get_hour(jst: bool) -> str:
 def get_initial_time_path(jst: bool = False) -> Path:
     """Get path represent April 1, 2023.
 
-    You can select time zone from UTC or JST.
+    Args:
+        jst (bool, optional): Defaults to False.
+            You can select time zone from UTC or JST.
+
+    Returns:
+        Path: Path including date time information.
+
     """
     return Path("2023", "04", "01", _get_hour(jst), "00", "00", "000000")
