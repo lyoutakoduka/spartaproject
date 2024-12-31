@@ -17,10 +17,12 @@ class SplitIdentifier:
 
         self._identifier: str = identifier
 
+    def _get_other_table(self) -> Strs:
+        return GroupedCharacters().get_table()["other"]
+
     def __initialize_variables(self, identifier: str | None) -> None:
         self._initialize_identifier(identifier)
-
-        self._other_table: Strs = GroupedCharacters().get_table()["other"]
+        self._other_table: Strs = self._get_other_table()
 
     def _replace_other(self, single: str) -> str:
         return self.get_identifier() if single in self._other_table else single
