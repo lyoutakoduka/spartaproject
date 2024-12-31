@@ -4,7 +4,7 @@
 
 from pathlib import Path
 
-from pyspartalib.context.default.string_context import StrPair2
+from pyspartalib.context.default.string_context import StrPair2, Strs
 from pyspartalib.script.directory.create_directory import (
     create_directory_array,
 )
@@ -13,14 +13,16 @@ from pyspartalib.script.file.json.export_json import Json, json_export
 from pyspartalib.script.file.text.export_file import text_export
 
 
+def _get_text(weight: int, index_digit: int, line_text: str) -> Strs:
+    return [str(i).zfill(index_digit) + line_text for i in range(weight)]
+
+
 def _sample_text(root: Path, weight: int) -> None:
     line_width: int = 10
     index_digit: int = len(str(weight))
     line_text: str = "-" * (line_width - index_digit)
 
-    source: str = "\n".join(
-        [str(i).zfill(index_digit) + line_text for i in range(weight)],
-    )
+    source: str = "\n".join(_get_text(weight, index_digit, line_text))
 
     text_export(Path(root, "file.txt"), source)
 
