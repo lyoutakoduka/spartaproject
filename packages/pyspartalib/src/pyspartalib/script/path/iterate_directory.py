@@ -13,10 +13,7 @@ def _create_filter(
     if not file and not directory:
         return ""
 
-    if depth > 0:
-        glob_filter = "*/" * (depth - 1)
-    else:
-        glob_filter = "**/"
+    glob_filter = "*/" * (depth - 1) if depth > 0 else "**/"
 
     if file and directory:
         glob_filter += "*"
@@ -91,7 +88,4 @@ def walk_iterator(
         Iterator[PathGene]: Path of file or directory found by search.
 
     """
-    for path in _iterate_tree(
-        root, depth, file, directory, suffix, glob_filter
-    ):
-        yield path
+    yield from _iterate_tree(root, depth, file, directory, suffix, glob_filter)
