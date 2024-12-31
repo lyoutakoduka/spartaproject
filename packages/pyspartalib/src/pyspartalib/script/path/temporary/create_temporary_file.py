@@ -9,7 +9,8 @@ from pyspartalib.script.file.json.export_json import json_export
 
 
 def create_temporary_file(
-    file_root: Path, file_name: str | None = None
+    file_root: Path,
+    file_name: str | None = None,
 ) -> Path:
     """Create empty temporary file as json format.
 

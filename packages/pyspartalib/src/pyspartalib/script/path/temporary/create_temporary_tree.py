@@ -19,7 +19,7 @@ def _sample_text(root: Path, weight: int) -> None:
     line_text: str = "-" * (line_width - index_digit)
 
     source: str = "\n".join(
-        [str(i).zfill(index_digit) + line_text for i in range(weight)]
+        [str(i).zfill(index_digit) + line_text for i in range(weight)],
     )
 
     text_export(Path(root, "file.txt"), source)
@@ -58,7 +58,10 @@ def _sample_json(root: Path, weight: int) -> None:
 
 
 def _recursive_tree(
-    root: Path, tree_deep: int, deep: int, weight: int
+    root: Path,
+    tree_deep: int,
+    deep: int,
+    weight: int,
 ) -> None:
     create_directory_array([root, Path(root, "empty")])
 
@@ -68,13 +71,16 @@ def _recursive_tree(
 
     if 1 < deep:
         directory_name: Path = Path(
-            root, "dir" + str(tree_deep - deep + 1).zfill(3)
+            root,
+            "dir" + str(tree_deep - deep + 1).zfill(3),
         )
         _recursive_tree(directory_name, tree_deep, deep - 1, weight)
 
 
 def create_temporary_tree(
-    root_path: Path, tree_deep: int = 1, tree_weight: int = 1
+    root_path: Path,
+    tree_deep: int = 1,
+    tree_weight: int = 1,
 ) -> Path:
     """Create temporary files and directories tree.
 
