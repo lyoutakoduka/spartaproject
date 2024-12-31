@@ -2,7 +2,7 @@
 
 """Module to get latest date time of file or directory as time object."""
 
-from datetime import datetime
+from datetime import UTC, datetime, timedelta
 from decimal import Decimal
 from pathlib import Path
 
@@ -47,7 +47,7 @@ def get_invalid_time() -> datetime:
         datetime: Invalid time date.
 
     """
-    return datetime(1, 1, 1)
+    return datetime(1, 1, 1, tzinfo=UTC)
 
 
 def get_latest(
