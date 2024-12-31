@@ -13,7 +13,7 @@ def _create_filter(
     if not file and not directory:
         return ""
 
-    if 0 < depth:
+    if depth > 0:
         glob_filter = "*/" * (depth - 1)
     else:
         glob_filter = "**/"
@@ -46,7 +46,7 @@ def _iterate_tree(
     if default_filter == glob_filter:
         glob_filter = _create_filter(depth, file, directory, suffix)
 
-    if 0 < len(glob_filter):
+    if len(glob_filter) > 0:
         for path in root.glob(glob_filter):
             if root != path:
                 yield path
