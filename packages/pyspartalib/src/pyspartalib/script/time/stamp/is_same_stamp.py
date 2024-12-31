@@ -10,7 +10,7 @@ from pyspartalib.script.file.json.convert_to_json import multiple_to_json
 
 def _get_stamp_json(times: TimePair) -> Json:
     return multiple_to_json(
-        {path_text: time.isoformat() for path_text, time in times.items()}
+        {path_text: time.isoformat() for path_text, time in times.items()},
     )
 
 
