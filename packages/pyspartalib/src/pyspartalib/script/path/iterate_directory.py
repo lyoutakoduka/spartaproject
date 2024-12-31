@@ -8,7 +8,10 @@ from pyspartalib.context.extension.path_context import PathGene
 
 
 def _create_filter(
-    depth: int, file: bool, directory: bool, suffix: str
+    depth: int,
+    file: bool,
+    directory: bool,
+    suffix: str,
 ) -> str:
     if not file and not directory:
         return ""
