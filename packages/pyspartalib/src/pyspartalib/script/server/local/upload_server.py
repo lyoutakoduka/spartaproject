@@ -11,6 +11,7 @@ from pyspartalib.script.path.modify.current.get_relative import (
     get_relative,
     is_relative,
 )
+from pyspartalib.script.path.status.get_statistic import get_file_size
 from pyspartalib.script.server.local.connect_server import ConnectServer
 
 
@@ -99,7 +100,7 @@ class UploadServer(ConnectServer):
         if (size_server := self._get_size_server(texts[0], texts[1])) is None:
             return False
 
-        return self._get_size_local(source) == size_server
+        return get_file_size(source) == size_server
 
     def _path_with_tree(self, local: Path) -> Path | None:
         if path := self._convert_remote_path(local):
