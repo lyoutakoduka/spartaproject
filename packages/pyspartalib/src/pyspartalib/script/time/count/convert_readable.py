@@ -27,14 +27,17 @@ def _get_datetime_counts(counter: datetime) -> IntPair:
             "minute": counter.minute,
             "second": counter.second,
             "micro": counter.microsecond,
-        }
+        },
     )
 
     return counts
 
 
 def _get_micro_second_text(
-    second: Decimal, counts: IntPair, digit: int, digit_limit: int
+    second: Decimal,
+    counts: IntPair,
+    digit: int,
+    digit_limit: int,
 ) -> str:
     count_text: str = str(counts["micro"])
 
@@ -46,7 +49,9 @@ def _get_micro_second_text(
 
 
 def _get_decimal_count_texts(
-    second: Decimal, counts: IntPair, digit: int
+    second: Decimal,
+    counts: IntPair,
+    digit: int,
 ) -> str:
     second_numbers: Strs = [str(counts["second"])]
     digit_limit: int = 6
@@ -83,7 +88,7 @@ def readable_time(second: Decimal, digit: int = 0) -> str:
         str: Time converted to readable string.
     """
     counts: IntPair = _get_datetime_counts(
-        datetime.min + timedelta(seconds=float(second))
+        datetime.min + timedelta(seconds=float(second)),
     )
 
     count_texts: Strs = _get_integer_count_texts(counts)
