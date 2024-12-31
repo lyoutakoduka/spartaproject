@@ -13,14 +13,18 @@ from pyspartalib.script.file.json.export_json import Json, json_export
 from pyspartalib.script.file.text.export_file import text_export
 
 
+def _get_line(index_digit: int) -> str:
+    line_width: int = 10
+    return "-" * (line_width - index_digit)
+
+
 def _get_text(weight: int, index_digit: int, line_text: str) -> Strs:
     return [str(i).zfill(index_digit) + line_text for i in range(weight)]
 
 
 def _sample_text(root: Path, weight: int) -> None:
-    line_width: int = 10
     index_digit: int = len(str(weight))
-    line_text: str = "-" * (line_width - index_digit)
+    line_text: str = _get_line(index_digit)
 
     source: str = "\n".join(_get_text(weight, index_digit, line_text))
 
