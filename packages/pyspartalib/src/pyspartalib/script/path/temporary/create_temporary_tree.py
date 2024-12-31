@@ -26,11 +26,15 @@ def _get_text(weight: int, index_digit: int, line_text: str) -> Strs:
     return [str(i).zfill(index_digit) + line_text for i in range(weight)]
 
 
+def _merged_text(weight: int, index_digit: int, line_text: str) -> str:
+    return "\n".join(_get_text(weight, index_digit, line_text))
+
+
 def _sample_text(root: Path, weight: int) -> None:
     index_digit: int = len(str(weight))
     line_text: str = _get_line(index_digit)
 
-    source: str = "\n".join(_get_text(weight, index_digit, line_text))
+    source: str = _merged_text(weight, index_digit, line_text)
 
     text_export(_get_file_path(root, "txt"), source)
 
