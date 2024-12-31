@@ -12,13 +12,16 @@ from pyspartalib.script.decimal.initialize_decimal import initialize_decimal
 initialize_decimal()
 
 
-def _get_datetime_counts(counter: datetime) -> IntPair:
-    counts: IntPair = {
+def _get_year(counter: datetime) -> IntPair:
+    return {
         "year": counter.year,
         "month": counter.month,
         "day": counter.day,
     }
 
+
+def _get_datetime_counts(counter: datetime) -> IntPair:
+    counts: IntPair = _get_year(counter)
     counts = {key: count - 1 for key, count in counts.items()}
 
     counts.update(
