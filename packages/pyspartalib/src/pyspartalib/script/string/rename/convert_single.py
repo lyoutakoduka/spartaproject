@@ -48,8 +48,8 @@ class ConvertSingle:
             str: Converted single byte characters.
 
         """
-        # Type Trans is necessary.
-        translated: Trans = str.maketrans(
-            self._get_link_table(self._get_tables_pair()),
+        return text.translate(
+            str.maketrans(
+                self._get_link_table(self._get_tables_pair()),
+            ),
         )
-        return text.translate(translated)
