@@ -65,13 +65,15 @@ def _get_group_strings(string_elements: StrPair2) -> StrPair:
 
 
 def _get_micro(iso_date: StrPair2) -> str | None:
-    if "hour" in iso_date:
-        hour_date = iso_date["hour"]
+    if "hour" not in iso_date:
+        return None
 
-        if "micro" in hour_date:
-            return hour_date["micro"]
+    hour_date = iso_date["hour"]
 
-    return None
+    if "micro" not in hour_date:
+        return None
+
+    return hour_date["micro"]
 
 
 def _add_micro(string_elements: StrPair2, group_strings: StrPair) -> None:
