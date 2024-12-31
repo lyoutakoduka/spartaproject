@@ -29,10 +29,12 @@ def _get_day(counter: datetime) -> IntPair:
     }
 
 
+def _reduce_datetime(time: IntPair) -> IntPair:
+    return {key: count - 1 for key, count in time.items()}
+
+
 def _get_datetime_counts(counter: datetime) -> IntPair:
-    return {
-        key: count - 1 for key, count in _get_year(counter).items()
-    } | _get_day(counter)
+    return _reduce_datetime(_get_year(counter)) | _get_day(counter)
 
 
 def _get_micro_second_text(
