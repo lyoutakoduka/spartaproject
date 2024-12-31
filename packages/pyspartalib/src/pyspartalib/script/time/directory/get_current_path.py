@@ -52,7 +52,8 @@ def _sort_formatted(result_all: StrPair2) -> Strs:
     sorted_times: Strs = []
 
     for result_group, result_types in zip(
-        _get_result_groups(), _get_result_types()
+        _get_result_groups(),
+        _get_result_types(),
     ):
         sorted_times += _sort_result(result_all[result_group], result_types)
 
@@ -61,7 +62,7 @@ def _sort_formatted(result_all: StrPair2) -> Strs:
 
 def _get_formatted(override: bool, jst: bool) -> StrPair2:
     return format_iso_date(
-        _get_source_all(get_current_time(override=override, jst=jst))
+        _get_source_all(get_current_time(override=override, jst=jst)),
     )
 
 
