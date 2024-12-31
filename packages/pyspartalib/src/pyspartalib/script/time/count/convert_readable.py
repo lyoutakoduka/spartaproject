@@ -86,6 +86,7 @@ def readable_time(second: Decimal, digit: int = 0) -> str:
 
     Returns:
         str: Time converted to readable string.
+
     """
     counts: IntPair = _get_datetime_counts(
         datetime.min + timedelta(seconds=float(second)),

@@ -42,6 +42,7 @@ class TimerSelect:
 
         Returns:
             Decimal: Current time of timer.
+
         """
         if self._override:
             return self._count
@@ -54,15 +55,6 @@ class TimerSelect:
         interval: Decimal | None = None,
     ) -> None:
         """Initialize variables and timer count.
-
-        Args:
-            override (bool, optional): Defaults to False.
-                Override initial time count to "2023/4/1:12:00:00-00 (AM)".
-                The argument is mainly used for test.
-
-            interval (Decimal | None, optional): Defaults to None.
-                Interval of timer count, use 1 if None.
-                The argument is mainly used for test.
 
         Use this class as like follow script,
             if you want to get current date time represented by epoch time.
@@ -83,6 +75,16 @@ class TimerSelect:
         >>> timer.increase_timer()  # Increase timer count by 0.1.
         >>> timer()
         1680307200.1
+
+        Args:
+            override (bool, optional): Defaults to False.
+                Override initial time count to "2023/4/1:12:00:00-00 (AM)".
+                The argument is mainly used for test.
+
+            interval (Decimal | None, optional): Defaults to None.
+                Interval of timer count, use 1 if None.
+                The argument is mainly used for test.
+
         """
         if interval is None:
             interval = Decimal("1")

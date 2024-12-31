@@ -53,6 +53,7 @@ class LogTimer:
             str | None:
                 Timer count is returned one time at every specific interval.
                 Return "None" if timer count is in interval.
+
         """
         elapsed: Decimal = self._timer_current() - self._start_time
 
@@ -73,21 +74,6 @@ class LogTimer:
         digit: int = 1,
     ) -> None:
         """Restart timer functionality, it's become initial status.
-
-        Args:
-            override (bool, optional): Defaults to False.
-                Override initial timer count to "2023/4/1:12:00:00-00 (AM)".
-                Use for argument "override" on class "TimerSelect".
-
-            timer_interval (Decimal | None, optional): Defaults to None.
-                Interval of timer count.
-                Use for argument "interval" on class "TimerSelect".
-
-            interval (Decimal | None, optional): Defaults to None.
-                Interval which is use for showing timer count.
-
-            digit (int, optional): Defaults to 1.
-                Digit of decimal point about timer count when showing.
 
         Use this class as like follow script,
             if you want to get current date time represented by readable time.
@@ -110,6 +96,22 @@ class LogTimer:
         >>> timer.increase_timer()  # Increase timer count by 0.5.
         >>> timer.get_readable_time()  # Timer count can shown.
         1.0s
+
+        Args:
+            override (bool, optional): Defaults to False.
+                Override initial timer count to "2023/4/1:12:00:00-00 (AM)".
+                Use for argument "override" on class "TimerSelect".
+
+            timer_interval (Decimal | None, optional): Defaults to None.
+                Interval of timer count.
+                Use for argument "interval" on class "TimerSelect".
+
+            interval (Decimal | None, optional): Defaults to None.
+                Interval which is use for showing timer count.
+
+            digit (int, optional): Defaults to 1.
+                Digit of decimal point about timer count when showing.
+
         """
         if timer_interval is None:
             timer_interval = Decimal("0.5")
