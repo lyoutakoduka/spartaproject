@@ -20,18 +20,19 @@ def _get_year(counter: datetime) -> IntPair:
     }
 
 
+def _get_day(counter: datetime) -> IntPair:
+    return {
+        "hour": counter.hour,
+        "minute": counter.minute,
+        "second": counter.second,
+        "micro": counter.microsecond,
+    }
+
+
 def _get_datetime_counts(counter: datetime) -> IntPair:
     counts: IntPair = _get_year(counter)
     counts = {key: count - 1 for key, count in counts.items()}
-
-    counts.update(
-        {
-            "hour": counter.hour,
-            "minute": counter.minute,
-            "second": counter.second,
-            "micro": counter.microsecond,
-        },
-    )
+    counts.update(_get_day(counter))
 
     return counts
 
