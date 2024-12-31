@@ -43,6 +43,7 @@ def set_latest(path: Path, time: datetime, access: bool = False) -> Path:
 
     Returns:
         Path: Path of file or directory you set latest date time.
+
     """
     numbers: Floats = convert_float_array(_get_path_times(path, time, access))
     utime(path, (numbers[0], numbers[1]))

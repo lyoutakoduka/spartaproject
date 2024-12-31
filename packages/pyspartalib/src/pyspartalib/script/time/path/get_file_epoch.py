@@ -35,6 +35,7 @@ def get_file_epoch(path: Path, access: bool = False) -> Decimal | None:
     Returns:
         Decimal | None: Latest date time according to condition you select.
             Return "None" if date time is broke.
+
     """
     time_epoch: Decimal = _get_epoch_source(path, access)
 

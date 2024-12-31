@@ -41,6 +41,7 @@ def get_invalid_time() -> datetime:
 
     Returns:
         datetime: Invalid time date.
+
     """
     return datetime(1, 1, 1)
 
@@ -64,6 +65,7 @@ def get_latest(
     Returns:
         datetime: Latest date time as time object.
             Return unique invalid time if time you got is broke is exists.
+
     """
     if time := get_file_epoch(path, access=access):
         return _convert_timestamp(float(time), jst=jst)
@@ -89,5 +91,6 @@ def get_directory_latest(
     Returns:
         TimePair: Dictionary constructed by string path and latest date time.
             Return unique invalid time if time you got is broke is exists.
+
     """
     return _get_latest_times(walk_generator, access, jst)
