@@ -2,10 +2,14 @@
 
 """Module to convert time data from epoch format to datetime object."""
 
-from datetime import datetime
+from datetime import datetime, tzinfo
 from decimal import Decimal
 
 from pyspartalib.interface.dateutil import gettz
+
+
+def _select_timestamp(jst: bool = False) -> tzinfo | None:
+    return gettz("Asia/Tokyo" if jst else "UTC")
 
 
 def time_from_timestamp(timestamp: Decimal, jst: bool = False) -> datetime:
@@ -21,7 +25,4 @@ def time_from_timestamp(timestamp: Decimal, jst: bool = False) -> datetime:
         datetime: Converted datetime object.
 
     """
-    return datetime.fromtimestamp(
-        float(timestamp),
-        tz=gettz("Asia/Tokyo" if jst else "UTC"),
-    )
+    return datetime.fromtimestamp(float(timestamp), tz=_select_timestamp(jst))
