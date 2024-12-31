@@ -46,7 +46,7 @@ def _sample_json(root: Path, weight: int) -> None:
     line_text: str = "-" * width
 
     def function(count: int) -> Json:
-        if 0 < count:
+        if count > 0:
             return {
                 str(i).zfill(section_digit): function(count - 1)
                 for i in range(weight)
@@ -69,7 +69,7 @@ def _recursive_tree(
     _sample_config(root, weight)
     _sample_json(root, weight)
 
-    if 1 < deep:
+    if deep > 1:
         directory_name: Path = Path(
             root,
             "dir" + str(tree_deep - deep + 1).zfill(3),
