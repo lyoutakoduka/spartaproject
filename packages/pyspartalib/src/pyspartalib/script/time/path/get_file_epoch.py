@@ -31,8 +31,7 @@ def _get_source() -> IntPair2:
 
 
 def _get_epoch_source(path: Path, access: bool) -> Decimal:
-    status: stat_result = path.stat()
-    return Decimal(str(status.st_atime if access else status.st_mtime))
+    return _get_access_date(path) if access else _get_update_date(path)
 
 
 def get_file_epoch(path: Path, access: bool = False) -> Decimal | None:
