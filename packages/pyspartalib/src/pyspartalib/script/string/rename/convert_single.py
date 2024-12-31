@@ -29,8 +29,13 @@ class ConvertSingle:
             for multiple_table, single_table in zip(
                 tables_pair[0],
                 tables_pair[1],
+                strict=True,
             )
-            for multiple, single in zip(multiple_table, single_table)
+            for multiple, single in zip(
+                multiple_table,
+                single_table,
+                strict=True,
+            )
         }
 
     def convert(self, text: str) -> str:

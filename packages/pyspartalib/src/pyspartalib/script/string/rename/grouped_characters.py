@@ -75,6 +75,7 @@ class GroupedCharacters:
             for begin, span in zip(
                 self._get_indices_begin(indices_span),
                 indices_span,
+                strict=True,
             )
         ]
 
