@@ -136,6 +136,7 @@ def get_iso_string(iso_date: IntPair2) -> str:
 
     Returns:
         str: Get converted date time string.
+
     """
     string_elements: StrPair2 = format_iso_date(iso_date)
     group_strings: StrPair = _get_group_strings(string_elements)
@@ -169,6 +170,7 @@ def get_iso_time(iso_date: IntPair2) -> datetime:
 
     Returns:
         datetime: Get converted date time object.
+
     """
     return datetime.fromisoformat(get_iso_string(iso_date))
 
@@ -196,5 +198,6 @@ def get_iso_epoch(iso_date: IntPair2) -> Decimal:
 
     Returns:
         Decimal: Get converted date time as UNIX epoch.
+
     """
     return Decimal(str(get_iso_time(iso_date).timestamp()))

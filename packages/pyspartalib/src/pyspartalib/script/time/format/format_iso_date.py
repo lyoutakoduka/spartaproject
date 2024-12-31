@@ -80,9 +80,10 @@ def format_iso_date(iso_date: IntPair2) -> StrPair2:
     9. minute - zone: 2
 
     Args:
-        iso_date_pair (IntPair2): Date time element you want to convert.
+        iso_date (IntPair2): Date time element you want to convert.
 
     Returns:
         StrPair2: Get converted date time element structured by type string.
+
     """
     return _get_formatted_groups(iso_date, _get_iso_digit())
