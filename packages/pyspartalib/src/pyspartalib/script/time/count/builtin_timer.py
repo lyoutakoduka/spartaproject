@@ -2,7 +2,7 @@
 
 """Module to count time like a timer."""
 
-from datetime import UTC, datetime, timezone
+from datetime import UTC, datetime
 from decimal import Decimal
 
 from pyspartalib.script.decimal.initialize_decimal import initialize_decimal
