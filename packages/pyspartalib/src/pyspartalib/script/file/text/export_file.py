@@ -30,7 +30,9 @@ def byte_export(export_path: Path, source: bytes) -> Path:
 
 
 def text_export(
-    export_path: Path, source: str, encoding: str | None = None
+    export_path: Path,
+    source: str,
+    encoding: str | None = None,
 ) -> Path:
     """Export text file.
 
