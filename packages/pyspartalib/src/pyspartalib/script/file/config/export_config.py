@@ -37,7 +37,7 @@ def _cleanup_key_default(source_config: Config) -> Config:
 
 
 def config_dump(source_config: Config, compress: bool = False) -> str:
-    """Function to convert data used for configuration file to text.
+    """Convert data used for configuration file to text.
 
     Return following triple quoted text if argument "source_config" is...
 
@@ -67,6 +67,7 @@ def config_dump(source_config: Config, compress: bool = False) -> str:
 
     Returns:
         str: Converted text used for configuration file.
+
     """
     cleanup = _cleanup_key_default(source_config)
 
@@ -82,7 +83,7 @@ def config_dump(source_config: Config, compress: bool = False) -> str:
 def config_export(
     export_path: Path, source_config: Config, compress: bool = False
 ) -> Path:
-    """Function to export data used for configuration file.
+    """Export data used for configuration file.
 
     Args:
         export_path (Path): Path which is used for exporting data.
@@ -96,6 +97,7 @@ def config_export(
 
     Returns:
         Path: Path of data which is finally exported.
+
     """
     return text_export(
         export_path, config_dump(source_config, compress=compress)

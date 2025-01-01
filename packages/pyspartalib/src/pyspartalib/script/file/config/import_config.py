@@ -60,6 +60,7 @@ def config_load(source: str) -> Config:
 
     Returns:
         Config: Configuration data converted to user defined type.
+
     """
     config = ConfigParser()
     config.read_string(source)
@@ -79,5 +80,6 @@ def config_import(import_path: Path, encoding: str | None = None) -> Config:
 
     Returns:
         Config: Configuration data converted to user defined type.
+
     """
     return config_load(text_import(import_path, encoding=encoding))
