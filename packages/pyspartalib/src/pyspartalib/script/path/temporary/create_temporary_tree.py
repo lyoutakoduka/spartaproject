@@ -34,7 +34,7 @@ def _get_text(weight: int, index_digit: int, line_text: str) -> Strs:
     return [_fill_index(i, index_digit) + line_text for i in range(weight)]
 
 
-def _get_text_config(
+def _get_config_section(
     weight: int,
     section_digit: int,
     line_text: str,
@@ -44,7 +44,7 @@ def _get_text_config(
 
 def _get_config(weight: int, section_digit: int, line_text: str) -> StrPair2:
     return {
-        _fill_index(i, section_digit): _get_text_config(
+        _fill_index(i, section_digit): _get_config_section(
             weight,
             section_digit,
             line_text,
