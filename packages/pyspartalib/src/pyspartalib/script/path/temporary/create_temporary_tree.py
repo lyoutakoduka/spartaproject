@@ -44,9 +44,8 @@ def _sample_text(root: Path, weight: int) -> None:
 
 
 def _sample_config(root: Path, weight: int) -> None:
-    width: int = 10
-    section_digit: int = len(str(weight))
-    line_text: str = "-" * width
+    section_digit: int = _get_index_digit(weight)
+    line_text: str = _get_line(0)
 
     source_pairs: StrPair2 = {
         str(i).zfill(section_digit): {
@@ -59,9 +58,8 @@ def _sample_config(root: Path, weight: int) -> None:
 
 
 def _sample_json(root: Path, weight: int) -> None:
-    width: int = 10
-    section_digit: int = len(str(weight))
-    line_text: str = "-" * width
+    section_digit: int = _get_index_digit(weight)
+    line_text: str = _get_line(0)
 
     def function(count: int) -> Json:
         if count > 0:
