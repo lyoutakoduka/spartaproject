@@ -10,12 +10,16 @@ from pyspartalib.context.file.config_context import Config
 from pyspartalib.script.file.text.export_file import text_export
 
 
+def _get_multiple_line_break() -> str:
+    return "\n" * 2
+
+
 def _strip(text: str) -> str:
     return text.strip()
 
 
 def _multiple_line_break(text: str) -> str:
-    return text.replace("\n" * 2, "\n")
+    return text.replace(_get_multiple_line_break(), "\n")
 
 
 def _unknown_empty(text: str) -> str:
@@ -27,7 +31,7 @@ def _cleanup_text(text: str) -> str:
 
 
 def _cleanup_text_default(text: str) -> str:
-    if text.endswith("\n" * 2):
+    if text.endswith(_get_multiple_line_break()):
         return text[:-1]
 
     return text
