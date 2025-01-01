@@ -36,6 +36,7 @@ def convert_to_linux(path: Path) -> Path:
 
     Returns:
         Path: Converted Linux format path.
+
     """
     if has_linux_head(path):
         return path

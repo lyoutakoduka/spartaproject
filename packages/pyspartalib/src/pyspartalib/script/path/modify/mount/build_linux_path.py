@@ -10,6 +10,7 @@ def get_mount_point() -> Path:
 
     Returns:
         Path: Path of the mount point.
+
     """
     return Path("/", "mnt")
 
@@ -22,6 +23,7 @@ def get_linux_head(identifier: str) -> Path:
 
     Returns:
         Path: Path including the drive letter.
+
     """
     return Path(get_mount_point(), identifier.lower())
 
@@ -37,5 +39,6 @@ def get_linux_path(identifier: str, relative_root: Path) -> Path:
 
     Returns:
         Path: Generated path about Windows mounted on Linux.
+
     """
     return Path(get_linux_head(identifier), relative_root)

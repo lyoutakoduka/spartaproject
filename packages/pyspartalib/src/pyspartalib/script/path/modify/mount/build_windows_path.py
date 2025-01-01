@@ -13,6 +13,7 @@ def get_windows_head(identifier: str) -> Path:
 
     Returns:
         Path: Path including the drive letter.
+
     """
     return Path(identifier.capitalize() + ":")
 
@@ -28,5 +29,6 @@ def get_windows_path(identifier: str, relative_root: Path) -> Path:
 
     Returns:
         Path: Generated path that is about Windows file system.
+
     """
     return Path(get_windows_head(identifier), relative_root)

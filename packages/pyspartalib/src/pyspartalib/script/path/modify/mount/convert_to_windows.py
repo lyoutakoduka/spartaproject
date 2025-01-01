@@ -39,6 +39,7 @@ def convert_to_windows(path: Path) -> Path:
 
     Returns:
         Path: Converted Windows format path.
+
     """
     if not has_linux_head(path):
         return path
