@@ -18,10 +18,14 @@ def _multiple_line_break(text: str) -> str:
     return text.replace("\n" * 2, "\n")
 
 
+def _unknown_empty(text: str) -> str:
+    return text.replace(" = ", "=")
+
+
 def _cleanup_text(text: str) -> str:
     text = _strip(text)
     text = _multiple_line_break(text)
-    return text.replace(" = ", "=")
+    return _unknown_empty(text)
 
 
 def _cleanup_text_default(text: str) -> str:
