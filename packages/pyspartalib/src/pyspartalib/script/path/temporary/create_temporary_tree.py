@@ -80,15 +80,15 @@ def _get_json(
     section_digit: int,
     line_text: str,
 ) -> Json:
-    if count > 0:
-        return _get_json_section(
-            count - 1,
-            weight,
-            section_digit,
-            line_text,
-        )
+    if count <= 0:
+        return line_text
 
-    return line_text
+    return _get_json_section(
+        count - 1,
+        weight,
+        section_digit,
+        line_text,
+    )
 
 
 def _sample_text(root: Path, weight: int) -> None:
