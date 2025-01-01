@@ -33,7 +33,8 @@ def is_relative(absolute_path: Path, root_path: Path | None = None) -> bool:
 
 
 def is_relative_array(
-    absolute_paths: Paths, root_path: Path | None = None
+    absolute_paths: Paths,
+    root_path: Path | None = None,
 ) -> Bools:
     """Check that list of paths are type relative at once.
 
@@ -79,7 +80,8 @@ def get_relative(absolute_path: Path, root_path: Path | None = None) -> Path:
 
 
 def get_relative_array(
-    absolute_paths: Paths, root_path: Path | None = None
+    absolute_paths: Paths,
+    root_path: Path | None = None,
 ) -> Paths:
     """Convert list of absolute paths to relative.
 
@@ -98,7 +100,8 @@ def get_relative_array(
 
 
 def get_relative_pair(
-    absolute_pair: PathPair, root_path: Path | None = None
+    absolute_pair: PathPair,
+    root_path: Path | None = None,
 ) -> PathPair:
     """Convert dictionary of absolute paths to relative.
 
