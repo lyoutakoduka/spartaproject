@@ -13,6 +13,10 @@ from pyspartalib.script.file.json.export_json import Json, json_export
 from pyspartalib.script.file.text.export_file import text_export
 
 
+def _fill_index(index: int, digit: int) -> str:
+    return str(index).zfill(digit)
+
+
 def _get_file_path(file_root: Path, file_suffix: str) -> Path:
     return Path(file_root, "file").with_suffix("." + file_suffix)
 
@@ -27,7 +31,7 @@ def _get_line(index_digit: int) -> str:
 
 
 def _get_text(weight: int, index_digit: int, line_text: str) -> Strs:
-    return [str(i).zfill(index_digit) + line_text for i in range(weight)]
+    return [_fill_index(i, index_digit) + line_text for i in range(weight)]
 
 
 def _get_text_config(
@@ -35,7 +39,7 @@ def _get_text_config(
     section_digit: int,
     line_text: str,
 ) -> StrPair:
-    return {str(i).zfill(section_digit): line_text for i in range(weight)}
+    return {_fill_index(i, section_digit): line_text for i in range(weight)}
 
 
 def _merged_text(weight: int, index_digit: int, line_text: str) -> str:
@@ -56,7 +60,7 @@ def _sample_config(root: Path, weight: int) -> None:
     line_text: str = _get_line(0)
 
     source_pairs: StrPair2 = {
-        str(i).zfill(section_digit): _get_text_config(
+        _fill_index(i, section_digit): _get_text_config(
             weight,
             section_digit,
             line_text,
@@ -74,7 +78,7 @@ def _sample_json(root: Path, weight: int) -> None:
     def function(count: int) -> Json:
         if count > 0:
             return {
-                str(i).zfill(section_digit): function(count - 1)
+                _fill_index(i, section_digit): function(count - 1)
                 for i in range(weight)
             }
 
@@ -98,7 +102,7 @@ def _recursive_tree(
     if deep > 1:
         directory_name: Path = Path(
             root,
-            "dir" + str(tree_deep - deep + 1).zfill(3),
+            "dir" + _fill_index(tree_deep - deep + 1, 3),
         )
         _recursive_tree(directory_name, tree_deep, deep - 1, weight)
 
