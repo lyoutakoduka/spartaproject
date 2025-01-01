@@ -62,7 +62,7 @@ class FileHistory(WorkSpace):
         return ""
 
     def _clear_history(self) -> PathPair2 | None:
-        if 0 == len(self._history):
+        if len(self._history) == 0:
             return None
 
         history: PathPair2 = deepcopy(self._history)
