@@ -20,6 +20,7 @@ def check_exists_array(paths: Paths) -> Bools:
 
     Returns:
         Bools: Return list of True if file or directory is exists.
+
     """
     return [_check_exists(path) for path in paths]
 
@@ -32,5 +33,6 @@ def check_exists_pair(paths: PathPair) -> BoolPair:
 
     Returns:
         BoolPair: Return directory of True if file or directory is exists.
+
     """
     return {key: _check_exists(path) for key, path in paths.items()}
