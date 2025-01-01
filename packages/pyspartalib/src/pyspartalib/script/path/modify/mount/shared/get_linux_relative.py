@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 """Module to get relative path seen from a mount point of Linux."""
 

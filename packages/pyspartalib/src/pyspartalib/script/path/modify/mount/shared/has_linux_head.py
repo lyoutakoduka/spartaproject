@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 """Module to confirm that selected path include a mount point of Linux."""
 
