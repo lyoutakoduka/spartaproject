@@ -4,7 +4,7 @@
 
 from pathlib import Path
 
-from pyspartalib.context.default.string_context import StrPair2, Strs
+from pyspartalib.context.default.string_context import StrPair, StrPair2, Strs
 from pyspartalib.script.directory.create_directory import (
     create_directory_array,
 )
@@ -30,6 +30,14 @@ def _get_text(weight: int, index_digit: int, line_text: str) -> Strs:
     return [str(i).zfill(index_digit) + line_text for i in range(weight)]
 
 
+def _get_text_config(
+    weight: int,
+    section_digit: int,
+    line_text: str,
+) -> StrPair:
+    return {str(i).zfill(section_digit): line_text for i in range(weight)}
+
+
 def _merged_text(weight: int, index_digit: int, line_text: str) -> str:
     return "\n".join(_get_text(weight, index_digit, line_text))
 
@@ -48,9 +56,11 @@ def _sample_config(root: Path, weight: int) -> None:
     line_text: str = _get_line(0)
 
     source_pairs: StrPair2 = {
-        str(i).zfill(section_digit): {
-            str(j).zfill(section_digit): line_text for j in range(weight)
-        }
+        str(i).zfill(section_digit): _get_text_config(
+            weight,
+            section_digit,
+            line_text,
+        )
         for i in range(weight)
     }
 
