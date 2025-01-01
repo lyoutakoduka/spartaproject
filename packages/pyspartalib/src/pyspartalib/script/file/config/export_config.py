@@ -23,9 +23,7 @@ def _unknown_empty(text: str) -> str:
 
 
 def _cleanup_text(text: str) -> str:
-    text = _strip(text)
-    text = _multiple_line_break(text)
-    return _unknown_empty(text)
+    return _unknown_empty(_multiple_line_break(_strip(text)))
 
 
 def _cleanup_text_default(text: str) -> str:
