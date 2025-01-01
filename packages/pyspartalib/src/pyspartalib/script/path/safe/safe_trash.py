@@ -31,16 +31,22 @@ class SafeTrash(SafeRename):
         )
 
     def __initialize_variables(
-        self, trash_root: Path | None, override: bool, jst: bool
+        self,
+        trash_root: Path | None,
+        override: bool,
+        jst: bool,
     ) -> None:
         self._trash_root: Path = self.create_date_time_space(
-            body_root=trash_root, override=override, jst=jst
+            body_root=trash_root,
+            override=override,
+            jst=jst,
         )
 
     def _move_file(self, target: Path, root: Path) -> None:
         if target.exists():
             trash_path: Path = Path(
-                self.get_trash_root(), get_relative(target, root_path=root)
+                self.get_trash_root(),
+                get_relative(target, root_path=root),
             )
             create_parent(trash_path)
             self.rename(target, trash_path, override=True)
@@ -55,7 +61,9 @@ class SafeTrash(SafeRename):
         return self._trash_root
 
     def trash(
-        self, trash_path: Path, relative_root: Path | None = None
+        self,
+        trash_path: Path,
+        relative_root: Path | None = None,
     ) -> Path:
         """Remove file or directory and log history.
 
@@ -82,7 +90,9 @@ class SafeTrash(SafeRename):
         return trash_path
 
     def trash_at_once(
-        self, trash_paths: Paths, relative_root: Path | None = None
+        self,
+        trash_paths: Paths,
+        relative_root: Path | None = None,
     ) -> Paths:
         """Remove files or directories at once, and log history.
 
@@ -140,6 +150,9 @@ class SafeTrash(SafeRename):
 
         """
         self.__initialize_super_class(
-            working_root, history_root, override, jst
+            working_root,
+            history_root,
+            override,
+            jst,
         )
         self.__initialize_variables(trash_root, override, jst)

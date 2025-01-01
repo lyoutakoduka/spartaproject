@@ -13,7 +13,10 @@ class SafeCopy(FileHistory):
     """Class to copy file or directory and log history."""
 
     def copy(
-        self, source_path: Path, destination_path: Path, override: bool = False
+        self,
+        source_path: Path,
+        destination_path: Path,
+        override: bool = False,
     ) -> Path:
         """Copy file or directory and log history.
 

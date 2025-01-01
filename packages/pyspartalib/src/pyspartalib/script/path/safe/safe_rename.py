@@ -13,7 +13,10 @@ class SafeRename(FileHistory):
     """Class to rename file or directory and log history."""
 
     def rename(
-        self, source_path: Path, destination_path: Path, override: bool = False
+        self,
+        source_path: Path,
+        destination_path: Path,
+        override: bool = False,
     ) -> Path:
         """Rename file or directory and log history.
 

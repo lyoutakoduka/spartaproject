@@ -26,18 +26,24 @@ class FileHistory(WorkSpace):
         super().__del__()
 
     def __initialize_variables(
-        self, history_root: Path | None, override: bool, jst: bool
+        self,
+        history_root: Path | None,
+        override: bool,
+        jst: bool,
     ) -> None:
         self._still_removed: bool = False
         self._history: PathPair2 = {}
         self._history_path: Path | None = None
         self._history_root: Path = self.create_date_time_space(
-            body_root=history_root, override=override, jst=jst
+            body_root=history_root,
+            override=override,
+            jst=jst,
         )
 
     def _update_history_path(self) -> None:
         self._history_path = Path(
-            self._history_root, self._get_key_time() + ".json"
+            self._history_root,
+            self._get_key_time() + ".json",
         )
 
     def _export_history(self, history: PathPair2) -> None:
