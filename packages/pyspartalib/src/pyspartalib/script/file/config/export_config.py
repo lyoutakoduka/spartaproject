@@ -39,31 +39,29 @@ def _cleanup_key_default(source_config: Config) -> Config:
 def config_dump(source_config: Config, compress: bool = False) -> str:
     """Convert data used for configuration file to text.
 
-    Return following triple quoted text if argument "source_config" is...
+    When argument "source_config" is follow.
 
-    {"flags": {"bool": True}, "indies": {"int": 1}}
+        {"flags": {"bool": True}, "indies": {"int": 1}}
 
-    '''
-    [flags]
-    bool = True
+    Return following text.
 
-    [indies]
-    int = 1
-    '''
+        [flags]
+        bool = True
+
+        [indies]
+        int = 1
 
     Args:
         source_config (Config):
             Data used for configuration file you want to convert.
 
         compress (bool, optional): Defaults to False.
-            Return following triple quoted text if argument "compress" is True.
+            Return following text if argument "compress" is True.
 
-            '''
-            [flags]
-            bool=True
-            [indies]
-            int=1
-            '''
+                [flags]
+                bool=True
+                [indies]
+                int=1
 
     Returns:
         str: Converted text used for configuration file.
