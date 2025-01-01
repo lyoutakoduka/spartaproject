@@ -8,7 +8,7 @@ from pyspartalib.script.string.encoding.set_encoding import set_encoding
 
 
 def byte_export(export_path: Path, source: bytes) -> Path:
-    """Function to export binary file.
+    """Export binary file.
 
     Args:
         export_path (Path): Path which is used for exporting data.
@@ -17,6 +17,7 @@ def byte_export(export_path: Path, source: bytes) -> Path:
 
     Returns:
         Path: Path of data which is finally exported.
+
     """
     with open(export_path, "wb") as file:
         file.write(source)
@@ -27,7 +28,7 @@ def byte_export(export_path: Path, source: bytes) -> Path:
 def text_export(
     export_path: Path, source: str, encoding: str | None = None
 ) -> Path:
-    """Function to export text file.
+    """Export text file.
 
     Args:
         export_path (Path): Path which is used for exporting data.
@@ -40,6 +41,7 @@ def text_export(
 
     Returns:
         Path: Path of data which is finally exported.
+
     """
     if encoding is None:
         encoding = "utf-8"
