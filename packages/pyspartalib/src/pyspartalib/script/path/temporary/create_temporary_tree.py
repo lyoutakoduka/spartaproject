@@ -57,6 +57,26 @@ def _merged_text(weight: int, index_digit: int, line_text: str) -> str:
     return "\n".join(_get_text(weight, index_digit, line_text))
 
 
+def _get_json(
+    count: int,
+    weight: int,
+    section_digit: int,
+    line_text: str,
+) -> Json:
+    if count > 0:
+        return {
+            _fill_index(i, section_digit): _get_json(
+                count - 1,
+                weight,
+                section_digit,
+                line_text,
+            )
+            for i in range(weight)
+        }
+
+    return line_text
+
+
 def _sample_text(root: Path, weight: int) -> None:
     index_digit: int = _get_index_digit(weight)
 
@@ -77,16 +97,10 @@ def _sample_json(root: Path, weight: int) -> None:
     section_digit: int = _get_index_digit(weight)
     line_text: str = _get_line(0)
 
-    def function(count: int) -> Json:
-        if count > 0:
-            return {
-                _fill_index(i, section_digit): function(count - 1)
-                for i in range(weight)
-            }
-
-        return line_text
-
-    json_export(_get_file_path(root, "json"), function(weight))
+    json_export(
+        _get_file_path(root, "json"),
+        _get_json(weight, weight, section_digit, line_text),
+    )
 
 
 def _recursive_tree(
