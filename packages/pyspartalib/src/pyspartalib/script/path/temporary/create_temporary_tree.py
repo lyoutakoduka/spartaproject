@@ -36,11 +36,11 @@ def _merged_text(weight: int, index_digit: int, line_text: str) -> str:
 
 def _sample_text(root: Path, weight: int) -> None:
     index_digit: int = _get_index_digit(weight)
-    line_text: str = _get_line(index_digit)
 
-    source: str = _merged_text(weight, index_digit, line_text)
-
-    text_export(_get_file_path(root, "txt"), source)
+    text_export(
+        _get_file_path(root, "txt"),
+        _merged_text(weight, index_digit, _get_line(index_digit)),
+    )
 
 
 def _sample_config(root: Path, weight: int) -> None:
