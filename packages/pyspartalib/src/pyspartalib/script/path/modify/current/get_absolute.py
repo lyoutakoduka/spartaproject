@@ -9,7 +9,7 @@ from pyspartalib.script.path.modify.current.get_current import get_current
 
 
 def get_absolute(relative_path: Path, root_path: Path | None = None) -> Path:
-    """Function to convert relative path to absolute.
+    """Convert relative path to absolute.
 
     Args:
         relative_path (Path): Path you want to convert to absolute.
@@ -19,6 +19,7 @@ def get_absolute(relative_path: Path, root_path: Path | None = None) -> Path:
 
     Returns:
         Path: Converted absolute path.
+
     """
     if relative_path.is_absolute():
         return relative_path
@@ -32,7 +33,7 @@ def get_absolute(relative_path: Path, root_path: Path | None = None) -> Path:
 def get_absolute_array(
     relative_paths: Paths, root_path: Path | None = None
 ) -> Paths:
-    """Function to convert list of relative paths to absolute.
+    """Convert list of relative paths to absolute.
 
     Args:
         relative_paths (Paths): Paths you want to convert to absolute.
@@ -42,6 +43,7 @@ def get_absolute_array(
 
     Returns:
         Paths: Converted absolute paths.
+
     """
     return [get_absolute(path, root_path=root_path) for path in relative_paths]
 
@@ -49,7 +51,7 @@ def get_absolute_array(
 def get_absolute_pair(
     relative_pair: PathPair, root_path: Path | None = None
 ) -> PathPair:
-    """Function to convert dictionary of relative paths to absolute.
+    """Convert dictionary of relative paths to absolute.
 
     Args:
         relative_pair (PathPair): Paths you want to convert to absolute.
@@ -59,6 +61,7 @@ def get_absolute_pair(
 
     Returns:
         PathPair: Converted absolute paths.
+
     """
     return {
         key: get_absolute(path, root_path=root_path)

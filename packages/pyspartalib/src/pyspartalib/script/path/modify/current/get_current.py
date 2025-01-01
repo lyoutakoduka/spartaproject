@@ -12,5 +12,6 @@ def get_current() -> Path:
 
     Returns:
         Path: Current working directory.
+
     """
     return Path().cwd()

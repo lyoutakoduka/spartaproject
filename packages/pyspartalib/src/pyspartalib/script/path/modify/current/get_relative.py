@@ -27,6 +27,7 @@ def is_relative(absolute_path: Path, root_path: Path | None = None) -> bool:
 
     Returns:
         bool: True if path is type relative.
+
     """
     return absolute_path.is_relative_to(_get_relative_root(root_path))
 
@@ -44,6 +45,7 @@ def is_relative_array(
 
     Returns:
         Bools: List of True if all paths are type relative.
+
     """
     return [
         is_relative(absolute_path, root_path=root_path)
@@ -52,7 +54,7 @@ def is_relative_array(
 
 
 def get_relative(absolute_path: Path, root_path: Path | None = None) -> Path:
-    """Function to convert absolute path to relative.
+    """Convert absolute path to relative.
 
     Args:
         absolute_path (Path): Path you want to convert to relative.
@@ -66,6 +68,7 @@ def get_relative(absolute_path: Path, root_path: Path | None = None) -> Path:
 
     Returns:
         Path: Converted relative path.
+
     """
     root_path = _get_relative_root(root_path)
 
@@ -78,7 +81,7 @@ def get_relative(absolute_path: Path, root_path: Path | None = None) -> Path:
 def get_relative_array(
     absolute_paths: Paths, root_path: Path | None = None
 ) -> Paths:
-    """Function to convert list of absolute paths to relative.
+    """Convert list of absolute paths to relative.
 
     Args:
         absolute_paths (Paths): Paths you want to convert to relative.
@@ -89,6 +92,7 @@ def get_relative_array(
 
     Returns:
         Paths: Converted relative paths.
+
     """
     return [get_relative(path, root_path=root_path) for path in absolute_paths]
 
@@ -96,7 +100,7 @@ def get_relative_array(
 def get_relative_pair(
     absolute_pair: PathPair, root_path: Path | None = None
 ) -> PathPair:
-    """Function to convert dictionary of absolute paths to relative.
+    """Convert dictionary of absolute paths to relative.
 
     Args:
         absolute_pair (PathPair): Paths you want to convert to relative.
@@ -107,6 +111,7 @@ def get_relative_pair(
 
     Returns:
         PathPair: Converted relative paths.
+
     """
     return {
         key: get_relative(path, root_path=root_path)
