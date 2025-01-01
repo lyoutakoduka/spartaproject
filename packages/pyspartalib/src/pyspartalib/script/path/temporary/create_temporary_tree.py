@@ -166,10 +166,7 @@ def create_temporary_tree(
         Path: "root_path" is returned.
 
     """
-    enable_deep: bool = _inside_span(tree_deep)
-    enable_weight: bool = _inside_span(tree_weight)
-
-    if enable_deep and enable_weight:
+    if _inside_span(tree_deep) and _inside_span(tree_weight):
         _recursive_tree(root_path, tree_deep, tree_deep, tree_weight)
 
     return root_path
