@@ -10,8 +10,12 @@ from pyspartalib.context.file.config_context import Config
 from pyspartalib.script.file.text.export_file import text_export
 
 
+def _strip(text: str) -> str:
+    return text.strip()
+
+
 def _cleanup_text(text: str) -> str:
-    text = text.strip()
+    text = _strip(text)
     text = text.replace("\n" * 2, "\n")
     return text.replace(" = ", "=")
 
