@@ -7,6 +7,10 @@ from pathlib import Path
 from pyspartalib.script.string.encoding.set_encoding import set_encoding
 
 
+def _unix_line_brake(text: str) -> str:
+    return text.replace("\r\n", "\n")
+
+
 def byte_export(export_path: Path, source: bytes) -> Path:
     """Export binary file.
 
@@ -48,5 +52,5 @@ def text_export(
 
     return byte_export(
         export_path,
-        set_encoding(source.replace("\r\n", "\n"), encoding=encoding),
+        set_encoding(_unix_line_brake(source), encoding=encoding),
     )

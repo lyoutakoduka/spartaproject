@@ -7,6 +7,10 @@ from pathlib import Path
 from pyspartalib.script.string.encoding.set_decoding import set_decoding
 
 
+def _unix_line_brake(text: str) -> str:
+    return text.replace("\r\n", "\n")
+
+
 def byte_import(import_path: Path) -> bytes:
     """Import binary file.
 
@@ -34,6 +38,6 @@ def text_import(import_path: Path, encoding: str | None = None) -> str:
         str: Imported string from text file.
 
     """
-    return set_decoding(byte_import(import_path), encoding=encoding).replace(
-        "\r\n", "\n"
+    return _unix_line_brake(
+        set_decoding(byte_import(import_path), encoding=encoding),
     )
