@@ -23,7 +23,7 @@ def byte_export(export_path: Path, source: bytes) -> Path:
         Path: Path of data which is finally exported.
 
     """
-    with open(export_path, "wb") as file:
+    with export_path.open("wb") as file:
         file.write(source)
 
     return export_path

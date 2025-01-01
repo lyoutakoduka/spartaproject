@@ -21,7 +21,7 @@ def byte_import(import_path: Path) -> bytes:
         bytes: Imported data from binary file.
 
     """
-    with open(import_path, "rb") as file:
+    with import_path.open("rb") as file:
         return file.read()
 
 
