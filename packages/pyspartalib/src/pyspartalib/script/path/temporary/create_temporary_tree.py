@@ -130,13 +130,15 @@ def _recursive_tree(
     _sample_config(root, weight)
     _sample_json(root, weight)
 
-    if deep > 1:
-        _recursive_tree(
-            _get_directory_path(root, tree_deep, deep),
-            tree_deep,
-            deep - 1,
-            weight,
-        )
+    if deep <= 1:
+        return
+
+    _recursive_tree(
+        _get_directory_path(root, tree_deep, deep),
+        tree_deep,
+        deep - 1,
+        weight,
+    )
 
 
 def _inside_span(tree_deep: int) -> bool:
