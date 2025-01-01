@@ -57,6 +57,23 @@ def _merged_text(weight: int, index_digit: int, line_text: str) -> str:
     return "\n".join(_get_text(weight, index_digit, line_text))
 
 
+def _get_json_section(
+    count: int,
+    weight: int,
+    section_digit: int,
+    line_text: str,
+) -> Json:
+    return {
+        _fill_index(i, section_digit): _get_json(
+            count,
+            weight,
+            section_digit,
+            line_text,
+        )
+        for i in range(weight)
+    }
+
+
 def _get_json(
     count: int,
     weight: int,
@@ -64,15 +81,12 @@ def _get_json(
     line_text: str,
 ) -> Json:
     if count > 0:
-        return {
-            _fill_index(i, section_digit): _get_json(
-                count - 1,
-                weight,
-                section_digit,
-                line_text,
-            )
-            for i in range(weight)
-        }
+        return _get_json_section(
+            count - 1,
+            weight,
+            section_digit,
+            line_text,
+        )
 
     return line_text
 
