@@ -42,6 +42,17 @@ def _get_text_config(
     return {_fill_index(i, section_digit): line_text for i in range(weight)}
 
 
+def _get_config(weight: int, section_digit: int, line_text: str) -> StrPair2:
+    return {
+        _fill_index(i, section_digit): _get_text_config(
+            weight,
+            section_digit,
+            line_text,
+        )
+        for i in range(weight)
+    }
+
+
 def _merged_text(weight: int, index_digit: int, line_text: str) -> str:
     return "\n".join(_get_text(weight, index_digit, line_text))
 
@@ -59,14 +70,7 @@ def _sample_config(root: Path, weight: int) -> None:
     section_digit: int = _get_index_digit(weight)
     line_text: str = _get_line(0)
 
-    source_pairs: StrPair2 = {
-        _fill_index(i, section_digit): _get_text_config(
-            weight,
-            section_digit,
-            line_text,
-        )
-        for i in range(weight)
-    }
+    source_pairs: StrPair2 = _get_config(weight, section_digit, line_text)
 
     config_export(_get_file_path(root, "ini"), source_pairs)
 
