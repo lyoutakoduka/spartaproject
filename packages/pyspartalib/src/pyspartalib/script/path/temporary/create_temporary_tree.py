@@ -17,6 +17,10 @@ def _get_file_path(file_root: Path, file_suffix: str) -> Path:
     return Path(file_root, "file").with_suffix("." + file_suffix)
 
 
+def _get_index_digit(weight: int) -> int:
+    return len(str(weight))
+
+
 def _get_line(index_digit: int) -> str:
     line_width: int = 10
     return "-" * (line_width - index_digit)
@@ -31,7 +35,7 @@ def _merged_text(weight: int, index_digit: int, line_text: str) -> str:
 
 
 def _sample_text(root: Path, weight: int) -> None:
-    index_digit: int = len(str(weight))
+    index_digit: int = _get_index_digit(weight)
     line_text: str = _get_line(index_digit)
 
     source: str = _merged_text(weight, index_digit, line_text)
