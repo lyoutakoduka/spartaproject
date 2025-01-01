@@ -18,5 +18,6 @@ def has_linux_head(path: Path) -> bool:
 
     Returns:
         bool: True if the mount point is included.
+
     """
     return is_relative(path, root_path=get_mount_point())

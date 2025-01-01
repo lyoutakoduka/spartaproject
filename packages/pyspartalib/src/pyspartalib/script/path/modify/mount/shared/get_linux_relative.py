@@ -18,5 +18,6 @@ def get_linux_relative(path: Path) -> Path:
 
     Returns:
         Path: Relative path which the mount point is removed.
+
     """
     return get_relative(path, root_path=get_mount_point())
