@@ -6,7 +6,7 @@ from pathlib import Path
 
 
 def get_avoid_path(path: Path) -> Path:
-    """Function to convert path to avoid existing path.
+    """Convert path to avoid existing path.
 
     Converting process and that condition is follow.
 
@@ -34,6 +34,7 @@ def get_avoid_path(path: Path) -> Path:
 
     Returns:
         Path: Path to avoid override of path.
+
     """
     while path.exists():
         path = path.with_stem(path.stem + "_")
