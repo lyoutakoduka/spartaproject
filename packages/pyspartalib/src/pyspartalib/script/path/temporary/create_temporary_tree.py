@@ -114,6 +114,10 @@ def _sample_json(root: Path, weight: int) -> None:
     )
 
 
+def _get_directory_path(root: Path, tree_deep: int, deep: int) -> Path:
+    return Path(root, "dir" + _fill_index(tree_deep - deep + 1, 3))
+
+
 def _recursive_tree(
     root: Path,
     tree_deep: int,
@@ -127,11 +131,12 @@ def _recursive_tree(
     _sample_json(root, weight)
 
     if deep > 1:
-        directory_name: Path = Path(
-            root,
-            "dir" + _fill_index(tree_deep - deep + 1, 3),
+        _recursive_tree(
+            _get_directory_path(root, tree_deep, deep),
+            tree_deep,
+            deep - 1,
+            weight,
         )
-        _recursive_tree(directory_name, tree_deep, deep - 1, weight)
 
 
 def _inside_span(tree_deep: int) -> bool:
