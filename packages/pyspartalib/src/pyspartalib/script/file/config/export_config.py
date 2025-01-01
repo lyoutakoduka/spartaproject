@@ -14,20 +14,20 @@ def _get_multiple_line_break() -> str:
     return "\n" * 2
 
 
-def _strip(text: str) -> str:
+def _strip_both_ends(text: str) -> str:
     return text.strip()
 
 
-def _multiple_line_break(text: str) -> str:
+def _remove_line_break(text: str) -> str:
     return text.replace(_get_multiple_line_break(), "\n")
 
 
-def _unknown_empty(text: str) -> str:
+def _remove_unknown_empty(text: str) -> str:
     return text.replace(" = ", "=")
 
 
 def _cleanup_text(text: str) -> str:
-    return _unknown_empty(_multiple_line_break(_strip(text)))
+    return _remove_unknown_empty(_remove_line_break(_strip_both_ends(text)))
 
 
 def _cleanup_text_default(text: str) -> str:
