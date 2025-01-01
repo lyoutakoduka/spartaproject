@@ -81,7 +81,9 @@ def config_dump(source_config: Config, compress: bool = False) -> str:
 
 
 def config_export(
-    export_path: Path, source_config: Config, compress: bool = False
+    export_path: Path,
+    source_config: Config,
+    compress: bool = False,
 ) -> Path:
     """Export data used for configuration file.
 
@@ -100,5 +102,6 @@ def config_export(
 
     """
     return text_export(
-        export_path, config_dump(source_config, compress=compress)
+        export_path,
+        config_dump(source_config, compress=compress),
     )
