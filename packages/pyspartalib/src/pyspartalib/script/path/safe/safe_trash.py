@@ -50,6 +50,7 @@ class SafeTrash(SafeRename):
 
         Returns:
             Path: Path of internal trash box.
+
         """
         return self._trash_root
 
@@ -66,6 +67,7 @@ class SafeTrash(SafeRename):
 
         Returns:
             Path: "trash_path" is returned.
+
         """
         parent_root: Path = trash_path.parent
 
@@ -93,6 +95,7 @@ class SafeTrash(SafeRename):
 
         Returns:
             Paths: "trash_paths" is returned.
+
         """
         for trash_path in trash_paths:
             self.trash(trash_path, relative_root=relative_root)
@@ -134,6 +137,7 @@ class SafeTrash(SafeRename):
                 User defined path of trash box including date time string.
                 It's used for argument "body_root" of
                     function "create_date_time_space".
+
         """
         self.__initialize_super_class(
             working_root, history_root, override, jst

@@ -28,6 +28,7 @@ class SafeCopy(FileHistory):
 
         Returns:
             Path: Final destination copied path.
+
         """
         if override:
             destination_path = get_avoid_path(destination_path)

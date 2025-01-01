@@ -76,6 +76,7 @@ class FileHistory(WorkSpace):
 
         Returns:
             Path: Path of temporary working space.
+
         """
         return self._history_root
 
@@ -84,6 +85,7 @@ class FileHistory(WorkSpace):
 
         Returns:
             Path: Path of file operation history.
+
         """
         return self._history_path
 
@@ -92,6 +94,7 @@ class FileHistory(WorkSpace):
 
         Returns:
             PathPair2 | None: The history of file operation until current.
+
         """
         if history := self._clear_history():
             self._update_history_path()
@@ -108,6 +111,7 @@ class FileHistory(WorkSpace):
 
             destination_path (Path):
                 Path witch is about "destination" of file operation.
+
         """
         self._history[self._get_key_time()] = {
             "source.path": source_path,
@@ -115,10 +119,11 @@ class FileHistory(WorkSpace):
         }
 
     def close_history(self) -> PathPair2 | None:
-        """Closing process is executed just once.
+        """Close process is executed just once.
 
         Returns:
             Path | None: Path of file including history of file operation.
+
         """
         if self._still_removed:
             return None
@@ -161,6 +166,7 @@ class FileHistory(WorkSpace):
                 If True, you can get datetime object as JST time zone.
                 It's used for argument "jst" of
                     function "create_date_time_space".
+
         """
         self.__initialize_super_class(working_root)
         self.__initialize_variables(history_root, override, jst)
