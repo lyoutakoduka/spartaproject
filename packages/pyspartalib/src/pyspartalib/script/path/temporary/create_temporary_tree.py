@@ -67,12 +67,10 @@ def _sample_text(root: Path, weight: int) -> None:
 
 
 def _sample_config(root: Path, weight: int) -> None:
-    section_digit: int = _get_index_digit(weight)
-    line_text: str = _get_line(0)
-
-    source_pairs: StrPair2 = _get_config(weight, section_digit, line_text)
-
-    config_export(_get_file_path(root, "ini"), source_pairs)
+    config_export(
+        _get_file_path(root, "ini"),
+        _get_config(weight, _get_index_digit(weight), _get_line(0)),
+    )
 
 
 def _sample_json(root: Path, weight: int) -> None:
