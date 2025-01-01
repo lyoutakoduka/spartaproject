@@ -94,12 +94,9 @@ def _sample_config(root: Path, weight: int) -> None:
 
 
 def _sample_json(root: Path, weight: int) -> None:
-    section_digit: int = _get_index_digit(weight)
-    line_text: str = _get_line(0)
-
     json_export(
         _get_file_path(root, "json"),
-        _get_json(weight, weight, section_digit, line_text),
+        _get_json(weight, weight, _get_index_digit(weight), _get_line(0)),
     )
 
 
