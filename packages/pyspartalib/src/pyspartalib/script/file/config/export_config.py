@@ -14,9 +14,13 @@ def _strip(text: str) -> str:
     return text.strip()
 
 
+def _multiple_line_break(text: str) -> str:
+    return text.replace("\n" * 2, "\n")
+
+
 def _cleanup_text(text: str) -> str:
     text = _strip(text)
-    text = text.replace("\n" * 2, "\n")
+    text = _multiple_line_break(text)
     return text.replace(" = ", "=")
 
 
