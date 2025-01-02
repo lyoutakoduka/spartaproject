@@ -23,13 +23,4 @@ Section = Pair | SinglePair
 
 SectionPair = dict[str, Section]
 
-Config = (
-    BoolPair2
-    | IntPair2
-    | FloatPair2
-    | DecPair2
-    | StrPair2
-    | PathPair2
-    | SinglePair2
-    | Pair2
-)
+Config = Pair2 | SinglePair2 | SectionPair
