@@ -74,7 +74,7 @@ class TakeOutArchive(EditArchive):
 
             file_paths += [path]
 
-        return None if 0 == len(file_paths) else file_paths
+        return None if len(file_paths) == 0 else file_paths
 
     def _get_inside_directory(self) -> PathsPair:
         return {

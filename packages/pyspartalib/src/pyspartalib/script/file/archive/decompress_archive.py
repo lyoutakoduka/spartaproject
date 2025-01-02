@@ -32,7 +32,7 @@ class DecompressArchive:
     def _is_sequential_archive(self, path: Path) -> bool:
         names: Strs = path.stem.split("#")
 
-        if 1 < len(names):
+        if len(names) > 1:
             index: int | None = convert_integer(names[-1])
 
             if index is not None:  # Can't use Walrus Operator.
@@ -192,7 +192,7 @@ class DecompressArchive:
         """
         with ZipFile(decompress_target) as archive_file:
             for information in archive_file.infolist():
-                if ZIP_LZMA == information.compress_type:
+                if information.compress_type == ZIP_LZMA:
                     return True
 
         return False

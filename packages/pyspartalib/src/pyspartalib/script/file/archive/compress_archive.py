@@ -45,7 +45,7 @@ class CompressArchive:
         return self._archive_file
 
     def _init_limit_byte(self, byte: int) -> None:
-        if 0 == byte:
+        if byte == 0:
             byte = 1
 
             for _ in range(3):
@@ -71,7 +71,7 @@ class CompressArchive:
         create_directory(self._output_root)
 
     def _has_archived(self) -> bool:
-        return 0 < self._output_index
+        return self._output_index > 0
 
     def _get_archive_path(self) -> Path:
         file_names: Strs = [self._archive_id]
@@ -184,7 +184,7 @@ class CompressArchive:
         return Decimal(str(sum(self._get_file_size())))
 
     def _archive_include_files(self) -> bool:
-        return 0 < self._archive_inside_byte()
+        return self._archive_inside_byte() > 0
 
     def _estimate_compressed_size(self, source_byte: Decimal) -> Decimal:
         outside_byte: Decimal = self._archive_outside_byte()
