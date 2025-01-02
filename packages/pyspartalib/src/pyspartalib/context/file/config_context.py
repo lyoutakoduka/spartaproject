@@ -15,10 +15,10 @@ from pyspartalib.context.extension.path_context import PathPair, PathPair2
 Single = bool | int | float | str | Decimal | Path
 
 SinglePair = dict[str, Single]
-SectionPair = BoolPair | IntPair | FloatPair | DecPair | StrPair | PathPair
+Pair = BoolPair | IntPair | FloatPair | DecPair | StrPair | PathPair
 
 SinglePair2 = dict[str, SinglePair]
-SectionPair2 = dict[str, SectionPair]
+Pair2 = BoolPair2 | IntPair2 | FloatPair2 | StrPair2 | DecPair2 | PathPair2
 
 Config = (
     BoolPair2
@@ -28,5 +28,5 @@ Config = (
     | StrPair2
     | PathPair2
     | SinglePair2
-    | SectionPair2
+    | Pair2
 )
