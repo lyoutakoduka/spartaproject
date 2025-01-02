@@ -10,6 +10,10 @@ from pyspartalib.context.file.json_context import Json
 from pyspartalib.script.file.text.export_file import text_export
 
 
+def _get_separators(compress: bool) -> StrTuple | None:
+    return (",", ":") if compress else None
+
+
 def json_dump(source: Json, compress: bool = False) -> str:
     """Convert data used for json format.
 
@@ -37,7 +41,7 @@ def json_dump(source: Json, compress: bool = False) -> str:
         str: Converted text used for json format.
 
     """
-    separators: StrTuple | None = (",", ":") if compress else None
+    separators: StrTuple | None = _get_separators(compress)
     indent: int | None = None if compress else 2
 
     return dumps(
