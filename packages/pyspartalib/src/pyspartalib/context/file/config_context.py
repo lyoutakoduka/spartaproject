@@ -19,6 +19,9 @@ Pair2 = BoolPair2 | IntPair2 | FloatPair2 | StrPair2 | DecPair2 | PathPair2
 SinglePair = dict[str, Single]
 
 SinglePair2 = dict[str, SinglePair]
+Section = Pair | SinglePair
+
+SectionPair = dict[str, Section]
 
 Config = (
     BoolPair2
