@@ -92,7 +92,7 @@ class TakeOutArchive(EditArchive):
     def _took_out_cycle(self, archive_paths: Paths) -> None:
         inside_directory: PathsPair = self._get_inside_directory()
 
-        if 0 < len(inside_directory):
+        if len(inside_directory) > 0:
             archive_paths += self._take_out_archives(inside_directory)
             self._remove_took_out(inside_directory)
             self._took_out_cycle(archive_paths)

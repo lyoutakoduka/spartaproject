@@ -57,7 +57,7 @@ class DecompressArchive:
         latest: datetime = datetime(*information.date_time)
         comment: bytes = information.comment
 
-        if 0 < len(comment):
+        if len(comment) > 0:
             content: StrPair = string_pair_from_json(
                 json_load(set_decoding(comment)),
             )
