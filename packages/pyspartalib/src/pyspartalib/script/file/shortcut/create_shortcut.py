@@ -60,7 +60,7 @@ def _execute_script(
 
 def _check_shortcut_exists(shortcut_target: Path) -> None:
     if not shortcut_target.exists():
-        raise FileNotFoundError()
+        raise FileNotFoundError
 
 
 def _cleanup_shortcut(shortcut_path: Path, remove_root: Path | None) -> None:
