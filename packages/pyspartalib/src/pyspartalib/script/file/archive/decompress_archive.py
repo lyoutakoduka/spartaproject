@@ -110,19 +110,19 @@ class DecompressArchive:
 
         e.g., sequential archives dividedly to three are represented to follow.
 
-        root/
-            |--archive.<archive format>
-            |--archive#0001.<archive format>
-            |--archive#0002.<archive format>
+            root/
+                |--archive.<archive format>
+                |--archive#0001.<archive format>
+                |--archive#0002.<archive format>
 
         If you select path "source_archive" is "root/archive.<archive format>",
             following list is returned.
 
-        [
-            root/archive.<archive format>,
-            root/archive#0001.<archive format>,
-            root/archive#0002.<archive format>
-        ]
+            [
+                root/archive.<archive format>,
+                root/archive#0001.<archive format>,
+                root/archive#0002.<archive format>
+            ]
 
         Name format of sequential archives are follow.
 
@@ -131,6 +131,7 @@ class DecompressArchive:
 
         <archive name> of all indices must be same.
         <string index> must filled by zero, and digit is optional.
+
         """
         sequential: Paths = [source_archive]
 
@@ -151,6 +152,7 @@ class DecompressArchive:
 
         Args:
             decompress_target (Path): Path of archive you want to decompress.
+
         """
         with ZipFile(decompress_target) as archive_file:
             for information in archive_file.infolist():
@@ -167,12 +169,13 @@ class DecompressArchive:
 
         Args:
             paths (Paths): List of path you want to decompress.
+
         """
         for path in paths:
             self.decompress_archive(path)
 
     def is_lzma_archive(self, decompress_target: Path) -> bool:
-        """Method to get status of compression format.
+        """Get status of compression format.
 
         Args:
             decompress_target (Path): Path of archive
@@ -180,6 +183,7 @@ class DecompressArchive:
 
         Returns:
             bool: True if archive is compressed by LZMA.
+
         """
         with ZipFile(decompress_target) as archive_file:
             for information in archive_file.infolist():
@@ -193,5 +197,6 @@ class DecompressArchive:
 
         Args:
             output_root (Path): Path of decompress directory.
+
         """
         self._initialize_paths(output_root)

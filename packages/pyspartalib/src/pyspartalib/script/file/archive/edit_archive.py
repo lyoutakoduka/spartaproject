@@ -151,6 +151,7 @@ class EditArchive(SafeTrash):
 
         Returns:
             bool: True if the archive is opened.
+
         """
         return self._disable_archive
 
@@ -162,6 +163,7 @@ class EditArchive(SafeTrash):
 
         Returns:
             Path: Path of archive.
+
         """
         if archive_path := self._archive_path:
             return archive_path
@@ -175,6 +177,7 @@ class EditArchive(SafeTrash):
 
         Returns:
             Path: Path of temporary working space.
+
         """
         return self._edit_root
 
@@ -184,6 +187,7 @@ class EditArchive(SafeTrash):
         Returns:
             Paths | None: Path of compressed archive.
                 Return "None" if the archive you want to edit isn't changed.
+
         """
         if self.is_disable_archive():
             return None
@@ -218,6 +222,7 @@ class EditArchive(SafeTrash):
 
         Returns:
             Path | None: Return archive path which is argument "archive_path".
+
         """
         if archive_path is None:
             return None
@@ -276,6 +281,7 @@ class EditArchive(SafeTrash):
                     including date time string to edit archive.
                 It's used for argument "body_root" of
                     function "create_date_time_space".
+
         """
         self.__initialize_super_class(
             working_root, history_root, trash_root, override, jst

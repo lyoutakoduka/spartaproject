@@ -10,6 +10,7 @@ def get_format() -> str:
 
     Returns:
         str: Archive format.
+
     """
     return "zip"
 
@@ -22,5 +23,6 @@ def rename_format(path: Path) -> Path:
 
     Returns:
         Path: Path which added archive format.
+
     """
     return path.with_suffix("." + get_format())

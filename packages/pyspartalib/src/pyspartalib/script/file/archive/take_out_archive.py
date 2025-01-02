@@ -112,6 +112,7 @@ class TakeOutArchive(EditArchive):
 
         Returns:
             Path: Path of directory that archives will placed.
+
         """
         if took_out_root := self._took_out_root:
             return took_out_root
@@ -125,75 +126,75 @@ class TakeOutArchive(EditArchive):
 
         Pattern 1: Do Nothing if archive is applicable to following 2 pattern.
 
-        root/
-        |--archive.zip
-            |--file
+            root/
+            |--archive.zip
+                |--file
 
-        root/
-        |--archive.zip
-            |--directory/
+            root/
+            |--archive.zip
+                |--directory/
 
         Pattern 2: Take out end of directories
             if the archive is applicable to following 3 types.
 
-        Type 1: Single directory.
+            Type 1: Single directory.
 
-        root/ # Before.
-        |--archive.zip
-            |--directory/
-                |--file
+                root/ # Before.
+                |--archive.zip
+                    |--directory/
+                        |--file
 
-        root/ # After.
-        |--directory.zip
-            |--file
-        |--archive.zip
+                root/ # After.
+                |--directory.zip
+                    |--file
+                |--archive.zip
 
-        Type 2: List of directories.
+            Type 2: List of directories.
 
-        root/ # Before.
-        |--archive.zip
-            |--directory_A/
-                |--file_A
-            |--directory_B/
-                |--file_B
+                root/ # Before.
+                |--archive.zip
+                    |--directory_A/
+                        |--file_A
+                    |--directory_B/
+                        |--file_B
 
-        Type 3: Nested directories.
+            Type 3: Nested directories.
 
-        root/ # Before.
-        |--archive.zip
-            |--directory_A/
-                |--file_A
-                |--directory_B/
+                root/ # Before.
+                |--archive.zip
+                    |--directory_A/
+                        |--file_A
+                        |--directory_B/
+                            |--file_B
+
+            Result of Type 2 and 3 is same.
+
+                root/
+                |--directory_A.zip
+                    |--file_A
+                |--directory_B.zip
                     |--file_B
-
-        Result of Type 2 and 3 is same.
-
-        root/
-        |--directory_A.zip
-            |--file_A
-        |--directory_B.zip
-            |--file_B
-        |--archive.zip
+                |--archive.zip
 
         Pattern 3: Avoid override path.
 
-        root/ # Before.
-        |--archive.zip
-            |--directory_A/
-                |--directory_same/
-                    |--file_A
-            |--directory_B/
-                |--directory_same/
-                    |--file_B
+            root/ # Before.
+            |--archive.zip
+                |--directory_A/
+                    |--directory_same/
+                        |--file_A
+                |--directory_B/
+                    |--directory_same/
+                        |--file_B
 
-        root/ # After.
-        |--directory_same.zip
-            |--file_A
-        |--directory_same_.zip
-            |--file_B
-        |--archive.zip
-            |--directory_A/
-            |--directory_B/
+            root/ # After.
+            |--directory_same.zip
+                |--file_A
+            |--directory_same_.zip
+                |--file_B
+            |--archive.zip
+                |--directory_A/
+                |--directory_B/
 
         Args:
             took_out_root (Path | None, optional): Defaults to None.
@@ -202,6 +203,7 @@ class TakeOutArchive(EditArchive):
         Returns:
             Paths | None: Retune list of directory path which is took out
                 if archive is successfully open.
+
         """
         if self.is_disable_archive():
             return None
@@ -248,6 +250,7 @@ class TakeOutArchive(EditArchive):
                 User defined path of temporary working space
                     including date time string to edit archive.
                 It's used for argument "edit_root" of class "EditArchive".
+
         """
         self.__initialize_super_class(
             working_root, history_root, trash_root, override, jst, edit_root

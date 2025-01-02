@@ -245,15 +245,16 @@ class CompressArchive:
 
             If archives isn't divided, following list is returned.
 
-            [<export directory>/<archive name>.<archive format>]
+                [<export directory>/<archive name>.<archive format>]
 
             If archive is divided by three, following list is returned.
 
-            [
-                <export directory>/<archive name>.<archive format>,
-                <export directory>/<archive name>#0001.<archive format>,
-                <export directory>/<archive name>#0002.<archive format>
-            ]
+                [
+                    <export directory>/<archive name>.<archive format>,
+                    <export directory>/<archive name>#0001.<archive format>,
+                    <export directory>/<archive name>#0002.<archive format>
+                ]
+
         """
         self._close_archive()
         return self._archived
@@ -273,18 +274,19 @@ class CompressArchive:
             e.g., if contents of archive target is follow,
                 and archive_root is "root/group/".
 
-            root/
-                |--group/
-                    |--file1.txt
-                    |--type/
-                        |--file2.txt
+                root/
+                    |--group/
+                        |--file1.txt
+                        |--type/
+                            |--file2.txt
 
             Compressed archive will contain following file and directory
                 as relative path.
 
-            |--file1.txt
-            |--type/
-                |--file2.txt
+                |--file1.txt
+                |--type/
+                    |--file2.txt
+
         """
         parent_root: Path = archive_target.parent
 
@@ -301,13 +303,14 @@ class CompressArchive:
         """Compress list of file or directory at once.
 
         Args:
-            archive_targets (Paths): List of path of compress target.
+            paths (Paths): List of path of compress target.
 
             archive_root (Path | None, optional): Defaults to None.
                 Root directory which is used for generating relative path
                     in the inner of archive.
                 It's used for argument "archive_root"
                     of method "compress_archive".
+
         """
         for path in paths:
             self.compress_archive(path, archive_root=archive_root)
@@ -337,47 +340,48 @@ class CompressArchive:
 
                 e.g., first sample to explain divided archive is follow.
 
-                target/
-                    |--file1.txt (4 byte)
-                    |--file2.txt (4 byte)
-                    |--file3.txt (4 byte)
+                    target/
+                        |--file1.txt (4 byte)
+                        |--file2.txt (4 byte)
+                        |--file3.txt (4 byte)
 
                 Archives of first sample are compressed as follow.
 
-                output_root/
-                    |--target.<archive format> (file1.txt + file2.txt)
-                    |--target#0001.<archive format> (file3.txt)
+                    output_root/
+                        |--target.<archive format> (file1.txt + file2.txt)
+                        |--target#0001.<archive format> (file3.txt)
 
                 e.g., second sample to explain divided archive is follow.
 
-                target/
-                    |--file1.txt (12 byte)
-                    |--file2.txt (4 byte)
-                    |--file3.txt (4 byte)
+                    target/
+                        |--file1.txt (12 byte)
+                        |--file2.txt (4 byte)
+                        |--file3.txt (4 byte)
 
                 Archives of first sample are compressed as follow.
 
-                output_root/
-                    |--target.<archive format> (file1.txt)
-                    |--target#0001.<archive format> (file2.txt + file3.txt)
+                    output_root/
+                        |--target.<archive format> (file1.txt)
+                        |--target#0001.<archive format> (file2.txt + file3.txt)
 
                 e.g., third sample to explain divided archive is follow.
 
-                target/
-                    |--file1.txt (10 byte)
-                    |--file2.txt (10 byte)
-                    |--file3.txt (10 byte)
+                    target/
+                        |--file1.txt (10 byte)
+                        |--file2.txt (10 byte)
+                        |--file3.txt (10 byte)
 
                 Archives of first sample are compressed as follow.
 
-                output_root/
-                    |--target.<archive format> (file1.txt)
-                    |--target#0001.<archive format> (file2.txt)
-                    |--target#0002.<archive format> (file3.txt)
+                    output_root/
+                        |--target.<archive format> (file1.txt)
+                        |--target#0001.<archive format> (file2.txt)
+                        |--target#0002.<archive format> (file3.txt)
 
             compress (bool, optional): Defaults to False.
                 If it's True, you can compress archive by LZMA format.
                 Default is no compressed.
+
         """
         self._init_variables(output_root, compress)
         self._init_limit_byte(limit_byte)
