@@ -50,7 +50,9 @@ def json_dump(source: Json, compress: bool = False) -> str:
 
 
 def json_export(
-    export_path: Path, source: Json, compress: bool = False
+    export_path: Path,
+    source: Json,
+    compress: bool = False,
 ) -> Path:
     """Export data used for json format.
 
