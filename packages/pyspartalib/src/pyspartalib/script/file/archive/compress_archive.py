@@ -113,7 +113,9 @@ class CompressArchive:
         return get_current_time()
 
     def _get_archive_information(
-        self, target: Path, relative: Path
+        self,
+        target: Path,
+        relative: Path,
     ) -> ZipInfo:
         information: ZipInfo = ZipInfo(filename=str(relative))
 
@@ -147,7 +149,11 @@ class CompressArchive:
             archive_file.close()
 
     def _add_file_to_archive(
-        self, is_dir: bool, reset: bool, target: Path, root: Path
+        self,
+        is_dir: bool,
+        reset: bool,
+        target: Path,
+        root: Path,
     ) -> None:
         if reset:
             self._reset_archive_byte()
@@ -203,7 +209,7 @@ class CompressArchive:
             if self._within_allowance(source_byte):
                 if include_files:
                     if not self._within_allowance(
-                        self._estimate_archived_size(source_byte)
+                        self._estimate_archived_size(source_byte),
                     ):
                         archive_reset = True
             elif include_files:
@@ -260,7 +266,9 @@ class CompressArchive:
         return self._archived
 
     def compress_archive(
-        self, archive_target: Path, archive_root: Path | None = None
+        self,
+        archive_target: Path,
+        archive_root: Path | None = None,
     ) -> None:
         """Compress file or directory you selected.
 
@@ -298,7 +306,9 @@ class CompressArchive:
             self._compress_child(archive_target, parent_root)
 
     def compress_at_once(
-        self, paths: Paths, archive_root: Path | None = None
+        self,
+        paths: Paths,
+        archive_root: Path | None = None,
     ) -> None:
         """Compress list of file or directory at once.
 

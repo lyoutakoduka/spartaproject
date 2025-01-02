@@ -46,7 +46,7 @@ class TakeOutArchive(EditArchive):
 
     def _get_archive_name(self, archive_id: str) -> str:
         archive_path: Path = get_avoid_path(
-            rename_format(Path(self.get_took_out_root(), archive_id))
+            rename_format(Path(self.get_took_out_root(), archive_id)),
         )
         return archive_path.stem
 
@@ -80,7 +80,8 @@ class TakeOutArchive(EditArchive):
         return {
             str(directory_root): file_paths
             for directory_root in walk_iterator(
-                self.get_edit_root(), file=False
+                self.get_edit_root(),
+                file=False,
             )
             if (file_paths := self._get_take_out(directory_root))
         }
@@ -253,6 +254,11 @@ class TakeOutArchive(EditArchive):
 
         """
         self.__initialize_super_class(
-            working_root, history_root, trash_root, override, jst, edit_root
+            working_root,
+            history_root,
+            trash_root,
+            override,
+            jst,
+            edit_root,
         )
         self.__initialize_variables()

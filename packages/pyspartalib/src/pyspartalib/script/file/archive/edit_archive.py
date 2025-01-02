@@ -39,13 +39,18 @@ class EditArchive(SafeTrash):
         super().__del__()
 
     def __initialize_variables(
-        self, edit_root: Path | None, override: bool, jst: bool
+        self,
+        edit_root: Path | None,
+        override: bool,
+        jst: bool,
     ) -> None:
         self._disable_archive: bool = True
         self._is_lzma_before: bool = False
         self._archive_path: Path | None = None
         self._edit_root: Path = self.create_date_time_space(
-            body_root=edit_root, override=override, jst=jst
+            body_root=edit_root,
+            override=override,
+            jst=jst,
         )
 
     def _initialize_archive_open(self) -> None:
@@ -106,18 +111,20 @@ class EditArchive(SafeTrash):
         return compress_archive.close_archived()
 
     def _decompress_archive(
-        self, decompress_archive: DecompressArchive
+        self,
+        decompress_archive: DecompressArchive,
     ) -> None:
         self._decompressed: Paths = decompress_archive.sequential_archives(
-            self.get_archive_path()
+            self.get_archive_path(),
         )
         decompress_archive.decompress_at_once(self._decompressed)
 
     def _record_compress_type(
-        self, decompress_archive: DecompressArchive
+        self,
+        decompress_archive: DecompressArchive,
     ) -> None:
         self._is_lzma_before = decompress_archive.is_lzma_archive(
-            self.get_archive_path()
+            self.get_archive_path(),
         )
 
     def _get_decompress_stamp(self) -> None:
@@ -229,7 +236,10 @@ class EditArchive(SafeTrash):
 
         self._initialize_archive_open()
         self._initialize_archive_element(
-            archive_path, limit_byte, compress, protected
+            archive_path,
+            limit_byte,
+            compress,
+            protected,
         )
 
         self._get_decompress_stamp()
@@ -284,6 +294,10 @@ class EditArchive(SafeTrash):
 
         """
         self.__initialize_super_class(
-            working_root, history_root, trash_root, override, jst
+            working_root,
+            history_root,
+            trash_root,
+            override,
+            jst,
         )
         self.__initialize_variables(edit_root, override, jst)

@@ -41,20 +41,25 @@ class DecompressArchive:
         return False
 
     def _decompress_file(
-        self, file_path: Path, information: ZipInfo, archive_file: ZipFile
+        self,
+        file_path: Path,
+        information: ZipInfo,
+        archive_file: ZipFile,
     ) -> None:
         create_parent(file_path)
         byte_export(file_path, archive_file.read(information.filename))
 
     def _restore_timestamp(
-        self, file_path: Path, information: ZipInfo
+        self,
+        file_path: Path,
+        information: ZipInfo,
     ) -> None:
         latest: datetime = datetime(*information.date_time)
         comment: bytes = information.comment
 
         if 0 < len(comment):
             content: StrPair = string_pair_from_json(
-                json_load(set_decoding(comment))
+                json_load(set_decoding(comment)),
             )
 
             if "latest" in content:
