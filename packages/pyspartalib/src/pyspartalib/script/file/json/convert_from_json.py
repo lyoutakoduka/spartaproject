@@ -57,10 +57,12 @@ def _convert_unknown(value: Single, key: str | None) -> Single:
     if isinstance(value, float):
         return _to_decimal(value)
 
-    if isinstance(value, str):
-        if key is not None:
-            if path := _filter_path(value, key):
-                return path
+    if (
+        isinstance(value, str)
+        and (key is not None)
+        and (path := _filter_path(value, key))
+    ):
+        return path
 
     return value
 
