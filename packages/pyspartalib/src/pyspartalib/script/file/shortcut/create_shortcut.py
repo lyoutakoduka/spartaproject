@@ -41,7 +41,7 @@ def _get_resource_script() -> str:
 def _get_shortcut_command(shortcut_target: Path, shortcut_path: Path) -> str:
     commands: Strs = [_get_resource_script()]
     return get_double_quoted_command(
-        commands + _get_quoted_command(shortcut_target, shortcut_path)
+        commands + _get_quoted_command(shortcut_target, shortcut_path),
     )
 
 

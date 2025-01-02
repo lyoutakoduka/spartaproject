@@ -50,12 +50,14 @@ def _get_quoted_path(path: Path) -> str:
 
 def _get_shortcut_command(shortcut_path: Path) -> str:
     return get_double_quoted_command(
-        [_get_script_string(), _get_quoted_path(shortcut_path)]
+        [_get_script_string(), _get_quoted_path(shortcut_path)],
     )
 
 
 def _execute_script(
-    shortcut_path: Path, platform: str | None, forward: Path | None
+    shortcut_path: Path,
+    platform: str | None,
+    forward: Path | None,
 ) -> StrGene:
     return execute_powershell(
         [_get_shortcut_command(shortcut_path)],
@@ -103,5 +105,5 @@ def read_shortcut(
     _check_shortcut_exists(shortcut_path)
 
     return _cleanup_result(
-        list(_execute_script(shortcut_path, platform, forward))
+        list(_execute_script(shortcut_path, platform, forward)),
     )
