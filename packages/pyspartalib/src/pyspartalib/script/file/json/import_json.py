@@ -26,6 +26,7 @@ def json_load(source: str) -> Json:
 
     Returns:
         Json: Json data converted to user defined type.
+
     """
     result: Json = loads(source)  # Should cast to type Json.
     return result
@@ -43,5 +44,6 @@ def json_import(import_path: Path, encoding: str | None = None) -> Json:
 
     Returns:
         Json: Json data converted to user defined type.
+
     """
     return json_load(text_import(import_path, encoding=encoding))

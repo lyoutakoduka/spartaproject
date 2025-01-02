@@ -11,19 +11,19 @@ from pyspartalib.script.file.text.export_file import text_export
 
 
 def json_dump(source: Json, compress: bool = False) -> str:
-    """Function to convert data used for json format.
+    """Convert data used for json format.
 
-    Return following triple quoted text if argument "source" is...
+    When argument "source" is follow.
 
-    {"bool": True, "int": 1, "str": "1"}
+        {"bool": True, "int": 1, "str": "1"}
 
-    '''
-      {
-        "bool": true,
-        "int": 1,
-        "str": "1"
-      }
-    '''
+    Return following text.
+
+        {
+            "bool": true,
+            "int": 1,
+            "str": "1"
+        }
 
     Args:
         source (Json): Data used for json format you want to convert.
@@ -31,10 +31,11 @@ def json_dump(source: Json, compress: bool = False) -> str:
         compress (bool, optional): Defaults to False.
             Return following single quoted text if argument "compress" is True.
 
-            '{"bool":true,"int":1,"str":"1"}'
+                {"bool":true,"int":1,"str":"1"}
 
     Returns:
         str: Converted text used for json format.
+
     """
     separators: StrTuple | None = (",", ":") if compress else None
     indent: int | None = None if compress else 2
@@ -51,7 +52,7 @@ def json_dump(source: Json, compress: bool = False) -> str:
 def json_export(
     export_path: Path, source: Json, compress: bool = False
 ) -> Path:
-    """Function to export data used for json format.
+    """Export data used for json format.
 
     Args:
         export_path (Path): Path which is used for exporting data.
@@ -64,5 +65,6 @@ def json_export(
 
     Returns:
         Path: Path of data which is finally exported.
+
     """
     return text_export(export_path, json_dump(source, compress=compress))

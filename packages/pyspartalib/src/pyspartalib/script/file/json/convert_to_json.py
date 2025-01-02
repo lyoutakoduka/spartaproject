@@ -37,6 +37,7 @@ def to_safe_json(value_json: Json) -> Json:
 
     Returns:
         Json: Converted data which is default json format.
+
     """
     if isinstance(value_json, Dict):
         return {key: to_safe_json(value) for key, value in value_json.items()}
@@ -58,6 +59,7 @@ def multiple_to_json(value_json: Multi) -> Json:
 
     Returns:
         Json: Converted data which is json format.
+
     """
     if isinstance(value_json, List):
         return [_convert_unknown(value) for value in value_json]
@@ -74,6 +76,7 @@ def multiple2_to_json(value_json: Multi2) -> Json:
 
     Returns:
         Json: Converted data which is json format.
+
     """
     if isinstance(value_json, List):
         return [multiple_to_json(value) for value in value_json]
