@@ -14,6 +14,10 @@ def _get_separators(compress: bool) -> StrTuple | None:
     return (",", ":") if compress else None
 
 
+def _get_indent(compress: bool) -> int | None:
+    return None if compress else 2
+
+
 def json_dump(source: Json, compress: bool = False) -> str:
     """Convert data used for json format.
 
@@ -42,7 +46,7 @@ def json_dump(source: Json, compress: bool = False) -> str:
 
     """
     separators: StrTuple | None = _get_separators(compress)
-    indent: int | None = None if compress else 2
+    indent: int | None = _get_indent(compress)
 
     return dumps(
         source,
