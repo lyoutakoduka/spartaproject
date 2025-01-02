@@ -4,7 +4,6 @@
 
 from decimal import Decimal
 from pathlib import PurePath
-from typing import Dict, List
 
 from pyspartalib.context.file.json_context import Json, Multi, Multi2, Single
 
