@@ -12,12 +12,12 @@ from pyspartalib.context.default.string_context import StrPair, StrPair2
 from pyspartalib.context.extension.decimal_context import DecPair, DecPair2
 from pyspartalib.context.extension.path_context import PathPair, PathPair2
 
-Basic = bool | int | float | str | Decimal | Path
+Single = bool | int | float | str | Decimal | Path
 
-BasicPair = dict[str, Basic]
+SinglePair = dict[str, Single]
 SectionPair = BoolPair | IntPair | FloatPair | DecPair | StrPair | PathPair
 
-BasicPair2 = dict[str, BasicPair]
+SinglePair2 = dict[str, SinglePair]
 SectionPair2 = dict[str, SectionPair]
 
 Config = (
@@ -27,6 +27,6 @@ Config = (
     | DecPair2
     | StrPair2
     | PathPair2
-    | BasicPair2
+    | SinglePair2
     | SectionPair2
 )
