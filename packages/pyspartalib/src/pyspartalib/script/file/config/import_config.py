@@ -7,16 +7,16 @@ from decimal import Decimal
 from pathlib import Path
 
 from pyspartalib.context.default.string_context import StrsPair
-from pyspartalib.context.file.config_context import Basic, Config
+from pyspartalib.context.file.config_context import Config, Single
 from pyspartalib.script.file.text.import_file import text_import
 
 
-def _find_other(config: ConfigParser, section: str, option: str) -> Basic:
+def _find_other(config: ConfigParser, section: str, option: str) -> Single:
     text: str = config.get(section, option)
     return Path(text) if "path" in option else text
 
 
-def _load_each_type(config: ConfigParser, section: str, option: str) -> Basic:
+def _load_each_type(config: ConfigParser, section: str, option: str) -> Single:
     for i in range(3):
         try:
             match i:
