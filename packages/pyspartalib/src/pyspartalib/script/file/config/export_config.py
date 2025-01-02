@@ -6,7 +6,7 @@ from configparser import ConfigParser
 from io import StringIO
 from pathlib import Path
 
-from pyspartalib.context.file.config_context import Config
+from pyspartalib.context.file.config_context import Config, Section
 from pyspartalib.script.file.text.export_file import text_export
 
 
@@ -41,11 +41,13 @@ def _cleanup_key(text: str) -> str:
     return text.strip()
 
 
+def _cleanup_section(section: Section) -> Section:
+    return {_cleanup_key(key): value for key, value in section.items()}
+
+
 def _cleanup_key_default(source_config: Config) -> Config:
     return {
-        _cleanup_key(section_key): {
-            _cleanup_key(key): value for key, value in section.items()
-        }
+        _cleanup_key(section_key): _cleanup_section(section)
         for section_key, section in source_config.items()
     }
 
