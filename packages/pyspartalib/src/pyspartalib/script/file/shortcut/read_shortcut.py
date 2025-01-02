@@ -72,7 +72,7 @@ def _check_shortcut_exists(shortcut_path: Path) -> None:
 
 
 def _cleanup_result(result: Strs) -> Path | None:
-    if 1 == len(result):
+    if len(result) == 1:
         return _convert_to_linux(_convert_to_path(result[0]))
 
     return None
