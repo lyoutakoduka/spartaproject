@@ -19,12 +19,15 @@ def _find_other(config: ConfigParser, section: str, option: str) -> Basic:
 def _load_each_type(config: ConfigParser, section: str, option: str) -> Basic:
     for i in range(3):
         try:
-            if 0 == i:
-                return config.getint(section, option)
-            elif 1 == i:
-                return Decimal(str(config.getfloat(section, option)))
-            elif 2 == i:
-                return config.getboolean(section, option)
+            match i:
+                case 0:
+                    return config.getint(section, option)
+                case 1:
+                    return Decimal(str(config.getfloat(section, option)))
+                case 2:
+                    return config.getboolean(section, option)
+                case _:
+                    pass
         except BaseException:
             pass
 
