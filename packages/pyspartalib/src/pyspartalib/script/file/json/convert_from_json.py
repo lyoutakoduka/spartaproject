@@ -89,13 +89,13 @@ def from_safe_json(value_json: Json, key: str | None = None) -> Json:
         Json: Converted data which is custom json format.
 
     """
-    if isinstance(value_json, Dict):
+    if isinstance(value_json, dict):
         return {
             key: from_safe_json(value, key=key)
             for key, value in value_json.items()
         }
 
-    if isinstance(value_json, List):
+    if isinstance(value_json, list):
         return [from_safe_json(value) for value in value_json]
 
     return _convert_unknown(value_json, key)
@@ -111,7 +111,7 @@ def bool_array_from_json(value_json: Json) -> Bools:
         Bools: Converted data which is list of type "bool".
 
     """
-    if not isinstance(value_json, List):
+    if not isinstance(value_json, list):
         return []
 
     return [value for value in value_json if isinstance(value, bool)]
@@ -127,7 +127,7 @@ def integer_array_from_json(value_json: Json) -> Ints:
         Ints: Converted data which is list of type "int".
 
     """
-    if not isinstance(value_json, List):
+    if not isinstance(value_json, list):
         return []
 
     return [value for value in value_json if isinstance(value, int)]
@@ -143,7 +143,7 @@ def string_array_from_json(value_json: Json) -> Strs:
         Strs: Converted data which is list of type "str".
 
     """
-    if not isinstance(value_json, List):
+    if not isinstance(value_json, list):
         return []
 
     return [value for value in value_json if isinstance(value, str)]
@@ -159,7 +159,7 @@ def decimal_array_from_json(value_json: Json) -> Decs:
         Decs: Converted data which is list of type "Decimal".
 
     """
-    if not isinstance(value_json, List):
+    if not isinstance(value_json, list):
         return []
 
     return [
@@ -177,7 +177,7 @@ def path_array_from_json(value_json: Json) -> Paths:
         Paths: Converted data which is list of type "Path".
 
     """
-    if not isinstance(value_json, List):
+    if not isinstance(value_json, list):
         return []
 
     return [_to_path(value) for value in value_json if isinstance(value, str)]
@@ -193,7 +193,7 @@ def bool_pair_from_json(value_json: Json) -> BoolPair:
         BoolPair: Converted data which is dictionary of type "bool".
 
     """
-    if not isinstance(value_json, Dict):
+    if not isinstance(value_json, dict):
         return {}
 
     return {
@@ -213,7 +213,7 @@ def integer_pair_from_json(value_json: Json) -> IntPair:
         IntPair: Converted data which is dictionary of type "int".
 
     """
-    if not isinstance(value_json, Dict):
+    if not isinstance(value_json, dict):
         return {}
 
     return {
@@ -233,7 +233,7 @@ def string_pair_from_json(value_json: Json) -> StrPair:
         StrPair: Converted data which is dictionary of type "str".
 
     """
-    if not isinstance(value_json, Dict):
+    if not isinstance(value_json, dict):
         return {}
 
     return {
@@ -253,7 +253,7 @@ def decimal_pair_from_json(value_json: Json) -> DecPair:
         DecPair: Converted data which is dictionary of type "Decimal".
 
     """
-    if not isinstance(value_json, Dict):
+    if not isinstance(value_json, dict):
         return {}
 
     return {
@@ -273,7 +273,7 @@ def path_pair_from_json(value_json: Json) -> PathPair:
         PathPair: Converted data which is dictionary of type "Path".
 
     """
-    if not isinstance(value_json, Dict):
+    if not isinstance(value_json, dict):
         return {}
 
     paths: PathPair = {}
@@ -298,7 +298,7 @@ def bool_array2_from_json(value_json: Json) -> Bools2:
         Bools2: Converted data which is 2 dimensional list of type "bool".
 
     """
-    if not isinstance(value_json, List):
+    if not isinstance(value_json, list):
         return []
 
     return [bool_array_from_json(value) for value in value_json]
@@ -314,7 +314,7 @@ def integer_array2_from_json(value_json: Json) -> Ints2:
         Ints2: Converted data which is 2 dimensional list of type "int".
 
     """
-    if not isinstance(value_json, List):
+    if not isinstance(value_json, list):
         return []
 
     return [integer_array_from_json(value) for value in value_json]
@@ -330,7 +330,7 @@ def string_array2_from_json(value_json: Json) -> Strs2:
         Strs2: Converted data which is 2 dimensional list of type "str".
 
     """
-    if not isinstance(value_json, List):
+    if not isinstance(value_json, list):
         return []
 
     return [string_array_from_json(value) for value in value_json]
@@ -346,7 +346,7 @@ def decimal_array2_from_json(value_json: Json) -> Decs2:
         Decs2: Converted data which is 2 dimensional list of type "Decimal".
 
     """
-    if not isinstance(value_json, List):
+    if not isinstance(value_json, list):
         return []
 
     return [decimal_array_from_json(value) for value in value_json]
@@ -362,7 +362,7 @@ def path_array2_from_json(value_json: Json) -> Paths2:
         Paths2: Converted data which is 2 dimensional list of type "Path".
 
     """
-    if not isinstance(value_json, List):
+    if not isinstance(value_json, list):
         return []
 
     return [path_array_from_json(value) for value in value_json]
@@ -379,7 +379,7 @@ def bool_pair2_from_json(value_json: Json) -> BoolPair2:
             Converted data which is 2 dimensional dictionary of type "bool".
 
     """
-    if not isinstance(value_json, Dict):
+    if not isinstance(value_json, dict):
         return {}
 
     return {
@@ -398,7 +398,7 @@ def integer_pair2_from_json(value_json: Json) -> IntPair2:
             Converted data which is 2 dimensional dictionary of type "int".
 
     """
-    if not isinstance(value_json, Dict):
+    if not isinstance(value_json, dict):
         return {}
 
     return {
@@ -417,7 +417,7 @@ def string_pair2_from_json(value_json: Json) -> StrPair2:
             Converted data which is 2 dimensional dictionary of type "str".
 
     """
-    if not isinstance(value_json, Dict):
+    if not isinstance(value_json, dict):
         return {}
 
     return {
@@ -436,7 +436,7 @@ def decimal_pair2_from_json(value_json: Json) -> DecPair2:
             Converted data which is 2 dimensional dictionary of type "Decimal".
 
     """
-    if not isinstance(value_json, Dict):
+    if not isinstance(value_json, dict):
         return {}
 
     return {
@@ -455,7 +455,7 @@ def path_pair2_from_json(value_json: Json) -> PathPair2:
             Converted data which is 2 dimensional dictionary of type "Path".
 
     """
-    if not isinstance(value_json, Dict):
+    if not isinstance(value_json, dict):
         return {}
 
     return {
