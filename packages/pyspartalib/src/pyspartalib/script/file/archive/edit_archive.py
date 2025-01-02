@@ -104,7 +104,7 @@ class EditArchive(SafeTrash):
         )
 
         compress_archive.compress_at_once(
-            [Path(path_text) for path_text in archive_stamp.keys()],
+            [Path(path_text) for path_text in archive_stamp],
             archive_root=self.get_edit_root(),
         )
 

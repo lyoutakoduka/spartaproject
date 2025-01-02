@@ -146,9 +146,8 @@ class DecompressArchive:
             depth=1,
             suffix=get_format(),
         ):
-            if source_archive != path:
-                if self._is_sequential_archive(path):
-                    sequential += [path]
+            if (source_archive != path) and self._is_sequential_archive(path):
+                sequential += [path]
 
         return sequential
 

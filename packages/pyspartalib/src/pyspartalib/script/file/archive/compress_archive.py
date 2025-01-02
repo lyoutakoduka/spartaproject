@@ -207,11 +207,12 @@ class CompressArchive:
                 source_byte = self._estimate_compressed_size(source_byte)
 
             if self._within_allowance(source_byte):
-                if include_files:
-                    if not self._within_allowance(
+                if include_files and (
+                    not self._within_allowance(
                         self._estimate_archived_size(source_byte),
-                    ):
-                        archive_reset = True
+                    )
+                ):
+                    archive_reset = True
             elif include_files:
                 archive_reset = True
         else:
@@ -239,9 +240,8 @@ class CompressArchive:
 
                 for path in walk_iterator(target):
                     self._compress_child(path, root)
-        else:
-            if self._not_still_archived(False, target):
-                self._update_archive_byte(target, root)
+        elif self._not_still_archived(False, target):
+            self._update_archive_byte(target, root)
 
     def close_archived(self) -> Paths:
         """Close archive and return archived list.

@@ -87,7 +87,7 @@ class TakeOutArchive(EditArchive):
         }
 
     def _remove_took_out(self, inside_directory: PathsPair) -> None:
-        self.trash_at_once([Path(text) for text in inside_directory.keys()])
+        self.trash_at_once([Path(text) for text in inside_directory])
 
     def _took_out_cycle(self, archive_paths: Paths) -> None:
         inside_directory: PathsPair = self._get_inside_directory()
