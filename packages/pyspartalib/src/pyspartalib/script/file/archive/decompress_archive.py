@@ -49,6 +49,9 @@ class DecompressArchive:
         create_parent(file_path)
         byte_export(file_path, archive_file.read(information.filename))
 
+    def _get_content(self, comment: bytes) -> StrPair:
+        return string_pair_from_json(json_load(set_decoding(comment)))
+
     def _restore_timestamp(
         self,
         file_path: Path,
@@ -58,9 +61,7 @@ class DecompressArchive:
         comment: bytes = information.comment
 
         if len(comment) > 0:
-            content: StrPair = string_pair_from_json(
-                json_load(set_decoding(comment)),
-            )
+            content: StrPair = self._get_content(comment)
 
             if "latest" in content:
                 latest = datetime.fromisoformat(content["latest"])
