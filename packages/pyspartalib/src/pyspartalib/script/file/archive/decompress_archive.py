@@ -2,7 +2,7 @@
 
 """Module to decompress file or directory by archive format."""
 
-from datetime import datetime
+from datetime import UTC, datetime
 from os import sep
 from pathlib import Path
 from zipfile import ZIP_LZMA, ZipFile, ZipInfo
@@ -57,7 +57,7 @@ class DecompressArchive:
         file_path: Path,
         information: ZipInfo,
     ) -> None:
-        latest: datetime = datetime(*information.date_time)
+        latest: datetime = datetime(*information.date_time, tzinfo=UTC)
         comment: bytes = information.comment
 
         if len(comment) > 0:
