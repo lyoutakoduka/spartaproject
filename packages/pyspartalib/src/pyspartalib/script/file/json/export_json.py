@@ -45,15 +45,12 @@ def json_dump(source: Json, compress: bool = False) -> str:
         str: Converted text used for json format.
 
     """
-    separators: StrTuple | None = _get_separators(compress)
-    indent: int | None = _get_indent(compress)
-
     return dumps(
         source,
         ensure_ascii=False,
         sort_keys=True,
-        indent=indent,
-        separators=separators,
+        indent=_get_indent(compress),
+        separators=_get_separators(compress),
     )
 
 
