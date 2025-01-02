@@ -99,6 +99,7 @@ def create_shortcut(
 
     Returns:
         bool: True if creating shortcut is success.
+
     """
     _check_shortcut_exists(shortcut_target)
     _cleanup_shortcut(shortcut_path, remove_root)

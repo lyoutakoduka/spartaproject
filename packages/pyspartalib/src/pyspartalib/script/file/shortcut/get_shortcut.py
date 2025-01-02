@@ -26,6 +26,7 @@ def get_shortcut(target_path: Path, shortcut_root: Path) -> Path:
 
     Returns:
         Path: Path of the shortcut file that is created.
+
     """
     path: Path = Path(shortcut_root, target_path.name)
     return path.with_suffix(target_path.suffix + ".lnk")

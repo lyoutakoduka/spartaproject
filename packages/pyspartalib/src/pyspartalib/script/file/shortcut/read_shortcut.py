@@ -98,6 +98,7 @@ def read_shortcut(
 
     Returns:
         Path | None: Path which is a link destination of shortcut.
+
     """
     _check_shortcut_exists(shortcut_path)
 
