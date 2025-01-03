@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
-"""Interface module to separate pure python code and other.
+"""Interface module of "pytest".
 
-pytest: pytest
+Separate pure python code and other.
 """
 
 from pytest import fail, raises  # noqa: F401 PT013 # type: ignore
