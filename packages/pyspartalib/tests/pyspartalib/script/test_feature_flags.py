@@ -14,9 +14,11 @@ def _get_current_file() -> Path:
 
 def test_develop() -> None:
     """Test when development environment."""
-    assert in_development(str(_get_current_file()))
+    if not in_development(str(_get_current_file())):
+        raise ValueError
 
 
 def test_production() -> None:
     """Test when production environment."""
-    assert not in_development()
+    if in_development():
+        raise ValueError

@@ -37,7 +37,8 @@ def test_name() -> None:
     text_print()
 
     expected_function: str = "text_print"
-    assert expected_function == text_print.__name__
+    if expected_function != text_print.__name__:
+        raise ValueError
 
 
 def test_doc() -> None:
@@ -51,7 +52,8 @@ def test_doc() -> None:
     text_print()
 
     expected_doc: str = "Text doc."
-    assert expected_doc == text_print.__doc__
+    if expected_doc != text_print.__doc__:
+        raise ValueError
 
 
 def test_text() -> None:
@@ -65,4 +67,5 @@ def test_text() -> None:
     text_print()
 
     expected_text: str = "Hello!Hello!"
-    assert expected_text == test_instance.show()
+    if expected_text != test_instance.show():
+        raise ValueError

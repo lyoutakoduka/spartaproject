@@ -19,7 +19,8 @@ def test_current() -> None:
         "function": "test_current",
         "line": 23,
     }
-    assert expected == current_frame()
+    if expected != current_frame():
+        raise ValueError
 
 
 def test_offset() -> None:
@@ -31,6 +32,7 @@ def test_offset() -> None:
     }
 
     def inside_function() -> None:
-        assert expected == current_frame(offset=1)
+        if expected != current_frame(offset=1):
+            raise ValueError
 
     inside_function()
