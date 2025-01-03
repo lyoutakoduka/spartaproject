@@ -9,5 +9,3 @@ node_modules
 
 # Isolate
 .vscode/sftp.json
-tools/sync/home/id/.bash_profile
-tools/sync/home/id/.pypirc
