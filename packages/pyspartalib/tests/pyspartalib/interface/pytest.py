@@ -5,4 +5,9 @@
 Separate pure python code and other.
 """
 
-from pytest import fail, raises  # noqa: F401 PT013 # type: ignore
+import pytest
+
+fail = pytest.fail
+raises = pytest.raises
+
+__all__ = ["fail", "raises"]
