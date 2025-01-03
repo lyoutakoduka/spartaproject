@@ -47,7 +47,6 @@ def test_doc() -> None:
     @test_instance.decorator
     def text_print() -> None:
         """Text doc."""
-        pass
 
     text_print()
 
