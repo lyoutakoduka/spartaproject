@@ -16,8 +16,13 @@ def _size_error(
     result: Ints,
     message: str | None = None,
 ) -> None:
-    if len(result) != expected:
-        raise ValueError(message)
+    if len(result) == expected:
+        return
+
+    if message is None:
+        raise ValueError
+
+    raise ValueError(message)
 
 
 def _zero_error(result: int, message: str | None = None) -> None:
