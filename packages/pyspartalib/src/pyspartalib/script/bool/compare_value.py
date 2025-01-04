@@ -11,6 +11,13 @@ from pyspartalib.context.default.integer_context import Ints
 from pyspartalib.context.default.string_context import Strs2
 
 
+def _raise_error(message: str | None) -> None:
+    if message is None:
+        raise ValueError
+
+    raise ValueError(message)
+
+
 def _size_error(
     expected: int,
     result: Ints,
@@ -19,30 +26,21 @@ def _size_error(
     if len(result) == expected:
         return
 
-    if message is None:
-        raise ValueError
-
-    raise ValueError(message)
+    _raise_error(message)
 
 
 def _zero_error(result: int, message: str | None = None) -> None:
     if result != 0:
         return
 
-    if message is None:
-        raise ValueError
-
-    raise ValueError(message)
+    _raise_error(message)
 
 
 def _difference_error(result: Strs2, message: str | None = None) -> None:
     if len(set(result)) > 1:
         return
 
-    if message is None:
-        raise ValueError
-
-    raise ValueError(message)
+    _raise_error(message)
 
 
 def _get_flag_counts(lefts: BoolType, rights: BoolType) -> Ints:
