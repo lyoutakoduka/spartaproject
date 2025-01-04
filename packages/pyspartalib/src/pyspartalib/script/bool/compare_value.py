@@ -59,6 +59,10 @@ def _confirm_list_same(lefts: Bools, rights: Bools) -> bool:
     return lefts == rights
 
 
+def _confirm_list_single(result: Bools2) -> bool:
+    return len(set(result)) == 1
+
+
 def bool_compare_array(lefts: Bools, rights: Bools) -> bool:
     _check_arguments_size(lefts, rights)
 
@@ -73,4 +77,4 @@ def bool_compare_pair(lefts: BoolPair, rights: BoolPair) -> bool:
 
     _difference_error(sorted_keys, message="unmatch")
 
-    return len(set(_get_sorted_flags(sorted_keys, flags_pair))) == 1
+    return _confirm_list_single(_get_sorted_flags(sorted_keys, flags_pair))
