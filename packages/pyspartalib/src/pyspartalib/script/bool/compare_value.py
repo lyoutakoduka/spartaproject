@@ -43,9 +43,14 @@ def _get_sorted_flags(sorted_keys: Strs2, flags_pair: BoolPairs) -> Bools2:
     ]
 
 
+def _same_error(lefts: Bools, rights: Bools) -> bool:
+    return lefts == rights
+
+
 def bool_compare_array(lefts: Bools, rights: Bools) -> bool:
     _check_arguments_size(lefts, rights)
-    return lefts == rights
+
+    return _same_error(lefts, rights)
 
 
 def bool_compare_pair(lefts: BoolPair, rights: BoolPair) -> bool:
