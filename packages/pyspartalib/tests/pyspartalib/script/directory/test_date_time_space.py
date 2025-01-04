@@ -17,6 +17,11 @@ def _path_name_error(expected: Path, result: Path) -> None:
         raise ValueError
 
 
+def _path_exists_error(path: Path) -> None:
+    if not path.exists():
+        raise FileNotFoundError
+
+
 def _compare_time_path(result: Path) -> None:
     _path_name_error(get_initial_time_path(), result)
 
@@ -27,6 +32,5 @@ def test_create() -> None:
         temporary_path: Path = Path(temporary_directory)
         time_path: Path = create_working_space(temporary_path, override=True)
 
-        assert time_path.exists()
-
+        _path_exists_error(time_path)
         _compare_time_path(get_relative(time_path, root_path=temporary_path))
