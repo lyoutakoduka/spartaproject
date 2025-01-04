@@ -20,6 +20,11 @@ from pyspartalib.script.shell.execute_powershell import (
 )
 
 
+def _no_exists_error(path: Path) -> None:
+    if not path.exists():
+        raise FileNotFoundError
+
+
 def _convert_to_windows(path: Path) -> Path:
     if is_platform_linux():
         return convert_to_windows(path)
@@ -56,11 +61,6 @@ def _execute_script(
         platform=platform,
         forward=forward,
     )
-
-
-def _no_exists_error(path: Path) -> None:
-    if not path.exists():
-        raise FileNotFoundError
 
 
 def _cleanup_shortcut(shortcut_path: Path, remove_root: Path | None) -> None:
