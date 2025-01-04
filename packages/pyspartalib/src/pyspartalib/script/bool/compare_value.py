@@ -20,6 +20,11 @@ def _size_error(
         raise ValueError(message)
 
 
+def _zero_error(result: int, message: str | None = None) -> None:
+    if result == 0:
+        raise ValueError(message)
+
+
 def _get_flag_counts(lefts: BoolType, rights: BoolType) -> Ints:
     return list({len(flags) for flags in [lefts, rights]})
 
@@ -28,11 +33,7 @@ def _check_arguments_size(lefts: BoolType, rights: BoolType) -> None:
     flag_counts: Ints = _get_flag_counts(lefts, rights)
 
     _size_error(1, flag_counts, message="size")
-
-    if flag_counts[0] == 0:
-        message: str = "empty"
-
-        raise ValueError(message)
+    _zero_error(flag_counts[0], message="empty")
 
 
 def _get_sorted_flags(sorted_keys: Strs2, flags_pair: BoolPairs) -> Bools2:
