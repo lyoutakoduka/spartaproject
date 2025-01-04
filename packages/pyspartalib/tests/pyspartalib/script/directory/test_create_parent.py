@@ -9,12 +9,12 @@ from pyspartalib.context.extension.path_context import PathFunc
 from pyspartalib.script.directory.create_parent import create_parent
 
 
-def _value_error(expected: Path, result: Path) -> None:
+def _path_name_error(expected: Path, result: Path) -> None:
     if expected != result:
         raise ValueError
 
 
-def _file_exists_error(path: Path) -> None:
+def _path_exists_error(path: Path) -> None:
     if not path.exists():
         raise FileNotFoundError
 
@@ -31,7 +31,7 @@ def test_directory() -> None:
         expected: Path = Path(temporary_root, "parent")
         parent_path: Path = create_parent(Path(expected, "temporary.json"))
 
-        _value_error(expected, parent_path)
-        _file_exists_error(parent_path)
+        _path_name_error(expected, parent_path)
+        _path_exists_error(parent_path)
 
     _inside_temporary_directory(individual_test)
