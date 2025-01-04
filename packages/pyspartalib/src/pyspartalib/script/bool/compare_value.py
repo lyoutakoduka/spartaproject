@@ -35,6 +35,16 @@ def _zero_error(result: int, message: str | None = None) -> None:
     raise ValueError(message)
 
 
+def _difference_error(result: Strs2, message: str | None = None) -> None:
+    if len(set(result)) > 1:
+        return
+
+    if message is None:
+        raise ValueError
+
+    raise ValueError(message)
+
+
 def _get_flag_counts(lefts: BoolType, rights: BoolType) -> Ints:
     return list({len(flags) for flags in [lefts, rights]})
 
@@ -69,8 +79,6 @@ def bool_compare_pair(lefts: BoolPair, rights: BoolPair) -> bool:
     flags_pair: BoolPairs = [lefts, rights]
     sorted_keys: Strs2 = [sorted(flags.keys()) for flags in flags_pair]
 
-    if len(set(sorted_keys)) != 1:
-        message: str = "unmatch"
-        raise KeyError(message)
+    _difference_error(sorted_keys, message="unmatch")
 
     return len(set(_get_sorted_flags(sorted_keys, flags_pair))) == 1
