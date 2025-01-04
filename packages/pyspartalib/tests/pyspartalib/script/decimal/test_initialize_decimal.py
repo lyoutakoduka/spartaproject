@@ -28,4 +28,5 @@ def test_accuracy() -> None:
     initialize_decimal()
     after: Strs = get_changed()
 
-    assert before != after
+    if before == after:
+        raise ValueError

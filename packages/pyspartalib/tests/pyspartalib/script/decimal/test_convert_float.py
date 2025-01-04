@@ -16,6 +16,7 @@ def test_array() -> None:
     """Test to convert array from type Decimal to type float."""
     expected: Floats = _get_expected()
 
-    assert expected == convert_float_array(
+    if expected != convert_float_array(
         [Decimal(str(value)) for value in expected]
-    )
+    ):
+        raise ValueError
