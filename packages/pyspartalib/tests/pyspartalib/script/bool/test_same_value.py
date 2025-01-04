@@ -26,10 +26,7 @@ def _expected_keys() -> Strs:
 
 
 def _expected_pair(status: bool) -> BoolPair:
-    return {
-        key: value
-        for key, value in zip(_expected_keys(), _expected_list(status))
-    }
+    return dict(zip(_expected_keys(), _expected_list(status), strict=True))
 
 
 def test_empty() -> None:
