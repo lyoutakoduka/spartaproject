@@ -23,24 +23,18 @@ def _size_error(
     result: Ints,
     message: str | None = None,
 ) -> None:
-    if len(result) == expected:
-        return
-
-    _raise_error(message)
+    if len(result) != expected:
+        _raise_error(message)
 
 
 def _zero_error(result: int, message: str | None = None) -> None:
-    if result != 0:
-        return
-
-    _raise_error(message)
+    if result == 0:
+        _raise_error(message)
 
 
 def _difference_error(result: Strs2, message: str | None = None) -> None:
-    if len(set(result)) > 1:
-        return
-
-    _raise_error(message)
+    if len(set(result)) <= 1:
+        _raise_error(message)
 
 
 def _get_flag_counts(lefts: BoolType, rights: BoolType) -> Ints:
