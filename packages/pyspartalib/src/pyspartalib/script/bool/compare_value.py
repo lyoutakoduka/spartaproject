@@ -11,9 +11,11 @@ from pyspartalib.context.default.integer_context import Ints
 from pyspartalib.context.default.string_context import Strs2
 
 
-def _size_error(expected: int, result: Ints) -> None:
-    message: str = "size"
-
+def _size_error(
+    expected: int,
+    result: Ints,
+    message: str | None = None,
+) -> None:
     if len(result) != expected:
         raise ValueError(message)
 
@@ -25,10 +27,11 @@ def _get_flag_counts(lefts: BoolType, rights: BoolType) -> Ints:
 def _check_arguments_size(lefts: BoolType, rights: BoolType) -> None:
     flag_counts: Ints = _get_flag_counts(lefts, rights)
 
-    _size_error(1, flag_counts)
+    _size_error(1, flag_counts, message="size")
 
     if flag_counts[0] == 0:
         message: str = "empty"
+
         raise ValueError(message)
 
 
