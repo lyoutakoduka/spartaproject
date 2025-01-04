@@ -25,6 +25,7 @@ def test_accuracy() -> None:
 
     setcontext(Context())
     before: Strs = get_changed()
+
     initialize_decimal()
     after: Strs = get_changed()
 
