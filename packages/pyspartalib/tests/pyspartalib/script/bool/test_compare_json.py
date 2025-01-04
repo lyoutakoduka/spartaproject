@@ -7,7 +7,8 @@ from pyspartalib.script.bool.compare_json import is_same_json
 
 
 def _compare_json(left: Json, right: Json) -> None:
-    assert is_same_json(left, right)
+    if not is_same_json(left, right):
+        raise ValueError
 
 
 def test_single() -> None:

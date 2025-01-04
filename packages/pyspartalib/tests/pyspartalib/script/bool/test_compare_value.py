@@ -26,10 +26,13 @@ def test_key() -> None:
 
 
 def test_array() -> None:
-    assert bool_compare_array([True, False], [True, False])
+    if not bool_compare_array([True, False], [True, False]):
+        raise ValueError
 
 
 def test_pair() -> None:
-    assert bool_compare_pair(
-        {"R": True, "G": False, "B": True}, {"R": True, "G": False, "B": True}
-    )
+    if not bool_compare_pair(
+        {"R": True, "G": False, "B": True},
+        {"R": True, "G": False, "B": True},
+    ):
+        raise ValueError

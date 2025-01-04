@@ -8,11 +8,13 @@ from pyspartalib.script.bool.same_value import bool_same_array, bool_same_pair
 
 
 def _confirm(status: bool) -> None:
-    assert status
+    if not status:
+        raise ValueError
 
 
 def _confirm_error(status: bool) -> None:
-    assert not status
+    if status:
+        raise ValueError
 
 
 def _expected_list(status: bool) -> Bools:
