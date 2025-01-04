@@ -14,6 +14,11 @@ def _value_error(expected: Path, result: Path) -> None:
         raise ValueError
 
 
+def _file_exists_error(path: Path) -> None:
+    if not path.exists():
+        raise FileNotFoundError
+
+
 def _inside_temporary_directory(function: PathFunc) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
@@ -27,7 +32,6 @@ def test_directory() -> None:
         parent_path: Path = create_parent(Path(expected, "temporary.json"))
 
         _value_error(expected, parent_path)
-
-        assert parent_path.exists()
+        _file_exists_error(parent_path)
 
     _inside_temporary_directory(individual_test)
