@@ -26,8 +26,13 @@ def _size_error(
 
 
 def _zero_error(result: int, message: str | None = None) -> None:
-    if result == 0:
-        raise ValueError(message)
+    if result != 0:
+        return
+
+    if message is None:
+        raise ValueError
+
+    raise ValueError(message)
 
 
 def _get_flag_counts(lefts: BoolType, rights: BoolType) -> Ints:
