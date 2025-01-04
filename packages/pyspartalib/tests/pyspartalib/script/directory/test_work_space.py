@@ -20,6 +20,11 @@ def _path_name_error(expected: Path, result: Path) -> None:
         raise ValueError
 
 
+def _exists_error(path: Path) -> None:
+    if path.exists():
+        raise FileExistsError
+
+
 def _no_exists_error(path: Path) -> None:
     if not path.exists():
         raise FileNotFoundError
@@ -110,7 +115,8 @@ def test_path() -> None:
     _check_exists(working_root)
 
     del work_space
-    assert not working_root.exists()
+
+    _exists_error(working_root)
 
 
 def test_root() -> None:
