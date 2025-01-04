@@ -15,6 +15,11 @@ from pyspartalib.script.time.directory.get_time_path import (
 )
 
 
+def _no_exists_error(path: Path) -> None:
+    if not path.exists():
+        raise FileNotFoundError
+
+
 def _status_error(status: bool) -> None:
     if not status:
         raise ValueError
@@ -43,7 +48,7 @@ def _get_expected(group: str) -> Path:
 
 
 def _check_exists(result: Path) -> None:
-    assert result.exists()
+    _no_exists_error(result)
 
 
 def _relative_test(result: Path, root: Path) -> None:
