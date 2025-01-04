@@ -58,7 +58,7 @@ def _execute_script(
     )
 
 
-def _check_shortcut_exists(shortcut_target: Path) -> None:
+def _no_exists_error(shortcut_target: Path) -> None:
     if not shortcut_target.exists():
         raise FileNotFoundError
 
@@ -101,7 +101,7 @@ def create_shortcut(
         bool: True if creating shortcut is success.
 
     """
-    _check_shortcut_exists(shortcut_target)
+    _no_exists_error(shortcut_target)
     _cleanup_shortcut(shortcut_path, remove_root)
 
     list(_execute_script(shortcut_target, shortcut_path, platform, forward))
