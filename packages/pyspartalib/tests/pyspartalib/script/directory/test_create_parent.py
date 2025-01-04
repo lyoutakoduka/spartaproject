@@ -14,7 +14,7 @@ def _path_name_error(expected: Path, result: Path) -> None:
         raise ValueError
 
 
-def _path_exists_error(path: Path) -> None:
+def _no_exists_error(path: Path) -> None:
     if not path.exists():
         raise FileNotFoundError
 
@@ -32,6 +32,6 @@ def test_directory() -> None:
         parent_path: Path = create_parent(Path(expected, "temporary.json"))
 
         _path_name_error(expected, parent_path)
-        _path_exists_error(parent_path)
+        _no_exists_error(parent_path)
 
     _inside_temporary_directory(individual_test)
