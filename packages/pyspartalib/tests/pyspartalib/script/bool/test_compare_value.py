@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 from pyspartalib.script.bool.compare_value import (
     bool_compare_array,
