@@ -41,7 +41,7 @@ def _get_directory() -> Path:
 
 def _create_sub_directory(temporary_root: Path, groups: Strs) -> PathPair:
     return create_directory_pair(
-        {group: Path(temporary_root, group) for group in groups}
+        {group: Path(temporary_root, group) for group in groups},
     )
 
 
@@ -85,7 +85,10 @@ def _compare_sub(temporary_root: Path, group: str, result: Path) -> None:
 
 
 def _compare_date(
-    temporary_root: Path, group: str, result: Path, expected: Path
+    temporary_root: Path,
+    group: str,
+    result: Path,
+    expected: Path,
 ) -> None:
     _compare_common(result, Path(temporary_root, group, expected))
 
@@ -133,7 +136,7 @@ def test_base() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         work_space: WorkSpace = _get_default_work_space(
-            _create_sub_work(temporary_root)
+            _create_sub_work(temporary_root),
         )
 
         _compare_base(temporary_root, work_space.get_selected_root())
@@ -149,7 +152,7 @@ def test_work() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         work_space: WorkSpace = _get_default_work_space(
-            _create_sub_work(temporary_root)
+            _create_sub_work(temporary_root),
         )
 
         _compare_sub(
@@ -175,7 +178,8 @@ def test_select() -> None:
             temporary_root,
             "select",
             work_space.create_sub_directory(
-                _get_directory(), selected_root=directory_pair["select"]
+                _get_directory(),
+                selected_root=directory_pair["select"],
             ),
         )
 
@@ -191,7 +195,7 @@ def test_date() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         work_space: WorkSpace = _get_default_work_space(
-            _create_sub_work(temporary_root)
+            _create_sub_work(temporary_root),
         )
 
         _compare_date(
@@ -219,7 +223,8 @@ def test_body() -> None:
             temporary_root,
             "select",
             work_space.create_date_time_space(
-                body_root=directory_pair["select"], override=True
+                body_root=directory_pair["select"],
+                override=True,
             ),
             date_time_root,
         )
@@ -236,14 +241,15 @@ def test_head() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         work_space: WorkSpace = _get_default_work_space(
-            _create_sub_work(temporary_root)
+            _create_sub_work(temporary_root),
         )
 
         _compare_date(
             temporary_root,
             "work",
             work_space.create_date_time_space(
-                head_root=_get_directory(), override=True
+                head_root=_get_directory(),
+                override=True,
             ),
             Path(_get_directory(), date_time_root),
         )
@@ -260,14 +266,15 @@ def test_foot() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         work_space: WorkSpace = _get_default_work_space(
-            _create_sub_work(temporary_root)
+            _create_sub_work(temporary_root),
         )
 
         _compare_date(
             temporary_root,
             "work",
             work_space.create_date_time_space(
-                foot_root=_get_directory(), override=True
+                foot_root=_get_directory(),
+                override=True,
             ),
             Path(date_time_root, _get_directory()),
         )
@@ -284,7 +291,7 @@ def test_jst() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         work_space: WorkSpace = _get_default_work_space(
-            _create_sub_work(temporary_root)
+            _create_sub_work(temporary_root),
         )
 
         _compare_date(

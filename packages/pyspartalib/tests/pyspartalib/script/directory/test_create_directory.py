@@ -48,13 +48,13 @@ def _inside_temporary_directory(function: PathBoolFunc) -> None:
 
 def _get_directory_array(root_path: Path, paths: Paths) -> Paths:
     return create_directory_array(
-        get_absolute_array(paths, root_path=root_path)
+        get_absolute_array(paths, root_path=root_path),
     )
 
 
 def _get_directory_pair(root_path: Path, paths: PathPair) -> PathPair:
     return create_directory_pair(
-        create_directory_pair(get_absolute_pair(paths, root_path=root_path))
+        create_directory_pair(get_absolute_pair(paths, root_path=root_path)),
     )
 
 
@@ -74,7 +74,7 @@ def test_single() -> None:
 
     def individual_test(temporary_root: Path) -> bool:
         return create_directory(
-            Path(temporary_root, element_names[0])
+            Path(temporary_root, element_names[0]),
         ).exists()
 
     _inside_temporary_directory(individual_test)
@@ -87,8 +87,8 @@ def test_array() -> None:
     def individual_test(temporary_root: Path) -> bool:
         return bool_same_array(
             check_exists_array(
-                _get_directory_array(temporary_root, relative_paths)
-            )
+                _get_directory_array(temporary_root, relative_paths),
+            ),
         )
 
     _inside_temporary_directory(individual_test)
@@ -101,8 +101,8 @@ def test_pair() -> None:
     def individual_test(temporary_root: Path) -> bool:
         return bool_same_pair(
             check_exists_pair(
-                _get_directory_pair(temporary_root, relative_paths)
-            )
+                _get_directory_pair(temporary_root, relative_paths),
+            ),
         )
 
     _inside_temporary_directory(individual_test)
