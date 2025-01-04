@@ -12,8 +12,13 @@ from pyspartalib.script.time.directory.get_time_path import (
 )
 
 
+def _path_name_error(expected: Path, result: Path) -> None:
+    if expected != result:
+        raise ValueError
+
+
 def _compare_time_path(result: Path) -> None:
-    assert get_initial_time_path() == result
+    _path_name_error(get_initial_time_path(), result)
 
 
 def test_create() -> None:
