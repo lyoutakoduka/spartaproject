@@ -4,7 +4,7 @@
 
 from pyspartalib.context.callable_context import Type
 from pyspartalib.script.stdout.logger import show_log
-from pyspartalib.script.string.off_stdout import StdoutText
+from pyspartalib.script.stdout.off_stdout import StdoutText
 
 
 def _difference_error(result: Type, expected: Type) -> None:
