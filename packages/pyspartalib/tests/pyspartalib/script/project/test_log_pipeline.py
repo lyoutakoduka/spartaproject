@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 """Test module to handle I/O functionalities of any script called pipeline."""
 
