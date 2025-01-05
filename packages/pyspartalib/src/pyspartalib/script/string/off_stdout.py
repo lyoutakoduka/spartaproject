@@ -6,7 +6,7 @@ from collections.abc import Callable
 from contextlib import redirect_stdout
 from io import StringIO
 
-from pyspartalib.context.callable_context import CP, CR
+from pyspartalib.context.callable_context import Param, Type
 from pyspartalib.script.decorator_generator import TransferFunction
 
 
@@ -15,10 +15,10 @@ class StdoutText(TransferFunction):
 
     def wrapper(
         self,
-        function: Callable[CP, CR],
-        *arguments: CP.args,
-        **key_arguments: CP.kwargs,
-    ) -> CR:
+        function: Callable[Param, Type],
+        *arguments: Param.args,
+        **key_arguments: Param.kwargs,
+    ) -> Type:
         """Override the method from super class.
 
         Define a process in front and back of the function
@@ -50,13 +50,13 @@ class StdoutText(TransferFunction):
 
         """
 
-        def _execute_function() -> CR:
+        def _execute_function() -> Type:
             return function(*arguments, **key_arguments)
 
         file = StringIO()
 
         with redirect_stdout(file):
-            result: CR = _execute_function()
+            result: Type = _execute_function()
 
         self.stdout: str = file.getvalue()
 
