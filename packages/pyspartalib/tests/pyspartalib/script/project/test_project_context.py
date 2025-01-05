@@ -12,6 +12,13 @@ from pyspartalib.script.platform.platform_status import get_platform
 from pyspartalib.script.project.project_context import ProjectContext
 
 
+def _get_expected_paths() -> PathPair:
+    return {
+        "root.path": Path("root"),
+        "head.path": Path("root", "head"),
+    }
+
+
 def _common_test(keys_pair: Strs2) -> None:
     assert len({str(sorted(keys)) for keys in keys_pair}) == 1
 
@@ -79,10 +86,7 @@ def test_string() -> None:
 
 def test_path() -> None:
     """Test to filter and get project context by path type."""
-    expected: PathPair = {
-        "root.path": Path("root"),
-        "head.path": Path("root", "head"),
-    }
+    expected: PathPair = _get_expected_paths()
 
     project: ProjectContext = _import_context()
     path_context: PathPair = project.get_path_context("type")
