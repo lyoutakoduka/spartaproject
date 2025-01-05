@@ -16,6 +16,10 @@ def _get_expected_numbers() -> IntPair:
     return {"index": 0, "count": 1}
 
 
+def _get_expected_strings() -> StrPair:
+    return {"name": "name", "language": "language"}
+
+
 def _get_expected_paths() -> PathPair:
     return {
         "root.path": Path("root"),
@@ -77,7 +81,7 @@ def test_integer() -> None:
 
 def test_string() -> None:
     """Test to filter and get project context by string type."""
-    expected: StrPair = {"name": "name", "language": "language"}
+    expected: StrPair = _get_expected_strings()
 
     project: ProjectContext = _import_context()
     string_context: StrPair = project.get_string_context("type")
