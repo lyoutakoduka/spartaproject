@@ -30,3 +30,7 @@ def _decorate_function(stdout_text: StdoutText) -> StdoutText:
 
 def _execute_log_function() -> str:
     return _decorate_function(StdoutText()).show()
+
+
+def test_show() -> None:
+    _difference_error(_execute_log_function(), _get_expected())
