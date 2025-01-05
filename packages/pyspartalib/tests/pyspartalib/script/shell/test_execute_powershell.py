@@ -65,7 +65,8 @@ def test_all() -> None:
     expected: Strs = [_print_command(), "Test"]
 
     assert expected == get_double_quoted_command(expected).replace(
-        '"', ""
+        '"',
+        "",
     ).split(" ")
 
 
@@ -73,11 +74,11 @@ def test_write() -> None:
     """Test for executing simple command on PowerShell."""
     expected: Strs = temporary_text(3, 3)
     commands: Strs = [
-        "; ".join([_print_command() + " " + text for text in expected])
+        "; ".join([_print_command() + " " + text for text in expected]),
     ]
 
     assert expected == _execute_powershell(
-        [get_double_quoted_command(commands)]
+        [get_double_quoted_command(commands)],
     )
 
 
@@ -93,7 +94,7 @@ def test_command() -> None:
         [
             get_script_string(expected),
             get_double_quoted_command(
-                [get_quoted_path(get_path_string(expected))] * 2
+                [get_quoted_path(get_path_string(expected))] * 2,
             ),
-        ]
+        ],
     )

@@ -41,7 +41,7 @@ def test_multiple() -> None:
         expected: Path = Path(temporary_directory)
 
         result: Strs = list(
-            execute_multiple([["cd", expected.as_posix()], ["pwd"]])
+            execute_multiple([["cd", expected.as_posix()], ["pwd"]]),
         )
 
         if len(result) != 1:
