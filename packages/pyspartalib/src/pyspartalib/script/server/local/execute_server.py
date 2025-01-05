@@ -28,6 +28,10 @@ class ExecuteServer(UploadServer):
             platform=platform,
         )
 
+    def _contain_error(self, target: str, group: Strs) -> None:
+        if target in group:
+            raise ValueError
+
     def _set_version(self, version: str | None) -> str:
         if version is None:
             version = "3.11.5"
@@ -93,8 +97,7 @@ class ExecuteServer(UploadServer):
         if (result := self._execute_command(source_root)) is None:
             return None
 
-        if self._error_identifier in result:
-            raise ValueError
+        self._contain_error(self._error_identifier, result)
 
         return result
 
