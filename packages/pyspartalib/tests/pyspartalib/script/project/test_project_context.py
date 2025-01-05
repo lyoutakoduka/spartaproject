@@ -4,6 +4,7 @@
 
 from pathlib import Path
 
+from pyspartalib.context.callable_context import Type
 from pyspartalib.context.default.integer_context import IntPair
 from pyspartalib.context.default.string_context import StrPair, Strs, Strs2
 from pyspartalib.context.extension.path_context import PathPair
@@ -14,6 +15,11 @@ from pyspartalib.script.project.project_context import ProjectContext
 
 def _count_error(result: Strs, expected: int) -> None:
     if len(result) != expected:
+        raise ValueError
+
+
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
         raise ValueError
 
 
@@ -49,8 +55,8 @@ def _platform_key_test(platform: str, project: ProjectContext) -> None:
     context_key: str = project.get_platform_key(expected)
     key_elements: Strs = context_key.split("_")
 
-    assert expected == key_elements[:2]
-    assert platform == key_elements[-1]
+    _difference_error(key_elements[:2], expected)
+    _difference_error(key_elements[-1], platform)
 
 
 def _add_platform(file: str) -> str:
@@ -81,7 +87,7 @@ def test_integer() -> None:
     _common_test([list(items.keys()) for items in [expected, integer_context]])
 
     for key, value in expected.items():
-        assert value == integer_context[key]
+        _difference_error(integer_context[key], value)
 
 
 def test_string() -> None:
@@ -94,7 +100,7 @@ def test_string() -> None:
     _common_test([list(items.keys()) for items in [expected, string_context]])
 
     for key, value in expected.items():
-        assert value == string_context[key]
+        _difference_error(string_context[key], value)
 
 
 def test_path() -> None:
@@ -107,7 +113,7 @@ def test_path() -> None:
     _common_test([list(items.keys()) for items in [expected, path_context]])
 
     for key, value in expected.items():
-        assert value == path_context[key]
+        _difference_error(path_context[key], value)
 
 
 def test_key() -> None:
@@ -135,6 +141,7 @@ def test_directory() -> None:
     path_roots: Strs = ["root", "directory"]
     path_heads: Strs = ["body", "head"]
 
-    expected: Path = _get_expected_path(path_roots, path_heads)
-
-    assert expected == _import_context().merge_paths("project", path_roots)
+    _difference_error(
+        _import_context().merge_paths("project", path_roots),
+        _get_expected_path(path_roots, path_heads),
+    )
