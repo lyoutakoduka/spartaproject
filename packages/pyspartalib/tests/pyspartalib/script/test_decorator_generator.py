@@ -2,7 +2,7 @@
 
 from collections.abc import Callable
 
-from pyspartalib.context.callable_context import CP, CR
+from pyspartalib.context.callable_context import Param, Type
 from pyspartalib.script.decorator_generator import TransferFunction
 
 
@@ -15,11 +15,11 @@ class TemporaryDecorator(TransferFunction):
 
     def wrapper(
         self,
-        function: Callable[CP, CR],
-        *arguments: CP.args,
-        **key_arguments: CP.kwargs,
-    ) -> CR:
-        result: CR = function(*arguments, **key_arguments)
+        function: Callable[Param, Type],
+        *arguments: Param.args,
+        **key_arguments: Param.kwargs,
+    ) -> Type:
+        result: Type = function(*arguments, **key_arguments)
         self.text *= 2
         return result
 
