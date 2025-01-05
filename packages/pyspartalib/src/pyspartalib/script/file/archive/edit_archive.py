@@ -68,6 +68,12 @@ class EditArchive(SafeTrash):
         self._is_lzma_after: bool = compress
         self._protected: bool = protected
 
+    def _path_error(self, result: Path | None) -> Path:
+        if result is None:
+            raise ValueError
+
+        return result
+
     def _get_archive_stamp(self) -> TimePair:
         return get_directory_latest(walk_iterator(self.get_edit_root()))
 
@@ -172,10 +178,7 @@ class EditArchive(SafeTrash):
             Path: Path of archive.
 
         """
-        if archive_path := self._archive_path:
-            return archive_path
-
-        raise ValueError
+        return self._path_error(self._archive_path)
 
     def get_edit_root(self) -> Path:
         """Get path of temporary working space.
