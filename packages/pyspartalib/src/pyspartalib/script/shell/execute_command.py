@@ -8,6 +8,13 @@ from pyspartalib.context.default.string_context import StrGene, Strs, Strs2
 from pyspartalib.script.string.encoding.set_decoding import set_decoding
 
 
+def _get_subprocess_result(subprocess: Popen[bytes]) -> bytes:
+    if stdout := subprocess.stdout:
+        return stdout.readline()
+
+    raise ValueError
+
+
 def _cleanup_new_lines(text: str) -> str:
     for new_line in reversed("\r\n"):
         if text.endswith(new_line):
@@ -19,11 +26,8 @@ def _cleanup_new_lines(text: str) -> str:
 def _execute(command: str) -> StrGene:
     subprocess = Popen(command, stdout=PIPE, stderr=PIPE, shell=True)
 
-    if subprocess.stdout is None:
-        raise ValueError
-
     while True:
-        line: bytes = subprocess.stdout.readline()
+        line: bytes = _get_subprocess_result(subprocess)
 
         if line:
             yield _cleanup_new_lines(set_decoding(line))
