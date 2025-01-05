@@ -66,8 +66,8 @@ def _execute_script(
     )
 
 
-def _no_exists_error(shortcut_path: Path) -> None:
-    if not shortcut_path.exists():
+def _no_exists_error(path: Path) -> None:
+    if not path.exists():
         raise FileNotFoundError
 
 
