@@ -10,6 +10,11 @@ from pyspartalib.script.platform.platform_status import (
 )
 
 
+def _status_error(status: bool) -> None:
+    if not status:
+        raise ValueError
+
+
 def _get_platform() -> str:
     return uname().system.lower()
 
@@ -23,7 +28,7 @@ def _valid_platform(platform: str) -> str | None:
 
 def test_name() -> None:
     """Test to get the platform of current executing script."""
-    assert _valid_platform(_get_platform()) == get_platform()
+    _status_error(_valid_platform(_get_platform()) == get_platform())
 
 
 def test_linux() -> None:
