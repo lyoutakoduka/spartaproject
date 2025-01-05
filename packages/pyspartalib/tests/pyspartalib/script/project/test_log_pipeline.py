@@ -11,6 +11,11 @@ from pyspartalib.script.string.off_stdout import StdoutText
 from tests.pyspartalib.interface.pytest import fail
 
 
+def _texts_error(result: Strs, expected: Strs) -> None:
+    if result != expected:
+        raise ValueError
+
+
 def _get_interval() -> Decimal:
     return Decimal("0.3")
 
@@ -143,7 +148,7 @@ def _create_pipeline_text() -> LogPipeline:
 
 
 def _compare_text(expected: Strs, result: Strs) -> None:
-    assert expected == result
+    _texts_error(result, expected)
 
 
 def test_print() -> None:
