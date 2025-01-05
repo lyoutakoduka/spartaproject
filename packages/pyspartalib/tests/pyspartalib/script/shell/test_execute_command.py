@@ -19,6 +19,11 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
+def _no_exists_error(path: Path) -> None:
+    if not path.exists():
+        raise FileNotFoundError
+
+
 def _get_current() -> Strs:
     return list(execute_single(["pwd"]))
 
@@ -35,7 +40,7 @@ def test_single() -> None:
 
     current: Path = Path(result[0])
 
-    assert current.exists()
+    _no_exists_error(current)
     _difference_error(current, get_current())
 
 
