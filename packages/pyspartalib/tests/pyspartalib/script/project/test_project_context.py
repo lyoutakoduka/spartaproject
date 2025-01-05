@@ -12,6 +12,11 @@ from pyspartalib.script.platform.platform_status import get_platform
 from pyspartalib.script.project.project_context import ProjectContext
 
 
+def _count_error(expected: int, result: Strs) -> None:
+    if len(result) != expected:
+        raise ValueError
+
+
 def _get_expected_numbers() -> IntPair:
     return {"index": 0, "count": 1}
 
@@ -28,7 +33,7 @@ def _get_expected_paths() -> PathPair:
 
 
 def _common_test(keys_pair: Strs2) -> None:
-    assert len({str(sorted(keys)) for keys in keys_pair}) == 1
+    _count_error(1, list({str(sorted(keys)) for keys in keys_pair}))
 
 
 def _get_config_file() -> Path:
