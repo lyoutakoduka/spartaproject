@@ -9,6 +9,11 @@ from pyspartalib.context.extension.path_context import PathPair, Paths
 from pyspartalib.script.path.modify.current.get_current import get_current
 
 
+def _status_error(status: bool) -> None:
+    if not status:
+        raise ValueError
+
+
 def _get_relative_root(root_path: Path | None = None) -> Path:
     if root_path is None:
         root_path = get_current()
@@ -73,8 +78,7 @@ def get_relative(absolute_path: Path, root_path: Path | None = None) -> Path:
     """
     root_path = _get_relative_root(root_path)
 
-    if not is_relative(absolute_path, root_path=root_path):
-        raise ValueError
+    _status_error(is_relative(absolute_path, root_path=root_path))
 
     return absolute_path.relative_to(root_path)
 
