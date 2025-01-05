@@ -96,7 +96,8 @@ def test_path() -> None:
 def test_key() -> None:
     """Test to get key of project context file corresponding to platform."""
     _platform_key_test(
-        get_platform(), ProjectContext(forward=_get_config_file())
+        get_platform(),
+        ProjectContext(forward=_get_config_file()),
     )
 
 

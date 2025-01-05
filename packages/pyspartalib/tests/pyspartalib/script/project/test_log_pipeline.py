@@ -39,7 +39,8 @@ def _get_expected_log() -> Strs:
     return [
         _get_timer_log(interval, message)
         for interval, message in zip(
-            _get_interval_texts(), _get_message_texts()
+            _get_interval_texts(),
+            _get_message_texts(),
         )
     ]
 
@@ -58,7 +59,8 @@ def _show_log(messages: Strs, pipeline: LogPipeline) -> LogPipeline:
 
 
 def _decorate_function(
-    function: LogFunc, stdout_text: StdoutText
+    function: LogFunc,
+    stdout_text: StdoutText,
 ) -> StdoutText:
     @stdout_text.decorator
     def _messages() -> None:
@@ -156,5 +158,6 @@ def test_all() -> None:
 def test_single() -> None:
     """Test to get log messages except automatically generated stuff."""
     _compare_text(
-        _get_expected_single(), _get_result_single(_create_pipeline_text)
+        _get_expected_single(),
+        _get_result_single(_create_pipeline_text),
     )
