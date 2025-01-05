@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+"""Test module to show log to stdout."""
+
 from pyspartalib.context.callable_context import Type
 from pyspartalib.script.stdout.logger import show_log
 from pyspartalib.script.string.off_stdout import StdoutText
@@ -33,4 +35,5 @@ def _execute_log_function() -> str:
 
 
 def test_show() -> None:
+    """Test to show log to stdout."""
     _difference_error(_execute_log_function(), _get_expected())
