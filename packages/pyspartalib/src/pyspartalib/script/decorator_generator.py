@@ -3,24 +3,27 @@
 from collections.abc import Callable
 from functools import wraps
 
-from pyspartalib.context.callable_context import CP, CR
+from pyspartalib.context.callable_context import Param, Type
 
 
 class TransferFunction:
     def wrapper(
         self,
-        function: Callable[CP, CR],
-        *arguments: CP.args,
-        **key_arguments: CP.kwargs,
-    ) -> CR:
+        function: Callable[Param, Type],
+        *arguments: Param.args,
+        **key_arguments: Param.kwargs,
+    ) -> Type:
         return function(*arguments, **key_arguments)
 
-    def decorator(self, function: Callable[CP, CR]) -> Callable[CP, CR]:
+    def decorator(
+        self,
+        function: Callable[Param, Type],
+    ) -> Callable[Param, Type]:
         @wraps(function)
         def register_function(
-            *arguments: CP.args,
-            **key_arguments: CP.kwargs,
-        ) -> CR:
+            *arguments: Param.args,
+            **key_arguments: Param.kwargs,
+        ) -> Type:
             return self.wrapper(function, *arguments, **key_arguments)
 
         return register_function
