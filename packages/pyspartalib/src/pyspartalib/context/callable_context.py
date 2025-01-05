@@ -4,5 +4,5 @@
 
 from typing import ParamSpec, TypeVar
 
-CR = TypeVar("CR")
-CP = ParamSpec("CP")
+Type = TypeVar("Type")
+Param = ParamSpec("Param")
