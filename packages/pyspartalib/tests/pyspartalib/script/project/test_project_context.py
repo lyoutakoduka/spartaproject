@@ -12,6 +12,10 @@ from pyspartalib.script.platform.platform_status import get_platform
 from pyspartalib.script.project.project_context import ProjectContext
 
 
+def _get_expected_numbers() -> IntPair:
+    return {"index": 0, "count": 1}
+
+
 def _get_expected_paths() -> PathPair:
     return {
         "root.path": Path("root"),
@@ -60,7 +64,7 @@ def test_bool() -> None:
 
 def test_integer() -> None:
     """Test to filter and get project context by integer type."""
-    expected: IntPair = {"index": 0, "count": 1}
+    expected: IntPair = _get_expected_numbers()
 
     project: ProjectContext = _import_context()
     integer_context: IntPair = project.get_integer_context("type")
