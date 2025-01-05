@@ -39,10 +39,6 @@ def _create_pipeline() -> BasePipeline:
     return BasePipeline(forward=_get_config_file())
 
 
-def _compare_text(expected: Strs, result: Strs) -> None:
-    assert expected == result
-
-
 def test_print() -> None:
     """Test to import strings from module outside."""
     _strings_error(_get_result(_create_pipeline()), _get_expected())
