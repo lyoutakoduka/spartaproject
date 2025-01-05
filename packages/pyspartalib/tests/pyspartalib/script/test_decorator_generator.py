@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from typing import Callable
+from collections.abc import Callable
 
 from pyspartalib.context.callable_context import CP, CR
 from pyspartalib.script.decorator_generator import TransferFunction
