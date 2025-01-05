@@ -23,6 +23,11 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
+def _fail_error(status: bool) -> None:
+    if not status:
+        raise ValueError
+
+
 def _get_expected_numbers() -> IntPair:
     return {"index": 0, "count": 1}
 
@@ -74,7 +79,7 @@ def _get_expected_path(path_roots: Strs, path_heads: Strs) -> Path:
 
 def test_bool() -> None:
     """Test to filter and get project context by boolean type."""
-    assert ProjectContext().get_bool_context("test")["boolean"]
+    _fail_error(ProjectContext().get_bool_context("test")["boolean"])
 
 
 def test_integer() -> None:
