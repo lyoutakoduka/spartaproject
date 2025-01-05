@@ -13,7 +13,7 @@ from pyspartalib.script.project.project_context import ProjectContext
 
 
 def _common_test(keys_pair: Strs2) -> None:
-    assert 1 == len({str(sorted(keys)) for keys in keys_pair})
+    assert len({str(sorted(keys)) for keys in keys_pair}) == 1
 
 
 def _get_config_file() -> Path:
