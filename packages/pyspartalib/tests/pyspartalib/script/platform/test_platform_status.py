@@ -34,4 +34,4 @@ def test_name() -> None:
 def test_linux() -> None:
     """Test to confirm that the platform of executing script is Linux."""
     if _get_platform() == "linux":
-        assert is_platform_linux()
+        _status_error(is_platform_linux())
