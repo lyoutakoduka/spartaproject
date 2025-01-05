@@ -36,6 +36,12 @@ class TakeOutArchive(EditArchive):
     def __initialize_variables(self) -> None:
         self._took_out_root: Path | None = None
 
+    def _path_error(self, result: Path | None) -> Path:
+        if result is None:
+            raise ValueError
+
+        return result
+
     def _set_took_out_root(self, took_out_root: Path | None) -> None:
         archive_path: Path = self.get_archive_path()
 
@@ -115,10 +121,7 @@ class TakeOutArchive(EditArchive):
             Path: Path of directory that archives will placed.
 
         """
-        if took_out_root := self._took_out_root:
-            return took_out_root
-
-        raise ValueError
+        return self._path_error(self._took_out_root)
 
     def take_out(self, took_out_root: Path | None = None) -> Paths | None:
         """Take out directory from inside of archive.
