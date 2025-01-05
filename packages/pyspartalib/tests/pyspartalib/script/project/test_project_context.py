@@ -41,7 +41,7 @@ def _get_expected_path(path_roots: Strs, path_heads: Strs) -> Path:
     return Path(
         *[
             Path(*[root, _add_platform(head)])
-            for root, head in zip(path_roots, path_heads)
+            for root, head in zip(path_roots, path_heads, strict=True)
         ]
     )
 

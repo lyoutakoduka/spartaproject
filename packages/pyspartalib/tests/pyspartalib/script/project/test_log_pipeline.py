@@ -41,6 +41,7 @@ def _get_expected_log() -> Strs:
         for interval, message in zip(
             _get_interval_texts(),
             _get_message_texts(),
+            strict=True,
         )
     ]
 
