@@ -26,3 +26,7 @@ def _decorate_function(stdout_text: StdoutText) -> StdoutText:
     _messages()
 
     return stdout_text
+
+
+def _execute_log_function() -> str:
+    return _decorate_function(StdoutText()).show()
