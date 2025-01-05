@@ -38,14 +38,15 @@ class StdoutText(TransferFunction):
                 print("test")
 
         Args:
-            function (Callable[CP, CR]): The function to be decorated.
+            function (Callable[Param, Type]): The function to be decorated.
 
             *arguments (CP.args): Variable size arguments.
 
             **key_arguments (bool, optional): Variable size keyword arguments.
 
         Returns:
-            CR: Return value of the function designated by decorator.
+            Type:
+                Return value of the function designated by decorator.
                 Value is automatically stored when executing the function.
 
         """
