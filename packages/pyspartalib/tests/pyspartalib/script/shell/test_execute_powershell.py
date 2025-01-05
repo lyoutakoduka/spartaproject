@@ -4,6 +4,7 @@
 
 from pathlib import Path
 
+from pyspartalib.context.callable_context import Type
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.script.path.modify.get_resource import get_resource
 from pyspartalib.script.shell.execute_powershell import (
@@ -14,6 +15,11 @@ from pyspartalib.script.shell.execute_powershell import (
     get_script_string,
 )
 from pyspartalib.script.string.temporary_text import temporary_text
+
+
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
 
 
 def _print_command() -> str:
@@ -40,15 +46,19 @@ def test_script() -> None:
     """Test to convert script part of command string on PowerShell."""
     path_elements: Strs = _get_path_elements()
 
-    assert "/".join(path_elements) == get_script_string(Path(*path_elements))
+    _difference_error(
+        get_script_string(Path(*path_elements)),
+        "/".join(path_elements),
+    )
 
 
 def test_path() -> None:
     """Test to convert argument part of command string on PowerShell."""
     path_elements: Strs = _get_path_elements()
 
-    assert _get_formatted_path(path_elements) == get_path_string(
-        Path(*path_elements)
+    _difference_error(
+        get_path_string(Path(*path_elements)),
+        _get_formatted_path(path_elements),
     )
 
 
@@ -57,17 +67,25 @@ def test_argument() -> None:
     path_elements: Strs = _get_path_elements()
     expected: str = _get_formatted_path(path_elements).join(["'"] * 2)
 
-    assert expected == get_quoted_path(get_path_string(Path(*path_elements)))
+    _difference_error(
+        get_quoted_path(get_path_string(Path(*path_elements))),
+        expected,
+    )
 
 
 def test_all() -> None:
     """Test to convert command part of command string on PowerShell."""
     expected: Strs = [_print_command(), "Test"]
 
-    assert expected == get_double_quoted_command(expected).replace(
-        '"',
-        "",
-    ).split(" ")
+    _difference_error(
+        get_double_quoted_command(expected)
+        .replace(
+            '"',
+            "",
+        )
+        .split(" "),
+        expected,
+    )
 
 
 def test_write() -> None:
@@ -77,8 +95,11 @@ def test_write() -> None:
         "; ".join([_print_command() + " " + text for text in expected]),
     ]
 
-    assert expected == _execute_powershell(
-        [get_double_quoted_command(commands)],
+    _difference_error(
+        _execute_powershell(
+            [get_double_quoted_command(commands)],
+        ),
+        expected,
     )
 
 
@@ -90,11 +111,14 @@ def test_command() -> None:
     """
     expected: Path = get_resource(local_path=Path("tools", "command.ps1"))
 
-    assert [get_path_string(expected)] == _execute_powershell(
-        [
-            get_script_string(expected),
-            get_double_quoted_command(
-                [get_quoted_path(get_path_string(expected))] * 2,
-            ),
-        ],
+    _difference_error(
+        _execute_powershell(
+            [
+                get_script_string(expected),
+                get_double_quoted_command(
+                    [get_quoted_path(get_path_string(expected))] * 2,
+                ),
+            ],
+        ),
+        [get_path_string(expected)],
     )

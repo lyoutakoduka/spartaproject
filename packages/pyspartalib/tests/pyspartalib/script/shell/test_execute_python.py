@@ -4,6 +4,7 @@
 
 from pathlib import Path
 
+from pyspartalib.context.callable_context import Type
 from pyspartalib.context.default.string_context import StrGene, Strs
 from pyspartalib.context.extension.path_context import PathPair, Paths
 from pyspartalib.script.path.modify.current.get_absolute import get_absolute
@@ -21,6 +22,11 @@ from pyspartalib.script.shell.execute_python import (
     get_runtime_path,
     get_script_string,
 )
+
+
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
 
 
 def _get_config_file() -> Path:
@@ -70,8 +76,10 @@ def _get_system_paths(expected: Paths, first_root: Path) -> Paths:
 
 
 def _compare_system_paths(expected: Paths, results: Paths) -> None:
-    if len({str(sorted(paths)) for paths in [expected, results]}) != 1:
-        raise ValueError
+    _difference_error(
+        len({str(sorted(paths)) for paths in [expected, results]}),
+        1,
+    )
 
 
 def _get_result_platform(platform: str) -> StrGene:
@@ -107,10 +115,10 @@ def test_path() -> None:
     path_elements: Strs = ["A", "B", "C"]
     identifier: str = "/" if is_platform_linux() else "\\"
 
-    if identifier.join(path_elements) != get_script_string(
-        Path(*path_elements),
-    ):
-        raise ValueError
+    _difference_error(
+        get_script_string(Path(*path_elements)),
+        identifier.join(path_elements),
+    )
 
 
 def test_interpreter() -> None:
@@ -118,24 +126,30 @@ def test_interpreter() -> None:
     platform: str = get_platform()
     expected: Path = _get_platform_interpreters()[platform]
 
-    if expected != _get_result_interpreter(platform, expected):
-        raise ValueError
+    _difference_error(
+        _get_result_interpreter(platform, expected),
+        expected,
+    )
 
 
 def test_command() -> None:
     """Test to execute simple Python script."""
     expected: str = "simple"
 
-    if [expected] != list(_get_result_command(expected)):
-        raise ValueError
+    _difference_error(
+        list(_get_result_command(expected)),
+        [expected],
+    )
 
 
 def test_platform() -> None:
     """Test to execute Python script for all executable platform."""
     expected: str = get_platform()
 
-    if [expected] != list(_get_result_platform(expected)):
-        raise ValueError
+    _difference_error(
+        list(_get_result_platform(expected)),
+        [expected],
+    )
 
 
 def test_system() -> None:

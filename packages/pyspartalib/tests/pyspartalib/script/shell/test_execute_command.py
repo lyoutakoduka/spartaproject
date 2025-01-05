@@ -5,6 +5,7 @@
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
+from pyspartalib.context.callable_context import Type
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.script.path.modify.current.get_current import get_current
 from pyspartalib.script.shell.execute_command import (
@@ -12,6 +13,11 @@ from pyspartalib.script.shell.execute_command import (
     execute_single,
 )
 from tests.pyspartalib.interface.pytest import fail
+
+
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
 
 
 def _get_current() -> Strs:
@@ -26,13 +32,12 @@ def test_single() -> None:
     """
     result: Strs = _get_current()
 
-    if len(result) != 1:
-        fail()
+    _difference_error(len(result), 1)
 
     current: Path = Path(result[0])
 
     assert current.exists()
-    assert current == get_current()
+    _difference_error(current, get_current())
 
 
 def test_multiple() -> None:
@@ -48,7 +53,5 @@ def test_multiple() -> None:
             execute_multiple([["cd", expected.as_posix()], ["pwd"]]),
         )
 
-        if len(result) != 1:
-            fail()
-
-        assert expected == Path(result[0])
+        _difference_error(len(result), 1)
+        _difference_error(Path(result[0]), expected)
