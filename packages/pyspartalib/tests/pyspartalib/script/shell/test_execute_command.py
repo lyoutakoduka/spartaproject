@@ -22,7 +22,7 @@ def test_single() -> None:
     """
     result: Strs = list(execute_single(["pwd"]))
 
-    if 1 != len(result):
+    if len(result) != 1:
         fail()
 
     current: Path = Path(result[0])
@@ -44,7 +44,7 @@ def test_multiple() -> None:
             execute_multiple([["cd", expected.as_posix()], ["pwd"]])
         )
 
-        if 1 != len(result):
+        if len(result) != 1:
             fail()
 
         assert expected == Path(result[0])
