@@ -66,7 +66,7 @@ def _execute_script(
     )
 
 
-def _check_shortcut_exists(shortcut_path: Path) -> None:
+def _no_exists_error(shortcut_path: Path) -> None:
     if not shortcut_path.exists():
         raise FileNotFoundError
 
@@ -102,7 +102,7 @@ def read_shortcut(
         Path | None: Path which is a link destination of shortcut.
 
     """
-    _check_shortcut_exists(shortcut_path)
+    _no_exists_error(shortcut_path)
 
     return _cleanup_result(
         list(_execute_script(shortcut_path, platform, forward)),
