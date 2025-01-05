@@ -12,7 +12,6 @@ from pyspartalib.script.shell.execute_command import (
     execute_multiple,
     execute_single,
 )
-from tests.pyspartalib.interface.pytest import fail
 
 
 def _difference_error(result: Type, expected: Type) -> None:
