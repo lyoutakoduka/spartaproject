@@ -4,13 +4,15 @@
 
 from platform import uname
 
+from pyspartalib.script.stdout.logger import show_log
+
 
 def _get_platform() -> str:
     return uname().system.lower()
 
 
 def _main() -> None:
-    print(_get_platform())
+    show_log(_get_platform())
 
 
 if __name__ == "__main__":

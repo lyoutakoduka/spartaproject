@@ -4,10 +4,12 @@
 
 from sys import path
 
+from pyspartalib.script.stdout.logger import show_log
+
 
 def _main() -> None:
     for text in path:
-        print(text)
+        show_log(text)
 
 
 if __name__ == "__main__":
