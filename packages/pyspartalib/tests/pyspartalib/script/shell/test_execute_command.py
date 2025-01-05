@@ -14,13 +14,17 @@ from pyspartalib.script.shell.execute_command import (
 from tests.pyspartalib.interface.pytest import fail
 
 
+def _get_current() -> Strs:
+    return list(execute_single(["pwd"]))
+
+
 def test_single() -> None:
     """Test to execute generic script.
 
     Suppose that the test environment of Windows
         can execute simple Linux commands.
     """
-    result: Strs = list(execute_single(["pwd"]))
+    result: Strs = _get_current()
 
     if len(result) != 1:
         fail()
