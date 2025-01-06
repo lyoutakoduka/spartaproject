@@ -13,14 +13,18 @@ def _success_error(status: bool) -> None:
         raise ValueError
 
 
+def _fail_error(status: bool) -> None:
+    if not status:
+        raise ValueError
+
+
 def _get_current_file() -> Path:
     return current_frame()["file"]
 
 
 def test_develop() -> None:
     """Test when development environment."""
-    if not in_development(str(_get_current_file())):
-        raise ValueError
+    _fail_error(in_development(str(_get_current_file())))
 
 
 def test_production() -> None:
