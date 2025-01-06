@@ -3,7 +3,6 @@
 
 """Script to execute Python module to get Python version on server."""
 
-
 from sys import version
 
 
