@@ -6,7 +6,7 @@ from collections.abc import Callable
 from contextlib import redirect_stdout
 from io import StringIO
 
-from pyspartalib.context.callable_context import Param, Type
+from pyspartalib.context.type_context import Param, Type
 from pyspartalib.script.decorator_generator import TransferFunction
 
 
