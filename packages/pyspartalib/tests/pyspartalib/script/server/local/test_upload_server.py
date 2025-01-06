@@ -26,7 +26,9 @@ def _upload_path(server: UploadServer, source_path: Path) -> None:
 
 
 def _upload_path_local(
-    server: UploadServer, source_path: Path, destination_path: Path
+    server: UploadServer,
+    source_path: Path,
+    destination_path: Path,
 ) -> None:
     assert server.upload(source_path, destination=destination_path)
 
@@ -41,7 +43,9 @@ def _get_server() -> UploadServer:
 
 def _get_server_local(local_root: Path) -> UploadServer:
     return UploadServer(
-        jst=True, local_root=local_root, forward=_get_config_file()
+        jst=True,
+        local_root=local_root,
+        forward=_get_config_file(),
     )
 
 
@@ -77,7 +81,8 @@ def test_tree() -> None:
     _upload_path(
         server,
         create_temporary_tree(
-            Path(server.get_date_time_root(), "tree"), tree_deep=2
+            Path(server.get_date_time_root(), "tree"),
+            tree_deep=2,
         ),
     )
 
@@ -92,7 +97,9 @@ def test_place() -> None:
         source_path: Path = create_temporary_file(server.get_date_time_root())
 
         _upload_path_local(
-            server, source_path, server.to_relative_path(source_path)
+            server,
+            source_path,
+            server.to_relative_path(source_path),
         )
 
     _inside_temporary_directory(individual_test)

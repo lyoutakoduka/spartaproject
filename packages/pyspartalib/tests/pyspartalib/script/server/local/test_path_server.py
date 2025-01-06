@@ -21,7 +21,9 @@ def _check_exists(result: Path) -> None:
 
 
 def _compare_relative(
-    expected: Path, result: Path, server: PathServer
+    expected: Path,
+    result: Path,
+    server: PathServer,
 ) -> None:
     assert expected == server.to_relative_path(result)
 
@@ -33,7 +35,9 @@ def _compare_path(result: Path, expected: Path) -> None:
 
 
 def _compare_working(
-    temporary_root: Path, date_time: Path, server: PathServer
+    temporary_root: Path,
+    date_time: Path,
+    server: PathServer,
 ) -> None:
     _compare_path(
         server.get_date_time_root(),
@@ -95,7 +99,9 @@ def test_date() -> None:
     def individual_test(temporary_root: Path) -> None:
         local_root: Path = _get_local_root(temporary_root)
         server = PathServer(
-            working_root=temporary_root, local_root=local_root, override=True
+            working_root=temporary_root,
+            local_root=local_root,
+            override=True,
         )
         _compare_working(local_root, date_time, server)
 
@@ -111,7 +117,9 @@ def test_relative() -> None:
     server = PathServer()
 
     _compare_relative(
-        expected, Path(server.get_local_root(), expected), server
+        expected,
+        Path(server.get_local_root(), expected),
+        server,
     )
 
 
