@@ -11,12 +11,17 @@ from pyspartalib.script.server.local.execute_server import ExecuteServer
 from tests.pyspartalib.interface.pytest import fail, raises
 
 
+def _fail_error(status: bool) -> None:
+    if not status:
+        raise ValueError
+
+
 def _get_config_file() -> Path:
     return get_resource(local_path=Path("forward.json"))
 
 
 def _is_connect(server: ExecuteServer) -> None:
-    assert server.connect()
+    _fail_error(server.connect())
 
 
 def _copy_resource(name: Path, destination_path: Path) -> None:

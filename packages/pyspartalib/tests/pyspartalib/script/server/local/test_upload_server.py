@@ -17,12 +17,17 @@ from pyspartalib.script.path.temporary.create_temporary_tree import (
 from pyspartalib.script.server.local.upload_server import UploadServer
 
 
+def _fail_error(status: bool) -> None:
+    if not status:
+        raise ValueError
+
+
 def _get_config_file() -> Path:
     return get_resource(local_path=Path("forward.json"))
 
 
 def _upload_path(server: UploadServer, source_path: Path) -> None:
-    assert server.upload(source_path)
+    _fail_error(server.upload(source_path))
 
 
 def _upload_path_local(
@@ -30,11 +35,11 @@ def _upload_path_local(
     source_path: Path,
     destination_path: Path,
 ) -> None:
-    assert server.upload(source_path, destination=destination_path)
+    _fail_error(server.upload(source_path, destination=destination_path))
 
 
 def _is_connect(server: UploadServer) -> None:
-    assert server.connect()
+    _fail_error(server.connect())
 
 
 def _get_server() -> UploadServer:
