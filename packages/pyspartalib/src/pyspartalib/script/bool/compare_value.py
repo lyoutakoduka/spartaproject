@@ -9,6 +9,7 @@ from pyspartalib.context.default.bool_context import (
 )
 from pyspartalib.context.default.integer_context import Ints
 from pyspartalib.context.default.string_context import Strs2
+from pyspartalib.context.type_context import Type
 
 
 def _raise_error(message: str | None) -> None:
@@ -20,15 +21,19 @@ def _raise_error(message: str | None) -> None:
 
 def _size_error(
     expected: int,
-    result: Ints,
+    result: list[Type],
     message: str | None = None,
 ) -> None:
     if len(result) != expected:
         _raise_error(message)
 
 
-def _zero_error(result: int, message: str | None = None) -> None:
-    if result == 0:
+def _zero_error(
+    result: Type,
+    expected: Type,
+    message: str | None = None,
+) -> None:
+    if result == expected:
         _raise_error(message)
 
 
@@ -45,7 +50,7 @@ def _check_arguments_size(lefts: BoolType, rights: BoolType) -> None:
     flag_counts: Ints = _get_flag_counts(lefts, rights)
 
     _size_error(1, flag_counts, message="size")
-    _zero_error(flag_counts[0], message="empty")
+    _zero_error(flag_counts[0], 0, message="empty")
 
 
 def _get_sorted_flags(sorted_keys: Strs2, flags_pair: BoolPairs) -> Bools2:
