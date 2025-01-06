@@ -17,6 +17,13 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
+def _none_error(result: Type | None) -> Type:
+    if result is None:
+        raise ValueError
+
+    return result
+
+
 def _fail_error(status: bool) -> None:
     if not status:
         raise ValueError
@@ -52,12 +59,7 @@ def _expected_result(name: Path) -> Strs:
 
 
 def _filter_execute_error(name: Path, server: ExecuteServer) -> Strs:
-    result: Strs | None = _execute_python(name, server)
-
-    if result is None:
-        fail()
-
-    return result
+    return _none_error(_execute_python(name, server))
 
 
 def _common_test(name: Path, server: ExecuteServer) -> None:
