@@ -2,10 +2,12 @@
 
 """Script to execute Python module from directory tree on server."""
 
+from pyspartalib.script.stdout.logger import show_log
+
 
 def _main() -> None:
     for i in range(3):
-        print("directory" + str(i))
+        show_log("directory" + str(i))
 
 
 if __name__ == "__main__":
