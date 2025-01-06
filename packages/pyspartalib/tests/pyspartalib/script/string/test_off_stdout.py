@@ -13,6 +13,15 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
+def _decorate_function(message: str, stdout_text: StdoutText) -> None:
+    @stdout_text.decorator
+    def _messages() -> None:
+        show_log(message)
+        show_log(message)
+
+    _messages()
+
+
 def test_messages() -> None:
     """Test to redirect stdout to string variable forcibly."""
     message: str = "Hello, World!"
@@ -20,14 +29,8 @@ def test_messages() -> None:
         Hello, World!
         Hello, World!
         """
-
     stdout_text = StdoutText()
 
-    @stdout_text.decorator
-    def _messages() -> None:
-        show_log(message)
-        show_log(message)
-
-    _messages()
+    _decorate_function(message, stdout_text)
 
     _difference_error(stdout_text.show(), format_indent(expected, stdout=True))
