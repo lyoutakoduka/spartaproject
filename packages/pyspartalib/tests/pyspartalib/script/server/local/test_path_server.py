@@ -69,7 +69,10 @@ def test_table() -> None:
 
 
 def test_path() -> None:
-    """Test to get all paths about server."""
+    """Test to get all paths about server.
+
+    Note that raise exception is unnecessary.
+    """
     server = PathServer()
 
     for path in server.get_path_table():
