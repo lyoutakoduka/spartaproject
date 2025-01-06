@@ -59,7 +59,7 @@ def test_table() -> None:
     expected: int = 6
     server = PathServer()
 
-    assert expected == len([path for path in server.get_path_table()])
+    assert expected == len(list(server.get_path_table()))
 
 
 def test_path() -> None:
