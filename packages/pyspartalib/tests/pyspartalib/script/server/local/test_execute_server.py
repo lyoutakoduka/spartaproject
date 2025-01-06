@@ -5,10 +5,16 @@
 from pathlib import Path
 
 from pyspartalib.context.default.string_context import Strs
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.path.modify.get_resource import get_resource
 from pyspartalib.script.path.safe.safe_copy import SafeCopy
 from pyspartalib.script.server.local.execute_server import ExecuteServer
 from tests.pyspartalib.interface.pytest import fail, raises
+
+
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
 
 
 def _fail_error(status: bool) -> None:
@@ -55,11 +61,17 @@ def _filter_execute_error(name: Path, server: ExecuteServer) -> Strs:
 
 
 def _common_test(name: Path, server: ExecuteServer) -> None:
-    assert _expected_result(name) == _filter_execute_error(name, server)
+    _difference_error(
+        _filter_execute_error(name, server),
+        _expected_result(name),
+    )
 
 
 def _version_test(name: Path, server: ExecuteServer, expected: str) -> None:
-    assert expected == _get_version_number(_filter_execute_error(name, server))
+    _difference_error(
+        _get_version_number(_filter_execute_error(name, server)),
+        expected,
+    )
 
 
 def _get_version_number(result: Strs) -> str:

@@ -6,10 +6,16 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from pyspartalib.context.extension.path_context import PathFunc
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.server.local.path_server import PathServer
 from pyspartalib.script.time.directory.get_time_path import (
     get_initial_time_path,
 )
+
+
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
 
 
 def _exists_error(path: Path) -> None:
@@ -30,13 +36,12 @@ def _compare_relative(
     result: Path,
     server: PathServer,
 ) -> None:
-    assert expected == server.to_relative_path(result)
+    _difference_error(server.to_relative_path(result), expected)
 
 
 def _compare_path(result: Path, expected: Path) -> None:
     _exists_error(result)
-
-    assert result == expected
+    _difference_error(result, expected)
 
 
 def _compare_working(
