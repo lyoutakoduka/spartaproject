@@ -8,6 +8,11 @@ from pyspartalib.script.feature_flags import in_development
 from pyspartalib.script.stack_frame import current_frame
 
 
+def _success_error(status: bool) -> None:
+    if status:
+        raise ValueError
+
+
 def _get_current_file() -> Path:
     return current_frame()["file"]
 
@@ -20,5 +25,4 @@ def test_develop() -> None:
 
 def test_production() -> None:
     """Test when production environment."""
-    if in_development():
-        raise ValueError
+    _success_error(in_development())
