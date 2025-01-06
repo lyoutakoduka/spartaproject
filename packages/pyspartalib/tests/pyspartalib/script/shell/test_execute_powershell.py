@@ -56,6 +56,17 @@ def _get_commands_write(expected: Strs) -> Strs:
     return ["; ".join([_print_command() + " " + text for text in expected])]
 
 
+def _get_result_command(expected: Path) -> Strs:
+    return _execute_powershell(
+        [
+            get_script_string(expected),
+            get_double_quoted_command(
+                [get_quoted_path(get_path_string(expected))] * 2,
+            ),
+        ],
+    )
+
+
 def test_script() -> None:
     """Test to convert script part of command string on PowerShell."""
     path_elements: Strs = _get_path_elements()
@@ -86,7 +97,7 @@ def test_argument() -> None:
     )
 
 
-def test_all() -> None:
+def test_grouped_all() -> None:
     """Test to convert command part of command string on PowerShell."""
     expected: Strs = [_print_command(), "Test"]
 
@@ -109,13 +120,6 @@ def test_command() -> None:
     expected: Path = get_resource(local_path=Path("tools", "command.ps1"))
 
     _difference_error(
-        _execute_powershell(
-            [
-                get_script_string(expected),
-                get_double_quoted_command(
-                    [get_quoted_path(get_path_string(expected))] * 2,
-                ),
-            ],
-        ),
+        _get_result_command(expected),
         [get_path_string(expected)],
     )
