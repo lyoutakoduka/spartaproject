@@ -26,6 +26,14 @@ def _get_frame_current() -> StackFrame:
     }
 
 
+def _get_frame_offset() -> StackFrame:
+    return {
+        "file": _get_file_expected(),
+        "function": "test_offset",
+        "line": 37,
+    }
+
+
 def test_current() -> None:
     """Test to get current frame information in stack frames."""
     _difference_error(current_frame(), _get_frame_current())
@@ -33,13 +41,8 @@ def test_current() -> None:
 
 def test_offset() -> None:
     """Test to get current frame information with index offset."""
-    expected: StackFrame = {
-        "file": _get_file_expected(),
-        "function": "test_offset",
-        "line": 37,
-    }
 
     def inside_function() -> None:
-        _difference_error(current_frame(offset=1), expected)
+        _difference_error(current_frame(offset=1), _get_frame_offset())
 
     inside_function()
