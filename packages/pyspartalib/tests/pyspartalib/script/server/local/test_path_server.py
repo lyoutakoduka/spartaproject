@@ -18,6 +18,11 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
+def _length_error(result: list[Type], expected: int) -> None:
+    if len(result) == expected:
+        raise ValueError
+
+
 def _exists_error(path: Path) -> None:
     if not path.exists():
         raise ValueError
@@ -65,7 +70,7 @@ def test_table() -> None:
     expected: int = 6
     server = PathServer()
 
-    assert expected == len(list(server.get_path_table()))
+    _length_error(server.get_path_table(), expected)
 
 
 def test_path() -> None:
