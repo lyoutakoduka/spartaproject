@@ -20,8 +20,8 @@ def _raise_error(message: str | None) -> None:
 
 
 def _size_error(
-    expected: int,
     result: list[Type],
+    expected: int,
     message: str | None = None,
 ) -> None:
     if len(result) != expected:
@@ -49,7 +49,7 @@ def _get_flag_counts(lefts: BoolType, rights: BoolType) -> Ints:
 def _check_arguments_size(lefts: BoolType, rights: BoolType) -> None:
     flag_counts: Ints = _get_flag_counts(lefts, rights)
 
-    _size_error(1, flag_counts, message="size")
+    _size_error(flag_counts, 1, message="size")
     _same_error(flag_counts[0], 0, message="empty")
 
 
