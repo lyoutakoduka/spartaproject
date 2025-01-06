@@ -3,10 +3,19 @@
 """Module to get stack frames information."""
 
 import inspect
+from inspect import FrameInfo
 from pathlib import Path
 
 from pyspartalib.context.typed.builtin_context import StackFrame, StackFrames
 from pyspartalib.script.path.modify.current.get_relative import get_relative
+
+
+def _get_stack_frame(outer_frame: FrameInfo) -> StackFrame:
+    return {
+        "file": Path(outer_frame.filename),
+        "function": outer_frame.function,
+        "line": outer_frame.lineno,
+    }
 
 
 def _get_stack_frames() -> StackFrames:
@@ -14,12 +23,7 @@ def _get_stack_frames() -> StackFrames:
 
     if current_frame := inspect.currentframe():
         for outer_frame in inspect.getouterframes(current_frame):
-            stack_frame: StackFrame = {
-                "file": Path(outer_frame.filename),
-                "function": outer_frame.function,
-                "line": outer_frame.lineno,
-            }
-            stack_frames += [stack_frame]
+            stack_frames += [_get_stack_frame(outer_frame)]
 
     return stack_frames
 
