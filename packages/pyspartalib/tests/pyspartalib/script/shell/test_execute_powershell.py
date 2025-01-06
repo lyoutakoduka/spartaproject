@@ -65,11 +65,10 @@ def test_path() -> None:
 def test_argument() -> None:
     """Test to get path surrounded by quotation for executing on PowerShell."""
     path_elements: Strs = _get_path_elements()
-    expected: str = _get_formatted_path(path_elements).join(["'"] * 2)
 
     _difference_error(
         get_quoted_path(get_path_string(Path(*path_elements))),
-        expected,
+        _get_formatted_path(path_elements).join(["'"] * 2),
     )
 
 
