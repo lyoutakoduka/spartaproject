@@ -2,12 +2,18 @@
 
 """Test module to convert text to specific type."""
 
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.string.convert_type import convert_integer
+
+
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
 
 
 def test_number() -> None:
     """Test to convert text to type "integer"."""
-    assert convert_integer("0001") == 1
+    _difference_error(convert_integer("0001"), 1)
 
 
 def test_error() -> None:
