@@ -37,8 +37,12 @@ def _same_error(
         _raise_error(message)
 
 
-def _length_small_error(result: Strs2, message: str | None = None) -> None:
-    if len(set(result)) <= 1:
+def _length_small_error(
+    result: list[Type],
+    expected: int,
+    message: str | None = None,
+) -> None:
+    if len(set(result)) <= expected:
         _raise_error(message)
 
 
@@ -80,6 +84,6 @@ def bool_compare_pair(lefts: BoolPair, rights: BoolPair) -> bool:
     flags_pair: BoolPairs = [lefts, rights]
     sorted_keys: Strs2 = [sorted(flags.keys()) for flags in flags_pair]
 
-    _length_small_error(sorted_keys, message="unmatch")
+    _length_small_error(list(set(sorted_keys)), 1, message="unmatch")
 
     return _confirm_list_single(_get_sorted_flags(sorted_keys, flags_pair))
