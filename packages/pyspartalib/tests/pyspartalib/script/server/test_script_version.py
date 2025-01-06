@@ -20,7 +20,8 @@ def _difference_error(result: Type, expected: Type) -> None:
 
 def test_name() -> None:
     """Test function to compare version string like default directory name."""
-    _difference_error(get_version_name("0.0.0"), "Python-0.0.0")
+    version: str = "0.0.0"
+    _difference_error(get_version_name(version), "Python-" + version)
 
 
 def test_version() -> None:
