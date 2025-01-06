@@ -74,7 +74,6 @@ def test_path() -> None:
 
     for path in server.get_path_table():
         server.get_path(path)
-        assert True
 
 
 def test_work() -> None:
