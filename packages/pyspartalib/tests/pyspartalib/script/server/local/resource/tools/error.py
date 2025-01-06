@@ -4,7 +4,7 @@
 
 
 def _main() -> None:
-    raise
+    raise NotImplementedError
 
 
 if __name__ == "__main__":
