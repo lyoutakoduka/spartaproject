@@ -5,6 +5,7 @@
 from pathlib import Path
 
 from pyspartalib.context.default.string_context import Strs
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.server.local.upload_server import UploadServer
 from pyspartalib.script.server.script_version import get_version_name
 
@@ -28,7 +29,7 @@ class ExecuteServer(UploadServer):
             platform=platform,
         )
 
-    def _contain_error(self, target: str, group: Strs) -> None:
+    def _contain_error(self, target: Type, group: list[Type]) -> None:
         if target in group:
             raise ValueError
 
