@@ -30,7 +30,7 @@ def _to_relative_path(frame: StackFrame) -> StackFrame:
 
 
 def current_frame(offset: int = 0) -> StackFrame:
-    """Function to get current frame information in stack frames.
+    """Get current frame information in stack frames.
 
     Args:
         offset (int, optional): Defaults to 0.
@@ -38,6 +38,7 @@ def current_frame(offset: int = 0) -> StackFrame:
 
     Returns:
         StackFrame: Selected current frame information.
+
     """
     stack_frames: StackFrames = _get_stack_frames()
     return _to_relative_path(stack_frames[2 + offset])
