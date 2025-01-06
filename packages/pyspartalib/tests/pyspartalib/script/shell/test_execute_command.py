@@ -7,6 +7,7 @@ from tempfile import TemporaryDirectory
 
 from pyspartalib.context.callable_context import Type
 from pyspartalib.context.default.string_context import Strs
+from pyspartalib.context.extension.path_context import PathFunc
 from pyspartalib.script.path.modify.current.get_current import get_current
 from pyspartalib.script.shell.execute_command import (
     execute_multiple,
@@ -34,6 +35,11 @@ def _move_and_get(expected: Path) -> Strs:
     )
 
 
+def _inside_temporary_directory(function: PathFunc) -> None:
+    with TemporaryDirectory() as temporary_path:
+        function(Path(temporary_path))
+
+
 def test_single() -> None:
     """Test to execute generic script.
 
@@ -56,9 +62,11 @@ def test_multiple() -> None:
     Suppose that the test environment of Windows
         can execute simple Linux commands.
     """
-    with TemporaryDirectory() as temporary_directory:
-        expected: Path = Path(temporary_directory)
-        result: Strs = _move_and_get(expected)
+
+    def individual_test(temporary_root: Path) -> None:
+        result: Strs = _move_and_get(temporary_root)
 
         _difference_error(len(result), 1)
-        _difference_error(Path(result[0]), expected)
+        _difference_error(Path(result[0]), temporary_root)
+
+    _inside_temporary_directory(individual_test)
