@@ -5,6 +5,8 @@ from collections.abc import Callable
 from pyspartalib.context.callable_context import Param, Type
 from pyspartalib.script.decorator_generator import TransferFunction
 
+Func = Callable[[], None]
+
 
 class TemporaryDecorator(TransferFunction):
     def __init__(self, text: str | None = None) -> None:
@@ -32,14 +34,20 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
+def _decorate_function(test_instance: TemporaryDecorator) -> Func:
+    @test_instance.decorator
+    def text_print() -> None:
+        """Text doc."""
+
+    text_print()
+
+    return text_print
+
+
 def test_name() -> None:
     test_instance = TemporaryDecorator()
 
-    @test_instance.decorator
-    def text_print() -> None:
-        pass
-
-    text_print()
+    text_print: Func = _decorate_function(test_instance)
 
     _difference_error(text_print.__name__, "text_print")
 
@@ -47,11 +55,7 @@ def test_name() -> None:
 def test_doc() -> None:
     test_instance = TemporaryDecorator()
 
-    @test_instance.decorator
-    def text_print() -> None:
-        """Text doc."""
-
-    text_print()
+    text_print: Func = _decorate_function(test_instance)
 
     _difference_error(text_print.__doc__, "Text doc.")
 
@@ -60,10 +64,6 @@ def test_text() -> None:
     message: str = "Hello!"
     test_instance = TemporaryDecorator(message)
 
-    @test_instance.decorator
-    def text_print() -> None:
-        pass
-
-    text_print()
+    _decorate_function(test_instance)
 
     _difference_error(test_instance.show(), "Hello!Hello!")
