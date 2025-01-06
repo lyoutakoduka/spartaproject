@@ -171,9 +171,6 @@ class EditArchive(SafeTrash):
     def get_archive_path(self) -> Path:
         """Get path of archive you will edit.
 
-        Raises:
-            ValueError: Raise error if you don't set path information.
-
         Returns:
             Path: Path of archive.
 
