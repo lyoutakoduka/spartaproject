@@ -5,6 +5,7 @@
 from pathlib import Path
 
 from pyspartalib.context.extension.path_context import Paths, PathsPair
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.file.archive.archive_format import rename_format
 from pyspartalib.script.file.archive.compress_archive import CompressArchive
 from pyspartalib.script.file.archive.edit_archive import EditArchive
@@ -36,7 +37,7 @@ class TakeOutArchive(EditArchive):
     def __initialize_variables(self) -> None:
         self._took_out_root: Path | None = None
 
-    def _path_error(self, result: Path | None) -> Path:
+    def _none_error(self, result: Type | None) -> Type:
         if result is None:
             raise ValueError
 

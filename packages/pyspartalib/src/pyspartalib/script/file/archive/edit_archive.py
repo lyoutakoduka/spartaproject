@@ -6,6 +6,7 @@ from pathlib import Path
 
 from pyspartalib.context.extension.path_context import Paths
 from pyspartalib.context.extension.time_context import TimePair
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.file.archive.compress_archive import CompressArchive
 from pyspartalib.script.file.archive.decompress_archive import (
     DecompressArchive,
@@ -68,7 +69,7 @@ class EditArchive(SafeTrash):
         self._is_lzma_after: bool = compress
         self._protected: bool = protected
 
-    def _path_error(self, result: Path | None) -> Path:
+    def _none_error(self, result: Type | None) -> Type:
         if result is None:
             raise ValueError
 
