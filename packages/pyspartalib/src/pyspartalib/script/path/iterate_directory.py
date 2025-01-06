@@ -87,8 +87,5 @@ def walk_iterator(
     Returns:
         PathGene: Path generator, not list of Path.
 
-    Yields:
-        Iterator[PathGene]: Path of file or directory found by search.
-
     """
     yield from _iterate_tree(root, depth, file, directory, suffix, glob_filter)
