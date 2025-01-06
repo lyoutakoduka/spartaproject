@@ -27,6 +27,11 @@ class TemporaryDecorator(TransferFunction):
         return self.text
 
 
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
+
+
 def test_name() -> None:
     test_instance = TemporaryDecorator()
 
@@ -36,9 +41,7 @@ def test_name() -> None:
 
     text_print()
 
-    expected_function: str = "text_print"
-    if expected_function != text_print.__name__:
-        raise ValueError
+    _difference_error(text_print.__name__, "text_print")
 
 
 def test_doc() -> None:
@@ -50,9 +53,7 @@ def test_doc() -> None:
 
     text_print()
 
-    expected_doc: str = "Text doc."
-    if expected_doc != text_print.__doc__:
-        raise ValueError
+    _difference_error(text_print.__doc__, "Text doc.")
 
 
 def test_text() -> None:
@@ -65,6 +66,4 @@ def test_text() -> None:
 
     text_print()
 
-    expected_text: str = "Hello!Hello!"
-    if expected_text != test_instance.show():
-        raise ValueError
+    _difference_error(test_instance.show(), "Hello!Hello!")

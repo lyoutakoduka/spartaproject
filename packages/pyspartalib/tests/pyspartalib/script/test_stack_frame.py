@@ -4,8 +4,14 @@
 
 from pathlib import Path
 
+from pyspartalib.context.callable_context import Type
 from pyspartalib.script.path.modify.current.get_relative import get_relative
 from pyspartalib.script.stack_frame import StackFrame, current_frame
+
+
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
 
 
 def _get_file_expected() -> Path:
@@ -19,8 +25,8 @@ def test_current() -> None:
         "function": "test_current",
         "line": 23,
     }
-    if expected != current_frame():
-        raise ValueError
+
+    _difference_error(current_frame(), expected)
 
 
 def test_offset() -> None:
@@ -32,7 +38,6 @@ def test_offset() -> None:
     }
 
     def inside_function() -> None:
-        if expected != current_frame(offset=1):
-            raise ValueError
+        _difference_error(current_frame(offset=1), expected)
 
     inside_function()
