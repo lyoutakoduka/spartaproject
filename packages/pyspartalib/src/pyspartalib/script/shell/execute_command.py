@@ -53,14 +53,8 @@ def execute_single(commands: Strs) -> StrGene:
     Args:
         commands (Strs): Script you want to execute corresponding to platform.
 
-    Raises:
-        ValueError: Throw an exception if execution of script is failed.
-
     Returns:
         StrGene: String generator, not string list.
-
-    Yields:
-        Iterator[StrGene]: String generator.
 
     """
     return _execute(_join_text(commands))
@@ -74,14 +68,8 @@ def execute_multiple(command_multiple: Strs2) -> StrGene:
             Script which is multiple lines
             you want to execute corresponding to platform.
 
-    Raises:
-        ValueError: Throw an exception if execution of script is failed.
-
     Returns:
         StrGene: String generator, not string list.
-
-    Yields:
-        Iterator[StrGene]: String generator.
 
     """
     return _execute(_join_line(_join_commands(command_multiple)))

@@ -66,10 +66,6 @@ def get_runtime_path(
                 project context file to any place.
             It's used for argument "forward" of class "ProjectContext".
 
-    Raises:
-        FileNotFoundError:
-            Throw an exception if interpreter path you selected isn't exists.
-
     Returns:
         Path: Relative path of Python interpreter.
 
