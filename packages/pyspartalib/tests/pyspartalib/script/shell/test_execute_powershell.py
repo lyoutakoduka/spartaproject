@@ -46,6 +46,12 @@ def _get_result_all(expected: Strs) -> Strs:
     return get_double_quoted_command(expected).replace('"', "").split(" ")
 
 
+def _get_result_write(expected: Strs) -> Strs:
+    return _execute_powershell(
+        [get_double_quoted_command(_get_commands_write(expected))],
+    )
+
+
 def _get_commands_write(expected: Strs) -> Strs:
     return ["; ".join([_print_command() + " " + text for text in expected])]
 
@@ -91,12 +97,7 @@ def test_write() -> None:
     """Test for executing simple command on PowerShell."""
     expected: Strs = temporary_text(3, 3)
 
-    _difference_error(
-        _execute_powershell(
-            [get_double_quoted_command(_get_commands_write(expected))],
-        ),
-        expected,
-    )
+    _difference_error(_get_result_write(expected), expected)
 
 
 def test_command() -> None:
