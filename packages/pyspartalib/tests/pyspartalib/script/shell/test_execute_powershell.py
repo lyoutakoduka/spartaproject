@@ -42,6 +42,10 @@ def _execute_powershell(commands: Strs) -> Strs:
     return list(execute_powershell(commands, forward=_get_config_file()))
 
 
+def _get_result_all(expected: Strs) -> Strs:
+    return get_double_quoted_command(expected).replace('"', "").split(" ")
+
+
 def test_script() -> None:
     """Test to convert script part of command string on PowerShell."""
     path_elements: Strs = _get_path_elements()
@@ -76,15 +80,7 @@ def test_all() -> None:
     """Test to convert command part of command string on PowerShell."""
     expected: Strs = [_print_command(), "Test"]
 
-    _difference_error(
-        get_double_quoted_command(expected)
-        .replace(
-            '"',
-            "",
-        )
-        .split(" "),
-        expected,
-    )
+    _difference_error(_get_result_all(expected), expected)
 
 
 def test_write() -> None:
