@@ -3,7 +3,7 @@
 from collections.abc import Callable
 from functools import wraps
 
-from pyspartalib.context.callable_context import Param, Type
+from pyspartalib.context.type_context import Param, Type
 
 
 class TransferFunction:

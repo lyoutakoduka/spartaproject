@@ -2,7 +2,7 @@
 
 from collections.abc import Callable
 
-from pyspartalib.context.callable_context import Param, Type
+from pyspartalib.context.type_context import Param, Type
 from pyspartalib.script.decorator_generator import TransferFunction
 
 Func = Callable[[], None]

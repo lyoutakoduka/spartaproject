@@ -4,7 +4,7 @@
 
 from pathlib import Path
 
-from pyspartalib.context.callable_context import Type
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.path.modify.current.get_relative import get_relative
 from pyspartalib.script.stack_frame import StackFrame, current_frame
 
