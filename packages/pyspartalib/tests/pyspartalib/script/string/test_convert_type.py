@@ -11,6 +11,11 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
+def _not_none_error(result: object) -> None:
+    if result is not None:
+        raise ValueError
+
+
 def test_number() -> None:
     """Test to convert text to type "integer"."""
     _difference_error(convert_integer("0001"), 1)
@@ -18,4 +23,4 @@ def test_number() -> None:
 
 def test_error() -> None:
     """Test to convert text, but it's not number."""
-    assert convert_integer("error") is None
+    _not_none_error(convert_integer("error"))
