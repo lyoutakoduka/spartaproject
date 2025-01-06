@@ -7,7 +7,7 @@ from pyspartalib.script.string.convert_type import convert_integer
 
 def test_number() -> None:
     """Test to convert text to type "integer"."""
-    assert 1 == convert_integer("0001")
+    assert convert_integer("0001") == 1
 
 
 def test_error() -> None:
