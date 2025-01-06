@@ -27,10 +27,6 @@ def _get_local_root(temporary_root: Path) -> Path:
     return Path(temporary_root, "local")
 
 
-def _check_exists(result: Path) -> None:
-    assert result.exists()
-
-
 def _compare_relative(
     expected: Path,
     result: Path,
