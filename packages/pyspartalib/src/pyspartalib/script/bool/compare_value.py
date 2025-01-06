@@ -28,7 +28,7 @@ def _size_error(
         _raise_error(message)
 
 
-def _zero_error(
+def _same_error(
     result: Type,
     expected: Type,
     message: str | None = None,
@@ -50,7 +50,7 @@ def _check_arguments_size(lefts: BoolType, rights: BoolType) -> None:
     flag_counts: Ints = _get_flag_counts(lefts, rights)
 
     _size_error(1, flag_counts, message="size")
-    _zero_error(flag_counts[0], 0, message="empty")
+    _same_error(flag_counts[0], 0, message="empty")
 
 
 def _get_sorted_flags(sorted_keys: Strs2, flags_pair: BoolPairs) -> Bools2:
