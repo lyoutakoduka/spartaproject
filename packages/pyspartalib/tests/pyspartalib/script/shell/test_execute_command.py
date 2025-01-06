@@ -5,9 +5,9 @@
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from pyspartalib.context.callable_context import Type
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.context.extension.path_context import PathFunc
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.path.modify.current.get_current import get_current
 from pyspartalib.script.shell.execute_command import (
     execute_multiple,

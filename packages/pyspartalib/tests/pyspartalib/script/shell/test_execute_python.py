@@ -4,9 +4,9 @@
 
 from pathlib import Path
 
-from pyspartalib.context.callable_context import Type
 from pyspartalib.context.default.string_context import StrGene, Strs
 from pyspartalib.context.extension.path_context import PathPair, Paths
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.path.modify.current.get_absolute import get_absolute
 from pyspartalib.script.path.modify.current.get_relative import (
     get_relative,
