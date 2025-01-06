@@ -12,6 +12,11 @@ from pyspartalib.script.time.directory.get_time_path import (
 )
 
 
+def _exists_error(path: Path) -> None:
+    if not path.exists():
+        raise ValueError
+
+
 def _get_local_root(temporary_root: Path) -> Path:
     return Path(temporary_root, "local")
 
@@ -29,7 +34,7 @@ def _compare_relative(
 
 
 def _compare_path(result: Path, expected: Path) -> None:
-    _check_exists(result)
+    _exists_error(result)
 
     assert result == expected
 
