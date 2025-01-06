@@ -68,10 +68,6 @@ def get_relative(absolute_path: Path, root_path: Path | None = None) -> Path:
         root_path (Path | None, optional): Defaults to None.
             Root of absolute path used for converting path.
 
-    Raises:
-        ValueError:
-            Throw an exception if absolute path don't include root path.
-
     Returns:
         Path: Converted relative path.
 
