@@ -4,9 +4,11 @@
 
 from sys import version
 
+from pyspartalib.script.stdout.logger import show_log
+
 
 def _main() -> None:
-    print(version)
+    show_log(version)
 
 
 if __name__ == "__main__":
