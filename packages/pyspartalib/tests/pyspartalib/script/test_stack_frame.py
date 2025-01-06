@@ -18,15 +18,17 @@ def _get_file_expected() -> Path:
     return get_relative(Path(__file__))
 
 
-def test_current() -> None:
-    """Test to get current frame information in stack frames."""
-    expected: StackFrame = {
+def _get_frame_current() -> StackFrame:
+    return {
         "file": _get_file_expected(),
         "function": "test_current",
         "line": 23,
     }
 
-    _difference_error(current_frame(), expected)
+
+def test_current() -> None:
+    """Test to get current frame information in stack frames."""
+    _difference_error(current_frame(), _get_frame_current())
 
 
 def test_offset() -> None:
