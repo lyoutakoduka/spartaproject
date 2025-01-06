@@ -42,6 +42,12 @@ def _execute_powershell(commands: Strs) -> Strs:
     return list(execute_powershell(commands, forward=_get_config_file()))
 
 
+def _get_command_string(expected: Path) -> str:
+    return get_double_quoted_command(
+        [get_quoted_path(get_path_string(expected))] * 2,
+    )
+
+
 def _get_result_all(expected: Strs) -> Strs:
     return get_double_quoted_command(expected).replace('"', "").split(" ")
 
@@ -58,12 +64,7 @@ def _get_commands_write(expected: Strs) -> Strs:
 
 def _get_result_command(expected: Path) -> Strs:
     return _execute_powershell(
-        [
-            get_script_string(expected),
-            get_double_quoted_command(
-                [get_quoted_path(get_path_string(expected))] * 2,
-            ),
-        ],
+        [get_script_string(expected), _get_command_string(expected)],
     )
 
 
