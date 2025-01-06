@@ -9,7 +9,7 @@ from pyspartalib.context.type_context import Type
 from pyspartalib.script.path.modify.get_resource import get_resource
 from pyspartalib.script.path.safe.safe_copy import SafeCopy
 from pyspartalib.script.server.local.execute_server import ExecuteServer
-from tests.pyspartalib.interface.pytest import fail, raises
+from tests.pyspartalib.interface.pytest import raises
 
 
 def _difference_error(result: Type, expected: Type) -> None:
