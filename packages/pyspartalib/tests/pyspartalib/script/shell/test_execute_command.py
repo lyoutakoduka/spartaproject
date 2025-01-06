@@ -28,6 +28,12 @@ def _get_current() -> Strs:
     return list(execute_single(["pwd"]))
 
 
+def _move_and_get(expected: Path) -> Strs:
+    return list(
+        execute_multiple([["cd", expected.as_posix()], ["pwd"]]),
+    )
+
+
 def test_single() -> None:
     """Test to execute generic script.
 
@@ -52,10 +58,7 @@ def test_multiple() -> None:
     """
     with TemporaryDirectory() as temporary_directory:
         expected: Path = Path(temporary_directory)
-
-        result: Strs = list(
-            execute_multiple([["cd", expected.as_posix()], ["pwd"]]),
-        )
+        result: Strs = _move_and_get(expected)
 
         _difference_error(len(result), 1)
         _difference_error(Path(result[0]), expected)
