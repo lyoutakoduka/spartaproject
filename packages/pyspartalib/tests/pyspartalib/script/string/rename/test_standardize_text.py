@@ -16,6 +16,15 @@ def _get_mail_elements() -> Strs:
     return ["name", "domain", "com"]
 
 
+def _get_noisy_mail(elements: Strs) -> str:
+    parentheses: str = "(" + elements[1] + ")"
+    at_mark: str = elements[0] + "@"
+    mail_body: str = "".join([at_mark, parentheses, elements[2]])
+    space: str = " " + mail_body + " "
+
+    return space
+
+
 def test_lower() -> None:
     """Test to convert upper case string to lower case."""
     _difference_error(
@@ -30,7 +39,7 @@ def test_all() -> None:
 
     _difference_error(
         StandardizeText().standardize(
-            " name@(domain).com ",
+            _get_noisy_mail(mail_elements),
             lower=True,
             under=True,
             strip=True,
