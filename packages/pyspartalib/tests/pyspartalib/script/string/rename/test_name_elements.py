@@ -73,6 +73,10 @@ def _split_name(text: str) -> BaseName | None:
     return NameElements().split_name(text)
 
 
+def _split_name_identifier(text: str, identifier: str) -> BaseName | None:
+    return NameElements(identifier=identifier).split_name(text)
+
+
 def _common_test(name: str, index: int, identifier: str) -> None:
     _split_test(
         name,
@@ -141,8 +145,9 @@ def test_identifier() -> None:
     _split_test(
         name,
         index,
-        NameElements(identifier=identifier).split_name(
+        _split_name_identifier(
             _get_base_name(name, index, identifier),
+            identifier,
         ),
     )
 
