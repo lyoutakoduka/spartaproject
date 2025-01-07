@@ -2,11 +2,17 @@
 
 """Test module to decode byte data by specific character encoding."""
 
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.string.encoding.set_decoding import set_decoding
 
 
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
+
+
 def _compare_decoding(result: str) -> None:
-    assert result == "\u3042"
+    _difference_error(result, "\u3042")
 
 
 def test_utf() -> None:

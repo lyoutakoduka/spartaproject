@@ -2,8 +2,14 @@
 
 """Test module to find character encoding from string automatically."""
 
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.string.encoding.find_encoding import find_encoding
 from pyspartalib.script.string.encoding.set_encoding import set_encoding
+
+
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
 
 
 def _get_input() -> str:
@@ -11,7 +17,7 @@ def _get_input() -> str:
 
 
 def _same_encoding(expected: str, result: bytes) -> None:
-    assert expected == find_encoding(result)
+    _difference_error(find_encoding(result), expected)
 
 
 def _not_same_encoding(expected: str, result: bytes) -> None:
