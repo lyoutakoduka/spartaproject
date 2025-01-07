@@ -5,8 +5,14 @@
 from datetime import datetime
 
 from pyspartalib.context.default.integer_context import IntPair, IntPair2
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.time.format.create_iso_date import get_iso_time
 from pyspartalib.script.time.stamp.current_datetime import get_current_time
+
+
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
 
 
 def _get_year() -> IntPair:
@@ -30,7 +36,7 @@ def _get_source_jst() -> IntPair2:
 
 
 def _compare_time(time: datetime, expected: IntPair2) -> None:
-    assert get_iso_time(expected) == time
+    _difference_error(get_iso_time(expected), time)
 
 
 def test_utc() -> None:

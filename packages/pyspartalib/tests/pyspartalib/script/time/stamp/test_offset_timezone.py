@@ -4,8 +4,14 @@
 
 from pyspartalib.context.default.integer_context import IntPair, IntPair2
 from pyspartalib.context.extension.time_context import Times
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.time.format.create_iso_date import get_iso_time
 from pyspartalib.script.time.stamp.offset_timezone import offset_time
+
+
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
 
 
 def _get_year() -> IntPair:
@@ -47,7 +53,8 @@ def _convert_datetime(time_pairs: IntPair2) -> Times:
 
 def _compare_datetime(time_pairs: IntPair2) -> None:
     times: Times = _convert_datetime(time_pairs)
-    assert times[0] == offset_time(times[1])
+
+    _difference_error(offset_time(times[1]), times[0])
 
 
 def test_jst() -> None:
