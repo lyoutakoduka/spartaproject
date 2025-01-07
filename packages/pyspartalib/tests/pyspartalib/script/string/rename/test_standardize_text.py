@@ -12,7 +12,7 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
-def _get_name_elements() -> Strs:
+def _get_mail_elements() -> Strs:
     return ["name", "domain", "com"]
 
 
@@ -26,7 +26,7 @@ def test_lower() -> None:
 
 def test_all() -> None:
     """Test to convert string by using all conditions at once."""
-    name_elements: Strs = _get_name_elements()
+    name_elements: Strs = _get_mail_elements()
 
     _difference_error(
         StandardizeText().standardize(
