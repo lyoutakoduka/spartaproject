@@ -22,6 +22,10 @@ def _length_error(result: list[Type], expected: int) -> None:
         raise ValueError
 
 
+def _get_expected_single() -> Strs2:
+    return [["A", "Z"], ["a", "z"], ["0", "9"], [" ", "~"]]
+
+
 def _compare_counts(tables: Strs2) -> None:
     for count, table in zip([26, 26, 10, 47], tables, strict=True):
         _length_error(table, count)
@@ -60,7 +64,7 @@ def _compare_merged(table: CharacterTable, merged: Strs2) -> None:
 def test_single() -> None:
     """Test to get characters constructed by single byte."""
     _compare_table(
-        [["A", "Z"], ["a", "z"], ["0", "9"], [" ", "~"]],
+        _get_expected_single(),
         GroupedCharacters().get_table(),
     )
 
