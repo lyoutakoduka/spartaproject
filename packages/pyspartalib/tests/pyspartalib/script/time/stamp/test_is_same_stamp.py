@@ -32,7 +32,7 @@ def _get_relative_latest(path: Path, access: bool = False) -> TimePair:
 
 
 def _is_access(group: str) -> bool:
-    return "access" == group
+    return group == "access"
 
 
 def _get_stamp_pair(stamp_root: Path) -> TimePair2:
