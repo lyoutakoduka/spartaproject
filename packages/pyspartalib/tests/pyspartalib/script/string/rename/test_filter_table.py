@@ -6,7 +6,13 @@ Each character should be included in user defined character tables.
 """
 
 from pyspartalib.context.default.string_context import Strs
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.string.rename.filter_table import FilterTable
+
+
+def _fail_error(status: bool) -> None:
+    if not status:
+        raise ValueError
 
 
 def _filter_text(texts: Strs, filter_table: FilterTable) -> bool:
@@ -14,7 +20,7 @@ def _filter_text(texts: Strs, filter_table: FilterTable) -> bool:
 
 
 def _enable_text(texts: Strs, filter_table: FilterTable) -> None:
-    assert _filter_text(texts, filter_table)
+    _fail_error(_filter_text(texts, filter_table))
 
 
 def _disable_text(texts: Strs, filter_table: FilterTable) -> None:
