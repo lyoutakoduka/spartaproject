@@ -15,13 +15,18 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
+def _length_error(result: list[Type], expected: int) -> None:
+    if len(result) != expected:
+        raise ValueError
+
+
 def _compare_count(expected: int, table: Strs) -> None:
     assert expected == len(table)
 
 
 def _compare_counts(tables: Strs2) -> None:
     for count, table in zip([26, 26, 10, 47], tables):
-        _compare_count(count, table)
+        _length_error(table, count)
 
 
 def _compare_both_ends(both_ends: Strs, table: Strs) -> None:
@@ -34,7 +39,7 @@ def _compare_filtered(expected: Strs2, tables: Strs2) -> None:
 
 
 def _compare_size(result: CharacterTable) -> None:
-    assert 4 == len(result)
+    _length_error(result, 4)
 
 
 def _get_tables(table: CharacterTable) -> Strs2:
@@ -89,5 +94,5 @@ def test_error() -> None:
     """Test to compare characters tables about Windows file system."""
     error_table: Strs = GroupedCharacters().get_error_table()
 
-    _compare_count(9, error_table)
+    _length_error(error_table, 9)
     _compare_both_ends(["\\", "|"], error_table)
