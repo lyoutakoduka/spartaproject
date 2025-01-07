@@ -32,5 +32,6 @@ def test_sjis() -> None:
 def test_other() -> None:
     """Test to find character encoding which is others."""
     _not_same_encoding(
-        "shift-jis", set_encoding(_get_input(), encoding="euc-jp")
+        "shift-jis",
+        set_encoding(_get_input(), encoding="euc-jp"),
     )

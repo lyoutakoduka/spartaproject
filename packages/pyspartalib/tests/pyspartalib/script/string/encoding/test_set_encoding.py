@@ -25,5 +25,6 @@ def test_sjis() -> None:
     expected: bytes = b"\x82\xa0"
 
     _compare_encoding(
-        expected, set_encoding(_get_input(), encoding="shift_jis")
+        expected,
+        set_encoding(_get_input(), encoding="shift_jis"),
     )
