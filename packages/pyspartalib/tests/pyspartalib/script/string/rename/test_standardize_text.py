@@ -2,6 +2,7 @@
 
 """Test module to standardize string for key of dictionary."""
 
+from pyspartalib.context.default.string_context import Strs
 from pyspartalib.context.type_context import Type
 from pyspartalib.script.string.rename.standardize_text import StandardizeText
 
@@ -9,6 +10,10 @@ from pyspartalib.script.string.rename.standardize_text import StandardizeText
 def _difference_error(result: Type, expected: Type) -> None:
     if result != expected:
         raise ValueError
+
+
+def _get_name_elements() -> Strs:
+    return ["name", "domain", "com"]
 
 
 def test_lower() -> None:
