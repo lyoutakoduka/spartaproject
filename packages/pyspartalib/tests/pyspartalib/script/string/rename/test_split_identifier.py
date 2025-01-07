@@ -16,6 +16,10 @@ def _get_names_three() -> Strs:
     return ["first", "second", "third"]
 
 
+def _get_names_two() -> Strs:
+    return ["first", "second"]
+
+
 def _compare_identifier(
     identifier: str,
     split_identifier: SplitIdentifier,
@@ -70,7 +74,7 @@ def test_identifier() -> None:
 def test_replace() -> None:
     """Test to replace one or more consecutive split identifier."""
     base_identifier: str = _get_identifier()
-    names: Strs = ["first", "second"]
+    names: Strs = _get_names_two()
     expected: str = base_identifier.join(names)
     split_identifier = SplitIdentifier()
 
@@ -85,7 +89,7 @@ def test_replace() -> None:
 def test_switch() -> None:
     """Test to switch the split identifier to specific character."""
     base_identifier: str = " "
-    expected: str = base_identifier.join(["first", "second"])
+    expected: str = base_identifier.join(_get_names_two())
     split_identifier = SplitIdentifier()
 
     _difference_error(
