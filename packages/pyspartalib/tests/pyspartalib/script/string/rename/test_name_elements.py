@@ -14,6 +14,13 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
+def _none_error(result: Type | None) -> Type:
+    if result is None:
+        raise ValueError
+
+    return result
+
+
 def _compare_name(name: str, base_name: BaseName) -> None:
     _difference_error(base_name["name"], name)
 
@@ -56,17 +63,16 @@ def _get_base_name_digit(name: str, index: int, identifier: str) -> str:
 
 
 def _split_test(name: str, index: int, base_name: BaseName | None) -> None:
-    if base_name is None:
-        fail()
-    else:
-        _compare_elements(name, index, base_name)
+    _compare_elements(name, index, _none_error(base_name))
 
 
 def _join_test(expected: str, name_elements: NameElements) -> None:
-    if base_name := name_elements.split_name(expected):
-        _difference_error(name_elements.join_name(base_name), expected)
-    else:
-        fail()
+    _difference_error(
+        name_elements.join_name(
+            _none_error(name_elements.split_name(expected)),
+        ),
+        expected,
+    )
 
 
 def _split_name(text: str) -> BaseName | None:
