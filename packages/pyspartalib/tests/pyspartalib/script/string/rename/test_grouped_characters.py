@@ -26,6 +26,15 @@ def _get_expected_single() -> Strs2:
     return [["A", "Z"], ["a", "z"], ["0", "9"], [" ", "~"]]
 
 
+def _get_expected_multiple() -> Strs2:
+    return [
+        ["\uff21", "\uff3a"],
+        ["\uff41", "\uff5a"],
+        ["\uff10", "\uff19"],
+        ["\u3000", "\uff5e"],
+    ]
+
+
 def _compare_counts(tables: Strs2) -> None:
     for count, table in zip([26, 26, 10, 47], tables, strict=True):
         _length_error(table, count)
@@ -72,12 +81,7 @@ def test_single() -> None:
 def test_multiple() -> None:
     """Test to get characters constructed by multiple byte."""
     _compare_table(
-        [
-            ["\uff21", "\uff3a"],
-            ["\uff41", "\uff5a"],
-            ["\uff10", "\uff19"],
-            ["\u3000", "\uff5e"],
-        ],
+        _get_expected_multiple(),
         GroupedCharacters(multiple=True).get_table(),
     )
 
