@@ -12,6 +12,10 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
+def _get_names_three() -> Strs:
+    return ["first", "second", "third"]
+
+
 def _compare_identifier(
     identifier: str,
     split_identifier: SplitIdentifier,
@@ -52,7 +56,7 @@ def test_identifier() -> None:
 
     Candidates are characters other than alphabets and numbers.
     """
-    names: Strs = ["first", "second", "third"]
+    names: Strs = _get_names_three()
     expected: str = _get_identifier().join(names)
     split_identifier = SplitIdentifier()
 
