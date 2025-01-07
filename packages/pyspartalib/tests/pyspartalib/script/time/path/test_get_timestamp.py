@@ -95,7 +95,7 @@ def _compare_invalid_times(times: TimePair) -> None:
 def _compare_invalid_files(times: TimePair) -> None:
     expected: Strs = ["file.json", "empty", "file.ini", "file.txt"]
     assert 1 == len(
-        set([str(sorted(files)) for files in [expected, list(times.keys())]])
+        set([str(sorted(files)) for files in [expected, list(times.keys())]]),
     )
 
 
@@ -123,7 +123,7 @@ def test_directory() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         _compare_utc_timezone(
-            create_directory(Path(temporary_root, "temporary"))
+            create_directory(Path(temporary_root, "temporary")),
         )
 
     _inside_temporary_directory(individual_test)
@@ -134,7 +134,7 @@ def test_jst() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         times: Times = _compare_jst_timezone(
-            create_temporary_file(temporary_root)
+            create_temporary_file(temporary_root),
         )
 
         assert "9:00:00" == str(times[0].utcoffset())
@@ -147,7 +147,7 @@ def test_tree() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         directory_path: Path = create_temporary_tree(
-            Path(temporary_root, "tree")
+            Path(temporary_root, "tree"),
         )
         _set_invalid_directory(directory_path)
 

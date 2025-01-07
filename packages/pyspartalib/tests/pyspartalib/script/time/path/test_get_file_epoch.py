@@ -21,7 +21,7 @@ def _set_invalid_datetime(file_path: Path) -> Path:
 
 def _common_test(path: Path) -> None:
     assert 1 == len(
-        set([get_file_epoch(path, access=status) for status in [False, True]])
+        set([get_file_epoch(path, access=status) for status in [False, True]]),
     )
 
 
@@ -53,7 +53,7 @@ def test_empty() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         file_path: Path = _set_invalid_datetime(
-            create_temporary_file(temporary_root)
+            create_temporary_file(temporary_root),
         )
         for status in [False, True]:
             assert get_file_epoch(file_path, access=status) is None

@@ -115,7 +115,8 @@ def test_file() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         _compare_datetime(
-            create_temporary_file(temporary_root), _select_zone()
+            create_temporary_file(temporary_root),
+            _select_zone(),
         )
 
     _inside_temporary_directory(individual_test)
@@ -138,7 +139,8 @@ def test_jst() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         _compare_datetime(
-            create_temporary_file(temporary_root), _select_zone(jst=True)
+            create_temporary_file(temporary_root),
+            _select_zone(jst=True),
         )
 
     _inside_temporary_directory(individual_test)
