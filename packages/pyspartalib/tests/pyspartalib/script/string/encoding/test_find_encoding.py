@@ -12,6 +12,11 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
+def _same_error(result: Type, expected: Type) -> None:
+    if result == expected:
+        raise ValueError
+
+
 def _get_input() -> str:
     return chr(12354)
 
@@ -21,7 +26,7 @@ def _same_encoding(expected: str, result: bytes) -> None:
 
 
 def _not_same_encoding(expected: str, result: bytes) -> None:
-    assert expected != find_encoding(result)
+    _same_error(find_encoding(result), expected)
 
 
 def test_utf() -> None:
