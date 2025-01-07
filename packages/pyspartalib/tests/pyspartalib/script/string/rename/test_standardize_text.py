@@ -26,6 +26,8 @@ def test_lower() -> None:
 
 def test_all() -> None:
     """Test to convert string by using all conditions at once."""
+    name_elements: Strs = _get_name_elements()
+
     _difference_error(
         StandardizeText().standardize(
             " name@(domain).com ",
@@ -34,5 +36,5 @@ def test_all() -> None:
             strip=True,
             replace=True,
         ),
-        "name_domain_com",
+        "_".join(name_elements),
     )
