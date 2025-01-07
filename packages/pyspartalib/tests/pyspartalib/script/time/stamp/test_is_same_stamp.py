@@ -16,6 +16,11 @@ from pyspartalib.script.time.path.get_timestamp import get_directory_latest
 from pyspartalib.script.time.stamp.is_same_stamp import is_same_stamp
 
 
+def _fail_error(status: bool) -> None:
+    if not status:
+        raise ValueError
+
+
 def _get_directory_latest(path: Path, access: bool) -> TimePair:
     return get_directory_latest(walk_iterator(path), access=access)
 
@@ -55,6 +60,8 @@ def test_same() -> None:
             create_temporary_tree(Path(temporary_root, "tree")),
         )
 
-        assert is_same_stamp(stamp_pair["update"], stamp_pair["access"])
+        _fail_error(
+            is_same_stamp(stamp_pair["update"], stamp_pair["access"]),
+        )
 
     _inside_temporary_directory(individual_test)
