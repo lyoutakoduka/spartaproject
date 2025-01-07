@@ -6,7 +6,6 @@ from pyspartalib.context.default.string_context import Strs
 from pyspartalib.context.type_context import Type
 from pyspartalib.context.typed.user_context import BaseName
 from pyspartalib.script.string.rename.name_elements import NameElements
-from tests.pyspartalib.interface.pytest import fail
 
 
 def _difference_error(result: Type, expected: Type) -> None:
