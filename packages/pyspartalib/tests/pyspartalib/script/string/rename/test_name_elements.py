@@ -106,7 +106,7 @@ def test_option() -> None:
         name,
         index,
         NameElements().split_name(
-            _get_base_name_option(name, index, identifier)
+            _get_base_name_option(name, index, identifier),
         ),
     )
 
@@ -121,7 +121,7 @@ def test_digit() -> None:
         name,
         index,
         NameElements().split_name(
-            _get_base_name_digit(name, index, identifier)
+            _get_base_name_digit(name, index, identifier),
         ),
     )
 
@@ -136,7 +136,7 @@ def test_identifier() -> None:
         name,
         index,
         NameElements(identifier=identifier).split_name(
-            _get_base_name(name, index, identifier)
+            _get_base_name(name, index, identifier),
         ),
     )
 

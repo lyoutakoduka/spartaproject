@@ -74,7 +74,8 @@ def test_merge() -> None:
     grouped_characters = GroupedCharacters()
 
     _compare_merged(
-        grouped_characters.get_table(), grouped_characters.get_merged_tables()
+        grouped_characters.get_table(),
+        grouped_characters.get_merged_tables(),
     )
 
 

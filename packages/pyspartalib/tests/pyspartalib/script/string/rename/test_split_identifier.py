@@ -11,7 +11,8 @@ def _compare_text(expected: str, result: str) -> None:
 
 
 def _compare_identifier(
-    identifier: str, split_identifier: SplitIdentifier
+    identifier: str,
+    split_identifier: SplitIdentifier,
 ) -> None:
     _compare_text(identifier, split_identifier.get_identifier())
 
@@ -37,7 +38,7 @@ def test_strip() -> None:
     identifier: str = _get_identifier() * 2
 
     assert expected == SplitIdentifier().convert_strip(
-        identifier + expected + identifier
+        identifier + expected + identifier,
     )
 
 
@@ -52,7 +53,8 @@ def test_identifier() -> None:
 
     for identifier in [" ", ".", "-", "~"]:
         _compare_text(
-            expected, split_identifier.convert_under(identifier.join(names))
+            expected,
+            split_identifier.convert_under(identifier.join(names)),
         )
 
 
@@ -80,6 +82,7 @@ def test_switch() -> None:
     _compare_text(
         expected,
         split_identifier.switch_identifier(
-            split_identifier.convert_under(expected), base_identifier
+            split_identifier.convert_under(expected),
+            base_identifier,
         ),
     )
