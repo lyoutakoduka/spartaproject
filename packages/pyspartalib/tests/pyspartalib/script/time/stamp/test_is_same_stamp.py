@@ -52,7 +52,7 @@ def test_same() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         stamp_pair: TimePair2 = _get_stamp_pair(
-            create_temporary_tree(Path(temporary_root, "tree"))
+            create_temporary_tree(Path(temporary_root, "tree")),
         )
 
         assert is_same_stamp(stamp_pair["update"], stamp_pair["access"])
