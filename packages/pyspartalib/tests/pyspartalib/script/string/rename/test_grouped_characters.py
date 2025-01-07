@@ -21,7 +21,7 @@ def _length_error(result: list[Type], expected: int) -> None:
 
 
 def _compare_counts(tables: Strs2) -> None:
-    for count, table in zip([26, 26, 10, 47], tables):
+    for count, table in zip([26, 26, 10, 47], tables, strict=True):
         _length_error(table, count)
 
 
@@ -30,7 +30,7 @@ def _compare_both_ends(both_ends: Strs, table: Strs) -> None:
 
 
 def _compare_filtered(expected: Strs2, tables: Strs2) -> None:
-    for both_ends, table in zip(expected, tables):
+    for both_ends, table in zip(expected, tables, strict=True):
         _compare_both_ends(both_ends, table)
 
 
