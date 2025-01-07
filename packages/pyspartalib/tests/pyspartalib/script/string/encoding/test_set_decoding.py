@@ -17,13 +17,9 @@ def _compare_decoding(result: str) -> None:
 
 def test_utf() -> None:
     """Test to decode byte data by default character encoding."""
-    source: bytes = b"\xe3\x81\x82"
-
-    _compare_decoding(set_decoding(source))
+    _compare_decoding(set_decoding(b"\xe3\x81\x82"))
 
 
 def test_sjis() -> None:
     """Test to decode byte data by specific character encoding."""
-    source: bytes = b"\x82\xa0"
-
-    _compare_decoding(set_decoding(source, encoding="shift_jis"))
+    _compare_decoding(set_decoding(b"\x82\xa0", encoding="shift_jis"))

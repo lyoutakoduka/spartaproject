@@ -17,16 +17,12 @@ def _get_input() -> str:
 
 def test_utf() -> None:
     """Test to encode string by default character encoding."""
-    expected: bytes = b"\xe3\x81\x82"
-
-    _difference_error(set_encoding(_get_input()), expected)
+    _difference_error(set_encoding(_get_input()), b"\xe3\x81\x82")
 
 
 def test_sjis() -> None:
     """Test to encode string by specific character encoding."""
-    expected: bytes = b"\x82\xa0"
-
     _difference_error(
         set_encoding(_get_input(), encoding="shift_jis"),
-        expected,
+        b"\x82\xa0",
     )
