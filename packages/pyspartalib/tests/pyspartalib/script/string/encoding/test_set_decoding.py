@@ -6,7 +6,7 @@ from pyspartalib.script.string.encoding.set_decoding import set_decoding
 
 
 def _compare_decoding(result: str) -> None:
-    assert "\u3042" == result
+    assert result == "\u3042"
 
 
 def test_utf() -> None:
