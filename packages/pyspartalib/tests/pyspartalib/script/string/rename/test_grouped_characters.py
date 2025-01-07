@@ -20,10 +20,6 @@ def _length_error(result: list[Type], expected: int) -> None:
         raise ValueError
 
 
-def _compare_count(expected: int, table: Strs) -> None:
-    assert expected == len(table)
-
-
 def _compare_counts(tables: Strs2) -> None:
     for count, table in zip([26, 26, 10, 47], tables):
         _length_error(table, count)

@@ -12,10 +12,6 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
-def _compare_text(expected: str, result: str) -> None:
-    assert expected == result
-
-
 def _compare_identifier(
     identifier: str,
     split_identifier: SplitIdentifier,

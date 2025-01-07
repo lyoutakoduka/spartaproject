@@ -11,10 +11,6 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
-def _compare_text(expected: str, result: str) -> None:
-    assert expected == result
-
-
 def test_lower() -> None:
     """Test to convert upper case string to lower case."""
     _difference_error(
