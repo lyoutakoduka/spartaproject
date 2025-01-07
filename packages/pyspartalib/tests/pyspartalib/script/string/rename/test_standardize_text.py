@@ -16,7 +16,7 @@ def _get_mail_elements() -> Strs:
     return ["name", "domain", "com"]
 
 
-def _get_noisy_mail(elements: Strs) -> str:
+def _get_invalid_mail(elements: Strs) -> str:
     parentheses: str = "(" + elements[1] + ")"
     at_mark: str = elements[0] + "@"
     mail_body: str = "".join([at_mark, parentheses, elements[2]])
@@ -39,7 +39,7 @@ def test_all() -> None:
 
     _difference_error(
         StandardizeText().standardize(
-            _get_noisy_mail(mail_elements),
+            _get_invalid_mail(mail_elements),
             lower=True,
             under=True,
             strip=True,
