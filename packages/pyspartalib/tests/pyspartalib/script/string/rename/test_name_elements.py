@@ -21,6 +21,11 @@ def _none_error(result: Type | None) -> Type:
     return result
 
 
+def _note_none_error(result: object) -> None:
+    if result is not None:
+        raise ValueError
+
+
 def _compare_name(name: str, base_name: BaseName) -> None:
     _difference_error(base_name["name"], name)
 
@@ -113,7 +118,7 @@ def test_index() -> None:
     """Test for base name of file, but it doesn't include index string."""
     name: str = "file"
 
-    assert _split_name(name) is None
+    _note_none_error(_split_name(name))
 
 
 def test_option() -> None:
