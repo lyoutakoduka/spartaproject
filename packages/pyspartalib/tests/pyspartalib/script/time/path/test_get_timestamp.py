@@ -94,8 +94,16 @@ def _compare_invalid_times(times: TimePair) -> None:
 
 def _compare_invalid_files(times: TimePair) -> None:
     expected: Strs = ["file.json", "empty", "file.ini", "file.txt"]
-    assert 1 == len(
-        set([str(sorted(files)) for files in [expected, list(times.keys())]]),
+    assert (
+        len(
+            set(
+                [
+                    str(sorted(files))
+                    for files in [expected, list(times.keys())]
+                ]
+            ),
+        )
+        == 1
     )
 
 
@@ -137,7 +145,7 @@ def test_jst() -> None:
             create_temporary_file(temporary_root),
         )
 
-        assert "9:00:00" == str(times[0].utcoffset())
+        assert str(times[0].utcoffset()) == "9:00:00"
 
     _inside_temporary_directory(individual_test)
 
