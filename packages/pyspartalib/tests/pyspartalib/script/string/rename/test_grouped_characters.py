@@ -3,10 +3,16 @@
 """Test Module to get characters constructed by multiple or single byte."""
 
 from pyspartalib.context.default.string_context import Strs, Strs2
+from pyspartalib.context.type_context import Type
 from pyspartalib.context.typed.user_context import CharacterTable
 from pyspartalib.script.string.rename.grouped_characters import (
     GroupedCharacters,
 )
+
+
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
 
 
 def _compare_count(expected: int, table: Strs) -> None:
@@ -19,7 +25,7 @@ def _compare_counts(tables: Strs2) -> None:
 
 
 def _compare_both_ends(both_ends: Strs, table: Strs) -> None:
-    assert both_ends == [table[-i] for i in range(2)]
+    _difference_error([table[-i] for i in range(2)], both_ends)
 
 
 def _compare_filtered(expected: Strs2, tables: Strs2) -> None:
@@ -45,7 +51,7 @@ def _compare_table(expected: Strs2, result: CharacterTable) -> None:
 
 
 def _compare_merged(table: CharacterTable, merged: Strs2) -> None:
-    assert _get_tables(table) == merged
+    _difference_error(_get_tables(table), merged)
 
 
 def test_single() -> None:

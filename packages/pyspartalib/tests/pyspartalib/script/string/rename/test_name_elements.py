@@ -3,17 +3,23 @@
 """Test module to take out name and index from base name of file."""
 
 from pyspartalib.context.default.string_context import Strs
+from pyspartalib.context.type_context import Type
 from pyspartalib.context.typed.user_context import BaseName
 from pyspartalib.script.string.rename.name_elements import NameElements
 from tests.pyspartalib.interface.pytest import fail
 
 
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
+
+
 def _compare_name(name: str, base_name: BaseName) -> None:
-    assert name == base_name["name"]
+    _difference_error(base_name["name"], name)
 
 
 def _compare_index(index: int, base_name: BaseName) -> None:
-    assert index == base_name["index"]
+    _difference_error(base_name["index"], index)
 
 
 def _compare_elements(name: str, index: int, base_name: BaseName) -> None:
@@ -58,7 +64,7 @@ def _split_test(name: str, index: int, base_name: BaseName | None) -> None:
 
 def _join_test(expected: str, name_elements: NameElements) -> None:
     if base_name := name_elements.split_name(expected):
-        assert expected == name_elements.join_name(base_name)
+        _difference_error(name_elements.join_name(base_name), expected)
     else:
         fail()
 

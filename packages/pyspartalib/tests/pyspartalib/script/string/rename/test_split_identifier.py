@@ -3,7 +3,13 @@
 """Test module to convert string by using the split identifier."""
 
 from pyspartalib.context.default.string_context import Strs
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.string.rename.split_identifier import SplitIdentifier
+
+
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
 
 
 def _compare_text(expected: str, result: str) -> None:
@@ -14,7 +20,7 @@ def _compare_identifier(
     identifier: str,
     split_identifier: SplitIdentifier,
 ) -> None:
-    _compare_text(identifier, split_identifier.get_identifier())
+    _difference_error(split_identifier.get_identifier(), identifier)
 
 
 def _get_identifier() -> str:
@@ -37,8 +43,11 @@ def test_strip() -> None:
     expected: str = "test"
     identifier: str = _get_identifier() * 2
 
-    assert expected == SplitIdentifier().convert_strip(
-        identifier + expected + identifier,
+    _difference_error(
+        SplitIdentifier().convert_strip(
+            identifier + expected + identifier,
+        ),
+        expected,
     )
 
 
@@ -52,9 +61,9 @@ def test_identifier() -> None:
     split_identifier = SplitIdentifier()
 
     for identifier in [" ", ".", "-", "~"]:
-        _compare_text(
-            expected,
+        _difference_error(
             split_identifier.convert_under(identifier.join(names)),
+            expected,
         )
 
 
@@ -67,9 +76,9 @@ def test_replace() -> None:
 
     for i in range(3):
         identifier: str = base_identifier * (i + 1)
-        _compare_text(
-            expected,
+        _difference_error(
             split_identifier.replace_identifier(identifier.join(names)),
+            expected,
         )
 
 
@@ -79,10 +88,10 @@ def test_switch() -> None:
     expected: str = base_identifier.join(["first", "second"])
     split_identifier = SplitIdentifier()
 
-    _compare_text(
-        expected,
+    _difference_error(
         split_identifier.switch_identifier(
             split_identifier.convert_under(expected),
             base_identifier,
         ),
+        expected,
     )
