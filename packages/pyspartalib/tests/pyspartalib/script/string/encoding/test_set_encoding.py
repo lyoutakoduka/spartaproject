@@ -11,10 +11,6 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
-def _compare_encoding(expected: bytes, result: bytes) -> None:
-    assert expected == result
-
-
 def _get_input() -> str:
     return "\u3042"
 
