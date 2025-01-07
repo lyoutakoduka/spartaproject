@@ -69,11 +69,15 @@ def _join_test(expected: str, name_elements: NameElements) -> None:
         fail()
 
 
+def _split_name(text: str) -> BaseName | None:
+    return NameElements().split_name(text)
+
+
 def _common_test(name: str, index: int, identifier: str) -> None:
     _split_test(
         name,
         index,
-        NameElements().split_name(_get_base_name(name, index, identifier)),
+        _split_name(_get_base_name(name, index, identifier)),
     )
 
 
@@ -99,7 +103,7 @@ def test_index() -> None:
     """Test for base name of file, but it doesn't include index string."""
     name: str = "file"
 
-    assert NameElements().split_name(name) is None
+    assert _split_name(name) is None
 
 
 def test_option() -> None:
@@ -111,9 +115,7 @@ def test_option() -> None:
     _split_test(
         name,
         index,
-        NameElements().split_name(
-            _get_base_name_option(name, index, identifier),
-        ),
+        _split_name(_get_base_name_option(name, index, identifier)),
     )
 
 
@@ -126,9 +128,7 @@ def test_digit() -> None:
     _split_test(
         name,
         index,
-        NameElements().split_name(
-            _get_base_name_digit(name, index, identifier),
-        ),
+        _split_name(_get_base_name_digit(name, index, identifier)),
     )
 
 
