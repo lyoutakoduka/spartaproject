@@ -41,10 +41,6 @@ def _get_source() -> IntPair2:
     }
 
 
-def _compare_datetime(left: datetime, right: datetime) -> None:
-    assert left == right
-
-
 def _common_test(times: Times) -> None:
     _difference_error(*times)
 
