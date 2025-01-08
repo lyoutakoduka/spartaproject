@@ -100,7 +100,7 @@ def _compare_invalid_files(times: TimePair) -> None:
                 [
                     str(sorted(files))
                     for files in [expected, list(times.keys())]
-                ]
+                ],
             ),
         )
         == 1
