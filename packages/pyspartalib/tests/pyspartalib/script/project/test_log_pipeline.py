@@ -6,9 +6,17 @@ from decimal import Decimal
 
 from pyspartalib.context.custom.log_context import LogFunc
 from pyspartalib.context.default.string_context import Strs
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.project.log_pipeline import LogPipeline
 from pyspartalib.script.stdout.off_stdout import StdoutText
 from tests.pyspartalib.interface.pytest import fail
+
+
+def _none_error(result: Type | None) -> Type:
+    if result is None:
+        raise ValueError
+
+    return result
 
 
 def _texts_error(result: Strs, expected: Strs) -> None:
@@ -119,7 +127,7 @@ def _find_log_error(logs: Strs | None) -> Strs:
 
 
 def _get_log(pipeline: LogPipeline) -> Strs:
-    return _find_log_error(pipeline.get_log())
+    return _none_error(pipeline.get_log())
 
 
 def _reset_stored_log(pipeline: LogPipeline) -> LogPipeline:
@@ -128,7 +136,7 @@ def _reset_stored_log(pipeline: LogPipeline) -> LogPipeline:
 
 
 def _close_log(pipeline: LogPipeline) -> Strs:
-    return _find_log_error(pipeline.close_log())
+    return _none_error(pipeline.close_log())
 
 
 def _get_result_all(function: LogFunc) -> Strs:
