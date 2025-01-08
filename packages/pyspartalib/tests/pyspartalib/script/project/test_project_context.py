@@ -13,7 +13,7 @@ from pyspartalib.script.platform.platform_status import get_platform
 from pyspartalib.script.project.project_context import ProjectContext
 
 
-def _count_error(result: Strs, expected: int) -> None:
+def _count_error(result: list[Type], expected: int) -> None:
     if len(result) != expected:
         raise ValueError
 
