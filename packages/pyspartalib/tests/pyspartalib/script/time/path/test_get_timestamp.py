@@ -34,6 +34,11 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
+def _length_error(result: list[Type], expected: int) -> None:
+    if len(result) != expected:
+        raise ValueError
+
+
 def _get_source() -> IntPair2:
     return {
         "year": {"year": 1, "month": 1, "day": 1},
@@ -100,7 +105,8 @@ def _get_files(times: TimePair, expected: Strs) -> Strs:
 
 def _compare_invalid_files(times: TimePair) -> None:
     expected: Strs = ["file.json", "empty", "file.ini", "file.txt"]
-    assert len(set(_get_files(times, expected))) == 1
+
+    _length_error(list(set(_get_files(times, expected))), 1)
 
 
 def _inside_temporary_directory(function: PathFunc) -> None:
