@@ -13,7 +13,7 @@ from pyspartalib.script.platform.platform_status import get_platform
 from pyspartalib.script.project.project_context import ProjectContext
 
 
-def _count_error(result: list[Type], expected: int) -> None:
+def _length_error(result: list[Type], expected: int) -> None:
     if len(result) != expected:
         raise ValueError
 
@@ -44,7 +44,7 @@ def _get_expected_paths() -> PathPair:
 
 
 def _common_test(keys_pair: Strs2) -> None:
-    _count_error(list({str(sorted(keys)) for keys in keys_pair}), 1)
+    _length_error(list({str(sorted(keys)) for keys in keys_pair}), 1)
 
 
 def _get_config_file() -> Path:
