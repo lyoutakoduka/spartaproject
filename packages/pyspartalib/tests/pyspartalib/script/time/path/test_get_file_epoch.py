@@ -21,6 +21,11 @@ def _length_error(result: list[Type], expected: int) -> None:
         raise ValueError
 
 
+def _not_none_error(result: object) -> None:
+    if result is not None:
+        raise ValueError
+
+
 def _set_invalid_datetime(file_path: Path) -> Path:
     utime(file_path, (0, 0))
     return file_path
@@ -73,6 +78,6 @@ def test_empty() -> None:
             create_temporary_file(temporary_root),
         )
         for status in [False, True]:
-            assert get_file_epoch(file_path, access=status) is None
+            _not_none_error(get_file_epoch(file_path, access=status))
 
     _inside_temporary_directory(individual_test)
