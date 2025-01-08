@@ -6,6 +6,7 @@ from os import utime
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
+from pyspartalib.context.extension.decimal_context import Decs
 from pyspartalib.context.extension.path_context import PathFunc
 from pyspartalib.script.directory.create_directory import create_directory
 from pyspartalib.script.path.temporary.create_temporary_file import (
@@ -19,18 +20,20 @@ def _set_invalid_datetime(file_path: Path) -> Path:
     return file_path
 
 
+def _get_file_epochs(path: Path) -> Decs:
+    file_epochs: Decs = []
+
+    for status in [False, True]:
+        if epoch := get_file_epoch(path, access=status):
+            file_epochs += [epoch]
+
+    return file_epochs
+
+
 def _common_test(path: Path) -> None:
-    assert (
-        len(
-            set(
-                [
-                    get_file_epoch(path, access=status)
-                    for status in [False, True]
-                ]
-            ),
-        )
-        == 1
-    )
+    file_epochs: Decs = list(set(_get_file_epochs(path)))
+
+    assert len(file_epochs) == 1
 
 
 def _inside_temporary_directory(function: PathFunc) -> None:
