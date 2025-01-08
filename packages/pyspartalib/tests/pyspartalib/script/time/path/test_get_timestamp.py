@@ -94,19 +94,13 @@ def _compare_invalid_times(times: TimePair) -> None:
         _difference_error(invalid_time, time)
 
 
+def _get_files(times: TimePair, expected: Strs) -> Strs:
+    return [str(sorted(files)) for files in [expected, list(times.keys())]]
+
+
 def _compare_invalid_files(times: TimePair) -> None:
     expected: Strs = ["file.json", "empty", "file.ini", "file.txt"]
-    assert (
-        len(
-            set(
-                [
-                    str(sorted(files))
-                    for files in [expected, list(times.keys())]
-                ],
-            ),
-        )
-        == 1
-    )
+    assert len(set(_get_files(times, expected))) == 1
 
 
 def _inside_temporary_directory(function: PathFunc) -> None:
