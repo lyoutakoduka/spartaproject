@@ -11,6 +11,7 @@ from pyspartalib.context.default.integer_context import IntPair2
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.context.extension.path_context import PathFunc
 from pyspartalib.context.extension.time_context import TimePair, Times
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.directory.create_directory import create_directory
 from pyspartalib.script.path.iterate_directory import walk_iterator
 from pyspartalib.script.path.modify.current.get_relative import get_relative
@@ -28,6 +29,11 @@ from pyspartalib.script.time.path.get_timestamp import (
 )
 
 
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
+
+
 def _get_source() -> IntPair2:
     return {
         "year": {"year": 1, "month": 1, "day": 1},
@@ -40,7 +46,7 @@ def _compare_datetime(left: datetime, right: datetime) -> None:
 
 
 def _common_test(times: Times) -> None:
-    _compare_datetime(*times)
+    _difference_error(*times)
 
 
 def _get_latest_pair(path: Path, jst: bool) -> Times:
@@ -89,7 +95,7 @@ def _compare_invalid_times(times: TimePair) -> None:
     invalid_time: datetime = get_invalid_time()
 
     for time in times.values():
-        _compare_datetime(invalid_time, time)
+        _difference_error(invalid_time, time)
 
 
 def _compare_invalid_files(times: TimePair) -> None:
@@ -114,7 +120,7 @@ def _inside_temporary_directory(function: PathFunc) -> None:
 
 def test_invalid() -> None:
     """Test to compare the date time used for invalid data check."""
-    _compare_datetime(get_iso_time(_get_source()), get_invalid_time())
+    _difference_error(get_invalid_time(), get_iso_time(_get_source()))
 
 
 def test_file() -> None:
@@ -144,8 +150,7 @@ def test_jst() -> None:
         times: Times = _compare_jst_timezone(
             create_temporary_file(temporary_root),
         )
-
-        assert str(times[0].utcoffset()) == "9:00:00"
+        _difference_error(str(times[0].utcoffset()), "9:00:00")
 
     _inside_temporary_directory(individual_test)
 
