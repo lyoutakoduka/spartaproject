@@ -9,7 +9,6 @@ from pyspartalib.context.default.string_context import Strs
 from pyspartalib.context.type_context import Type
 from pyspartalib.script.project.log_pipeline import LogPipeline
 from pyspartalib.script.stdout.off_stdout import StdoutText
-from tests.pyspartalib.interface.pytest import fail
 
 
 def _none_error(result: Type | None) -> Type:
