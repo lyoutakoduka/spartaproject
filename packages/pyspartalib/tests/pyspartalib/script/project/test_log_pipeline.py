@@ -119,13 +119,6 @@ def _get_result_print(function: LogFunc) -> Strs:
     return _execute_log_function(_wrapper_print(function)).splitlines()
 
 
-def _find_log_error(logs: Strs | None) -> Strs:
-    if logs is None:
-        fail()
-
-    return logs
-
-
 def _get_log(pipeline: LogPipeline) -> Strs:
     return _none_error(pipeline.get_log())
 
