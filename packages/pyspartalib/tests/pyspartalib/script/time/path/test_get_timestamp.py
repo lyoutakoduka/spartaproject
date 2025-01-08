@@ -92,8 +92,12 @@ def _get_relative_latest(path: Path, access: bool = False) -> TimePair:
     }
 
 
+def _get_invalid_time() -> datetime:
+    return get_invalid_time()  # To avoid a circular reference.
+
+
 def _compare_invalid_times(times: TimePair) -> None:
-    invalid_time: datetime = get_invalid_time()
+    invalid_time: datetime = _get_invalid_time()
 
     for time in times.values():
         _difference_error(invalid_time, time)
