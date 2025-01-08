@@ -12,6 +12,7 @@ from pyspartalib.context.default.integer_context import (
 )
 from pyspartalib.context.extension.path_context import PathFunc
 from pyspartalib.context.extension.time_context import TimePair
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.directory.create_directory import create_directory
 from pyspartalib.script.path.temporary.create_temporary_file import (
     create_temporary_file,
@@ -19,6 +20,11 @@ from pyspartalib.script.path.temporary.create_temporary_file import (
 from pyspartalib.script.time.format.create_iso_date import get_iso_time
 from pyspartalib.script.time.path.get_timestamp import get_latest
 from pyspartalib.script.time.path.set_timestamp import set_latest
+
+
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
 
 
 def _is_access(group: str) -> bool:
@@ -101,8 +107,7 @@ def _compare_datetime(path: Path, times: IntPair3) -> None:
     _set_latest_pair(path, times)
 
     for group, expected in _get_input_time(times).items():
-        results: TimePair = _get_latest_pair(path)
-        assert expected == results[group]
+        _difference_error(_get_latest_pair(path)[group], expected)
 
 
 def _inside_temporary_directory(function: PathFunc) -> None:
