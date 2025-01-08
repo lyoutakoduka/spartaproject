@@ -20,7 +20,7 @@ def _none_error(result: Type | None) -> Type:
     return result
 
 
-def _note_none_error(result: object) -> None:
+def _not_none_error(result: object) -> None:
     if result is not None:
         raise ValueError
 
@@ -117,7 +117,7 @@ def test_index() -> None:
     """Test for base name of file, but it doesn't include index string."""
     name: str = "file"
 
-    _note_none_error(_split_name(name))
+    _not_none_error(_split_name(name))
 
 
 def test_option() -> None:
