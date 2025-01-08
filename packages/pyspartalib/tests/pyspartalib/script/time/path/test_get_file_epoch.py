@@ -21,6 +21,13 @@ def _length_error(result: list[Type], expected: int) -> None:
         raise ValueError
 
 
+def _none_error(result: Type | None) -> Type:
+    if result is None:
+        raise ValueError
+
+    return result
+
+
 def _not_none_error(result: object) -> None:
     if result is not None:
         raise ValueError
@@ -45,6 +52,7 @@ def _common_test(path: Path) -> None:
     file_epochs: Decs = list(set(_get_file_epochs(path)))
 
     _length_error(file_epochs, 1)
+    _none_error(file_epochs[0])
 
 
 def _inside_temporary_directory(function: PathFunc) -> None:
