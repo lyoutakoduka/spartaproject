@@ -53,5 +53,6 @@ def test_utc() -> None:
 def test_jst() -> None:
     """Test to convert time data to datetime object as JST time zone."""
     _compare_time(
-        _get_iso_time_jst(), time_from_timestamp(_get_iso_epoch(), jst=True)
+        _get_iso_time_jst(),
+        time_from_timestamp(_get_iso_epoch(), jst=True),
     )
