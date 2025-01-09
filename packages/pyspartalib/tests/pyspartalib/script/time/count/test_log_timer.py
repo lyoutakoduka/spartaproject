@@ -19,7 +19,7 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
-def _get_time_texts(
+def _get_timer_results(
     count: int,
     show: TimerIntStrFunc,
     timer: LogTimer,
@@ -45,7 +45,7 @@ def _stdout_check(
     restart(timer)
 
     _difference_error(
-        "\n".join(_get_time_texts(count, show, timer)),
+        "\n".join(_get_timer_results(count, show, timer)),
         format_indent(expected),
     )
 
