@@ -21,7 +21,7 @@ def _common_test(results: StrPair) -> None:
 def test_datetime() -> None:
     """Test to convert time from number to readable string."""
     assert "2023y 3m 24d 21h 59m 7s" == readable_time(
-        Decimal("63849679147.012345")
+        Decimal("63849679147.012345"),
     )
 
 
@@ -49,7 +49,7 @@ def test_day() -> None:
         {
             expected: readable_time(Decimal(str(source)))
             for expected, source in test_case.items()
-        }
+        },
     )
 
 
@@ -68,14 +68,14 @@ def test_second() -> None:
                 "0.000000s",
             ],
             [Decimal("0.1") ** Decimal(str(i)) for i in range(9)],
-        )
+        ),
     )
 
     _common_test(
         {
             expected: readable_time(source, digit=6)
             for expected, source in test_case.items()
-        }
+        },
     )
 
 
@@ -95,5 +95,5 @@ def test_digit() -> None:
         {
             expected: readable_time(Decimal("0.6666666"), digit=source)
             for expected, source in test_case.items()
-        }
+        },
     )

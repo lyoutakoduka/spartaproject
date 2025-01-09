@@ -14,7 +14,10 @@ initialize_decimal()
 
 
 def _stdout_check(
-    expected: str, count: int, restart: TimerFunc, show: TimerIntStrFunc
+    expected: str,
+    count: int,
+    restart: TimerFunc,
+    show: TimerIntStrFunc,
 ) -> None:
     timer = LogTimer()
     restart(timer)
@@ -146,7 +149,9 @@ def test_force() -> None:
 
     def restart_timer(timer: LogTimer) -> None:
         timer.restart(
-            override=True, timer_interval=timer_interval, interval=interval
+            override=True,
+            timer_interval=timer_interval,
+            interval=interval,
         )
 
     def show_timer(timer: LogTimer, index: int) -> str | None:
