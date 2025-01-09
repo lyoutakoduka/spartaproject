@@ -6,11 +6,17 @@ from datetime import datetime
 from decimal import Decimal
 
 from pyspartalib.context.default.integer_context import IntPair2
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.time.epoch.from_timestamp import time_from_timestamp
 from pyspartalib.script.time.format.create_iso_date import (
     get_iso_epoch,
     get_iso_time,
 )
+
+
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
 
 
 def _get_source() -> IntPair2:
@@ -47,12 +53,12 @@ def _compare_time(expected: datetime, result: datetime) -> None:
 
 def test_utc() -> None:
     """Test to convert time data from epoch format to datetime object."""
-    _compare_time(_get_iso_time(), time_from_timestamp(_get_iso_epoch()))
+    _difference_error(time_from_timestamp(_get_iso_epoch()), _get_iso_time())
 
 
 def test_jst() -> None:
     """Test to convert time data to datetime object as JST time zone."""
-    _compare_time(
-        _get_iso_time_jst(),
+    _difference_error(
         time_from_timestamp(_get_iso_epoch(), jst=True),
+        _get_iso_time_jst(),
     )
