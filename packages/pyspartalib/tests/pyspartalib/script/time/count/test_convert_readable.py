@@ -32,14 +32,13 @@ def test_datetime() -> None:
     )
 
 
-def test_day() -> None:
-    """Test to convert times that is type integer."""
+def _get_case_day() -> IntPair:
     second: int = 1
     minute: int = second * 60
     hour: int = minute * 60
     day: int = hour * 24
 
-    test_case: IntPair = {
+    return {
         "1s": second,
         "1m 0s": minute,
         "1m 1s": minute + second,
@@ -52,10 +51,13 @@ def test_day() -> None:
         "1d 1h 1m 1s": day + hour + minute + second,
     }
 
+
+def test_day() -> None:
+    """Test to convert times that is type integer."""
     _common_test(
         {
             expected: readable_time(Decimal(str(source)))
-            for expected, source in test_case.items()
+            for expected, source in _get_case_day().items()
         },
     )
 
