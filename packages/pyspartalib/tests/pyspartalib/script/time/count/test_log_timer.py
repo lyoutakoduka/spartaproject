@@ -53,7 +53,7 @@ def test_count() -> None:
     def restart_timer(timer: LogTimer) -> None:
         timer.restart(override=True)
 
-    def show_timer(timer: LogTimer, index: int) -> str | None:
+    def show_timer(timer: LogTimer, _: int) -> str | None:
         return timer.get_readable_time()
 
     _stdout_check(expected, increase_count, restart_timer, show_timer)
