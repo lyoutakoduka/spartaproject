@@ -71,6 +71,7 @@ def test_second() -> None:
                 "0.000000s",
             ],
             [Decimal("0.1") ** Decimal(str(i)) for i in range(9)],
+            strict=True,
         ),
     )
 
