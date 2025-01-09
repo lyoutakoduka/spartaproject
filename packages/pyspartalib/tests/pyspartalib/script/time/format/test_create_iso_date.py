@@ -7,11 +7,17 @@ from decimal import Decimal
 from zoneinfo import ZoneInfo
 
 from pyspartalib.context.default.integer_context import IntPair, IntPair2
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.time.format.create_iso_date import (
     get_iso_epoch,
     get_iso_string,
     get_iso_time,
 )
+
+
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
 
 
 def _get_years() -> IntPair:
@@ -84,15 +90,15 @@ def _get_expected_zone() -> str:
 
 
 def _compare_string(source: IntPair2, expected: str) -> None:
-    assert get_iso_string(source) == expected
+    _difference_error(get_iso_string(source), expected)
 
 
 def _compare_time(source: IntPair2, expected: datetime) -> None:
-    assert get_iso_time(source) == expected
+    _difference_error(get_iso_time(source), expected)
 
 
 def _compare_epoch(source: IntPair2, expected: Decimal) -> None:
-    assert get_iso_epoch(source) == expected
+    _difference_error(get_iso_epoch(source), expected)
 
 
 def test_all() -> None:
