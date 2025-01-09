@@ -10,6 +10,11 @@ from pyspartalib.script.file.json.convert_to_json import multiple2_to_json
 from pyspartalib.script.time.format.format_iso_date import format_iso_date
 
 
+def _fail_error(status: bool) -> None:
+    if not status:
+        raise ValueError
+
+
 def _get_source_year() -> IntPair:
     return {"year": 2023, "month": 4, "day": 1}
 
@@ -93,7 +98,9 @@ def _convert_to_json(left: StrPair2, right: StrPair2) -> Jsons:
 
 
 def _compare_datetime(source: IntPair2, expected: StrPair2) -> None:
-    assert is_same_json(*_convert_to_json(format_iso_date(source), expected))
+    _fail_error(
+        is_same_json(*_convert_to_json(format_iso_date(source), expected)),
+    )
 
 
 def test_all() -> None:
