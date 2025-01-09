@@ -88,6 +88,21 @@ def _get_expected_digit() -> str:
     """
 
 
+def _get_expected_force() -> str:
+    return """
+        i=0, 0.0s
+        i=1, 0.1s
+        i=2, 0.2s
+        i=3, 0.3s
+        i=4, 0.4s
+        i=5, 0.5s
+        i=6, 0.6s
+        i=7, 0.7s
+        i=8, 0.8s
+        i=9, 0.9s
+    """
+
+
 def test_count() -> None:
     """Test to get timer count by readable format."""
     expected: str = _get_expected_count()
@@ -148,19 +163,7 @@ def test_digit() -> None:
 
 def test_force() -> None:
     """Test to get timer count forcibly."""
-    expected: str = """
-        i=0, 0.0s
-        i=1, 0.1s
-        i=2, 0.2s
-        i=3, 0.3s
-        i=4, 0.4s
-        i=5, 0.5s
-        i=6, 0.6s
-        i=7, 0.7s
-        i=8, 0.8s
-        i=9, 0.9s
-    """
-
+    expected: str = _get_expected_force()
     timer_interval: Decimal = Decimal(str(0.1))
     interval: Decimal = Decimal(str(1.0))
 
