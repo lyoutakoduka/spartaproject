@@ -108,13 +108,12 @@ def test_count() -> None:
     expected: str = _get_expected_count()
     increase_count: int = 20 + 1
 
-    def restart_timer(timer: LogTimer) -> None:
-        timer.restart(override=True)
-
-    def show_timer(timer: LogTimer, _: int) -> str | None:
-        return timer.get_readable_time()
-
-    _stdout_check(expected, increase_count, restart_timer, show_timer)
+    _stdout_check(
+        expected,
+        increase_count,
+        lambda timer: timer.restart(override=True),
+        lambda timer, _: timer.get_readable_time(),
+    )
 
 
 def test_interval() -> None:
@@ -133,10 +132,12 @@ def test_interval() -> None:
             interval=interval,
         )
 
-    def show_timer(timer: LogTimer, _: int) -> str | None:
-        return timer.get_readable_time()
-
-    _stdout_check(expected, increase_count, restart_timer, show_timer)
+    _stdout_check(
+        expected,
+        increase_count,
+        restart_timer,
+        lambda timer, _: timer.get_readable_time(),
+    )
 
 
 def test_digit() -> None:
@@ -155,10 +156,12 @@ def test_digit() -> None:
             digit=digit,
         )
 
-    def show_timer(timer: LogTimer, _: int) -> str | None:
-        return timer.get_readable_time()
-
-    _stdout_check(expected, increase_count, restart_timer, show_timer)
+    _stdout_check(
+        expected,
+        increase_count,
+        restart_timer,
+        lambda timer, _: timer.get_readable_time(),
+    )
 
 
 def test_force() -> None:
