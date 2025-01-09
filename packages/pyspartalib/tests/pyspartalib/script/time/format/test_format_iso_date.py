@@ -48,7 +48,7 @@ def _format_digit(number: int, digit: int) -> str:
 def _format_digit_type(source: IntPair, groups: Strs, digits: Ints) -> StrPair:
     return {
         group: _format_digit(source[group], digit)
-        for group, digit in zip(groups, digits)
+        for group, digit in zip(groups, digits, strict=True)
     }
 
 
