@@ -71,6 +71,18 @@ def _get_case_second() -> DecPair:
     )
 
 
+def _get_case_digit() -> IntPair:
+    return {
+        "0s": 0,
+        "0.6s": 1,
+        "0.66s": 2,
+        "0.666s": 3,
+        "0.6666s": 4,
+        "0.66666s": 5,
+        "0.666666s": 6,
+    }
+
+
 def test_day() -> None:
     """Test to convert times that is type integer."""
     _common_test(
@@ -93,19 +105,9 @@ def test_second() -> None:
 
 def test_digit() -> None:
     """Test to convert times including decimal point by specific digit."""
-    test_case: IntPair = {
-        "0s": 0,
-        "0.6s": 1,
-        "0.66s": 2,
-        "0.666s": 3,
-        "0.6666s": 4,
-        "0.66666s": 5,
-        "0.666666s": 6,
-    }
-
     _common_test(
         {
             expected: readable_time(Decimal("0.6666666"), digit=source)
-            for expected, source in test_case.items()
+            for expected, source in _get_case_digit().items()
         },
     )
