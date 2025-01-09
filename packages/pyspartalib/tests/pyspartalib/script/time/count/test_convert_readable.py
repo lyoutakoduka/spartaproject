@@ -20,8 +20,11 @@ def _common_test(results: StrPair) -> None:
 
 def test_datetime() -> None:
     """Test to convert time from number to readable string."""
-    assert "2023y 3m 24d 21h 59m 7s" == readable_time(
-        Decimal("63849679147.012345"),
+    assert (
+        readable_time(
+            Decimal("63849679147.012345"),
+        )
+        == "2023y 3m 24d 21h 59m 7s"
     )
 
 
