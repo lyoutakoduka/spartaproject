@@ -54,7 +54,9 @@ def _format_digit_type(source: IntPair, groups: Strs, digits: Ints) -> StrPair:
 
 def _get_expected_year() -> StrPair:
     return _format_digit_type(
-        _get_source_year(), ["year", "month", "day"], [4] + [2] * 2
+        _get_source_year(),
+        ["year", "month", "day"],
+        [4] + [2] * 2,
     )
 
 

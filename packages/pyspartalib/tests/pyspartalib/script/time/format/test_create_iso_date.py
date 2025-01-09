@@ -39,7 +39,9 @@ def _get_source_micro() -> IntPair2:
 
 
 def _set_expected_time(
-    year: IntPair, hour: IntPair, tzinfo: ZoneInfo
+    year: IntPair,
+    hour: IntPair,
+    tzinfo: ZoneInfo,
 ) -> datetime:
     return datetime(
         year["year"],
@@ -55,7 +57,9 @@ def _set_expected_time(
 
 def _get_expected_time(source: IntPair2) -> datetime:
     return _set_expected_time(
-        source["year"], source["hour"], ZoneInfo("Asia/Tokyo")
+        source["year"],
+        source["hour"],
+        ZoneInfo("Asia/Tokyo"),
     )
 
 
