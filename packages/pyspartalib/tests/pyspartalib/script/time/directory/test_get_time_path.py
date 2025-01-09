@@ -4,9 +4,15 @@
 
 from pathlib import Path
 
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.time.directory.get_time_path import (
     get_initial_time_path,
 )
+
+
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
 
 
 def _get_hour(jst: bool) -> str:
@@ -19,9 +25,12 @@ def _get_time_path(jst: bool = False) -> Path:
 
 def test_utc() -> None:
     """Test to get path represent April 1, 2023 as UTC time zone."""
-    assert get_initial_time_path() == _get_time_path()
+    _difference_error(get_initial_time_path(), _get_time_path())
 
 
 def test_jst() -> None:
     """Test to get path represent April 1, 2023 as JST time zone."""
-    assert get_initial_time_path(jst=True) == _get_time_path(jst=True)
+    _difference_error(
+        get_initial_time_path(jst=True),
+        _get_time_path(jst=True),
+    )

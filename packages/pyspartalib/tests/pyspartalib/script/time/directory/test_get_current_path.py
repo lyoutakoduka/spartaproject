@@ -4,14 +4,20 @@
 
 from pathlib import Path
 
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.directory.date_time_space import get_working_path
 from pyspartalib.script.time.directory.get_time_path import (
     get_initial_time_path,
 )
 
 
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
+
+
 def _compare_time_path(result: Path) -> None:
-    assert get_initial_time_path() == result
+    _difference_error(get_initial_time_path(), result)
 
 
 def test_name() -> None:
