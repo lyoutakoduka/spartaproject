@@ -13,6 +13,22 @@ from pyspartalib.script.time.count.log_timer import LogTimer
 initialize_decimal()
 
 
+def _get_time_texts(
+    count: int,
+    show: TimerIntStrFunc,
+    timer: LogTimer,
+) -> Strs:
+    results: Strs = []
+
+    for i in range(count):
+        if time_text := show(timer, i):
+            results += [time_text]
+
+        timer.increase_timer()
+
+    return results
+
+
 def _stdout_check(
     expected: str,
     count: int,
@@ -22,13 +38,7 @@ def _stdout_check(
     timer = LogTimer()
     restart(timer)
 
-    results: Strs = []
-
-    for i in range(count):
-        if time_text := show(timer, i):
-            results += [time_text]
-
-        timer.increase_timer()
+    results: Strs = _get_time_texts(count, show, timer)
 
     assert format_indent(expected) == "\n".join(results)
 
