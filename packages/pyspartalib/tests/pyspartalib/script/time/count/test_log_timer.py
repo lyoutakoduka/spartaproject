@@ -119,13 +119,13 @@ def test_count() -> None:
 def test_interval() -> None:
     """Test to get timer count with specific interval."""
     expected: str = _get_expected_interval()
-    minutes: int = 60
-    timer_interval: Decimal = Decimal(str(minutes * 10))
-    interval: Decimal = Decimal(str(minutes * 30))
-
     increase_count: int = 30 + 1
 
     def restart_timer(timer: LogTimer) -> None:
+        minutes: int = 60
+        timer_interval: Decimal = Decimal(str(minutes * 10))
+        interval: Decimal = Decimal(str(minutes * 30))
+
         timer.restart(
             override=True,
             timer_interval=timer_interval,
@@ -143,12 +143,12 @@ def test_interval() -> None:
 def test_digit() -> None:
     """Test to get timer count with digit of decimal point."""
     expected: str = _get_expected_digit()
-    interval: Decimal = Decimal(str(0.01))
-    digit: int = 3
-
     increase_count: int = 10 + 1
 
     def restart_timer(timer: LogTimer) -> None:
+        interval: Decimal = Decimal(str(0.01))
+        digit: int = 3
+
         timer.restart(
             override=True,
             timer_interval=interval,
@@ -167,12 +167,12 @@ def test_digit() -> None:
 def test_force() -> None:
     """Test to get timer count forcibly."""
     expected: str = _get_expected_force()
-    timer_interval: Decimal = Decimal(str(0.1))
-    interval: Decimal = Decimal(str(1.0))
-
     increase_count: int = 10
 
     def restart_timer(timer: LogTimer) -> None:
+        timer_interval: Decimal = Decimal(str(0.1))
+        interval: Decimal = Decimal(str(1.0))
+
         timer.restart(
             override=True,
             timer_interval=timer_interval,
