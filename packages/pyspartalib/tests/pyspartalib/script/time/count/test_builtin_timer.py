@@ -39,12 +39,18 @@ def _get_time_array() -> Decs:
     return [Decimal(str(i)) for i in range(10)]
 
 
-def _check_counter_result(expected: Decs, timer: TimerSelect) -> None:
+def _get_timer_results(timer: TimerSelect) -> Decs:
     results: Decs = []
 
     for _ in range(10):
         results += [timer()]
         timer.increase_timer()
+
+    return results
+
+
+def _check_counter_result(expected: Decs, timer: TimerSelect) -> None:
+    results: Decs = _get_timer_results(timer)
 
     _difference_error(
         [count + get_initial_epoch() for count in expected],
