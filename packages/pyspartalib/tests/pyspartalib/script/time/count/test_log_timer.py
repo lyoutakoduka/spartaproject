@@ -43,9 +43,8 @@ def _stdout_check(
     assert format_indent(expected) == "\n".join(results)
 
 
-def test_count() -> None:
-    """Test to get timer count by readable format."""
-    expected: str = """
+def _get_expected_count() -> str:
+    return """
         1.0s
         2.0s
         3.0s
@@ -58,6 +57,10 @@ def test_count() -> None:
         10.0s
     """
 
+
+def test_count() -> None:
+    """Test to get timer count by readable format."""
+    expected: str = _get_expected_count()
     increase_count: int = 20 + 1
 
     def restart_timer(timer: LogTimer) -> None:
