@@ -52,19 +52,8 @@ def _get_case_day() -> IntPair:
     }
 
 
-def test_day() -> None:
-    """Test to convert times that is type integer."""
-    _common_test(
-        {
-            expected: readable_time(Decimal(str(source)))
-            for expected, source in _get_case_day().items()
-        },
-    )
-
-
-def test_second() -> None:
-    """Test to convert times including decimal point."""
-    test_case: DecPair = dict(
+def _get_case_second() -> DecPair:
+    return dict(
         zip(
             [
                 "1.000000s",
@@ -81,10 +70,23 @@ def test_second() -> None:
         ),
     )
 
+
+def test_day() -> None:
+    """Test to convert times that is type integer."""
+    _common_test(
+        {
+            expected: readable_time(Decimal(str(source)))
+            for expected, source in _get_case_day().items()
+        },
+    )
+
+
+def test_second() -> None:
+    """Test to convert times including decimal point."""
     _common_test(
         {
             expected: readable_time(source, digit=6)
-            for expected, source in test_case.items()
+            for expected, source in _get_case_second().items()
         },
     )
 
