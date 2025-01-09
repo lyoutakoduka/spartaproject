@@ -7,24 +7,28 @@ from decimal import Decimal
 from pyspartalib.context.default.integer_context import IntPair
 from pyspartalib.context.default.string_context import StrPair
 from pyspartalib.context.extension.decimal_context import DecPair
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.decimal.initialize_decimal import initialize_decimal
 from pyspartalib.script.time.count.convert_readable import readable_time
 
 initialize_decimal()
 
 
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
+
+
 def _common_test(results: StrPair) -> None:
     for expected, result in results.items():
-        assert expected == result
+        _difference_error(result, expected)
 
 
 def test_datetime() -> None:
     """Test to convert time from number to readable string."""
-    assert (
-        readable_time(
-            Decimal("63849679147.012345"),
-        )
-        == "2023y 3m 24d 21h 59m 7s"
+    _difference_error(
+        readable_time(Decimal("63849679147.012345")),
+        "2023y 3m 24d 21h 59m 7s",
     )
 
 

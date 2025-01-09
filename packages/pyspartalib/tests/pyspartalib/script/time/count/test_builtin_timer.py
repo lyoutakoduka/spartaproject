@@ -6,11 +6,17 @@ from decimal import Decimal
 from time import sleep
 
 from pyspartalib.context.extension.decimal_context import Decs
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.decimal.initialize_decimal import initialize_decimal
 from pyspartalib.script.time.count.builtin_timer import TimerSelect
 from pyspartalib.script.time.epoch.get_time_stamp import get_initial_epoch
 
 initialize_decimal()
+
+
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
 
 
 def _get_interval() -> Decimal:
@@ -40,7 +46,10 @@ def _check_counter_result(expected: Decs, timer: TimerSelect) -> None:
         results += [timer()]
         timer.increase_timer()
 
-    assert results == [count + get_initial_epoch() for count in expected]
+    _difference_error(
+        [count + get_initial_epoch() for count in expected],
+        results,
+    )
 
 
 def test_builtin() -> None:

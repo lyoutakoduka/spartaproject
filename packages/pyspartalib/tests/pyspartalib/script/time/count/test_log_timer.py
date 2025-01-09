@@ -6,11 +6,17 @@ from decimal import Decimal
 
 from pyspartalib.context.custom.timer_context import TimerFunc, TimerIntStrFunc
 from pyspartalib.context.default.string_context import Strs
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.decimal.initialize_decimal import initialize_decimal
 from pyspartalib.script.string.format_texts import format_indent
 from pyspartalib.script.time.count.log_timer import LogTimer
 
 initialize_decimal()
+
+
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
 
 
 def _get_time_texts(
@@ -38,9 +44,10 @@ def _stdout_check(
     timer = LogTimer()
     restart(timer)
 
-    results: Strs = _get_time_texts(count, show, timer)
-
-    assert format_indent(expected) == "\n".join(results)
+    _difference_error(
+        "\n".join(_get_time_texts(count, show, timer)),
+        format_indent(expected),
+    )
 
 
 def _get_expected_count() -> str:
