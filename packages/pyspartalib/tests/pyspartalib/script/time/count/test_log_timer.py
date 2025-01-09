@@ -58,6 +58,21 @@ def _get_expected_count() -> str:
     """
 
 
+def _get_expected_interval() -> str:
+    return """
+        30m 0.0s
+        1h 0.0s
+        1h 30m 0.0s
+        2h 0.0s
+        2h 30m 0.0s
+        3h 0.0s
+        3h 30m 0.0s
+        4h 0.0s
+        4h 30m 0.0s
+        5h 0.0s
+    """
+
+
 def test_count() -> None:
     """Test to get timer count by readable format."""
     expected: str = _get_expected_count()
@@ -74,19 +89,7 @@ def test_count() -> None:
 
 def test_interval() -> None:
     """Test to get timer count with specific interval."""
-    expected: str = """
-        30m 0.0s
-        1h 0.0s
-        1h 30m 0.0s
-        2h 0.0s
-        2h 30m 0.0s
-        3h 0.0s
-        3h 30m 0.0s
-        4h 0.0s
-        4h 30m 0.0s
-        5h 0.0s
-    """
-
+    expected: str = _get_expected_interval()
     minutes: int = 60
     timer_interval: Decimal = Decimal(str(minutes * 10))
     interval: Decimal = Decimal(str(minutes * 30))
