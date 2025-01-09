@@ -47,10 +47,6 @@ def _get_iso_epoch() -> Decimal:
     return get_iso_epoch(_get_source())
 
 
-def _compare_time(expected: datetime, result: datetime) -> None:
-    assert expected == result
-
-
 def test_utc() -> None:
     """Test to convert time data from epoch format to datetime object."""
     _difference_error(time_from_timestamp(_get_iso_epoch()), _get_iso_time())
