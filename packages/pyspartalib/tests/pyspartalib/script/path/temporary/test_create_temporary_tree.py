@@ -8,6 +8,7 @@ from tempfile import TemporaryDirectory
 from pyspartalib.context.default.integer_context import Ints
 from pyspartalib.context.default.string_context import Strs, Strs2
 from pyspartalib.context.extension.path_context import PathFunc, Paths
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.path.iterate_directory import walk_iterator
 from pyspartalib.script.path.modify.current.get_relative import (
     get_relative_array,
@@ -15,6 +16,11 @@ from pyspartalib.script.path.modify.current.get_relative import (
 from pyspartalib.script.path.temporary.create_temporary_tree import (
     create_temporary_tree,
 )
+
+
+def _length_error(result: list[Type], expected: int) -> None:
+    if len(result) != expected:
+        raise ValueError
 
 
 def _get_tree_contents(temporary_root: Path) -> Paths:
@@ -25,11 +31,14 @@ def _get_tree_contents(temporary_root: Path) -> Paths:
 
 
 def _sort_test(expected: Paths, result: Paths) -> None:
-    assert len({str(sorted(contents)) for contents in [expected, result]}) == 1
+    _length_error(
+        list({str(sorted(contents)) for contents in [expected, result]}),
+        1,
+    )
 
 
 def _common_test(temporary_root: Path) -> None:
-    assert len(_get_tree_contents(temporary_root)) == 0
+    _length_error(_get_tree_contents(temporary_root), 0)
 
 
 def _inside_temporary_directory(function: PathFunc) -> None:
