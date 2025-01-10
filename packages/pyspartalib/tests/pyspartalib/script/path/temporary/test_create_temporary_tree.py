@@ -25,13 +25,16 @@ def _get_tree_contents(temporary_root: Path) -> Paths:
 
 
 def _sort_test(expected: Paths, result: Paths) -> None:
-    assert 1 == len(
-        set([str(sorted(contents)) for contents in [expected, result]]),
+    assert (
+        len(
+            set([str(sorted(contents)) for contents in [expected, result]]),
+        )
+        == 1
     )
 
 
 def _common_test(temporary_root: Path) -> None:
-    assert 0 == len(_get_tree_contents(temporary_root))
+    assert len(_get_tree_contents(temporary_root)) == 0
 
 
 def _inside_temporary_directory(function: PathFunc) -> None:
