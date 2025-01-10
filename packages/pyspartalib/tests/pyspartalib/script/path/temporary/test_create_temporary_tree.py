@@ -19,13 +19,14 @@ from pyspartalib.script.path.temporary.create_temporary_tree import (
 
 def _get_tree_contents(temporary_root: Path) -> Paths:
     return get_relative_array(
-        list(walk_iterator(temporary_root)), root_path=temporary_root
+        list(walk_iterator(temporary_root)),
+        root_path=temporary_root,
     )
 
 
 def _sort_test(expected: Paths, result: Paths) -> None:
     assert 1 == len(
-        set([str(sorted(contents)) for contents in [expected, result]])
+        set([str(sorted(contents)) for contents in [expected, result]]),
     )
 
 
