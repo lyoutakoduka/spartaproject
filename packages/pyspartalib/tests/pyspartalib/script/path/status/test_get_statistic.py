@@ -15,6 +15,10 @@ from pyspartalib.script.path.status.get_statistic import (
 )
 
 
+def _get_texts() -> Strs:
+    return ["first", "second", "third"]
+
+
 def _inside_temporary_directory(function: PathFunc) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
@@ -34,7 +38,7 @@ def test_single() -> None:
 
 def test_array() -> None:
     """Test to get list of file size."""
-    texts: Strs = ["first", "second", "third"]
+    texts: Strs = _get_texts()
     expected: Ints = [len(text) for text in texts]
 
     def individual_test(temporary_root: Path) -> None:
