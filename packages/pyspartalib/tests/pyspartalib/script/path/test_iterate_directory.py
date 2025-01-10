@@ -69,7 +69,7 @@ def _get_second_files() -> Strs2:
 
 
 def _get_third_root() -> Strs:
-    return _get_second_root() + ["dir002"]
+    return [*_get_second_root(), "dir002"]
 
 
 def _get_third_text() -> Strs:
