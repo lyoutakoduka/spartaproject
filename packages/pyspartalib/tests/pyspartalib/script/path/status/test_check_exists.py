@@ -34,6 +34,10 @@ def _get_expected_array() -> Bools:
     return [True, False]
 
 
+def _get_expected_pair() -> BoolPair:
+    return {"R": True, "G": False, "B": True}
+
+
 def test_array() -> None:
     """Test to check existing of list of file or directory."""
     current_file: Path = _get_current_file()
@@ -52,6 +56,7 @@ def test_pair() -> None:
         "G": _get_unknown_file(current_file),
         "B": current_file.parent,
     }
-    expected: BoolPair = {"R": True, "G": False, "B": True}
 
-    _fail_error(bool_compare_pair(expected, check_exists_pair(paths)))
+    _fail_error(
+        bool_compare_pair(_get_expected_pair(), check_exists_pair(paths)),
+    )
