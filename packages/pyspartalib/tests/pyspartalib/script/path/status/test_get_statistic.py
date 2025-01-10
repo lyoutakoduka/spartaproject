@@ -8,7 +8,7 @@ from tempfile import TemporaryDirectory
 
 from pyspartalib.context.default.integer_context import Ints
 from pyspartalib.context.default.string_context import Strs
-from pyspartalib.context.extension.path_context import PathFunc
+from pyspartalib.context.extension.path_context import PathFunc, Paths
 from pyspartalib.context.type_context import Type
 from pyspartalib.script.file.text.export_file import text_export
 from pyspartalib.script.path.status.get_statistic import (
@@ -50,6 +50,13 @@ def _get_file_size(temporary_root: Path) -> int:
     )
 
 
+def _export_text_files(temporary_root: Path) -> Paths:
+    return [
+        text_export(Path(temporary_root, text + ".txt"), text)
+        for text in _get_texts()
+    ]
+
+
 def test_single() -> None:
     """Test to get file size."""
     text: str = _get_text()
@@ -65,12 +72,9 @@ def test_array() -> None:
     expected: Ints = _get_expected_counts()
 
     def individual_test(temporary_root: Path) -> None:
-        result: Ints = get_file_size_array(
-            [
-                text_export(Path(temporary_root, text + ".txt"), text)
-                for text in _get_texts()
-            ],
+        _difference_error(
+            get_file_size_array(_export_text_files(temporary_root)),
+            expected,
         )
-        _difference_error(result, expected)
 
     _inside_temporary_directory(individual_test)
