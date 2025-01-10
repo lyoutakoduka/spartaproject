@@ -19,6 +19,10 @@ def _get_texts() -> Strs:
     return ["first", "second", "third"]
 
 
+def _get_expected_counts() -> Ints:
+    return [len(text) for text in _get_texts()]
+
+
 def _inside_temporary_directory(function: PathFunc) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
@@ -38,14 +42,13 @@ def test_single() -> None:
 
 def test_array() -> None:
     """Test to get list of file size."""
-    texts: Strs = _get_texts()
-    expected: Ints = [len(text) for text in texts]
+    expected: Ints = _get_expected_counts()
 
     def individual_test(temporary_root: Path) -> None:
         result: Ints = get_file_size_array(
             [
                 text_export(Path(temporary_root, text + ".txt"), text)
-                for text in texts
+                for text in _get_texts()
             ],
         )
 
