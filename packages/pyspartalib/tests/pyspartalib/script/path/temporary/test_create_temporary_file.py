@@ -6,9 +6,15 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from pyspartalib.context.extension.path_context import PathFunc
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
+
+
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
 
 
 def _exists_error(path: Path) -> None:
@@ -28,6 +34,6 @@ def test_file() -> None:
         file_path: Path = create_temporary_file(temporary_root)
 
         _exists_error(file_path)
-        assert file_path == Path(temporary_root, "temporary.json")
+        _difference_error(file_path, Path(temporary_root, "temporary.json"))
 
     _inside_temporary_directory(individual_test)
