@@ -5,7 +5,7 @@
 from decimal import Decimal
 
 from pyspartalib.context.default.integer_context import IntPair
-from pyspartalib.context.default.string_context import StrPair
+from pyspartalib.context.default.string_context import StrPair, Strs
 from pyspartalib.context.extension.decimal_context import DecPair
 from pyspartalib.context.type_context import Type
 from pyspartalib.script.decimal.initialize_decimal import initialize_decimal
@@ -52,19 +52,23 @@ def _get_case_day() -> IntPair:
     }
 
 
+def _times_key_second() -> Strs:
+    return [
+        "1.000000s",
+        "0.100000s",
+        "0.010000s",
+        "0.001000s",
+        "0.000100s",
+        "0.000010s",
+        "0.000001s",
+        "0.000000s",
+    ]
+
+
 def _get_case_second() -> DecPair:
     return dict(
         zip(
-            [
-                "1.000000s",
-                "0.100000s",
-                "0.010000s",
-                "0.001000s",
-                "0.000100s",
-                "0.000010s",
-                "0.000001s",
-                "0.000000s",
-            ],
+            _times_key_second(),
             [Decimal("0.1") ** Decimal(str(i)) for i in range(9)],
             strict=True,
         ),
