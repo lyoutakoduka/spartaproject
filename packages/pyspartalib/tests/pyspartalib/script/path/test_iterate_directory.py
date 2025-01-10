@@ -11,6 +11,7 @@ from pyspartalib.context.extension.path_context import (
     PathGene,
     Paths,
 )
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.path.iterate_directory import walk_iterator
 from pyspartalib.script.path.modify.current.get_relative import (
     get_relative_array,
@@ -18,6 +19,11 @@ from pyspartalib.script.path.modify.current.get_relative import (
 from pyspartalib.script.path.temporary.create_temporary_tree import (
     create_temporary_tree,
 )
+
+
+def _length_error(result: list[Type], expected: int) -> None:
+    if len(result) != expected:
+        raise ValueError
 
 
 def _get_first_ini() -> Strs:
@@ -97,7 +103,7 @@ def _get_third_files() -> Strs2:
 
 
 def _sorted_match(expected: Paths, source: Paths) -> None:
-    assert len({str(sorted(name)) for name in [expected, source]}) == 1
+    _length_error(list({str(sorted(name)) for name in [expected, source]}), 1)
 
 
 def _common_test(
