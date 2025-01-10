@@ -58,10 +58,10 @@ def _get_three_hierarchy() -> Strs2:
         [name_dir_1, name_ini],
         [name_dir_1, name_json],
         [name_dir_1, name_text],
-        name_dirs + [name_dir_empty],
-        name_dirs + [name_ini],
-        name_dirs + [name_json],
-        name_dirs + [name_text],
+        [*name_dirs, name_dir_empty],
+        [*name_dirs, name_ini],
+        [*name_dirs, name_json],
+        [*name_dirs, name_text],
     ]
 
 
