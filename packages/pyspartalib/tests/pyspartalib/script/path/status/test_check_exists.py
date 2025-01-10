@@ -30,13 +30,18 @@ def _get_unknown_file(path: Path) -> Path:
     return path.with_name("unknown.py")
 
 
+def _get_expected_array() -> Bools:
+    return [True, False]
+
+
 def test_array() -> None:
     """Test to check existing of list of file or directory."""
     current_file: Path = _get_current_file()
     paths: Paths = [current_file, _get_unknown_file(current_file)]
-    expected: Bools = [True, False]
 
-    _fail_error(bool_compare_array(expected, check_exists_array(paths)))
+    _fail_error(
+        bool_compare_array(_get_expected_array(), check_exists_array(paths)),
+    )
 
 
 def test_pair() -> None:
