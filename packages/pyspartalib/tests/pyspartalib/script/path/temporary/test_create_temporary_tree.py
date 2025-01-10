@@ -69,6 +69,10 @@ def _get_indices_deep() -> Ints:
     return [-1, 0, 11, 12, 13]
 
 
+def _get_indices_weight() -> Ints:
+    return [-2, -1, 0, 11, 12, 13]
+
+
 def test_three() -> None:
     """Test for contents of the temporary tree which is three hierarchy."""
     expected: Paths = [
@@ -96,10 +100,9 @@ def test_deep() -> None:
 
 def test_weight() -> None:
     """Test for scale of file size which is placed on the temporary tree."""
-    outrange_indices: Ints = [-2, -1, 0, 11, 12, 13]
 
     def individual_test(temporary_root: Path) -> None:
-        for index in outrange_indices:
+        for index in _get_indices_weight():
             create_temporary_tree(temporary_root, tree_weight=index)
 
         _common_test(temporary_root)
