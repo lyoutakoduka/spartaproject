@@ -17,6 +17,11 @@ from pyspartalib.script.path.status.check_exists import (
 from pyspartalib.script.stack_frame import current_frame
 
 
+def _fail_error(status: bool) -> None:
+    if not status:
+        raise ValueError
+
+
 def _get_current_file() -> Path:
     return current_frame()["file"]
 
@@ -31,7 +36,7 @@ def test_array() -> None:
     paths: Paths = [current_file, _get_unknown_file(current_file)]
     expected: Bools = [True, False]
 
-    assert bool_compare_array(expected, check_exists_array(paths))
+    _fail_error(bool_compare_array(expected, check_exists_array(paths)))
 
 
 def test_pair() -> None:
@@ -44,4 +49,4 @@ def test_pair() -> None:
     }
     expected: BoolPair = {"R": True, "G": False, "B": True}
 
-    assert bool_compare_pair(expected, check_exists_pair(paths))
+    _fail_error(bool_compare_pair(expected, check_exists_pair(paths)))
