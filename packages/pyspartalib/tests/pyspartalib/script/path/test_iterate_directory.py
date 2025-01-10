@@ -97,7 +97,7 @@ def _get_third_files() -> Strs2:
 
 
 def _sorted_match(expected: Paths, source: Paths) -> bool:
-    return 1 == len(set([str(sorted(name)) for name in [expected, source]]))
+    return 1 == len({str(sorted(name)) for name in [expected, source]})
 
 
 def _common_test(
