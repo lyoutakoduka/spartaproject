@@ -65,6 +65,10 @@ def _get_three_hierarchy() -> Strs2:
     ]
 
 
+def _get_indices_deep() -> Ints:
+    return [-1, 0, 11, 12, 13]
+
+
 def test_three() -> None:
     """Test for contents of the temporary tree which is three hierarchy."""
     expected: Paths = [
@@ -80,10 +84,9 @@ def test_three() -> None:
 
 def test_deep() -> None:
     """Test for count of hierarchy of the temporary tree."""
-    outrange_indices: Ints = [-1, 0, 11, 12, 13]
 
     def individual_test(temporary_root: Path) -> None:
-        for index in outrange_indices:
+        for index in _get_indices_deep():
             create_temporary_tree(temporary_root, tree_deep=index)
 
         _common_test(temporary_root)
