@@ -30,11 +30,12 @@ def _get_tree_contents(temporary_root: Path) -> Paths:
     )
 
 
+def _get_sorted_paths(expected: Paths, result: Paths) -> Strs:
+    return list({str(sorted(contents)) for contents in [expected, result]})
+
+
 def _sort_test(expected: Paths, result: Paths) -> None:
-    _length_error(
-        list({str(sorted(contents)) for contents in [expected, result]}),
-        1,
-    )
+    _length_error(_get_sorted_paths(expected, result), 1)
 
 
 def _common_test(temporary_root: Path) -> None:
