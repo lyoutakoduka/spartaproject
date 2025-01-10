@@ -19,6 +19,11 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
+def _fail_error(status: bool) -> None:
+    if not status:
+        raise ValueError
+
+
 def _get_interval() -> Decimal:
     return Decimal("0.005")
 
@@ -65,7 +70,7 @@ def test_builtin() -> None:
 
     _sleep_interval()
 
-    assert _get_interval() < _get_elapsed_time(timer, begin)
+    _fail_error(_get_interval() < _get_elapsed_time(timer, begin))
 
 
 def test_integer() -> None:
