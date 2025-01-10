@@ -6,7 +6,7 @@ from decimal import Decimal
 
 from pyspartalib.context.default.integer_context import IntPair
 from pyspartalib.context.default.string_context import StrPair, Strs
-from pyspartalib.context.extension.decimal_context import DecPair
+from pyspartalib.context.extension.decimal_context import DecPair, Decs
 from pyspartalib.context.type_context import Type
 from pyspartalib.script.decimal.initialize_decimal import initialize_decimal
 from pyspartalib.script.time.count.convert_readable import readable_time
@@ -65,14 +65,12 @@ def _times_key_second() -> Strs:
     ]
 
 
+def _times_value_second() -> Decs:
+    return [Decimal("0.1") ** Decimal(str(i)) for i in range(9)]
+
+
 def _get_case_second() -> DecPair:
-    return dict(
-        zip(
-            _times_key_second(),
-            [Decimal("0.1") ** Decimal(str(i)) for i in range(9)],
-            strict=True,
-        ),
-    )
+    return dict(zip(_times_key_second(), _times_value_second(), strict=True))
 
 
 def _get_case_digit() -> IntPair:
