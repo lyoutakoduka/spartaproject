@@ -44,17 +44,18 @@ def _inside_temporary_directory(function: PathFunc) -> None:
         function(Path(temporary_path))
 
 
+def _get_file_size(temporary_root: Path) -> int:
+    return get_file_size(
+        text_export(Path(temporary_root, "temporary.txt"), _get_text()),
+    )
+
+
 def test_single() -> None:
     """Test to get file size."""
     text: str = _get_text()
 
     def individual_test(temporary_root: Path) -> None:
-        _length_error(
-            text,
-            get_file_size(
-                text_export(Path(temporary_root, "temporary.txt"), text),
-            ),
-        )
+        _length_error(text, _get_file_size(temporary_root))
 
     _inside_temporary_directory(individual_test)
 
