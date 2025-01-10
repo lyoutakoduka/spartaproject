@@ -25,12 +25,7 @@ def _get_tree_contents(temporary_root: Path) -> Paths:
 
 
 def _sort_test(expected: Paths, result: Paths) -> None:
-    assert (
-        len(
-            set([str(sorted(contents)) for contents in [expected, result]]),
-        )
-        == 1
-    )
+    assert len({str(sorted(contents)) for contents in [expected, result]}) == 1
 
 
 def _common_test(temporary_root: Path) -> None:
