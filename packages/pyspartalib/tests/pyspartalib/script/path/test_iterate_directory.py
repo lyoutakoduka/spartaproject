@@ -101,7 +101,9 @@ def _sorted_match(expected: Paths, source: Paths) -> bool:
 
 
 def _common_test(
-    expected: Strs2, walk_generator: PathGene, root_path: Path
+    expected: Strs2,
+    walk_generator: PathGene,
+    root_path: Path,
 ) -> None:
     assert _sorted_match(
         [Path(*path_names) for path_names in expected],
@@ -157,7 +159,9 @@ def test_file() -> None:
 
     def individual_test(root_path: Path) -> None:
         _common_test(
-            expected, walk_iterator(root_path, directory=False), root_path
+            expected,
+            walk_iterator(root_path, directory=False),
+            root_path,
         )
 
     _inside_temporary_directory(individual_test)
