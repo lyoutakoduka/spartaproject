@@ -27,6 +27,10 @@ def _length_error(result: Sized, expected: int) -> None:
         raise ValueError
 
 
+def _get_text() -> str:
+    return "test"
+
+
 def _get_texts() -> Strs:
     return ["first", "second", "third"]
 
@@ -42,7 +46,7 @@ def _inside_temporary_directory(function: PathFunc) -> None:
 
 def test_single() -> None:
     """Test to get file size."""
-    text: str = "test"
+    text: str = _get_text()
 
     def individual_test(temporary_root: Path) -> None:
         _length_error(
