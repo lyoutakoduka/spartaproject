@@ -26,7 +26,7 @@ def test_single() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         assert len(text) == get_file_size(
-            text_export(Path(temporary_root, "temporary.txt"), text)
+            text_export(Path(temporary_root, "temporary.txt"), text),
         )
 
     _inside_temporary_directory(individual_test)
@@ -42,7 +42,7 @@ def test_array() -> None:
             [
                 text_export(Path(temporary_root, text + ".txt"), text)
                 for text in texts
-            ]
+            ],
         )
 
         assert expected == result
