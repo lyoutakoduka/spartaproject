@@ -96,8 +96,8 @@ def _get_third_files() -> Strs2:
     ]
 
 
-def _sorted_match(expected: Paths, source: Paths) -> bool:
-    return len({str(sorted(name)) for name in [expected, source]}) == 1
+def _sorted_match(expected: Paths, source: Paths) -> None:
+    assert len({str(sorted(name)) for name in [expected, source]}) == 1
 
 
 def _common_test(
@@ -105,7 +105,7 @@ def _common_test(
     walk_generator: PathGene,
     root_path: Path,
 ) -> None:
-    assert _sorted_match(
+    _sorted_match(
         [Path(*path_names) for path_names in expected],
         get_relative_array(list(walk_generator), root_path=root_path),
     )
