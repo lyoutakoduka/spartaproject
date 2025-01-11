@@ -122,7 +122,9 @@ def _compare_archived_count(archive_paths: Paths) -> None:
 
 
 def _get_sorted_paths(
-    walk_paths: Paths, archive_paths: Paths, temporary_root: Path
+    walk_paths: Paths,
+    archive_paths: Paths,
+    temporary_root: Path,
 ) -> Paths2:
     inputs: Paths = _get_input_paths(walk_paths, temporary_root)
     outputs: Paths = _get_output_paths(archive_paths, temporary_root)
@@ -131,10 +133,14 @@ def _get_sorted_paths(
 
 
 def _compare_archive(
-    archive_paths: Paths, temporary_root: Path, walk_paths: Paths
+    archive_paths: Paths,
+    temporary_root: Path,
+    walk_paths: Paths,
 ) -> Paths2:
     sorted_paths: Paths2 = _get_sorted_paths(
-        walk_paths, archive_paths, temporary_root
+        walk_paths,
+        archive_paths,
+        temporary_root,
     )
 
     _compare_path_name(sorted_paths, temporary_root)
@@ -144,14 +150,18 @@ def _compare_archive(
 
 
 def _common_test(
-    archive_paths: Paths, temporary_root: Path, walk_paths: Paths
+    archive_paths: Paths,
+    temporary_root: Path,
+    walk_paths: Paths,
 ) -> None:
     _compare_archive(archive_paths, temporary_root, walk_paths)
     _compare_archived_count(archive_paths)
 
 
 def _compress_test(
-    archive_paths: Paths, temporary_root: Path, walk_paths: Paths
+    archive_paths: Paths,
+    temporary_root: Path,
+    walk_paths: Paths,
 ) -> None:
     sorted_paths: Paths2 = _compare_archive(
         archive_paths,
@@ -187,7 +197,7 @@ def _multiple_test(
 ) -> None:
     _compare_archive_text(
         _find_config_path(
-            _compare_archive(archive_paths, temporary_root, walk_paths)
+            _compare_archive(archive_paths, temporary_root, walk_paths),
         ),
         expected,
     )

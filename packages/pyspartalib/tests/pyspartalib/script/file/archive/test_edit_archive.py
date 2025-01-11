@@ -65,10 +65,11 @@ def _get_root_edit(temporary_root: Path) -> Path:
 
 
 def _add_archive(
-    temporary_root: Path, compress_archive: CompressArchive
+    temporary_root: Path,
+    compress_archive: CompressArchive,
 ) -> Paths:
     compress_archive.compress_at_once(
-        list(walk_iterator(_get_root_before(temporary_root)))
+        list(walk_iterator(_get_root_before(temporary_root))),
     )
 
     return compress_archive.close_archived()
@@ -169,20 +170,26 @@ def _add_stamp_after(
 
 
 def _add_time_stamp(
-    edit_history: PathPair, stamp_before: TimePair, stamp_after: TimePair
+    edit_history: PathPair,
+    stamp_before: TimePair,
+    stamp_after: TimePair,
 ) -> None:
     _add_stamp_after("remove", edit_history, stamp_before, stamp_after)
 
 
 def _update_time_stamp(
-    edit_history: PathPair, stamp_before: TimePair, stamp_after: TimePair
+    edit_history: PathPair,
+    stamp_before: TimePair,
+    stamp_after: TimePair,
 ) -> None:
     _remove_stamp_after("rename", stamp_after)
     _add_stamp_after("update", edit_history, stamp_before, stamp_after)
 
 
 def _edit_time_stamp(
-    edit_history: PathPair, stamp_before: TimePair, stamp_after: TimePair
+    edit_history: PathPair,
+    stamp_before: TimePair,
+    stamp_after: TimePair,
 ) -> None:
     _remove_time_stamp(edit_history, stamp_after)
     _add_time_stamp(edit_history, stamp_before, stamp_after)
@@ -190,7 +197,8 @@ def _edit_time_stamp(
 
 
 def _get_decompress_stamp(
-    temporary_root: Path, archive_paths: Paths
+    temporary_root: Path,
+    archive_paths: Paths,
 ) -> TimePair:
     _decompress_archive(_get_root_after(temporary_root), archive_paths)
     return _get_archive_stamp_after(temporary_root)
@@ -203,7 +211,8 @@ def _get_stamp_after(
     archive_paths: Paths,
 ) -> TimePair:
     stamp_after: TimePair = _get_decompress_stamp(
-        temporary_root, archive_paths
+        temporary_root,
+        archive_paths,
     )
     _edit_time_stamp(edit_history, stamp_before, stamp_after)
 
@@ -212,7 +221,8 @@ def _get_stamp_after(
 
 def _find_decompress_root(temporary_root: Path, remove_root: Path) -> TimePair:
     return _get_decompress_stamp(
-        temporary_root, list(walk_iterator(remove_root, directory=False))
+        temporary_root,
+        list(walk_iterator(remove_root, directory=False)),
     )
 
 
@@ -234,7 +244,8 @@ def _compare_path(result: Path, expected: Path) -> None:
 
 def _compare_root(trash_root: Path, edit_archive: EditArchive) -> None:
     _compare_path(
-        edit_archive.get_edit_root(), Path(trash_root, get_initial_time_path())
+        edit_archive.get_edit_root(),
+        Path(trash_root, get_initial_time_path()),
     )
 
 
@@ -255,7 +266,9 @@ def _open_test(archive_path: Path, edit_archive: EditArchive) -> None:
 
 
 def _common_test(
-    temporary_root: Path, stamp_before: TimePair, edit_archive: EditArchive
+    temporary_root: Path,
+    stamp_before: TimePair,
+    edit_archive: EditArchive,
 ) -> None:
     _stamp_test(
         stamp_before,
@@ -269,7 +282,9 @@ def _common_test(
 
 
 def _protect_test(
-    temporary_root: Path, stamp_before: TimePair, edit_archive: EditArchive
+    temporary_root: Path,
+    stamp_before: TimePair,
+    edit_archive: EditArchive,
 ) -> None:
     _get_edit_history(edit_archive)
     _close_archive_fail(edit_archive)
@@ -277,7 +292,8 @@ def _protect_test(
     _stamp_test(
         stamp_before,
         _find_decompress_root(
-            temporary_root, _get_root_archive(temporary_root)
+            temporary_root,
+            _get_root_archive(temporary_root),
         ),
     )
 
@@ -336,15 +352,18 @@ def _get_archive(temporary_root: Path) -> CompressArchive:
 
 def _get_archive_name(temporary_root: Path) -> CompressArchive:
     return CompressArchive(
-        _get_root_archive(temporary_root), archive_id=_get_name()
+        _get_root_archive(temporary_root),
+        archive_id=_get_name(),
     )
 
 
 def _get_archive_limit(
-    temporary_root: Path, limit_byte: int
+    temporary_root: Path,
+    limit_byte: int,
 ) -> CompressArchive:
     return CompressArchive(
-        _get_root_archive(temporary_root), limit_byte=limit_byte
+        _get_root_archive(temporary_root),
+        limit_byte=limit_byte,
     )
 
 
@@ -358,7 +377,8 @@ def _get_archive_path_name(temporary_root: Path) -> Paths:
 
 def _get_archive_path_limit(temporary_root: Path, limit_byte: int) -> Paths:
     return _add_archive(
-        temporary_root, _get_archive_limit(temporary_root, limit_byte)
+        temporary_root,
+        _get_archive_limit(temporary_root, limit_byte),
     )
 
 
@@ -443,7 +463,8 @@ def test_different() -> None:
         edit_archive: EditArchive = _get_edit_edit(temporary_root)
 
         _compare_not_relative(
-            edit_archive.get_edit_root(), edit_archive.get_working_root()
+            edit_archive.get_edit_root(),
+            edit_archive.get_working_root(),
         )
 
     _inside_temporary_directory(individual_test)
@@ -514,11 +535,13 @@ def test_limit() -> None:
     def individual_test(temporary_root: Path) -> None:
         _create_source(temporary_root)
         archive_paths: Paths = _get_archive_path_limit(
-            temporary_root, limit_byte
+            temporary_root,
+            limit_byte,
         )
 
         _limit_test(
-            archive_paths, _get_edit_limit(archive_paths[0], limit_byte)
+            archive_paths,
+            _get_edit_limit(archive_paths[0], limit_byte),
         )
 
     _inside_temporary_directory(individual_test)
