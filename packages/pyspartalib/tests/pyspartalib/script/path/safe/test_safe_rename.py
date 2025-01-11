@@ -39,6 +39,11 @@ def _length_error(result: Sized, expected: int) -> None:
         raise ValueError
 
 
+def _fail_error(status: bool) -> None:
+    if not status:
+        raise ValueError
+
+
 def _compare_empty(history: PathPair2 | None) -> PathPair2:
     filtered: PathPair2 = _none_error(history)
 
@@ -50,8 +55,14 @@ def _compare_empty(history: PathPair2 | None) -> PathPair2:
 def _common_test(history: PathPair2 | None) -> None:
     for path_pair in _compare_empty(history).values():
         exists_pair: BoolPair = check_exists_pair(path_pair)
-        assert bool_same_array(
-            [not exists_pair["source.path"], exists_pair["destination.path"]],
+
+        _fail_error(
+            bool_same_array(
+                [
+                    not exists_pair["source.path"],
+                    exists_pair["destination.path"],
+                ],
+            ),
         )
 
 

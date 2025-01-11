@@ -33,6 +33,11 @@ def _length_error(result: Sized, expected: int) -> None:
         raise ValueError
 
 
+def _fail_error(status: bool) -> None:
+    if not status:
+        raise ValueError
+
+
 def _get_history_root(temporary_root: Path) -> Path:
     return Path(temporary_root, "history")
 
@@ -97,8 +102,7 @@ def _compare_root(
 
 def _relative_test(path: Path, root: Path) -> None:
     _check_exists(path)
-
-    assert is_relative(path, root_path=root)
+    _fail_error(is_relative(path, root_path=root))
 
 
 def _compare_path_before(file_history: FileHistory) -> None:

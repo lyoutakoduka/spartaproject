@@ -52,6 +52,11 @@ def _length_error(result: Sized, expected: int) -> None:
         raise ValueError
 
 
+def _fail_error(status: bool) -> None:
+    if not status:
+        raise ValueError
+
+
 def _get_trash_root(temporary_root: Path) -> Path:
     return Path(temporary_root, "trash")
 
@@ -100,7 +105,7 @@ def _check_path_exists(path_pair: PathPair) -> None:
     exists_pair: BoolPair = check_exists_pair(path_pair)
     exists_array: Bools = [exists_pair[group] for group in _get_group()]
 
-    assert bool_same_array([not exists_array[0], exists_array[1]])
+    _fail_error(bool_same_array([not exists_array[0], exists_array[1]]))
 
 
 def _get_relative_pair(path_pair: PathPair, root_pair: PathPair) -> Paths:
