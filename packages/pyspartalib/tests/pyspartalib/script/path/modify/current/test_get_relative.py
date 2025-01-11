@@ -29,6 +29,11 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
+def _fail_error(status: bool) -> None:
+    if not status:
+        raise ValueError
+
+
 def _get_error() -> Path:
     return Path("error")
 
@@ -66,12 +71,14 @@ def test_check() -> None:
     """Test to check path which is type relative."""
     current: Path = _get_current_file()
 
-    assert bool_compare_array(
-        _get_expected(),
-        [
-            is_relative(path, root_path=current.parent)
-            for path in _get_paths(current)
-        ],
+    _fail_error(
+        bool_compare_array(
+            _get_expected(),
+            [
+                is_relative(path, root_path=current.parent)
+                for path in _get_paths(current)
+            ],
+        ),
     )
 
 
@@ -79,9 +86,11 @@ def test_check_array() -> None:
     """Test to check that list of paths are type relative at once."""
     current: Path = _get_current_file()
 
-    assert bool_compare_array(
-        _get_expected(),
-        is_relative_array(_get_paths(current), root_path=current.parent),
+    _fail_error(
+        bool_compare_array(
+            _get_expected(),
+            is_relative_array(_get_paths(current), root_path=current.parent),
+        ),
     )
 
 
