@@ -107,8 +107,12 @@ def _compare_root(trash_root: Path, safe_trash: SafeTrash) -> None:
     )
 
 
+def _check_exists_pair(path_pair: PathPair) -> BoolPair:
+    return check_exists_pair(path_pair)  # To avoid a circular reference.
+
+
 def _check_path_exists(path_pair: PathPair) -> None:
-    exists_pair: BoolPair = check_exists_pair(path_pair)
+    exists_pair: BoolPair = _check_exists_pair(path_pair)
     exists_array: Bools = [exists_pair[group] for group in _get_group()]
 
     _fail_error(bool_same_array([not exists_array[0], exists_array[1]]))
