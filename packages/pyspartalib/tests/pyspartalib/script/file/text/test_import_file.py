@@ -6,13 +6,19 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from pyspartalib.context.extension.path_context import PathFunc
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.file.text.export_file import text_export
 from pyspartalib.script.file.text.import_file import byte_import, text_import
 from pyspartalib.script.string.encoding.set_decoding import set_decoding
 
 
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
+
+
 def _common_test(result: str) -> None:
-    assert "test" == result
+    _difference_error(result, "test")
 
 
 def _inside_temporary_directory(function: PathFunc) -> None:

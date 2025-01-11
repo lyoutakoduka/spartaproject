@@ -6,12 +6,18 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from pyspartalib.context.extension.path_context import PathFunc
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.file.text.export_file import byte_export, text_export
 from pyspartalib.script.path.status.get_statistic import get_file_size
 
 
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
+
+
 def _common_test(text_path: Path, count: int) -> None:
-    assert get_file_size(text_path) == count
+    _difference_error(get_file_size(text_path), count)
 
 
 def _inside_temporary_directory(function: PathFunc) -> None:
