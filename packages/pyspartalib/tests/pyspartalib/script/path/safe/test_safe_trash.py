@@ -207,6 +207,12 @@ def _get_remove_trash(trash_root: Path) -> SafeTrash:
     return SafeTrash(trash_root=trash_root, override=True)
 
 
+def _create_tree(temporary_root: Path) -> Path:
+    return create_temporary_file(
+        create_directory(_get_trash_root(temporary_root)),
+    )
+
+
 def test_work() -> None:
     """Test to compare user defined temporary working space."""
 
@@ -264,9 +270,7 @@ def test_relative() -> None:
 
         _single_test(
             _finalize_single_relative(
-                create_temporary_file(
-                    create_directory(_get_trash_root(temporary_root)),
-                ),
+                _create_tree(temporary_root),
                 temporary_root,
                 safe_trash,
             ),
