@@ -20,7 +20,6 @@ from pyspartalib.script.stack_frame import current_frame
 from pyspartalib.script.time.directory.get_time_path import (
     get_initial_time_path,
 )
-from tests.pyspartalib.interface.pytest import fail
 
 
 def _length_error(result: Sized, expected: int) -> None:

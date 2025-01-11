@@ -20,7 +20,6 @@ from pyspartalib.script.path.temporary.create_temporary_file import (
 from pyspartalib.script.path.temporary.create_temporary_tree import (
     create_temporary_tree,
 )
-from tests.pyspartalib.interface.pytest import fail
 
 
 def _none_error(result: Type | None) -> Type:

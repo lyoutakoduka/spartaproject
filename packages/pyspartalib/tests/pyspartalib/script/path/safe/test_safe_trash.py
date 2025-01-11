@@ -33,7 +33,6 @@ from pyspartalib.script.path.temporary.create_temporary_tree import (
 from pyspartalib.script.time.directory.get_time_path import (
     get_initial_time_path,
 )
-from tests.pyspartalib.interface.pytest import fail
 
 
 def _none_error(result: Type | None) -> Type:
