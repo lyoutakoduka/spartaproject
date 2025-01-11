@@ -66,6 +66,10 @@ def _copy(safe_copy: SafeCopy, path: Path) -> PathPair2 | None:
     return safe_copy.close_history()
 
 
+def _create_tree_deep(path: Path) -> Path:
+    return create_temporary_tree(Path(path, "temporary"), tree_deep=2)
+
+
 def test_file() -> None:
     """Test to copy file, and log history."""
 
@@ -114,14 +118,6 @@ def test_tree() -> None:
     """Test to copy files and directories, and log history."""
 
     def individual_test(safe_copy: SafeCopy, temporary_path: Path) -> None:
-        _common_test(
-            _copy(
-                safe_copy,
-                create_temporary_tree(
-                    Path(temporary_path, "temporary"),
-                    tree_deep=2,
-                ),
-            ),
-        )
+        _common_test(_copy(safe_copy, _create_tree_deep(temporary_path)))
 
     _inside_temporary_directory(individual_test)
