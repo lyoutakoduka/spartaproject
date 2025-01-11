@@ -45,7 +45,7 @@ def _get_expected_paths() -> PathPair:
 
 
 def _common_test(keys_pair: Strs2) -> None:
-    _length_error(list({str(sorted(keys)) for keys in keys_pair}), 1)
+    _length_error({str(sorted(keys)) for keys in keys_pair}, 1)
 
 
 def _get_config_file() -> Path:
