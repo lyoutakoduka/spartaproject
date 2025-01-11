@@ -11,6 +11,7 @@ from pyspartalib.context.extension.path_context import (
     PathPair,
     Paths,
 )
+from pyspartalib.context.type_context import Type
 from pyspartalib.context.typed.user_context import ArchiveStatus
 from pyspartalib.script.directory.create_directory import create_directory
 from pyspartalib.script.file.archive.compress_archive import CompressArchive
@@ -28,6 +29,11 @@ from pyspartalib.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
 from tests.pyspartalib.interface.pytest import fail, raises
+
+
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
 
 
 def _get_empty() -> Paths:
@@ -333,7 +339,7 @@ def _took_out_and_keep(
 
 def _compare_path(result: Path, expected: Path) -> None:
     assert result.exists()
-    assert result == expected
+    _difference_error(result, expected)
 
 
 def _compare_relative(working: PathPair, archive_paths: Paths) -> None:

@@ -6,10 +6,16 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from pyspartalib.context.extension.path_context import PathFunc
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.file.archive.archive_format import (
     get_format,
     rename_format,
 )
+
+
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
 
 
 def _inside_temporary_directory(function: PathFunc) -> None:
@@ -23,14 +29,16 @@ def _get_format() -> str:
 
 def test_format() -> None:
     """Test to get information of archive format."""
-    assert _get_format() == get_format()
+    _difference_error(get_format(), _get_format())
 
 
 def test_rename() -> None:
     """Test to add archive format to path you select."""
 
     def individual_test(temporary_root: Path) -> None:
-        expected: Path = temporary_root.with_suffix("." + _get_format())
-        assert expected == rename_format(temporary_root)
+        _difference_error(
+            rename_format(temporary_root),
+            temporary_root.with_suffix("." + _get_format()),
+        )
 
     _inside_temporary_directory(individual_test)

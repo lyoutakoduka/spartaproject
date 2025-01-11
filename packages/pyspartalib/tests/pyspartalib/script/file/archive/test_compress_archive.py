@@ -11,6 +11,7 @@ from pyspartalib.context.default.integer_context import Ints2
 from pyspartalib.context.default.string_context import StrPair
 from pyspartalib.context.extension.decimal_context import Decs
 from pyspartalib.context.extension.path_context import PathFunc, Paths, Paths2
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.decimal.initialize_decimal import initialize_decimal
 from pyspartalib.script.directory.create_parent import create_parent
 from pyspartalib.script.file.archive.compress_archive import CompressArchive
@@ -33,6 +34,11 @@ from pyspartalib.script.path.temporary.create_temporary_tree import (
 )
 
 initialize_decimal()
+
+
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
 
 
 def _get_multiple() -> str:
@@ -92,24 +98,23 @@ def _get_output_paths(archive_paths: Paths, temporary_root: Path) -> Paths:
 
 
 def _compare_path_name(sorted_paths: Paths2, temporary_root: Path) -> None:
-    relative_paths: Paths2 = [
-        get_relative_array(paths, root_path=Path(temporary_root, directory))
-        for directory, paths in zip(
-            ["tree", "extract"],
-            sorted_paths,
-            strict=True,
-        )
-    ]
-
-    assert relative_paths[0] == relative_paths[1]
+    _difference_error(
+        *[
+            get_relative_array(
+                paths,
+                root_path=Path(temporary_root, directory),
+            )
+            for directory, paths in zip(
+                ["tree", "extract"],
+                sorted_paths,
+                strict=True,
+            )
+        ],
+    )
 
 
 def _compare_file_size(sorted_paths: Paths2) -> None:
-    file_size_pair: Ints2 = [
-        get_file_size_array(paths) for paths in sorted_paths
-    ]
-
-    assert file_size_pair[0] == file_size_pair[1]
+    _difference_error(*[get_file_size_array(paths) for paths in sorted_paths])
 
 
 def _compare_compress_size(outputs: Paths, archive_paths: Paths) -> None:
@@ -178,7 +183,7 @@ def _compress_test(
 
 
 def _name_test(archive_name: str, archive_paths: Paths) -> None:
-    assert archive_name == archive_paths[0].stem
+    _difference_error(archive_paths[0].stem, archive_name)
 
 
 def _import_multiple(config_path: Path) -> StrPair:
@@ -186,7 +191,7 @@ def _import_multiple(config_path: Path) -> StrPair:
 
 
 def _compare_archive_text(config_path: Path, expected: StrPair) -> None:
-    assert expected == _import_multiple(config_path)
+    _difference_error(_import_multiple(config_path), expected)
 
 
 def _find_config_path(sorted_paths: Paths2) -> Path:
@@ -214,9 +219,7 @@ def _inside_temporary_directory(function: PathFunc) -> None:
 
 def _confirm_empty_archive(archive_paths: Paths) -> None:
     _compare_archived_count(archive_paths)
-
-    expected: int = 22
-    assert expected == get_file_size(archive_paths[0])
+    _difference_error(get_file_size(archive_paths[0]), 22)
 
 
 def _finalize_archive(

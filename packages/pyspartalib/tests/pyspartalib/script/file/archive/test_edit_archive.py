@@ -13,6 +13,7 @@ from pyspartalib.context.extension.path_context import (
     Paths2,
 )
 from pyspartalib.context.extension.time_context import TimePair
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.directory.create_directory import create_directory
 from pyspartalib.script.file.archive.compress_archive import CompressArchive
 from pyspartalib.script.file.archive.decompress_archive import (
@@ -42,6 +43,11 @@ from pyspartalib.script.time.path.get_timestamp import (
 )
 from pyspartalib.script.time.stamp.is_same_stamp import is_same_stamp
 from tests.pyspartalib.interface.pytest import fail, raises
+
+
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
 
 
 def _get_name() -> str:
@@ -239,7 +245,7 @@ def _close_archive(edit_archive: EditArchive) -> Paths:
 
 def _compare_path(result: Path, expected: Path) -> None:
     assert result.exists()
-    assert result == expected
+    _difference_error(result, expected)
 
 
 def _compare_root(trash_root: Path, edit_archive: EditArchive) -> None:
@@ -262,7 +268,10 @@ def _compare_not_relative(full_path: Path, root_path: Path) -> None:
 
 
 def _open_test(archive_path: Path, edit_archive: EditArchive) -> None:
-    assert archive_path == edit_archive.open_archive(archive_path=archive_path)
+    _difference_error(
+        edit_archive.open_archive(archive_path=archive_path),
+        archive_path,
+    )
 
 
 def _common_test(
@@ -324,19 +333,18 @@ def _name_test(before_path: Path, edit_archive: EditArchive) -> None:
     _get_edit_history(edit_archive)
 
     assert before_path == _close_archive(edit_archive)[0]
-    assert before_path.stem == _get_name()
+    _difference_error(_get_name(), before_path.stem)
 
 
 def _path_test(archive_path: Path, edit_archive: EditArchive) -> None:
-    assert archive_path == edit_archive.get_archive_path()
+    _difference_error(edit_archive.get_archive_path(), archive_path)
 
 
 def _limit_test(before_paths: Paths, edit_archive: EditArchive) -> None:
     _get_edit_history(edit_archive)
     after_paths: Paths = _close_archive(edit_archive)
 
-    before_paths, after_paths = _get_sorted_paths(before_paths, after_paths)
-    assert before_paths == after_paths
+    _difference_error(*_get_sorted_paths(before_paths, after_paths))
 
 
 def _compress_test(archive_path: Path, edit_archive: EditArchive) -> None:

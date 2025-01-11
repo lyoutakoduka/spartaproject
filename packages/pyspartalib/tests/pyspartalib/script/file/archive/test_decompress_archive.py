@@ -12,6 +12,7 @@ from pyspartalib.context.default.integer_context import IntPair2, Ints, Ints2
 from pyspartalib.context.default.string_context import StrPair, Strs
 from pyspartalib.context.extension.path_context import PathFunc, Paths, Paths2
 from pyspartalib.context.extension.time_context import Times, Times2
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.directory.create_parent import create_parent
 from pyspartalib.script.file.archive.compress_archive import CompressArchive
 from pyspartalib.script.file.archive.decompress_archive import (
@@ -33,6 +34,11 @@ from pyspartalib.script.string.format_texts import format_indent
 from pyspartalib.script.time.format.create_iso_date import get_iso_time
 from pyspartalib.script.time.path.get_timestamp import get_latest
 from pyspartalib.script.time.path.set_timestamp import set_latest
+
+
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
 
 
 def _get_multiple() -> str:
@@ -123,12 +129,12 @@ def _get_times(times_pair: Times2) -> Times:
 
 def _compare_timestamp(sorted_paths: Paths2, expected: datetime) -> None:
     times_pair: Times2 = _get_times_pair(sorted_paths)
-    _equal_stamp(*times_pair)
+    _difference_error(*times_pair)
 
     times: Times = _get_times(times_pair)
     _equal_count(1, len(times))
 
-    _equal_datetime(expected, times[0])
+    _difference_error(times[0], expected)
 
 
 def _compare_path_pair(left: Paths, right: Paths) -> None:
@@ -143,7 +149,7 @@ def _get_relative_paths(sorted_paths: Paths2, temporary_root: Path) -> Paths2:
 
 
 def _compare_path_name(sorted_paths: Paths2, temporary_root: Path) -> None:
-    _equal_path(*_get_relative_paths(sorted_paths, temporary_root))
+    _difference_error(*_get_relative_paths(sorted_paths, temporary_root))
 
 
 def _get_file_size_pair(sorted_paths: Paths2) -> Ints2:
@@ -151,7 +157,7 @@ def _get_file_size_pair(sorted_paths: Paths2) -> Ints2:
 
 
 def _compare_file_size(sorted_paths: Paths2) -> None:
-    _equal_size(*_get_file_size_pair(sorted_paths))
+    _difference_error(*_get_file_size_pair(sorted_paths))
 
 
 def _get_sorted_path(walk_root: Path) -> Paths:
