@@ -31,7 +31,7 @@ def _compare_empty(history: PathPair2 | None) -> PathPair2:
 
 
 def _common_test(history: PathPair2 | None) -> None:
-    for _, path_pair in _compare_empty(history).items():
+    for path_pair in _compare_empty(history).values():
         exists_pair: BoolPair = check_exists_pair(path_pair)
         assert bool_same_array(
             [not exists_pair["source.path"], exists_pair["destination.path"]],
