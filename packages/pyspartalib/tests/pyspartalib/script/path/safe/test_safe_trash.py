@@ -243,14 +243,15 @@ def test_file() -> None:
     """Test to remove file, and log history."""
 
     def individual_test(temporary_root: Path) -> None:
-        if safe_trash := _get_remove():
-            _single_test(
-                _finalize_single(
-                    create_temporary_file(temporary_root),
-                    safe_trash,
-                ),
-                _convert_path_pair(temporary_root, safe_trash),
-            )
+        safe_trash: SafeTrash = _get_remove()
+
+        _single_test(
+            _finalize_single(
+                create_temporary_file(temporary_root),
+                safe_trash,
+            ),
+            _convert_path_pair(temporary_root, safe_trash),
+        )
 
     _inside_temporary_directory(individual_test)
 
@@ -259,17 +260,18 @@ def test_relative() -> None:
     """Test to remove file which is based on specific root directory."""
 
     def individual_test(temporary_root: Path) -> None:
-        if safe_trash := _get_remove():
-            _single_test(
-                _finalize_single_relative(
-                    create_temporary_file(
-                        create_directory(_get_trash_root(temporary_root)),
-                    ),
-                    temporary_root,
-                    safe_trash,
+        safe_trash: SafeTrash = _get_remove()
+
+        _single_test(
+            _finalize_single_relative(
+                create_temporary_file(
+                    create_directory(_get_trash_root(temporary_root)),
                 ),
-                _convert_path_pair(temporary_root, safe_trash),
-            )
+                temporary_root,
+                safe_trash,
+            ),
+            _convert_path_pair(temporary_root, safe_trash),
+        )
 
     _inside_temporary_directory(individual_test)
 
@@ -278,14 +280,15 @@ def test_exists() -> None:
     """Test to remove same files at twice."""
 
     def individual_test(temporary_root: Path) -> None:
-        if safe_trash := _get_remove():
-            _single_test(
-                _finalize_array(
-                    [create_temporary_file(temporary_root)] * 2,
-                    safe_trash,
-                ),
-                _convert_path_pair(temporary_root, safe_trash),
-            )
+        safe_trash: SafeTrash = _get_remove()
+
+        _single_test(
+            _finalize_array(
+                [create_temporary_file(temporary_root)] * 2,
+                safe_trash,
+            ),
+            _convert_path_pair(temporary_root, safe_trash),
+        )
 
     _inside_temporary_directory(individual_test)
 
@@ -296,17 +299,13 @@ def test_tree() -> None:
     def individual_test(temporary_root: Path) -> None:
         create_temporary_tree(temporary_root, tree_deep=3)
         remove_paths: Paths = _get_removal_array(temporary_root)
+        safe_trash: SafeTrash = _get_remove()
 
-        if safe_trash := _get_remove():
-            _multiple_test(
-                remove_paths,
-                _finalize_array_relative(
-                    remove_paths,
-                    temporary_root,
-                    safe_trash,
-                ),
-                _convert_path_pair(temporary_root, safe_trash),
-            )
+        _multiple_test(
+            remove_paths,
+            _finalize_array_relative(remove_paths, temporary_root, safe_trash),
+            _convert_path_pair(temporary_root, safe_trash),
+        )
 
     _inside_temporary_directory(individual_test)
 
