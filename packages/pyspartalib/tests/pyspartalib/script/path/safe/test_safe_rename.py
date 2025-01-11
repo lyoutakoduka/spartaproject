@@ -8,6 +8,7 @@ from tempfile import TemporaryDirectory
 from pyspartalib.context.custom.rename_context import RenamePathFunc
 from pyspartalib.context.default.bool_context import BoolPair
 from pyspartalib.context.extension.path_context import PathPair2
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.bool.same_value import bool_same_array
 from pyspartalib.script.directory.create_directory import create_directory
 from pyspartalib.script.path.safe.safe_rename import SafeRename
@@ -21,13 +22,19 @@ from pyspartalib.script.path.temporary.create_temporary_tree import (
 from tests.pyspartalib.interface.pytest import fail
 
 
+def _none_error(result: Type | None) -> Type:
+    if result is None:
+        raise ValueError
+
+    return result
+
+
 def _compare_empty(history: PathPair2 | None) -> PathPair2:
-    if history is None:
-        fail()
+    filtered: PathPair2 = _none_error(history)
 
-    assert len(history) == 1
+    assert len(filtered) == 1
 
-    return history
+    return filtered
 
 
 def _common_test(history: PathPair2 | None) -> None:

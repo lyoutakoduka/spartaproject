@@ -13,6 +13,7 @@ from pyspartalib.context.extension.path_context import (
     PathPair2,
     Paths,
 )
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.bool.same_value import bool_same_array
 from pyspartalib.script.directory.create_directory import create_directory
 from pyspartalib.script.path.iterate_directory import walk_iterator
@@ -32,6 +33,13 @@ from pyspartalib.script.time.directory.get_time_path import (
     get_initial_time_path,
 )
 from tests.pyspartalib.interface.pytest import fail
+
+
+def _none_error(result: Type | None) -> Type:
+    if result is None:
+        raise ValueError
+
+    return result
 
 
 def _get_trash_root(temporary_root: Path) -> Path:
@@ -61,12 +69,11 @@ def _compare_path(result: Path, expected: Path) -> None:
 
 
 def _compare_size(history_size: int, history: PathPair2 | None) -> PathPair2:
-    if history is None:
-        fail()
+    filtered: PathPair2 = _none_error(history)
 
-    assert len(history) == history_size
+    assert len(filtered) == history_size
 
-    return history
+    return filtered
 
 
 def _compare_not_relative(full_path: Path, root_path: Path) -> None:
