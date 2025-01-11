@@ -45,10 +45,6 @@ def _get_expected_path() -> Path:
     return Path(_get_expected_head(), _get_relative_root())
 
 
-def _compare_path(expected: Path, result: Path) -> None:
-    assert expected == result
-
-
 def test_mount() -> None:
     """Test to get the path of a mount point of Linux."""
     _difference_error(get_mount_point(), _get_expected_mount())

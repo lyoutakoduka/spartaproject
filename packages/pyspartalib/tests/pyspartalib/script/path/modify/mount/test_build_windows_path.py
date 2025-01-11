@@ -40,10 +40,6 @@ def _get_expected_path() -> Path:
     return Path(_get_expected_head(), _get_relative_root())
 
 
-def _compare_path(expected: Path, result: Path) -> None:
-    assert expected == result
-
-
 def test_head() -> None:
     """Test to get root path of drive about Windows file system."""
     _difference_error(_get_windows_head(), _get_expected_head())
