@@ -5,6 +5,7 @@
 from pathlib import Path
 
 from pyspartalib.context.default.string_context import Strs
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.file.json.convert_from_json import (
     string_pair_from_json,
 )
@@ -12,9 +13,18 @@ from pyspartalib.script.file.json.import_json import json_import
 from pyspartalib.script.path.modify.get_resource import get_resource
 
 
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
+
+
 def _common_test(expected: str, path_elements: Strs) -> None:
     result_path: Path = get_resource(local_path=Path(*path_elements))
-    assert expected == string_pair_from_json(json_import(result_path))["name"]
+
+    _difference_error(
+        string_pair_from_json(json_import(result_path))["name"],
+        expected,
+    )
 
 
 def test_file() -> None:
