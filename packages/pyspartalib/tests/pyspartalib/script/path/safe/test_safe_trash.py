@@ -111,9 +111,12 @@ def _check_exists_pair(path_pair: PathPair) -> BoolPair:
     return check_exists_pair(path_pair)  # To avoid a circular reference.
 
 
+def _filter_exists_pair(exists_pair: BoolPair) -> Bools:
+    return [exists_pair[group] for group in _get_group()]
+
+
 def _check_path_exists(path_pair: PathPair) -> None:
-    exists_pair: BoolPair = _check_exists_pair(path_pair)
-    exists_array: Bools = [exists_pair[group] for group in _get_group()]
+    exists_array: Bools = _filter_exists_pair(_check_exists_pair(path_pair))
 
     _fail_error(bool_same_array([not exists_array[0], exists_array[1]]))
 
