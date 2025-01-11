@@ -2,6 +2,7 @@
 
 """Test module to get date time about selected file or directory."""
 
+from collections.abc import Sized
 from os import utime
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -16,8 +17,8 @@ from pyspartalib.script.path.temporary.create_temporary_file import (
 from pyspartalib.script.time.path.get_file_epoch import get_file_epoch
 
 
-def _length_error(result: list[Type], expected: int) -> None:
-    if len(result) != expected:
+def _length_error(result: Sized, expected: int) -> None:
+    if len(result) == expected:
         raise ValueError
 
 

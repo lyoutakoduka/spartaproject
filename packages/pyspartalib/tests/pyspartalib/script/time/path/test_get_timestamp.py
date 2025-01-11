@@ -2,6 +2,7 @@
 
 """Test module to get latest date time of file or directory as time object."""
 
+from collections.abc import Sized
 from datetime import datetime
 from os import utime
 from pathlib import Path
@@ -34,8 +35,8 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
-def _length_error(result: list[Type], expected: int) -> None:
-    if len(result) != expected:
+def _length_error(result: Sized, expected: int) -> None:
+    if len(result) == expected:
         raise ValueError
 
 
