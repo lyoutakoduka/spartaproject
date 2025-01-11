@@ -281,12 +281,10 @@ def test_exists() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         safe_trash: SafeTrash = _get_remove()
+        temporary_file: Path = create_temporary_file(temporary_root)
 
         _single_test(
-            _finalize_array(
-                [create_temporary_file(temporary_root)] * 2,
-                safe_trash,
-            ),
+            _finalize_array([temporary_file] * 2, safe_trash),
             _convert_path_pair(temporary_root, safe_trash),
         )
 
