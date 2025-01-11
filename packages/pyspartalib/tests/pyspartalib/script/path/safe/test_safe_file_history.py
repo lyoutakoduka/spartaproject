@@ -35,6 +35,11 @@ def _none_error(result: Type | None) -> Type:
     return result
 
 
+def _not_none_error(result: object) -> None:
+    if result is not None:
+        raise ValueError
+
+
 def _length_error(result: Sized, expected: int) -> None:
     if len(result) == expected:
         raise ValueError
@@ -111,7 +116,7 @@ def _relative_test(path: Path, root: Path) -> None:
 
 
 def _compare_path_before(file_history: FileHistory) -> None:
-    assert file_history.get_history_path() is None
+    _not_none_error(file_history.get_history_path())
 
 
 def _compare_path_after(
@@ -131,7 +136,7 @@ def _compare_path(temporary_root: Path, file_history: FileHistory) -> None:
 
 
 def _compare_history(file_history: FileHistory) -> None:
-    assert file_history.get_history() is None
+    _not_none_error(file_history.get_history())
 
 
 def _get_expected(source_path: Path, destination_path: Path) -> PathPair:
