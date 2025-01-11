@@ -227,6 +227,7 @@ def test_different() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         safe_trash: SafeTrash = _get_remove_trash(temporary_root)
+
         _compare_not_relative(
             safe_trash.get_trash_root(),
             safe_trash.get_working_root(),
