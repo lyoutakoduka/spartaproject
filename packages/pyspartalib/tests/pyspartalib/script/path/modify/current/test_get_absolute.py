@@ -70,11 +70,11 @@ def test_root() -> None:
 def test_array() -> None:
     """Test to convert list of relative paths to absolute."""
     expected_base: Path = _get_absolute_current()
-    expected: Paths = _get_parents(expected_base)
+    parents: Paths = _get_parents(expected_base)
 
     _difference_error(
-        get_absolute_array(_get_relative_paths(expected)),
-        expected,
+        get_absolute_array(_get_relative_paths(parents)),
+        parents,
     )
 
 
