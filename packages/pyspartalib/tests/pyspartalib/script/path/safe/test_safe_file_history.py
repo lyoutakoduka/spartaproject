@@ -38,6 +38,11 @@ def _fail_error(status: bool) -> None:
         raise ValueError
 
 
+def _no_exists_error(path: Path) -> None:
+    if not path.exists():
+        raise FileNotFoundError
+
+
 def _get_history_root(temporary_root: Path) -> Path:
     return Path(temporary_root, "history")
 
@@ -55,7 +60,7 @@ def _check_exists(result: Path) -> None:
 
 
 def _compare_path_pair(result: Path, expected: Path) -> None:
-    _check_exists(result)
+    _no_exists_error(result)
     _difference_error(result, expected)
 
 
@@ -101,7 +106,7 @@ def _compare_root(
 
 
 def _relative_test(path: Path, root: Path) -> None:
-    _check_exists(path)
+    _no_exists_error(path)
     _fail_error(is_relative(path, root_path=root))
 
 

@@ -57,6 +57,11 @@ def _fail_error(status: bool) -> None:
         raise ValueError
 
 
+def _no_exists_error(path: Path) -> None:
+    if not path.exists():
+        raise FileNotFoundError
+
+
 def _get_trash_root(temporary_root: Path) -> Path:
     return Path(temporary_root, "trash")
 
@@ -78,7 +83,7 @@ def _convert_path_pair(source: Path, safe_trash: SafeTrash) -> PathPair:
 
 
 def _compare_path(result: Path, expected: Path) -> None:
-    _check_exists(result)
+    _no_exists_error(result)
     _difference_error(result, expected)
 
 
