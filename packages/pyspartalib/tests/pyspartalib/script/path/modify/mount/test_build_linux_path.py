@@ -4,11 +4,17 @@
 
 from pathlib import Path
 
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.path.modify.mount.build_linux_path import (
     get_linux_head,
     get_linux_path,
     get_mount_point,
 )
+
+
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
 
 
 def _get_drive_letter() -> str:
@@ -45,14 +51,14 @@ def _compare_path(expected: Path, result: Path) -> None:
 
 def test_mount() -> None:
     """Test to get the path of a mount point of Linux."""
-    _compare_path(_get_expected_mount(), get_mount_point())
+    _difference_error(get_mount_point(), _get_expected_mount())
 
 
 def test_head() -> None:
     """Test to get path of a drive letter about Windows mounted on Linux."""
-    _compare_path(_get_expected_head(), _get_linux_head())
+    _difference_error(_get_linux_head(), _get_expected_head())
 
 
 def test_path() -> None:
     """Test to generate path about Windows mounted on Linux from elements."""
-    _compare_path(_get_expected_path(), _get_linux_path())
+    _difference_error(_get_linux_path(), _get_expected_path())

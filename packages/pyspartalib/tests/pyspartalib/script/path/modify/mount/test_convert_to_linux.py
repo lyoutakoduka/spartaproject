@@ -4,6 +4,7 @@
 
 from pathlib import Path
 
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.path.modify.mount.build_linux_path import (
     get_linux_path,
 )
@@ -13,6 +14,11 @@ from pyspartalib.script.path.modify.mount.build_windows_path import (
 from pyspartalib.script.path.modify.mount.convert_to_linux import (
     convert_to_linux,
 )
+
+
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
 
 
 def _get_drive_letter() -> str:
@@ -36,4 +42,4 @@ def test_mount() -> None:
     expected: Path = _get_linux_path()
 
     for path in [_get_windows_path(), expected]:
-        assert expected == convert_to_linux(path)
+        _difference_error(convert_to_linux(path), expected)
