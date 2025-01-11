@@ -45,7 +45,7 @@ def _compare_path_pair(result: Path, expected: Path) -> None:
 
 
 def _compare_path_count(expected: PathPair2, result: PathPair2) -> None:
-    assert len(set([len(history) for history in [expected, result]])) == 1
+    assert len({len(history) for history in [expected, result]}) == 1
 
 
 def _take_out_path(history: PathPair2) -> Paths2:
@@ -118,10 +118,7 @@ def _compare_history(file_history: FileHistory) -> None:
 
 
 def _get_expected(source_path: Path, destination_path: Path) -> PathPair:
-    return {
-        group: path
-        for group, path in zip(_get_group(), [source_path, destination_path])
-    }
+    return dict(zip(_get_group(), [source_path, destination_path]))
 
 
 def _add_history(
