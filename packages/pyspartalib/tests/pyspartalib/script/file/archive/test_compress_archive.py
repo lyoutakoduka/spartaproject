@@ -220,7 +220,9 @@ def _confirm_empty_archive(archive_paths: Paths) -> None:
 
 
 def _finalize_archive(
-    tree_root: Path, paths: Paths, compress_archive: CompressArchive
+    tree_root: Path,
+    paths: Paths,
+    compress_archive: CompressArchive,
 ) -> Paths:
     compress_archive.compress_at_once(paths, archive_root=tree_root)
     return compress_archive.close_archived()
@@ -248,7 +250,9 @@ def _create_tree_limit(temporary_root: Path) -> Path:
 
 def _create_tree_heavy(temporary_root: Path) -> Path:
     return create_temporary_tree(
-        _get_tree_root(temporary_root), tree_deep=3, tree_weight=2
+        _get_tree_root(temporary_root),
+        tree_deep=3,
+        tree_weight=2,
     )
 
 
@@ -264,7 +268,8 @@ def _get_archive_name(
     temporary_root: Path, archive_name: str
 ) -> CompressArchive:
     return CompressArchive(
-        _get_archive_root(temporary_root), archive_id=archive_name
+        _get_archive_root(temporary_root),
+        archive_id=archive_name,
     )
 
 
@@ -310,7 +315,9 @@ def test_empty() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         _confirm_empty_archive(
-            CompressArchive(_get_archive_root(temporary_root)).close_archived()
+            CompressArchive(
+                _get_archive_root(temporary_root),
+            ).close_archived(),
         )
 
     _inside_temporary_directory(individual_test)
@@ -325,7 +332,9 @@ def test_file() -> None:
 
         _common_test(
             _finalize_archive(
-                tree_root, walk_paths, _get_archive(temporary_root)
+                tree_root,
+                walk_paths,
+                _get_archive(temporary_root),
             ),
             temporary_root,
             walk_paths,
@@ -343,7 +352,9 @@ def test_directory() -> None:
 
         _common_test(
             _finalize_archive(
-                tree_root, walk_paths, _get_archive(temporary_root)
+                tree_root,
+                walk_paths,
+                _get_archive(temporary_root),
             ),
             temporary_root,
             walk_paths,
@@ -361,7 +372,9 @@ def test_tree() -> None:
 
         _common_test(
             _finalize_archive(
-                tree_root, walk_paths, _get_archive(temporary_root)
+                tree_root,
+                walk_paths,
+                _get_archive(temporary_root),
             ),
             temporary_root,
             walk_paths,
@@ -379,7 +392,9 @@ def test_compress() -> None:
 
         _compress_test(
             _finalize_archive(
-                tree_root, walk_paths, _get_archive_compress(temporary_root)
+                tree_root,
+                walk_paths,
+                _get_archive_compress(temporary_root),
             ),
             temporary_root,
             walk_paths,
@@ -416,7 +431,9 @@ def test_limit() -> None:
 
         _compare_archive(
             _finalize_archive(
-                tree_root, walk_paths, _get_archive_limit(temporary_root)
+                tree_root,
+                walk_paths,
+                _get_archive_limit(temporary_root),
             ),
             temporary_root,
             walk_paths,
@@ -434,7 +451,9 @@ def test_heavy() -> None:
 
         _compare_archive(
             _finalize_archive(
-                tree_root, walk_paths, _get_archive_heavy(temporary_root)
+                tree_root,
+                walk_paths,
+                _get_archive_heavy(temporary_root),
             ),
             temporary_root,
             walk_paths,
@@ -456,7 +475,9 @@ def test_multiple() -> None:
 
         _multiple_test(
             _finalize_archive(
-                tree_root, walk_paths, _get_archive(temporary_root)
+                tree_root,
+                walk_paths,
+                _get_archive(temporary_root),
             ),
             temporary_root,
             walk_paths,
