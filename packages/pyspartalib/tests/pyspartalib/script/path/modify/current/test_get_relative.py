@@ -84,7 +84,8 @@ def test_root() -> None:
     expected_base: Path = _get_current_file()
 
     assert Path(expected_base.name) == get_relative(
-        expected_base, root_path=expected_base.parent
+        expected_base,
+        root_path=expected_base.parent,
     )
 
 
@@ -102,7 +103,8 @@ def test_pair() -> None:
     keys: Strs = ["R", "G", "B"]
 
     expected: PathPair = _to_pair(
-        keys, [expected_base.parents[i] for i in range(3)]
+        keys,
+        [expected_base.parents[i] for i in range(3)],
     )
     result: PathPair = get_absolute_pair(get_relative_pair(expected))
 

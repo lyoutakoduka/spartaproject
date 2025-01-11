@@ -40,7 +40,8 @@ def test_root() -> None:
     expected: Path = _get_absolute_current()
 
     assert expected == get_absolute(
-        Path(expected.name), root_path=expected.parent
+        Path(expected.name),
+        root_path=expected.parent,
     )
 
 
@@ -50,7 +51,7 @@ def test_array() -> None:
     expected: Paths = [expected_base.parents[i] for i in range(3)]
 
     assert expected == get_absolute_array(
-        [get_relative(path) for path in expected]
+        [get_relative(path) for path in expected],
     )
 
 
@@ -62,7 +63,7 @@ def test_pair() -> None:
 
     expected: PathPair = _to_pair(keys, parents)
     result: PathPair = get_absolute_pair(
-        _to_pair(keys, [get_relative(path) for path in parents])
+        _to_pair(keys, [get_relative(path) for path in parents]),
     )
 
     assert bool_same_array([expected[key] == result[key] for key in keys])
