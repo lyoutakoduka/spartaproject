@@ -58,6 +58,10 @@ def _confirm_sorted_paths(
         _difference_error(result[key], expected[key])
 
 
+def _get_parents(path: Path) -> Paths:
+    return [path.parents[i] for i in range(3)]
+
+
 def test_check() -> None:
     """Test to check path which is type relative."""
     current: Path = _get_current_file()
@@ -105,8 +109,7 @@ def test_root() -> None:
 
 def test_array() -> None:
     """Test to convert list of absolute paths to relative."""
-    expected_base: Path = _get_current_file()
-    expected: Paths = [expected_base.parents[i] for i in range(3)]
+    expected: Paths = _get_parents(_get_current_file())
 
     _difference_error(
         get_absolute_array(get_relative_array(expected)),
@@ -116,13 +119,8 @@ def test_array() -> None:
 
 def test_pair() -> None:
     """Test to convert dictionary of absolute paths to relative."""
-    expected_base: Path = _get_current_file()
     keys: Strs = ["R", "G", "B"]
-
-    expected: PathPair = _to_pair(
-        keys,
-        [expected_base.parents[i] for i in range(3)],
-    )
+    expected: PathPair = _to_pair(keys, _get_parents(_get_current_file()))
 
     _confirm_sorted_paths(
         keys,
