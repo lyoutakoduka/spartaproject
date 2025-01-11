@@ -4,12 +4,18 @@
 
 from pathlib import Path
 
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.path.modify.mount.build_linux_path import (
     get_linux_path,
 )
 from pyspartalib.script.path.modify.mount.shared.get_linux_relative import (
     get_linux_relative,
 )
+
+
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
 
 
 def _get_drive_letter() -> str:
@@ -30,4 +36,7 @@ def _get_linux_path() -> Path:
 
 def test_mount() -> None:
     """Test to get relative path seen from a mount point of Linux."""
-    assert _get_expected_path() == get_linux_relative(_get_linux_path())
+    _difference_error(
+        get_linux_relative(_get_linux_path()),
+        _get_expected_path(),
+    )

@@ -6,6 +6,7 @@ from pathlib import Path
 
 from pyspartalib.context.default.bool_context import Bools
 from pyspartalib.context.extension.path_context import Paths
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.path.modify.mount.build_linux_path import (
     get_linux_path,
 )
@@ -15,6 +16,11 @@ from pyspartalib.script.path.modify.mount.build_windows_path import (
 from pyspartalib.script.path.modify.mount.shared.has_linux_head import (
     has_linux_head,
 )
+
+
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
 
 
 def _get_drive_letter() -> str:
@@ -44,4 +50,4 @@ def _get_paths() -> Paths:
 def test_mount() -> None:
     """Test to confirm that selected path include a mount point of Linux."""
     for expected, path in zip(_get_expected(), _get_paths()):
-        assert expected == has_linux_head(path)
+        _difference_error(has_linux_head(path), expected)
