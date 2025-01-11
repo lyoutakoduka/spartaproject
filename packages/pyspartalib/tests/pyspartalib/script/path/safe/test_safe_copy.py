@@ -96,10 +96,12 @@ def test_override() -> None:
     def individual_test(safe_copy: SafeCopy, temporary_path: Path) -> None:
         source_path: Path = create_temporary_file(temporary_path)
         destination_path: Path = _copy_override(safe_copy, source_path)
-        expected: Path = source_path.with_stem(source_path.stem + "_")
 
         _common_test(safe_copy.close_history())
-        _difference_error(destination_path, expected)
+        _difference_error(
+            destination_path,
+            source_path.with_stem(source_path.stem + "_"),
+        )
 
     _inside_temporary_directory(individual_test)
 
