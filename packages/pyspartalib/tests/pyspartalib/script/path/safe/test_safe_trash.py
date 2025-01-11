@@ -57,6 +57,11 @@ def _fail_error(status: bool) -> None:
         raise ValueError
 
 
+def _success_error(status: bool) -> None:
+    if status:
+        raise ValueError
+
+
 def _no_exists_error(path: Path) -> None:
     if not path.exists():
         raise FileNotFoundError
@@ -92,7 +97,7 @@ def _compare_size(history_size: int, history: PathPair2 | None) -> PathPair2:
 
 
 def _compare_not_relative(full_path: Path, root_path: Path) -> None:
-    assert not is_relative(full_path, root_path=root_path)
+    _success_error(is_relative(full_path, root_path=root_path))
 
 
 def _compare_root(trash_root: Path, safe_trash: SafeTrash) -> None:
