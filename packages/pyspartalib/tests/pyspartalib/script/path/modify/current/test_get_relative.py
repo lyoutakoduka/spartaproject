@@ -49,6 +49,15 @@ def _to_pair(path_types: Strs, paths: Paths) -> PathPair:
     return dict(zip(path_types, paths, strict=True))
 
 
+def _confirm_sorted_paths(
+    keys: Strs,
+    expected: PathPair,
+    result: PathPair,
+) -> None:
+    for key in keys:
+        _difference_error(result[key], expected[key])
+
+
 def test_check() -> None:
     """Test to check path which is type relative."""
     current: Path = _get_current_file()
@@ -114,7 +123,9 @@ def test_pair() -> None:
         keys,
         [expected_base.parents[i] for i in range(3)],
     )
-    result: PathPair = get_absolute_pair(get_relative_pair(expected))
 
-    for key in keys:
-        _difference_error(expected[key], result[key])
+    _confirm_sorted_paths(
+        keys,
+        get_absolute_pair(get_relative_pair(expected)),
+        expected,
+    )

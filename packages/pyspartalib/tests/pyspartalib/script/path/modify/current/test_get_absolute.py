@@ -28,6 +28,15 @@ def _to_pair(keys: Strs, paths: Paths) -> PathPair:
     return dict(zip(keys, paths, strict=True))
 
 
+def _confirm_sorted_paths(
+    keys: Strs,
+    expected: PathPair,
+    result: PathPair,
+) -> None:
+    for key in keys:
+        _difference_error(result[key], expected[key])
+
+
 def test_ignore() -> None:
     """Test to convert absolute path to absolute."""
     expected: Path = _get_absolute_current()
@@ -69,10 +78,10 @@ def test_pair() -> None:
     keys: Strs = ["R", "G", "B"]
     parents: Paths = [expected_base.parents[i] for i in range(3)]
 
-    expected: PathPair = _to_pair(keys, parents)
-    result: PathPair = get_absolute_pair(
-        _to_pair(keys, [get_relative(path) for path in parents]),
+    _confirm_sorted_paths(
+        keys,
+        get_absolute_pair(
+            _to_pair(keys, [get_relative(path) for path in parents]),
+        ),
+        _to_pair(keys, parents),
     )
-
-    for key in keys:
-        _difference_error(result[key], expected[key])
