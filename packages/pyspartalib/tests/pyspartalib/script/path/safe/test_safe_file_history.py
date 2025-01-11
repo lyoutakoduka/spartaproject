@@ -77,10 +77,13 @@ def _compare_added(expected: PathPair2, result: PathPair2 | None) -> None:
 
 
 def _compare_root(
-    temporary_root: Path, date_time_root: Path, file_history: FileHistory
+    temporary_root: Path,
+    date_time_root: Path,
+    file_history: FileHistory,
 ) -> None:
     _compare_path_pair(
-        file_history.get_history_root(), Path(temporary_root, date_time_root)
+        file_history.get_history_root(),
+        Path(temporary_root, date_time_root),
     )
 
 
@@ -95,7 +98,8 @@ def _compare_path_before(file_history: FileHistory) -> None:
 
 
 def _compare_path_after(
-    temporary_root: Path, file_history: FileHistory
+    temporary_root: Path,
+    file_history: FileHistory,
 ) -> None:
     if history_path := file_history.get_history_path():
         _relative_test(history_path, temporary_root)
@@ -121,7 +125,9 @@ def _get_expected(source_path: Path, destination_path: Path) -> PathPair:
 
 
 def _add_history(
-    file_history: FileHistory, expected: PathPair2, name: str
+    file_history: FileHistory,
+    expected: PathPair2,
+    name: str,
 ) -> None:
     source_path: Path = _get_current_file().parent.with_name("source.json")
     destination_path: Path = source_path.with_stem(name)
@@ -187,7 +193,8 @@ def test_get() -> None:
     file_history = FileHistory()
 
     _compare_added(
-        _add_history_single(file_history), file_history.get_history()
+        _add_history_single(file_history),
+        file_history.get_history(),
     )
 
     _compare_history(file_history)
@@ -198,7 +205,8 @@ def test_single() -> None:
     file_history = FileHistory()
 
     _compare_added(
-        _add_history_single(file_history), file_history.close_history()
+        _add_history_single(file_history),
+        file_history.close_history(),
     )
 
 
@@ -207,7 +215,8 @@ def test_array() -> None:
     file_history = FileHistory()
 
     _compare_added(
-        _add_history_array(file_history), file_history.close_history()
+        _add_history_array(file_history),
+        file_history.close_history(),
     )
 
 

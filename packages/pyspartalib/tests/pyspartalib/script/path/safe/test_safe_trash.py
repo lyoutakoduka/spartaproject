@@ -77,7 +77,8 @@ def _compare_not_relative(full_path: Path, root_path: Path) -> None:
 
 def _compare_root(trash_root: Path, safe_trash: SafeTrash) -> None:
     _compare_path(
-        safe_trash.get_trash_root(), Path(trash_root, get_initial_time_path())
+        safe_trash.get_trash_root(),
+        Path(trash_root, get_initial_time_path()),
     )
 
 
@@ -100,7 +101,9 @@ def _check_path_relative(path_pair: PathPair, root_pair: PathPair) -> None:
 
 
 def _common_test(
-    history_size: int, history: PathPair2 | None, root_pair: PathPair
+    history_size: int,
+    history: PathPair2 | None,
+    root_pair: PathPair,
 ) -> None:
     for path_pair in _compare_size(history_size, history).values():
         _check_path_exists(path_pair)
@@ -112,7 +115,9 @@ def _single_test(history: PathPair2 | None, root_pair: PathPair) -> None:
 
 
 def _multiple_test(
-    remove_paths: Paths, history: PathPair2 | None, root_pair: PathPair
+    remove_paths: Paths,
+    history: PathPair2 | None,
+    root_pair: PathPair,
 ) -> None:
     _common_test(len(remove_paths), history, root_pair)
 
@@ -132,7 +137,9 @@ def _finalize_single(path: Path, safe_trash: SafeTrash) -> PathPair2 | None:
 
 
 def _finalize_single_relative(
-    path: Path, relative_root: Path, safe_trash: SafeTrash
+    path: Path,
+    relative_root: Path,
+    safe_trash: SafeTrash,
 ) -> PathPair2 | None:
     safe_trash.trash(path, relative_root=relative_root)
     return _get_history(safe_trash)
@@ -144,7 +151,9 @@ def _finalize_array(paths: Paths, safe_trash: SafeTrash) -> PathPair2 | None:
 
 
 def _finalize_array_relative(
-    paths: Paths, relative_root: Path, safe_trash: SafeTrash
+    paths: Paths,
+    relative_root: Path,
+    safe_trash: SafeTrash,
 ) -> PathPair2 | None:
     safe_trash.trash_at_once(paths, relative_root=relative_root)
     return _get_history(safe_trash)
@@ -181,7 +190,8 @@ def test_different() -> None:
     def individual_test(temporary_root: Path) -> None:
         safe_trash: SafeTrash = _get_remove_trash(temporary_root)
         _compare_not_relative(
-            safe_trash.get_trash_root(), safe_trash.get_working_root()
+            safe_trash.get_trash_root(),
+            safe_trash.get_working_root(),
         )
 
     _inside_temporary_directory(individual_test)
@@ -221,7 +231,7 @@ def test_relative() -> None:
             _single_test(
                 _finalize_single_relative(
                     create_temporary_file(
-                        create_directory(_get_trash_root(temporary_root))
+                        create_directory(_get_trash_root(temporary_root)),
                     ),
                     temporary_root,
                     safe_trash,
@@ -239,7 +249,8 @@ def test_exists() -> None:
         if safe_trash := _get_remove():
             _single_test(
                 _finalize_array(
-                    [create_temporary_file(temporary_root)] * 2, safe_trash
+                    [create_temporary_file(temporary_root)] * 2,
+                    safe_trash,
                 ),
                 _convert_path_pair(temporary_root, safe_trash),
             )
@@ -258,7 +269,9 @@ def test_tree() -> None:
             _multiple_test(
                 remove_paths,
                 _finalize_array_relative(
-                    remove_paths, temporary_root, safe_trash
+                    remove_paths,
+                    temporary_root,
+                    safe_trash,
                 ),
                 _convert_path_pair(temporary_root, safe_trash),
             )
@@ -274,7 +287,7 @@ def test_select() -> None:
 
         remove_paths: Paths = _get_removal_array(temporary_root)
         safe_trash: SafeTrash = _get_remove_trash(
-            _get_trash_root(temporary_root)
+            _get_trash_root(temporary_root),
         )
 
         _multiple_test(

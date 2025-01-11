@@ -62,7 +62,9 @@ def test_override() -> None:
     def individual_test(safe_copy: SafeCopy, temporary_path: Path) -> None:
         source_path: Path = create_temporary_file(temporary_path)
         destination_path: Path = safe_copy.copy(
-            source_path, source_path, override=True
+            source_path,
+            source_path,
+            override=True,
         )
         expected: Path = source_path.with_stem(source_path.stem + "_")
 
@@ -78,8 +80,9 @@ def test_directory() -> None:
     def individual_test(safe_copy: SafeCopy, temporary_path: Path) -> None:
         _common_test(
             _copy(
-                safe_copy, create_directory(Path(temporary_path, "temporary"))
-            )
+                safe_copy,
+                create_directory(Path(temporary_path, "temporary")),
+            ),
         )
 
     _inside_temporary_directory(individual_test)
@@ -93,9 +96,10 @@ def test_tree() -> None:
             _copy(
                 safe_copy,
                 create_temporary_tree(
-                    Path(temporary_path, "temporary"), tree_deep=2
+                    Path(temporary_path, "temporary"),
+                    tree_deep=2,
                 ),
-            )
+            ),
         )
 
     _inside_temporary_directory(individual_test)

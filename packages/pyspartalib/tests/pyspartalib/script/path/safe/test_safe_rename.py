@@ -34,7 +34,7 @@ def _common_test(history: PathPair2 | None) -> None:
     for _, path_pair in _compare_empty(history).items():
         exists_pair: BoolPair = check_exists_pair(path_pair)
         assert bool_same_array(
-            [not exists_pair["source.path"], exists_pair["destination.path"]]
+            [not exists_pair["source.path"], exists_pair["destination.path"]],
         )
 
 
@@ -53,7 +53,7 @@ def test_file() -> None:
 
     def individual_test(safe_rename: SafeRename, temporary_path: Path) -> None:
         _common_test(
-            _rename(safe_rename, create_temporary_file(temporary_path))
+            _rename(safe_rename, create_temporary_file(temporary_path)),
         )
 
     _inside_temporary_directory(individual_test)
@@ -65,7 +65,9 @@ def test_override() -> None:
     def individual_test(safe_rename: SafeRename, temporary_path: Path) -> None:
         source_path: Path = create_temporary_file(temporary_path)
         destination_path: Path = safe_rename.rename(
-            source_path, source_path, override=True
+            source_path,
+            source_path,
+            override=True,
         )
         expected: Path = source_path.with_stem(source_path.stem + "_")
 
@@ -83,7 +85,7 @@ def test_directory() -> None:
             _rename(
                 safe_rename,
                 create_directory(Path(temporary_path, "temporary")),
-            )
+            ),
         )
 
     _inside_temporary_directory(individual_test)
@@ -97,9 +99,10 @@ def test_tree() -> None:
             _rename(
                 safe_rename,
                 create_temporary_tree(
-                    Path(temporary_path, "temporary"), tree_deep=2
+                    Path(temporary_path, "temporary"),
+                    tree_deep=2,
                 ),
-            )
+            ),
         )
 
     _inside_temporary_directory(individual_test)
