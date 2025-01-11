@@ -183,9 +183,11 @@ def test_work() -> None:
     """Test to compare user defined temporary working space."""
 
     def individual_test(temporary_root: Path) -> None:
-        file_history = FileHistory(working_root=temporary_root, override=True)
-
-        _compare_root(temporary_root, get_initial_time_path(), file_history)
+        _compare_root(
+            temporary_root,
+            get_initial_time_path(),
+            FileHistory(working_root=temporary_root, override=True),
+        )
 
     _inside_temporary_directory(individual_test)
 
