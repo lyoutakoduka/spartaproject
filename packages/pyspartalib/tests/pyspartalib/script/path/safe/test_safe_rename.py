@@ -85,6 +85,10 @@ def _create_tree_deep(path: Path) -> Path:
     return create_temporary_tree(Path(path, "temporary"), tree_deep=2)
 
 
+def _rename_override(safe_rename: SafeRename, path: Path) -> Path:
+    return safe_rename.rename(path, path, override=True)
+
+
 def test_file() -> None:
     """Test to rename file, and log history."""
 
@@ -101,11 +105,7 @@ def test_override() -> None:
 
     def individual_test(safe_rename: SafeRename, temporary_path: Path) -> None:
         source_path: Path = create_temporary_file(temporary_path)
-        destination_path: Path = safe_rename.rename(
-            source_path,
-            source_path,
-            override=True,
-        )
+        destination_path: Path = _rename_override(safe_rename, source_path)
 
         _common_test(safe_rename.close_history())
         _difference_error(
