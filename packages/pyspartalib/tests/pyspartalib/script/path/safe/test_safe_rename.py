@@ -81,6 +81,10 @@ def _create_tree(path: Path) -> Path:
     return create_directory(Path(path, "temporary"))
 
 
+def _create_tree_deep(path: Path) -> Path:
+    return create_temporary_tree(Path(path, "temporary"), tree_deep=2)
+
+
 def test_file() -> None:
     """Test to rename file, and log history."""
 
@@ -123,14 +127,6 @@ def test_tree() -> None:
     """Test to rename files and directories, and log history."""
 
     def individual_test(safe_rename: SafeRename, temporary_path: Path) -> None:
-        _common_test(
-            _rename(
-                safe_rename,
-                create_temporary_tree(
-                    Path(temporary_path, "temporary"),
-                    tree_deep=2,
-                ),
-            ),
-        )
+        _common_test(_rename(safe_rename, _create_tree_deep(temporary_path)))
 
     _inside_temporary_directory(individual_test)
