@@ -138,7 +138,7 @@ def _compare_path_pair(left: Paths, right: Paths) -> None:
 def _get_relative_paths(sorted_paths: Paths2, temporary_root: Path) -> Paths2:
     return [
         get_relative_array(paths, root_path=Path(temporary_root, directory))
-        for directory, paths in zip(_get_types(), sorted_paths)
+        for directory, paths in zip(_get_types(), sorted_paths, strict=True)
     ]
 
 

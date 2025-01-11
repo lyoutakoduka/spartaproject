@@ -94,7 +94,11 @@ def _get_output_paths(archive_paths: Paths, temporary_root: Path) -> Paths:
 def _compare_path_name(sorted_paths: Paths2, temporary_root: Path) -> None:
     relative_paths: Paths2 = [
         get_relative_array(paths, root_path=Path(temporary_root, directory))
-        for directory, paths in zip(["tree", "extract"], sorted_paths)
+        for directory, paths in zip(
+            ["tree", "extract"],
+            sorted_paths,
+            strict=True,
+        )
     ]
 
     assert relative_paths[0] == relative_paths[1]
