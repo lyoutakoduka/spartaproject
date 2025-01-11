@@ -3,6 +3,7 @@
 """Test module to decompress file or directory by archive format."""
 
 from base64 import b64decode
+from collections.abc import Sized
 from datetime import datetime
 from itertools import chain
 from pathlib import Path
@@ -38,6 +39,11 @@ from pyspartalib.script.time.path.set_timestamp import set_latest
 
 def _difference_error(result: Type, expected: Type) -> None:
     if result != expected:
+        raise ValueError
+
+
+def _length_error(result: Sized, expected: int) -> None:
+    if len(result) == expected:
         raise ValueError
 
 

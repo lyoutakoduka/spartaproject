@@ -2,6 +2,7 @@
 
 """Test module to compress file or directory by archive format."""
 
+from collections.abc import Sized
 from decimal import Decimal
 from pathlib import Path
 from shutil import unpack_archive
@@ -38,6 +39,11 @@ initialize_decimal()
 
 def _difference_error(result: Type, expected: Type) -> None:
     if result != expected:
+        raise ValueError
+
+
+def _length_error(result: Sized, expected: int) -> None:
+    if len(result) == expected:
         raise ValueError
 
 
@@ -127,7 +133,7 @@ def _compare_compress_size(outputs: Paths, archive_paths: Paths) -> None:
 
 
 def _compare_archived_count(archive_paths: Paths) -> None:
-    assert 1 == len(archive_paths)
+    _length_error(archive_paths, 1)
 
 
 def _get_sorted_paths(
