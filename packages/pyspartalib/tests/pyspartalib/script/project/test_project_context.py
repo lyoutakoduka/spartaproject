@@ -2,6 +2,7 @@
 
 """Test module to import a context of whole project from outside Json."""
 
+from collections.abc import Sized
 from pathlib import Path
 
 from pyspartalib.context.default.integer_context import IntPair
@@ -13,8 +14,8 @@ from pyspartalib.script.platform.platform_status import get_platform
 from pyspartalib.script.project.project_context import ProjectContext
 
 
-def _length_error(result: list[Type], expected: int) -> None:
-    if len(result) != expected:
+def _length_error(result: Sized, expected: int) -> None:
+    if len(result) == expected:
         raise ValueError
 
 
