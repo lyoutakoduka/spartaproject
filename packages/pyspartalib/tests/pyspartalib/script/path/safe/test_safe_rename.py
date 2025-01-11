@@ -77,6 +77,10 @@ def _rename(safe_rename: SafeRename, path: Path) -> PathPair2 | None:
     return safe_rename.close_history()
 
 
+def _create_tree(path: Path) -> Path:
+    return create_directory(Path(path, "temporary"))
+
+
 def test_file() -> None:
     """Test to rename file, and log history."""
 
@@ -110,12 +114,7 @@ def test_directory() -> None:
     """Test to rename directory, and log history."""
 
     def individual_test(safe_rename: SafeRename, temporary_path: Path) -> None:
-        _common_test(
-            _rename(
-                safe_rename,
-                create_directory(Path(temporary_path, "temporary")),
-            ),
-        )
+        _common_test(_rename(safe_rename, _create_tree(temporary_path)))
 
     _inside_temporary_directory(individual_test)
 
