@@ -49,5 +49,5 @@ def _get_paths() -> Paths:
 
 def test_mount() -> None:
     """Test to confirm that selected path include a mount point of Linux."""
-    for expected, path in zip(_get_expected(), _get_paths()):
+    for expected, path in zip(_get_expected(), _get_paths(), strict=True):
         _difference_error(has_linux_head(path), expected)
