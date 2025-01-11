@@ -104,7 +104,7 @@ def _get_third_files() -> Strs2:
 
 
 def _sorted_match(expected: Paths, source: Paths) -> None:
-    _length_error(list({str(sorted(name)) for name in [expected, source]}), 1)
+    _length_error({str(sorted(name)) for name in [expected, source]}, 1)
 
 
 def _common_test(
