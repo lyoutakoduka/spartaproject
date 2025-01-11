@@ -55,10 +55,6 @@ def _get_current_file() -> Path:
     return current_frame()["file"]
 
 
-def _check_exists(result: Path) -> None:
-    assert result.exists()
-
-
 def _compare_path_pair(result: Path, expected: Path) -> None:
     _no_exists_error(result)
     _difference_error(result, expected)

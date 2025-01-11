@@ -70,10 +70,6 @@ def _get_group() -> Strs:
     return [group + ".path" for group in ["source", "destination"]]
 
 
-def _check_exists(result: Path) -> None:
-    assert result.exists()
-
-
 def _get_path_pair(source: Path, destination: Path) -> PathPair:
     return dict(zip(_get_group(), [source, destination], strict=True))
 
