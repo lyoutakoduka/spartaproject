@@ -2,6 +2,7 @@
 
 """Test Module to get characters constructed by multiple or single byte."""
 
+from collections.abc import Sized
 from typing import get_type_hints
 
 from pyspartalib.context.default.string_context import Strs, Strs2
@@ -17,8 +18,8 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
-def _length_error(result: list[Type], expected: int) -> None:
-    if len(result) != expected:
+def _length_error(result: Sized, expected: int) -> None:
+    if len(result) == expected:
         raise ValueError
 
 
