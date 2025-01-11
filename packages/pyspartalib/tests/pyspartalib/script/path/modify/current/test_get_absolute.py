@@ -37,6 +37,10 @@ def _confirm_sorted_paths(
         _difference_error(result[key], expected[key])
 
 
+def _get_relative_paths(paths: Paths) -> Paths:
+    return [get_relative(path) for path in paths]
+
+
 def test_ignore() -> None:
     """Test to convert absolute path to absolute."""
     expected: Path = _get_absolute_current()
@@ -65,9 +69,7 @@ def test_array() -> None:
     expected: Paths = [expected_base.parents[i] for i in range(3)]
 
     _difference_error(
-        get_absolute_array(
-            [get_relative(path) for path in expected],
-        ),
+        get_absolute_array(_get_relative_paths(expected)),
         expected,
     )
 
@@ -80,8 +82,6 @@ def test_pair() -> None:
 
     _confirm_sorted_paths(
         keys,
-        get_absolute_pair(
-            _to_pair(keys, [get_relative(path) for path in parents]),
-        ),
+        get_absolute_pair(_to_pair(keys, _get_relative_paths(parents))),
         _to_pair(keys, parents),
     )
