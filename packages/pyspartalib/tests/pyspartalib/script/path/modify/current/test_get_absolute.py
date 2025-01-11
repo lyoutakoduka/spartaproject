@@ -25,7 +25,7 @@ def _get_absolute_current() -> Path:
 
 
 def _to_pair(keys: Strs, paths: Paths) -> PathPair:
-    return {key: path for key, path in zip(keys, paths, strict=True)}
+    return dict(zip(keys, paths, strict=True))
 
 
 def test_ignore() -> None:

@@ -46,10 +46,7 @@ def _get_paths(current: Path) -> Paths:
 
 
 def _to_pair(path_types: Strs, paths: Paths) -> PathPair:
-    return {
-        path_type: path
-        for path_type, path in zip(path_types, paths, strict=True)
-    }
+    return dict(zip(path_types, paths, strict=True))
 
 
 def test_check() -> None:
