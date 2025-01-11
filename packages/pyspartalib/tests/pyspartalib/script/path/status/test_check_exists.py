@@ -38,13 +38,18 @@ def _get_expected_pair() -> BoolPair:
     return {"R": True, "G": False, "B": True}
 
 
+def _get_source_array() -> Paths:
+    current_file: Path = _get_current_file()
+    return [current_file, _get_unknown_file(current_file)]
+
+
 def test_array() -> None:
     """Test to check existing of list of file or directory."""
-    current_file: Path = _get_current_file()
-    paths: Paths = [current_file, _get_unknown_file(current_file)]
-
     _fail_error(
-        bool_compare_array(_get_expected_array(), check_exists_array(paths)),
+        bool_compare_array(
+            _get_expected_array(),
+            check_exists_array(_get_source_array()),
+        ),
     )
 
 
