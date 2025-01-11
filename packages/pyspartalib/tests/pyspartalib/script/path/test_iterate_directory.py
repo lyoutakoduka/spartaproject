@@ -2,6 +2,7 @@
 
 """Test module to get list of contents in the directory you select."""
 
+from collections.abc import Sized
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
@@ -21,8 +22,8 @@ from pyspartalib.script.path.temporary.create_temporary_tree import (
 )
 
 
-def _length_error(result: list[Type], expected: int) -> None:
-    if len(result) != expected:
+def _length_error(result: Sized, expected: int) -> None:
+    if len(result) == expected:
         raise ValueError
 
 
