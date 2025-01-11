@@ -2,6 +2,7 @@
 
 """Test module to copy file or directory and log history."""
 
+from collections.abc import Sized
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
@@ -28,10 +29,15 @@ def _none_error(result: Type | None) -> Type:
     return result
 
 
+def _length_error(result: Sized, expected: int) -> None:
+    if len(result) == expected:
+        raise ValueError
+
+
 def _compare_empty(history: PathPair2 | None) -> PathPair2:
     filtered: PathPair2 = _none_error(history)
 
-    assert len(filtered) == 1
+    _length_error(filtered, 1)
 
     return filtered
 

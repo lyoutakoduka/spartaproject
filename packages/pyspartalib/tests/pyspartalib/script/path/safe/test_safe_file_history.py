@@ -2,6 +2,7 @@
 
 """Test module to record paths which is source and destination pair."""
 
+from collections.abc import Sized
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
@@ -20,6 +21,11 @@ from pyspartalib.script.time.directory.get_time_path import (
     get_initial_time_path,
 )
 from tests.pyspartalib.interface.pytest import fail
+
+
+def _length_error(result: Sized, expected: int) -> None:
+    if len(result) == expected:
+        raise ValueError
 
 
 def _get_history_root(temporary_root: Path) -> Path:
@@ -45,7 +51,7 @@ def _compare_path_pair(result: Path, expected: Path) -> None:
 
 
 def _compare_path_count(expected: PathPair2, result: PathPair2) -> None:
-    assert len({len(history) for history in [expected, result]}) == 1
+    _length_error({len(history) for history in [expected, result]}, 1)
 
 
 def _take_out_path(history: PathPair2) -> Paths2:

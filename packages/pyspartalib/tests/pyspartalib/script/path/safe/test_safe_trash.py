@@ -2,6 +2,7 @@
 
 """Test module to remove file or directory and log history."""
 
+from collections.abc import Sized
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
@@ -42,6 +43,11 @@ def _none_error(result: Type | None) -> Type:
     return result
 
 
+def _length_error(result: Sized, expected: int) -> None:
+    if len(result) == expected:
+        raise ValueError
+
+
 def _get_trash_root(temporary_root: Path) -> Path:
     return Path(temporary_root, "trash")
 
@@ -71,7 +77,7 @@ def _compare_path(result: Path, expected: Path) -> None:
 def _compare_size(history_size: int, history: PathPair2 | None) -> PathPair2:
     filtered: PathPair2 = _none_error(history)
 
-    assert len(filtered) == history_size
+    _length_error(filtered, history_size)
 
     return filtered
 
