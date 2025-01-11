@@ -43,6 +43,15 @@ def _get_source_array() -> Paths:
     return [current_file, _get_unknown_file(current_file)]
 
 
+def _get_source_pair() -> PathPair:
+    current_file: Path = _get_current_file()
+    return {
+        "R": current_file,
+        "G": _get_unknown_file(current_file),
+        "B": current_file.parent,
+    }
+
+
 def test_array() -> None:
     """Test to check existing of list of file or directory."""
     _fail_error(
@@ -55,13 +64,9 @@ def test_array() -> None:
 
 def test_pair() -> None:
     """Test to check existing of directory of file or directory."""
-    current_file: Path = _get_current_file()
-    paths: PathPair = {
-        "R": current_file,
-        "G": _get_unknown_file(current_file),
-        "B": current_file.parent,
-    }
-
     _fail_error(
-        bool_compare_pair(_get_expected_pair(), check_exists_pair(paths)),
+        bool_compare_pair(
+            _get_expected_pair(),
+            check_exists_pair(_get_source_pair()),
+        ),
     )
