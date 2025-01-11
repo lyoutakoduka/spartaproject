@@ -66,7 +66,7 @@ def _compare_size(history_size: int, history: PathPair2 | None) -> PathPair2:
     if history is None:
         fail()
 
-    assert history_size == len(history)
+    assert len(history) == history_size
 
     return history
 
@@ -97,7 +97,7 @@ def _get_relative_pair(path_pair: PathPair, root_pair: PathPair) -> Paths:
 
 
 def _check_path_relative(path_pair: PathPair, root_pair: PathPair) -> None:
-    assert 1 == len(set(_get_relative_pair(path_pair, root_pair)))
+    assert len(set(_get_relative_pair(path_pair, root_pair))) == 1
 
 
 def _common_test(

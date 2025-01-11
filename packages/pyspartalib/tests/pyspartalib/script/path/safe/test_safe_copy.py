@@ -24,7 +24,7 @@ def _compare_empty(history: PathPair2 | None) -> PathPair2:
     if history is None:
         fail()
 
-    assert 1 == len(history)
+    assert len(history) == 1
 
     return history
 
