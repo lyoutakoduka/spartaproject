@@ -179,6 +179,14 @@ def _inside_temporary_directory(function: PathFunc) -> None:
         function(Path(temporary_path))
 
 
+def _get_file_history(working_root: Path, history_root: Path) -> FileHistory:
+    return FileHistory(
+        working_root=working_root,
+        history_root=history_root,
+        override=True,
+    )
+
+
 def test_work() -> None:
     """Test to compare user defined temporary working space."""
 
@@ -200,13 +208,12 @@ def test_history() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         history_root: Path = _get_history_root(temporary_root)
-        file_history = FileHistory(
-            working_root=temporary_root,
-            history_root=history_root,
-            override=True,
-        )
 
-        _compare_root(history_root, get_initial_time_path(), file_history)
+        _compare_root(
+            history_root,
+            get_initial_time_path(),
+            _get_file_history(temporary_root, history_root),
+        )
 
     _inside_temporary_directory(individual_test)
 
