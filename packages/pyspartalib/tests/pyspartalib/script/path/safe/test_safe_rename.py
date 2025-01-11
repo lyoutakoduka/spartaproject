@@ -106,10 +106,12 @@ def test_override() -> None:
             source_path,
             override=True,
         )
-        expected: Path = source_path.with_stem(source_path.stem + "_")
 
         _common_test(safe_rename.close_history())
-        _difference_error(destination_path, expected)
+        _difference_error(
+            destination_path,
+            source_path.with_stem(source_path.stem + "_"),
+        )
 
     _inside_temporary_directory(individual_test)
 
