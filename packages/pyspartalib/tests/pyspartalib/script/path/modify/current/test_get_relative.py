@@ -67,6 +67,10 @@ def _get_parents(path: Path) -> Paths:
     return [path.parents[i] for i in range(3)]
 
 
+def _re_implement(paths: Paths, root_path: Path | None) -> Bools:
+    return [is_relative(path, root_path=root_path) for path in paths]
+
+
 def test_check() -> None:
     """Test to check path which is type relative."""
     current: Path = _get_current_file()
@@ -74,10 +78,7 @@ def test_check() -> None:
     _fail_error(
         bool_compare_array(
             _get_expected(),
-            [
-                is_relative(path, root_path=current.parent)
-                for path in _get_paths(current)
-            ],
+            _re_implement(_get_paths(current), current.parent),
         ),
     )
 
