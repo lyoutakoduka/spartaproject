@@ -80,8 +80,8 @@ def test_array() -> None:
 
 def test_pair() -> None:
     """Test to convert dictionary of relative paths to absolute."""
-    expected_base: Path = _get_absolute_current()
     keys: Strs = ["R", "G", "B"]
+    expected_base: Path = _get_absolute_current()
     parents: Paths = _get_parents(expected_base)
 
     _confirm_sorted_paths(
