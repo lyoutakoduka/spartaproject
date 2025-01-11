@@ -1,8 +1,6 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 """Test module to convert relative path to absolute."""
-
 
 from pathlib import Path
 
