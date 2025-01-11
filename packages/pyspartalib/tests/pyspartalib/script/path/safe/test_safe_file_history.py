@@ -118,7 +118,9 @@ def _compare_history(file_history: FileHistory) -> None:
 
 
 def _get_expected(source_path: Path, destination_path: Path) -> PathPair:
-    return dict(zip(_get_group(), [source_path, destination_path]))
+    return dict(
+        zip(_get_group(), [source_path, destination_path], strict=True),
+    )
 
 
 def _add_history(

@@ -47,7 +47,7 @@ def _check_exists(result: Path) -> None:
 
 
 def _get_path_pair(source: Path, destination: Path) -> PathPair:
-    return dict(zip(_get_group(), [source, destination]))
+    return dict(zip(_get_group(), [source, destination], strict=True))
 
 
 def _convert_path_pair(source: Path, safe_trash: SafeTrash) -> PathPair:
