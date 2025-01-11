@@ -122,7 +122,7 @@ def _get_relative_pair(path_pair: PathPair, root_pair: PathPair) -> Paths:
 
 
 def _check_path_relative(path_pair: PathPair, root_pair: PathPair) -> None:
-    assert len(set(_get_relative_pair(path_pair, root_pair))) == 1
+    _length_error(set(_get_relative_pair(path_pair, root_pair)), 1)
 
 
 def _common_test(
