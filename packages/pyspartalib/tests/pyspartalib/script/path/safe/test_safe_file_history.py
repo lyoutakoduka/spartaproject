@@ -28,6 +28,13 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
+def _none_error(result: Type | None) -> Type:
+    if result is None:
+        raise ValueError
+
+    return result
+
+
 def _length_error(result: Sized, expected: int) -> None:
     if len(result) == expected:
         raise ValueError
@@ -84,10 +91,7 @@ def _common_test(expected: PathPair2, result: PathPair2) -> None:
 
 
 def _compare_added(expected: PathPair2, result: PathPair2 | None) -> None:
-    if result is None:
-        fail()
-    else:
-        _common_test(expected, result)
+    _common_test(expected, _none_error(result))
 
 
 def _compare_root(
@@ -114,10 +118,10 @@ def _compare_path_after(
     temporary_root: Path,
     file_history: FileHistory,
 ) -> None:
-    if history_path := file_history.get_history_path():
-        _relative_test(history_path, temporary_root)
-    else:
-        fail()
+    _relative_test(
+        _none_error(file_history.get_history_path()),
+        temporary_root,
+    )
 
 
 def _compare_path(temporary_root: Path, file_history: FileHistory) -> None:
