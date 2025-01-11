@@ -16,10 +16,6 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
-def _common_test(source_path: Path, destination_path: Path) -> None:
-    assert source_path == destination_path
-
-
 def _inside_temporary_directory(function: PathFunc) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path, "temporary.json"))
