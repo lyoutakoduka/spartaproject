@@ -35,6 +35,11 @@ from pyspartalib.script.time.directory.get_time_path import (
 )
 
 
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
+
+
 def _none_error(result: Type | None) -> Type:
     if result is None:
         raise ValueError
@@ -69,8 +74,7 @@ def _convert_path_pair(source: Path, safe_trash: SafeTrash) -> PathPair:
 
 def _compare_path(result: Path, expected: Path) -> None:
     _check_exists(result)
-
-    assert result == expected
+    _difference_error(result, expected)
 
 
 def _compare_size(history_size: int, history: PathPair2 | None) -> PathPair2:

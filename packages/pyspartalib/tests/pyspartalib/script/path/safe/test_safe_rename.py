@@ -22,6 +22,11 @@ from pyspartalib.script.path.temporary.create_temporary_tree import (
 )
 
 
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
+
+
 def _none_error(result: Type | None) -> Type:
     if result is None:
         raise ValueError
@@ -84,7 +89,7 @@ def test_override() -> None:
         expected: Path = source_path.with_stem(source_path.stem + "_")
 
         _common_test(safe_rename.close_history())
-        assert expected == destination_path
+        _difference_error(destination_path, expected)
 
     _inside_temporary_directory(individual_test)
 

@@ -14,12 +14,18 @@ from pyspartalib.context.extension.path_context import (
     Paths2,
     Paths3,
 )
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.path.modify.current.get_relative import is_relative
 from pyspartalib.script.path.safe.safe_file_history import FileHistory
 from pyspartalib.script.stack_frame import current_frame
 from pyspartalib.script.time.directory.get_time_path import (
     get_initial_time_path,
 )
+
+
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
 
 
 def _length_error(result: Sized, expected: int) -> None:
@@ -45,8 +51,7 @@ def _check_exists(result: Path) -> None:
 
 def _compare_path_pair(result: Path, expected: Path) -> None:
     _check_exists(result)
-
-    assert result == expected
+    _difference_error(result, expected)
 
 
 def _compare_path_count(expected: PathPair2, result: PathPair2) -> None:
@@ -64,9 +69,7 @@ def _take_out_path_pair(expected: PathPair2, result: PathPair2) -> Paths3:
 
 
 def _compare_path_name(expected: PathPair2, result: PathPair2) -> None:
-    history_path_pair: Paths3 = _take_out_path_pair(expected, result)
-
-    assert history_path_pair[0] == history_path_pair[1]
+    _difference_error(*_take_out_path_pair(expected, result))
 
 
 def _common_test(expected: PathPair2, result: PathPair2) -> None:
