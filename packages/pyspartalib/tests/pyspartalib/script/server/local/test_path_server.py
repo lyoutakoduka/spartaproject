@@ -2,6 +2,7 @@
 
 """Test module to handle paths about file and directory on server."""
 
+from collections.abc import Sized
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
@@ -18,7 +19,7 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
-def _length_error(result: list[Type], expected: int) -> None:
+def _length_error(result: Sized, expected: int) -> None:
     if len(result) == expected:
         raise ValueError
 
