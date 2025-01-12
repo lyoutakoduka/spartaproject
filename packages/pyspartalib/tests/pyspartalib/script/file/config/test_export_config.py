@@ -236,6 +236,10 @@ def _get_source_compress() -> SectionPair:
     return {"bool": {"true": True}, "integer": {"one": 1}}
 
 
+def _get_source_lower() -> Config:
+    return {"SECTION": {"TRUE": True, "FALSE": False}}
+
+
 def test_bool() -> None:
     """Test to convert data used for configuration file to text.
 
@@ -338,10 +342,7 @@ def test_lower() -> None:
 
     Test for upper case of keys is enable.
     """
-    source_pairs: Config = {"SECTION": {"TRUE": True, "FALSE": False}}
-    expected: str = _get_config_lower()
-
-    _common_test(expected, source_pairs)
+    _common_test(_get_config_lower(), _get_source_lower())
 
 
 def test_noise() -> None:
