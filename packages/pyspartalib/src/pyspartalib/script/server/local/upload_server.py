@@ -44,16 +44,12 @@ class UploadServer(ConnectServer):
         return Path(root)
 
     def _get_server_tree(self, path: Path, remote: Path) -> Paths:
-        tree: Paths = []
-
-        for parent in path.parents:
-            if not is_relative(parent, root_path=remote):
-                continue
-
-            if str(get_relative(parent, root_path=remote)) != ".":
-                tree += [parent]
-
-        return tree
+        return [
+            parent
+            for parent in path.parents
+            if is_relative(parent, root_path=remote)
+            and str(get_relative(parent, root_path=remote)) != "."
+        ]
 
     def _get_upload_tree(self, path: Path) -> Paths | None:
         if remote := self._get_remote_root():
