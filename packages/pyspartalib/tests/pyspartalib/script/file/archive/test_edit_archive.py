@@ -50,6 +50,13 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
+def _none_error(result: Type | None) -> Type:
+    if result is None:
+        raise ValueError
+
+    return result
+
+
 def _fail_error(status: bool) -> None:
     if not status:
         raise ValueError
@@ -247,10 +254,7 @@ def _get_edit_history(edit_archive: EditArchive) -> PathPair:
 
 
 def _close_archive(edit_archive: EditArchive) -> Paths:
-    if archive_paths := edit_archive.close_archive():
-        return archive_paths
-    else:
-        fail()
+    return _none_error(edit_archive.close_archive())
 
 
 def _compare_path(result: Path, expected: Path) -> None:
@@ -456,12 +460,12 @@ def test_disable() -> None:
 
 def test_none() -> None:
     """Test to open archive with out archive path."""
-    _none_test(_get_edit().open_archive())
+    _none_error(_get_edit().open_archive())
 
 
 def test_close() -> None:
     """Test to close archive with out archive path."""
-    _none_test(_get_edit().close_archive())
+    _none_error(_get_edit().close_archive())
 
 
 def test_work() -> None:

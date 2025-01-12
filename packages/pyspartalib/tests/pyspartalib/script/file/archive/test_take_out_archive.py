@@ -37,6 +37,13 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
+def _none_error(result: Type | None) -> Type:
+    if result is None:
+        raise ValueError
+
+    return result
+
+
 def _length_error(result: Sized, expected: int) -> None:
     if len(result) == expected:
         raise ValueError
@@ -408,7 +415,7 @@ def _close_archive(
     took_out_paths: Paths | None,
     take_out_archive: TakeOutArchive,
 ) -> Paths:
-    archive_paths: Paths = _filter_paths(took_out_paths)
+    archive_paths: Paths = _none_error(took_out_paths)
     take_out_archive.close_archive()
     return archive_paths
 
