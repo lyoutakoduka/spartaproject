@@ -2,6 +2,7 @@
 
 """Test module to convert data from json format."""
 
+from collections.abc import Sized
 from decimal import Decimal
 from pathlib import Path
 from typing import Dict, List
@@ -48,13 +49,18 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
-def _common_test(expected: Single, result: Single, size: int) -> None:
-    assert 1 == size
+def _length_error(result: Sized, expected: int) -> None:
+    if len(result) == expected:
+        raise ValueError
+
+
+def _common_test(expected: Single, result: Single, size: Sized) -> None:
+    _length_error(size, 1)
     _difference_error(result, expected)
 
 
 def _common_test_array(expected: Single, result: Array) -> None:
-    _common_test(expected, result[0], len(result))
+    _common_test(expected, result[0], result)
 
 
 def _common_test_array2(expected: Single, result: Array2) -> None:
@@ -62,7 +68,7 @@ def _common_test_array2(expected: Single, result: Array2) -> None:
 
 
 def _common_test_pair(expected: Single, result: Pair) -> None:
-    _common_test(expected, result["B"], len(result))
+    _common_test(expected, result["B"], result)
 
 
 def _common_test_pair2(expected: Single, result: Pair2) -> None:
@@ -129,11 +135,11 @@ def test_string_pair() -> None:
     _common_test_pair2(source, string_pair2_from_json(source_pairs))
 
     result: StrPair = string_pair_from_json(source_pair)
-    _common_test(source, result["B"], len(result))
+    _common_test(source, result["B"], result)
 
     result_parent: StrPair2 = string_pair2_from_json(source_pairs)
     result_child: StrPair = result_parent["A"]
-    _common_test(source, result_child["B"], len(result_child))
+    _common_test(source, result_child["B"], result_child)
 
 
 def test_decimal_array() -> None:
@@ -173,11 +179,11 @@ def test_path_pair() -> None:
     source_pairs: Json = {"A": source_pair}
 
     result: PathPair = path_pair_from_json(source_pair)
-    _common_test(source, result["B.path"], len(result))
+    _common_test(source, result["B.path"], result)
 
     result_parent: PathPair2 = path_pair2_from_json(source_pairs)
     result_child: PathPair = result_parent["A"]
-    _common_test(source, result_child["B.path"], len(result_child))
+    _common_test(source, result_child["B.path"], result_child)
 
 
 def test_tree() -> None:
