@@ -411,7 +411,7 @@ def _get_expected_paths(path_names: Strs) -> Paths:
 
 
 def _get_expected_archive() -> Paths:
-    return _get_expected_paths(["archive"] + _get_multiple_element())
+    return _get_expected_paths(["archive", *_get_multiple_element()])
 
 
 def _archive_test(temporary_root: Path) -> None:
