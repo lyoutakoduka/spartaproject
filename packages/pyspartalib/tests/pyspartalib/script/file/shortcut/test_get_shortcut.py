@@ -4,7 +4,13 @@
 
 from pathlib import Path
 
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.file.shortcut.get_shortcut import get_shortcut
+
+
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
 
 
 def _get_target_root() -> Path:
@@ -28,7 +34,7 @@ def _get_result(target_name: str) -> Path:
 
 
 def _compare_shortcut(target_name: str) -> None:
-    assert _get_expected(target_name) == _get_result(target_name)
+    _difference_error(_get_result(target_name), _get_expected(target_name))
 
 
 def test_file() -> None:

@@ -5,6 +5,7 @@
 from pathlib import Path
 
 from pyspartalib.context.extension.path_context import PathPair
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.directory.date_time_space import create_working_space
 from pyspartalib.script.file.shortcut.create_shortcut import create_shortcut
 from pyspartalib.script.file.shortcut.get_shortcut import get_shortcut
@@ -15,6 +16,11 @@ from pyspartalib.script.path.temporary.create_temporary_file import (
 )
 from pyspartalib.script.project.project_context import ProjectContext
 from tests.pyspartalib.interface.pytest import fail, raises
+
+
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
 
 
 def _get_config_file() -> Path:
@@ -56,7 +62,7 @@ def _read_shortcut(shortcut_path: Path) -> Path:
 
 
 def _compare_target(expected: Path, shortcut_path: Path) -> None:
-    assert expected == _read_shortcut(shortcut_path)
+    _difference_error(_read_shortcut(shortcut_path), expected)
 
 
 def _common_test(shortcut_target: Path, shortcut_path: Path) -> None:
