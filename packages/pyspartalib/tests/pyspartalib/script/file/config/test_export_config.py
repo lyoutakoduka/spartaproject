@@ -222,20 +222,13 @@ def _get_source_mix() -> SinglePair2:
 
 
 def _get_source_group() -> SectionPair:
-    flags: BoolPair = {"bool": True}
-    indies: IntPair = {"integer": 1}
-    numbers: FloatPair = {"float": 1.0}
-    decimals: DecPair = {"decimal": Decimal("0.1")}
-    texts: StrPair = {"string": "test"}
-    paths: PathPair = {"path": Path("root")}
-
     return {
-        "bool": flags,
-        "integer": indies,
-        "float": numbers,
-        "decimal": decimals,
-        "string": texts,
-        "path": paths,
+        "bool": _get_source_bool(),
+        "integer": _get_source_integer(),
+        "float": _get_source_float(),
+        "decimal": _get_source_decimal(),
+        "string": _get_source_string(),
+        "path": _get_source_path(),
     }
 
 
