@@ -39,6 +39,13 @@ def _get_section(formatted: str) -> Single:
     return config["section"]["option"]
 
 
+def _get_config_bool() -> str:
+    return """
+        [section]
+        option=True
+    """
+
+
 def _inside_temporary_directory(function: PathFunc) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
@@ -46,10 +53,7 @@ def _inside_temporary_directory(function: PathFunc) -> None:
 
 def test_bool() -> None:
     """Test to load configuration data as type boolean."""
-    source: str = """
-        [section]
-        option=True
-    """
+    source: str = _get_config_bool()
     result: Single = _get_section(format_indent(source))
 
     _fail_error(bool(_instance_error(result, bool)))
