@@ -64,15 +64,17 @@ def _get_script_texts(script_name: str) -> Strs:
 
 
 def _get_system_paths(expected: Paths, first_root: Path) -> Paths:
-    system_paths: Paths = []
-
-    for result in _execute_python_path(_get_script_texts("system"), expected):
-        path: Path = Path(result)
-
-        if is_relative(path, root_path=get_absolute(first_root)):
-            system_paths += [get_relative(path)]
-
-    return system_paths
+    return [
+        get_relative(path)
+        for path in [
+            Path(result)
+            for result in _execute_python_path(
+                _get_script_texts("system"),
+                expected,
+            )
+        ]
+        if is_relative(path, root_path=get_absolute(first_root))
+    ]
 
 
 def _compare_system_paths(expected: Paths, results: Paths) -> None:
