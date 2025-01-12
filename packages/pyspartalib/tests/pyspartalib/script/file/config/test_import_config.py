@@ -81,6 +81,10 @@ def _inside_temporary_directory(function: PathFunc) -> None:
         function(Path(temporary_path))
 
 
+def _get_path_value(config: Config) -> Single:
+    return config["section"]["path"]
+
+
 def _get_section(formatted: str) -> Single:
     config: Config = config_load(formatted)
     return config["section"]["option"]
@@ -123,8 +127,10 @@ def test_string() -> None:
 
 def test_path() -> None:
     """Test to load configuration data as type path."""
-    config: Config = config_load(format_indent(_get_config_path()))
-    _difference_error(config["section"]["path"], Path("text"))
+    _difference_error(
+        _get_path_value(config_load(format_indent(_get_config_path()))),
+        Path("text"),
+    )
 
 
 def test_import() -> None:
