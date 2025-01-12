@@ -337,7 +337,7 @@ def _none_test(path: Path | Paths | None) -> None:
 def _name_test(before_path: Path, edit_archive: EditArchive) -> None:
     _get_edit_history(edit_archive)
 
-    assert before_path == _close_archive(edit_archive)[0]
+    _difference_error(_close_archive(edit_archive)[0], before_path)
     _difference_error(_get_name(), before_path.stem)
 
 

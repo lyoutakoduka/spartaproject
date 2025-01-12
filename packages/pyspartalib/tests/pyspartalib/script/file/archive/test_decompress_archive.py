@@ -415,7 +415,10 @@ def _get_expected_archive() -> Paths:
 
 
 def _archive_test(temporary_root: Path) -> None:
-    _equal_path(_get_result_archive(temporary_root), _get_expected_archive())
+    _difference_error(
+        _get_result_archive(temporary_root),
+        _get_expected_archive(),
+    )
 
 
 def _export_byte_archive(temporary_root: Path) -> Path:
