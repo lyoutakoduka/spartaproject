@@ -89,8 +89,8 @@ def _get_path_value(config: Config) -> Single:
     return config["section"]["path"]
 
 
-def _get_section(formatted: str) -> Single:
-    return _get_general_value(config_load(formatted))
+def _get_section(config: str) -> Single:
+    return _get_general_value(config_load(format_indent(config)))
 
 
 def test_bool() -> None:
@@ -99,33 +99,24 @@ def test_bool() -> None:
 
     _fail_error(
         type_variable(
-            _instance_error(
-                _get_section(format_indent(_get_config_bool())),
-                type_variable,
-            ),
+            _instance_error(_get_section(_get_config_bool()), type_variable),
         ),
     )
 
 
 def test_integer() -> None:
     """Test to load configuration data as type integer."""
-    _difference_error(_get_section(format_indent(_get_config_integer())), 1)
+    _difference_error(_get_section(_get_config_integer()), 1)
 
 
 def test_decimal() -> None:
     """Test to load configuration data as type decimal."""
-    _difference_error(
-        _get_section(format_indent(_get_config_decimal())),
-        Decimal("1.0"),
-    )
+    _difference_error(_get_section(_get_config_decimal()), Decimal("1.0"))
 
 
 def test_string() -> None:
     """Test to load configuration data as type string."""
-    _difference_error(
-        _get_section(format_indent(_get_config_string())),
-        "text",
-    )
+    _difference_error(_get_section(_get_config_string()), "text")
 
 
 def test_path() -> None:
