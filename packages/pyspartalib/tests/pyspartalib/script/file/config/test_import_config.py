@@ -67,6 +67,13 @@ def _get_config_string() -> str:
     """
 
 
+def _get_config_path() -> str:
+    return """
+        [section]
+        path=text
+    """
+
+
 def _inside_temporary_directory(function: PathFunc) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
@@ -106,10 +113,7 @@ def test_string() -> None:
 
 def test_path() -> None:
     """Test to load configuration data as type path."""
-    source: str = """
-        [section]
-        path=text
-    """
+    source: str = _get_config_path()
     expected: Path = Path("text")
 
     config: Config = config_load(format_indent(source))
