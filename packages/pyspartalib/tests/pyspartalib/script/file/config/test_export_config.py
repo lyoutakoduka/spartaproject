@@ -208,12 +208,12 @@ def _get_source_path_nest() -> PathPair2:
 
 def _get_source_mix_section() -> SinglePair:
     return {
-        "bool": True,
-        "integer": 1,
-        "float": 1.0,
-        "decimal": Decimal("0.1"),
-        "string": "test",
-        "path": Path("root"),
+        "bool": _get_source_bool()["bool"],
+        "integer": _get_source_integer()["integer"],
+        "float": _get_source_float()["float"],
+        "decimal": _get_source_decimal()["decimal"],
+        "string": _get_source_string()["string"],
+        "path": _get_source_path()["path"],
     }
 
 
