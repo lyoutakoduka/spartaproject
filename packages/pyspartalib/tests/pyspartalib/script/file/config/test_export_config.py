@@ -42,6 +42,13 @@ def _get_config_bool() -> str:
     """
 
 
+def _get_config_integer() -> str:
+    return """
+        [A]
+        b = 1
+    """
+
+
 def _common_test(expected: str, source: Config) -> None:
     _difference_error(
         config_dump(source),
@@ -74,10 +81,8 @@ def test_integer() -> None:
     """
     source_pair: IntPair = {"b": 1}
     source_pairs: IntPair2 = {"A": source_pair}
-    expected: str = """
-        [A]
-        b = 1
-    """
+    expected: str = _get_config_integer()
+
     _common_test(expected, {"A": source_pair})
     _common_test(expected, source_pairs)
 
