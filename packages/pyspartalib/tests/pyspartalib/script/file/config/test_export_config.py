@@ -161,17 +161,19 @@ def _get_source_bool() -> BoolPair:
     return {"b": True}
 
 
+def _get_source_bool_nest() -> BoolPair2:
+    return {"A": _get_source_bool()}
+
+
 def test_bool() -> None:
     """Test to convert data used for configuration file to text.
 
     Data is 2 dimensional dictionary created with type "bool".
     """
-    source_pair: BoolPair = _get_source_bool()
-    source_pairs: BoolPair2 = {"A": source_pair}
     expected: str = _get_config_bool()
 
-    _common_test(expected, {"A": source_pair})
-    _common_test(expected, source_pairs)
+    _common_test(expected, {"A": _get_source_bool()})
+    _common_test(expected, _get_source_bool_nest())
 
 
 def test_integer() -> None:
