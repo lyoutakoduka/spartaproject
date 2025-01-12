@@ -77,7 +77,7 @@ def _get_config_path() -> str:
     """
 
 
-def _get_config_option() -> str:
+def _get_config_mix() -> str:
     return """
         [section]
         bool = True
@@ -179,7 +179,7 @@ def test_path() -> None:
     _common_test(expected, source_pairs)
 
 
-def test_mix_option() -> None:
+def test_mix() -> None:
     """Test to convert data used for configuration file to text.
 
     Data is 2 dimensional dictionary created with multiple mixed type.
@@ -194,7 +194,7 @@ def test_mix_option() -> None:
             "path": Path("root"),
         },
     }
-    expected: str = _get_config_option()
+    expected: str = _get_config_mix()
 
     _common_test(expected, source_pairs)
 
