@@ -135,6 +135,16 @@ def _get_config_invalid() -> str:
     """
 
 
+def _get_config_export() -> str:
+    return """
+        [true]
+        true = True
+
+        [false]
+        false = False
+    """
+
+
 def _common_test(expected: str, source: Config) -> None:
     _difference_error(
         config_dump(source),
@@ -311,13 +321,7 @@ def test_noise() -> None:
 def test_export() -> None:
     """Test to export data used for configuration file."""
     source_pairs: Config = {"true": {"true": True}, "false": {"false": False}}
-    expected: str = """
-        [true]
-        true = True
-
-        [false]
-        false = False
-    """
+    expected: str = _get_config_export()
 
     def individual_test(temporary_root: Path) -> None:
         _difference_error(
