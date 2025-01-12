@@ -84,8 +84,8 @@ def _get_config_mix() -> str:
         bool = True
         integer = 1
         float = 1.0
-        str = test
         decimal = 0.1
+        str = test
         path = root
     """
 
@@ -101,11 +101,11 @@ def _get_config_mix_group() -> str:
         [numbers]
         float = 1.0
 
-        [texts]
-        str = test
-
         [decimals]
         decimal = 0.1
+
+        [texts]
+        str = test
 
         [paths]
         path = root
@@ -211,8 +211,8 @@ def _get_source_mix_section() -> SinglePair:
         "bool": True,
         "integer": 1,
         "float": 1.0,
-        "str": "test",
         "decimal": Decimal("0.1"),
+        "str": "test",
         "path": Path("root"),
     }
 
@@ -225,16 +225,16 @@ def _get_source_group() -> SectionPair:
     flags: BoolPair = {"bool": True}
     indies: IntPair = {"integer": 1}
     numbers: FloatPair = {"float": 1.0}
-    texts: StrPair = {"str": "test"}
     decimals: DecPair = {"decimal": Decimal("0.1")}
+    texts: StrPair = {"str": "test"}
     paths: PathPair = {"path": Path("root")}
 
     return {
         "flags": flags,
         "indies": indies,
         "numbers": numbers,
-        "texts": texts,
         "decimals": decimals,
+        "texts": texts,
         "paths": paths,
     }
 
