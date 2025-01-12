@@ -373,13 +373,6 @@ def _compare_remove(trash_root: Path, archive_status: ArchiveStatus) -> None:
     )
 
 
-def _filter_paths(paths: Paths | None) -> Paths:
-    if paths is None:
-        fail()
-
-    return paths
-
-
 def _open_archive(
     archive_status: ArchiveStatus,
     take_out_archive: TakeOutArchive,
