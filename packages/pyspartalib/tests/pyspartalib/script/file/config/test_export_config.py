@@ -63,6 +63,13 @@ def _get_config_decimal() -> str:
     """
 
 
+def _get_config_string() -> str:
+    return """
+        [A]
+        b = test
+    """
+
+
 def _common_test(expected: str, source: Config) -> None:
     _difference_error(
         config_dump(source),
@@ -121,10 +128,8 @@ def test_string() -> None:
     """
     source_pair: StrPair = {"b": "test"}
     source_pairs: StrPair2 = {"A": source_pair}
-    expected: str = """
-        [A]
-        b = test
-    """
+    expected: str = _get_config_string()
+
     _common_test(expected, {"A": source_pair})
     _common_test(expected, source_pairs)
 
