@@ -17,6 +17,7 @@ from pyspartalib.context.file.config_context import (
     Config,
     SectionPair2,
 )
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.file.config.export_config import (
     config_dump,
     config_export,
@@ -25,8 +26,16 @@ from pyspartalib.script.file.text.import_file import text_import
 from pyspartalib.script.string.format_texts import format_indent
 
 
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
+
+
 def _common_test(expected: str, source: Config) -> None:
-    assert format_indent(expected, stdout=True) == config_dump(source)
+    _difference_error(
+        config_dump(source),
+        format_indent(expected, stdout=True),
+    )
 
 
 def test_bool() -> None:
@@ -208,8 +217,10 @@ def test_compress() -> None:
         [int]
         one=1
     """
-
-    assert format_indent(expected) == config_dump(source_pairs, compress=True)
+    _difference_error(
+        config_dump(source_pairs, compress=True),
+        format_indent(expected),
+    )
 
 
 def test_lower() -> None:
@@ -251,6 +262,12 @@ def test_export() -> None:
     """
 
     with TemporaryDirectory() as temporary_path:
-        assert format_indent(expected, stdout=True) == text_import(
-            config_export(Path(temporary_path, "temporary.ini"), source_pairs),
+        _difference_error(
+            text_import(
+                config_export(
+                    Path(temporary_path, "temporary.ini"),
+                    source_pairs,
+                ),
+            ),
+            format_indent(expected, stdout=True),
         )

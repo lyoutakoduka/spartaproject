@@ -7,12 +7,18 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from pyspartalib.context.file.config_context import Basic, Config
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.file.config.import_config import (
     config_import,
     config_load,
 )
 from pyspartalib.script.file.text.export_file import text_export
 from pyspartalib.script.string.format_texts import format_indent
+
+
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
 
 
 def _get_section(formatted: str) -> Basic:
@@ -38,7 +44,7 @@ def test_integer() -> None:
     """
     expected: int = 1
 
-    assert expected == _get_section(format_indent(source))
+    _difference_error(_get_section(format_indent(source)), expected)
 
 
 def test_decimal() -> None:
@@ -49,7 +55,7 @@ def test_decimal() -> None:
     """
     expected: Decimal = Decimal("1.0")
 
-    assert expected == _get_section(format_indent(source))
+    _difference_error(_get_section(format_indent(source)), expected)
 
 
 def test_string() -> None:
@@ -60,7 +66,7 @@ def test_string() -> None:
     """
     expected: str = "text"
 
-    assert expected == _get_section(format_indent(source))
+    _difference_error(_get_section(format_indent(source)), expected)
 
 
 def test_path() -> None:
@@ -72,7 +78,7 @@ def test_path() -> None:
     expected: Path = Path("text")
 
     config: Config = config_load(format_indent(source))
-    assert expected == config["section"]["path"]
+    _difference_error(config["section"]["path"], expected)
 
 
 def test_import() -> None:
@@ -90,4 +96,4 @@ def test_import() -> None:
                 format_indent(source),
             ),
         )
-        assert expected == config["section"]["option"]
+        _difference_error(config["section"]["option"], expected)
