@@ -102,26 +102,6 @@ def _get_expected_stamp() -> datetime:
     return get_iso_time(_get_source())
 
 
-def _equal_stamp(left: Times, right: Times) -> None:
-    assert left == right
-
-
-def _equal_datetime(left: datetime, right: datetime) -> None:
-    assert left == right
-
-
-def _equal_count(left: int, right: int) -> None:
-    assert left == right
-
-
-def _equal_path(left: Paths, right: Paths) -> None:
-    assert left == right
-
-
-def _equal_size(left: Ints, right: Ints) -> None:
-    assert left == right
-
-
 def _get_times_pair(sorted_paths: Paths2) -> Times2:
     return [
         [get_latest(path) for path in paths if path.is_file()]
