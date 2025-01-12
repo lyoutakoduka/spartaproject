@@ -38,42 +38,42 @@ def _difference_error(result: Type, expected: Type) -> None:
 
 def _get_config_bool() -> str:
     return """
-        [A]
+        [bool]
         bool = True
     """
 
 
 def _get_config_integer() -> str:
     return """
-        [A]
+        [integer]
         integer = 1
     """
 
 
 def _get_config_float() -> str:
     return """
-        [A]
+        [float]
         float = 1.0
     """
 
 
 def _get_config_decimal() -> str:
     return """
-        [A]
+        [decimal]
         decimal = 0.1
     """
 
 
 def _get_config_string() -> str:
     return """
-        [A]
+        [string]
         string = test
     """
 
 
 def _get_config_path() -> str:
     return """
-        [A]
+        [path]
         path = root
     """
 
@@ -85,29 +85,29 @@ def _get_config_mix() -> str:
         integer = 1
         float = 1.0
         decimal = 0.1
-        str = test
+        string = test
         path = root
     """
 
 
 def _get_config_mix_group() -> str:
     return """
-        [flags]
+        [bool]
         bool = True
 
-        [indies]
+        [integer]
         integer = 1
 
-        [numbers]
+        [float]
         float = 1.0
 
-        [decimals]
+        [decimal]
         decimal = 0.1
 
-        [texts]
-        str = test
+        [string]
+        string = test
 
-        [paths]
+        [path]
         path = root
     """
 
@@ -163,7 +163,7 @@ def _get_source_bool() -> BoolPair:
 
 
 def _get_source_bool_nest() -> BoolPair2:
-    return {"A": _get_source_bool()}
+    return {"bool": _get_source_bool()}
 
 
 def _get_source_integer() -> IntPair:
@@ -171,7 +171,7 @@ def _get_source_integer() -> IntPair:
 
 
 def _get_source_integer_nest() -> IntPair2:
-    return {"A": _get_source_integer()}
+    return {"integer": _get_source_integer()}
 
 
 def _get_source_float() -> FloatPair:
@@ -179,7 +179,7 @@ def _get_source_float() -> FloatPair:
 
 
 def _get_source_float_nest() -> FloatPair2:
-    return {"A": _get_source_float()}
+    return {"float": _get_source_float()}
 
 
 def _get_source_decimal() -> DecPair:
@@ -187,7 +187,7 @@ def _get_source_decimal() -> DecPair:
 
 
 def _get_source_decimal_nest() -> DecPair2:
-    return {"A": _get_source_decimal()}
+    return {"decimal": _get_source_decimal()}
 
 
 def _get_source_string() -> StrPair:
@@ -195,7 +195,7 @@ def _get_source_string() -> StrPair:
 
 
 def _get_source_string_nest() -> StrPair2:
-    return {"A": _get_source_string()}
+    return {"string": _get_source_string()}
 
 
 def _get_source_path() -> PathPair:
@@ -203,7 +203,7 @@ def _get_source_path() -> PathPair:
 
 
 def _get_source_path_nest() -> PathPair2:
-    return {"A": _get_source_path()}
+    return {"path": _get_source_path()}
 
 
 def _get_source_mix_section() -> SinglePair:
@@ -212,7 +212,7 @@ def _get_source_mix_section() -> SinglePair:
         "integer": 1,
         "float": 1.0,
         "decimal": Decimal("0.1"),
-        "str": "test",
+        "string": "test",
         "path": Path("root"),
     }
 
@@ -226,16 +226,16 @@ def _get_source_group() -> SectionPair:
     indies: IntPair = {"integer": 1}
     numbers: FloatPair = {"float": 1.0}
     decimals: DecPair = {"decimal": Decimal("0.1")}
-    texts: StrPair = {"str": "test"}
+    texts: StrPair = {"string": "test"}
     paths: PathPair = {"path": Path("root")}
 
     return {
-        "flags": flags,
-        "indies": indies,
-        "numbers": numbers,
-        "decimals": decimals,
-        "texts": texts,
-        "paths": paths,
+        "bool": flags,
+        "integer": indies,
+        "float": numbers,
+        "decimal": decimals,
+        "string": texts,
+        "path": paths,
     }
 
 
@@ -246,7 +246,7 @@ def test_bool() -> None:
     """
     expected: str = _get_config_bool()
 
-    _common_test(expected, {"A": _get_source_bool()})
+    _common_test(expected, {"bool": _get_source_bool()})
     _common_test(expected, _get_source_bool_nest())
 
 
@@ -257,7 +257,7 @@ def test_integer() -> None:
     """
     expected: str = _get_config_integer()
 
-    _common_test(expected, {"A": _get_source_integer()})
+    _common_test(expected, {"integer": _get_source_integer()})
     _common_test(expected, _get_source_integer_nest())
 
 
@@ -268,7 +268,7 @@ def test_float() -> None:
     """
     expected: str = _get_config_float()
 
-    _common_test(expected, {"A": _get_source_float()})
+    _common_test(expected, {"float": _get_source_float()})
     _common_test(expected, _get_source_float_nest())
 
 
@@ -279,7 +279,7 @@ def test_decimal() -> None:
     """
     expected: str = _get_config_decimal()
 
-    _common_test(expected, {"A": _get_source_decimal()})
+    _common_test(expected, {"decimal": _get_source_decimal()})
     _common_test(expected, _get_source_decimal_nest())
 
 
@@ -290,7 +290,7 @@ def test_string() -> None:
     """
     expected: str = _get_config_string()
 
-    _common_test(expected, {"A": _get_source_string()})
+    _common_test(expected, {"string": _get_source_string()})
     _common_test(expected, _get_source_string_nest())
 
 
@@ -301,7 +301,7 @@ def test_path() -> None:
     """
     expected: str = _get_config_path()
 
-    _common_test(expected, {"A": _get_source_path()})
+    _common_test(expected, {"path": _get_source_path()})
     _common_test(expected, _get_source_path_nest())
 
 
@@ -330,7 +330,7 @@ def test_compress() -> None:
 
     Test for compress option is enable.
     """
-    source_pairs: SectionPair = {"bool": {"true": True}, "int": {"one": 1}}
+    source_pairs: SectionPair = {"bool": {"true": True}, "integer": {"one": 1}}
     expected: str = _get_config_compress()
 
     _difference_error(
