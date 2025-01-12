@@ -49,6 +49,13 @@ def _get_config_integer() -> str:
     """
 
 
+def _get_config_float() -> str:
+    return """
+        [A]
+        b = 1.0
+    """
+
+
 def _get_config_decimal() -> str:
     return """
         [A]
@@ -101,10 +108,8 @@ def test_float() -> None:
     """
     source_pair: FloatPair = {"b": 1.0}
     source_pairs: FloatPair2 = {"A": source_pair}
-    expected: str = """
-        [A]
-        b = 1.0
-    """
+    expected: str = _get_config_float()
+
     _common_test(expected, {"A": source_pair})
     _common_test(expected, source_pairs)
 
