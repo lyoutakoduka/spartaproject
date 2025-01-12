@@ -22,6 +22,11 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
+def _fail_error(status: bool) -> None:
+    if not status:
+        raise ValueError
+
+
 def _instance_error(result: object, type_variable: type) -> object:
     if isinstance(result, type_variable):
         return result
@@ -47,7 +52,7 @@ def test_bool() -> None:
     """
     result: Single = _get_section(format_indent(source))
 
-    assert bool(_instance_error(result, bool))
+    _fail_error(bool(_instance_error(result, bool)))
 
 
 def test_integer() -> None:
