@@ -30,6 +30,11 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
+def _fail_error(status: bool) -> None:
+    if not status:
+        raise ValueError
+
+
 def _get_config_file() -> Path:
     return get_resource(local_path=Path("forward.json"))
 
@@ -77,7 +82,7 @@ def _filter_created(is_success: bool) -> None:
 
 
 def _success_created(shortcut_target: Path, shortcut_path: Path) -> None:
-    _filter_created(_create_shortcut(shortcut_target, shortcut_path))
+    _fail_error(_create_shortcut(shortcut_target, shortcut_path))
 
 
 def _success_created_remove(
@@ -85,7 +90,7 @@ def _success_created_remove(
     shortcut_path: Path,
     remove_root: Path,
 ) -> None:
-    _filter_created(
+    _fail_error(
         _create_shortcut_remove(shortcut_target, shortcut_path, remove_root),
     )
 
