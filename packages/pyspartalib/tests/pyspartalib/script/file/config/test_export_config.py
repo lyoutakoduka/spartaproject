@@ -245,6 +245,10 @@ def _get_source_invalid() -> Config:
     return {"section".join(invalid): {"key".join(invalid): True}}
 
 
+def _get_source_export() -> Config:
+    return {"true": {"true": True}, "false": {"false": False}}
+
+
 def test_bool() -> None:
     """Test to convert data used for configuration file to text.
 
@@ -357,18 +361,16 @@ def test_invalid() -> None:
 
 def test_export() -> None:
     """Test to export data used for configuration file."""
-    source_pairs: Config = {"true": {"true": True}, "false": {"false": False}}
-    expected: str = _get_config_export()
 
     def individual_test(temporary_root: Path) -> None:
         _difference_error(
             text_import(
                 config_export(
                     Path(temporary_root, "temporary.ini"),
-                    source_pairs,
+                    _get_source_export(),
                 ),
             ),
-            format_indent(expected, stdout=True),
+            format_indent(_get_config_export(), stdout=True),
         )
 
     _inside_temporary_directory(individual_test)
