@@ -240,6 +240,11 @@ def _get_source_lower() -> Config:
     return {"SECTION": {"TRUE": True, "FALSE": False}}
 
 
+def _get_source_invalid() -> Config:
+    noise: Strs = [" 　\n\t"] * 2
+    return {"section".join(noise): {"key".join(noise): True}}
+
+
 def test_bool() -> None:
     """Test to convert data used for configuration file to text.
 
@@ -347,11 +352,7 @@ def test_lower() -> None:
 
 def test_noise() -> None:
     """Test to convert data used for configuration file with noisy keys."""
-    noise: Strs = [" 　\n\t"] * 2
-    source_pairs: Config = {"section".join(noise): {"key".join(noise): True}}
-    expected: str = _get_config_invalid()
-
-    _common_test(expected, source_pairs)
+    _common_test(_get_config_invalid(), _get_source_invalid())
 
 
 def test_export() -> None:
