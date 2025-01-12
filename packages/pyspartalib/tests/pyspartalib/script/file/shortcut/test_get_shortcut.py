@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 """Test module to get path of a shortcut file on Windows environment."""
 
