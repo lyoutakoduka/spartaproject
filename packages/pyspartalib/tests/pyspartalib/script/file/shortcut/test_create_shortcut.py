@@ -87,11 +87,6 @@ def _create_shortcut_remove(
     )
 
 
-def _filter_created(is_success: bool) -> None:
-    if not is_success:
-        fail()
-
-
 def _success_created(shortcut_target: Path, shortcut_path: Path) -> None:
     _fail_error(_create_shortcut(shortcut_target, shortcut_path))
 
