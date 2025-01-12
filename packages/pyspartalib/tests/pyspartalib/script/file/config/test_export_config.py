@@ -111,6 +111,15 @@ def _get_config_mix_section() -> str:
     """
 
 
+def _get_config_compress() -> str:
+    return """
+        [bool]
+        true=True
+        [int]
+        one=1
+    """
+
+
 def _common_test(expected: str, source: Config) -> None:
     _difference_error(
         config_dump(source),
@@ -256,12 +265,8 @@ def test_compress() -> None:
     Test for compress option is enable.
     """
     source_pairs: SectionPair = {"bool": {"true": True}, "int": {"one": 1}}
-    expected: str = """
-        [bool]
-        true=True
-        [int]
-        one=1
-    """
+    expected: str = _get_config_compress()
+
     _difference_error(
         config_dump(source_pairs, compress=True),
         format_indent(expected),
