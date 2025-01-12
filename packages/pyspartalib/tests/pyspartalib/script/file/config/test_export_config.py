@@ -292,7 +292,7 @@ def test_lower() -> None:
     _common_test(expected, source_pairs)
 
 
-def test_key() -> None:
+def test_noise() -> None:
     """Test to convert data used for configuration file with noisy keys."""
     noise: Strs = [" 　\n\t"] * 2
     source_pairs: Config = {"section".join(noise): {"key".join(noise): True}}
