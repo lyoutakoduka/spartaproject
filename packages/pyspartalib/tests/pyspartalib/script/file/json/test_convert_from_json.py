@@ -54,6 +54,11 @@ def _length_error(result: Sized, expected: int) -> None:
         raise ValueError
 
 
+def _fail_error(status: bool) -> None:
+    if not status:
+        raise ValueError
+
+
 def _common_test(expected: Single, result: Single, size: Sized) -> None:
     _length_error(size, 1)
     _difference_error(result, expected)
@@ -199,9 +204,11 @@ def test_tree() -> None:
     result_inside: Json = result_outside["B"]
     assert isinstance(result_inside, List)
 
-    assert bool_same_array(
-        [
-            input_right == result_outside["C"],
-            [None, input_left] == result_inside,
-        ],
+    _fail_error(
+        bool_same_array(
+            [
+                input_right == result_outside["C"],
+                [None, input_left] == result_inside,
+            ],
+        ),
     )
