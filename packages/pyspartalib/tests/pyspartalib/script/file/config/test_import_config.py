@@ -81,13 +81,16 @@ def _inside_temporary_directory(function: PathFunc) -> None:
         function(Path(temporary_path))
 
 
+def _get_general_value(config: Config) -> Single:
+    return config["section"]["option"]
+
+
 def _get_path_value(config: Config) -> Single:
     return config["section"]["path"]
 
 
 def _get_section(formatted: str) -> Single:
-    config: Config = config_load(formatted)
-    return config["section"]["option"]
+    return _get_general_value(config_load(formatted))
 
 
 def test_bool() -> None:
@@ -143,6 +146,6 @@ def test_import() -> None:
                 format_indent(_get_config_import()),
             ),
         )
-        _difference_error(config["section"]["option"], "text")
+        _difference_error(_get_general_value(config), "text")
 
     _inside_temporary_directory(individual_test)
