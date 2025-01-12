@@ -128,12 +128,15 @@ def _compare_file_size(sorted_paths: Paths2) -> None:
     _difference_error(*[get_file_size_array(paths) for paths in sorted_paths])
 
 
-def _compare_compress_size(outputs: Paths, archive_paths: Paths) -> None:
-    file_sizes: Decs = [
+def _get_total_file_size(outputs: Paths, archive_paths: Paths) -> Decs:
+    return [
         Decimal(str(sum(get_file_size_array(paths))))
         for paths in [outputs, archive_paths]
     ]
 
+
+def _compare_compress_size(outputs: Paths, archive_paths: Paths) -> None:
+    file_sizes: Decs = _get_total_file_size(outputs, archive_paths)
     _fail_error(Decimal("0.05") > (file_sizes[1] / file_sizes[0]))
 
 
