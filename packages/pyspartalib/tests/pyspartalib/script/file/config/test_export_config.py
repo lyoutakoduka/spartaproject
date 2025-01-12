@@ -197,6 +197,10 @@ def _get_source_string_nest() -> StrPair2:
     return {"A": _get_source_string()}
 
 
+def _get_source_path() -> PathPair:
+    return {"path": Path("root")}
+
+
 def test_bool() -> None:
     """Test to convert data used for configuration file to text.
 
@@ -257,7 +261,7 @@ def test_path() -> None:
 
     Data is 2 dimensional dictionary created with type "Path".
     """
-    source_pair: PathPair = {"path": Path("root")}
+    source_pair: PathPair = _get_source_path()
     source_pairs: PathPair2 = {"A": source_pair}
     expected: str = _get_config_path()
 
