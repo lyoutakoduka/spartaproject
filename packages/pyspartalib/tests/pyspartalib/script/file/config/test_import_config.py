@@ -86,7 +86,8 @@ def test_import() -> None:
     with TemporaryDirectory() as temporary_path:
         config: Config = config_import(
             text_export(
-                Path(temporary_path, "temporary.ini"), format_indent(source)
-            )
+                Path(temporary_path, "temporary.ini"),
+                format_indent(source),
+            ),
         )
         assert expected == config["section"]["option"]

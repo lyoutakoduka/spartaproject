@@ -132,7 +132,7 @@ def test_mix_option() -> None:
             "str": "test",
             "decimal": Decimal("0.1"),
             "path": Path("root"),
-        }
+        },
     }
 
     expected: str = """
@@ -252,5 +252,5 @@ def test_export() -> None:
 
     with TemporaryDirectory() as temporary_path:
         assert format_indent(expected, stdout=True) == text_import(
-            config_export(Path(temporary_path, "temporary.ini"), source_pairs)
+            config_export(Path(temporary_path, "temporary.ini"), source_pairs),
         )
