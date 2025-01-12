@@ -40,13 +40,11 @@ def _set_invalid_datetime(file_path: Path) -> Path:
 
 
 def _get_file_epochs(path: Path) -> Decs:
-    file_epochs: Decs = []
-
-    for status in [False, True]:
-        if epoch := get_file_epoch(path, access=status):
-            file_epochs += [epoch]
-
-    return file_epochs
+    return [
+        epoch
+        for status in [False, True]
+        if (epoch := get_file_epoch(path, access=status))
+    ]
 
 
 def _common_test(path: Path) -> None:
