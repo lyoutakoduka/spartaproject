@@ -39,35 +39,35 @@ def _difference_error(result: Type, expected: Type) -> None:
 def _get_config_bool() -> str:
     return """
         [A]
-        b = True
+        bool = True
     """
 
 
 def _get_config_integer() -> str:
     return """
         [A]
-        b = 1
+        integer = 1
     """
 
 
 def _get_config_float() -> str:
     return """
         [A]
-        b = 1.0
+        float = 1.0
     """
 
 
 def _get_config_decimal() -> str:
     return """
         [A]
-        b = 0.1
+        decimal = 0.1
     """
 
 
 def _get_config_string() -> str:
     return """
         [A]
-        b = test
+        string = test
     """
 
 
@@ -82,7 +82,7 @@ def _get_config_mix() -> str:
     return """
         [section]
         bool = True
-        int = 1
+        integer = 1
         float = 1.0
         str = test
         decimal = 0.1
@@ -96,7 +96,7 @@ def _get_config_mix_group() -> str:
         bool = True
 
         [indies]
-        int = 1
+        integer = 1
 
         [numbers]
         float = 1.0
@@ -159,7 +159,7 @@ def _inside_temporary_directory(function: PathFunc) -> None:
 
 
 def _get_source_bool() -> BoolPair:
-    return {"b": True}
+    return {"bool": True}
 
 
 def _get_source_bool_nest() -> BoolPair2:
@@ -167,7 +167,7 @@ def _get_source_bool_nest() -> BoolPair2:
 
 
 def _get_source_integer() -> IntPair:
-    return {"b": 1}
+    return {"integer": 1}
 
 
 def _get_source_integer_nest() -> IntPair2:
@@ -175,7 +175,7 @@ def _get_source_integer_nest() -> IntPair2:
 
 
 def _get_source_float() -> FloatPair:
-    return {"b": 1.0}
+    return {"float": 1.0}
 
 
 def _get_source_float_nest() -> FloatPair2:
@@ -183,7 +183,7 @@ def _get_source_float_nest() -> FloatPair2:
 
 
 def _get_source_decimal() -> DecPair:
-    return {"b": Decimal("0.1")}
+    return {"decimal": Decimal("0.1")}
 
 
 def _get_source_decimal_nest() -> DecPair2:
@@ -191,7 +191,7 @@ def _get_source_decimal_nest() -> DecPair2:
 
 
 def _get_source_string() -> StrPair:
-    return {"b": "test"}
+    return {"string": "test"}
 
 
 def _get_source_string_nest() -> StrPair2:
@@ -209,7 +209,7 @@ def _get_source_path_nest() -> PathPair2:
 def _get_source_mix_section() -> SinglePair:
     return {
         "bool": True,
-        "int": 1,
+        "integer": 1,
         "float": 1.0,
         "str": "test",
         "decimal": Decimal("0.1"),
@@ -223,7 +223,7 @@ def _get_source_mix() -> SinglePair2:
 
 def _get_source_group() -> SectionPair:
     flags: BoolPair = {"bool": True}
-    indies: IntPair = {"int": 1}
+    indies: IntPair = {"integer": 1}
     numbers: FloatPair = {"float": 1.0}
     texts: StrPair = {"str": "test"}
     decimals: DecPair = {"decimal": Decimal("0.1")}
