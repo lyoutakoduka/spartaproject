@@ -31,14 +31,19 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
+def _length_error(result: Sized, expected: int) -> None:
+    if len(result) == expected:
+        raise ValueError
+
+
 def _fail_error(status: bool) -> None:
     if not status:
         raise ValueError
 
 
-def _length_error(result: Sized, expected: int) -> None:
-    if len(result) == expected:
-        raise ValueError
+def _no_exists_error(path: Path) -> None:
+    if not path.exists():
+        raise FileNotFoundError
 
 
 def _get_config_file() -> Path:
@@ -102,7 +107,8 @@ def _success_created_remove(
 
 
 def _confirm_exists(shortcut_target: Path, shortcut_path: Path) -> None:
-    assert check_exists_array([shortcut_target, shortcut_path])
+    for path in [shortcut_target, shortcut_path]:
+        _no_exists_error(path)
 
 
 def _compare_name(shortcut_target: Path, shortcut_path: Path) -> None:
