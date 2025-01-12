@@ -241,8 +241,8 @@ def _get_source_lower() -> Config:
 
 
 def _get_source_invalid() -> Config:
-    noise: Strs = [" 　\n\t"] * 2
-    return {"section".join(noise): {"key".join(noise): True}}
+    invalid: Strs = [" 　\n\t"] * 2
+    return {"section".join(invalid): {"key".join(invalid): True}}
 
 
 def test_bool() -> None:
@@ -350,7 +350,7 @@ def test_lower() -> None:
     _common_test(_get_config_lower(), _get_source_lower())
 
 
-def test_noise() -> None:
+def test_invalid() -> None:
     """Test to convert data used for configuration file with noisy keys."""
     _common_test(_get_config_invalid(), _get_source_invalid())
 
