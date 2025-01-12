@@ -267,15 +267,14 @@ def _add_archive_override(file_root: Path) -> Paths:
 
 
 def _get_take_out_override(working: PathPair) -> Paths:
-    take_paths: Paths = []
-
-    for i, file_root in enumerate(_add_directories_test(working)):
-        take_paths += _replace_paths_override(
+    return [
+        path
+        for i, file_root in enumerate(_add_directories_test(working))
+        for path in _replace_paths_override(
             i,
             _add_archive_override(file_root),
         )
-
-    return take_paths
+    ]
 
 
 def _get_keep_override() -> Paths:
