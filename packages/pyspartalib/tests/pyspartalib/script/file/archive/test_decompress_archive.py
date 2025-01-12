@@ -9,7 +9,7 @@ from itertools import chain
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from pyspartalib.context.default.integer_context import IntPair2, Ints, Ints2
+from pyspartalib.context.default.integer_context import IntPair2, Ints2
 from pyspartalib.context.default.string_context import StrPair, Strs
 from pyspartalib.context.extension.path_context import PathFunc, Paths, Paths2
 from pyspartalib.context.extension.time_context import Times, Times2

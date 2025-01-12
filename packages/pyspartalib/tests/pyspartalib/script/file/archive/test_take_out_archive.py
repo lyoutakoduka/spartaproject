@@ -29,7 +29,7 @@ from pyspartalib.script.path.modify.current.get_relative import (
 from pyspartalib.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
-from tests.pyspartalib.interface.pytest import fail, raises
+from tests.pyspartalib.interface.pytest import raises
 
 
 def _difference_error(result: Type, expected: Type) -> None:

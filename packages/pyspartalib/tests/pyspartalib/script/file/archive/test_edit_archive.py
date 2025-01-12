@@ -42,7 +42,7 @@ from pyspartalib.script.time.path.get_timestamp import (
     get_invalid_time,
 )
 from pyspartalib.script.time.stamp.is_same_stamp import is_same_stamp
-from tests.pyspartalib.interface.pytest import fail, raises
+from tests.pyspartalib.interface.pytest import raises
 
 
 def _difference_error(result: Type, expected: Type) -> None:

@@ -8,7 +8,6 @@ from pathlib import Path
 from shutil import unpack_archive
 from tempfile import TemporaryDirectory
 
-from pyspartalib.context.default.integer_context import Ints2
 from pyspartalib.context.default.string_context import StrPair
 from pyspartalib.context.extension.decimal_context import Decs
 from pyspartalib.context.extension.path_context import PathFunc, Paths, Paths2
