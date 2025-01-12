@@ -46,6 +46,13 @@ def _get_config_bool() -> str:
     """
 
 
+def _get_config_integer() -> str:
+    return """
+        [section]
+        option=1
+    """
+
+
 def _inside_temporary_directory(function: PathFunc) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
@@ -61,10 +68,7 @@ def test_bool() -> None:
 
 def test_integer() -> None:
     """Test to load configuration data as type integer."""
-    source: str = """
-        [section]
-        option=1
-    """
+    source: str = _get_config_integer()
     expected: int = 1
 
     _difference_error(_get_section(format_indent(source)), expected)
