@@ -213,12 +213,11 @@ def _create_archive_mix(working: PathPair) -> ArchiveStatus:
 
 
 def _get_take_out_list(working: PathPair) -> Paths:
-    file_paths: Paths = []
-
-    for file_root in _add_directories_test(working):
-        file_paths += [file_root, create_temporary_file(file_root)]
-
-    return file_paths
+    return [
+        path
+        for file_root in _add_directories_test(working)
+        for path in [file_root, create_temporary_file(file_root)]
+    ]
 
 
 def _create_archive_list(working: PathPair) -> ArchiveStatus:
@@ -322,12 +321,11 @@ def _get_took_out(archive_path: Path) -> Paths:
 
 
 def _get_took_out_list(archive_paths: Paths) -> Paths:
-    file_paths: Paths = []
-
-    for archive_path in archive_paths:
-        file_paths += _get_took_out(archive_path)
-
-    return file_paths
+    return [
+        path
+        for archive_path in archive_paths
+        for path in _get_took_out(archive_path)
+    ]
 
 
 def _compare_path_test(left: Paths, right: Paths) -> None:
