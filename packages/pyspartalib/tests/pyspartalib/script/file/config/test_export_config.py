@@ -49,6 +49,13 @@ def _get_config_integer() -> str:
     """
 
 
+def _get_config_decimal() -> str:
+    return """
+        [A]
+        b = 0.1
+    """
+
+
 def _common_test(expected: str, source: Config) -> None:
     _difference_error(
         config_dump(source),
@@ -124,10 +131,8 @@ def test_decimal() -> None:
     """
     source_pair: DecPair = {"b": Decimal("0.1")}
     source_pairs: DecPair2 = {"A": source_pair}
-    expected: str = """
-        [A]
-        b = 0.1
-    """
+    expected: str = _get_config_decimal()
+
     _common_test(expected, {"A": source_pair})
     _common_test(expected, source_pairs)
 
