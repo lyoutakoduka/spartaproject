@@ -17,9 +17,9 @@ from pyspartalib.context.extension.path_context import (
     PathPair2,
 )
 from pyspartalib.context.file.config_context import (
-    BasicPair2,
     Config,
-    SectionPair2,
+    SectionPair,
+    SinglePair2,
 )
 from pyspartalib.context.type_context import Type
 from pyspartalib.script.file.config.export_config import (
@@ -142,7 +142,7 @@ def test_mix_option() -> None:
 
     Data is 2 dimensional dictionary created with multiple mixed type.
     """
-    source_pairs: BasicPair2 = {
+    source_pairs: SinglePair2 = {
         "section": {
             "bool": True,
             "int": 1,
@@ -182,7 +182,7 @@ def test_mix_section() -> None:
     decimals: DecPair = {"decimal": Decimal("0.1")}
     paths: PathPair = {"path": Path("root")}
 
-    source_pairs: SectionPair2 = {
+    source_pairs: SectionPair = {
         "flags": flags,
         "indies": indies,
         "numbers": numbers,
@@ -219,7 +219,7 @@ def test_compress() -> None:
 
     Test for compress option is enable.
     """
-    source_pairs: SectionPair2 = {"bool": {"true": True}, "int": {"one": 1}}
+    source_pairs: SectionPair = {"bool": {"true": True}, "int": {"one": 1}}
     expected: str = """
         [bool]
         true=True

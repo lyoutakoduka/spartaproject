@@ -7,7 +7,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from pyspartalib.context.extension.path_context import PathFunc
-from pyspartalib.context.file.config_context import Basic, Config
+from pyspartalib.context.file.config_context import Config, Single
 from pyspartalib.context.type_context import Type
 from pyspartalib.script.file.config.import_config import (
     config_import,
@@ -22,7 +22,7 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
-def _get_section(formatted: str) -> Basic:
+def _get_section(formatted: str) -> Single:
     config: Config = config_load(formatted)
     return config["section"]["option"]
 
