@@ -157,12 +157,16 @@ def _inside_temporary_directory(function: PathFunc) -> None:
         function(Path(temporary_path))
 
 
+def _get_source_bool() -> BoolPair:
+    return {"b": True}
+
+
 def test_bool() -> None:
     """Test to convert data used for configuration file to text.
 
     Data is 2 dimensional dictionary created with type "bool".
     """
-    source_pair: BoolPair = {"b": True}
+    source_pair: BoolPair = _get_source_bool()
     source_pairs: BoolPair2 = {"A": source_pair}
     expected: str = _get_config_bool()
 
