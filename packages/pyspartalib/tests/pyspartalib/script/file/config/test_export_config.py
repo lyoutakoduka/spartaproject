@@ -35,6 +35,13 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
+def _get_config_bool() -> str:
+    return """
+        [A]
+        b = True
+    """
+
+
 def _common_test(expected: str, source: Config) -> None:
     _difference_error(
         config_dump(source),
@@ -54,10 +61,8 @@ def test_bool() -> None:
     """
     source_pair: BoolPair = {"b": True}
     source_pairs: BoolPair2 = {"A": source_pair}
-    expected: str = """
-        [A]
-        b = True
-    """
+    expected: str = _get_config_bool()
+
     _common_test(expected, {"A": source_pair})
     _common_test(expected, source_pairs)
 
