@@ -88,11 +88,13 @@ def _inside_temporary_directory(function: PathFunc) -> None:
 
 def test_bool() -> None:
     """Test to load configuration data as type boolean."""
+    type_variable: type = bool
+
     _fail_error(
-        bool(
+        type_variable(
             _instance_error(
                 _get_section(format_indent(_get_config_bool())),
-                bool,
+                type_variable,
             ),
         ),
     )
