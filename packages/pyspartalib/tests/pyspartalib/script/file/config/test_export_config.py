@@ -222,17 +222,6 @@ def test_float() -> None:
     _common_test(expected, _get_source_float_nest())
 
 
-def test_string() -> None:
-    """Test to convert data used for configuration file to text.
-
-    Data is 2 dimensional dictionary created with type "str".
-    """
-    expected: str = _get_config_string()
-
-    _common_test(expected, {"A": _get_source_string()})
-    _common_test(expected, _get_source_string_nest())
-
-
 def test_decimal() -> None:
     """Test to convert data used for configuration file to text.
 
@@ -244,6 +233,17 @@ def test_decimal() -> None:
 
     _common_test(expected, {"A": source_pair})
     _common_test(expected, source_pairs)
+
+
+def test_string() -> None:
+    """Test to convert data used for configuration file to text.
+
+    Data is 2 dimensional dictionary created with type "str".
+    """
+    expected: str = _get_config_string()
+
+    _common_test(expected, {"A": _get_source_string()})
+    _common_test(expected, _get_source_string_nest())
 
 
 def test_path() -> None:
