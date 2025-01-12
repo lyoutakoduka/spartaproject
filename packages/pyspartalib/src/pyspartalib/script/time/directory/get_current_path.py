@@ -49,16 +49,15 @@ def _sort_result(result: StrPair, result_types: Strs) -> Strs:
 
 
 def _sort_formatted(result_all: StrPair2) -> Strs:
-    sorted_times: Strs = []
-
-    for result_group, result_types in zip(
-        _get_result_groups(),
-        _get_result_types(),
-        strict=True,
-    ):
-        sorted_times += _sort_result(result_all[result_group], result_types)
-
-    return sorted_times
+    return [
+        result
+        for result_group, result_types in zip(
+            _get_result_groups(),
+            _get_result_types(),
+            strict=True,
+        )
+        for result in _sort_result(result_all[result_group], result_types)
+    ]
 
 
 def _get_formatted(override: bool, jst: bool) -> StrPair2:
