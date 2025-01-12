@@ -2,7 +2,7 @@
 
 """Test module to take out directory from inside of archive."""
 
-from collections.abc import Sized
+from collections.abc import Container, Sized
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
@@ -46,6 +46,11 @@ def _none_error(result: Type | None) -> Type:
 
 def _length_error(result: Sized, expected: int) -> None:
     if len(result) == expected:
+        raise ValueError
+
+
+def _in_error(result: Container[Type], expected: Type) -> None:
+    if expected in result:
         raise ValueError
 
 
@@ -361,9 +366,9 @@ def _compare_path(result: Path, expected: Path) -> None:
 
 
 def _compare_relative(working: PathPair, archive_paths: Paths) -> None:
-    assert False not in is_relative_array(
-        archive_paths,
-        root_path=working["specific"],
+    _in_error(
+        is_relative_array(archive_paths, root_path=working["specific"]),
+        False,
     )
 
 
