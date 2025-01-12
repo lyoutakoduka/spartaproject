@@ -221,6 +221,24 @@ def _get_source_mix() -> SinglePair2:
     return {"section": _get_source_mix_section()}
 
 
+def _get_source_group() -> SectionPair:
+    flags: BoolPair = {"bool": True}
+    indies: IntPair = {"int": 1}
+    numbers: FloatPair = {"float": 1.0}
+    texts: StrPair = {"str": "test"}
+    decimals: DecPair = {"decimal": Decimal("0.1")}
+    paths: PathPair = {"path": Path("root")}
+
+    return {
+        "flags": flags,
+        "indies": indies,
+        "numbers": numbers,
+        "texts": texts,
+        "decimals": decimals,
+        "paths": paths,
+    }
+
+
 def test_bool() -> None:
     """Test to convert data used for configuration file to text.
 
@@ -304,24 +322,7 @@ def test_mix_group() -> None:
 
     2. Parent dictionary is structured with multiple child dictionaries.
     """
-    flags: BoolPair = {"bool": True}
-    indies: IntPair = {"int": 1}
-    numbers: FloatPair = {"float": 1.0}
-    texts: StrPair = {"str": "test"}
-    decimals: DecPair = {"decimal": Decimal("0.1")}
-    paths: PathPair = {"path": Path("root")}
-
-    source_pairs: SectionPair = {
-        "flags": flags,
-        "indies": indies,
-        "numbers": numbers,
-        "texts": texts,
-        "decimals": decimals,
-        "paths": paths,
-    }
-    expected: str = _get_config_mix_group()
-
-    _common_test(expected, source_pairs)
+    _common_test(_get_config_mix_group(), _get_source_group())
 
 
 def test_compress() -> None:
