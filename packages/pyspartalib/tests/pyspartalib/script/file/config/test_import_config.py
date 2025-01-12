@@ -88,57 +88,53 @@ def _inside_temporary_directory(function: PathFunc) -> None:
 
 def test_bool() -> None:
     """Test to load configuration data as type boolean."""
-    source: str = _get_config_bool()
-    result: Single = _get_section(format_indent(source))
-
-    _fail_error(bool(_instance_error(result, bool)))
+    _fail_error(
+        bool(
+            _instance_error(
+                _get_section(format_indent(_get_config_bool())),
+                bool,
+            ),
+        ),
+    )
 
 
 def test_integer() -> None:
     """Test to load configuration data as type integer."""
-    source: str = _get_config_integer()
-    expected: int = 1
-
-    _difference_error(_get_section(format_indent(source)), expected)
+    _difference_error(_get_section(format_indent(_get_config_integer())), 1)
 
 
 def test_decimal() -> None:
     """Test to load configuration data as type decimal."""
-    source: str = _get_config_decimal()
-    expected: Decimal = Decimal("1.0")
-
-    _difference_error(_get_section(format_indent(source)), expected)
+    _difference_error(
+        _get_section(format_indent(_get_config_decimal())),
+        Decimal("1.0"),
+    )
 
 
 def test_string() -> None:
     """Test to load configuration data as type string."""
-    source: str = _get_config_string()
-    expected: str = "text"
-
-    _difference_error(_get_section(format_indent(source)), expected)
+    _difference_error(
+        _get_section(format_indent(_get_config_string())),
+        "text",
+    )
 
 
 def test_path() -> None:
     """Test to load configuration data as type path."""
-    source: str = _get_config_path()
-    expected: Path = Path("text")
-
-    config: Config = config_load(format_indent(source))
-    _difference_error(config["section"]["path"], expected)
+    config: Config = config_load(format_indent(_get_config_path()))
+    _difference_error(config["section"]["path"], Path("text"))
 
 
 def test_import() -> None:
     """Test to import configuration file as format "ini"."""
-    source: str = _get_config_import()
-    expected: str = "text"
 
     def individual_test(temporary_root: Path) -> None:
         config: Config = config_import(
             text_export(
                 Path(temporary_root, "temporary.ini"),
-                format_indent(source),
+                format_indent(_get_config_import()),
             ),
         )
-        _difference_error(config["section"]["option"], expected)
+        _difference_error(config["section"]["option"], "text")
 
     _inside_temporary_directory(individual_test)
