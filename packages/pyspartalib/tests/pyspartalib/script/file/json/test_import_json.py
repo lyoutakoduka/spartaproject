@@ -20,7 +20,7 @@ def _difference_error(result: Type, expected: Type) -> None:
 def _common_test(expected: Single, key: str, value: str) -> None:
     result: Json = json_load('{"%s": %s}' % (key, value))
 
-    assert isinstance(result, Dict)
+    assert isinstance(result, dict)
     _difference_error(result[key], expected)
 
 

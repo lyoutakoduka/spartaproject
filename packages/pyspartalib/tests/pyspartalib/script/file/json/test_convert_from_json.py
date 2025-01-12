@@ -198,11 +198,11 @@ def test_tree() -> None:
     source_pairs: Json = {"A": {"B": [None, input_left], "C": input_right}}
     result: Json = from_safe_json(source_pairs)
 
-    assert isinstance(result, Dict)
+    assert isinstance(result, dict)
     result_outside: Json = result["A"]
-    assert isinstance(result_outside, Dict)
+    assert isinstance(result_outside, dict)
     result_inside: Json = result_outside["B"]
-    assert isinstance(result_inside, List)
+    assert isinstance(result_inside, list)
 
     _fail_error(
         bool_same_array(
