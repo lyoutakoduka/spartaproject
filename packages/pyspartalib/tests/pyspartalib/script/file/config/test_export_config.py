@@ -181,6 +181,10 @@ def _get_source_float_nest() -> FloatPair2:
     return {"A": _get_source_float()}
 
 
+def _get_source_string() -> StrPair:
+    return {"b": "test"}
+
+
 def test_bool() -> None:
     """Test to convert data used for configuration file to text.
 
@@ -219,7 +223,7 @@ def test_string() -> None:
 
     Data is 2 dimensional dictionary created with type "str".
     """
-    source_pair: StrPair = {"b": "test"}
+    source_pair: StrPair = _get_source_string()
     source_pairs: StrPair2 = {"A": source_pair}
     expected: str = _get_config_string()
 
