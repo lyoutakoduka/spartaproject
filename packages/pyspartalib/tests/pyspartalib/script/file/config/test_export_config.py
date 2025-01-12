@@ -232,6 +232,10 @@ def _get_source_group() -> SectionPair:
     }
 
 
+def _get_source_compress() -> SectionPair:
+    return {"bool": {"true": True}, "integer": {"one": 1}}
+
+
 def test_bool() -> None:
     """Test to convert data used for configuration file to text.
 
@@ -323,12 +327,9 @@ def test_compress() -> None:
 
     Test for compress option is enable.
     """
-    source_pairs: SectionPair = {"bool": {"true": True}, "integer": {"one": 1}}
-    expected: str = _get_config_compress()
-
     _difference_error(
-        config_dump(source_pairs, compress=True),
-        format_indent(expected),
+        config_dump(_get_source_compress(), compress=True),
+        format_indent(_get_config_compress()),
     )
 
 
