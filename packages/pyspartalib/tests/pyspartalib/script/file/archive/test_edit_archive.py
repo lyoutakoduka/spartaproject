@@ -72,6 +72,11 @@ def _success_error(status: bool) -> None:
         raise ValueError
 
 
+def _no_exists_error(path: Path) -> None:
+    if not path.exists():
+        raise FileNotFoundError
+
+
 def _get_name() -> str:
     return "temporary"
 
@@ -263,7 +268,7 @@ def _close_archive(edit_archive: EditArchive) -> Paths:
 
 
 def _compare_path(result: Path, expected: Path) -> None:
-    assert result.exists()
+    _no_exists_error(result)
     _difference_error(result, expected)
 
 

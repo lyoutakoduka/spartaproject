@@ -49,6 +49,11 @@ def _length_error(result: Sized, expected: int) -> None:
         raise ValueError
 
 
+def _no_exists_error(path: Path) -> None:
+    if not path.exists():
+        raise FileNotFoundError
+
+
 def _get_empty() -> Paths:
     return []
 
@@ -351,7 +356,7 @@ def _took_out_and_keep(
 
 
 def _compare_path(result: Path, expected: Path) -> None:
-    assert result.exists()
+    _no_exists_error(result)
     _difference_error(result, expected)
 
 
