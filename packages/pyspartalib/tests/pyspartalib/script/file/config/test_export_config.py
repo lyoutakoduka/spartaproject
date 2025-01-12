@@ -11,7 +11,11 @@ from pyspartalib.context.default.float_context import FloatPair, FloatPair2
 from pyspartalib.context.default.integer_context import IntPair, IntPair2
 from pyspartalib.context.default.string_context import StrPair, StrPair2, Strs
 from pyspartalib.context.extension.decimal_context import DecPair, DecPair2
-from pyspartalib.context.extension.path_context import PathPair, PathPair2
+from pyspartalib.context.extension.path_context import (
+    PathFunc,
+    PathPair,
+    PathPair2,
+)
 from pyspartalib.context.file.config_context import (
     BasicPair2,
     Config,
@@ -36,6 +40,11 @@ def _common_test(expected: str, source: Config) -> None:
         config_dump(source),
         format_indent(expected, stdout=True),
     )
+
+
+def _inside_temporary_directory(function: PathFunc) -> None:
+    with TemporaryDirectory() as temporary_path:
+        function(Path(temporary_path))
 
 
 def test_bool() -> None:
@@ -261,13 +270,15 @@ def test_export() -> None:
         false = False
     """
 
-    with TemporaryDirectory() as temporary_path:
+    def individual_test(temporary_root: Path) -> None:
         _difference_error(
             text_import(
                 config_export(
-                    Path(temporary_path, "temporary.ini"),
+                    Path(temporary_root, "temporary.ini"),
                     source_pairs,
                 ),
             ),
             format_indent(expected, stdout=True),
         )
+
+    _inside_temporary_directory(individual_test)

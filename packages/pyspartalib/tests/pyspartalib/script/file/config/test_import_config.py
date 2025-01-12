@@ -6,6 +6,7 @@ from decimal import Decimal
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
+from pyspartalib.context.extension.path_context import PathFunc
 from pyspartalib.context.file.config_context import Basic, Config
 from pyspartalib.context.type_context import Type
 from pyspartalib.script.file.config.import_config import (
@@ -24,6 +25,11 @@ def _difference_error(result: Type, expected: Type) -> None:
 def _get_section(formatted: str) -> Basic:
     config: Config = config_load(formatted)
     return config["section"]["option"]
+
+
+def _inside_temporary_directory(function: PathFunc) -> None:
+    with TemporaryDirectory() as temporary_path:
+        function(Path(temporary_path))
 
 
 def test_bool() -> None:
@@ -89,11 +95,13 @@ def test_import() -> None:
     """
     expected: str = "text"
 
-    with TemporaryDirectory() as temporary_path:
+    def individual_test(temporary_root: Path) -> None:
         config: Config = config_import(
             text_export(
-                Path(temporary_path, "temporary.ini"),
+                Path(temporary_root, "temporary.ini"),
                 format_indent(source),
             ),
         )
         _difference_error(config["section"]["option"], expected)
+
+    _inside_temporary_directory(individual_test)
