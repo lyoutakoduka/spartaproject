@@ -89,5 +89,5 @@ def test_export() -> None:
 
     with TemporaryDirectory() as temporary_path:
         assert format_indent(expected) == text_import(
-            json_export(Path(temporary_path, "temporary.json"), keys)
+            json_export(Path(temporary_path, "temporary.json"), keys),
         )

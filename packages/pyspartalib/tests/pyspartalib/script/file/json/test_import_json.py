@@ -58,5 +58,5 @@ def test_export() -> None:
 
     with TemporaryDirectory() as temporary_path:
         assert expected == json_import(
-            json_export(Path(temporary_path, "temporary.ini"), expected)
+            json_export(Path(temporary_path, "temporary.ini"), expected),
         )

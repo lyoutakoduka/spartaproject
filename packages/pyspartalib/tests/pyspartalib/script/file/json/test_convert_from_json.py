@@ -191,5 +191,5 @@ def test_tree() -> None:
         [
             input_right == result_outside["C"],
             [None, input_left] == result_inside,
-        ]
+        ],
     )
