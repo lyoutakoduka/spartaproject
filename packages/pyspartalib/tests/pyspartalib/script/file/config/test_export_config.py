@@ -185,6 +185,10 @@ def _get_source_decimal() -> DecPair:
     return {"b": Decimal("0.1")}
 
 
+def _get_source_decimal_nest() -> DecPair2:
+    return {"A": _get_source_decimal()}
+
+
 def _get_source_string() -> StrPair:
     return {"b": "test"}
 
@@ -231,12 +235,10 @@ def test_decimal() -> None:
 
     Data is 2 dimensional dictionary created with type "Decimal".
     """
-    source_pair: DecPair = _get_source_decimal()
-    source_pairs: DecPair2 = {"A": source_pair}
     expected: str = _get_config_decimal()
 
-    _common_test(expected, {"A": source_pair})
-    _common_test(expected, source_pairs)
+    _common_test(expected, {"A": _get_source_decimal()})
+    _common_test(expected, _get_source_decimal_nest())
 
 
 def test_string() -> None:
