@@ -34,11 +34,6 @@ def _instance_error(result: object, type_variable: type) -> object:
     raise TypeError
 
 
-def _get_section(formatted: str) -> Single:
-    config: Config = config_load(formatted)
-    return config["section"]["option"]
-
-
 def _get_config_bool() -> str:
     return """
         [section]
@@ -84,6 +79,11 @@ def _get_config_import() -> str:
 def _inside_temporary_directory(function: PathFunc) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
+
+
+def _get_section(formatted: str) -> Single:
+    config: Config = config_load(formatted)
+    return config["section"]["option"]
 
 
 def test_bool() -> None:
