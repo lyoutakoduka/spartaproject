@@ -327,7 +327,7 @@ def _get_took_out_list(archive_paths: Paths) -> Paths:
 
 
 def _compare_path_test(left: Paths, right: Paths) -> None:
-    _length_error(set([str(sorted(paths)) for paths in [left, right]]), 1)
+    _length_error({str(sorted(paths)) for paths in [left, right]}, 1)
 
 
 def _compare_took_out(
