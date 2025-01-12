@@ -128,6 +128,13 @@ def _get_config_lower() -> str:
     """
 
 
+def _get_config_invalid() -> str:
+    return """
+        [section]
+        key = True
+    """
+
+
 def _common_test(expected: str, source: Config) -> None:
     _difference_error(
         config_dump(source),
@@ -296,10 +303,7 @@ def test_noise() -> None:
     """Test to convert data used for configuration file with noisy keys."""
     noise: Strs = [" 　\n\t"] * 2
     source_pairs: Config = {"section".join(noise): {"key".join(noise): True}}
-    expected: str = """
-        [section]
-        key = True
-    """
+    expected: str = _get_config_invalid()
 
     _common_test(expected, source_pairs)
 
