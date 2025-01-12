@@ -22,6 +22,13 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
+def _instance_error(result: object, type_variable: type) -> object:
+    if isinstance(result, type_variable):
+        return result
+
+    raise TypeError
+
+
 def _get_section(formatted: str) -> Single:
     config: Config = config_load(formatted)
     return config["section"]["option"]
@@ -38,8 +45,9 @@ def test_bool() -> None:
         [section]
         option=True
     """
+    result: Single = _get_section(format_indent(source))
 
-    assert _get_section(format_indent(source))
+    assert bool(_instance_error(result, bool))
 
 
 def test_integer() -> None:
