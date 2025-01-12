@@ -50,6 +50,11 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
+def _fail_error(status: bool) -> None:
+    if not status:
+        raise ValueError
+
+
 def _get_name() -> str:
     return "temporary"
 
@@ -260,7 +265,7 @@ def _close_archive_fail(edit_archive: EditArchive) -> None:
 
 
 def _stamp_test(stamp_before: TimePair, stamp_after: TimePair) -> None:
-    assert is_same_stamp(stamp_before, stamp_after)
+    _fail_error(is_same_stamp(stamp_before, stamp_after))
 
 
 def _compare_not_relative(full_path: Path, root_path: Path) -> None:
@@ -350,8 +355,7 @@ def _limit_test(before_paths: Paths, edit_archive: EditArchive) -> None:
 def _compress_test(archive_path: Path, edit_archive: EditArchive) -> None:
     archive_size_before: int = get_file_size(archive_path)
     _close_archive(edit_archive)
-
-    assert archive_size_before > get_file_size(archive_path)
+    _fail_error(archive_size_before > get_file_size(archive_path))
 
 
 def _get_archive(temporary_root: Path) -> CompressArchive:
@@ -442,7 +446,7 @@ def test_error() -> None:
 
 def test_disable() -> None:
     """Test to confirm path of archive is undefined."""
-    assert _get_edit().is_disable_archive()
+    _fail_error(_get_edit().is_disable_archive())
 
 
 def test_none() -> None:

@@ -47,6 +47,11 @@ def _length_error(result: Sized, expected: int) -> None:
         raise ValueError
 
 
+def _fail_error(status: bool) -> None:
+    if not status:
+        raise ValueError
+
+
 def _get_multiple() -> str:
     return "\u3042"
 
@@ -129,7 +134,7 @@ def _compare_compress_size(outputs: Paths, archive_paths: Paths) -> None:
         for paths in [outputs, archive_paths]
     ]
 
-    assert Decimal("0.05") > (file_sizes[1] / file_sizes[0])
+    _fail_error(Decimal("0.05") > (file_sizes[1] / file_sizes[0]))
 
 
 def _compare_archived_count(archive_paths: Paths) -> None:
