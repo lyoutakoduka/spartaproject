@@ -60,6 +60,13 @@ def _get_config_decimal() -> str:
     """
 
 
+def _get_config_string() -> str:
+    return """
+        [section]
+        option=text
+    """
+
+
 def _inside_temporary_directory(function: PathFunc) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
@@ -91,10 +98,7 @@ def test_decimal() -> None:
 
 def test_string() -> None:
     """Test to load configuration data as type string."""
-    source: str = """
-        [section]
-        option=text
-    """
+    source: str = _get_config_string()
     expected: str = "text"
 
     _difference_error(_get_section(format_indent(source)), expected)
