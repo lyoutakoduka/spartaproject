@@ -74,6 +74,13 @@ def _get_config_path() -> str:
     """
 
 
+def _get_config_import() -> str:
+    return """
+        [section]
+        option=text
+    """
+
+
 def _inside_temporary_directory(function: PathFunc) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
@@ -122,10 +129,7 @@ def test_path() -> None:
 
 def test_import() -> None:
     """Test to import configuration file as format "ini"."""
-    source: str = """
-        [section]
-        option=text
-    """
+    source: str = _get_config_import()
     expected: str = "text"
 
     def individual_test(temporary_root: Path) -> None:
