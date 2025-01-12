@@ -70,6 +70,13 @@ def _get_config_string() -> str:
     """
 
 
+def _get_config_path() -> str:
+    return """
+        [A]
+        path = root
+    """
+
+
 def _common_test(expected: str, source: Config) -> None:
     _difference_error(
         config_dump(source),
@@ -154,10 +161,8 @@ def test_path() -> None:
     """
     source_pair: PathPair = {"path": Path("root")}
     source_pairs: PathPair2 = {"A": source_pair}
-    expected: str = """
-        [A]
-        path = root
-    """
+    expected: str = _get_config_path()
+
     _common_test(expected, {"A": source_pair})
     _common_test(expected, source_pairs)
 
