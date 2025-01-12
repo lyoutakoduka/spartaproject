@@ -23,6 +23,13 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
+def _none_error(result: Type | None) -> Type:
+    if result is None:
+        raise ValueError
+
+    return result
+
+
 def _get_config_file() -> Path:
     return get_resource(local_path=Path("forward.json"))
 
@@ -52,13 +59,9 @@ def _create_shortcut(shortcut_target: Path, shortcut_path: Path) -> bool:
 
 
 def _read_shortcut(shortcut_path: Path) -> Path:
-    if shortcut_target := read_shortcut(
-        shortcut_path,
-        forward=_get_config_file(),
-    ):
-        return shortcut_target
-    else:
-        fail()
+    return _none_error(
+        read_shortcut(shortcut_path, forward=_get_config_file()),
+    )
 
 
 def _compare_target(expected: Path, shortcut_path: Path) -> None:
