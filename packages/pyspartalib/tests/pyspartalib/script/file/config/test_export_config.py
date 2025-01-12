@@ -89,6 +89,28 @@ def _get_config_mix() -> str:
     """
 
 
+def _get_config_mix_section() -> str:
+    return """
+        [flags]
+        bool = True
+
+        [indies]
+        int = 1
+
+        [numbers]
+        float = 1.0
+
+        [texts]
+        str = test
+
+        [decimals]
+        decimal = 0.1
+
+        [paths]
+        path = root
+    """
+
+
 def _common_test(expected: str, source: Config) -> None:
     _difference_error(
         config_dump(source),
@@ -223,26 +245,7 @@ def test_mix_section() -> None:
         "decimals": decimals,
         "paths": paths,
     }
-
-    expected: str = """
-        [flags]
-        bool = True
-
-        [indies]
-        int = 1
-
-        [numbers]
-        float = 1.0
-
-        [texts]
-        str = test
-
-        [decimals]
-        decimal = 0.1
-
-        [paths]
-        path = root
-    """
+    expected: str = _get_config_mix_section()
 
     _common_test(expected, source_pairs)
 
