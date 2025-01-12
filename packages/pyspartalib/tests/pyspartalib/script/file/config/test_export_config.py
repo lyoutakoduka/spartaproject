@@ -19,6 +19,7 @@ from pyspartalib.context.extension.path_context import (
 from pyspartalib.context.file.config_context import (
     Config,
     SectionPair,
+    SinglePair,
     SinglePair2,
 )
 from pyspartalib.context.type_context import Type
@@ -205,17 +206,19 @@ def _get_source_path_nest() -> PathPair2:
     return {"A": _get_source_path()}
 
 
-def _get_source_mix() -> SinglePair2:
+def _get_source_mix_section() -> SinglePair:
     return {
-        "section": {
-            "bool": True,
-            "int": 1,
-            "float": 1.0,
-            "str": "test",
-            "decimal": Decimal("0.1"),
-            "path": Path("root"),
-        },
+        "bool": True,
+        "int": 1,
+        "float": 1.0,
+        "str": "test",
+        "decimal": Decimal("0.1"),
+        "path": Path("root"),
     }
+
+
+def _get_source_mix() -> SinglePair2:
+    return {"section": _get_source_mix_section()}
 
 
 def test_bool() -> None:
