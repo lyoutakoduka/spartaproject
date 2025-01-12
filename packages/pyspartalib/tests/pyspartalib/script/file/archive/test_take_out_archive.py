@@ -469,14 +469,14 @@ def _create_directory_default(temporary_root: Path) -> PathPair:
 def _create_directory_specific(temporary_root: Path) -> PathPair:
     return _create_working_directory(
         temporary_root,
-        _get_directory_names() + ["specific"],
+        [*_get_directory_names(), "specific"],
     )
 
 
 def _create_directory_remove(temporary_root: Path) -> PathPair:
     return _create_working_directory(
         temporary_root,
-        _get_directory_names() + ["remove"],
+        [*_get_directory_names(), "remove"],
     )
 
 
