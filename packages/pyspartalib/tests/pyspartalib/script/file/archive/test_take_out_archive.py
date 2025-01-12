@@ -2,6 +2,7 @@
 
 """Test module to take out directory from inside of archive."""
 
+from collections.abc import Sized
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
@@ -33,6 +34,11 @@ from tests.pyspartalib.interface.pytest import fail, raises
 
 def _difference_error(result: Type, expected: Type) -> None:
     if result != expected:
+        raise ValueError
+
+
+def _length_error(result: Sized, expected: int) -> None:
+    if len(result) == expected:
         raise ValueError
 
 
@@ -309,7 +315,7 @@ def _get_took_out_list(archive_paths: Paths) -> Paths:
 
 
 def _compare_path_test(left: Paths, right: Paths) -> None:
-    assert 1 == len(set([str(sorted(paths)) for paths in [left, right]]))
+    _length_error(set([str(sorted(paths)) for paths in [left, right]]), 1)
 
 
 def _compare_took_out(

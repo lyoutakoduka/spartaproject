@@ -138,13 +138,12 @@ def _compare_timestamp(sorted_paths: Paths2, expected: datetime) -> None:
     _difference_error(*times_pair)
 
     times: Times = _get_times(times_pair)
-    _equal_count(1, len(times))
-
+    _length_error(times, 1)
     _difference_error(times[0], expected)
 
 
 def _compare_path_pair(left: Paths, right: Paths) -> None:
-    _equal_count(1, len({str(sorted(paths)) for paths in [left, right]}))
+    _length_error({str(sorted(paths)) for paths in [left, right]}, 1)
 
 
 def _get_relative_paths(sorted_paths: Paths2, temporary_root: Path) -> Paths2:
@@ -218,7 +217,9 @@ def _set_file_latest(paths: Paths) -> None:
 
 def _find_unused(paths: Paths) -> Paths:
     return [
-        path for path in paths if 0 == len(list(walk_iterator(path, depth=1)))
+        path
+        for path in paths
+        if _length_error(list(walk_iterator(path, depth=1)), 0)
     ]
 
 
