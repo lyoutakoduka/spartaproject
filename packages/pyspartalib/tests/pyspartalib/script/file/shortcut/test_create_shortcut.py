@@ -2,6 +2,7 @@
 
 """Test module to create Windows shortcut from PowerShell."""
 
+from collections.abc import Sized
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
@@ -32,6 +33,11 @@ def _difference_error(result: Type, expected: Type) -> None:
 
 def _fail_error(status: bool) -> None:
     if not status:
+        raise ValueError
+
+
+def _length_error(result: Sized, expected: int) -> None:
+    if len(result) == expected:
         raise ValueError
 
 
@@ -117,7 +123,7 @@ def _get_shortcut_names(roots: Paths) -> Strs:
 
 
 def _compare_shortcut_names(shortcut_root: Path, remove_root: Path) -> None:
-    assert 1 == len(set(_get_shortcut_names([shortcut_root, remove_root])))
+    _length_error(set(_get_shortcut_names([shortcut_root, remove_root])), 1)
 
 
 def _inside_temporary_directory(function: PathFunc) -> None:
