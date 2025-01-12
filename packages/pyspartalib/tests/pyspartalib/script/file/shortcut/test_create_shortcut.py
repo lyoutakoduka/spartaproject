@@ -46,12 +46,16 @@ def _create_working_space() -> Path:
 
 def _create_shortcut(shortcut_target: Path, shortcut_path: Path) -> bool:
     return create_shortcut(
-        shortcut_target, shortcut_path, forward=_get_config_file()
+        shortcut_target,
+        shortcut_path,
+        forward=_get_config_file(),
     )
 
 
 def _create_shortcut_remove(
-    shortcut_target: Path, shortcut_path: Path, remove_root: Path
+    shortcut_target: Path,
+    shortcut_path: Path,
+    remove_root: Path,
 ) -> bool:
     return create_shortcut(
         shortcut_target,
@@ -71,10 +75,12 @@ def _success_created(shortcut_target: Path, shortcut_path: Path) -> None:
 
 
 def _success_created_remove(
-    shortcut_target: Path, shortcut_path: Path, remove_root: Path
+    shortcut_target: Path,
+    shortcut_path: Path,
+    remove_root: Path,
 ) -> None:
     _filter_created(
-        _create_shortcut_remove(shortcut_target, shortcut_path, remove_root)
+        _create_shortcut_remove(shortcut_target, shortcut_path, remove_root),
     )
 
 
