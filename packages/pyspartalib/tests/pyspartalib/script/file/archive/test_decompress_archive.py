@@ -47,6 +47,11 @@ def _length_error(result: Sized, expected: int) -> None:
         raise ValueError
 
 
+def _success_error(status: bool) -> None:
+    if status:
+        raise ValueError
+
+
 def _get_multiple() -> str:
     return "\u3042"
 
@@ -167,7 +172,7 @@ def _common_test(temporary_root: Path) -> Paths2:
 
 def _type_test(temporary_root: Path, same_type: bool) -> None:
     _common_test(temporary_root)
-    assert not same_type
+    _success_error(same_type)
 
 
 def _sequential_test(
