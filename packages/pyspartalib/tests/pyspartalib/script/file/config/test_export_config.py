@@ -120,6 +120,14 @@ def _get_config_compress() -> str:
     """
 
 
+def _get_config_lower() -> str:
+    return """
+        [SECTION]
+        true = True
+        false = False
+    """
+
+
 def _common_test(expected: str, source: Config) -> None:
     _difference_error(
         config_dump(source),
@@ -279,11 +287,7 @@ def test_lower() -> None:
     Test for upper case of keys is enable.
     """
     source_pairs: Config = {"SECTION": {"TRUE": True, "FALSE": False}}
-    expected: str = """
-        [SECTION]
-        true = True
-        false = False
-    """
+    expected: str = _get_config_lower()
 
     _common_test(expected, source_pairs)
 
