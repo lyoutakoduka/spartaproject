@@ -205,6 +205,19 @@ def _get_source_path_nest() -> PathPair2:
     return {"A": _get_source_path()}
 
 
+def _get_source_mix() -> SinglePair2:
+    return {
+        "section": {
+            "bool": True,
+            "int": 1,
+            "float": 1.0,
+            "str": "test",
+            "decimal": Decimal("0.1"),
+            "path": Path("root"),
+        },
+    }
+
+
 def test_bool() -> None:
     """Test to convert data used for configuration file to text.
 
@@ -276,19 +289,7 @@ def test_mix() -> None:
 
     Data is 2 dimensional dictionary created with multiple mixed type.
     """
-    source_pairs: SinglePair2 = {
-        "section": {
-            "bool": True,
-            "int": 1,
-            "float": 1.0,
-            "str": "test",
-            "decimal": Decimal("0.1"),
-            "path": Path("root"),
-        },
-    }
-    expected: str = _get_config_mix()
-
-    _common_test(expected, source_pairs)
+    _common_test(_get_config_mix(), _get_source_mix())
 
 
 def test_mix_section() -> None:
