@@ -53,6 +53,13 @@ def _get_config_integer() -> str:
     """
 
 
+def _get_config_decimal() -> str:
+    return """
+        [section]
+        option=1.0
+    """
+
+
 def _inside_temporary_directory(function: PathFunc) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
@@ -76,10 +83,7 @@ def test_integer() -> None:
 
 def test_decimal() -> None:
     """Test to load configuration data as type decimal."""
-    source: str = """
-        [section]
-        option=1.0
-    """
+    source: str = _get_config_decimal()
     expected: Decimal = Decimal("1.0")
 
     _difference_error(_get_section(format_indent(source)), expected)
