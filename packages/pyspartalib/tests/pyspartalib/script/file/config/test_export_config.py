@@ -169,6 +169,10 @@ def _get_source_integer() -> IntPair:
     return {"b": 1}
 
 
+def _get_source_integer_nest() -> IntPair2:
+    return {"A": _get_source_integer()}
+
+
 def test_bool() -> None:
     """Test to convert data used for configuration file to text.
 
@@ -185,12 +189,10 @@ def test_integer() -> None:
 
     Data is 2 dimensional dictionary created with type "int".
     """
-    source_pair: IntPair = _get_source_integer()
-    source_pairs: IntPair2 = {"A": source_pair}
     expected: str = _get_config_integer()
 
-    _common_test(expected, {"A": source_pair})
-    _common_test(expected, source_pairs)
+    _common_test(expected, {"A": _get_source_integer()})
+    _common_test(expected, _get_source_integer_nest())
 
 
 def test_float() -> None:
