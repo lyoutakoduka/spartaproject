@@ -21,12 +21,9 @@ class FilterTable(GroupedCharacters):
         super().__init__(multiple=multiple)
 
     def _serialize_tables(self) -> Strs:
-        serialized: Strs = []
-
-        for table in self.get_merged_tables():
-            serialized += table
-
-        return serialized
+        return [
+            table for tables in self.get_merged_tables() for table in tables
+        ]
 
     def __initialize_variables(self) -> None:
         self._serialized: Strs = self._serialize_tables()

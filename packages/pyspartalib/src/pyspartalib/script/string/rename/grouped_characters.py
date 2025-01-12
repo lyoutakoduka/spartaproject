@@ -85,12 +85,9 @@ class GroupedCharacters:
         indices: Ints,
         character_tables: Strs2,
     ) -> Strs:
-        merged_table: Strs = []
-
-        for index in indices:
-            merged_table += character_tables[index]
-
-        return merged_table
+        return [
+            table for index in indices for table in character_tables[index]
+        ]
 
     def _get_other_table(self, character_tables: Strs2) -> Strs:
         return self._merge_string_tables([0, 2, 4, 6], character_tables)
