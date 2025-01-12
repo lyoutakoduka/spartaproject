@@ -77,6 +77,18 @@ def _get_config_path() -> str:
     """
 
 
+def _get_config_option() -> str:
+    return """
+        [section]
+        bool = True
+        int = 1
+        float = 1.0
+        str = test
+        decimal = 0.1
+        path = root
+    """
+
+
 def _common_test(expected: str, source: Config) -> None:
     _difference_error(
         config_dump(source),
@@ -182,16 +194,7 @@ def test_mix_option() -> None:
             "path": Path("root"),
         },
     }
-
-    expected: str = """
-        [section]
-        bool = True
-        int = 1
-        float = 1.0
-        str = test
-        decimal = 0.1
-        path = root
-    """
+    expected: str = _get_config_option()
 
     _common_test(expected, source_pairs)
 
