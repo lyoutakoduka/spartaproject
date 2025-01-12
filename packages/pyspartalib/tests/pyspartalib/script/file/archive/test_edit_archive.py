@@ -57,6 +57,11 @@ def _none_error(result: Type | None) -> Type:
     return result
 
 
+def _not_none_error(result: object) -> None:
+    if result is not None:
+        raise ValueError
+
+
 def _fail_error(status: bool) -> None:
     if not status:
         raise ValueError
@@ -270,7 +275,7 @@ def _compare_root(trash_root: Path, edit_archive: EditArchive) -> None:
 
 
 def _close_archive_fail(edit_archive: EditArchive) -> None:
-    assert edit_archive.close_archive() is None
+    _not_none_error(edit_archive.close_archive())
 
 
 def _stamp_test(stamp_before: TimePair, stamp_after: TimePair) -> None:
