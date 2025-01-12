@@ -6,13 +6,19 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from pyspartalib.context.file.json_context import Json
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.file.json.export_json import json_dump, json_export
 from pyspartalib.script.file.text.import_file import text_import
 from pyspartalib.script.string.format_texts import format_indent
 
 
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
+
+
 def _common_test(expected: str, source: Json) -> None:
-    assert format_indent(expected) == json_dump(source)
+    _difference_error(json_dump(source), format_indent(expected))
 
 
 def test_type() -> None:
@@ -73,7 +79,8 @@ def test_compress() -> None:
     """Test to convert data used for json format with compress option."""
     source: Json = {"0": {"1": {"2": {"3": {"4": {"5": {"6": None}}}}}}}
     expected: str = """{"0":{"1":{"2":{"3":{"4":{"5":{"6":null}}}}}}}"""
-    assert expected == json_dump(source, compress=True)
+
+    _difference_error(json_dump(source, compress=True), expected)
 
 
 def test_export() -> None:
@@ -88,6 +95,9 @@ def test_export() -> None:
     """
 
     with TemporaryDirectory() as temporary_path:
-        assert format_indent(expected) == text_import(
-            json_export(Path(temporary_path, "temporary.json"), keys),
+        _difference_error(
+            text_import(
+                json_export(Path(temporary_path, "temporary.json"), keys),
+            ),
+            format_indent(expected),
         )

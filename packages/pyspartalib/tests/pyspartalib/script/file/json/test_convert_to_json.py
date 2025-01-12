@@ -42,6 +42,7 @@ from pyspartalib.context.extension.path_context import (
     Paths2,
 )
 from pyspartalib.context.file.json_context import Json, Multi, Multi2
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.file.json.convert_to_json import (
     multiple2_to_json,
     multiple_to_json,
@@ -50,8 +51,13 @@ from pyspartalib.script.file.json.convert_to_json import (
 from pyspartalib.script.file.json.export_json import json_dump
 
 
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
+
+
 def _common_test(expected: str, source: Json) -> None:
-    assert expected == json_dump(source, compress=True)
+    _difference_error(json_dump(source, compress=True), expected)
 
 
 def _common_test_array(expected: str, source_array: Multi) -> None:
@@ -212,4 +218,7 @@ def test_tree() -> None:
         "A": {"B": {"C": [None, Decimal("-1.0"), Path("root")]}},
     }
     expected: str = """{"A":{"B":{"C":[null,-1.0,"root"]}}}"""
-    assert expected == json_dump(to_safe_json(source_pairs), compress=True)
+
+    _difference_error(
+        json_dump(to_safe_json(source_pairs), compress=True), expected
+    )

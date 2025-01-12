@@ -16,6 +16,7 @@ from pyspartalib.context.file.json_context import (
     Pair2,
     Single,
 )
+from pyspartalib.context.type_context import Type
 from pyspartalib.script.bool.same_value import bool_same_array
 from pyspartalib.script.file.json.convert_from_json import (
     bool_array2_from_json,
@@ -42,9 +43,14 @@ from pyspartalib.script.file.json.convert_from_json import (
 )
 
 
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
+
+
 def _common_test(expected: Single, result: Single, size: int) -> None:
     assert 1 == size
-    assert expected == result
+    _difference_error(result, expected)
 
 
 def _common_test_array(expected: Single, result: Array) -> None:
