@@ -139,18 +139,20 @@ class DecompressArchive:
         <string index> must filled by zero, and digit is optional.
 
         """
-        sequential: Paths = [source_archive]
-
-        for path in walk_iterator(
-            source_archive.parent,
-            directory=False,
-            depth=1,
-            suffix=get_format(),
-        ):
-            if (source_archive != path) and self._is_sequential_archive(path):
-                sequential += [path]
-
-        return sequential
+        return [
+            source_archive,
+            *[
+                path
+                for path in walk_iterator(
+                    source_archive.parent,
+                    directory=False,
+                    depth=1,
+                    suffix=get_format(),
+                )
+                if (source_archive != path)
+                and self._is_sequential_archive(path)
+            ],
+        ]
 
     def decompress_archive(self, decompress_target: Path) -> None:
         """Decompress file or directory by archive format.
