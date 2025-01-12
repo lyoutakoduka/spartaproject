@@ -18,12 +18,11 @@ from pyspartalib.script.file.shortcut.create_shortcut import create_shortcut
 from pyspartalib.script.file.shortcut.get_shortcut import get_shortcut
 from pyspartalib.script.path.iterate_directory import walk_iterator
 from pyspartalib.script.path.modify.get_resource import get_resource
-from pyspartalib.script.path.status.check_exists import check_exists_array
 from pyspartalib.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
 from pyspartalib.script.project.project_context import ProjectContext
-from tests.pyspartalib.interface.pytest import fail, raises
+from tests.pyspartalib.interface.pytest import raises
 
 
 def _difference_error(result: Type, expected: Type) -> None:
