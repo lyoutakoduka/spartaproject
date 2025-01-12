@@ -19,13 +19,13 @@ def _get_stack_frame(outer_frame: FrameInfo) -> StackFrame:
 
 
 def _get_stack_frames() -> StackFrames:
-    stack_frames: StackFrames = []
-
     if current_frame := inspect.currentframe():
-        for outer_frame in inspect.getouterframes(current_frame):
-            stack_frames += [_get_stack_frame(outer_frame)]
+        return [
+            _get_stack_frame(outer_frame)
+            for outer_frame in inspect.getouterframes(current_frame)
+        ]
 
-    return stack_frames
+    return []
 
 
 def _to_relative_path(frame: StackFrame) -> StackFrame:
