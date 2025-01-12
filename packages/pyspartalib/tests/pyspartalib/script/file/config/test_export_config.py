@@ -90,7 +90,7 @@ def _get_config_mix() -> str:
     """
 
 
-def _get_config_mix_section() -> str:
+def _get_config_mix_group() -> str:
     return """
         [flags]
         bool = True
@@ -295,7 +295,7 @@ def test_mix() -> None:
     _common_test(_get_config_mix(), _get_source_mix())
 
 
-def test_mix_section() -> None:
+def test_mix_group() -> None:
     """Test to convert data used for configuration file to text.
 
     Data is 2 dimensional dictionary, the rule of dictionary is follow.
@@ -319,7 +319,7 @@ def test_mix_section() -> None:
         "decimals": decimals,
         "paths": paths,
     }
-    expected: str = _get_config_mix_section()
+    expected: str = _get_config_mix_group()
 
     _common_test(expected, source_pairs)
 
