@@ -144,7 +144,7 @@ def _get_sorted_paths(
     inputs: Paths = _get_input_paths(walk_paths, temporary_root)
     outputs: Paths = _get_output_paths(archive_paths, temporary_root)
 
-    return [sorted(list(set(paths))) for paths in [inputs, outputs]]
+    return [sorted(set(paths)) for paths in [inputs, outputs]]
 
 
 def _compare_archive(

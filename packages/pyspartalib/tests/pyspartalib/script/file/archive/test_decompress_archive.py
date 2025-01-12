@@ -144,7 +144,7 @@ def _compare_timestamp(sorted_paths: Paths2, expected: datetime) -> None:
 
 
 def _compare_path_pair(left: Paths, right: Paths) -> None:
-    _equal_count(1, len(set([str(sorted(paths)) for paths in [left, right]])))
+    _equal_count(1, len({str(sorted(paths)) for paths in [left, right]}))
 
 
 def _get_relative_paths(sorted_paths: Paths2, temporary_root: Path) -> Paths2:
@@ -167,7 +167,7 @@ def _compare_file_size(sorted_paths: Paths2) -> None:
 
 
 def _get_sorted_path(walk_root: Path) -> Paths:
-    return sorted(list(walk_iterator(walk_root)))
+    return sorted(walk_iterator(walk_root))
 
 
 def _get_sorted_paths(temporary_root: Path) -> Paths2:
