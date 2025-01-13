@@ -4,7 +4,6 @@
 
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from typing import Dict
 
 from pyspartalib.context.file.json_context import Json, Single
 from pyspartalib.context.type_context import Type

@@ -5,7 +5,6 @@
 from collections.abc import Sized
 from decimal import Decimal
 from pathlib import Path
-from typing import Dict, List
 
 from pyspartalib.context.default.string_context import StrPair, StrPair2
 from pyspartalib.context.extension.path_context import PathPair, PathPair2
