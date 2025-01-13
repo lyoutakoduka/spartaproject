@@ -91,6 +91,13 @@ def _inside_temporary_directory(function: PathFunc) -> None:
         function(Path(temporary_path))
 
 
+def _export_json(temporary_root: Path) -> Path:
+    return json_export(
+        Path(temporary_root, "temporary.json"),
+        _get_source_export(),
+    )
+
+
 def test_type() -> None:
     """Test to convert data used for json format to text.
 
@@ -120,12 +127,7 @@ def test_export() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         _difference_error(
-            text_import(
-                json_export(
-                    Path(temporary_root, "temporary.json"),
-                    _get_source_export(),
-                ),
-            ),
+            text_import(_export_json(temporary_root)),
             format_indent(_get_expected_export()),
         )
 
