@@ -74,6 +74,10 @@ def _get_source_type() -> Json:
     }
 
 
+def _get_source_nested() -> Json:
+    return {"0": {"1": {"2": {"3": {"4": {"5": {"6": None}}}}}}}
+
+
 def _common_test(expected: str, source: Json) -> None:
     _difference_error(json_dump(source), format_indent(expected))
 
@@ -96,17 +100,13 @@ def test_tree() -> None:
 
     Data is multiple dimensional dictionary created with None object.
     """
-    source: Json = {"0": {"1": {"2": {"3": {"4": {"5": {"6": None}}}}}}}
-
-    _common_test(_get_expected_nest(), source)
+    _common_test(_get_expected_nest(), _get_source_nested())
 
 
 def test_compress() -> None:
     """Test to convert data used for json format with compress option."""
-    source: Json = {"0": {"1": {"2": {"3": {"4": {"5": {"6": None}}}}}}}
-
     _difference_error(
-        json_dump(source, compress=True),
+        json_dump(_get_source_nested(), compress=True),
         _get_expected_compress(),
     )
 
