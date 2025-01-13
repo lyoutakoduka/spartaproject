@@ -99,6 +99,10 @@ def _get_decimal() -> Decimal:
     return Decimal("1.0")
 
 
+def _get_path() -> Path:
+    return Path("root")
+
+
 def test_bool_array() -> None:
     """Test to convert data which is list of type "bool"."""
     source_array: Bools = [_get_bool()]
@@ -201,8 +205,7 @@ def test_decimal_pair() -> None:
 
 def test_path_array() -> None:
     """Test to convert data which is list of type "Path"."""
-    source: Path = Path("root")
-    source_array: Paths = [source]
+    source_array: Paths = [_get_path()]
     source_arrays: Paths2 = [source_array]
     expected: str = '"root"'
 
@@ -212,8 +215,7 @@ def test_path_array() -> None:
 
 def test_path_pair() -> None:
     """Test to convert data which is dictionary of type "Path"."""
-    source: Path = Path("root")
-    source_pair: PathPair = {"B": source}
+    source_pair: PathPair = {"B": _get_path()}
     source_pairs: PathPair2 = {"A": source_pair}
     expected: str = '"root"'
 
