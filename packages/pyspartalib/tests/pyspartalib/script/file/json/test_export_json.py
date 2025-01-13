@@ -64,6 +64,16 @@ def _get_expected_export() -> str:
     """
 
 
+def _get_source_type() -> Json:
+    return {
+        "None": None,
+        "bool": True,
+        "int": 1,
+        "float": 1.0,
+        "str": "1",
+    }
+
+
 def _common_test(expected: str, source: Json) -> None:
     _difference_error(json_dump(source), format_indent(expected))
 
@@ -78,15 +88,7 @@ def test_type() -> None:
 
     Data is a dictionary created with multiple mixed type.
     """
-    source: Json = {
-        "None": None,
-        "bool": True,
-        "int": 1,
-        "float": 1.0,
-        "str": "1",
-    }
-
-    _common_test(_get_expected_type(), source)
+    _common_test(_get_expected_type(), _get_source_type())
 
 
 def test_tree() -> None:
