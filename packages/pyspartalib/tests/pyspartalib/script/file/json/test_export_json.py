@@ -78,6 +78,10 @@ def _get_source_nested() -> Json:
     return {"0": {"1": {"2": {"3": {"4": {"5": {"6": None}}}}}}}
 
 
+def _get_source_export() -> Json:
+    return ["R", "G", "B"]
+
+
 def _common_test(expected: str, source: Json) -> None:
     _difference_error(json_dump(source), format_indent(expected))
 
@@ -113,12 +117,14 @@ def test_compress() -> None:
 
 def test_export() -> None:
     """Test to export data used for json format."""
-    keys: Json = ["R", "G", "B"]
 
     def individual_test(temporary_root: Path) -> None:
         _difference_error(
             text_import(
-                json_export(Path(temporary_root, "temporary.json"), keys),
+                json_export(
+                    Path(temporary_root, "temporary.json"),
+                    _get_source_export(),
+                ),
             ),
             format_indent(_get_expected_export()),
         )
