@@ -220,5 +220,6 @@ def test_tree() -> None:
     expected: str = """{"A":{"B":{"C":[null,-1.0,"root"]}}}"""
 
     _difference_error(
-        json_dump(to_safe_json(source_pairs), compress=True), expected
+        json_dump(to_safe_json(source_pairs), compress=True),
+        expected,
     )
