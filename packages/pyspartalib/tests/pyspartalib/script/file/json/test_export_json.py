@@ -18,6 +18,18 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
+def _get_expected_type() -> str:
+    return """
+      {
+        "None": null,
+        "bool": true,
+        "float": 1.0,
+        "int": 1,
+        "str": "1"
+      }
+    """  # 2 space indent
+
+
 def _common_test(expected: str, source: Json) -> None:
     _difference_error(json_dump(source), format_indent(expected))
 
@@ -40,18 +52,7 @@ def test_type() -> None:
         "str": "1",
     }
 
-    # 2 space indent
-    expected: str = """
-      {
-        "None": null,
-        "bool": true,
-        "float": 1.0,
-        "int": 1,
-        "str": "1"
-      }
-    """
-
-    _common_test(expected, source)
+    _common_test(_get_expected_type(), source)
 
 
 def test_tree() -> None:
