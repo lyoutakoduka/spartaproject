@@ -30,6 +30,26 @@ def _get_expected_type() -> str:
     """  # 2 space indent
 
 
+def _get_expected_nest() -> str:
+    return """
+    {
+      "0": {
+        "1": {
+          "2": {
+            "3": {
+              "4": {
+                "5": {
+                  "6": null
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    """
+
+
 def _common_test(expected: str, source: Json) -> None:
     _difference_error(json_dump(source), format_indent(expected))
 
@@ -61,25 +81,8 @@ def test_tree() -> None:
     Data is multiple dimensional dictionary created with None object.
     """
     source: Json = {"0": {"1": {"2": {"3": {"4": {"5": {"6": None}}}}}}}
-    expected: str = """
-    {
-      "0": {
-        "1": {
-          "2": {
-            "3": {
-              "4": {
-                "5": {
-                  "6": null
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-    """
 
-    _common_test(expected, source)
+    _common_test(_get_expected_nest(), source)
 
 
 def test_compress() -> None:
