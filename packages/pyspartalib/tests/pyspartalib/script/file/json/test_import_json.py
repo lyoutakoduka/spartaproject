@@ -29,9 +29,10 @@ def _pair_from_json(value_json: Json) -> SinglePair:
 
 
 def _common_test(expected: Single, key: str, value: str) -> None:
-    result: Json = json_load(f'{{"{key}": {value}}}')
-    assert isinstance(result, dict)
-    _difference_error(result[key], expected)
+    _difference_error(
+        _pair_from_json(json_load(f'{{"{key}": {value}}}'))[key],
+        expected,
+    )
 
 
 def _specify_pair(expected: Single, source: str) -> None:
