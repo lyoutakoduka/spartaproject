@@ -50,6 +50,16 @@ def _get_expected_nest() -> str:
     """
 
 
+def _get_expected_export() -> str:
+    return """
+      [
+        "R",
+        "G",
+        "B"
+      ]
+    """
+
+
 def _common_test(expected: str, source: Json) -> None:
     _difference_error(json_dump(source), format_indent(expected))
 
@@ -96,20 +106,13 @@ def test_compress() -> None:
 def test_export() -> None:
     """Test to export data used for json format."""
     keys: Json = ["R", "G", "B"]
-    expected: str = """
-      [
-        "R",
-        "G",
-        "B"
-      ]
-    """
 
     def individual_test(temporary_root: Path) -> None:
         _difference_error(
             text_import(
                 json_export(Path(temporary_root, "temporary.json"), keys),
             ),
-            format_indent(expected),
+            format_indent(_get_expected_export()),
         )
 
     _inside_temporary_directory(individual_test)
