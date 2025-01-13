@@ -6,7 +6,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from pyspartalib.context.extension.path_context import PathFunc
-from pyspartalib.context.file.json_context import Json, Single
+from pyspartalib.context.file.json_context import Json, Single, SinglePair
 from pyspartalib.context.type_context import Type
 from pyspartalib.script.file.json.export_json import json_export
 from pyspartalib.script.file.json.import_json import json_import, json_load
@@ -15,6 +15,17 @@ from pyspartalib.script.file.json.import_json import json_import, json_load
 def _difference_error(result: Type, expected: Type) -> None:
     if result != expected:
         raise ValueError
+
+
+def _pair_from_json(value_json: Json) -> SinglePair:
+    if not isinstance(value_json, dict):
+        return {}
+
+    return {
+        key: value
+        for key, value in value_json.items()
+        if isinstance(value, Single)
+    }
 
 
 def _common_test(expected: Single, key: str, value: str) -> None:
