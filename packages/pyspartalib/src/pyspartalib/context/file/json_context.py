@@ -51,6 +51,9 @@ Single = None | bool | int | float | str | Decimal | Path
 Json = Single | dict[str, "Json"] | list["Json"]
 Multi = Array | Pair
 Multi2 = Array2 | Pair2
-
 Singles = list[Single]
+SinglePair = dict[str, Single]
+
 Jsons = list[Json]
+Singles2 = list[Singles]
+SinglePair2 = dict[str, SinglePair]
