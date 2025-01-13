@@ -17,8 +17,7 @@ def _difference_error(result: Type, expected: Type) -> None:
 
 
 def _common_test(expected: Single, key: str, value: str) -> None:
-    result: Json = json_load('{"%s": %s}' % (key, value))
-
+    result: Json = json_load(f'{{"{key}": {value}}}')
     assert isinstance(result, dict)
     _difference_error(result[key], expected)
 
@@ -54,7 +53,7 @@ def test_decimal() -> None:
 def test_string() -> None:
     """Test to load Json data as type string."""
     expected: str = "test"
-    _specify_pair(expected, '"%s"' % expected)
+    _specify_pair(expected, f'"{expected}"')
 
 
 def test_export() -> None:

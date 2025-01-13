@@ -71,12 +71,12 @@ def _common_test_array2(expected: str, source_arrays: Multi2) -> None:
 
 
 def _common_test_pair(expected: str, source_pair: Multi) -> None:
-    expected_pair: str = '{"B":%s}' % expected
+    expected_pair: str = f'{{"B":{expected}}}'
     _common_test(expected_pair, multiple_to_json(source_pair))
 
 
 def _common_test_pair2(expected: str, source_pairs: Multi2) -> None:
-    expected_pair: str = """{"A":{"B":%s}}""" % expected
+    expected_pair: str = f'{{"A":{{"B":{expected}}}}}'
     _common_test(expected_pair, multiple2_to_json(source_pairs))
 
 
