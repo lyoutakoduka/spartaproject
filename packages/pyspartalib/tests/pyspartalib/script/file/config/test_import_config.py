@@ -95,13 +95,7 @@ def _get_section(config: str) -> Single:
 
 def test_bool() -> None:
     """Test to load configuration data as type boolean."""
-    type_variable: type = bool
-
-    _fail_error(
-        type_variable(
-            _instance_error(_get_section(_get_config_bool()), type_variable),
-        ),
-    )
+    _difference_error(_get_section(_get_config_bool()), True)
 
 
 def test_integer() -> None:
