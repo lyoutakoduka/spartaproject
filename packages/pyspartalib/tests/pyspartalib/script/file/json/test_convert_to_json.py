@@ -91,6 +91,10 @@ def _get_float() -> float:
     return 1.0
 
 
+def _get_string() -> str:
+    return "R"
+
+
 def test_bool_array() -> None:
     """Test to convert data which is list of type "bool"."""
     source_array: Bools = [_get_bool()]
@@ -153,8 +157,7 @@ def test_float_pair() -> None:
 
 def test_string_array() -> None:
     """Test to convert data which is list of type "str"."""
-    source: str = "R"
-    source_array: Strs = [source]
+    source_array: Strs = [_get_string()]
     source_arrays: Strs2 = [source_array]
     expected: str = '"R"'
 
@@ -164,8 +167,7 @@ def test_string_array() -> None:
 
 def test_string_pair() -> None:
     """Test to convert data which is dictionary of type "str"."""
-    source: str = "R"
-    source_pair: StrPair = {"B": source}
+    source_pair: StrPair = {"B": _get_string()}
     source_pairs: StrPair2 = {"A": source_pair}
     expected: str = '"R"'
 
