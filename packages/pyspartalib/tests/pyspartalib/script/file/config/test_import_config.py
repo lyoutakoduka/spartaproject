@@ -22,18 +22,6 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
-def _fail_error(status: bool) -> None:
-    if not status:
-        raise ValueError
-
-
-def _instance_error(result: object, type_variable: type) -> object:
-    if isinstance(result, type_variable):
-        return result
-
-    raise TypeError
-
-
 def _get_config_bool() -> str:
     return """
         [section]
