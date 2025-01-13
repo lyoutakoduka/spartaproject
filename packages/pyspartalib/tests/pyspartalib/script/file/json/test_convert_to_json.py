@@ -87,6 +87,10 @@ def _get_integer() -> int:
     return 1
 
 
+def _get_float() -> float:
+    return 1.0
+
+
 def test_bool_array() -> None:
     """Test to convert data which is list of type "bool"."""
     source_array: Bools = [_get_bool()]
@@ -129,8 +133,7 @@ def test_integer_pair() -> None:
 
 def test_float_array() -> None:
     """Test to convert data which is list of type "float"."""
-    source: float = 1.0
-    source_array: Floats = [source]
+    source_array: Floats = [_get_float()]
     source_arrays: Floats2 = [source_array]
     expected: str = "1.0"
 
@@ -140,8 +143,7 @@ def test_float_array() -> None:
 
 def test_float_pair() -> None:
     """Test to convert data which is dictionary of type "float"."""
-    source: float = 1.0
-    source_pair: FloatPair = {"B": source}
+    source_pair: FloatPair = {"B": _get_float()}
     source_pairs: FloatPair2 = {"A": source_pair}
     expected: str = "1.0"
 
