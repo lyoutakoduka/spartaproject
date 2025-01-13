@@ -5,6 +5,7 @@
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
+from pyspartalib.context.extension.path_context import PathFunc
 from pyspartalib.context.file.json_context import Json
 from pyspartalib.context.type_context import Type
 from pyspartalib.script.file.json.export_json import json_dump, json_export
@@ -19,6 +20,11 @@ def _difference_error(result: Type, expected: Type) -> None:
 
 def _common_test(expected: str, source: Json) -> None:
     _difference_error(json_dump(source), format_indent(expected))
+
+
+def _inside_temporary_directory(function: PathFunc) -> None:
+    with TemporaryDirectory() as temporary_path:
+        function(Path(temporary_path))
 
 
 def test_type() -> None:
@@ -94,10 +100,12 @@ def test_export() -> None:
       ]
     """
 
-    with TemporaryDirectory() as temporary_path:
+    def individual_test(temporary_root: Path) -> None:
         _difference_error(
             text_import(
-                json_export(Path(temporary_path, "temporary.json"), keys),
+                json_export(Path(temporary_root, "temporary.json"), keys),
             ),
             format_indent(expected),
         )
+
+    _inside_temporary_directory(individual_test)
