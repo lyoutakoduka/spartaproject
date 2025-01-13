@@ -95,6 +95,10 @@ def _get_string() -> str:
     return "R"
 
 
+def _get_decimal() -> Decimal:
+    return Decimal("1.0")
+
+
 def test_bool_array() -> None:
     """Test to convert data which is list of type "bool"."""
     source_array: Bools = [_get_bool()]
@@ -177,8 +181,7 @@ def test_string_pair() -> None:
 
 def test_decimal_array() -> None:
     """Test to convert data which is list of type "Decimal"."""
-    source: Decimal = Decimal("1.0")
-    source_array: Decs = [source]
+    source_array: Decs = [_get_decimal()]
     source_arrays: Decs2 = [source_array]
     expected: str = "1.0"
 
@@ -188,8 +191,7 @@ def test_decimal_array() -> None:
 
 def test_decimal_pair() -> None:
     """Test to convert data which is dictionary of type "Decimal"."""
-    source: Decimal = Decimal("1.0")
-    source_pair: DecPair = {"B": source}
+    source_pair: DecPair = {"B": _get_decimal()}
     source_pairs: DecPair2 = {"A": source_pair}
     expected: str = "1.0"
 
