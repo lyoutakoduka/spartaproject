@@ -79,10 +79,13 @@ def _common_test_pair2(expected: str, source_pairs: Multi2) -> None:
     )
 
 
+def _get_bool() -> bool:
+    return True
+
+
 def test_bool_array() -> None:
     """Test to convert data which is list of type "bool"."""
-    source: bool = True
-    source_array: Bools = [source]
+    source_array: Bools = [_get_bool()]
     source_arrays: Bools2 = [source_array]
     expected: str = "true"
 
@@ -92,8 +95,7 @@ def test_bool_array() -> None:
 
 def test_bool_pair() -> None:
     """Test to convert data which is dictionary of type "bool"."""
-    source: bool = True
-    source_pair: BoolPair = {"B": source}
+    source_pair: BoolPair = {"B": _get_bool()}
     source_pairs: BoolPair2 = {"A": source_pair}
     expected: str = "true"
 
