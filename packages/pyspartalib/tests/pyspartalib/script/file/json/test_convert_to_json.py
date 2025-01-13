@@ -91,12 +91,12 @@ def _get_float() -> float:
     return 1.0
 
 
-def _get_string() -> str:
-    return "R"
-
-
 def _get_decimal() -> Decimal:
     return Decimal("1.0")
+
+
+def _get_string() -> str:
+    return "R"
 
 
 def _get_path() -> Path:
@@ -163,26 +163,6 @@ def test_float_pair() -> None:
     _common_test_pair2(expected, source_pairs)
 
 
-def test_string_array() -> None:
-    """Test to convert data which is list of type "str"."""
-    source_array: Strs = [_get_string()]
-    source_arrays: Strs2 = [source_array]
-    expected: str = '"R"'
-
-    _common_test_array(expected, source_array)
-    _common_test_array2(expected, source_arrays)
-
-
-def test_string_pair() -> None:
-    """Test to convert data which is dictionary of type "str"."""
-    source_pair: StrPair = {"B": _get_string()}
-    source_pairs: StrPair2 = {"A": source_pair}
-    expected: str = '"R"'
-
-    _common_test_pair(expected, source_pair)
-    _common_test_pair2(expected, source_pairs)
-
-
 def test_decimal_array() -> None:
     """Test to convert data which is list of type "Decimal"."""
     source_array: Decs = [_get_decimal()]
@@ -198,6 +178,26 @@ def test_decimal_pair() -> None:
     source_pair: DecPair = {"B": _get_decimal()}
     source_pairs: DecPair2 = {"A": source_pair}
     expected: str = "1.0"
+
+    _common_test_pair(expected, source_pair)
+    _common_test_pair2(expected, source_pairs)
+
+
+def test_string_array() -> None:
+    """Test to convert data which is list of type "str"."""
+    source_array: Strs = [_get_string()]
+    source_arrays: Strs2 = [source_array]
+    expected: str = '"R"'
+
+    _common_test_array(expected, source_array)
+    _common_test_array2(expected, source_arrays)
+
+
+def test_string_pair() -> None:
+    """Test to convert data which is dictionary of type "str"."""
+    source_pair: StrPair = {"B": _get_string()}
+    source_pairs: StrPair2 = {"A": source_pair}
+    expected: str = '"R"'
 
     _common_test_pair(expected, source_pair)
     _common_test_pair2(expected, source_pairs)
