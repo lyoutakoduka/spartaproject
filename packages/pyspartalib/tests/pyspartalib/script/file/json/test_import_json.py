@@ -27,6 +27,10 @@ def _specify_pair(expected: Single, source: str) -> None:
     _common_test(expected, "group", source)
 
 
+def _export_json(path: Path, config: Json) -> Path:
+    return json_export(Path(path, "temporary.ini"), config)
+
+
 def _inside_temporary_directory(function: PathFunc) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
@@ -68,9 +72,7 @@ def test_export() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         _difference_error(
-            json_import(
-                json_export(Path(temporary_root, "temporary.ini"), expected),
-            ),
+            json_import(_export_json(temporary_root, expected)),
             expected,
         )
 
