@@ -61,23 +61,22 @@ def _common_test(expected: str, source: Json) -> None:
 
 
 def _common_test_array(expected: str, source_array: Multi) -> None:
-    expected_array: str = f"[{expected}]"
-    _common_test(expected_array, multiple_to_json(source_array))
+    _common_test(f"[{expected}]", multiple_to_json(source_array))
 
 
 def _common_test_array2(expected: str, source_arrays: Multi2) -> None:
-    expected_array: str = f"[[{expected}]]"
-    _common_test(expected_array, multiple2_to_json(source_arrays))
+    _common_test(f"[[{expected}]]", multiple2_to_json(source_arrays))
 
 
 def _common_test_pair(expected: str, source_pair: Multi) -> None:
-    expected_pair: str = f'{{"B":{expected}}}'
-    _common_test(expected_pair, multiple_to_json(source_pair))
+    _common_test(f'{{"B":{expected}}}', multiple_to_json(source_pair))
 
 
 def _common_test_pair2(expected: str, source_pairs: Multi2) -> None:
-    expected_pair: str = f'{{"A":{{"B":{expected}}}}}'
-    _common_test(expected_pair, multiple2_to_json(source_pairs))
+    _common_test(
+        f'{{"A":{{"B":{expected}}}}}',
+        multiple2_to_json(source_pairs),
+    )
 
 
 def test_bool_array() -> None:
