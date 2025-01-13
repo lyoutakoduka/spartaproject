@@ -50,6 +50,10 @@ def _get_expected_nest() -> str:
     """
 
 
+def _get_expected_compress() -> str:
+    return """{"0":{"1":{"2":{"3":{"4":{"5":{"6":null}}}}}}}"""
+
+
 def _get_expected_export() -> str:
     return """
       [
@@ -98,9 +102,11 @@ def test_tree() -> None:
 def test_compress() -> None:
     """Test to convert data used for json format with compress option."""
     source: Json = {"0": {"1": {"2": {"3": {"4": {"5": {"6": None}}}}}}}
-    expected: str = """{"0":{"1":{"2":{"3":{"4":{"5":{"6":null}}}}}}}"""
 
-    _difference_error(json_dump(source, compress=True), expected)
+    _difference_error(
+        json_dump(source, compress=True),
+        _get_expected_compress(),
+    )
 
 
 def test_export() -> None:
