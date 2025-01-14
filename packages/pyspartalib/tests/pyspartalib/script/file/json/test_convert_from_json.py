@@ -122,6 +122,10 @@ def _get_decimal_pairs() -> Json:
     return {"A": _get_decimal_pair()}
 
 
+def _get_string() -> str:
+    return "root"
+
+
 def _common_test(expected: Single, result: Single, size: Sized) -> None:
     _length_error(size, 1)
     _difference_error(result, expected)
@@ -199,7 +203,7 @@ def test_decimal_pair() -> None:
 
 def test_string_array() -> None:
     """Test to convert json format data to list of type "str"."""
-    source: str = "test"
+    source: str = _get_string()
     source_array: Json = [source]
     source_arrays: Json = [source_array]
 
@@ -209,7 +213,7 @@ def test_string_array() -> None:
 
 def test_string_pair() -> None:
     """Test to convert json format data to dictionary of type "str"."""
-    source: str = "test"
+    source: str = _get_string()
     source_pair: Json = {"B": source, "C.path": Path("remove")}
     source_pairs: Json = {"A": source_pair}
 
