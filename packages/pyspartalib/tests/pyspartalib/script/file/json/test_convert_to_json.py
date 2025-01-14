@@ -156,6 +156,10 @@ def _get_decimal_arrays() -> Decs2:
     return [_get_decimal_array()]
 
 
+def _get_decimal_pair() -> DecPair:
+    return {"B": _get_decimal()}
+
+
 def _get_string() -> str:
     return "R"
 
@@ -276,7 +280,7 @@ def test_decimal_array() -> None:
 
 def test_decimal_pair() -> None:
     """Test to convert data which is dictionary of type "Decimal"."""
-    source_pair: DecPair = {"B": _get_decimal()}
+    source_pair: DecPair = _get_decimal_pair()
     source_pairs: DecPair2 = {"A": source_pair}
     expected: str = _get_expected_float()
 
