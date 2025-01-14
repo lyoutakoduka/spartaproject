@@ -132,6 +132,10 @@ def _get_expected_float() -> str:
     return "1.0"
 
 
+def _get_expected_string() -> str:
+    return '"root"'
+
+
 def test_bool_array() -> None:
     """Test to convert data which is list of type "bool"."""
     source_array: Bools = [_get_bool()]
@@ -216,7 +220,7 @@ def test_string_array() -> None:
     """Test to convert data which is list of type "str"."""
     source_array: Strs = [_get_string()]
     source_arrays: Strs2 = [source_array]
-    expected: str = '"R"'
+    expected: str = _get_expected_string()
 
     _common_test_array(expected, source_array)
     _common_test_array2(expected, source_arrays)
@@ -226,7 +230,7 @@ def test_string_pair() -> None:
     """Test to convert data which is dictionary of type "str"."""
     source_pair: StrPair = {"B": _get_string()}
     source_pairs: StrPair2 = {"A": source_pair}
-    expected: str = '"R"'
+    expected: str = _get_expected_string()
 
     _common_test_pair(expected, source_pair)
     _common_test_pair2(expected, source_pairs)
@@ -236,7 +240,7 @@ def test_path_array() -> None:
     """Test to convert data which is list of type "Path"."""
     source_array: Paths = [_get_path()]
     source_arrays: Paths2 = [source_array]
-    expected: str = '"root"'
+    expected: str = _get_expected_string()
 
     _common_test_array(expected, source_array)
     _common_test_array2(expected, source_arrays)
@@ -246,7 +250,7 @@ def test_path_pair() -> None:
     """Test to convert data which is dictionary of type "Path"."""
     source_pair: PathPair = {"B": _get_path()}
     source_pairs: PathPair2 = {"A": source_pair}
-    expected: str = '"root"'
+    expected: str = _get_expected_string()
 
     _common_test_pair(expected, source_pair)
     _common_test_pair2(expected, source_pairs)
