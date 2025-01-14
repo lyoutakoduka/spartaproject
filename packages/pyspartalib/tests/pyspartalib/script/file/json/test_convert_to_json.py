@@ -152,6 +152,10 @@ def _get_decimal_array() -> Decs:
     return [_get_decimal()]
 
 
+def _get_decimal_arrays() -> Decs2:
+    return [_get_decimal_array()]
+
+
 def _get_string() -> str:
     return "R"
 
@@ -264,12 +268,10 @@ def test_float_pair() -> None:
 
 def test_decimal_array() -> None:
     """Test to convert data which is list of type "Decimal"."""
-    source_array: Decs = _get_decimal_array()
-    source_arrays: Decs2 = [source_array]
     expected: str = _get_expected_float()
 
-    _common_test_array(expected, source_array)
-    _common_test_array2(expected, source_arrays)
+    _common_test_array(expected, _get_decimal_array())
+    _common_test_array2(expected, _get_decimal_arrays())
 
 
 def test_decimal_pair() -> None:
