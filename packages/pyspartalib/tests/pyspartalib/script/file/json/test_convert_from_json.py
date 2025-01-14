@@ -123,6 +123,26 @@ def test_integer_pair() -> None:
     _common_test_pair2(source, integer_pair2_from_json(source_pairs))
 
 
+def test_decimal_array() -> None:
+    """Test to convert json format data to list of type "Decimal"."""
+    source: Decimal = Decimal("1.0")
+    source_array: Json = [float(source)]
+    source_arrays: Json = [source_array]
+
+    _common_test_array(source, decimal_array_from_json(source_array))
+    _common_test_array2(source, decimal_array2_from_json(source_arrays))
+
+
+def test_decimal_pair() -> None:
+    """Test to convert json format data to dictionary of type "Decimal"."""
+    source: Decimal = Decimal("1.0")
+    source_pair: Json = {"B": float(source)}
+    source_pairs: Json = {"A": source_pair}
+
+    _common_test_pair(source, decimal_pair_from_json(source_pair))
+    _common_test_pair2(source, decimal_pair2_from_json(source_pairs))
+
+
 def test_string_array() -> None:
     """Test to convert json format data to list of type "str"."""
     source: str = "test"
@@ -148,26 +168,6 @@ def test_string_pair() -> None:
     result_parent: StrPair2 = string_pair2_from_json(source_pairs)
     result_child: StrPair = result_parent["A"]
     _common_test(source, result_child["B"], result_child)
-
-
-def test_decimal_array() -> None:
-    """Test to convert json format data to list of type "Decimal"."""
-    source: Decimal = Decimal("1.0")
-    source_array: Json = [float(source)]
-    source_arrays: Json = [source_array]
-
-    _common_test_array(source, decimal_array_from_json(source_array))
-    _common_test_array2(source, decimal_array2_from_json(source_arrays))
-
-
-def test_decimal_pair() -> None:
-    """Test to convert json format data to dictionary of type "Decimal"."""
-    source: Decimal = Decimal("1.0")
-    source_pair: Json = {"B": float(source)}
-    source_pairs: Json = {"A": source_pair}
-
-    _common_test_pair(source, decimal_pair_from_json(source_pair))
-    _common_test_pair2(source, decimal_pair2_from_json(source_pairs))
 
 
 def test_path_array() -> None:
