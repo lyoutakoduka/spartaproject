@@ -94,6 +94,10 @@ def _get_integer_pair() -> Json:
     return {"B": _get_integer()}
 
 
+def _get_integer_pairs() -> Json:
+    return {"A": _get_integer_pair()}
+
+
 def _common_test(expected: Single, result: Single, size: Sized) -> None:
     _length_error(size, 1)
     _difference_error(result, expected)
@@ -145,11 +149,9 @@ def test_integer_array() -> None:
 def test_integer_pair() -> None:
     """Test to convert json format data to dictionary of type "int"."""
     source: int = _get_integer()
-    source_pair: Json = _get_integer_pair()
-    source_pairs: Json = {"A": source_pair}
 
-    _common_test_pair(source, integer_pair_from_json(source_pair))
-    _common_test_pair2(source, integer_pair2_from_json(source_pairs))
+    _common_test_pair(source, integer_pair_from_json(_get_integer_pair()))
+    _common_test_pair2(source, integer_pair2_from_json(_get_integer_pairs()))
 
 
 def test_decimal_array() -> None:
