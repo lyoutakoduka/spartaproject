@@ -165,7 +165,7 @@ def _get_decimal_pairs() -> DecPair2:
 
 
 def _get_string() -> str:
-    return "R"
+    return "root"
 
 
 def _get_string_array() -> Strs:
@@ -173,7 +173,7 @@ def _get_string_array() -> Strs:
 
 
 def _get_path() -> Path:
-    return Path("root")
+    return Path(_get_string())
 
 
 def _get_mixed() -> Singles:
