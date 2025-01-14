@@ -136,6 +136,10 @@ def _get_expected_string() -> str:
     return '"root"'
 
 
+def _duplicate_text(text: str) -> Strs:
+    return [text] * 2
+
+
 def test_bool_array() -> None:
     """Test to convert data which is list of type "bool"."""
     source_array: Bools = [_get_bool()]
