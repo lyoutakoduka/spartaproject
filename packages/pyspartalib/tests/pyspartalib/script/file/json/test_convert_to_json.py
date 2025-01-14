@@ -158,6 +158,10 @@ def _stringify_mixed() -> str:
     return "[" + ", ".join(_get_expected_source()) + "]"
 
 
+def _get_config_expected() -> str:
+    return f'{{"A":{{"B":{{"C":{_stringify_mixed()}}}}}}}'
+
+
 def test_bool_array() -> None:
     """Test to convert data which is list of type "bool"."""
     source_array: Bools = [_get_bool()]
@@ -280,9 +284,7 @@ def test_path_pair() -> None:
 
 def test_tree() -> None:
     """Test to convert custom json format data to default json format."""
-    expected: str = """{"A":{"B":{"C":[null,-1.0,"root"]}}}"""
-
     _difference_error(
         json_dump(to_safe_json(_get_config_source()), compress=True),
-        expected,
+        _get_config_expected(),
     )
