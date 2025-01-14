@@ -41,7 +41,12 @@ from pyspartalib.context.extension.path_context import (
     Paths,
     Paths2,
 )
-from pyspartalib.context.file.json_context import Json, Multi, Multi2
+from pyspartalib.context.file.json_context import (
+    Json,
+    Multi,
+    Multi2,
+    Singles,
+)
 from pyspartalib.context.type_context import Type
 from pyspartalib.script.file.json.convert_to_json import (
     multiple2_to_json,
@@ -101,6 +106,18 @@ def _get_string() -> str:
 
 def _get_path() -> Path:
     return Path("root")
+
+
+def _get_mixed() -> Singles:
+    return [
+        None,
+        _get_bool(),
+        _get_integer(),
+        _get_float(),
+        _get_decimal(),
+        _get_string(),
+        _get_path(),
+    ]
 
 
 def test_bool_array() -> None:
