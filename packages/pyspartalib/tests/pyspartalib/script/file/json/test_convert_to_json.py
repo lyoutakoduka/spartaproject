@@ -116,6 +116,10 @@ def _get_integer_arrays() -> Ints2:
     return [_get_integer_array()]
 
 
+def _get_integer_pair() -> IntPair:
+    return {"B": _get_integer()}
+
+
 def _get_float() -> float:
     return 1.0
 
@@ -212,7 +216,7 @@ def test_integer_array() -> None:
 
 def test_integer_pair() -> None:
     """Test to convert data which is dictionary of type "int"."""
-    source_pair: IntPair = {"B": _get_integer()}
+    source_pair: IntPair = _get_integer_pair()
     source_pairs: IntPair2 = {"A": source_pair}
     expected: str = _get_expected_integer()
 
