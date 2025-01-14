@@ -128,6 +128,10 @@ def _get_expected_integer() -> str:
     return "1"
 
 
+def _get_expected_float() -> str:
+    return "1.0"
+
+
 def test_bool_array() -> None:
     """Test to convert data which is list of type "bool"."""
     source_array: Bools = [_get_bool()]
@@ -172,7 +176,7 @@ def test_float_array() -> None:
     """Test to convert data which is list of type "float"."""
     source_array: Floats = [_get_float()]
     source_arrays: Floats2 = [source_array]
-    expected: str = "1.0"
+    expected: str = _get_expected_float()
 
     _common_test_array(expected, source_array)
     _common_test_array2(expected, source_arrays)
@@ -182,7 +186,7 @@ def test_float_pair() -> None:
     """Test to convert data which is dictionary of type "float"."""
     source_pair: FloatPair = {"B": _get_float()}
     source_pairs: FloatPair2 = {"A": source_pair}
-    expected: str = "1.0"
+    expected: str = _get_expected_float()
 
     _common_test_pair(expected, source_pair)
     _common_test_pair2(expected, source_pairs)
@@ -192,7 +196,7 @@ def test_decimal_array() -> None:
     """Test to convert data which is list of type "Decimal"."""
     source_array: Decs = [_get_decimal()]
     source_arrays: Decs2 = [source_array]
-    expected: str = "1.0"
+    expected: str = _get_expected_float()
 
     _common_test_array(expected, source_array)
     _common_test_array2(expected, source_arrays)
@@ -202,7 +206,7 @@ def test_decimal_pair() -> None:
     """Test to convert data which is dictionary of type "Decimal"."""
     source_pair: DecPair = {"B": _get_decimal()}
     source_pairs: DecPair2 = {"A": source_pair}
-    expected: str = "1.0"
+    expected: str = _get_expected_float()
 
     _common_test_pair(expected, source_pair)
     _common_test_pair2(expected, source_pairs)
