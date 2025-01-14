@@ -172,6 +172,10 @@ def _get_string_array() -> Strs:
     return [_get_string()]
 
 
+def _get_string_arrays() -> Strs2:
+    return [_get_string_array()]
+
+
 def _get_path() -> Path:
     return Path(_get_string())
 
@@ -296,12 +300,10 @@ def test_decimal_pair() -> None:
 
 def test_string_array() -> None:
     """Test to convert data which is list of type "str"."""
-    source_array: Strs = _get_string_array()
-    source_arrays: Strs2 = [source_array]
     expected: str = _get_expected_string()
 
-    _common_test_array(expected, source_array)
-    _common_test_array2(expected, source_arrays)
+    _common_test_array(expected, _get_string_array())
+    _common_test_array2(expected, _get_string_arrays())
 
 
 def test_string_pair() -> None:
