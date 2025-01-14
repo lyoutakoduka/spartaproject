@@ -188,6 +188,10 @@ def _get_path() -> Path:
     return Path(_get_string())
 
 
+def _get_path_array() -> Paths:
+    return [_get_path()]
+
+
 def _get_mixed() -> Singles:
     return [
         None,
@@ -324,7 +328,7 @@ def test_string_pair() -> None:
 
 def test_path_array() -> None:
     """Test to convert data which is list of type "Path"."""
-    source_array: Paths = [_get_path()]
+    source_array: Paths = _get_path_array()
     source_arrays: Paths2 = [source_array]
     expected: str = _get_expected_string()
 
