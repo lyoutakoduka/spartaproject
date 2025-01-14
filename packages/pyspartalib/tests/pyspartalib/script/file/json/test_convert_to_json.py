@@ -150,6 +150,10 @@ def _get_expected_source() -> Strs:
     ]
 
 
+def _stringify_mixed() -> str:
+    return "[" + ", ".join(_get_expected_source()) + "]"
+
+
 def test_bool_array() -> None:
     """Test to convert data which is list of type "bool"."""
     source_array: Bools = [_get_bool()]
