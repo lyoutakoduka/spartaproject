@@ -88,6 +88,10 @@ def _get_bool() -> bool:
     return True
 
 
+def _get_bool_array() -> Bools:
+    return [_get_bool()]
+
+
 def _get_integer() -> int:
     return 1
 
@@ -164,7 +168,7 @@ def _get_config_expected() -> str:
 
 def test_bool_array() -> None:
     """Test to convert data which is list of type "bool"."""
-    source_array: Bools = [_get_bool()]
+    source_array: Bools = _get_bool_array()
     source_arrays: Bools2 = [source_array]
     expected: str = _get_expected_bool()
 
