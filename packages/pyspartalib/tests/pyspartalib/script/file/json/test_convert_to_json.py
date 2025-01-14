@@ -120,6 +120,10 @@ def _get_mixed() -> Singles:
     ]
 
 
+def _get_config_source() -> Json:
+    return {"A": {"B": {"C": list(_get_mixed())}}}
+
+
 def _get_expected_bool() -> str:
     return "true"
 
@@ -276,12 +280,9 @@ def test_path_pair() -> None:
 
 def test_tree() -> None:
     """Test to convert custom json format data to default json format."""
-    source_pairs: Json = {
-        "A": {"B": {"C": [None, Decimal("-1.0"), Path("root")]}},
-    }
     expected: str = """{"A":{"B":{"C":[null,-1.0,"root"]}}}"""
 
     _difference_error(
-        json_dump(to_safe_json(source_pairs), compress=True),
+        json_dump(to_safe_json(_get_config_source()), compress=True),
         expected,
     )
