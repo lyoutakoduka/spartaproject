@@ -180,6 +180,10 @@ def _get_string_pair() -> StrPair:
     return {"B": _get_string()}
 
 
+def _get_string_pairs() -> StrPair2:
+    return {"A": _get_string_pair()}
+
+
 def _get_path() -> Path:
     return Path(_get_string())
 
@@ -312,12 +316,10 @@ def test_string_array() -> None:
 
 def test_string_pair() -> None:
     """Test to convert data which is dictionary of type "str"."""
-    source_pair: StrPair = _get_string_pair()
-    source_pairs: StrPair2 = {"A": source_pair}
     expected: str = _get_expected_string()
 
-    _common_test_pair(expected, source_pair)
-    _common_test_pair2(expected, source_pairs)
+    _common_test_pair(expected, _get_string_pair())
+    _common_test_pair2(expected, _get_string_pairs())
 
 
 def test_path_array() -> None:
