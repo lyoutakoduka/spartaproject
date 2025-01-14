@@ -108,6 +108,10 @@ def _get_integer() -> int:
     return 1
 
 
+def _get_integer_array() -> Ints:
+    return [_get_integer()]
+
+
 def _get_float() -> float:
     return 1.0
 
@@ -196,7 +200,7 @@ def test_bool_pair() -> None:
 
 def test_integer_array() -> None:
     """Test to convert data which is list of type "int"."""
-    source_array: Ints = [_get_integer()]
+    source_array: Ints = _get_integer_array()
     source_arrays: Ints2 = [source_array]
     expected: str = _get_expected_integer()
 
