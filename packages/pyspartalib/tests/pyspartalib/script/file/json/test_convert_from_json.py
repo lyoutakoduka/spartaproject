@@ -58,6 +58,10 @@ def _fail_error(status: bool) -> None:
         raise ValueError
 
 
+def _get_bool() -> bool:
+    return True
+
+
 def _common_test(expected: Single, result: Single, size: Sized) -> None:
     _length_error(size, 1)
     _difference_error(result, expected)
@@ -81,7 +85,7 @@ def _common_test_pair2(expected: Single, result: Pair2) -> None:
 
 def test_bool_array() -> None:
     """Test to convert json format data to list of type "bool"."""
-    source: bool = True
+    source: bool = _get_bool()
     source_array: Json = [source]
     source_arrays: Json = [source_array]
 
@@ -91,7 +95,7 @@ def test_bool_array() -> None:
 
 def test_bool_pair() -> None:
     """Test to convert json format data to dictionary of type "bool"."""
-    source: bool = True
+    source: bool = _get_bool()
     source_pair: Json = {"B": source}
     source_pairs: Json = {"A": source_pair}
 
