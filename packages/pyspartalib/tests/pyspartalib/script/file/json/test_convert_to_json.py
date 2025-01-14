@@ -136,6 +136,10 @@ def _get_float_arrays() -> Floats2:
     return [_get_float_array()]
 
 
+def _get_float_pair() -> FloatPair:
+    return {"B": _get_float()}
+
+
 def _get_decimal() -> Decimal:
     return Decimal("1.0")
 
@@ -244,7 +248,7 @@ def test_float_array() -> None:
 
 def test_float_pair() -> None:
     """Test to convert data which is dictionary of type "float"."""
-    source_pair: FloatPair = {"B": _get_float()}
+    source_pair: FloatPair = _get_float_pair()
     source_pairs: FloatPair2 = {"A": source_pair}
     expected: str = _get_expected_float()
 
