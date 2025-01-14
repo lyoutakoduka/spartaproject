@@ -124,6 +124,10 @@ def _get_expected_bool() -> str:
     return "true"
 
 
+def _get_expected_integer() -> str:
+    return "1"
+
+
 def test_bool_array() -> None:
     """Test to convert data which is list of type "bool"."""
     source_array: Bools = [_get_bool()]
@@ -148,7 +152,7 @@ def test_integer_array() -> None:
     """Test to convert data which is list of type "int"."""
     source_array: Ints = [_get_integer()]
     source_arrays: Ints2 = [source_array]
-    expected: str = "1"
+    expected: str = _get_expected_integer()
 
     _common_test_array(expected, source_array)
     _common_test_array2(expected, source_arrays)
@@ -158,7 +162,7 @@ def test_integer_pair() -> None:
     """Test to convert data which is dictionary of type "int"."""
     source_pair: IntPair = {"B": _get_integer()}
     source_pairs: IntPair2 = {"A": source_pair}
-    expected: str = "1"
+    expected: str = _get_expected_integer()
 
     _common_test_pair(expected, source_pair)
     _common_test_pair2(expected, source_pairs)
