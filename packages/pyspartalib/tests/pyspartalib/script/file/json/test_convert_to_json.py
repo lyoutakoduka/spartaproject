@@ -200,6 +200,10 @@ def _get_path_pair() -> PathPair:
     return {"B": _get_path()}
 
 
+def _get_path_pairs() -> PathPair2:
+    return {"A": _get_path_pair()}
+
+
 def _get_mixed() -> Singles:
     return [
         None,
@@ -344,12 +348,10 @@ def test_path_array() -> None:
 
 def test_path_pair() -> None:
     """Test to convert data which is dictionary of type "Path"."""
-    source_pair: PathPair = _get_path_pair()
-    source_pairs: PathPair2 = {"A": source_pair}
     expected: str = _get_expected_string()
 
-    _common_test_pair(expected, source_pair)
-    _common_test_pair2(expected, source_pairs)
+    _common_test_pair(expected, _get_path_pair())
+    _common_test_pair2(expected, _get_path_pairs())
 
 
 def test_tree() -> None:
