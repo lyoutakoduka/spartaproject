@@ -120,6 +120,10 @@ def _get_integer_pair() -> IntPair:
     return {"B": _get_integer()}
 
 
+def _get_integer_pairs() -> IntPair2:
+    return {"A": _get_integer_pair()}
+
+
 def _get_float() -> float:
     return 1.0
 
@@ -216,12 +220,10 @@ def test_integer_array() -> None:
 
 def test_integer_pair() -> None:
     """Test to convert data which is dictionary of type "int"."""
-    source_pair: IntPair = _get_integer_pair()
-    source_pairs: IntPair2 = {"A": source_pair}
     expected: str = _get_expected_integer()
 
-    _common_test_pair(expected, source_pair)
-    _common_test_pair2(expected, source_pairs)
+    _common_test_pair(expected, _get_integer_pair())
+    _common_test_pair2(expected, _get_integer_pairs())
 
 
 def test_float_array() -> None:
