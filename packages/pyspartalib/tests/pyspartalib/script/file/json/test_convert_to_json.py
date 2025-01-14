@@ -192,6 +192,10 @@ def _get_path_array() -> Paths:
     return [_get_path()]
 
 
+def _get_path_arrays() -> Paths2:
+    return [_get_path_array()]
+
+
 def _get_mixed() -> Singles:
     return [
         None,
@@ -328,12 +332,10 @@ def test_string_pair() -> None:
 
 def test_path_array() -> None:
     """Test to convert data which is list of type "Path"."""
-    source_array: Paths = _get_path_array()
-    source_arrays: Paths2 = [source_array]
     expected: str = _get_expected_string()
 
-    _common_test_array(expected, source_array)
-    _common_test_array2(expected, source_arrays)
+    _common_test_array(expected, _get_path_array())
+    _common_test_array2(expected, _get_path_arrays())
 
 
 def test_path_pair() -> None:
