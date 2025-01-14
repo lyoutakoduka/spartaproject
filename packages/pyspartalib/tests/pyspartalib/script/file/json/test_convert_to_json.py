@@ -100,6 +100,10 @@ def _get_bool_pair() -> BoolPair:
     return {"B": _get_bool()}
 
 
+def _get_bool_pairs() -> BoolPair2:
+    return {"A": _get_bool_pair()}
+
+
 def _get_integer() -> int:
     return 1
 
@@ -184,12 +188,10 @@ def test_bool_array() -> None:
 
 def test_bool_pair() -> None:
     """Test to convert data which is dictionary of type "bool"."""
-    source_pair: BoolPair = _get_bool_pair()
-    source_pairs: BoolPair2 = {"A": source_pair}
     expected: str = _get_expected_bool()
 
-    _common_test_pair(expected, source_pair)
-    _common_test_pair2(expected, source_pairs)
+    _common_test_pair(expected, _get_bool_pair())
+    _common_test_pair2(expected, _get_bool_pairs())
 
 
 def test_integer_array() -> None:
