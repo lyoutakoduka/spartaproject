@@ -66,6 +66,10 @@ def _get_bool_array() -> Json:
     return [_get_bool()]
 
 
+def _get_bool_arrays() -> Json:
+    return [_get_bool_array()]
+
+
 def _common_test(expected: Single, result: Single, size: Sized) -> None:
     _length_error(size, 1)
     _difference_error(result, expected)
@@ -90,11 +94,9 @@ def _common_test_pair2(expected: Single, result: Pair2) -> None:
 def test_bool_array() -> None:
     """Test to convert json format data to list of type "bool"."""
     source: bool = _get_bool()
-    source_array: Json = _get_bool_array()
-    source_arrays: Json = [source_array]
 
-    _common_test_array(source, bool_array_from_json(source_array))
-    _common_test_array2(source, bool_array2_from_json(source_arrays))
+    _common_test_array(source, bool_array_from_json(_get_bool_array()))
+    _common_test_array2(source, bool_array2_from_json(_get_bool_arrays()))
 
 
 def test_bool_pair() -> None:
