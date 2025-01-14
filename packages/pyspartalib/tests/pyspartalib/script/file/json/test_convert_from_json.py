@@ -126,6 +126,10 @@ def _get_string() -> str:
     return "root"
 
 
+def _get_string_array() -> Json:
+    return [_get_string()]
+
+
 def _common_test(expected: Single, result: Single, size: Sized) -> None:
     _length_error(size, 1)
     _difference_error(result, expected)
@@ -204,7 +208,7 @@ def test_decimal_pair() -> None:
 def test_string_array() -> None:
     """Test to convert json format data to list of type "str"."""
     source: str = _get_string()
-    source_array: Json = [source]
+    source_array: Json = _get_string_array()
     source_arrays: Json = [source_array]
 
     _common_test_array(source, string_array_from_json(source_array))
