@@ -102,6 +102,10 @@ def _get_decimal() -> Decimal:
     return Decimal("1.0")
 
 
+def _convert_float() -> float:
+    return float(_get_decimal())
+
+
 def _common_test(expected: Single, result: Single, size: Sized) -> None:
     _length_error(size, 1)
     _difference_error(result, expected)
@@ -161,7 +165,7 @@ def test_integer_pair() -> None:
 def test_decimal_array() -> None:
     """Test to convert json format data to list of type "Decimal"."""
     source: Decimal = _get_decimal()
-    source_array: Json = [float(source)]
+    source_array: Json = [_convert_float()]
     source_arrays: Json = [source_array]
 
     _common_test_array(source, decimal_array_from_json(source_array))
@@ -171,7 +175,7 @@ def test_decimal_array() -> None:
 def test_decimal_pair() -> None:
     """Test to convert json format data to dictionary of type "Decimal"."""
     source: Decimal = _get_decimal()
-    source_pair: Json = {"B": float(source)}
+    source_pair: Json = {"B": _convert_float()}
     source_pairs: Json = {"A": source_pair}
 
     _common_test_pair(source, decimal_pair_from_json(source_pair))
