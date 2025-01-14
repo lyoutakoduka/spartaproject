@@ -120,11 +120,15 @@ def _get_mixed() -> Singles:
     ]
 
 
+def _get_expected_bool() -> str:
+    return "true"
+
+
 def test_bool_array() -> None:
     """Test to convert data which is list of type "bool"."""
     source_array: Bools = [_get_bool()]
     source_arrays: Bools2 = [source_array]
-    expected: str = "true"
+    expected: str = _get_expected_bool()
 
     _common_test_array(expected, source_array)
     _common_test_array2(expected, source_arrays)
@@ -134,7 +138,7 @@ def test_bool_pair() -> None:
     """Test to convert data which is dictionary of type "bool"."""
     source_pair: BoolPair = {"B": _get_bool()}
     source_pairs: BoolPair2 = {"A": source_pair}
-    expected: str = "true"
+    expected: str = _get_expected_bool()
 
     _common_test_pair(expected, source_pair)
     _common_test_pair2(expected, source_pairs)
