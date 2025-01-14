@@ -82,6 +82,10 @@ def _get_integer() -> int:
     return 1
 
 
+def _get_integer_array() -> Json:
+    return [_get_integer()]
+
+
 def _common_test(expected: Single, result: Single, size: Sized) -> None:
     _length_error(size, 1)
     _difference_error(result, expected)
@@ -122,7 +126,7 @@ def test_bool_pair() -> None:
 def test_integer_array() -> None:
     """Test to convert json format data to list of type "int"."""
     source: int = _get_integer()
-    source_array: Json = [source]
+    source_array: Json = _get_integer_array()
     source_arrays: Json = [source_array]
 
     _common_test_array(source, integer_array_from_json(source_array))
