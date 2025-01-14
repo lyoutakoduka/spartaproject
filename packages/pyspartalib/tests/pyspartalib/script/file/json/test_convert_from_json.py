@@ -78,6 +78,10 @@ def _get_bool_pairs() -> Json:
     return {"A": _get_bool_pair()}
 
 
+def _get_integer() -> int:
+    return 1
+
+
 def _common_test(expected: Single, result: Single, size: Sized) -> None:
     _length_error(size, 1)
     _difference_error(result, expected)
@@ -117,7 +121,7 @@ def test_bool_pair() -> None:
 
 def test_integer_array() -> None:
     """Test to convert json format data to list of type "int"."""
-    source: int = 1
+    source: int = _get_integer()
     source_array: Json = [source]
     source_arrays: Json = [source_array]
 
@@ -127,7 +131,7 @@ def test_integer_array() -> None:
 
 def test_integer_pair() -> None:
     """Test to convert json format data to dictionary of type "int"."""
-    source: int = 1
+    source: int = _get_integer()
     source_pair: Json = {"B": source}
     source_pairs: Json = {"A": source_pair}
 
