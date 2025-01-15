@@ -106,20 +106,20 @@ def _convert_float() -> float:
     return float(_get_decimal())
 
 
-def _get_decimal_array() -> Json:
+def _get_float_array() -> Json:
     return [_convert_float()]
 
 
-def _get_decimal_arrays() -> Json:
-    return [_get_decimal_array()]
+def _get_float_arrays() -> Json:
+    return [_get_float_array()]
 
 
-def _get_decimal_pair() -> Json:
+def _get_float_pair() -> Json:
     return {"B": _convert_float()}
 
 
-def _get_decimal_pairs() -> Json:
-    return {"A": _get_decimal_pair()}
+def _get_float_pairs() -> Json:
+    return {"A": _get_float_pair()}
 
 
 def _get_string() -> str:
@@ -194,19 +194,16 @@ def test_decimal_array() -> None:
     """Test to convert json format data to list of type "Decimal"."""
     source: Decimal = _get_decimal()
 
-    _common_test_array(source, decimal_array_from_json(_get_decimal_array()))
-    _common_test_array2(
-        source,
-        decimal_array2_from_json(_get_decimal_arrays()),
-    )
+    _common_test_array(source, decimal_array_from_json(_get_float_array()))
+    _common_test_array2(source, decimal_array2_from_json(_get_float_arrays()))
 
 
 def test_decimal_pair() -> None:
     """Test to convert json format data to dictionary of type "Decimal"."""
     source: Decimal = _get_decimal()
 
-    _common_test_pair(source, decimal_pair_from_json(_get_decimal_pair()))
-    _common_test_pair2(source, decimal_pair2_from_json(_get_decimal_pairs()))
+    _common_test_pair(source, decimal_pair_from_json(_get_float_pair()))
+    _common_test_pair2(source, decimal_pair2_from_json(_get_float_pairs()))
 
 
 def test_string_array() -> None:
