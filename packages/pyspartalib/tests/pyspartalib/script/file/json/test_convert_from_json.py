@@ -138,6 +138,10 @@ def _get_string_arrays() -> Json:
     return [_get_string_array()]
 
 
+def _get_string_pair() -> Json:
+    return {"B": _get_string(), "C.path": _get_path()}
+
+
 def _common_test(expected: Single, result: Single, size: Sized) -> None:
     _length_error(size, 1)
     _difference_error(result, expected)
@@ -229,7 +233,7 @@ def test_string_array() -> None:
 def test_string_pair() -> None:
     """Test to convert json format data to dictionary of type "str"."""
     source: str = _get_string()
-    source_pair: Json = {"B": _get_string(), "C.path": _get_path()}
+    source_pair: Json = _get_string_pair()
     source_pairs: Json = {"A": source_pair}
 
     _common_test_pair(source, string_pair_from_json(source_pair))
