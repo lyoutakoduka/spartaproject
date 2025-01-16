@@ -6,7 +6,6 @@ from collections.abc import Sized
 from decimal import Decimal
 from pathlib import Path
 
-from pyspartalib.context.default.string_context import StrPair, StrPair2
 from pyspartalib.context.extension.path_context import PathPair, PathPair2
 from pyspartalib.context.file.json_context import (
     Array,
@@ -19,7 +18,6 @@ from pyspartalib.context.file.json_context import (
 )
 from pyspartalib.context.type_context import Type
 from pyspartalib.script.bool.compare_json import is_same_json
-from pyspartalib.script.bool.same_value import bool_same_array
 from pyspartalib.script.file.json.convert_from_json import (
     bool_array2_from_json,
     bool_array_from_json,
