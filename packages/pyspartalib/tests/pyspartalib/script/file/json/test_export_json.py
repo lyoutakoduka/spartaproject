@@ -10,7 +10,7 @@ from pyspartalib.context.file.json_context import Json
 from pyspartalib.context.type_context import Type
 from pyspartalib.script.file.json.export_json import json_dump, json_export
 from pyspartalib.script.file.text.import_file import text_import
-from pyspartalib.script.string.format_texts import format_indent
+from pyspartalib.script.stdout.format_texts import format_indent
 
 
 def _difference_error(result: Type, expected: Type) -> None:
