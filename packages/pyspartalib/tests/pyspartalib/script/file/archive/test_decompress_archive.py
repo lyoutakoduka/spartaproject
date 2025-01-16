@@ -31,7 +31,7 @@ from pyspartalib.script.path.status.get_statistic import get_file_size_array
 from pyspartalib.script.path.temporary.create_temporary_tree import (
     create_temporary_tree,
 )
-from pyspartalib.script.string.format_texts import format_indent
+from pyspartalib.script.stdout.format_texts import format_indent
 from pyspartalib.script.time.format.create_iso_date import get_iso_time
 from pyspartalib.script.time.path.get_timestamp import get_latest
 from pyspartalib.script.time.path.set_timestamp import set_latest
