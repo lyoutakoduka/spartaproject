@@ -62,7 +62,7 @@ class ExecuteServer(UploadServer):
             self.get_path("python_root"),
             self._set_version(version),
         )
-        self._error_identifier = self._get_error_identifier()
+        self._error_identifier: str = self._get_error_identifier()
 
     def _get_command(self, source_root: Path) -> Strs:
         return [
