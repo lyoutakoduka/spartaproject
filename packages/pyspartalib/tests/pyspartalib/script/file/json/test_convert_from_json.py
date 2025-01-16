@@ -126,6 +126,10 @@ def _get_string() -> str:
     return "root"
 
 
+def _get_path() -> Path:
+    return Path(_get_string())
+
+
 def _get_string_array() -> Json:
     return [_get_string()]
 
@@ -230,7 +234,7 @@ def test_string_pair() -> None:
 
 def test_path_array() -> None:
     """Test to convert json format data to list of type "Path"."""
-    source: Path = Path("root")
+    source: Path = _get_path()
     source_array: Json = [str(source)]
     source_arrays: Json = [source_array]
 
@@ -240,7 +244,7 @@ def test_path_array() -> None:
 
 def test_path_pair() -> None:
     """Test to convert json format data to dictionary of type "Path"."""
-    source: Path = Path("root")
+    source: Path = _get_path()
     source_pair: Json = {"B.path": str(source), "C": "remove"}
     source_pairs: Json = {"A": source_pair}
 
