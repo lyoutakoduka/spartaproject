@@ -22,4 +22,4 @@ def is_platform_linux() -> bool:
         bool: True if the platform is Linux.
 
     """
-    return "linux" == get_platform()
+    return get_platform() == "linux"
