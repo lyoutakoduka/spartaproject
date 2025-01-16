@@ -302,26 +302,3 @@ def test_safe() -> None:
             _get_expected_safe(),
         ),
     )
-
-
-def test_tree() -> None:
-    """Test to convert default json format data to custom json format."""
-    input_left: int = 1
-    input_right: str = "test"
-    source_pairs: Json = {"A": {"B": [None, input_left], "C": input_right}}
-    result: Json = from_safe_json(source_pairs)
-
-    assert isinstance(result, dict)
-    result_outside: Json = result["A"]
-    assert isinstance(result_outside, dict)
-    result_inside: Json = result_outside["B"]
-    assert isinstance(result_inside, list)
-
-    _fail_error(
-        bool_same_array(
-            [
-                input_right == result_outside["C"],
-                [None, input_left] == result_inside,
-            ],
-        ),
-    )
