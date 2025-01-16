@@ -223,13 +223,6 @@ def test_string_pair() -> None:
     _common_test_pair(source, string_pair_from_json(source_pair))
     _common_test_pair2(source, string_pair2_from_json(source_pairs))
 
-    result: StrPair = string_pair_from_json(source_pair)
-    _common_test(source, result["B"], result)
-
-    result_parent: StrPair2 = string_pair2_from_json(source_pairs)
-    result_child: StrPair = result_parent["A"]
-    _common_test(source, result_child["B"], result_child)
-
 
 def test_path_array() -> None:
     """Test to convert json format data to list of type "Path"."""
