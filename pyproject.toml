@@ -3,8 +3,19 @@ name = "pyspartaproj"
 version = "0.0.1"
 requires-python = ">=3.13.1"
 
-[dependency-groups]
-dev = ["mypy>=1.13.0", "pytest>=8.3.4", "ruff>=0.8.3"]
+[tool.uv]
+dev-dependencies = [
+  "mypy>=1.13.0",
+  "pytest>=8.3.4",
+  "ruff>=0.8.3",
+  "pyspartalib",
+]
+
+[tool.uv.sources]
+pyspartalib = { workspace = true }
+
+[tool.uv.workspace]
+members = ["packages/*"]
 
 [tool.ruff]
 cache-dir = "./.temp/.ruff_cache"
