@@ -278,6 +278,10 @@ def _get_mixed() -> SinglePair:
     }
 
 
+def _get_config_source() -> Json:
+    return {"section": dict(_get_mixed())}
+
+
 def test_tree() -> None:
     """Test to convert default json format data to custom json format."""
     input_left: int = 1
