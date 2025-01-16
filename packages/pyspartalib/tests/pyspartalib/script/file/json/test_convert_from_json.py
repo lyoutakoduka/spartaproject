@@ -155,6 +155,10 @@ def _common_test_pair2(expected: Single, result: Pair2) -> None:
     _common_test_pair(expected, result["A"])
 
 
+def _compare_path_pair(expected: Path, result: PathPair) -> None:
+    _common_test(expected, result["B.path"], result)
+
+
 def test_bool_array() -> None:
     """Test to convert json format data to list of type "bool"."""
     source: bool = _get_bool()
@@ -240,11 +244,8 @@ def test_path_pair() -> None:
     source_pair: Json = {"B.path": str(source), "C": "remove"}
     source_pairs: Json = {"A": source_pair}
 
-    result: PathPair = path_pair_from_json(source_pair)
-    _common_test(source, result["B.path"], result)
-
-    result_child: PathPair = path_pair2_from_json(source_pairs)["A"]
-    _common_test(source, result_child["B.path"], result_child)
+    _compare_path_pair(source, path_pair_from_json(source_pair))
+    _compare_path_pair(source, path_pair2_from_json(source_pairs)["A"])
 
 
 def test_tree() -> None:
