@@ -18,6 +18,7 @@ from pyspartalib.context.file.json_context import (
     SinglePair,
 )
 from pyspartalib.context.type_context import Type
+from pyspartalib.script.bool.compare_json import is_same_json
 from pyspartalib.script.bool.same_value import bool_same_array
 from pyspartalib.script.file.json.convert_from_json import (
     bool_array2_from_json,
@@ -291,6 +292,16 @@ def test_path_pair() -> None:
 
     _compare_path_pair(source, path_pair_from_json(_get_path_pair()))
     _compare_path_pair2(source, path_pair2_from_json(_get_path_pairs()))
+
+
+def test_safe() -> None:
+    """Test to convert default json format data to custom json format."""
+    _fail_error(
+        is_same_json(
+            from_safe_json(_get_config_source()),
+            _get_expected_safe(),
+        ),
+    )
 
 
 def test_tree() -> None:
