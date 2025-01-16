@@ -225,7 +225,7 @@ def test_string_array() -> None:
 def test_string_pair() -> None:
     """Test to convert json format data to dictionary of type "str"."""
     source: str = _get_string()
-    source_pair: Json = {"B": source, "C.path": Path("remove")}
+    source_pair: Json = {"B": _get_string(), "C.path": _get_path()}
     source_pairs: Json = {"A": source_pair}
 
     _common_test_pair(source, string_pair_from_json(source_pair))
@@ -235,7 +235,7 @@ def test_string_pair() -> None:
 def test_path_array() -> None:
     """Test to convert json format data to list of type "Path"."""
     source: Path = _get_path()
-    source_array: Json = [str(source)]
+    source_array: Json = [_get_string()]
     source_arrays: Json = [source_array]
 
     _common_test_array(source, path_array_from_json(source_array))
@@ -245,7 +245,7 @@ def test_path_array() -> None:
 def test_path_pair() -> None:
     """Test to convert json format data to dictionary of type "Path"."""
     source: Path = _get_path()
-    source_pair: Json = {"B.path": str(source), "C": "remove"}
+    source_pair: Json = {"B.path": _get_string(), "C": _get_string()}
     source_pairs: Json = {"A": source_pair}
 
     _compare_path_pair(source, path_pair_from_json(source_pair))
