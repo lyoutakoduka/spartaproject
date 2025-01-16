@@ -52,3 +52,5 @@ addopts = """
   --ignore ./docs
 """
 cache_dir = "./.temp/.pytest_cache"
+pythonpath = "packages/pyspartalib"
+testpaths = ["packages/pyspartalib/tests"]
