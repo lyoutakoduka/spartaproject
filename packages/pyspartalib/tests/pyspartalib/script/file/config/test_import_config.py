@@ -14,7 +14,7 @@ from pyspartalib.script.file.config.import_config import (
     config_load,
 )
 from pyspartalib.script.file.text.export_file import text_export
-from pyspartalib.script.string.format_texts import format_indent
+from pyspartalib.script.stdout.format_texts import format_indent
 
 
 def _difference_error(result: Type, expected: Type) -> None:
