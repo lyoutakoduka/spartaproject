@@ -243,8 +243,7 @@ def test_path_pair() -> None:
     result: PathPair = path_pair_from_json(source_pair)
     _common_test(source, result["B.path"], result)
 
-    result_parent: PathPair2 = path_pair2_from_json(source_pairs)
-    result_child: PathPair = result_parent["A"]
+    result_child: PathPair = path_pair2_from_json(source_pairs)["A"]
     _common_test(source, result_child["B.path"], result_child)
 
 
