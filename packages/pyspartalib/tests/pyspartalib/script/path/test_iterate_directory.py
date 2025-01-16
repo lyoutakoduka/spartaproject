@@ -12,7 +12,6 @@ from pyspartalib.context.extension.path_context import (
     PathGene,
     Paths,
 )
-from pyspartalib.context.type_context import Type
 from pyspartalib.script.path.iterate_directory import walk_iterator
 from pyspartalib.script.path.modify.current.get_relative import (
     get_relative_array,
