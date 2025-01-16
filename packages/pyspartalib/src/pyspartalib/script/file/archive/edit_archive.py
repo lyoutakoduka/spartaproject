@@ -176,7 +176,7 @@ class EditArchive(SafeTrash):
             Path: Path of archive.
 
         """
-        return self._path_error(self._archive_path)
+        return self._none_error(self._archive_path)
 
     def get_edit_root(self) -> Path:
         """Get path of temporary working space.
