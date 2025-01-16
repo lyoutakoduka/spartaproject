@@ -184,6 +184,21 @@ def _compare_path_pair2(expected: Path, result: PathPair2) -> None:
     _compare_path_pair(expected, result["A"])
 
 
+def _get_mixed() -> SinglePair:
+    return {
+        "null": None,
+        "boolean": _get_bool(),
+        "integer": _get_integer(),
+        "decimal": _get_float(),
+        "string": _get_string(),
+        "path.path": _get_string(),
+    }
+
+
+def _get_config_source() -> Json:
+    return {"section": dict(_get_mixed())}
+
+
 def test_bool_array() -> None:
     """Test to convert json format data to list of type "bool"."""
     source: bool = _get_bool()
@@ -265,21 +280,6 @@ def test_path_pair() -> None:
 
     _compare_path_pair(source, path_pair_from_json(_get_path_pair()))
     _compare_path_pair2(source, path_pair2_from_json(_get_path_pairs()))
-
-
-def _get_mixed() -> SinglePair:
-    return {
-        "null": None,
-        "boolean": _get_bool(),
-        "integer": _get_integer(),
-        "decimal": _get_float(),
-        "string": _get_string(),
-        "path.path": _get_string(),
-    }
-
-
-def _get_config_source() -> Json:
-    return {"section": dict(_get_mixed())}
 
 
 def test_tree() -> None:
