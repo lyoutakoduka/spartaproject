@@ -9,7 +9,6 @@ from tempfile import TemporaryDirectory
 from pyspartalib.context.default.integer_context import Ints
 from pyspartalib.context.default.string_context import Strs, Strs2
 from pyspartalib.context.extension.path_context import PathFunc, Paths
-from pyspartalib.context.type_context import Type
 from pyspartalib.script.path.iterate_directory import walk_iterator
 from pyspartalib.script.path.modify.current.get_relative import (
     get_relative_array,
