@@ -12,3 +12,7 @@ exclude = ["**/.temp/**", "**/.venv/**", "**/node_modules/**"]
 line-length = 79
 respect-gitignore = false
 target-version = "py313"
+
+[tool.ruff.format]
+docstring-code-format = true
+line-ending = "lf"
