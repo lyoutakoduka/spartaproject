@@ -199,6 +199,17 @@ def _get_config_source() -> Json:
     return {"section": dict(_get_mixed())}
 
 
+def _get_expected_safe() -> Json:
+    return {
+        "null": None,
+        "boolean": _get_bool(),
+        "integer": _get_integer(),
+        "decimal": _get_decimal(),
+        "string": _get_string(),
+        "path.path": _get_path(),
+    }
+
+
 def test_bool_array() -> None:
     """Test to convert json format data to list of type "bool"."""
     source: bool = _get_bool()
