@@ -239,11 +239,9 @@ def test_string_pair() -> None:
 def test_path_array() -> None:
     """Test to convert json format data to list of type "Path"."""
     source: Path = _get_path()
-    source_array: Json = [_get_string()]
-    source_arrays: Json = [source_array]
 
-    _common_test_array(source, path_array_from_json(source_array))
-    _common_test_array2(source, path_array2_from_json(source_arrays))
+    _common_test_array(source, path_array_from_json(_get_string_array()))
+    _common_test_array2(source, path_array2_from_json(_get_string_arrays()))
 
 
 def test_path_pair() -> None:
