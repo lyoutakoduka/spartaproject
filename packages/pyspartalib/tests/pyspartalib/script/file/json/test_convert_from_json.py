@@ -15,6 +15,7 @@ from pyspartalib.context.file.json_context import (
     Pair,
     Pair2,
     Single,
+    SinglePair,
 )
 from pyspartalib.context.type_context import Type
 from pyspartalib.script.bool.same_value import bool_same_array
@@ -264,6 +265,17 @@ def test_path_pair() -> None:
 
     _compare_path_pair(source, path_pair_from_json(_get_path_pair()))
     _compare_path_pair2(source, path_pair2_from_json(_get_path_pairs()))
+
+
+def _get_mixed() -> SinglePair:
+    return {
+        "null": None,
+        "boolean": _get_bool(),
+        "integer": _get_integer(),
+        "decimal": _get_float(),
+        "string": _get_string(),
+        "path.path": _get_string(),
+    }
 
 
 def test_tree() -> None:
