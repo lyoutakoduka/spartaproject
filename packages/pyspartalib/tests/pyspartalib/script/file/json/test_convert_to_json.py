@@ -354,7 +354,7 @@ def test_path_pair() -> None:
     _common_test_pair2(expected, _get_path_pairs())
 
 
-def test_tree() -> None:
+def test_safe() -> None:
     """Test to convert custom json format data to default json format."""
     _difference_error(
         json_dump(to_safe_json(_get_config_source()), compress=True),
