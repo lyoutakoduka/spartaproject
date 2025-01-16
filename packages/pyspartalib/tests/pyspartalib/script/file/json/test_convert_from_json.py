@@ -102,12 +102,12 @@ def _get_decimal() -> Decimal:
     return Decimal("1.0")
 
 
-def _convert_float() -> float:
+def _get_float() -> float:
     return float(_get_decimal())
 
 
 def _get_float_array() -> Json:
-    return [_convert_float()]
+    return [_get_float()]
 
 
 def _get_float_arrays() -> Json:
@@ -115,7 +115,7 @@ def _get_float_arrays() -> Json:
 
 
 def _get_float_pair() -> Json:
-    return {"B": _convert_float()}
+    return {"B": _get_float()}
 
 
 def _get_float_pairs() -> Json:
