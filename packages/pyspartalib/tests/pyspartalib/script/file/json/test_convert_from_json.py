@@ -146,6 +146,10 @@ def _get_string_pairs() -> Json:
     return {"A": _get_string_pair()}
 
 
+def _get_path_pair() -> Json:
+    return {"B.path": _get_string(), "C": _get_string()}
+
+
 def _common_test(expected: Single, result: Single, size: Sized) -> None:
     _length_error(size, 1)
     _difference_error(result, expected)
@@ -253,7 +257,7 @@ def test_path_array() -> None:
 def test_path_pair() -> None:
     """Test to convert json format data to dictionary of type "Path"."""
     source: Path = _get_path()
-    source_pair: Json = {"B.path": _get_string(), "C": _get_string()}
+    source_pair: Json = _get_path_pair()
     source_pairs: Json = {"A": source_pair}
 
     _compare_path_pair(source, path_pair_from_json(source_pair))
