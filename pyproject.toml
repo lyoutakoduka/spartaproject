@@ -28,6 +28,11 @@ target-version = "py313"
 docstring-code-format = true
 line-ending = "lf"
 
+[tool.ruff.lint]
+select = ["ALL"]
+fixable = ["ALL"]
+ignore = ["D203", "D213"]
+
 [tool.mypy]
 cache_dir = "./.temp/.mypy_cache"
 disallow_any_decorated = true
@@ -38,11 +43,6 @@ implicit_optional = true
 implicit_reexport = true
 strict = true
 warn_unreachable = true
-
-[tool.ruff.lint]
-select = ["ALL"]
-fixable = ["ALL"]
-ignore = ["D203", "D213"]
 
 [tool.pytest.ini_options]
 addopts = """
