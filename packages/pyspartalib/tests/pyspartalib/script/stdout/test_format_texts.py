@@ -4,7 +4,7 @@
 
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.context.type_context import Type
-from pyspartalib.script.stdout.format_texts import format_indent
+from pyspartalib.script.stdout.format_indent import format_indent
 
 
 def _difference_error(result: Type, expected: Type) -> None:

@@ -3,9 +3,9 @@
 """Test module to redirect stdout to string variable forcibly."""
 
 from pyspartalib.context.type_context import Type
-from pyspartalib.script.stdout.format_texts import format_indent
-from pyspartalib.script.stdout.logger import show_log
+from pyspartalib.script.stdout.format_indent import format_indent
 from pyspartalib.script.stdout.off_stdout import StdoutText
+from pyspartalib.script.stdout.send_stdout import send_stdout
 
 
 def _difference_error(result: Type, expected: Type) -> None:
@@ -16,8 +16,8 @@ def _difference_error(result: Type, expected: Type) -> None:
 def _decorate_function(message: str, stdout_text: StdoutText) -> None:
     @stdout_text.decorator
     def _messages() -> None:
-        show_log(message)
-        show_log(message)
+        send_stdout(message)
+        send_stdout(message)
 
     _messages()
 

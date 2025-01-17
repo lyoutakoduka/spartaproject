@@ -3,8 +3,8 @@
 """Test module to show log to stdout."""
 
 from pyspartalib.context.type_context import Type
-from pyspartalib.script.stdout.logger import show_log
 from pyspartalib.script.stdout.off_stdout import StdoutText
+from pyspartalib.script.stdout.send_stdout import send_stdout
 
 
 def _difference_error(result: Type, expected: Type) -> None:
@@ -17,7 +17,7 @@ def _get_expected() -> str:
 
 
 def _show_log() -> None:
-    show_log(_get_expected())
+    send_stdout(_get_expected())
 
 
 def _decorate_function(stdout_text: StdoutText) -> StdoutText:
