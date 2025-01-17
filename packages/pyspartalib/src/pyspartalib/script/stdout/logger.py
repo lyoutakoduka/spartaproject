@@ -7,7 +7,7 @@ def show_log(log: object) -> None:
     """Show log to stdout.
 
     Args:
-        text (str): String you want to show.
+        log (object): String you want to show.
 
     """
     print(log)
