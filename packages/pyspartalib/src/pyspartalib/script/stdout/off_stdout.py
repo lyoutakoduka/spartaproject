@@ -10,7 +10,7 @@ from pyspartalib.context.type_context import Param, Type
 from pyspartalib.script.decorator_generator import TransferFunction
 
 
-class StdoutText(TransferFunction):
+class OffStdout(TransferFunction):
     """Class to redirect stdout to string variable forcibly."""
 
     def wrapper(
