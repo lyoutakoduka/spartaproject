@@ -3,7 +3,7 @@
 """Test module to show log to stdout."""
 
 from pyspartalib.context.type_context import Type
-from pyspartalib.script.stdout.off_stdout import StdoutText
+from pyspartalib.script.stdout.off_stdout import OffStdout
 from pyspartalib.script.stdout.send_stdout import send_stdout
 
 
@@ -20,7 +20,7 @@ def _show_log() -> None:
     send_stdout(_get_expected())
 
 
-def _decorate_function(stdout_text: StdoutText) -> StdoutText:
+def _decorate_function(stdout_text: OffStdout) -> OffStdout:
     @stdout_text.decorator
     def _messages() -> None:
         _show_log()
@@ -35,7 +35,7 @@ def _remove_end(result: str) -> str:
 
 
 def _execute_log_function() -> str:
-    return _remove_end(_decorate_function(StdoutText()).show())
+    return _remove_end(_decorate_function(OffStdout()).show())
 
 
 def test_show() -> None:

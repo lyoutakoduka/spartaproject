@@ -4,7 +4,7 @@
 
 from pyspartalib.context.type_context import Type
 from pyspartalib.script.stdout.format_indent import format_indent
-from pyspartalib.script.stdout.off_stdout import StdoutText
+from pyspartalib.script.stdout.off_stdout import OffStdout
 from pyspartalib.script.stdout.send_stdout import send_stdout
 
 
@@ -13,7 +13,7 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
-def _decorate_function(message: str, stdout_text: StdoutText) -> None:
+def _decorate_function(message: str, stdout_text: OffStdout) -> None:
     @stdout_text.decorator
     def _messages() -> None:
         send_stdout(message)
@@ -29,7 +29,7 @@ def test_messages() -> None:
         Hello, World!
         Hello, World!
         """
-    stdout_text = StdoutText()
+    stdout_text = OffStdout()
 
     _decorate_function(message, stdout_text)
 
