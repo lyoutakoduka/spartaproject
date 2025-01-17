@@ -3,7 +3,7 @@
 """Module to handle I/O functionalities of any script called pipeline."""
 
 from pyspartalib.context.default.string_context import Strs
-from pyspartalib.script.stdout.logger import show_log
+from pyspartalib.script.stdout.send_stdout import send_stdout
 from pyspartalib.script.time.count.log_timer import LogTimer
 
 
@@ -20,7 +20,7 @@ class LogPipeline(LogTimer):
 
     def _show_message(self, message: str) -> None:
         if self._enable_shown:
-            show_log(message)
+            send_stdout(message)
         else:
             self._log += [message]
 
