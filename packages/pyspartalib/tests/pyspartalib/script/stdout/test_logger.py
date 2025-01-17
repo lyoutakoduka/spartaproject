@@ -30,8 +30,12 @@ def _decorate_function(stdout_text: StdoutText) -> StdoutText:
     return stdout_text
 
 
+def _remove_end(result: str) -> str:
+    return result[:-1]
+
+
 def _execute_log_function() -> str:
-    return _decorate_function(StdoutText()).show()
+    return _remove_end(_decorate_function(StdoutText()).show())
 
 
 def test_show() -> None:
