@@ -200,11 +200,15 @@ def _set_file_latest(paths: Paths) -> None:
             set_latest(path, latest)
 
 
+def _filter_length(result: Sized, expected: int) -> bool:
+    return len(result) == expected
+
+
 def _find_unused(paths: Paths) -> Paths:
     return [
         path
         for path in paths
-        if _length_error(list(walk_iterator(path, depth=1)), 0)
+        if _filter_length(list(walk_iterator(path, depth=1)), 0)
     ]
 
 
