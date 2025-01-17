@@ -2,11 +2,11 @@
 
 """Module for test to execute specific script in Python."""
 
-from pyspartalib.script.stdout.logger import show_log
+from pyspartalib.script.stdout.send_stdout import send_stdout
 
 
 def _main() -> None:
-    show_log("simple")
+    send_stdout("simple")
 
 
 if __name__ == "__main__":

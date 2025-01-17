@@ -4,7 +4,7 @@
 
 from platform import uname
 
-from pyspartalib.script.stdout.logger import show_log
+from pyspartalib.script.stdout.send_stdout import send_stdout
 
 
 def _get_platform() -> str:
@@ -12,7 +12,7 @@ def _get_platform() -> str:
 
 
 def _main() -> None:
-    show_log(_get_platform())
+    send_stdout(_get_platform())
 
 
 if __name__ == "__main__":
