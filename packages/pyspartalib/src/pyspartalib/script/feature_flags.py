@@ -2,8 +2,6 @@
 
 """Module to manage feature flags."""
 
-from logging import Formatter, Handler, Logger, StreamHandler, getLogger
-
 
 def in_development(file: str | None = None) -> bool:
     """Check feature flag.
