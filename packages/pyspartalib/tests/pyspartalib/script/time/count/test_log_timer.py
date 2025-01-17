@@ -8,7 +8,7 @@ from pyspartalib.context.custom.timer_context import TimerFunc, TimerIntStrFunc
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.context.type_context import Type
 from pyspartalib.script.decimal.initialize_decimal import initialize_decimal
-from pyspartalib.script.stdout.format_texts import format_indent
+from pyspartalib.script.stdout.format_indent import format_indent
 from pyspartalib.script.time.count.log_timer import LogTimer
 
 initialize_decimal()
