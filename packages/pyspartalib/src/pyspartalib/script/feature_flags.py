@@ -5,16 +5,6 @@
 from logging import Formatter, Handler, Logger, StreamHandler, getLogger
 
 
-def _config_logger(handler_name: str, handler: Handler) -> Logger:
-    logger: Logger = getLogger(handler_name)
-    logger.addHandler(handler)
-
-    handler.setFormatter(
-        Formatter("%(levelname)s (%(asctime)s) [%(name)s] %(message)s"),
-    )
-    return logger
-
-
 def in_development(file: str | None = None) -> bool:
     """Check feature flag.
 
@@ -26,9 +16,4 @@ def in_development(file: str | None = None) -> bool:
         bool: True if in development.
 
     """
-    if file is None:
-        return False
-
-    _config_logger("feature_flags", StreamHandler()).info(file)
-
-    return True
+    return file is not None
