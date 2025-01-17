@@ -11,9 +11,11 @@ from tests.pyspartalib.interface.pytest import raises
 
 def test_float() -> None:
     """Test for assign float to Decimal type directly."""
+    number: float = 1.0
+
     with raises(FloatOperation):
         initialize_decimal()
-        Decimal(1.0)
+        Decimal(number)
 
 
 def test_accuracy() -> None:
