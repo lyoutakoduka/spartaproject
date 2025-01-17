@@ -3,7 +3,7 @@
 """Module to show log to stdout."""
 
 
-def show_log(log: object) -> None:
+def send_stdout(log: object) -> None:
     """Show log to stdout.
 
     Args:
