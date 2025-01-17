@@ -8,7 +8,7 @@ from pyspartalib.context.custom.log_context import LogFunc
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.context.type_context import Type
 from pyspartalib.script.project.log_pipeline import LogPipeline
-from pyspartalib.script.stdout.off_stdout import StdoutText
+from pyspartalib.script.stdout.off_stdout import OffStdout
 
 
 def _none_error(result: Type | None) -> Type:
@@ -71,10 +71,7 @@ def _show_log(messages: Strs, pipeline: LogPipeline) -> LogPipeline:
     return pipeline
 
 
-def _decorate_function(
-    function: LogFunc,
-    stdout_text: StdoutText,
-) -> StdoutText:
+def _decorate_function(function: LogFunc, stdout_text: OffStdout) -> OffStdout:
     @stdout_text.decorator
     def _messages() -> None:
         function()
@@ -85,7 +82,7 @@ def _decorate_function(
 
 
 def _execute_log_function(function: LogFunc) -> str:
-    return _decorate_function(function, StdoutText()).show()
+    return _decorate_function(function, OffStdout()).show()
 
 
 def _initialize_pipeline(pipeline: LogPipeline) -> None:
