@@ -28,6 +28,7 @@ from pyspartalib.script.time.path.get_timestamp import (
     get_invalid_time,
     get_latest,
 )
+from pyspartalib.script.time.path.set_timestamp import set_invalid
 
 
 def _difference_error(result: Type, expected: Type) -> None:
@@ -76,7 +77,7 @@ def _set_invalid_datetime(path: Path) -> Path:
 
 def _set_invalid_directory(invalid_root: Path) -> None:
     for path in walk_iterator(invalid_root):
-        _set_invalid_datetime(path)
+        set_invalid(path)
 
 
 def _get_directory_latest(path: Path, access: bool) -> TimePair:

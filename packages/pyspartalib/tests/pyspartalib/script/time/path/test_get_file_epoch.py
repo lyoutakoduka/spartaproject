@@ -15,6 +15,7 @@ from pyspartalib.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
 from pyspartalib.script.time.path.get_file_epoch import get_file_epoch
+from pyspartalib.script.time.path.set_timestamp import set_invalid
 
 
 def _length_error(result: Sized, expected: int) -> None:
@@ -81,9 +82,8 @@ def test_empty() -> None:
     """Test to check the invalid date time about file you select."""
 
     def individual_test(temporary_root: Path) -> None:
-        file_path: Path = _set_invalid_datetime(
-            create_temporary_file(temporary_root),
-        )
+        file_path: Path = set_invalid(create_temporary_file(temporary_root))
+
         for status in [False, True]:
             _not_none_error(get_file_epoch(file_path, access=status))
 
