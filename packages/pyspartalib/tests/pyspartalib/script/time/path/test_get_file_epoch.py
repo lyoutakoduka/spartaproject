@@ -3,7 +3,6 @@
 """Test module to get date time about selected file or directory."""
 
 from collections.abc import Sized
-from os import utime
 from pathlib import Path
 from tempfile import TemporaryDirectory
 

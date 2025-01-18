@@ -4,7 +4,6 @@
 
 from collections.abc import Sized
 from datetime import datetime
-from os import utime
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
