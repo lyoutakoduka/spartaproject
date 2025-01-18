@@ -75,6 +75,14 @@ def _get_source_jst_access() -> IntPair2:
     }
 
 
+def _get_invalid_source() -> IntPair2:
+    return {
+        "year": {"year": 1, "month": 1, "day": 1},
+        "hour": {"hour": 0, "minute": 0, "second": 0, "micro": 0},
+        "zone": _get_utc(),
+    }
+
+
 def _time_utc() -> IntPair3:
     return {"update": _get_source(), "access": _get_source_access()}
 
