@@ -30,7 +30,7 @@ class ExecuteServer(UploadServer):
         )
 
     def _length_error(self, result: Sized, expected: int) -> None:
-        if len(result) == expected:
+        if len(result) != expected:
             raise ValueError
 
     def _set_version(self, version: str | None) -> str:
