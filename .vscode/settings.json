@@ -46,6 +46,7 @@
   "search.useIgnoreFiles": false,
   "search.exclude": { "**/.venv/**": true },
   "terminal.integrated.fontSize": 14,
+  "testing.automaticallyOpenTestResults": "neverOpen",
   "testing.gutterEnabled": true,
   "workbench.colorTheme": "Dracula Theme",
   "workbench.editor.enablePreview": false,
