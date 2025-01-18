@@ -76,9 +76,11 @@ def test_empty() -> None:
     """Test to check the invalid date time about file you select."""
 
     def individual_test(temporary_root: Path) -> None:
-        file_path: Path = set_invalid(create_temporary_file(temporary_root))
-
-        for status in [False, True]:
-            _not_none_error(get_file_epoch(file_path, access=status))
+        _length_error(
+            _get_file_epochs(
+                set_invalid(create_temporary_file(temporary_root)),
+            ),
+            0,
+        )
 
     _inside_temporary_directory(individual_test)
