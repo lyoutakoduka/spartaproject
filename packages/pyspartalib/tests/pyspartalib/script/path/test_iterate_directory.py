@@ -22,7 +22,7 @@ from pyspartalib.script.path.temporary.create_temporary_tree import (
 
 
 def _length_error(result: Sized, expected: int) -> None:
-    if len(result) == expected:
+    if len(result) != expected:
         raise ValueError
 
 
