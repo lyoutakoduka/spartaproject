@@ -34,6 +34,11 @@ def _get_path_times(path: Path, time: datetime, access: bool) -> Decs:
     return path_times
 
 
+def _set_time(path: Path, access: float, update: float) -> Path:
+    utime(path, (access, update))
+    return path
+
+
 def set_latest(path: Path, time: datetime, access: bool = False) -> Path:
     """Set latest date time of file or directory by time object.
 
@@ -49,7 +54,4 @@ def set_latest(path: Path, time: datetime, access: bool = False) -> Path:
         Path: Path of file or directory you set latest date time.
 
     """
-    numbers: Floats = _get_file_date_time(path, time, access)
-    utime(path, (numbers[0], numbers[1]))
-
-    return path
+    return _set_time(path, *_get_file_date_time(path, time, access))
