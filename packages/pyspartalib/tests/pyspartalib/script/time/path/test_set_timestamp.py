@@ -11,7 +11,7 @@ from pyspartalib.context.default.integer_context import (
     IntPair3,
 )
 from pyspartalib.context.extension.path_context import PathFunc
-from pyspartalib.context.extension.time_context import TimePair
+from pyspartalib.context.extension.time_context import TimePair, Times
 from pyspartalib.context.type_context import Type
 from pyspartalib.script.directory.create_directory import create_directory
 from pyspartalib.script.path.temporary.create_temporary_file import (
@@ -116,6 +116,10 @@ def _compare_datetime(path: Path, times: IntPair3) -> None:
 
     for group, expected in _get_input_time(times).items():
         _difference_error(_get_latest_pair(path)[group], expected)
+
+
+def _get_latest_list(path: Path) -> Times:
+    return list(set(_get_latest_pair(path).values()))
 
 
 def _inside_temporary_directory(function: PathFunc) -> None:
