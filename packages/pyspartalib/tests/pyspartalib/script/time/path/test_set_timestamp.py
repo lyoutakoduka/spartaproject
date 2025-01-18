@@ -134,6 +134,10 @@ def _compare_invalid(times: Times, expected: datetime) -> None:
     _difference_error(times[0], expected)
 
 
+def _set_invalid_date(path: Path) -> Path:
+    return set_invalid(create_temporary_file(path))
+
+
 def _inside_temporary_directory(function: PathFunc) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
@@ -178,9 +182,7 @@ def test_jst() -> None:
 def test_invalid() -> None:
     def individual_test(temporary_root: Path) -> None:
         _compare_invalid(
-            _get_latest_list(
-                set_invalid(create_temporary_file(temporary_root)),
-            ),
+            _get_latest_list(_set_invalid_date(temporary_root)),
             get_iso_time(_get_invalid_source()),
         )
 
