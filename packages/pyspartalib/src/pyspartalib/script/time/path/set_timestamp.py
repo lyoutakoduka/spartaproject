@@ -39,6 +39,10 @@ def _set_time(path: Path, access: float, update: float) -> Path:
     return path
 
 
+def set_invalid(path: Path) -> Path:
+    return _set_time(path, 0.0, 0.0)
+
+
 def set_latest(path: Path, time: datetime, access: bool = False) -> Path:
     """Set latest date time of file or directory by time object.
 
