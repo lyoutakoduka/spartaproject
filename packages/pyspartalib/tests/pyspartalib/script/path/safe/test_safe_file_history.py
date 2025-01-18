@@ -41,7 +41,7 @@ def _not_none_error(result: object) -> None:
 
 
 def _length_error(result: Sized, expected: int) -> None:
-    if len(result) == expected:
+    if len(result) != expected:
         raise ValueError
 
 

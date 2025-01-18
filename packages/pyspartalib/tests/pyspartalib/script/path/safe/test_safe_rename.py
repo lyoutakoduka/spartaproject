@@ -35,7 +35,7 @@ def _none_error(result: Type | None) -> Type:
 
 
 def _length_error(result: Sized, expected: int) -> None:
-    if len(result) == expected:
+    if len(result) != expected:
         raise ValueError
 
 
