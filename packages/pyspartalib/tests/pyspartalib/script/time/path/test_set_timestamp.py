@@ -21,7 +21,7 @@ from pyspartalib.script.path.temporary.create_temporary_file import (
 )
 from pyspartalib.script.time.format.create_iso_date import get_iso_time
 from pyspartalib.script.time.path.get_timestamp import get_latest
-from pyspartalib.script.time.path.set_timestamp import set_latest
+from pyspartalib.script.time.path.set_timestamp import set_invalid, set_latest
 
 
 def _difference_error(result: Type, expected: Type) -> None:
@@ -170,6 +170,18 @@ def test_jst() -> None:
         _compare_datetime(
             create_temporary_file(temporary_root),
             _select_zone(jst=True),
+        )
+
+    _inside_temporary_directory(individual_test)
+
+
+def test_invalid() -> None:
+    def individual_test(temporary_root: Path) -> None:
+        _compare_invalid(
+            _get_latest_list(
+                set_invalid(create_temporary_file(temporary_root)),
+            ),
+            get_iso_time(_get_invalid_source()),
         )
 
     _inside_temporary_directory(individual_test)
