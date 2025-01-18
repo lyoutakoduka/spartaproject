@@ -70,11 +70,6 @@ def _compare_jst_timezone(path: Path) -> Times:
     return times
 
 
-def _set_invalid_datetime(path: Path) -> Path:
-    utime(path, (0, 0))
-    return path
-
-
 def _set_invalid_directory(invalid_root: Path) -> None:
     for path in walk_iterator(invalid_root):
         set_invalid(path)

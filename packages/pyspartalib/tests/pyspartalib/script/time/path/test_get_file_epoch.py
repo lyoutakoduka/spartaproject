@@ -35,11 +35,6 @@ def _not_none_error(result: object) -> None:
         raise ValueError
 
 
-def _set_invalid_datetime(file_path: Path) -> Path:
-    utime(file_path, (0, 0))
-    return file_path
-
-
 def _get_file_epochs(path: Path) -> Decs:
     return [
         epoch
