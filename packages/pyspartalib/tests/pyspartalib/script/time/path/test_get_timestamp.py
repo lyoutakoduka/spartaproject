@@ -36,7 +36,7 @@ def _difference_error(result: Type, expected: Type) -> None:
 
 
 def _length_error(result: Sized, expected: int) -> None:
-    if len(result) == expected:
+    if len(result) != expected:
         raise ValueError
 
 

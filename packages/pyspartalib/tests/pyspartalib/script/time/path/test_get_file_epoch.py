@@ -18,7 +18,7 @@ from pyspartalib.script.time.path.get_file_epoch import get_file_epoch
 
 
 def _length_error(result: Sized, expected: int) -> None:
-    if len(result) == expected:
+    if len(result) != expected:
         raise ValueError
 
 
