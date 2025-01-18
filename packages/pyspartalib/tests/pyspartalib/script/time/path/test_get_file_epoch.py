@@ -29,11 +29,6 @@ def _none_error(result: Type | None) -> Type:
     return result
 
 
-def _not_none_error(result: object) -> None:
-    if result is not None:
-        raise ValueError
-
-
 def _get_file_epochs(path: Path) -> Decs:
     return [
         epoch
