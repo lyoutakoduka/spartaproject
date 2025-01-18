@@ -3,6 +3,7 @@
 """test module to set latest date time of file or directory by time object."""
 
 from collections.abc import Sized
+from datetime import datetime
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
@@ -126,6 +127,11 @@ def _compare_datetime(path: Path, times: IntPair3) -> None:
 
 def _get_latest_list(path: Path) -> Times:
     return list(set(_get_latest_pair(path).values()))
+
+
+def _compare_invalid(times: Times, expected: datetime) -> None:
+    _length_error(times, 1)
+    _difference_error(times[0], expected)
 
 
 def _inside_temporary_directory(function: PathFunc) -> None:
