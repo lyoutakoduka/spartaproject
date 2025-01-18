@@ -44,6 +44,7 @@ def _get_source() -> IntPair2:
     return {
         "year": {"year": 1, "month": 1, "day": 1},
         "hour": {"hour": 0, "minute": 0, "second": 0},
+        "zone": {"hour": 0, "minute": 0},
     }
 
 
