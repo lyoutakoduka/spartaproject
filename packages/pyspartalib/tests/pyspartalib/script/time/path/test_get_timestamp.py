@@ -40,6 +40,13 @@ def _length_error(result: Sized, expected: int) -> None:
         raise ValueError
 
 
+def _none_error(result: Type | None) -> Type:
+    if result is None:
+        raise ValueError
+
+    return result
+
+
 def _is_access(group: str) -> bool:
     return group == "access"
 
