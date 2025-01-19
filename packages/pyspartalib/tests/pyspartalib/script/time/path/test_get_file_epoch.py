@@ -55,10 +55,10 @@ def _get_file_epoch_pair(path: Path) -> DecPair:
 
 
 def _common_test(path: Path) -> None:
-    file_epochs: Decs = list(set(_get_file_epochs(path)))
+    epochs: DecPair = _get_file_epoch_pair(path)
 
-    _length_error(file_epochs, 1)
-    _none_error(file_epochs[0])
+    _length_error(epochs, 2)
+    _difference_error(epochs["update"], epochs["access"])
 
 
 def _set_invalid_date(path: Path) -> Path:
