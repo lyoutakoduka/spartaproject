@@ -17,6 +17,11 @@ from pyspartalib.script.time.path.get_file_epoch import get_file_epoch
 from pyspartalib.script.time.path.set_timestamp import set_invalid
 
 
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
+
+
 def _length_error(result: Sized, expected: int) -> None:
     if len(result) != expected:
         raise ValueError
