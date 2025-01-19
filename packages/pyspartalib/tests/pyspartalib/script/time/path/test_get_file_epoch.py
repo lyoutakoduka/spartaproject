@@ -61,6 +61,10 @@ def _common_test(path: Path) -> None:
     _difference_error(epochs["update"], epochs["access"])
 
 
+def _invalid_test(path: Path) -> None:
+    _length_error(_get_file_epoch_pair(path), 0)
+
+
 def _set_invalid_date(path: Path) -> Path:
     return set_invalid(create_temporary_file(path))
 
