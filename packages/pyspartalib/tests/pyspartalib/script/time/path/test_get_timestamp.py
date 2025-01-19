@@ -40,6 +40,10 @@ def _length_error(result: Sized, expected: int) -> None:
         raise ValueError
 
 
+def _is_access(group: str) -> bool:
+    return group == "access"
+
+
 def _get_source() -> IntPair2:
     return {
         "year": {"year": 1, "month": 1, "day": 1},
