@@ -19,10 +19,6 @@ def _convert_timestamp(time: datetime) -> Decimal:
     return Decimal(str(offset_time(time).timestamp()))
 
 
-def _get_file_date_time(path: Path, time: datetime, access: bool) -> Floats:
-    return convert_float_array(_get_path_times(path, time, access))
-
-
 def _get_path_times(path: Path, time: datetime, access: bool) -> Decs:
     path_times: Decs = [_convert_timestamp(time)]
 
