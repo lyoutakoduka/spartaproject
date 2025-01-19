@@ -47,6 +47,10 @@ def _none_error(result: Type | None) -> Type:
     return result
 
 
+def _get_expected_files() -> Strs:
+    return ["file.json", "empty", "file.ini", "file.txt"]
+
+
 def _is_access(group: str) -> bool:
     return group == "access"
 
@@ -110,9 +114,7 @@ def _get_files(times: TimePair, expected: Strs) -> Strs:
 
 
 def _compare_invalid_files(times: TimePair) -> None:
-    expected: Strs = ["file.json", "empty", "file.ini", "file.txt"]
-
-    _length_error(list(set(_get_files(times, expected))), 1)
+    _length_error(list(set(_get_files(times, _get_expected_files()))), 1)
 
 
 def _get_time_zone(times: TimePair) -> str:
