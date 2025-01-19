@@ -34,8 +34,11 @@ def _get_path_times(path: Path, time: datetime, access: bool) -> Decs:
     return path_times
 
 
-def _set_time(path: Path, access: float, update: float) -> Path:
-    utime(path, (access, update))
+def _set_time(path: Path, access: Decimal, update: Decimal) -> Path:
+    times: Floats = convert_float_array([access, update])
+
+    utime(path, (times[0], times[1]))
+
     return path
 
 
