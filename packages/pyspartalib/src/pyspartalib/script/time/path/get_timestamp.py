@@ -16,14 +16,6 @@ def _convert_timestamp(time: float, jst: bool) -> datetime:
     return time_from_timestamp(Decimal(str(time)), jst=jst)
 
 
-def _add_latest_times(
-    path: Path,
-    time: datetime,
-    latest_times: TimePair,
-) -> None:
-    latest_times[str(path)] = time
-
-
 def _get_latest_times(
     walk_generator: PathGene,
     access: bool = False,
