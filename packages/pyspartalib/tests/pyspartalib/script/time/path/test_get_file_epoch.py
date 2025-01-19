@@ -6,7 +6,7 @@ from collections.abc import Sized
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from pyspartalib.context.extension.decimal_context import Decs
+from pyspartalib.context.extension.decimal_context import DecPair, Decs
 from pyspartalib.context.extension.path_context import PathFunc
 from pyspartalib.context.type_context import Type
 from pyspartalib.script.directory.create_directory import create_directory
@@ -44,6 +44,14 @@ def _get_file_epochs(path: Path) -> Decs:
         for status in [False, True]
         if (epoch := get_file_epoch(path, access=status))
     ]
+
+
+def _get_file_epoch_pair(path: Path) -> DecPair:
+    return {
+        group: epoch
+        for group in ["update", "access"]
+        if (epoch := get_file_epoch(path, access=_is_access(group)))
+    }
 
 
 def _common_test(path: Path) -> None:
