@@ -143,7 +143,7 @@ def test_file() -> None:
     """Test to get latest date time of file with readable format."""
 
     def individual_test(temporary_root: Path) -> None:
-        _compare_utc_timezone(create_temporary_file(temporary_root))
+        _compare_timezone(create_temporary_file(temporary_root), False)
 
     _inside_temporary_directory(individual_test)
 
@@ -152,8 +152,9 @@ def test_directory() -> None:
     """Test to get latest date time of directory with readable format."""
 
     def individual_test(temporary_root: Path) -> None:
-        _compare_utc_timezone(
+        _compare_timezone(
             create_directory(Path(temporary_root, "temporary")),
+            False,
         )
 
     _inside_temporary_directory(individual_test)
@@ -163,10 +164,11 @@ def test_jst() -> None:
     """Test to get latest date time of file as JST time zone."""
 
     def individual_test(temporary_root: Path) -> None:
-        times: Times = _compare_jst_timezone(
+        times: TimePair = _compare_timezone(
             create_temporary_file(temporary_root),
+            True,
         )
-        _difference_error(str(times[0].utcoffset()), "9:00:00")
+        _difference_error(str(times["update"].utcoffset()), "9:00:00")
 
     _inside_temporary_directory(individual_test)
 
