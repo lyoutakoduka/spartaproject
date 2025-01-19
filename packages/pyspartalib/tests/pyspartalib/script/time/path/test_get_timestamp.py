@@ -115,6 +115,10 @@ def _compare_invalid_files(times: TimePair) -> None:
     _length_error(list(set(_get_files(times, expected))), 1)
 
 
+def _get_time_zone(times: TimePair) -> str:
+    return str(_none_error(times["update"].utcoffset()))
+
+
 def _inside_temporary_directory(function: PathFunc) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
@@ -150,11 +154,15 @@ def test_jst() -> None:
     """Test to get latest date time of file as JST time zone."""
 
     def individual_test(temporary_root: Path) -> None:
-        times: TimePair = _compare_timezone(
-            create_temporary_file(temporary_root),
-            True,
+        _difference_error(
+            _get_time_zone(
+                _compare_timezone(
+                    create_temporary_file(temporary_root),
+                    True,
+                ),
+            ),
+            "9:00:00",
         )
-        _difference_error(str(times["update"].utcoffset()), "9:00:00")
 
     _inside_temporary_directory(individual_test)
 
