@@ -18,7 +18,7 @@ def _get_access_date(path: Path) -> Decimal:
 
 
 def _get_update_date(path: Path) -> Decimal:
-    return _to_decimal(path.stat().st_atime)
+    return _to_decimal(path.stat().st_mtime)
 
 
 def _get_epoch_source(path: Path, access: bool) -> Decimal:
