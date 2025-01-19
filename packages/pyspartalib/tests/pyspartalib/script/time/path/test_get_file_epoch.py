@@ -34,6 +34,10 @@ def _none_error(result: Type | None) -> Type:
     return result
 
 
+def _is_access(group: str) -> bool:
+    return group == "access"
+
+
 def _get_file_epochs(path: Path) -> Decs:
     return [
         epoch
