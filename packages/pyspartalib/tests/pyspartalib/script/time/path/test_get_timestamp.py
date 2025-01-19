@@ -100,6 +100,14 @@ def _get_latest_pair_2(path: Path, jst: bool) -> TimePair:
     }
 
 
+def _compare_timezone(path: Path, jst: bool) -> TimePair:
+    times: TimePair = _get_latest_pair_2(path, jst)
+
+    _difference_error(times["update"], times["access"])
+
+    return times
+
+
 def _get_invalid_time() -> datetime:
     return get_invalid_time()  # To avoid a circular reference.
 
