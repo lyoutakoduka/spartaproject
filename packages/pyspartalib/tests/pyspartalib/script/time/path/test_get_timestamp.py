@@ -52,27 +52,6 @@ def _get_source() -> IntPair2:
     }
 
 
-def _common_test(times: Times) -> None:
-    _difference_error(*times)
-
-
-def _get_latest_pair(path: Path, jst: bool) -> Times:
-    return [
-        get_latest(path, access=status, jst=jst) for status in [False, True]
-    ]
-
-
-def _compare_utc_timezone(path: Path) -> None:
-    _common_test(_get_latest_pair(path, False))
-
-
-def _compare_jst_timezone(path: Path) -> Times:
-    times: Times = _get_latest_pair(path, True)
-    _common_test(times)
-
-    return times
-
-
 def _set_invalid_directory(invalid_root: Path) -> None:
     for path in walk_iterator(invalid_root):
         set_invalid(path)
