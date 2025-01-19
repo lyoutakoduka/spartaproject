@@ -29,15 +29,10 @@ def _get_latest_times(
     access: bool = False,
     jst: bool = False,
 ) -> TimePair:
-    latest_times: TimePair = {}
-
-    for path in walk_generator:
-        if time := get_latest(path, jst=jst, access=access):
-            _add_latest_times(path, time, latest_times)
-        else:
-            _add_latest_times(path, get_invalid_time(), latest_times)
-
-    return latest_times
+    return {
+        str(path): get_latest(path, jst=jst, access=access)
+        for path in walk_generator
+    }
 
 
 def get_invalid_time() -> datetime:
