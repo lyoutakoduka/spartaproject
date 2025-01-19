@@ -72,7 +72,7 @@ def _get_relative_latest(path: Path, access: bool = False) -> TimePair:
     }
 
 
-def _get_latest_pair_2(path: Path, jst: bool) -> TimePair:
+def _get_latest_pair(path: Path, jst: bool) -> TimePair:
     return {
         group: get_latest(path, jst=jst, access=_is_access(group))
         for group in ["update", "access"]
@@ -80,7 +80,7 @@ def _get_latest_pair_2(path: Path, jst: bool) -> TimePair:
 
 
 def _compare_timezone(path: Path, jst: bool) -> TimePair:
-    times: TimePair = _get_latest_pair_2(path, jst)
+    times: TimePair = _get_latest_pair(path, jst)
 
     _difference_error(times["update"], times["access"])
 
