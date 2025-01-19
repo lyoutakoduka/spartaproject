@@ -10,7 +10,7 @@ from tempfile import TemporaryDirectory
 from pyspartalib.context.default.integer_context import IntPair2
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.context.extension.path_context import PathFunc
-from pyspartalib.context.extension.time_context import TimePair, Times
+from pyspartalib.context.extension.time_context import TimePair
 from pyspartalib.context.type_context import Type
 from pyspartalib.script.directory.create_directory import create_directory
 from pyspartalib.script.path.iterate_directory import walk_iterator
