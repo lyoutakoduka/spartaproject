@@ -7,7 +7,6 @@ from decimal import Decimal
 from os import utime
 from pathlib import Path
 
-from pyspartalib.context.default.float_context import Floats
 from pyspartalib.context.extension.decimal_context import Decs
 from pyspartalib.script.decimal.convert_float import convert_float_array
 from pyspartalib.script.time.path.get_file_epoch import get_file_epoch
