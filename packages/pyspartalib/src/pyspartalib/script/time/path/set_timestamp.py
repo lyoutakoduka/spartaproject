@@ -63,4 +63,4 @@ def set_latest(path: Path, time: datetime, access: bool = False) -> Path:
         Path: Path of file or directory you set latest date time.
 
     """
-    return _set_time(path, *_get_file_date_time(path, time, access))
+    return _set_time(path, *_get_path_times(path, time, access))
