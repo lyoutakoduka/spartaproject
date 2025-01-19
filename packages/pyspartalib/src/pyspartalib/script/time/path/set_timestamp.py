@@ -11,6 +11,7 @@ from pyspartalib.context.default.float_context import Floats
 from pyspartalib.context.extension.decimal_context import Decs
 from pyspartalib.script.decimal.convert_float import convert_float_array
 from pyspartalib.script.time.path.get_file_epoch import get_file_epoch
+from pyspartalib.script.time.path.get_timestamp import get_invalid_time
 from pyspartalib.script.time.stamp.offset_timezone import offset_time
 
 
@@ -43,7 +44,8 @@ def _set_time(path: Path, access: Decimal, update: Decimal) -> Path:
 
 
 def set_invalid(path: Path) -> Path:
-    return _set_time(path, 0.0, 0.0)
+    time: Decimal = _convert_timestamp(get_invalid_time())
+    return _set_time(path, time, time)
 
 
 def set_latest(path: Path, time: datetime, access: bool = False) -> Path:
