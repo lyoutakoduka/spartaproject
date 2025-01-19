@@ -117,6 +117,11 @@ def _compare_invalid_files(times: TimePair) -> None:
     _length_error(list(set(_get_files(times, _get_expected_files()))), 1)
 
 
+def _compare_invalid(times: TimePair) -> None:
+    _compare_invalid_times(times)
+    _compare_invalid_files(times)
+
+
 def _get_time_zone(times: TimePair) -> str:
     return str(_none_error(times["update"].utcoffset()))
 
@@ -176,11 +181,8 @@ def test_tree() -> None:
         directory_path: Path = create_temporary_tree(
             Path(temporary_root, "tree"),
         )
+
         _set_invalid_directory(directory_path)
-
-        times: TimePair = _get_relative_latest(directory_path)
-
-        _compare_invalid_times(times)
-        _compare_invalid_files(times)
+        _compare_invalid(_get_relative_latest(directory_path))
 
     _inside_temporary_directory(individual_test)
