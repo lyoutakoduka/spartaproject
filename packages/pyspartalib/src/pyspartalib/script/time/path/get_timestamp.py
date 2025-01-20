@@ -57,8 +57,9 @@ def get_latest(
             Return latest date time as JST time zone if it's True.
 
     Returns:
-        datetime: Latest date time as time object.
-            Return unique invalid time if time you got is broke is exists.
+        datetime | None:
+            Latest date time as time object.
+            Return None if the epoch can't be obtained.
 
     """
     if time := get_file_epoch(path, access=access):
@@ -86,7 +87,7 @@ def get_directory_latest(
 
     Returns:
         TimePair: Dictionary constructed by string path and latest date time.
-            Return unique invalid time if time you got is broke is exists.
+            Not including if the epoch can't be obtained.
 
     """
     return _get_latest_times(walk_generator, access, jst)
