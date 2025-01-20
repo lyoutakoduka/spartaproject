@@ -105,9 +105,7 @@ class CompressArchive:
         )
 
     def _get_archive_timestamp(self, target: Path) -> datetime:
-        latest: datetime = get_latest(target)
-
-        if latest != get_invalid_time():
+        if latest := get_latest(target):
             return latest
 
         return get_current_time()
