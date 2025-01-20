@@ -41,7 +41,7 @@ def get_latest(
     path: Path,
     access: bool = False,
     jst: bool = False,
-) -> datetime:
+) -> datetime | None:
     """Get latest date time of file or directory as time object.
 
     Args:
@@ -63,7 +63,7 @@ def get_latest(
     if time := get_file_epoch(path, access=access):
         return _convert_timestamp(float(time), jst=jst)
 
-    return get_invalid_time()
+    return None
 
 
 def get_directory_latest(
