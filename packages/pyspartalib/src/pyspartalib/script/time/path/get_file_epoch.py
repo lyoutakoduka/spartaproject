@@ -33,6 +33,10 @@ def _get_source() -> IntPair2:
     }
 
 
+def _invalid_epoch(time_epoch: Decimal) -> bool:
+    return get_iso_epoch(_get_source()) > time_epoch
+
+
 def get_file_epoch(path: Path, access: bool = False) -> Decimal | None:
     """Get date time about selected file or directory as epoch format.
 
@@ -49,7 +53,7 @@ def get_file_epoch(path: Path, access: bool = False) -> Decimal | None:
     """
     time_epoch: Decimal = _get_epoch_source(path, access)
 
-    if get_iso_epoch(_get_source()) >= time_epoch:
+    if _invalid_epoch(time_epoch):
         return None
 
     return time_epoch
