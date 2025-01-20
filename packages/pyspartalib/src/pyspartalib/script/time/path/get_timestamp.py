@@ -22,8 +22,9 @@ def _get_latest_times(
     jst: bool = False,
 ) -> TimePair:
     return {
-        str(path): get_latest(path, jst=jst, access=access)
+        str(path): time
         for path in walk_generator
+        if (time := get_latest(path, jst=jst, access=access)) is not None
     }
 
 
