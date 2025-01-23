@@ -47,10 +47,6 @@ def _none_error(result: Type | None) -> Type:
     return result
 
 
-def _get_expected_files() -> Strs:
-    return ["file.json", "empty", "file.ini", "file.txt"]
-
-
 def _get_jst_time_zone() -> str:
     return "9:00:00"
 
@@ -76,17 +72,6 @@ def _get_directory_latest(path: Path) -> TimePair:
     return get_directory_latest(walk_iterator(path))
 
 
-def _get_relative_text(path_text: str, root_path: Path) -> str:
-    return str(get_relative(Path(path_text), root_path=root_path))
-
-
-def _get_relative_latest(path: Path) -> TimePair:
-    return {
-        _get_relative_text(path_text, path): time
-        for path_text, time in _get_directory_latest(path).items()
-    }
-
-
 def _get_latest_pair(path: Path, jst: bool) -> TimePair:
     return {
         group: time
@@ -102,30 +87,6 @@ def _compare_timezone(path: Path, jst: bool) -> TimePair:
     _difference_error(times["update"], times["access"])
 
     return times
-
-
-def _get_invalid_time() -> datetime:
-    return get_invalid_time()  # To avoid a circular reference.
-
-
-def _compare_invalid_times(times: TimePair) -> None:
-    invalid_time: datetime = _get_invalid_time()
-
-    for time in times.values():
-        _difference_error(invalid_time, time)
-
-
-def _get_files(times: TimePair, expected: Strs) -> Strs:
-    return [str(sorted(files)) for files in [expected, list(times.keys())]]
-
-
-def _compare_invalid_files(times: TimePair) -> None:
-    _length_error(list(set(_get_files(times, _get_expected_files()))), 1)
-
-
-def _compare_invalid(times: TimePair) -> None:
-    _compare_invalid_times(times)
-    _compare_invalid_files(times)
 
 
 def _get_time_zone(times: TimePair) -> str:
