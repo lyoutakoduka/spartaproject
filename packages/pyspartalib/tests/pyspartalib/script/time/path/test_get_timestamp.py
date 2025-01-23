@@ -85,8 +85,10 @@ def _get_relative_latest(path: Path) -> TimePair:
 
 def _get_latest_pair(path: Path, jst: bool) -> TimePair:
     return {
-        group: get_latest(path, jst=jst, access=_is_access(group))
+        group: time
         for group in ["update", "access"]
+        if (time := get_latest(path, jst=jst, access=_is_access(group)))
+        is not None
     }
 
 
