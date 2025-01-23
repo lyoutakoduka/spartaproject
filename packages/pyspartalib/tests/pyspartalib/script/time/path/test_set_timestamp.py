@@ -113,8 +113,9 @@ def _set_latest_pair(path: Path, times: IntPair3) -> None:
 
 def _get_latest_pair(path: Path) -> TimePair:
     return {
-        group: get_latest(path, access=_is_access(group))
+        group: time
         for group in ["update", "access"]
+        if (time := get_latest(path, access=_is_access(group))) is not None
     }
 
 
