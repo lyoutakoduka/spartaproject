@@ -19,37 +19,6 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
-def _get_timer_results(
-    count: int,
-    show: TimerIntStrFunc,
-    timer: LogTimer,
-) -> Strs:
-    results: Strs = []
-
-    for i in range(count):
-        if time_text := show(timer, i):
-            results += [time_text]
-
-        timer.increase_timer()
-
-    return results
-
-
-def _stdout_check(
-    expected: str,
-    count: int,
-    restart: TimerFunc,
-    show: TimerIntStrFunc,
-) -> None:
-    timer = LogTimer()
-    restart(timer)
-
-    _difference_error(
-        "\n".join(_get_timer_results(count, show, timer)),
-        format_indent(expected),
-    )
-
-
 def _get_expected_count() -> str:
     return """
         1.0s
@@ -108,6 +77,37 @@ def _get_expected_force() -> str:
         i=8, 0.8s
         i=9, 0.9s
     """
+
+
+def _get_timer_results(
+    count: int,
+    show: TimerIntStrFunc,
+    timer: LogTimer,
+) -> Strs:
+    results: Strs = []
+
+    for i in range(count):
+        if time_text := show(timer, i):
+            results += [time_text]
+
+        timer.increase_timer()
+
+    return results
+
+
+def _stdout_check(
+    expected: str,
+    count: int,
+    restart: TimerFunc,
+    show: TimerIntStrFunc,
+) -> None:
+    timer = LogTimer()
+    restart(timer)
+
+    _difference_error(
+        "\n".join(_get_timer_results(count, show, timer)),
+        format_indent(expected),
+    )
 
 
 def test_count() -> None:
