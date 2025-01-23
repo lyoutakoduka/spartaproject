@@ -137,6 +137,10 @@ def _get_temporary_directory(path: Path) -> Path:
     return create_directory(Path(path, "temporary"))
 
 
+def _get_temporary_tree(path: Path) -> Path:
+    return create_temporary_tree(Path(path, "tree"))
+
+
 def test_invalid() -> None:
     """Test to compare the date time used for invalid data check."""
     _difference_error(get_invalid_time(), get_iso_time(_get_source()))
@@ -181,9 +185,7 @@ def test_tree() -> None:
     """Test to get latest date time of contents in the directory you select."""
 
     def individual_test(temporary_root: Path) -> None:
-        directory_path: Path = create_temporary_tree(
-            Path(temporary_root, "tree"),
-        )
+        directory_path: Path = _get_temporary_tree(temporary_root)
 
         _set_invalid_directory(directory_path)
         _compare_invalid(_get_relative_latest(directory_path))
