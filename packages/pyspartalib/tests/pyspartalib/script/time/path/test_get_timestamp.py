@@ -51,6 +51,10 @@ def _get_expected_files() -> Strs:
     return ["file.json", "empty", "file.ini", "file.txt"]
 
 
+def _get_jst_time_zone() -> str:
+    return "9:00:00"
+
+
 def _is_access(group: str) -> bool:
     return group == "access"
 
@@ -172,7 +176,7 @@ def test_jst() -> None:
             _get_time_zone(
                 _compare_timezone(create_temporary_file(temporary_root), True),
             ),
-            "9:00:00",
+            _get_jst_time_zone(),
         )
 
     _inside_temporary_directory(individual_test)
