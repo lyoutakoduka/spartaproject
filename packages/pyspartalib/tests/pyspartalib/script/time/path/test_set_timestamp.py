@@ -82,14 +82,6 @@ def _get_source_jst_access() -> IntPair2:
     }
 
 
-def _get_invalid_source() -> IntPair2:
-    return {
-        "year": {"year": 1, "month": 1, "day": 1},
-        "hour": {"hour": 0, "minute": 0, "second": 0, "micro": 0},
-        "zone": _get_utc(),
-    }
-
-
 def _time_utc() -> IntPair3:
     return {"update": _get_source(), "access": _get_source_access()}
 
@@ -124,19 +116,6 @@ def _compare_datetime(path: Path, times: IntPair3) -> None:
 
     for group, expected in _get_input_time(times).items():
         _difference_error(_get_latest_pair(path)[group], expected)
-
-
-def _get_latest_list(path: Path) -> Times:
-    return list(set(_get_latest_pair(path).values()))
-
-
-def _compare_invalid(times: Times, expected: datetime) -> None:
-    _length_error(times, 1)
-    _difference_error(times[0], expected)
-
-
-def _set_invalid_date(path: Path) -> Path:
-    return set_invalid(create_temporary_file(path))
 
 
 def _inside_temporary_directory(function: PathFunc) -> None:
