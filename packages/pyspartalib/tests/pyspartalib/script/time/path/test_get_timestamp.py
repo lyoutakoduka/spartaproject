@@ -170,10 +170,7 @@ def test_jst() -> None:
     def individual_test(temporary_root: Path) -> None:
         _difference_error(
             _get_time_zone(
-                _compare_timezone(
-                    create_temporary_file(temporary_root),
-                    True,
-                ),
+                _compare_timezone(create_temporary_file(temporary_root), True),
             ),
             "9:00:00",
         )
