@@ -133,6 +133,10 @@ def _inside_temporary_directory(function: PathFunc) -> None:
         function(Path(temporary_path))
 
 
+def _get_temporary_directory(path: Path) -> Path:
+    return create_directory(Path(path, "temporary"))
+
+
 def test_invalid() -> None:
     """Test to compare the date time used for invalid data check."""
     _difference_error(get_invalid_time(), get_iso_time(_get_source()))
@@ -151,10 +155,7 @@ def test_directory() -> None:
     """Test to get latest date time of directory with readable format."""
 
     def individual_test(temporary_root: Path) -> None:
-        _compare_timezone(
-            create_directory(Path(temporary_root, "temporary")),
-            False,
-        )
+        _compare_timezone(_get_temporary_directory(temporary_root), False)
 
     _inside_temporary_directory(individual_test)
 
