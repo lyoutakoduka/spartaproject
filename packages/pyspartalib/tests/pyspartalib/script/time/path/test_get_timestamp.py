@@ -189,6 +189,6 @@ def test_tree() -> None:
         directory_path: Path = _get_temporary_tree(temporary_root)
 
         _set_invalid_directory(directory_path)
-        _compare_invalid(_get_relative_latest(directory_path))
+        _length_error(_get_directory_latest(directory_path), 0)
 
     _inside_temporary_directory(individual_test)
