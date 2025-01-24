@@ -13,7 +13,6 @@ from pyspartalib.context.extension.path_context import (
     Paths,
 )
 from pyspartalib.context.type_context import Type
-from pyspartalib.context.typed.user_context import ArchiveStatus
 from pyspartalib.script.directory.create_directory import create_directory
 from pyspartalib.script.file.archive.compress_archive import CompressArchive
 from pyspartalib.script.file.archive.edit_archive import EditArchive
@@ -30,6 +29,8 @@ from pyspartalib.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
 from tests.pyspartalib.interface.pytest import raises
+
+from .context.archive_context import ArchiveStatus
 
 
 def _difference_error(result: Type, expected: Type) -> None:
