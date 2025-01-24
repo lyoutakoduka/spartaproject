@@ -144,12 +144,9 @@ def _get_timer_results(
 def _stdout_check(
     expected: str,
     count: int,
-    restart: TimerFunc,
+    timer: LogTimer,
     show: TimerIntStrFunc,
 ) -> None:
-    timer = LogTimer()
-    restart(timer)
-
     _difference_error(
         "\n".join(_get_timer_results(count, show, timer)),
         format_indent(expected),
@@ -160,11 +157,12 @@ def test_count() -> None:
     """Test to get timer count by readable format."""
     expected: str = _get_expected_count()
     increase_count: int = 20 + 1
+    timer: LogTimer = _get_timer_count()
 
     _stdout_check(
         expected,
         increase_count,
-        lambda timer: timer.restart(override=True),
+        timer,
         lambda timer, _: timer.get_readable_time(),
     )
 
@@ -173,6 +171,7 @@ def test_interval() -> None:
     """Test to get timer count with specific interval."""
     expected: str = _get_expected_interval()
     increase_count: int = 30 + 1
+    timer: LogTimer = _get_timer_interval()
 
     def restart_timer(timer: LogTimer) -> None:
         minutes: int = 60
@@ -188,7 +187,7 @@ def test_interval() -> None:
     _stdout_check(
         expected,
         increase_count,
-        restart_timer,
+        timer,
         lambda timer, _: timer.get_readable_time(),
     )
 
@@ -197,6 +196,7 @@ def test_digit() -> None:
     """Test to get timer count with digit of decimal point."""
     expected: str = _get_expected_digit()
     increase_count: int = 10 + 1
+    timer: LogTimer = _get_timer_digit()
 
     def restart_timer(timer: LogTimer) -> None:
         interval: Decimal = Decimal(str(0.01))
@@ -212,7 +212,7 @@ def test_digit() -> None:
     _stdout_check(
         expected,
         increase_count,
-        restart_timer,
+        timer,
         lambda timer, _: timer.get_readable_time(),
     )
 
@@ -221,6 +221,7 @@ def test_force() -> None:
     """Test to get timer count forcibly."""
     expected: str = _get_expected_force()
     increase_count: int = 10
+    timer: LogTimer = _get_timer_force()
 
     def restart_timer(timer: LogTimer) -> None:
         timer_interval: Decimal = Decimal(str(0.1))
@@ -240,4 +241,4 @@ def test_force() -> None:
 
         return result
 
-    _stdout_check(expected, increase_count, restart_timer, show_timer)
+    _stdout_check(expected, increase_count, timer, show_timer)
