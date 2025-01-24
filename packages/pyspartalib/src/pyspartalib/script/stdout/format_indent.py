@@ -8,9 +8,11 @@ from pyspartalib.context.default.integer_context import Ints
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.context.typed.builtin_context import LinePair, LinePairs
 
+from .context.format_context import FormatPair, FormatPairs
 
-def _strip_line(source_text: str) -> LinePairs:
-    line_attributes: LinePairs = []
+
+def _strip_line(source_text: str) -> FormatPairs:
+    line_attributes: FormatPairs = []
 
     for line in source_text.splitlines():
         striped_right: str = line.rstrip()
@@ -22,7 +24,7 @@ def _strip_line(source_text: str) -> LinePairs:
             count_left: int = len(striped_left)
             space_size = count_right - count_left
 
-        line_attribute: LinePair = {
+        line_attribute: FormatPair = {
             "text": striped_right,
             "count": space_size,
         }
@@ -32,7 +34,7 @@ def _strip_line(source_text: str) -> LinePairs:
     return line_attributes
 
 
-def _clip_line(empty_size: int, line_attributes: LinePairs) -> Strs:
+def _clip_line(empty_size: int, line_attributes: FormatPairs) -> Strs:
     clipped_lines: Strs = []
 
     for line_attribute in line_attributes:
@@ -49,7 +51,7 @@ def _strip_lines(lines: Strs) -> Strs:
     return lines[index:]
 
 
-def _get_line_counts(line_attributes: LinePairs) -> Ints:
+def _get_line_counts(line_attributes: FormatPairs) -> Ints:
     return [line_attribute["count"] for line_attribute in line_attributes]
 
 
@@ -66,7 +68,7 @@ def format_indent(source_text: str, stdout: bool = False) -> str:
         str: Text which is removed white space.
 
     """
-    line_attributes: LinePairs = _strip_line(source_text)
+    line_attributes: FormatPairs = _strip_line(source_text)
     counts: Ints = sorted(set(_get_line_counts(line_attributes)))
     counts.remove(0)
 
