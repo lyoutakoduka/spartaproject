@@ -141,6 +141,10 @@ def _get_timer_results(
     return results
 
 
+def get_time(_: int, timer: LogTimer) -> str | None:
+    return timer.get_readable_time()
+
+
 def get_time_force(index: int, timer: LogTimer) -> str | None:
     result: str = f"i={index}"
 
