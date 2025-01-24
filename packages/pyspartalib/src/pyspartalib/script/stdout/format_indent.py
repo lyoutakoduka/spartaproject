@@ -63,6 +63,22 @@ def _get_line_counts(line_attributes: FormatPairs) -> Ints:
     return [line_attribute["count"] for line_attribute in line_attributes]
 
 
+def _get_cleaned_up(
+    stdout: bool,
+    empty_size: int,
+    line_attributes: FormatPairs,
+) -> Strs:
+    lines: Strs = _clip_lines(empty_size, line_attributes)
+
+    for _ in range(2):
+        lines = _strip_lines(list(reversed(lines)))
+
+    if stdout:
+        lines += [""]
+
+    return lines
+
+
 def format_indent(source_text: str, stdout: bool = False) -> str:
     """Remove white space at the beginning of a sentence.
 
@@ -84,12 +100,5 @@ def format_indent(source_text: str, stdout: bool = False) -> str:
         return ""
 
     empty_size: int = counts[0]
-    lines: Strs = _clip_lines(empty_size, line_attributes)
 
-    for _ in range(2):
-        lines = _strip_lines(list(reversed(lines)))
-
-    if stdout:
-        lines += [""]
-
-    return "\n".join(lines)
+    return "\n".join(_get_cleaned_up(stdout, empty_size, line_attributes))
