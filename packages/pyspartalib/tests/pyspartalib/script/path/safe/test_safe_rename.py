@@ -6,7 +6,6 @@ from collections.abc import Sized
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from pyspartalib.context.custom.rename_context import RenamePathFunc
 from pyspartalib.context.default.bool_context import BoolPair, Bools
 from pyspartalib.context.extension.path_context import PathPair, PathPair2
 from pyspartalib.context.type_context import Type
@@ -20,6 +19,8 @@ from pyspartalib.script.path.temporary.create_temporary_file import (
 from pyspartalib.script.path.temporary.create_temporary_tree import (
     create_temporary_tree,
 )
+
+from .context.rename_context import RenamePathFunc
 
 
 def _difference_error(result: Type, expected: Type) -> None:
