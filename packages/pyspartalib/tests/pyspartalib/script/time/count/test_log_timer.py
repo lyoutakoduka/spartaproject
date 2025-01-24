@@ -94,6 +94,17 @@ def _get_timer_digit() -> LogTimer:
     return timer
 
 
+def _get_timer_force() -> LogTimer:
+    timer = LogTimer()
+    timer.restart(
+        override=True,
+        timer_interval=Decimal(str(0.1)),
+        interval=Decimal(str(1.0)),
+    )
+
+    return timer
+
+
 def _get_timer_results(
     count: int,
     show: TimerIntStrFunc,
