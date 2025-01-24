@@ -10,22 +10,25 @@ from pyspartalib.context.default.string_context import Strs
 from .context.format_context import FormatPair, FormatPairs
 
 
+def _get_space_size(striped_right: str) -> int:
+    count_right: int = len(striped_right)
+    minimum: int = 0
+
+    if count_right <= minimum:
+        return minimum
+
+    return count_right - len(striped_right.lstrip())
+
+
 def _strip_line(source_text: str) -> FormatPairs:
     line_attributes: FormatPairs = []
 
     for line in source_text.splitlines():
         striped_right: str = line.rstrip()
-        count_right: int = len(striped_right)
-        space_size: int = 0
-
-        if count_right > 0:
-            striped_left: str = striped_right.lstrip()
-            count_left: int = len(striped_left)
-            space_size = count_right - count_left
 
         line_attribute: FormatPair = {
             "text": striped_right,
-            "count": space_size,
+            "count": _get_space_size(striped_right),
         }
 
         line_attributes += [line_attribute]
