@@ -51,8 +51,12 @@ def _ignore_if_empty(lines: Strs) -> Strs:
     return list(takewhile(lambda line: len(line) == 0, lines))
 
 
+def _get_ignore_index(lines: Strs) -> int:
+    return len(_ignore_if_empty(lines))
+
+
 def _strip_lines(lines: Strs) -> Strs:
-    return lines[len(_ignore_if_empty(lines)) :]
+    return lines[_get_ignore_index(lines) :]
 
 
 def _get_line_counts(line_attributes: FormatPairs) -> Ints:
