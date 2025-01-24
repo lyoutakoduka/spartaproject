@@ -26,7 +26,7 @@ def _get_stack_frames() -> StackFrames:
             for outer_frame in inspect.getouterframes(current_frame)
         ]
 
-    return []
+    raise ValueError
 
 
 def _to_relative_path(frame: StackFrame) -> StackFrame:
