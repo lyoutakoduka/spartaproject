@@ -45,5 +45,4 @@ def current_frame(offset: int = 0) -> StackFrame:
         StackFrame: Selected current frame information.
 
     """
-    stack_frames: StackFrames = _get_stack_frames()
-    return _to_relative_path(stack_frames[2 + offset])
+    return _to_relative_path(_get_stack_frames()[2 + offset])
