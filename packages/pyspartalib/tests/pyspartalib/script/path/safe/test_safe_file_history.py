@@ -15,9 +15,9 @@ from pyspartalib.context.extension.path_context import (
     Paths3,
 )
 from pyspartalib.context.type_context import Type
+from pyspartalib.script.frame.stack_frame import current_frame
 from pyspartalib.script.path.modify.current.get_relative import is_relative
 from pyspartalib.script.path.safe.safe_file_history import FileHistory
-from pyspartalib.script.stack_frame import current_frame
 from pyspartalib.script.time.directory.get_time_path import (
     get_initial_time_path,
 )
