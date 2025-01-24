@@ -6,7 +6,6 @@ from itertools import takewhile
 
 from pyspartalib.context.default.integer_context import Ints
 from pyspartalib.context.default.string_context import Strs
-from pyspartalib.context.typed.builtin_context import LinePair, LinePairs
 
 from .context.format_context import FormatPair, FormatPairs
 
