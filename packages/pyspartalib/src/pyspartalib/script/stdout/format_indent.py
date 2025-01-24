@@ -47,10 +47,12 @@ def _clip_lines(size: int, attributes: FormatPairs) -> Strs:
     ]
 
 
+def _ignore_if_empty(lines: Strs) -> Strs:
+    return list(takewhile(lambda line: len(line) == 0, lines))
+
+
 def _strip_lines(lines: Strs) -> Strs:
-    striped_lines: Strs = list(takewhile(lambda line: len(line) == 0, lines))
-    index: int = len(striped_lines)
-    return lines[index:]
+    return lines[len(_ignore_if_empty(lines)) :]
 
 
 def _get_line_counts(line_attributes: FormatPairs) -> Ints:
