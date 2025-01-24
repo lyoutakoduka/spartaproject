@@ -37,7 +37,7 @@ def _get_clipped_line(size: int, line: str) -> str:
     return line[(size if size < len(line) else 0) :]
 
 
-def _clip_line(size: int, attributes: FormatPairs) -> Strs:
+def _clip_lines(size: int, attributes: FormatPairs) -> Strs:
     return [
         _get_clipped_line(size, attribute["text"]) for attribute in attributes
     ]
@@ -74,7 +74,7 @@ def format_indent(source_text: str, stdout: bool = False) -> str:
         return ""
 
     empty_size: int = counts[0]
-    lines: Strs = _clip_line(empty_size, line_attributes)
+    lines: Strs = _clip_lines(empty_size, line_attributes)
 
     for _ in range(2):
         lines = _strip_lines(list(reversed(lines)))
