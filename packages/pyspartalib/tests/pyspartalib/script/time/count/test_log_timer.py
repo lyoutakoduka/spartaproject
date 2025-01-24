@@ -141,6 +141,15 @@ def _get_timer_results(
     return results
 
 
+def get_time_force(index: int, timer: LogTimer) -> str | None:
+    result: str = f"i={index}"
+
+    if time_text := timer.get_readable_time(force=True):
+        result += ", " + time_text
+
+    return result
+
+
 def _stdout_check(
     expected: str,
     count: int,
