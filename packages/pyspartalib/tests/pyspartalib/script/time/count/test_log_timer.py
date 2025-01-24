@@ -79,7 +79,7 @@ def _get_expected_force() -> str:
     """
 
 
-def _get_timer_count() -> LogTimer:
+def _get_timer_base() -> LogTimer:
     timer = LogTimer()
     timer.restart(override=True)
 
@@ -170,7 +170,7 @@ def test_count() -> None:
     """Test to get timer count by readable format."""
     expected: str = _get_expected_base()
     increase_count: int = 20 + 1
-    timer: LogTimer = _get_timer_count()
+    timer: LogTimer = _get_timer_base()
 
     _stdout_check(
         expected,
