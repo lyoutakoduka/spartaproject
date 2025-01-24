@@ -5,7 +5,8 @@
 from pathlib import Path
 
 from pyspartalib.context.type_context import Type
-from pyspartalib.script.frame.stack_frame import StackFrame, current_frame
+from pyspartalib.script.frame.context.builtin_context import StackFrame
+from pyspartalib.script.frame.stack_frame import current_frame
 from pyspartalib.script.path.modify.current.get_relative import get_relative
 
 
