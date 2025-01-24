@@ -10,11 +10,11 @@ from pyspartalib.script.bool.compare_value import (
     bool_compare_array,
     bool_compare_pair,
 )
+from pyspartalib.script.frame.stack_frame import current_frame
 from pyspartalib.script.path.status.check_exists import (
     check_exists_array,
     check_exists_pair,
 )
-from pyspartalib.script.stack_frame import current_frame
 
 
 def _fail_error(status: bool) -> None:
