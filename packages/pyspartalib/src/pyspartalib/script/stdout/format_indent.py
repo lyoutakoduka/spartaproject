@@ -20,20 +20,17 @@ def _get_space_size(striped_right: str) -> int:
     return count_right - len(striped_right.lstrip())
 
 
+def _get_format_pair(line: str) -> FormatPair:
+    striped_right: str = line.rstrip()
+
+    return {
+        "text": striped_right,
+        "count": _get_space_size(striped_right),
+    }
+
+
 def _strip_line(source_text: str) -> FormatPairs:
-    line_attributes: FormatPairs = []
-
-    for line in source_text.splitlines():
-        striped_right: str = line.rstrip()
-
-        line_attribute: FormatPair = {
-            "text": striped_right,
-            "count": _get_space_size(striped_right),
-        }
-
-        line_attributes += [line_attribute]
-
-    return line_attributes
+    return [_get_format_pair(line) for line in source_text.splitlines()]
 
 
 def _clip_line(empty_size: int, line_attributes: FormatPairs) -> Strs:
