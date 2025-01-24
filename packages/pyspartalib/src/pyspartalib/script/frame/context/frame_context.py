@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-"""User defined types using class "TypedDict"."""
+"""Module to represent single frame information in stack frames."""
 
 from pathlib import Path
 from typing import TypedDict
