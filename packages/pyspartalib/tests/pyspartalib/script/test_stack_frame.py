@@ -5,8 +5,8 @@
 from pathlib import Path
 
 from pyspartalib.context.type_context import Type
+from pyspartalib.script.frame.stack_frame import StackFrame, current_frame
 from pyspartalib.script.path.modify.current.get_relative import get_relative
-from pyspartalib.script.stack_frame import StackFrame, current_frame
 
 
 def _difference_error(result: Type, expected: Type) -> None:
