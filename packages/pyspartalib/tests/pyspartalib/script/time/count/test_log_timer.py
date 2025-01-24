@@ -19,7 +19,7 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
-def _get_expected_count() -> str:
+def _get_expected_base() -> str:
     return """
         1.0s
         2.0s
@@ -168,7 +168,7 @@ def _stdout_check(
 
 def test_count() -> None:
     """Test to get timer count by readable format."""
-    expected: str = _get_expected_count()
+    expected: str = _get_expected_base()
     increase_count: int = 20 + 1
     timer: LogTimer = _get_timer_count()
 
