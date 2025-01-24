@@ -79,6 +79,21 @@ def _get_expected_force() -> str:
     """
 
 
+def _get_timer_digit() -> LogTimer:
+    interval: Decimal = Decimal(str(0.01))
+    digit: int = 3
+
+    timer = LogTimer()
+    timer.restart(
+        override=True,
+        timer_interval=interval,
+        interval=interval,
+        digit=digit,
+    )
+
+    return timer
+
+
 def _get_timer_results(
     count: int,
     show: TimerIntStrFunc,
