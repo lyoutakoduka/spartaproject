@@ -79,6 +79,16 @@ def _get_cleaned_up(
     return lines
 
 
+def _get_minimum_space(line_attributes: FormatPairs) -> int | None:
+    counts: Ints = sorted(set(_get_line_counts(line_attributes)))
+    counts.remove(0)
+
+    if len(counts) == 0:
+        return None
+
+    return counts[0]
+
+
 def format_indent(source_text: str, stdout: bool = False) -> str:
     """Remove white space at the beginning of a sentence.
 
@@ -93,12 +103,8 @@ def format_indent(source_text: str, stdout: bool = False) -> str:
 
     """
     line_attributes: FormatPairs = _strip_line(source_text)
-    counts: Ints = sorted(set(_get_line_counts(line_attributes)))
-    counts.remove(0)
 
-    if len(counts) == 0:
-        return ""
+    if (empty_size := _get_minimum_space(line_attributes)) is not None:
+        return "\n".join(_get_cleaned_up(stdout, empty_size, line_attributes))
 
-    empty_size: int = counts[0]
-
-    return "\n".join(_get_cleaned_up(stdout, empty_size, line_attributes))
+    return ""
