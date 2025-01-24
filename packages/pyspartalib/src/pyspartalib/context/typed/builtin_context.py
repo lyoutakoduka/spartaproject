@@ -6,13 +6,6 @@ from pathlib import Path
 from typing import TypedDict
 
 
-class LinePair(TypedDict):
-    """Class to represent string with white space character on head."""
-
-    text: str
-    count: int
-
-
 class StackFrame(TypedDict):
     """Class to represent single frame information in stack frames."""
 
@@ -21,5 +14,4 @@ class StackFrame(TypedDict):
     line: int
 
 
-LinePairs = list[LinePair]
 StackFrames = list[StackFrame]
