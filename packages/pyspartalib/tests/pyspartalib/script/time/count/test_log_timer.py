@@ -173,17 +173,6 @@ def test_interval() -> None:
     increase_count: int = 30 + 1
     timer: LogTimer = _get_timer_interval()
 
-    def restart_timer(timer: LogTimer) -> None:
-        minutes: int = 60
-        timer_interval: Decimal = Decimal(str(minutes * 10))
-        interval: Decimal = Decimal(str(minutes * 30))
-
-        timer.restart(
-            override=True,
-            timer_interval=timer_interval,
-            interval=interval,
-        )
-
     _stdout_check(
         expected,
         increase_count,
@@ -198,17 +187,6 @@ def test_digit() -> None:
     increase_count: int = 10 + 1
     timer: LogTimer = _get_timer_digit()
 
-    def restart_timer(timer: LogTimer) -> None:
-        interval: Decimal = Decimal(str(0.01))
-        digit: int = 3
-
-        timer.restart(
-            override=True,
-            timer_interval=interval,
-            interval=interval,
-            digit=digit,
-        )
-
     _stdout_check(
         expected,
         increase_count,
@@ -222,16 +200,6 @@ def test_force() -> None:
     expected: str = _get_expected_force()
     increase_count: int = 10
     timer: LogTimer = _get_timer_force()
-
-    def restart_timer(timer: LogTimer) -> None:
-        timer_interval: Decimal = Decimal(str(0.1))
-        interval: Decimal = Decimal(str(1.0))
-
-        timer.restart(
-            override=True,
-            timer_interval=timer_interval,
-            interval=interval,
-        )
 
     def show_timer(timer: LogTimer, index: int) -> str | None:
         result: str = f"i={index}"
