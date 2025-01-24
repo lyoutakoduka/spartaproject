@@ -33,17 +33,18 @@ def _strip_line(source_text: str) -> FormatPairs:
     return [_get_format_pair(line) for line in source_text.splitlines()]
 
 
-def _get_clipped_index(size: int, line: str) -> int:
-    return size if size < len(line) else 0
+def _get_clipped_index(minimum: int, line: str) -> int:
+    return minimum if minimum < len(line) else 0
 
 
-def _get_clipped_line(size: int, line: str) -> str:
-    return line[_get_clipped_index(size, line) :]
+def _get_clipped_line(minimum: int, line: str) -> str:
+    return line[_get_clipped_index(minimum, line) :]
 
 
-def _clip_lines(size: int, attributes: FormatPairs) -> Strs:
+def _clip_lines(minimum: int, attributes: FormatPairs) -> Strs:
     return [
-        _get_clipped_line(size, attribute["text"]) for attribute in attributes
+        _get_clipped_line(minimum, attribute["text"])
+        for attribute in attributes
     ]
 
 
@@ -65,10 +66,10 @@ def _get_line_counts(line_attributes: FormatPairs) -> Ints:
 
 def _get_cleaned_up(
     stdout: bool,
-    empty_size: int,
+    minimum: int,
     line_attributes: FormatPairs,
 ) -> Strs:
-    lines: Strs = _clip_lines(empty_size, line_attributes)
+    lines: Strs = _clip_lines(minimum, line_attributes)
 
     for _ in range(2):
         lines = _strip_lines(list(reversed(lines)))
@@ -104,7 +105,7 @@ def format_indent(source_text: str, stdout: bool = False) -> str:
     """
     line_attributes: FormatPairs = _strip_line(source_text)
 
-    if (empty_size := _get_minimum_space(line_attributes)) is not None:
-        return "\n".join(_get_cleaned_up(stdout, empty_size, line_attributes))
+    if (minimum := _get_minimum_space(line_attributes)) is not None:
+        return "\n".join(_get_cleaned_up(stdout, minimum, line_attributes))
 
     return ""
