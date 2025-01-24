@@ -79,6 +79,13 @@ def _get_expected_force() -> str:
     """
 
 
+def _get_timer_count() -> LogTimer:
+    timer = LogTimer()
+    timer.restart(override=True)
+
+    return timer
+
+
 def _get_timer_interval() -> LogTimer:
     minutes: int = 60
 
