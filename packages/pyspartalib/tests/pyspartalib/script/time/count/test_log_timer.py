@@ -141,7 +141,7 @@ def _get_timer_results(
     return results
 
 
-def get_time(_: int, timer: LogTimer) -> str | None:
+def get_time(timer: LogTimer) -> str | None:
     return timer.get_readable_time()
 
 
