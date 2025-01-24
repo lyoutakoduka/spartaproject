@@ -6,8 +6,9 @@ import inspect
 from inspect import FrameInfo
 from pathlib import Path
 
-from pyspartalib.context.typed.builtin_context import StackFrame, StackFrames
 from pyspartalib.script.path.modify.current.get_relative import get_relative
+
+from .context.builtin_context import StackFrame, StackFrames
 
 
 def _get_stack_frame(outer_frame: FrameInfo) -> StackFrame:
