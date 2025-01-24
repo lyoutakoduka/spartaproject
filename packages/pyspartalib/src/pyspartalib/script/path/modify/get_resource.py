@@ -4,7 +4,7 @@
 
 from pathlib import Path
 
-from pyspartalib.script.stack_frame import current_frame
+from pyspartalib.script.frame.stack_frame import current_frame
 
 
 def get_resource(local_path: Path | None = None) -> Path:
