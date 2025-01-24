@@ -33,15 +33,14 @@ def _strip_line(source_text: str) -> FormatPairs:
     return [_get_format_pair(line) for line in source_text.splitlines()]
 
 
-def _clip_line(empty_size: int, line_attributes: FormatPairs) -> Strs:
-    clipped_lines: Strs = []
+def _get_clipped_line(size: int, line: str) -> str:
+    return line[(size if size < len(line) else 0) :]
 
-    for line_attribute in line_attributes:
-        line: str = line_attribute["text"]
-        index: int = empty_size if empty_size < len(line) else 0
-        clipped_lines += [line[index:]]
 
-    return clipped_lines
+def _clip_line(size: int, attributes: FormatPairs) -> Strs:
+    return [
+        _get_clipped_line(size, attribute["text"]) for attribute in attributes
+    ]
 
 
 def _strip_lines(lines: Strs) -> Strs:
