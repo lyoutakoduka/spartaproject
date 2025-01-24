@@ -9,7 +9,6 @@ from zipfile import ZIP_LZMA, ZIP_STORED, ZipFile, ZipInfo
 
 from pyspartalib.context.default.integer_context import Ints
 from pyspartalib.context.default.string_context import StrPair, Strs
-from pyspartalib.context.extension.archive_context import Archives
 from pyspartalib.context.extension.path_context import Paths
 from pyspartalib.script.decimal.initialize_decimal import initialize_decimal
 from pyspartalib.script.directory.create_directory import create_directory
@@ -29,6 +28,8 @@ from pyspartalib.script.time.path.get_timestamp import (
     get_latest,
 )
 from pyspartalib.script.time.stamp.current_datetime import get_current_time
+
+from .context.archive_context import Archives
 
 initialize_decimal()
 
