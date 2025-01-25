@@ -6,7 +6,7 @@ Each character should be included in user defined character tables.
 """
 
 from pyspartalib.context.default.string_context import Strs
-from pyspartalib.script.string.rename.filter_table import FilterTable
+from pyspartalib.script.string.table.filter_table import FilterTable
 
 
 def _fail_error(status: bool) -> None:
