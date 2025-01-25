@@ -6,7 +6,7 @@ Each character should be included in user defined character tables.
 """
 
 from pyspartalib.context.default.string_context import Strs
-from pyspartalib.script.string.rename.grouped_characters import (
+from pyspartalib.script.string.table.grouped_table import (
     GroupedCharacters,
 )
 
