@@ -3,7 +3,7 @@
 """Module to convert string by using the split identifier."""
 
 from pyspartalib.context.default.string_context import Strs
-from pyspartalib.script.string.rename.grouped_characters import (
+from pyspartalib.script.string.table.grouped_characters import (
     GroupedCharacters,
 )
 
