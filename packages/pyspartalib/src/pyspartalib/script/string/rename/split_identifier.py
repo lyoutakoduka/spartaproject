@@ -3,9 +3,7 @@
 """Module to convert string by using the split identifier."""
 
 from pyspartalib.context.default.string_context import Strs
-from pyspartalib.script.string.table.grouped_table import (
-    GroupedCharacters,
-)
+from pyspartalib.script.string.table.grouped_table import GroupedTable
 
 
 class SplitIdentifier:
@@ -18,7 +16,7 @@ class SplitIdentifier:
         return identifier
 
     def _get_other_table(self) -> Strs:
-        return GroupedCharacters().get_table()["other"]
+        return GroupedTable().get_table()["other"]
 
     def __initialize_variables(self, identifier: str | None) -> None:
         self._identifier: str = self._get_identifier(identifier)

@@ -6,9 +6,7 @@ There are converted to single byte same characters in Ascii table.
 """
 
 from pyspartalib.context.default.string_context import StrPair, Strs3
-from pyspartalib.script.string.table.grouped_table import (
-    GroupedCharacters,
-)
+from pyspartalib.script.string.table.grouped_table import GroupedTable
 
 
 class ConvertSingle:
@@ -19,7 +17,7 @@ class ConvertSingle:
 
     def _get_tables_pair(self) -> Strs3:
         return [
-            GroupedCharacters(multiple=(i == 0)).get_merged_tables()
+            GroupedTable(multiple=(i == 0)).get_merged_tables()
             for i in range(2)
         ]
 
