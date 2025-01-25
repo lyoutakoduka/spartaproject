@@ -8,9 +8,7 @@ from typing import get_type_hints
 from pyspartalib.context.default.string_context import Strs, Strs2
 from pyspartalib.context.type_context import Type
 from pyspartalib.context.typed.user_context import CharacterTable
-from pyspartalib.script.string.table.grouped_table import (
-    GroupedCharacters,
-)
+from pyspartalib.script.string.table.grouped_table import GroupedTable
 
 
 def _difference_error(result: Type, expected: Type) -> None:
@@ -75,7 +73,7 @@ def test_single() -> None:
     """Test to get characters constructed by single byte."""
     _compare_table(
         _get_expected_single(),
-        GroupedCharacters().get_table(),
+        GroupedTable().get_table(),
     )
 
 
@@ -83,13 +81,13 @@ def test_multiple() -> None:
     """Test to get characters constructed by multiple byte."""
     _compare_table(
         _get_expected_multiple(),
-        GroupedCharacters(multiple=True).get_table(),
+        GroupedTable(multiple=True).get_table(),
     )
 
 
 def test_merge() -> None:
     """Test to compare merged character tables and originals."""
-    grouped_characters = GroupedCharacters()
+    grouped_characters = GroupedTable()
 
     _compare_merged(
         grouped_characters.get_table(),
@@ -99,7 +97,7 @@ def test_merge() -> None:
 
 def test_error() -> None:
     """Test to compare characters tables about Windows file system."""
-    error_table: Strs = GroupedCharacters().get_error_table()
+    error_table: Strs = GroupedTable().get_error_table()
 
     _length_error(error_table, 9)
     _compare_both_ends(["\\", "|"], error_table)
