@@ -6,12 +6,10 @@ Each character should be included in user defined character tables.
 """
 
 from pyspartalib.context.default.string_context import Strs
-from pyspartalib.script.string.table.grouped_table import (
-    GroupedCharacters,
-)
+from pyspartalib.script.string.table.grouped_table import GroupedTable
 
 
-class FilterTable(GroupedCharacters):
+class FilterTable(GroupedTable):
     """Class to confirm that characters in selected string.
 
     Each character should be included in user defined character tables.

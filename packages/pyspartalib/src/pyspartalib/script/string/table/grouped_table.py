@@ -7,7 +7,7 @@ from pyspartalib.context.default.string_context import Strs, Strs2, StrsPair
 from pyspartalib.context.typed.user_context import CharacterTable
 
 
-class GroupedCharacters:
+class GroupedTable:
     """Class to get character tables constructed by multiple or single byte."""
 
     def _get_index_base(self) -> int:
