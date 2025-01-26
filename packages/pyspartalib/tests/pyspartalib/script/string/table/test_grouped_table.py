@@ -5,8 +5,8 @@
 from collections.abc import Sized
 from typing import get_type_hints
 
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.string_context import Strs, Strs2
-from pyspartalib.context.type_context import Type
 from pyspartalib.script.string.table.context.table_context import (
     CharacterTable,
 )
