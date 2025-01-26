@@ -6,10 +6,10 @@ from collections.abc import Sized
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.integer_context import Ints
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.context.extension.path_context import PathFunc, Paths
-from pyspartalib.context.type_context import Type
 from pyspartalib.script.file.text.export_file import text_export
 from pyspartalib.script.path.status.get_statistic import (
     get_file_size,
