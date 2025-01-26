@@ -5,8 +5,8 @@
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.extension.path_context import PathFunc
-from pyspartalib.context.type_context import Type
 from pyspartalib.script.file.text.export_file import text_export
 from pyspartalib.script.file.text.import_file import byte_import, text_import
 from pyspartalib.script.string.encoding.set_decoding import set_decoding
