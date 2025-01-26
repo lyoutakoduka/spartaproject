@@ -4,8 +4,8 @@
 
 from pathlib import Path
 
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.string_context import Strs
-from pyspartalib.context.type_context import Type
 from pyspartalib.script.path.modify.get_resource import get_resource
 from pyspartalib.script.shell.execute_powershell import (
     execute_powershell,
