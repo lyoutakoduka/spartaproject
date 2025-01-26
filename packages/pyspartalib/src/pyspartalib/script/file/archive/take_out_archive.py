@@ -4,8 +4,8 @@
 
 from pathlib import Path
 
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.extension.path_context import Paths, PathsPair
-from pyspartalib.context.type_context import Type
 from pyspartalib.script.file.archive.archive_format import rename_format
 from pyspartalib.script.file.archive.compress_archive import CompressArchive
 from pyspartalib.script.file.archive.edit_archive import EditArchive

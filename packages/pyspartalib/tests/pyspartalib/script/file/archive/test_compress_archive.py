@@ -8,10 +8,10 @@ from pathlib import Path
 from shutil import unpack_archive
 from tempfile import TemporaryDirectory
 
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.string_context import StrPair
 from pyspartalib.context.extension.decimal_context import Decs
 from pyspartalib.context.extension.path_context import PathFunc, Paths, Paths2
-from pyspartalib.context.type_context import Type
 from pyspartalib.script.decimal.initialize_decimal import initialize_decimal
 from pyspartalib.script.directory.create_parent import create_parent
 from pyspartalib.script.file.archive.compress_archive import CompressArchive

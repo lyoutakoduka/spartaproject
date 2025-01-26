@@ -6,6 +6,7 @@ from datetime import datetime
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.extension.path_context import (
     PathFunc,
     PathPair,
@@ -13,7 +14,6 @@ from pyspartalib.context.extension.path_context import (
     Paths2,
 )
 from pyspartalib.context.extension.time_context import TimePair
-from pyspartalib.context.type_context import Type
 from pyspartalib.script.directory.create_directory import create_directory
 from pyspartalib.script.file.archive.compress_archive import CompressArchive
 from pyspartalib.script.file.archive.decompress_archive import (

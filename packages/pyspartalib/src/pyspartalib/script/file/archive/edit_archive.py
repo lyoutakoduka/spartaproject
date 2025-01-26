@@ -4,9 +4,9 @@
 
 from pathlib import Path
 
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.extension.path_context import Paths
 from pyspartalib.context.extension.time_context import TimePair
-from pyspartalib.context.type_context import Type
 from pyspartalib.script.file.archive.compress_archive import CompressArchive
 from pyspartalib.script.file.archive.decompress_archive import (
     DecompressArchive,

@@ -6,13 +6,13 @@ from collections.abc import Container, Sized
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.context.extension.path_context import (
     PathFunc,
     PathPair,
     Paths,
 )
-from pyspartalib.context.type_context import Type
 from pyspartalib.script.directory.create_directory import create_directory
 from pyspartalib.script.file.archive.compress_archive import CompressArchive
 from pyspartalib.script.file.archive.edit_archive import EditArchive

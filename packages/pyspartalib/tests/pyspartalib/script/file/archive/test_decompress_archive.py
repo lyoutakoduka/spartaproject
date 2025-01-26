@@ -9,11 +9,11 @@ from itertools import chain
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.integer_context import IntPair2, Ints2
 from pyspartalib.context.default.string_context import StrPair, Strs
 from pyspartalib.context.extension.path_context import PathFunc, Paths, Paths2
 from pyspartalib.context.extension.time_context import Times, Times2
-from pyspartalib.context.type_context import Type
 from pyspartalib.script.directory.create_parent import create_parent
 from pyspartalib.script.file.archive.compress_archive import CompressArchive
 from pyspartalib.script.file.archive.decompress_archive import (
