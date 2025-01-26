@@ -2,8 +2,8 @@
 
 """Test module to remove white space at the beginning of a sentence."""
 
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.string_context import Strs
-from pyspartalib.context.type_context import Type
 from pyspartalib.script.stdout.format_indent import format_indent
 
 

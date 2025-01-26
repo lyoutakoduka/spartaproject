@@ -2,7 +2,7 @@
 
 """Test module to show log to stdout."""
 
-from pyspartalib.context.type_context import Type
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.script.stdout.off_stdout import OffStdout
 from pyspartalib.script.stdout.send_stdout import send_stdout
 

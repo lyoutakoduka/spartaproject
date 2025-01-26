@@ -2,7 +2,7 @@
 
 """Test module to redirect stdout to string variable forcibly."""
 
-from pyspartalib.context.type_context import Type
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.script.stdout.format_indent import format_indent
 from pyspartalib.script.stdout.off_stdout import OffStdout
 from pyspartalib.script.stdout.send_stdout import send_stdout
