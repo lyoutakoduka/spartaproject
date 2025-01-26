@@ -2,7 +2,7 @@
 
 """Test module to show simple numbers as string type."""
 
-from pyspartalib.context.type_context import Type
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.script.string.temporary_text import temporary_text
 
 

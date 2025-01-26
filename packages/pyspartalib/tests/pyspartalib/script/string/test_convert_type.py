@@ -2,7 +2,7 @@
 
 """Test module to convert text to specific type."""
 
-from pyspartalib.context.type_context import Type
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.script.string.convert_type import convert_integer
 
 
