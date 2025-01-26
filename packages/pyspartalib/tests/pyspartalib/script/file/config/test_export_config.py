@@ -6,6 +6,7 @@ from decimal import Decimal
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.bool_context import BoolPair, BoolPair2
 from pyspartalib.context.default.float_context import FloatPair, FloatPair2
 from pyspartalib.context.default.integer_context import IntPair, IntPair2
@@ -22,7 +23,6 @@ from pyspartalib.context.file.config_context import (
     SinglePair,
     SinglePair2,
 )
-from pyspartalib.context.type_context import Type
 from pyspartalib.script.file.config.export_config import (
     config_dump,
     config_export,

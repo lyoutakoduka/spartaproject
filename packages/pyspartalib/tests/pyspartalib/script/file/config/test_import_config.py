@@ -6,9 +6,9 @@ from decimal import Decimal
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.extension.path_context import PathFunc
 from pyspartalib.context.file.config_context import Config, Single
-from pyspartalib.context.type_context import Type
 from pyspartalib.script.file.config.import_config import (
     config_import,
     config_load,
