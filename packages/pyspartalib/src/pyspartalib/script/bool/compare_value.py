@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.bool_context import (
     BoolPair,
     BoolPairs,
@@ -9,7 +10,6 @@ from pyspartalib.context.default.bool_context import (
 )
 from pyspartalib.context.default.integer_context import Ints
 from pyspartalib.context.default.string_context import Strs2
-from pyspartalib.context.type_context import Type
 
 
 def _raise_error(message: str | None) -> None:
