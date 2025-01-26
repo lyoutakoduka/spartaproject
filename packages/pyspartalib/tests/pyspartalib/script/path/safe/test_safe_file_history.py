@@ -6,6 +6,7 @@ from collections.abc import Sized
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.context.extension.path_context import (
     PathFunc,
@@ -14,7 +15,6 @@ from pyspartalib.context.extension.path_context import (
     Paths2,
     Paths3,
 )
-from pyspartalib.context.type_context import Type
 from pyspartalib.script.frame.stack_frame import current_frame
 from pyspartalib.script.path.modify.current.get_relative import is_relative
 from pyspartalib.script.path.safe.safe_file_history import FileHistory

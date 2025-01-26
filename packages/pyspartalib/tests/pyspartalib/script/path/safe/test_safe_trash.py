@@ -6,6 +6,7 @@ from collections.abc import Sized
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.bool_context import BoolPair, Bools
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.context.extension.path_context import (
@@ -14,7 +15,6 @@ from pyspartalib.context.extension.path_context import (
     PathPair2,
     Paths,
 )
-from pyspartalib.context.type_context import Type
 from pyspartalib.script.bool.same_value import bool_same_array
 from pyspartalib.script.directory.create_directory import create_directory
 from pyspartalib.script.path.iterate_directory import walk_iterator
