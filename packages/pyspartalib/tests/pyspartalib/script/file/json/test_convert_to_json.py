@@ -5,6 +5,7 @@
 from decimal import Decimal
 from pathlib import Path
 
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.bool_context import (
     BoolPair,
     BoolPair2,
@@ -47,7 +48,6 @@ from pyspartalib.context.file.json_context import (
     Multi2,
     Singles,
 )
-from pyspartalib.context.type_context import Type
 from pyspartalib.script.file.json.convert_to_json import (
     multiple2_to_json,
     multiple_to_json,

@@ -5,9 +5,9 @@
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.extension.path_context import PathFunc
 from pyspartalib.context.file.json_context import Json, Single, SinglePair
-from pyspartalib.context.type_context import Type
 from pyspartalib.script.file.json.export_json import json_export
 from pyspartalib.script.file.json.import_json import json_import, json_load
 
