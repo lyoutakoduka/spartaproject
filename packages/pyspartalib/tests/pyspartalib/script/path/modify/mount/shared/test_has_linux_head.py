@@ -4,9 +4,9 @@
 
 from pathlib import Path
 
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.bool_context import Bools
 from pyspartalib.context.extension.path_context import Paths
-from pyspartalib.context.type_context import Type
 from pyspartalib.script.path.modify.mount.build_linux_path import (
     get_linux_path,
 )
