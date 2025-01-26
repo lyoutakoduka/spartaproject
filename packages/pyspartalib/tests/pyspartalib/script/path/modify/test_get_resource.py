@@ -4,8 +4,8 @@
 
 from pathlib import Path
 
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.string_context import Strs
-from pyspartalib.context.type_context import Type
 from pyspartalib.script.file.json.convert_from_json import (
     string_pair_from_json,
 )
