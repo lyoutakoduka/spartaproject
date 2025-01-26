@@ -2,8 +2,8 @@
 
 """Test module to take out name and index from base name of file."""
 
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.string_context import Strs
-from pyspartalib.context.type_context import Type
 from pyspartalib.script.string.rename.context.rename_context import BaseName
 from pyspartalib.script.string.rename.name_elements import NameElements
 

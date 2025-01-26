@@ -2,8 +2,8 @@
 
 """Test module to standardize string for key of dictionary."""
 
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.string_context import Strs
-from pyspartalib.context.type_context import Type
 from pyspartalib.script.string.rename.standardize_text import StandardizeText
 
 

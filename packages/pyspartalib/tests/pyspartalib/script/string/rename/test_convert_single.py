@@ -5,7 +5,7 @@
 There are converted to single byte same characters in Ascii table.
 """
 
-from pyspartalib.context.type_context import Type
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.script.string.rename.convert_single import ConvertSingle
 
 

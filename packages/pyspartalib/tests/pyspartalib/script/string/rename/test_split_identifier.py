@@ -2,8 +2,8 @@
 
 """Test module to convert string by using the split identifier."""
 
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.string_context import Strs
-from pyspartalib.context.type_context import Type
 from pyspartalib.script.string.rename.split_identifier import SplitIdentifier
 
 
