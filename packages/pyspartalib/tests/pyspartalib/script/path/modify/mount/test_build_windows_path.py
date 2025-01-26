@@ -4,7 +4,7 @@
 
 from pathlib import Path
 
-from pyspartalib.context.type_context import Type
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.script.path.modify.mount.build_windows_path import (
     get_windows_head,
     get_windows_path,
