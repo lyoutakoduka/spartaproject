@@ -2,9 +2,9 @@
 
 """Test module to offset date time by current time zone to UTC time."""
 
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.integer_context import IntPair, IntPair2
 from pyspartalib.context.extension.time_context import Times
-from pyspartalib.context.type_context import Type
 from pyspartalib.script.time.format.create_iso_date import get_iso_time
 from pyspartalib.script.time.stamp.offset_timezone import offset_time
 
