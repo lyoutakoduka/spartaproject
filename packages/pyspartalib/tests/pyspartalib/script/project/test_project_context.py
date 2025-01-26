@@ -5,10 +5,10 @@
 from collections.abc import Sized
 from pathlib import Path
 
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.integer_context import IntPair
 from pyspartalib.context.default.string_context import StrPair, Strs, Strs2
 from pyspartalib.context.extension.path_context import PathPair
-from pyspartalib.context.type_context import Type
 from pyspartalib.script.path.modify.get_resource import get_resource
 from pyspartalib.script.platform.platform_status import get_platform
 from pyspartalib.script.project.project_context import ProjectContext

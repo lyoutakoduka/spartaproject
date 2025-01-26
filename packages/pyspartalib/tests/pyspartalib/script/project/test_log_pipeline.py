@@ -4,8 +4,8 @@
 
 from decimal import Decimal
 
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.string_context import Strs
-from pyspartalib.context.type_context import Type
 from pyspartalib.script.project.log_pipeline import LogPipeline
 from pyspartalib.script.stdout.off_stdout import OffStdout
 
