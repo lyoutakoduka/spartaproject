@@ -2,7 +2,7 @@
 
 """Test module to decode byte data by specific character encoding."""
 
-from pyspartalib.context.type_context import Type
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.script.string.encoding.set_decoding import set_decoding
 
 

@@ -2,7 +2,7 @@
 
 """Test module to find character encoding from string automatically."""
 
-from pyspartalib.context.type_context import Type
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.script.string.encoding.find_encoding import find_encoding
 from pyspartalib.script.string.encoding.set_encoding import set_encoding
 

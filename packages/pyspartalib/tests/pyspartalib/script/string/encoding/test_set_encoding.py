@@ -2,7 +2,7 @@
 
 """Test module to encode string by specific character encoding."""
 
-from pyspartalib.context.type_context import Type
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.script.string.encoding.set_encoding import set_encoding
 
 
