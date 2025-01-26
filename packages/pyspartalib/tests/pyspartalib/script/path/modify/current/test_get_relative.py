@@ -4,10 +4,10 @@
 
 from pathlib import Path
 
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.bool_context import Bools
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.context.extension.path_context import PathPair, Paths
-from pyspartalib.context.type_context import Type
 from pyspartalib.script.bool.compare_value import bool_compare_array
 from pyspartalib.script.path.modify.current.get_absolute import (
     get_absolute,

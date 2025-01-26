@@ -4,9 +4,9 @@
 
 from pathlib import Path
 
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.context.extension.path_context import PathPair, Paths
-from pyspartalib.context.type_context import Type
 from pyspartalib.script.path.modify.current.get_absolute import (
     get_absolute,
     get_absolute_array,
