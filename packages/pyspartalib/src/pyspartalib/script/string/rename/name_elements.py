@@ -4,9 +4,10 @@
 
 from re import sub
 
-from pyspartalib.context.typed.user_context import BaseName
 from pyspartalib.script.string.convert_type import convert_integer
 from pyspartalib.script.string.rename.split_identifier import SplitIdentifier
+
+from .context.rename_context import BaseName
 
 
 class NameElements(SplitIdentifier):
