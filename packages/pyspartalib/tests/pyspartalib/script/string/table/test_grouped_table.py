@@ -7,7 +7,9 @@ from typing import get_type_hints
 
 from pyspartalib.context.default.string_context import Strs, Strs2
 from pyspartalib.context.type_context import Type
-from pyspartalib.context.typed.user_context import CharacterTable
+from pyspartalib.script.string.table.context.table_context import (
+    CharacterTable,
+)
 from pyspartalib.script.string.table.grouped_table import GroupedTable
 
 
