@@ -6,7 +6,7 @@ from pathlib import Path
 from platform import python_version
 from sys import executable
 
-from pyspartalib.context.type_context import Type
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.script.server.script_version import (
     get_interpreter_version,
     get_version_name,
