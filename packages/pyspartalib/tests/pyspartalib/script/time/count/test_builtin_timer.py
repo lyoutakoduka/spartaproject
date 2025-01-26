@@ -5,8 +5,8 @@
 from decimal import Decimal
 from time import sleep
 
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.extension.decimal_context import Decs
-from pyspartalib.context.type_context import Type
 from pyspartalib.script.decimal.initialize_decimal import initialize_decimal
 from pyspartalib.script.time.count.builtin_timer import TimerSelect
 from pyspartalib.script.time.epoch.get_time_stamp import get_initial_epoch

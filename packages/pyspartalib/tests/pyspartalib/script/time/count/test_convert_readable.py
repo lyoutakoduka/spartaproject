@@ -4,10 +4,10 @@
 
 from decimal import Decimal
 
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.integer_context import IntPair
 from pyspartalib.context.default.string_context import StrPair, Strs
 from pyspartalib.context.extension.decimal_context import DecPair, Decs
-from pyspartalib.context.type_context import Type
 from pyspartalib.script.decimal.initialize_decimal import initialize_decimal
 from pyspartalib.script.time.count.convert_readable import readable_time
 
