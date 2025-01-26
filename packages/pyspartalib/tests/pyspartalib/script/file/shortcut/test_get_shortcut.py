@@ -4,7 +4,7 @@
 
 from pathlib import Path
 
-from pyspartalib.context.type_context import Type
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.script.file.shortcut.get_shortcut import get_shortcut
 
 
