@@ -4,7 +4,7 @@
 
 from decimal import Decimal
 
-from pyspartalib.context.type_context import Type
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.script.time.epoch.get_time_stamp import get_initial_epoch
 
 
