@@ -6,8 +6,8 @@ from collections.abc import Sized
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.extension.path_context import PathFunc
-from pyspartalib.context.type_context import Type
 from pyspartalib.script.server.local.path_server import PathServer
 from pyspartalib.script.time.directory.get_time_path import (
     get_initial_time_path,
