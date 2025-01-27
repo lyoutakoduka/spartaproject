@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-"""User defined types about callable object."""
+"""User defined types about generics."""
 
 from typing import ParamSpec, TypeVar
 
