@@ -4,6 +4,7 @@
 
 from decimal import Decimal
 
+from pyspartalib.context.custom.callable_context import IntStrFunc
 from pyspartalib.context.custom.timer_context import TimerFunc, TimerIntStrFunc
 from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.string_context import Strs
@@ -127,7 +128,7 @@ def _get_timer_force() -> LogTimer:
 
 def _get_timer_results(
     count: int,
-    show: TimerIntStrFunc,
+    show: IntStrFunc,
     timer: LogTimer,
 ) -> Strs:
     results: Strs = []
@@ -158,7 +159,7 @@ def _stdout_check(
     expected: str,
     count: int,
     timer: LogTimer,
-    show: TimerIntStrFunc,
+    show: IntStrFunc,
 ) -> None:
     _difference_error(
         "\n".join(_get_timer_results(count, show, timer)),
