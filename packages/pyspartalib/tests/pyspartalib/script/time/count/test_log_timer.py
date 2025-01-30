@@ -183,35 +183,31 @@ def _stdout_check(
 
 def test_base() -> None:
     """Test to get timer count by readable format."""
-    expected: str = _get_expected_base()
     count: int = 20 + 1
     timer: LogTimer = _get_timer_base()
 
-    _stdout_check(expected, count, timer, _outside(timer))
+    _stdout_check(_get_expected_base(), count, timer, _outside(timer))
 
 
 def test_interval() -> None:
     """Test to get timer count with specific interval."""
-    expected: str = _get_expected_interval()
     count: int = 30 + 1
     timer: LogTimer = _get_timer_interval()
 
-    _stdout_check(expected, count, timer, _outside(timer))
+    _stdout_check(_get_expected_interval(), count, timer, _outside(timer))
 
 
 def test_digit() -> None:
     """Test to get timer count with digit of decimal point."""
-    expected: str = _get_expected_digit()
     count: int = 10 + 1
     timer: LogTimer = _get_timer_digit()
 
-    _stdout_check(expected, count, timer, _outside(timer))
+    _stdout_check(_get_expected_digit(), count, timer, _outside(timer))
 
 
 def test_force() -> None:
     """Test to get timer count forcibly."""
-    expected: str = _get_expected_force()
     count: int = 10
     timer: LogTimer = _get_timer_force()
 
-    _stdout_check(expected, count, timer, _outside_index(timer))
+    _stdout_check(_get_expected_force(), count, timer, _outside_index(timer))
