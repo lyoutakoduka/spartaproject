@@ -214,12 +214,4 @@ def test_force() -> None:
     count: int = 10
     timer: LogTimer = _get_timer_force()
 
-    def show_timer(timer: LogTimer, index: int) -> str | None:
-        result: str = f"i={index}"
-
-        if time_text := timer.get_readable_time(force=True):
-            result += ", " + time_text
-
-        return result
-
     _stdout_check(expected, count, timer, _outside_index(timer))
