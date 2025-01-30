@@ -5,7 +5,6 @@
 from decimal import Decimal
 
 from pyspartalib.context.custom.callable_context import IntStrFunc
-from pyspartalib.context.custom.timer_context import TimerFunc, TimerIntStrFunc
 from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.script.decimal.initialize_decimal import initialize_decimal
