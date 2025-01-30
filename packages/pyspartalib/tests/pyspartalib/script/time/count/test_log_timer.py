@@ -187,12 +187,7 @@ def test_base() -> None:
     count: int = 20 + 1
     timer: LogTimer = _get_timer_base()
 
-    _stdout_check(
-        expected,
-        count,
-        timer,
-        lambda timer, _: timer.get_readable_time(),
-    )
+    _stdout_check(expected, count, timer, _outside(timer))
 
 
 def test_interval() -> None:
@@ -201,12 +196,7 @@ def test_interval() -> None:
     count: int = 30 + 1
     timer: LogTimer = _get_timer_interval()
 
-    _stdout_check(
-        expected,
-        count,
-        timer,
-        lambda timer, _: timer.get_readable_time(),
-    )
+    _stdout_check(expected, count, timer, _outside(timer))
 
 
 def test_digit() -> None:
@@ -215,12 +205,7 @@ def test_digit() -> None:
     count: int = 10 + 1
     timer: LogTimer = _get_timer_digit()
 
-    _stdout_check(
-        expected,
-        count,
-        timer,
-        lambda timer, _: timer.get_readable_time(),
-    )
+    _stdout_check(expected, count, timer, _outside(timer))
 
 
 def test_force() -> None:
@@ -237,4 +222,4 @@ def test_force() -> None:
 
         return result
 
-    _stdout_check(expected, count, timer, show_timer)
+    _stdout_check(expected, count, timer, _outside_index(timer))
