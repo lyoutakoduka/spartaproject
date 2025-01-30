@@ -134,7 +134,7 @@ def _get_timer_results(
     results: Strs = []
 
     for i in range(count):
-        if time_text := show(timer, i):
+        if time_text := show(i):
             results += [time_text]
 
         timer.increase_timer()
