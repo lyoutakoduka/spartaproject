@@ -181,7 +181,7 @@ def _stdout_check(
     )
 
 
-def test_count() -> None:
+def test_base() -> None:
     """Test to get timer count by readable format."""
     expected: str = _get_expected_base()
     increase_count: int = 20 + 1
