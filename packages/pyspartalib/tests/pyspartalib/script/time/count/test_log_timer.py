@@ -184,12 +184,12 @@ def _stdout_check(
 def test_base() -> None:
     """Test to get timer count by readable format."""
     expected: str = _get_expected_base()
-    increase_count: int = 20 + 1
+    count: int = 20 + 1
     timer: LogTimer = _get_timer_base()
 
     _stdout_check(
         expected,
-        increase_count,
+        count,
         timer,
         lambda timer, _: timer.get_readable_time(),
     )
@@ -198,12 +198,12 @@ def test_base() -> None:
 def test_interval() -> None:
     """Test to get timer count with specific interval."""
     expected: str = _get_expected_interval()
-    increase_count: int = 30 + 1
+    count: int = 30 + 1
     timer: LogTimer = _get_timer_interval()
 
     _stdout_check(
         expected,
-        increase_count,
+        count,
         timer,
         lambda timer, _: timer.get_readable_time(),
     )
@@ -212,12 +212,12 @@ def test_interval() -> None:
 def test_digit() -> None:
     """Test to get timer count with digit of decimal point."""
     expected: str = _get_expected_digit()
-    increase_count: int = 10 + 1
+    count: int = 10 + 1
     timer: LogTimer = _get_timer_digit()
 
     _stdout_check(
         expected,
-        increase_count,
+        count,
         timer,
         lambda timer, _: timer.get_readable_time(),
     )
@@ -226,7 +226,7 @@ def test_digit() -> None:
 def test_force() -> None:
     """Test to get timer count forcibly."""
     expected: str = _get_expected_force()
-    increase_count: int = 10
+    count: int = 10
     timer: LogTimer = _get_timer_force()
 
     def show_timer(timer: LogTimer, index: int) -> str | None:
@@ -237,4 +237,4 @@ def test_force() -> None:
 
         return result
 
-    _stdout_check(expected, increase_count, timer, show_timer)
+    _stdout_check(expected, count, timer, show_timer)
