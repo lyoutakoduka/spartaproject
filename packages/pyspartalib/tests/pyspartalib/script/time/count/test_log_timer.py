@@ -155,6 +155,13 @@ def _get_time_force(index: int, timer: LogTimer) -> str:
     return result
 
 
+def _outside(timer: LogTimer) -> IntStrFunc:
+    def _inside(_: int) -> str | None:
+        return _get_time(timer)
+
+    return _inside
+
+
 def _outside_index(timer: LogTimer) -> IntStrFunc:
     def _inside(index: int) -> str | None:
         return _get_time_force(index, timer)
