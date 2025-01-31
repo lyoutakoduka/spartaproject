@@ -66,7 +66,7 @@ def _times_key_second() -> Strs:
 
 
 def _times_value_second() -> Decs:
-    return [Decimal("0.1") ** Decimal(str(i)) for i in range(9)]
+    return [Decimal("0.1") ** Decimal(str(i)) for i in range(8)]
 
 
 def _get_case_second() -> DecPair:
