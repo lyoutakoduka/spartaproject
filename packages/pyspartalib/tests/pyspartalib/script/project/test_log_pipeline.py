@@ -8,8 +8,7 @@ from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.script.project.log_pipeline import LogPipeline
 from pyspartalib.script.stdout.off_stdout import OffStdout
-
-from .context.log_context import LogFunc
+from tests.pyspartalib.script.project.context.log_context import LogFunc
 
 
 def _none_error(result: Type | None) -> Type:
