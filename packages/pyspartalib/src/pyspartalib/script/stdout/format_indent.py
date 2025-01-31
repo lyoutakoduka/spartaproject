@@ -6,8 +6,10 @@ from itertools import takewhile
 
 from pyspartalib.context.default.integer_context import Ints
 from pyspartalib.context.default.string_context import Strs
-
-from .context.format_context import FormatPair, FormatPairs
+from pyspartalib.script.stdout.context.format_context import (
+    FormatPair,
+    FormatPairs,
+)
 
 
 def _get_space_size(striped_right: str) -> int:
