@@ -13,6 +13,7 @@ from pyspartalib.context.extension.path_context import Paths
 from pyspartalib.script.decimal.initialize_decimal import initialize_decimal
 from pyspartalib.script.directory.create_directory import create_directory
 from pyspartalib.script.file.archive.archive_format import rename_format
+from pyspartalib.script.file.archive.context.archive_context import Archives
 from pyspartalib.script.file.json.convert_to_json import multiple_to_json
 from pyspartalib.script.file.json.export_json import json_dump
 from pyspartalib.script.file.text.import_file import byte_import
@@ -28,8 +29,6 @@ from pyspartalib.script.time.path.get_timestamp import (
     get_latest,
 )
 from pyspartalib.script.time.stamp.current_datetime import get_current_time
-
-from .context.archive_context import Archives
 
 initialize_decimal()
 

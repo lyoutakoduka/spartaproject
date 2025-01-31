@@ -29,8 +29,9 @@ from pyspartalib.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
 from tests.pyspartalib.interface.pytest import raises
-
-from .context.archive_context import ArchiveStatus
+from tests.pyspartalib.script.file.archive.context.archive_context import (
+    ArchiveStatus,
+)
 
 
 def _difference_error(result: Type, expected: Type) -> None:
