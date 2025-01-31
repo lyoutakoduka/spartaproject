@@ -4,8 +4,9 @@
 
 from pyspartalib.context.default.integer_context import Ints
 from pyspartalib.context.default.string_context import Strs, Strs2, StrsPair
-
-from .context.table_context import CharacterTable
+from pyspartalib.script.string.table.context.table_context import (
+    CharacterTable,
+)
 
 
 class GroupedTable:
