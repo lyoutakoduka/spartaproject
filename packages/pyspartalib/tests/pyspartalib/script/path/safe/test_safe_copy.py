@@ -18,8 +18,9 @@ from pyspartalib.script.path.temporary.create_temporary_file import (
 from pyspartalib.script.path.temporary.create_temporary_tree import (
     create_temporary_tree,
 )
-
-from .context.copy_context import CopyPathFunc
+from tests.pyspartalib.script.path.safe.context.copy_context import (
+    CopyPathFunc,
+)
 
 
 def _difference_error(result: Type, expected: Type) -> None:

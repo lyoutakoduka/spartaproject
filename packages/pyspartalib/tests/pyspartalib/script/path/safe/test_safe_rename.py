@@ -19,8 +19,9 @@ from pyspartalib.script.path.temporary.create_temporary_file import (
 from pyspartalib.script.path.temporary.create_temporary_tree import (
     create_temporary_tree,
 )
-
-from .context.rename_context import RenamePathFunc
+from tests.pyspartalib.script.path.safe.context.rename_context import (
+    RenamePathFunc,
+)
 
 
 def _difference_error(result: Type, expected: Type) -> None:
