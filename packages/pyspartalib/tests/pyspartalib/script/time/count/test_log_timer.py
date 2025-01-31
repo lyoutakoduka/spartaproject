@@ -51,16 +51,16 @@ def _get_expected_interval() -> str:
 
 def _get_expected_digit() -> str:
     return """
-        30m 0.0s
-        1h 0.0s
-        1h 30m 0.0s
-        2h 0.0s
-        2h 30m 0.0s
-        3h 0.0s
-        3h 30m 0.0s
-        4h 0.0s
-        4h 30m 0.0s
-        5h 0.0s
+        0.010s
+        0.020s
+        0.030s
+        0.040s
+        0.050s
+        0.060s
+        0.070s
+        0.080s
+        0.090s
+        0.100s
     """
 
 
