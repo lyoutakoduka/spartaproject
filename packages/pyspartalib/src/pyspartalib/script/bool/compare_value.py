@@ -70,6 +70,10 @@ def _confirm_list_single(result: Bools2) -> bool:
     return len(set(result)) == 1
 
 
+def _get_sorted_keys(lefts: BoolPair, rights: BoolPair) -> Strs2:
+    return [sorted(flags.keys()) for flags in [lefts, rights]]
+
+
 def bool_compare_array(lefts: Bools, rights: Bools) -> bool:
     _check_arguments_size(lefts, rights)
 
@@ -79,9 +83,10 @@ def bool_compare_array(lefts: Bools, rights: Bools) -> bool:
 def bool_compare_pair(lefts: BoolPair, rights: BoolPair) -> bool:
     _check_arguments_size(lefts, rights)
 
-    flags_pair: BoolPairs = [lefts, rights]
-    sorted_keys: Strs2 = [sorted(flags.keys()) for flags in flags_pair]
+    sorted_keys: Strs2 = _get_sorted_keys(lefts, rights)
 
     _status_error(len(set(sorted_keys)) > 1, message="unmatch")
 
-    return _confirm_list_single(_get_sorted_flags(sorted_keys, flags_pair))
+    return _confirm_list_single(
+        _get_sorted_flags(sorted_keys, [lefts, rights]),
+    )
