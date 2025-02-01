@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+from collections.abc import Sized
+
 from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.bool_context import (
     BoolPair,
@@ -20,7 +22,7 @@ def _raise_error(message: str | None) -> None:
 
 
 def _length_error(
-    result: list[Type],
+    result: Sized,
     expected: int,
     message: str | None = None,
 ) -> None:
