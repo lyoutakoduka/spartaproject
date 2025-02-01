@@ -44,15 +44,6 @@ def _status_error(status: bool, message: str | None = None) -> None:
         _raise_error(message)
 
 
-def _length_small_error(
-    result: list[Type],
-    expected: int,
-    message: str | None = None,
-) -> None:
-    if len(set(result)) <= expected:
-        _raise_error(message)
-
-
 def _get_flag_counts(lefts: BoolType, rights: BoolType) -> Ints:
     return list({len(flags) for flags in [lefts, rights]})
 
