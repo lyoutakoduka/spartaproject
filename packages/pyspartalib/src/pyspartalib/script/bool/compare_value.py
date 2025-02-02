@@ -21,6 +21,14 @@ def _raise_error(message: str | None) -> None:
     raise ValueError(message)
 
 
+def _confirm_list_same(lefts: Type, rights: Type) -> bool:
+    return lefts == rights
+
+
+def _confirm_list_single(result: Sized) -> bool:
+    return len(result) == 1
+
+
 def _length_error(
     result: Sized,
     expected: int,
@@ -60,14 +68,6 @@ def _get_sorted_flags(sorted_keys: Strs2, flags_pair: BoolPairs) -> Bools2:
         [flags[key] for key in keys]
         for keys, flags in zip(sorted_keys, flags_pair, strict=True)
     ]
-
-
-def _confirm_list_same(lefts: Type, rights: Type) -> bool:
-    return lefts == rights
-
-
-def _confirm_list_single(result: Sized) -> bool:
-    return len(result) == 1
 
 
 def _get_sorted_keys(lefts: BoolPair, rights: BoolPair) -> Strs2:
