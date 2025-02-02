@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from collections.abc import Sized
+from collections.abc import Iterable, Sized
 
 from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.bool_context import (
@@ -69,7 +69,7 @@ def _get_sorted_keys(lefts: BoolPair, rights: BoolPair) -> Strs2:
     return [sorted(flags.keys()) for flags in [lefts, rights]]
 
 
-def _get_key_strings(sorted_keys: Strs2) -> Strs:
+def _get_key_strings(sorted_keys: Iterable[Type]) -> Strs:
     return [str(keys) for keys in sorted_keys]
 
 
