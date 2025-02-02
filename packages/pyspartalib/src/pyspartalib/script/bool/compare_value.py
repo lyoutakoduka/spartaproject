@@ -11,7 +11,7 @@ from pyspartalib.context.default.bool_context import (
     BoolType,
 )
 from pyspartalib.context.default.integer_context import Ints
-from pyspartalib.context.default.string_context import Strs2
+from pyspartalib.context.default.string_context import Strs, Strs2
 
 
 def _raise_error(message: str | None) -> None:
@@ -74,6 +74,10 @@ def _get_sorted_keys(lefts: BoolPair, rights: BoolPair) -> Strs2:
     return [sorted(flags.keys()) for flags in [lefts, rights]]
 
 
+def _get_key_strings(sorted_keys: Strs2) -> Strs:
+    return [str(keys) for keys in sorted_keys]
+
+
 def bool_compare_array(lefts: Bools, rights: Bools) -> bool:
     _check_arguments_size(lefts, rights)
 
@@ -84,6 +88,7 @@ def bool_compare_pair(lefts: BoolPair, rights: BoolPair) -> bool:
     _check_arguments_size(lefts, rights)
 
     sorted_keys: Strs2 = _get_sorted_keys(lefts, rights)
+    key_strings: Strs = _get_key_strings(sorted_keys)
 
     _status_error(len(set(sorted_keys)) > 1, message="unmatch")
 
