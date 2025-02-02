@@ -87,6 +87,6 @@ def bool_compare_pair(lefts: BoolPair, rights: BoolPair) -> bool:
     _length_error(set(_get_key_strings(sorted_keys)), 1, message="unmatch")
 
     return _length_condition(
-        set(_get_sorted_flags(sorted_keys, [lefts, rights])),
+        set(_get_key_strings(_get_sorted_flags(sorted_keys, [lefts, rights]))),
         1,
     )
