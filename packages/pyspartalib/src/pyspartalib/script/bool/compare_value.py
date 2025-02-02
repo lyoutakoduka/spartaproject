@@ -34,7 +34,7 @@ def _length_error(
     expected: int,
     message: str | None = None,
 ) -> None:
-    if len(result) != expected:
+    if not _length_condition(result, expected):
         _raise_error(message)
 
 
