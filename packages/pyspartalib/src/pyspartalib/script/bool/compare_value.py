@@ -47,11 +47,6 @@ def _same_error(
         _raise_error(message)
 
 
-def _status_error(status: bool, message: str | None = None) -> None:
-    if not status:
-        _raise_error(message)
-
-
 def _get_flag_counts(lefts: BoolType, rights: BoolType) -> Ints:
     return list({len(flags) for flags in [lefts, rights]})
 
