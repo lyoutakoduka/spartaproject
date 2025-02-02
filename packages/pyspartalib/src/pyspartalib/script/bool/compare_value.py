@@ -25,7 +25,7 @@ def _difference_condition(lefts: Type, rights: Type) -> bool:
     return lefts == rights
 
 
-def _confirm_list_single(result: Sized, expected: int) -> bool:
+def _length_condition(result: Sized, expected: int) -> bool:
     return len(result) == expected
 
 
@@ -91,7 +91,7 @@ def bool_compare_pair(lefts: BoolPair, rights: BoolPair) -> bool:
 
     _length_error(set(_get_key_strings(sorted_keys)), 1, message="unmatch")
 
-    return _confirm_list_single(
+    return _length_condition(
         set(_get_sorted_flags(sorted_keys, [lefts, rights])),
         1,
     )
