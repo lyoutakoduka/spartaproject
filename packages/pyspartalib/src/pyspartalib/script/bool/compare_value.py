@@ -88,9 +88,8 @@ def bool_compare_pair(lefts: BoolPair, rights: BoolPair) -> bool:
     _check_arguments_size(lefts, rights)
 
     sorted_keys: Strs2 = _get_sorted_keys(lefts, rights)
-    key_strings: Strs = _get_key_strings(sorted_keys)
 
-    _status_error(len(set(sorted_keys)) > 1, message="unmatch")
+    _length_error(set(_get_key_strings(sorted_keys)), 1, message="unmatch")
 
     return _confirm_list_single(
         _get_sorted_flags(sorted_keys, [lefts, rights]),
