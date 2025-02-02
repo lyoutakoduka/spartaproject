@@ -69,7 +69,7 @@ def _get_sorted_keys(lefts: BoolPair, rights: BoolPair) -> Strs2:
     return [sorted(flags.keys()) for flags in [lefts, rights]]
 
 
-def _get_key_strings(sorted_keys: Iterable[Type]) -> Strs:
+def _convert_strings(sorted_keys: Iterable[Type]) -> Strs:
     return [str(keys) for keys in sorted_keys]
 
 
@@ -84,9 +84,9 @@ def bool_compare_pair(lefts: BoolPair, rights: BoolPair) -> bool:
 
     sorted_keys: Strs2 = _get_sorted_keys(lefts, rights)
 
-    _length_error(set(_get_key_strings(sorted_keys)), 1, message="unmatch")
+    _length_error(set(_convert_strings(sorted_keys)), 1, message="unmatch")
 
     return _length_condition(
-        set(_get_key_strings(_get_sorted_flags(sorted_keys, [lefts, rights]))),
+        set(_convert_strings(_get_sorted_flags(sorted_keys, [lefts, rights]))),
         1,
     )
