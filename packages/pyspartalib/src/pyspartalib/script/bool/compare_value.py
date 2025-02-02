@@ -62,7 +62,7 @@ def _get_sorted_flags(sorted_keys: Strs2, flags_pair: BoolPairs) -> Bools2:
     ]
 
 
-def _confirm_list_same(lefts: Bools, rights: Bools) -> bool:
+def _confirm_list_same(lefts: Type, rights: Type) -> bool:
     return lefts == rights
 
 
