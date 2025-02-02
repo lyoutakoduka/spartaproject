@@ -25,8 +25,8 @@ def _confirm_list_same(lefts: Type, rights: Type) -> bool:
     return lefts == rights
 
 
-def _confirm_list_single(result: Sized) -> bool:
-    return len(result) == 1
+def _confirm_list_single(result: Sized, expected: int) -> bool:
+    return len(result) == expected
 
 
 def _length_error(
@@ -93,4 +93,5 @@ def bool_compare_pair(lefts: BoolPair, rights: BoolPair) -> bool:
 
     return _confirm_list_single(
         set(_get_sorted_flags(sorted_keys, [lefts, rights])),
+        1,
     )
