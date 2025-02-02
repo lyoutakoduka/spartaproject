@@ -21,7 +21,7 @@ def _raise_error(message: str | None) -> None:
     raise ValueError(message)
 
 
-def _confirm_list_same(lefts: Type, rights: Type) -> bool:
+def _difference_condition(lefts: Type, rights: Type) -> bool:
     return lefts == rights
 
 
@@ -81,7 +81,7 @@ def _get_key_strings(sorted_keys: Strs2) -> Strs:
 def bool_compare_array(lefts: Bools, rights: Bools) -> bool:
     _check_arguments_size(lefts, rights)
 
-    return _confirm_list_same(lefts, rights)
+    return _difference_condition(lefts, rights)
 
 
 def bool_compare_pair(lefts: BoolPair, rights: BoolPair) -> bool:
