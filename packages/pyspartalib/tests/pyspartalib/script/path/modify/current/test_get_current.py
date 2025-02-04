@@ -2,6 +2,7 @@
 
 """Test module to get current working directory."""
 
+from os import chdir
 from pathlib import Path
 
 from pyspartalib.context.custom.type_context import Type
@@ -11,6 +12,10 @@ from pyspartalib.script.path.modify.current.get_current import get_current
 def _difference_error(result: Type, expected: Type) -> None:
     if result != expected:
         raise ValueError
+
+
+def _set_current(path: Path) -> None:
+    chdir(path)
 
 
 def _no_exists_error(path: Path) -> None:
