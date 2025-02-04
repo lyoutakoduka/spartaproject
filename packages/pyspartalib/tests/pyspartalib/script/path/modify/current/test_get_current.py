@@ -20,11 +20,6 @@ def _set_current(path: Path) -> None:
     chdir(path)
 
 
-def _no_exists_error(path: Path) -> None:
-    if not path.exists():
-        raise FileNotFoundError
-
-
 def _inside_temporary_directory(function: PathFunc) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
