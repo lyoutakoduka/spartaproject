@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+"""Test module to get the current executing terminal."""
+
 from os import getenv
 from pathlib import Path
 
@@ -39,6 +41,7 @@ def _confirm_terminal() -> None:
 
 
 def test_terminal() -> None:
+    """Test to get the current executing terminal."""
     source_type = get_terminal()
 
     if source_type == "test":
