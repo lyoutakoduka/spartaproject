@@ -32,3 +32,7 @@ def _confirm_test_explorer() -> None:
 
 def _confirm_vscode_terminal() -> None:
     _difference_error(_get_environment("term_program"), get_terminal())
+
+
+def _confirm_terminal() -> None:
+    pass  # Do nothing.
