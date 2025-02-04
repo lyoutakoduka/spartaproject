@@ -6,7 +6,7 @@ from pathlib import Path
 
 from pyspartalib.context.default.bool_context import Bools
 from pyspartalib.context.extension.path_context import PathPair, Paths
-from pyspartalib.script.path.modify.current.get_current import get_current
+from pyspartalib.script.directory.current.get_current import get_current
 
 
 def _status_error(status: bool) -> None:
