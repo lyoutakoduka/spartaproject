@@ -4,8 +4,10 @@
 
 from os import chdir
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
 from pyspartalib.context.custom.type_context import Type
+from pyspartalib.context.extension.path_context import PathFunc
 from pyspartalib.script.path.modify.current.get_current import get_current
 
 
@@ -21,6 +23,11 @@ def _set_current(path: Path) -> None:
 def _no_exists_error(path: Path) -> None:
     if not path.exists():
         raise FileNotFoundError
+
+
+def _inside_temporary_directory(function: PathFunc) -> None:
+    with TemporaryDirectory() as temporary_path:
+        function(Path(temporary_path))
 
 
 def test_current() -> None:
