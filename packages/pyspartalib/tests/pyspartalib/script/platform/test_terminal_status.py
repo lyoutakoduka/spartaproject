@@ -36,3 +36,16 @@ def _confirm_vscode_terminal() -> None:
 
 def _confirm_terminal() -> None:
     pass  # Do nothing.
+
+
+def test_terminal() -> None:
+    source_type = get_terminal()
+
+    if source_type == "test":
+        _confirm_test_explorer()
+
+    if source_type == "vscode":
+        _confirm_vscode_terminal()
+
+    if source_type == "terminal":
+        _confirm_terminal()
