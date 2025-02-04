@@ -38,7 +38,7 @@ def _confirm_symbolic() -> Path:
     return _from_shell()
 
 
-def get_current() -> Path:
+def get_current(symbolic: bool = False) -> Path:
     """Get current working directory.
 
     Call from symbolic link on Linux is not support
@@ -47,4 +47,7 @@ def get_current() -> Path:
         Path: Current working directory.
 
     """
+    if symbolic is True:
+        return _confirm_symbolic()
+
     return _from_python()
