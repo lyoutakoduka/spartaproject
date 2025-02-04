@@ -8,7 +8,7 @@ from tempfile import TemporaryDirectory
 
 from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.extension.path_context import PathFunc
-from pyspartalib.script.path.modify.current.get_current import get_current
+from pyspartalib.script.directory.current.get_current import get_current
 
 
 def _difference_error(result: Type, expected: Type) -> None:
