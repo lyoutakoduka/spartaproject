@@ -5,6 +5,10 @@
 from pathlib import Path
 
 
+def _from_python() -> Path:
+    return Path().cwd()
+
+
 def get_current() -> Path:
     """Get current working directory.
 
@@ -14,4 +18,4 @@ def get_current() -> Path:
         Path: Current working directory.
 
     """
-    return Path().cwd()
+    return _from_python()
