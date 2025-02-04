@@ -4,6 +4,7 @@ from os import getenv
 from pathlib import Path
 
 from pyspartalib.context.custom.type_context import Type
+from pyspartalib.script.platform.terminal_status import get_terminal
 
 
 def _difference_error(result: Type, expected: Type) -> None:
@@ -27,3 +28,7 @@ def _confirm_test_explorer() -> None:
         Path(_get_environment("vscode_cwd")).name,
         "Microsoft VS Code",
     )
+
+
+def _confirm_vscode_terminal() -> None:
+    _difference_error(_get_environment("term_program"), get_terminal())
