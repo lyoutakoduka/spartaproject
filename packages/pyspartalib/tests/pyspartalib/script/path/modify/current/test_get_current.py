@@ -31,7 +31,7 @@ def _inside_temporary_directory(function: PathFunc) -> None:
 
 
 def test_current() -> None:
-    """Test to cet current working directory."""
+    """Test to get current working directory."""
 
     def individual_test(temporary_root: Path) -> None:
         _set_current(temporary_root)
