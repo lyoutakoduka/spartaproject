@@ -22,6 +22,14 @@ def _get_shell_current() -> Strs:
     return list(execute_single(["pwd"]))
 
 
+def _from_shell() -> Path:
+    result: Strs = _get_shell_current()
+
+    _length_error(result, 1)
+
+    return Path(result[0])
+
+
 def get_current() -> Path:
     """Get current working directory.
 
