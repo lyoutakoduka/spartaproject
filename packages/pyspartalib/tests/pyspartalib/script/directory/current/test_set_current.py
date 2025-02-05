@@ -5,6 +5,7 @@ from tempfile import TemporaryDirectory
 
 from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.extension.path_context import PathFunc
+from pyspartalib.script.directory.current.set_current import set_current
 
 
 def _difference_error(result: Type, expected: Type) -> None:
@@ -19,3 +20,11 @@ def _get_current() -> Path:
 def _inside_temporary_directory(function: PathFunc) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
+
+
+def test_current() -> None:
+    def individual_test(temporary_root: Path) -> None:
+        set_current(temporary_root)
+        _difference_error(_get_current(), temporary_root)
+
+    _inside_temporary_directory(individual_test)
