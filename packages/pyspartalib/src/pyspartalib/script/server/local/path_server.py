@@ -6,7 +6,7 @@ from pathlib import Path
 
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.context.extension.path_context import PathPair
-from pyspartalib.script.directory.working.work_space import WorkSpace
+from pyspartalib.script.directory.working.working_space import WorkSpace
 from pyspartalib.script.path.modify.current.get_relative import get_relative
 
 
