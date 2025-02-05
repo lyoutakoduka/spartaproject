@@ -5,7 +5,7 @@
 from pathlib import Path
 
 from pyspartalib.context.custom.type_context import Type
-from pyspartalib.script.directory.working.date_time_space import (
+from pyspartalib.script.directory.working.working_date_time import (
     get_working_path,
 )
 from pyspartalib.script.time.directory.get_time_path import (
