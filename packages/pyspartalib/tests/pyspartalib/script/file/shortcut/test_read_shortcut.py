@@ -6,7 +6,9 @@ from pathlib import Path
 
 from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.extension.path_context import PathPair
-from pyspartalib.script.directory.date_time_space import create_working_space
+from pyspartalib.script.directory.working.date_time_space import (
+    create_working_space,
+)
 from pyspartalib.script.file.shortcut.create_shortcut import create_shortcut
 from pyspartalib.script.file.shortcut.get_shortcut import get_shortcut
 from pyspartalib.script.file.shortcut.read_shortcut import read_shortcut
