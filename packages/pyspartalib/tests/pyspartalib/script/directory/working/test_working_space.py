@@ -8,7 +8,7 @@ from tempfile import TemporaryDirectory
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.context.extension.path_context import PathFunc, PathPair
 from pyspartalib.script.directory.create_directory import create_directory_pair
-from pyspartalib.script.directory.working.work_space import WorkSpace
+from pyspartalib.script.directory.working.working_space import WorkSpace
 from pyspartalib.script.path.modify.current.get_relative import is_relative
 from pyspartalib.script.time.directory.get_time_path import (
     get_initial_time_path,

@@ -7,7 +7,7 @@ from shutil import rmtree
 from tempfile import mkdtemp
 
 from pyspartalib.script.directory.create_directory import create_directory
-from pyspartalib.script.directory.working.date_time_space import (
+from pyspartalib.script.directory.working.working_date_time import (
     create_working_space,
 )
 
