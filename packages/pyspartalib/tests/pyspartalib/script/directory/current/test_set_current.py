@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+"""Test module to set current working directory."""
+
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
@@ -23,6 +25,8 @@ def _inside_temporary_directory(function: PathFunc) -> None:
 
 
 def test_current() -> None:
+    """Test to set current working directory."""
+
     def individual_test(temporary_root: Path) -> None:
         set_current(temporary_root)
         _difference_error(_get_current(), temporary_root)
