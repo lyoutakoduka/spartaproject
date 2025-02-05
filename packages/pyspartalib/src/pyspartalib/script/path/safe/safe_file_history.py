@@ -7,7 +7,7 @@ from itertools import count
 from pathlib import Path
 
 from pyspartalib.context.extension.path_context import PathPair2
-from pyspartalib.script.directory.working.work_space import WorkSpace
+from pyspartalib.script.directory.working.working_space import WorkSpace
 from pyspartalib.script.file.json.convert_to_json import multiple2_to_json
 from pyspartalib.script.file.json.export_json import json_export
 from pyspartalib.script.time.stamp.current_datetime import get_current_time
