@@ -13,7 +13,7 @@ from pyspartalib.script.path.symbolic.context.symbolic_context import (
     SymbolicLink,
 )
 from pyspartalib.script.path.symbolic.create_symbolic import (
-    create_symbolic,
+    create_symbolic_link,
     get_symbolic_link,
 )
 from pyspartalib.script.path.temporary.create_temporary_tree import (
@@ -36,7 +36,7 @@ def _get_expected_paths() -> Paths:
 
 
 def _create_symbolic(path: Path) -> SymbolicLink:
-    return create_symbolic(
+    return create_symbolic_link(
         create_temporary_tree(Path(path, "source"), tree_deep=1),
         Path(path, "symbolic"),
     )
