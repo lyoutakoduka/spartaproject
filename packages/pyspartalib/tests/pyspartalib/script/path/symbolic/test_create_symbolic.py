@@ -26,6 +26,10 @@ def _status_error(status: bool) -> None:
         raise ValueError
 
 
+def _get_expected_paths() -> Paths:
+    return [Path(group) for group in ["source", "symbolic"]]
+
+
 def _create_symbolic(path: Path) -> SymbolicLink:
     return create_symbolic(
         create_temporary_tree(Path(path, "source"), tree_deep=1),
