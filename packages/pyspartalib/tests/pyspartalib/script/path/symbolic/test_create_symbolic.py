@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+"""Test module to create symbolic link and link information."""
+
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
@@ -64,6 +66,7 @@ def _inside_temporary_directory(function: PathFunc) -> None:
 
 
 def test_path() -> None:
+    """Test to get type that represent paths about symbolic link."""
     expected_paths: Paths = _get_expected_paths()
 
     _difference_error(
@@ -73,6 +76,8 @@ def test_path() -> None:
 
 
 def test_create() -> None:
+    """Test to create symbolic link and link information."""
+
     def individual_test(temporary_root: Path) -> None:
         symbolic_link: SymbolicLink = _create_symbolic(temporary_root)
 
