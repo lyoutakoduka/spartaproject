@@ -10,7 +10,10 @@ from pyspartalib.script.path.modify.current.get_relative import get_relative
 from pyspartalib.script.path.symbolic.context.symbolic_context import (
     SymbolicLink,
 )
-from pyspartalib.script.path.symbolic.create_symbolic import create_symbolic
+from pyspartalib.script.path.symbolic.create_symbolic import (
+    create_symbolic,
+    get_symbolic_link,
+)
 from pyspartalib.script.path.temporary.create_temporary_tree import (
     create_temporary_tree,
 )
@@ -58,3 +61,12 @@ def _get_relative_pair(symbolic_link: SymbolicLink) -> Paths2:
 def _inside_temporary_directory(function: PathFunc) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
+
+
+def test_path() -> None:
+    expected_paths: Paths = _get_expected_paths()
+
+    _difference_error(
+        _get_symbolic_paths(get_symbolic_link(*expected_paths)),
+        expected_paths,
+    )
