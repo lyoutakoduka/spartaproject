@@ -4,6 +4,8 @@ from pathlib import Path
 
 from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.extension.path_context import Paths
+from pyspartalib.script.path.iterate_directory import walk_iterator
+from pyspartalib.script.path.modify.current.get_relative import get_relative
 from pyspartalib.script.path.symbolic.context.symbolic_context import (
     SymbolicLink,
 )
@@ -32,3 +34,10 @@ def _create_symbolic(path: Path) -> SymbolicLink:
 
 def _get_symbolic_paths(symbolic_link: SymbolicLink) -> Paths:
     return [symbolic_link["source"], symbolic_link["symbolic"]]
+
+
+def _get_relative_paths(working_root: Path) -> Paths:
+    return [
+        get_relative(path, root_path=working_root)
+        for path in walk_iterator(working_root)
+    ]
