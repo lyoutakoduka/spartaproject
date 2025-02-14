@@ -24,7 +24,10 @@ def get_symbolic_link(source_root: Path, symbolic_root: Path) -> SymbolicLink:
     return {"source": source_root, "symbolic": symbolic_root}
 
 
-def create_symbolic(source_root: Path, symbolic_root: Path) -> SymbolicLink:
+def create_symbolic_link(
+    source_root: Path,
+    symbolic_root: Path,
+) -> SymbolicLink:
     """Create symbolic link and link information.
 
     Args:
