@@ -70,3 +70,13 @@ def test_path() -> None:
         _get_symbolic_paths(get_symbolic_link(*expected_paths)),
         expected_paths,
     )
+
+
+def test_create() -> None:
+    def individual_test(temporary_root: Path) -> None:
+        symbolic_link: SymbolicLink = _create_symbolic(temporary_root)
+
+        _status_error(symbolic_link["symbolic"].is_symlink())
+        _difference_error(*_get_relative_pair(symbolic_link))
+
+    _inside_temporary_directory(individual_test)
