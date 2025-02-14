@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
 from pyspartalib.context.custom.type_context import Type
-from pyspartalib.context.extension.path_context import Paths, Paths2
+from pyspartalib.context.extension.path_context import PathFunc, Paths, Paths2
 from pyspartalib.script.path.iterate_directory import walk_iterator
 from pyspartalib.script.path.modify.current.get_relative import get_relative
 from pyspartalib.script.path.symbolic.context.symbolic_context import (
@@ -48,3 +49,8 @@ def _get_relative_pair(symbolic_link: SymbolicLink) -> Paths2:
         _get_relative_paths(working_root)
         for working_root in _get_symbolic_paths(symbolic_link)
     ]
+
+
+def _inside_temporary_directory(function: PathFunc) -> None:
+    with TemporaryDirectory() as temporary_path:
+        function(Path(temporary_path))
