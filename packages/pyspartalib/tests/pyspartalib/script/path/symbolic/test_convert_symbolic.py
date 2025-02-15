@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+"""Test module to convert path to symbolic link if it's available."""
 
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -38,6 +39,8 @@ def _inside_temporary_directory(function: PathFunc) -> None:
 
 
 def test_convert() -> None:
+    """Test to convert path to symbolic link if it's available."""
+
     def individual_test(temporary_root: Path) -> None:
         directories: Paths = _get_directories(temporary_root)
         _difference_error(_convert_root(directories), directories[1])
