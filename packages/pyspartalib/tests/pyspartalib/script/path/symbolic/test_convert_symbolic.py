@@ -8,6 +8,9 @@ from pyspartalib.context.extension.path_context import Paths
 from pyspartalib.script.path.symbolic.context.symbolic_context import (
     SymbolicLink,
 )
+from pyspartalib.script.path.symbolic.convert_symbolic import (
+    convert_symbolic_link,
+)
 from pyspartalib.script.path.symbolic.create_symbolic import get_symbolic_link
 
 
@@ -22,3 +25,7 @@ def _get_directories(path: Path) -> Paths:
 
 def _get_link_paths(directories: Paths) -> SymbolicLink:
     return get_symbolic_link(*directories)
+
+
+def _convert_root(directories: Paths) -> Path:
+    return convert_symbolic_link(directories[0], _get_link_paths(directories))
