@@ -35,3 +35,11 @@ def _convert_root(directories: Paths) -> Path:
 def _inside_temporary_directory(function: PathFunc) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
+
+
+def test_convert() -> None:
+    def individual_test(temporary_root: Path) -> None:
+        directories: Paths = _get_directories(temporary_root)
+        _difference_error(_convert_root(directories), directories[1])
+
+    _inside_temporary_directory(individual_test)
