@@ -2,9 +2,10 @@
 
 
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
 from pyspartalib.context.custom.type_context import Type
-from pyspartalib.context.extension.path_context import Paths
+from pyspartalib.context.extension.path_context import PathFunc, Paths
 from pyspartalib.script.path.symbolic.context.symbolic_context import (
     SymbolicLink,
 )
@@ -29,3 +30,8 @@ def _get_link_paths(directories: Paths) -> SymbolicLink:
 
 def _convert_root(directories: Paths) -> Path:
     return convert_symbolic_link(directories[0], _get_link_paths(directories))
+
+
+def _inside_temporary_directory(function: PathFunc) -> None:
+    with TemporaryDirectory() as temporary_path:
+        function(Path(temporary_path))
