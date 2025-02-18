@@ -20,14 +20,14 @@ def _show_log() -> None:
     send_stdout(_get_expected())
 
 
-def _decorate_function(off_stdout: OffStdout) -> OffStdout:
+def _decorate_function(off_stdout: OffStdout) -> str:
     @off_stdout.decorator
     def _messages() -> None:
         _show_log()
 
     _messages()
 
-    return off_stdout
+    return off_stdout.show()
 
 
 def _remove_end(result: str) -> str:
@@ -35,7 +35,7 @@ def _remove_end(result: str) -> str:
 
 
 def _execute_log_function() -> str:
-    return _remove_end(_decorate_function(OffStdout()).show())
+    return _remove_end(_decorate_function(OffStdout()))
 
 
 def test_show() -> None:
