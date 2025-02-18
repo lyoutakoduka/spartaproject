@@ -2,7 +2,6 @@
 
 """Test module to get current working directory."""
 
-from os import chdir
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
