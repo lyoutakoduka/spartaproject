@@ -71,18 +71,18 @@ def _show_log(messages: Strs, pipeline: LogPipeline) -> LogPipeline:
     return pipeline
 
 
-def _decorate_function(function: LogFunc, off_stdout: OffStdout) -> OffStdout:
+def _decorate_function(function: LogFunc, off_stdout: OffStdout) -> str:
     @off_stdout.decorator
     def _messages() -> None:
         function()
 
     _messages()
 
-    return off_stdout
+    return off_stdout.show()
 
 
 def _execute_log_function(function: LogFunc) -> str:
-    return _decorate_function(function, OffStdout()).show()
+    return _decorate_function(function, OffStdout())
 
 
 def _initialize_pipeline(pipeline: LogPipeline) -> None:
