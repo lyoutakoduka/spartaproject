@@ -29,8 +29,8 @@ def test_messages() -> None:
         Hello, World!
         Hello, World!
         """
-    stdout_text = OffStdout()
+    off_stdout = OffStdout()
 
-    _decorate_function(message, stdout_text)
+    _decorate_function(message, off_stdout)
 
-    _difference_error(stdout_text.show(), format_indent(expected, stdout=True))
+    _difference_error(off_stdout.show(), format_indent(expected, stdout=True))
