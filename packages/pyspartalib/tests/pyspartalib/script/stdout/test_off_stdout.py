@@ -13,6 +13,10 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
+def _get_source() -> str:
+    return "Hello, World!"
+
+
 def _get_expected() -> str:
     return """
         Hello, World!
@@ -33,9 +37,7 @@ def _decorate_function(message: str, off_stdout: OffStdout) -> OffStdout:
 
 def test_messages() -> None:
     """Test to redirect stdout to string variable forcibly."""
-    message: str = "Hello, World!"
-
     _difference_error(
-        _decorate_function(message, OffStdout()).show(),
+        _decorate_function(_get_source(), OffStdout()).show(),
         format_indent(_get_expected(), stdout=True),
     )
