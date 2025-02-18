@@ -2,12 +2,7 @@
 
 """Module to get current working directory."""
 
-from collections.abc import Sized
 from pathlib import Path
-
-from pyspartalib.context.default.string_context import Strs
-from pyspartalib.script.platform.terminal_status import get_terminal
-from pyspartalib.script.shell.execute_command import execute_single
 
 
 def _from_python() -> Path:
