@@ -4,10 +4,10 @@ from collections.abc import Callable
 
 from pyspartalib.context.custom.callable_context import Func
 from pyspartalib.context.custom.type_context import Param, Type
-from pyspartalib.script.inherit.inherit_decorator import TransferFunction
+from pyspartalib.script.inherit.inherit_decorator import InheritDecorator
 
 
-class TemporaryDecorator(TransferFunction):
+class TemporaryDecorator(InheritDecorator):
     def __init__(self, text: str | None = None) -> None:
         if text is None:
             text = ""
