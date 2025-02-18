@@ -6,7 +6,7 @@ from functools import wraps
 from pyspartalib.context.custom.type_context import Param, Type
 
 
-class TransferFunction:
+class InheritDecorator:
     def wrapper(
         self,
         function: Callable[Param, Type],
