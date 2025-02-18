@@ -4,7 +4,7 @@ from collections.abc import Callable
 
 from pyspartalib.context.custom.callable_context import Func
 from pyspartalib.context.custom.type_context import Param, Type
-from pyspartalib.script.decorator_generator import TransferFunction
+from pyspartalib.script.inherit.decorator_generator import TransferFunction
 
 
 class TemporaryDecorator(TransferFunction):
