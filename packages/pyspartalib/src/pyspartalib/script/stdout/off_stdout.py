@@ -7,10 +7,10 @@ from contextlib import redirect_stdout
 from io import StringIO
 
 from pyspartalib.context.custom.type_context import Param, Type
-from pyspartalib.script.decorator_generator import TransferFunction
+from pyspartalib.script.inherit.inherit_decorator import InheritDecorator
 
 
-class OffStdout(TransferFunction):
+class OffStdout(InheritDecorator):
     """Class to redirect stdout to string variable forcibly."""
 
     def wrapper(
