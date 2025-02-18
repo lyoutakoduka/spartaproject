@@ -24,7 +24,7 @@ def _get_expected() -> str:
         """
 
 
-def _decorate_function(message: str, off_stdout: OffStdout) -> OffStdout:
+def _decorate_function(message: str, off_stdout: OffStdout) -> str:
     @off_stdout.decorator
     def _messages() -> None:
         send_stdout(message)
@@ -32,12 +32,12 @@ def _decorate_function(message: str, off_stdout: OffStdout) -> OffStdout:
 
     _messages()
 
-    return off_stdout
+    return off_stdout.show()
 
 
 def test_messages() -> None:
     """Test to redirect stdout to string variable forcibly."""
     _difference_error(
-        _decorate_function(_get_source(), OffStdout()).show(),
+        _decorate_function(_get_source(), OffStdout()),
         format_indent(_get_expected(), stdout=True),
     )
