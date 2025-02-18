@@ -13,13 +13,15 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
-def _decorate_function(message: str, off_stdout: OffStdout) -> None:
+def _decorate_function(message: str, off_stdout: OffStdout) -> OffStdout:
     @off_stdout.decorator
     def _messages() -> None:
         send_stdout(message)
         send_stdout(message)
 
     _messages()
+
+    return off_stdout
 
 
 def test_messages() -> None:
@@ -29,8 +31,8 @@ def test_messages() -> None:
         Hello, World!
         Hello, World!
         """
-    off_stdout = OffStdout()
 
-    _decorate_function(message, off_stdout)
-
-    _difference_error(off_stdout.show(), format_indent(expected, stdout=True))
+    _difference_error(
+        _decorate_function(message, OffStdout()).show(),
+        format_indent(expected, stdout=True),
+    )
