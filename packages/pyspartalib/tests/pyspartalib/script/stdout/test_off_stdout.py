@@ -13,8 +13,8 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
-def _decorate_function(message: str, stdout_text: OffStdout) -> None:
-    @stdout_text.decorator
+def _decorate_function(message: str, off_stdout: OffStdout) -> None:
+    @off_stdout.decorator
     def _messages() -> None:
         send_stdout(message)
         send_stdout(message)
