@@ -2,6 +2,7 @@
 
 from pyspartalib.context.custom.type_context import Type
 from pyspartalib.script.inherit.inherit_with import InheritWith
+from pyspartalib.script.stdout.off_stdout import OffStdout
 from pyspartalib.script.stdout.send_stdout import send_stdout
 
 
@@ -33,3 +34,13 @@ def _get_expected() -> str:
 def _use_temporary_with() -> None:
     with TemporaryWith() as node:
         _status_error(type(node) is TemporaryWith)
+
+
+def _decorate_function(off_stdout: OffStdout) -> str:
+    @off_stdout.decorator
+    def _messages() -> None:
+        _use_temporary_with()
+
+    _messages()
+
+    return off_stdout.show()
