@@ -2,6 +2,7 @@
 
 from pyspartalib.context.custom.type_context import Type
 from pyspartalib.script.inherit.inherit_with import InheritWith
+from pyspartalib.script.stdout.format_indent import format_indent
 from pyspartalib.script.stdout.off_stdout import OffStdout
 from pyspartalib.script.stdout.send_stdout import send_stdout
 
@@ -44,3 +45,10 @@ def _decorate_function(off_stdout: OffStdout) -> str:
     _messages()
 
     return off_stdout.show()
+
+
+def test_with() -> None:
+    _difference_error(
+        _decorate_function(OffStdout()),
+        format_indent(_get_expected(), stdout=True),
+    )
