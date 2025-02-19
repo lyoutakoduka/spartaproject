@@ -28,3 +28,8 @@ def _get_expected() -> str:
         init
         exit
         """
+
+
+def _use_temporary_with() -> None:
+    with TemporaryWith() as node:
+        _status_error(type(node) is TemporaryWith)
