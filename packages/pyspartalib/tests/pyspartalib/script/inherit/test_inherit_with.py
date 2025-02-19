@@ -21,3 +21,10 @@ def _difference_error(result: Type, expected: Type) -> None:
 def _status_error(status: bool) -> None:
     if not status:
         raise ValueError
+
+
+def _get_expected() -> str:
+    return """
+        init
+        exit
+        """
