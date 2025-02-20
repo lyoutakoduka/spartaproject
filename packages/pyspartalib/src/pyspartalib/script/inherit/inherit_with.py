@@ -42,6 +42,3 @@ class InheritWith:
 
         """
         self.exit()
-
-    def __init__(self) -> None:
-        return
