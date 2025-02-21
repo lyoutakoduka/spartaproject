@@ -10,6 +10,8 @@ from pyspartalib.script.inherit.inherit_with import InheritWith
 
 
 class SetCurrent(InheritWith):
+    """Class to use With statement by using custom class."""
+
     def __initialize_variables(self) -> None:
         self._backup_current_root = get_current()
 
@@ -17,9 +19,17 @@ class SetCurrent(InheritWith):
         chdir(path)
 
     def exit(self) -> None:
+        """Revert current working directory to pre-recorded path."""
         self._set_current(self._backup_current_root)
 
     def __init__(self, current_root: Path) -> None:
+        """Record current working directory.
+
+        Args:
+            current_root (Path):
+                Current working directory you want to set temporary.
+
+        """
         self.__initialize_variables()
         self._set_current(current_root)
 
