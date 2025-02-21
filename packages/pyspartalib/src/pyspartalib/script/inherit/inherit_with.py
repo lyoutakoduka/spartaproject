@@ -10,6 +10,7 @@ class InheritWith:
     """Class to use With statement by using custom class."""
 
     def exit(self) -> None:
+        """For method overriding."""
         return
 
     def __enter__(self) -> Self:

@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+"""Test module to use With statement by using custom class."""
+
 from pyspartalib.context.custom.type_context import Type
 from pyspartalib.script.inherit.inherit_with import InheritWith
 from pyspartalib.script.stdout.format_indent import format_indent
@@ -8,10 +10,14 @@ from pyspartalib.script.stdout.send_stdout import send_stdout
 
 
 class TemporaryWith(InheritWith):
+    """Test class to use With statement by using custom class."""
+
     def exit(self) -> None:
+        """Show log message when leaving With statement."""
         send_stdout("exit")
 
     def __init__(self) -> None:
+        """Show log message when creating instance."""
         send_stdout("init")
 
 
@@ -48,6 +54,7 @@ def _decorate_function(off_stdout: OffStdout) -> str:
 
 
 def test_with() -> None:
+    """Test to call custom method when leaving from With statement."""
     _difference_error(
         _decorate_function(OffStdout()),
         format_indent(_get_expected(), stdout=True),
