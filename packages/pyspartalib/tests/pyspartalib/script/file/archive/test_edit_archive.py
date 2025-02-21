@@ -6,6 +6,7 @@ from datetime import datetime
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
+import pytest
 from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.extension.path_context import (
     PathFunc,
@@ -42,7 +43,6 @@ from pyspartalib.script.time.path.get_timestamp import (
     get_invalid_time,
 )
 from pyspartalib.script.time.stamp.is_same_stamp import is_same_stamp
-from tests.pyspartalib.interface.pytest import raises
 
 
 def _difference_error(result: Type, expected: Type) -> None:
@@ -455,7 +455,7 @@ def test_error() -> None:
     """Test to confirm that path of archive is undefined."""
     edit_archive: EditArchive = _get_edit()
 
-    with raises(ValueError):
+    with pytest.raises(ValueError):
         edit_archive.get_archive_path()
 
 

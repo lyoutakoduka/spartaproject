@@ -6,6 +6,7 @@ from collections.abc import Container, Sized
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
+import pytest
 from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.context.extension.path_context import (
@@ -28,7 +29,6 @@ from pyspartalib.script.path.modify.current.get_relative import (
 from pyspartalib.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
-from tests.pyspartalib.interface.pytest import raises
 from tests.pyspartalib.script.file.archive.context.archive_context import (
     ArchiveStatus,
 )
@@ -499,7 +499,7 @@ def test_error() -> None:
     """Test to confirm that path used for take out archives is undefined."""
     take_out_archive = TakeOutArchive()
 
-    with raises(ValueError):
+    with pytest.raises(ValueError):
         take_out_archive.get_took_out_root()
 
 
