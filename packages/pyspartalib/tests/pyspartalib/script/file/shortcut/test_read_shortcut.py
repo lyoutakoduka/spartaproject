@@ -4,6 +4,7 @@
 
 from pathlib import Path
 
+import pytest
 from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.extension.path_context import PathPair
 from pyspartalib.script.directory.working.working_date_time import (
@@ -17,7 +18,6 @@ from pyspartalib.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
 from pyspartalib.script.project.project_context import ProjectContext
-from tests.pyspartalib.interface.pytest import raises
 
 
 def _difference_error(result: Type, expected: Type) -> None:
@@ -95,5 +95,5 @@ def test_directory() -> None:
 
 def test_exist() -> None:
     """Test to exists shortcut file before read inside it."""
-    with raises(FileNotFoundError):
+    with pytest.raises(FileNotFoundError):
         read_shortcut(Path("empty.lnk"))

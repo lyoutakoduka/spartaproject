@@ -6,6 +6,7 @@ from collections.abc import Sized
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
+import pytest
 from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.context.extension.path_context import (
@@ -24,7 +25,6 @@ from pyspartalib.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
 from pyspartalib.script.project.project_context import ProjectContext
-from tests.pyspartalib.interface.pytest import raises
 
 
 def _difference_error(result: Type, expected: Type) -> None:
@@ -156,7 +156,7 @@ def test_exist() -> None:
     """Test to exists shortcut file before create it."""
     empty_path: Path = Path("empty")
 
-    with raises(FileNotFoundError):
+    with pytest.raises(FileNotFoundError):
         create_shortcut(empty_path, empty_path)
 
 
