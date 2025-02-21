@@ -13,8 +13,12 @@ class SetCurrent(InheritWith):
     def __initialize_variables(self) -> None:
         self._backup_current_root = get_current()
 
-    def __init__(self) -> None:
+    def _set_current(self, path: Path) -> None:
+        chdir(path)
+
+    def __init__(self, current_root: Path) -> None:
         self.__initialize_variables()
+        self._set_current(current_root)
 
 
 def set_current(path: Path) -> None:
