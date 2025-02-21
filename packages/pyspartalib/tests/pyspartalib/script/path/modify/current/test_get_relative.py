@@ -4,6 +4,7 @@
 
 from pathlib import Path
 
+import pytest
 from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.bool_context import Bools
 from pyspartalib.context.default.string_context import Strs
@@ -21,7 +22,6 @@ from pyspartalib.script.path.modify.current.get_relative import (
     is_relative,
     is_relative_array,
 )
-from tests.pyspartalib.interface.pytest import raises
 
 
 def _difference_error(result: Type, expected: Type) -> None:
@@ -97,7 +97,7 @@ def test_check_array() -> None:
 
 def test_unmatch() -> None:
     """Test to convert absolute path, but using invalid path."""
-    with raises(ValueError):
+    with pytest.raises(ValueError):
         get_relative(_get_error())
 
 
