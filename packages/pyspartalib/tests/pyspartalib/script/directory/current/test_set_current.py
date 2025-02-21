@@ -16,10 +16,6 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
-def _get_current() -> Path:
-    return Path().cwd()
-
-
 def _inside_temporary_directory(function: PathFunc) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
