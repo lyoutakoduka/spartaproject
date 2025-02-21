@@ -4,12 +4,12 @@
 
 from pathlib import Path
 
+import pytest
 from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.script.path.modify.get_resource import get_resource
 from pyspartalib.script.path.safe.safe_copy import SafeCopy
 from pyspartalib.script.server.local.execute_server import ExecuteServer
-from tests.pyspartalib.interface.pytest import raises
 
 
 def _difference_error(result: Type, expected: Type) -> None:
@@ -122,5 +122,5 @@ def test_error() -> None:
     name: Path = Path("error.py")
     server: ExecuteServer = _get_server()
 
-    with raises(ValueError):
+    with pytest.raises(ValueError):
         _execute_python(name, server)
