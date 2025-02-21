@@ -18,7 +18,7 @@ def test_empty() -> None:
 
 
 def test_key() -> None:
-    with pytest.raises(KeyError, match="unmatch"):
+    with pytest.raises(ValueError, match="unmatch"):
         bool_compare_pair(
             {"R": False, "G": True, "B": True},
             {"R": True, "error": False, "B": True},
