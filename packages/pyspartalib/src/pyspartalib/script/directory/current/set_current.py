@@ -16,6 +16,9 @@ class SetCurrent(InheritWith):
     def _set_current(self, path: Path) -> None:
         chdir(path)
 
+    def exit(self) -> None:
+        self._set_current(self._backup_current_root)
+
     def __init__(self, current_root: Path) -> None:
         self.__initialize_variables()
         self._set_current(current_root)
