@@ -3,7 +3,6 @@
 """Test Module to get characters constructed by multiple or single byte."""
 
 from collections.abc import Sized
-from typing import get_type_hints
 
 from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.string_context import Strs, Strs2
@@ -51,7 +50,7 @@ def _compare_filtered(expected: Strs2, tables: Strs2) -> None:
 
 
 def _compare_size(result: CharacterTable) -> None:
-    _length_error(list(get_type_hints(result).keys()), 4)
+    _length_error(result.keys(), 4)
 
 
 def _get_tables(table: CharacterTable) -> Strs2:
