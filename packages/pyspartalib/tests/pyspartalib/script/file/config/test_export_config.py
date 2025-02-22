@@ -116,7 +116,7 @@ def _get_config_compress() -> str:
     return """
         [bool]
         true=True
-        [int]
+        [integer]
         one=1
     """
 
