@@ -58,10 +58,7 @@ def test_single() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         with SetCurrent(temporary_root):
-            result: Strs = _get_current()
-            current: Path = _get_single_path(result)
-
-            _difference_error(current, temporary_root)
+            _difference_error(_get_single_path(_get_current()), temporary_root)
 
     _inside_temporary_directory(individual_test)
 
@@ -74,11 +71,12 @@ def test_multiple() -> None:
     """
 
     def individual_test(temporary_root: Path) -> None:
-        with SetCurrent(temporary_root):
-            move_root: Path = create_directory(Path(temporary_root, "move"))
-            result: Strs = _move_and_get(move_root)
-            current: Path = _get_single_path(result)
+        move_root: Path = create_directory(Path(temporary_root, "move"))
 
-            _difference_error(current, move_root)
+        with SetCurrent(temporary_root):
+            _difference_error(
+                _get_single_path(_move_and_get(move_root)),
+                move_root,
+            )
 
     _inside_temporary_directory(individual_test)
