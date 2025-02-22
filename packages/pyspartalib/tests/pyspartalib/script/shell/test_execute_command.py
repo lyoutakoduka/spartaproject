@@ -21,14 +21,16 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
-def _no_exists_error(path: Path) -> None:
+def _no_exists_error(path: Path) -> Path:
     if not path.exists():
         raise FileNotFoundError
+
+    return path
 
 
 def _get_single_path(result: Strs) -> Path:
     _difference_error(len(result), 1)
-    return Path(result[0])
+    return _no_exists_error(Path(result[0]))
 
 
 def _get_current() -> Strs:
@@ -58,7 +60,6 @@ def test_single() -> None:
             result: Strs = _get_current()
             current: Path = _get_single_path(result)
 
-            _no_exists_error(current)
             _difference_error(current, temporary_root)
 
     _inside_temporary_directory(individual_test)
