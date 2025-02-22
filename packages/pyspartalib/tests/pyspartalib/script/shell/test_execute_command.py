@@ -8,6 +8,7 @@ from tempfile import TemporaryDirectory
 from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.context.extension.path_context import PathFunc
+from pyspartalib.script.directory.create_directory import create_directory
 from pyspartalib.script.directory.current.get_current import get_current
 from pyspartalib.script.directory.current.set_current import SetCurrent
 from pyspartalib.script.shell.execute_command import (
@@ -73,9 +74,11 @@ def test_multiple() -> None:
     """
 
     def individual_test(temporary_root: Path) -> None:
-        result: Strs = _move_and_get(temporary_root)
-        current: Path = _get_single_path(result)
+        with SetCurrent(temporary_root):
+            move_root: Path = create_directory(Path(temporary_root, "move"))
+            result: Strs = _move_and_get(move_root)
+            current: Path = _get_single_path(result)
 
-        _difference_error(current, temporary_root)
+            _difference_error(current, move_root)
 
     _inside_temporary_directory(individual_test)
