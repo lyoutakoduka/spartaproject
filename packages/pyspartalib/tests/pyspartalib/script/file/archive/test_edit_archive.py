@@ -471,7 +471,7 @@ def test_none() -> None:
 
 def test_close() -> None:
     """Test to close archive with out archive path."""
-    _not_none_error(_get_edit().close_archive())
+    _close_archive_fail(_get_edit())
 
 
 def test_work() -> None:
