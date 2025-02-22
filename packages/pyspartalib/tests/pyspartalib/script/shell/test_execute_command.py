@@ -9,6 +9,7 @@ from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.context.extension.path_context import PathFunc
 from pyspartalib.script.directory.current.get_current import get_current
+from pyspartalib.script.directory.current.set_current import SetCurrent
 from pyspartalib.script.shell.execute_command import (
     execute_multiple,
     execute_single,
@@ -51,11 +52,16 @@ def test_single() -> None:
     Suppose that the test environment of Windows
         can execute simple Linux commands.
     """
-    result: Strs = _get_current()
-    current: Path = _get_single_path(result)
 
-    _no_exists_error(current)
-    _difference_error(current, get_current())
+    def individual_test(temporary_root: Path) -> None:
+        with SetCurrent(temporary_root):
+            result: Strs = _get_current()
+            current: Path = _get_single_path(result)
+
+            _no_exists_error(current)
+            _difference_error(current, temporary_root)
+
+    _inside_temporary_directory(individual_test)
 
 
 def test_multiple() -> None:
