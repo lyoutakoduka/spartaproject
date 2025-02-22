@@ -209,6 +209,10 @@ def _get_expected_safe() -> Json:
     }
 
 
+def _get_config_expected() -> Json:
+    return {"section": _get_expected_safe()}
+
+
 def test_bool_array() -> None:
     """Test to convert json format data to list of type "bool"."""
     source: bool = _get_bool()
