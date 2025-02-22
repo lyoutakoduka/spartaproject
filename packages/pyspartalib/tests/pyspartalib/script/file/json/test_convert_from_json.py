@@ -301,6 +301,6 @@ def test_safe() -> None:
     _fail_error(
         is_same_json(
             from_safe_json(_get_config_source()),
-            _get_expected_safe(),
+            _get_config_expected(),
         ),
     )
