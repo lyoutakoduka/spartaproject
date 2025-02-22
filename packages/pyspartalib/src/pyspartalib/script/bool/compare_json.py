@@ -4,11 +4,15 @@
 
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.context.file.json_context import Json
+from pyspartalib.script.file.json.convert_to_json import to_safe_json
 from pyspartalib.script.file.json.export_json import json_dump
 
 
 def _convert_string(left: Json, right: Json) -> Strs:
-    return [json_dump(source, compress=True) for source in [left, right]]
+    return [
+        json_dump(to_safe_json(source), compress=True)
+        for source in [left, right]
+    ]
 
 
 def is_same_json(left: Json, right: Json) -> bool:
