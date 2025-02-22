@@ -255,7 +255,8 @@ def _stringify_mixed() -> str:
 
 
 def _get_config_expected() -> str:
-    return f'{{"A":{{"B":{{"C":{_stringify_mixed()}}}}}}}'
+    compressed: str = _stringify_mixed().replace(" ", "")
+    return f'{{"A":{{"B":{{"C":{compressed}}}}}}}'
 
 
 def test_bool_array() -> None:
