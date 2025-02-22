@@ -263,10 +263,6 @@ def _get_edit_history(edit_archive: EditArchive) -> PathPair:
     return _edit_to_archived(edit_archive.get_edit_root())
 
 
-def _close_archive(edit_archive: EditArchive) -> Paths:
-    return _none_error(edit_archive.close_archive())
-
-
 def _compare_path(result: Path, expected: Path) -> None:
     _no_exists_error(result)
     _difference_error(result, expected)
@@ -277,6 +273,10 @@ def _compare_root(trash_root: Path, edit_archive: EditArchive) -> None:
         edit_archive.get_edit_root(),
         Path(trash_root, get_initial_time_path()),
     )
+
+
+def _close_archive(edit_archive: EditArchive) -> Paths:
+    return _none_error(edit_archive.close_archive())
 
 
 def _close_archive_fail(edit_archive: EditArchive) -> None:
