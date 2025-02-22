@@ -466,12 +466,12 @@ def test_disable() -> None:
 
 def test_none() -> None:
     """Test to open archive with out archive path."""
-    _none_error(_get_edit().open_archive())
+    _not_none_error(_get_edit().open_archive())
 
 
 def test_close() -> None:
     """Test to close archive with out archive path."""
-    _none_error(_get_edit().close_archive())
+    _not_none_error(_get_edit().close_archive())
 
 
 def test_work() -> None:
