@@ -41,7 +41,7 @@ def test_current() -> None:
 
 
 def test_offset() -> None:
-    """Test to get current frame information with index offset."""
+    """Test to get current frame from an offset stack frame."""
 
     def inside_function() -> None:
         _difference_error(current_frame(offset=1), _get_frame_offset())
