@@ -2,9 +2,10 @@
 
 """Module to execute python code on server you can use ssh connection."""
 
-from collections.abc import Sized
+from collections.abc import Container, Sized
 from pathlib import Path
 
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.script.server.local.upload_server import UploadServer
 from pyspartalib.script.server.script_version import get_version_name
@@ -31,6 +32,10 @@ class ExecuteServer(UploadServer):
 
     def _length_error(self, result: Sized, expected: int) -> None:
         if len(result) != expected:
+            raise ValueError
+
+    def _contain_error(self, result: Type, expected: Container[Type]) -> None:
+        if result not in expected:
             raise ValueError
 
     def _set_version(self, version: str | None) -> str:
