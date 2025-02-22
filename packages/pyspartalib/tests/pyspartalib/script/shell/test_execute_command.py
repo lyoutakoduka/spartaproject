@@ -25,6 +25,11 @@ def _no_exists_error(path: Path) -> None:
         raise FileNotFoundError
 
 
+def _get_single_path(result: Strs) -> Path:
+    _difference_error(len(result), 1)
+    return Path(result[0])
+
+
 def _get_current() -> Strs:
     return list(execute_single(["pwd"]))
 
@@ -47,10 +52,7 @@ def test_single() -> None:
         can execute simple Linux commands.
     """
     result: Strs = _get_current()
-
-    _difference_error(len(result), 1)
-
-    current: Path = Path(result[0])
+    current: Path = _get_single_path(result)
 
     _no_exists_error(current)
     _difference_error(current, get_current())
@@ -65,8 +67,8 @@ def test_multiple() -> None:
 
     def individual_test(temporary_root: Path) -> None:
         result: Strs = _move_and_get(temporary_root)
+        current: Path = _get_single_path(result)
 
-        _difference_error(len(result), 1)
-        _difference_error(Path(result[0]), temporary_root)
+        _difference_error(current, temporary_root)
 
     _inside_temporary_directory(individual_test)
