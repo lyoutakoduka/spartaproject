@@ -23,7 +23,7 @@ def _get_frame_current() -> StackFrame:
     return {
         "file": _get_file_expected(),
         "function": "test_current",
-        "line": 23,
+        "line": 40,
     }
 
 
@@ -31,7 +31,7 @@ def _get_frame_offset() -> StackFrame:
     return {
         "file": _get_file_expected(),
         "function": "test_offset",
-        "line": 37,
+        "line": 49,
     }
 
 
