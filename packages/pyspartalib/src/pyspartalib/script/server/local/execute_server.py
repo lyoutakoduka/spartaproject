@@ -43,18 +43,6 @@ class ExecuteServer(UploadServer):
             platform=platform,
         )
 
-    def _raise_error(self, message: str) -> None:
-        raise ValueError(message)
-
-    def _contain_error(
-        self,
-        result: Type,
-        expected: Container[Type],
-        message: str,
-    ) -> None:
-        if result in expected:
-            self._raise_error(message)
-
     def _set_version(self, version: str | None) -> str:
         if version is None:
             version = "3.11.5"
