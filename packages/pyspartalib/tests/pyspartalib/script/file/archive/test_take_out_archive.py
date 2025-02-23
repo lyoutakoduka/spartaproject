@@ -499,7 +499,7 @@ def test_error() -> None:
     """Test to confirm that path used for take out archives is undefined."""
     take_out_archive = TakeOutArchive()
 
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match="take"):
         take_out_archive.get_took_out_root()
 
 
