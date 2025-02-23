@@ -97,7 +97,7 @@ def test_check_array() -> None:
 
 def test_unmatch() -> None:
     """Test to convert absolute path, but using invalid path."""
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match="relative"):
         get_relative(_get_error())
 
 

@@ -3,15 +3,20 @@
 """Module to convert absolute path to relative."""
 
 from pathlib import Path
+from typing import NoReturn
 
 from pyspartalib.context.default.bool_context import Bools
 from pyspartalib.context.extension.path_context import PathPair, Paths
 from pyspartalib.script.directory.current.get_current import get_current
 
 
-def _status_error(status: bool) -> None:
+def _raise_error(message: str) -> NoReturn:
+    raise ValueError(message)
+
+
+def _status_error(status: bool, message: str) -> None:
     if not status:
-        raise ValueError
+        _raise_error(message)
 
 
 def _get_relative_root(root_path: Path | None = None) -> Path:
@@ -74,7 +79,7 @@ def get_relative(absolute_path: Path, root_path: Path | None = None) -> Path:
     """
     root_path = _get_relative_root(root_path)
 
-    _status_error(is_relative(absolute_path, root_path=root_path))
+    _status_error(is_relative(absolute_path, root_path=root_path), "relative")
 
     return absolute_path.relative_to(root_path)
 
