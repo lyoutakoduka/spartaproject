@@ -5,6 +5,7 @@
 import inspect
 from inspect import FrameInfo
 from pathlib import Path
+from types import FrameType
 from typing import NoReturn
 
 from pyspartalib.script.frame.context.frame_context import (
@@ -24,6 +25,13 @@ def _get_stack_frame(outer_frame: FrameInfo) -> StackFrame:
         "function": outer_frame.function,
         "line": outer_frame.lineno,
     }
+
+
+def _list_stack_frames(current_frame: FrameType) -> StackFrames:
+    return [
+        _get_stack_frame(outer_frame)
+        for outer_frame in inspect.getouterframes(current_frame)
+    ]
 
 
 def _get_stack_frames() -> StackFrames:
