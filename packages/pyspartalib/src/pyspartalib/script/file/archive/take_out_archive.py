@@ -125,7 +125,7 @@ class TakeOutArchive(EditArchive):
             Path: Path of directory that archives will placed.
 
         """
-        return _none_error(self._took_out_root, "edit")
+        return _none_error(self._took_out_root, "take")
 
     def take_out(self, took_out_root: Path | None = None) -> Paths | None:
         """Take out directory from inside of archive.
