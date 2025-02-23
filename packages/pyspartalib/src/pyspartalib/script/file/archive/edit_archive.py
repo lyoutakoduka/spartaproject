@@ -17,6 +17,13 @@ from pyspartalib.script.time.path.get_timestamp import get_directory_latest
 from pyspartalib.script.time.stamp.is_same_stamp import is_same_stamp
 
 
+def _none_error(result: Type | None) -> Type:
+    if result is None:
+        raise ValueError
+
+    return result
+
+
 class EditArchive(SafeTrash):
     """Class to edit internal of archive file."""
 
@@ -176,7 +183,7 @@ class EditArchive(SafeTrash):
             Path: Path of archive.
 
         """
-        return self._none_error(self._archive_path)
+        return _none_error(self._archive_path)
 
     def get_edit_root(self) -> Path:
         """Get path of temporary working space.
