@@ -27,14 +27,14 @@ def _get_stack_frame(outer_frame: FrameInfo) -> StackFrame:
     }
 
 
-def _list_stack_frames(current_frame: FrameType) -> StackFrames:
+def _get_stack_frames(current_frame: FrameType) -> StackFrames:
     return [
         _get_stack_frame(outer_frame)
         for outer_frame in inspect.getouterframes(current_frame)
     ]
 
 
-def _get_stack_frames() -> StackFrames:
+def _find_stack_frame_error() -> StackFrames:
     if current_frame := inspect.currentframe():
         return [
             _get_stack_frame(outer_frame)
@@ -60,4 +60,4 @@ def current_frame(offset: int = 0) -> StackFrame:
         StackFrame: Selected current frame information.
 
     """
-    return _to_relative_path(_get_stack_frames()[2 + offset])
+    return _to_relative_path(_find_stack_frame_error()[2 + offset])
