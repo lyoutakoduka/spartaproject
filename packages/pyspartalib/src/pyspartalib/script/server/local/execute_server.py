@@ -30,10 +30,6 @@ class ExecuteServer(UploadServer):
             platform=platform,
         )
 
-    def _length_error(self, result: Sized, expected: int) -> None:
-        if len(result) != expected:
-            raise ValueError
-
     def _contain_error(self, result: Type, expected: Container[Type]) -> None:
         if result in expected:
             raise ValueError
