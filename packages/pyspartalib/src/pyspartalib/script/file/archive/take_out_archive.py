@@ -49,12 +49,6 @@ class TakeOutArchive(EditArchive):
     def __initialize_variables(self) -> None:
         self._took_out_root: Path | None = None
 
-    def _none_error(self, result: Type | None) -> Type:
-        if result is None:
-            raise ValueError
-
-        return result
-
     def _set_took_out_root(self, took_out_root: Path | None) -> None:
         archive_path: Path = self.get_archive_path()
 
