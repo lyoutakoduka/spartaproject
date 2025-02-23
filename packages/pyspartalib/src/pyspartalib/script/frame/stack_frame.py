@@ -36,10 +36,7 @@ def _get_stack_frames(current_frame: FrameType) -> StackFrames:
 
 def _find_stack_frame_error() -> StackFrames:
     if current_frame := inspect.currentframe():
-        return [
-            _get_stack_frame(outer_frame)
-            for outer_frame in inspect.getouterframes(current_frame)
-        ]
+        return _get_stack_frames(current_frame)
 
     _raise_error("frame")
 
