@@ -10,4 +10,4 @@ def send_stdout(log: object) -> None:
         log (object): String you want to show.
 
     """
-    print(log)
+    print(log)  # noqa: T201
