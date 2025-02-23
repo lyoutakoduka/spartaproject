@@ -106,7 +106,7 @@ class ExecuteServer(UploadServer):
         self._contain_error(
             self._error_identifier,
             "\n".join(result),
-            message="server",
+            "server",
         )
 
         return result
