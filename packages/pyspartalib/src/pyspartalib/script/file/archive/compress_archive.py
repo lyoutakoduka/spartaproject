@@ -24,10 +24,7 @@ from pyspartalib.script.path.modify.current.get_relative import (
 )
 from pyspartalib.script.path.status.get_statistic import get_file_size
 from pyspartalib.script.string.encoding.set_encoding import set_encoding
-from pyspartalib.script.time.path.get_timestamp import (
-    get_invalid_time,
-    get_latest,
-)
+from pyspartalib.script.time.path.get_timestamp import get_latest
 from pyspartalib.script.time.stamp.current_datetime import get_current_time
 
 initialize_decimal()
