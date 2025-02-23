@@ -2,7 +2,7 @@
 
 """Script to execute Python module from directory tree on server."""
 
-from pyspartalib.script.stdout.send_stdout import send_stdout
+from send_stdout import send_stdout
 
 
 def _main() -> None:
