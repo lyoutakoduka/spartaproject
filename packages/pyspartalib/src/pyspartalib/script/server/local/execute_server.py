@@ -30,11 +30,17 @@ class ExecuteServer(UploadServer):
             platform=platform,
         )
 
-    def _contain_error(self, result: Type, expected: Container[Type]) -> None:
-        group: str = "server"
+    def _raise_error(self, message: str) -> None:
+        raise ValueError(message)
 
+    def _contain_error(
+        self,
+        result: Type,
+        expected: Container[Type],
+        message: str,
+    ) -> None:
         if result in expected:
-            raise ValueError(group)
+            self._raise_error(message)
 
     def _set_version(self, version: str | None) -> str:
         if version is None:
@@ -97,7 +103,11 @@ class ExecuteServer(UploadServer):
         if (result := self._execute_command(source_root)) is None:
             return None
 
-        self._contain_error(self._error_identifier, "\n".join(result))
+        self._contain_error(
+            self._error_identifier,
+            "\n".join(result),
+            message="server",
+        )
 
         return result
 
