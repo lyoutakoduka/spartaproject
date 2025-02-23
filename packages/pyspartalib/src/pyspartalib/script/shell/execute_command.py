@@ -3,16 +3,21 @@
 """Module to execute CLI (Command Line Interface) script on subprocess."""
 
 from subprocess import PIPE, Popen
+from typing import NoReturn
 
 from pyspartalib.context.default.string_context import StrGene, Strs, Strs2
 from pyspartalib.script.string.encoding.set_decoding import set_decoding
+
+
+def _raise_error(message: str) -> NoReturn:
+    raise ValueError(message)
 
 
 def _get_subprocess_result(subprocess: Popen[bytes]) -> bytes:
     if stdout := subprocess.stdout:
         return stdout.readline()
 
-    raise ValueError
+    _raise_error("subprocess")
 
 
 def _cleanup_new_lines(text: str) -> str:
