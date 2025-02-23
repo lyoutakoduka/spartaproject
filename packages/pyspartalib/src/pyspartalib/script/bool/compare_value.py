@@ -43,8 +43,8 @@ def _get_flag_counts(lefts: BoolType, rights: BoolType) -> Ints:
 def _check_arguments_size(lefts: BoolType, rights: BoolType) -> None:
     flag_counts: Ints = _get_flag_counts(lefts, rights)
 
-    _length_error(flag_counts, 1, message="size")
-    _same_error(flag_counts[0], 0, message="empty")
+    _length_error(flag_counts, 1, "size")
+    _same_error(flag_counts[0], 0, "empty")
 
 
 def _get_sorted_flags(sorted_keys: Strs2, flags_pair: BoolPairs) -> Bools2:
@@ -73,7 +73,7 @@ def bool_compare_pair(lefts: BoolPair, rights: BoolPair) -> bool:
 
     sorted_keys: Strs2 = _get_sorted_keys(lefts, rights)
 
-    _length_error(set(_convert_strings(sorted_keys)), 1, message="unmatch")
+    _length_error(set(_convert_strings(sorted_keys)), 1, "unmatch")
 
     return _length_condition(
         set(_convert_strings(_get_sorted_flags(sorted_keys, [lefts, rights]))),
