@@ -5,12 +5,17 @@
 import inspect
 from inspect import FrameInfo
 from pathlib import Path
+from typing import NoReturn
 
 from pyspartalib.script.frame.context.frame_context import (
     StackFrame,
     StackFrames,
 )
 from pyspartalib.script.path.modify.current.get_relative import get_relative
+
+
+def _raise_error(message: str) -> NoReturn:
+    raise ValueError(message)
 
 
 def _get_stack_frame(outer_frame: FrameInfo) -> StackFrame:
@@ -28,7 +33,7 @@ def _get_stack_frames() -> StackFrames:
             for outer_frame in inspect.getouterframes(current_frame)
         ]
 
-    raise ValueError
+    _raise_error("frame")
 
 
 def _to_relative_path(frame: StackFrame) -> StackFrame:
