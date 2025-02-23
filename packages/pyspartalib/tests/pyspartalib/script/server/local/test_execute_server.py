@@ -122,5 +122,5 @@ def test_error() -> None:
     name: Path = Path("error.py")
     server: ExecuteServer = _get_server()
 
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match="sever"):
         _execute_python(name, server)
