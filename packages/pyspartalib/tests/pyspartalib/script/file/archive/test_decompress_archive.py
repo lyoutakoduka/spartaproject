@@ -107,6 +107,14 @@ def _get_expected_stamp() -> datetime:
     return get_iso_time(_get_source())
 
 
+def _get_time_pair(paths: Paths) -> Times:
+    return [
+        latest
+        for path in paths
+        if path.is_file() and ((latest := get_latest(path)) is not None)
+    ]
+
+
 def _get_times_pair(sorted_paths: Paths2) -> Times2:
     return [
         [get_latest(path) for path in paths if path.is_file()]
