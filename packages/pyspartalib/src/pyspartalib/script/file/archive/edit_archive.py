@@ -3,6 +3,7 @@
 """Module to edit internal of archive file."""
 
 from pathlib import Path
+from typing import NoReturn
 
 from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.extension.path_context import Paths
@@ -17,9 +18,13 @@ from pyspartalib.script.time.path.get_timestamp import get_directory_latest
 from pyspartalib.script.time.stamp.is_same_stamp import is_same_stamp
 
 
-def _none_error(result: Type | None) -> Type:
+def _raise_error(message: str) -> NoReturn:
+    raise ValueError(message)
+
+
+def _none_error(result: Type | None, message: str) -> Type:
     if result is None:
-        raise ValueError
+        _raise_error(message)
 
     return result
 
@@ -183,7 +188,7 @@ class EditArchive(SafeTrash):
             Path: Path of archive.
 
         """
-        return _none_error(self._archive_path)
+        return _none_error(self._archive_path, "edit")
 
     def get_edit_root(self) -> Path:
         """Get path of temporary working space.
