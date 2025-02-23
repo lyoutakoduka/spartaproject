@@ -455,7 +455,7 @@ def test_error() -> None:
     """Test to confirm that path of archive is undefined."""
     edit_archive: EditArchive = _get_edit()
 
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match="edit"):
         edit_archive.get_archive_path()
 
 
