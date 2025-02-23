@@ -13,6 +13,13 @@ from pyspartalib.script.path.iterate_directory import walk_iterator
 from pyspartalib.script.path.modify.avoid_duplication import get_avoid_path
 
 
+def _none_error(result: Type | None) -> Type:
+    if result is None:
+        raise ValueError
+
+    return result
+
+
 class TakeOutArchive(EditArchive):
     """Class to take out directory from inside of archive."""
 
@@ -119,7 +126,7 @@ class TakeOutArchive(EditArchive):
             Path: Path of directory that archives will placed.
 
         """
-        return self._none_error(self._took_out_root)
+        return _none_error(self._took_out_root)
 
     def take_out(self, took_out_root: Path | None = None) -> Paths | None:
         """Take out directory from inside of archive.
