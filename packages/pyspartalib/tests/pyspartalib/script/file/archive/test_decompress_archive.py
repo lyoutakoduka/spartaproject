@@ -116,10 +116,7 @@ def _get_time_pair(paths: Paths) -> Times:
 
 
 def _get_times_pair(sorted_paths: Paths2) -> Times2:
-    return [
-        [get_latest(path) for path in paths if path.is_file()]
-        for paths in sorted_paths
-    ]
+    return [_get_time_pair(paths) for paths in sorted_paths]
 
 
 def _get_times(times_pair: Times2) -> Times:
