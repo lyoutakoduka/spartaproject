@@ -2,8 +2,7 @@
 
 """Module to get stack frames information."""
 
-import inspect
-from inspect import FrameInfo
+from inspect import FrameInfo, currentframe, getouterframes
 from pathlib import Path
 from types import FrameType
 from typing import NoReturn
@@ -30,12 +29,12 @@ def _get_stack_frame(outer_frame: FrameInfo) -> StackFrame:
 def _get_stack_frames(current_frame: FrameType) -> StackFrames:
     return [
         _get_stack_frame(outer_frame)
-        for outer_frame in inspect.getouterframes(current_frame)
+        for outer_frame in getouterframes(current_frame)
     ]
 
 
 def _find_stack_frame_error() -> StackFrames:
-    if current_frame := inspect.currentframe():
+    if current_frame := currentframe():
         return _get_stack_frames(current_frame)
 
     _raise_error("frame")
