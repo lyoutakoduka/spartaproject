@@ -5,7 +5,7 @@
 
 def _main() -> None:
     for i in range(3):
-        print("file" + str(i))
+        print("file" + str(i))  # noqa: T201
 
 
 if __name__ == "__main__":

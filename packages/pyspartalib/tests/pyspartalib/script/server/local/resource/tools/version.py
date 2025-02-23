@@ -6,7 +6,7 @@ from sys import version
 
 
 def _main() -> None:
-    print(version)
+    print(version)  # noqa: T201
 
 
 if __name__ == "__main__":
