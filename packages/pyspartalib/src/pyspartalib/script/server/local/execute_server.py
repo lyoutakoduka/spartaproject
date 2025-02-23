@@ -2,7 +2,7 @@
 
 """Module to execute python code on server you can use ssh connection."""
 
-from collections.abc import Container, Sized
+from collections.abc import Container
 from pathlib import Path
 
 from pyspartalib.context.custom.type_context import Type
