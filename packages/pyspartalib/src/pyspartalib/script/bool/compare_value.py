@@ -14,10 +14,7 @@ from pyspartalib.context.default.integer_context import Ints
 from pyspartalib.context.default.string_context import Strs, Strs2
 
 
-def _raise_error(message: str | None) -> None:
-    if message is None:
-        raise ValueError
-
+def _raise_error(message: str) -> None:
     raise ValueError(message)
 
 
@@ -29,20 +26,12 @@ def _length_condition(result: Sized, expected: int) -> bool:
     return len(result) == expected
 
 
-def _length_error(
-    result: Sized,
-    expected: int,
-    message: str | None = None,
-) -> None:
+def _length_error(result: Sized, expected: int, message: str) -> None:
     if not _length_condition(result, expected):
         _raise_error(message)
 
 
-def _same_error(
-    result: Type,
-    expected: Type,
-    message: str | None = None,
-) -> None:
+def _same_error(result: Type, expected: Type, message: str) -> None:
     if result == expected:
         _raise_error(message)
 
