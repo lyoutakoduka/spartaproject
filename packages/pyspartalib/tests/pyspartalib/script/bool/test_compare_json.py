@@ -6,9 +6,13 @@ from pyspartalib.context.file.json_context import Json, Singles
 from pyspartalib.script.bool.compare_json import is_same_json
 
 
-def _compare_json(left: Json, right: Json) -> None:
-    if not is_same_json(left, right):
+def _status_error(status: bool) -> None:
+    if not status:
         raise ValueError
+
+
+def _compare_json(left: Json, right: Json) -> None:
+    _status_error(is_same_json(left, right))
 
 
 def test_single() -> None:
