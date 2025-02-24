@@ -26,7 +26,7 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
-def _status_error(status: bool) -> None:
+def _fail_error(status: bool) -> None:
     if not status:
         raise ValueError
 
@@ -40,7 +40,7 @@ def _get_expected() -> str:
 
 def _use_temporary_with() -> None:
     with TemporaryWith() as node:
-        _status_error(type(node) is TemporaryWith)
+        _fail_error(type(node) is TemporaryWith)
 
 
 def _decorate_function(off_stdout: OffStdout) -> str:
