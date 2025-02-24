@@ -15,5 +15,5 @@ def convert_integer(index: str) -> int | None:
     """
     try:
         return int(index)
-    except BaseException:
+    except ValueError:
         return None
