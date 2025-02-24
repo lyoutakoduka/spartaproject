@@ -104,7 +104,7 @@ class ExecuteServer(UploadServer):
         if (result := self._execute_command(source_root)) is None:
             return None
 
-        _contain_error(self._error_identifier, "\n".join(result), "server")
+        _contain_error("\n".join(result), self._error_identifier, "server")
 
         return result
 
