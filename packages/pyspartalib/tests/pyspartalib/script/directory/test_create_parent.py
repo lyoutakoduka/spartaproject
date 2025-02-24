@@ -5,11 +5,12 @@
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.extension.path_context import PathFunc
 from pyspartalib.script.directory.create_parent import create_parent
 
 
-def _path_name_error(expected: Path, result: Path) -> None:
+def _path_name_error(result: Type, expected: Type) -> None:
     if expected != result:
         raise ValueError
 
