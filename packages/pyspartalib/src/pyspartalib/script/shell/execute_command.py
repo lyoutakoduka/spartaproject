@@ -5,12 +5,20 @@
 from subprocess import PIPE, Popen
 from typing import NoReturn
 
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.string_context import StrGene, Strs, Strs2
 from pyspartalib.script.string.encoding.set_decoding import set_decoding
 
 
 def _raise_error(message: str) -> NoReturn:
     raise ValueError(message)
+
+
+def _none_error(result: Type | None) -> Type:
+    if result is None:
+        raise ValueError
+
+    return result
 
 
 def _get_subprocess_result(subprocess: Popen[bytes]) -> bytes:
