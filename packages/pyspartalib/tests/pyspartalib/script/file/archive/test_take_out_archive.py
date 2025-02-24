@@ -51,7 +51,7 @@ def _length_error(result: Sized, expected: int) -> None:
         raise ValueError
 
 
-def _in_error(result: Container[Type], expected: Type) -> None:
+def _contain_error(result: Container[Type], expected: Type) -> None:
     if expected in result:
         raise ValueError
 
@@ -365,7 +365,7 @@ def _compare_path(result: Path, expected: Path) -> None:
 
 
 def _compare_relative(working: PathPair, archive_paths: Paths) -> None:
-    _in_error(
+    _contain_error(
         is_relative_array(archive_paths, root_path=working["specific"]),
         False,
     )
