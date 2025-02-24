@@ -16,11 +16,11 @@ def _raise_error(message: str) -> None:
 
 
 def _contain_error(
-    result: Type,
-    expected: Container[Type],
+    result: Container[Type],
+    expected: Type,
     message: str,
 ) -> None:
-    if result in expected:
+    if expected in result:
         _raise_error(message)
 
 
