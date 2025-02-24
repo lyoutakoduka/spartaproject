@@ -28,7 +28,7 @@ def _load_each_type(config: ConfigParser, section: str, option: str) -> Single:
                     return config.getboolean(section, option)
                 case _:
                     pass
-        except BaseException:
+        except ValueError:
             pass
 
     return _find_other(config, section, option)
