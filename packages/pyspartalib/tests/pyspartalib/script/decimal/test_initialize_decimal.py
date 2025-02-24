@@ -5,8 +5,14 @@
 from decimal import Context, Decimal, FloatOperation, getcontext, setcontext
 
 import pytest
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.script.decimal.initialize_decimal import initialize_decimal
+
+
+def _same_error(result: Type, expected: Type) -> None:
+    if result == expected:
+        raise ValueError
 
 
 def _compute_decimal() -> None:
@@ -33,7 +39,5 @@ def test_accuracy() -> None:
     before: Strs = get_changed()
 
     initialize_decimal()
-    after: Strs = get_changed()
 
-    if before == after:
-        raise ValueError
+    _same_error(before, get_changed())
