@@ -10,10 +10,6 @@ from pyspartalib.context.default.string_context import StrGene, Strs, Strs2
 from pyspartalib.script.string.encoding.set_decoding import set_decoding
 
 
-def _raise_error(message: str) -> NoReturn:
-    raise ValueError(message)
-
-
 def _none_error(result: Type | None) -> Type:
     if result is None:
         raise ValueError
