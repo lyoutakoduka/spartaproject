@@ -18,7 +18,7 @@ def _none_error(result: Type | None) -> Type:
     return result
 
 
-def _texts_error(result: Type, expected: Type) -> None:
+def _difference_error(result: Type, expected: Type) -> None:
     if result != expected:
         raise ValueError
 
@@ -145,7 +145,7 @@ def _create_pipeline_text() -> LogPipeline:
 
 
 def _compare_text(expected: Strs, result: Strs) -> None:
-    _texts_error(result, expected)
+    _difference_error(result, expected)
 
 
 def test_print() -> None:
