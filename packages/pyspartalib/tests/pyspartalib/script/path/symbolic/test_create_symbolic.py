@@ -26,7 +26,7 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
-def _status_error(status: bool) -> None:
+def _fail_error(status: bool) -> None:
     if not status:
         raise ValueError
 
@@ -81,7 +81,7 @@ def test_create() -> None:
     def individual_test(temporary_root: Path) -> None:
         symbolic_link: SymbolicLink = _create_symbolic(temporary_root)
 
-        _status_error(symbolic_link["symbolic"].is_symlink())
+        _fail_error(symbolic_link["symbolic"].is_symlink())
         _difference_error(*_get_relative_pair(symbolic_link))
 
     _inside_temporary_directory(individual_test)
