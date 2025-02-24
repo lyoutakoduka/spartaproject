@@ -5,6 +5,7 @@
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.script.directory.working.working_date_time import (
     create_working_space,
 )
@@ -14,7 +15,7 @@ from pyspartalib.script.time.directory.get_time_path import (
 )
 
 
-def _path_name_error(expected: Path, result: Path) -> None:
+def _path_name_error(result: Type, expected: Type) -> None:
     if expected != result:
         raise ValueError
 
