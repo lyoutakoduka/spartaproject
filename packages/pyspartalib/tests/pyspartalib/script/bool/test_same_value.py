@@ -7,7 +7,7 @@ from pyspartalib.context.default.string_context import Strs
 from pyspartalib.script.bool.same_value import bool_same_array, bool_same_pair
 
 
-def _confirm(status: bool) -> None:
+def _fail_error(status: bool) -> None:
     if not status:
         raise ValueError
 
@@ -46,19 +46,19 @@ def test_false() -> None:
 
 def test_array() -> None:
     """Test for list of bool value which is all True."""
-    _confirm(bool_same_array(_expected_list(True)))
+    _fail_error(bool_same_array(_expected_list(True)))
 
 
 def test_invert() -> None:
     """Test for list of bool value with invert option."""
-    _confirm(bool_same_array(_expected_list(False), invert=True))
+    _fail_error(bool_same_array(_expected_list(False), invert=True))
 
 
 def test_pair() -> None:
     """Test for pair of bool value which is all True."""
-    _confirm(bool_same_pair(_expected_pair(True)))
+    _fail_error(bool_same_pair(_expected_pair(True)))
 
 
 def test_pair_invert() -> None:
     """Test for pair of bool value with invert option."""
-    _confirm(bool_same_pair(_expected_pair(False), invert=True))
+    _fail_error(bool_same_pair(_expected_pair(False), invert=True))
