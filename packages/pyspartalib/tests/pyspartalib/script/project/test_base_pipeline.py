@@ -11,7 +11,7 @@ from pyspartalib.script.path.modify.get_resource import get_resource
 from pyspartalib.script.project.base_pipeline import BasePipeline
 
 
-def _strings_error(result: Type, expected: Type) -> None:
+def _difference_error(result: Type, expected: Type) -> None:
     if result != expected:
         raise ValueError
 
@@ -42,4 +42,4 @@ def _create_pipeline() -> BasePipeline:
 
 def test_print() -> None:
     """Test to import strings from module outside."""
-    _strings_error(_get_result(_create_pipeline()), _get_expected())
+    _difference_error(_get_result(_create_pipeline()), _get_expected())
