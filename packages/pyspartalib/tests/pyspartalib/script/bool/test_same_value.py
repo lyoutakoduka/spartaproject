@@ -12,7 +12,7 @@ def _fail_error(status: bool) -> None:
         raise ValueError
 
 
-def _confirm_error(status: bool) -> None:
+def _success_error(status: bool) -> None:
     if status:
         raise ValueError
 
@@ -31,17 +31,17 @@ def _expected_pair(status: bool) -> BoolPair:
 
 def test_empty() -> None:
     """Test for list of bool value as empty."""
-    _confirm_error(bool_same_array([]))
+    _success_error(bool_same_array([]))
 
 
 def test_mixed() -> None:
     """Test for list of bool value which is mix of True and False."""
-    _confirm_error(bool_same_array([False, True, False]))
+    _success_error(bool_same_array([False, True, False]))
 
 
 def test_false() -> None:
     """Test for list of bool value which is all False."""
-    _confirm_error(bool_same_array(_expected_list(False)))
+    _success_error(bool_same_array(_expected_list(False)))
 
 
 def test_array() -> None:
