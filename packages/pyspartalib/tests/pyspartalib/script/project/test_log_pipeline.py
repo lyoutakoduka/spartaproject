@@ -18,7 +18,7 @@ def _none_error(result: Type | None) -> Type:
     return result
 
 
-def _texts_error(result: Strs, expected: Strs) -> None:
+def _texts_error(result: Type, expected: Type) -> None:
     if result != expected:
         raise ValueError
 
