@@ -14,7 +14,7 @@ def _raise_error(message: str) -> NoReturn:
     raise ValueError(message)
 
 
-def _status_error(status: bool, message: str) -> None:
+def _fail_error(status: bool, message: str) -> None:
     if not status:
         _raise_error(message)
 
@@ -79,7 +79,7 @@ def get_relative(absolute_path: Path, root_path: Path | None = None) -> Path:
     """
     root_path = _get_relative_root(root_path)
 
-    _status_error(is_relative(absolute_path, root_path=root_path), "relative")
+    _fail_error(is_relative(absolute_path, root_path=root_path), "relative")
 
     return absolute_path.relative_to(root_path)
 
