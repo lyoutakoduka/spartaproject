@@ -27,7 +27,7 @@ from pyspartalib.script.path.status.check_exists import (
 )
 
 
-def _status_error(status: bool) -> None:
+def _fail_error(status: bool) -> None:
     if not status:
         raise ValueError
 
@@ -43,7 +43,7 @@ def _get_head_path(index: int) -> Path:
 
 def _inside_temporary_directory(function: PathBoolFunc) -> None:
     with TemporaryDirectory() as temporary_path:
-        _status_error(function(Path(temporary_path)))
+        _fail_error(function(Path(temporary_path)))
 
 
 def _get_directory_array(root_path: Path, paths: Paths) -> Paths:
