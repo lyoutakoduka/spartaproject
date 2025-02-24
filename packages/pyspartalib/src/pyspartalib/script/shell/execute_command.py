@@ -3,7 +3,6 @@
 """Module to execute CLI (Command Line Interface) script on subprocess."""
 
 from subprocess import PIPE, Popen
-from typing import NoReturn
 
 from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.string_context import StrGene, Strs, Strs2
