@@ -5,6 +5,7 @@
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
+from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.context.extension.path_context import PathFunc, PathPair
 from pyspartalib.script.directory.create_directory import create_directory_pair
@@ -15,7 +16,7 @@ from pyspartalib.script.time.directory.get_time_path import (
 )
 
 
-def _path_name_error(expected: Path, result: Path) -> None:
+def _path_name_error(result: Type, expected: Type) -> None:
     if expected != result:
         raise ValueError
 
