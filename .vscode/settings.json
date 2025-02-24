@@ -39,7 +39,10 @@
   "prettier.requireConfig": true,
   "pythonTestExplorer.testFramework": "pytest",
   "python.analysis.diagnosticMode": "workspace",
-  "python.analysis.extraPaths": ["packages/pyspartalib/src"],
+  "python.analysis.extraPaths": [
+    "packages/pyspartalib",
+    "packages/pyspartalib/src"
+  ],
   "python.analysis.typeCheckingMode": "strict",
   "python.languageServer": "Pylance",
   "ruff.configuration": "pyproject.toml",
