@@ -16,7 +16,7 @@ from pyspartalib.script.time.directory.get_time_path import (
 )
 
 
-def _path_name_error(result: Type, expected: Type) -> None:
+def _difference_error(result: Type, expected: Type) -> None:
     if expected != result:
         raise ValueError
 
@@ -72,7 +72,7 @@ def _compare_root(temporary_root: Path, work_space: WorkSpace) -> None:
 
 
 def _compare_common(result: Path, expected: Path) -> None:
-    _path_name_error(result, expected)
+    _difference_error(result, expected)
 
 
 def _compare_base(temporary_root: Path, result: Path) -> None:
