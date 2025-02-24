@@ -31,7 +31,7 @@ class OffStdout(InheritDecorator):
 
         Use decorator generated from this class as below.
 
-            stdout_text = StdoutText()
+            stdout_text = OffStdout()
 
             @stdout_text.decorator
             def message() -> None:
