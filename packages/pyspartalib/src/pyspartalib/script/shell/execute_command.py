@@ -22,10 +22,7 @@ def _none_error(result: Type | None) -> Type:
 
 
 def _get_subprocess_result(subprocess: Popen[bytes]) -> bytes:
-    if stdout := subprocess.stdout:
-        return stdout.readline()
-
-    _raise_error("subprocess")
+    return _none_error(subprocess.stdout).readline()
 
 
 def _cleanup_new_lines(text: str) -> str:
