@@ -30,7 +30,7 @@ def _no_exists_error(path: Path) -> None:
         raise FileNotFoundError
 
 
-def _status_error(status: bool) -> None:
+def _fail_error(status: bool) -> None:
     if not status:
         raise ValueError
 
@@ -63,7 +63,7 @@ def _check_exists(result: Path) -> None:
 
 def _relative_test(result: Path, root: Path) -> None:
     _check_exists(result)
-    _status_error(is_relative(result, root_path=root))
+    _fail_error(is_relative(result, root_path=root))
 
 
 def _compare_root(temporary_root: Path, work_space: WorkSpace) -> None:
