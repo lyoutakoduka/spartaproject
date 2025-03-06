@@ -48,10 +48,10 @@ warn_unreachable = true
 [tool.pytest.ini_options]
 addopts = """
   --capture=no
-  --new-first
-  --ignore ./docs
   --exitfirst
+  --ignore ./docs
   --last-failed
+  --new-first
   --verbose
 """
 cache_dir = "./.temp/.pytest_cache"
