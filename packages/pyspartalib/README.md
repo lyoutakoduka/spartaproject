@@ -10,11 +10,11 @@ We sometimes call this product "Sparta" simply instead of "spartaproject" or "py
 
 ## Language
 
-All documents written by English, and it's on the premise that translation service like Google Translate.
+All documents are written in English, and these are also formatted for easy translation by translation services.
 
 ## Technical Support
 
-You can get tech support of Sparta only English or Japanese.
+We provide technical support in either English or Japanese.
 
 ## Contribution
 
