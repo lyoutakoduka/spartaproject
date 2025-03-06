@@ -50,6 +50,8 @@ addopts = """
   --capture=no
   --new-first
   --ignore ./docs
+  --exitfirst
+  --last-failed
   --verbose
 """
 cache_dir = "./.temp/.pytest_cache"
