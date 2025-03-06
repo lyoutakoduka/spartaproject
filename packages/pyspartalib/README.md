@@ -1,4 +1,4 @@
-# Sync browser file system to local, and run Python on browser.
+# Sync browser's virtual file system with local storage.
 
 ## Version
 
