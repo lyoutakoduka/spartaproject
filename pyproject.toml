@@ -47,10 +47,10 @@ warn_unreachable = true
 
 [tool.pytest.ini_options]
 addopts = """
-  --quiet
   --capture=no
   --new-first
   --ignore ./docs
+  --verbose
 """
 cache_dir = "./.temp/.pytest_cache"
 pythonpath = "packages/pyspartalib"
