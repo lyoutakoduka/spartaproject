@@ -7,3 +7,16 @@ All documents are written in English, and these are also formatted for easy tran
 ## Technical Support
 
 We provide technical support in either English or Japanese.
+
+## Contribution
+
+[CONTRIBUTING.md](CONTRIBUTING.md)
+
+## License
+
+[LICENSE](LICENSE)
+
+## Author
+
+- [github](https://github.com/lyoutakoduka)
+- [twitter](https://twitter.com/lyouta_koduka)
