@@ -1,8 +1,4 @@
-# Sync browser's virtual file system with local storage.
-
-## Version
-
-- [test.pypi](https://test.pypi.org/project/pyspartalib)
+# Libraries for SpartaProject, these are managed on mono repository.
 
 ## Language
 
@@ -11,6 +7,14 @@ All documents are written in English, and these are also formatted for easy tran
 ## Technical Support
 
 We provide technical support in either English or Japanese.
+
+## Contribution
+
+[CONTRIBUTING.md](CONTRIBUTING.md)
+
+## License
+
+[LICENSE](LICENSE)
 
 ## Author
 
