@@ -1,0 +1,16 @@
+[project]
+name = "pyspartaimg"
+version = "0.0.1"
+requires-python = ">=3.13.1"
+authors = [{ name = "lyouta", email = "lyouta@spartaproject.com" }]
+description = "Treat the image list like as an archive."
+readme = "README.md"
+keywords = ["pyspartaimg"]
+classifiers = ["Programming Language :: Python :: 3.13"]
+
+[project.urls]
+Homepage = "http://lyoutakoduka.github.io/spartaproject"
+Repository = "https://github.com/lyoutakoduka/spartaproject"
+
+[project.scripts]
+pyspartaimg = "pyspartaimg:main"
