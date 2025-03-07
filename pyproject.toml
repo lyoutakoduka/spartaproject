@@ -3,13 +3,15 @@ name = "pyspartaproj"
 version = "0.0.1"
 requires-python = ">=3.13.1"
 
+[dependency-groups]
+lib = ["pyspartalib"]
+dev = ["mypy>=1.13.0", "pytest>=8.3.4", "ruff>=0.8.3"]
+
+[project.optional-dependencies]
+lib = ["pyspartalib"]
+
 [tool.uv]
-dev-dependencies = [
-  "mypy>=1.13.0",
-  "pytest>=8.3.4",
-  "ruff>=0.8.3",
-  "pyspartalib",
-]
+default-groups = ["dev"]
 
 [tool.uv.sources]
 pyspartalib = { workspace = true }
