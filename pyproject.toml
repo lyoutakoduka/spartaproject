@@ -5,16 +5,19 @@ requires-python = ">=3.13.1"
 
 [dependency-groups]
 lib = ["pyspartalib"]
+img = ["pyspartaimg", "pyspartalib"]
 dev = ["mypy>=1.13.0", "pytest>=8.3.4", "ruff>=0.8.3"]
 
 [project.optional-dependencies]
 lib = ["pyspartalib"]
+img = ["pyspartaimg"]
 
 [tool.uv]
 default-groups = ["dev"]
 
 [tool.uv.sources]
 pyspartalib = { workspace = true }
+pyspartaimg = { workspace = true }
 
 [tool.uv.workspace]
 members = ["packages/*"]
