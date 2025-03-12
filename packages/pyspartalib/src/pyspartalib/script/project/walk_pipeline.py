@@ -13,7 +13,6 @@ class WalkPipeline(LogPipeline):
 
     def launch_pipeline(self) -> None:
         """Provide an entry point of class as overridable method."""
-        pass
 
     def __init__(self, enable_shown: bool) -> None:
         """Initialize super class and variables.
