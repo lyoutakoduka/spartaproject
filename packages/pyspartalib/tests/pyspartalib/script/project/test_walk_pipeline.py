@@ -59,3 +59,7 @@ def _decorate_function(function: Func) -> str:
     _messages()
 
     return off_stdout.show()
+
+
+def _get_result_launch() -> str:
+    return _decorate_function(_get_pipeline_launch())
