@@ -68,3 +68,7 @@ def _get_result_launch() -> str:
 
 def _compare_walk(result: str, expected: str) -> None:
     _difference_error(result, format_indent(expected, stdout=True))
+
+
+def test_launch() -> None:
+    _compare_walk(_get_result_launch(), _get_expected_launch())
