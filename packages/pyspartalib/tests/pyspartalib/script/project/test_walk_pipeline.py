@@ -32,3 +32,9 @@ def _get_expected_launch() -> str:
 
 def _restart_timer(pipeline: LogPipeline) -> None:
     pipeline.restart(override=True)
+
+
+def _edit_pipeline_launch() -> None:
+    pipeline = LaunchTest()
+    _restart_timer(pipeline)
+    pipeline.initialize_pipeline()
