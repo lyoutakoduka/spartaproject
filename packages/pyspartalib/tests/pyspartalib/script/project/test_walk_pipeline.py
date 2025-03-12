@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from pyspartalib.context.custom.callable_context import Func
 from pyspartalib.context.custom.type_context import Type
 from pyspartalib.script.project.log_pipeline import LogPipeline
 from pyspartalib.script.project.walk_pipeline import WalkPipeline
@@ -38,3 +39,10 @@ def _edit_pipeline_launch() -> None:
     pipeline = LaunchTest()
     _restart_timer(pipeline)
     pipeline.initialize_pipeline()
+
+
+def _get_pipeline_launch() -> Func:
+    def _wrapper() -> None:
+        _edit_pipeline_launch()
+
+    return _wrapper
