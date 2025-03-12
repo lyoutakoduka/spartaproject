@@ -14,9 +14,6 @@ class WalkPipeline(LogPipeline):
     def launch_pipeline(self) -> None:
         pass
 
-    def initialize_pipeline(self) -> None:
-        self.launch_pipeline()
-
     def __init__(self, enable_shown: bool) -> None:
         """Initialize super class and variables.
 
