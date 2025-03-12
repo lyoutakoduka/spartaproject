@@ -4,6 +4,7 @@ from pyspartalib.context.custom.callable_context import Func
 from pyspartalib.context.custom.type_context import Type
 from pyspartalib.script.project.log_pipeline import LogPipeline
 from pyspartalib.script.project.walk_pipeline import WalkPipeline
+from pyspartalib.script.stdout.off_stdout import OffStdout
 from pyspartalib.script.stdout.send_stdout import send_stdout
 
 
@@ -46,3 +47,15 @@ def _get_pipeline_launch() -> Func:
         _edit_pipeline_launch()
 
     return _wrapper
+
+
+def _decorate_function(function: Func) -> str:
+    off_stdout = OffStdout()
+
+    @off_stdout.decorator
+    def _messages() -> None:
+        function()
+
+    _messages()
+
+    return off_stdout.show()
