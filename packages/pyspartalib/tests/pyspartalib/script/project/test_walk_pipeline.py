@@ -40,7 +40,7 @@ def _restart_timer(pipeline: LogPipeline) -> None:
 def _edit_pipeline_launch() -> None:
     pipeline = LaunchTest()
     _restart_timer(pipeline)
-    pipeline.initialize_pipeline()
+    pipeline.launch_pipeline()
 
 
 def _get_pipeline_launch() -> Func:
