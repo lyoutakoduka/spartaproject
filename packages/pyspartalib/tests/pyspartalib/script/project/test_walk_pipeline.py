@@ -19,3 +19,11 @@ class LaunchTest(WalkPipeline):
 def _difference_error(result: Type, expected: Type) -> None:
     if result != expected:
         raise ValueError
+
+
+def _get_expected_launch() -> str:
+    return """
+        0.0s: begin
+        launch
+        0.0s: end
+    """
