@@ -9,7 +9,7 @@ class WalkPipeline(LogPipeline):
     """Class to iterate contents in a directory like walk module."""
 
     def __initialize_super_class(self, enable_shown: bool) -> None:
-        LogPipeline.__init__(self, enable_shown=enable_shown)
+        super().__init__(enable_shown=enable_shown)
 
     def launch_pipeline(self) -> None:
         pass
