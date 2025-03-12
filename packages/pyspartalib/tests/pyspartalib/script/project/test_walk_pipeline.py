@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+"""Test module to iterate contents in a directory like walk module."""
+
 from pyspartalib.context.custom.callable_context import Func
 from pyspartalib.context.custom.type_context import Type
 from pyspartalib.script.project.log_pipeline import LogPipeline
@@ -10,13 +12,17 @@ from pyspartalib.script.stdout.send_stdout import send_stdout
 
 
 class LaunchTest(WalkPipeline):
+    """Class for test to iterate contents in a directory."""
+
     def __initialize_super_class(self) -> None:
         super().__init__(True)
 
     def launch_pipeline(self) -> None:
+        """Show message when a pipeline module is executed."""
         send_stdout("launch")
 
     def __init__(self) -> None:
+        """Initialize super class and variables."""
         self.__initialize_super_class()
 
 
@@ -71,4 +77,5 @@ def _compare_walk(result: str, expected: str) -> None:
 
 
 def test_launch() -> None:
+    """Test to execute a pipeline module from sub module."""
     _compare_walk(_get_result_launch(), _get_expected_launch())
