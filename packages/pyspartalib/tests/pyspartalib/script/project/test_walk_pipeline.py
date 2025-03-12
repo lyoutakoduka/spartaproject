@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 from pyspartalib.context.custom.type_context import Type
+from pyspartalib.script.project.log_pipeline import LogPipeline
 from pyspartalib.script.project.walk_pipeline import WalkPipeline
 from pyspartalib.script.stdout.send_stdout import send_stdout
 
@@ -27,3 +28,7 @@ def _get_expected_launch() -> str:
         launch
         0.0s: end
     """
+
+
+def _restart_timer(pipeline: LogPipeline) -> None:
+    pipeline.restart(override=True)
