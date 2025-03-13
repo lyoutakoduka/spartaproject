@@ -4,11 +4,11 @@
 
 from pathlib import Path
 
-from pyspartalib.script.project.log_pipeline import LogPipeline
 from pyspartalib.script.project.project_context import ProjectContext
+from pyspartalib.script.project.walk_pipeline import WalkPipeline
 
 
-class BasePipeline(ProjectContext, LogPipeline):
+class BasePipeline(ProjectContext, WalkPipeline):
     """Class to handle all functionalities of any script called pipeline."""
 
     def __initialize_super_class(
@@ -18,7 +18,7 @@ class BasePipeline(ProjectContext, LogPipeline):
         enable_shown: bool,
     ) -> None:
         ProjectContext.__init__(self, platform=platform, forward=forward)
-        LogPipeline.__init__(self, enable_shown=enable_shown)
+        WalkPipeline.__init__(self, enable_shown)
 
     def __init__(
         self,
