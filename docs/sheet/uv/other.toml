@@ -1,0 +1,9 @@
+[uv.other]
+
+cache.clean = """
+uv cache clean
+"""
+
+publish.index = """
+uv publish --index test dist/***-0.0.14.tar.gz
+"""

@@ -1,0 +1,9 @@
+[uv.build]
+
+build = """
+uv build --package ***
+"""
+
+build.out = """
+uv build --package *** --out-dir .temp/dist
+"""

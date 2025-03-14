@@ -1,0 +1,9 @@
+[uv.init]
+
+init = """
+uv init
+"""
+
+init.package = """
+uv init --package packages
+"""
