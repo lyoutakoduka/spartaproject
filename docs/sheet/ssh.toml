@@ -1,0 +1,33 @@
+[ssh]
+
+chmod = """
+chmod 600 ***.pem
+"""
+
+ssh.identity_file = """
+ssh -i "***.pem" ubuntu@ec***.compute***.amazonaws.com
+"""
+
+ssh.connect = """
+ssh sparta_ec2
+"""
+
+ssh.keygen.type.output_keyfile.new_passphrase = """
+ssh-keygen -t rsa -f ~/.ssh/id_rsa -N passphrase
+"""
+
+cat = """
+cat id_rsa.pub >> authorized_keys
+"""
+
+host_file = """
+UserKnownHostsFile ~/.ssh/known_hosts
+"""
+
+identity_file = """
+IdentityFile ~/.ssh/id_rsa
+"""
+
+ssh.server = """
+ssh server
+"""
