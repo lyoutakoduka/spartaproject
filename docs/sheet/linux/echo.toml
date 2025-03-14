@@ -1,0 +1,17 @@
+[linux.echo]
+
+stdout = """
+echo "TEST"
+"""
+
+stdout.off = """
+echo "TEST" > /dev/null
+"""
+
+stdout.file = """
+echo "TEST" | sudo tee test.txt
+"""
+
+stdout.file.stdout.off = """
+echo "TEST" | sudo tee test.txt > /dev/null
+"""
