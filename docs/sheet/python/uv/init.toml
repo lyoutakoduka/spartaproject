@@ -1,4 +1,4 @@
-[uv.init]
+[python.uv.init]
 
 init = """
 uv init

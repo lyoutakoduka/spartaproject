@@ -1,4 +1,4 @@
-[uv.sync]
+[python.uv.sync]
 
 sync = """
 uv sync

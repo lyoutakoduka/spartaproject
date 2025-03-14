@@ -1,4 +1,4 @@
-[uv.build]
+[python.uv.build]
 
 build = """
 uv build --package ***
