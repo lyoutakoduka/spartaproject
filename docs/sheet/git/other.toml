@@ -1,0 +1,21 @@
+[git.other]
+
+clone = """
+git clone https://github.com/***/***.git ~/***/project
+"""
+
+branch = """
+git branch --delete 165-***
+"""
+
+checkout = """
+git checkout 167-***-***
+"""
+
+fetch.origin = """
+git fetch origin
+"""
+
+log = """
+git log --oneline
+"""

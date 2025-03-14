@@ -1,0 +1,9 @@
+[docker.image]
+
+docker.image.ls = """
+docker image ls
+"""
+
+docker.image.rm = """
+docker image rm ***
+"""

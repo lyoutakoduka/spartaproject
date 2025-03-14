@@ -1,0 +1,13 @@
+[js.yarn]
+
+add.dev = """
+yarn add --dev cspell
+"""
+
+remove = """
+yarn remove cspell
+"""
+
+run = """
+yarn run cspell .
+"""

@@ -1,0 +1,17 @@
+[docker.compose]
+
+docker.compose.up = """
+docker compose up --detach
+"""
+
+docker.compose.up.build = """
+docker compose up --detach --build --no-start
+"""
+
+docker.compose.exec = """
+docker compose exec app bash
+"""
+
+docker.compose.down = """
+docker compose down
+"""

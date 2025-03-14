@@ -1,0 +1,14 @@
+[dropbox.other]
+
+wget.download = """
+wget --output-document=dropbox.tar.gz --no-check-certificate \
+"https://www.dropbox.com/download?plat=lnx.x86_64"
+"""
+
+tar.xzf = """
+tar xzf dropbox.tar.gz
+"""
+
+export.path = """
+export PATH=$PATH:/***/dropbox/.dropbox-dist/dropbox-lnx.x86_64-***
+"""

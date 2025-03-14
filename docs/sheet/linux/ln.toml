@@ -1,0 +1,9 @@
+[linux.ln]
+
+ln.file = """
+ln --symbolic ../pyproject.toml pyproject.toml
+"""
+
+ln.directory = """
+ln --symbolic ../tools/ tools
+"""

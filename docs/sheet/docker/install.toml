@@ -1,0 +1,33 @@
+[docker.install]
+
+install.certificates = """
+sudo apt install ca-certificates
+"""
+
+install.curl = """
+sudo apt install curl
+"""
+
+install.gnupg = """
+sudo apt install gnupg
+"""
+
+install.docker_ce = """
+sudo apt install docker-ce
+"""
+
+install.docker_ce_cli = """
+sudo apt install docker-ce-cli
+"""
+
+install.containerd = """
+sudo apt install containerd.io
+"""
+
+install.buildx = """
+sudo apt install docker-buildx-plugin
+"""
+
+install.compose = """
+sudo apt install docker-compose-plugin
+"""

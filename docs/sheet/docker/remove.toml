@@ -1,0 +1,25 @@
+[docker.remove]
+
+remove.io = """
+sudo apt remove docker.io
+"""
+
+remove.doc = """
+sudo apt remove docker-doc
+"""
+
+remove.compose = """
+sudo apt remove docker-compose
+"""
+
+remove.podman = """
+sudo apt remove podman-docker
+"""
+
+remove.containerd = """
+sudo apt remove containerd
+"""
+
+remove.runc = """
+sudo apt remove runc
+"""
