@@ -1,0 +1,21 @@
+[language.install]
+
+install.language = """
+sudo apt install language-pack-ja
+"""
+
+install.fonts.ipafont = """
+sudo apt install fonts-ipafont
+"""
+
+install.fonts.ipaexfont = """
+sudo apt install fonts-ipaexfont
+"""
+
+install.manpages = """
+sudo apt install manpages-ja --yes 
+"""
+
+install.manpages.dev = """
+sudo apt install manpages-ja-dev --yes 
+"""
