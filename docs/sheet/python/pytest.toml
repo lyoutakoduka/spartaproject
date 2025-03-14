@@ -1,0 +1,5 @@
+[python.pytest]
+
+pytest = """
+uv run pytest
+"""
