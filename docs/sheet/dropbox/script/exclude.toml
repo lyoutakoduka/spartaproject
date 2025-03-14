@@ -1,0 +1,13 @@
+[dropbox.script.exclude]
+
+exclude.list = """
+uv run python ~/***/dropbox/dropbox.py exclude list
+"""
+
+exclude.add = """
+uv run python ~/***/dropbox/dropbox.py exclude add ~/***/.venv/
+"""
+
+exclude.remove = """
+uv run python ~/***/dropbox/dropbox.py exclude remove ~/***/.venv/
+"""

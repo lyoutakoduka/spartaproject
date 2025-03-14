@@ -1,0 +1,9 @@
+[dropbox.script.start]
+
+start = """
+uv run python ~/***/dropbox/dropbox.py start
+"""
+
+start.install = """
+uv run python ~/***/dropbox/dropbox.py start --install
+"""
