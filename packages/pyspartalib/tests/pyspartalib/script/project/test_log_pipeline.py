@@ -6,7 +6,7 @@ from decimal import Decimal
 
 from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.string_context import Strs
-from pyspartalib.script.project.log_pipeline import LogPipeline
+from pyspartalib.script.pipeline.log_pipeline import LogPipeline
 from pyspartalib.script.stdout.off_stdout import OffStdout
 from tests.pyspartalib.script.project.context.log_context import LogFunc
 
