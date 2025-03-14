@@ -1,0 +1,11 @@
+[js.prettier]
+
+check = """
+yarn run prettier . --check \
+--config=".vscode/.prettierrc.toml" --ignore-path=".vscode/.prettierignore"
+"""
+
+write = """
+yarn run prettier . --write \
+--config=".vscode/.prettierrc.toml" --ignore-path=".vscode/.prettierignore"
+"""
