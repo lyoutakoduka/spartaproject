@@ -1,0 +1,9 @@
+[wsl.backup]
+
+wsl.export = """
+wsl --export Ubuntu-22.04 B:/virtual/Ubuntu_22_04.tar
+"""
+
+wsl.import = """
+wsl --import Ubuntu_22_04 B:/virtual B:/virtual/Ubuntu_22_04.tar
+"""
