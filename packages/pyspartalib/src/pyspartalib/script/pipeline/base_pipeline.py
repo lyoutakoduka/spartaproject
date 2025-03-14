@@ -4,8 +4,8 @@
 
 from pathlib import Path
 
+from pyspartalib.script.pipeline.walk_pipeline import WalkPipeline
 from pyspartalib.script.project.project_context import ProjectContext
-from pyspartalib.script.project.walk_pipeline import WalkPipeline
 
 
 class BasePipeline(ProjectContext, WalkPipeline):

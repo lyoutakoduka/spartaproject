@@ -4,6 +4,6 @@
 
 from collections.abc import Callable
 
-from pyspartalib.script.project.log_pipeline import LogPipeline
+from pyspartalib.script.pipeline.log_pipeline import LogPipeline
 
 LogFunc = Callable[[], LogPipeline]

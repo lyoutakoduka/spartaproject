@@ -4,8 +4,8 @@
 
 from pyspartalib.context.custom.callable_context import Func
 from pyspartalib.context.custom.type_context import Type
-from pyspartalib.script.project.log_pipeline import LogPipeline
-from pyspartalib.script.project.walk_pipeline import WalkPipeline
+from pyspartalib.script.pipeline.log_pipeline import LogPipeline
+from pyspartalib.script.pipeline.walk_pipeline import WalkPipeline
 from pyspartalib.script.stdout.format_indent import format_indent
 from pyspartalib.script.stdout.off_stdout import OffStdout
 from pyspartalib.script.stdout.send_stdout import send_stdout

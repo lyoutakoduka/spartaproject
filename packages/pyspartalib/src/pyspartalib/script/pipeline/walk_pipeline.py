@@ -2,7 +2,7 @@
 
 """Module to iterate contents in a directory like walk module."""
 
-from pyspartalib.script.project.log_pipeline import LogPipeline
+from pyspartalib.script.pipeline.log_pipeline import LogPipeline
 
 
 class WalkPipeline(LogPipeline):
