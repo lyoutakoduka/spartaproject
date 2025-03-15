@@ -35,6 +35,9 @@ class InterruptTest(WalkPipeline):
     def __initialize_variables(self, iterate_root: Path) -> None:
         self._iterate_root: Path = iterate_root
 
+    def _iteration(self, _: Path) -> bool:
+        return True
+
     def __init__(self, iterate_root: Path) -> None:
         self.__initialize_super_class()
         self.__initialize_variables(iterate_root)
