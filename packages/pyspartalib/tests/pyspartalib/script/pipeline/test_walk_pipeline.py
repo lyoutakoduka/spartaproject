@@ -2,6 +2,8 @@
 
 """Test module to iterate contents in a directory like walk module."""
 
+from pathlib import Path
+
 from pyspartalib.context.custom.callable_context import Func
 from pyspartalib.context.custom.type_context import Type
 from pyspartalib.script.pipeline.log_pipeline import LogPipeline
@@ -23,6 +25,14 @@ class LaunchTest(WalkPipeline):
 
     def __init__(self) -> None:
         """Initialize super class and variables."""
+        self.__initialize_super_class()
+
+
+class InterruptTest(WalkPipeline):
+    def __initialize_super_class(self) -> None:
+        super().__init__(True)
+
+    def __init__(self, iterate_root: Path) -> None:
         self.__initialize_super_class()
 
 
