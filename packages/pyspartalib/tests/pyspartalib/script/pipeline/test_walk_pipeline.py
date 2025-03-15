@@ -74,6 +74,16 @@ def _get_expected_interrupt() -> str:
     """
 
 
+def _get_expected_through() -> str:
+    return """
+        0.0s: begin
+        0.0s: find [0] file.json
+        0.0s: find [1] file.ini
+        0.0s: find [2] file.txt
+        0.0s: end
+    """
+
+
 def _restart_timer(pipeline: LogPipeline) -> None:
     pipeline.restart(override=True)
 
