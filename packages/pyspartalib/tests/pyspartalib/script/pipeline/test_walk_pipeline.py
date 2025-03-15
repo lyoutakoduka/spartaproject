@@ -17,7 +17,7 @@ class LaunchTest(WalkPipeline):
     def __initialize_super_class(self) -> None:
         super().__init__(True)
 
-    def launch_pipeline(self) -> None:
+    def launch_override(self) -> None:
         """Show message when a pipeline module is executed."""
         send_stdout("launch")
 
