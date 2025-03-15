@@ -2,6 +2,7 @@
 
 """Module to iterate contents in a directory like walk module."""
 
+from pyspartalib.context.default.string_context import Strs
 from pyspartalib.script.pipeline.log_pipeline import LogPipeline
 
 
@@ -13,6 +14,9 @@ class WalkPipeline(LogPipeline):
 
     def _initialize_walk(self, interrupt: int) -> None:
         self._interrupt = interrupt
+
+    def _force_logs(self, messages: Strs) -> None:
+        self.show_log(messages, force=True)
 
     def launch_override(self) -> None:
         pass
