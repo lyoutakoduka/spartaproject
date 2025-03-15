@@ -18,6 +18,14 @@ class WalkPipeline(LogPipeline):
     def _force_logs(self, messages: Strs) -> None:
         self.show_log(messages, force=True)
 
+    def _break_loop(self, index: int) -> bool:
+        if index < self._interrupt:
+            return False
+
+        self._force_logs(["break"])
+
+        return True
+
     def launch_override(self) -> None:
         pass
 
