@@ -32,8 +32,12 @@ class InterruptTest(WalkPipeline):
     def __initialize_super_class(self) -> None:
         super().__init__(True)
 
+    def __initialize_variables(self, iterate_root: Path) -> None:
+        self._iterate_root: Path = iterate_root
+
     def __init__(self, iterate_root: Path) -> None:
         self.__initialize_super_class()
+        self.__initialize_variables(iterate_root)
 
 
 def _difference_error(result: Type, expected: Type) -> None:
