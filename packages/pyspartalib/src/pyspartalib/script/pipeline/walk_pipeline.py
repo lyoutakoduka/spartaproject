@@ -3,6 +3,10 @@
 """Module to iterate contents in a directory like walk module."""
 
 from pyspartalib.context.default.string_context import Strs
+from pyspartalib.context.extension.path_context import (
+    PathBoolFunc,
+    PathGeneFunc,
+)
 from pyspartalib.script.pipeline.log_pipeline import LogPipeline
 
 
@@ -25,6 +29,22 @@ class WalkPipeline(LogPipeline):
         self._force_logs(["break"])
 
         return True
+
+    def walk_directory(
+        self,
+        generator: PathGeneFunc,
+        iteration: PathBoolFunc,
+    ) -> None:
+        index: int = 0
+
+        for path in generator():
+            if self._break_loop(index):
+                break
+
+            self._force_logs(["find", f"[{index}]", str(path)])
+
+            if iteration(path):
+                index += 1
 
     def launch_override(self) -> None:
         pass
