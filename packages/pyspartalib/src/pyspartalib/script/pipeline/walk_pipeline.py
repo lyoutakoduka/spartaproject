@@ -11,8 +11,12 @@ class WalkPipeline(LogPipeline):
     def __initialize_super_class(self, enable_shown: bool) -> None:
         super().__init__(enable_shown=enable_shown)
 
-    def launch_pipeline(self) -> None:
+    def _initialize_walk(self, interrupt: int) -> None:
+        self._interrupt = interrupt
+
+    def launch_pipeline(self, interrupt: int = 1) -> None:
         """Provide an entry point of class as overridable method."""
+        self._initialize_walk(interrupt)
 
     def __init__(self, enable_shown: bool) -> None:
         """Initialize super class and variables.
