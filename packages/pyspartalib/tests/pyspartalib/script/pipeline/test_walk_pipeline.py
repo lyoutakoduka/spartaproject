@@ -43,6 +43,9 @@ class InterruptTest(WalkPipeline):
     def _get_walk(self) -> PathGene:
         return walk_iterator(self._iterate_root, directory=False)
 
+    def launch_override(self) -> None:
+        self.walk_directory(self._get_walk, self._iteration)
+
     def __init__(self, iterate_root: Path) -> None:
         self.__initialize_super_class()
         self.__initialize_variables(iterate_root)
