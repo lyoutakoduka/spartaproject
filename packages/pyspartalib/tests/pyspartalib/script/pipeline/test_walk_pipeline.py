@@ -6,6 +6,8 @@ from pathlib import Path
 
 from pyspartalib.context.custom.callable_context import Func
 from pyspartalib.context.custom.type_context import Type
+from pyspartalib.context.extension.path_context import PathGene
+from pyspartalib.script.path.iterate_directory import walk_iterator
 from pyspartalib.script.pipeline.log_pipeline import LogPipeline
 from pyspartalib.script.pipeline.walk_pipeline import WalkPipeline
 from pyspartalib.script.stdout.format_indent import format_indent
@@ -37,6 +39,9 @@ class InterruptTest(WalkPipeline):
 
     def _iteration(self, _: Path) -> bool:
         return True
+
+    def _get_walk(self) -> PathGene:
+        return walk_iterator(self._iterate_root, directory=False)
 
     def __init__(self, iterate_root: Path) -> None:
         self.__initialize_super_class()
