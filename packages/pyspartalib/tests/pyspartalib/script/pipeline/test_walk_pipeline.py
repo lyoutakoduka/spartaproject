@@ -32,7 +32,7 @@ class LaunchTest(WalkPipeline):
         self.__initialize_super_class()
 
 
-class InterruptTest(WalkPipeline):
+class BreakTest(WalkPipeline):
     def __initialize_super_class(self) -> None:
         super().__init__(True)
 
