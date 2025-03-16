@@ -104,6 +104,12 @@ def _edit_pipeline_launch() -> None:
     pipeline.launch_pipeline()
 
 
+def _edit_pipeline_break(break_count: int, iterate_root: Path) -> None:
+    pipeline = BreakTest(iterate_root)
+    _restart_timer(pipeline)
+    pipeline.launch_pipeline(break_count=break_count)
+
+
 def _get_pipeline_launch() -> Func:
     def _wrapper() -> None:
         _edit_pipeline_launch()
