@@ -140,6 +140,10 @@ def _get_result_launch() -> str:
     return _decorate_function(_get_pipeline_launch())
 
 
+def _get_result_break(interrupt: int, iterate_root: Path) -> str:
+    return _decorate_function(_get_pipeline_break(interrupt, iterate_root))
+
+
 def _compare_walk(result: str, expected: str) -> None:
     _difference_error(result, format_indent(expected, stdout=True))
 
