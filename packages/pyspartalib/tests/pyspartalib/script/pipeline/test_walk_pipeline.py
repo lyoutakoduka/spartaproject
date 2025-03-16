@@ -135,7 +135,7 @@ class TestBreak(Shared):
 
     def _edit_pipeline_break(self, break_count: int, iterate_root: Path) -> None:
         pipeline = BreakTest(iterate_root)
-        _restart_timer(pipeline)
+        self.restart_timer(pipeline)
         pipeline.launch_pipeline(break_count=break_count)
 
     def _get_pipeline_break(self, interrupt: int, iterate_root: Path) -> Func:
@@ -148,7 +148,7 @@ class TestBreak(Shared):
         return result.replace(path.as_posix() + "/", "")
 
     def _get_result_break(self, interrupt: int, iterate_root: Path) -> str:
-        return _decorate_function(self._get_pipeline_break(interrupt, iterate_root))
+        return self.decorate_function(self._get_pipeline_break(interrupt, iterate_root))
 
     def _replace_result_break(self, interrupt: int, path: Path) -> str:
         return self._replace_root(self._get_result_break(interrupt, path), path)
@@ -169,7 +169,7 @@ class TestBreak(Shared):
                 break_pair,
                 strict=True,
             ):
-                _compare_walk(
+                self.compare_walk(
                     self._replace_result_break(break_count, temporary_root),
                     expected,
                 )
