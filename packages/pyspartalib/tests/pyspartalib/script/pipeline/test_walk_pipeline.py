@@ -140,29 +140,24 @@ class TestBreak(Shared):
         return [2, 3]
 
     def _edit_pipeline_break(self, break_count: int) -> None:
-        pipeline = BreakTest(iterate_root)
+        pipeline = BreakTest(self._temporary_root)
         self.restart_timer(pipeline)
         pipeline.launch_pipeline(break_count=break_count)
 
     def _get_pipeline_break(self, interrupt: int) -> Func:
         def _wrapper() -> None:
-            self._edit_pipeline_break(interrupt, iterate_root)
+            self._edit_pipeline_break(interrupt)
 
         return _wrapper
 
     def _replace_root(self, result: str) -> str:
-        return result.replace(path.as_posix() + "/", "")
+        return result.replace(self._temporary_root.as_posix() + "/", "")
 
     def _get_result_break(self, interrupt: int) -> str:
-        return self.decorate_function(
-            self._get_pipeline_break(interrupt, iterate_root),
-        )
+        return self.decorate_function(self._get_pipeline_break(interrupt))
 
     def _replace_result_break(self, interrupt: int) -> str:
-        return self._replace_root(
-            self._get_result_break(interrupt, path),
-            path,
-        )
+        return self._replace_root(self._get_result_break(interrupt))
 
     def _inside_temporary_directory(self, function: PathFunc) -> None:
         with TemporaryDirectory() as temporary_path:
@@ -174,7 +169,7 @@ class TestBreak(Shared):
         break_pair: Ints = self._get_break_pair()
 
         def individual_test(temporary_root: Path) -> None:
-            create_temporary_tree(temporary_root, tree_deep=1)
+            create_temporary_tree(self._temporary_root, tree_deep=1)
 
             for expected, break_count in zip(
                 expected_pair,
@@ -182,7 +177,7 @@ class TestBreak(Shared):
                 strict=True,
             ):
                 self.compare_walk(
-                    self._replace_result_break(break_count, temporary_root),
+                    self._replace_result_break(break_count),
                     expected,
                 )
 
