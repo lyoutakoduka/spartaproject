@@ -21,6 +21,11 @@ from pyspartalib.script.stdout.off_stdout import OffStdout
 from pyspartalib.script.stdout.send_stdout import send_stdout
 
 
+def _difference_error(result: Type, expected: Type) -> None:
+    if result != expected:
+        raise ValueError
+
+
 class LaunchTest(WalkPipeline):
     """Class for test to iterate contents in a directory."""
 
@@ -55,11 +60,6 @@ class BreakTest(WalkPipeline):
     def __init__(self, iterate_root: Path) -> None:
         self.__initialize_super_class()
         self.__initialize_variables(iterate_root)
-
-
-def _difference_error(result: Type, expected: Type) -> None:
-    if result != expected:
-        raise ValueError
 
 
 class Shared:
