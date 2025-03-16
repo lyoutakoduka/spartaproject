@@ -62,84 +62,6 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
-def _get_expected_break() -> str:
-    return """
-        0.0s: begin
-        0.0s: find [0] file.json
-        0.0s: find [1] file.ini
-        0.0s: break
-        0.0s: end
-    """
-
-
-def _get_expected_through() -> str:
-    return """
-        0.0s: begin
-        0.0s: find [0] file.json
-        0.0s: find [1] file.ini
-        0.0s: find [2] file.txt
-        0.0s: end
-    """
-
-
-def _get_expected_pair() -> Strs:
-    return [_get_expected_break(), _get_expected_through()]
-
-
-def _get_break_pair() -> Ints:
-    return [2, 3]
-
-
-def _edit_pipeline_break(break_count: int, iterate_root: Path) -> None:
-    pipeline = BreakTest(iterate_root)
-    _restart_timer(pipeline)
-    pipeline.launch_pipeline(break_count=break_count)
-
-
-def _get_pipeline_break(interrupt: int, iterate_root: Path) -> Func:
-    def _wrapper() -> None:
-        _edit_pipeline_break(interrupt, iterate_root)
-
-    return _wrapper
-
-
-def _get_result_break(interrupt: int, iterate_root: Path) -> str:
-    return _decorate_function(_get_pipeline_break(interrupt, iterate_root))
-
-
-def _replace_root(result: str, path: Path) -> str:
-    return result.replace(path.as_posix() + "/", "")
-
-
-def _replace_result_break(interrupt: int, path: Path) -> str:
-    return _replace_root(_get_result_break(interrupt, path), path)
-
-
-def _inside_temporary_directory(function: PathFunc) -> None:
-    with TemporaryDirectory() as temporary_path:
-        function(Path(temporary_path))
-
-
-def test_break() -> None:
-    expected_pair: Strs = _get_expected_pair()
-    break_pair: Ints = _get_break_pair()
-
-    def individual_test(temporary_root: Path) -> None:
-        create_temporary_tree(temporary_root, tree_deep=1)
-
-        for expected, break_count in zip(
-            expected_pair,
-            break_pair,
-            strict=True,
-        ):
-            _compare_walk(
-                _replace_result_break(break_count, temporary_root),
-                expected,
-            )
-
-    _inside_temporary_directory(individual_test)
-
-
 class Shared:
     def restart_timer(self, pipeline: LogPipeline) -> None:
         pipeline.restart(override=True)
@@ -184,3 +106,81 @@ class TestLaunch(Shared):
     def test_launch(self) -> None:
         """Test to execute a pipeline module from sub module."""
         self.compare_walk(self._get_result_launch(), self._get_expected_launch())
+
+
+def _get_expected_break() -> str:
+    return """
+        0.0s: begin
+        0.0s: find [0] file.json
+        0.0s: find [1] file.ini
+        0.0s: break
+        0.0s: end
+    """
+
+
+def _get_expected_through() -> str:
+    return """
+        0.0s: begin
+        0.0s: find [0] file.json
+        0.0s: find [1] file.ini
+        0.0s: find [2] file.txt
+        0.0s: end
+    """
+
+
+def _get_expected_pair() -> Strs:
+    return [_get_expected_break(), _get_expected_through()]
+
+
+def _get_break_pair() -> Ints:
+    return [2, 3]
+
+
+def _edit_pipeline_break(break_count: int, iterate_root: Path) -> None:
+    pipeline = BreakTest(iterate_root)
+    _restart_timer(pipeline)
+    pipeline.launch_pipeline(break_count=break_count)
+
+
+def _get_pipeline_break(interrupt: int, iterate_root: Path) -> Func:
+    def _wrapper() -> None:
+        _edit_pipeline_break(interrupt, iterate_root)
+
+    return _wrapper
+
+
+def _replace_root(result: str, path: Path) -> str:
+    return result.replace(path.as_posix() + "/", "")
+
+
+def _get_result_break(interrupt: int, iterate_root: Path) -> str:
+    return _decorate_function(_get_pipeline_break(interrupt, iterate_root))
+
+
+def _replace_result_break(interrupt: int, path: Path) -> str:
+    return _replace_root(_get_result_break(interrupt, path), path)
+
+
+def _inside_temporary_directory(function: PathFunc) -> None:
+    with TemporaryDirectory() as temporary_path:
+        function(Path(temporary_path))
+
+
+def test_break() -> None:
+    expected_pair: Strs = _get_expected_pair()
+    break_pair: Ints = _get_break_pair()
+
+    def individual_test(temporary_root: Path) -> None:
+        create_temporary_tree(temporary_root, tree_deep=1)
+
+        for expected, break_count in zip(
+            expected_pair,
+            break_pair,
+            strict=True,
+        ):
+            _compare_walk(
+                _replace_result_break(break_count, temporary_root),
+                expected,
+            )
+
+    _inside_temporary_directory(individual_test)
