@@ -98,10 +98,6 @@ def _get_break_pair() -> Ints:
     return [2, 3]
 
 
-def _restart_timer(pipeline: LogPipeline) -> None:
-    pipeline.restart(override=True)
-
-
 def _edit_pipeline_launch() -> None:
     pipeline = LaunchTest()
     _restart_timer(pipeline)
@@ -128,28 +124,12 @@ def _get_pipeline_break(interrupt: int, iterate_root: Path) -> Func:
     return _wrapper
 
 
-def _decorate_function(function: Func) -> str:
-    off_stdout = OffStdout()
-
-    @off_stdout.decorator
-    def _messages() -> None:
-        function()
-
-    _messages()
-
-    return off_stdout.show()
-
-
 def _get_result_launch() -> str:
     return _decorate_function(_get_pipeline_launch())
 
 
 def _get_result_break(interrupt: int, iterate_root: Path) -> str:
     return _decorate_function(_get_pipeline_break(interrupt, iterate_root))
-
-
-def _compare_walk(result: str, expected: str) -> None:
-    _difference_error(result, format_indent(expected, stdout=True))
 
 
 def _replace_root(result: str, path: Path) -> str:
@@ -188,3 +168,23 @@ def test_break() -> None:
             )
 
     _inside_temporary_directory(individual_test)
+
+
+def _restart_timer(pipeline: LogPipeline) -> None:
+    pipeline.restart(override=True)
+
+
+def _decorate_function(function: Func) -> str:
+    off_stdout = OffStdout()
+
+    @off_stdout.decorator
+    def _messages() -> None:
+        function()
+
+    _messages()
+
+    return off_stdout.show()
+
+
+def _compare_walk(result: str, expected: str) -> None:
+    _difference_error(result, format_indent(expected, stdout=True))
