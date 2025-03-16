@@ -149,6 +149,10 @@ def _compare_walk(result: str, expected: str) -> None:
     _difference_error(result, format_indent(expected, stdout=True))
 
 
+def _replace_root(result: str, path: Path) -> str:
+    return result.replace(path.as_posix() + "/", "")
+
+
 def _inside_temporary_directory(function: PathFunc) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
