@@ -170,21 +170,20 @@ def test_break() -> None:
     _inside_temporary_directory(individual_test)
 
 
-def _restart_timer(pipeline: LogPipeline) -> None:
-    pipeline.restart(override=True)
+class Shared:
+    def _restart_timer(pipeline: LogPipeline) -> None:
+        pipeline.restart(override=True)
 
+    def _decorate_function(function: Func) -> str:
+        off_stdout = OffStdout()
 
-def _decorate_function(function: Func) -> str:
-    off_stdout = OffStdout()
+        @off_stdout.decorator
+        def _messages() -> None:
+            function()
 
-    @off_stdout.decorator
-    def _messages() -> None:
-        function()
+        _messages()
 
-    _messages()
+        return off_stdout.show()
 
-    return off_stdout.show()
-
-
-def _compare_walk(result: str, expected: str) -> None:
-    _difference_error(result, format_indent(expected, stdout=True))
+    def _compare_walk(result: str, expected: str) -> None:
+        _difference_error(result, format_indent(expected, stdout=True))
