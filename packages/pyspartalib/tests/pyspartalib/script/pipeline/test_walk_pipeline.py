@@ -105,7 +105,10 @@ class TestLaunch(Shared):
 
     def test_launch(self) -> None:
         """Test to execute a pipeline module from sub module."""
-        self.compare_walk(self._get_result_launch(), self._get_expected_launch())
+        self.compare_walk(
+            self._get_result_launch(),
+            self._get_expected_launch(),
+        )
 
 
 class TestBreak(Shared):
@@ -133,7 +136,11 @@ class TestBreak(Shared):
     def _get_break_pair(self) -> Ints:
         return [2, 3]
 
-    def _edit_pipeline_break(self, break_count: int, iterate_root: Path) -> None:
+    def _edit_pipeline_break(
+        self,
+        break_count: int,
+        iterate_root: Path,
+    ) -> None:
         pipeline = BreakTest(iterate_root)
         self.restart_timer(pipeline)
         pipeline.launch_pipeline(break_count=break_count)
@@ -148,10 +155,15 @@ class TestBreak(Shared):
         return result.replace(path.as_posix() + "/", "")
 
     def _get_result_break(self, interrupt: int, iterate_root: Path) -> str:
-        return self.decorate_function(self._get_pipeline_break(interrupt, iterate_root))
+        return self.decorate_function(
+            self._get_pipeline_break(interrupt, iterate_root),
+        )
 
     def _replace_result_break(self, interrupt: int, path: Path) -> str:
-        return self._replace_root(self._get_result_break(interrupt, path), path)
+        return self._replace_root(
+            self._get_result_break(interrupt, path),
+            path,
+        )
 
     def _inside_temporary_directory(self, function: PathFunc) -> None:
         with TemporaryDirectory() as temporary_path:
