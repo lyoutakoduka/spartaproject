@@ -152,17 +152,14 @@ class TestBreak(Shared):
         self.restart_timer(pipeline)
         pipeline.launch_pipeline(break_count=self._break_count)
 
-    def _get_pipeline_break(self) -> Func:
-        def _wrapper() -> None:
-            self._edit_pipeline_break()
-
-        return _wrapper
+    def _get_pipeline_break(self) -> None:
+        self._edit_pipeline_break()
 
     def _replace_root(self, result: str) -> str:
         return result.replace(self._temporary_root.as_posix() + "/", "")
 
     def _get_result_break(self) -> str:
-        return self.decorate_function(self._get_pipeline_break())
+        return self.decorate_function(self._get_pipeline_break)
 
     def _replace_result_break(self) -> str:
         return self._replace_root(self._get_result_break())
