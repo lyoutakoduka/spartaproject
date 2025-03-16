@@ -6,6 +6,7 @@ from pathlib import Path
 
 from pyspartalib.context.custom.callable_context import Func
 from pyspartalib.context.custom.type_context import Type
+from pyspartalib.context.default.integer_context import Ints
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.context.extension.path_context import PathGene
 from pyspartalib.script.path.iterate_directory import walk_iterator
@@ -87,6 +88,10 @@ def _get_expected_through() -> str:
 
 def _get_expected_pair() -> Strs:
     return [_get_expected_interrupt(), _get_expected_through()]
+
+
+def _get_interrupt_pair() -> Ints:
+    return [2, 3]
 
 
 def _restart_timer(pipeline: LogPipeline) -> None:
