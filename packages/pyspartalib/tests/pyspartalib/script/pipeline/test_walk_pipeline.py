@@ -153,6 +153,10 @@ def _replace_root(result: str, path: Path) -> str:
     return result.replace(path.as_posix() + "/", "")
 
 
+def _replace_result_break(interrupt: int, path: Path) -> str:
+    return _replace_root(_get_result_break(interrupt, path), path)
+
+
 def _inside_temporary_directory(function: PathFunc) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
