@@ -171,10 +171,10 @@ def test_break() -> None:
 
 
 class Shared:
-    def _restart_timer(pipeline: LogPipeline) -> None:
+    def _restart_timer(self, pipeline: LogPipeline) -> None:
         pipeline.restart(override=True)
 
-    def _decorate_function(function: Func) -> str:
+    def _decorate_function(self, function: Func) -> str:
         off_stdout = OffStdout()
 
         @off_stdout.decorator
@@ -185,5 +185,5 @@ class Shared:
 
         return off_stdout.show()
 
-    def _compare_walk(result: str, expected: str) -> None:
+    def _compare_walk(self, result: str, expected: str) -> None:
         _difference_error(result, format_indent(expected, stdout=True))
