@@ -62,14 +62,6 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
-def _get_expected_launch() -> str:
-    return """
-        0.0s: begin
-        launch
-        0.0s: end
-    """
-
-
 def _get_expected_break() -> str:
     return """
         0.0s: begin
@@ -98,23 +90,10 @@ def _get_break_pair() -> Ints:
     return [2, 3]
 
 
-def _edit_pipeline_launch() -> None:
-    pipeline = LaunchTest()
-    _restart_timer(pipeline)
-    pipeline.launch_pipeline()
-
-
 def _edit_pipeline_break(break_count: int, iterate_root: Path) -> None:
     pipeline = BreakTest(iterate_root)
     _restart_timer(pipeline)
     pipeline.launch_pipeline(break_count=break_count)
-
-
-def _get_pipeline_launch() -> Func:
-    def _wrapper() -> None:
-        _edit_pipeline_launch()
-
-    return _wrapper
 
 
 def _get_pipeline_break(interrupt: int, iterate_root: Path) -> Func:
@@ -122,10 +101,6 @@ def _get_pipeline_break(interrupt: int, iterate_root: Path) -> Func:
         _edit_pipeline_break(interrupt, iterate_root)
 
     return _wrapper
-
-
-def _get_result_launch() -> str:
-    return _decorate_function(_get_pipeline_launch())
 
 
 def _get_result_break(interrupt: int, iterate_root: Path) -> str:
@@ -143,11 +118,6 @@ def _replace_result_break(interrupt: int, path: Path) -> str:
 def _inside_temporary_directory(function: PathFunc) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
-
-
-def test_launch() -> None:
-    """Test to execute a pipeline module from sub module."""
-    _compare_walk(_get_result_launch(), _get_expected_launch())
 
 
 def test_break() -> None:
@@ -187,3 +157,33 @@ class Shared:
 
     def compare_walk(self, result: str, expected: str) -> None:
         _difference_error(result, format_indent(expected, stdout=True))
+
+
+def _get_expected_launch() -> str:
+    return """
+        0.0s: begin
+        launch
+        0.0s: end
+    """
+
+
+def _edit_pipeline_launch() -> None:
+    pipeline = LaunchTest()
+    _restart_timer(pipeline)
+    pipeline.launch_pipeline()
+
+
+def _get_pipeline_launch() -> Func:
+    def _wrapper() -> None:
+        _edit_pipeline_launch()
+
+    return _wrapper
+
+
+def _get_result_launch() -> str:
+    return _decorate_function(_get_pipeline_launch())
+
+
+def test_launch() -> None:
+    """Test to execute a pipeline module from sub module."""
+    _compare_walk(_get_result_launch(), _get_expected_launch())
