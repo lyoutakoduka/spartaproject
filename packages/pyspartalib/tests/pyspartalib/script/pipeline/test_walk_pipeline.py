@@ -6,6 +6,7 @@ from pathlib import Path
 
 from pyspartalib.context.custom.callable_context import Func
 from pyspartalib.context.custom.type_context import Type
+from pyspartalib.context.default.string_context import Strs
 from pyspartalib.context.extension.path_context import PathGene
 from pyspartalib.script.path.iterate_directory import walk_iterator
 from pyspartalib.script.pipeline.log_pipeline import LogPipeline
@@ -82,6 +83,10 @@ def _get_expected_through() -> str:
         0.0s: find [2] file.txt
         0.0s: end
     """
+
+
+def _get_expected_pair() -> Strs:
+    return [_get_expected_interrupt(), _get_expected_through()]
 
 
 def _restart_timer(pipeline: LogPipeline) -> None:
