@@ -17,13 +17,13 @@ class WalkPipeline(LogPipeline):
         super().__init__(enable_shown=enable_shown)
 
     def _initialize_walk(self, interrupt: int) -> None:
-        self._interrupt = interrupt
+        self._break_count = interrupt
 
     def _force_logs(self, messages: Strs) -> None:
         self.show_log(messages, force=True)
 
     def _break_loop(self, index: int) -> bool:
-        if index < self._interrupt:
+        if index < self._break_count:
             return False
 
         self._force_logs(["break"])
