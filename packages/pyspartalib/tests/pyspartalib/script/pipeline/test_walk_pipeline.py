@@ -26,6 +26,11 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
+def _inside_temporary_directory(function: PathFunc) -> None:
+    with TemporaryDirectory() as temporary_path:
+        function(Path(temporary_path))
+
+
 class LaunchTest(WalkPipeline):
     """Class for test to iterate contents in a directory."""
 
@@ -159,10 +164,6 @@ class TestBreak(Shared):
     def _replace_result_break(self, interrupt: int) -> str:
         return self._replace_root(self._get_result_break(interrupt))
 
-    def _inside_temporary_directory(self, function: PathFunc) -> None:
-        with TemporaryDirectory() as temporary_path:
-            function(Path(temporary_path))
-
     def test_break(self) -> None:
         expected_pair: Strs = self._get_expected_pair()
         break_pair: Ints = self._get_break_pair()
@@ -181,4 +182,4 @@ class TestBreak(Shared):
                     expected,
                 )
 
-        self._inside_temporary_directory(individual_test)
+        _inside_temporary_directory(individual_test)
