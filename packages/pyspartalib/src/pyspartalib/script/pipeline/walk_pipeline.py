@@ -35,16 +35,16 @@ class WalkPipeline(LogPipeline):
         generator: PathGeneFunc,
         iteration: PathBoolFunc,
     ) -> None:
-        index: int = 0
+        count: int = 0
 
         for path in generator():
-            if self._break_loop(index):
+            if self._break_loop(count):
                 break
 
-            self._force_logs(["find", f"[{index}]", str(path)])
+            self._force_logs(["find", f"[{count}]", str(path)])
 
             if iteration(path):
-                index += 1
+                count += 1
 
     def launch_override(self) -> None:
         pass
