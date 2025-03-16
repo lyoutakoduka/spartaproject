@@ -120,6 +120,9 @@ class TestBreak(Shared):
     def _set_temporary_root(self, temporary_root: Path) -> None:
         self._temporary_root: Path = temporary_root
 
+    def _set_break_count(self, break_count: int) -> None:
+        self._break_count: int = break_count
+
     def _get_expected_break(self) -> str:
         return """
             0.0s: begin
@@ -173,6 +176,7 @@ class TestBreak(Shared):
             self._get_break_pair(),
             strict=True,
         ):
+            self._set_break_count(break_count)
             self.compare_walk(
                 self._replace_result_break(break_count),
                 expected,
