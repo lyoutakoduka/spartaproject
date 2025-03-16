@@ -99,14 +99,11 @@ class TestLaunch(Shared):
         self.restart_timer(pipeline)
         pipeline.launch_pipeline()
 
-    def _get_pipeline_launch(self) -> Func:
-        def _wrapper() -> None:
-            self._edit_pipeline_launch()
-
-        return _wrapper
+    def _get_pipeline_launch(self) -> None:
+        self._edit_pipeline_launch()
 
     def _get_result_launch(self) -> str:
-        return self.decorate_function(self._get_pipeline_launch())
+        return self.decorate_function(self._get_pipeline_launch)
 
     def test_launch(self) -> None:
         """Test to execute a pipeline module from sub module."""
