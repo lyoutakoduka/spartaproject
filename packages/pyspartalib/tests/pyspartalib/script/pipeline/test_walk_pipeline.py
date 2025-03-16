@@ -11,6 +11,9 @@ from pyspartalib.context.default.integer_context import Ints
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.context.extension.path_context import PathFunc, PathGene
 from pyspartalib.script.path.iterate_directory import walk_iterator
+from pyspartalib.script.path.temporary.create_temporary_tree import (
+    create_temporary_tree,
+)
 from pyspartalib.script.pipeline.log_pipeline import LogPipeline
 from pyspartalib.script.pipeline.walk_pipeline import WalkPipeline
 from pyspartalib.script.stdout.format_indent import format_indent
@@ -165,3 +168,23 @@ def _inside_temporary_directory(function: PathFunc) -> None:
 def test_launch() -> None:
     """Test to execute a pipeline module from sub module."""
     _compare_walk(_get_result_launch(), _get_expected_launch())
+
+
+def test_break() -> None:
+    expected_pair: Strs = _get_expected_pair()
+    break_pair: Ints = _get_break_pair()
+
+    def individual_test(temporary_root: Path) -> None:
+        create_temporary_tree(temporary_root, tree_deep=1)
+
+        for expected, break_count in zip(
+            expected_pair,
+            break_pair,
+            strict=True,
+        ):
+            _compare_walk(
+                _replace_result_break(break_count, temporary_root),
+                expected,
+            )
+
+    _inside_temporary_directory(individual_test)
