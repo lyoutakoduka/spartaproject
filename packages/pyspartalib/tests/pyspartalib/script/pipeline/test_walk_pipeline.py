@@ -159,31 +159,28 @@ class Shared:
         _difference_error(result, format_indent(expected, stdout=True))
 
 
-def _get_expected_launch() -> str:
-    return """
-        0.0s: begin
-        launch
-        0.0s: end
-    """
+class TestLaunch(Shared):
+    def _get_expected_launch() -> str:
+        return """
+            0.0s: begin
+            launch
+            0.0s: end
+        """
 
+    def _edit_pipeline_launch() -> None:
+        pipeline = LaunchTest()
+        _restart_timer(pipeline)
+        pipeline.launch_pipeline()
 
-def _edit_pipeline_launch() -> None:
-    pipeline = LaunchTest()
-    _restart_timer(pipeline)
-    pipeline.launch_pipeline()
+    def _get_pipeline_launch() -> Func:
+        def _wrapper() -> None:
+            _edit_pipeline_launch()
 
+        return _wrapper
 
-def _get_pipeline_launch() -> Func:
-    def _wrapper() -> None:
-        _edit_pipeline_launch()
+    def _get_result_launch() -> str:
+        return _decorate_function(_get_pipeline_launch())
 
-    return _wrapper
-
-
-def _get_result_launch() -> str:
-    return _decorate_function(_get_pipeline_launch())
-
-
-def test_launch() -> None:
-    """Test to execute a pipeline module from sub module."""
-    _compare_walk(_get_result_launch(), _get_expected_launch())
+    def test_launch() -> None:
+        """Test to execute a pipeline module from sub module."""
+        _compare_walk(_get_result_launch(), _get_expected_launch())
