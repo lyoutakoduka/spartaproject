@@ -117,6 +117,13 @@ def _get_pipeline_launch() -> Func:
     return _wrapper
 
 
+def _get_pipeline_break(interrupt: int, iterate_root: Path) -> Func:
+    def _wrapper() -> None:
+        _edit_pipeline_break(interrupt, iterate_root)
+
+    return _wrapper
+
+
 def _decorate_function(function: Func) -> str:
     off_stdout = OffStdout()
 
