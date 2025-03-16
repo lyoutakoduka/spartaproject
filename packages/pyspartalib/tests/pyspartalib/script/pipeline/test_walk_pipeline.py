@@ -164,22 +164,19 @@ class TestBreak(Shared):
     def _replace_result_break(self, interrupt: int) -> str:
         return self._replace_root(self._get_result_break(interrupt))
 
+    def _individual_test(self, temporary_root: Path) -> None:
+        self._set_temporary_root(temporary_root)
+        create_temporary_tree(self._temporary_root, tree_deep=1)
+
+        for expected, break_count in zip(
+            self._get_expected_pair(),
+            self._get_break_pair(),
+            strict=True,
+        ):
+            self.compare_walk(
+                self._replace_result_break(break_count),
+                expected,
+            )
+
     def test_break(self) -> None:
-        expected_pair: Strs = self._get_expected_pair()
-        break_pair: Ints = self._get_break_pair()
-
-        def individual_test(temporary_root: Path) -> None:
-            self._set_temporary_root(temporary_root)
-            create_temporary_tree(self._temporary_root, tree_deep=1)
-
-            for expected, break_count in zip(
-                expected_pair,
-                break_pair,
-                strict=True,
-            ):
-                self.compare_walk(
-                    self._replace_result_break(break_count),
-                    expected,
-                )
-
-        _inside_temporary_directory(individual_test)
+        _inside_temporary_directory(self._individual_test)
