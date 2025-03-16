@@ -147,25 +147,25 @@ class TestBreak(Shared):
     def _get_break_pair(self) -> Ints:
         return [2, 3]
 
-    def _edit_pipeline_break(self, break_count: int) -> None:
+    def _edit_pipeline_break(self) -> None:
         pipeline = BreakTest(self._temporary_root)
         self.restart_timer(pipeline)
-        pipeline.launch_pipeline(break_count=break_count)
+        pipeline.launch_pipeline(break_count=self._break_count)
 
-    def _get_pipeline_break(self, interrupt: int) -> Func:
+    def _get_pipeline_break(self) -> Func:
         def _wrapper() -> None:
-            self._edit_pipeline_break(interrupt)
+            self._edit_pipeline_break()
 
         return _wrapper
 
     def _replace_root(self, result: str) -> str:
         return result.replace(self._temporary_root.as_posix() + "/", "")
 
-    def _get_result_break(self, interrupt: int) -> str:
-        return self.decorate_function(self._get_pipeline_break(interrupt))
+    def _get_result_break(self) -> str:
+        return self.decorate_function(self._get_pipeline_break())
 
-    def _replace_result_break(self, interrupt: int) -> str:
-        return self._replace_root(self._get_result_break(interrupt))
+    def _replace_result_break(self) -> str:
+        return self._replace_root(self._get_result_break())
 
     def _individual_test(self, temporary_root: Path) -> None:
         self._set_temporary_root(temporary_root)
@@ -177,10 +177,7 @@ class TestBreak(Shared):
             strict=True,
         ):
             self._set_break_count(break_count)
-            self.compare_walk(
-                self._replace_result_break(break_count),
-                expected,
-            )
+            self.compare_walk(self._replace_result_break(), expected)
 
     def test_break(self) -> None:
         _inside_temporary_directory(self._individual_test)
