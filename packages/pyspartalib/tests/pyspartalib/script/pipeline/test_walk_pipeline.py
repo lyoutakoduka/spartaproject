@@ -3,12 +3,13 @@
 """Test module to iterate contents in a directory like walk module."""
 
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
 from pyspartalib.context.custom.callable_context import Func
 from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.integer_context import Ints
 from pyspartalib.context.default.string_context import Strs
-from pyspartalib.context.extension.path_context import PathGene
+from pyspartalib.context.extension.path_context import PathFunc, PathGene
 from pyspartalib.script.path.iterate_directory import walk_iterator
 from pyspartalib.script.pipeline.log_pipeline import LogPipeline
 from pyspartalib.script.pipeline.walk_pipeline import WalkPipeline
@@ -146,6 +147,11 @@ def _get_result_break(interrupt: int, iterate_root: Path) -> str:
 
 def _compare_walk(result: str, expected: str) -> None:
     _difference_error(result, format_indent(expected, stdout=True))
+
+
+def _inside_temporary_directory(function: PathFunc) -> None:
+    with TemporaryDirectory() as temporary_path:
+        function(Path(temporary_path))
 
 
 def test_launch() -> None:
