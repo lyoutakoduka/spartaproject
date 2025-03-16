@@ -90,7 +90,7 @@ def _get_expected_pair() -> Strs:
     return [_get_expected_break(), _get_expected_through()]
 
 
-def _get_interrupt_pair() -> Ints:
+def _get_break_pair() -> Ints:
     return [2, 3]
 
 
