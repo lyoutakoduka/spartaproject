@@ -66,7 +66,7 @@ def _get_expected_launch() -> str:
     """
 
 
-def _get_expected_interrupt() -> str:
+def _get_expected_break() -> str:
     return """
         0.0s: begin
         0.0s: find [0] file.json
@@ -87,7 +87,7 @@ def _get_expected_through() -> str:
 
 
 def _get_expected_pair() -> Strs:
-    return [_get_expected_interrupt(), _get_expected_through()]
+    return [_get_expected_break(), _get_expected_through()]
 
 
 def _get_interrupt_pair() -> Ints:
