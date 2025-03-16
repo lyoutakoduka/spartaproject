@@ -16,8 +16,8 @@ class WalkPipeline(LogPipeline):
     def __initialize_super_class(self, enable_shown: bool) -> None:
         super().__init__(enable_shown=enable_shown)
 
-    def _initialize_walk(self, interrupt: int) -> None:
-        self._break_count = interrupt
+    def _initialize_walk(self, break_count: int) -> None:
+        self._break_count = break_count
 
     def _force_logs(self, messages: Strs) -> None:
         self.show_log(messages, force=True)
@@ -49,9 +49,9 @@ class WalkPipeline(LogPipeline):
     def launch_override(self) -> None:
         pass
 
-    def launch_pipeline(self, interrupt: int = 1) -> None:
+    def launch_pipeline(self, break_count: int = 1) -> None:
         """Provide an entry point of class as overridable method."""
-        self._initialize_walk(interrupt)
+        self._initialize_walk(break_count)
         self.launch_override()
 
     def __init__(self, enable_shown: bool) -> None:
