@@ -161,7 +161,6 @@ class TestBreak(Shared):
 
     def _inside_temporary_directory(self, function: PathFunc) -> None:
         with TemporaryDirectory() as temporary_path:
-            self._set_temporary_root(Path(temporary_path))
             function(Path(temporary_path))
 
     def test_break(self) -> None:
@@ -169,6 +168,7 @@ class TestBreak(Shared):
         break_pair: Ints = self._get_break_pair()
 
         def individual_test(temporary_root: Path) -> None:
+            self._set_temporary_root(temporary_root)
             create_temporary_tree(self._temporary_root, tree_deep=1)
 
             for expected, break_count in zip(
