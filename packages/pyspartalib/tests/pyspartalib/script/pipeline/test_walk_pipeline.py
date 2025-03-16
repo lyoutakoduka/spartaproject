@@ -169,7 +169,7 @@ class TestLaunch(Shared):
 
     def _edit_pipeline_launch(self) -> None:
         pipeline = LaunchTest()
-        _restart_timer(pipeline)
+        self.restart_timer(pipeline)
         pipeline.launch_pipeline()
 
     def _get_pipeline_launch(self) -> Func:
@@ -179,8 +179,8 @@ class TestLaunch(Shared):
         return _wrapper
 
     def _get_result_launch(self) -> str:
-        return _decorate_function(self._get_pipeline_launch())
+        return self.decorate_function(self._get_pipeline_launch())
 
     def test_launch(self) -> None:
         """Test to execute a pipeline module from sub module."""
-        _compare_walk(self._get_result_launch(), self._get_expected_launch())
+        self.compare_walk(self._get_result_launch(), self._get_expected_launch())
