@@ -112,6 +112,9 @@ class TestLaunch(Shared):
 
 
 class TestBreak(Shared):
+    def _set_temporary_root(self, temporary_root: Path) -> None:
+        self._temporary_root: Path = temporary_root
+
     def _get_expected_break(self) -> str:
         return """
             0.0s: begin
@@ -167,6 +170,7 @@ class TestBreak(Shared):
 
     def _inside_temporary_directory(self, function: PathFunc) -> None:
         with TemporaryDirectory() as temporary_path:
+            self._set_temporary_root(Path(temporary_path))
             function(Path(temporary_path))
 
     def test_break(self) -> None:
