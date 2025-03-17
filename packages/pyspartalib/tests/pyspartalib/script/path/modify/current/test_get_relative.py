@@ -94,19 +94,19 @@ class TestUnmatch(_Share):
 class TestSingle(_Share):
     def test_single(self) -> None:
         """Test to convert absolute path by using specific root path."""
-        expected: Path = self.get_absolute_current()
+        current: Path = self.get_absolute_current()
 
-        _difference_error(get_absolute(get_relative(expected)), expected)
+        _difference_error(get_absolute(get_relative(current)), current)
 
 
 class TestRoot(_Share):
     def test_root(self) -> None:
         """Test to convert absolute path with specific root."""
-        expected_base: Path = self.get_absolute_current()
+        current: Path = self.get_absolute_current()
 
         _difference_error(
-            get_relative(expected_base, root_path=expected_base.parent),
-            Path(expected_base.name),
+            get_relative(current, root_path=current.parent),
+            Path(current.name),
         )
 
 
