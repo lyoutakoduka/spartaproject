@@ -134,16 +134,18 @@ class TestPair(_Share):
         for key in keys:
             _difference_error(result[key], expected[key])
 
-    def test_pair(self) -> None:
-        """Test to convert dictionary of absolute paths to relative."""
-        keys: Strs = ["R", "G", "B"]
-        expected: PathPair = self._to_pair(
-            keys,
+    def _get_expected_pair(self) -> PathPair:
+        return self._to_pair(
+            ["R", "G", "B"],
             self.get_parents(self.get_absolute_current()),
         )
 
+    def test_pair(self) -> None:
+        """Test to convert dictionary of absolute paths to relative."""
+        expected: PathPair = self._get_expected_pair()
+
         self._confirm_sorted_paths(
-            keys,
+            ["R", "G", "B"],
             get_absolute_pair(get_relative_pair(expected)),
             expected,
         )
