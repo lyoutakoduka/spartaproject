@@ -86,10 +86,12 @@ def test_unmatch() -> None:
         get_relative(_get_error())
 
 
-def test_single() -> None:
-    """Test to convert absolute path by using specific root path."""
-    expected: Path = _get_absolute_current()
-    _difference_error(get_absolute(get_relative(expected)), expected)
+class TestSingle(_Share):
+    def test_single(self) -> None:
+        """Test to convert absolute path by using specific root path."""
+        expected: Path = self.get_absolute_current()
+
+        _difference_error(get_absolute(get_relative(expected)), expected)
 
 
 class TestRoot(_Share):
