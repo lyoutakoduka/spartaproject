@@ -65,7 +65,6 @@ class WalkPipeline(LogPipeline):
 
         It's only used for method overriding.
         """
-        pass
 
     def launch_pipeline(self, break_count: int = 1) -> None:
         """Provide an entry point of class as overridable method.
