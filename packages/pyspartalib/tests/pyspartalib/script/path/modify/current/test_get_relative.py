@@ -10,6 +10,7 @@ from pyspartalib.context.default.bool_context import Bools
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.context.extension.path_context import PathPair, Paths
 from pyspartalib.script.bool.compare_value import bool_compare_array
+from pyspartalib.script.frame.stack_frame import current_frame
 from pyspartalib.script.path.modify.current.get_absolute import (
     get_absolute,
     get_absolute_array,
@@ -40,6 +41,10 @@ def _get_error() -> Path:
 
 def _get_current_file() -> Path:
     return Path(__file__)
+
+
+def _get_absolute_current() -> Path:
+    return get_absolute(current_frame()["file"])
 
 
 def _get_expected() -> Bools:
