@@ -51,19 +51,6 @@ def _get_paths(current: Path) -> Paths:
     return [current, _get_error()]
 
 
-def _to_pair(path_types: Strs, paths: Paths) -> PathPair:
-    return dict(zip(path_types, paths, strict=True))
-
-
-def _confirm_sorted_paths(
-    keys: Strs,
-    expected: PathPair,
-    result: PathPair,
-) -> None:
-    for key in keys:
-        _difference_error(result[key], expected[key])
-
-
 def _get_parents(path: Path) -> Paths:
     return [path.parents[i] for i in range(3)]
 
@@ -126,6 +113,19 @@ def test_array() -> None:
         get_absolute_array(get_relative_array(expected)),
         expected,
     )
+
+
+def _to_pair(path_types: Strs, paths: Paths) -> PathPair:
+    return dict(zip(path_types, paths, strict=True))
+
+
+def _confirm_sorted_paths(
+    keys: Strs,
+    expected: PathPair,
+    result: PathPair,
+) -> None:
+    for key in keys:
+        _difference_error(result[key], expected[key])
 
 
 def test_pair() -> None:
