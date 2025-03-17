@@ -35,6 +35,20 @@ class WalkPipeline(LogPipeline):
         generator: PathGeneFunc,
         iteration: PathBoolFunc,
     ) -> None:
+        """Iterate through a directory.
+
+        You can break iteration after a specific count.
+
+        Args:
+            generator (PathGeneFunc):
+                Iterate through a directory using a user-defined path filter.
+
+            iteration (PathBoolFunc):
+                The function that is called in each iteration.
+                If the function returns True,
+                    the count for breaking the iteration is incremented.
+
+        """
         count: int = 0
 
         for path in generator():
@@ -47,10 +61,20 @@ class WalkPipeline(LogPipeline):
                 count += 1
 
     def launch_override(self) -> None:
+        """Run just after launch super class.
+
+        It's only used for method overriding.
+        """
         pass
 
     def launch_pipeline(self, break_count: int = 1) -> None:
-        """Provide an entry point of class as overridable method."""
+        """Provide an entry point of class as overridable method.
+
+        Args:
+            break_count (int, optional): Defaults to 1.
+                The count that is condition for breaking the iteration.
+
+        """
         self._initialize_walk(break_count)
         self.launch_override()
 
