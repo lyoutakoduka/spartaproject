@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-"""Module to iterate contents in a directory like walk module."""
+"""Module that iterates through a directory like "os.walk" module."""
 
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.context.extension.path_context import (
@@ -11,7 +11,7 @@ from pyspartalib.script.pipeline.log_pipeline import LogPipeline
 
 
 class WalkPipeline(LogPipeline):
-    """Class to iterate contents in a directory like walk module."""
+    """Class to iterates through a directory like walk module."""
 
     def __initialize_super_class(self, enable_shown: bool) -> None:
         super().__init__(enable_shown=enable_shown)

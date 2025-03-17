@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-"""Test module to iterate contents in a directory like walk module."""
+"""Test module that iterates through a directory like "os.walk" module."""
 
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -32,17 +32,13 @@ def _inside_temporary_directory(function: PathFunc) -> None:
 
 
 class _LaunchTest(WalkPipeline):
-    """Class for test to iterate contents in a directory."""
-
     def __initialize_super_class(self) -> None:
         super().__init__(True)
 
     def launch_override(self) -> None:
-        """Show message when a pipeline module is executed."""
         send_stdout("launch")
 
     def __init__(self) -> None:
-        """Initialize super class and variables."""
         self.__initialize_super_class()
 
 
@@ -87,6 +83,8 @@ class _Shared:
 
 
 class TestLaunch(_Shared):
+    """Class to execute the pipeline module from a sub-module."""
+
     def _get_expected_launch(self) -> str:
         return """
             0.0s: begin
@@ -106,7 +104,7 @@ class TestLaunch(_Shared):
         return self.decorate_function(self._get_pipeline_launch)
 
     def test_launch(self) -> None:
-        """Test to execute a pipeline module from sub module."""
+        """Test to execute the pipeline module from a sub-module."""
         self.compare_walk(
             self._get_result_launch(),
             self._get_expected_launch(),
@@ -114,6 +112,8 @@ class TestLaunch(_Shared):
 
 
 class TestBreak(_Shared):
+    """Class to iterates through a directory with brake option."""
+
     def _set_temporary_root(self, temporary_root: Path) -> None:
         self._temporary_root: Path = temporary_root
 
@@ -174,4 +174,5 @@ class TestBreak(_Shared):
             self.compare_walk(self._replace_result_break(), expected)
 
     def test_break(self) -> None:
+        """Test to iterates through a directory with brake option."""
         _inside_temporary_directory(self._individual_test)
