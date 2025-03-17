@@ -122,6 +122,9 @@ class TestArray(_Share):
 
 
 class TestPair(_Share):
+    def _get_keys(self) -> Strs:
+        return ["R", "G", "B"]
+
     def _to_pair(self, path_types: Strs, paths: Paths) -> PathPair:
         return dict(zip(path_types, paths, strict=True))
 
@@ -136,7 +139,7 @@ class TestPair(_Share):
 
     def _get_expected_pair(self) -> PathPair:
         return self._to_pair(
-            ["R", "G", "B"],
+            self._get_keys(),
             self.get_parents(self.get_absolute_current()),
         )
 
@@ -145,7 +148,7 @@ class TestPair(_Share):
         expected: PathPair = self._get_expected_pair()
 
         self._confirm_sorted_paths(
-            ["R", "G", "B"],
+            self._get_keys(),
             get_absolute_pair(get_relative_pair(expected)),
             expected,
         )
