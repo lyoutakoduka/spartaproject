@@ -112,26 +112,29 @@ def test_array() -> None:
     )
 
 
-def _to_pair(path_types: Strs, paths: Paths) -> PathPair:
-    return dict(zip(path_types, paths, strict=True))
+class TestPair(_Share):
+    def _to_pair(self, path_types: Strs, paths: Paths) -> PathPair:
+        return dict(zip(path_types, paths, strict=True))
 
+    def _confirm_sorted_paths(
+        self,
+        keys: Strs,
+        expected: PathPair,
+        result: PathPair,
+    ) -> None:
+        for key in keys:
+            _difference_error(result[key], expected[key])
 
-def _confirm_sorted_paths(
-    keys: Strs,
-    expected: PathPair,
-    result: PathPair,
-) -> None:
-    for key in keys:
-        _difference_error(result[key], expected[key])
+    def test_pair(self) -> None:
+        """Test to convert dictionary of absolute paths to relative."""
+        keys: Strs = ["R", "G", "B"]
+        expected: PathPair = self._to_pair(
+            keys,
+            self.get_parents(self.get_absolute_current()),
+        )
 
-
-def test_pair() -> None:
-    """Test to convert dictionary of absolute paths to relative."""
-    keys: Strs = ["R", "G", "B"]
-    expected: PathPair = _to_pair(keys, _get_parents(_get_absolute_current()))
-
-    _confirm_sorted_paths(
-        keys,
-        get_absolute_pair(get_relative_pair(expected)),
-        expected,
-    )
+        self._confirm_sorted_paths(
+            keys,
+            get_absolute_pair(get_relative_pair(expected)),
+            expected,
+        )
