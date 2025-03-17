@@ -68,16 +68,20 @@ def test_check() -> None:
     )
 
 
-def test_check_array() -> None:
-    """Test to check that list of paths are type relative at once."""
-    current: Path = _get_absolute_current()
+class TestCheckArray(_Share):
+    def test_check_array(self) -> None:
+        """Test to check that list of paths are type relative at once."""
+        current: Path = self.get_absolute_current()
 
-    _fail_error(
-        bool_compare_array(
-            _get_expected(),
-            is_relative_array(_get_paths(current), root_path=current.parent),
-        ),
-    )
+        _fail_error(
+            bool_compare_array(
+                self.get_expected(),
+                is_relative_array(
+                    self.get_paths(current),
+                    root_path=current.parent,
+                ),
+            ),
+        )
 
 
 class TestUnmatch(_Share):
