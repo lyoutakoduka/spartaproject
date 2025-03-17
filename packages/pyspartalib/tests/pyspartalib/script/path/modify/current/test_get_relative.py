@@ -39,10 +39,6 @@ def _get_error() -> Path:
     return Path("error")
 
 
-def _get_current_file() -> Path:
-    return Path(__file__)
-
-
 def _get_absolute_current() -> Path:
     return get_absolute(current_frame()["file"])
 
