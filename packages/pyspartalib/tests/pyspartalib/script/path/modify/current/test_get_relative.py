@@ -52,20 +52,20 @@ class _Share:
         return get_absolute(current_frame()["file"])
 
 
-def _re_implement(paths: Paths, root_path: Path | None) -> Bools:
-    return [is_relative(path, root_path=root_path) for path in paths]
+class TestCheck(_Share):
+    def _re_implement(self, paths: Paths, root_path: Path | None) -> Bools:
+        return [is_relative(path, root_path=root_path) for path in paths]
 
+    def test_check(self) -> None:
+        """Test to check path which is type relative."""
+        current: Path = self.get_absolute_current()
 
-def test_check() -> None:
-    """Test to check path which is type relative."""
-    current: Path = _get_absolute_current()
-
-    _fail_error(
-        bool_compare_array(
-            _get_expected(),
-            _re_implement(_get_paths(current), current.parent),
-        ),
-    )
+        _fail_error(
+            bool_compare_array(
+                self.get_expected(),
+                self._re_implement(self.get_paths(current), current.parent),
+            ),
+        )
 
 
 class TestCheckArray(_Share):
