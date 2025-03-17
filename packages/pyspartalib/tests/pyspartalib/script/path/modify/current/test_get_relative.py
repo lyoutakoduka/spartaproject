@@ -35,24 +35,21 @@ def _fail_error(status: bool) -> None:
         raise ValueError
 
 
-def _get_error() -> Path:
-    return Path("error")
+class _Share:
+    def get_error(self) -> Path:
+        return Path("error")
 
+    def get_paths(self, current: Path) -> Paths:
+        return [current, self.get_error()]
 
-def _get_paths(current: Path) -> Paths:
-    return [current, _get_error()]
+    def get_expected(self) -> Bools:
+        return [True, False]
 
+    def get_parents(self, path: Path) -> Paths:
+        return [path.parents[i] for i in range(3)]
 
-def _get_expected() -> Bools:
-    return [True, False]
-
-
-def _get_parents(path: Path) -> Paths:
-    return [path.parents[i] for i in range(3)]
-
-
-def _get_absolute_current() -> Path:
-    return get_absolute(current_frame()["file"])
+    def get_absolute_current(self) -> Path:
+        return get_absolute(current_frame()["file"])
 
 
 def _re_implement(paths: Paths, root_path: Path | None) -> Bools:
