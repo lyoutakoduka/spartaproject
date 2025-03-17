@@ -102,14 +102,15 @@ def test_root() -> None:
     )
 
 
-def test_array() -> None:
-    """Test to convert list of absolute paths to relative."""
-    expected: Paths = _get_parents(_get_absolute_current())
+class TestArray(_Share):
+    def test_array(self) -> None:
+        """Test to convert list of absolute paths to relative."""
+        expected: Paths = self.get_parents(self.get_absolute_current())
 
-    _difference_error(
-        get_absolute_array(get_relative_array(expected)),
-        expected,
-    )
+        _difference_error(
+            get_absolute_array(get_relative_array(expected)),
+            expected,
+        )
 
 
 class TestPair(_Share):
