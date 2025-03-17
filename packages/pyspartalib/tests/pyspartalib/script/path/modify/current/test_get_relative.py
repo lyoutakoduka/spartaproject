@@ -80,10 +80,11 @@ def test_check_array() -> None:
     )
 
 
-def test_unmatch() -> None:
-    """Test to convert absolute path, but using invalid path."""
-    with pytest.raises(ValueError, match="relative"):
-        get_relative(_get_error())
+class TestUnmatch(_Share):
+    def test_unmatch(self) -> None:
+        """Test to convert absolute path, but using invalid path."""
+        with pytest.raises(ValueError, match="relative"):
+            get_relative(self.get_error())
 
 
 class TestSingle(_Share):
