@@ -78,7 +78,7 @@ def _re_implement(paths: Paths, root_path: Path | None) -> Bools:
 
 def test_check() -> None:
     """Test to check path which is type relative."""
-    current: Path = _get_current_file()
+    current: Path = _get_absolute_current()
 
     _fail_error(
         bool_compare_array(
@@ -90,7 +90,7 @@ def test_check() -> None:
 
 def test_check_array() -> None:
     """Test to check that list of paths are type relative at once."""
-    current: Path = _get_current_file()
+    current: Path = _get_absolute_current()
 
     _fail_error(
         bool_compare_array(
@@ -108,13 +108,13 @@ def test_unmatch() -> None:
 
 def test_single() -> None:
     """Test to convert absolute path by using specific root path."""
-    expected: Path = _get_current_file()
+    expected: Path = _get_absolute_current()
     _difference_error(get_absolute(get_relative(expected)), expected)
 
 
 def test_root() -> None:
     """Test to convert absolute path with specific root."""
-    expected_base: Path = _get_current_file()
+    expected_base: Path = _get_absolute_current()
 
     _difference_error(
         get_relative(expected_base, root_path=expected_base.parent),
@@ -124,7 +124,7 @@ def test_root() -> None:
 
 def test_array() -> None:
     """Test to convert list of absolute paths to relative."""
-    expected: Paths = _get_parents(_get_current_file())
+    expected: Paths = _get_parents(_get_absolute_current())
 
     _difference_error(
         get_absolute_array(get_relative_array(expected)),
@@ -135,7 +135,7 @@ def test_array() -> None:
 def test_pair() -> None:
     """Test to convert dictionary of absolute paths to relative."""
     keys: Strs = ["R", "G", "B"]
-    expected: PathPair = _to_pair(keys, _get_parents(_get_current_file()))
+    expected: PathPair = _to_pair(keys, _get_parents(_get_absolute_current()))
 
     _confirm_sorted_paths(
         keys,
