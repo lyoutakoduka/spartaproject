@@ -39,20 +39,20 @@ def _get_error() -> Path:
     return Path("error")
 
 
-def _get_absolute_current() -> Path:
-    return get_absolute(current_frame()["file"])
+def _get_paths(current: Path) -> Paths:
+    return [current, _get_error()]
 
 
 def _get_expected() -> Bools:
     return [True, False]
 
 
-def _get_paths(current: Path) -> Paths:
-    return [current, _get_error()]
-
-
 def _get_parents(path: Path) -> Paths:
     return [path.parents[i] for i in range(3)]
+
+
+def _get_absolute_current() -> Path:
+    return get_absolute(current_frame()["file"])
 
 
 def _re_implement(paths: Paths, root_path: Path | None) -> Bools:
