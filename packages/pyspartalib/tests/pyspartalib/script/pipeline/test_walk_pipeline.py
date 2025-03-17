@@ -31,7 +31,7 @@ def _inside_temporary_directory(function: PathFunc) -> None:
         function(Path(temporary_path))
 
 
-class LaunchTest(WalkPipeline):
+class _LaunchTest(WalkPipeline):
     """Class for test to iterate contents in a directory."""
 
     def __initialize_super_class(self) -> None:
@@ -46,7 +46,7 @@ class LaunchTest(WalkPipeline):
         self.__initialize_super_class()
 
 
-class BreakTest(WalkPipeline):
+class _BreakTest(WalkPipeline):
     def __initialize_super_class(self) -> None:
         super().__init__(True)
 
@@ -67,7 +67,7 @@ class BreakTest(WalkPipeline):
         self.__initialize_variables(iterate_root)
 
 
-class Shared:
+class _Shared:
     def restart_timer(self, pipeline: LogPipeline) -> None:
         pipeline.restart(override=True)
 
@@ -86,7 +86,7 @@ class Shared:
         _difference_error(result, format_indent(expected, stdout=True))
 
 
-class TestLaunch(Shared):
+class TestLaunch(_Shared):
     def _get_expected_launch(self) -> str:
         return """
             0.0s: begin
@@ -95,7 +95,7 @@ class TestLaunch(Shared):
         """
 
     def _edit_pipeline_launch(self) -> None:
-        pipeline = LaunchTest()
+        pipeline = _LaunchTest()
         self.restart_timer(pipeline)
         pipeline.launch_pipeline()
 
@@ -113,7 +113,7 @@ class TestLaunch(Shared):
         )
 
 
-class TestBreak(Shared):
+class TestBreak(_Shared):
     def _set_temporary_root(self, temporary_root: Path) -> None:
         self._temporary_root: Path = temporary_root
 
@@ -145,7 +145,7 @@ class TestBreak(Shared):
         return [2, 3]
 
     def _edit_pipeline_break(self) -> None:
-        pipeline = BreakTest(self._temporary_root)
+        pipeline = _BreakTest(self._temporary_root)
         self.restart_timer(pipeline)
         pipeline.launch_pipeline(break_count=self._break_count)
 
