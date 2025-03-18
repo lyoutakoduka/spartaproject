@@ -32,7 +32,7 @@ def get_absolute(relative_path: Path, root_path: Path | None = None) -> Path:
         Path: Converted absolute path.
 
     """
-    if relative_path.is_absolute():
+    if is_absolute(relative_path, root_path=root_path):
         return relative_path
 
     if root_path is None:
