@@ -53,14 +53,15 @@ def test_root() -> None:
     )
 
 
-def test_array() -> None:
-    """Test to convert list of relative paths to absolute."""
-    parents: Paths = _get_parents(_get_absolute_current())
+class TestArray(_Share):
+    def test_array(self) -> None:
+        """Test to convert list of relative paths to absolute."""
+        parents: Paths = self.get_parents(self.get_absolute_current())
 
-    _difference_error(
-        get_absolute_array(_get_relative_paths(parents)),
-        parents,
-    )
+        _difference_error(
+            get_absolute_array(self.get_relative_paths(parents)),
+            parents,
+        )
 
 
 class TestPair(_Share):
