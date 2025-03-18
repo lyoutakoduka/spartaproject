@@ -52,7 +52,7 @@ class TestSingle(_Share):
 class TestRoot(_Share):
     def test_root(self) -> None:
         """Test to convert relative path by using specific root path."""
-        expected: Path = self.get_absolute_current()
+        expected: Path = self.get_relative_current()
 
         _difference_error(
             get_absolute(Path(expected.name), root_path=expected.parent),
