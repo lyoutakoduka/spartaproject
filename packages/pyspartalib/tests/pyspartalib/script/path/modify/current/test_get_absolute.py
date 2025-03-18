@@ -16,6 +16,7 @@ from pyspartalib.script.path.modify.current.get_absolute import (
 from pyspartalib.script.path.modify.current.get_relative import (
     get_relative,
     get_relative_array,
+    get_relative_pair,
 )
 
 
@@ -90,12 +91,10 @@ class TestPair(_Share):
     def test_pair(self) -> None:
         """Test to convert dictionary of relative paths to absolute."""
         keys: Strs = ["R", "G", "B"]
-        parents: Paths = self.get_parents(self.get_absolute_current())
+        parents: Paths = self.get_parents(self.get_relative_current())
 
         self._confirm_sorted_paths(
             keys,
-            get_absolute_pair(
-                self._to_pair(keys, self.get_relative_paths(parents)),
-            ),
+            get_relative_pair(get_absolute_pair(self._to_pair(keys, parents))),
             self._to_pair(keys, parents),
         )
