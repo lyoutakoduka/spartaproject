@@ -79,12 +79,11 @@ class TestPair(_Share):
     def _get_keys(self) -> Strs:
         return ["R", "G", "B"]
 
-    def _to_pair(self, keys: Strs, paths: Paths) -> PathPair:
+    def _to_pair(self, paths: Paths) -> PathPair:
         return dict(zip(self._get_keys(), paths, strict=True))
 
     def _confirm_sorted_paths(
         self,
-        keys: Strs,
         expected: PathPair,
         result: PathPair,
     ) -> None:
@@ -97,7 +96,6 @@ class TestPair(_Share):
         parents: Paths = self.get_parents(self.get_relative_current())
 
         self._confirm_sorted_paths(
-            keys,
-            get_relative_pair(get_absolute_pair(self._to_pair(keys, parents))),
-            self._to_pair(keys, parents),
+            get_relative_pair(get_absolute_pair(self._to_pair(parents))),
+            self._to_pair(parents),
         )
