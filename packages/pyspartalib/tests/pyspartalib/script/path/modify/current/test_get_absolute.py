@@ -20,16 +20,15 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
-def _get_absolute_current() -> Path:
-    return Path(__file__).resolve()
+class _Share:
+    def get_absolute_current(self) -> Path:
+        return Path(__file__).resolve()
 
+    def get_parents(self, path: Path) -> Paths:
+        return [path.parents[i] for i in range(3)]
 
-def _get_parents(path: Path) -> Paths:
-    return [path.parents[i] for i in range(3)]
-
-
-def _get_relative_paths(paths: Paths) -> Paths:
-    return [get_relative(path) for path in paths]
+    def get_relative_paths(self, paths: Paths) -> Paths:
+        return [get_relative(path) for path in paths]
 
 
 def test_ignore() -> None:
