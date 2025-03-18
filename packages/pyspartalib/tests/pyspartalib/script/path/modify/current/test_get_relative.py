@@ -51,6 +51,9 @@ class _Share:
     def get_absolute_current(self) -> Path:
         return get_absolute(current_frame()["file"])
 
+    def get_absolute_parents(self) -> Paths:
+        return self.get_three_parents(self.get_absolute_current())
+
 
 class TestCheck(_Share):
     def _re_implement(self, paths: Paths, root_path: Path | None) -> Bools:
@@ -113,7 +116,7 @@ class TestRoot(_Share):
 class TestArray(_Share):
     def test_array(self) -> None:
         """Test to convert list of absolute paths to relative."""
-        expected: Paths = self.get_three_parents(self.get_absolute_current())
+        expected: Paths = self.get_absolute_parents()
 
         _difference_error(
             get_absolute_array(get_relative_array(expected)),
@@ -138,10 +141,7 @@ class TestPair(_Share):
             _difference_error(result[key], expected[key])
 
     def _get_expected_pair(self) -> PathPair:
-        return self._to_pair(
-            self._get_keys(),
-            self.get_three_parents(self.get_absolute_current()),
-        )
+        return self._to_pair(self._get_keys(), self.get_absolute_parents())
 
     def test_pair(self) -> None:
         """Test to convert dictionary of absolute paths to relative."""
