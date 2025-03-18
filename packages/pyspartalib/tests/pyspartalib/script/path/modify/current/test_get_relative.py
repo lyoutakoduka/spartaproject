@@ -94,10 +94,13 @@ class TestCheckArray(_Share):
 
 
 class TestUnmatch(_Share):
+    def _catch_test(self) -> None:
+        get_relative(self.get_error())
+
     def test_unmatch(self) -> None:
         """Test to convert absolute path, but using invalid path."""
         with pytest.raises(ValueError, match="relative"):
-            get_relative(self.get_error())
+            self._catch_test()
 
 
 class TestSingle(_Share):
