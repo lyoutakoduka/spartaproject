@@ -43,14 +43,15 @@ def test_single() -> None:
     _difference_error(get_absolute(get_relative(expected)), expected)
 
 
-def test_root() -> None:
-    """Test to convert relative path by using specific root path."""
-    expected: Path = _get_absolute_current()
+class TestRoot(_Share):
+    def test_root(self) -> None:
+        """Test to convert relative path by using specific root path."""
+        expected: Path = self.get_absolute_current()
 
-    _difference_error(
-        get_absolute(Path(expected.name), root_path=expected.parent),
-        expected,
-    )
+        _difference_error(
+            get_absolute(Path(expected.name), root_path=expected.parent),
+            expected,
+        )
 
 
 class TestArray(_Share):
