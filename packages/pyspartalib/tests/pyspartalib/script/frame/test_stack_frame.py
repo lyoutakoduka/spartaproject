@@ -15,8 +15,9 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
-def _get_file_expected() -> Path:
-    return get_relative(Path(__file__).resolve())
+class _Share:
+    def get_file_expected(self) -> Path:
+        return get_relative(Path(__file__).resolve())
 
 
 def _get_frame_current() -> StackFrame:
