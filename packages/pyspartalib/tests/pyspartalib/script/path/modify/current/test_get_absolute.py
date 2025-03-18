@@ -29,7 +29,7 @@ class _Share:
     def get_absolute_current(self) -> Path:
         return get_absolute(self.get_relative_current())
 
-    def get_parents(self, path: Path) -> Paths:
+    def get_three_parents(self, path: Path) -> Paths:
         return [path.parents[i] for i in range(3)]
 
     def get_relative_paths(self, paths: Paths) -> Paths:
@@ -39,7 +39,7 @@ class _Share:
         return current_frame()["file"]
 
     def get_relative_parents(self) -> Paths:
-        return self.get_parents(self.get_relative_current())
+        return self.get_three_parents(self.get_relative_current())
 
 
 class TestIgnore(_Share):
