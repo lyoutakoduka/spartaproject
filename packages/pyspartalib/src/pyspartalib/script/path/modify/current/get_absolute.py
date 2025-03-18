@@ -8,8 +8,15 @@ from pyspartalib.context.extension.path_context import PathPair, Paths
 from pyspartalib.script.directory.current.get_current import get_current
 
 
-def _extract_root_path(relative_path: Path, size: int) -> Path:
+def _extract_parent(relative_path: Path, size: int) -> Path:
     return Path(*list(relative_path.parts)[:size])
+
+
+def is_absolute(relative_path: Path, root_path: Path | None = None) -> bool:
+    if root_path is None:
+        return relative_path.is_absolute()
+
+    return _extract_parent(relative_path, len(root_path.parts)) == root_path
 
 
 def get_absolute(relative_path: Path, root_path: Path | None = None) -> Path:
