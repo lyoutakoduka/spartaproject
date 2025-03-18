@@ -20,17 +20,17 @@ class _Share:
         return get_relative(Path(__file__).resolve())
 
 
-def _get_frame_current() -> StackFrame:
-    return {
-        "file": _get_file_expected(),
-        "function": "test_current",
-        "line": 40,
-    }
+class TestCurrent(_Share):
+    def _get_frame_current(self) -> StackFrame:
+        return {
+            "file": self.get_file_expected(),
+            "function": "test_current",
+            "line": 40,
+        }
 
-
-def test_current() -> None:
-    """Test to get current frame information in stack frames."""
-    _difference_error(current_frame(), _get_frame_current())  # Here
+    def test_current(self) -> None:
+        """Test to get current frame information in stack frames."""
+        _difference_error(current_frame(), self._get_frame_current())  # Here
 
 
 def _get_frame_offset() -> StackFrame:
