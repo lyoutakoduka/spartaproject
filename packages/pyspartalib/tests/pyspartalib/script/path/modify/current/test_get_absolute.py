@@ -31,10 +31,11 @@ class _Share:
         return [get_relative(path) for path in paths]
 
 
-def test_ignore() -> None:
-    """Test to convert absolute path to absolute."""
-    expected: Path = _get_absolute_current()
-    _difference_error(get_absolute(expected), expected)
+class TestIgnore(_Share):
+    def test_ignore(self) -> None:
+        """Test to convert absolute path to absolute."""
+        expected: Path = self.get_absolute_current()
+        _difference_error(get_absolute(expected), expected)
 
 
 class TestSingle(_Share):
