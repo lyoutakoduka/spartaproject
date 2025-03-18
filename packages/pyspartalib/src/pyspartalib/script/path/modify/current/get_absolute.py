@@ -8,6 +8,29 @@ from pyspartalib.context.extension.path_context import PathPair, Paths
 from pyspartalib.script.directory.current.get_current import get_current
 
 
+def _extract_parent(relative_path: Path, size: int) -> Path:
+    return Path(*list(relative_path.parts)[:size])
+
+
+def is_absolute(relative_path: Path, root_path: Path | None = None) -> bool:
+    """Verify the input path is an absolute path.
+
+    Args:
+        relative_path (Path): Path you want to convert to absolute.
+
+        root_path (Path | None, optional): Defaults to None.
+            Root of relative path used for converting path.
+
+    Returns:
+        bool: True if the input path is an absolute path.
+
+    """
+    if root_path is None:
+        return relative_path.is_absolute()
+
+    return _extract_parent(relative_path, len(root_path.parts)) == root_path
+
+
 def get_absolute(relative_path: Path, root_path: Path | None = None) -> Path:
     """Convert relative path to absolute.
 
@@ -21,7 +44,7 @@ def get_absolute(relative_path: Path, root_path: Path | None = None) -> Path:
         Path: Converted absolute path.
 
     """
-    if relative_path.is_absolute():
+    if is_absolute(relative_path, root_path=root_path):
         return relative_path
 
     if root_path is None:
