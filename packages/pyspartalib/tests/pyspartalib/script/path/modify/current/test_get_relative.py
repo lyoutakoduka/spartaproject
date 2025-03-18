@@ -62,6 +62,8 @@ class _Share:
 
 
 class TestCheck(_Share):
+    """Class to check path which is type relative."""
+
     def _re_implement(self, paths: Paths, root_path: Path | None) -> Bools:
         return [is_relative(path, root_path=root_path) for path in paths]
 
@@ -78,6 +80,8 @@ class TestCheck(_Share):
 
 
 class TestCheckArray(_Share):
+    """Class to check that list of paths are type relative at once."""
+
     def test_check_array(self) -> None:
         """Test to check that list of paths are type relative at once."""
         current: Path = self.get_absolute_current()
@@ -94,6 +98,8 @@ class TestCheckArray(_Share):
 
 
 class TestUnmatch(_Share):
+    """Class to convert absolute path, but using invalid path."""
+
     def _catch_test(self) -> None:
         get_relative(self.get_error())
 
@@ -103,6 +109,8 @@ class TestUnmatch(_Share):
 
 
 class TestSingle(_Share):
+    """Class to convert absolute path by using specific root path."""
+
     def test_single(self) -> None:
         """Test to convert absolute path by using specific root path."""
         current: Path = self.get_absolute_current()
@@ -111,6 +119,8 @@ class TestSingle(_Share):
 
 
 class TestRoot(_Share):
+    """Class to convert absolute path with specific root."""
+
     def test_root(self) -> None:
         """Test to convert absolute path with specific root."""
         current: Path = self.get_absolute_current()
@@ -122,6 +132,8 @@ class TestRoot(_Share):
 
 
 class TestArray(_Share):
+    """Class to convert list of absolute paths to relative."""
+
     def test_array(self) -> None:
         """Test to convert list of absolute paths to relative."""
         expected: Paths = self.get_absolute_parents()
@@ -133,6 +145,8 @@ class TestArray(_Share):
 
 
 class TestPair(_Share):
+    """Class to convert dictionary of absolute paths to relative."""
+
     def _get_keys(self) -> Strs:
         return ["R", "G", "B"]
 
