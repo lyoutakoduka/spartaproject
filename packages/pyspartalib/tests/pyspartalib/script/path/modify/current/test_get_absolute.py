@@ -25,6 +25,11 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
+def _fail_error(status: bool) -> None:
+    if not status:
+        raise ValueError
+
+
 class _Share:
     def get_absolute_current(self) -> Path:
         return get_absolute(self.get_relative_current())
