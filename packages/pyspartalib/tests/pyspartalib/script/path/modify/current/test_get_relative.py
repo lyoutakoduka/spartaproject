@@ -5,6 +5,7 @@
 from pathlib import Path
 
 import pytest
+from pyspartalib.context.custom.callable_context import Func
 from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.bool_context import Bools
 from pyspartalib.context.default.string_context import Strs
@@ -33,6 +34,11 @@ def _difference_error(result: Type, expected: Type) -> None:
 def _fail_error(status: bool) -> None:
     if not status:
         raise ValueError
+
+
+def _cache_error(function: Func, match: str) -> None:
+    with pytest.raises(ValueError, match=match):
+        function()
 
 
 class _Share:
