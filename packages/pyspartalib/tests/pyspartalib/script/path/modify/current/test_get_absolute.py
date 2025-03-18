@@ -21,20 +21,7 @@ def _difference_error(result: Type, expected: Type) -> None:
 
 
 def _get_absolute_current() -> Path:
-    return Path(__file__)
-
-
-def _to_pair(keys: Strs, paths: Paths) -> PathPair:
-    return dict(zip(keys, paths, strict=True))
-
-
-def _confirm_sorted_paths(
-    keys: Strs,
-    expected: PathPair,
-    result: PathPair,
-) -> None:
-    for key in keys:
-        _difference_error(result[key], expected[key])
+    return Path(__file__).resolve()
 
 
 def _get_parents(path: Path) -> Paths:
@@ -75,6 +62,19 @@ def test_array() -> None:
         get_absolute_array(_get_relative_paths(parents)),
         parents,
     )
+
+
+def _to_pair(keys: Strs, paths: Paths) -> PathPair:
+    return dict(zip(keys, paths, strict=True))
+
+
+def _confirm_sorted_paths(
+    keys: Strs,
+    expected: PathPair,
+    result: PathPair,
+) -> None:
+    for key in keys:
+        _difference_error(result[key], expected[key])
 
 
 def test_pair() -> None:
