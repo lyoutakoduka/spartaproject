@@ -32,6 +32,8 @@ class _Share:
 
 
 class TestCurrent(_Share):
+    """Class to get current frame information in stack frames."""
+
     def _get_frame_current(self) -> StackFrame:
         return self.get_expected_frame("test_current", 40)
 
@@ -41,6 +43,8 @@ class TestCurrent(_Share):
 
 
 class TestOffset(_Share):
+    """Class to get current frame from an offset stack frame."""
+
     def _get_frame_offset(self) -> StackFrame:
         return self.get_expected_frame("test_offset", 52)
 
