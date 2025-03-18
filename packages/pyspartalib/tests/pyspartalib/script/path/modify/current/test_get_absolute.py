@@ -38,6 +38,9 @@ class _Share:
     def get_relative_current(self) -> Path:
         return current_frame()["file"]
 
+    def get_relative_parents(self) -> Paths:
+        return self.get_parents(self.get_relative_current())
+
 
 class TestIgnore(_Share):
     def test_ignore(self) -> None:
@@ -67,7 +70,7 @@ class TestRoot(_Share):
 class TestArray(_Share):
     def test_array(self) -> None:
         """Test to convert list of relative paths to absolute."""
-        parents: Paths = self.get_parents(self.get_relative_current())
+        parents: Paths = self.get_relative_parents()
 
         _difference_error(
             get_relative_array(get_absolute_array(parents)),
@@ -92,7 +95,7 @@ class TestPair(_Share):
 
     def test_pair(self) -> None:
         """Test to convert dictionary of relative paths to absolute."""
-        parents: Paths = self.get_parents(self.get_relative_current())
+        parents: Paths = self.get_relative_parents()
 
         self._confirm_sorted_paths(
             get_relative_pair(get_absolute_pair(self._to_pair(parents))),
