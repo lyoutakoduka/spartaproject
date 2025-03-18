@@ -19,6 +19,17 @@ class _Share:
     def get_file_expected(self) -> Path:
         return get_relative(Path(__file__).resolve())
 
+    def get_expected_frame(
+        self,
+        function_name: str,
+        line_number: int,
+    ) -> StackFrame:
+        return {
+            "file": self.get_file_expected(),
+            "function": function_name,
+            "line": line_number,
+        }
+
 
 class TestCurrent(_Share):
     def _get_frame_current(self) -> StackFrame:
