@@ -36,7 +36,7 @@ def _fail_error(status: bool) -> None:
 
 
 class _Share:
-    def get_three_parents(self, path: Path) -> Paths:
+    def _get_three_parents(self, path: Path) -> Paths:
         return [path.parents[i] for i in range(3)]
 
     def get_error(self) -> Path:
@@ -52,7 +52,7 @@ class _Share:
         return get_absolute(current_frame()["file"])
 
     def get_absolute_parents(self) -> Paths:
-        return self.get_three_parents(self.get_absolute_current())
+        return self._get_three_parents(self.get_absolute_current())
 
 
 class TestCheck(_Share):
