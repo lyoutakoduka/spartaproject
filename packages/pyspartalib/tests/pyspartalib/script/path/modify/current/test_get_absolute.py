@@ -23,7 +23,7 @@ def _difference_error(result: Type, expected: Type) -> None:
 
 class _Share:
     def get_absolute_current(self) -> Path:
-        return Path(__file__).resolve()
+        return get_absolute(self.get_relative_current())
 
     def get_parents(self, path: Path) -> Paths:
         return [path.parents[i] for i in range(3)]
