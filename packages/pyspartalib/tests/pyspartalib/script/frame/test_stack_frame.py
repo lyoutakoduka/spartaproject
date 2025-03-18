@@ -33,18 +33,21 @@ class TestCurrent(_Share):
         _difference_error(current_frame(), self._get_frame_current())  # Here
 
 
-def _get_frame_offset() -> StackFrame:
-    return {
-        "file": _get_file_expected(),
-        "function": "test_offset",
-        "line": 49,
-    }
+class TestOffset(_Share):
+    def _get_frame_offset(self) -> StackFrame:
+        return {
+            "file": self.get_file_expected(),
+            "function": "test_offset",
+            "line": 49,
+        }
 
+    def test_offset(self) -> None:
+        """Test to get current frame from an offset stack frame."""
 
-def test_offset() -> None:
-    """Test to get current frame from an offset stack frame."""
+        def inside_function() -> None:
+            _difference_error(
+                current_frame(offset=1),
+                self._get_frame_offset(),
+            )
 
-    def inside_function() -> None:
-        _difference_error(current_frame(offset=1), _get_frame_offset())
-
-    inside_function()  # Here
+        inside_function()  # Here
