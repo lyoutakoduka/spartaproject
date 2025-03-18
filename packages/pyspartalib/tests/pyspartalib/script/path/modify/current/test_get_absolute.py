@@ -76,8 +76,11 @@ class TestArray(_Share):
 
 
 class TestPair(_Share):
+    def _get_keys(self) -> Strs:
+        return ["R", "G", "B"]
+
     def _to_pair(self, keys: Strs, paths: Paths) -> PathPair:
-        return dict(zip(keys, paths, strict=True))
+        return dict(zip(self._get_keys(), paths, strict=True))
 
     def _confirm_sorted_paths(
         self,
@@ -85,7 +88,7 @@ class TestPair(_Share):
         expected: PathPair,
         result: PathPair,
     ) -> None:
-        for key in keys:
+        for key in self._get_keys():
             _difference_error(result[key], expected[key])
 
     def test_pair(self) -> None:
