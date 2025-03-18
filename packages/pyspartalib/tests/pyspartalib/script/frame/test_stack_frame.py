@@ -33,11 +33,7 @@ class _Share:
 
 class TestCurrent(_Share):
     def _get_frame_current(self) -> StackFrame:
-        return {
-            "file": self.get_file_expected(),
-            "function": "test_current",
-            "line": 40,
-        }
+        return self.get_expected_frame("test_current", 40)
 
     def test_current(self) -> None:
         """Test to get current frame information in stack frames."""
@@ -46,11 +42,7 @@ class TestCurrent(_Share):
 
 class TestOffset(_Share):
     def _get_frame_offset(self) -> StackFrame:
-        return {
-            "file": self.get_file_expected(),
-            "function": "test_offset",
-            "line": 49,
-        }
+        return self.get_expected_frame("test_offset", 49)
 
     def test_offset(self) -> None:
         """Test to get current frame from an offset stack frame."""
