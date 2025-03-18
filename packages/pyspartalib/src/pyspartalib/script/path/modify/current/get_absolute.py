@@ -13,6 +13,18 @@ def _extract_parent(relative_path: Path, size: int) -> Path:
 
 
 def is_absolute(relative_path: Path, root_path: Path | None = None) -> bool:
+    """Verify the input path is an absolute path.
+
+    Args:
+        relative_path (Path): Path you want to convert to absolute.
+
+        root_path (Path | None, optional): Defaults to None.
+            Root of relative path used for converting path.
+
+    Returns:
+        bool: True if the input path is an absolute path.
+
+    """
     if root_path is None:
         return relative_path.is_absolute()
 
