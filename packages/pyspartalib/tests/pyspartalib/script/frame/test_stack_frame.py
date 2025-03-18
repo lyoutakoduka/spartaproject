@@ -27,17 +27,17 @@ def _get_frame_current() -> StackFrame:
     }
 
 
+def test_current() -> None:
+    """Test to get current frame information in stack frames."""
+    _difference_error(current_frame(), _get_frame_current())  # Here
+
+
 def _get_frame_offset() -> StackFrame:
     return {
         "file": _get_file_expected(),
         "function": "test_offset",
         "line": 49,
     }
-
-
-def test_current() -> None:
-    """Test to get current frame information in stack frames."""
-    _difference_error(current_frame(), _get_frame_current())  # Here
 
 
 def test_offset() -> None:
