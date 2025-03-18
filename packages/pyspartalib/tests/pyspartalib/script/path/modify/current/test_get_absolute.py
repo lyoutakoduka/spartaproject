@@ -32,9 +32,6 @@ def _fail_error(status: bool) -> None:
 
 
 class _Share:
-    def get_absolute_current(self) -> Path:
-        return get_absolute(self.get_relative_current())
-
     def _get_three_parents(self, path: Path) -> Paths:
         return [path.parents[i] for i in range(3)]
 
