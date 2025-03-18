@@ -36,6 +36,9 @@ def _fail_error(status: bool) -> None:
 
 
 class _Share:
+    def get_parents(self, path: Path) -> Paths:
+        return [path.parents[i] for i in range(3)]
+
     def get_error(self) -> Path:
         return Path("error")
 
@@ -44,9 +47,6 @@ class _Share:
 
     def get_expected(self) -> Bools:
         return [True, False]
-
-    def get_parents(self, path: Path) -> Paths:
-        return [path.parents[i] for i in range(3)]
 
     def get_absolute_current(self) -> Path:
         return get_absolute(current_frame()["file"])
