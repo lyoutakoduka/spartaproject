@@ -13,7 +13,10 @@ from pyspartalib.script.path.modify.current.get_absolute import (
     get_absolute_array,
     get_absolute_pair,
 )
-from pyspartalib.script.path.modify.current.get_relative import get_relative
+from pyspartalib.script.path.modify.current.get_relative import (
+    get_relative,
+    get_relative_array,
+)
 
 
 def _difference_error(result: Type, expected: Type) -> None:
@@ -63,10 +66,10 @@ class TestRoot(_Share):
 class TestArray(_Share):
     def test_array(self) -> None:
         """Test to convert list of relative paths to absolute."""
-        parents: Paths = self.get_parents(self.get_absolute_current())
+        parents: Paths = self.get_parents(self.get_relative_current())
 
         _difference_error(
-            get_absolute_array(self.get_relative_paths(parents)),
+            get_relative_array(get_absolute_array(parents)),
             parents,
         )
 
