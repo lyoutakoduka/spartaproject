@@ -92,7 +92,6 @@ class TestPair(_Share):
 
     def test_pair(self) -> None:
         """Test to convert dictionary of relative paths to absolute."""
-        keys: Strs = ["R", "G", "B"]
         parents: Paths = self.get_parents(self.get_relative_current())
 
         self._confirm_sorted_paths(
