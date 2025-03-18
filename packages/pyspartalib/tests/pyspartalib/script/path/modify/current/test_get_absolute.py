@@ -37,10 +37,11 @@ def test_ignore() -> None:
     _difference_error(get_absolute(expected), expected)
 
 
-def test_single() -> None:
-    """Test to convert relative path to absolute."""
-    expected: Path = _get_absolute_current()
-    _difference_error(get_absolute(get_relative(expected)), expected)
+class TestSingle(_Share):
+    def test_single(self) -> None:
+        """Test to convert relative path to absolute."""
+        expected: Path = self.get_absolute_current()
+        _difference_error(get_absolute(get_relative(expected)), expected)
 
 
 class TestRoot(_Share):
