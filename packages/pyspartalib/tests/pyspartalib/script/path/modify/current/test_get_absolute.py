@@ -12,6 +12,7 @@ from pyspartalib.script.path.modify.current.get_absolute import (
     get_absolute,
     get_absolute_array,
     get_absolute_pair,
+    is_absolute,
 )
 from pyspartalib.script.path.modify.current.get_relative import (
     get_relative,
@@ -45,6 +46,12 @@ class _Share:
 
     def get_relative_parents(self) -> Paths:
         return self._get_three_parents(self.get_relative_current())
+
+
+class TestIs(_Share):
+    def test_is(self) -> None:
+        expected: Path = self.get_relative_current()
+        _fail_error(is_absolute(expected, root_path=expected.parent))
 
 
 class TestIgnore(_Share):
