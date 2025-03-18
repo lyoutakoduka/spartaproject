@@ -8,6 +8,10 @@ from pyspartalib.context.extension.path_context import PathPair, Paths
 from pyspartalib.script.directory.current.get_current import get_current
 
 
+def _extract_root_path(relative_path: Path, size: int) -> Path:
+    return Path(*list(relative_path.parts)[:size])
+
+
 def get_absolute(relative_path: Path, root_path: Path | None = None) -> Path:
     """Convert relative path to absolute.
 
