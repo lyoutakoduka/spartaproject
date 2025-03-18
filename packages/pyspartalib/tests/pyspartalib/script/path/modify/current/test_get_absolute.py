@@ -45,8 +45,8 @@ class TestIgnore(_Share):
 class TestSingle(_Share):
     def test_single(self) -> None:
         """Test to convert relative path to absolute."""
-        expected: Path = self.get_absolute_current()
-        _difference_error(get_absolute(get_relative(expected)), expected)
+        expected: Path = self.get_relative_current()
+        _difference_error(get_relative(get_absolute(expected)), expected)
 
 
 class TestRoot(_Share):
