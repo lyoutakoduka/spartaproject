@@ -42,7 +42,7 @@ class TestCurrent(_Share):
 
 class TestOffset(_Share):
     def _get_frame_offset(self) -> StackFrame:
-        return self.get_expected_frame("test_offset", 49)
+        return self.get_expected_frame("test_offset", 52)
 
     def _inside_function(self) -> None:
         _difference_error(current_frame(offset=1), self._get_frame_offset())
