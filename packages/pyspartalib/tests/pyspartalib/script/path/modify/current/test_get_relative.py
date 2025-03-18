@@ -36,7 +36,7 @@ def _fail_error(status: bool) -> None:
 
 
 class _Share:
-    def get_parents(self, path: Path) -> Paths:
+    def get_three_parents(self, path: Path) -> Paths:
         return [path.parents[i] for i in range(3)]
 
     def get_error(self) -> Path:
@@ -113,7 +113,7 @@ class TestRoot(_Share):
 class TestArray(_Share):
     def test_array(self) -> None:
         """Test to convert list of absolute paths to relative."""
-        expected: Paths = self.get_parents(self.get_absolute_current())
+        expected: Paths = self.get_three_parents(self.get_absolute_current())
 
         _difference_error(
             get_absolute_array(get_relative_array(expected)),
@@ -140,7 +140,7 @@ class TestPair(_Share):
     def _get_expected_pair(self) -> PathPair:
         return self._to_pair(
             self._get_keys(),
-            self.get_parents(self.get_absolute_current()),
+            self.get_three_parents(self.get_absolute_current()),
         )
 
     def test_pair(self) -> None:
