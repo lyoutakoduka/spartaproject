@@ -16,7 +16,7 @@ def _difference_error(result: Type, expected: Type) -> None:
 
 
 def _get_file_expected() -> Path:
-    return get_relative(Path(__file__))
+    return get_relative(Path(__file__).resolve())
 
 
 def _get_frame_current() -> StackFrame:
