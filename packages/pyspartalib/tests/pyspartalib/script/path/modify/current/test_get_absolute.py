@@ -46,12 +46,17 @@ class _Share:
 
 
 class TestIs(_Share):
+    """Class to verify the input path is an absolute path."""
+
     def test_is(self) -> None:
+        """Test to verify the input path is an absolute path."""
         expected: Path = self.get_relative_current()
         _fail_error(is_absolute(expected, root_path=expected.parent))
 
 
 class TestIgnore(_Share):
+    """Class to convert absolute path to absolute."""
+
     def test_ignore(self) -> None:
         """Test to convert absolute path to absolute."""
         expected: Path = self.get_relative_current()
@@ -63,6 +68,8 @@ class TestIgnore(_Share):
 
 
 class TestSingle(_Share):
+    """Class to convert relative path to absolute."""
+
     def test_single(self) -> None:
         """Test to convert relative path to absolute."""
         expected: Path = self.get_relative_current()
@@ -70,6 +77,8 @@ class TestSingle(_Share):
 
 
 class TestRoot(_Share):
+    """Class to convert relative path by using specific root path."""
+
     def test_root(self) -> None:
         """Test to convert relative path by using specific root path."""
         expected: Path = self.get_relative_current()
@@ -81,6 +90,8 @@ class TestRoot(_Share):
 
 
 class TestArray(_Share):
+    """Class to convert list of relative paths to absolute."""
+
     def test_array(self) -> None:
         """Test to convert list of relative paths to absolute."""
         parents: Paths = self.get_relative_parents()
@@ -92,6 +103,8 @@ class TestArray(_Share):
 
 
 class TestPair(_Share):
+    """Class to convert dictionary of relative paths to absolute."""
+
     def _get_keys(self) -> Strs:
         return ["R", "G", "B"]
 
