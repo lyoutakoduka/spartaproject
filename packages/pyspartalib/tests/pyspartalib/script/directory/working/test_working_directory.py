@@ -25,3 +25,6 @@ class _Share(WorkingDirectory):
 class TestLaunch(_Share):
     def _individual_test(self) -> bool:
         return True
+
+    def test_launch(self) -> None:
+        self.execute_function(self._individual_test)
