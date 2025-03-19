@@ -59,6 +59,7 @@ class TestPath(_Share):
         return self.get_working_root().as_posix()
 
     def _individual_test(self) -> bool:
+        _difference_error(self._get_result(), self._get_expected())
         return True
 
     def test_path(self) -> None:
