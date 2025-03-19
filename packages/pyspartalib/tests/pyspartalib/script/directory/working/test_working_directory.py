@@ -33,3 +33,6 @@ class TestLaunch(_Share):
 class TestPath(_Share):
     def _individual_test(self) -> bool:
         return True
+
+    def test_path(self) -> None:
+        self.execute_function(self._individual_test)
