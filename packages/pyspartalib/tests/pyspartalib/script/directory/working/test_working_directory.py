@@ -55,6 +55,9 @@ class TestPath(_Share):
             self._decorate_function(self._execute_with_log),
         )
 
+    def _get_expected(self) -> str:
+        return self.get_working_root().as_posix()
+
     def _individual_test(self) -> bool:
         return True
 
