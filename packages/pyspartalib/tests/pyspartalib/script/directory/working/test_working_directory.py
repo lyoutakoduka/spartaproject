@@ -20,3 +20,8 @@ def _fail_error(status: bool) -> None:
 class _Share(WorkingDirectory):
     def execute_function(self, function: BoolFunc) -> None:
         _fail_error(self.inside_working(function))
+
+
+class TestLaunch(_Share):
+    def _individual_test(self) -> bool:
+        return True
