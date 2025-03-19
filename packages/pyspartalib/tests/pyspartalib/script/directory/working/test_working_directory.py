@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 
-from pyspartalib.context.custom.callable_context import BoolFunc
+from pyspartalib.context.custom.callable_context import BoolFunc, Func
 from pyspartalib.context.custom.type_context import Type
 from pyspartalib.script.directory.working.working_directory import (
     WorkingDirectory,
 )
+from pyspartalib.script.stdout.off_stdout import OffStdout
 
 
 def _difference_error(result: Type, expected: Type) -> None:
@@ -31,6 +32,17 @@ class TestLaunch(_Share):
 
 
 class TestPath(_Share):
+    def _decorate_function(self, function: Func) -> str:
+        off_stdout = OffStdout()
+
+        @off_stdout.decorator
+        def _messages() -> None:
+            function()
+
+        _messages()
+
+        return off_stdout.show()
+
     def _individual_test(self) -> bool:
         return True
 
