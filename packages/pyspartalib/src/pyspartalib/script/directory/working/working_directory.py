@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
 from pyspartalib.context.custom.callable_context import BoolFunc
 
@@ -19,3 +20,7 @@ class WorkingDirectory:
 
     def get_working_root(self) -> Path:
         return self._working_root
+
+    def inside_working(self, function: BoolFunc) -> bool:
+        with TemporaryDirectory() as working_path:
+            return self._execute_function(function, Path(working_path))
