@@ -6,6 +6,7 @@ from pyspartalib.script.directory.working.working_directory import (
     WorkingDirectory,
 )
 from pyspartalib.script.stdout.off_stdout import OffStdout
+from pyspartalib.script.stdout.send_stdout import send_stdout
 
 
 def _difference_error(result: Type, expected: Type) -> None:
@@ -42,6 +43,9 @@ class TestPath(_Share):
         _messages()
 
         return off_stdout.show()
+
+    def _execute_with_log(self) -> None:
+        send_stdout(self.get_working_root())
 
     def _individual_test(self) -> bool:
         return True
