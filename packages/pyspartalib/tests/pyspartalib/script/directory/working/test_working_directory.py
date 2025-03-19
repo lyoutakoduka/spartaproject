@@ -50,6 +50,11 @@ class TestPath(_Share):
     def _remove_line_break(self, result: str) -> str:
         return result[:-1]
 
+    def _get_result(self) -> str:
+        return self._remove_line_break(
+            self._decorate_function(self._execute_with_log),
+        )
+
     def _individual_test(self) -> bool:
         return True
 
