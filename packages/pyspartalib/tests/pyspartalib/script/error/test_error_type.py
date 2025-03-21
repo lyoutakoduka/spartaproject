@@ -166,3 +166,11 @@ class TestContain(_TestShare, ErrorContain):
 class TestLength(_TestShare, ErrorLength):
     def _get_match(self) -> str:
         return "length"
+
+    def _error_length(self, expected: int, invert: bool) -> None:
+        self.error_length(
+            self.get_result_integer(),
+            expected,
+            self._get_match(),
+            invert=invert,
+        )
