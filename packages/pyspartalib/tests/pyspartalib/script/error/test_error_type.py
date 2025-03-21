@@ -7,6 +7,7 @@ from pyspartalib.script.error.error_type import (
     ErrorBase,
     ErrorDifference,
     ErrorFail,
+    ErrorNoExists,
     ErrorNone,
 )
 
@@ -98,3 +99,8 @@ class TestNone(_TestShare, ErrorNone, ErrorDifference):
 
     def test_none_success(self) -> None:
         self._raise_error_success()
+
+
+class TestNoExists(_TestShare, ErrorNoExists):
+    def _get_match(self) -> str:
+        return "exists"
