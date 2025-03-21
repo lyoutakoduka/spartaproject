@@ -5,7 +5,7 @@ from pyspartalib.context.custom.callable_context import Func
 
 
 class _TestShare:
-    def _cache_base(
+    def cache_error(
         self,
         function: Func,
         match: str,
