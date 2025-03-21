@@ -206,3 +206,6 @@ class TestDifference(_TestShare, ErrorDifference):
 
     def _cache_error(self, function: Func) -> None:
         self.catch_error(function, self._get_match())
+
+    def test_difference(self) -> None:
+        self._cache_error(self._raise_error)
