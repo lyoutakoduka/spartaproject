@@ -37,3 +37,6 @@ class TestBase(_TestShare, ErrorBase):
 class TestFail(_TestShare, ErrorFail):
     def _get_match(self) -> str:
         return "fail"
+
+    def _error_fail(self, result: bool, invert: bool) -> None:
+        self.error_fail(result, self._get_match(), invert=invert)
