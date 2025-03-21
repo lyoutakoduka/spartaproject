@@ -43,3 +43,6 @@ class TestFail(_TestShare, ErrorFail):
 
     def _raise_error(self) -> None:
         self._error_fail(False, False)
+
+    def _raise_error_not(self) -> None:
+        self._error_fail(True, True)
