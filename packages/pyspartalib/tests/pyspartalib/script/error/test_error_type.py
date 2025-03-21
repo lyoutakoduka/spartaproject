@@ -200,3 +200,6 @@ class TestDifference(_TestShare, ErrorDifference):
 
     def _raise_error(self) -> None:
         self._error_difference(1, False)
+
+    def _raise_error_not(self) -> None:
+        self._error_difference(0, True)
