@@ -137,3 +137,11 @@ class TestNoExists(_TestShare, ErrorNoExists, WorkingDirectory):
 class TestContain(_TestShare, ErrorContain):
     def _get_match(self) -> str:
         return "contain"
+
+    def _error_contain(self, expected: int, invert: bool) -> None:
+        self.error_contain(
+            self.get_result_integer(),
+            expected,
+            self._get_match(),
+            invert=invert,
+        )
