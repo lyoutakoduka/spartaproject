@@ -13,6 +13,7 @@ from pyspartalib.script.error.error_type import (
     ErrorContain,
     ErrorDifference,
     ErrorFail,
+    ErrorLength,
     ErrorNoExists,
     ErrorNone,
 )
@@ -160,3 +161,8 @@ class TestContain(_TestShare, ErrorContain):
 
     def test_contain_not(self) -> None:
         self._cache_error(self._raise_error_not)
+
+
+class TestLength(_TestShare, ErrorLength):
+    def _get_match(self) -> str:
+        return "length"
