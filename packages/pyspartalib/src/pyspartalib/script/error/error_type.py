@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 
+from collections.abc import Container
 from pathlib import Path
+
+from pyspartalib.context.custom.type_context import Type
 
 
 class _Base:
@@ -46,3 +49,8 @@ class _TypeNoExists(_Base):
 
     def type_no_exists(self, result: Path, match: str, invert: bool) -> None:
         self.raise_not_found(self.__confirm(result), match, invert)
+
+
+class _TypeContain(_Base):
+    def __confirm(self, result: Container[Type], expected: object) -> bool:
+        return expected not in result
