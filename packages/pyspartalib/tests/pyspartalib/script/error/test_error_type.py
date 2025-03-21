@@ -95,3 +95,6 @@ class TestNone(_TestShare, ErrorNone, ErrorDifference):
 
     def test_none_not(self) -> None:
         self._cache_error(self._raise_error_not)
+
+    def test_none_success(self) -> None:
+        self._raise_error_success()
