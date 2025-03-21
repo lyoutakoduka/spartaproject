@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+from pathlib import Path
+
 import pytest
 from pyspartalib.context.custom.callable_context import Func
 from pyspartalib.context.default.integer_context import Ints
@@ -104,3 +106,6 @@ class TestNone(_TestShare, ErrorNone, ErrorDifference):
 class TestNoExists(_TestShare, ErrorNoExists):
     def _get_match(self) -> str:
         return "exists"
+
+    def _error_no_exists(self, result: Path, invert: bool) -> None:
+        self.error_no_exists(result, self._get_match(), invert=invert)
