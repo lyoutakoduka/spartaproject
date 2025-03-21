@@ -154,3 +154,6 @@ class TestContain(_TestShare, ErrorContain):
 
     def _cache_error(self, function: Func) -> None:
         self.catch_error(function, self._get_match())
+
+    def test_contain(self) -> None:
+        self._cache_error(self._raise_error)
