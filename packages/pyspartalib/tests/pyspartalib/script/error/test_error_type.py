@@ -74,3 +74,6 @@ class TestNone(_TestShare, ErrorNone, ErrorDifference):
 
     def _error_none_walrus(self) -> str | None:
         return self.error_none_walrus(self._get_expected(), self._get_match())
+
+    def _raise_error(self) -> None:
+        self._error_none(None, False)
