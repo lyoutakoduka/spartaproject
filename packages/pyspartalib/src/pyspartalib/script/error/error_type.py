@@ -77,3 +77,8 @@ class _TypeLength(_Base):
         invert: bool,
     ) -> None:
         self.raise_value(self.__confirm(result, expected), match, invert)
+
+
+class _TypeDifference(_Base):
+    def __confirm(self, result: Type, expected: Type) -> bool:
+        return result != expected
