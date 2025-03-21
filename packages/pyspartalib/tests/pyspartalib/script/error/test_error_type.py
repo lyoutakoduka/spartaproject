@@ -145,3 +145,6 @@ class TestContain(_TestShare, ErrorContain):
             self._get_match(),
             invert=invert,
         )
+
+    def _raise_error(self) -> None:
+        self._error_contain(3, False)
