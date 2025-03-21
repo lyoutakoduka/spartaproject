@@ -21,7 +21,7 @@ class ErrorBase:
         self._error_base(match, error=FileNotFoundError)
 
 
-class _Base(ErrorBase):
+class _ErrorShare(ErrorBase):
     def _invert(self, result: bool, invert: bool) -> bool:
         return result ^ invert
 
@@ -34,7 +34,7 @@ class _Base(ErrorBase):
             self.error_value(match)
 
 
-class ErrorFail(_Base):
+class ErrorFail(_ErrorShare):
     def _confirm(self, result: bool) -> bool:
         return not result
 
@@ -47,7 +47,7 @@ class ErrorFail(_Base):
         self.raise_value(self._confirm(result), match, invert)
 
 
-class ErrorNone(_Base):
+class ErrorNone(_ErrorShare):
     def _confirm(self, result: object) -> bool:
         return result is None
 
@@ -69,7 +69,7 @@ class ErrorNone(_Base):
         return result
 
 
-class ErrorNoExists(_Base):
+class ErrorNoExists(_ErrorShare):
     def _confirm(self, result: Path) -> bool:
         return not result.exists()
 
@@ -82,7 +82,7 @@ class ErrorNoExists(_Base):
         self.raise_not_found(self._confirm(result), match, invert)
 
 
-class ErrorContain(_Base):
+class ErrorContain(_ErrorShare):
     def _confirm(self, result: Container[Type], expected: object) -> bool:
         return expected not in result
 
@@ -96,7 +96,7 @@ class ErrorContain(_Base):
         self.raise_value(self._confirm(result, expected), match, invert)
 
 
-class ErrorLength(_Base):
+class ErrorLength(_ErrorShare):
     def _confirm(self, result: Sized, expected: int) -> bool:
         return len(result) != expected
 
@@ -110,7 +110,7 @@ class ErrorLength(_Base):
         self.raise_value(self._confirm(result, expected), match, invert)
 
 
-class ErrorDifference(_Base):
+class ErrorDifference(_ErrorShare):
     def _confirm(self, result: Type, expected: Type) -> bool:
         return result != expected
 
