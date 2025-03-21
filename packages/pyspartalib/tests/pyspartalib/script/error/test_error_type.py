@@ -174,3 +174,6 @@ class TestLength(_TestShare, ErrorLength):
             self._get_match(),
             invert=invert,
         )
+
+    def _raise_error(self) -> None:
+        self._error_length(0, False)
