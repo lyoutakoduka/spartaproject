@@ -10,6 +10,7 @@ from pyspartalib.script.directory.working.working_directory import (
 )
 from pyspartalib.script.error.error_type import (
     ErrorBase,
+    ErrorContain,
     ErrorDifference,
     ErrorFail,
     ErrorNoExists,
@@ -131,3 +132,8 @@ class TestNoExists(_TestShare, ErrorNoExists, WorkingDirectory):
 
     def test_no_exists_not(self) -> None:
         self.inside_working(self._no_exists_not)
+
+
+class TestContain(_TestShare, ErrorContain):
+    def _get_match(self) -> str:
+        return "contain"
