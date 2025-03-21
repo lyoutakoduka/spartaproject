@@ -7,7 +7,7 @@ from pyspartalib.context.custom.type_context import Type
 
 
 class ErrorBase:
-    def error_base(self, match: str) -> None:
+    def error_value(self, match: str) -> None:
         raise ValueError(match)
 
 
@@ -21,7 +21,7 @@ class _Base(ErrorBase):
 
     def raise_value(self, result: bool, match: str, invert: bool) -> None:
         if self._invert(result, invert):
-            self.error_base(match)
+            self.error_value(match)
 
 
 class _TypeFail(_Base):
