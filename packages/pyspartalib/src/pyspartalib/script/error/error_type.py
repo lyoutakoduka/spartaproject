@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+from pathlib import Path
+
 
 class _Base:
     def _invert(self, result: bool, invert: bool) -> bool:
@@ -36,3 +38,8 @@ class _TypeNone(_Base):
         invert: bool,
     ) -> None:
         self.raise_value(self.__confirm(result), match, invert)
+
+
+class _TypeNoExists(_Base):
+    def __confirm(self, result: Path) -> bool:
+        return not result.exists()
