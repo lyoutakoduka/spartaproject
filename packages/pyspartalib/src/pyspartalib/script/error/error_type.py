@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from collections.abc import Container
+from collections.abc import Container, Sized
 from pathlib import Path
 
 from pyspartalib.context.custom.type_context import Type
@@ -63,3 +63,8 @@ class _TypeContain(_Base):
         invert: bool,
     ) -> None:
         self.raise_value(self.__confirm(result, expected), match, invert)
+
+
+class _TypeLength(_Base):
+    def __confirm(self, result: Sized, expected: int) -> bool:
+        return len(result) != expected
