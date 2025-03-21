@@ -10,7 +10,7 @@ class _Base:
     def _invert(self, result: bool, invert: bool) -> bool:
         return result ^ invert
 
-    def base_value(self, match: str) -> None:
+    def error_base(self, match: str) -> None:
         raise ValueError(match)
 
     def raise_not_found(self, result: bool, match: str, invert: bool) -> None:
@@ -19,7 +19,7 @@ class _Base:
 
     def raise_value(self, result: bool, match: str, invert: bool) -> None:
         if self._invert(result, invert):
-            self.base_value(match)
+            self.error_base(match)
 
 
 class _TypeFail(_Base):
