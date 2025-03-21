@@ -3,7 +3,7 @@
 import pytest
 from pyspartalib.context.custom.callable_context import Func
 from pyspartalib.context.default.integer_context import Ints
-from pyspartalib.script.error.error_type import ErrorBase
+from pyspartalib.script.error.error_type import ErrorBase, ErrorFail
 
 
 class _TestShare:
@@ -32,3 +32,8 @@ class TestBase(_TestShare, ErrorBase):
 
     def test_value(self) -> None:
         self.catch_error(self._raise_error, self._get_match())
+
+
+class TestFail(_TestShare, ErrorFail):
+    def _get_match(self) -> str:
+        return "fail"
