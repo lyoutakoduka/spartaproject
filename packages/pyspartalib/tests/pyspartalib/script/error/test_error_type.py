@@ -186,3 +186,6 @@ class TestLength(_TestShare, ErrorLength):
 
     def test_length(self) -> None:
         self._cache_error(self._raise_error)
+
+    def test_length_not(self) -> None:
+        self._cache_error(self._raise_error_not)
