@@ -82,3 +82,12 @@ class _TypeLength(_Base):
 class _TypeDifference(_Base):
     def __confirm(self, result: Type, expected: Type) -> bool:
         return result != expected
+
+    def type_difference(
+        self,
+        result: Type,
+        expected: Type,
+        match: str,
+        invert: bool,
+    ) -> None:
+        self.raise_value(self.__confirm(result, expected), match, invert)
