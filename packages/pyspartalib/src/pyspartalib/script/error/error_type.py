@@ -11,3 +11,7 @@ class _Base:
     def raise_not_found(self, result: bool, match: str, invert: bool) -> None:
         if self._invert(result, invert):
             raise FileNotFoundError(match)
+
+    def raise_value(self, result: bool, match: str, invert: bool) -> None:
+        if self._invert(result, invert):
+            self.base_value(match)
