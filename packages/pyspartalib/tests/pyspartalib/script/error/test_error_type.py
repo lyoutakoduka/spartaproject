@@ -65,3 +65,6 @@ class TestFail(_TestShare, ErrorFail):
 class TestNone(_TestShare, ErrorNone, ErrorDifference):
     def _get_expected(self) -> str:
         return "success"
+
+    def _get_match(self) -> str:
+        return "none"
