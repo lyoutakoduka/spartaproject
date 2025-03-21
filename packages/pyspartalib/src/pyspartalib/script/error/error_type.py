@@ -7,11 +7,18 @@ from pyspartalib.context.custom.type_context import Type
 
 
 class ErrorBase:
+    def _error_base(
+        self,
+        match: str,
+        error: type[Exception] = ValueError,
+    ) -> None:
+        raise error(match)
+
     def error_value(self, match: str) -> None:
-        raise ValueError(match)
+        self._error_base(match)
 
     def error_not_found(self, match: str) -> None:
-        raise FileNotFoundError(match)
+        self._error_base(match, error=FileNotFoundError)
 
 
 class _Base(ErrorBase):
