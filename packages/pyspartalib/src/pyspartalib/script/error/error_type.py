@@ -35,7 +35,7 @@ class _ErrorShare(ErrorBase):
 
 
 class ErrorFail(_ErrorShare):
-    def _confirm(self, result: bool) -> bool:
+    def __confirm(self, result: bool) -> bool:
         return not result
 
     def error_fail(
@@ -44,11 +44,11 @@ class ErrorFail(_ErrorShare):
         match: str,
         invert: bool = False,
     ) -> None:
-        self.raise_value(self._confirm(result), match, invert)
+        self.raise_value(self.__confirm(result), match, invert)
 
 
 class ErrorNone(_ErrorShare):
-    def _confirm(self, result: object) -> bool:
+    def __confirm(self, result: object) -> bool:
         return result is None
 
     def error_none(
@@ -57,7 +57,7 @@ class ErrorNone(_ErrorShare):
         match: str,
         invert: bool = False,
     ) -> None:
-        self.raise_value(self._confirm(result), match, invert)
+        self.raise_value(self.__confirm(result), match, invert)
 
     def error_none_walrus(
         self,
@@ -70,7 +70,7 @@ class ErrorNone(_ErrorShare):
 
 
 class ErrorNoExists(_ErrorShare):
-    def _confirm(self, result: Path) -> bool:
+    def __confirm(self, result: Path) -> bool:
         return not result.exists()
 
     def error_no_exists(
@@ -79,11 +79,11 @@ class ErrorNoExists(_ErrorShare):
         match: str,
         invert: bool = False,
     ) -> None:
-        self.raise_not_found(self._confirm(result), match, invert)
+        self.raise_not_found(self.__confirm(result), match, invert)
 
 
 class ErrorContain(_ErrorShare):
-    def _confirm(self, result: Container[Type], expected: object) -> bool:
+    def __confirm(self, result: Container[Type], expected: object) -> bool:
         return expected not in result
 
     def error_contain(
@@ -93,11 +93,11 @@ class ErrorContain(_ErrorShare):
         match: str,
         invert: bool = False,
     ) -> None:
-        self.raise_value(self._confirm(result, expected), match, invert)
+        self.raise_value(self.__confirm(result, expected), match, invert)
 
 
 class ErrorLength(_ErrorShare):
-    def _confirm(self, result: Sized, expected: int) -> bool:
+    def __confirm(self, result: Sized, expected: int) -> bool:
         return len(result) != expected
 
     def error_length(
@@ -107,11 +107,11 @@ class ErrorLength(_ErrorShare):
         match: str,
         invert: bool = False,
     ) -> None:
-        self.raise_value(self._confirm(result, expected), match, invert)
+        self.raise_value(self.__confirm(result, expected), match, invert)
 
 
 class ErrorDifference(_ErrorShare):
-    def _confirm(self, result: Type, expected: Type) -> bool:
+    def __confirm(self, result: Type, expected: Type) -> bool:
         return result != expected
 
     def error_difference(
@@ -121,4 +121,4 @@ class ErrorDifference(_ErrorShare):
         match: str,
         invert: bool = False,
     ) -> None:
-        self.raise_value(self._confirm(result, expected), match, invert)
+        self.raise_value(self.__confirm(result, expected), match, invert)
