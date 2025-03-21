@@ -86,3 +86,6 @@ class TestNone(_TestShare, ErrorNone, ErrorDifference):
             self.error_difference(result, self._get_expected(), "difference")
         else:
             self.error_value("base")
+
+    def _cache_error(self, function: Func) -> None:
+        self.catch_error(function, self._get_match())
