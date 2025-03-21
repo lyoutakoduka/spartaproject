@@ -121,3 +121,7 @@ class TestNoExists(_TestShare, ErrorNoExists, WorkingDirectory):
 
     def _cache_error(self, function: Func) -> None:
         self.catch_error_not_found(function, self._get_match())
+
+    def _no_exists_not(self) -> bool:
+        self._cache_error(self._raise_error_not)
+        return True
