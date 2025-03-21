@@ -194,3 +194,6 @@ class TestLength(_TestShare, ErrorLength):
 class TestDifference(_TestShare, ErrorDifference):
     def _get_match(self) -> str:
         return "difference"
+
+    def _error_difference(self, expected: int, invert: bool) -> None:
+        self.error_difference(0, expected, self._get_match(), invert=invert)
