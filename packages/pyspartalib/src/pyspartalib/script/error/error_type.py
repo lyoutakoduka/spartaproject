@@ -15,3 +15,8 @@ class _Base:
     def raise_value(self, result: bool, match: str, invert: bool) -> None:
         if self._invert(result, invert):
             self.base_value(match)
+
+
+class _TypeFail(_Base):
+    def __confirm(self, result: bool) -> bool:
+        return not result
