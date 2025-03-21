@@ -20,3 +20,6 @@ class _Base:
 class _TypeFail(_Base):
     def __confirm(self, result: bool) -> bool:
         return not result
+
+    def type_fail(self, result: bool, match: str, invert: bool) -> None:
+        self.raise_value(self.__confirm(result), match, invert)
