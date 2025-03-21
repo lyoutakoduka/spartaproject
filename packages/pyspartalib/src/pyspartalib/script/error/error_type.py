@@ -10,6 +10,9 @@ class ErrorBase:
     def error_value(self, match: str) -> None:
         raise ValueError(match)
 
+    def error_not_found(self, match: str) -> None:
+        raise FileNotFoundError(match)
+
 
 class _Base(ErrorBase):
     def _invert(self, result: bool, invert: bool) -> bool:
@@ -17,7 +20,7 @@ class _Base(ErrorBase):
 
     def raise_not_found(self, result: bool, match: str, invert: bool) -> None:
         if self._invert(result, invert):
-            raise FileNotFoundError(match)
+            self.error_not_found(match)
 
     def raise_value(self, result: bool, match: str, invert: bool) -> None:
         if self._invert(result, invert):
