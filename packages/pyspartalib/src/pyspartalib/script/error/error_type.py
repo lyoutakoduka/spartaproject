@@ -7,3 +7,7 @@ class _Base:
 
     def base_value(self, match: str) -> None:
         raise ValueError(match)
+
+    def raise_not_found(self, result: bool, match: str, invert: bool) -> None:
+        if self._invert(result, invert):
+            raise FileNotFoundError(match)
