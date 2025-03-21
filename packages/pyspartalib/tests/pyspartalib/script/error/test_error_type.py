@@ -128,3 +128,6 @@ class TestNoExists(_TestShare, ErrorNoExists, WorkingDirectory):
 
     def test_no_exists(self) -> None:
         self._cache_error(self._raise_error)
+
+    def test_no_exists_not(self) -> None:
+        self.inside_working(self._no_exists_not)
