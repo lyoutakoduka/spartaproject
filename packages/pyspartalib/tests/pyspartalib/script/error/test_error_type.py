@@ -80,3 +80,9 @@ class TestNone(_TestShare, ErrorNone, ErrorDifference):
 
     def _raise_error_not(self) -> None:
         self._error_none(self._get_expected(), True)
+
+    def _raise_error_success(self) -> None:
+        if (result := self._error_none_walrus()) is not None:
+            self.error_difference(result, self._get_expected(), "difference")
+        else:
+            self.error_value("base")
