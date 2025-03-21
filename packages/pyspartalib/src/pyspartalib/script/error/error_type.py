@@ -68,3 +68,12 @@ class _TypeContain(_Base):
 class _TypeLength(_Base):
     def __confirm(self, result: Sized, expected: int) -> bool:
         return len(result) != expected
+
+    def type_length(
+        self,
+        result: Sized,
+        expected: int,
+        match: str,
+        invert: bool,
+    ) -> None:
+        self.raise_value(self.__confirm(result, expected), match, invert)
