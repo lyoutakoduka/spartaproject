@@ -13,3 +13,6 @@ class _TestShare:
     ) -> None:
         with pytest.raises(error, match=match):
             function()
+
+    def cache_error_not_found(self, function: Func, match: str) -> None:
+        self.cache_error(function, match, error=FileNotFoundError)
