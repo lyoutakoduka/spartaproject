@@ -47,6 +47,15 @@ class _TypeNone(_Base):
     ) -> None:
         self.raise_value(self.__confirm(result), match, invert)
 
+    def error_none_walrus(
+        self,
+        result: Type | None,
+        match: str,
+        invert: bool = False,
+    ) -> Type | None:
+        self.error_none(result, match, invert=invert)
+        return result
+
 
 class _TypeNoExists(_Base):
     def __confirm(self, result: Path) -> bool:
