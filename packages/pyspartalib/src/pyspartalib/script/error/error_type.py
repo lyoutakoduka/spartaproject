@@ -27,7 +27,7 @@ class _Base(ErrorBase):
             self.error_value(match)
 
 
-class _TypeFail(_Base):
+class _ErrorFail(_Base):
     def _confirm(self, result: bool) -> bool:
         return not result
 
@@ -40,7 +40,7 @@ class _TypeFail(_Base):
         self.raise_value(self._confirm(result), match, invert)
 
 
-class _TypeNone(_Base):
+class _ErrorNone(_Base):
     def _confirm(self, result: object) -> bool:
         return result is None
 
@@ -62,7 +62,7 @@ class _TypeNone(_Base):
         return result
 
 
-class _TypeNoExists(_Base):
+class _ErrorNoExists(_Base):
     def _confirm(self, result: Path) -> bool:
         return not result.exists()
 
@@ -75,7 +75,7 @@ class _TypeNoExists(_Base):
         self.raise_not_found(self._confirm(result), match, invert)
 
 
-class _TypeContain(_Base):
+class _ErrorContain(_Base):
     def _confirm(self, result: Container[Type], expected: object) -> bool:
         return expected not in result
 
@@ -89,7 +89,7 @@ class _TypeContain(_Base):
         self.raise_value(self._confirm(result, expected), match, invert)
 
 
-class _TypeLength(_Base):
+class _ErrorLength(_Base):
     def _confirm(self, result: Sized, expected: int) -> bool:
         return len(result) != expected
 
@@ -103,7 +103,7 @@ class _TypeLength(_Base):
         self.raise_value(self._confirm(result, expected), match, invert)
 
 
-class _TypeDifference(_Base):
+class _ErrorDifference(_Base):
     def _confirm(self, result: Type, expected: Type) -> bool:
         return result != expected
 
