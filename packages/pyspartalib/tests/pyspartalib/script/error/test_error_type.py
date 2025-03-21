@@ -3,7 +3,12 @@
 import pytest
 from pyspartalib.context.custom.callable_context import Func
 from pyspartalib.context.default.integer_context import Ints
-from pyspartalib.script.error.error_type import ErrorBase, ErrorFail
+from pyspartalib.script.error.error_type import (
+    ErrorBase,
+    ErrorDifference,
+    ErrorFail,
+    ErrorNone,
+)
 
 
 class _TestShare:
@@ -55,3 +60,8 @@ class TestFail(_TestShare, ErrorFail):
 
     def test_fail_not(self) -> None:
         self._cache_error(self._raise_error_not)
+
+
+class TestNone(_TestShare, ErrorNone, ErrorDifference):
+    def _get_expected(self) -> str:
+        return "success"
