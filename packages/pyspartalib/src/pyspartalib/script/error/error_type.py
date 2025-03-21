@@ -23,3 +23,8 @@ class _TypeFail(_Base):
 
     def type_fail(self, result: bool, match: str, invert: bool) -> None:
         self.raise_value(self.__confirm(result), match, invert)
+
+
+class _TypeNone(_Base):
+    def __confirm(self, result: object) -> bool:
+        return result is None
