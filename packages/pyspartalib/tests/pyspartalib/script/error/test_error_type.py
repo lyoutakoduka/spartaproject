@@ -68,3 +68,6 @@ class TestNone(_TestShare, ErrorNone, ErrorDifference):
 
     def _get_match(self) -> str:
         return "none"
+
+    def _error_none(self, result: str | None, invert: bool) -> None:
+        self.error_none(result, self._get_match(), invert=invert)
