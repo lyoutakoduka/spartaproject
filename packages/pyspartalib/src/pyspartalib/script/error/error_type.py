@@ -6,12 +6,14 @@ from pathlib import Path
 from pyspartalib.context.custom.type_context import Type
 
 
-class _Base:
-    def _invert(self, result: bool, invert: bool) -> bool:
-        return result ^ invert
-
+class ErrorBase:
     def error_base(self, match: str) -> None:
         raise ValueError(match)
+
+
+class _Base(ErrorBase):
+    def _invert(self, result: bool, invert: bool) -> bool:
+        return result ^ invert
 
     def raise_not_found(self, result: bool, match: str, invert: bool) -> None:
         if self._invert(result, invert):
