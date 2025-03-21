@@ -109,3 +109,6 @@ class TestNoExists(_TestShare, ErrorNoExists):
 
     def _error_no_exists(self, result: Path, invert: bool) -> None:
         self.error_no_exists(result, self._get_match(), invert=invert)
+
+    def _raise_error(self) -> None:
+        self._error_no_exists(Path("error"), False)
