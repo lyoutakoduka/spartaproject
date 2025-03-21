@@ -148,3 +148,6 @@ class TestContain(_TestShare, ErrorContain):
 
     def _raise_error(self) -> None:
         self._error_contain(3, False)
+
+    def _raise_error_not(self) -> None:
+        self._error_contain(0, True)
