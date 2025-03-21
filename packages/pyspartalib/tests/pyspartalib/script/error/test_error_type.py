@@ -52,3 +52,6 @@ class TestFail(_TestShare, ErrorFail):
 
     def test_fail(self) -> None:
         self._cache_error(self._raise_error)
+
+    def test_fail_not(self) -> None:
+        self._cache_error(self._raise_error_not)
