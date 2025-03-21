@@ -40,3 +40,6 @@ class TestFail(_TestShare, ErrorFail):
 
     def _error_fail(self, result: bool, invert: bool) -> None:
         self.error_fail(result, self._get_match(), invert=invert)
+
+    def _raise_error(self) -> None:
+        self._error_fail(False, False)
