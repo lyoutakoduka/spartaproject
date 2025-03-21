@@ -77,3 +77,6 @@ class TestNone(_TestShare, ErrorNone, ErrorDifference):
 
     def _raise_error(self) -> None:
         self._error_none(None, False)
+
+    def _raise_error_not(self) -> None:
+        self._error_none(self._get_expected(), True)
