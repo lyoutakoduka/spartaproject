@@ -7,7 +7,7 @@ from pyspartalib.script.error.error_type import ErrorBase
 
 
 class _TestShare:
-    def cache_error(
+    def catch_error(
         self,
         function: Func,
         match: str,
@@ -16,8 +16,8 @@ class _TestShare:
         with pytest.raises(error, match=match):
             function()
 
-    def cache_error_not_found(self, function: Func, match: str) -> None:
-        self.cache_error(function, match, error=FileNotFoundError)
+    def catch_error_not_found(self, function: Func, match: str) -> None:
+        self.catch_error(function, match, error=FileNotFoundError)
 
     def get_result_integer(self) -> Ints:
         return list(range(3))
