@@ -28,7 +28,7 @@ class _Base(ErrorBase):
 
 
 class _TypeFail(_Base):
-    def __confirm(self, result: bool) -> bool:
+    def _confirm(self, result: bool) -> bool:
         return not result
 
     def error_fail(
@@ -37,11 +37,11 @@ class _TypeFail(_Base):
         match: str,
         invert: bool = False,
     ) -> None:
-        self.raise_value(self.__confirm(result), match, invert)
+        self.raise_value(self._confirm(result), match, invert)
 
 
 class _TypeNone(_Base):
-    def __confirm(self, result: object) -> bool:
+    def _confirm(self, result: object) -> bool:
         return result is None
 
     def error_none(
@@ -50,7 +50,7 @@ class _TypeNone(_Base):
         match: str,
         invert: bool = False,
     ) -> None:
-        self.raise_value(self.__confirm(result), match, invert)
+        self.raise_value(self._confirm(result), match, invert)
 
     def error_none_walrus(
         self,
@@ -63,7 +63,7 @@ class _TypeNone(_Base):
 
 
 class _TypeNoExists(_Base):
-    def __confirm(self, result: Path) -> bool:
+    def _confirm(self, result: Path) -> bool:
         return not result.exists()
 
     def error_no_exists(
@@ -72,11 +72,11 @@ class _TypeNoExists(_Base):
         match: str,
         invert: bool = False,
     ) -> None:
-        self.raise_not_found(self.__confirm(result), match, invert)
+        self.raise_not_found(self._confirm(result), match, invert)
 
 
 class _TypeContain(_Base):
-    def __confirm(self, result: Container[Type], expected: object) -> bool:
+    def _confirm(self, result: Container[Type], expected: object) -> bool:
         return expected not in result
 
     def error_contain(
@@ -86,11 +86,11 @@ class _TypeContain(_Base):
         match: str,
         invert: bool = False,
     ) -> None:
-        self.raise_value(self.__confirm(result, expected), match, invert)
+        self.raise_value(self._confirm(result, expected), match, invert)
 
 
 class _TypeLength(_Base):
-    def __confirm(self, result: Sized, expected: int) -> bool:
+    def _confirm(self, result: Sized, expected: int) -> bool:
         return len(result) != expected
 
     def error_length(
@@ -100,11 +100,11 @@ class _TypeLength(_Base):
         match: str,
         invert: bool = False,
     ) -> None:
-        self.raise_value(self.__confirm(result, expected), match, invert)
+        self.raise_value(self._confirm(result, expected), match, invert)
 
 
 class _TypeDifference(_Base):
-    def __confirm(self, result: Type, expected: Type) -> bool:
+    def _confirm(self, result: Type, expected: Type) -> bool:
         return result != expected
 
     def error_difference(
@@ -114,4 +114,4 @@ class _TypeDifference(_Base):
         match: str,
         invert: bool = False,
     ) -> None:
-        self.raise_value(self.__confirm(result, expected), match, invert)
+        self.raise_value(self._confirm(result, expected), match, invert)
