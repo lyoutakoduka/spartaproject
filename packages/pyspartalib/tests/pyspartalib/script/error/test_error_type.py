@@ -189,3 +189,8 @@ class TestLength(_TestShare, ErrorLength):
 
     def test_length_not(self) -> None:
         self._cache_error(self._raise_error_not)
+
+
+class TestDifference(_TestShare, ErrorDifference):
+    def _get_match(self) -> str:
+        return "difference"
