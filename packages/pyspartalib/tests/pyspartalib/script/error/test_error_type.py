@@ -5,6 +5,9 @@ from pathlib import Path
 import pytest
 from pyspartalib.context.custom.callable_context import Func
 from pyspartalib.context.default.integer_context import Ints
+from pyspartalib.script.directory.working.working_directory import (
+    WorkingDirectory,
+)
 from pyspartalib.script.error.error_type import (
     ErrorBase,
     ErrorDifference,
@@ -103,7 +106,7 @@ class TestNone(_TestShare, ErrorNone, ErrorDifference):
         self._raise_error_success()
 
 
-class TestNoExists(_TestShare, ErrorNoExists):
+class TestNoExists(_TestShare, ErrorNoExists, WorkingDirectory):
     def _get_match(self) -> str:
         return "exists"
 
@@ -112,3 +115,6 @@ class TestNoExists(_TestShare, ErrorNoExists):
 
     def _raise_error(self) -> None:
         self._error_no_exists(Path("error"), False)
+
+    def _raise_error_not(self) -> None:
+        self._error_no_exists(self.get_working_root(), True)
