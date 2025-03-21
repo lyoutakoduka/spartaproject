@@ -26,7 +26,12 @@ class _TypeFail(_Base):
     def __confirm(self, result: bool) -> bool:
         return not result
 
-    def type_fail(self, result: bool, match: str, invert: bool) -> None:
+    def type_fail(
+        self,
+        result: bool,
+        match: str,
+        invert: bool = False,
+    ) -> None:
         self.raise_value(self.__confirm(result), match, invert)
 
 
@@ -38,7 +43,7 @@ class _TypeNone(_Base):
         self,
         result: object | None,
         match: str,
-        invert: bool,
+        invert: bool = False,
     ) -> None:
         self.raise_value(self.__confirm(result), match, invert)
 
@@ -47,7 +52,12 @@ class _TypeNoExists(_Base):
     def __confirm(self, result: Path) -> bool:
         return not result.exists()
 
-    def type_no_exists(self, result: Path, match: str, invert: bool) -> None:
+    def type_no_exists(
+        self,
+        result: Path,
+        match: str,
+        invert: bool = False,
+    ) -> None:
         self.raise_not_found(self.__confirm(result), match, invert)
 
 
@@ -60,7 +70,7 @@ class _TypeContain(_Base):
         result: Container[Type],
         expected: Type,
         match: str,
-        invert: bool,
+        invert: bool = False,
     ) -> None:
         self.raise_value(self.__confirm(result, expected), match, invert)
 
@@ -74,7 +84,7 @@ class _TypeLength(_Base):
         result: Sized,
         expected: int,
         match: str,
-        invert: bool,
+        invert: bool = False,
     ) -> None:
         self.raise_value(self.__confirm(result, expected), match, invert)
 
@@ -88,6 +98,6 @@ class _TypeDifference(_Base):
         result: Type,
         expected: Type,
         match: str,
-        invert: bool,
+        invert: bool = False,
     ) -> None:
         self.raise_value(self.__confirm(result, expected), match, invert)
