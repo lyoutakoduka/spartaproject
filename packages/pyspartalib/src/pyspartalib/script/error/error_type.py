@@ -43,3 +43,6 @@ class _TypeNone(_Base):
 class _TypeNoExists(_Base):
     def __confirm(self, result: Path) -> bool:
         return not result.exists()
+
+    def type_no_exists(self, result: Path, match: str, invert: bool) -> None:
+        self.raise_not_found(self.__confirm(result), match, invert)
