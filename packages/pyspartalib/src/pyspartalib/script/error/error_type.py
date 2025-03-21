@@ -54,3 +54,12 @@ class _TypeNoExists(_Base):
 class _TypeContain(_Base):
     def __confirm(self, result: Container[Type], expected: object) -> bool:
         return expected not in result
+
+    def type_contain(
+        self,
+        result: Container[Type],
+        expected: Type,
+        match: str,
+        invert: bool,
+    ) -> None:
+        self.raise_value(self.__confirm(result, expected), match, invert)
