@@ -3,6 +3,7 @@
 import pytest
 from pyspartalib.context.custom.callable_context import Func
 from pyspartalib.context.default.integer_context import Ints
+from pyspartalib.script.error.error_type import ErrorBase
 
 
 class _TestShare:
@@ -20,3 +21,8 @@ class _TestShare:
 
     def get_result_integer(self) -> Ints:
         return list(range(3))
+
+
+class TestBase(_TestShare, ErrorBase):
+    def _get_match(self) -> str:
+        return "base"
