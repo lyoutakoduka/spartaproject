@@ -29,3 +29,6 @@ class TestBase(_TestShare, ErrorBase):
 
     def _raise_error(self) -> None:
         self.error_value(self._get_match())
+
+    def test_value(self) -> None:
+        self.catch_error(self._raise_error, self._get_match())
