@@ -11,13 +11,13 @@ from pyspartalib.script.directory.working.working_directory import (
     WorkingDirectory,
 )
 from pyspartalib.script.error.error_raise import (
-    ErrorBase,
     ErrorContain,
     ErrorDifference,
     ErrorFail,
     ErrorLength,
     ErrorNoExists,
     ErrorNone,
+    ErrorRaise,
 )
 
 
@@ -38,7 +38,7 @@ class _TestShare:
         return list(range(3))
 
 
-class TestBase(_TestShare, ErrorBase):
+class TestBase(_TestShare, ErrorRaise):
     """Test class to raise errors together with the error identifier."""
 
     def _get_match(self) -> str:
