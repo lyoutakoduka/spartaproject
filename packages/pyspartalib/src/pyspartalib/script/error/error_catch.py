@@ -13,3 +13,6 @@ class ErrorCatch:
     ) -> None:
         with pytest.raises(error, match=match):
             function()
+
+    def catch_not_found(self, function: Func, match: str) -> None:
+        self.catch_value(function, match, error=FileNotFoundError)
