@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-"""Module to raise errors, and it's used through method overriding."""
+"""Module to raise errors, and it is used through method overriding."""
 
 from collections.abc import Container, Sized
 from pathlib import Path
@@ -136,7 +136,7 @@ class ErrorNone(_ErrorShare):
 
 
 class ErrorNoExists(_ErrorShare):
-    """Class to raise error if the input path doesn't exist."""
+    """Class to raise error if the input path does not exist."""
 
     def __confirm(self, result: Path) -> bool:
         return not result.exists()
@@ -147,7 +147,7 @@ class ErrorNoExists(_ErrorShare):
         match: str,
         invert: bool = False,
     ) -> None:
-        """Raise error if the input path doesn't exist.
+        """Raise error if the input path does not exist.
 
         Args:
             result (Path): The path you want to to verify.
@@ -196,7 +196,7 @@ class ErrorContain(_ErrorShare):
 
 
 class ErrorLength(_ErrorShare):
-    """Class to raise error if the length of Sized type isn't as expected."""
+    """Class to raise error if the length of Sized type is not as expected."""
 
     def __confirm(self, result: Sized, expected: int) -> bool:
         return len(result) != expected
@@ -208,7 +208,7 @@ class ErrorLength(_ErrorShare):
         match: str,
         invert: bool = False,
     ) -> None:
-        """Raise error if the length of Sized type isn't as expected.
+        """Raise error if the length of Sized type is not as expected.
 
         Args:
             result (Sized): The Sized type you want to verify the length.
@@ -243,11 +243,11 @@ class ErrorDifference(_ErrorShare):
 
         Args:
             result (Type):
-                For example, it's recommended to assign
+                For example, it is recommended to assign
                     such as the computed result.
 
             expected (Type):
-                For example, it's recommended to assign
+                For example, it is recommended to assign
                     the expected value for comparison with the computed result.
 
             match (str):
