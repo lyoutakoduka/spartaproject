@@ -4,7 +4,6 @@
 
 from pathlib import Path
 
-import pytest
 from pyspartalib.context.custom.callable_context import Func
 from pyspartalib.context.default.integer_context import Ints
 from pyspartalib.script.directory.working.working_directory import (
