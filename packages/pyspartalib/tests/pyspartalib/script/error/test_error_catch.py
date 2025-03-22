@@ -18,3 +18,6 @@ class TestValue(ErrorCatch, ErrorRaise):
 class TestNotFound(ErrorCatch, ErrorRaise):
     def _get_match(self) -> str:
         return "not_found"
+
+    def _error_not_found(self) -> None:
+        self.error_not_found(self._get_match())
