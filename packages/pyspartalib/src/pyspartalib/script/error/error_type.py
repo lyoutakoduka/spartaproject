@@ -8,7 +8,7 @@ from pathlib import Path
 from pyspartalib.context.custom.type_context import Type
 
 
-class ErrorBase:
+class ErrorRaise:
     """Class to raise errors together with the error identifier."""
 
     def _error_base(
@@ -41,7 +41,7 @@ class ErrorBase:
         self._error_base(match, error=FileNotFoundError)
 
 
-class _ErrorShare(ErrorBase):
+class _ErrorShare(ErrorRaise):
     def _invert(self, result: bool, invert: bool) -> bool:
         return result ^ invert
 
