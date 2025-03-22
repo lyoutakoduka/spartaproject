@@ -10,7 +10,7 @@ from pyspartalib.context.default.integer_context import Ints
 from pyspartalib.script.directory.working.working_directory import (
     WorkingDirectory,
 )
-from pyspartalib.script.error.error_type import (
+from pyspartalib.script.error.error_raise import (
     ErrorBase,
     ErrorContain,
     ErrorDifference,
