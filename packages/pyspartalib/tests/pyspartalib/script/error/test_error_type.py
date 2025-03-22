@@ -22,7 +22,7 @@ from pyspartalib.script.error.error_raise import (
 
 
 class _TestShare:
-    def catch_error(
+    def catch_value(
         self,
         function: Func,
         match: str,
@@ -32,7 +32,7 @@ class _TestShare:
             function()
 
     def catch_error_not_found(self, function: Func, match: str) -> None:
-        self.catch_error(function, match, error=FileNotFoundError)
+        self.catch_value(function, match, error=FileNotFoundError)
 
     def get_result_integer(self) -> Ints:
         return list(range(3))
@@ -52,7 +52,7 @@ class TestBase(_TestShare, ErrorRaise):
 
     def test_value(self) -> None:
         """Test to raise ValueError together with the error identifier."""
-        self.catch_error(self._error_value, self._get_match())
+        self.catch_value(self._error_value, self._get_match())
 
     def test_not_found(self) -> None:
         """Test to raise FileNotFoundError.
@@ -78,7 +78,7 @@ class TestFail(_TestShare, ErrorFail):
         self._error_fail(True, True)
 
     def _cache_error(self, function: Func) -> None:
-        self.catch_error(function, self._get_match())
+        self.catch_value(function, self._get_match())
 
     def test_fail(self) -> None:
         """Test to raise error if the input value is False."""
@@ -117,7 +117,7 @@ class TestNone(_TestShare, ErrorNone, ErrorDifference):
             self.error_value("base")
 
     def _cache_error(self, function: Func) -> None:
-        self.catch_error(function, self._get_match())
+        self.catch_value(function, self._get_match())
 
     def test_none(self) -> None:
         """Test to raise error if the input value is None."""
@@ -184,7 +184,7 @@ class TestContain(_TestShare, ErrorContain):
         self._error_contain(0, True)
 
     def _cache_error(self, function: Func) -> None:
-        self.catch_error(function, self._get_match())
+        self.catch_value(function, self._get_match())
 
     def test_contain(self) -> None:
         """Test to raise error if the input value is not in the container."""
@@ -219,7 +219,7 @@ class TestLength(_TestShare, ErrorLength):
         self._error_length(3, True)
 
     def _cache_error(self, function: Func) -> None:
-        self.catch_error(function, self._get_match())
+        self.catch_value(function, self._get_match())
 
     def test_length(self) -> None:
         """Test to raise error.
@@ -252,7 +252,7 @@ class TestDifference(_TestShare, ErrorDifference):
         self._error_difference(0, True)
 
     def _cache_error(self, function: Func) -> None:
-        self.catch_error(function, self._get_match())
+        self.catch_value(function, self._get_match())
 
     def test_difference(self) -> None:
         """Test to raise error if input the two values are different."""
