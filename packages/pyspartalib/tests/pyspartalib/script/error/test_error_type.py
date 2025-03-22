@@ -47,6 +47,9 @@ class TestBase(_TestShare, ErrorBase):
     def _error_value(self) -> None:
         self.error_value(self._get_match())
 
+    def _raise_not_found(self) -> None:
+        self.error_not_found(self._get_match())
+
     def test_value(self) -> None:
         """Test to raise ValueError together with the error identifier."""
         self.catch_error(self._error_value, self._get_match())
