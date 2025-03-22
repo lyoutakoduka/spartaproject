@@ -55,6 +55,10 @@ class TestBase(_TestShare, ErrorBase):
         self.catch_error(self._error_value, self._get_match())
 
     def test_not_found(self) -> None:
+        """Test to raise FileNotFoundError.
+
+        It together with the error identifier.
+        """
         self.catch_error_not_found(self._raise_not_found, self._get_match())
 
 
