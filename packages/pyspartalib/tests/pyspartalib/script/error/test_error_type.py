@@ -10,6 +10,7 @@ from pyspartalib.context.default.integer_context import Ints
 from pyspartalib.script.directory.working.working_directory import (
     WorkingDirectory,
 )
+from pyspartalib.script.error.error_catch import ErrorCatch
 from pyspartalib.script.error.error_raise import (
     ErrorContain,
     ErrorDifference,
@@ -21,19 +22,7 @@ from pyspartalib.script.error.error_raise import (
 )
 
 
-class _TestShare:
-    def catch_value(
-        self,
-        function: Func,
-        match: str,
-        error: type[Exception] = ValueError,
-    ) -> None:
-        with pytest.raises(error, match=match):
-            function()
-
-    def catch_not_found(self, function: Func, match: str) -> None:
-        self.catch_value(function, match, error=FileNotFoundError)
-
+class _TestShare(ErrorCatch):
     def get_result_integer(self) -> Ints:
         return list(range(3))
 
