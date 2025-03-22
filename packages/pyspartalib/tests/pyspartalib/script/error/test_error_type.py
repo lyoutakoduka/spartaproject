@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+"""Test module to raise errors, and it is used through method overriding."""
+
 from pathlib import Path
 
 import pytest
@@ -37,6 +39,8 @@ class _TestShare:
 
 
 class TestBase(_TestShare, ErrorBase):
+    """Test class to raise errors together with the error identifier."""
+
     def _get_match(self) -> str:
         return "base"
 
@@ -44,10 +48,13 @@ class TestBase(_TestShare, ErrorBase):
         self.error_value(self._get_match())
 
     def test_value(self) -> None:
+        """Test to raise ValueError together with the error identifier."""
         self.catch_error(self._raise_error, self._get_match())
 
 
 class TestFail(_TestShare, ErrorFail):
+    """Test class to raise error if the input value is False."""
+
     def _get_match(self) -> str:
         return "fail"
 
@@ -64,13 +71,17 @@ class TestFail(_TestShare, ErrorFail):
         self.catch_error(function, self._get_match())
 
     def test_fail(self) -> None:
+        """Test to raise error if the input value is False."""
         self._cache_error(self._raise_error)
 
     def test_fail_not(self) -> None:
+        """Test to raise error if the input value is True."""
         self._cache_error(self._raise_error_not)
 
 
 class TestNone(_TestShare, ErrorNone, ErrorDifference):
+    """Test class to raise error if the input value is None."""
+
     def _get_expected(self) -> str:
         return "success"
 
@@ -99,16 +110,21 @@ class TestNone(_TestShare, ErrorNone, ErrorDifference):
         self.catch_error(function, self._get_match())
 
     def test_none(self) -> None:
+        """Test to raise error if the input value is None."""
         self._cache_error(self._raise_error)
 
     def test_none_not(self) -> None:
+        """Test to raise error if the input value is not None."""
         self._cache_error(self._raise_error_not)
 
     def test_none_success(self) -> None:
+        """Test to assign the result of method by using a walrus operator."""
         self._raise_error_success()
 
 
 class TestNoExists(_TestShare, ErrorNoExists, WorkingDirectory):
+    """Test class to raise error if the input path does not exist."""
+
     def _get_match(self) -> str:
         return "exists"
 
@@ -129,13 +145,17 @@ class TestNoExists(_TestShare, ErrorNoExists, WorkingDirectory):
         return True
 
     def test_no_exists(self) -> None:
+        """Test to raise error if the input path does not exist."""
         self._cache_error(self._raise_error)
 
     def test_no_exists_not(self) -> None:
+        """Test to raise error if the input path exists."""
         self.inside_working(self._no_exists_not)
 
 
 class TestContain(_TestShare, ErrorContain):
+    """Test class to raise error if the input value is not in the container."""
+
     def _get_match(self) -> str:
         return "contain"
 
@@ -157,13 +177,20 @@ class TestContain(_TestShare, ErrorContain):
         self.catch_error(function, self._get_match())
 
     def test_contain(self) -> None:
+        """Test to raise error if the input value is not in the container."""
         self._cache_error(self._raise_error)
 
     def test_contain_not(self) -> None:
+        """Test to raise error if the input value is in the container."""
         self._cache_error(self._raise_error_not)
 
 
 class TestLength(_TestShare, ErrorLength):
+    """Test class to raise error.
+
+    If the input length of Sized type is not as the expected value.
+    """
+
     def _get_match(self) -> str:
         return "length"
 
@@ -185,13 +212,23 @@ class TestLength(_TestShare, ErrorLength):
         self.catch_error(function, self._get_match())
 
     def test_length(self) -> None:
+        """Test to raise error.
+
+        If the input length of Sized type is not as the expected value.
+        """
         self._cache_error(self._raise_error)
 
     def test_length_not(self) -> None:
+        """Test to raise error.
+
+        If the input length of Sized type is as the expected value.
+        """
         self._cache_error(self._raise_error_not)
 
 
 class TestDifference(_TestShare, ErrorDifference):
+    """Test class to raise error if input the two values are different."""
+
     def _get_match(self) -> str:
         return "difference"
 
@@ -208,7 +245,9 @@ class TestDifference(_TestShare, ErrorDifference):
         self.catch_error(function, self._get_match())
 
     def test_difference(self) -> None:
+        """Test to raise error if input the two values are different."""
         self._cache_error(self._raise_error)
 
     def test_difference_not(self) -> None:
+        """Test to raise error if input the two values are the same."""
         self._cache_error(self._raise_error_not)
