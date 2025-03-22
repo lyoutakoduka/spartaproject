@@ -196,7 +196,10 @@ class ErrorContain(_ErrorShare):
 
 
 class ErrorLength(_ErrorShare):
-    """Class to raise error if the length of Sized type is not as expected."""
+    """Class to raise error.
+
+    If the input length of Sized type is not as the expected value.
+    """
 
     def __confirm(self, result: Sized, expected: int) -> bool:
         return len(result) != expected
