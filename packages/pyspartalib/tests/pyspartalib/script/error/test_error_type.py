@@ -54,6 +54,9 @@ class TestBase(_TestShare, ErrorBase):
         """Test to raise ValueError together with the error identifier."""
         self.catch_error(self._error_value, self._get_match())
 
+    def test_not_found(self) -> None:
+        self.catch_error_not_found(self._raise_not_found, self._get_match())
+
 
 class TestFail(_TestShare, ErrorFail):
     """Test class to raise error if the input value is False."""
