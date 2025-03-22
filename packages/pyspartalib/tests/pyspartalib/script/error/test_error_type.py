@@ -31,7 +31,7 @@ class _TestShare:
         with pytest.raises(error, match=match):
             function()
 
-    def catch_error_not_found(self, function: Func, match: str) -> None:
+    def catch_not_found(self, function: Func, match: str) -> None:
         self.catch_value(function, match, error=FileNotFoundError)
 
     def get_result_integer(self) -> Ints:
@@ -59,7 +59,7 @@ class TestBase(_TestShare, ErrorRaise):
 
         It together with the error identifier.
         """
-        self.catch_error_not_found(self._raise_not_found, self._get_match())
+        self.catch_not_found(self._raise_not_found, self._get_match())
 
 
 class TestFail(_TestShare, ErrorFail):
@@ -148,7 +148,7 @@ class TestNoExists(_TestShare, ErrorNoExists, WorkingDirectory):
         self._error_no_exists(self.get_working_root(), True)
 
     def _cache_error(self, function: Func) -> None:
-        self.catch_error_not_found(function, self._get_match())
+        self.catch_not_found(function, self._get_match())
 
     def _no_exists_not(self) -> bool:
         self._cache_error(self._raise_error_not)
