@@ -44,12 +44,12 @@ class TestBase(_TestShare, ErrorBase):
     def _get_match(self) -> str:
         return "base"
 
-    def _raise_error(self) -> None:
+    def _error_value(self) -> None:
         self.error_value(self._get_match())
 
     def test_value(self) -> None:
         """Test to raise ValueError together with the error identifier."""
-        self.catch_error(self._raise_error, self._get_match())
+        self.catch_error(self._error_value, self._get_match())
 
 
 class TestFail(_TestShare, ErrorFail):
