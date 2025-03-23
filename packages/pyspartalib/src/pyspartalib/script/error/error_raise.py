@@ -3,6 +3,7 @@
 """Module to raise errors, and it is used through method overriding."""
 
 from collections.abc import Container, Sized
+from decimal import FloatOperation
 from pathlib import Path
 
 from pyspartalib.context.custom.type_context import Type
@@ -42,6 +43,9 @@ class ErrorRaise:
 
         """
         self._error_base(error=FileNotFoundError, match=match)
+
+    def error_float(self) -> None:
+        self._error_base(error=FloatOperation)
 
 
 class _ErrorShare(ErrorRaise):
