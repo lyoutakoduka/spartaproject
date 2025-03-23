@@ -7,7 +7,7 @@ from pyspartalib.context.custom.callable_context import Func
 
 
 class ErrorCatch:
-    def catch_value(
+    def _catch_base(
         self,
         function: Func,
         error: type[Exception] = ValueError,
@@ -16,8 +16,11 @@ class ErrorCatch:
         with pytest.raises(error, match=match):
             function()
 
+    def catch_value(self, function: Func, match: str) -> None:
+        self._catch_base(function, match=match)
+
     def catch_not_found(self, function: Func, match: str) -> None:
-        self.catch_value(function, error=FileNotFoundError, match=match)
+        self._catch_base(function, error=FileNotFoundError, match=match)
 
     def catch_float(self, function: Func) -> None:
-        self.catch_value(function, error=FloatOperation)
+        self._catch_base(function, error=FloatOperation)
