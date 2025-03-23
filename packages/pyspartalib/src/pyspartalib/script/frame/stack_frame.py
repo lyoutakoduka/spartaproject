@@ -43,7 +43,7 @@ class CurrentFrame(ErrorRaise):
         frame["file"] = get_relative(frame["file"])
         return frame
 
-    def current_frame(self, offset: int = 0) -> StackFrame:
+    def get_frame(self, offset: int = 0) -> StackFrame:
         """Get current frame information in stack frames.
 
         Args:
