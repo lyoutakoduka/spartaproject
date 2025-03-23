@@ -15,4 +15,4 @@ class ErrorCatch:
             function()
 
     def catch_not_found(self, function: Func, match: str) -> None:
-        self.catch_value(function, match, error=FileNotFoundError)
+        self.catch_value(function, error=FileNotFoundError, match=match)
