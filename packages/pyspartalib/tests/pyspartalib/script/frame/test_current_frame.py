@@ -4,7 +4,6 @@
 
 from pathlib import Path
 
-from pyspartalib.context.custom.type_context import Type
 from pyspartalib.script.error.error_raise import ErrorDifference
 from pyspartalib.script.frame.context.frame_context import StackFrame
 from pyspartalib.script.frame.current_frame import CurrentFrame
