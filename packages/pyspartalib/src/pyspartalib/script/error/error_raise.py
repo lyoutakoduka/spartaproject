@@ -5,6 +5,7 @@
 from collections.abc import Container, Sized
 from decimal import FloatOperation
 from pathlib import Path
+from typing import NoReturn
 
 from pyspartalib.context.custom.type_context import Type
 
@@ -16,13 +17,13 @@ class ErrorRaise:
         self,
         error: type[Exception] = ValueError,
         match: str | None = None,
-    ) -> None:
+    ) -> NoReturn:
         if match is None:
             raise error
 
         raise error(match)
 
-    def error_value(self, match: str) -> None:
+    def error_value(self, match: str) -> NoReturn:
         """Raise ValueError together with the error identifier.
 
         Args:
@@ -33,7 +34,7 @@ class ErrorRaise:
         """
         self._error_base(match=match)
 
-    def error_not_found(self, match: str) -> None:
+    def error_not_found(self, match: str) -> NoReturn:
         """Raise FileNotFoundError together with the error identifier.
 
         Args:
@@ -44,7 +45,7 @@ class ErrorRaise:
         """
         self._error_base(error=FileNotFoundError, match=match)
 
-    def error_float(self) -> None:
+    def error_float(self) -> NoReturn:
         """Raise FloatOperation for a test."""
         self._error_base(error=FloatOperation)
 
