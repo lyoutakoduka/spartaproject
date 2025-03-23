@@ -8,8 +8,8 @@ class ErrorCatch:
     def catch_value(
         self,
         function: Func,
-        match: str | None = None,
         error: type[Exception] = ValueError,
+        match: str | None = None,
     ) -> None:
         with pytest.raises(error, match=match):
             function()
