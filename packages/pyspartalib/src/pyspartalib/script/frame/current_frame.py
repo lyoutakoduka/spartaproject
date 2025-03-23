@@ -49,6 +49,9 @@ class CurrentFrame(ErrorRaise):
         frame["file"] = get_relative(frame["file"])
         return frame
 
+    def _select_frame(self, offset: int, frames: StackFrames) -> StackFrame:
+        return frames[3 + offset]
+
     def get_frame(self, offset: int = 0) -> StackFrame:
         """Get the current frame information from the stack frames.
 
@@ -61,7 +64,7 @@ class CurrentFrame(ErrorRaise):
 
         """
         return self._to_relative_path(
-            self._find_stack_frame_error()[3 + offset],
+            self._select_frame(offset, self._find_stack_frame_error()),
         )
 
     def __init__(self, force_fail: bool = False) -> None:
