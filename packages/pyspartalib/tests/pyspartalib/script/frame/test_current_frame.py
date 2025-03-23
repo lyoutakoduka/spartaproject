@@ -66,3 +66,6 @@ class TestOffset(_TestShare):
 class TestError(_TestShare, ErrorCatch):
     def _get_result(self) -> None:
         CurrentFrame(force_fail=True).get_frame()
+
+    def test_error(self) -> None:
+        self.catch_value(self._get_result, "frame")
