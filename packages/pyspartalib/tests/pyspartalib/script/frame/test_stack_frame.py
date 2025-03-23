@@ -6,7 +6,7 @@ from pathlib import Path
 
 from pyspartalib.context.custom.type_context import Type
 from pyspartalib.script.frame.context.frame_context import StackFrame
-from pyspartalib.script.frame.stack_frame import current_frame
+from pyspartalib.script.frame.current_frame import CurrentFrame
 from pyspartalib.script.path.modify.current.get_relative import get_relative
 
 
@@ -39,7 +39,10 @@ class TestCurrent(_Share):
 
     def test_current(self) -> None:
         """Test to get current frame information in stack frames."""
-        _difference_error(current_frame(), self._get_frame_current())  # Here
+        _difference_error(
+            CurrentFrame().get_frame(),
+            self._get_frame_current(),
+        )  # Here
 
 
 class TestOffset(_Share):
@@ -49,7 +52,10 @@ class TestOffset(_Share):
         return self.get_expected_frame("test_offset", 56)
 
     def _inside_function(self) -> None:
-        _difference_error(current_frame(offset=1), self._get_frame_offset())
+        _difference_error(
+            CurrentFrame().get_frame(offset=1),
+            self._get_frame_offset(),
+        )
 
     def test_offset(self) -> None:
         """Test to get current frame from an offset stack frame."""
