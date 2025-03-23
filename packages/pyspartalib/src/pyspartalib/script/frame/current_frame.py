@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-"""Module to get stack frames information."""
+"""Module to get the current frame from the stack frames."""
 
 from inspect import FrameInfo, currentframe, getouterframes
 from pathlib import Path
@@ -15,7 +15,7 @@ from pyspartalib.script.path.modify.current.get_relative import get_relative
 
 
 class CurrentFrame(ErrorRaise):
-    """Class to get the current frame information from the stack frames."""
+    """Class to get the current frame from the stack frames."""
 
     def __initialize_variables(self, force_fail: bool) -> None:
         self._force_fail: bool = force_fail
@@ -53,14 +53,14 @@ class CurrentFrame(ErrorRaise):
         return frames[3 + offset]
 
     def get_frame(self, offset: int = 0) -> StackFrame:
-        """Get the current frame information from the stack frames.
+        """Get the current frame from the stack frames.
 
         Args:
             offset (int, optional): Defaults to 0.
                 Index offset of the stack frames based on the current frame.
 
         Returns:
-            StackFrame: Selected the current frame information.
+            StackFrame: Selected the current frame.
 
         """
         return self._to_relative_path(
