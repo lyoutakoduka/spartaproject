@@ -31,8 +31,14 @@ class CurrentFrame(ErrorRaise):
             for outer_frame in getouterframes(current_frame)
         ]
 
+    def _current_frame(self) -> FrameType | None:
+        if self._force_fail:
+            return None
+
+        return currentframe()
+
     def _find_stack_frame_error(self) -> StackFrames:
-        if current_frame := currentframe():
+        if current_frame := self._current_frame():
             return self._get_stack_frames(current_frame)
 
         return self.error_value("frame")
