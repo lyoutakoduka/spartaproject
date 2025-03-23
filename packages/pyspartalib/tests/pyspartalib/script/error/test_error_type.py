@@ -26,30 +26,6 @@ class _TestShare(ErrorCatch):
         return list(range(3))
 
 
-class TestBase(_TestShare, ErrorRaise):
-    """Test class to raise errors together with the error identifier."""
-
-    def _get_match(self) -> str:
-        return "base"
-
-    def _error_value(self) -> None:
-        self.error_value(self._get_match())
-
-    def _raise_not_found(self) -> None:
-        self.error_not_found(self._get_match())
-
-    def test_value(self) -> None:
-        """Test to raise ValueError together with the error identifier."""
-        self.catch_value(self._error_value, self._get_match())
-
-    def test_not_found(self) -> None:
-        """Test to raise FileNotFoundError.
-
-        It together with the error identifier.
-        """
-        self.catch_not_found(self._raise_not_found, self._get_match())
-
-
 class TestFail(_TestShare, ErrorFail):
     """Test class to raise error if the input value is False."""
 
