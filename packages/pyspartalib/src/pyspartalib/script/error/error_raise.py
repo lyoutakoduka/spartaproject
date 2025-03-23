@@ -45,6 +45,7 @@ class ErrorRaise:
         self._error_base(error=FileNotFoundError, match=match)
 
     def error_float(self) -> None:
+        """Raise FloatOperation for a test."""
         self._error_base(error=FloatOperation)
 
 
