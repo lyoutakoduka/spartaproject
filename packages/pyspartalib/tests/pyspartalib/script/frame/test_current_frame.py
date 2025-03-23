@@ -41,7 +41,7 @@ class TestCurrent(_TestShare):
             self._get_result(),
             self._get_expected(),
             "current",
-        )  # Here
+        )
 
 
 class TestOffset(_TestShare):
@@ -62,4 +62,4 @@ class TestOffset(_TestShare):
 
     def test_offset(self) -> None:
         """Test to get current frame from an offset stack frame."""
-        self._inside_function()  # Here
+        self._inside_function()
