@@ -15,7 +15,7 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
-class _Share:
+class _TestShare:
     def get_file_expected(self) -> Path:
         return get_relative(Path(__file__).resolve())
 
@@ -31,7 +31,7 @@ class _Share:
         }
 
 
-class TestCurrent(_Share):
+class TestCurrent(_TestShare):
     """Class to get current frame information in stack frames."""
 
     def _get_frame_current(self) -> StackFrame:
@@ -45,7 +45,7 @@ class TestCurrent(_Share):
         )  # Here
 
 
-class TestOffset(_Share):
+class TestOffset(_TestShare):
     """Class to get current frame from an offset stack frame."""
 
     def _get_frame_offset(self) -> StackFrame:
