@@ -24,3 +24,8 @@ class TestNotFound(ErrorCatch, ErrorRaise):
 
     def test_not_found(self) -> None:
         self.catch_not_found(self._error_not_found, self._get_match())
+
+
+class TestFloat(ErrorCatch, ErrorRaise):
+    def test_float(self) -> None:
+        self.catch_float(self.error_float)
