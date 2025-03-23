@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 
-"""Test module to get stack frames information."""
+"""Test module to get the current frame from the stack frames."""
 
 from pathlib import Path
 
@@ -28,7 +28,7 @@ class _TestShare(ErrorDifference):
 
 
 class TestCurrent(_TestShare):
-    """Class to get current frame information in stack frames."""
+    """Class to get the current frame from the stack frames."""
 
     def _get_result(self) -> StackFrame:
         return CurrentFrame().get_frame()
@@ -37,7 +37,7 @@ class TestCurrent(_TestShare):
         return self.get_expected_frame("_get_result", 34)
 
     def test_current(self) -> None:
-        """Test to get current frame information in stack frames."""
+        """Test to get the current frame from the stack frames."""
         self.error_difference(
             self._get_result(),
             self._get_expected(),
@@ -46,7 +46,7 @@ class TestCurrent(_TestShare):
 
 
 class TestOffset(_TestShare):
-    """Class to get current frame from an offset stack frame."""
+    """Class to get the current frame from the offset stack frame."""
 
     def _get_result(self) -> StackFrame:
         return CurrentFrame().get_frame(offset=1)
@@ -55,7 +55,7 @@ class TestOffset(_TestShare):
         return self.get_expected_frame("test_offset", 60)
 
     def test_offset(self) -> None:
-        """Test to get current frame from an offset stack frame."""
+        """Test to get the current frame from the offset stack frame."""
         self.error_difference(
             self._get_result(),
             self._get_expected(),
@@ -64,8 +64,11 @@ class TestOffset(_TestShare):
 
 
 class TestError(_TestShare, ErrorCatch):
+    """Class to get the current frame, but it fails."""
+
     def _get_result(self) -> None:
         CurrentFrame(force_fail=True).get_frame()
 
     def test_error(self) -> None:
+        """Test to get the current frame, but it fails."""
         self.catch_value(self._get_result, "frame")
