@@ -15,6 +15,9 @@ from pyspartalib.script.path.modify.current.get_relative import get_relative
 
 
 class CurrentFrame(ErrorRaise):
+    def __initialize_variables(self, force_fail: bool) -> None:
+        self._force_fail: bool = force_fail
+
     def _get_stack_frame(self, outer_frame: FrameInfo) -> StackFrame:
         return {
             "file": Path(outer_frame.filename),
@@ -52,3 +55,6 @@ class CurrentFrame(ErrorRaise):
         return self._to_relative_path(
             self._find_stack_frame_error()[2 + offset],
         )
+
+    def __init__(self, force_fail: bool = False) -> None:
+        self.__initialize_variables(force_fail)
