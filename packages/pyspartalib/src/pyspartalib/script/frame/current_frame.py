@@ -15,6 +15,8 @@ from pyspartalib.script.path.modify.current.get_relative import get_relative
 
 
 class CurrentFrame(ErrorRaise):
+    """Class to get the current frame information from the stack frames."""
+
     def __initialize_variables(self, force_fail: bool) -> None:
         self._force_fail: bool = force_fail
 
@@ -48,14 +50,14 @@ class CurrentFrame(ErrorRaise):
         return frame
 
     def get_frame(self, offset: int = 0) -> StackFrame:
-        """Get current frame information in stack frames.
+        """Get the current frame information from the stack frames.
 
         Args:
             offset (int, optional): Defaults to 0.
-                Index offset of stack frames based on current frame.
+                Index offset of the stack frames based on the current frame.
 
         Returns:
-            StackFrame: Selected current frame information.
+            StackFrame: Selected the current frame information.
 
         """
         return self._to_relative_path(
@@ -63,4 +65,11 @@ class CurrentFrame(ErrorRaise):
         )
 
     def __init__(self, force_fail: bool = False) -> None:
+        """Initialize the class variables.
+
+        Args:
+            force_fail (bool, optional): Defaults to False.
+                If true, retrieving the stack frames will fail.
+
+        """
         self.__initialize_variables(force_fail)
