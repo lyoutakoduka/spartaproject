@@ -5,7 +5,6 @@
 from inspect import FrameInfo, currentframe, getouterframes
 from pathlib import Path
 from types import FrameType
-from typing import NoReturn
 
 from pyspartalib.script.error.error_raise import ErrorRaise
 from pyspartalib.script.frame.context.frame_context import (
