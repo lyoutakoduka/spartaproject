@@ -5,6 +5,7 @@
 from pathlib import Path
 
 from pyspartalib.context.custom.type_context import Type
+from pyspartalib.script.error.error_raise import ErrorDifference
 from pyspartalib.script.frame.context.frame_context import StackFrame
 from pyspartalib.script.frame.current_frame import CurrentFrame
 from pyspartalib.script.path.modify.current.get_relative import get_relative
@@ -15,7 +16,7 @@ def _difference_error(result: Type, expected: Type) -> None:
         raise ValueError
 
 
-class _TestShare:
+class _TestShare(ErrorDifference):
     def get_file_expected(self) -> Path:
         return get_relative(Path(__file__).resolve())
 
@@ -39,9 +40,10 @@ class TestCurrent(_TestShare):
 
     def test_current(self) -> None:
         """Test to get current frame information in stack frames."""
-        _difference_error(
+        self.error_difference(
             CurrentFrame().get_frame(),
             self._get_frame_current(),
+            "current",
         )  # Here
 
 
@@ -52,9 +54,10 @@ class TestOffset(_TestShare):
         return self.get_expected_frame("test_offset", 56)
 
     def _inside_function(self) -> None:
-        _difference_error(
+        self.error_difference(
             CurrentFrame().get_frame(offset=1),
             self._get_frame_offset(),
+            "offset",
         )
 
     def test_offset(self) -> None:
