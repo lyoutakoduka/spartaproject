@@ -12,6 +12,10 @@ def _get_current() -> StackFrame:
     return CurrentFrame().get_frame(offset=2)
 
 
+def _get_parent(frame: StackFrame) -> Path:
+    return frame["file"].parent
+
+
 def get_resource(local_path: Path | None = None) -> Path:
     """Get path in local resource directory.
 
@@ -37,7 +41,7 @@ def get_resource(local_path: Path | None = None) -> Path:
         Path: Path based on resource directory.
 
     """
-    resource: Path = Path(_get_current()["file"].parent, "resource")
+    resource: Path = Path(_get_parent(_get_current()), "resource")
 
     if local_path is None:
         return resource
