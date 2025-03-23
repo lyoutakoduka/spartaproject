@@ -34,7 +34,7 @@ class TestCurrent(_TestShare):
         return CurrentFrame().get_frame()
 
     def _get_expected(self) -> StackFrame:
-        return self.get_expected_frame("_get_result", 33)
+        return self.get_expected_frame("_get_result", 34)
 
     def test_current(self) -> None:
         """Test to get current frame information in stack frames."""
@@ -52,7 +52,7 @@ class TestOffset(_TestShare):
         return CurrentFrame().get_frame(offset=1)
 
     def _get_expected(self) -> StackFrame:
-        return self.get_expected_frame("test_offset", 59)
+        return self.get_expected_frame("test_offset", 60)
 
     def test_offset(self) -> None:
         """Test to get current frame from an offset stack frame."""
