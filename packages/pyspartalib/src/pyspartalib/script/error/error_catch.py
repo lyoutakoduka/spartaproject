@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+from decimal import FloatOperation
+
 import pytest
 from pyspartalib.context.custom.callable_context import Func
 
@@ -16,3 +18,6 @@ class ErrorCatch:
 
     def catch_not_found(self, function: Func, match: str) -> None:
         self.catch_value(function, error=FileNotFoundError, match=match)
+
+    def catch_float(self, function: Func) -> None:
+        self.catch_value(function, error=FloatOperation)
