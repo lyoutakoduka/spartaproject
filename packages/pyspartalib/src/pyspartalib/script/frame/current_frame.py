@@ -38,10 +38,10 @@ class CurrentFrame(ErrorRaise):
         return currentframe()
 
     def _find_stack_frame_error(self) -> StackFrames:
-        if current_frame := self._current_frame():
-            return self._get_stack_frames(current_frame)
+        if (current_frame := self._current_frame()) is None:
+            self.error_value("frame")
 
-        return self.error_value("frame")
+        return self._get_stack_frames(current_frame)
 
     def _to_relative_path(self, frame: StackFrame) -> StackFrame:
         frame["file"] = get_relative(frame["file"])
