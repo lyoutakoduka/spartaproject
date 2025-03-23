@@ -53,13 +53,10 @@ class TestOffset(_TestShare):
     def _get_expected(self) -> StackFrame:
         return self.get_expected_frame("_inside_function", 58)
 
-    def _inside_function(self) -> None:
+    def test_offset(self) -> None:
+        """Test to get current frame from an offset stack frame."""
         self.error_difference(
             self._get_result(),
             self._get_expected(),
             "offset",
         )
-
-    def test_offset(self) -> None:
-        """Test to get current frame from an offset stack frame."""
-        self._inside_function()
