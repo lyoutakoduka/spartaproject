@@ -11,11 +11,6 @@ from pyspartalib.script.frame.current_frame import CurrentFrame
 from pyspartalib.script.path.modify.current.get_relative import get_relative
 
 
-def _difference_error(result: Type, expected: Type) -> None:
-    if result != expected:
-        raise ValueError
-
-
 class _TestShare(ErrorDifference):
     def get_file_expected(self) -> Path:
         return get_relative(Path(__file__).resolve())
