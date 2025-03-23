@@ -61,7 +61,7 @@ class CurrentFrame(ErrorRaise):
 
         """
         return self._to_relative_path(
-            self._find_stack_frame_error()[2 + offset],
+            self._find_stack_frame_error()[3 + offset],
         )
 
     def __init__(self, force_fail: bool = False) -> None:
