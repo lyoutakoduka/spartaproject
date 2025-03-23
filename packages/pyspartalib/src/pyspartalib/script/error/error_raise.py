@@ -31,6 +31,9 @@ class ErrorRaise:
                 The error identifier for correct error handling.
                 Assign a unique string.
 
+        Returns:
+            NoReturn: An error always occurs.
+
         """
         self._error_base(match=match)
 
@@ -42,11 +45,19 @@ class ErrorRaise:
                 The error identifier for correct error handling.
                 Assign a unique string.
 
+        Returns:
+            NoReturn: An error always occurs.
+
         """
         self._error_base(error=FileNotFoundError, match=match)
 
     def error_float(self) -> NoReturn:
-        """Raise FloatOperation for a test."""
+        """Raise FloatOperation for a test.
+
+        Returns:
+            NoReturn: An error always occurs.
+
+        """
         self._error_base(error=FloatOperation)
 
 
