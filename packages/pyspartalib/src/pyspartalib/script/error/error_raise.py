@@ -13,9 +13,12 @@ class ErrorRaise:
 
     def _error_base(
         self,
-        match: str,
+        match: str | None = None,
         error: type[Exception] = ValueError,
     ) -> None:
+        if match is None:
+            raise error
+
         raise error(match)
 
     def error_value(self, match: str) -> None:
@@ -27,7 +30,7 @@ class ErrorRaise:
                 Assign a unique string.
 
         """
-        self._error_base(match)
+        self._error_base(match=match)
 
     def error_not_found(self, match: str) -> None:
         """Raise FileNotFoundError together with the error identifier.
@@ -38,7 +41,7 @@ class ErrorRaise:
                 Assign a unique string.
 
         """
-        self._error_base(match, error=FileNotFoundError)
+        self._error_base(match=match, error=FileNotFoundError)
 
 
 class _ErrorShare(ErrorRaise):
