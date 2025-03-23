@@ -4,6 +4,7 @@
 
 from pathlib import Path
 
+from pyspartalib.script.error.error_catch import ErrorCatch
 from pyspartalib.script.error.error_raise import ErrorDifference
 from pyspartalib.script.frame.context.frame_context import StackFrame
 from pyspartalib.script.frame.current_frame import CurrentFrame
@@ -60,3 +61,8 @@ class TestOffset(_TestShare):
             self._get_expected(),
             "offset",
         )
+
+
+class TestError(_TestShare, ErrorCatch):
+    def _get_result(self) -> None:
+        CurrentFrame(force_fail=True).get_frame()
