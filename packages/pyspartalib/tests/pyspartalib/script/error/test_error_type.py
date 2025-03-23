@@ -17,7 +17,6 @@ from pyspartalib.script.error.error_raise import (
     ErrorLength,
     ErrorNoExists,
     ErrorNone,
-    ErrorRaise,
 )
 
 
