@@ -29,13 +29,16 @@ class _TestShare(ErrorDifference):
 class TestCurrent(_TestShare):
     """Class to get current frame information in stack frames."""
 
+    def _get_result(self) -> StackFrame:
+        return CurrentFrame().get_frame()
+
     def _get_expected(self) -> StackFrame:
         return self.get_expected_frame("test_current", 38)
 
     def test_current(self) -> None:
         """Test to get current frame information in stack frames."""
         self.error_difference(
-            CurrentFrame().get_frame(),
+            self._get_result(),
             self._get_expected(),
             "current",
         )  # Here
@@ -44,12 +47,15 @@ class TestCurrent(_TestShare):
 class TestOffset(_TestShare):
     """Class to get current frame from an offset stack frame."""
 
+    def _get_result(self) -> StackFrame:
+        return CurrentFrame().get_frame(offset=1)
+
     def _get_expected(self) -> StackFrame:
         return self.get_expected_frame("test_offset", 59)
 
     def _inside_function(self) -> None:
         self.error_difference(
-            CurrentFrame().get_frame(offset=1),
+            self._get_result(),
             self._get_expected(),
             "offset",
         )
