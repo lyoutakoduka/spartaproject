@@ -51,7 +51,7 @@ class TestOffset(_TestShare):
         return CurrentFrame().get_frame(offset=1)
 
     def _get_expected(self) -> StackFrame:
-        return self.get_expected_frame("_inside_function", 58)
+        return self.get_expected_frame("test_offset", 59)
 
     def test_offset(self) -> None:
         """Test to get current frame from an offset stack frame."""
