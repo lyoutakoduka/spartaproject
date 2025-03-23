@@ -15,10 +15,6 @@ from pyspartalib.script.frame.context.frame_context import (
 from pyspartalib.script.path.modify.current.get_relative import get_relative
 
 
-def _raise_error(message: str) -> NoReturn:
-    raise ValueError(message)
-
-
 class CurrentFrame(ErrorRaise):
     def _get_stack_frame(self, outer_frame: FrameInfo) -> StackFrame:
         return {
