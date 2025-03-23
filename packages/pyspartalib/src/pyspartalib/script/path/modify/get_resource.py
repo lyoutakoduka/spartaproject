@@ -9,7 +9,7 @@ from pyspartalib.script.frame.current_frame import CurrentFrame
 
 
 def _get_current() -> StackFrame:
-    return CurrentFrame().get_frame(offset=1)
+    return CurrentFrame().get_frame(offset=2)
 
 
 def get_resource(local_path: Path | None = None) -> Path:
