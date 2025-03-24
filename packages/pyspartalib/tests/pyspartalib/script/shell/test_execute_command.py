@@ -30,51 +30,55 @@ def _inside_temporary_directory(function: PathFunc) -> None:
         function(Path(temporary_path))
 
 
-def _get_single_path(result: Strs) -> Path:
-    _difference_error(len(result), 1)
-    return _no_exists_error(Path(result[0]))
+class _TestShare:
+    def get_single_path(self, result: Strs) -> Path:
+        _difference_error(len(result), 1)
+        return _no_exists_error(Path(result[0]))
 
 
-def _get_current() -> Strs:
-    return list(ExecuteCommand().execute_single(["pwd"]))
+class TestSingle(_TestShare):
+    def _get_current(self) -> Strs:
+        return list(ExecuteCommand().execute_single(["pwd"]))
+
+    def test_single(self) -> None:
+        """Test to execute generic script.
+
+        Suppose that the test environment of Windows
+            can execute simple Linux commands.
+        """
+
+        def individual_test(temporary_root: Path) -> None:
+            with SetCurrent(temporary_root):
+                _difference_error(
+                    self.get_single_path(self._get_current()),
+                    temporary_root,
+                )
+
+        _inside_temporary_directory(individual_test)
 
 
-def test_single() -> None:
-    """Test to execute generic script.
+class TestMultiple(_TestShare):
+    def _move_and_get(self, expected: Path) -> Strs:
+        return list(
+            ExecuteCommand().execute_multiple(
+                [["cd", expected.as_posix()], ["pwd"]],
+            ),
+        )
 
-    Suppose that the test environment of Windows
-        can execute simple Linux commands.
-    """
+    def test_multiple(self) -> None:
+        """Test to execute generic script which is multiple lines.
 
-    def individual_test(temporary_root: Path) -> None:
-        with SetCurrent(temporary_root):
-            _difference_error(_get_single_path(_get_current()), temporary_root)
+        Suppose that the test environment of Windows
+            can execute simple Linux commands.
+        """
 
-    _inside_temporary_directory(individual_test)
+        def individual_test(temporary_root: Path) -> None:
+            move_root: Path = create_directory(Path(temporary_root, "move"))
 
+            with SetCurrent(temporary_root):
+                _difference_error(
+                    self.get_single_path(self._move_and_get(move_root)),
+                    move_root,
+                )
 
-def _move_and_get(expected: Path) -> Strs:
-    return list(
-        ExecuteCommand().execute_multiple(
-            [["cd", expected.as_posix()], ["pwd"]],
-        ),
-    )
-
-
-def test_multiple() -> None:
-    """Test to execute generic script which is multiple lines.
-
-    Suppose that the test environment of Windows
-        can execute simple Linux commands.
-    """
-
-    def individual_test(temporary_root: Path) -> None:
-        move_root: Path = create_directory(Path(temporary_root, "move"))
-
-        with SetCurrent(temporary_root):
-            _difference_error(
-                _get_single_path(_move_and_get(move_root)),
-                move_root,
-            )
-
-    _inside_temporary_directory(individual_test)
+        _inside_temporary_directory(individual_test)
