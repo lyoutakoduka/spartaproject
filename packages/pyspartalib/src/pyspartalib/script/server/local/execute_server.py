@@ -12,19 +12,6 @@ from pyspartalib.script.server.local.upload_server import UploadServer
 from pyspartalib.script.server.script_version import get_version_name
 
 
-def _raise_error(message: str) -> None:
-    raise ValueError(message)
-
-
-def _contain_error(
-    result: Container[Type],
-    expected: Type,
-    message: str,
-) -> None:
-    if expected in result:
-        _raise_error(message)
-
-
 class ExecuteServer(UploadServer, ErrorContain):
     """Class to execute python code on server."""
 
