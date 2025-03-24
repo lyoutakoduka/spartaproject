@@ -4,6 +4,7 @@
 
 from pathlib import Path
 
+from pyspartalib.context.custom.callable_context import Func
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.script.directory.create_directory import create_directory
 from pyspartalib.script.directory.current.set_current import SetCurrent
@@ -76,6 +77,9 @@ class TestMultiple(_TestShare):
             move_root,
             "multiple",
         )
+
+    def _hide_arguments(self, move_root: Path) -> Func:
+        return lambda: self._inside_current(move_root)
 
     def _individual_test(self) -> bool:
         temporary_root: Path = self.get_working_root()
