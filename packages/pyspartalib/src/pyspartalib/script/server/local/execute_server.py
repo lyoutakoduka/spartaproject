@@ -106,6 +106,11 @@ class ExecuteServer(UploadServer, ErrorContain, ErrorNone, ErrorFail):
             invert=True,
         )
 
+    def _execute_on_server(self) -> Strs:
+        result: Strs = self._confirm_execute()
+        self._confirm_after("\n".join(result))
+        return result
+
     def execute(self, source_root: Path) -> Strs:
         """Execute Python code you selected.
 
@@ -119,14 +124,8 @@ class ExecuteServer(UploadServer, ErrorContain, ErrorNone, ErrorFail):
 
         """
         self._initialize_path(source_root)
-
         self._confirm_upload()
-
-        result: Strs = self._confirm_execute()
-
-        self._confirm_after("\n".join(result))
-
-        return result
+        return self._execute_on_server()
 
     def __init__(
         self,
