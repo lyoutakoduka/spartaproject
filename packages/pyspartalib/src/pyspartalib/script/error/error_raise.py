@@ -129,12 +129,7 @@ class ErrorNone(_ErrorShare):
         """
         self.raise_value(self.__confirm(result), match, invert)
 
-    def error_none_walrus(
-        self,
-        result: Type | None,
-        match: str,
-        invert: bool = False,
-    ) -> Type | None:
+    def error_none_walrus(self, result: Type | None, match: str) -> Type:
         """Raise error if the input value is None.
 
         Args:
@@ -151,7 +146,9 @@ class ErrorNone(_ErrorShare):
             Type | None: Return the input argument "result" if no error occurs.
 
         """
-        self.error_none(result, match, invert=invert)
+        if result is None:
+            self.error_value(match)
+
         return result
 
 
