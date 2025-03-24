@@ -92,6 +92,9 @@ class ExecuteServer(UploadServer, ErrorContain, ErrorNone, ErrorFail):
     def _execute_command(self) -> Strs | None:
         return self.execute_ssh(self._get_command())
 
+    def _confirm_upload(self) -> None:
+        self.error_fail(self.upload(self._source_root), "server")
+
     def execute(self, source_root: Path) -> Strs:
         """Execute Python code you selected.
 
@@ -106,7 +109,7 @@ class ExecuteServer(UploadServer, ErrorContain, ErrorNone, ErrorFail):
         """
         self._initialize_path(source_root)
 
-        self.error_fail(self.upload(source_root), "server")
+        self._confirm_upload()
 
         result: Strs = self.error_none_walrus(
             self._execute_command(),
