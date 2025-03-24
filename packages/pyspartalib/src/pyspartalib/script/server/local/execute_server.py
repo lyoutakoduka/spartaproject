@@ -98,6 +98,14 @@ class ExecuteServer(UploadServer, ErrorContain, ErrorNone, ErrorFail):
     def _confirm_execute(self) -> Strs:
         return self.error_none_walrus(self._execute_command(), "server")
 
+    def _confirm_after(self, result_text: str) -> None:
+        self.error_contain(
+            result_text,
+            self._error_identifier,
+            "server",
+            invert=True,
+        )
+
     def execute(self, source_root: Path) -> Strs:
         """Execute Python code you selected.
 
@@ -116,12 +124,7 @@ class ExecuteServer(UploadServer, ErrorContain, ErrorNone, ErrorFail):
 
         result: Strs = self._confirm_execute()
 
-        self.error_contain(
-            "\n".join(result),
-            self._error_identifier,
-            "server",
-            invert=True,
-        )
+        self._confirm_after("\n".join(result))
 
         return result
 
