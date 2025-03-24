@@ -31,6 +31,20 @@ class _ErrorIdentifier:
         return self._get_filter_head() + " " + self._get_filter_body() + ":"
 
 
+class _RuntimeLocal:
+    def _set_version(self, version: str | None) -> str:
+        if version is None:
+            version = "3.11.5"
+
+        return get_version_name(version)
+
+    def _get_local(self) -> Path:
+        return Path("bin", "python3")
+
+    def get_path(self, version: str | None) -> Path:
+        return Path(self._set_version(version), self._get_local())
+
+
 class ExecuteServer(UploadServer, ErrorContain, ErrorNone, ErrorFail):
     """Class to execute python code on server."""
 
@@ -50,22 +64,10 @@ class ExecuteServer(UploadServer, ErrorContain, ErrorNone, ErrorFail):
             platform=platform,
         )
 
-    def _set_version(self, version: str | None) -> str:
-        if version is None:
-            version = "3.11.5"
-
-        return get_version_name(version)
-
-    def _get_local(self) -> Path:
-        return Path("bin", "python3")
-
-    def _get_runtime_path(self, runtime_root: Path, version: str) -> Path:
-        return Path(runtime_root, version, self._get_local())
-
     def __initialize_variables(self, version: str | None) -> None:
-        self._runtime_path: Path = self._get_runtime_path(
+        self._runtime_path: Path = Path(
             self.get_path("python_root"),
-            self._set_version(version),
+            _RuntimeLocal().get_path(version),
         )
         self._error_identifier: str = _ErrorIdentifier().get_identifier()
 
