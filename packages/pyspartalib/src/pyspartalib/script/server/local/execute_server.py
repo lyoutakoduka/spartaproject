@@ -5,12 +5,16 @@
 from pathlib import Path
 
 from pyspartalib.context.default.string_context import Strs
-from pyspartalib.script.error.error_raise import ErrorContain, ErrorNone
+from pyspartalib.script.error.error_raise import (
+    ErrorContain,
+    ErrorFail,
+    ErrorNone,
+)
 from pyspartalib.script.server.local.upload_server import UploadServer
 from pyspartalib.script.server.script_version import get_version_name
 
 
-class ExecuteServer(UploadServer, ErrorContain, ErrorNone):
+class ExecuteServer(UploadServer, ErrorContain, ErrorNone, ErrorFail):
     """Class to execute python code on server."""
 
     def __initialize_super_class(
@@ -84,8 +88,7 @@ class ExecuteServer(UploadServer, ErrorContain, ErrorNone):
                 Stdout of executed Python code when execution is successful.
 
         """
-        if not self.upload(source_root):
-            return None
+        self.error_fail(self.upload(source_root), "server")
 
         result: Strs = self.error_none_walrus(
             self._execute_command(source_root),
