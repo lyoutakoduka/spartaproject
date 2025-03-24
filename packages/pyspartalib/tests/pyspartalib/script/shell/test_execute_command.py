@@ -76,10 +76,13 @@ class TestSingle(_TestShare):
 
 
 class TestMultiple(_TestShare):
+    def _get_cd(self, expected: Path) -> Strs:
+        return ["cd", expected.as_posix()]
+
     def _move_and_get(self, expected: Path) -> Strs:
         return list(
             ExecuteCommand().execute_multiple(
-                [["cd", expected.as_posix()], self._get_pwd()],
+                [self._get_cd(expected), self._get_pwd()],
             ),
         )
 
