@@ -83,10 +83,11 @@ class TestMultiple(_TestShare):
         return lambda: self._inside_current(move_root)
 
     def _individual_test(self) -> bool:
-        temporary_root: Path = self.get_working_root()
-        move_root: Path = create_directory(Path(temporary_root, "move"))
-
-        self.set_current(self._hide_arguments(move_root))
+        self.set_current(
+            self._hide_arguments(
+                create_directory(Path(self.get_working_root(), "move")),
+            ),
+        )
 
         return True
 
