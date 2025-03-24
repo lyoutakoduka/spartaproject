@@ -34,6 +34,10 @@ class _TestShare(
         self.error_no_exists(path, self._get_match())
         return path
 
+    def set_current(self, function: Func) -> None:
+        with SetCurrent(self.get_working_root()):
+            function()
+
 
 class TestSingle(_TestShare):
     def _get_current(self) -> Strs:
@@ -49,8 +53,7 @@ class TestSingle(_TestShare):
     def _individual_test(self) -> bool:
         temporary_root: Path = self.get_working_root()
 
-        with SetCurrent(temporary_root):
-            self._inside_current()
+        self.set_current(self._inside_current)
 
         return True
 
@@ -85,8 +88,7 @@ class TestMultiple(_TestShare):
         temporary_root: Path = self.get_working_root()
         move_root: Path = create_directory(Path(temporary_root, "move"))
 
-        with SetCurrent(temporary_root):
-            self._inside_current(move_root)
+        self.set_current(self._hide_arguments(move_root))
 
         return True
 
