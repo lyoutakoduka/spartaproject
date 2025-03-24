@@ -66,13 +66,16 @@ class ExecuteServer(UploadServer, ErrorContain, ErrorNone, ErrorFail):
 
     def __initialize_variables(self, version: str | None) -> None:
         self._runtime_path: Path = self._get_runtime_path(version)
-        self._error_identifier: str = _ErrorIdentifier().get_identifier()
+        self._error_identifier: str = self._get_error_identifier()
 
     def _get_runtime_path(self, version: str | None) -> Path:
         return Path(
             self.get_path("python_root"),
             _RuntimeLocal().get_path(version),
         )
+
+    def _get_error_identifier(self) -> str:
+        return _ErrorIdentifier().get_identifier()
 
     def _get_command(self, source_root: Path) -> Strs:
         return [
