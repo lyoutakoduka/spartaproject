@@ -7,7 +7,7 @@ from pathlib import Path
 from pyspartalib.context.default.string_context import StrGene, Strs
 from pyspartalib.script.platform.platform_status import is_platform_linux
 from pyspartalib.script.project.project_context import ProjectContext
-from pyspartalib.script.shell.execute_command import execute_single
+from pyspartalib.script.shell.execute_command import ExecuteCommand
 
 
 def _merge_context_path(project: ProjectContext) -> Path:
@@ -61,7 +61,7 @@ def execute_powershell(
         StrGene: Generator for getting stdout of command  you want execute.
 
     """
-    return execute_single(
+    return ExecuteCommand().execute_single(
         _build_commands(
             _get_runtime_path(platform, forward).as_posix(),
             commands,
