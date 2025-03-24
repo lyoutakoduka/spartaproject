@@ -65,13 +65,13 @@ class _ErrorShare(ErrorRaise):
     def _invert(self, result: bool, invert: bool) -> bool:
         return result ^ invert
 
-    def raise_not_found(self, result: bool, match: str, invert: bool) -> None:
-        if self._invert(result, invert):
-            self.error_not_found(match)
-
     def raise_value(self, result: bool, match: str, invert: bool) -> None:
         if self._invert(result, invert):
             self.error_value(match)
+
+    def raise_not_found(self, result: bool, match: str, invert: bool) -> None:
+        if self._invert(result, invert):
+            self.error_not_found(match)
 
 
 class ErrorFail(_ErrorShare):
