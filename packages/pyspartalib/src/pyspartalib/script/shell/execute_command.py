@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-"""Module to execute CLI (Command Line Interface) script on subprocess."""
+"""Module for executing CLI script in a subprocess."""
 
 from subprocess import PIPE, Popen
 
@@ -10,6 +10,8 @@ from pyspartalib.script.string.encoding.set_decoding import set_decoding
 
 
 class ExecuteCommand(ErrorNone):
+    """Class for executing CLI script in a subprocess."""
+
     def __initialize_variables(self, force_fail: bool) -> None:
         self._force_fail: bool = force_fail
 
@@ -44,27 +46,29 @@ class ExecuteCommand(ErrorNone):
         return [self._join_text(commands) for commands in command_multiple]
 
     def execute_single(self, commands: Strs) -> StrGene:
-        """Execute CLI script on subprocess.
+        """Execute the single line CLI script on a subprocess.
 
         Args:
-            commands (Strs): Script you want to execute corresponding to platform.
+            commands (Strs):
+                The single line CLI script
+                    to be executed based on the platform.
 
         Returns:
-            StrGene: String generator, not string list.
+            StrGene: The generator of strings, not a list of strings.
 
         """
         return self._execute(self._join_text(commands))
 
     def execute_multiple(self, command_multiple: Strs2) -> StrGene:
-        """Execute CLI script which is multiple lines on subprocess.
+        """Execute the multi-line CLI script on a subprocess.
 
         Args:
             command_multiple (Strs2):
-                Script which is multiple lines
-                you want to execute corresponding to platform.
+                The multi-line CLI script
+                    to be executed based on the platform.
 
         Returns:
-            StrGene: String generator, not string list.
+            StrGene: The generator of strings, not a list of strings.
 
         """
         return self._execute(
@@ -72,4 +76,11 @@ class ExecuteCommand(ErrorNone):
         )
 
     def __init__(self, force_fail: bool = False) -> None:
+        """Initialize the class variables.
+
+        Args:
+            force_fail (bool, optional): Defaults to False.
+                If true, retrieving the stack frames will fail.
+
+        """
         self.__initialize_variables(force_fail)
