@@ -28,6 +28,9 @@ class _TestShare(
     def _get_match(self) -> str:
         return "share"
 
+    def _get_pwd(self) -> Strs:
+        return ["pwd"]
+
     def _error_length(self, result: Strs) -> str:
         self.error_length(result, 1, self._get_match())
         return result[0]
@@ -46,7 +49,7 @@ class _TestShare(
 
 class TestSingle(_TestShare):
     def _get_current(self) -> Strs:
-        return list(ExecuteCommand().execute_single(["pwd"]))
+        return list(ExecuteCommand().execute_single(self._get_pwd()))
 
     def _get_result(self) -> Path:
         return self.get_single_path(self._get_current())
@@ -76,7 +79,7 @@ class TestMultiple(_TestShare):
     def _move_and_get(self, expected: Path) -> Strs:
         return list(
             ExecuteCommand().execute_multiple(
-                [["cd", expected.as_posix()], ["pwd"]],
+                [["cd", expected.as_posix()], self._get_pwd()],
             ),
         )
 
