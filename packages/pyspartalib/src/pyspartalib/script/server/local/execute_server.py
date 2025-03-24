@@ -2,10 +2,8 @@
 
 """Module to execute python code on server you can use ssh connection."""
 
-from collections.abc import Container
 from pathlib import Path
 
-from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.script.error.error_raise import ErrorContain
 from pyspartalib.script.server.local.upload_server import UploadServer
