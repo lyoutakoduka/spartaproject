@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-"""Test module to execute CLI (Command Line Interface) script on subprocess."""
+"""Test module to execute CLI script in a subprocess."""
 
 from pathlib import Path
 
@@ -48,6 +48,8 @@ class _TestShare(
 
 
 class TestSingle(_TestShare):
+    """Class to execute the single line CLI script on a subprocess."""
+
     def _get_current(self) -> Strs:
         return list(ExecuteCommand().execute_single(self._get_pwd()))
 
@@ -67,15 +69,17 @@ class TestSingle(_TestShare):
         return True
 
     def test_single(self) -> None:
-        """Test to execute generic script.
+        """Test to execute the single line CLI script on a subprocess.
 
-        Suppose that the test environment of Windows
-            can execute simple Linux commands.
+        Note that the Linux command (pwd) should be installed
+            before execute the test on Windows environment.
         """
         self.inside_working(self._individual_test)
 
 
 class TestMultiple(_TestShare):
+    """Class to execute the multi-line CLI script on a subprocess."""
+
     def _initialize_root(self, move_root: Path) -> None:
         self._move_root: Path = move_root
 
@@ -111,9 +115,9 @@ class TestMultiple(_TestShare):
         return True
 
     def test_multiple(self) -> None:
-        """Test to execute generic script which is multiple lines.
+        """Test to execute the multi-line CLI script on a subprocess.
 
-        Suppose that the test environment of Windows
-            can execute simple Linux commands.
+        Note that the simple Linux commands (cd, pwd) should be installed
+            before execute the test on Windows environment.
         """
         self.inside_working(self._individual_test)
