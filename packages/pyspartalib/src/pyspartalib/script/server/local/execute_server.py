@@ -68,6 +68,9 @@ class ExecuteServer(UploadServer, ErrorContain, ErrorNone, ErrorFail):
         self._runtime_path: Path = self._get_runtime_path(version)
         self._error_identifier: str = self._get_error_identifier()
 
+    def _initialize_path(self, source_root: Path) -> None:
+        self._source_root = source_root
+
     def _get_runtime_path(self, version: str | None) -> Path:
         return Path(
             self.get_path("python_root"),
@@ -101,6 +104,8 @@ class ExecuteServer(UploadServer, ErrorContain, ErrorNone, ErrorFail):
                 Stdout of executed Python code when execution is successful.
 
         """
+        self._initialize_path(source_root)
+
         self.error_fail(self.upload(source_root), "server")
 
         result: Strs = self.error_none_walrus(
