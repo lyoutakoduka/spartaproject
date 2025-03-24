@@ -45,22 +45,21 @@ class TestSingle(_TestShare):
     def _get_current(self) -> Strs:
         return list(ExecuteCommand().execute_single(["pwd"]))
 
+    def _individual_test(self, temporary_root: Path) -> None:
+        with SetCurrent(temporary_root):
+            self.error_difference(
+                self.get_single_path(self._get_current()),
+                temporary_root,
+                "single",
+            )
+
     def test_single(self) -> None:
         """Test to execute generic script.
 
         Suppose that the test environment of Windows
             can execute simple Linux commands.
         """
-
-        def individual_test(temporary_root: Path) -> None:
-            with SetCurrent(temporary_root):
-                self.error_difference(
-                    self.get_single_path(self._get_current()),
-                    temporary_root,
-                    "single",
-                )
-
-        _inside_temporary_directory(individual_test)
+        _inside_temporary_directory(self._individual_test)
 
 
 class TestMultiple(_TestShare):
@@ -71,21 +70,20 @@ class TestMultiple(_TestShare):
             ),
         )
 
+    def _individual_test(self, temporary_root: Path) -> None:
+        move_root: Path = create_directory(Path(temporary_root, "move"))
+
+        with SetCurrent(temporary_root):
+            self.error_difference(
+                self.get_single_path(self._move_and_get(move_root)),
+                move_root,
+                "multiple",
+            )
+
     def test_multiple(self) -> None:
         """Test to execute generic script which is multiple lines.
 
         Suppose that the test environment of Windows
             can execute simple Linux commands.
         """
-
-        def individual_test(temporary_root: Path) -> None:
-            move_root: Path = create_directory(Path(temporary_root, "move"))
-
-            with SetCurrent(temporary_root):
-                self.error_difference(
-                    self.get_single_path(self._move_and_get(move_root)),
-                    move_root,
-                    "multiple",
-                )
-
-        _inside_temporary_directory(individual_test)
+        _inside_temporary_directory(self._individual_test)
