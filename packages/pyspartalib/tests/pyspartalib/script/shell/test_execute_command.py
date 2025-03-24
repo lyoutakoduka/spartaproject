@@ -76,6 +76,9 @@ class TestSingle(_TestShare):
 
 
 class TestMultiple(_TestShare):
+    def _initialize_root(self, move_root: Path) -> None:
+        self._move_root: Path = move_root
+
     def _get_cd(self, expected: Path) -> Strs:
         return ["cd", expected.as_posix()]
 
@@ -96,8 +99,10 @@ class TestMultiple(_TestShare):
             "multiple",
         )
 
-    def _create_move_root(self) -> Path:
-        return create_directory(Path(self.get_working_root(), "move"))
+    def _create_move_root(self) -> None:
+        self._initialize_root(
+            create_directory(Path(self.get_working_root(), "move")),
+        )
 
     def _hide_arguments(self, move_root: Path) -> Func:
         return lambda: self._inside_current(move_root)
