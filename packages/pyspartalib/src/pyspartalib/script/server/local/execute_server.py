@@ -76,7 +76,7 @@ class ExecuteServer(UploadServer, ErrorContain, ErrorNone, ErrorFail):
     def _execute_command(self, source_root: Path) -> Strs | None:
         return self.execute_ssh(self._get_command(source_root))
 
-    def execute(self, source_root: Path) -> Strs | None:
+    def execute(self, source_root: Path) -> Strs:
         """Execute Python code you selected.
 
         Args:
