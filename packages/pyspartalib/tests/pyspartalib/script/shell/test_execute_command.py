@@ -18,18 +18,6 @@ from pyspartalib.script.error.error_raise import (
 from pyspartalib.script.shell.execute_command import ExecuteCommand
 
 
-def _difference_error(result: Type, expected: Type) -> None:
-    if result != expected:
-        raise ValueError
-
-
-def _no_exists_error(path: Path) -> Path:
-    if not path.exists():
-        raise FileNotFoundError
-
-    return path
-
-
 def _inside_temporary_directory(function: PathFunc) -> None:
     with TemporaryDirectory() as temporary_path:
         function(Path(temporary_path))
