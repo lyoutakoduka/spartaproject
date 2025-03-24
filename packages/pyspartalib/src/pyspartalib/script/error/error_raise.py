@@ -130,20 +130,17 @@ class ErrorNone(_ErrorShare):
         self.raise_value(self.__confirm(result), match, invert)
 
     def error_none_walrus(self, result: Type | None, match: str) -> Type:
-        """Raise error if the input value is None.
+        """Raise error if the input argument "result" is None.
 
         Args:
-            result (object | None): The value you want to to verify.
+            result (Type | None): The value you want to to verify.
 
             match (str):
                 The error identifier for correct error handling.
                 Assign a unique string.
 
-            invert (bool, optional): Defaults to False.
-                If True, the condition to raise the error is inverted.
-
         Returns:
-            Type | None: Return the input argument "result" if no error occurs.
+            Type: Return the input argument "result" if no error occurs.
 
         """
         if result is None:
