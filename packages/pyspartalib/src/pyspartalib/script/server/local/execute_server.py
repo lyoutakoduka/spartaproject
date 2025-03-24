@@ -7,6 +7,7 @@ from pathlib import Path
 
 from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.string_context import Strs
+from pyspartalib.script.error.error_raise import ErrorContain
 from pyspartalib.script.server.local.upload_server import UploadServer
 from pyspartalib.script.server.script_version import get_version_name
 
@@ -24,7 +25,7 @@ def _contain_error(
         _raise_error(message)
 
 
-class ExecuteServer(UploadServer):
+class ExecuteServer(UploadServer, ErrorContain):
     """Class to execute python code on server."""
 
     def __initialize_super_class(
@@ -104,7 +105,12 @@ class ExecuteServer(UploadServer):
         if (result := self._execute_command(source_root)) is None:
             return None
 
-        _contain_error("\n".join(result), self._error_identifier, "server")
+        self.error_contain(
+            "\n".join(result),
+            self._error_identifier,
+            "server",
+            invert=True,
+        )
 
         return result
 
