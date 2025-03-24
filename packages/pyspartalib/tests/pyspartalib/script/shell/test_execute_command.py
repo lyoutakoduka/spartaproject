@@ -25,6 +25,11 @@ def _no_exists_error(path: Path) -> Path:
     return path
 
 
+def _inside_temporary_directory(function: PathFunc) -> None:
+    with TemporaryDirectory() as temporary_path:
+        function(Path(temporary_path))
+
+
 def _get_single_path(result: Strs) -> Path:
     _difference_error(len(result), 1)
     return _no_exists_error(Path(result[0]))
@@ -32,19 +37,6 @@ def _get_single_path(result: Strs) -> Path:
 
 def _get_current() -> Strs:
     return list(ExecuteCommand().execute_single(["pwd"]))
-
-
-def _move_and_get(expected: Path) -> Strs:
-    return list(
-        ExecuteCommand().execute_multiple(
-            [["cd", expected.as_posix()], ["pwd"]],
-        ),
-    )
-
-
-def _inside_temporary_directory(function: PathFunc) -> None:
-    with TemporaryDirectory() as temporary_path:
-        function(Path(temporary_path))
 
 
 def test_single() -> None:
@@ -59,6 +51,14 @@ def test_single() -> None:
             _difference_error(_get_single_path(_get_current()), temporary_root)
 
     _inside_temporary_directory(individual_test)
+
+
+def _move_and_get(expected: Path) -> Strs:
+    return list(
+        ExecuteCommand().execute_multiple(
+            [["cd", expected.as_posix()], ["pwd"]],
+        ),
+    )
 
 
 def test_multiple() -> None:
