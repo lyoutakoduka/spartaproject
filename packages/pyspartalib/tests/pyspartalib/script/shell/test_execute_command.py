@@ -5,7 +5,6 @@
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.context.extension.path_context import PathFunc
 from pyspartalib.script.directory.create_directory import create_directory
