@@ -36,10 +36,13 @@ def _inside_temporary_directory(function: PathFunc) -> None:
 
 
 class _TestShare(ErrorLength, ErrorNoExists, ErrorDifference):
+    def _get_match(self) -> str:
+        return "share"
+
     def get_single_path(self, result: Strs) -> Path:
-        self.error_length(result, 1, "share")
+        self.error_length(result, 1, self._get_match())
         path: Path = Path(result[0])
-        self.error_no_exists(path, "share")
+        self.error_no_exists(path, self._get_match())
         return path
 
 
