@@ -45,7 +45,9 @@ class TestSingle(_TestShare):
     def _get_current(self) -> Strs:
         return list(ExecuteCommand().execute_single(["pwd"]))
 
-    def _individual_test(self, temporary_root: Path) -> None:
+    def _individual_test(self) -> bool:
+        temporary_root: Path = self.get_working_root()
+
         with SetCurrent(temporary_root):
             self.error_difference(
                 self.get_single_path(self._get_current()),
@@ -53,13 +55,15 @@ class TestSingle(_TestShare):
                 "single",
             )
 
+        return True
+
     def test_single(self) -> None:
         """Test to execute generic script.
 
         Suppose that the test environment of Windows
             can execute simple Linux commands.
         """
-        _inside_temporary_directory(self._individual_test)
+        self.inside_working(self._individual_test)
 
 
 class TestMultiple(_TestShare):
@@ -70,7 +74,8 @@ class TestMultiple(_TestShare):
             ),
         )
 
-    def _individual_test(self, temporary_root: Path) -> None:
+    def _individual_test(self) -> bool:
+        temporary_root: Path = self.get_working_root()
         move_root: Path = create_directory(Path(temporary_root, "move"))
 
         with SetCurrent(temporary_root):
@@ -80,10 +85,12 @@ class TestMultiple(_TestShare):
                 "multiple",
             )
 
+        return True
+
     def test_multiple(self) -> None:
         """Test to execute generic script which is multiple lines.
 
         Suppose that the test environment of Windows
             can execute simple Linux commands.
         """
-        _inside_temporary_directory(self._individual_test)
+        self.inside_working(self._individual_test)
