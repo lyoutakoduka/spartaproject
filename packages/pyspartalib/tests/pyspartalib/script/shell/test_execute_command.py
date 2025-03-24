@@ -10,7 +10,7 @@ from pyspartalib.context.default.string_context import Strs
 from pyspartalib.context.extension.path_context import PathFunc
 from pyspartalib.script.directory.create_directory import create_directory
 from pyspartalib.script.directory.current.set_current import SetCurrent
-from pyspartalib.script.error.error_raise import ErrorLength
+from pyspartalib.script.error.error_raise import ErrorLength, ErrorNoExists
 from pyspartalib.script.shell.execute_command import ExecuteCommand
 
 
@@ -31,10 +31,12 @@ def _inside_temporary_directory(function: PathFunc) -> None:
         function(Path(temporary_path))
 
 
-class _TestShare(ErrorLength):
+class _TestShare(ErrorLength, ErrorNoExists):
     def get_single_path(self, result: Strs) -> Path:
         self.error_length(result, 1, "share")
-        return _no_exists_error(Path(result[0]))
+        path: Path = Path(result[0])
+        self.error_no_exists(path, "share")
+        return path
 
 
 class TestSingle(_TestShare):
