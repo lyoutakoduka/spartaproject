@@ -108,7 +108,8 @@ class TestMultiple(_TestShare):
         return lambda: self._inside_current(move_root)
 
     def _individual_test(self) -> bool:
-        self.set_current(self._hide_arguments(self._create_move_root()))
+        self._create_move_root()
+        self.set_current(self._inside_current)
 
         return True
 
