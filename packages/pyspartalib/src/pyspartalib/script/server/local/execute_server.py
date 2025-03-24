@@ -5,6 +5,7 @@
 from pathlib import Path
 
 from pyspartalib.context.default.string_context import Strs
+from pyspartalib.context.extension.path_context import Paths
 from pyspartalib.script.error.error_raise import (
     ErrorContain,
     ErrorFail,
@@ -80,14 +81,11 @@ class ExecuteServer(UploadServer, ErrorContain, ErrorNone, ErrorFail):
     def _get_error_identifier(self) -> str:
         return _ErrorIdentifier().get_identifier()
 
+    def _get_command_paths(self) -> Paths:
+        return [self._runtime_path, self.to_relative_path(self._source_root)]
+
     def _get_command(self) -> Strs:
-        return [
-            path.as_posix()
-            for path in [
-                self._runtime_path,
-                self.to_relative_path(self._source_root),
-            ]
-        ]
+        return [path.as_posix() for path in self._get_command_paths()]
 
     def _execute_command(self) -> Strs | None:
         return self.execute_ssh(self._get_command())
