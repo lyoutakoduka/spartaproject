@@ -57,7 +57,8 @@ class ExecuteServer(UploadServer, ErrorContain, ErrorNone, ErrorFail):
         forward: Path | None,
         platform: str | None,
     ) -> None:
-        super().__init__(
+        UploadServer.__init__(
+            self,
             local_root=local_root,
             override=override,
             jst=jst,
