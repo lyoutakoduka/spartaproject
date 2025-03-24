@@ -79,23 +79,23 @@ class TestMultiple(_TestShare):
     def _initialize_root(self, move_root: Path) -> None:
         self._move_root: Path = move_root
 
-    def _get_cd(self, expected: Path) -> Strs:
-        return ["cd", expected.as_posix()]
+    def _get_cd(self) -> Strs:
+        return ["cd", self._move_root.as_posix()]
 
-    def _move_and_get(self, expected: Path) -> Strs:
+    def _move_and_get(self) -> Strs:
         return list(
             ExecuteCommand().execute_multiple(
-                [self._get_cd(expected), self._get_pwd()],
+                [self._get_cd(), self._get_pwd()],
             ),
         )
 
-    def _get_result(self, move_root: Path) -> Path:
-        return self.get_single_path(self._move_and_get(move_root))
+    def _get_result(self) -> Path:
+        return self.get_single_path(self._move_and_get())
 
-    def _inside_current(self, move_root: Path) -> None:
+    def _inside_current(self) -> None:
         self.error_difference(
-            self._get_result(move_root),
-            move_root,
+            self._get_result(),
+            self._move_root,
             "multiple",
         )
 
