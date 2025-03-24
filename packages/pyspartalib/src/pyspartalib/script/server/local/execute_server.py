@@ -14,6 +14,23 @@ from pyspartalib.script.server.local.upload_server import UploadServer
 from pyspartalib.script.server.script_version import get_version_name
 
 
+class _ErrorIdentifier:
+    def _get_filter_head(self) -> str:
+        return "traceback".capitalize()
+
+    def _error_strings(self) -> Strs:
+        return ["most", "recent", "call", "last"]
+
+    def _get_filter_inside(self) -> str:
+        return " ".join(self._error_strings())
+
+    def _get_filter_body(self) -> str:
+        return "(" + self._get_filter_inside() + ")"
+
+    def get_identifier(self) -> str:
+        return self._get_filter_head() + " " + self._get_filter_body() + ":"
+
+
 class ExecuteServer(UploadServer, ErrorContain, ErrorNone, ErrorFail):
     """Class to execute python code on server."""
 
@@ -42,27 +59,12 @@ class ExecuteServer(UploadServer, ErrorContain, ErrorNone, ErrorFail):
     def _get_runtime_path(self, runtime_root: Path, version: str) -> Path:
         return Path(runtime_root, version, "bin", "python3")
 
-    def _get_filter_head(self) -> str:
-        return "traceback".capitalize()
-
-    def _error_strings(self) -> Strs:
-        return ["most", "recent", "call", "last"]
-
-    def _get_filter_inside(self) -> str:
-        return " ".join(self._error_strings())
-
-    def _get_filter_body(self) -> str:
-        return "(" + self._get_filter_inside() + ")"
-
-    def _get_error_identifier(self) -> str:
-        return self._get_filter_head() + " " + self._get_filter_body() + ":"
-
     def __initialize_variables(self, version: str | None) -> None:
         self._runtime_path: Path = self._get_runtime_path(
             self.get_path("python_root"),
             self._set_version(version),
         )
-        self._error_identifier: str = self._get_error_identifier()
+        self._error_identifier: str = _ErrorIdentifier().get_identifier()
 
     def _get_command(self, source_root: Path) -> Strs:
         return [
