@@ -51,8 +51,6 @@ class TestSingle(_TestShare):
         )
 
     def _individual_test(self) -> bool:
-        temporary_root: Path = self.get_working_root()
-
         self.set_current(self._inside_current)
 
         return True
