@@ -28,9 +28,12 @@ class _TestShare(
     def _get_match(self) -> str:
         return "share"
 
-    def get_single_path(self, result: Strs) -> Path:
+    def _error_length(self, result: Strs) -> str:
         self.error_length(result, 1, self._get_match())
-        path: Path = Path(result[0])
+        return result[0]
+
+    def get_single_path(self, result: Strs) -> Path:
+        path: Path = Path(self._error_length(result))
         self.error_no_exists(path, self._get_match())
         return path
 
