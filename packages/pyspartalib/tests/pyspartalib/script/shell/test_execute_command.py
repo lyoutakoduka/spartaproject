@@ -10,10 +10,7 @@ from pyspartalib.context.default.string_context import Strs
 from pyspartalib.context.extension.path_context import PathFunc
 from pyspartalib.script.directory.create_directory import create_directory
 from pyspartalib.script.directory.current.set_current import SetCurrent
-from pyspartalib.script.shell.execute_command import (
-    execute_multiple,
-    execute_single,
-)
+from pyspartalib.script.shell.execute_command import ExecuteCommand
 
 
 def _difference_error(result: Type, expected: Type) -> None:
@@ -34,12 +31,14 @@ def _get_single_path(result: Strs) -> Path:
 
 
 def _get_current() -> Strs:
-    return list(execute_single(["pwd"]))
+    return list(ExecuteCommand().execute_single(["pwd"]))
 
 
 def _move_and_get(expected: Path) -> Strs:
     return list(
-        execute_multiple([["cd", expected.as_posix()], ["pwd"]]),
+        ExecuteCommand().execute_multiple(
+            [["cd", expected.as_posix()], ["pwd"]],
+        ),
     )
 
 
