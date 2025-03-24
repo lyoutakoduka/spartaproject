@@ -32,10 +32,12 @@ class _TestShare(
         self.error_length(result, 1, self._get_match())
         return result[0]
 
-    def get_single_path(self, result: Strs) -> Path:
-        path: Path = Path(self._error_length(result))
+    def _error_no_exists(self, path: Path) -> Path:
         self.error_no_exists(path, self._get_match())
         return path
+
+    def get_single_path(self, result: Strs) -> Path:
+        return self._error_no_exists(Path(self._error_length(result)))
 
     def set_current(self, function: Func) -> None:
         with SetCurrent(self.get_working_root()):
