@@ -20,11 +20,6 @@ from pyspartalib.script.error.error_raise import (
 from pyspartalib.script.shell.execute_command import ExecuteCommand
 
 
-def _inside_temporary_directory(function: PathFunc) -> None:
-    with TemporaryDirectory() as temporary_path:
-        function(Path(temporary_path))
-
-
 class _TestShare(
     ErrorLength,
     ErrorNoExists,
