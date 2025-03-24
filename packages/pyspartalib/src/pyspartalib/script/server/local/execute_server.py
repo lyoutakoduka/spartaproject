@@ -80,17 +80,17 @@ class ExecuteServer(UploadServer, ErrorContain, ErrorNone, ErrorFail):
     def _get_error_identifier(self) -> str:
         return _ErrorIdentifier().get_identifier()
 
-    def _get_command(self, source_root: Path) -> Strs:
+    def _get_command(self) -> Strs:
         return [
             path.as_posix()
             for path in [
                 self._runtime_path,
-                self.to_relative_path(source_root),
+                self.to_relative_path(self._source_root),
             ]
         ]
 
-    def _execute_command(self, source_root: Path) -> Strs | None:
-        return self.execute_ssh(self._get_command(source_root))
+    def _execute_command(self) -> Strs | None:
+        return self.execute_ssh(self._get_command())
 
     def execute(self, source_root: Path) -> Strs:
         """Execute Python code you selected.
@@ -109,7 +109,7 @@ class ExecuteServer(UploadServer, ErrorContain, ErrorNone, ErrorFail):
         self.error_fail(self.upload(source_root), "server")
 
         result: Strs = self.error_none_walrus(
-            self._execute_command(source_root),
+            self._execute_command(),
             "server",
         )
 
