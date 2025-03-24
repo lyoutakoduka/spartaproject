@@ -4,7 +4,6 @@
 
 from subprocess import PIPE, Popen
 
-from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.string_context import StrGene, Strs, Strs2
 from pyspartalib.script.error.error_raise import ErrorNone
 from pyspartalib.script.string.encoding.set_decoding import set_decoding
