@@ -78,3 +78,11 @@ def execute_multiple(command_multiple: Strs2) -> StrGene:
 
     """
     return _execute(_join_line(_join_commands(command_multiple)))
+
+
+class ExecuteCommand:
+    def __initialize_variables(self, force_fail: bool) -> None:
+        self._force_fail: bool = force_fail
+
+    def __init__(self, force_fail: bool = False) -> None:
+        self.__initialize_variables(force_fail)
