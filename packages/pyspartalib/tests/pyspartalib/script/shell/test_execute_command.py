@@ -38,15 +38,18 @@ class TestSingle(_TestShare):
     def _get_current(self) -> Strs:
         return list(ExecuteCommand().execute_single(["pwd"]))
 
+    def _inside_current(self) -> None:
+        self.error_difference(
+            self.get_single_path(self._get_current()),
+            self.get_working_root(),
+            "single",
+        )
+
     def _individual_test(self) -> bool:
         temporary_root: Path = self.get_working_root()
 
         with SetCurrent(temporary_root):
-            self.error_difference(
-                self.get_single_path(self._get_current()),
-                temporary_root,
-                "single",
-            )
+            self._inside_current()
 
         return True
 
@@ -67,16 +70,19 @@ class TestMultiple(_TestShare):
             ),
         )
 
+    def _inside_current(self, move_root: Path) -> None:
+        self.error_difference(
+            self.get_single_path(self._move_and_get(move_root)),
+            move_root,
+            "multiple",
+        )
+
     def _individual_test(self) -> bool:
         temporary_root: Path = self.get_working_root()
         move_root: Path = create_directory(Path(temporary_root, "move"))
 
         with SetCurrent(temporary_root):
-            self.error_difference(
-                self.get_single_path(self._move_and_get(move_root)),
-                move_root,
-                "multiple",
-            )
+            self._inside_current(move_root)
 
         return True
 
