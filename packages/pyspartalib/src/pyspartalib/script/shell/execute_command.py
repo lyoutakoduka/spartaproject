@@ -10,13 +10,6 @@ from pyspartalib.script.error.error_raise import ErrorNone
 from pyspartalib.script.string.encoding.set_decoding import set_decoding
 
 
-def _none_error(result: Type | None) -> Type:
-    if result is None:
-        raise ValueError
-
-    return result
-
-
 class ExecuteCommand(ErrorNone):
     def __initialize_variables(self, force_fail: bool) -> None:
         self._force_fail: bool = force_fail
