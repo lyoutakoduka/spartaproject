@@ -104,9 +104,6 @@ class TestMultiple(_TestShare):
             create_directory(Path(self.get_working_root(), "move")),
         )
 
-    def _hide_arguments(self, move_root: Path) -> Func:
-        return lambda: self._inside_current(move_root)
-
     def _individual_test(self) -> bool:
         self._create_move_root()
         self.set_current(self._inside_current)
