@@ -3,10 +3,8 @@
 """Test module to execute CLI (Command Line Interface) script on subprocess."""
 
 from pathlib import Path
-from tempfile import TemporaryDirectory
 
 from pyspartalib.context.default.string_context import Strs
-from pyspartalib.context.extension.path_context import PathFunc
 from pyspartalib.script.directory.create_directory import create_directory
 from pyspartalib.script.directory.current.set_current import SetCurrent
 from pyspartalib.script.directory.working.working_directory import (
