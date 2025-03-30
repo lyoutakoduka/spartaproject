@@ -38,6 +38,9 @@ class ExecuteCommand(ErrorNone):
 
         return text
 
+    def _break_condition(self, subprocess: POpen) -> bool:
+        return subprocess.poll() is not None
+
     def _execute(self, command: str) -> StrGene:
         subprocess = Popen(command, stdout=PIPE, stderr=PIPE, shell=True)
 
@@ -46,7 +49,7 @@ class ExecuteCommand(ErrorNone):
 
             if line:
                 yield self._cleanup_new_lines(set_decoding(line))
-            elif subprocess.poll() is not None:
+            elif self._break_condition(subprocess):
                 break
 
     def _join_text(self, texts: Strs) -> str:
