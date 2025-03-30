@@ -6,6 +6,7 @@ from subprocess import PIPE, Popen
 
 from pyspartalib.context.default.string_context import StrGene, Strs, Strs2
 from pyspartalib.script.error.error_raise import ErrorNone
+from pyspartalib.script.shell.context.process_context import PByte
 from pyspartalib.script.string.encoding.set_decoding import set_decoding
 
 
@@ -15,8 +16,11 @@ class ExecuteCommand(ErrorNone):
     def __initialize_variables(self, force_fail: bool) -> None:
         self._force_fail: bool = force_fail
 
+    def _confirm_none(self, result: PByte | None) -> PByte:
+        return self.error_none_walrus(result, "process")
+
     def _get_subprocess_result(self, subprocess: Popen[bytes]) -> bytes:
-        return self.error_none_walrus(subprocess.stdout, "process").readline()
+        return self._confirm_none(subprocess.stdout).readline()
 
     def _cleanup_new_lines(self, text: str) -> str:
         for new_line in reversed("\r\n"):
