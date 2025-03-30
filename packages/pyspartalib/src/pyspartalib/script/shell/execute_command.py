@@ -36,9 +36,7 @@ class ExecuteCommand(ErrorNone):
 
     def _get_result_cycle(self, subprocess: POpen) -> StrGene:
         while True:
-            line: bytes = self._get_subprocess_result(subprocess)
-
-            if line:
+            if line := self._get_subprocess_result(subprocess):
                 yield self._cleanup_new_lines(set_decoding(line))
             elif self._break_condition(subprocess):
                 break
