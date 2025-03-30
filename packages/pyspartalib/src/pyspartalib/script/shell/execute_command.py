@@ -34,9 +34,7 @@ class ExecuteCommand(ErrorNone):
     def _break_condition(self, subprocess: POpen) -> bool:
         return subprocess.poll() is not None
 
-    def _execute(self, command: str) -> StrGene:
-        subprocess = Popen(command, stdout=PIPE, stderr=PIPE, shell=True)
-
+    def _get_result_cycle(self, subprocess: POpen) -> StrGene:
         while True:
             line: bytes = self._get_subprocess_result(subprocess)
 
@@ -44,6 +42,11 @@ class ExecuteCommand(ErrorNone):
                 yield self._cleanup_new_lines(set_decoding(line))
             elif self._break_condition(subprocess):
                 break
+
+    def _execute(self, command: str) -> StrGene:
+        return self._get_result_cycle(
+            Popen(command, stdout=PIPE, stderr=PIPE, shell=True),
+        )
 
     def _join_text(self, texts: Strs) -> str:
         return " ".join(texts)
