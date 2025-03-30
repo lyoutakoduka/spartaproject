@@ -32,11 +32,7 @@ class ExecuteCommand(ErrorNone):
         return self._confirm_result(subprocess).readline()
 
     def _cleanup_new_lines(self, text: str) -> str:
-        for new_line in reversed("\r\n"):
-            if text.endswith(new_line):
-                text = text[:-1]
-
-        return text
+        return text.rstrip("\r\n")
 
     def _break_condition(self, subprocess: POpen) -> bool:
         return subprocess.poll() is not None
