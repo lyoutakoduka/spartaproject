@@ -25,10 +25,11 @@ class ExecuteCommand(ErrorNone):
 
         return subprocess.stdout
 
+    def _confirm_result(self, subprocess: POpen) -> PByte:
+        return self._confirm_none(self._select_fail_condition(subprocess))
+
     def _get_subprocess_result(self, subprocess: Popen[bytes]) -> bytes:
-        return self._confirm_none(
-            self._select_fail_condition(subprocess),
-        ).readline()
+        return self._confirm_result(subprocess).readline()
 
     def _cleanup_new_lines(self, text: str) -> str:
         for new_line in reversed("\r\n"):
