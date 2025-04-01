@@ -11,5 +11,11 @@ class _TestForce(ErrorForce):
     def _reproduce_external(self) -> str | None:
         return "success"
 
+    def select_process(self, error_type: str) -> str | None:
+        if self.find_type(error_type):
+            return None
+
+        return self._reproduce_external()
+
     def __init__(self, error_types: Strs | None = None) -> None:
         self.__initialize_super_class(error_types)
