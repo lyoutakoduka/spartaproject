@@ -138,3 +138,8 @@ class TestMultiple(_TestShare):
         """
         self.initialize_execute_default()
         self.inside_working(self._individual_test)
+
+
+class TestNone:
+    def _get_command(self) -> Strs:
+        return ["ls"]
