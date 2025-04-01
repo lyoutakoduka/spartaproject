@@ -146,9 +146,6 @@ class TestNone(_TestShare, ErrorCatch):
     def _error_none(self) -> None:
         self.evaluate(self.get_instance().execute_single(self._get_command()))
 
-    def _create_execute(self) -> ExecuteCommand:
-        return ExecuteCommand(error_types=["none"])
-
     def _create_instance_none(self) -> None:
         self.initialize_instance(ExecuteCommand(error_types=["none"]))
 
