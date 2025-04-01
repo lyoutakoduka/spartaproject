@@ -69,6 +69,9 @@ class TestError(_TestShare, ErrorCatch):
     def _initialize_instance(self, instance: CurrentFrame) -> None:
         self._instance = instance
 
+    def _get_instance(self) -> CurrentFrame:
+        return self._instance
+
     def _get_result(self) -> None:
         CurrentFrame(force_fail=True).get_frame()
 
