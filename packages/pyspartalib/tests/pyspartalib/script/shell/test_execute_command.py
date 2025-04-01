@@ -149,7 +149,10 @@ class TestNone(_TestShare, ErrorCatch):
     def _create_execute(self) -> ExecuteCommand:
         return ExecuteCommand(error_types=["none"])
 
+    def _create_instance_none(self) -> None:
+        self.initialize_instance(ExecuteCommand(error_types=["none"]))
+
     def test_none(self) -> None:
         """Test to raise the error forcibly and catch it."""
-        self.initialize_instance(self._create_execute())
+        self._create_instance_none()
         self.catch_value(self._error_none, "process")
