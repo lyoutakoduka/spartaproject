@@ -21,6 +21,9 @@ class _ExecuteBefore:
     def _join_commands(self, command_multiple: Strs2) -> Strs:
         return [self._join_text(commands) for commands in command_multiple]
 
+    def get_command_single(self, commands: Strs) -> str:
+        return self._join_text(commands)
+
 
 class ExecuteCommand(_ExecuteBefore, ErrorForce, ErrorNone):
     """Class for executing CLI script in a subprocess."""
@@ -70,7 +73,7 @@ class ExecuteCommand(_ExecuteBefore, ErrorForce, ErrorNone):
             StrGene: The generator of strings, not a list of strings.
 
         """
-        return self._execute(self._join_text(commands))
+        return self._execute(self.get_command_single(commands))
 
     def execute_multiple(self, command_multiple: Strs2) -> StrGene:
         """Execute the multi-line CLI script on a subprocess.
