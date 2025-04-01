@@ -5,7 +5,7 @@
 from pathlib import Path
 
 from pyspartalib.context.custom.callable_context import Func
-from pyspartalib.context.default.string_context import Strs
+from pyspartalib.context.default.string_context import StrGene, Strs
 from pyspartalib.script.directory.create_directory import create_directory
 from pyspartalib.script.directory.current.set_current import SetCurrent
 from pyspartalib.script.directory.working.working_directory import (
@@ -55,12 +55,17 @@ class _TestShare(
         with SetCurrent(self.get_working_root()):
             function()
 
+    def evaluate(self, generator: StrGene) -> Strs:
+        return list(generator)
+
 
 class TestSingle(_TestShare):
     """Class to execute the single line CLI script on a subprocess."""
 
     def _get_current(self) -> Strs:
-        return list(self.get_execute().execute_single(self._get_pwd()))
+        return self.evaluate(
+            self.get_execute().execute_single(self._get_pwd()),
+        )
 
     def _get_result(self) -> Path:
         return self.get_single_path(self._get_current())
@@ -97,7 +102,7 @@ class TestMultiple(_TestShare):
         return ["cd", self._move_root.as_posix()]
 
     def _move_and_get(self) -> Strs:
-        return list(
+        return self.evaluate(
             self.get_execute().execute_multiple(
                 [self._get_cd(), self._get_pwd()],
             ),
