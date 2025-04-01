@@ -17,9 +17,6 @@ class ExecuteCommand(ErrorForce, ErrorNone):
     def __initialize_super_class(self, fail_types: Strs | None) -> None:
         ErrorForce.__init__(self, fail_types)
 
-    def __initialize_variables(self, force_fail: bool) -> None:
-        self._force_fail: bool = force_fail
-
     def _confirm_none(self, result: PByte | None) -> PByte:
         return self.error_none_walrus(result, "process")
 
@@ -102,4 +99,3 @@ class ExecuteCommand(ErrorForce, ErrorNone):
 
         """
         self.__initialize_super_class(fail_types)
-        self.__initialize_variables(force_fail)
