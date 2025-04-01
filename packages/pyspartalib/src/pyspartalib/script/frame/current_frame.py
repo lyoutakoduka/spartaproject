@@ -8,7 +8,7 @@ from types import FrameType
 
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.script.error.error_force import ErrorForce
-from pyspartalib.script.error.error_raise import ErrorNone, ErrorRaise
+from pyspartalib.script.error.error_raise import ErrorNone
 from pyspartalib.script.frame.context.frame_context import (
     StackFrame,
     StackFrames,
@@ -16,7 +16,7 @@ from pyspartalib.script.frame.context.frame_context import (
 from pyspartalib.script.path.modify.current.get_relative import get_relative
 
 
-class CurrentFrame(ErrorForce, ErrorNone, ErrorRaise):
+class CurrentFrame(ErrorForce, ErrorNone):
     """Class to get the current frame from the stack frames."""
 
     def __initialize_super_class(self, error_types: Strs | None) -> None:
