@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-"""Module for executing CLI script in a subprocess."""
+"""Module for executing specific CLI script on a subprocess."""
 
 from subprocess import PIPE, Popen
 
@@ -29,7 +29,7 @@ class _ExecuteBefore:
 
 
 class ExecuteCommand(_ExecuteBefore, ErrorForce, ErrorNone):
-    """Class for executing CLI script in a subprocess."""
+    """Class for executing specific CLI script on a subprocess."""
 
     def __initialize_super_class(self, fail_types: Strs | None) -> None:
         ErrorForce.__init__(self, fail_types)
@@ -65,12 +65,11 @@ class ExecuteCommand(_ExecuteBefore, ErrorForce, ErrorNone):
         )
 
     def execute_single(self, commands: Strs) -> StrGene:
-        """Execute the single line CLI script on a subprocess.
+        """Execute the specific single line CLI script on a subprocess.
 
         Args:
             commands (Strs):
-                The single line CLI script
-                    to be executed based on the platform.
+                The single line CLI script to be executed.
 
         Returns:
             StrGene: The generator of strings, not a list of strings.
@@ -79,12 +78,11 @@ class ExecuteCommand(_ExecuteBefore, ErrorForce, ErrorNone):
         return self._execute(self.get_command_single(commands))
 
     def execute_multiple(self, command_multiple: Strs2) -> StrGene:
-        """Execute the multi-line CLI script on a subprocess.
+        """Execute the specific multi-line CLI script on a subprocess.
 
         Args:
             command_multiple (Strs2):
-                The multi-line CLI script
-                    to be executed based on the platform.
+                The multi-line CLI script to be executed.
 
         Returns:
             StrGene: The generator of strings, not a list of strings.
@@ -93,11 +91,12 @@ class ExecuteCommand(_ExecuteBefore, ErrorForce, ErrorNone):
         return self._execute(self.get_command_multiple(command_multiple))
 
     def __init__(self, fail_types: Strs | None = None) -> None:
-        """Initialize the class variables.
+        """Initialize the super class.
 
         Args:
-            force_fail (bool, optional): Defaults to False.
-                If true, retrieving the stack frames will fail.
+            error_types (Strs | None, optional): Defaults to None.
+                The candidates of error type you raise forcibly.
+                It's used for the argument "error_types" of class "ErrorForce".
 
         """
         self.__initialize_super_class(fail_types)
