@@ -36,3 +36,6 @@ class TestContain:
 
     def _get_test_force(self) -> _TestForce:
         return _TestForce(error_types=self._get_error_types())
+
+    def _get_result(self) -> str | None:
+        return self._get_test_force().select_process("none")
