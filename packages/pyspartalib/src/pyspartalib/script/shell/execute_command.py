@@ -14,6 +14,9 @@ from pyspartalib.script.string.encoding.set_decoding import set_decoding
 class ExecuteCommand(ErrorForce, ErrorNone):
     """Class for executing CLI script in a subprocess."""
 
+    def __initialize_super_class(self, fail_types: Strs | None) -> None:
+        ErrorForce.__init__(self, fail_types)
+
     def __initialize_variables(self, force_fail: bool) -> None:
         self._force_fail: bool = force_fail
 
@@ -86,7 +89,11 @@ class ExecuteCommand(ErrorForce, ErrorNone):
             self._join_line(self._join_commands(command_multiple)),
         )
 
-    def __init__(self, force_fail: bool = False) -> None:
+    def __init__(
+        self,
+        fail_types: Strs | None = None,
+        force_fail: bool = False,
+    ) -> None:
         """Initialize the class variables.
 
         Args:
@@ -94,4 +101,5 @@ class ExecuteCommand(ErrorForce, ErrorNone):
                 If true, retrieving the stack frames will fail.
 
         """
+        self.__initialize_super_class(fail_types)
         self.__initialize_variables(force_fail)
