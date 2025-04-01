@@ -13,7 +13,7 @@ class _TestForce(ErrorForce):
         return "success"
 
     def select_process(self, error_type: str) -> str | None:
-        if self.find_type(error_type):
+        if self.send_signal(error_type):
             return None
 
         return self._reproduce_external()

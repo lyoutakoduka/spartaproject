@@ -17,7 +17,7 @@ class ErrorForce:
 
         return error_types
 
-    def find_type(self, error_type: str) -> bool:
+    def send_signal(self, error_type: str) -> bool:
         """Send the signal to raise an errors forcibly.
 
         Args:
