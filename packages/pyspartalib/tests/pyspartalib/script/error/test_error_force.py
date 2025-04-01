@@ -33,3 +33,6 @@ class TestEmpty(ErrorDifference):
 class TestContain:
     def _get_error_types(self) -> Strs:
         return ["none", "fail", "exists"]
+
+    def _get_test_force(self) -> _TestForce:
+        return _TestForce(error_types=self._get_error_types())
