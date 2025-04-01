@@ -14,6 +14,15 @@ from pyspartalib.script.string.encoding.set_decoding import set_decoding
 class ExecuteCommand(ErrorForce, ErrorNone):
     """Class for executing CLI script in a subprocess."""
 
+    def _join_line(self, texts: Strs) -> str:
+        return "; ".join(texts)
+
+    def _join_text(self, texts: Strs) -> str:
+        return " ".join(texts)
+
+    def _join_commands(self, command_multiple: Strs2) -> Strs:
+        return [self._join_text(commands) for commands in command_multiple]
+
     def __initialize_super_class(self, fail_types: Strs | None) -> None:
         ErrorForce.__init__(self, fail_types)
 
@@ -46,15 +55,6 @@ class ExecuteCommand(ErrorForce, ErrorNone):
         return self._get_result_cycle(
             Popen(command, stdout=PIPE, stderr=PIPE, shell=True),
         )
-
-    def _join_text(self, texts: Strs) -> str:
-        return " ".join(texts)
-
-    def _join_line(self, texts: Strs) -> str:
-        return "; ".join(texts)
-
-    def _join_commands(self, command_multiple: Strs2) -> Strs:
-        return [self._join_text(commands) for commands in command_multiple]
 
     def execute_single(self, commands: Strs) -> StrGene:
         """Execute the single line CLI script on a subprocess.
