@@ -140,6 +140,9 @@ class TestMultiple(_TestShare):
         self.inside_working(self._individual_test)
 
 
-class TestNone:
+class TestNone(_TestShare):
     def _get_command(self) -> Strs:
         return ["ls"]
+
+    def _error_none(self) -> None:
+        self.evaluate(self.get_execute().execute_single(self._get_command()))
