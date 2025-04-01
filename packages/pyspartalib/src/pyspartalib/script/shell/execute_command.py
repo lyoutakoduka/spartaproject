@@ -5,12 +5,13 @@
 from subprocess import PIPE, Popen
 
 from pyspartalib.context.default.string_context import StrGene, Strs, Strs2
+from pyspartalib.script.error.error_force import ErrorForce
 from pyspartalib.script.error.error_raise import ErrorNone
 from pyspartalib.script.shell.context.process_context import PByte, POpen
 from pyspartalib.script.string.encoding.set_decoding import set_decoding
 
 
-class ExecuteCommand(ErrorNone):
+class ExecuteCommand(ErrorForce, ErrorNone):
     """Class for executing CLI script in a subprocess."""
 
     def __initialize_variables(self, force_fail: bool) -> None:
@@ -20,7 +21,7 @@ class ExecuteCommand(ErrorNone):
         return self.error_none_walrus(result, "process")
 
     def _select_fail_condition(self, subprocess: POpen) -> PByte | None:
-        return None if self._force_fail else subprocess.stdout
+        return None if self.send_signal("process") else subprocess.stdout
 
     def _confirm_result(self, subprocess: POpen) -> PByte:
         return self._confirm_none(self._select_fail_condition(subprocess))
