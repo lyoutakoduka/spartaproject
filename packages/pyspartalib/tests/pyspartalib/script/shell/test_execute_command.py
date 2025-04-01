@@ -42,6 +42,9 @@ class _TestShare(
     def initialize_execute(self, execute: ExecuteCommand) -> None:
         self._execute = execute
 
+    def initialize_execute_default(self) -> None:
+        self.initialize_execute(ExecuteCommand())
+
     def get_execute(self) -> ExecuteCommand:
         return self._execute
 
@@ -80,7 +83,7 @@ class TestSingle(_TestShare):
         Note that the Linux command (pwd) should be installed
             before execute the test on Windows environment.
         """
-        self.initialize_execute(ExecuteCommand())
+        self.initialize_execute_default()
         self.inside_working(self._individual_test)
 
 
@@ -127,5 +130,5 @@ class TestMultiple(_TestShare):
         Note that the simple Linux commands (cd, pwd) should be installed
             before execute the test on Windows environment.
         """
-        self.initialize_execute(ExecuteCommand())
+        self.initialize_execute_default()
         self.inside_working(self._individual_test)
