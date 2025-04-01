@@ -44,11 +44,11 @@ class _TestShare(
         self.error_no_exists(path, self._get_match())
         return path
 
-    def initialize_execute(self, instance: ExecuteCommand) -> None:
+    def initialize_instance(self, instance: ExecuteCommand) -> None:
         self._instance = instance
 
     def create_execute_default(self) -> None:
-        self.initialize_execute(ExecuteCommand())
+        self.initialize_instance(ExecuteCommand())
 
     def get_execute(self) -> ExecuteCommand:
         return self._instance
@@ -151,5 +151,5 @@ class TestNone(_TestShare, ErrorCatch):
 
     def test_none(self) -> None:
         """Test to raise the error forcibly and catch it."""
-        self.initialize_execute(self._create_execute())
+        self.initialize_instance(self._create_execute())
         self.catch_value(self._error_none, "process")
