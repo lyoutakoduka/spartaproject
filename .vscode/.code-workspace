@@ -1,0 +1,21 @@
+{
+  "folders": [
+    {
+      "name": "OUTSIDE",
+      "path": "../../../../../outside/",
+    },
+    {
+      "name": "EXTERNAL",
+      "path": "../../../../../external/",
+    },
+    {
+      "name": "INTERNAL",
+      "path": "../../../internal",
+    },
+    {
+      "name": "ROOT",
+      "path": "../",
+    },
+  ],
+  "settings": {},
+}
