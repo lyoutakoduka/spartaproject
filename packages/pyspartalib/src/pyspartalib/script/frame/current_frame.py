@@ -42,10 +42,7 @@ class CurrentFrame(ErrorForce, ErrorNone, ErrorRaise):
         return self.error_none_walrus(self._select_fail_condition(), "frame")
 
     def _find_stack_frame_error(self) -> StackFrames:
-        if (current_frame := self._select_fail_condition()) is None:
-            self.error_value("frame")
-
-        return self._get_stack_frames(current_frame)
+        return self._get_stack_frames(self._confirm_result())
 
     def _to_relative_path(self, frame: StackFrame) -> StackFrame:
         frame["file"] = get_relative(frame["file"])
