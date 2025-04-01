@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 
-"""Test module to execute CLI script in a subprocess."""
+"""Test module for executing specific CLI script on a subprocess.
+
+Note that the simple Linux commands (cd, pwd) should be installed
+    before execute the test on Windows environment.
+"""
 
 from pathlib import Path
 
@@ -61,7 +65,7 @@ class _TestShare(
 
 
 class TestSingle(_TestShare):
-    """Class to execute the single line CLI script on a subprocess."""
+    """Test class to execute the specific single line CLI script."""
 
     def _get_current(self) -> Strs:
         return self.evaluate(
@@ -84,17 +88,13 @@ class TestSingle(_TestShare):
         return True
 
     def test_single(self) -> None:
-        """Test to execute the single line CLI script on a subprocess.
-
-        Note that the Linux command (pwd) should be installed
-            before execute the test on Windows environment.
-        """
+        """Test to execute the specific single line CLI script."""
         self._create_execute_default()
         self.inside_working(self._individual_test)
 
 
 class TestMultiple(_TestShare):
-    """Class to execute the multi-line CLI script on a subprocess."""
+    """Test class to execute the specific multi-line CLI script."""
 
     def _initialize_root(self, move_root: Path) -> None:
         self._move_root: Path = move_root
@@ -132,16 +132,14 @@ class TestMultiple(_TestShare):
         return True
 
     def test_multiple(self) -> None:
-        """Test to execute the multi-line CLI script on a subprocess.
-
-        Note that the simple Linux commands (cd, pwd) should be installed
-            before execute the test on Windows environment.
-        """
+        """Test to execute the specific multi-line CLI script."""
         self._create_execute_default()
         self.inside_working(self._individual_test)
 
 
 class TestNone(_TestShare, ErrorCatch):
+    """Test class to raise the error forcibly and catch it."""
+
     def _get_command(self) -> Strs:
         return ["ls"]
 
@@ -152,5 +150,6 @@ class TestNone(_TestShare, ErrorCatch):
         return ExecuteCommand(error_types=["none"])
 
     def test_none(self) -> None:
+        """Test to raise the error forcibly and catch it."""
         self.initialize_execute(self._create_execute())
         self.catch_value(self._error_none, "process")
