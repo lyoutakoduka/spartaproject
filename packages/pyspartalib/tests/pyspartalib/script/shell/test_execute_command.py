@@ -11,6 +11,7 @@ from pyspartalib.script.directory.current.set_current import SetCurrent
 from pyspartalib.script.directory.working.working_directory import (
     WorkingDirectory,
 )
+from pyspartalib.script.error.error_catch import ErrorCatch
 from pyspartalib.script.error.error_raise import (
     ErrorDifference,
     ErrorLength,
@@ -140,7 +141,7 @@ class TestMultiple(_TestShare):
         self.inside_working(self._individual_test)
 
 
-class TestNone(_TestShare):
+class TestNone(_TestShare, ErrorCatch):
     def _get_command(self) -> Strs:
         return ["ls"]
 
@@ -149,3 +150,7 @@ class TestNone(_TestShare):
 
     def _create_execute(self) -> ExecuteCommand:
         return ExecuteCommand(error_types=["none"])
+
+    def test_none(self) -> None:
+        self.initialize_execute(self._create_execute())
+        self.catch_value(self._error_none, "process")
