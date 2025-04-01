@@ -25,3 +25,6 @@ class _TestForce(ErrorForce):
 class TestEmpty(ErrorDifference):
     def _get_result(self) -> str | None:
         return _TestForce().select_process("none")
+
+    def test_empty(self) -> None:
+        self.error_difference(self._get_result(), "success", "empty")
