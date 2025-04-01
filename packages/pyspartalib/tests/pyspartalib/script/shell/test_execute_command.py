@@ -5,7 +5,7 @@
 from pathlib import Path
 
 from pyspartalib.context.custom.callable_context import Func
-from pyspartalib.context.default.string_context import StrGene, Strs
+from pyspartalib.context.default.string_context import StrGene, Strs, Strs2
 from pyspartalib.script.directory.create_directory import create_directory
 from pyspartalib.script.directory.current.set_current import SetCurrent
 from pyspartalib.script.directory.working.working_directory import (
@@ -101,11 +101,12 @@ class TestMultiple(_TestShare):
     def _get_cd(self) -> Strs:
         return ["cd", self._move_root.as_posix()]
 
+    def _get_commands(self) -> Strs2:
+        return [self._get_cd(), self._get_pwd()]
+
     def _move_and_get(self) -> Strs:
         return self.evaluate(
-            self.get_execute().execute_multiple(
-                [self._get_cd(), self._get_pwd()],
-            ),
+            self.get_execute().execute_multiple(self._get_commands()),
         )
 
     def _get_result(self) -> Path:
