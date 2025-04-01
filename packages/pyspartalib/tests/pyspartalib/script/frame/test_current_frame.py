@@ -66,6 +66,9 @@ class TestOffset(_TestShare):
 class TestError(_TestShare, ErrorCatch):
     """Class to get the current frame, but it fails."""
 
+    def _initialize_instance(self, instance: CurrentFrame) -> None:
+        self._instance = instance
+
     def _get_result(self) -> None:
         CurrentFrame(force_fail=True).get_frame()
 
