@@ -86,11 +86,7 @@ class ExecuteCommand(ErrorForce, ErrorNone):
             self._join_line(self._join_commands(command_multiple)),
         )
 
-    def __init__(
-        self,
-        fail_types: Strs | None = None,
-        force_fail: bool = False,
-    ) -> None:
+    def __init__(self, fail_types: Strs | None = None) -> None:
         """Initialize the class variables.
 
         Args:
