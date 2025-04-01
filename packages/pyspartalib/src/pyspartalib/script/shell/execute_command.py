@@ -38,7 +38,7 @@ class ExecuteCommand(_ExecuteBefore, ErrorForce, ErrorNone):
         return self.error_none_walrus(result, "process")
 
     def _select_fail_condition(self, subprocess: POpen) -> PByte | None:
-        return None if self.send_signal("process") else subprocess.stdout
+        return None if self.send_signal("none") else subprocess.stdout
 
     def _confirm_result(self, subprocess: POpen) -> PByte:
         return self._confirm_none(self._select_fail_condition(subprocess))
