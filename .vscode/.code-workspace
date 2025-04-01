@@ -1,6 +1,10 @@
 {
   "folders": [
     {
+      "name": "EXTERNAL",
+      "path": "../../../../../external/",
+    },
+    {
       "name": "INTERNAL",
       "path": "../../../internal",
     },
