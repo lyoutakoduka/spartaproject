@@ -44,14 +44,14 @@ class _TestShare(
         self.error_no_exists(path, self._get_match())
         return path
 
-    def initialize_execute(self, execute: ExecuteCommand) -> None:
-        self._execute = execute
+    def initialize_execute(self, instance: ExecuteCommand) -> None:
+        self._instance = instance
 
     def create_execute_default(self) -> None:
         self.initialize_execute(ExecuteCommand())
 
     def get_execute(self) -> ExecuteCommand:
-        return self._execute
+        return self._instance
 
     def get_single_path(self, result: Strs) -> Path:
         return self._error_no_exists(Path(self._error_length(result)))
