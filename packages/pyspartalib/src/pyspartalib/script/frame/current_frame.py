@@ -22,9 +22,6 @@ class CurrentFrame(ErrorForce, ErrorRaise):
     def __initialize_super_class(self, error_types: Strs | None) -> None:
         ErrorForce.__init__(self, error_types)
 
-    def __initialize_variables(self, force_fail: bool) -> None:
-        self._force_fail: bool = force_fail
-
     def _get_stack_frame(self, outer_frame: FrameInfo) -> StackFrame:
         return {
             "file": Path(outer_frame.filename),
@@ -40,12 +37,6 @@ class CurrentFrame(ErrorForce, ErrorRaise):
 
     def _select_fail_condition(self) -> FrameType | None:
         return None if self.send_signal("none") else currentframe()
-
-    def _current_frame(self) -> FrameType | None:
-        if self._force_fail:
-            return None
-
-        return currentframe()
 
     def _find_stack_frame_error(self) -> StackFrames:
         if (current_frame := self._current_frame()) is None:
@@ -88,4 +79,3 @@ class CurrentFrame(ErrorForce, ErrorRaise):
 
         """
         self.__initialize_super_class(error_types)
-        self.__initialize_variables(force_fail)
