@@ -28,3 +28,8 @@ class TestEmpty(ErrorDifference):
 
     def test_empty(self) -> None:
         self.error_difference(self._get_result(), "success", "empty")
+
+
+class TestContain:
+    def _get_error_types(self) -> Strs:
+        return ["none", "fail", "exists"]
