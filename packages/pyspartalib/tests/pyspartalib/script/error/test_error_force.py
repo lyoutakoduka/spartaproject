@@ -8,7 +8,7 @@ class _TestForce(ErrorForce):
     def __initialize_super_class(self, error_types: Strs | None) -> None:
         ErrorForce.__init__(self, error_types=error_types)
 
-    def _outside_process(self) -> str | None:
+    def _reproduce_external(self) -> str | None:
         return "success"
 
     def __init__(self, error_types: Strs | None = None) -> None:
