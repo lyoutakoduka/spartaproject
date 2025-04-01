@@ -31,8 +31,8 @@ class _ExecuteBefore:
 class ExecuteCommand(_ExecuteBefore, ErrorForce, ErrorNone):
     """Class for executing specific CLI script on a subprocess."""
 
-    def __initialize_super_class(self, fail_types: Strs | None) -> None:
-        ErrorForce.__init__(self, fail_types)
+    def __initialize_super_class(self, error_types: Strs | None) -> None:
+        ErrorForce.__init__(self, error_types)
 
     def _confirm_none(self, result: PByte | None) -> PByte:
         return self.error_none_walrus(result, "process")
@@ -90,7 +90,7 @@ class ExecuteCommand(_ExecuteBefore, ErrorForce, ErrorNone):
         """
         return self._execute(self.get_command_multiple(command_multiple))
 
-    def __init__(self, fail_types: Strs | None = None) -> None:
+    def __init__(self, error_types: Strs | None = None) -> None:
         """Initialize the super class.
 
         Args:
@@ -99,4 +99,4 @@ class ExecuteCommand(_ExecuteBefore, ErrorForce, ErrorNone):
                 It's used for the argument "error_types" of class "ErrorForce".
 
         """
-        self.__initialize_super_class(fail_types)
+        self.__initialize_super_class(error_types)
