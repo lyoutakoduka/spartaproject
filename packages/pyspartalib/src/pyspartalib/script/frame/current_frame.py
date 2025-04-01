@@ -6,6 +6,7 @@ from inspect import FrameInfo, currentframe, getouterframes
 from pathlib import Path
 from types import FrameType
 
+from pyspartalib.context.default.string_context import Strs
 from pyspartalib.script.error.error_force import ErrorForce
 from pyspartalib.script.error.error_raise import ErrorRaise
 from pyspartalib.script.frame.context.frame_context import (
@@ -17,6 +18,9 @@ from pyspartalib.script.path.modify.current.get_relative import get_relative
 
 class CurrentFrame(ErrorForce, ErrorRaise):
     """Class to get the current frame from the stack frames."""
+
+    def __initialize_super_class(self, error_types: Strs | None) -> None:
+        ErrorForce.__init__(self, error_types)
 
     def __initialize_variables(self, force_fail: bool) -> None:
         self._force_fail: bool = force_fail
@@ -71,7 +75,11 @@ class CurrentFrame(ErrorForce, ErrorRaise):
             self._select_frame(offset, self._find_stack_frame_error()),
         )
 
-    def __init__(self, force_fail: bool = False) -> None:
+    def __init__(
+        self,
+        error_types: Strs | None = None,
+        force_fail: bool = False,
+    ) -> None:
         """Initialize the class variables.
 
         Args:
@@ -79,4 +87,5 @@ class CurrentFrame(ErrorForce, ErrorRaise):
                 If true, retrieving the stack frames will fail.
 
         """
+        self.__initialize_super_class(error_types)
         self.__initialize_variables(force_fail)
