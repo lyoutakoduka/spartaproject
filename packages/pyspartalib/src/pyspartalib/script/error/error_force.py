@@ -13,5 +13,8 @@ class ErrorForce:
 
         return error_types
 
+    def find_type(self, error_type: str) -> bool:
+        return error_type in self._error_types
+
     def __init__(self, error_types: Strs | None = None) -> None:
         self.__initialize_variables(error_types)
