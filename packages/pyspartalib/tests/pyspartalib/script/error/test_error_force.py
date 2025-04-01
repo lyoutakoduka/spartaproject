@@ -2,7 +2,7 @@
 
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.script.error.error_force import ErrorForce
-from pyspartalib.script.error.error_type import ErrorDifference
+from pyspartalib.script.error.error_type import ErrorDifference, ErrorNone
 
 
 class _TestForce(ErrorForce):
@@ -30,7 +30,7 @@ class TestEmpty(ErrorDifference):
         self.error_difference(self._get_result(), "success", "empty")
 
 
-class TestContain:
+class TestContain(ErrorNone):
     def _get_error_types(self) -> Strs:
         return ["none", "fail", "exists"]
 
@@ -39,3 +39,6 @@ class TestContain:
 
     def _get_result(self) -> str | None:
         return self._get_test_force().select_process("none")
+
+    def test_contain(self) -> None:
+        self.error_none(self._get_result(), "contain", invert=True)
