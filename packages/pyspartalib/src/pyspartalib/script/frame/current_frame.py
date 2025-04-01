@@ -67,11 +67,12 @@ class CurrentFrame(ErrorForce, ErrorNone):
         )
 
     def __init__(self, error_types: Strs | None = None) -> None:
-        """Initialize the class variables.
+        """Initialize the super class.
 
         Args:
-            force_fail (bool, optional): Defaults to False.
-                If true, retrieving the stack frames will fail.
+            error_types (Strs | None, optional): Defaults to None.
+                The candidates of error type you raise forcibly.
+                It's used for the argument "error_types" of class "ErrorForce".
 
         """
         self.__initialize_super_class(error_types)
