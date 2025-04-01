@@ -39,6 +39,12 @@ class _TestShare(
         self.error_no_exists(path, self._get_match())
         return path
 
+    def initialize_execute(self, execute: ExecuteCommand) -> None:
+        self._execute = execute
+
+    def get_execute(self) -> ExecuteCommand:
+        return self._execute
+
     def get_single_path(self, result: Strs) -> Path:
         return self._error_no_exists(Path(self._error_length(result)))
 
@@ -51,7 +57,7 @@ class TestSingle(_TestShare):
     """Class to execute the single line CLI script on a subprocess."""
 
     def _get_current(self) -> Strs:
-        return list(ExecuteCommand().execute_single(self._get_pwd()))
+        return list(self.get_execute().execute_single(self._get_pwd()))
 
     def _get_result(self) -> Path:
         return self.get_single_path(self._get_current())
@@ -74,6 +80,7 @@ class TestSingle(_TestShare):
         Note that the Linux command (pwd) should be installed
             before execute the test on Windows environment.
         """
+        self.initialize_execute(ExecuteCommand())
         self.inside_working(self._individual_test)
 
 
@@ -88,7 +95,7 @@ class TestMultiple(_TestShare):
 
     def _move_and_get(self) -> Strs:
         return list(
-            ExecuteCommand().execute_multiple(
+            self.get_execute().execute_multiple(
                 [self._get_cd(), self._get_pwd()],
             ),
         )
@@ -120,4 +127,5 @@ class TestMultiple(_TestShare):
         Note that the simple Linux commands (cd, pwd) should be installed
             before execute the test on Windows environment.
         """
+        self.initialize_execute(ExecuteCommand())
         self.inside_working(self._individual_test)
