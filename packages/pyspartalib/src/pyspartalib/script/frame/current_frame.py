@@ -39,7 +39,7 @@ class CurrentFrame(ErrorForce, ErrorRaise):
         return None if self.send_signal("none") else currentframe()
 
     def _find_stack_frame_error(self) -> StackFrames:
-        if (current_frame := self._current_frame()) is None:
+        if (current_frame := self._select_fail_condition()) is None:
             self.error_value("frame")
 
         return self._get_stack_frames(current_frame)
