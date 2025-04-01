@@ -47,7 +47,7 @@ class _TestShare(
     def initialize_instance(self, instance: ExecuteCommand) -> None:
         self._instance = instance
 
-    def create_execute_default(self) -> None:
+    def create_instance(self) -> None:
         self.initialize_instance(ExecuteCommand())
 
     def get_execute(self) -> ExecuteCommand:
@@ -89,7 +89,7 @@ class TestSingle(_TestShare):
 
     def test_single(self) -> None:
         """Test to execute the specific single line CLI script."""
-        self.create_execute_default()
+        self.create_instance()
         self.inside_working(self._individual_test)
 
 
@@ -133,7 +133,7 @@ class TestMultiple(_TestShare):
 
     def test_multiple(self) -> None:
         """Test to execute the specific multi-line CLI script."""
-        self.create_execute_default()
+        self.create_instance()
         self.inside_working(self._individual_test)
 
 
