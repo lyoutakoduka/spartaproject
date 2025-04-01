@@ -66,11 +66,7 @@ class CurrentFrame(ErrorForce, ErrorRaise):
             self._select_frame(offset, self._find_stack_frame_error()),
         )
 
-    def __init__(
-        self,
-        error_types: Strs | None = None,
-        force_fail: bool = False,
-    ) -> None:
+    def __init__(self, error_types: Strs | None = None) -> None:
         """Initialize the class variables.
 
         Args:
