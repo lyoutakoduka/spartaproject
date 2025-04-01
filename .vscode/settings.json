@@ -43,6 +43,7 @@
   ],
   "python.analysis.typeCheckingMode": "strict",
   "python.languageServer": "Pylance",
+  "python.testing.pytestEnabled": true,
   "ruff.configuration": "pyproject.toml",
   "search.useIgnoreFiles": false,
   "search.exclude": { "**/.venv/**": true },
