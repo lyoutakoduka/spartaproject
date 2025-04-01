@@ -50,7 +50,7 @@ class _TestShare(
     def create_instance(self) -> None:
         self.initialize_instance(ExecuteCommand())
 
-    def get_execute(self) -> ExecuteCommand:
+    def get_instance(self) -> ExecuteCommand:
         return self._instance
 
     def get_single_path(self, result: Strs) -> Path:
@@ -69,7 +69,7 @@ class TestSingle(_TestShare):
 
     def _get_current(self) -> Strs:
         return self.evaluate(
-            self.get_execute().execute_single(self._get_pwd()),
+            self.get_instance().execute_single(self._get_pwd()),
         )
 
     def _get_result(self) -> Path:
@@ -107,7 +107,7 @@ class TestMultiple(_TestShare):
 
     def _move_and_get(self) -> Strs:
         return self.evaluate(
-            self.get_execute().execute_multiple(self._get_commands()),
+            self.get_instance().execute_multiple(self._get_commands()),
         )
 
     def _get_result(self) -> Path:
@@ -144,7 +144,7 @@ class TestNone(_TestShare, ErrorCatch):
         return ["ls"]
 
     def _error_none(self) -> None:
-        self.evaluate(self.get_execute().execute_single(self._get_command()))
+        self.evaluate(self.get_instance().execute_single(self._get_command()))
 
     def _create_execute(self) -> ExecuteCommand:
         return ExecuteCommand(error_types=["none"])
