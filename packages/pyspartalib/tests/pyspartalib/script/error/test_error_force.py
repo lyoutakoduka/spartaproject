@@ -2,6 +2,7 @@
 
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.script.error.error_force import ErrorForce
+from pyspartalib.script.error.error_type import ErrorDifference
 
 
 class _TestForce(ErrorForce):
@@ -19,3 +20,8 @@ class _TestForce(ErrorForce):
 
     def __init__(self, error_types: Strs | None = None) -> None:
         self.__initialize_super_class(error_types)
+
+
+class TestEmpty(ErrorDifference):
+    def _get_result(self) -> str | None:
+        return _TestForce().select_process("none")
