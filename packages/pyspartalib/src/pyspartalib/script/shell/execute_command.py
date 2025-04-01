@@ -11,9 +11,7 @@ from pyspartalib.script.shell.context.process_context import PByte, POpen
 from pyspartalib.script.string.encoding.set_decoding import set_decoding
 
 
-class ExecuteCommand(ErrorForce, ErrorNone):
-    """Class for executing CLI script in a subprocess."""
-
+class _ExecuteBefore:
     def _join_line(self, texts: Strs) -> str:
         return "; ".join(texts)
 
@@ -22,6 +20,10 @@ class ExecuteCommand(ErrorForce, ErrorNone):
 
     def _join_commands(self, command_multiple: Strs2) -> Strs:
         return [self._join_text(commands) for commands in command_multiple]
+
+
+class ExecuteCommand(_ExecuteBefore, ErrorForce, ErrorNone):
+    """Class for executing CLI script in a subprocess."""
 
     def __initialize_super_class(self, fail_types: Strs | None) -> None:
         ErrorForce.__init__(self, fail_types)
