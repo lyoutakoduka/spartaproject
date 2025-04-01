@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+"""Test module to send the signal to raise an errors forcibly."""
+
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.script.error.error_force import ErrorForce
 from pyspartalib.script.error.error_type import ErrorDifference, ErrorNone
@@ -23,14 +25,19 @@ class _TestForce(ErrorForce):
 
 
 class TestEmpty(ErrorDifference):
+    """Test class to receive the signal to raise an error. But test fails."""
+
     def _get_result(self) -> str | None:
         return _TestForce().select_process("none")
 
     def test_empty(self) -> None:
+        """Receive the signal to raise an error. But test fails."""
         self.error_difference(self._get_result(), "success", "empty")
 
 
 class TestContain(ErrorNone):
+    """Test class to receive the signal to raise an error forcibly."""
+
     def _get_error_types(self) -> Strs:
         return ["none", "fail", "exists"]
 
@@ -41,4 +48,5 @@ class TestContain(ErrorNone):
         return self._get_test_force().select_process("none")
 
     def test_contain(self) -> None:
+        """Receive the signal to raise an error forcibly."""
         self.error_none(self._get_result(), "contain", invert=True)
