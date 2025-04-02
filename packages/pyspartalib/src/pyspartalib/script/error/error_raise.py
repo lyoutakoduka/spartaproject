@@ -3,22 +3,27 @@
 """Module to raise errors, and it is used through method overriding."""
 
 from collections.abc import Container, Sized
+from decimal import FloatOperation
 from pathlib import Path
+from typing import NoReturn
 
 from pyspartalib.context.custom.type_context import Type
 
 
-class ErrorBase:
+class ErrorRaise:
     """Class to raise errors together with the error identifier."""
 
     def _error_base(
         self,
-        match: str,
         error: type[Exception] = ValueError,
-    ) -> None:
+        match: str | None = None,
+    ) -> NoReturn:
+        if match is None:
+            raise error
+
         raise error(match)
 
-    def error_value(self, match: str) -> None:
+    def error_value(self, match: str) -> NoReturn:
         """Raise ValueError together with the error identifier.
 
         Args:
@@ -26,10 +31,13 @@ class ErrorBase:
                 The error identifier for correct error handling.
                 Assign a unique string.
 
-        """
-        self._error_base(match)
+        Returns:
+            NoReturn: An error always occurs.
 
-    def error_not_found(self, match: str) -> None:
+        """
+        self._error_base(match=match)
+
+    def error_not_found(self, match: str) -> NoReturn:
         """Raise FileNotFoundError together with the error identifier.
 
         Args:
@@ -37,21 +45,33 @@ class ErrorBase:
                 The error identifier for correct error handling.
                 Assign a unique string.
 
+        Returns:
+            NoReturn: An error always occurs.
+
         """
-        self._error_base(match, error=FileNotFoundError)
+        self._error_base(error=FileNotFoundError, match=match)
+
+    def error_float(self) -> NoReturn:
+        """Raise FloatOperation for a test.
+
+        Returns:
+            NoReturn: An error always occurs.
+
+        """
+        self._error_base(error=FloatOperation)
 
 
-class _ErrorShare(ErrorBase):
+class _ErrorShare(ErrorRaise):
     def _invert(self, result: bool, invert: bool) -> bool:
         return result ^ invert
-
-    def raise_not_found(self, result: bool, match: str, invert: bool) -> None:
-        if self._invert(result, invert):
-            self.error_not_found(match)
 
     def raise_value(self, result: bool, match: str, invert: bool) -> None:
         if self._invert(result, invert):
             self.error_value(match)
+
+    def raise_not_found(self, result: bool, match: str, invert: bool) -> None:
+        if self._invert(result, invert):
+            self.error_not_found(match)
 
 
 class ErrorFail(_ErrorShare):
@@ -109,29 +129,23 @@ class ErrorNone(_ErrorShare):
         """
         self.raise_value(self.__confirm(result), match, invert)
 
-    def error_none_walrus(
-        self,
-        result: Type | None,
-        match: str,
-        invert: bool = False,
-    ) -> Type | None:
-        """Raise error if the input value is None.
+    def error_none_walrus(self, result: Type | None, match: str) -> Type:
+        """Raise error if the input argument "result" is None.
 
         Args:
-            result (object | None): The value you want to to verify.
+            result (Type | None): The value you want to to verify.
 
             match (str):
                 The error identifier for correct error handling.
                 Assign a unique string.
 
-            invert (bool, optional): Defaults to False.
-                If True, the condition to raise the error is inverted.
-
         Returns:
-            Type | None: Return the input argument "result" if no error occurs.
+            Type: Return the input argument "result" if no error occurs.
 
         """
-        self.error_none(result, match, invert=invert)
+        if result is None:
+            self.error_value(match)
+
         return result
 
 

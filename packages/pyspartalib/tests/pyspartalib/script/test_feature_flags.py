@@ -5,7 +5,7 @@
 from pathlib import Path
 
 from pyspartalib.script.feature_flags import in_development
-from pyspartalib.script.frame.stack_frame import current_frame
+from pyspartalib.script.frame.current_frame import CurrentFrame
 
 
 def _success_error(status: bool) -> None:
@@ -19,7 +19,7 @@ def _fail_error(status: bool) -> None:
 
 
 def _get_current_file() -> Path:
-    return current_frame()["file"]
+    return CurrentFrame().get_frame()["file"]
 
 
 def test_develop() -> None:

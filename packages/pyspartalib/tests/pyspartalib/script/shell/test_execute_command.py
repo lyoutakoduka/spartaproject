@@ -1,81 +1,155 @@
 #!/usr/bin/env python
 
-"""Test module to execute CLI (Command Line Interface) script on subprocess."""
+"""Test module for executing specific CLI script on a subprocess.
+
+Note that the simple Linux commands (cd, pwd) should be installed
+    before execute the test on Windows environment.
+"""
 
 from pathlib import Path
-from tempfile import TemporaryDirectory
 
-from pyspartalib.context.custom.type_context import Type
-from pyspartalib.context.default.string_context import Strs
-from pyspartalib.context.extension.path_context import PathFunc
+from pyspartalib.context.custom.callable_context import Func
+from pyspartalib.context.default.string_context import StrGene, Strs, Strs2
 from pyspartalib.script.directory.create_directory import create_directory
 from pyspartalib.script.directory.current.set_current import SetCurrent
-from pyspartalib.script.shell.execute_command import (
-    execute_multiple,
-    execute_single,
+from pyspartalib.script.directory.working.working_directory import (
+    WorkingDirectory,
 )
+from pyspartalib.script.error.error_catch import ErrorCatch
+from pyspartalib.script.error.error_raise import (
+    ErrorDifference,
+    ErrorLength,
+    ErrorNoExists,
+)
+from pyspartalib.script.shell.execute_command import ExecuteCommand
 
 
-def _difference_error(result: Type, expected: Type) -> None:
-    if result != expected:
-        raise ValueError
+class _TestShare(
+    ErrorLength,
+    ErrorNoExists,
+    ErrorDifference,
+    WorkingDirectory,
+):
+    def _get_match(self) -> str:
+        return "share"
+
+    def _get_pwd(self) -> Strs:
+        return ["pwd"]
+
+    def _error_length(self, result: Strs) -> str:
+        self.error_length(result, 1, self._get_match())
+        return result[0]
+
+    def _error_no_exists(self, path: Path) -> Path:
+        self.error_no_exists(path, self._get_match())
+        return path
+
+    def initialize_instance(self, instance: ExecuteCommand) -> None:
+        self._instance = instance
+
+    def create_instance(self) -> None:
+        self.initialize_instance(ExecuteCommand())
+
+    def get_instance(self) -> ExecuteCommand:
+        return self._instance
+
+    def get_single_path(self, result: Strs) -> Path:
+        return self._error_no_exists(Path(self._error_length(result)))
+
+    def set_current(self, function: Func) -> None:
+        with SetCurrent(self.get_working_root()):
+            function()
+
+    def evaluate(self, generator: StrGene) -> Strs:
+        return list(generator)
 
 
-def _no_exists_error(path: Path) -> Path:
-    if not path.exists():
-        raise FileNotFoundError
+class TestSingle(_TestShare):
+    """Test class to execute the specific single line CLI script."""
 
-    return path
+    def _get_current(self) -> Strs:
+        return self.evaluate(
+            self.get_instance().execute_single(self._get_pwd()),
+        )
 
+    def _get_result(self) -> Path:
+        return self.get_single_path(self._get_current())
 
-def _get_single_path(result: Strs) -> Path:
-    _difference_error(len(result), 1)
-    return _no_exists_error(Path(result[0]))
+    def _inside_current(self) -> None:
+        self.error_difference(
+            self._get_result(),
+            self.get_working_root(),
+            "single",
+        )
 
+    def _individual_test(self) -> bool:
+        self.set_current(self._inside_current)
 
-def _get_current() -> Strs:
-    return list(execute_single(["pwd"]))
+        return True
 
-
-def _move_and_get(expected: Path) -> Strs:
-    return list(
-        execute_multiple([["cd", expected.as_posix()], ["pwd"]]),
-    )
-
-
-def _inside_temporary_directory(function: PathFunc) -> None:
-    with TemporaryDirectory() as temporary_path:
-        function(Path(temporary_path))
-
-
-def test_single() -> None:
-    """Test to execute generic script.
-
-    Suppose that the test environment of Windows
-        can execute simple Linux commands.
-    """
-
-    def individual_test(temporary_root: Path) -> None:
-        with SetCurrent(temporary_root):
-            _difference_error(_get_single_path(_get_current()), temporary_root)
-
-    _inside_temporary_directory(individual_test)
+    def test_single(self) -> None:
+        """Test to execute the specific single line CLI script."""
+        self.create_instance()
+        self.inside_working(self._individual_test)
 
 
-def test_multiple() -> None:
-    """Test to execute generic script which is multiple lines.
+class TestMultiple(_TestShare):
+    """Test class to execute the specific multi-line CLI script."""
 
-    Suppose that the test environment of Windows
-        can execute simple Linux commands.
-    """
+    def _initialize_root(self, move_root: Path) -> None:
+        self._move_root: Path = move_root
 
-    def individual_test(temporary_root: Path) -> None:
-        move_root: Path = create_directory(Path(temporary_root, "move"))
+    def _get_cd(self) -> Strs:
+        return ["cd", self._move_root.as_posix()]
 
-        with SetCurrent(temporary_root):
-            _difference_error(
-                _get_single_path(_move_and_get(move_root)),
-                move_root,
-            )
+    def _get_commands(self) -> Strs2:
+        return [self._get_cd(), self._get_pwd()]
 
-    _inside_temporary_directory(individual_test)
+    def _move_and_get(self) -> Strs:
+        return self.evaluate(
+            self.get_instance().execute_multiple(self._get_commands()),
+        )
+
+    def _get_result(self) -> Path:
+        return self.get_single_path(self._move_and_get())
+
+    def _inside_current(self) -> None:
+        self.error_difference(
+            self._get_result(),
+            self._move_root,
+            "multiple",
+        )
+
+    def _create_move_root(self) -> None:
+        self._initialize_root(
+            create_directory(Path(self.get_working_root(), "move")),
+        )
+
+    def _individual_test(self) -> bool:
+        self._create_move_root()
+        self.set_current(self._inside_current)
+
+        return True
+
+    def test_multiple(self) -> None:
+        """Test to execute the specific multi-line CLI script."""
+        self.create_instance()
+        self.inside_working(self._individual_test)
+
+
+class TestNone(_TestShare, ErrorCatch):
+    """Test class to raise the error forcibly and catch it."""
+
+    def _get_command(self) -> Strs:
+        return ["ls"]
+
+    def _error_none(self) -> None:
+        self.evaluate(self.get_instance().execute_single(self._get_command()))
+
+    def _create_instance_none(self) -> None:
+        self.initialize_instance(ExecuteCommand(error_types=["none"]))
+
+    def test_none(self) -> None:
+        """Test to raise the error forcibly and catch it."""
+        self._create_instance_none()
+        self.catch_value(self._error_none, "process")

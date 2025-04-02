@@ -4,7 +4,16 @@
 
 from pathlib import Path
 
-from pyspartalib.script.frame.stack_frame import current_frame
+from pyspartalib.script.frame.context.frame_context import StackFrame
+from pyspartalib.script.frame.current_frame import CurrentFrame
+
+
+def _get_current() -> StackFrame:
+    return CurrentFrame().get_frame(offset=2)
+
+
+def _get_parent(frame: StackFrame) -> Path:
+    return frame["file"].parent
 
 
 def get_resource(local_path: Path | None = None) -> Path:
@@ -32,7 +41,7 @@ def get_resource(local_path: Path | None = None) -> Path:
         Path: Path based on resource directory.
 
     """
-    resource: Path = Path(current_frame(offset=1)["file"].parent, "resource")
+    resource: Path = Path(_get_parent(_get_current()), "resource")
 
     if local_path is None:
         return resource

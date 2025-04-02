@@ -11,7 +11,7 @@ from pyspartalib.context.default.bool_context import Bools
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.context.extension.path_context import PathPair, Paths
 from pyspartalib.script.bool.compare_value import bool_compare_array
-from pyspartalib.script.frame.stack_frame import current_frame
+from pyspartalib.script.frame.current_frame import CurrentFrame
 from pyspartalib.script.path.modify.current.get_absolute import (
     get_absolute,
     get_absolute_array,
@@ -55,7 +55,7 @@ class _Share:
         return [True, False]
 
     def get_absolute_current(self) -> Path:
-        return get_absolute(current_frame()["file"])
+        return get_absolute(CurrentFrame().get_frame()["file"])
 
     def get_absolute_parents(self) -> Paths:
         return self._get_three_parents(self.get_absolute_current())

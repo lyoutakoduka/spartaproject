@@ -7,7 +7,7 @@ from pathlib import Path
 from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.context.extension.path_context import PathPair, Paths
-from pyspartalib.script.frame.stack_frame import current_frame
+from pyspartalib.script.frame.current_frame import CurrentFrame
 from pyspartalib.script.path.modify.current.get_absolute import (
     get_absolute,
     get_absolute_array,
@@ -39,7 +39,7 @@ class _Share:
         return [get_relative(path) for path in paths]
 
     def get_relative_current(self) -> Path:
-        return current_frame()["file"]
+        return CurrentFrame().get_frame()["file"]
 
     def get_relative_parents(self) -> Paths:
         return self._get_three_parents(self.get_relative_current())

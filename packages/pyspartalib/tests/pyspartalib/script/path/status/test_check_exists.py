@@ -10,7 +10,7 @@ from pyspartalib.script.bool.compare_value import (
     bool_compare_array,
     bool_compare_pair,
 )
-from pyspartalib.script.frame.stack_frame import current_frame
+from pyspartalib.script.frame.current_frame import CurrentFrame
 from pyspartalib.script.path.status.check_exists import (
     check_exists_array,
     check_exists_pair,
@@ -23,7 +23,7 @@ def _fail_error(status: bool) -> None:
 
 
 def _get_current_file() -> Path:
-    return current_frame()["file"]
+    return CurrentFrame().get_frame()["file"]
 
 
 def _get_unknown_file(path: Path) -> Path:

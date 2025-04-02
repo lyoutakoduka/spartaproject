@@ -6,7 +6,7 @@ requires-python = ">=3.13.1"
 [dependency-groups]
 lib = ["pyspartalib"]
 img = ["pyspartaimg", "pyspartalib"]
-dev = ["mypy>=1.13.0", "pytest>=8.3.4", "ruff>=0.8.3"]
+dev = ["mypy>=1.13.0", "ruff>=0.8.3"]
 
 [project.optional-dependencies]
 lib = ["pyspartalib"]
@@ -37,6 +37,7 @@ line-ending = "lf"
 select = ["ALL"]
 fixable = ["ALL"]
 ignore = ["D203", "D213"]
+extend-ignore = ["FBT001", "FBT002", "FBT003", "PLR0913", "S602"]
 
 [tool.mypy]
 cache_dir = "./.temp/.mypy_cache"

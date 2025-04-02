@@ -2,56 +2,20 @@
 
 """Module to execute python code on server you can use ssh connection."""
 
-from collections.abc import Container
 from pathlib import Path
 
-from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.string_context import Strs
+from pyspartalib.context.extension.path_context import Paths
+from pyspartalib.script.error.error_raise import (
+    ErrorContain,
+    ErrorFail,
+    ErrorNone,
+)
 from pyspartalib.script.server.local.upload_server import UploadServer
 from pyspartalib.script.server.script_version import get_version_name
 
 
-def _raise_error(message: str) -> None:
-    raise ValueError(message)
-
-
-def _contain_error(
-    result: Container[Type],
-    expected: Type,
-    message: str,
-) -> None:
-    if expected in result:
-        _raise_error(message)
-
-
-class ExecuteServer(UploadServer):
-    """Class to execute python code on server."""
-
-    def __initialize_super_class(
-        self,
-        local_root: Path | None,
-        override: bool,
-        jst: bool,
-        forward: Path | None,
-        platform: str | None,
-    ) -> None:
-        super().__init__(
-            local_root=local_root,
-            override=override,
-            jst=jst,
-            forward=forward,
-            platform=platform,
-        )
-
-    def _set_version(self, version: str | None) -> str:
-        if version is None:
-            version = "3.11.5"
-
-        return get_version_name(version)
-
-    def _get_runtime_path(self, runtime_root: Path, version: str) -> Path:
-        return Path(runtime_root, version, "bin", "python3")
-
+class _ErrorIdentifier:
     def _get_filter_head(self) -> str:
         return "traceback".capitalize()
 
@@ -64,29 +28,89 @@ class ExecuteServer(UploadServer):
     def _get_filter_body(self) -> str:
         return "(" + self._get_filter_inside() + ")"
 
-    def _get_error_identifier(self) -> str:
+    def get_identifier(self) -> str:
         return self._get_filter_head() + " " + self._get_filter_body() + ":"
 
-    def __initialize_variables(self, version: str | None) -> None:
-        self._runtime_path: Path = self._get_runtime_path(
-            self.get_path("python_root"),
-            self._set_version(version),
+
+class _RuntimeLocal:
+    def _set_version(self, version: str | None) -> str:
+        if version is None:
+            version = "3.11.5"
+
+        return get_version_name(version)
+
+    def _get_local(self) -> Path:
+        return Path("bin", "python3")
+
+    def get_path(self, version: str | None) -> Path:
+        return Path(self._set_version(version), self._get_local())
+
+
+class ExecuteServer(UploadServer, ErrorContain, ErrorNone, ErrorFail):
+    """Class to execute python code on server."""
+
+    def __initialize_super_class(
+        self,
+        local_root: Path | None,
+        override: bool,
+        jst: bool,
+        forward: Path | None,
+        platform: str | None,
+    ) -> None:
+        UploadServer.__init__(
+            self,
+            local_root=local_root,
+            override=override,
+            jst=jst,
+            forward=forward,
+            platform=platform,
         )
+
+    def __initialize_variables(self, version: str | None) -> None:
+        self._runtime_path: Path = self._get_runtime_path(version)
         self._error_identifier: str = self._get_error_identifier()
 
-    def _get_command(self, source_root: Path) -> Strs:
-        return [
-            path.as_posix()
-            for path in [
-                self._runtime_path,
-                self.to_relative_path(source_root),
-            ]
-        ]
+    def _initialize_path(self, source_root: Path) -> None:
+        self._source_root = source_root
 
-    def _execute_command(self, source_root: Path) -> Strs | None:
-        return self.execute_ssh(self._get_command(source_root))
+    def _get_runtime_path(self, version: str | None) -> Path:
+        return Path(
+            self.get_path("python_root"),
+            _RuntimeLocal().get_path(version),
+        )
 
-    def execute(self, source_root: Path) -> Strs | None:
+    def _get_error_identifier(self) -> str:
+        return _ErrorIdentifier().get_identifier()
+
+    def _get_command_paths(self) -> Paths:
+        return [self._runtime_path, self.to_relative_path(self._source_root)]
+
+    def _get_command(self) -> Strs:
+        return [path.as_posix() for path in self._get_command_paths()]
+
+    def _execute_command(self) -> Strs | None:
+        return self.execute_ssh(self._get_command())
+
+    def _confirm_upload(self) -> None:
+        self.error_fail(self.upload(self._source_root), "server")
+
+    def _confirm_execute(self) -> Strs:
+        return self.error_none_walrus(self._execute_command(), "server")
+
+    def _confirm_after(self, result_text: str) -> None:
+        self.error_contain(
+            result_text,
+            self._error_identifier,
+            "server",
+            invert=True,
+        )
+
+    def _execute_on_server(self) -> Strs:
+        result: Strs = self._confirm_execute()
+        self._confirm_after("\n".join(result))
+        return result
+
+    def execute(self, source_root: Path) -> Strs:
         """Execute Python code you selected.
 
         Args:
@@ -98,15 +122,9 @@ class ExecuteServer(UploadServer):
                 Stdout of executed Python code when execution is successful.
 
         """
-        if not self.upload(source_root):
-            return None
-
-        if (result := self._execute_command(source_root)) is None:
-            return None
-
-        _contain_error("\n".join(result), self._error_identifier, "server")
-
-        return result
+        self._initialize_path(source_root)
+        self._confirm_upload()
+        return self._execute_on_server()
 
     def __init__(
         self,

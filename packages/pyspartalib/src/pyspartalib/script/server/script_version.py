@@ -5,11 +5,11 @@
 from pathlib import Path
 
 from pyspartalib.context.default.string_context import StrGene
-from pyspartalib.script.shell.execute_command import execute_single
+from pyspartalib.script.shell.execute_command import ExecuteCommand
 
 
 def _get_command(executable: Path) -> StrGene:
-    return execute_single([str(executable), "-V"])
+    return ExecuteCommand().execute_single([str(executable), "-V"])
 
 
 def _get_result_head(executable: Path) -> str:

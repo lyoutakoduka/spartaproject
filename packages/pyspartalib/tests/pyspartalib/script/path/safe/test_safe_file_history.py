@@ -15,7 +15,7 @@ from pyspartalib.context.extension.path_context import (
     Paths2,
     Paths3,
 )
-from pyspartalib.script.frame.stack_frame import current_frame
+from pyspartalib.script.frame.current_frame import CurrentFrame
 from pyspartalib.script.path.modify.current.get_relative import is_relative
 from pyspartalib.script.path.safe.safe_file_history import FileHistory
 from pyspartalib.script.time.directory.get_time_path import (
@@ -64,7 +64,7 @@ def _get_group() -> Strs:
 
 
 def _get_current_file() -> Path:
-    return current_frame()["file"]
+    return CurrentFrame().get_frame()["file"]
 
 
 def _compare_path_pair(result: Path, expected: Path) -> None:

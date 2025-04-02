@@ -243,6 +243,7 @@ source = { editable = "packages/pyspartalib" }
 dependencies = [
     { name = "chardet" },
     { name = "paramiko" },
+    { name = "pytest" },
     { name = "python-dateutil" },
     { name = "types-paramiko" },
     { name = "types-python-dateutil" },
@@ -252,6 +253,7 @@ dependencies = [
 requires-dist = [
     { name = "chardet", specifier = ">=5.2.0" },
     { name = "paramiko", specifier = ">=3.5.0" },
+    { name = "pytest", specifier = ">=8.3.4" },
     { name = "python-dateutil", specifier = ">=2.9.0.post0" },
     { name = "types-paramiko", specifier = ">=3.5.0.20240928" },
     { name = "types-python-dateutil", specifier = ">=2.9.0.20241206" },
@@ -273,7 +275,6 @@ lib = [
 [package.dev-dependencies]
 dev = [
     { name = "mypy" },
-    { name = "pytest" },
     { name = "ruff" },
 ]
 img = [
@@ -293,7 +294,6 @@ requires-dist = [
 [package.metadata.requires-dev]
 dev = [
     { name = "mypy", specifier = ">=1.13.0" },
-    { name = "pytest", specifier = ">=8.3.4" },
     { name = "ruff", specifier = ">=0.8.3" },
 ]
 img = [

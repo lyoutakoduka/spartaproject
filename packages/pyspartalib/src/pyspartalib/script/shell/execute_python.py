@@ -7,7 +7,7 @@ from pathlib import Path
 from pyspartalib.context.default.string_context import StrGene, Strs, Strs2
 from pyspartalib.context.extension.path_context import Paths
 from pyspartalib.script.project.project_context import ProjectContext
-from pyspartalib.script.shell.execute_command import execute_multiple
+from pyspartalib.script.shell.execute_command import ExecuteCommand
 
 
 def _merge_context_path(project: ProjectContext) -> Path:
@@ -123,4 +123,4 @@ def execute_python(
 
     command_multiple += [_get_python_command(commands, platform, forward)]
 
-    return execute_multiple(command_multiple)
+    return ExecuteCommand().execute_multiple(command_multiple)
