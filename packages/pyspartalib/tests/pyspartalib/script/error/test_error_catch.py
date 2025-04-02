@@ -6,7 +6,10 @@ from pyspartalib.script.error.error_catch import ErrorCatch
 from pyspartalib.script.error.error_raise import ErrorRaise
 
 
-class TestValue(ErrorCatch, ErrorRaise):
+class _TestShare(ErrorCatch, ErrorRaise): ...
+
+
+class TestValue(_TestShare):
     """Test class to catch ValueError together with the error identifier."""
 
     def _get_match(self) -> str:
@@ -20,7 +23,7 @@ class TestValue(ErrorCatch, ErrorRaise):
         self.catch_value(self._error_value, self._get_match())
 
 
-class TestNotFound(ErrorCatch, ErrorRaise):
+class TestNotFound(_TestShare):
     """Test class to catch FileNotFoundError.
 
     It together with the error identifier.
@@ -37,7 +40,7 @@ class TestNotFound(ErrorCatch, ErrorRaise):
         self.catch_not_found(self._error_not_found, self._get_match())
 
 
-class TestFloat(ErrorCatch, ErrorRaise):
+class TestFloat(_TestShare):
     """Test class to catch FloatOperation for a test."""
 
     def test_float(self) -> None:
