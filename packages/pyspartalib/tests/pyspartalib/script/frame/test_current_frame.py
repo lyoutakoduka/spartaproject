@@ -28,7 +28,7 @@ class _TestShare(ErrorDifference):
 
 
 class TestCurrent(_TestShare):
-    """Class to get the current frame from the stack frames."""
+    """Test class to get the current frame from the stack frames."""
 
     def _get_result(self) -> StackFrame:
         return CurrentFrame().get_frame()
@@ -46,7 +46,7 @@ class TestCurrent(_TestShare):
 
 
 class TestOffset(_TestShare):
-    """Class to get the current frame from the offset stack frame."""
+    """Test class to get the offset current frame from the stack frames."""
 
     def _get_result(self) -> StackFrame:
         return CurrentFrame().get_frame(offset=1)
@@ -55,7 +55,7 @@ class TestOffset(_TestShare):
         return self.get_expected_frame("test_offset", 60)
 
     def test_offset(self) -> None:
-        """Test to get the current frame from the offset stack frame."""
+        """Test to get the offset current frame from the stack frames."""
         self.error_difference(
             self._get_result(),
             self._get_expected(),
@@ -64,7 +64,7 @@ class TestOffset(_TestShare):
 
 
 class TestError(_TestShare, ErrorCatch):
-    """Class to get the current frame, but it fails."""
+    """Test class to get the current stack frame, but it fails."""
 
     def _initialize_instance(self, instance: CurrentFrame) -> None:
         self._instance = instance
@@ -79,6 +79,6 @@ class TestError(_TestShare, ErrorCatch):
         self._get_instance().get_frame()
 
     def test_error(self) -> None:
-        """Test to get the current frame, but it fails."""
+        """Test to get the current stack frame, but it fails."""
         self._create_instance()
         self.catch_value(self._get_result, "frame")
