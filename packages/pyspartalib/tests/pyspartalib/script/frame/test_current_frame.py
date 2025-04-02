@@ -72,9 +72,13 @@ class TestError(_TestShare, ErrorCatch):
     def _get_instance(self) -> CurrentFrame:
         return self._instance
 
+    def _create_instance(self) -> None:
+        self._initialize_instance(CurrentFrame(error_types=["none"]))
+
     def _get_result(self) -> None:
         CurrentFrame(force_fail=True).get_frame()
 
     def test_error(self) -> None:
         """Test to get the current frame, but it fails."""
+        self._create_instance()
         self.catch_value(self._get_result, "frame")
