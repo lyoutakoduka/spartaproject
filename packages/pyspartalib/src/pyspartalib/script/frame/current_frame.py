@@ -49,7 +49,7 @@ class CurrentFrame(ErrorForce, ErrorNone):
         return frame
 
     def _select_frame(self, offset: int, frames: StackFrames) -> StackFrame:
-        return frames[3 + offset]
+        return frames[4 + offset]
 
     def get_frame(self, offset: int = 0) -> StackFrame:
         """Get the current frame from the stack frames.
