@@ -4,7 +4,7 @@
 
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.script.error.error_force import ErrorForce
-from pyspartalib.script.error.error_type import ErrorDifference, ErrorNone
+from pyspartalib.script.error.error_raise import ErrorDifference, ErrorNone
 
 
 class _TestForce(ErrorForce):
