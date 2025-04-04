@@ -12,7 +12,7 @@ Prepare the Linux environment.
 
 _Our primary development environment is Ubuntu within Windows WSL._
 
-#### 2-2: IDE
+### 2-2: IDE
 
 #### 2-2-1: Main
 
@@ -24,11 +24,11 @@ _Our primary IDE is VSCode on Windows._
 
 Prepare the extension "Remote Development" if you select VSCode.
 
-#### 2-3: VCS
+### 2-3: VCS
 
 Prepare Git.
 
-#### 2-4: Container
+### 2-4: Container
 
 Prepare Docker and Devcontainer.
 
