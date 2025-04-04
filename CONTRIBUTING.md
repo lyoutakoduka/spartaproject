@@ -19,3 +19,7 @@ _Our primary development environment is Ubuntu within Windows WSL._
 Select python friendly IDE.
 
 _Our primary IDE is VSCode on Windows._
+
+#### 2-2-2: Extension
+
+Install extension "Remote Development" if you select VSCode.
