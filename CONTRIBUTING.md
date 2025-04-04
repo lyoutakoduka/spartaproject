@@ -8,7 +8,7 @@ See "Language" and "Technical Support" section of [README.md](README.md)
 
 ### 2-1: Operating system (OS)
 
-Prepare a Linux environment.
+Prepare the Linux environment.
 
 _Our primary development environment is Ubuntu within Windows WSL._
 
@@ -16,20 +16,20 @@ _Our primary development environment is Ubuntu within Windows WSL._
 
 #### 2-2-1: Main
 
-Select python friendly IDE.
+Prepare the Python friendly IDE.
 
 _Our primary IDE is VSCode on Windows._
 
 #### 2-2-2: Extension
 
-Install extension "Remote Development" if you select VSCode.
+Prepare the extension "Remote Development" if you select VSCode.
 
 #### 2-3: VCS
 
-Install Git.
+Prepare Git.
 
 #### 2-4: Container
 
-Install Docker and Devcontainer.
+Prepare Docker and Devcontainer.
 
 _We use "Docker Engine" and "Dev Container CLI"._
