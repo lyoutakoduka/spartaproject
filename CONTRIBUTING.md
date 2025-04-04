@@ -1,13 +1,17 @@
-# How to setup development environment of spartaproject
+# How to set up the development environment of our project.
 
-## STEP1: Communication language
+## 1: Language
 
 See Language section of [README.md](README.md)
 
-## STEP2: Operating system (OS)
+## 2: Requirements
+
+### 2-1: Operating system (OS)
 
 We basically develop Sparta on Linux, and its running on Windows WSL. Test of this library is executed on both of Linux (Required) and Windows (Optional).
 
-## STEP3: Integrated development environment (IDE)
+#### 2-2: IDE
+
+#### 2-2-1: Main
 
 We basically develop on Visual Studio Code (VCCode).
