@@ -12,19 +12,19 @@ Prepare the Linux environment.
 
 _Our primary development environment is Ubuntu within Windows WSL._
 
-### 2-2: IDE
+### 2-2: Integrated Development Environment (IDE)
 
-#### 2-2-1: Main
+#### 2-2-1: Code editor
 
 Prepare the Python friendly IDE.
 
 _Our primary IDE is VSCode on Windows._
 
-#### 2-2-2: Extension
+#### 2-2-2: Extensions
 
 Prepare the extension "Remote Development" if you select VSCode.
 
-### 2-3: VCS
+### 2-3: Version Control System (VCS)
 
 Prepare Git.
 
