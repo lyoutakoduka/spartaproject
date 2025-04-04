@@ -2,16 +2,20 @@
 
 ## 1: Language
 
-See Language section of [README.md](README.md)
+See "Language" and "Technical Support" section of [README.md](README.md)
 
 ## 2: Requirements
 
 ### 2-1: Operating system (OS)
 
-We basically develop Sparta on Linux, and its running on Windows WSL. Test of this library is executed on both of Linux (Required) and Windows (Optional).
+Prepare a Linux environment.
+
+_Our primary development environment is Ubuntu within Windows WSL._
 
 #### 2-2: IDE
 
 #### 2-2-1: Main
 
-We basically develop on Visual Studio Code (VCCode).
+Select python friendly IDE.
+
+_Our primary IDE is VSCode on Windows._
