@@ -27,3 +27,9 @@ Install extension "Remote Development" if you select VSCode.
 #### 2-3: VCS
 
 Install Git.
+
+#### 2-4: Container
+
+Install Docker and Devcontainer.
+
+_We use "Docker Engine" and "Dev Container CLI"._
