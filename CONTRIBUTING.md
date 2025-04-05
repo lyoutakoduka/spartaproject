@@ -75,3 +75,11 @@ _The conditions used for verification._
 ```bash
 for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt remove $pkg; done
 ```
+
+##### 3-3-1-2: Outside packages
+
+**Install packages used for installation.**
+
+```bash
+sudo apt install ca-certificates curl
+```
