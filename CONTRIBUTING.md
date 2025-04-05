@@ -173,3 +173,11 @@ sudo apt install npm
 ```bash
 sudo npm install --global @devcontainers/cli
 ```
+
+### 3-4: Git
+
+**Install Git.**
+
+```bash
+sudo apt install git
+```
