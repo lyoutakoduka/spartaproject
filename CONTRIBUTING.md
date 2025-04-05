@@ -83,3 +83,35 @@ for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker c
 ```bash
 sudo apt install ca-certificates curl
 ```
+
+##### 3-3-1-3: Add repository
+
+**Prepare downloading a public key.**
+
+```bash
+sudo install --mode 0755 --directory /etc/apt/keyrings
+```
+
+**Download the public key.**
+
+```bash
+sudo curl --fail --silent --show-error --location https://download.docker.com/linux/ubuntu/gpg --output /etc/apt/keyrings/docker.asc
+```
+
+**Change the permission of the public key.**
+
+```bash
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+```
+
+**Add the official Docker repository to Apt's package sources.**
+
+```bash
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+```
+
+**Refresh the installable packages again.**
+
+```bash
+sudo apt update
+```
