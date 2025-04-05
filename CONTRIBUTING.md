@@ -181,3 +181,16 @@ sudo npm install --global @devcontainers/cli
 ```bash
 sudo apt install git
 ```
+
+### 3-5: IDE
+
+_The conditions used for verification._
+
+- IDE: VSCode
+- OS: Windows
+
+#### 3-5-1: Code editor
+
+**Install VSCode**
+
+[Official Information](https://code.visualstudio.com/download)
