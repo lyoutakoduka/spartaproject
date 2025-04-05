@@ -153,3 +153,23 @@ logout
 ```bat
 wsl --distribution Ubuntu-24.04 --user sparta
 ```
+
+### 3-4: Devcontainer
+
+[Official Information](https://code.visualstudio.com/docs/devcontainers/devcontainer-cli)
+
+_The conditions used for verification._
+
+- Package manager: npm
+
+**Install the package manager for installing "Dev Container CLI".**
+
+```bash
+sudo apt install npm
+```
+
+**Install "Dev Container CLI".**
+
+```bash
+sudo npm install --global @devcontainers/cli
+```
