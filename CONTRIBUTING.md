@@ -194,3 +194,13 @@ _The conditions used for verification._
 **Install VSCode**
 
 [Official Information](https://code.visualstudio.com/download)
+
+#### 3-5-2: VSCode Extensions
+
+**Install VSCode WSL**
+
+[Official Information](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl)
+
+**Install VSCode Dev Containers**
+
+[Official Information](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
