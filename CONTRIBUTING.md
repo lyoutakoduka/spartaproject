@@ -123,3 +123,33 @@ sudo apt update
 ```bash
 sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
+
+#### 3-3-2: User
+
+In order to execute Docker commands without "sudo".
+
+[Official Information](https://docs.docker.com/engine/install/linux-postinstall/)
+
+**Create the docker group.**
+
+```bash
+sudo groupadd docker
+```
+
+**Change the permission of the docker group.**
+
+```bash
+sudo usermod --append --groups docker $USER
+```
+
+**Log out.**
+
+```bash
+logout
+```
+
+**Login to Linux again.**
+
+```bat
+wsl --distribution Ubuntu-24.04 --user sparta
+```
