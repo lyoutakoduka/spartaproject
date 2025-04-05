@@ -115,3 +115,11 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.
 ```bash
 sudo apt update
 ```
+
+##### 3-3-1-4: Installation
+
+**Install packages for Docker.**
+
+```bash
+sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
