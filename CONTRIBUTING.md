@@ -20,10 +20,5 @@ Prepare Git.
 
 ### 2-4: Integrated Development Environment (IDE)
 
-#### 2-4-1: Code editor
-
 Prepare the Python friendly IDE.
-
-#### 2-4-2: Extensions
-
-Prepare the extensions "WSL" and "Dev Containers" if you select VSCode.
+And if you select VSCode, prepare the extensions "WSL" and "Dev Containers".
