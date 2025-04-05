@@ -22,3 +22,30 @@ Prepare Git.
 
 Prepare the Python friendly IDE.
 And if you select VSCode, prepare the extensions "WSL" and "Dev Containers".
+
+## 3: Installation
+
+Let me explain with more specific examples.
+
+### 3-1: WSL
+
+[Official Information](https://learn.microsoft.com/en-us/windows/wsl/install)
+
+_The conditions used for verification._
+
+- OS: Windows
+- Distribution: Ubuntu
+- Distribution version: 24.04
+- User: sparta
+
+**Install WSL.**
+
+```bat
+wsl --install --distribution Ubuntu-24.04
+```
+
+**Login to Linux.**
+
+```bat
+wsl --distribution Ubuntu-24.04 --user sparta
+```
