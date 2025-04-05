@@ -10,19 +10,15 @@ See "Language" and "Technical Support" section of [README.md](README.md)
 
 Prepare the Linux environment.
 
-_Our primary development environment is Ubuntu within Windows WSL._
-
 ### 2-2: Integrated Development Environment (IDE)
 
 #### 2-2-1: Code editor
 
 Prepare the Python friendly IDE.
 
-_Our primary IDE is VSCode on Windows._
-
 #### 2-2-2: Extensions
 
-Prepare the extension "Remote Development" if you select VSCode.
+Prepare the extensions "WSL" and "Dev Containers" if you select VSCode.
 
 ### 2-3: Version Control System (VCS)
 
@@ -31,5 +27,3 @@ Prepare Git.
 ### 2-4: Container
 
 Prepare Docker and Devcontainer.
-
-_We use "Docker Engine" and "Dev Container CLI"._
