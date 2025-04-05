@@ -204,3 +204,23 @@ _The conditions used for verification._
 **Install VSCode Dev Containers**
 
 [Official Information](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+
+## 4: Getting Started
+
+### 4-1: Working Directory
+
+_The conditions used for verification._
+
+- Directory name: sparta_working
+
+**Create the working directory.**
+
+```bash
+mkdir ~/sparta_working
+```
+
+**Move to the working directory.**
+
+```bash
+cd ~/sparta_working
+```
