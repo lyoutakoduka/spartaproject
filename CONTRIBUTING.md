@@ -49,3 +49,11 @@ wsl --install --distribution Ubuntu-24.04
 ```bat
 wsl --distribution Ubuntu-24.04 --user sparta
 ```
+
+### 3-2: Apt
+
+**Refresh the installable packages.**
+
+```bash
+sudo apt update
+```
