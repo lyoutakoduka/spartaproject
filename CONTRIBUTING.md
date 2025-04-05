@@ -244,3 +244,22 @@ git clone https://github.com/lyoutakoduka/spartaproject.git sparta_project
 ```bash
 cd ~/sparta_project
 ```
+
+#### 4-2-2: User
+
+_The conditions used for verification._
+
+- User name: leonidas
+- User email: leonidas@spartaproject.com
+
+**Set user for Git.**
+
+```bash
+git config --global user.name leonidas
+```
+
+**Set user's email for Git.**
+
+```bash
+git config --global user.email leonidas@spartaproject.com
+```
