@@ -57,3 +57,21 @@ wsl --distribution Ubuntu-24.04 --user sparta
 ```bash
 sudo apt update
 ```
+
+### 3-3: Docker
+
+[Official Information](https://docs.docker.com/engine/install/)
+
+_The conditions used for verification._
+
+- Distribution: Ubuntu
+
+#### 3-3-1: Packages
+
+##### 3-3-1-1: Cleanup
+
+**Remove old packages.**
+
+```bash
+for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt remove $pkg; done
+```
