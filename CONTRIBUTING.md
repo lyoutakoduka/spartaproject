@@ -224,3 +224,23 @@ mkdir ~/sparta_working
 ```bash
 cd ~/sparta_working
 ```
+
+### 4-2: Repository
+
+#### 4-2-1: Clone
+
+_The conditions used for verification._
+
+- Directory name: sparta_project
+
+**Download the repository.**
+
+```bash
+git clone https://github.com/lyoutakoduka/spartaproject.git sparta_project
+```
+
+**Move to the project directory.**
+
+```bash
+cd ~/sparta_project
+```
