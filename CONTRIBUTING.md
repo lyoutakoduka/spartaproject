@@ -36,7 +36,7 @@ _The conditions used for verification._
 - OS: Windows
 - Distribution: Ubuntu
 - Distribution version: 24.04
-- User: sparta
+- User: leonidas
 
 **Install WSL.**
 
@@ -47,7 +47,7 @@ wsl --install --distribution Ubuntu-24.04
 **Login to Linux.**
 
 ```bat
-wsl --distribution Ubuntu-24.04 --user sparta
+wsl --distribution Ubuntu-24.04 --user leonidas
 ```
 
 ### 3-2: Apt
@@ -151,7 +151,7 @@ logout
 **Login to Linux again.**
 
 ```bat
-wsl --distribution Ubuntu-24.04 --user sparta
+wsl --distribution Ubuntu-24.04 --user leonidas
 ```
 
 #### 3-3-3: Devcontainer
