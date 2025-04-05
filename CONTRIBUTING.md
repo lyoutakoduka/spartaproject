@@ -154,7 +154,7 @@ logout
 wsl --distribution Ubuntu-24.04 --user sparta
 ```
 
-### 3-4: Devcontainer
+#### 3-3-3: Devcontainer
 
 [Official Information](https://code.visualstudio.com/docs/devcontainers/devcontainer-cli)
 
