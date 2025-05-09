@@ -53,6 +53,7 @@
   "workbench.colorTheme": "Dracula Theme",
   "workbench.editor.enablePreview": false,
   "workbench.startupEditor": "none",
+  "[dockerfile]": { "editor.defaultFormatter": "ms-azuretools.vscode-docker" },
   "[dotenv]": { "editor.defaultFormatter": "foxundermoon.shell-format" },
   "[python]": { "editor.defaultFormatter": "charliermarsh.ruff" },
   "[shellscript]": { "editor.defaultFormatter": "foxundermoon.shell-format" }
