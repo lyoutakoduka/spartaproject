@@ -53,5 +53,7 @@
   "workbench.colorTheme": "Dracula Theme",
   "workbench.editor.enablePreview": false,
   "workbench.startupEditor": "none",
-  "[python]": { "editor.defaultFormatter": "charliermarsh.ruff" }
+  "[dotenv]": { "editor.defaultFormatter": "foxundermoon.shell-format" },
+  "[python]": { "editor.defaultFormatter": "charliermarsh.ruff" },
+  "[shellscript]": { "editor.defaultFormatter": "foxundermoon.shell-format" }
 }
