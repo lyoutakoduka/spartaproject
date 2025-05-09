@@ -39,7 +39,8 @@
   "python.analysis.diagnosticMode": "workspace",
   "python.analysis.extraPaths": [
     "packages/pyspartalib/src",
-    "packages/pyspartaimg/src"
+    "packages/pyspartaimg/src",
+    "packages/pyspartadevc/src"
   ],
   "python.analysis.typeCheckingMode": "strict",
   "python.languageServer": "Pylance",
