@@ -6,11 +6,13 @@ requires-python = ">=3.13.1"
 [dependency-groups]
 lib = ["pyspartalib"]
 img = ["pyspartaimg", "pyspartalib"]
+devc = ["pyspartadevc", "pyspartalib"]
 dev = ["mypy>=1.13.0", "ruff>=0.8.3"]
 
 [project.optional-dependencies]
 lib = ["pyspartalib"]
 img = ["pyspartaimg"]
+devc = ["pyspartadevc"]
 
 [tool.uv]
 default-groups = ["dev"]
@@ -18,9 +20,14 @@ default-groups = ["dev"]
 [tool.uv.sources]
 pyspartalib = { workspace = true }
 pyspartaimg = { workspace = true }
+pyspartadevc = { workspace = true }
 
 [tool.uv.workspace]
-members = ["packages/pyspartalib", "packages/pyspartaimg"]
+members = [
+  "packages/pyspartalib",
+  "packages/pyspartaimg",
+  "packages/pyspartadevc",
+]
 
 [tool.ruff]
 cache-dir = "./.temp/.ruff_cache"
