@@ -20,7 +20,7 @@ pyspartalib = { workspace = true }
 pyspartaimg = { workspace = true }
 
 [tool.uv.workspace]
-members = ["packages/*"]
+members = ["packages/pyspartalib", "packages/pyspartaimg"]
 
 [tool.ruff]
 cache-dir = "./.temp/.ruff_cache"
