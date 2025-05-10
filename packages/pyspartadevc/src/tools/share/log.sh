@@ -11,3 +11,7 @@ show_log() {
 show_error() {
     show_base "error" "$1"
 }
+
+show_begin() {
+    show_base "begin" "$1"
+}
