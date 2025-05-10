@@ -23,3 +23,8 @@ Usage: command [<options>...]
 
 EOF
 }
+
+usage_error() {
+    show_error 'Invalid option. See help "-h"'
+    usage
+}
