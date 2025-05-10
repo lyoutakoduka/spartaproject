@@ -15,3 +15,7 @@ show_error() {
 show_begin() {
     show_base "begin" "$1"
 }
+
+show_end() {
+    show_base "end"
+}
