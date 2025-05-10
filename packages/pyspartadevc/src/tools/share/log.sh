@@ -7,3 +7,7 @@ show_base() {
 show_log() {
     show_base "log" "$1"
 }
+
+show_error() {
+    show_base "error" "$1"
+}
