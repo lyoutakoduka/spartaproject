@@ -17,3 +17,12 @@ sync_yarn() {
 
     show_end
 }
+
+sync_uv() {
+    show_begin "Sync Python package manager UV."
+
+    change_own .venv
+    uv sync --group "$1"
+
+    show_end
+}
