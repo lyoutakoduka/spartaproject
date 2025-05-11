@@ -37,18 +37,18 @@ select_arguments() {
 
     while getopts "cah" opt; do
         case "$opt" in
-        c)
-            create="true"
-            ;;
-        a)
-            attach="true"
-            ;;
-        h)
-            help="true"
-            ;;
-        \?)
-            invalid="true"
-            ;;
+            c)
+                create="true"
+                ;;
+            a)
+                attach="true"
+                ;;
+            h)
+                help="true"
+                ;;
+            \?)
+                invalid="true"
+                ;;
         esac
     done
 
