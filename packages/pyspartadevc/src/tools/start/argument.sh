@@ -32,6 +32,8 @@ usage_error() {
 select_arguments() {
     local create=""
     local attach=""
+    local help=""
+    local invalid=""
 
     while getopts "cah" opt; do
         case "$opt" in
@@ -42,17 +44,15 @@ select_arguments() {
             attach="true"
             ;;
         h)
-            usage
-            exit 0
+            help="true"
             ;;
         \?)
-            usage_error
-            exit 1
+            invalid="true"
             ;;
         esac
     done
 
     shift $((OPTIND - 1))
 
-    echo "$create,$attach"
+    echo "$create,$attach,$help,$invalid"
 }
