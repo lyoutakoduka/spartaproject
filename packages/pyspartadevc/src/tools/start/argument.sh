@@ -26,7 +26,6 @@ EOF
 
 usage_error() {
     show_error 'Invalid option. See help "-h"'
-    usage
 }
 
 select_arguments() {
