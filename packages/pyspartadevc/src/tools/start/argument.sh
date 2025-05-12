@@ -14,6 +14,12 @@ Usage: command [<options>...]
             Default: create
             Proposal: [create|attach]
 
+
+        -p  Identifier for development project.
+            Type: string
+            Default: pyspartadevc
+            Proposal: [pyspartadevc|pyspartalib|pyspartaimg]
+
         -c  Create devcontainer
             Type: boolean
             Default: false
@@ -35,15 +41,19 @@ usage_error() {
 
 select_arguments() {
     local group="create"
+    local project="pyspartadevc"
     local create=""
     local attach=""
     local help=""
     local invalid=""
 
-    while getopts "g:cah" opt; do
+    while getopts "g:p:cah" opt; do
         case "$opt" in
             g)
                 group="$OPTARG"
+                ;;
+            p)
+                project="${OPTARG}"
                 ;;
             c)
                 create="true"
@@ -62,5 +72,5 @@ select_arguments() {
 
     shift $((OPTIND - 1))
 
-    echo "$group,$create,$attach,$help,$invalid"
+    echo "$group,$project,$create,$attach,$help,$invalid"
 }
