@@ -57,5 +57,5 @@ select_arguments() {
 
     shift $((OPTIND - 1))
 
-    echo "$group,$project,$help,$invalid"
+    echo ""$group","$project","$help","$invalid""
 }
