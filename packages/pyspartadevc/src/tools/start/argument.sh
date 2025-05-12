@@ -9,6 +9,11 @@ usage() {
 Usage: command [<options>...]
 
     Options:
+        -g  Operation group for dev-container.
+            Type: string
+            Default: create
+            Proposal: [create|attach]
+
         -c  Create devcontainer
             Type: boolean
             Default: false
@@ -29,13 +34,17 @@ usage_error() {
 }
 
 select_arguments() {
+    local group="create"
     local create=""
     local attach=""
     local help=""
     local invalid=""
 
-    while getopts "cah" opt; do
+    while getopts "g:cah" opt; do
         case "$opt" in
+            g)
+                group="$OPTARG"
+                ;;
             c)
                 create="true"
                 ;;
@@ -53,5 +62,5 @@ select_arguments() {
 
     shift $((OPTIND - 1))
 
-    echo "$create,$attach,$help,$invalid"
+    echo "$group,$create,$attach,$help,$invalid"
 }
