@@ -20,10 +20,6 @@ Usage: command [<options>...]
             Default: pyspartadevc
             Proposal: [pyspartadevc|pyspartalib|pyspartaimg]
 
-        -a  Attach to devcontainer
-            Type: boolean
-            Default: false
-
         -h  Show help
             Type: boolean
             Default: false
@@ -42,16 +38,13 @@ select_arguments() {
     local help=""
     local invalid=""
 
-    while getopts "g:p:ah" opt; do
+    while getopts "g:p:h" opt; do
         case "$opt" in
             g)
                 group="$OPTARG"
                 ;;
             p)
                 project="${OPTARG}"
-                ;;
-            a)
-                attach="true"
                 ;;
             h)
                 help="true"
@@ -64,5 +57,5 @@ select_arguments() {
 
     shift $((OPTIND - 1))
 
-    echo "$group,$project,$attach,$help,$invalid"
+    echo "$group,$project,$help,$invalid"
 }
