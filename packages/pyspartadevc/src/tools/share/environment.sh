@@ -13,3 +13,13 @@ set_environment() {
     export "$key"="$value"
   fi
 }
+
+get_environment() {
+  local key="$1"
+
+  if [[ -v "$key" ]]; then
+    echo "${!key}"
+  else
+    echo "false"
+  fi
+}
