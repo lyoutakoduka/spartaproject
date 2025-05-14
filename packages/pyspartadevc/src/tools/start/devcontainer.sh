@@ -24,3 +24,12 @@ create_devcontainer() {
 
     show_end
 }
+
+attach_devcontainer() {
+    show_begin "Attach to the container."
+
+    local arguments="$(get_shared_arguments)"
+    devcontainer up $arguments
+
+    show_end
+}
