@@ -9,3 +9,7 @@ after_create() {
     sync_yarn
     sync_uv "$(get_environment "DEVC_PROJECT")"
 }
+
+after_attach() {
+    zsh
+}
