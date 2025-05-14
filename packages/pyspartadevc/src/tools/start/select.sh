@@ -2,7 +2,7 @@
 
 root="$(dirname "$0")"
 
-source "$root/start/user.sh"
+source "$root/start/argument.sh"
 
 select_invalid() {
     usage_error
