@@ -4,15 +4,15 @@ version = "0.0.1"
 requires-python = ">=3.13.1"
 
 [dependency-groups]
-lib = ["pyspartalib"]
-img = ["pyspartaimg", "pyspartalib"]
-devc = ["pyspartadevc", "pyspartalib"]
+pyspartalib = ["pyspartalib"]
+pyspartaimg = ["pyspartaimg", "pyspartalib"]
+pyspartadevc = ["pyspartadevc", "pyspartalib"]
 dev = ["mypy>=1.13.0", "ruff>=0.8.3"]
 
 [project.optional-dependencies]
-lib = ["pyspartalib"]
-img = ["pyspartaimg"]
-devc = ["pyspartadevc"]
+pyspartalib = ["pyspartalib"]
+pyspartaimg = ["pyspartaimg"]
+pyspartadevc = ["pyspartadevc"]
 
 [tool.uv]
 default-groups = ["dev"]
