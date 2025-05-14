@@ -272,13 +272,13 @@ version = "0.0.1"
 source = { virtual = "." }
 
 [package.optional-dependencies]
-devc = [
+pyspartadevc = [
     { name = "pyspartadevc" },
 ]
-img = [
+pyspartaimg = [
     { name = "pyspartaimg" },
 ]
-lib = [
+pyspartalib = [
     { name = "pyspartalib" },
 ]
 
@@ -287,40 +287,40 @@ dev = [
     { name = "mypy" },
     { name = "ruff" },
 ]
-devc = [
+pyspartadevc = [
     { name = "pyspartadevc" },
     { name = "pyspartalib" },
 ]
-img = [
+pyspartaimg = [
     { name = "pyspartaimg" },
     { name = "pyspartalib" },
 ]
-lib = [
+pyspartalib = [
     { name = "pyspartalib" },
 ]
 
 [package.metadata]
 requires-dist = [
-    { name = "pyspartadevc", marker = "extra == 'devc'", editable = "packages/pyspartadevc" },
-    { name = "pyspartaimg", marker = "extra == 'img'", editable = "packages/pyspartaimg" },
-    { name = "pyspartalib", marker = "extra == 'lib'", editable = "packages/pyspartalib" },
+    { name = "pyspartadevc", marker = "extra == 'pyspartadevc'", editable = "packages/pyspartadevc" },
+    { name = "pyspartaimg", marker = "extra == 'pyspartaimg'", editable = "packages/pyspartaimg" },
+    { name = "pyspartalib", marker = "extra == 'pyspartalib'", editable = "packages/pyspartalib" },
 ]
-provides-extras = ["lib", "img", "devc"]
+provides-extras = ["pyspartalib", "pyspartaimg", "pyspartadevc"]
 
 [package.metadata.requires-dev]
 dev = [
     { name = "mypy", specifier = ">=1.13.0" },
     { name = "ruff", specifier = ">=0.8.3" },
 ]
-devc = [
+pyspartadevc = [
     { name = "pyspartadevc", editable = "packages/pyspartadevc" },
     { name = "pyspartalib", editable = "packages/pyspartalib" },
 ]
-img = [
+pyspartaimg = [
     { name = "pyspartaimg", editable = "packages/pyspartaimg" },
     { name = "pyspartalib", editable = "packages/pyspartalib" },
 ]
-lib = [{ name = "pyspartalib", editable = "packages/pyspartalib" }]
+pyspartalib = [{ name = "pyspartalib", editable = "packages/pyspartalib" }]
 
 [[package]]
 name = "pytest"
