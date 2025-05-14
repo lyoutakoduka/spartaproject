@@ -2,6 +2,7 @@
 
 root="$(dirname "$0")"
 
+source "$root/share/log.sh"
 source "$root/start/path.sh"
 
 get_shared_arguments() {
@@ -11,4 +12,15 @@ get_shared_arguments() {
     local workspace="--workspace-folder ."
 
     echo ""$config" "$workspace""
+}
+
+create_devcontainer() {
+    show_begin "Re-create the image and container."
+
+    local arguments="$(get_shared_arguments)"
+    local existing="--remove-existing-container"
+
+    devcontainer up $existing $arguments
+
+    show_end
 }
