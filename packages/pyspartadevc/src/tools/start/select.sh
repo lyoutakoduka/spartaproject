@@ -26,3 +26,7 @@ select_create() {
     set_user
     create_devcontainer
 }
+
+select_attach() {
+    attach_devcontainer
+}
