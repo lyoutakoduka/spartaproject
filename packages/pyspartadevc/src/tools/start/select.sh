@@ -8,3 +8,8 @@ select_invalid() {
     usage_error
     exit 1
 }
+
+select_help() {
+    usage
+    exit 0
+}
