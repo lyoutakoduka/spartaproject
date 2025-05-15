@@ -23,5 +23,27 @@
     { "type": "volume", "target": "${containerWorkspaceFolder}/.temp/cache" },
     { "type": "volume", "target": "${containerWorkspaceFolder}/.venv" },
     { "type": "volume", "target": "${containerWorkspaceFolder}/node_modules" }
-  ]
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "alefragnani.bookmarks",
+        "alefragnani.project-manager",
+        "bodil.prettier-toml",
+        "charliermarsh.ruff",
+        "dracula-theme.theme-dracula",
+        "eamodio.gitlens",
+        "esbenp.prettier-vscode",
+        "foxundermoon.shell-format",
+        "littlefoxteam.vscode-python-test-adapter",
+        "ms-ceintl.vscode-language-pack-ja",
+        "ms-python.mypy-type-checker",
+        "njpwerner.autodocstring",
+        "oderwat.indent-rainbow",
+        "shardulm94.trailing-spaces",
+        "streetsidesoftware.code-spell-checker",
+        "tamasfe.even-better-toml"
+      ]
+    }
+  }
 }
