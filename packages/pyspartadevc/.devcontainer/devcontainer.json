@@ -1,0 +1,9 @@
+{
+  "name": "pyspartadevc",
+  "image": "mcr.microsoft.com/devcontainers/base:dev-ubuntu-24.04",
+  "init": true,
+  "overrideCommand": true,
+  "updateRemoteUserUID": false,
+  "containerUser": "vscode",
+  "workspaceFolder": "/home/vscode/workspace"
+}
