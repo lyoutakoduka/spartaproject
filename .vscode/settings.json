@@ -21,12 +21,6 @@
   "explorer.confirmDragAndDrop": false,
   "explorer.excludeGitIgnore": false,
   "extensions.ignoreRecommendations": false,
-  "files.exclude": {
-    "**/__pycache__/**": true,
-    ".temp/.mypy_cache/**": true,
-    ".temp/.pytest_cache/**": true,
-    ".temp/.ruff_cache/**": true
-  },
   "git.autoRepositoryDetection": "openEditors",
   "git.inputValidation": true,
   "liveServer.settings.NoBrowser": true,
@@ -46,8 +40,6 @@
   "python.languageServer": "Pylance",
   "python.testing.pytestEnabled": true,
   "ruff.configuration": "pyproject.toml",
-  "search.useIgnoreFiles": false,
-  "search.exclude": { "**/.venv/**": true },
   "testing.automaticallyOpenTestResults": "neverOpen",
   "testing.gutterEnabled": true,
   "workbench.colorTheme": "Dracula Theme",
