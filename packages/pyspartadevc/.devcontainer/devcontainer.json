@@ -13,5 +13,15 @@
     "TZ": "Asia/Tokyo",
     "PYTHONPYCACHEPREFIX": "${containerWorkspaceFolder}/.temp/cache/python",
     "DEVC_PROJECT": "${localEnv:DEVC_PROJECT}"
-  }
+  },
+  "mounts": [
+    {
+      "type": "bind",
+      "source": "${localWorkspaceFolder}",
+      "target": "${containerWorkspaceFolder}"
+    },
+    { "type": "volume", "target": "${containerWorkspaceFolder}/.temp/cache" },
+    { "type": "volume", "target": "${containerWorkspaceFolder}/.venv" },
+    { "type": "volume", "target": "${containerWorkspaceFolder}/node_modules" }
+  ]
 }
