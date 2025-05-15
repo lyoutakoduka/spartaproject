@@ -5,5 +5,7 @@
   "overrideCommand": true,
   "updateRemoteUserUID": false,
   "containerUser": "vscode",
-  "workspaceFolder": "/home/vscode/workspace"
+  "workspaceFolder": "/home/vscode/workspace",
+  "postCreateCommand": "./packages/pyspartadevc/src/tools/lifecycle.sh create",
+  "postAttachCommand": "./packages/pyspartadevc/src/tools/lifecycle.sh attach"
 }
