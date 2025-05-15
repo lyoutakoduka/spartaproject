@@ -23,8 +23,6 @@
   "extensions.ignoreRecommendations": false,
   "git.autoRepositoryDetection": "openEditors",
   "git.inputValidation": true,
-  "liveServer.settings.NoBrowser": true,
-  "liveServer.settings.root": "/docs",
   "mypy-type-checker.args": ["--config-file=pyproject.toml"],
   "prettier.configPath": ".vscode/.prettierrc.toml",
   "prettier.ignorePath": ".vscode/.prettierignore",
