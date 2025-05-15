@@ -1,6 +1,6 @@
 #!/bin/bash
 
-change_own() {
+change_owner() {
     local name="$(whoami)"
     sudo chown "$name":"$name" "$1"
 }
