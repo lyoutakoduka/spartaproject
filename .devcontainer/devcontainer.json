@@ -1,7 +1,0 @@
-{
-  "name": "Sparta",
-  "dockerComposeFile": "docker-compose.yml",
-  "service": "dev",
-  "workspaceFolder": "/workspace",
-  "overrideCommand": true
-}

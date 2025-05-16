@@ -1,6 +1,0 @@
-{
-  "remote.SSH.remotePlatform": {
-    "aws_ec2": "linux"
-  },
-  "terminal.integrated.env.linux": {}
-}
