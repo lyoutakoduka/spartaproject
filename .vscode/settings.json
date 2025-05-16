@@ -21,16 +21,8 @@
   "explorer.confirmDragAndDrop": false,
   "explorer.excludeGitIgnore": false,
   "extensions.ignoreRecommendations": false,
-  "files.exclude": {
-    "**/__pycache__/**": true,
-    ".temp/.mypy_cache/**": true,
-    ".temp/.pytest_cache/**": true,
-    ".temp/.ruff_cache/**": true
-  },
   "git.autoRepositoryDetection": "openEditors",
   "git.inputValidation": true,
-  "liveServer.settings.NoBrowser": true,
-  "liveServer.settings.root": "/docs",
   "mypy-type-checker.args": ["--config-file=pyproject.toml"],
   "prettier.configPath": ".vscode/.prettierrc.toml",
   "prettier.ignorePath": ".vscode/.prettierignore",
@@ -39,18 +31,21 @@
   "python.analysis.diagnosticMode": "workspace",
   "python.analysis.extraPaths": [
     "packages/pyspartalib/src",
-    "packages/pyspartaimg/src"
+    "packages/pyspartaimg/src",
+    "packages/pyspartadevc/src"
   ],
   "python.analysis.typeCheckingMode": "strict",
   "python.languageServer": "Pylance",
   "python.testing.pytestEnabled": true,
   "ruff.configuration": "pyproject.toml",
-  "search.useIgnoreFiles": false,
-  "search.exclude": { "**/.venv/**": true },
   "testing.automaticallyOpenTestResults": "neverOpen",
   "testing.gutterEnabled": true,
   "workbench.colorTheme": "Dracula Theme",
   "workbench.editor.enablePreview": false,
   "workbench.startupEditor": "none",
-  "[python]": { "editor.defaultFormatter": "charliermarsh.ruff" }
+  "[dockerfile]": { "editor.defaultFormatter": "ms-azuretools.vscode-docker" },
+  "[dotenv]": { "editor.defaultFormatter": "foxundermoon.shell-format" },
+  "[ignore]": { "editor.defaultFormatter": "foxundermoon.shell-format" },
+  "[python]": { "editor.defaultFormatter": "charliermarsh.ruff" },
+  "[shellscript]": { "editor.defaultFormatter": "foxundermoon.shell-format" }
 }

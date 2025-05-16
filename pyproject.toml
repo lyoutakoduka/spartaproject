@@ -4,13 +4,15 @@ version = "0.0.1"
 requires-python = ">=3.13.1"
 
 [dependency-groups]
-lib = ["pyspartalib"]
-img = ["pyspartaimg", "pyspartalib"]
+pyspartalib = ["pyspartalib"]
+pyspartaimg = ["pyspartaimg", "pyspartalib"]
+pyspartadevc = ["pyspartadevc", "pyspartalib"]
 dev = ["mypy>=1.13.0", "ruff>=0.8.3"]
 
 [project.optional-dependencies]
-lib = ["pyspartalib"]
-img = ["pyspartaimg"]
+pyspartalib = ["pyspartalib"]
+pyspartaimg = ["pyspartaimg"]
+pyspartadevc = ["pyspartadevc"]
 
 [tool.uv]
 default-groups = ["dev"]
@@ -18,12 +20,17 @@ default-groups = ["dev"]
 [tool.uv.sources]
 pyspartalib = { workspace = true }
 pyspartaimg = { workspace = true }
+pyspartadevc = { workspace = true }
 
 [tool.uv.workspace]
-members = ["packages/*"]
+members = [
+  "packages/pyspartalib",
+  "packages/pyspartaimg",
+  "packages/pyspartadevc",
+]
 
 [tool.ruff]
-cache-dir = "./.temp/.ruff_cache"
+cache-dir = "./.temp/cache/ruff"
 exclude = ["**/.temp/**", "**/.venv/**", "**/node_modules/**"]
 line-length = 79
 respect-gitignore = false
@@ -40,7 +47,7 @@ ignore = ["D203", "D213"]
 extend-ignore = ["FBT001", "FBT002", "FBT003", "PLR0913", "S602"]
 
 [tool.mypy]
-cache_dir = "./.temp/.mypy_cache"
+cache_dir = "./.temp/cache/mypy"
 disallow_any_decorated = true
 disallow_any_explicit = true
 disallow_any_expr = true
@@ -60,6 +67,6 @@ addopts = """
   --new-first
   --verbose
 """
-cache_dir = "./.temp/.pytest_cache"
+cache_dir = "./.temp/cache/pytest"
 pythonpath = "packages/pyspartalib"
 testpaths = ["packages/pyspartalib/tests"]
