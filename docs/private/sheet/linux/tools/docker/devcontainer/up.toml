@@ -1,0 +1,16 @@
+[section]
+
+up.default = """
+devcontainer up --workspace-folder .
+"""
+
+up.remove = """
+devcontainer up --remove-existing-container --workspace-folder .
+"""
+
+up.config = """
+devcontainer up \
+--config .devcontainer/devcontainer.json \
+--remove-existing-container \
+--workspace-folder .
+"""
