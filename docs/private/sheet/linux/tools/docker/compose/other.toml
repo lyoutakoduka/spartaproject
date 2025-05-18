@@ -1,0 +1,9 @@
+[section]
+
+exec = """
+docker compose exec app bash
+"""
+
+down = """
+docker compose down
+"""

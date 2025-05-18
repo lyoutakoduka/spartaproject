@@ -1,0 +1,9 @@
+[section]
+
+up.default = """
+docker compose up --detach
+"""
+
+up.build = """
+docker compose up --detach --build --no-start
+"""
