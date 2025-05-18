@@ -1,0 +1,9 @@
+[section]
+
+stash.untracked = """
+git stash --include-untracked
+"""
+
+stash.pop = """
+git stash pop stash@{0}
+"""
