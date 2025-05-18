@@ -1,5 +1,0 @@
-[docker.other]
-
-docker.container.ls = """
-docker container ls
-"""
