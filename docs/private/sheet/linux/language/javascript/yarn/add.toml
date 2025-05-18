@@ -1,0 +1,9 @@
+[section]
+
+add.dev = """
+yarn add --dev <Module Name>
+"""
+
+global.add = """
+yarn global add <Module Name>
+"""

@@ -1,0 +1,9 @@
+[section]
+
+remove = """
+yarn remove <Module Name>
+"""
+
+global.remove = """
+yarn global remove <Module Name>
+"""

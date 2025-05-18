@@ -1,0 +1,9 @@
+[section]
+
+list = """
+yarn list --depth=0
+"""
+
+global.list = """
+yarn global list --depth=0
+"""

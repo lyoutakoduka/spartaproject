@@ -1,0 +1,13 @@
+[section]
+
+sync = """
+yarn
+"""
+
+global.bin = """
+yarn global bin
+"""
+
+run = """
+yarn run <Module Name> .
+"""
