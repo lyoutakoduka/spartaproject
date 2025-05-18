@@ -1,0 +1,5 @@
+[section]
+
+upscale.file = """
+~/develop/shared/external/realesrgan/realesrgan-ncnn-vulkan -i 3355.jpg -o 9957.png
+"""

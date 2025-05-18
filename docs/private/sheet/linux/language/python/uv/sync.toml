@@ -1,0 +1,13 @@
+[section]
+
+sync.default = """
+uv sync
+"""
+
+sync.project = """
+uv sync --project packages/***
+"""
+
+sync.group.lib = """
+uv sync --group lib
+"""

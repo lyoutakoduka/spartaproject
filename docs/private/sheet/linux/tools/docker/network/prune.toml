@@ -1,0 +1,9 @@
+[section]
+
+prune.default = """
+docker network prune --force
+"""
+
+prune.filter = """
+docker network prune --force --filter "until=24h"
+"""

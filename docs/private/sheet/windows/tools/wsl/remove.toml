@@ -1,0 +1,9 @@
+[section]
+
+terminate = """
+wsl --terminate <Distribution Name>
+"""
+
+unregister = """
+wsl --unregister <Distribution Name>
+"""

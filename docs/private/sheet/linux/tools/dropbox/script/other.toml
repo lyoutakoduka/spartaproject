@@ -1,0 +1,18 @@
+[section]
+
+wget.output = """
+wget --output-document=dropbox.py \
+"http://www.dropbox.com/download?dl=***/dropbox.py"
+"""
+
+chmod = """
+chmod a+x dropbox.py
+"""
+
+autostart = """
+uv run python ~/***/dropbox/dropbox.py autostart -y
+"""
+
+stop = """
+uv run python ~/***/dropbox/dropbox.py stop
+"""

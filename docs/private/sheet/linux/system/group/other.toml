@@ -1,0 +1,9 @@
+[section]
+
+list = """
+cut --delimiter : --fields 1 /etc/group
+"""
+
+new.directory = """
+useradd --create-home --user-group 	--shell /bin/bash sparta
+"""

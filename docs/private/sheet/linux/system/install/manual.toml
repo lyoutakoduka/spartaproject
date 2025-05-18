@@ -1,0 +1,9 @@
+[section]
+
+install.default = """
+sudo apt install manpages-ja --yes
+"""
+
+install.dev = """
+sudo apt install manpages-ja-dev --yes
+"""

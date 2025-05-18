@@ -1,0 +1,17 @@
+[section]
+
+chmod.access = """
+chmod 755 tools/tool.sh
+"""
+
+touch = """
+touch index.html
+"""
+
+which = """
+which <Runtime>
+"""
+
+id.whoami = """
+id $(whoami)
+"""

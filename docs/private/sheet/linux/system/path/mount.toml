@@ -1,0 +1,9 @@
+[section]
+
+mount.types.font = """
+sudo mount --types drvfs f: /mnt/f
+"""
+
+mount.list.windows = """
+mount | grep 9p
+"""

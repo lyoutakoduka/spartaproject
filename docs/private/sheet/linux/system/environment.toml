@@ -1,0 +1,9 @@
+[section]
+
+path.lines = """
+echo "$PATH" | tr ':' '\n'
+"""
+
+path.add = """
+export PATH=$HOME<Runtime Directory>:$PATH
+"""

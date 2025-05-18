@@ -1,0 +1,21 @@
+[section]
+
+apt.install.gcc = """
+sudo apt install gcc
+"""
+
+apt.install.make = """
+sudo apt install make
+"""
+
+configure = """
+./configure
+"""
+
+make.default = """
+make
+"""
+
+make.install = """
+sudo make install
+"""

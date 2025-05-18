@@ -1,0 +1,9 @@
+[section]
+
+build.workspace = """
+devcontainer build --workspace-folder .
+"""
+
+exec.workspace.bash = """
+devcontainer exec --workspace-folder . zsh
+"""

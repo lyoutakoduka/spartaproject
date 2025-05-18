@@ -1,0 +1,9 @@
+[section]
+
+prune.default = """
+docker image prune --force
+"""
+
+prune.filter = """
+docker image prune --force --all --filter "until=24h"
+"""

@@ -1,0 +1,5 @@
+[section]
+
+system.df = """
+docker system df
+"""

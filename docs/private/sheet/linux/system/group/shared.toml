@@ -1,0 +1,17 @@
+[section]
+
+new.default = """
+groupadd sparta
+"""
+
+new.directory = """
+chgrp sparta /home/sparta
+"""
+
+change.authority = """
+chmod 2770 /home/sparta
+"""
+
+add.user = """
+usermod -G sparta leonidas
+"""

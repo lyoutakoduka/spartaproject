@@ -1,0 +1,9 @@
+[section]
+
+verbose = """
+wsl --list --verbose
+"""
+
+online = """
+wsl --list --online
+"""

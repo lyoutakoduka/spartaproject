@@ -1,0 +1,9 @@
+[section]
+
+build.default = """
+uv build --package ***
+"""
+
+build.out = """
+uv build --package *** --out-dir .temp/dist
+"""

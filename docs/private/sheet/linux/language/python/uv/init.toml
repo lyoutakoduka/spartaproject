@@ -1,0 +1,9 @@
+[section]
+
+init.default = """
+uv init
+"""
+
+init.package = """
+uv init --package packages
+"""

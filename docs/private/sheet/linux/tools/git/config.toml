@@ -1,0 +1,9 @@
+[section]
+
+config.user.name = """
+git config user.name "***"
+"""
+
+config.user.email = """
+git config user.email  ""***@"***.com"
+"""

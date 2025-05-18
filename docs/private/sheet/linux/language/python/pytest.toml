@@ -1,0 +1,5 @@
+[section]
+
+pytest = """
+uv run pytest
+"""

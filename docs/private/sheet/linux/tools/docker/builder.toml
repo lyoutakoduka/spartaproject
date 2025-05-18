@@ -1,0 +1,9 @@
+[section]
+
+prune.default = """
+docker builder prune --force
+"""
+
+prune.filter = """
+docker builder prune --force --filter "until=24h"
+"""

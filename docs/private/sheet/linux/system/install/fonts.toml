@@ -1,0 +1,9 @@
+[section]
+
+install.fonts.ipafont = """
+sudo apt install fonts-ipafont
+"""
+
+install.fonts.ipaexfont = """
+sudo apt install fonts-ipaexfont
+"""

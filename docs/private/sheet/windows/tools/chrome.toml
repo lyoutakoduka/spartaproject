@@ -1,0 +1,9 @@
+[section]
+
+development = """
+& 'C:/***/chrome.exe' --disable-web-security --user-data-dir
+"""
+
+secret = """
+& 'C:/***/chrome.exe'  --incognito
+"""

@@ -1,0 +1,9 @@
+[section]
+
+volume.ls = """
+docker volume ls
+"""
+
+volume.prune.force = """
+docker volume prune --force
+"""

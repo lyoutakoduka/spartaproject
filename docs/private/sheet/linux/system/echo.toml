@@ -1,0 +1,17 @@
+[section]
+
+stdout.default = """
+echo "TEST"
+"""
+
+stdout.off = """
+echo "TEST" > /dev/null
+"""
+
+stdout.file.on = """
+echo "TEST" | sudo tee test.txt
+"""
+
+stdout.file.off = """
+echo "TEST" | sudo tee test.txt > /dev/null
+"""

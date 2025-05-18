@@ -1,0 +1,13 @@
+[section]
+
+apt.install.attr = """
+sudo apt install attr
+"""
+
+apt.install.libgtk = """
+sudo apt install libgtk-3-dev
+"""
+
+apt.install.libgirepository = """
+sudo apt install libgirepository1.0-dev
+"""

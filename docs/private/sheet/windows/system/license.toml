@@ -1,0 +1,9 @@
+[section]
+
+default = """
+slmgr -dli
+"""
+
+detail = """
+slmgr -dlv
+"""

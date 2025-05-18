@@ -1,0 +1,9 @@
+[section]
+
+history.default = """
+history
+"""
+
+history.grep = """
+history | grep <Keyword>
+"""

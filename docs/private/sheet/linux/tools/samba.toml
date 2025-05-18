@@ -1,0 +1,13 @@
+[section]
+
+install = """
+sudo apt install nautilus-share
+"""
+
+set.car = """
+sudo usermod --append --groups sambashare $USER
+"""
+
+set.cdr = """
+sudo smbpasswd -a $USER
+"""

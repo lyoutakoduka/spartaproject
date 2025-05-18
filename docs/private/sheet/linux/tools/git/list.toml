@@ -1,0 +1,9 @@
+[section]
+
+branch.all = """
+git branch --all
+"""
+
+branch.list = """
+git branch --list
+"""

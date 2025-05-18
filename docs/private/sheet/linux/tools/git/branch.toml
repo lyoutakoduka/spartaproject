@@ -1,0 +1,13 @@
+[section]
+
+fetch.origin = """
+git fetch origin
+"""
+
+checkout = """
+git checkout ***-***
+"""
+
+branch = """
+git branch --delete ***-***
+"""

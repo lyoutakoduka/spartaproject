@@ -1,0 +1,13 @@
+[section]
+
+container.rm.default = """
+docker container rm <CONTAINER ID>
+"""
+
+container.rm.all = """
+docker container rm $(docker ps --all --quiet)
+"""
+
+rm = """
+docker rm <CONTAINER ID>
+"""
