@@ -1,0 +1,9 @@
+[section]
+
+default = """
+wsl --install Ubuntu
+"""
+
+distribution = """
+wsl --install --distribution Ubuntu-24.04
+"""

@@ -1,0 +1,13 @@
+[section]
+
+update = """
+wsl --update
+"""
+
+default = """
+wsl --set-default <Distribution Name>
+"""
+
+login = """
+wsl --distribution <Distribution Name> --user root
+"""

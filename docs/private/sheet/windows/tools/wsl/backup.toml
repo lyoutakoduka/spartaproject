@@ -1,0 +1,9 @@
+[section]
+
+export = """
+wsl --export Ubuntu-24.04 B:/***/Ubuntu_24_04.tar
+"""
+
+import = """
+wsl --import Ubuntu_24_04 B:/***/ B:/***/Ubuntu_24_04.tar
+"""
