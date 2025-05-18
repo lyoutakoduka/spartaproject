@@ -1,0 +1,13 @@
+[section]
+
+ls.all = """
+ls -l --all /user/bin
+"""
+
+ls.id = """
+ls -l --all --numeric-uid-gid --human-readable /user/bin
+"""
+
+ls.wc = """
+ls -l --all /user/bin | wc 	--lines
+"""
