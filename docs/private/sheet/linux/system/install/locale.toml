@@ -1,0 +1,13 @@
+[section]
+
+fc_cache.off = """
+fc-cache --force --verbose
+"""
+
+update.locale = """
+sudo update-locale LANG=ja_JP.UTF8
+"""
+
+dpkg.reconfigure = """
+sudo dpkg-reconfigure tzdata
+"""
