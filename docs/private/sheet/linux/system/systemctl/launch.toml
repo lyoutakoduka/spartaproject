@@ -1,0 +1,9 @@
+[section]
+
+launch.cui = """
+sudo systemctl set-default multi-user
+"""
+
+launch.gui = """
+sudo systemctl set-default graphical
+"""
