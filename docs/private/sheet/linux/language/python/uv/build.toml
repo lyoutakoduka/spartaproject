@@ -1,6 +1,6 @@
-[python.uv.build]
+[section]
 
-build = """
+build.default = """
 uv build --package ***
 """
 

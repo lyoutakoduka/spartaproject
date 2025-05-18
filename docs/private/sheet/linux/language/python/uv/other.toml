@@ -1,4 +1,4 @@
-[python.uv.other]
+[section]
 
 cache.clean = """
 uv cache clean

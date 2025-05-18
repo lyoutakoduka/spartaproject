@@ -1,6 +1,6 @@
-[python.uv.init]
+[section]
 
-init = """
+init.default = """
 uv init
 """
 
