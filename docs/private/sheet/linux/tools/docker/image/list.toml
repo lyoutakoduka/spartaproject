@@ -1,0 +1,13 @@
+[section]
+
+image.ls.default = """
+docker image ls
+"""
+
+image.ls.all = """
+docker image ls --all
+"""
+
+images = """
+docker images
+"""

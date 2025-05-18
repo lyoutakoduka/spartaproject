@@ -1,0 +1,13 @@
+[section]
+
+image.rm.default = """
+docker image rm <IMAGE ID>
+"""
+
+image.rm.all = """
+docker image rm $(docker images --quiet)
+"""
+
+rmi = """
+docker rmi <IMAGE ID>
+"""
