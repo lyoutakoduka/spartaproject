@@ -1,4 +1,4 @@
-[js.prettier]
+[section]
 
 check = """
 yarn run prettier . --check \
