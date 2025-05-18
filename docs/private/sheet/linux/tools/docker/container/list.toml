@@ -1,0 +1,20 @@
+[section]
+
+container.ls.default = """
+docker container ls
+"""
+container.ls.all = """
+docker container ls --all
+"""
+
+container.ls.size = """
+docker container ls --all --size
+"""
+
+ps.default = """
+docker ps
+"""
+
+ps.all = """
+docker ps --all
+"""

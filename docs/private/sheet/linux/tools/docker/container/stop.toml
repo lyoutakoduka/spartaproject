@@ -1,0 +1,13 @@
+[section]
+
+container.stop.default = """
+docker container stop <CONTAINER ID>
+"""
+
+container.stop.all = """
+docker container stop $(docker ps --all --quiet)
+"""
+
+stop = """
+docker stop <CONTAINER ID>
+"""

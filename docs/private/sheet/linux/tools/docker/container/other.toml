@@ -1,0 +1,5 @@
+[section]
+
+container.prune.force.until = """
+docker container prune --force --filter "until=24h"
+"""
