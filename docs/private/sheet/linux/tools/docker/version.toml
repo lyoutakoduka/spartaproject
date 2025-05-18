@@ -1,0 +1,9 @@
+[section]
+
+version.default = """
+docker --version
+"""
+
+version.related = """
+dpkg --list | grep docker
+"""
