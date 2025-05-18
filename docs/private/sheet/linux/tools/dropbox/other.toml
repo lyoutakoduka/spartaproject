@@ -1,4 +1,4 @@
-[dropbox.other]
+[section]
 
 wget.download = """
 wget --output-document=dropbox.tar.gz --no-check-certificate \
