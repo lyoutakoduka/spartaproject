@@ -1,0 +1,13 @@
+[section]
+
+download = """
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+"""
+
+install = """
+sudo apt install --yes ./google-chrome-stable_current_amd64.deb
+"""
+
+cleanup = """
+rm ./google-chrome-stable_current_amd64.deb
+"""
