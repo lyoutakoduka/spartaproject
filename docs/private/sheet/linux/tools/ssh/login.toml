@@ -1,0 +1,13 @@
+[section]
+
+connect.file = """
+ssh -i "***.pem" ubuntu@ec***.compute***.amazonaws.com
+"""
+
+connect.default = """
+ssh sparta_ec2
+"""
+
+ssh.server = """
+ssh server
+"""

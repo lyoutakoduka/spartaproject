@@ -1,0 +1,21 @@
+[section]
+
+authority = """
+chmod 600 ***.pem
+"""
+
+passphrase = """
+ssh-keygen -t rsa -f ~/.ssh/id_rsa -N passphrase
+"""
+
+cat = """
+cat id_rsa.pub >> authorized_keys
+"""
+
+file.host = """
+UserKnownHostsFile ~/.ssh/known_hosts
+"""
+
+file.identity = """
+IdentityFile ~/.ssh/id_rsa
+"""
