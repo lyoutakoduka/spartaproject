@@ -1,4 +1,4 @@
-[dropbox.script.exclude]
+[section]
 
 exclude.list = """
 uv run python ~/***/dropbox/dropbox.py exclude list

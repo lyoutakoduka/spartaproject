@@ -1,4 +1,4 @@
-[dropbox.script.other]
+[section]
 
 wget.output = """
 wget --output-document=dropbox.py \

@@ -1,6 +1,6 @@
-[dropbox.script.start]
+[section]
 
-start = """
+start.default = """
 uv run python ~/***/dropbox/dropbox.py start
 """
 
