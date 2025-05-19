@@ -1,6 +1,17 @@
 {
   "useGitignore": false,
-  "ignoreWords": [
+  "ignorePaths": [
+    ".temp",
+    "__pycache__",
+    "context.json",
+    "cspell.json",
+    "package.json",
+    "pyproject.toml",
+    "LICENSE",
+    "*.gitignore",
+    "*.lock"
+  ],
+  "words": [
     "addopts",
     "dateutil",
     "dividedly",
@@ -24,16 +35,5 @@
     "testpaths",
     "unmatch",
     "venv"
-  ],
-  "ignorePaths": [
-    ".temp",
-    "__pycache__",
-    "context.json",
-    "cspell.json",
-    "package.json",
-    "pyproject.toml",
-    "LICENSE",
-    "*.gitignore",
-    "*.lock"
   ]
 }
