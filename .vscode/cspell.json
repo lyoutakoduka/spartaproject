@@ -1,15 +1,15 @@
 {
   "useGitignore": false,
   "ignorePaths": [
-    ".temp",
     "__pycache__",
+    ".temp",
+    "*.gitignore",
+    "*.lock",
     "context.json",
     "cspell.json",
+    "LICENSE",
     "package.json",
     "pyproject.toml",
-    "LICENSE",
-    "*.gitignore",
-    "*.lock"
   ],
   "words": [
     "addopts",
