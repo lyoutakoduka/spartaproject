@@ -30,9 +30,10 @@
   "pythonTestExplorer.testFramework": "pytest",
   "python.analysis.diagnosticMode": "workspace",
   "python.analysis.extraPaths": [
-    "packages/pyspartalib/src",
+    "packages/pyspartadevc/src",
     "packages/pyspartaimg/src",
-    "packages/pyspartadevc/src"
+    "packages/pyspartalib/src",
+    "packages/pyspartawsl/src"
   ],
   "python.analysis.typeCheckingMode": "strict",
   "python.languageServer": "Pylance",
