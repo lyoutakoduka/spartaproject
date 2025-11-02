@@ -9,7 +9,7 @@
     "cspell.json",
     "LICENSE",
     "package.json",
-    "pyproject.toml",
+    "pyproject.toml"
   ],
   "words": [
     "addopts",
@@ -78,6 +78,6 @@
     "unmatch",
     "usermod",
     "venv",
-    "visualstudioexptteam",
+    "visualstudioexptteam"
   ]
 }
