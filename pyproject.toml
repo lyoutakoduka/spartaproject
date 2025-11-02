@@ -9,7 +9,7 @@ pyspartaimg = ["pyspartaimg", "pyspartalib"]
 pyspartalib = ["pyspartalib"]
 pyspartawsl = ["pyspartawsl", "pyspartalib"]
 
-dev = ["mypy>=1.13.0", "ruff>=0.8.3"]
+dev = ["mypy>=1.13.0", "ruff>=0.8.3", "pytest>=8.3.4"]
 
 [project.optional-dependencies]
 pyspartadevc = ["pyspartadevc"]
