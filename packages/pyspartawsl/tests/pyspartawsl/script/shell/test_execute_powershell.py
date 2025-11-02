@@ -7,14 +7,14 @@ from pathlib import Path
 from pyspartalib.context.custom.type_context import Type
 from pyspartalib.context.default.string_context import Strs
 from pyspartalib.script.path.modify.get_resource import get_resource
-from pyspartalib.script.shell.execute_powershell import (
+from pyspartalib.script.string.temporary_text import temporary_text
+from pyspartawsl.script.shell.execute_powershell import (
     execute_powershell,
     get_double_quoted_command,
     get_path_string,
     get_quoted_path,
     get_script_string,
 )
-from pyspartalib.script.string.temporary_text import temporary_text
 
 
 def _difference_error(result: Type, expected: Type) -> None:

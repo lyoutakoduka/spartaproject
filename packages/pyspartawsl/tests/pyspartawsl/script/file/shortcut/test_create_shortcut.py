@@ -17,7 +17,6 @@ from pyspartalib.context.extension.path_context import (
 from pyspartalib.script.directory.working.working_date_time import (
     create_working_space,
 )
-from pyspartalib.script.file.shortcut.create_shortcut import create_shortcut
 from pyspartalib.script.file.shortcut.get_shortcut import get_shortcut
 from pyspartalib.script.path.iterate_directory import walk_iterator
 from pyspartalib.script.path.modify.get_resource import get_resource
@@ -25,6 +24,7 @@ from pyspartalib.script.path.temporary.create_temporary_file import (
     create_temporary_file,
 )
 from pyspartalib.script.project.project_context import ProjectContext
+from pyspartawsl.script.file.shortcut.create_shortcut import create_shortcut
 
 
 def _difference_error(result: Type, expected: Type) -> None:

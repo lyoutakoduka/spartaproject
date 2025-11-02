@@ -11,7 +11,7 @@ from pyspartalib.script.path.modify.mount.convert_to_windows import (
 )
 from pyspartalib.script.path.safe.safe_trash import SafeTrash
 from pyspartalib.script.platform.platform_status import is_platform_linux
-from pyspartalib.script.shell.execute_powershell import (
+from pyspartawsl.script.shell.execute_powershell import (
     execute_powershell,
     get_double_quoted_command,
     get_path_string,

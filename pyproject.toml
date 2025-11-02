@@ -4,29 +4,34 @@ version = "0.0.1"
 requires-python = ">=3.13.1"
 
 [dependency-groups]
-pyspartalib = ["pyspartalib"]
-pyspartaimg = ["pyspartaimg", "pyspartalib"]
 pyspartadevc = ["pyspartadevc", "pyspartalib"]
+pyspartaimg = ["pyspartaimg", "pyspartalib"]
+pyspartalib = ["pyspartalib"]
+pyspartawsl = ["pyspartawsl", "pyspartalib"]
+
 dev = ["mypy>=1.13.0", "ruff>=0.8.3"]
 
 [project.optional-dependencies]
-pyspartalib = ["pyspartalib"]
-pyspartaimg = ["pyspartaimg"]
 pyspartadevc = ["pyspartadevc"]
+pyspartaimg = ["pyspartaimg"]
+pyspartalib = ["pyspartalib"]
+pyspartawsl = ["pyspartawsl"]
 
 [tool.uv]
 default-groups = ["dev"]
 
 [tool.uv.sources]
-pyspartalib = { workspace = true }
-pyspartaimg = { workspace = true }
 pyspartadevc = { workspace = true }
+pyspartaimg = { workspace = true }
+pyspartalib = { workspace = true }
+pyspartawsl = { workspace = true }
 
 [tool.uv.workspace]
 members = [
-  "packages/pyspartalib",
-  "packages/pyspartaimg",
   "packages/pyspartadevc",
+  "packages/pyspartaimg",
+  "packages/pyspartalib",
+  "packages/pyspartawsl",
 ]
 
 [tool.ruff]

@@ -1,0 +1,11 @@
+{
+  "powershell": {
+    "runtime_linux.path": "***",
+    "runtime_windows.path": "***"
+    "working_linux.path": ""***",
+    "working_windows.path": ""***"
+  },
+  "shortcut": {
+    "temporary.path": "***"
+  }
+}

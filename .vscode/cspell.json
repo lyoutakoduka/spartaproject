@@ -9,7 +9,7 @@
     "cspell.json",
     "LICENSE",
     "package.json",
-    "pyproject.toml",
+    "pyproject.toml"
   ],
   "words": [
     "addopts",
@@ -59,6 +59,7 @@
     "pyspartaimg",
     "pyspartalib",
     "pyspartaproj",
+    "pyspartawsl",
     "pyspratadev",
     "pytest",
     "PYTHONPATH",
@@ -78,6 +79,6 @@
     "unmatch",
     "usermod",
     "venv",
-    "visualstudioexptteam",
+    "visualstudioexptteam"
   ]
 }
