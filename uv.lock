@@ -1,5 +1,5 @@
 version = 1
-revision = 2
+revision = 3
 requires-python = ">=3.13.1"
 
 [manifest]
@@ -8,6 +8,7 @@ members = [
     "pyspartaimg",
     "pyspartalib",
     "pyspartaproj",
+    "pyspartawsl",
 ]
 
 [[package]]
@@ -281,6 +282,9 @@ pyspartaimg = [
 pyspartalib = [
     { name = "pyspartalib" },
 ]
+pyspartawsl = [
+    { name = "pyspartawsl" },
+]
 
 [package.dev-dependencies]
 dev = [
@@ -298,14 +302,19 @@ pyspartaimg = [
 pyspartalib = [
     { name = "pyspartalib" },
 ]
+pyspartawsl = [
+    { name = "pyspartalib" },
+    { name = "pyspartawsl" },
+]
 
 [package.metadata]
 requires-dist = [
     { name = "pyspartadevc", marker = "extra == 'pyspartadevc'", editable = "packages/pyspartadevc" },
     { name = "pyspartaimg", marker = "extra == 'pyspartaimg'", editable = "packages/pyspartaimg" },
     { name = "pyspartalib", marker = "extra == 'pyspartalib'", editable = "packages/pyspartalib" },
+    { name = "pyspartawsl", marker = "extra == 'pyspartawsl'", editable = "packages/pyspartawsl" },
 ]
-provides-extras = ["pyspartalib", "pyspartaimg", "pyspartadevc"]
+provides-extras = ["pyspartadevc", "pyspartaimg", "pyspartalib", "pyspartawsl"]
 
 [package.metadata.requires-dev]
 dev = [
@@ -321,6 +330,15 @@ pyspartaimg = [
     { name = "pyspartalib", editable = "packages/pyspartalib" },
 ]
 pyspartalib = [{ name = "pyspartalib", editable = "packages/pyspartalib" }]
+pyspartawsl = [
+    { name = "pyspartalib", editable = "packages/pyspartalib" },
+    { name = "pyspartawsl", editable = "packages/pyspartawsl" },
+]
+
+[[package]]
+name = "pyspartawsl"
+version = "0.0.1"
+source = { editable = "packages/pyspartawsl" }
 
 [[package]]
 name = "pytest"
