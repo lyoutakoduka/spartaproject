@@ -29,7 +29,7 @@ class ProjectContext:
     """Class to import a context of whole project."""
 
     def _load_path_directly(self) -> Path:
-        return get_resource(local_path=Path("project_context", "default.json"))
+        return get_resource(local_path=Path("project_context", "context.json"))
 
     def _get_forward_path(self, forward: Path) -> Path:
         return path_pair_from_json(json_import(forward))["forward.path"]
@@ -189,11 +189,11 @@ class ProjectContext:
 
         e.g., in the following cases.
 
-        The project context file named "default.json"
+        The project context file named "context.json"
         The path forwarding file named "forward.json"
 
         ProjectContext module import "forward.json" first,
-            then find a path of "default.json" in therefore,
+            then find a path of "context.json" in therefore,
             finally import it.
 
         Default platform is automatically selected from current environment.
