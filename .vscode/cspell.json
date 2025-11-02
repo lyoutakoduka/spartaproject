@@ -59,6 +59,7 @@
     "pyspartaimg",
     "pyspartalib",
     "pyspartaproj",
+    "pyspartawsl",
     "pyspratadev",
     "pytest",
     "PYTHONPATH",
