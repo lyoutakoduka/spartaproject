@@ -13,7 +13,7 @@ from pyspartalib.script.path.modify.mount.convert_to_windows import (
     convert_to_windows,
 )
 from pyspartalib.script.platform.platform_status import is_platform_linux
-from pyspartalib.script.shell.execute_powershell import (
+from pyspartawsl.script.shell.execute_powershell import (
     execute_powershell,
     get_double_quoted_command,
     get_path_string,
