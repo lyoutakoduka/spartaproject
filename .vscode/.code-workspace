@@ -31,6 +31,9 @@
         },
       ],
     },
+    "workbench.colorCustomizations": {
+      "tree.indentGuidesStroke": "#DD0000",
+    },
 
     // Test
     "testing.automaticallyOpenTestResults": "neverOpen",
