@@ -32,6 +32,8 @@
       ],
     },
     "workbench.colorCustomizations": {
+      "editorLineNumber.activeForeground": "#DD0000",
+      "editorLineNumber.foreground": "#88ff00",
       "tree.indentGuidesStroke": "#DD0000",
     },
 
