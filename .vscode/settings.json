@@ -6,6 +6,7 @@
   "editor.formatOnSave": true,
   "editor.minimap.enabled": false,
   "editor.renderWhitespace": "all",
+  "editor.rulers": [79],
   "explorer.excludeGitIgnore": false,
   "mypy-type-checker.args": ["--config-file=pyproject.toml"],
   "prettier.configPath": ".vscode/.prettierrc.toml",
