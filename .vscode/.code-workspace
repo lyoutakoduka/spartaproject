@@ -10,9 +10,17 @@
     },
   ],
   "settings": {
-    // Prioritize ".code-workspace"
-    "autoDocstring.docstringFormat": "google",
+    // ! Prioritize ".code-workspace"
+    // Other
+    "explorer.confirmDragAndDrop": false,
+    "extensions.ignoreRecommendations": false,
+    "workbench.colorTheme": "Dracula Theme",
+    "workbench.editor.enablePreview": false,
+
+    // Font
     "debug.console.fontFamily": "editor",
+
+    // Color
     "editor.tokenColorCustomizations": {
       "textMateRules": [
         {
@@ -23,15 +31,22 @@
         },
       ],
     },
-    "explorer.confirmDragAndDrop": false,
-    "extensions.ignoreRecommendations": false,
-    "git.autoRepositoryDetection": "openEditors",
-    "git.inputValidation": true,
-    "python.languageServer": "Pylance",
-    "ruff.configuration": "pyproject.toml",
+
+    // Test
     "testing.automaticallyOpenTestResults": "neverOpen",
     "testing.gutterEnabled": true,
-    "workbench.colorTheme": "Dracula Theme",
-    "workbench.editor.enablePreview": false,
+
+    // Git
+    "git.autoRepositoryDetection": "openEditors",
+    "git.inputValidation": true,
+
+    // Python
+    "python.languageServer": "Pylance",
+
+    // Docstring
+    "autoDocstring.docstringFormat": "google",
+
+    // Ruff
+    "ruff.configuration": "pyproject.toml",
   },
 }
