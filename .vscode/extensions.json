@@ -1,5 +1,6 @@
 {
   "recommendations": [
+    "aaron-bond.better-comments",
     "alefragnani.bookmarks",
     "alefragnani.project-manager",
     "bodil.prettier-toml",
@@ -19,6 +20,6 @@
     "shardulm94.trailing-spaces",
     "streetsidesoftware.code-spell-checker",
     "tamasfe.even-better-toml",
-    "visualstudioexptteam",
-  ],
+    "visualstudioexptteam"
+  ]
 }
