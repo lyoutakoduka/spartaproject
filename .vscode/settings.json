@@ -1,14 +1,23 @@
 {
   // ! Prioritize "settings.json"
-  "editor.codeActionsOnSave": { "source.organizeImports": "explicit" },
-  "editor.fontFamily": "UDEV Gothic JPDOC",
-  "editor.formatOnSave": true,
-  "editor.minimap.enabled": false,
-  "editor.renderWhitespace": "all",
-  "editor.rulers": [79],
+  // * VSCode
+  // Other
   "explorer.excludeGitIgnore": false,
   "workbench.startupEditor": "none",
 
+  // Font
+  "editor.fontFamily": "UDEV Gothic JPDOC",
+
+  // Editor
+  "editor.minimap.enabled": false,
+  "editor.renderWhitespace": "all",
+  "editor.rulers": [79],
+
+  // Save
+  "editor.codeActionsOnSave": { "source.organizeImports": "explicit" },
+  "editor.formatOnSave": true,
+
+  // * Outside tools
   // Python
   "python.analysis.diagnosticMode": "workspace",
   "python.analysis.extraPaths": [
@@ -32,6 +41,7 @@
   "mypy-type-checker.args": ["--config-file=pyproject.toml"],
 
   // * Formatter
+  // Prettier
   "editor.defaultFormatter": "esbenp.prettier-vscode",
 
   // Docker
