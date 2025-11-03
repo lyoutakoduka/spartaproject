@@ -1,28 +1,4 @@
 {
-  // Prioritize ".code-workspace"
-  "autoDocstring.docstringFormat": "google",
-  "debug.console.fontFamily": "editor",
-  "editor.tokenColorCustomizations": {
-    "textMateRules": [
-      {
-        "scope": "string.quoted.docstring.multi.python",
-        "settings": {
-          "foreground": "#ffBB00"
-        }
-      }
-    ]
-  },
-  "explorer.confirmDragAndDrop": false,
-  "extensions.ignoreRecommendations": false,
-  "git.autoRepositoryDetection": "openEditors",
-  "git.inputValidation": true,
-  "python.languageServer": "Pylance",
-  "ruff.configuration": "pyproject.toml",
-  "testing.automaticallyOpenTestResults": "neverOpen",
-  "testing.gutterEnabled": true,
-  "workbench.colorTheme": "Dracula Theme",
-  "workbench.editor.enablePreview": false,
-
   // Prioritize "settings.json"
   "editor.codeActionsOnSave": { "source.organizeImports": "explicit" },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
