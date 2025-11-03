@@ -7,11 +7,9 @@
   "editor.renderWhitespace": "all",
   "editor.rulers": [79],
   "explorer.excludeGitIgnore": false,
-  "mypy-type-checker.args": ["--config-file=pyproject.toml"],
-  "prettier.configPath": ".vscode/.prettierrc.toml",
-  "prettier.ignorePath": ".vscode/.prettierignore",
-  "prettier.requireConfig": true,
-  "pythonTestExplorer.testFramework": "pytest",
+  "workbench.startupEditor": "none",
+
+  // Python
   "python.analysis.diagnosticMode": "workspace",
   "python.analysis.extraPaths": [
     "packages/pyspartadevc/src",
@@ -20,8 +18,18 @@
     "packages/pyspartawsl/src"
   ],
   "python.analysis.typeCheckingMode": "strict",
+
+  // Prettier
+  "prettier.configPath": ".vscode/.prettierrc.toml",
+  "prettier.ignorePath": ".vscode/.prettierignore",
+  "prettier.requireConfig": true,
+
+  // Pytest
   "python.testing.pytestEnabled": true,
-  "workbench.startupEditor": "none",
+  "pythonTestExplorer.testFramework": "pytest",
+
+  // Mypy
+  "mypy-type-checker.args": ["--config-file=pyproject.toml"],
 
   // * Formatter
   "editor.defaultFormatter": "esbenp.prettier-vscode",
