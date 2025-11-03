@@ -1,33 +1,24 @@
 {
-  "autoDocstring.docstringFormat": "google",
-  "debug.console.fontFamily": "editor",
-  "editor.codeActionsOnSave": { "source.organizeImports": "explicit" },
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  // ! Prioritize "settings.json"
+  // * VSCode
+  // Other
+  "explorer.excludeGitIgnore": false,
+  "workbench.startupEditor": "none",
+
+  // Font
   "editor.fontFamily": "UDEV Gothic JPDOC",
-  "editor.formatOnSave": true,
+
+  // Editor
   "editor.minimap.enabled": false,
   "editor.renderWhitespace": "all",
   "editor.rulers": [79],
-  "editor.tokenColorCustomizations": {
-    "textMateRules": [
-      {
-        "scope": "string.quoted.docstring.multi.python",
-        "settings": {
-          "foreground": "#ffBB00"
-        }
-      }
-    ]
-  },
-  "explorer.confirmDragAndDrop": false,
-  "explorer.excludeGitIgnore": false,
-  "extensions.ignoreRecommendations": false,
-  "git.autoRepositoryDetection": "openEditors",
-  "git.inputValidation": true,
-  "mypy-type-checker.args": ["--config-file=pyproject.toml"],
-  "prettier.configPath": ".vscode/.prettierrc.toml",
-  "prettier.ignorePath": ".vscode/.prettierignore",
-  "prettier.requireConfig": true,
-  "pythonTestExplorer.testFramework": "pytest",
+
+  // Save
+  "editor.codeActionsOnSave": { "source.organizeImports": "explicit" },
+  "editor.formatOnSave": true,
+
+  // * Outside tools
+  // Python
   "python.analysis.diagnosticMode": "workspace",
   "python.analysis.extraPaths": [
     "packages/pyspartadevc/src",
@@ -36,17 +27,36 @@
     "packages/pyspartawsl/src"
   ],
   "python.analysis.typeCheckingMode": "strict",
-  "python.languageServer": "Pylance",
+
+  // Prettier
+  "prettier.configPath": ".vscode/.prettierrc.toml",
+  "prettier.ignorePath": ".vscode/.prettierignore",
+  "prettier.requireConfig": true,
+
+  // Pytest
   "python.testing.pytestEnabled": true,
-  "ruff.configuration": "pyproject.toml",
-  "testing.automaticallyOpenTestResults": "neverOpen",
-  "testing.gutterEnabled": true,
-  "workbench.colorTheme": "Dracula Theme",
-  "workbench.editor.enablePreview": false,
-  "workbench.startupEditor": "none",
-  "[dockerfile]": { "editor.defaultFormatter": "ms-azuretools.vscode-docker" },
+  "pythonTestExplorer.testFramework": "pytest",
+
+  // Mypy
+  "mypy-type-checker.args": ["--config-file=pyproject.toml"],
+
+  // * Formatter
+  // Prettier
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  // Docker
+  "[dockerfile]": {
+    "editor.defaultFormatter": "ms-azuretools.vscode-containers"
+  },
+  "[dockercompose]": {
+    "editor.defaultFormatter": "ms-azuretools.vscode-containers"
+  },
+
+  // Shell
   "[dotenv]": { "editor.defaultFormatter": "foxundermoon.shell-format" },
   "[ignore]": { "editor.defaultFormatter": "foxundermoon.shell-format" },
-  "[python]": { "editor.defaultFormatter": "charliermarsh.ruff" },
-  "[shellscript]": { "editor.defaultFormatter": "foxundermoon.shell-format" }
+  "[shellscript]": { "editor.defaultFormatter": "foxundermoon.shell-format" },
+
+  // Python
+  "[python]": { "editor.defaultFormatter": "charliermarsh.ruff" }
 }

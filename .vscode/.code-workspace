@@ -1,21 +1,57 @@
 {
   "folders": [
     {
-      "name": "OUTSIDE",
-      "path": "../../../../../outside/",
+      "name": "Container Root",
+      "path": "/",
     },
     {
-      "name": "EXTERNAL",
-      "path": "../../../../../external/",
-    },
-    {
-      "name": "INTERNAL",
-      "path": "../../../internal",
-    },
-    {
-      "name": "ROOT",
+      "name": "VSCode Workspace",
       "path": "../",
     },
   ],
-  "settings": {},
+  "settings": {
+    // ! Prioritize ".code-workspace"
+    // Other
+    "explorer.confirmDragAndDrop": false,
+    "extensions.ignoreRecommendations": false,
+    "workbench.colorTheme": "Dracula Theme",
+    "workbench.editor.enablePreview": false,
+
+    // Font
+    "debug.console.fontFamily": "editor",
+
+    // Color
+    "editor.tokenColorCustomizations": {
+      "textMateRules": [
+        {
+          "scope": "string.quoted.docstring.multi.python",
+          "settings": {
+            "foreground": "#ffBB00",
+          },
+        },
+      ],
+    },
+    "workbench.colorCustomizations": {
+      "editorLineNumber.activeForeground": "#DD0000",
+      "editorLineNumber.foreground": "#88ff00",
+      "tree.indentGuidesStroke": "#DD0000",
+    },
+
+    // Test
+    "testing.automaticallyOpenTestResults": "neverOpen",
+    "testing.gutterEnabled": true,
+
+    // Git
+    "git.autoRepositoryDetection": "openEditors",
+    "git.inputValidation": true,
+
+    // Python
+    "python.languageServer": "Pylance",
+
+    // Docstring
+    "autoDocstring.docstringFormat": "google",
+
+    // Ruff
+    "ruff.configuration": "pyproject.toml",
+  },
 }
