@@ -1,19 +1,11 @@
 {
   "folders": [
     {
-      "name": "OUTSIDE",
-      "path": "../../../../../outside/",
+      "name": "Container Root",
+      "path": "/",
     },
     {
-      "name": "EXTERNAL",
-      "path": "../../../../../external/",
-    },
-    {
-      "name": "INTERNAL",
-      "path": "../../../internal",
-    },
-    {
-      "name": "ROOT",
+      "name": "VSCode Workspace",
       "path": "../",
     },
   ],
