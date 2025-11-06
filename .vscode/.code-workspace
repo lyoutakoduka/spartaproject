@@ -45,6 +45,9 @@
     "git.autoRepositoryDetection": "openEditors",
     "git.inputValidation": true,
 
+    // shfmt
+    "shellformat.useEditorConfig": true,
+
     // Python
     "python.languageServer": "Pylance",
 
