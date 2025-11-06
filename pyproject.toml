@@ -18,7 +18,7 @@ pyspartalib = ["pyspartalib"]
 pyspartawsl = ["pyspartawsl"]
 
 [tool.uv]
-default-groups = ["dev"]
+default-groups = ["pyspartadevc"]
 
 [tool.uv.sources]
 pyspartadevc = { workspace = true }
