@@ -11,6 +11,7 @@
     "foxundermoon.shell-format",
     "ibm.output-colorizer",
     "littlefoxteam.vscode-python-test-adapter",
+    "mads-hartmann.bash-ide-vscode",
     "mkxml.vscode-filesize",
     "ms-ceintl.vscode-language-pack-ja",
     "ms-python.mypy-type-checker",
@@ -20,6 +21,7 @@
     "shardulm94.trailing-spaces",
     "streetsidesoftware.code-spell-checker",
     "tamasfe.even-better-toml",
-    "visualstudioexptteam"
+    "timonwong.shellcheck",
+    "VisualStudioExptTeam.vscodeintellicode"
   ]
 }
