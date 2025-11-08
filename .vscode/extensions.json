@@ -10,6 +10,7 @@
     "esbenp.prettier-vscode",
     "foxundermoon.shell-format",
     "ibm.output-colorizer",
+    "jetmartin.bats",
     "littlefoxteam.vscode-python-test-adapter",
     "mads-hartmann.bash-ide-vscode",
     "mkxml.vscode-filesize",
