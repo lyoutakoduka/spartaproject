@@ -48,6 +48,10 @@
     // shfmt
     "shellformat.useEditorConfig": true,
 
+    // Bash IDE: Disable linting and formatting.
+    "bashIde.shfmt.path": "",
+    "bashIde.shellcheckPath": "",
+
     // Python
     "python.languageServer": "Pylance",
 
