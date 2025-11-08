@@ -1,3 +1,5 @@
 external-sources=true
 enable=all
 disable=SC2119
+source-path=packages/pyspartadevc/src/shell/script
+source-path=packages/pyspartadevc/tests/shell/script
