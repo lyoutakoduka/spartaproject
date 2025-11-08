@@ -14,7 +14,10 @@
   "editor.rulers": [79],
 
   // Save
-  "editor.codeActionsOnSave": { "source.organizeImports": "explicit" },
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit",
+    "source.fixAll.shellcheck": "explicit"
+  },
   "editor.formatOnSave": true,
 
   // * Outside tools
@@ -40,6 +43,7 @@
   // ShellCheck
   "shellcheck.useWorkspaceRootAsCwd": true,
   "shellcheck.customArgs": ["--rcfile=.vscode/.shellcheckrc"],
+  "shellcheck.executablePath": "shellcheck",
 
   // Mypy
   "mypy-type-checker.args": ["--config-file=pyproject.toml"],
