@@ -45,6 +45,9 @@
     "git.autoRepositoryDetection": "openEditors",
     "git.inputValidation": true,
 
+    // ShellCheck
+    "shellcheck.logLevel": "debug",
+
     // shfmt
     "shellformat.useEditorConfig": true,
 
