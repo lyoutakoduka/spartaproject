@@ -65,6 +65,7 @@
   "[ignore]": { "editor.defaultFormatter": "foxundermoon.shell-format" },
   "[properties]": { "editor.defaultFormatter": "foxundermoon.shell-format" },
   "[shellscript]": { "editor.defaultFormatter": "foxundermoon.shell-format" },
+  "[bats]": { "editor.defaultFormatter": "foxundermoon.shell-format" },
 
   // Python
   "[python]": { "editor.defaultFormatter": "charliermarsh.ruff" }
