@@ -41,9 +41,9 @@
   "pythonTestExplorer.testFramework": "pytest",
 
   // ShellCheck
-  "shellcheck.useWorkspaceRootAsCwd": true,
   "shellcheck.customArgs": ["--rcfile=.vscode/.shellcheckrc"],
   "shellcheck.executablePath": "shellcheck",
+  "shellcheck.useWorkspaceRootAsCwd": true,
 
   // Mypy
   "mypy-type-checker.args": ["--config-file=pyproject.toml"],
@@ -61,11 +61,11 @@
   },
 
   // Shell
+  "[bats]": { "editor.defaultFormatter": "foxundermoon.shell-format" },
   "[dotenv]": { "editor.defaultFormatter": "foxundermoon.shell-format" },
   "[ignore]": { "editor.defaultFormatter": "foxundermoon.shell-format" },
   "[properties]": { "editor.defaultFormatter": "foxundermoon.shell-format" },
   "[shellscript]": { "editor.defaultFormatter": "foxundermoon.shell-format" },
-  "[bats]": { "editor.defaultFormatter": "foxundermoon.shell-format" },
 
   // Python
   "[python]": { "editor.defaultFormatter": "charliermarsh.ruff" }
