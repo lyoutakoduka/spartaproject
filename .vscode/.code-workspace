@@ -1,12 +1,12 @@
 {
   "folders": [
     {
-      "name": "Container Root",
-      "path": "/",
-    },
-    {
       "name": "VSCode Workspace",
       "path": "../",
+    },
+    {
+      "name": "Container Root",
+      "path": "/",
     },
   ],
   "settings": {
