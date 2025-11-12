@@ -1,0 +1,25 @@
+#!/bin/bash
+
+. packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant_help.sh
+. packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant.sh
+. packages/pyspartadevc/tools/shspartadevc/script/shared/show/show_error.sh
+
+filter_by_invalid() (
+    declare -r _status=1
+    declare -r _invalid="$1"
+    declare -r _success=$(constant::status_success)
+    declare -r _message=$(constant::message_invalid)
+
+    _show_and_exit() {
+        show_error "${_message}"
+        exit "${_status}"
+    }
+
+    _main() {
+        if [[ "${_invalid}" = "${_success}" ]]; then
+            _show_and_exit
+        fi
+    }
+
+    _main
+)

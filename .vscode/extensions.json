@@ -10,16 +10,20 @@
     "esbenp.prettier-vscode",
     "foxundermoon.shell-format",
     "ibm.output-colorizer",
+    "jetmartin.bats",
     "littlefoxteam.vscode-python-test-adapter",
+    "mads-hartmann.bash-ide-vscode",
     "mkxml.vscode-filesize",
     "ms-ceintl.vscode-language-pack-ja",
     "ms-python.mypy-type-checker",
     "njpwerner.autodocstring",
     "oderwat.indent-rainbow",
     "pkief.material-icon-theme",
+    "remisa.shellman",
     "shardulm94.trailing-spaces",
     "streetsidesoftware.code-spell-checker",
     "tamasfe.even-better-toml",
-    "visualstudioexptteam"
+    "timonwong.shellcheck",
+    "VisualStudioExptTeam.vscodeintellicode"
   ]
 }
