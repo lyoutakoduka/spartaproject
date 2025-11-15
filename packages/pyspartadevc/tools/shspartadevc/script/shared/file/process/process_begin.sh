@@ -2,7 +2,7 @@
 
 . packages/pyspartadevc/tools/shspartadevc/script/shared/constant/get_constant_message.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/file/path/get_file_path.sh
-. packages/pyspartadevc/tools/shspartadevc/script/shared/file/process/process_head.sh
+. packages/pyspartadevc/tools/shspartadevc/script/shared/file/process/process_log.sh
 
 begin_text_file() (
     declare -r _group=$(constant::group_text_remove)
