@@ -5,7 +5,7 @@
 test() (
     declare -r _expected="test"
 
-    error_difference "${_expected}" "${_expected}"
+    shell::error_difference "${_expected}" "${_expected}"
 )
 
 "$@"
