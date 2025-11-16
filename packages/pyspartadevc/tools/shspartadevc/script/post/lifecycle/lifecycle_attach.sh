@@ -16,7 +16,8 @@ _lifecycle() (
         _launch_terminal
     }
 
-    _main
+    show_log "${_message}"
+    zsh
 )
 
 _lifecycle
