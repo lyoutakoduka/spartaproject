@@ -4,6 +4,16 @@
 . packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/constant/get_constant.sh
 
+#*  Filter the processing by the help message flag.
+#*
+#*  Args:
+#*      _help (string): Set "true" if help argument is found.
+#*
+#*      _message (string): Help message you want to shown.
+#*
+#*  Error:
+#*      _show_and_exit (function): exit 1
+#*
 filter_by_help() (
     declare -r _help="$1"
     declare -r _message="$2"
