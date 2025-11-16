@@ -19,7 +19,3 @@ constant::sync_python_main() {
 constant::sync_python_sub() {
     echo "sync"
 }
-
-constant::terminal() {
-    echo "zsh"
-}
