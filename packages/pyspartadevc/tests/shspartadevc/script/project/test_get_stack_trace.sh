@@ -12,13 +12,6 @@ test() (
     declare -r _expected_path_offset="get_stack_trace.sh"
     declare -r _expected_name_offset="get_selected_frame"
 
-    _confirm_result() {
-        declare -r result="$1"
-        declare -r expected="$2"
-
-        shell::error_difference "${result}" "${expected}"
-    }
-
     _test_base_path() {
         declare -r result=$(get_selected_frame "${_group_path}")
         declare -r parent_root=$(basename "${result}")
