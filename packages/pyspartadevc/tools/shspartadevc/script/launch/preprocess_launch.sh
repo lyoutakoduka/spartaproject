@@ -10,14 +10,13 @@
 . packages/pyspartadevc/tools/shspartadevc/script/shared/constant/get_constant_message.sh
 
 launch_preprocess() (
-    declare -r _status=1
     declare -r _message=$(constant::help_launch)
     declare -r _create=$(constant::group_create)
     declare -r _attach=$(constant::group_attach)
     declare -r _separator=$(constant::separator)
 
     _exit() {
-        exit "${_status}"
+        exit 1
     }
 
     _filter_by_arguments() {
