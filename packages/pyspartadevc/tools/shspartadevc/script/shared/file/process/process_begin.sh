@@ -7,12 +7,11 @@
 
 begin_text_file() (
     declare -r _group=$(constant::group_text_remove)
-    declare -r _remove=$(constant::remove_file)
 
     _remove_preprocess_script() {
         declare -r path=$(get_file_path)
 
-        eval "${_remove} ${path}"
+        rm "${path}"
     }
 
     _main() {
