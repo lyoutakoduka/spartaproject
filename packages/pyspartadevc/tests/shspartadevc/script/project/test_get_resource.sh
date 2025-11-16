@@ -31,7 +31,7 @@ test() (
         declare -r result=$(get_resource "${executed_path}")
         declare -r resource_root=$(_get_resource_root)
 
-        _confirm_result "${result}" "${resource_root}"
+        shell::error_difference "${result}" "${resource_root}"
     }
 
     test_local() {
@@ -40,7 +40,7 @@ test() (
         declare -r resource_root=$(_get_resource_root)
         declare -r expected="${resource_root}/${_local_path}"
 
-        _confirm_result "${result}" "${expected}"
+        shell::error_difference "${result}" "${expected}"
     }
 
     _main() {
