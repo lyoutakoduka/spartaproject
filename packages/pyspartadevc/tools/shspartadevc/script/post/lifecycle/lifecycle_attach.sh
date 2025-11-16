@@ -5,11 +5,10 @@
 . packages/pyspartadevc/tools/shspartadevc/script/shared/show/show_log.sh
 
 _lifecycle() (
-    declare -r _terminal=$(constant::terminal)
     declare -r _message=$(constant::help_attach)
 
     _launch_terminal() {
-        eval "${_terminal}"
+        zsh
     }
 
     _main() {
