@@ -1,6 +1,6 @@
 #!/bin/bash
 
-error_same() {
+shell::error_same() {
     declare -r _result="$1"
     declare -r _expected="$2"
 

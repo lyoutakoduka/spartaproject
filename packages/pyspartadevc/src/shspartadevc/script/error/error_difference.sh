@@ -1,6 +1,6 @@
 #!/bin/bash
 
-error_difference() {
+shell::error_difference() {
     declare -r _result="$1"
     declare -r _expected="$2"
 
