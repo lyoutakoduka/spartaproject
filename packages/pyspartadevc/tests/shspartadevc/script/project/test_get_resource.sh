@@ -5,18 +5,10 @@
 . packages/pyspartadevc/src/shspartadevc/script/project/get_stack_trace.sh
 
 test() (
-    declare -r _status=1
     declare -r _group="path"
     declare -r _local_path="root/head.json"
     declare -r _root_main="packages/pyspartadevc/tests/shspartadevc"
     declare -r _root_sub="script/project/resource"
-
-    _confirm_result() {
-        declare -r result="$1"
-        declare -r expected="$2"
-
-        error_difference "${result}" "${expected}" || exit "${_status}"
-    }
 
     _get_resource_root() {
         echo "${_root_main}/${_root_sub}"
@@ -32,7 +24,7 @@ test() (
         declare -r result=$(get_resource "${executed_path}")
         declare -r resource_root=$(_get_resource_root)
 
-        _confirm_result "${result}" "${resource_root}"
+        shell::error_difference "${result}" "${resource_root}"
     }
 
     test_local() {
@@ -41,7 +33,7 @@ test() (
         declare -r resource_root=$(_get_resource_root)
         declare -r expected="${resource_root}/${_local_path}"
 
-        _confirm_result "${result}" "${expected}"
+        shell::error_difference "${result}" "${expected}"
     }
 
     _main() {

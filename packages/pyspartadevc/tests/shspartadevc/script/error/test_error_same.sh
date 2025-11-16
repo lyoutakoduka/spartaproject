@@ -6,7 +6,7 @@ test() (
     declare -r _expected="test"
     declare -r _result="error"
 
-    error_same "${_result}" "${_expected}"
+    shell::error_same "${_result}" "${_expected}"
 )
 
 "$@"

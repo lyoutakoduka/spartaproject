@@ -1,15 +1,10 @@
 #!/bin/bash
 
-error_difference() (
-    declare -r _status=1
+shell::error_difference() {
     declare -r _result="$1"
     declare -r _expected="$2"
 
-    _main() {
-        if [[ "${_result}" != "${_expected}" ]]; then
-            exit "${_status}"
-        fi
-    }
-
-    _main
-)
+    if [[ "${_result}" != "${_expected}" ]]; then
+        exit 1
+    fi
+}

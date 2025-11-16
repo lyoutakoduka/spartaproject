@@ -5,7 +5,6 @@
 . packages/pyspartadevc/src/shspartadevc/script/project/get_stack_trace.sh
 
 test() (
-    declare -r _status=1
     declare -r _group="path"
     declare -r _local_path="context.json"
     declare -r _root_main="packages/pyspartadevc/tests/shspartadevc"
@@ -20,7 +19,7 @@ test() (
 
         declare -r context_path=$(_get_context_path)
 
-        error_difference "${result}" "${context_path}" || exit "${_status}"
+        shell::error_difference "${result}" "${context_path}"
     }
 
     _get_executed_path() {
