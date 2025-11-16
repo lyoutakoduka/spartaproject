@@ -23,8 +23,8 @@ launch_preprocess() (
         declare -r help="$1"
         declare -r invalid="$2"
 
-        filter_by_invalid "${invalid}" || _exit
-        filter_by_help "${help}" "${_message}" || _exit
+        filter_by_invalid "${invalid}" || exit 1
+        filter_by_help "${help}" "${_message}" || exit 1
     }
 
     _handle_arguments() {
@@ -44,7 +44,7 @@ launch_preprocess() (
 
     _main() {
         _handle_arguments "$@"
-        filter_by_account || _exit
+        filter_by_account || exit 1
         _create_preprocess_scripts "${_create}" "${_attach}"
     }
 
