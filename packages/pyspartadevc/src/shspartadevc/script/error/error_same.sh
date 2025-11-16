@@ -1,6 +1,6 @@
 #!/bin/bash
 
-error_same() (
+error_same() {
     declare -r _status=1
     declare -r _result="$1"
     declare -r _expected="$2"
@@ -12,4 +12,4 @@ error_same() (
     }
 
     _main
-)
+}
