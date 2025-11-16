@@ -4,7 +4,6 @@
 . packages/pyspartadevc/src/shspartadevc/script/project/get_stack_trace.sh
 
 test() (
-    declare -r _status=1
     declare -r -i _offset=-1
     declare -r _group_path="path"
     declare -r _group_name="name"
@@ -17,7 +16,7 @@ test() (
         declare -r result="$1"
         declare -r expected="$2"
 
-        error_difference "${result}" "${expected}" || exit "${_status}"
+        error_difference "${result}" "${expected}"
     }
 
     _test_base_path() {

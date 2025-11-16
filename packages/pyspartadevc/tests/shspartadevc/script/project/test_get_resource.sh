@@ -5,7 +5,6 @@
 . packages/pyspartadevc/src/shspartadevc/script/project/get_stack_trace.sh
 
 test() (
-    declare -r _status=1
     declare -r _group="path"
     declare -r _local_path="root/head.json"
     declare -r _root_main="packages/pyspartadevc/tests/shspartadevc"
@@ -15,7 +14,7 @@ test() (
         declare -r result="$1"
         declare -r expected="$2"
 
-        error_difference "${result}" "${expected}" || exit "${_status}"
+        error_difference "${result}" "${expected}"
     }
 
     _get_resource_root() {
