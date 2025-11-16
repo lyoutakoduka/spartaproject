@@ -9,6 +9,13 @@
 . packages/pyspartadevc/tools/shspartadevc/script/launch/preprocess/preprocess_script.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/constant/get_constant_message.sh
 
+#*  Create the script to create or attach a dev-container.
+#*
+#*  Error:
+#*    _filter_by_arguments (function): exit 1
+#*
+#*    _main (function): exit 1
+#*
 launch_preprocess() (
     declare -r _message=$(constant::help_launch)
     declare -r _create=$(constant::group_create)
