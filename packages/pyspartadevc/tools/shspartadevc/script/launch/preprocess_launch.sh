@@ -15,10 +15,6 @@ launch_preprocess() (
     declare -r _attach=$(constant::group_attach)
     declare -r _separator=$(constant::separator)
 
-    _exit() {
-        exit 1
-    }
-
     _filter_by_arguments() {
         declare -r help="$1"
         declare -r invalid="$2"
