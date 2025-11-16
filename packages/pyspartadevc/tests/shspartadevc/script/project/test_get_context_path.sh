@@ -19,7 +19,7 @@ test() (
 
         declare -r context_path=$(_get_context_path)
 
-        error_difference "${result}" "${context_path}"
+        shell::error_difference "${result}" "${context_path}"
     }
 
     _get_executed_path() {

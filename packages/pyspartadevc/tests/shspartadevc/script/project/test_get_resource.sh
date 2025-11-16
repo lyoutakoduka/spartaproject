@@ -14,7 +14,7 @@ test() (
         declare -r result="$1"
         declare -r expected="$2"
 
-        error_difference "${result}" "${expected}"
+        shell::error_difference "${result}" "${expected}"
     }
 
     _get_resource_root() {

@@ -16,7 +16,7 @@ test() (
         declare -r result="$1"
         declare -r expected="$2"
 
-        error_difference "${result}" "${expected}"
+        shell::error_difference "${result}" "${expected}"
     }
 
     _test_base_path() {
