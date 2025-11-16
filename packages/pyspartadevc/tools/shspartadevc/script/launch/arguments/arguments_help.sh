@@ -5,7 +5,6 @@
 . packages/pyspartadevc/tools/shspartadevc/script/shared/constant/get_constant.sh
 
 filter_by_help() (
-    declare -r _status=1
     declare -r _help="$1"
     declare -r _message="$2"
     declare -r _empty=$(constant::empty)
@@ -37,7 +36,7 @@ filter_by_help() (
 
     _show_and_exit() {
         _get_arguments
-        exit "${_status}"
+        exit 1
     }
 
     _main() {
