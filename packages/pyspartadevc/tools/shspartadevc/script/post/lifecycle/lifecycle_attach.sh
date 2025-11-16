@@ -7,15 +7,6 @@
 _lifecycle() (
     declare -r _message=$(constant::help_attach)
 
-    _launch_terminal() {
-        zsh
-    }
-
-    _main() {
-        show_log "${_message}"
-        _launch_terminal
-    }
-
     show_log "${_message}"
     zsh
 )
