@@ -5,14 +5,18 @@
 . packages/pyspartadevc/tools/shspartadevc/script/shared/get_account.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/show/show_error.sh
 
+#*  Filter the processing by user name.
+#*
+#*  Error:
+#*    _show_and_exit (function): exit 1
+#*
 filter_by_account() (
-    declare -r _status=1
     declare -r _expected=$(constant::root)
     declare -r _message=$(constant::message_user)
 
     _show_and_exit() {
         show_error "${_message}"
-        exit "${_status}"
+        exit 1
     }
 
     _main() {

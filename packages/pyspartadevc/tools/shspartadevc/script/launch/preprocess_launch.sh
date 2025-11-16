@@ -9,23 +9,25 @@
 . packages/pyspartadevc/tools/shspartadevc/script/launch/preprocess/preprocess_script.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/constant/get_constant_message.sh
 
+#*  Create the script to create or attach a dev-container.
+#*
+#*  Error:
+#*    _filter_by_arguments (function): exit 1
+#*
+#*    _main (function): exit 1
+#*
 launch_preprocess() (
-    declare -r _status=1
     declare -r _message=$(constant::help_launch)
     declare -r _create=$(constant::group_create)
     declare -r _attach=$(constant::group_attach)
     declare -r _separator=$(constant::separator)
 
-    _exit() {
-        exit "${_status}"
-    }
-
     _filter_by_arguments() {
         declare -r help="$1"
         declare -r invalid="$2"
 
-        filter_by_invalid "${invalid}" || _exit
-        filter_by_help "${help}" "${_message}" || _exit
+        filter_by_invalid "${invalid}" || exit 1
+        filter_by_help "${help}" "${_message}" || exit 1
     }
 
     _handle_arguments() {
@@ -45,7 +47,7 @@ launch_preprocess() (
 
     _main() {
         _handle_arguments "$@"
-        filter_by_account || _exit
+        filter_by_account || exit 1
         _create_preprocess_scripts "${_create}" "${_attach}"
     }
 
