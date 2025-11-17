@@ -27,3 +27,8 @@ _confirm_status() {
     run test_offset_path
     shell::confirm_success "${status}"
 }
+
+@test "test_offset_name" {
+    run test_offset_name
+    shell::confirm_success "${status}"
+}

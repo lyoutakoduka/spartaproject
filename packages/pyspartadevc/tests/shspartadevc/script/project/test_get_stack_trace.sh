@@ -90,4 +90,18 @@ test_offset_path() (
     _main
 )
 
+test_offset_name() (
+    declare -r _group="name"
+    declare -r _expected="get_selected_frame"
+    declare -r -i _offset=-1
+
+    _main() {
+        declare -r result=$(get_selected_frame "${_group}" "${_offset}")
+
+        shell::error_difference "${result}" "${_expected}"
+    }
+
+    _main
+)
+
 "$@"
