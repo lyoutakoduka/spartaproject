@@ -1,7 +1,6 @@
 #!/bin/bash
 
 . packages/pyspartadevc/tools/shspartadevc/script/launch/account/account_message.sh
-. packages/pyspartadevc/tools/shspartadevc/script/launch/account/account_user.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/environment/environment_group.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/environment/environment_name.sh
@@ -23,7 +22,7 @@ ready_identifier() (
     }
 
     _get_status_identifier() {
-        declare -r -i identifier=$(get_user_identifier)
+        declare -r identifier=$(id --user)
 
         if [[ "${identifier}" -ne "${_expected}" ]]; then
             echo "${_success}"

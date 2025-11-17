@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. packages/pyspartadevc/tools/shspartadevc/script/launch/account/account_user.sh
+. packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant_command.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant_environment.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/environment/environment_create.sh
@@ -18,7 +18,7 @@ set_user_identifier() (
         declare number="${_empty}"
 
         if [[ "${_status}" = "${_success}" ]]; then
-            number=$(get_user_identifier)
+            number=$(id --user)
         fi
 
         echo "${number}"
