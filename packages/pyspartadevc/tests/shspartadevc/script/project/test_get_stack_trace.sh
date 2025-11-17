@@ -62,4 +62,17 @@ test_base_path() (
     _main
 )
 
+test_base_name() (
+    declare -r _group="name"
+    declare -r _expected="_main"
+
+    _main() {
+        declare -r result=$(get_selected_frame "${_group}")
+
+        shell::error_difference "${result}" "${_expected}"
+    }
+
+    _main
+)
+
 "$@"
