@@ -5,6 +5,5 @@
 get_user_identifier() (
     declare -r _option=$(constant::identifier_user)
 
-    declare -r -i identifier=$(id "${_option}")
-    echo "${identifier}"
+    id "${_option}"
 )
