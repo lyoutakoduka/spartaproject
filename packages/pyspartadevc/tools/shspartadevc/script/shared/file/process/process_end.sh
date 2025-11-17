@@ -15,7 +15,7 @@ end_text_file() (
         declare -r path=$(get_file_path)
         declare -r _command="${_executable_sub}"
 
-        chmod "${_command} ${path}"
+        chmod "${_command}" "${path}"
     }
 
     _execute_and_show() {
