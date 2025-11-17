@@ -44,4 +44,12 @@ test() (
     _main
 )
 
+_get_resource_root() (
+    declare -r _root_main="packages/pyspartadevc"
+    declare -r _root_sub="tests/shspartadevc"
+    declare -r _resource="script/project/resource"
+
+    echo "${_root_main}/${_root_sub}/${_resource}"
+)
+
 "$@"
