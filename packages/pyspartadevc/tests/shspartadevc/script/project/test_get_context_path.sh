@@ -76,4 +76,17 @@ _get_executed_path() (
     echo "${executed}"
 )
 
+test_base() (
+    declare -r _local_path="context.json"
+
+    _main() {
+        declare -r executed=$(_get_executed_path)
+        declare -r result=$(get_context_path "${executed}" "${_local_path}")
+
+        _confirm_result "${result}" || exit 1
+    }
+
+    _main
+)
+
 "$@"
