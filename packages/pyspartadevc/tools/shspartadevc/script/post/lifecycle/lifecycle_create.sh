@@ -30,7 +30,7 @@ _lifecycle() (
 
     _set_added_path() {
         declare -r path=$(get_preprocess_script "${_script_post}")
-        set_file_path "${path}"
+        shell::set_file_path "${path}"
     }
 
     _main() {
