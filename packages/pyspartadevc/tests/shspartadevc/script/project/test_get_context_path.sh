@@ -49,4 +49,23 @@ test() (
     _main
 )
 
+_confirm_result() (
+    declare -r result="$1"
+    declare -r _root_main="packages/pyspartadevc/tests/shspartadevc"
+    declare -r _root_sub="script/project/resource/context.json"
+
+    _get_context_path() {
+
+        echo "${_root_main}/${_root_sub}"
+    }
+
+    _main() {
+        declare -r context_path=$(_get_context_path)
+
+        shell::error_difference "${result}" "${context_path}"
+    }
+
+    _main
+)
+
 "$@"
