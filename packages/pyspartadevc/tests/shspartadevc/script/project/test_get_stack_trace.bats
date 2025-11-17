@@ -22,3 +22,8 @@ _confirm_status() {
     run test_base_name
     shell::confirm_success "${status}"
 }
+
+@test "test_offset_path" {
+    run test_offset_path
+    shell::confirm_success "${status}"
+}
