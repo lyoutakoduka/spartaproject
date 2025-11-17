@@ -1,6 +1,8 @@
 #!/usr/bin/env bats
 
-. packages/pyspartadevc/tests/shspartadevc/script/error/test_error_difference.sh
+setup() {
+    . packages/pyspartadevc/tests/shspartadevc/script/error/test_error_difference.sh
+}
 
 _confirm_status() {
     declare -r _expected=0
