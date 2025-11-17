@@ -68,4 +68,12 @@ _confirm_result() (
     _main
 )
 
+_get_executed_path() (
+    declare -r _group="path"
+
+    declare -r executed=$(get_selected_frame "${_group}")
+
+    echo "${executed}"
+)
+
 "$@"
