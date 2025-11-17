@@ -5,6 +5,9 @@
 . packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/environment/environment_create.sh
 
+#*  Args:
+#*      _status (string): Set "true" if you are the none-default user.
+#*
 set_user_identifier() (
     declare -r _status="$1"
     declare -r _user_key=$(constant::user_key)
