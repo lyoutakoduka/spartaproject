@@ -39,7 +39,7 @@ create_preprocess_script() (
 
     _main() {
         declare -r path=$(_get_preprocess)
-        set_file_path "${path}"
+        shell::set_file_path "${path}"
 
         _whole_text_file
     }
