@@ -52,4 +52,11 @@ _get_resource_root() (
     echo "${_root_main}/${_root_sub}/${_resource}"
 )
 
+_get_executed_path() (
+    declare -r _group="path"
+
+    declare -r executed_path=$(get_selected_frame "${_group}")
+    echo "${executed_path}"
+)
+
 "$@"
