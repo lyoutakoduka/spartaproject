@@ -1,7 +1,9 @@
 #!/usr/bin/env bats
 
-. packages/pyspartadevc/src/shspartadevc/script/bats/confirm_status.sh
-. packages/pyspartadevc/tests/shspartadevc/script/string/test_string_quoted.sh
+setup() {
+    . packages/pyspartadevc/src/shspartadevc/script/bats/confirm_status.sh
+    . packages/pyspartadevc/tests/shspartadevc/script/string/test_string_quoted.sh
+}
 
 @test "test_single" {
     run test_single

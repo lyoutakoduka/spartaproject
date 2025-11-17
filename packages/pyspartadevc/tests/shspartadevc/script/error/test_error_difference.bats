@@ -1,13 +1,11 @@
 #!/usr/bin/env bats
 
-. packages/pyspartadevc/tests/shspartadevc/script/error/test_error_difference.sh
-
-_confirm_status() {
-    declare -r _expected=0
-    [[ "${status}" -eq "${_expected}" ]]
+setup() {
+    . packages/pyspartadevc/src/shspartadevc/script/bats/confirm_status.sh
+    . packages/pyspartadevc/tests/shspartadevc/script/error/test_error_difference.sh
 }
 
 @test "test_error_difference" {
-    run test
-    _confirm_status
+    run test_difference
+    shell::confirm_success "${status}"
 }
