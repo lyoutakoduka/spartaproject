@@ -2,13 +2,10 @@
 
 . packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant_message.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant.sh
-. packages/pyspartadevc/tools/shspartadevc/script/shared/get_account.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/show/show_error.sh
 
-#*  Filter the processing by user name.
-#*
 #*  Error:
-#*    _show_and_exit (function): exit 1
+#*      Set exit status 1 if you are root user.
 #*
 filter_by_account() (
     declare -r _expected=$(constant::root)
@@ -20,7 +17,7 @@ filter_by_account() (
     }
 
     _main() {
-        declare -r user_name=$(get_user_name)
+        declare -r user_name=$(whoami)
 
         if [[ "${user_name}" = "${_expected}" ]]; then
             _show_and_exit

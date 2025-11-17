@@ -1,9 +1,12 @@
 #!/bin/bash
 
-. packages/pyspartadevc/tools/shspartadevc/script/launch/account/account_group.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant_environment.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/environment/environment_create.sh
 
+#*  Args:
+#*      $1 (string):
+#*          Command to export environment variable will be added to file.
+#*
 set_group_identifier() (
     declare -r _status="$1"
     declare -r _empty=$(constant::empty)
@@ -14,7 +17,7 @@ set_group_identifier() (
         declare identifier="${_empty}"
 
         if [[ "${_status}" = "${_success}" ]]; then
-            identifier=$(get_group_identifier)
+            identifier=$(id --group)
         fi
 
         echo "${identifier}"
