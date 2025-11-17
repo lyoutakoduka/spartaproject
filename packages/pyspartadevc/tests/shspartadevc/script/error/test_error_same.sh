@@ -2,7 +2,7 @@
 
 . packages/pyspartadevc/src/shspartadevc/script/error/error_same.sh
 
-test() (
+test_same() (
     declare -r _expected="test"
     declare -r _result="error"
 
