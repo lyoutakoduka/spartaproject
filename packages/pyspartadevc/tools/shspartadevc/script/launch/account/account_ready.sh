@@ -16,11 +16,9 @@ ready_identifier() (
     _set_user_information() {
         declare -r status="$1"
 
-        declare -r -i identifier=$(get_user_identifier)
-
         show_identifier "${status}"
         set_user_name "${status}"
-        set_user_identifier "${status}" "${identifier}"
+        set_user_identifier "${status}"
         set_group_identifier "${status}"
     }
 

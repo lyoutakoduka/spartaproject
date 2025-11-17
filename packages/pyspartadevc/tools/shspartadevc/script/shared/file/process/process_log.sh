@@ -4,11 +4,14 @@
 . packages/pyspartadevc/tools/shspartadevc/script/shared/show/show_log.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/string/string_comment.sh
 
+#*  Args:
+#*      _group (string): Set the file path placed on global scope.
+#*
 show_preprocess_log() (
     declare -r _group="$1"
 
     _get_pair_log() {
-        declare -r path=$(get_file_path)
+        declare -r path=$(shell::get_file_path)
         declare -r text=$(create_pair_comment "${_group}" "${path}")
 
         echo "${text}"
