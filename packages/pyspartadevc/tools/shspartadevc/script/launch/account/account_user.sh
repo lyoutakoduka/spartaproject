@@ -2,6 +2,9 @@
 
 . packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant_command.sh
 
+#*  Return:
+#*      (string): User Identifier (UID).
+#*
 get_user_identifier() (
     declare -r _option=$(constant::identifier_user)
 
