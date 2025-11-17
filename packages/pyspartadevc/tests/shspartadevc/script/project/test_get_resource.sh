@@ -59,4 +59,12 @@ _get_executed_path() (
     echo "${executed_path}"
 )
 
+test_base() {
+    declare -r executed_path=$(_get_executed_path)
+    declare -r result=$(get_resource "${executed_path}")
+    declare -r resource_root=$(_get_resource_root)
+
+    shell::error_difference "${result}" "${resource_root}"
+}
+
 "$@"
