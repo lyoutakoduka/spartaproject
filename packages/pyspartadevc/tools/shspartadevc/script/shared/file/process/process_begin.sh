@@ -5,22 +5,27 @@
 . packages/pyspartadevc/tools/shspartadevc/script/shared/file/path/get_file_path.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/file/process/process_log.sh
 
+#*  Remove the script for dev-container, and log it.
+#*
 begin_text_file() (
     declare -r _group=$(constant::group_text_remove)
-    declare -r _remove=$(constant::remove_file)
 
     _remove_preprocess_script() {
         declare -r path=$(get_file_path)
 
-        eval "${_remove} ${path}"
+        rm "${path}"
+    }
+
+    _execute_and_show() {
+        _remove_preprocess_script
+        show_preprocess_log "${_group}"
     }
 
     _main() {
         declare -r path=$(get_file_path)
 
         if [[ -e "${path}" ]]; then
-            _remove_preprocess_script
-            show_preprocess_log "${_group}"
+            _execute_and_show
         fi
     }
 
