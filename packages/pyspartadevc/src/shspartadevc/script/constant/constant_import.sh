@@ -2,6 +2,14 @@
 
 . packages/pyspartadevc/src/shspartadevc/script/project/get_context_path.sh
 
+#*  Args:
+#*      $1 (string): The file path of the calling script.
+#*
+#*      $2 (string): Filter string used to trim the imported json text.
+#*
+#*  Return:
+#*      (string) Filtered or raw json text you imported.
+#*
 import_constant() (
     declare -r _executed="$1"
     declare -r _trim_filter="$2"
