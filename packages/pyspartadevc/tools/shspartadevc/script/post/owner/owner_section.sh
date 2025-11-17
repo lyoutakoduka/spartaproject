@@ -5,7 +5,6 @@
 . packages/pyspartadevc/tools/shspartadevc/script/post/owner/owner_comment.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/constant/get_constant_path.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/file/export/export_line.sh
-. packages/pyspartadevc/tools/shspartadevc/script/shared/get_account.sh
 
 create_command_owner() (
     declare -r _cache=$(constant::volume_cache)
@@ -23,7 +22,7 @@ create_command_owner() (
     }
 
     _change_owners() {
-        declare -r user_name=$(get_user_name)
+        declare -r user_name=$(whoami)
 
         for volume in "$@"; do
             _change_owner "${user_name}" "${volume}"
