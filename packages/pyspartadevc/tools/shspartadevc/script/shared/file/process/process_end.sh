@@ -16,12 +16,16 @@ end_text_file() (
         chmod "${_command} ${path}"
     }
 
+    _execute_and_show() {
+        _add_executable_permission
+        show_preprocess_log "${_group}"
+    }
+
     _main() {
         declare -r path=$(get_file_path)
 
         if [[ -e "${path}" ]]; then
-            _add_executable_permission
-            show_preprocess_log "${_group}"
+            _execute_and_show
         fi
     }
 

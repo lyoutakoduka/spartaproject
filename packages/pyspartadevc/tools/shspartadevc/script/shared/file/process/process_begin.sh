@@ -14,12 +14,16 @@ begin_text_file() (
         rm "${path}"
     }
 
+    _execute_and_show() {
+        _remove_preprocess_script
+        show_preprocess_log "${_group}"
+    }
+
     _main() {
         declare -r path=$(get_file_path)
 
         if [[ -e "${path}" ]]; then
-            _remove_preprocess_script
-            show_preprocess_log "${_group}"
+            _execute_and_show
         fi
     }
 
