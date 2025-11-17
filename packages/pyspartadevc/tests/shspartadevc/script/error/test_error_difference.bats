@@ -6,6 +6,6 @@ setup() {
 }
 
 @test "test_error_difference" {
-    run test
+    run test_difference
     shell::confirm_success "${status}"
 }

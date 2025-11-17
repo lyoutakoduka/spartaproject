@@ -6,6 +6,6 @@ setup() {
 }
 
 @test "test_error_same" {
-    run test
+    run test_same
     shell::confirm_success "${status}"
 }
