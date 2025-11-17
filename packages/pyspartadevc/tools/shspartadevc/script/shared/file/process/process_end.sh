@@ -12,7 +12,7 @@ end_text_file() (
     declare -r _executable_sub=$(constant::executable_sub)
 
     _add_executable_permission() {
-        declare -r path=$(get_file_path)
+        declare -r path=$(shell::get_file_path)
         declare -r _command="${_executable_sub}"
 
         chmod "${_command}" "${path}"
@@ -24,7 +24,7 @@ end_text_file() (
     }
 
     _main() {
-        declare -r path=$(get_file_path)
+        declare -r path=$(shell::get_file_path)
 
         if [[ -e "${path}" ]]; then
             _execute_and_show
