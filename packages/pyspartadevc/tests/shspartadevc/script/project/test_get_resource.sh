@@ -67,4 +67,19 @@ test_base() {
     shell::error_difference "${result}" "${resource_root}"
 }
 
+test_local() {
+    declare -r _local_path="root/head.json"
+
+    _main() {
+        declare -r executed_path=$(_get_executed_path)
+        declare -r result=$(get_resource "${executed_path}" "${_local_path}")
+        declare -r resource_root=$(_get_resource_root)
+        declare -r expected="${resource_root}/${_local_path}"
+
+        shell::error_difference "${result}" "${expected}"
+    }
+
+    _main
+}
+
 "$@"

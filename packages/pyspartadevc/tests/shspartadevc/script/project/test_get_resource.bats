@@ -17,3 +17,8 @@ _confirm_status() {
     run test_base
     shell::confirm_success "${status}"
 }
+
+@test "test_local" {
+    run test_local
+    shell::confirm_success "${status}"
+}
