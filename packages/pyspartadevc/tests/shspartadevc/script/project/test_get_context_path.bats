@@ -1,7 +1,9 @@
 #!/usr/bin/env bats
 
-. packages/pyspartadevc/src/shspartadevc/script/bats/confirm_status.sh
-. packages/pyspartadevc/tests/shspartadevc/script/project/test_get_context_path.sh
+setup() {
+    . packages/pyspartadevc/src/shspartadevc/script/bats/confirm_status.sh
+    . packages/pyspartadevc/tests/shspartadevc/script/project/test_get_context_path.sh
+}
 
 @test "test_base" {
     run test_base
