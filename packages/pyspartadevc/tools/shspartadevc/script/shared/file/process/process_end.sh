@@ -5,8 +5,6 @@
 . packages/pyspartadevc/tools/shspartadevc/script/shared/file/path/get_file_path.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/file/process/process_log.sh
 
-#*  Set executable permission to the script for dev-container, and log it.
-#*
 end_text_file() (
     declare -r _group=$(constant::group_text_create)
     declare -r _executable_sub=$(constant::executable_sub)
