@@ -1,6 +1,5 @@
 #!/bin/bash
 
-. packages/pyspartadevc/tools/shspartadevc/script/launch/account/account_group.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant_environment.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/environment/environment_create.sh
 
@@ -14,7 +13,7 @@ set_group_identifier() (
         declare identifier="${_empty}"
 
         if [[ "${_status}" = "${_success}" ]]; then
-            identifier=$(get_group_identifier)
+            identifier=$(id --group)
         fi
 
         echo "${identifier}"
