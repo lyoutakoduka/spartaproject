@@ -4,10 +4,8 @@
 . packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/show/show_error.sh
 
-#*  Filter the processing by user name.
-#*
 #*  Error:
-#*    _show_and_exit (function): exit 1
+#*      Set exit status 1 if you are root user.
 #*
 filter_by_account() (
     declare -r _expected=$(constant::root)

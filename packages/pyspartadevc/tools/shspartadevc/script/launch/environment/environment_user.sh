@@ -6,7 +6,8 @@
 . packages/pyspartadevc/tools/shspartadevc/script/launch/environment/environment_create.sh
 
 #*  Args:
-#*      _status (string): Set "true" if you are the none-default user.
+#*      $1 (string):
+#*          Command to export environment variable will be added to file.
 #*
 set_user_identifier() (
     declare -r _status="$1"
