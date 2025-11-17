@@ -20,14 +20,6 @@ constant::flag_exists() {
     echo "--remove-existing-container"
 }
 
-constant::identifier_user() {
-    echo "--user"
-}
-
-constant::identifier_group() {
-    echo "--group"
-}
-
 constant::environment() {
     echo "export"
 }
