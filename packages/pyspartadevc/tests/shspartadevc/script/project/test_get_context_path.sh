@@ -89,4 +89,15 @@ test_base() (
     _main
 )
 
+test_forward() (
+    _main() {
+        declare -r executed=$(_get_executed_path)
+        declare -r result=$(get_context_path "${executed}")
+
+        _confirm_result "${result}" || exit 1
+    }
+
+    _main
+)
+
 "$@"

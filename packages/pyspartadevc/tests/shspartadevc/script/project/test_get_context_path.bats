@@ -17,3 +17,8 @@ _confirm_status() {
     run test_base
     shell::confirm_success "${status}"
 }
+
+@test "test_forward" {
+    run test_forward
+    shell::confirm_success "${status}"
+}
