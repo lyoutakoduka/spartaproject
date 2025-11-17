@@ -5,6 +5,11 @@ setup() {
     . packages/pyspartadevc/tests/shspartadevc/script/constant/test_constant_import.sh
 }
 
+@test "test_print" {
+    run test_print
+    shell::confirm_success "${status}"
+}
+
 @test "test_import" {
     run test_import
     shell::confirm_success "${status}"

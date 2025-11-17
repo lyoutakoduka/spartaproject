@@ -11,6 +11,32 @@ _test_get_frame_path() (
     echo "${executed}"
 )
 
+test_print() (
+    declare -r _expected_array=(
+        '{'
+        '  "fruits": {'
+        '    "red": "apple"'
+        '  }'
+        '}'
+    )
+
+    _get_expected() {
+        for item in "${_expected_array[@]}"; do
+            echo "${item}"
+        done
+    }
+
+    _main() {
+        declare -r executed=$(_test_get_frame_path)
+        declare -r result=$(import_constant "${executed}")
+        declare -r _expected=$(_get_expected)
+
+        shell::error_difference "${result}" "${_expected}"
+    }
+
+    _main
+)
+
 test_import() (
     declare -r _trim_filter="\n "
     declare -r _expected='{"fruits":{"red":"apple"}}'
