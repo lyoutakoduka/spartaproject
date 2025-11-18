@@ -5,12 +5,12 @@ setup() {
     . packages/pyspartadevc/tests/shspartadevc/script/error/test_error_difference.sh
 }
 
-@test "test_error_difference" {
+@test "test_difference" {
     run test_difference
     shell::confirm_success "${status}"
 }
 
-@test "test_error_same" {
+@test "test_same" {
     run test_same
     shell::confirm_success "${status}"
 }
