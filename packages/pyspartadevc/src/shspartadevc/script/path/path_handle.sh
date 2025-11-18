@@ -9,3 +9,9 @@ begin_temporary_root() {
 
     echo "${temporary}"
 }
+
+end_temporary_root() {
+    declare -r _temporary="$1"
+
+    rm --recursive --force "${_temporary}"
+}
