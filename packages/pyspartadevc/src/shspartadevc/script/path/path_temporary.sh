@@ -9,6 +9,18 @@ _add_path_identifier() (
     echo "${_path_head}#${_identifier}"
 )
 
+#*  Args:
+#*      $1 (string):
+#*          Path of the sub-directory where temporary file is generated.
+#*
+#*      $2 (string):
+#*          The file name which will be suffixed with a random string.
+#*
+#*      $3 (string): The suffix for the temporary file.
+#*
+#*  Return:
+#*      (string): Path of the temporary file which was created.
+#*
 get_temporary_file() (
     declare -r _group_root="$1"
     declare -r _path_head="$2"
@@ -29,6 +41,16 @@ get_temporary_file() (
     _main
 )
 
+#*  Args:
+#*      $1 (string):
+#*          Path of the sub-directory where temporary directory is generated.
+#*
+#*      $2 (string):
+#*          The directory name which will be suffixed with a random string.
+#*
+#*  Return:
+#*      (string): Path of the temporary directory created.
+#*
 get_temporary_directory() (
     declare -r _group_root="$1"
     declare -r _path_head="$2"
