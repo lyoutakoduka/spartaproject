@@ -9,3 +9,8 @@ setup() {
     run test_difference
     shell::confirm_success "${status}"
 }
+
+@test "test_error_same" {
+    run test_same
+    shell::confirm_success "${status}"
+}

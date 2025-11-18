@@ -8,4 +8,11 @@ test_difference() (
     shell::error_difference "${_expected}" "${_expected}"
 )
 
+test_same() (
+    declare -r _expected="test"
+    declare -r _result="error"
+
+    shell::error_same "${_result}" "${_expected}"
+)
+
 "$@"
