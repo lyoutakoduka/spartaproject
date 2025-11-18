@@ -28,4 +28,20 @@ test_file() (
     _main
 )
 
+test_directory() (
+    declare -r _group_root="test_temporary/directory"
+    declare -r _path_head="path_test"
+
+    _main() {
+        declare -r temporary=$(
+            get_temporary_directory "${_group_root}" "${_path_head}"
+        )
+
+        shell::error_no_exists "${temporary}"
+        _cleanup_temporary_root "${temporary}"
+    }
+
+    _main
+)
+
 "$@"
