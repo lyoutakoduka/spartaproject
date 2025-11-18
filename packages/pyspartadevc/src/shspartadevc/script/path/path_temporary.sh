@@ -28,3 +28,22 @@ get_temporary_file() (
 
     _main
 )
+
+get_temporary_directory() (
+    declare -r _group_root="$1"
+    declare -r _path_head="$2"
+
+    _make_temporary() {
+        declare -r temporary="$1"
+
+        declare -r name=$(_add_path_identifier "${_path_head}")
+        mktemp --directory --tmpdir="${temporary}" "${name}"
+    }
+
+    _main() {
+        declare -r temporary=$(begin_temporary_root "${_group_root}")
+        _make_temporary "${temporary}"
+    }
+
+    _main
+)
