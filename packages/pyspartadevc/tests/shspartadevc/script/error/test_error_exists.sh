@@ -8,4 +8,10 @@ test_no_exists() (
     shell::error_no_exists "${_path}"
 )
 
+test_exists() (
+    declare -r _path="root/file"
+
+    shell::error_exists "${_path}"
+)
+
 "$@"

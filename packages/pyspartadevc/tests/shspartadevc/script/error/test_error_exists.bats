@@ -9,3 +9,8 @@ setup() {
     run test_no_exists
     shell::confirm_success "${status}"
 }
+
+@test "test_exists" {
+    run test_exists
+    shell::confirm_success "${status}"
+}
