@@ -1,5 +1,11 @@
 #!/bin/bash
 
+#*  Args:
+#*      $1 (string): The path you want to confirm existing.
+#*
+#*  Error:
+#*      exit 1, if the path does not exists.
+#*
 shell::error_no_exists() {
     declare -r _path="$1"
 
@@ -8,6 +14,12 @@ shell::error_no_exists() {
     fi
 }
 
+#*  Args:
+#*      $1 (string): The path you want to confirm existing.
+#*
+#*  Error:
+#*      exit 1, if the path is exists.
+#*
 shell::error_exists() {
     declare -r _path="$1"
 
