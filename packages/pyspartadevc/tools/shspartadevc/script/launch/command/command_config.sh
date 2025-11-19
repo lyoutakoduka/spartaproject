@@ -3,7 +3,6 @@
 . packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant_path.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/constant/get_constant_path.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/constant/get_constant.sh
-. packages/pyspartadevc/tools/shspartadevc/script/shared/path/path_package.sh
 
 get_command_config() (
     declare -r _flag_config="--config"
