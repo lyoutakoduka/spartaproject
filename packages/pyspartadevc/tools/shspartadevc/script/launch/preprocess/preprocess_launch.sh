@@ -31,10 +31,10 @@ preprocess_launch() (
     }
 
     _handle_arguments() {
-        declare -r arguments=$(select_arguments "$@")
+        declare -r flags=$(select_arguments "$@")
 
         declare help invalid
-        IFS="${_separator}" read -r help invalid <<<"${arguments}"
+        IFS="${_separator}" read -r help invalid <<<"${flags}"
 
         _filter_by_arguments "${help}" "${invalid}"
     }
