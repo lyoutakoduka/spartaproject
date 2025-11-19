@@ -12,7 +12,7 @@
 
 lifecycle_create() (
     declare -r _header=$(constant::header_post)
-    declare -r _script_post=$(constant::script_post)
+    declare -r _script_post="devcontainer_post.sh"
 
     _body_text_file() {
         create_command_owner
