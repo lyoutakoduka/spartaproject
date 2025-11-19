@@ -5,7 +5,7 @@
 . packages/pyspartadevc/tools/shspartadevc/script/post/constant/get_constant_comment.sh
 . packages/pyspartadevc/tools/shspartadevc/script/post/constant/get_constant_path.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/file/file_initialize.sh
-. packages/pyspartadevc/tools/shspartadevc/script/shared/file/path/set_file_path.sh
+. packages/pyspartadevc/tools/shspartadevc/script/shared/file/path/get_file_path.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/file/process/process_begin.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/file/process/process_end.sh
 
