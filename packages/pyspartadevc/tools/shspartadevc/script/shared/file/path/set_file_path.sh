@@ -1,8 +1,5 @@
 #!/bin/bash
 
-#*  Args:
-#*      _path (string): Set the file path placed on global scope.
-#*
 shell::set_file_path() {
     declare -r path="$1"
 
