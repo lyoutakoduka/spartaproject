@@ -1,7 +1,7 @@
 #!/bin/bash
 
 constant::volume_cache() {
-    echo "cache"
+    echo ".temp/cache"
 }
 
 constant::volume_python() {
