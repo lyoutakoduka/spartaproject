@@ -6,9 +6,5 @@
 add_owner_comment() (
     declare -r _comment=$(constant::comment_owner)
 
-    _main() {
-        export_line "${_comment}"
-    }
-
-    _main
+    export_line "${_comment}"
 )
