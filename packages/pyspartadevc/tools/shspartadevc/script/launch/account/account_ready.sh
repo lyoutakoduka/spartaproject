@@ -12,13 +12,11 @@ ready_identifier() (
     declare -r -i _expected=$(constant::expected_identifier)
 
     _set_user_information() {
-        declare -r status="true"
-
-        show_identifier "${status}"
-        environment_comment "${status}"
-        set_user_name "${status}"
-        set_user_identifier "${status}"
-        set_group_identifier "${status}"
+        show_identifier
+        environment_comment
+        set_user_name
+        set_user_identifier
+        set_group_identifier
     }
 
     _main() {
