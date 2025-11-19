@@ -4,14 +4,6 @@
 . packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/show/show_error.sh
 
-#*  Filter the processing by invalid arguments.
-#*
-#*  Args:
-#*      _invalid (string): Set "true" if invalid arguments are found.
-#*
-#*  Error:
-#*      _show_and_exit (function): exit 1
-#*
 filter_by_invalid() (
     declare -r _invalid="$1"
     declare -r _success="true"
