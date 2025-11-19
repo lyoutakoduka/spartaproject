@@ -42,7 +42,9 @@ preprocess_launch() (
     }
 
     _create_preprocess_scripts() {
-        for item in "$@"; do
+        declare -r _groups=("$@")
+
+        for item in "${_groups[@]}"; do
             create_preprocess_script "${item}"
         done
     }
