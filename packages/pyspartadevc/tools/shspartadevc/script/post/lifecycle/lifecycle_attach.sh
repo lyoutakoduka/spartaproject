@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. packages/pyspartadevc/tools/shspartadevc/script/post/constant/get_constant_message.sh
+. packages/pyspartadevc/tools/shspartadevc/script/post/constant/get_constant.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/show/show_message.sh
 
 lifecycle_attach() (
