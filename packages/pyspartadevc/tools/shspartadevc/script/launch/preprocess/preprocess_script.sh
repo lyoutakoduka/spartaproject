@@ -17,15 +17,11 @@ create_preprocess_script() (
     declare -r _script_attach="devcontainer_attach.sh"
 
     _get_preprocess() {
-        declare path="${_empty}"
-
         if [[ "${_group}" = "${_expected}" ]]; then
-            path=$(get_preprocess_script "${_script_create}")
+            get_preprocess_script "${_script_create}"
         else
-            path=$(get_preprocess_script "${_script_attach}")
+            get_preprocess_script "${_script_attach}"
         fi
-
-        echo "${path}"
     }
 
     _whole_text_file() {
