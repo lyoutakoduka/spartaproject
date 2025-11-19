@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. packages/pyspartadevc/tools/shspartadevc/script/launch/account/account_filter.sh.sh
+. packages/pyspartadevc/tools/shspartadevc/script/launch/account/account_filter.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/arguments/arguments_help.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/arguments/arguments_invalid.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/arguments/arguments_select.sh
