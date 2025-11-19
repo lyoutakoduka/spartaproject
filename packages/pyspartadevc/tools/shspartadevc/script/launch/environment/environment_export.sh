@@ -8,5 +8,5 @@ export_environment() (
     declare -r _value="$2"
 
     declare -r _text="${_command} ${_key}=${_value}"
-    export_line "${_text}"
+    export_lines "${_text}"
 )

@@ -16,7 +16,7 @@ _filter_exists_command() (
 
     if [[ "${_group}" = "${_expected}" ]]; then
         declare -r command_exists=$(get_command_exists)
-        export_line "${command_exists}"
+        export_lines "${command_exists}"
     fi
 )
 
@@ -26,7 +26,7 @@ body_text_file() (
 
     _add_shared_head() {
         declare -r command_devcontainer=$(get_command_devcontainer)
-        export_line "${command_devcontainer}"
+        export_lines "${command_devcontainer}"
     }
 
     _add_shared_foot() {
@@ -44,7 +44,7 @@ body_text_file() (
 
     _main() {
         ready_identifier
-        export_line "${_message}"
+        export_lines "${_message}"
         _add_command_base
     }
 

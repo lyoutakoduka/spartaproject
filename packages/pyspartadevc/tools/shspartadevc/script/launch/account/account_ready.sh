@@ -44,7 +44,7 @@ ready_identifier() (
 
     _set_user_information() {
         show_log "${_identifier}"
-        export_line "${_comment}"
+        export_lines "${_comment}"
 
         _add_environment_variable
 
