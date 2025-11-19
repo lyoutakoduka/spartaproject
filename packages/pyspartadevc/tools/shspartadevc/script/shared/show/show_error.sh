@@ -5,7 +5,7 @@
 
 show_error() (
     declare -r _message="$1"
-    declare -r _group=$(constant::group_error)
+    declare -r _group="error"
 
     _main() {
         show_message "${_group}" "${_message}"

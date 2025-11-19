@@ -7,7 +7,7 @@
 show_message() (
     declare -r _group="$1"
     declare -r _message="$2"
-    declare -r _package=$(constant::package_main)
+    declare -r _package="pyspartadevc"
 
     _get_message_inside() {
         declare -r text=$(create_pair "${_package}" "${_group}")
