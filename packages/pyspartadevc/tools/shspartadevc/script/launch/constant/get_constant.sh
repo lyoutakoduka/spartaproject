@@ -36,6 +36,6 @@ constant::group_attach() {
     echo "attach"
 }
 
-constant::root() {
+constant::expected_name() {
     echo "root"
 }
