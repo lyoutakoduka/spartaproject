@@ -7,8 +7,6 @@
 . packages/pyspartadevc/tools/shspartadevc/script/shared/path/path_package.sh
 
 get_command_config() (
-    declare -r _config_main=".devcontainer"
-    declare -r _config_sub="devcontainer.json"
     declare -r _flag_config="--config"
     declare -r _config_path=$(constant::config)
     declare -r _indent=$(constant::indent)
