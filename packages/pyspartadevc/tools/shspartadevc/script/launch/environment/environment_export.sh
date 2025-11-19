@@ -9,24 +9,8 @@ export_environment() (
     declare -r _key="$1"
     declare -r _value="$2"
 
-    _get_export_text() {
-        declare -r command_export="$1"
-        declare -r export_pair="$2"
+    declare -r export_pair=$(create_assign "${_key}" "${_value}")
+    declare -r text="${_command} ${export_pair}"
 
-        echo "${command_export} ${export_pair}"
-    }
-
-    _get_command_text() {
-        declare -r export_pair=$(create_assign "${_key}" "${_value}")
-        declare -r text=$(_get_export_text "${_command}" "${export_pair}")
-
-        echo "${text}"
-    }
-
-    _main() {
-        declare -r text=$(_get_command_text)
-        export_line "${text}"
-    }
-
-    _main
+    export_line "${text}"
 )
