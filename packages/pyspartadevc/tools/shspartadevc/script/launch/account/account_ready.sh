@@ -1,7 +1,5 @@
 #!/bin/bash
 
-. packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant_comment.sh
-. packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant_environment.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/environment/environment_create.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/constant/get_constant.sh
