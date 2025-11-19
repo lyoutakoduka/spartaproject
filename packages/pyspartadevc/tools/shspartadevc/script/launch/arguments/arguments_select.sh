@@ -3,7 +3,6 @@
 select_arguments() (
     declare -r _success="true"
     declare -r _fail="false"
-    declare -r _separator=","
 
     _shift_arguments() {
         shift $((OPTIND - 1))
