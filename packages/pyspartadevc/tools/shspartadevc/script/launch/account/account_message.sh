@@ -6,10 +6,10 @@
 
 show_identifier() (
     declare -r _status="$1"
-    declare -r _success="true"
+    declare -r _expected="true"
     declare -r _identifier=$(constant::message_identifier)
 
-    if [[ "${_status}" = "${_success}" ]]; then
+    if [[ "${_status}" = "${_expected}" ]]; then
         show_log "${_identifier}"
     fi
 )
