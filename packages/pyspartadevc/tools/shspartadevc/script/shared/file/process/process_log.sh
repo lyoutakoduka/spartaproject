@@ -10,17 +10,7 @@
 show_preprocess_log() (
     declare -r _group="$1"
 
-    _get_pair_log() {
-        declare -r path=$(shell::get_file_path)
-        declare -r text=$(create_pair_comment "${_group}" "${path}")
+    declare -r _path=$(shell::get_file_path)
 
-        echo "${text}"
-    }
-
-    _main() {
-        declare -r pair_log=$(_get_pair_log)
-        show_log "${pair_log}"
-    }
-
-    _main
+    show_log "${_group}: ${_path}"
 )
