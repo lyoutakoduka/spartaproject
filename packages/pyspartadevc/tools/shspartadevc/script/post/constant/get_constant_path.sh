@@ -11,3 +11,7 @@ constant::volume_python() {
 constant::volume_javascript() {
     echo "node_modules"
 }
+
+constant::temporary_post() {
+    echo "packages/pyspartadevc/tools/shspartadevc/.temp/devcontainer_post.sh"
+}
