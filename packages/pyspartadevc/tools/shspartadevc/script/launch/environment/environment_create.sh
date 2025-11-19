@@ -1,8 +1,6 @@
 #!/bin/bash
 
 . packages/pyspartadevc/src/shspartadevc/script/string/string_quoted.sh
-. packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant.sh
-. packages/pyspartadevc/tools/shspartadevc/script/launch/environment/environment_status.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/file/export/export_line.sh
 
 set_environment() (
