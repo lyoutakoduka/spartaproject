@@ -11,7 +11,6 @@
 
 create_preprocess_script() (
     declare -r _group="$1"
-    declare -r _empty=""
     declare -r _expected="create"
     declare -r _script_create=$(constant::temporary_create)
     declare -r _script_attach=$(constant::temporary_attach)
