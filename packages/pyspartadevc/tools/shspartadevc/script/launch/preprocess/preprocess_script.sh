@@ -9,9 +9,6 @@
 . packages/pyspartadevc/tools/shspartadevc/script/shared/file/process/process_end.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/path/path_temporary.sh
 
-#*  Args:
-#*      _group (string): Select "create" or "attach".
-#*
 create_preprocess_script() (
     declare -r _group="$1"
     declare -r _empty=""
