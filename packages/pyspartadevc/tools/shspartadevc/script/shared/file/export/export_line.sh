@@ -2,12 +2,6 @@
 
 . packages/pyspartadevc/tools/shspartadevc/script/shared/file/path/get_file_path.sh
 
-#*  Args:
-#*      _text (string): String you want to add text file.
-#*
-#*  Redirect:
-#*      _add_text (string): Add string to text file.
-#*
 export_line() (
     declare -r _text="$1"
 
