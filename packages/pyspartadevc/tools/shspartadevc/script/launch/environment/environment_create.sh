@@ -7,9 +7,9 @@
 
 set_environment() (
     declare -r _quote="\""
+    declare -r _success="true"
     declare -r _key="$1"
     declare -r _value="$2"
-    declare -r _success="true"
 
     _create_environment() {
         declare -r quote_added=$(string_quoted "${_value}" "${_quote}")

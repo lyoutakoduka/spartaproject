@@ -10,10 +10,10 @@
 #*          Command to export environment variable will be added to file.
 #*
 set_user_identifier() (
-    declare -r _status="$1"
-    declare -r _user_key=$(constant::user_key)
     declare -r _empty=""
     declare -r _success="true"
+    declare -r _status="$1"
+    declare -r _user_key=$(constant::user_key)
 
     _get_user_value() {
         declare number="${_empty}"

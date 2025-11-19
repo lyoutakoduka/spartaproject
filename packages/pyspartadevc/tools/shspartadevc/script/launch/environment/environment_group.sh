@@ -8,9 +8,9 @@
 #*          Command to export environment variable will be added to file.
 #*
 set_group_identifier() (
-    declare -r _status="$1"
     declare -r _empty=""
     declare -r _success="true"
+    declare -r _status="$1"
     declare -r _identifier_key=$(constant::group_key)
 
     _get_identifier() {
