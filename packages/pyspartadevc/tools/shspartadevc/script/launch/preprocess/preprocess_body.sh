@@ -5,7 +5,6 @@
 . packages/pyspartadevc/tools/shspartadevc/script/launch/command/command_devcontainer.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/command/command_exists.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/command/command_workspace.sh
-. packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant_comment.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/file/export/export_line.sh
 
