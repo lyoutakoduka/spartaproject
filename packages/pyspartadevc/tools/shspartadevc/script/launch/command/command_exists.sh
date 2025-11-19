@@ -8,10 +8,5 @@ get_command_exists() (
     declare -r _indent=$(constant::indent)
     declare -r _enter=$(constant::enter)
 
-    _main() {
-        echo "${_indent}${_flag_exists}${_enter}"
-    }
-
-    declare -r result=$(_main)
-    echo "${result}"
+    echo "${_indent}${_flag_exists}${_enter}"
 )

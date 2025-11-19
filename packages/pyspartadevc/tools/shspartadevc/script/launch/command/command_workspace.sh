@@ -12,15 +12,6 @@ get_command_workspace() (
     declare -r _indent=$(constant::indent)
     declare -r _enter=$(constant::enter)
 
-    _get_workspace_section() {
-        echo "${_flag_workspace} ${_current}"
-    }
-
-    _main() {
-        declare -r workspace=$(_get_workspace_section)
-        echo "${_indent}${workspace}${_enter}"
-    }
-
-    declare -r result=$(_main)
-    echo "${result}"
+    declare -r workspace="${_flag_workspace} ${_current}"
+    echo "${_indent}${workspace}${_enter}"
 )

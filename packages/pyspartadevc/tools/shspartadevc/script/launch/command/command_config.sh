@@ -11,24 +11,8 @@ get_command_config() (
     declare -r _config_path=$(constant::config)
     declare -r _indent=$(constant::indent)
 
-    _get_config_path() {
-        declare -r _package_root=$(get_package_root)
+    declare -r _package_root=$(get_package_root)
+    declare -r config_path="${_package_root}/${_config_path}"
 
-        echo "${_package_root}/${_config_path}"
-    }
-
-    _get_config() {
-        declare -r config_path=$(_get_config_path)
-
-        echo "${_flag_config} ${config_path}"
-    }
-
-    _main() {
-        declare -r config=$(_get_config)
-
-        echo "${_indent}${config}"
-    }
-
-    declare -r result=$(_main)
-    echo "${result}"
+    echo "${_indent}${_flag_config} ${config_path}"
 )
