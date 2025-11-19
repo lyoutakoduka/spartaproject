@@ -6,9 +6,5 @@
 add_comment_sync() (
     declare -r _comment=$(constant::comment_sync)
 
-    _main() {
-        export_line "${_comment}"
-    }
-
-    _main
+    export_line "${_comment}"
 )
