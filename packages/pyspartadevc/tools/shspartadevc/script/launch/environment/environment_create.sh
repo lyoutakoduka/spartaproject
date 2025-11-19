@@ -7,7 +7,7 @@
 
 set_environment() (
     declare -r _quote="\""
-    declare -r _success="true"
+    declare -r _expected="true"
     declare -r _key="$1"
     declare -r _value="$2"
 
@@ -19,7 +19,7 @@ set_environment() (
     _main() {
         declare -r status=$(get_status_environment "${_key}" "${_value}")
 
-        if [[ "${status}" = "${_success}" ]]; then
+        if [[ "${status}" = "${_expected}" ]]; then
             _create_environment
         fi
     }

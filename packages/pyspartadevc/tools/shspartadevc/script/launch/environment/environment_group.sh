@@ -9,12 +9,12 @@
 #*
 set_group_identifier() (
     declare -r _empty=""
-    declare -r _success="true"
+    declare -r _expected="true"
     declare -r _status="$1"
     declare -r _identifier_key=$(constant::group_key)
 
     _get_identifier() {
-        if [[ "${_status}" != "${_success}" ]]; then
+        if [[ "${_status}" != "${_expected}" ]]; then
             echo "${_empty}"
             return
         fi

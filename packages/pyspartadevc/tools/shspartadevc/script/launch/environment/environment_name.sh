@@ -10,12 +10,12 @@
 #*
 set_user_name() (
     declare -r _empty=""
-    declare -r _success="true"
+    declare -r _expected="true"
     declare -r _status="$1"
     declare -r _name_key=$(constant::name_key)
 
     _get_user_name() {
-        if [[ "${_status}" != "${_success}" ]]; then
+        if [[ "${_status}" != "${_expected}" ]]; then
             echo "${_empty}"
             return
         fi
