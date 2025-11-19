@@ -4,10 +4,6 @@
 . packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/environment/environment_create.sh
 
-#*  Args:
-#*      $1 (string):
-#*          Command to export environment variable will be added to file.
-#*
 set_user_name() (
     declare -r _empty=""
     declare -r _expected="true"
