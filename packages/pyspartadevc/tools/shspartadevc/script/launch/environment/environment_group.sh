@@ -14,13 +14,12 @@ set_group_identifier() (
     declare -r _identifier_key=$(constant::group_key)
 
     _get_identifier() {
-        declare identifier="${_empty}"
-
-        if [[ "${_status}" = "${_success}" ]]; then
-            identifier=$(id --group)
+        if [[ "${_status}" != "${_success}" ]]; then
+            echo "${_empty}"
+            return
         fi
 
-        echo "${identifier}"
+        id --group
     }
 
     _main() {

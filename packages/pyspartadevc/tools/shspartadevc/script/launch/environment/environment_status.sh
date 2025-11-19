@@ -8,16 +8,10 @@ get_status_environment() (
     declare -r _key="$1"
     declare -r _value="$2"
 
-    _main() {
-        declare result="${_empty}"
+    if [[ -n "${_key}" ]] && [[ -n "${_value}" ]]; then
+        echo "${_success}"
+        return
+    fi
 
-        if [[ -n "${_key}" ]] && [[ -n "${_value}" ]]; then
-            result="${_success}"
-        fi
-
-        echo "${result}"
-    }
-
-    declare -r result=$(_main)
-    echo "${result}"
+    echo "${_empty}"
 )

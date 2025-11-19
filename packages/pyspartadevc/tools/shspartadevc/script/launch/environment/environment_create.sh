@@ -16,13 +16,8 @@ set_environment() (
         export_environment "${_key}" "${quote_added}"
     }
 
-    _get_status() {
-        declare -r status=$(get_status_environment "${_key}" "${_value}")
-        echo "${status}"
-    }
-
     _main() {
-        declare -r status=$(_get_status)
+        declare -r status=$(get_status_environment "${_key}" "${_value}")
 
         if [[ "${status}" = "${_success}" ]]; then
             _create_environment

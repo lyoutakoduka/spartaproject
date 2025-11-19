@@ -15,13 +15,12 @@ set_user_name() (
     declare -r _name_key=$(constant::name_key)
 
     _get_user_name() {
-        declare user_name="${_empty}"
-
-        if [[ "${_status}" = "${_success}" ]]; then
-            user_name=$(whoami)
+        if [[ "${_status}" != "${_success}" ]]; then
+            echo "${_empty}"
+            return
         fi
 
-        echo "${user_name}"
+        whoami
     }
 
     _main() {

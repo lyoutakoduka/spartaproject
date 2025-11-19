@@ -16,13 +16,11 @@ set_user_identifier() (
     declare -r _user_key=$(constant::user_key)
 
     _get_user_value() {
-        declare number="${_empty}"
-
-        if [[ "${_status}" = "${_success}" ]]; then
-            number=$(id --user)
+        if [[ "${_status}" != "${_success}" ]]; then
+            echo "${_empty}"
+            return
         fi
-
-        echo "${number}"
+        id --user
     }
 
     _main() {
