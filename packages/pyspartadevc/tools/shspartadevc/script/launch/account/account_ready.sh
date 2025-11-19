@@ -3,6 +3,7 @@
 . packages/pyspartadevc/tools/shspartadevc/script/launch/account/account_message.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/environment/environment_group.sh
+. packages/pyspartadevc/tools/shspartadevc/script/launch/environment/environment_header.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/environment/environment_name.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/environment/environment_user.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/constant/get_constant.sh
@@ -16,6 +17,7 @@ ready_identifier() (
         declare -r status="$1"
 
         show_identifier "${status}"
+        environment_comment "${status}"
         set_user_name "${status}"
         set_user_identifier "${status}"
         set_group_identifier "${status}"
