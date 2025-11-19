@@ -6,8 +6,8 @@
 get_command_change() (
     declare -r _user_name="$1"
     declare -r _volume="$2"
-    declare -r _change_main=$(constant::change_main)
-    declare -r _change_sub=$(constant::change_sub)
+    declare -r _change_main="sudo"
+    declare -r _change_sub="chown"
 
     _get_change_pair() {
         declare -r text=$(create_pair "${_user_name}" "${_user_name}")

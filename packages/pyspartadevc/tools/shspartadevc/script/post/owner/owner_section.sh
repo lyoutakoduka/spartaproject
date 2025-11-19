@@ -7,10 +7,10 @@
 . packages/pyspartadevc/tools/shspartadevc/script/shared/file/export/export_line.sh
 
 create_command_owner() (
-    declare -r _cache=$(constant::volume_cache)
-    declare -r _temporary=$(constant::temporary_name)
-    declare -r _python=$(constant::volume_python)
-    declare -r _javascript=$(constant::volume_javascript)
+    declare -r _cache="cache"
+    declare -r _temporary=".temp"
+    declare -r _python=".venv"
+    declare -r _javascript="node_modules"
 
     _change_owner() {
         declare -r user_name="$1"
