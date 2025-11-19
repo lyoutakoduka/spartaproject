@@ -12,8 +12,8 @@
 set_user_identifier() (
     declare -r _status="$1"
     declare -r _user_key=$(constant::user_key)
-    declare -r _empty=$(constant::empty)
-    declare -r _success=$(constant::status_success)
+    declare -r _empty=""
+    declare -r _success="true"
 
     _get_user_value() {
         declare number="${_empty}"

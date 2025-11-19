@@ -10,8 +10,8 @@
 #*
 set_user_name() (
     declare -r _status="$1"
-    declare -r _empty=$(constant::empty)
-    declare -r _success=$(constant::status_success)
+    declare -r _empty=""
+    declare -r _success="true"
     declare -r _name_key=$(constant::name_key)
 
     _get_user_name() {

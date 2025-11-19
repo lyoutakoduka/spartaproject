@@ -5,8 +5,8 @@
 get_status_environment() (
     declare -r _key="$1"
     declare -r _value="$2"
-    declare -r _empty=$(constant::empty)
-    declare -r _success=$(constant::status_success)
+    declare -r _empty=""
+    declare -r _success="true"
 
     _main() {
         declare result="${_empty}"
