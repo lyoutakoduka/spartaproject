@@ -8,10 +8,10 @@ constant::header_attach() {
     echo "# * Execute this script that attach to the dev-container."
 }
 
-constant::add_environment() {
+constant::header_environment() {
     echo "# Set environment variables."
 }
 
-constant::command_up() {
+constant::header_devcontainer() {
     echo "# Handle the dev-container."
 }

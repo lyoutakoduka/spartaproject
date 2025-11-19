@@ -6,7 +6,7 @@
 environment_comment() (
     declare -r _expected="true"
     declare -r _status="$1"
-    declare -r _comment=$(constant::add_environment)
+    declare -r _comment=$(constant::header_environment)
 
     if [[ "${_status}" = "${_expected}" ]]; then
         export_line "${_comment}"
