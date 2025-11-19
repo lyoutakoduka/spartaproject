@@ -6,7 +6,7 @@
 
 show_identifier() (
     declare -r _status="$1"
-    declare -r _success=$(constant::status_success)
+    declare -r _success="true"
     declare -r _identifier=$(constant::message_identifier)
 
     _show_message_identifier() {

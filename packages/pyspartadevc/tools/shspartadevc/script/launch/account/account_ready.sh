@@ -8,8 +8,8 @@
 . packages/pyspartadevc/tools/shspartadevc/script/shared/constant/get_constant.sh
 
 ready_identifier() (
-    declare -r _success=$(constant::status_success)
-    declare -r _fail=$(constant::status_fail)
+    declare -r _success="true"
+    declare -r _fail="false"
     declare -r -i _expected=$(constant::identifier_expected)
 
     _set_user_information() {
