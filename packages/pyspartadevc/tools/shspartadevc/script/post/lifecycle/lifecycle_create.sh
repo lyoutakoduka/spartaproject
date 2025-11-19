@@ -1,5 +1,6 @@
 #!/bin/bash
 
+. packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant_path.sh
 . packages/pyspartadevc/tools/shspartadevc/script/post/constant/get_constant_comment.sh
 . packages/pyspartadevc/tools/shspartadevc/script/post/owner/owner_section.sh
 . packages/pyspartadevc/tools/shspartadevc/script/post/sync/sync_package.sh
@@ -12,7 +13,7 @@
 
 lifecycle_create() (
     declare -r _header=$(constant::header_post)
-    declare -r _script_post="devcontainer_post.sh"
+    declare -r _script_post=$(constant::temporary_post)
 
     _body_text_file() {
         create_command_owner
@@ -28,13 +29,8 @@ lifecycle_create() (
         end_text_file
     }
 
-    _set_added_path() {
-        declare -r path=$(get_preprocess_script "${_script_post}")
-        shell::set_file_path "${path}"
-    }
-
     _main() {
-        _set_added_path
+        shell::set_file_path "${_script_post}"
         _whole_text_file
     }
 

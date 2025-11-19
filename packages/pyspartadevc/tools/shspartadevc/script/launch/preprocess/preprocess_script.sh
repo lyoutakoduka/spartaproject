@@ -1,5 +1,6 @@
 #!/bin/bash
 
+. packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant_path.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/preprocess/preprocess_body.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/preprocess/preprocess_head.sh
@@ -13,14 +14,14 @@ create_preprocess_script() (
     declare -r _group="$1"
     declare -r _empty=""
     declare -r _expected="create"
-    declare -r _script_create="devcontainer_create.sh"
-    declare -r _script_attach="devcontainer_attach.sh"
+    declare -r _script_create=$(constant::temporary_create)
+    declare -r _script_attach=$(constant::temporary_attach)
 
     _get_preprocess() {
         if [[ "${_group}" = "${_expected}" ]]; then
-            get_preprocess_script "${_script_create}"
+            echo "${_script_create}"
         else
-            get_preprocess_script "${_script_attach}"
+            echo "${_script_attach}"
         fi
     }
 
