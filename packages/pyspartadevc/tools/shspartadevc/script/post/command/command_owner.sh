@@ -18,11 +18,11 @@ command_change_owner() (
         declare -r _change_pair="${user_name}:${user_name}"
         declare -r command="${_command_change} ${_change_pair} ${volume}"
 
-        export_line "${command}"
+        export_lines "${command}"
     }
 
     _main() {
-        export_line "${_comment}"
+        export_lines "${_comment}"
 
         _change_owner "${_cache}"
         _change_owner "${_python}"
