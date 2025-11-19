@@ -1,6 +1,5 @@
 #!/bin/bash
 
-. packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant_command.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/string/string_assign.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/file/export/export_line.sh
 
