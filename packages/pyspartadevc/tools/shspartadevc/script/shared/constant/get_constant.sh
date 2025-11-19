@@ -7,3 +7,11 @@ constant::package_main() {
 constant::indent() {
     echo "    "
 }
+
+constant::group_text_remove() {
+    echo "Remove"
+}
+
+constant::group_text_create() {
+    echo "Create"
+}
