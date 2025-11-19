@@ -1,14 +1,15 @@
 #!/bin/bash
 
 . packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant_command.sh
+. packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant_path.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/constant/get_constant_path.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/constant/get_constant.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/path/path_package.sh
 
 get_command_config() (
-    declare -r _config_main=$(constant::config_main)
-    declare -r _config_sub=$(constant::config_sub)
-    declare -r _flag_config=$(constant::flag_config)
+    declare -r _config_main=".devcontainer"
+    declare -r _config_sub="devcontainer.json"
+    declare -r _flag_config="--config"
     declare -r _indent=$(constant::indent)
 
     _get_config_path() {

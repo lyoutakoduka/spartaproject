@@ -1,10 +1,11 @@
 #!/bin/bash
 
 . packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant_command.sh
+. packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant.sh
 
 get_command_devcontainer() (
-    declare -r _command_main=$(constant::devcontainer_main)
-    declare -r _command_sub=$(constant::devcontainer_sub)
+    declare -r _command_main="devcontainer"
+    declare -r _command_sub="up"
     declare -r _enter=$(constant::enter)
 
     _get_command_base() {
