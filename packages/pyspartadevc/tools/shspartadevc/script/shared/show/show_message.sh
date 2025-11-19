@@ -10,12 +10,14 @@ show_message() (
     echo "[${_package}:${_group}] ${_message}"
 )
 
-show_error() (
+show_error() {
     declare -r _message="$1"
     declare -r _group="error"
 
     show_message "${_group}" "${_message}"
-)
+
+    exit 1
+}
 
 show_log() (
     declare -r _message="$1"
