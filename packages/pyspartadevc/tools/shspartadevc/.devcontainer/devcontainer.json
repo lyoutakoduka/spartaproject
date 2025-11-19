@@ -6,8 +6,8 @@
   "updateRemoteUserUID": false,
   "containerUser": "vscode",
   "workspaceFolder": "/home/vscode/workspace",
-  "postCreateCommand": "./packages/pyspartadevc/tools/shspartadevc/script/post/lifecycle/lifecycle_create.sh",
-  "postAttachCommand": "./packages/pyspartadevc/tools/shspartadevc/script/post/lifecycle/lifecycle_attach.sh",
+  "postCreateCommand": "./packages/pyspartadevc/tools/shspartadevc/script/setup.sh \"create\"",
+  "postAttachCommand": "./packages/pyspartadevc/tools/shspartadevc/script/setup.sh \"attach\"",
   "containerEnv": {
     "LANG": "${localEnv:LANG}",
     "TZ": "Asia/Tokyo",

@@ -1,26 +1,19 @@
 #!/bin/bash
 
+. packages/pyspartadevc/tools/shspartadevc/script/launch/account/account_filter.sh.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/arguments/arguments_help.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/arguments/arguments_invalid.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/arguments/arguments_select.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant_help.sh
-. packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant.sh
-. packages/pyspartadevc/tools/shspartadevc/script/launch/handle_account.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/preprocess/preprocess_script.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/constant/get_constant_message.sh
 
-#*  Create the script to create or attach a dev-container.
-#*
-#*  Error:
-#*    _filter_by_arguments (function): exit 1
-#*
-#*    _main (function): exit 1
-#*
-launch_preprocess() (
+preprocess_launch() (
+    declare -r _create="create"
+    declare -r _attach="attach"
+    declare -r _separator=","
+    declare -r _arguments=("$@")
     declare -r _message=$(constant::help_launch)
-    declare -r _create=$(constant::group_create)
-    declare -r _attach=$(constant::group_attach)
-    declare -r _separator=$(constant::separator)
 
     _filter_by_arguments() {
         declare -r help="$1"
@@ -31,25 +24,27 @@ launch_preprocess() (
     }
 
     _handle_arguments() {
-        declare -r arguments=$(select_arguments "$@")
+        declare -r flags=$(select_arguments "${_arguments[@]}")
 
         declare help invalid
-        IFS="${_separator}" read -r help invalid <<<"${arguments}"
+        IFS="${_separator}" read -r help invalid <<<"${flags}"
 
         _filter_by_arguments "${help}" "${invalid}"
     }
 
     _create_preprocess_scripts() {
-        for item in "$@"; do
-            create_preprocess_script "${item}"
+        declare -r _groups=("$@")
+
+        for group in "${_groups[@]}"; do
+            create_preprocess_script "${group}"
         done
     }
 
     _main() {
-        _handle_arguments "$@"
+        _handle_arguments
         filter_by_account || exit 1
         _create_preprocess_scripts "${_create}" "${_attach}"
     }
 
-    _main "$@"
+    _main
 )

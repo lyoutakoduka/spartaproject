@@ -10,7 +10,7 @@
 . packages/pyspartadevc/tools/shspartadevc/script/shared/file/process/process_end.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/path/path_temporary.sh
 
-_lifecycle() (
+lifecycle_create() (
     declare -r _header=$(constant::header_post)
     declare -r _script_post=$(constant::script_post)
 
@@ -40,5 +40,3 @@ _lifecycle() (
 
     _main
 )
-
-_lifecycle

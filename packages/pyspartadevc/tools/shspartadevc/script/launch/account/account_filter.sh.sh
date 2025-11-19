@@ -4,9 +4,6 @@
 . packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/show/show_error.sh
 
-#*  Error:
-#*      Set exit status 1 if you are root user.
-#*
 filter_by_account() (
     declare -r _expected=$(constant::root)
     declare -r _message=$(constant::message_user)
