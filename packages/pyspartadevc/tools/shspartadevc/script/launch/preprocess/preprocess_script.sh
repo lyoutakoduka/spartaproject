@@ -4,7 +4,6 @@
 . packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/preprocess/preprocess_body.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/preprocess/preprocess_head.sh
-. packages/pyspartadevc/tools/shspartadevc/script/shared/constant/get_constant_path.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/file/path/set_file_path.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/file/process/process_begin.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/file/process/process_end.sh
