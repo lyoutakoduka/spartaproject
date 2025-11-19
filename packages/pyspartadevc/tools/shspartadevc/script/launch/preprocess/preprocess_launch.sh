@@ -5,7 +5,6 @@
 . packages/pyspartadevc/tools/shspartadevc/script/launch/arguments/arguments_invalid.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/arguments/arguments_select.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant_help.sh
-. packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/preprocess/preprocess_script.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/constant/get_constant_message.sh
 
