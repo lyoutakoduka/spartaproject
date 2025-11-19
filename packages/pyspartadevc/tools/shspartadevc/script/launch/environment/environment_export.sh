@@ -7,6 +7,5 @@ export_environment() (
     declare -r _key="$1"
     declare -r _value="$2"
 
-    declare -r _text="${_command} ${_key}=${_value}"
-    export_lines "${_text}"
+    export_lines "${_command} ${_key}=${_value}"
 )
