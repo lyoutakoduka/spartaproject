@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. packages/pyspartadevc/tools/shspartadevc/script/post/constant/get_constant_comment.sh
+. packages/pyspartadevc/tools/shspartadevc/script/post/constant/get_constant.sh
 
 command_package_manager() (
     declare -r _sync_python="uv sync"

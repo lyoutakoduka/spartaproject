@@ -1,7 +1,6 @@
 #!/bin/bash
 
-. packages/pyspartadevc/tools/shspartadevc/script/post/constant/get_constant_comment.sh
-. packages/pyspartadevc/tools/shspartadevc/script/post/constant/get_constant_path.sh
+. packages/pyspartadevc/tools/shspartadevc/script/post/constant/get_constant.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/file/export/export_line.sh
 
 command_change_owner() (
