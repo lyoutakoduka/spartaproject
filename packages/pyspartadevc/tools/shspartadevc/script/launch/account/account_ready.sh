@@ -9,12 +9,10 @@
 . packages/pyspartadevc/tools/shspartadevc/script/shared/constant/get_constant.sh
 
 ready_identifier() (
-    declare -r _success="true"
-    declare -r _fail="false"
     declare -r -i _expected=$(constant::expected_identifier)
 
     _set_user_information() {
-        declare -r status="$1"
+        declare -r status="true"
 
         show_identifier "${status}"
         environment_comment "${status}"
@@ -23,19 +21,12 @@ ready_identifier() (
         set_group_identifier "${status}"
     }
 
-    _get_status_identifier() {
+    _main() {
         declare -r identifier=$(id --user)
 
         if [[ "${identifier}" -ne "${_expected}" ]]; then
-            echo "${_success}"
-        else
-            echo "${_fail}"
+            _set_user_information
         fi
-    }
-
-    _main() {
-        declare -r status=$(_get_status_identifier)
-        _set_user_information "${status}"
     }
 
     _main
