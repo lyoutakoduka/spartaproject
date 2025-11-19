@@ -8,7 +8,6 @@
 . packages/pyspartadevc/tools/shspartadevc/script/shared/file/path/set_file_path.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/file/process/process_begin.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/file/process/process_end.sh
-. packages/pyspartadevc/tools/shspartadevc/script/shared/path/path_temporary.sh
 
 create_preprocess_script() (
     declare -r _group="$1"
