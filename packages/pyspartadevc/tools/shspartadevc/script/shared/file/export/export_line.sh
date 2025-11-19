@@ -11,3 +11,9 @@ export_line() (
         echo "${_text}" >>"${path}"
     fi
 )
+
+export_lines() (
+    for text in "$@"; do
+        export_line "${text}"
+    done
+)
