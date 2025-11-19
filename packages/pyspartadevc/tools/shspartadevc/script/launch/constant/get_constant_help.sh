@@ -10,6 +10,10 @@ constant::help_header() {
 
 constant::help_help() {
     mapfile str <<EOF
+Usage: command [<options>...]
+
+    Create the script that create a dev-container.
+
     Options:
         -h  Show help
             Type: boolean

@@ -28,9 +28,6 @@ filter_by_help() (
         declare -r message_section=$(_get_message_section)
 
         _show_arguments \
-            "${_message_header}" \
-            "${message_section}" \
-            "${_empty}" \
             "${_message_help}"
     }
 
