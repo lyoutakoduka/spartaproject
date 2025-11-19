@@ -8,7 +8,7 @@
 
 get_command_workspace() (
     declare -r _flag_workspace="--workspace-folder"
-    declare -r _current="."
+    declare -r _current=$(constant::current)
     declare -r _indent=$(constant::indent)
     declare -r _enter=$(constant::enter)
 
