@@ -17,12 +17,11 @@
 #*    _main (function): exit 1
 #*
 preprocess_launch() (
-    declare -r _arguments=("$@")
-
-    declare -r _message=$(constant::help_launch)
     declare -r _create="create"
     declare -r _attach="attach"
     declare -r _separator=","
+    declare -r _arguments=("$@")
+    declare -r _message=$(constant::help_launch)
 
     _filter_by_arguments() {
         declare -r help="$1"
