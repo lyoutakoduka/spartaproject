@@ -8,7 +8,6 @@
 . packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant_comment.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/file/export/export_line.sh
-. packages/pyspartadevc/tools/shspartadevc/script/shared/file/export/export_lines.sh
 
 _filter_exists_command() (
     declare -r _expected="create"
