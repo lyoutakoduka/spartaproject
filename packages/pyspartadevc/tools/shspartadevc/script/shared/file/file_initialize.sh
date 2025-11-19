@@ -7,9 +7,5 @@ initialize_text_file() (
     declare -r _header="$1"
     declare -r _shebang="#!/bin/bash"
 
-    _main() {
-        export_line "${_shebang}" "${_header}"
-    }
-
-    _main
+    export_line "${_shebang}" "${_header}"
 )
