@@ -7,7 +7,5 @@ command_package_manager() (
     declare -r _sync_javascript="yarn"
     declare -r _comment=$(constant::comment_sync)
 
-    export_lines "${_comment}"
-    export_lines "${_sync_python}"
-    export_lines "${_sync_javascript}"
+    export_lines "${_comment}" "${_sync_python}" "${_sync_javascript}"
 )
