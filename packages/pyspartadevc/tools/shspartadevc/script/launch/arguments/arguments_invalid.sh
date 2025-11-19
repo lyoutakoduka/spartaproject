@@ -9,7 +9,6 @@ filter_by_invalid() (
     declare -r _message=$(constant::message_invalid)
 
     if [[ "${_invalid}" = "${_expected}" ]]; then
-        show_error "${_message}"
-        exit 1
+        shell::show_warning "${_message}"
     fi
 )

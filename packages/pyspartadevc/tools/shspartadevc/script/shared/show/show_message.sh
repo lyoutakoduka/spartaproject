@@ -10,7 +10,7 @@ show_message() (
     echo "[${_package}:${_group}] ${_message}"
 )
 
-show_error() {
+shell::show_warning() {
     declare -r _message="$1"
     declare -r _group="error"
 

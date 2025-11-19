@@ -10,7 +10,6 @@ filter_by_account() (
     declare -r user_name=$(whoami)
 
     if [[ "${user_name}" = "${_expected}" ]]; then
-        show_error "${_message}"
-        return 1
+        shell::show_warning "${_message}"
     fi
 )
