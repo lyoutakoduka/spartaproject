@@ -13,14 +13,13 @@ preprocess_launch() (
     declare -r _attach="attach"
     declare -r _separator=","
     declare -r _arguments=("$@")
-    declare -r _message=$(constant::help_launch)
 
     _filter_by_arguments() {
         declare -r help="$1"
         declare -r invalid="$2"
 
         filter_by_invalid "${invalid}" || exit 1
-        filter_by_help "${help}" "${_message}" || exit 1
+        filter_by_help "${help}" || exit 1
     }
 
     _handle_arguments() {

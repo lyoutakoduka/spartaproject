@@ -8,7 +8,7 @@ filter_by_help() (
     declare -r _empty=""
     declare -r _success="true"
     declare -r _help="$1"
-    declare -r _message="$2"
+    declare -r _message=$(constant::help_launch)
     declare -r _indent=$(constant::indent)
     declare -r _message_header=$(constant::help_header)
     declare -r _message_help=$(constant::help_help)
