@@ -8,14 +8,10 @@ filter_by_account() (
     declare -r _expected=$(constant::root)
     declare -r _message=$(constant::message_user)
 
-    _main() {
-        declare -r user_name=$(whoami)
+    declare -r user_name=$(whoami)
 
-        if [[ "${user_name}" = "${_expected}" ]]; then
-            show_error "${_message}"
-            exit 1
-        fi
-    }
-
-    _main
+    if [[ "${user_name}" = "${_expected}" ]]; then
+        show_error "${_message}"
+        return 1
+    fi
 )
