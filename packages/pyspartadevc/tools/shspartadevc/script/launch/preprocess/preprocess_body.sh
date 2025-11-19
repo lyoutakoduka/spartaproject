@@ -14,18 +14,10 @@ _filter_exists_command() (
     declare -r _expected="create"
     declare -r _group="$1"
 
-    _add_section_exists() {
+    if [[ "${_group}" = "${_expected}" ]]; then
         declare -r command_exists=$(get_command_exists)
         export_line "${command_exists}"
-    }
-
-    _main() {
-        if [[ "${_group}" = "${_expected}" ]]; then
-            _add_section_exists
-        fi
-    }
-
-    _main
+    fi
 )
 
 body_text_file() (
