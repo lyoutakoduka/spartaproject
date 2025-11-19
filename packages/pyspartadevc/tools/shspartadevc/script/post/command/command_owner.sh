@@ -3,7 +3,6 @@
 . packages/pyspartadevc/tools/shspartadevc/script/post/constant/get_constant_comment.sh
 . packages/pyspartadevc/tools/shspartadevc/script/post/constant/get_constant_path.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/file/export/export_line.sh
-. packages/pyspartadevc/tools/shspartadevc/script/shared/string/string_pair.sh
 
 command_change_owner() (
     declare -r _command_change="sudo chown"
@@ -16,7 +15,7 @@ command_change_owner() (
         declare -r volume="$1"
 
         declare -r user_name=$(whoami)
-        declare -r _change_pair=$(create_pair "${user_name}" "${user_name}")
+        declare -r _change_pair="${user_name}:${user_name}"
         declare -r command="${_command_change} ${_change_pair} ${volume}"
 
         export_line "${command}"
