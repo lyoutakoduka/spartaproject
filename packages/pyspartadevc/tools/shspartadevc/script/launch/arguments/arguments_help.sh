@@ -44,14 +44,10 @@ filter_by_help() (
             "${_message_help}"
     }
 
-    _show_and_exit() {
-        _get_arguments
-        exit 1
-    }
-
     _main() {
         if [[ "${_help}" = "${_success}" ]]; then
-            _show_and_exit
+            _get_arguments
+            exit 1
         fi
     }
 

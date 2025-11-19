@@ -17,16 +17,8 @@ filter_by_invalid() (
     declare -r _success="true"
     declare -r _message=$(constant::message_invalid)
 
-    _show_and_exit() {
+    if [[ "${_invalid}" = "${_success}" ]]; then
         show_error "${_message}"
         exit 1
-    }
-
-    _main() {
-        if [[ "${_invalid}" = "${_success}" ]]; then
-            _show_and_exit
-        fi
-    }
-
-    _main
+    fi
 )
