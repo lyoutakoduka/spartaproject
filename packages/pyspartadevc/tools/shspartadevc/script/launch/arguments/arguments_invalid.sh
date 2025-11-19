@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant_help.sh
+. packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/show/show_message.sh
 
 filter_by_invalid() (
