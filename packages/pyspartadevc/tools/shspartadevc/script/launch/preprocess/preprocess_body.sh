@@ -10,10 +10,27 @@
 . packages/pyspartadevc/tools/shspartadevc/script/shared/file/export/export_line.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/file/export/export_lines.sh
 
+_filter_exists_command() (
+    declare -r _expected="create"
+    declare -r _group="$1"
+
+    _add_section_exists() {
+        declare -r command_exists=$(get_command_exists)
+        export_line "${command_exists}"
+    }
+
+    _main() {
+        if [[ "${_group}" = "${_expected}" ]]; then
+            _add_section_exists
+        fi
+    }
+
+    _main
+)
+
 body_text_file() (
     declare -r _group="$1"
     declare -r _message=$(constant::header_devcontainer)
-    declare -r _expected="create"
 
     _add_shared_head() {
         declare -r command_devcontainer=$(get_command_devcontainer)
@@ -27,21 +44,9 @@ body_text_file() (
         export_lines "${command_workspace}" "${command_config}"
     }
 
-    _add_section_exists() {
-        declare -r command_exists=$(get_command_exists)
-        export_line "${command_exists}"
-
-    }
-
-    _filter_section_exists() {
-        if [[ "${_group}" = "${_expected}" ]]; then
-            _add_section_exists
-        fi
-    }
-
     _add_command_base() {
         _add_shared_head
-        _filter_section_exists
+        _filter_exists_command "${_group}"
         _add_shared_foot
     }
 
