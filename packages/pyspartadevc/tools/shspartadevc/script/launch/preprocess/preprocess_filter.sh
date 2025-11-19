@@ -2,7 +2,16 @@
 
 . packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/show/show_message.sh
-. packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant.sh
+
+filter_by_invalid() (
+    declare -r _expected="true"
+    declare -r _invalid="$1"
+    declare -r _message=$(constant::message_invalid)
+
+    if [[ "${_invalid}" = "${_expected}" ]]; then
+        shell::show_warning "${_message}"
+    fi
+)
 
 filter_by_help() (
     declare -r _expected="true"
