@@ -9,3 +9,17 @@ show_message() (
 
     echo "[${_package}:${_group}] ${_message}"
 )
+
+show_error() (
+    declare -r _message="$1"
+    declare -r _group="error"
+
+    show_message "${_group}" "${_message}"
+)
+
+show_log() (
+    declare -r _message="$1"
+    declare -r _group="log"
+
+    show_message "${_group}" "${_message}"
+)
