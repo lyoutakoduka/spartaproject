@@ -2,10 +2,10 @@
 
 . packages/pyspartadevc/tools/shspartadevc/script/launch/account/account_message.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant.sh
-. packages/pyspartadevc/tools/shspartadevc/script/launch/environment/environment_group.sh
+. packages/pyspartadevc/tools/shspartadevc/script/launch/environment/variable/variable_group.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/environment/environment_header.sh
-. packages/pyspartadevc/tools/shspartadevc/script/launch/environment/environment_name.sh
-. packages/pyspartadevc/tools/shspartadevc/script/launch/environment/environment_user.sh
+. packages/pyspartadevc/tools/shspartadevc/script/launch/environment/variable/variable_name.sh
+. packages/pyspartadevc/tools/shspartadevc/script/launch/environment/variable/variable_user.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/constant/get_constant.sh
 
 ready_identifier() (
