@@ -16,7 +16,7 @@
 #*
 #*    _main (function): exit 1
 #*
-launch_preprocess() (
+preprocess_launch() (
     declare -r _message=$(constant::help_launch)
     declare -r _create=$(constant::group_create)
     declare -r _attach=$(constant::group_attach)
