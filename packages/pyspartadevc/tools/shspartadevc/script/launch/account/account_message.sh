@@ -5,11 +5,7 @@
 . packages/pyspartadevc/tools/shspartadevc/script/shared/show/show_log.sh
 
 show_identifier() (
-    declare -r _status="$1"
-    declare -r _expected="true"
     declare -r _identifier=$(constant::message_identifier)
 
-    if [[ "${_status}" = "${_expected}" ]]; then
-        show_log "${_identifier}"
-    fi
+    show_log "${_identifier}"
 )
