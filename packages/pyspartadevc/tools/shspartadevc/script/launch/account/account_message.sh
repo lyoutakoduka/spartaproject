@@ -9,15 +9,7 @@ show_identifier() (
     declare -r _success="true"
     declare -r _identifier=$(constant::message_identifier)
 
-    _show_message_identifier() {
+    if [[ "${_status}" = "${_success}" ]]; then
         show_log "${_identifier}"
-    }
-
-    _main() {
-        if [[ "${_status}" = "${_success}" ]]; then
-            _show_message_identifier
-        fi
-    }
-
-    _main
+    fi
 )
