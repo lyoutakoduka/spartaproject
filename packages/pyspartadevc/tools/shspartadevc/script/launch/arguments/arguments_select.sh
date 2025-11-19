@@ -3,9 +3,9 @@
 . packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant.sh
 
 select_arguments() (
-    declare -r _success=$(constant::status_success)
-    declare -r _fail=$(constant::status_fail)
-    declare -r _separator=$(constant::separator)
+    declare -r _success="true"
+    declare -r _fail="false"
+    declare -r _separator=","
 
     _shift_arguments() {
         shift $((OPTIND - 1))

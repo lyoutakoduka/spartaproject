@@ -14,7 +14,7 @@
 #*
 filter_by_invalid() (
     declare -r _invalid="$1"
-    declare -r _success=$(constant::status_success)
+    declare -r _success="true"
     declare -r _message=$(constant::message_invalid)
 
     _show_and_exit() {
