@@ -1,27 +1,32 @@
 #!/bin/bash
 
+. packages/pyspartadevc/tools/shspartadevc/script/post/constant/get_constant_command.sh
 . packages/pyspartadevc/tools/shspartadevc/script/post/constant/get_constant_path.sh
 . packages/pyspartadevc/tools/shspartadevc/script/post/owner/owner_change.sh
 . packages/pyspartadevc/tools/shspartadevc/script/post/owner/owner_comment.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/constant/get_constant_path.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/file/export/export_line.sh
+. packages/pyspartadevc/tools/shspartadevc/script/shared/string/string_pair.sh
 
 create_command_owner() (
+    declare -r _command_change="sudo chown"
     declare -r _cache=$(constant::volume_cache)
     declare -r _python=$(constant::volume_python)
     declare -r _javascript=$(constant::volume_javascript)
+    declare -r _comment=$(constant::comment_owner)
 
     _change_owner() {
         declare -r volume="$1"
 
         declare -r user_name=$(whoami)
-        declare -r command=$(get_command_change "${user_name}" "${volume}")
+        declare -r _change_pair=$(create_pair "${user_name}" "${user_name}")
+        declare -r command="${_command_change} ${_change_pair} ${volume}"
 
         export_line "${command}"
     }
 
     _main() {
-        add_owner_comment
+        export_line "${_comment}"
 
         _change_owner "${_cache}"
         _change_owner "${_python}"
