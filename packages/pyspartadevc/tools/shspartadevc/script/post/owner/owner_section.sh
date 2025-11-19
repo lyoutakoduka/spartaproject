@@ -12,34 +12,20 @@ create_command_owner() (
     declare -r _javascript=$(constant::volume_javascript)
 
     _change_owner() {
-        declare -r user_name="$1"
-        declare -r volume="$2"
+        declare -r volume="$1"
 
+        declare -r user_name=$(whoami)
         declare -r command=$(get_command_change "${user_name}" "${volume}")
 
         export_line "${command}"
     }
 
-    _change_owners() {
-        declare -r user_name=$(whoami)
-
-        for volume in "$@"; do
-            _change_owner "${user_name}" "${volume}"
-        done
-    }
-
-    _get_volume_cache() {
-        echo "${_cache}"
-    }
-
-    _add_owner_change() {
-        declare -r cache=$(_get_volume_cache)
-        _change_owners "${cache}" "${_python}" "${_javascript}"
-    }
-
     _main() {
         add_owner_comment
-        _add_owner_change
+
+        _change_owner "${_cache}"
+        _change_owner "${_python}"
+        _change_owner "${_javascript}"
     }
 
     _main
