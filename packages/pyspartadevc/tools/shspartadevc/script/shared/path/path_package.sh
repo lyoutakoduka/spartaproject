@@ -4,10 +4,10 @@
 . packages/pyspartadevc/tools/shspartadevc/script/shared/constant/get_constant.sh
 
 get_package_root() (
-    declare -r _package_base=$(constant::package_base)
-    declare -r _package_main=$(constant::package_main)
-    declare -r _package_script=$(constant::package_script)
-    declare -r _package_sub=$(constant::package_sub)
+    declare -r _package_base="packages"
+    declare -r _package_main="pyspartadevc"
+    declare -r _package_script="tools"
+    declare -r _package_sub="shspartadevc"
 
     _get_root_main() {
         echo "${_package_base}/${_package_main}"

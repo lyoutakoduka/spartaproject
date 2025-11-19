@@ -5,7 +5,7 @@
 
 get_preprocess_script() (
     declare -r _script_name="$1"
-    declare -r _temporary_root=$(constant::temporary_name)
+    declare -r _temporary_root=".temp"
 
     _main() {
         declare -r package_root=$(get_package_root)
