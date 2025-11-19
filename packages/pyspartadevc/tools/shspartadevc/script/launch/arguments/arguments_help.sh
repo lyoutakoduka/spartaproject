@@ -13,30 +13,8 @@ filter_by_help() (
     declare -r _message_header=$(constant::help_header)
     declare -r _message_help=$(constant::help_help)
 
-    _show_arguments() {
-        declare text
-        for text in "$@"; do
-            echo "${text}"
-        done
-    }
-
-    _get_message_section() {
-        echo "${_indent}${_message}"
-    }
-
-    _get_arguments() {
-        declare -r message_section=$(_get_message_section)
-
-        _show_arguments \
-            "${_message_help}"
-    }
-
-    _main() {
-        if [[ "${_help}" = "${_success}" ]]; then
-            _get_arguments
-            exit 1
-        fi
-    }
-
-    _main
+    if [[ "${_help}" = "${_success}" ]]; then
+        echo "${_message_help}"
+        exit 1
+    fi
 )

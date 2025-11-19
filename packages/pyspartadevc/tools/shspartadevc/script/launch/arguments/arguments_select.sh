@@ -37,10 +37,8 @@ select_arguments() (
 
         _shift_arguments
 
-        declare -r merged=$(_merge_arguments "${help}" "${invalid}")
-        echo "${merged}"
+        _merge_arguments "${help}" "${invalid}"
     }
 
-    declare -r result=$(_main "$@")
-    echo "${result}"
+    _main "$@"
 )
