@@ -1,6 +1,6 @@
 #!/bin/bash
 
-constant::identifier_expected() {
+constant::expected_identifier() {
     echo 1000
 }
 

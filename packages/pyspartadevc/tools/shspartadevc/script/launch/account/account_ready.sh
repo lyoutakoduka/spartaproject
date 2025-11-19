@@ -11,7 +11,7 @@
 ready_identifier() (
     declare -r _success="true"
     declare -r _fail="false"
-    declare -r -i _expected=$(constant::identifier_expected)
+    declare -r -i _expected=$(constant::expected_identifier)
 
     _set_user_information() {
         declare -r status="$1"
