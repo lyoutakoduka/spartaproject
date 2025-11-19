@@ -1,5 +1,9 @@
 #!/bin/bash
 
+constant::config() {
+    echo ".devcontainer/devcontainer.json"
+}
+
 constant::config_main() {
     echo ".devcontainer"
 }

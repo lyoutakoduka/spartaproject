@@ -10,12 +10,13 @@ get_command_config() (
     declare -r _config_main=".devcontainer"
     declare -r _config_sub="devcontainer.json"
     declare -r _flag_config="--config"
+    declare -r _config_path=$(constant::config)
     declare -r _indent=$(constant::indent)
 
     _get_config_path() {
         declare -r _package_root=$(get_package_root)
 
-        echo "${_package_root}/${_config_main}/${_config_sub}"
+        echo "${_package_root}/${_config_path}"
     }
 
     _get_config() {
