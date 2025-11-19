@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. packages/pyspartadevc/tools/shspartadevc/script/shared/constant/get_constant_message.sh
+. packages/pyspartadevc/tools/shspartadevc/script/shared/constant/get_constant.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/file/path/get_file_path.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/file/process/process_log.sh
 
