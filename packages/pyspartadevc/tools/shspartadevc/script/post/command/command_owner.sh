@@ -8,7 +8,7 @@
 . packages/pyspartadevc/tools/shspartadevc/script/shared/file/export/export_line.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/string/string_pair.sh
 
-create_command_owner() (
+command_change_owner() (
     declare -r _command_change="sudo chown"
     declare -r _cache=$(constant::volume_cache)
     declare -r _python=$(constant::volume_python)

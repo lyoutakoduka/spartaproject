@@ -14,7 +14,7 @@ lifecycle_create() (
     declare -r _script_post=$(constant::temporary_post)
 
     _body_text_file() {
-        create_command_owner
+        command_change_owner
         command_package_manager
     }
 
