@@ -1,8 +1,6 @@
 #!/bin/bash
 
 . packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant_help.sh
-. packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant.sh
-. packages/pyspartadevc/tools/shspartadevc/script/shared/constant/get_constant.sh
 
 filter_by_help() (
     declare -r _success="true"

@@ -1,7 +1,5 @@
 #!/bin/bash
 
-. packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant.sh
-
 select_arguments() (
     declare -r _success="true"
     declare -r _fail="false"
