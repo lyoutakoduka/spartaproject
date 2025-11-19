@@ -6,7 +6,7 @@
 
 head_text_file() (
     declare -r _group="$1"
-    declare -r _expected=$(constant::group_create)
+    declare -r _expected="create"
     declare -r _header_create=$(constant::header_create)
     declare -r _header_attach=$(constant::header_attach)
 

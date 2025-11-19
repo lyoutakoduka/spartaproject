@@ -14,10 +14,10 @@
 #*
 create_preprocess_script() (
     declare -r _group="$1"
-    declare -r _empty=$(constant::empty)
-    declare -r _expected=$(constant::group_create)
-    declare -r _script_create=$(constant::script_create)
-    declare -r _script_attach=$(constant::script_attach)
+    declare -r _empty=""
+    declare -r _expected="create"
+    declare -r _script_create="devcontainer_create.sh"
+    declare -r _script_attach="devcontainer_attach.sh"
 
     _get_preprocess() {
         declare path="${_empty}"

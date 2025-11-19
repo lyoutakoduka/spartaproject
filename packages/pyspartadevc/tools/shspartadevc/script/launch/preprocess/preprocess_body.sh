@@ -13,7 +13,7 @@
 body_text_file() (
     declare -r _group="$1"
     declare -r _message=$(constant::command_up)
-    declare -r _expected=$(constant::group_create)
+    declare -r _expected="create"
 
     _add_shared_head() {
         declare -r command_devcontainer=$(get_command_devcontainer)
