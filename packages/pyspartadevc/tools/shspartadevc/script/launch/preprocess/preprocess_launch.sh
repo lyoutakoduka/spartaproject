@@ -8,9 +8,7 @@
 . packages/pyspartadevc/tools/shspartadevc/script/launch/preprocess/preprocess_script.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/constant/get_constant_message.sh
 
-preprocess_launch() (
-    declare -r _create="create"
-    declare -r _attach="attach"
+_handling_arguments() (
     declare -r _separator=","
     declare -r _arguments=("$@")
 
@@ -22,7 +20,7 @@ preprocess_launch() (
         filter_by_help "${help}" || exit 1
     }
 
-    _handle_arguments() {
+    _main() {
         declare -r flags=$(select_arguments "${_arguments[@]}")
 
         declare help invalid
@@ -30,6 +28,14 @@ preprocess_launch() (
 
         _filter_by_arguments "${help}" "${invalid}"
     }
+
+    _main
+)
+
+preprocess_launch() (
+    declare -r _create="create"
+    declare -r _attach="attach"
+    declare -r _arguments=("$@")
 
     _create_preprocess_scripts() {
         declare -r _groups=("$@")
@@ -40,7 +46,7 @@ preprocess_launch() (
     }
 
     _main() {
-        _handle_arguments
+        _handling_arguments "${_arguments[@]}" || exit 1
         filter_by_account || exit 1
         _create_preprocess_scripts "${_create}" "${_attach}"
     }
