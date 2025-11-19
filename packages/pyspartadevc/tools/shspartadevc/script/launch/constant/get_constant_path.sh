@@ -1,7 +1,7 @@
 #!/bin/bash
 
 constant::config() {
-    echo ".devcontainer/devcontainer.json"
+    echo "packages/pyspartadevc/tools/shspartadevc/.devcontainer/devcontainer.json"
 }
 
 constant::current() {
