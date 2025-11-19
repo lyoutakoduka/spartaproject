@@ -37,18 +37,12 @@ preprocess_launch() (
     declare -r _attach="attach"
     declare -r _arguments=("$@")
 
-    _create_preprocess_scripts() {
-        declare -r _groups=("$@")
-
-        for group in "${_groups[@]}"; do
-            create_preprocess_script "${group}"
-        done
-    }
-
     _main() {
         _handling_arguments "${_arguments[@]}" || exit 1
         filter_by_account || exit 1
-        _create_preprocess_scripts "${_create}" "${_attach}"
+
+        create_preprocess_script "${_create}"
+        create_preprocess_script "${_attach}"
     }
 
     _main
