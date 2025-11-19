@@ -5,9 +5,9 @@
 . packages/pyspartadevc/tools/shspartadevc/script/shared/file/export/export_line.sh
 
 create_command_sync() (
-    declare -r _python_main=$(constant::sync_python_main)
-    declare -r _python_sub=$(constant::sync_python_sub)
-    declare -r _javascript=$(constant::sync_javascript)
+    declare -r _python_main="uv"
+    declare -r _python_sub="sync"
+    declare -r _javascript="yarn"
 
     _get_sync_python() {
         echo "${_python_main} ${_python_sub}"
