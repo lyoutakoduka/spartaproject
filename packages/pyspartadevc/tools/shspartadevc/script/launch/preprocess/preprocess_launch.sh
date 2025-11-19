@@ -17,6 +17,8 @@
 #*    _main (function): exit 1
 #*
 preprocess_launch() (
+    declare -r _arguments=("$@")
+
     declare -r _message=$(constant::help_launch)
     declare -r _create=$(constant::group_create)
     declare -r _attach=$(constant::group_attach)
@@ -31,7 +33,7 @@ preprocess_launch() (
     }
 
     _handle_arguments() {
-        declare -r flags=$(select_arguments "$@")
+        declare -r flags=$(select_arguments "${_arguments[@]}")
 
         declare help invalid
         IFS="${_separator}" read -r help invalid <<<"${flags}"
@@ -46,10 +48,10 @@ preprocess_launch() (
     }
 
     _main() {
-        _handle_arguments "$@"
+        _handle_arguments
         filter_by_account || exit 1
         _create_preprocess_scripts "${_create}" "${_attach}"
     }
 
-    _main "$@"
+    _main
 )
