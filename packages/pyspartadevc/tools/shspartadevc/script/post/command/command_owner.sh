@@ -1,10 +1,7 @@
 #!/bin/bash
 
-. packages/pyspartadevc/tools/shspartadevc/script/post/constant/get_constant_command.sh
+. packages/pyspartadevc/tools/shspartadevc/script/post/constant/get_constant_comment.sh
 . packages/pyspartadevc/tools/shspartadevc/script/post/constant/get_constant_path.sh
-. packages/pyspartadevc/tools/shspartadevc/script/post/owner/owner_change.sh
-. packages/pyspartadevc/tools/shspartadevc/script/post/owner/owner_comment.sh
-. packages/pyspartadevc/tools/shspartadevc/script/shared/constant/get_constant_path.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/file/export/export_line.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/string/string_pair.sh
 
