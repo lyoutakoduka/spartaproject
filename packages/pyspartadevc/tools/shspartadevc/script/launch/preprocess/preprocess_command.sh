@@ -27,3 +27,11 @@ get_command_workspace() (
     declare -r workspace="${_flag_workspace} ${_current}"
     echo "${_indent}${workspace}${_enter}"
 )
+
+get_command_config() (
+    declare -r _flag_config="--config"
+    declare -r _config_path=$(constant::config)
+    declare -r _indent=$(constant::indent)
+
+    echo "${_indent}${_flag_config} ${_config_path}"
+)
