@@ -9,50 +9,28 @@ _confirm_result() (
     declare -r _root_main="packages/pyspartadevc/tests/shspartadevc"
     declare -r _root_sub="script/project/resource/context.json"
 
-    _get_context_path() {
-
-        echo "${_root_main}/${_root_sub}"
-    }
-
-    _main() {
-        declare -r context_path=$(_get_context_path)
-
-        shell::error_difference "${result}" "${context_path}"
-    }
-
-    _main
+    shell::error_difference "${result}" "${_root_main}/${_root_sub}"
 )
 
 _get_executed_path() (
     declare -r _group="path"
-
-    declare -r executed=$(get_selected_frame "${_group}")
-
-    echo "${executed}"
+    get_selected_frame "${_group}"
 )
 
 test_base() (
     declare -r _local_path="context.json"
 
-    _main() {
-        declare -r executed=$(_get_executed_path)
-        declare -r result=$(get_context_path "${executed}" "${_local_path}")
+    declare -r _executed=$(_get_executed_path)
+    declare -r _result=$(get_context_path "${_executed}" "${_local_path}")
 
-        _confirm_result "${result}" || exit 1
-    }
-
-    _main
+    _confirm_result "${_result}" || exit 1
 )
 
 test_forward() (
-    _main() {
-        declare -r executed=$(_get_executed_path)
-        declare -r result=$(get_context_path "${executed}")
+    declare -r _executed=$(_get_executed_path)
+    declare -r _result=$(get_context_path "${_executed}")
 
-        _confirm_result "${result}" || exit 1
-    }
-
-    _main
+    _confirm_result "${_result}" || exit 1
 )
 
 "$@"
