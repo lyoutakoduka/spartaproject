@@ -1,8 +1,7 @@
 #!/bin/bash
 
 constant::expected_identifier() {
-    # echo 1000
-    echo 9999
+    echo 1000
 }
 
 constant::enter() {
