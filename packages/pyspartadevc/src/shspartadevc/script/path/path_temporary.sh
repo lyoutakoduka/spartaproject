@@ -26,19 +26,10 @@ get_temporary_file() (
     declare -r _path_head="$2"
     declare -r _suffix="$3"
 
-    _make_temporary() {
-        declare -r temporary="$1"
+    declare -r _temporary=$(begin_temporary_root "${_group_root}")
+    declare -r _name=$(_add_path_identifier "${_path_head}")
 
-        declare -r name=$(_add_path_identifier "${_path_head}")
-        mktemp --tmpdir="${temporary}" --suffix=".${_suffix}" "${name}"
-    }
-
-    _main() {
-        declare -r temporary=$(begin_temporary_root "${_group_root}")
-        _make_temporary "${temporary}"
-    }
-
-    _main
+    mktemp --tmpdir="${_temporary}" --suffix=".${_suffix}" "${_name}"
 )
 
 #*  Args:
@@ -55,17 +46,8 @@ get_temporary_directory() (
     declare -r _group_root="$1"
     declare -r _path_head="$2"
 
-    _make_temporary() {
-        declare -r temporary="$1"
+    declare -r _temporary=$(begin_temporary_root "${_group_root}")
+    declare -r _name=$(_add_path_identifier "${_path_head}")
 
-        declare -r name=$(_add_path_identifier "${_path_head}")
-        mktemp --directory --tmpdir="${temporary}" "${name}"
-    }
-
-    _main() {
-        declare -r temporary=$(begin_temporary_root "${_group_root}")
-        _make_temporary "${temporary}"
-    }
-
-    _main
+    mktemp --directory --tmpdir="${_temporary}" "${_name}"
 )
