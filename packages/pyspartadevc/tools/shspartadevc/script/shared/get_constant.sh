@@ -4,16 +4,16 @@ constant::expected_identifier() {
     echo 1000
 }
 
-constant::enter() {
-    echo " \\"
-}
-
 constant::expected_name() {
     echo "root"
 }
 
 constant::package_main() {
     echo "pyspartadevc"
+}
+
+constant::enter() {
+    echo " \\"
 }
 
 constant::indent() {
@@ -40,22 +40,6 @@ constant::group_key() {
     echo "DEVC_GID"
 }
 
-constant::volume_cache() {
-    echo ".temp/cache"
-}
-
-constant::volume_python() {
-    echo ".venv"
-}
-
-constant::volume_javascript() {
-    echo "node_modules"
-}
-
-constant::temporary_post() {
-    echo "packages/pyspartadevc/tools/shspartadevc/.temp/devcontainer_post.sh"
-}
-
 constant::config() {
     echo "packages/pyspartadevc/tools/shspartadevc/.devcontainer/devcontainer.json"
 }
@@ -68,6 +52,22 @@ constant::temporary_attach() {
     echo "packages/pyspartadevc/tools/shspartadevc/.temp/devcontainer_attach.sh"
 }
 
+constant::temporary_post() {
+    echo "packages/pyspartadevc/tools/shspartadevc/.temp/devcontainer_post.sh"
+}
+
+constant::volume_cache() {
+    echo ".temp/cache"
+}
+
+constant::volume_python() {
+    echo ".venv"
+}
+
+constant::volume_javascript() {
+    echo "node_modules"
+}
+
 constant::current() {
     echo "."
 }
@@ -76,20 +76,20 @@ constant::header_post() {
     echo "# * Execute this script that finalize to create the dev-container."
 }
 
-constant::comment_owner() {
-    echo "# Change directory owner to non-root user."
-}
-
-constant::comment_sync() {
-    echo "# Sync the package managers."
-}
-
 constant::header_create() {
     echo "# * Execute this script that create a dev-container."
 }
 
 constant::header_attach() {
     echo "# * Execute this script that attach to the dev-container."
+}
+
+constant::comment_owner() {
+    echo "# Change directory owner to non-root user."
+}
+
+constant::comment_sync() {
+    echo "# Sync the package managers."
 }
 
 constant::header_environment() {
@@ -112,6 +112,10 @@ constant::help_launch() {
     echo "Create the script that create a dev-container."
 }
 
+constant::help_attach() {
+    echo 'Launched the terminal "zsh".'
+}
+
 constant::message_invalid() {
     echo 'Invalid option. See help "-h"'
 }
@@ -132,8 +136,4 @@ Usage: command [<options>...]
             Default: false
 EOF
     echo "${str[@]}"
-}
-
-constant::help_attach() {
-    echo 'Launched the terminal "zsh".'
 }
