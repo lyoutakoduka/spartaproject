@@ -168,6 +168,17 @@ _create_preprocess_script() (
         _whole_text_file
     }
 
+    _main_#FF_0000_TOP() {
+        shell::begin_text_file_#FF_0000_TOP
+
+        declare -r header=$(_get_header)
+        initialize_text_file "${header}"
+        _add_text_file_launch "${_group}"
+
+        declare -r script_path=$(_get_preprocess)
+        end_text_file_#FF_0000_TOP "${script_path}"
+    }
+
     _main
 )
 
