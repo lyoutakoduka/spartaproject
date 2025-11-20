@@ -30,13 +30,13 @@ _add_environment_variable() (
     declare -r _identifier_key=$(constant::group_key)
 
     _set_user_name() {
-        declare -r _user_name=$(whoami)
-        _set_environment "${_name_key}" "${_user_name}"
+        declare -r user_name=$(whoami)
+        _set_environment "${_name_key}" "${user_name}"
     }
 
     _set_user_identifier() {
-        declare -r _user_value=$(id --user)
-        _set_environment "${_user_key}" "${_user_value}"
+        declare -r user_value=$(id --user)
+        _set_environment "${_user_key}" "${user_value}"
     }
 
     _set_group_identifier() {
