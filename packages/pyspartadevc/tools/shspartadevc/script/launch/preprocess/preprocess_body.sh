@@ -10,19 +10,19 @@ body_text_file() (
     declare -r _group="$1"
     declare -r _message=$(constant::header_devcontainer)
 
-    _add_shared_head() {
+    _add_command_head() {
         declare -r command_devcontainer=$(get_command_devcontainer)
         export_lines "${command_devcontainer}"
     }
 
-    _filter_exists_command() (
+    _add_command_body() (
         if [[ "${_group}" = "${_expected}" ]]; then
             declare -r command_exists=$(get_command_exists)
             export_lines "${command_exists}"
         fi
     )
 
-    _add_shared_foot() {
+    _add_command_foot() {
         declare -r command_workspace=$(get_command_workspace)
         declare -r command_config=$(get_command_config)
 
@@ -30,9 +30,9 @@ body_text_file() (
     }
 
     _add_command_base() {
-        _add_shared_head
-        _filter_exists_command "${_group}"
-        _add_shared_foot
+        _add_command_head
+        _add_command_body "${_group}"
+        _add_command_foot
     }
 
     _main() {
