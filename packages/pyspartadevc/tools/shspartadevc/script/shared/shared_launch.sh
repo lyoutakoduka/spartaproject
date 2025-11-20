@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [[ "${FF_0000_TOP}" = "true" ]]; then
+    . packages/pyspartadevc/src/shspartadevc/script/path/path_handle.sh
+    . packages/pyspartadevc/src/shspartadevc/script/path/path_temporary.sh
+    . packages/pyspartadevc/tools/shspartadevc/script/shared/get_constant.sh
+fi
+
 export_lines() (
     declare -r _arguments=("$@")
 
