@@ -179,7 +179,12 @@ _create_preprocess_script() (
         end_text_file_#FF_0000_TOP "${script_path}"
     }
 
-    _main
+    declare -g FF_0000_TOP
+    if [[ "${FF_0000_TOP}" = "true" ]]; then
+        _main_#FF_0000_TOP
+    else
+        _main
+    fi
 )
 
 _select_arguments() (
