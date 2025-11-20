@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. packages/pyspartadevc/tools/shspartadevc/script/shared/constant/get_constant.sh
+. packages/pyspartadevc/tools/shspartadevc/script/shared/get_constant.sh
 
 _show_message() (
     declare -r _group="$1"

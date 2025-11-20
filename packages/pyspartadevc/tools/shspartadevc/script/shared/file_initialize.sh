@@ -1,7 +1,7 @@
 #!/bin/bash
 
-. packages/pyspartadevc/tools/shspartadevc/script/shared/constant/get_constant.sh
-. packages/pyspartadevc/tools/shspartadevc/script/shared/file/export/export_line.sh
+. packages/pyspartadevc/tools/shspartadevc/script/shared/get_constant.sh
+. packages/pyspartadevc/tools/shspartadevc/script/shared/export_line.sh
 
 initialize_text_file() (
     declare -r _header="$1"
