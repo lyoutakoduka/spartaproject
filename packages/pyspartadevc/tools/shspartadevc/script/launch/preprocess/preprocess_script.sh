@@ -32,20 +32,12 @@ _add_text_file_launch() (
         export_lines "${command}"
     )
 
-    _get_command_config() (
-        declare -r command="${_indent}${_flag_config} ${_config_path}"
-        export_lines "${command}"
-    )
-
-    _get_command_workspace() (
-        declare -r workspace="${_flag_workspace} ${_current}"
-        declare -r command="${_indent}${workspace}${_enter}"
-        export_lines "${command}"
-    )
-
     _add_command_foot() {
-        _get_command_workspace
-        _get_command_config
+        declare -r workspace="${_flag_workspace} ${_current}"
+        declare -r command_workspace="${_indent}${workspace}${_enter}"
+        declare -r command_config="${_indent}${_flag_config} ${_config_path}"
+
+        export_lines "${command_workspace}" "${command_config}"
     }
 
     _add_command_base() {
