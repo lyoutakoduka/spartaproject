@@ -5,8 +5,6 @@
 
 lifecycle_attach() (
     declare -r _message=$(constant::help_attach)
-
     show_log "${_message}"
-
     zsh
 )

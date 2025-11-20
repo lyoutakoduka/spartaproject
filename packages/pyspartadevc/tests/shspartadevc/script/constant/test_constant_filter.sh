@@ -12,10 +12,10 @@ test_filter() (
     declare -r _filter_sub="red"
     declare -r _expected="apple"
 
-    _test_get_frame_path() (
+    _test_get_frame_path() {
         declare -r executed=$(get_selected_frame "${_group}")
         echo "${executed}"
-    )
+    }
 
     _filter_constant() {
         declare text_json="$1"

@@ -9,25 +9,14 @@ get_context_path() (
     declare -r _executed_path="$1"
     declare -r _local_path="$2"
 
-    _import_forward_link() {
-        declare -r forward_path="$1"
-
-        declare -r context_path=$(jq -r "${_filter}" "${forward_path}")
-        echo "${context_path}"
-    }
-
     _get_resource_root() {
         declare -r relative_path="$1"
-
-        declare -r path=$(get_resource "${_executed_path}" "${relative_path}")
-        echo "${path}"
+        get_resource "${_executed_path}" "${relative_path}"
     }
 
     _get_forward_link() {
         declare -r forward_path=$(_get_resource_root "${_file_path}")
-        context_path=$(_import_forward_link "${forward_path}")
-
-        echo "${context_path}"
+        jq -r "${_filter}" "${forward_path}"
     }
 
     _main() {
@@ -42,6 +31,5 @@ get_context_path() (
         echo "${path}"
     }
 
-    declare -r result=$(_main)
-    echo "${result}"
+    _main
 )

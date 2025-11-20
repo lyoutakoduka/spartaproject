@@ -6,9 +6,7 @@
 
 _test_get_frame_path() (
     declare -r _group="path"
-
-    declare -r executed=$(get_selected_frame "${_group}")
-    echo "${executed}"
+    get_selected_frame "${_group}"
 )
 
 test_print() (

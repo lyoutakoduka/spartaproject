@@ -30,13 +30,13 @@ _add_environment_variable() (
     declare -r _identifier_key=$(constant::group_key)
 
     _set_user_name() {
-        declare -r _user_name=$(whoami)
-        _set_environment "${_name_key}" "${_user_name}"
+        declare -r user_name=$(whoami)
+        _set_environment "${_name_key}" "${user_name}"
     }
 
     _set_user_identifier() {
-        declare -r _user_value=$(id --user)
-        _set_environment "${_user_key}" "${_user_value}"
+        declare -r user_value=$(id --user)
+        _set_environment "${_user_key}" "${user_value}"
     }
 
     _set_group_identifier() {
@@ -63,7 +63,6 @@ _ready_identifier() (
         export_lines "${_comment}"
 
         _add_environment_variable
-
     }
 
     _main() {
@@ -79,7 +78,7 @@ _ready_identifier() (
 
 _add_text_file_launch() (
     declare -r _expected="create"
-    declare -r command_base="devcontainer up"
+    declare -r _command_base="devcontainer up"
     declare -r _flag_exists="--remove-existing-container"
     declare -r _flag_config="--config"
     declare -r _flag_workspace="--workspace-folder"
@@ -90,16 +89,6 @@ _add_text_file_launch() (
     declare -r _config_path=$(constant::config)
     declare -r _current=$(constant::current)
 
-    _add_command_head() {
-        declare -r command="${command_base}${_enter}"
-        export_lines "${command}"
-    }
-
-    _add_command_body() (
-        declare -r command="${_indent}${_flag_exists}${_enter}"
-        export_lines "${command}"
-    )
-
     _add_command_foot() {
         declare -r workspace="${_flag_workspace} ${_current}"
         declare -r command_workspace="${_indent}${workspace}${_enter}"
@@ -109,10 +98,10 @@ _add_text_file_launch() (
     }
 
     _add_command_base() {
-        _add_command_head
+        export_lines "${_command_base}${_enter}"
 
         if [[ "${_group}" = "${_expected}" ]]; then
-            _add_command_body "${_group}"
+            export_lines "${_indent}${_flag_exists}${_enter}"
         fi
 
         _add_command_foot
@@ -199,7 +188,6 @@ _select_arguments() (
         declare help="${_fail}"
         declare invalid="${_fail}"
 
-        declare opt
         while getopts "h" opt; do
             case "${opt}" in
             h)
@@ -226,22 +214,22 @@ _handling_arguments() (
     declare -r _message_invalid=$(constant::message_invalid)
     declare -r _message_help=$(constant::help_help)
 
-    _filter_by_invalid() (
-        declare -r _invalid="$1"
+    _filter_by_invalid() {
+        declare -r invalid="$1"
 
-        if [[ "${_invalid}" = "${_expected}" ]]; then
+        if [[ "${invalid}" = "${_expected}" ]]; then
             shell::show_warning "${_message_invalid}"
         fi
-    )
+    }
 
-    _filter_by_help() (
-        declare -r _help="$1"
+    _filter_by_help() {
+        declare -r help="$1"
 
-        if [[ "${_help}" = "${_expected}" ]]; then
+        if [[ "${help}" = "${_expected}" ]]; then
             echo "${_message_help}"
             exit 1
         fi
-    )
+    }
 
     _filter_by_arguments() {
         declare -r help="$1"
@@ -270,13 +258,13 @@ preprocess_launch() (
     declare -r _expected=$(constant::expected_name)
     declare -r _message=$(constant::message_user)
 
-    _filter_by_account() (
+    _filter_by_account() {
         declare -r user_name=$(whoami)
 
         if [[ "${user_name}" = "${_expected}" ]]; then
             shell::show_warning "${_message}"
         fi
-    )
+    }
 
     _main() {
         _handling_arguments "${_arguments[@]}" || exit 1

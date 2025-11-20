@@ -4,7 +4,6 @@
 
 test_difference() (
     declare -r _expected="test"
-
     shell::error_difference "${_expected}" "${_expected}"
 )
 
