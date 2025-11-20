@@ -1,7 +1,7 @@
 #!/bin/bash
 
 . packages/pyspartadevc/src/shspartadevc/script/string/string_quoted.sh
-. packages/pyspartadevc/tools/shspartadevc/script/shared/file/export/export_line.sh
+. packages/pyspartadevc/tools/shspartadevc/script/shared/export_line.sh
 
 set_environment() (
     declare -r _quote="\""
