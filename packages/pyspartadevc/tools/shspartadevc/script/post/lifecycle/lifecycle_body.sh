@@ -3,7 +3,7 @@
 . packages/pyspartadevc/tools/shspartadevc/script/post/constant/get_constant.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/file/export/export_line.sh
 
-_command_change_owner() (
+command_change_owner() (
     declare -r _command_change="sudo chown"
     declare -r _cache=$(constant::volume_cache)
     declare -r _python=$(constant::volume_python)
@@ -31,15 +31,10 @@ _command_change_owner() (
     _main
 )
 
-_command_package_manager() (
+command_package_manager() (
     declare -r _sync_python="uv sync"
     declare -r _sync_javascript="yarn"
     declare -r _comment=$(constant::comment_sync)
 
     export_lines "${_comment}" "${_sync_python}" "${_sync_javascript}"
 )
-
-add_text_file_post() {
-    _command_change_owner
-    _command_package_manager
-}
