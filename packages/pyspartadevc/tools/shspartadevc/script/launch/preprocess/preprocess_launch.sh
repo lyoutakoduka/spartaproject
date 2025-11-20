@@ -1,6 +1,5 @@
 #!/bin/bash
 
-. packages/pyspartadevc/tools/shspartadevc/script/launch/arguments/arguments_select.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/get_constant.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/preprocess/preprocess_filter.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/preprocess/preprocess_script.sh

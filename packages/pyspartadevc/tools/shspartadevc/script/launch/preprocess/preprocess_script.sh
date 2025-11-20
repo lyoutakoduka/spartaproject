@@ -2,7 +2,6 @@
 
 . packages/pyspartadevc/tools/shspartadevc/script/launch/account/account_ready.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/get_constant.sh
-. packages/pyspartadevc/tools/shspartadevc/script/launch/preprocess/preprocess_body.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/preprocess/preprocess_command.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/export_line.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/file_initialize.sh
