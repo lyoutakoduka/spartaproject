@@ -100,6 +100,17 @@ begin_text_file() (
     _main
 )
 
+shell::begin_text_file_#FF_0000_TOP() {
+    declare -r _group="preprocess"
+    declare -r _head="devcontainer"
+    declare -r _suffix="sh"
+
+    declare -r _temporary=$(
+        get_temporary_file "${_group}" "${_head}" "${_suffix}"
+    )
+    declare -g ADDED_FILE_PATH="${_temporary}"
+}
+
 end_text_file() (
     declare -r _group=$(constant::group_text_create)
 
