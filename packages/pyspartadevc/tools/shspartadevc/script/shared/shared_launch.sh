@@ -9,7 +9,13 @@ fi
 export_lines() (
     declare -r _arguments=("$@")
 
-    declare -r path=$(shell::get_file_path)
+    declare -g FF_0000_TOP
+    if [[ "${FF_0000_TOP}" = "true" ]]; then
+        declare -g ADDED_FILE_PATH
+        declare -r path="${ADDED_FILE_PATH}"
+    else
+        declare -r path=$(shell::get_file_path)
+    fi
 
     if [[ -n "${path}" ]]; then
         for text in "${_arguments[@]}"; do
