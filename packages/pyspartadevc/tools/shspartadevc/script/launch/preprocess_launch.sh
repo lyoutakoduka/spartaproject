@@ -95,10 +95,10 @@ _add_text_file_launch() (
         export_lines "${command}"
     }
 
-    _add_command_body() (
+    _add_command_body() {
         declare -r command="${_indent}${_flag_exists}${_enter}"
         export_lines "${command}"
-    )
+    }
 
     _add_command_foot() {
         declare -r workspace="${_flag_workspace} ${_current}"
@@ -226,22 +226,22 @@ _handling_arguments() (
     declare -r _message_invalid=$(constant::message_invalid)
     declare -r _message_help=$(constant::help_help)
 
-    _filter_by_invalid() (
+    _filter_by_invalid() {
         declare -r _invalid="$1"
 
         if [[ "${_invalid}" = "${_expected}" ]]; then
             shell::show_warning "${_message_invalid}"
         fi
-    )
+    }
 
-    _filter_by_help() (
+    _filter_by_help() {
         declare -r _help="$1"
 
         if [[ "${_help}" = "${_expected}" ]]; then
             echo "${_message_help}"
             exit 1
         fi
-    )
+    }
 
     _filter_by_arguments() {
         declare -r help="$1"
@@ -270,13 +270,13 @@ preprocess_launch() (
     declare -r _expected=$(constant::expected_name)
     declare -r _message=$(constant::message_user)
 
-    _filter_by_account() (
+    _filter_by_account() {
         declare -r user_name=$(whoami)
 
         if [[ "${user_name}" = "${_expected}" ]]; then
             shell::show_warning "${_message}"
         fi
-    )
+    }
 
     _main() {
         _handling_arguments "${_arguments[@]}" || exit 1
