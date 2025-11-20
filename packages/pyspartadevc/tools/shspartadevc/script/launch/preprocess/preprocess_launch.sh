@@ -1,7 +1,6 @@
 #!/bin/bash
 
 . packages/pyspartadevc/tools/shspartadevc/script/launch/get_constant.sh
-. packages/pyspartadevc/tools/shspartadevc/script/launch/preprocess/preprocess_filter.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/preprocess/preprocess_script.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/get_constant.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/show_message.sh
@@ -41,22 +40,21 @@ _select_arguments() (
 
 _handling_arguments() (
     declare -r _separator=","
+    declare -r _expected="true"
     declare -r _arguments=("$@")
+    declare -r _message_invalid=$(constant::message_invalid)
+    declare -r _message_help=$(constant::help_help)
 
     _filter_by_invalid() (
-        declare -r _expected="true"
         declare -r _invalid="$1"
-        declare -r _message=$(constant::message_invalid)
 
         if [[ "${_invalid}" = "${_expected}" ]]; then
-            shell::show_warning "${_message}"
+            shell::show_warning "${_message_invalid}"
         fi
     )
 
     _filter_by_help() (
-        declare -r _expected="true"
         declare -r _help="$1"
-        declare -r _message_help=$(constant::help_help)
 
         if [[ "${_help}" = "${_expected}" ]]; then
             echo "${_message_help}"
@@ -88,11 +86,10 @@ preprocess_launch() (
     declare -r _create="create"
     declare -r _attach="attach"
     declare -r _arguments=("$@")
+    declare -r _expected=$(constant::expected_name)
+    declare -r _message=$(constant::message_user)
 
     _filter_by_account() (
-        declare -r _expected=$(constant::expected_name)
-        declare -r _message=$(constant::message_user)
-
         declare -r user_name=$(whoami)
 
         if [[ "${user_name}" = "${_expected}" ]]; then
