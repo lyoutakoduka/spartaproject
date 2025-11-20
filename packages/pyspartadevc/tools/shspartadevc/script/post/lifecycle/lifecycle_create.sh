@@ -2,18 +2,55 @@
 
 . packages/pyspartadevc/tools/shspartadevc/script/post/constant/get_constant.sh
 . packages/pyspartadevc/tools/shspartadevc/script/post/lifecycle/lifecycle_body.sh
+. packages/pyspartadevc/tools/shspartadevc/script/shared/file/export/export_line.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/file/file_initialize.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/file/path/get_file_path.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/file/process/process_begin.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/file/process/process_end.sh
+
+_command_change_owner() (
+    declare -r _command_change="sudo chown"
+    declare -r _cache=$(constant::volume_cache)
+    declare -r _python=$(constant::volume_python)
+    declare -r _javascript=$(constant::volume_javascript)
+    declare -r _comment=$(constant::comment_owner)
+
+    _change_owner() {
+        declare -r volume="$1"
+
+        declare -r user_name=$(whoami)
+        declare -r _change_pair="${user_name}:${user_name}"
+        declare -r command="${_command_change} ${_change_pair} ${volume}"
+
+        export_lines "${command}"
+    }
+
+    _main() {
+        export_lines "${_comment}"
+
+        _change_owner "${_cache}"
+        _change_owner "${_python}"
+        _change_owner "${_javascript}"
+    }
+
+    _main
+)
+
+_command_package_manager() (
+    declare -r _sync_python="uv sync"
+    declare -r _sync_javascript="yarn"
+    declare -r _comment=$(constant::comment_sync)
+
+    export_lines "${_comment}" "${_sync_python}" "${_sync_javascript}"
+)
 
 lifecycle_create() (
     declare -r _header=$(constant::header_post)
     declare -r _script_post=$(constant::temporary_post)
 
     _add_text_file_post() {
-        command_change_owner
-        command_package_manager
+        _command_change_owner
+        _command_package_manager
     }
 
     _whole_text_file() {
