@@ -1,7 +1,5 @@
 #!/bin/bash
 
-. packages/pyspartadevc/tools/shspartadevc/script/shared/get_file_path.sh
-
 export_lines() (
     declare -r _arguments=("$@")
 
