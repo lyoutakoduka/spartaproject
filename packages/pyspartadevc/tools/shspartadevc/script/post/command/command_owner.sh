@@ -30,3 +30,16 @@ command_change_owner() (
 
     _main
 )
+
+command_package_manager() (
+    declare -r _sync_python="uv sync"
+    declare -r _sync_javascript="yarn"
+    declare -r _comment=$(constant::comment_sync)
+
+    export_lines "${_comment}" "${_sync_python}" "${_sync_javascript}"
+)
+
+body_text_file() {
+    command_change_owner
+    command_package_manager
+}
