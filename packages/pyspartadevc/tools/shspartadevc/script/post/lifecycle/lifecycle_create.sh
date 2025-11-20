@@ -15,7 +15,7 @@ lifecycle_create() (
         begin_text_file
 
         initialize_text_file "${_header}"
-        body_text_file
+        add_text_file_post
 
         end_text_file
     }

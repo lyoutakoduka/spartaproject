@@ -39,7 +39,7 @@ command_package_manager() (
     export_lines "${_comment}" "${_sync_python}" "${_sync_javascript}"
 )
 
-body_text_file() {
+add_text_file_post() {
     command_change_owner
     command_package_manager
 }
