@@ -11,13 +11,18 @@
 
 _add_text_file_launch() (
     declare -r _expected="create"
+    declare -r command_base="devcontainer up"
+    declare -r _flag_exists="--remove-existing-container"
+    declare -r _flag_config="--config"
+    declare -r _flag_workspace="--workspace-folder"
     declare -r _group="$1"
     declare -r _message=$(constant::header_devcontainer)
+    declare -r _enter=$(constant::enter)
+    declare -r _indent=$(constant::indent)
+    declare -r _config_path=$(constant::config)
+    declare -r _current=$(constant::current)
 
     _get_command_devcontainer() (
-        declare -r command_base="devcontainer up"
-        declare -r _enter=$(constant::enter)
-
         declare -r command="${command_base}${_enter}"
         export_lines "${command}"
     )
@@ -27,10 +32,6 @@ _add_text_file_launch() (
     }
 
     _get_command_exists() (
-        declare -r _flag_exists="--remove-existing-container"
-        declare -r _indent=$(constant::indent)
-        declare -r _enter=$(constant::enter)
-
         declare -r command="${_indent}${_flag_exists}${_enter}"
         export_lines "${command}"
     )
@@ -42,20 +43,11 @@ _add_text_file_launch() (
     )
 
     _get_command_config() (
-        declare -r _flag_config="--config"
-        declare -r _config_path=$(constant::config)
-        declare -r _indent=$(constant::indent)
-
         declare -r command="${_indent}${_flag_config} ${_config_path}"
         export_lines "${command}"
     )
 
     _get_command_workspace() (
-        declare -r _flag_workspace="--workspace-folder"
-        declare -r _current=$(constant::current)
-        declare -r _indent=$(constant::indent)
-        declare -r _enter=$(constant::enter)
-
         declare -r workspace="${_flag_workspace} ${_current}"
         declare -r command="${_indent}${workspace}${_enter}"
         export_lines "${command}"
