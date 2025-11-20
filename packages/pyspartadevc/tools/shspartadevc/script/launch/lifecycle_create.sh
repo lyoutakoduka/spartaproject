@@ -14,8 +14,8 @@ _command_change_owner() (
         declare -r volume="$1"
 
         declare -r user_name=$(whoami)
-        declare -r _change_pair="${user_name}:${user_name}"
-        declare -r command="${_command_change} ${_change_pair} ${volume}"
+        declare -r change_pair="${user_name}:${user_name}"
+        declare -r command="${_command_change} ${change_pair} ${volume}"
 
         export_lines "${command}"
     }

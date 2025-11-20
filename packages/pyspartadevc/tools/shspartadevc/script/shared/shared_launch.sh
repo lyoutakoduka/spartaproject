@@ -12,14 +12,14 @@ export_lines() (
     declare -g FF_0000_TOP
     if [[ "${FF_0000_TOP}" = "true" ]]; then
         declare -g ADDED_FILE_PATH
-        declare -r path="${ADDED_FILE_PATH}"
+        declare -r _path="${ADDED_FILE_PATH}"
     else
-        declare -r path=$(shell::get_file_path)
+        declare -r _path=$(shell::get_file_path)
     fi
 
-    if [[ -n "${path}" ]]; then
+    if [[ -n "${_path}" ]]; then
         for text in "${_arguments[@]}"; do
-            echo "${text}" >>"${path}"
+            echo "${text}" >>"${_path}"
         done
     fi
 )
@@ -31,9 +31,9 @@ shell::get_file_path() {
 }
 
 shell::set_file_path() {
-    declare -r path="$1"
+    declare -r _path="$1"
 
-    declare -g ADDED_FILE_PATH="${path}"
+    declare -g ADDED_FILE_PATH="${_path}"
 }
 
 _show_message() (

@@ -79,7 +79,7 @@ _ready_identifier() (
 
 _add_text_file_launch() (
     declare -r _expected="create"
-    declare -r command_base="devcontainer up"
+    declare -r _command_base="devcontainer up"
     declare -r _flag_exists="--remove-existing-container"
     declare -r _flag_config="--config"
     declare -r _flag_workspace="--workspace-folder"
@@ -91,7 +91,7 @@ _add_text_file_launch() (
     declare -r _current=$(constant::current)
 
     _add_command_head() {
-        declare -r command="${command_base}${_enter}"
+        declare -r command="${_command_base}${_enter}"
         export_lines "${command}"
     }
 
@@ -227,17 +227,17 @@ _handling_arguments() (
     declare -r _message_help=$(constant::help_help)
 
     _filter_by_invalid() {
-        declare -r _invalid="$1"
+        declare -r invalid="$1"
 
-        if [[ "${_invalid}" = "${_expected}" ]]; then
+        if [[ "${invalid}" = "${_expected}" ]]; then
             shell::show_warning "${_message_invalid}"
         fi
     }
 
     _filter_by_help() {
-        declare -r _help="$1"
+        declare -r help="$1"
 
-        if [[ "${_help}" = "${_expected}" ]]; then
+        if [[ "${help}" = "${_expected}" ]]; then
             echo "${_message_help}"
             exit 1
         fi
