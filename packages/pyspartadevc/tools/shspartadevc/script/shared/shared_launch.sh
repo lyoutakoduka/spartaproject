@@ -135,3 +135,17 @@ end_text_file() (
 
     _main
 )
+
+end_text_file_#FF_0000_TOP() {
+    declare -g ADDED_FILE_PATH
+    declare -r _script_path="$1"
+    declare -r _group=$(constant::group_text_create)
+
+    _main() {
+        mv --force "${ADDED_FILE_PATH}" "${_script_path}"
+        chmod +x "${_script_path}"
+        show_log "${_group}: ${_script_path}"
+    }
+
+    _main
+}
