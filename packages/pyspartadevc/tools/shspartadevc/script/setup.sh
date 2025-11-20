@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. packages/pyspartadevc/tools/shspartadevc/script/launch/preprocess/preprocess_launch.sh
+. packages/pyspartadevc/tools/shspartadevc/script/launch/preprocess_launch.sh
 . packages/pyspartadevc/tools/shspartadevc/script/post/lifecycle/lifecycle_attach.sh
 . packages/pyspartadevc/tools/shspartadevc/script/post/lifecycle/lifecycle_create.sh
 
