@@ -1,7 +1,7 @@
 #!/bin/bash
 
-. packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant.sh
-. packages/pyspartadevc/tools/shspartadevc/script/shared/constant/get_constant.sh
+. packages/pyspartadevc/tools/shspartadevc/script/launch/get_constant.sh
+. packages/pyspartadevc/tools/shspartadevc/script/shared/get_constant.sh
 
 get_command_exists() (
     declare -r _flag_exists="--remove-existing-container"

@@ -1,11 +1,11 @@
 #!/bin/bash
 
-. packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant.sh
+. packages/pyspartadevc/tools/shspartadevc/script/launch/get_constant.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/preprocess/preprocess_body.sh
-. packages/pyspartadevc/tools/shspartadevc/script/shared/file/file_initialize.sh
-. packages/pyspartadevc/tools/shspartadevc/script/shared/file/path/get_file_path.sh
-. packages/pyspartadevc/tools/shspartadevc/script/shared/file/process/process_begin.sh
-. packages/pyspartadevc/tools/shspartadevc/script/shared/file/process/process_end.sh
+. packages/pyspartadevc/tools/shspartadevc/script/shared/file_initialize.sh
+. packages/pyspartadevc/tools/shspartadevc/script/shared/get_file_path.sh
+. packages/pyspartadevc/tools/shspartadevc/script/shared/process/process_begin.sh
+. packages/pyspartadevc/tools/shspartadevc/script/shared/process/process_end.sh
 
 create_preprocess_script() (
     declare -r _expected="create"

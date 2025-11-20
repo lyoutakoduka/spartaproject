@@ -1,7 +1,7 @@
 #!/bin/bash
 
-. packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant.sh
-. packages/pyspartadevc/tools/shspartadevc/script/shared/show/show_message.sh
+. packages/pyspartadevc/tools/shspartadevc/script/launch/get_constant.sh
+. packages/pyspartadevc/tools/shspartadevc/script/shared/show_message.sh
 
 filter_by_invalid() (
     declare -r _expected="true"

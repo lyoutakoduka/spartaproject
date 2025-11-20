@@ -1,9 +1,9 @@
 #!/bin/bash
 
 . packages/pyspartadevc/tools/shspartadevc/script/launch/account/account_ready.sh
-. packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant.sh
+. packages/pyspartadevc/tools/shspartadevc/script/launch/get_constant.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/preprocess/preprocess_command.sh
-. packages/pyspartadevc/tools/shspartadevc/script/shared/file/export/export_line.sh
+. packages/pyspartadevc/tools/shspartadevc/script/shared/export_line.sh
 
 add_text_file_launch() (
     declare -r _expected="create"
