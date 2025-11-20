@@ -1,9 +1,9 @@
 #!/bin/bash
 
 . packages/pyspartadevc/src/shspartadevc/script/string/string_quoted.sh
-. packages/pyspartadevc/tools/shspartadevc/script/launch/get_constant.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/export_line.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/file_initialize.sh
+. packages/pyspartadevc/tools/shspartadevc/script/shared/get_constant.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/get_constant.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/get_file_path.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/process_begin.sh

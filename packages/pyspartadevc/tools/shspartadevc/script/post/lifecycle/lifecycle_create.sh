@@ -1,11 +1,9 @@
 #!/bin/bash
 
-. packages/pyspartadevc/tools/shspartadevc/script/post/get_constant.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/export_line.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/file_initialize.sh
+. packages/pyspartadevc/tools/shspartadevc/script/shared/get_constant.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/get_file_path.sh
-. packages/pyspartadevc/tools/shspartadevc/script/shared/process/process_begin.sh
-. packages/pyspartadevc/tools/shspartadevc/script/shared/process/process_end.sh
 
 _command_change_owner() (
     declare -r _command_change="sudo chown"
