@@ -22,24 +22,14 @@ _add_text_file_launch() (
     declare -r _config_path=$(constant::config)
     declare -r _current=$(constant::current)
 
-    _get_command_devcontainer() (
+    _add_command_head() {
         declare -r command="${command_base}${_enter}"
         export_lines "${command}"
-    )
-
-    _add_command_head() {
-        _get_command_devcontainer
     }
 
-    _get_command_exists() (
+    _add_command_body() (
         declare -r command="${_indent}${_flag_exists}${_enter}"
         export_lines "${command}"
-    )
-
-    _add_command_body() (
-        if [[ "${_group}" = "${_expected}" ]]; then
-            _get_command_exists
-        fi
     )
 
     _get_command_config() (
@@ -54,13 +44,17 @@ _add_text_file_launch() (
     )
 
     _add_command_foot() {
-        _get_command_config
         _get_command_workspace
+        _get_command_config
     }
 
     _add_command_base() {
         _add_command_head
-        _add_command_body "${_group}"
+
+        if [[ "${_group}" = "${_expected}" ]]; then
+            _add_command_body "${_group}"
+        fi
+
         _add_command_foot
     }
 
