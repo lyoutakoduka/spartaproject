@@ -5,7 +5,7 @@
 . packages/pyspartadevc/tools/shspartadevc/script/launch/preprocess/preprocess_command.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/file/export/export_line.sh
 
-body_text_file() (
+add_text_file_launch() (
     declare -r _expected="create"
     declare -r _group="$1"
     declare -r _message=$(constant::header_devcontainer)

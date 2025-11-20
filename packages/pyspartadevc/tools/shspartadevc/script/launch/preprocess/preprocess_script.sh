@@ -25,7 +25,7 @@ create_preprocess_script() (
         begin_text_file
 
         head_text_file "${_group}"
-        body_text_file "${_group}"
+        add_text_file_launch "${_group}"
 
         end_text_file
     }
