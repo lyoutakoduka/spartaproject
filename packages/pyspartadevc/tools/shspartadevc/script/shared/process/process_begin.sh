@@ -2,7 +2,6 @@
 
 . packages/pyspartadevc/tools/shspartadevc/script/shared/get_constant.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/get_file_path.sh
-. packages/pyspartadevc/tools/shspartadevc/script/shared/process/process_log.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/show_message.sh
 
 show_preprocess_log() (
