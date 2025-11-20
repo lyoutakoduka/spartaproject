@@ -1,11 +1,8 @@
 #!/bin/bash
 
 . packages/pyspartadevc/tools/shspartadevc/script/launch/account/account_ready.sh
-. packages/pyspartadevc/tools/shspartadevc/script/launch/command/command_config.sh
-. packages/pyspartadevc/tools/shspartadevc/script/launch/command/command_devcontainer.sh
-. packages/pyspartadevc/tools/shspartadevc/script/launch/command/command_exists.sh
-. packages/pyspartadevc/tools/shspartadevc/script/launch/command/command_workspace.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/constant/get_constant.sh
+. packages/pyspartadevc/tools/shspartadevc/script/launch/preprocess/preprocess_command.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/file/export/export_line.sh
 
 _filter_exists_command() (
