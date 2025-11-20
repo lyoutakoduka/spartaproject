@@ -1,9 +1,180 @@
 #!/bin/bash
 
+. packages/pyspartadevc/src/shspartadevc/script/string/string_quoted.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/get_constant.sh
-. packages/pyspartadevc/tools/shspartadevc/script/launch/preprocess/preprocess_script.sh
+. packages/pyspartadevc/tools/shspartadevc/script/shared/export_line.sh
+. packages/pyspartadevc/tools/shspartadevc/script/shared/file_initialize.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/get_constant.sh
+. packages/pyspartadevc/tools/shspartadevc/script/shared/get_file_path.sh
+. packages/pyspartadevc/tools/shspartadevc/script/shared/process_begin.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/show_message.sh
+
+_set_environment() (
+    declare -r _quote="\""
+    declare -r _command="export"
+    declare -r _key="$1"
+    declare -r _value="$2"
+
+    _create_environment() {
+        declare -r quote_added=$(string_quoted "${_value}" "${_quote}")
+        export_lines "${_command} ${_key}=${quote_added}"
+    }
+
+    _main() {
+        if [[ -n "${_key}" ]] && [[ -n "${_value}" ]]; then
+            _create_environment
+        fi
+    }
+
+    _main
+)
+
+_add_environment_variable() (
+    declare -r _name_key=$(constant::name_key)
+    declare -r _user_key=$(constant::user_key)
+    declare -r _identifier_key=$(constant::group_key)
+
+    _set_user_name() {
+        declare -r _user_name=$(whoami)
+        _set_environment "${_name_key}" "${_user_name}"
+    }
+
+    _set_user_identifier() {
+        declare -r _user_value=$(id --user)
+        _set_environment "${_user_key}" "${_user_value}"
+    }
+
+    _set_group_identifier() {
+        declare -r identifier=$(id --group)
+        _set_environment "${_identifier_key}" "${identifier}"
+    }
+
+    _main() {
+        _set_user_name
+        _set_user_identifier
+        _set_group_identifier
+    }
+
+    _main
+)
+
+_ready_identifier() (
+    declare -r -i _expected=$(constant::expected_identifier)
+    declare -r _identifier=$(constant::message_identifier)
+    declare -r _comment=$(constant::header_environment)
+
+    _set_user_information() {
+        show_log "${_identifier}"
+        export_lines "${_comment}"
+
+        _add_environment_variable
+
+    }
+
+    _main() {
+        declare -r identifier=$(id --user)
+
+        if [[ "${identifier}" -ne "${_expected}" ]]; then
+            _set_user_information
+        fi
+    }
+
+    _main
+)
+
+_add_text_file_launch() (
+    declare -r _expected="create"
+    declare -r command_base="devcontainer up"
+    declare -r _flag_exists="--remove-existing-container"
+    declare -r _flag_config="--config"
+    declare -r _flag_workspace="--workspace-folder"
+    declare -r _group="$1"
+    declare -r _message=$(constant::header_devcontainer)
+    declare -r _enter=$(constant::enter)
+    declare -r _indent=$(constant::indent)
+    declare -r _config_path=$(constant::config)
+    declare -r _current=$(constant::current)
+
+    _add_command_head() {
+        declare -r command="${command_base}${_enter}"
+        export_lines "${command}"
+    }
+
+    _add_command_body() (
+        declare -r command="${_indent}${_flag_exists}${_enter}"
+        export_lines "${command}"
+    )
+
+    _add_command_foot() {
+        declare -r workspace="${_flag_workspace} ${_current}"
+        declare -r command_workspace="${_indent}${workspace}${_enter}"
+        declare -r command_config="${_indent}${_flag_config} ${_config_path}"
+
+        export_lines "${command_workspace}" "${command_config}"
+    }
+
+    _add_command_base() {
+        _add_command_head
+
+        if [[ "${_group}" = "${_expected}" ]]; then
+            _add_command_body "${_group}"
+        fi
+
+        _add_command_foot
+    }
+
+    _main() {
+        _ready_identifier
+        export_lines "${_message}"
+        _add_command_base
+    }
+
+    _main
+)
+
+_create_preprocess_script() (
+    declare -r _expected="create"
+    declare -r _group="$1"
+    declare -r _script_create=$(constant::temporary_create)
+    declare -r _script_attach=$(constant::temporary_attach)
+    declare -r _header_create=$(constant::header_create)
+    declare -r _header_attach=$(constant::header_attach)
+
+    _get_preprocess() {
+        if [[ "${_group}" = "${_expected}" ]]; then
+            echo "${_script_create}"
+        else
+            echo "${_script_attach}"
+        fi
+    }
+
+    _get_header() {
+        if [[ "${_group}" = "${_expected}" ]]; then
+            echo "${_header_create}"
+        else
+            echo "${_header_attach}"
+        fi
+    }
+
+    _whole_text_file() {
+        begin_text_file
+
+        declare -r header=$(_get_header)
+        initialize_text_file "${header}"
+        _add_text_file_launch "${_group}"
+
+        end_text_file
+    }
+
+    _main() {
+        declare -r path=$(_get_preprocess)
+        shell::set_file_path "${path}"
+
+        _whole_text_file
+    }
+
+    _main
+)
 
 _select_arguments() (
     declare -r _success="true"
@@ -100,8 +271,8 @@ preprocess_launch() (
         _handling_arguments "${_arguments[@]}" || exit 1
         _filter_by_account || exit 1
 
-        create_preprocess_script "${_create}"
-        create_preprocess_script "${_attach}"
+        _create_preprocess_script "${_create}"
+        _create_preprocess_script "${_attach}"
     }
 
     _main
