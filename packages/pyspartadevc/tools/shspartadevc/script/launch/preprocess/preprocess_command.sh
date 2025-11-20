@@ -9,3 +9,10 @@ get_command_exists() (
 
     echo "${_indent}${_flag_exists}${_enter}"
 )
+
+get_command_devcontainer() (
+    declare -r command_base="devcontainer up"
+    declare -r _enter=$(constant::enter)
+
+    echo "${command_base}${_enter}"
+)
