@@ -26,13 +26,11 @@ export_lines() (
 
 shell::get_file_path() {
     declare -g ADDED_FILE_PATH
-
     echo "${ADDED_FILE_PATH}"
 }
 
 shell::set_file_path() {
     declare -r _path="$1"
-
     declare -g ADDED_FILE_PATH="${_path}"
 }
 
@@ -69,9 +67,7 @@ initialize_text_file() (
 
 _show_preprocess_log() (
     declare -r _group="$1"
-
     declare -r _path=$(shell::get_file_path)
-
     show_log "${_group}: ${_path}"
 )
 
@@ -112,7 +108,6 @@ end_text_file() (
 
     _add_executable_permission() {
         declare -r path=$(shell::get_file_path)
-
         chmod +x "${path}"
     }
 
