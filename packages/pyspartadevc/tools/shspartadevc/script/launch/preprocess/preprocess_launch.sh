@@ -6,6 +6,39 @@
 . packages/pyspartadevc/tools/shspartadevc/script/launch/preprocess/preprocess_script.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/get_constant.sh
 
+_select_arguments() (
+    declare -r _success="true"
+    declare -r _fail="false"
+
+    _shift_arguments() {
+        shift $((OPTIND - 1))
+    }
+
+    _main() {
+        declare help="${_fail}"
+        declare invalid="${_fail}"
+
+        declare opt
+        while getopts "h" opt; do
+            case "${opt}" in
+            h)
+                help="${_success}"
+                ;;
+            \?)
+                invalid="${_success}"
+                ;;
+            *) ;;
+            esac
+        done
+
+        _shift_arguments
+
+        echo "${help},${invalid}"
+    }
+
+    _main "$@"
+)
+
 _handling_arguments() (
     declare -r _separator=","
     declare -r _arguments=("$@")
@@ -19,7 +52,7 @@ _handling_arguments() (
     }
 
     _main() {
-        declare -r flags=$(select_arguments "${_arguments[@]}")
+        declare -r flags=$(_select_arguments "${_arguments[@]}")
 
         declare help invalid
         IFS="${_separator}" read -r help invalid <<<"${flags}"
