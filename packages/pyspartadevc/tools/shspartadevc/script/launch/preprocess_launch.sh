@@ -63,7 +63,6 @@ _ready_identifier() (
         export_lines "${_comment}"
 
         _add_environment_variable
-
     }
 
     _main() {
@@ -90,16 +89,6 @@ _add_text_file_launch() (
     declare -r _config_path=$(constant::config)
     declare -r _current=$(constant::current)
 
-    _add_command_head() {
-        declare -r command="${_command_base}${_enter}"
-        export_lines "${command}"
-    }
-
-    _add_command_body() {
-        declare -r command="${_indent}${_flag_exists}${_enter}"
-        export_lines "${command}"
-    }
-
     _add_command_foot() {
         declare -r workspace="${_flag_workspace} ${_current}"
         declare -r command_workspace="${_indent}${workspace}${_enter}"
@@ -109,10 +98,10 @@ _add_text_file_launch() (
     }
 
     _add_command_base() {
-        _add_command_head
+        export_lines "${_command_base}${_enter}"
 
         if [[ "${_group}" = "${_expected}" ]]; then
-            _add_command_body "${_group}"
+            export_lines "${_indent}${_flag_exists}${_enter}"
         fi
 
         _add_command_foot
@@ -199,7 +188,6 @@ _select_arguments() (
         declare help="${_fail}"
         declare invalid="${_fail}"
 
-        declare opt
         while getopts "h" opt; do
             case "${opt}" in
             h)
