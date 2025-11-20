@@ -84,16 +84,12 @@ begin_text_file() (
         rm "${path}"
     }
 
-    _execute_and_show() {
-        _remove_preprocess_script
-        _show_preprocess_log "${_group}"
-    }
-
     _main() {
         declare -r path=$(shell::get_file_path)
 
         if [[ -e "${path}" ]]; then
-            _execute_and_show
+            _remove_preprocess_script
+            _show_preprocess_log "${_group}"
         fi
     }
 
@@ -120,16 +116,12 @@ end_text_file() (
         chmod +x "${path}"
     }
 
-    _execute_and_show() {
-        _add_executable_permission
-        _show_preprocess_log "${_group}"
-    }
-
     _main() {
         declare -r path=$(shell::get_file_path)
 
         if [[ -e "${path}" ]]; then
-            _execute_and_show
+            _add_executable_permission
+            _show_preprocess_log "${_group}"
         fi
     }
 
