@@ -1,9 +1,21 @@
 #!/bin/bash
 
+if [[ "${FF_0000_TOP}" = "true" ]]; then
+    . packages/pyspartadevc/src/shspartadevc/script/path/path_handle.sh
+    . packages/pyspartadevc/src/shspartadevc/script/path/path_temporary.sh
+    . packages/pyspartadevc/tools/shspartadevc/script/shared/get_constant.sh
+fi
+
 export_lines() (
     declare -r _arguments=("$@")
 
-    declare -r path=$(shell::get_file_path)
+    declare -g FF_0000_TOP
+    if [[ "${FF_0000_TOP}" = "true" ]]; then
+        declare -g ADDED_FILE_PATH
+        declare -r path="${ADDED_FILE_PATH}"
+    else
+        declare -r path=$(shell::get_file_path)
+    fi
 
     if [[ -n "${path}" ]]; then
         for text in "${_arguments[@]}"; do
@@ -88,6 +100,17 @@ begin_text_file() (
     _main
 )
 
+shell::begin_text_file_#FF_0000_TOP() {
+    declare -r _group="preprocess"
+    declare -r _head="devcontainer"
+    declare -r _suffix="sh"
+
+    declare -r _temporary=$(
+        get_temporary_file "${_group}" "${_head}" "${_suffix}"
+    )
+    declare -g ADDED_FILE_PATH="${_temporary}"
+}
+
 end_text_file() (
     declare -r _group=$(constant::group_text_create)
 
@@ -112,3 +135,17 @@ end_text_file() (
 
     _main
 )
+
+end_text_file_#FF_0000_TOP() {
+    declare -g ADDED_FILE_PATH
+    declare -r _script_path="$1"
+    declare -r _group=$(constant::group_text_create)
+
+    _main() {
+        mv --force "${ADDED_FILE_PATH}" "${_script_path}"
+        chmod +x "${_script_path}"
+        show_log "${_group}: ${_script_path}"
+    }
+
+    _main
+}

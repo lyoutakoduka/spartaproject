@@ -1,7 +1,12 @@
 #!/bin/bash
 
 constant::expected_identifier() {
-    echo 1000
+    declare -g FF_0000_VER
+    if [[ "${FF_0000_VER}" = "true" ]]; then
+        echo 9999
+    else
+        echo 1000
+    fi
 }
 
 constant::expected_name() {
