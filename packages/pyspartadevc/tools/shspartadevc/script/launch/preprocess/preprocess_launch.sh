@@ -39,7 +39,6 @@ _select_arguments() (
 )
 
 _handling_arguments() (
-    declare -r _separator=","
     declare -r _expected="true"
     declare -r _arguments=("$@")
     declare -r _message_invalid=$(constant::message_invalid)
@@ -74,7 +73,7 @@ _handling_arguments() (
         declare -r flags=$(_select_arguments "${_arguments[@]}")
 
         declare help invalid
-        IFS="${_separator}" read -r help invalid <<<"${flags}"
+        IFS="," read -r help invalid <<<"${flags}"
 
         _filter_by_arguments "${help}" "${invalid}"
     }
