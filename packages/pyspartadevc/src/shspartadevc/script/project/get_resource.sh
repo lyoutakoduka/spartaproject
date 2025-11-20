@@ -20,6 +20,5 @@ get_resource() (
         fi
     }
 
-    declare -r result=$(_main)
-    echo "${result}"
+    _main
 )
