@@ -4,7 +4,7 @@
 . packages/pyspartadevc/tools/shspartadevc/script/shared/get_file_path.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/show_message.sh
 
-show_preprocess_log() (
+_show_preprocess_log() (
     declare -r _group="$1"
 
     declare -r _path=$(shell::get_file_path)
@@ -23,7 +23,7 @@ begin_text_file() (
 
     _execute_and_show() {
         _remove_preprocess_script
-        show_preprocess_log "${_group}"
+        _show_preprocess_log "${_group}"
     }
 
     _main() {
@@ -48,7 +48,7 @@ end_text_file() (
 
     _execute_and_show() {
         _add_executable_permission
-        show_preprocess_log "${_group}"
+        _show_preprocess_log "${_group}"
     }
 
     _main() {
