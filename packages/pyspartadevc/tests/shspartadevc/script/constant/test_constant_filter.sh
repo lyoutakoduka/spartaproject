@@ -12,22 +12,15 @@ test_filter() (
     declare -r _filter_sub="red"
     declare -r _expected="apple"
 
-    _test_get_frame_path() {
-        declare -r executed=$(get_selected_frame "${_group}")
-        echo "${executed}"
-    }
-
     _filter_constant() {
-        declare text_json="$1"
+        declare -r text_json="$1"
 
-        text_json=$(filter_constant "${text_json}" "${_filter_main}")
-        text_json=$(filter_constant "${text_json}" "${_filter_sub}")
-
-        echo "${text_json}"
+        declare -r filtered=$(filter_constant "${text_json}" "${_filter_main}")
+        filter_constant "${filtered}" "${_filter_sub}"
     }
 
     _main() {
-        declare -r executed=$(_test_get_frame_path)
+        declare -r executed=$(get_selected_frame "${_group}")
         declare -r text_json=$(import_constant "${executed}" "${_filter_trim}")
         declare -r result=$(_filter_constant "${text_json}")
 
