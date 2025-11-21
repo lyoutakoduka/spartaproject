@@ -1,25 +1,16 @@
 #!/bin/bash
 
-if [[ "${FF_0000_TOP}" = "true" ]]; then
-    . packages/pyspartadevc/src/shspartadevc/script/path/path_handle.sh
-    . packages/pyspartadevc/src/shspartadevc/script/path/path_temporary.sh
-    . packages/pyspartadevc/tools/shspartadevc/script/shared/get_constant.sh
-fi
+. packages/pyspartadevc/src/shspartadevc/script/path/path_handle.sh
+. packages/pyspartadevc/src/shspartadevc/script/path/path_temporary.sh
+. packages/pyspartadevc/tools/shspartadevc/script/shared/get_constant.sh
 
 export_lines() (
     declare -r _arguments=("$@")
+    declare -g ADDED_FILE_PATH
 
-    declare -g FF_0000_TOP
-    if [[ "${FF_0000_TOP}" = "true" ]]; then
-        declare -g ADDED_FILE_PATH
-        declare -r _path="${ADDED_FILE_PATH}"
-    else
-        declare -r _path=$(shell::get_file_path)
-    fi
-
-    if [[ -n "${_path}" ]]; then
+    if [[ -n "${ADDED_FILE_PATH}" ]]; then
         for text in "${_arguments[@]}"; do
-            echo "${text}" >>"${_path}"
+            echo "${text}" >>"${ADDED_FILE_PATH}"
         done
     fi
 )
