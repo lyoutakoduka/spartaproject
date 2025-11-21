@@ -1,0 +1,13 @@
+[section]
+
+shellcheck = """
+shellcheck ***/***.sh --rcfile=.vscode/.shellcheckrc
+"""
+
+shfmt = """
+shfmt --list --write ***/***.sh
+"""
+
+bats = """
+bats ***/***/ --recursive
+"""
