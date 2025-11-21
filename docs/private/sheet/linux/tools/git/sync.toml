@@ -1,0 +1,21 @@
+[section]
+
+fetch.origin = """
+git fetch origin
+"""
+
+fetch.prune = """
+git fetch --prune
+"""
+
+merge = """
+git merge origin
+"""
+
+push = """
+git push origin
+"""
+
+checkout = """
+git checkout ***-***
+"""

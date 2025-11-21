@@ -1,11 +1,11 @@
 {
   "folders": [
     {
-      "name": "VSCode Workspace",
+      "name": "Workspace",
       "path": "../",
     },
     {
-      "name": "Container Root",
+      "name": "Root",
       "path": "/",
     },
   ],
@@ -44,6 +44,9 @@
     // Git
     "git.autoRepositoryDetection": "openEditors",
     "git.inputValidation": true,
+
+    // TD Tree
+    "todo-tree.filtering.includedWorkspaces": ["."],
 
     // ShellCheck
     "shellcheck.logLevel": "debug",

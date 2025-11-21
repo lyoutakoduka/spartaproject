@@ -7,3 +7,15 @@ git branch --all
 branch.list = """
 git branch --list
 """
+
+stash.show.remote = """
+git branch --remotes
+"""
+
+stash.show.merge = """
+git branch --merged
+"""
+
+stash.show.not.merge = """
+git branch --no-merged
+"""

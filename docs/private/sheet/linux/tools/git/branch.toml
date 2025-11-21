@@ -1,13 +1,9 @@
 [section]
 
-fetch.origin = """
-git fetch origin
-"""
-
-checkout = """
-git checkout ***-***
-"""
-
-branch = """
+branch.merged = """
 git branch --delete ***-***
+"""
+
+branch.not.merged = """
+git branch -D ***-***
 """

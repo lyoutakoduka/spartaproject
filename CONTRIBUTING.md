@@ -154,7 +154,7 @@ logout
 wsl --distribution Ubuntu-24.04 --user leonidas
 ```
 
-#### 3-3-3: Devcontainer
+#### 3-3-3: Dev Container
 
 [Official Information](https://code.visualstudio.com/docs/devcontainers/devcontainer-cli)
 
@@ -264,16 +264,53 @@ git config --global user.name leonidas
 git config --global user.email leonidas@spartaproject.com
 ```
 
-### 4-3: Devcontainer
+### 4-3: Dev Container
 
-**Create and launch Devcontainer.**
+#### 4-3-1: Preprocess
+
+**Create the preprocess scripts to handle a dev container.**
 
 ```bash
-devcontainer up --workspace-folder .
+packages/pyspartadevc/tools/shspartadevc/script/setup.sh
 ```
 
-**Run interactive shell in Devcontainer.**
+**The following scripts are created in result.**
+
+- packages/pyspartadevc/tools/shspartadevc/.temp/devcontainer_create.sh
+- packages/pyspartadevc/tools/shspartadevc/.temp/devcontainer_attach.sh
+
+#### 4-3-2: Create Dev Container
+
+**Create and attach a dev container.**
 
 ```bash
-devcontainer exec --workspace-folder . bash
+packages/pyspartadevc/tools/shspartadevc/.temp/devcontainer_create.sh
+```
+
+_The terminal is automatically attached to the dev container._
+
+**The following script is created in result.**
+
+- packages/pyspartadevc/tools/shspartadevc/.temp/devcontainer_post.sh
+
+#### 4-3-3: Setup Dev Container
+
+**Set up a user account and a package manager in the dev container.**
+
+```bash
+packages/pyspartadevc/tools/shspartadevc/.temp/devcontainer_post.sh
+```
+
+**Leave from the dev-container.**
+
+```bash
+exit
+```
+
+#### 4-3-4: Attach to Dev Container
+
+**Attach to the dev-container again.**
+
+```bash
+packages/pyspartadevc/tools/shspartadevc/.temp/devcontainer_attach.sh
 ```

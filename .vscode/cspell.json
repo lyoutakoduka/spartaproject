@@ -1,16 +1,6 @@
 {
   "useGitignore": false,
-  "ignorePaths": [
-    "__pycache__",
-    ".temp",
-    "*.gitignore",
-    "*.lock",
-    "context.json",
-    "cspell.json",
-    "LICENSE",
-    "package.json",
-    "pyproject.toml"
-  ],
+  "ignorePaths": [".temp", ".venv", "*.lock"],
   "words": [
     "addopts",
     "alefragnani",
@@ -25,6 +15,8 @@
     "devc",
     "devcontainers",
     "dividedly",
+    "docstring",
+    "docstrings",
     "dpkg",
     "drvfs",
     "eamodio",
@@ -77,12 +69,12 @@
     "slmgr",
     "smbpasswd",
     "spartaproject",
+    "subshell",
     "tamasfe",
     "testpaths",
     "tzdata",
     "unmatch",
     "usermod",
-    "venv",
-    "visualstudioexptteam"
+    "venv"
   ]
 }

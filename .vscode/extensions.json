@@ -9,6 +9,7 @@
     "eamodio.gitlens",
     "esbenp.prettier-vscode",
     "foxundermoon.shell-format",
+    "gruntfuggly.todo-tree",
     "ibm.output-colorizer",
     "jetmartin.bats",
     "littlefoxteam.vscode-python-test-adapter",
@@ -23,7 +24,6 @@
     "shardulm94.trailing-spaces",
     "streetsidesoftware.code-spell-checker",
     "tamasfe.even-better-toml",
-    "timonwong.shellcheck",
-    "VisualStudioExptTeam.vscodeintellicode"
+    "timonwong.shellcheck"
   ]
 }

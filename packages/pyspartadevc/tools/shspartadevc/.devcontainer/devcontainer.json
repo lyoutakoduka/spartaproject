@@ -1,5 +1,5 @@
 {
-  "name": "pyspartadevc_rev_0000",
+  "name": "pyspartadevc",
   "image": "mcr.microsoft.com/devcontainers/base:dev-ubuntu-24.04",
   "init": true,
   "overrideCommand": true,
