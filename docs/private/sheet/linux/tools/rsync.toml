@@ -4,8 +4,9 @@ rsync.file = """
 sudo rsync --verbose --archive --progress --stats /***/*.html /var/www/html
 """
 
-rsync.cloud = """
+rsync.dropbox = """
 rsync --verbose --archive --progress --stats \
-/mnt/c/Users/hasta/Dropbox/shared/ \
-/mnt/c/Users/hasta/OneDrive/dropbox/
+--exclude-from=.vscode/rsync_ignore.txt \
+~/***/source/ \
+~/***/destination/
 """
