@@ -1,6 +1,4 @@
 #!/bin/bash
-readonly FF_0000_TOP="false"
-readonly FF_0000_VER="false"
 
 . packages/pyspartadevc/tools/shspartadevc/script/launch/lifecycle_attach.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/lifecycle_create.sh
