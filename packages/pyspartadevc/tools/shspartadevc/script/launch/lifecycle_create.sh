@@ -45,14 +45,14 @@ lifecycle_create() (
         _command_package_manager
     }
 
-    _main_#FF_0000_TOP() {
-        shell::begin_text_file_#FF_0000_TOP
+    _main() {
+        shell::begin_text_file
 
         initialize_text_file "${_header}"
         _add_text_file_post
 
-        end_text_file_#FF_0000_TOP "${_script_post}"
+        end_text_file "${_script_post}"
     }
 
-    _main_#FF_0000_TOP
+    _main
 )

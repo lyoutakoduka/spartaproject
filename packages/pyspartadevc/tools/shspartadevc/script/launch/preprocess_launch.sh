@@ -140,18 +140,18 @@ _create_preprocess_script() (
         fi
     }
 
-    _main_#FF_0000_TOP() {
-        shell::begin_text_file_#FF_0000_TOP
+    _main() {
+        shell::begin_text_file
 
         declare -r header=$(_get_header)
         initialize_text_file "${header}"
         _add_text_file_launch "${_group}"
 
         declare -r script_path=$(_get_preprocess)
-        end_text_file_#FF_0000_TOP "${script_path}"
+        end_text_file "${script_path}"
     }
 
-    _main_#FF_0000_TOP
+    _main
 )
 
 _select_arguments() (
