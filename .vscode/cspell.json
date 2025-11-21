@@ -25,6 +25,8 @@
     "devc",
     "devcontainers",
     "dividedly",
+    "docstring",
+    "docstrings",
     "dpkg",
     "drvfs",
     "eamodio",
@@ -77,12 +79,12 @@
     "slmgr",
     "smbpasswd",
     "spartaproject",
+    "subshell",
     "tamasfe",
     "testpaths",
     "tzdata",
     "unmatch",
     "usermod",
-    "venv",
-    "visualstudioexptteam"
+    "venv"
   ]
 }
