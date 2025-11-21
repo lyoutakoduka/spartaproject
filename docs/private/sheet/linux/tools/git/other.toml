@@ -7,11 +7,3 @@ git clone https://github.com/***/***.git ~/***/project
 log = """
 git log --oneline
 """
-
-merge = """
-git merge origin/main
-"""
-
-push = """
-git push origin
-"""
