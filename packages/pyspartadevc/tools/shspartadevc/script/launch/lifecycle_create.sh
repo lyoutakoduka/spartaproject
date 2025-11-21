@@ -45,20 +45,6 @@ lifecycle_create() (
         _command_package_manager
     }
 
-    _whole_text_file() {
-        begin_text_file
-
-        initialize_text_file "${_header}"
-        _add_text_file_post
-
-        end_text_file
-    }
-
-    _main() {
-        shell::set_file_path "${_script_post}"
-        _whole_text_file
-    }
-
     _main_#FF_0000_TOP() {
         shell::begin_text_file_#FF_0000_TOP
 
