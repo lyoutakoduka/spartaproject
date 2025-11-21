@@ -1,16 +1,6 @@
 {
   "useGitignore": false,
-  "ignorePaths": [
-    "__pycache__",
-    ".temp",
-    "*.gitignore",
-    "*.lock",
-    "context.json",
-    "cspell.json",
-    "LICENSE",
-    "package.json",
-    "pyproject.toml"
-  ],
+  "ignorePaths": [".temp", ".venv", "*.lock"],
   "words": [
     "addopts",
     "alefragnani",
