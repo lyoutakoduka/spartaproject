@@ -1,38 +1,19 @@
 #!/bin/bash
 
-if [[ "${FF_0000_TOP}" = "true" ]]; then
-    . packages/pyspartadevc/src/shspartadevc/script/path/path_handle.sh
-    . packages/pyspartadevc/src/shspartadevc/script/path/path_temporary.sh
-    . packages/pyspartadevc/tools/shspartadevc/script/shared/get_constant.sh
-fi
+. packages/pyspartadevc/src/shspartadevc/script/path/path_handle.sh
+. packages/pyspartadevc/src/shspartadevc/script/path/path_temporary.sh
+. packages/pyspartadevc/tools/shspartadevc/script/shared/get_constant.sh
 
 export_lines() (
     declare -r _arguments=("$@")
+    declare -g ADDED_FILE_PATH
 
-    declare -g FF_0000_TOP
-    if [[ "${FF_0000_TOP}" = "true" ]]; then
-        declare -g ADDED_FILE_PATH
-        declare -r _path="${ADDED_FILE_PATH}"
-    else
-        declare -r _path=$(shell::get_file_path)
-    fi
-
-    if [[ -n "${_path}" ]]; then
+    if [[ -n "${ADDED_FILE_PATH}" ]]; then
         for text in "${_arguments[@]}"; do
-            echo "${text}" >>"${_path}"
+            echo "${text}" >>"${ADDED_FILE_PATH}"
         done
     fi
 )
-
-shell::get_file_path() {
-    declare -g ADDED_FILE_PATH
-    echo "${ADDED_FILE_PATH}"
-}
-
-shell::set_file_path() {
-    declare -r _path="$1"
-    declare -g ADDED_FILE_PATH="${_path}"
-}
 
 _show_message() (
     declare -r _group="$1"
@@ -65,34 +46,7 @@ initialize_text_file() (
     export_lines "${_shebang}" "${_header}"
 )
 
-_show_preprocess_log() (
-    declare -r _group="$1"
-    declare -r _path=$(shell::get_file_path)
-    show_log "${_group}: ${_path}"
-)
-
-begin_text_file() (
-    declare -r _group=$(constant::group_text_remove)
-
-    _remove_preprocess_script() {
-        declare -r path=$(shell::get_file_path)
-
-        rm "${path}"
-    }
-
-    _main() {
-        declare -r path=$(shell::get_file_path)
-
-        if [[ -e "${path}" ]]; then
-            _remove_preprocess_script
-            _show_preprocess_log "${_group}"
-        fi
-    }
-
-    _main
-)
-
-shell::begin_text_file_#FF_0000_TOP() {
+shell::begin_text_file() {
     declare -r _group="preprocess"
     declare -r _head="devcontainer"
     declare -r _suffix="sh"
@@ -103,27 +57,7 @@ shell::begin_text_file_#FF_0000_TOP() {
     declare -g ADDED_FILE_PATH="${_temporary}"
 }
 
-end_text_file() (
-    declare -r _group=$(constant::group_text_create)
-
-    _add_executable_permission() {
-        declare -r path=$(shell::get_file_path)
-        chmod +x "${path}"
-    }
-
-    _main() {
-        declare -r path=$(shell::get_file_path)
-
-        if [[ -e "${path}" ]]; then
-            _add_executable_permission
-            _show_preprocess_log "${_group}"
-        fi
-    }
-
-    _main
-)
-
-end_text_file_#FF_0000_TOP() {
+end_text_file() {
     declare -g ADDED_FILE_PATH
     declare -r _script_path="$1"
     declare -r _group=$(constant::group_text_create)

@@ -140,40 +140,18 @@ _create_preprocess_script() (
         fi
     }
 
-    _whole_text_file() {
-        begin_text_file
-
-        declare -r header=$(_get_header)
-        initialize_text_file "${header}"
-        _add_text_file_launch "${_group}"
-
-        end_text_file
-    }
-
     _main() {
-        declare -r path=$(_get_preprocess)
-        shell::set_file_path "${path}"
-
-        _whole_text_file
-    }
-
-    _main_#FF_0000_TOP() {
-        shell::begin_text_file_#FF_0000_TOP
+        shell::begin_text_file
 
         declare -r header=$(_get_header)
         initialize_text_file "${header}"
         _add_text_file_launch "${_group}"
 
         declare -r script_path=$(_get_preprocess)
-        end_text_file_#FF_0000_TOP "${script_path}"
+        end_text_file "${script_path}"
     }
 
-    declare -g FF_0000_TOP
-    if [[ "${FF_0000_TOP}" = "true" ]]; then
-        _main_#FF_0000_TOP
-    else
-        _main
-    fi
+    _main
 )
 
 _select_arguments() (
