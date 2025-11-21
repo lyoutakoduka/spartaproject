@@ -4,6 +4,14 @@ stash.untracked = """
 git stash --include-untracked
 """
 
+stash.stage = """
+git stash --staged
+"""
+
+stash.not.stage = """
+git stash --keep-index
+"""
+
 stash.pop = """
 git stash pop stash@{0}
 """
