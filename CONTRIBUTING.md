@@ -154,7 +154,7 @@ logout
 wsl --distribution Ubuntu-24.04 --user leonidas
 ```
 
-#### 3-3-3: Devcontainer
+#### 3-3-3: Dev Container
 
 [Official Information](https://code.visualstudio.com/docs/devcontainers/devcontainer-cli)
 
