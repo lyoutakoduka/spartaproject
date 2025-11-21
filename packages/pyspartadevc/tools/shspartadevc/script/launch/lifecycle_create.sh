@@ -59,5 +59,14 @@ lifecycle_create() (
         _whole_text_file
     }
 
+    _main_#FF_0000_TOP() {
+        shell::begin_text_file_#FF_0000_TOP
+
+        initialize_text_file "${_header}"
+        _add_text_file_post
+
+        end_text_file_#FF_0000_TOP "${_script_post}"
+    }
+
     _main
 )
