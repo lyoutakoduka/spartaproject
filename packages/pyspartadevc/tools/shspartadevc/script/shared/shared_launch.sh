@@ -46,7 +46,7 @@ initialize_text_file() (
     export_lines "${_shebang}" "${_header}"
 )
 
-shell::begin_text_file_#FF_0000_TOP() {
+shell::begin_text_file() {
     declare -r _group="preprocess"
     declare -r _head="devcontainer"
     declare -r _suffix="sh"
@@ -57,7 +57,7 @@ shell::begin_text_file_#FF_0000_TOP() {
     declare -g ADDED_FILE_PATH="${_temporary}"
 }
 
-end_text_file_#FF_0000_TOP() {
+end_text_file() {
     declare -g ADDED_FILE_PATH
     declare -r _script_path="$1"
     declare -r _group=$(constant::group_text_create)
