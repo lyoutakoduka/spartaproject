@@ -65,7 +65,13 @@ end_text_file() {
     _main() {
         mv --force "${ADDED_FILE_PATH}" "${_script_path}"
         chmod +x "${_script_path}"
-        show_log "${_group}: ${_script_path}"
+
+        declare -g FFB275A
+        if [[ "${FFB275A}" == "true" ]]; then
+            show_log "${_group}: ${_script_path}"
+        else
+            show_log "${_group}: ${_script_path}"
+        fi
     }
 
     _main

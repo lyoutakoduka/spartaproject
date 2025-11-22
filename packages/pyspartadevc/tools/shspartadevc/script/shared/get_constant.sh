@@ -1,11 +1,21 @@
 #!/bin/bash
 
 constant::expected_identifier() {
-    echo 1000
+    declare -g FFB275B
+    if [[ "${FFB275B}" == "true" ]]; then
+        echo 1234
+    else
+        echo 1000
+    fi
 }
 
 constant::expected_name() {
-    echo "root"
+    declare -g FFB275C
+    if [[ "${FFB275C}" == "true" ]]; then
+        echo "other"
+    else
+        echo "root"
+    fi
 }
 
 constant::package_main() {
