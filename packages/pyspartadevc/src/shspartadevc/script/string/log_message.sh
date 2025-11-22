@@ -1,5 +1,15 @@
 #!/bin/bash
 
+#*  Args:
+#*      $1 (string): Main group name used for log message.
+#*
+#*      $2 (string): Sub group name used for log message.
+#*
+#*      $3 (string): Text used for log message.
+#*
+#*  Return:
+#*      (string): Log message string with timestamp and group information.
+#*
 get_message() (
     declare -r _format="seconds"
     declare -r _zone="Asia/Tokyo"
