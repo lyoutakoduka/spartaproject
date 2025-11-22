@@ -3,15 +3,16 @@
 get_message() (
     declare -r _format="seconds"
     declare -r _zone="Asia/Tokyo"
+    declare -r _format="%Y-%m-%dT%H:%M:%SZ"
     declare -r _group_main="$1"
     declare -r _group_sub="$2"
     declare -r _message="$3"
 
     _get_time() {
         if [[ "${_message}" == "fake" ]]; then
-            date --iso-8601="${_format}" --date @0
+            date +"${_format}" --date @0
         else
-            date --iso-8601="${_format}"
+            date +"${_format}"
         fi
     }
 
