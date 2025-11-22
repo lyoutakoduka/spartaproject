@@ -11,7 +11,6 @@
 #*      (string): Log message string with timestamp and group information.
 #*
 get_message() (
-    declare -r _format="seconds"
     declare -r _zone="Asia/Tokyo"
     declare -r _format="%Y-%m-%dT%H:%M:%SZ"
     declare -r _group_main="$1"
