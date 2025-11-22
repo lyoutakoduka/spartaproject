@@ -1,0 +1,26 @@
+#!/bin/bash
+
+get_message() (
+    declare -r _format="seconds"
+    declare -r _zone="Asia/Tokyo"
+    declare -r _group_main="$1"
+    declare -r _group_sub="$2"
+    declare -r _message="$3"
+
+    _get_time() {
+        if [[ "${_message}" == "fake" ]]; then
+            date --iso-8601="${_format}" --date @0
+        else
+            date --iso-8601="${_format}"
+        fi
+    }
+
+    _main() {
+        TZ="${_zone}"
+        declare -r time=$(_get_time)
+
+        echo "${time} [${_group_main}:${_group_sub}] ${_message}"
+    }
+
+    _main
+)
