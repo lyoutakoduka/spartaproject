@@ -5,6 +5,13 @@
 
 lifecycle_attach() (
     declare -r _message=$(constant::help_attach)
-    show_log "${_message}"
+
+    declare -g FFB275A
+    if [[ "${FFB275A}" == "true" ]]; then
+        show_log "${_message}"
+    else
+        show_log "${_message}"
+    fi
+
     zsh
 )

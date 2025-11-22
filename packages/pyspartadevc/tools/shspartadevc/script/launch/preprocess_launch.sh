@@ -59,7 +59,13 @@ _ready_identifier() (
     declare -r _comment=$(constant::header_environment)
 
     _set_user_information() {
-        show_log "${_identifier}"
+        declare -g FFB275A
+        if [[ "${FFB275A}" == "true" ]]; then
+            show_log "${_identifier}"
+        else
+            show_log "${_identifier}"
+        fi
+
         export_lines "${_comment}"
 
         _add_environment_variable
@@ -196,7 +202,12 @@ _handling_arguments() (
         declare -r invalid="$1"
 
         if [[ "${invalid}" = "${_expected}" ]]; then
-            shell::show_warning "${_message_invalid}"
+            declare -g FFB275A
+            if [[ "${FFB275A}" == "true" ]]; then
+                shell::show_warning "${_message_invalid}"
+            else
+                shell::show_warning "${_message_invalid}"
+            fi
         fi
     }
 
@@ -240,7 +251,12 @@ preprocess_launch() (
         declare -r user_name=$(whoami)
 
         if [[ "${user_name}" = "${_expected}" ]]; then
-            shell::show_warning "${_message}"
+            declare -g FFB275A
+            if [[ "${FFB275A}" == "true" ]]; then
+                shell::show_warning "${_message}"
+            else
+                shell::show_warning "${_message}"
+            fi
         fi
     }
 
