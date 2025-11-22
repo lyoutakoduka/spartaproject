@@ -4,10 +4,11 @@
 . packages/pyspartadevc/tools/shspartadevc/script/shared/get_constant.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/shared_launch.sh
 
+declare -g FFB275A
+
 lifecycle_attach() (
     declare -r _message=$(constant::help_attach)
 
-    declare -g FFB275A
     if [[ "${FFB275A}" == "true" ]]; then
         show_log "${_message}"
     else

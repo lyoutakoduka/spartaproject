@@ -5,6 +5,8 @@
 . packages/pyspartadevc/tools/shspartadevc/script/shared/get_constant.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/shared_launch.sh
 
+declare -g FFB275A
+
 _set_environment() (
     declare -r _quote="\""
     declare -r _command="export"
@@ -60,7 +62,6 @@ _ready_identifier() (
     declare -r _comment=$(constant::header_environment)
 
     _set_user_information() {
-        declare -g FFB275A
         if [[ "${FFB275A}" == "true" ]]; then
             show_log "${_identifier}"
         else
@@ -203,7 +204,6 @@ _handling_arguments() (
         declare -r invalid="$1"
 
         if [[ "${invalid}" = "${_expected}" ]]; then
-            declare -g FFB275A
             if [[ "${FFB275A}" == "true" ]]; then
                 shell::show_warning "${_message_invalid}"
             else
@@ -252,7 +252,6 @@ preprocess_launch() (
         declare -r user_name=$(whoami)
 
         if [[ "${user_name}" = "${_expected}" ]]; then
-            declare -g FFB275A
             if [[ "${FFB275A}" == "true" ]]; then
                 shell::show_warning "${_message}"
             else
