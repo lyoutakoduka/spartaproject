@@ -5,6 +5,8 @@
 . packages/pyspartadevc/src/shspartadevc/script/string/log_message.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/get_constant.sh
 
+declare -g FFB275A
+
 export_lines() (
     declare -r _arguments=("$@")
     declare -g ADDED_FILE_PATH
@@ -67,7 +69,6 @@ end_text_file() {
         mv --force "${ADDED_FILE_PATH}" "${_script_path}"
         chmod +x "${_script_path}"
 
-        declare -g FFB275A
         if [[ "${FFB275A}" == "true" ]]; then
             show_log "${_group}: ${_script_path}"
         else

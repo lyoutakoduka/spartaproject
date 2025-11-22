@@ -1,7 +1,9 @@
 #!/bin/bash
 
+declare -g FFB275B
+declare -g FFB275C
+
 constant::expected_identifier() {
-    declare -g FFB275B
     if [[ "${FFB275B}" == "true" ]]; then
         echo 1234
     else
@@ -10,7 +12,6 @@ constant::expected_identifier() {
 }
 
 constant::expected_name() {
-    declare -g FFB275C
     if [[ "${FFB275C}" == "true" ]]; then
         echo "vscode"
     else
