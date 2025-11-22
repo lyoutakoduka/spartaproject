@@ -1,5 +1,6 @@
 #!/bin/bash
 
+. packages/pyspartadevc/src/shspartadevc/script/string/log_message.sh
 . packages/pyspartadevc/src/shspartadevc/script/string/string_quoted.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/get_constant.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/shared_launch.sh

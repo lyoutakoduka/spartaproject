@@ -2,6 +2,7 @@
 
 . packages/pyspartadevc/src/shspartadevc/script/path/path_handle.sh
 . packages/pyspartadevc/src/shspartadevc/script/path/path_temporary.sh
+. packages/pyspartadevc/src/shspartadevc/script/string/log_message.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/get_constant.sh
 
 export_lines() (
