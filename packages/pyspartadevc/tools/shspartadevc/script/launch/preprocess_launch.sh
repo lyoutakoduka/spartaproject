@@ -57,13 +57,15 @@ _add_environment_variable() (
 )
 
 _ready_identifier() (
+    declare -r _group="log"
     declare -r -i _expected=$(constant::expected_identifier)
     declare -r _identifier=$(constant::message_identifier)
     declare -r _comment=$(constant::header_environment)
+    declare -r _package=$(constant::package_main)
 
     _set_user_information() {
         if [[ "${FFB275A}" == "true" ]]; then
-            show_log "${_identifier}"
+            get_message "${_package}" "${_group}" "${_identifier}"
         else
             show_log "${_identifier}"
         fi
@@ -196,16 +198,19 @@ _select_arguments() (
 
 _handling_arguments() (
     declare -r _expected="true"
+    declare -r _group="warning"
     declare -r _arguments=("$@")
     declare -r _message_invalid=$(constant::message_invalid)
     declare -r _message_help=$(constant::help_help)
+    declare -r _package=$(constant::package_main)
 
     _filter_by_invalid() {
         declare -r invalid="$1"
 
         if [[ "${invalid}" = "${_expected}" ]]; then
             if [[ "${FFB275A}" == "true" ]]; then
-                shell::show_warning "${_message_invalid}"
+                get_message "${_package}" "${_group}" "${_message_invalid}"
+                exit 1
             else
                 shell::show_warning "${_message_invalid}"
             fi
@@ -244,16 +249,19 @@ _handling_arguments() (
 preprocess_launch() (
     declare -r _create="create"
     declare -r _attach="attach"
+    declare -r _group="warning"
     declare -r _arguments=("$@")
     declare -r _expected=$(constant::expected_name)
     declare -r _message=$(constant::message_user)
+    declare -r _package=$(constant::package_main)
 
     _filter_by_account() {
         declare -r user_name=$(whoami)
 
         if [[ "${user_name}" = "${_expected}" ]]; then
             if [[ "${FFB275A}" == "true" ]]; then
-                shell::show_warning "${_message}"
+                get_message "${_package}" "${_group}" "${_message}"
+                exit 1
             else
                 shell::show_warning "${_message}"
             fi
