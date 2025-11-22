@@ -1,5 +1,9 @@
 #!/bin/bash
 
+readonly FFB275A="false"
+readonly FFB275B="false"
+readonly FFB275C="false"
+
 . packages/pyspartadevc/tools/shspartadevc/script/launch/lifecycle_attach.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/lifecycle_create.sh
 . packages/pyspartadevc/tools/shspartadevc/script/launch/preprocess_launch.sh

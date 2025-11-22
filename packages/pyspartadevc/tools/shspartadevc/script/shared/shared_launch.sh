@@ -2,7 +2,10 @@
 
 . packages/pyspartadevc/src/shspartadevc/script/path/path_handle.sh
 . packages/pyspartadevc/src/shspartadevc/script/path/path_temporary.sh
+. packages/pyspartadevc/src/shspartadevc/script/string/log_message.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/get_constant.sh
+
+declare -g FFB275A
 
 export_lines() (
     declare -r _arguments=("$@")
@@ -59,13 +62,25 @@ shell::begin_text_file() {
 
 end_text_file() {
     declare -g ADDED_FILE_PATH
+    declare -r _group_message="log"
     declare -r _script_path="$1"
     declare -r _group=$(constant::group_text_create)
+    declare -r _package=$(constant::package_main)
+
+    _get_message() {
+        declare -r _message="${_group}: ${_script_path}"
+        get_message "${_package}" "${_group_message}" "${_message}"
+    }
 
     _main() {
         mv --force "${ADDED_FILE_PATH}" "${_script_path}"
         chmod +x "${_script_path}"
-        show_log "${_group}: ${_script_path}"
+
+        if [[ "${FFB275A}" == "true" ]]; then
+            _get_message
+        else
+            show_log "${_group}: ${_script_path}"
+        fi
     }
 
     _main

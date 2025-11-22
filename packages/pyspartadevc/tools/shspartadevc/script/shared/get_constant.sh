@@ -1,11 +1,22 @@
 #!/bin/bash
 
+declare -g FFB275B
+declare -g FFB275C
+
 constant::expected_identifier() {
-    echo 1000
+    if [[ "${FFB275B}" == "true" ]]; then
+        echo 1234
+    else
+        echo 1000
+    fi
 }
 
 constant::expected_name() {
-    echo "root"
+    if [[ "${FFB275C}" == "true" ]]; then
+        echo "vscode"
+    else
+        echo "root"
+    fi
 }
 
 constant::package_main() {

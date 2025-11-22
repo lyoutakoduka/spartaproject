@@ -1,8 +1,11 @@
 #!/bin/bash
 
+. packages/pyspartadevc/src/shspartadevc/script/string/log_message.sh
 . packages/pyspartadevc/src/shspartadevc/script/string/string_quoted.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/get_constant.sh
 . packages/pyspartadevc/tools/shspartadevc/script/shared/shared_launch.sh
+
+declare -g FFB275A
 
 _set_environment() (
     declare -r _quote="\""
@@ -54,12 +57,19 @@ _add_environment_variable() (
 )
 
 _ready_identifier() (
+    declare -r _group="log"
     declare -r -i _expected=$(constant::expected_identifier)
     declare -r _identifier=$(constant::message_identifier)
     declare -r _comment=$(constant::header_environment)
+    declare -r _package=$(constant::package_main)
 
     _set_user_information() {
-        show_log "${_identifier}"
+        if [[ "${FFB275A}" == "true" ]]; then
+            get_message "${_package}" "${_group}" "${_identifier}"
+        else
+            show_log "${_identifier}"
+        fi
+
         export_lines "${_comment}"
 
         _add_environment_variable
@@ -188,15 +198,22 @@ _select_arguments() (
 
 _handling_arguments() (
     declare -r _expected="true"
+    declare -r _group="warning"
     declare -r _arguments=("$@")
     declare -r _message_invalid=$(constant::message_invalid)
     declare -r _message_help=$(constant::help_help)
+    declare -r _package=$(constant::package_main)
 
     _filter_by_invalid() {
         declare -r invalid="$1"
 
         if [[ "${invalid}" = "${_expected}" ]]; then
-            shell::show_warning "${_message_invalid}"
+            if [[ "${FFB275A}" == "true" ]]; then
+                get_message "${_package}" "${_group}" "${_message_invalid}"
+                exit 1
+            else
+                shell::show_warning "${_message_invalid}"
+            fi
         fi
     }
 
@@ -232,15 +249,22 @@ _handling_arguments() (
 preprocess_launch() (
     declare -r _create="create"
     declare -r _attach="attach"
+    declare -r _group="warning"
     declare -r _arguments=("$@")
     declare -r _expected=$(constant::expected_name)
     declare -r _message=$(constant::message_user)
+    declare -r _package=$(constant::package_main)
 
     _filter_by_account() {
         declare -r user_name=$(whoami)
 
         if [[ "${user_name}" = "${_expected}" ]]; then
-            shell::show_warning "${_message}"
+            if [[ "${FFB275A}" == "true" ]]; then
+                get_message "${_package}" "${_group}" "${_message}"
+                exit 1
+            else
+                shell::show_warning "${_message}"
+            fi
         fi
     }
 
