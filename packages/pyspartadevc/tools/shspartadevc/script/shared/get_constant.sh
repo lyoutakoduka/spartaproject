@@ -12,7 +12,7 @@ constant::expected_identifier() {
 constant::expected_name() {
     declare -g FFB275C
     if [[ "${FFB275C}" == "true" ]]; then
-        echo "other"
+        echo "vscode"
     else
         echo "root"
     fi
